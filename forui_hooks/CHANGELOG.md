@@ -1,4 +1,7 @@
 ## 0.17.0
+* **Breaking** Remove `useFAutocompleteController(vsync: ...)`.
+* **Breaking** Remove `useFDateFieldController(vsync: ..., popoverMotion: ..., truncateAndStripTimezone: ...)`. Use `FDateField(popoverControl: ...)` instead.
+* **Breaking** Rename `useFDateFieldController(initialDate: ...)` to `useFDateFieldController(initial: ...)`.
 * **Breaking** Remove `useFSelectTileGroupController`. Use `useFSelectGroupController` instead.
 * **Breaking** Remove `useFSelectMenuTileController`. Use `useFSelectGroupController` instead.
 * **Breaking** Remove `useFRadioSelectMenuTileController`. Use `useFRadioSelectGroupController` instead.

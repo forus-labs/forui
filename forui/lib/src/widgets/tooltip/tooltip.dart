@@ -171,7 +171,7 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
   }
 
   void _handleOnChange() {
-    if (widget.control case Managed(:final onChange?)) {
+    if (widget.control case FTooltipManagedControl(:final onChange?)) {
       onChange(_controller.status.isForwardOrCompleted);
     }
   }

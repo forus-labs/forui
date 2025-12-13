@@ -10,6 +10,6 @@ library forui.widgets.picker;
 
 export '../src/widgets/picker/picker.dart' hide PickerData;
 export '../src/widgets/picker/picker_controller.dart'
-    hide InternalFPickerControl, InternalPickerController, Lifted, Managed;
+    hide FPickerManagedControl, InternalFPickerControl, InternalPickerController, Lifted;
 export '../src/widgets/picker/picker_style.dart';
 export '../src/widgets/picker/picker_wheel.dart' hide BuilderWheel, ListWheel;

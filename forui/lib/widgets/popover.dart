@@ -7,4 +7,4 @@ library forui.widgets.popover;
 
 export '../src/widgets/popover/popover.dart';
 export '../src/widgets/popover/popover_controller.dart'
-    hide InternalFPopoverControl, InternalPopoverController, Lifted, LiftedPopoverController, Managed;
+    hide FPopoverManagedControl, InternalFPopoverControl, InternalFPopoverController, LiftedPopoverController;

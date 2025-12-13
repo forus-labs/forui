@@ -488,13 +488,13 @@ class _FSelectMenuTileState<T> extends State<FSelectMenuTile<T>> with TickerProv
   }
 
   void _handleChange() {
-    if (widget.selectControl case select.Managed(:final onChange?)) {
+    if (widget.selectControl case select.FSelectGroupManagedControl(:final onChange?)) {
       onChange(_controller.value);
     }
   }
 
   void _handlePopoverChange() {
-    if (widget.popoverControl case popover.Managed(:final onChange?)) {
+    if (widget.popoverControl case popover.FPopoverManagedControl(:final onChange?)) {
       onChange(_controller._popover.status.isForwardOrCompleted);
     }
   }

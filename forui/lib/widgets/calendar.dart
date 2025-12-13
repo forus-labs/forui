@@ -9,4 +9,5 @@ export '../src/widgets/calendar/calendar.dart';
 export '../src/widgets/calendar/day/day_picker.dart' hide DayPicker;
 export '../src/widgets/calendar/shared/entry.dart' hide Entry;
 export '../src/widgets/calendar/shared/header.dart' hide Header, Navigation;
-export '../src/widgets/calendar/calendar_controller.dart' hide InternalFCalendarControl, Lifted, Managed;
+export '../src/widgets/calendar/calendar_controller.dart'
+    hide FCalendarManagedControl, InternalFCalendarControl, ProxyController;

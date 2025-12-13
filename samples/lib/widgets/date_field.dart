@@ -72,7 +72,6 @@ class FormDateFieldPage extends StatefulSample {
 class _FormDateFieldPageState extends StatefulSampleState<FormDateFieldPage> with TickerProviderStateMixin {
   final _key = GlobalKey<FormState>();
   late final _startDateController = FDateFieldController(
-    vsync: this,
     validator: (date) => switch (date) {
       null => 'Please select a start date',
       final date when date.isBefore(.now()) => 'Start date must be in the future',

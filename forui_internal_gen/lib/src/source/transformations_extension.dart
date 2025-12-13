@@ -148,31 +148,32 @@ class TransformationsExtension {
               Parameter(
                 (p) => p
                   ..name = field.name!
-                  ..type = refer('${field.type.getDisplayString()} Function(${field.type.getDisplayString()} motion)?')
+                  ..type = refer('${aliasAwareType(field.type)} Function(${aliasAwareType(field.type)} motion)?')
                   ..named = true,
               )
             else if (nestedStyle(field.type))
               Parameter(
                 (p) => p
                   ..name = field.name!
-                  ..type = refer('${field.type.getDisplayString()} Function(${field.type.getDisplayString()} style)?')
+                  ..type = refer('${aliasAwareType(field.type)} Function(${aliasAwareType(field.type)} style)?')
                   ..named = true,
               )
             else
               Parameter(
                 (p) => p
                   ..name = field.name!
-                  ..type = refer(
-                    field.type.getDisplayString().endsWith('?')
-                        ? field.type.getDisplayString()
-                        : '${field.type.getDisplayString()}?',
-                  )
+                  ..type = refer(_nullableType(field.type))
                   ..named = true,
               ),
         ])
         ..lambda = true
         ..body = Code('.new($assignments)\n'),
     );
+  }
+
+  String _nullableType(DartType type) {
+    final aliasedType = aliasAwareType(type);
+    return type.nullabilitySuffix == .question ? aliasedType : '$aliasedType?';
   }
 
   /// Checks if the type is a nested motion.

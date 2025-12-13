@@ -137,7 +137,7 @@ class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
 
   void _update() {
     if (!_controller._controller.indexIsChanging) {
-      if (widget.control case Managed(:final onChange)) {
+      if (widget.control case FTabManagedControl(:final onChange)) {
         onChange?.call(_controller.index);
       }
     }

@@ -6,10 +6,7 @@ void main() {
   group('FCalendarController.date(...)', () {
     test(
       'constructor converts date time',
-      () => expect(
-        FCalendarController.date(initialSelection: DateTime(2024, 11, 30, 12)).value,
-        DateTime.utc(2024, 11, 30),
-      ),
+      () => expect(FCalendarController.date(initial: DateTime(2024, 11, 30, 12)).value, DateTime.utc(2024, 11, 30)),
     );
 
     test('selectable(...)', () {
@@ -23,7 +20,7 @@ void main() {
 
     for (final (date, expected) in [(DateTime(2024, 5, 4, 3), true), (DateTime(2024, 5, 5, 3), false)]) {
       test('selected(...) contains date', () {
-        final controller = FCalendarController.date(initialSelection: DateTime(2024, 5, 4));
+        final controller = FCalendarController.date(initial: DateTime(2024, 5, 4));
         expect(controller.selected(date), expected);
       });
     }
@@ -37,7 +34,7 @@ void main() {
       (false, DateTime(2024), DateTime(2024), DateTime.utc(2024)),
     ]) {
       test('select(...)', () {
-        final controller = FCalendarController.date(initialSelection: initial, toggleable: toggleable)..select(date);
+        final controller = FCalendarController.date(initial: initial, toggleable: toggleable)..select(date);
         expect(controller.value, expected);
       });
     }
@@ -53,7 +50,7 @@ void main() {
       (false, DateTime(2024), DateTime(2024), DateTime.utc(2024)),
     ]) {
       test('value setter', () {
-        final controller = FCalendarController.date(initialSelection: initial, toggleable: toggleable)..value = date;
+        final controller = FCalendarController.date(initial: initial, toggleable: toggleable)..value = date;
         expect(controller.value, expected);
       });
     }
@@ -63,7 +60,7 @@ void main() {
     test(
       'constructor throws error',
       () => expect(
-        () => FCalendarController.date(initialSelection: DateTime.now(), truncateAndStripTimezone: false),
+        () => FCalendarController.date(initial: DateTime.now(), truncateAndStripTimezone: false),
         throwsAssertionError,
       ),
     );
@@ -80,10 +77,7 @@ void main() {
 
     for (final (date, expected) in [(DateTime.utc(2024, 5, 4), true), (DateTime.utc(2024, 5, 5), false)]) {
       test('selected(...) contains date', () {
-        final controller = FCalendarController.date(
-          initialSelection: DateTime.utc(2024, 5, 4),
-          truncateAndStripTimezone: false,
-        );
+        final controller = FCalendarController.date(initial: DateTime.utc(2024, 5, 4), truncateAndStripTimezone: false);
         expect(controller.selected(date), expected);
       });
     }
@@ -98,7 +92,7 @@ void main() {
     ]) {
       test('select(...)', () {
         final controller = FCalendarController.date(
-          initialSelection: initial,
+          initial: initial,
           truncateAndStripTimezone: false,
           toggleable: toggleable,
         )..select(date);
@@ -118,7 +112,7 @@ void main() {
     ]) {
       test('value setter', () {
         final controller = FCalendarController.date(
-          initialSelection: initial,
+          initial: initial,
           truncateAndStripTimezone: false,
           toggleable: toggleable,
         )..value = date;
@@ -130,9 +124,8 @@ void main() {
   group('FCalendarController.dates(...)', () {
     test(
       'constructor converts date time',
-      () => expect(FCalendarController.dates(initialSelections: {DateTime(2024, 11, 30, 12)}).value, {
-        DateTime.utc(2024, 11, 30),
-      }),
+      () =>
+          expect(FCalendarController.dates(initial: {DateTime(2024, 11, 30, 12)}).value, {DateTime.utc(2024, 11, 30)}),
     );
 
     test('selectable(...)', () {
@@ -146,7 +139,7 @@ void main() {
 
     for (final (date, expected) in [(DateTime(2024), true), (DateTime(2025), false)]) {
       test('selected(...)', () {
-        final controller = FCalendarController.dates(initialSelections: {DateTime.utc(2024)});
+        final controller = FCalendarController.dates(initial: {DateTime.utc(2024)});
         expect(controller.selected(date), expected);
       });
     }
@@ -157,7 +150,7 @@ void main() {
       ({DateTime(2024)}, DateTime(2025), {DateTime.utc(2024), DateTime.utc(2025)}),
     ]) {
       test('select(...)', () {
-        final controller = FCalendarController.dates(initialSelections: initial)..select(date);
+        final controller = FCalendarController.dates(initial: initial)..select(date);
         expect(controller.value, expected);
       });
     }
@@ -172,7 +165,7 @@ void main() {
     test(
       'constructor throws error',
       () => expect(
-        () => FCalendarController.dates(initialSelections: {DateTime.now()}, truncateAndStripTimezone: false),
+        () => FCalendarController.dates(initial: {DateTime.now()}, truncateAndStripTimezone: false),
         throwsAssertionError,
       ),
     );
@@ -189,10 +182,7 @@ void main() {
 
     for (final (date, expected) in [(DateTime.utc(2024), true), (DateTime.utc(2025), false)]) {
       test('selected(...)', () {
-        final controller = FCalendarController.dates(
-          initialSelections: {DateTime.utc(2024)},
-          truncateAndStripTimezone: false,
-        );
+        final controller = FCalendarController.dates(initial: {DateTime.utc(2024)}, truncateAndStripTimezone: false);
         expect(controller.selected(date), expected);
       });
     }
@@ -203,8 +193,7 @@ void main() {
       ({DateTime.utc(2024)}, DateTime.utc(2025), {DateTime.utc(2024), DateTime.utc(2025)}),
     ]) {
       test('select(...)', () {
-        final controller = FCalendarController.dates(initialSelections: initial, truncateAndStripTimezone: false)
-          ..select(date);
+        final controller = FCalendarController.dates(initial: initial, truncateAndStripTimezone: false)..select(date);
         expect(controller.value, expected);
       });
     }
@@ -213,10 +202,10 @@ void main() {
   group('FCalendarController.range(...)', () {
     test(
       'constructor converts date time',
-      () => expect(
-        FCalendarController.range(initialSelection: (DateTime(2024, 11, 30, 12), DateTime(2024, 12, 12, 12))).value,
-        (DateTime.utc(2024, 11, 30), DateTime.utc(2024, 12, 12)),
-      ),
+      () => expect(FCalendarController.range(initial: (DateTime(2024, 11, 30, 12), DateTime(2024, 12, 12, 12))).value, (
+        DateTime.utc(2024, 11, 30),
+        DateTime.utc(2024, 12, 12),
+      )),
     );
 
     test('selectable(...)', () {
@@ -236,7 +225,7 @@ void main() {
       (null, DateTime.utc(2023), false),
     ]) {
       test('selected(...)', () {
-        final controller = FCalendarController.range(initialSelection: initial);
+        final controller = FCalendarController.range(initial: initial);
         expect(controller.selected(date), expected);
       });
     }
@@ -250,7 +239,7 @@ void main() {
       (null, DateTime(2023), (DateTime.utc(2023), DateTime.utc(2023))),
     ]) {
       test('select(...)', () {
-        final controller = FCalendarController.range(initialSelection: initial)..select(date);
+        final controller = FCalendarController.range(initial: initial)..select(date);
         expect(controller.value, expected);
       });
     }
@@ -265,10 +254,7 @@ void main() {
     test(
       'constructor throws error',
       () => expect(
-        () => FCalendarController.range(
-          initialSelection: (DateTime(2025), DateTime(2024)),
-          truncateAndStripTimezone: false,
-        ),
+        () => FCalendarController.range(initial: (DateTime(2025), DateTime(2024)), truncateAndStripTimezone: false),
         throwsAssertionError,
       ),
     );
@@ -281,7 +267,7 @@ void main() {
       (null, DateTime.utc(2023), false),
     ]) {
       test('selected(...)', () {
-        final controller = FCalendarController.range(initialSelection: initial, truncateAndStripTimezone: false);
+        final controller = FCalendarController.range(initial: initial, truncateAndStripTimezone: false);
         expect(controller.selected(date), expected);
       });
     }
@@ -295,8 +281,7 @@ void main() {
       (null, DateTime.utc(2023), (DateTime.utc(2023), DateTime.utc(2023))),
     ]) {
       test('select(...)', () {
-        final controller = FCalendarController.range(initialSelection: initial, truncateAndStripTimezone: false)
-          ..select(date);
+        final controller = FCalendarController.range(initial: initial, truncateAndStripTimezone: false)..select(date);
         expect(controller.value, expected);
       });
     }

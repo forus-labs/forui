@@ -274,4 +274,138 @@ void main() {
       debugDefaultTargetPlatformOverride = null;
     });
   }
+
+  testWidgets('arrow key traversal works without setState', (tester) async {
+    await tester.pumpWidget(
+      TestScaffold.app(
+        locale: const Locale('en', 'SG'),
+        child: StatefulBuilder(
+          builder: (context, setState) => FDateField(
+            key: key,
+            control: .lifted(value: null, onChange: (_) {}),
+          ),
+        ),
+      ),
+    );
+
+    await tester.tapAt(tester.getTopLeft(find.byKey(key)));
+    await tester.pumpAndSettle();
+
+    await tester.sendKeyEvent(.arrowRight);
+    await tester.pumpAndSettle();
+
+    await tester.sendKeyEvent(.arrowRight);
+    await tester.pumpAndSettle();
+
+    await tester.sendKeyEvent(.arrowLeft);
+    await tester.pumpAndSettle();
+
+    await expectLater(find.byType(TestScaffold), matchesGoldenFile('date-field/arrow-key-traversal.png'));
+  });
+
+  group('preserve selection', () {
+    testWidgets('managed - short to long', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          locale: const Locale('en', 'SG'),
+          child: FDateField(
+            key: key,
+            control: .managed(initial: .utc(2025)),
+            calendar: FDateFieldCalendarProperties(today: .utc(2025, 1, 15)),
+          ),
+        ),
+      );
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.text('12'));
+      await tester.pumpAndSettle();
+
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('date-field/managed-selection-short-long.png'));
+    });
+
+    testWidgets('managed - long to short', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          locale: const Locale('en', 'SG'),
+          child: FDateField(
+            key: key,
+            control: .managed(initial: .utc(2025, 12, 15)),
+            calendar: FDateFieldCalendarProperties(today: .utc(2025, 12, 15)),
+          ),
+        ),
+      );
+
+      // Focus and select day part (second part)
+      await tester.tapAt(tester.getTopLeft(find.byKey(key)));
+      await tester.pumpAndSettle();
+      await tester.sendKeyEvent(.arrowRight);
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.text('5'));
+      await tester.pumpAndSettle();
+
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('date-field/managed-selection-long-short.png'));
+    });
+
+    testWidgets('managed - short to long', (tester) async {
+      DateTime? value = .utc(2025);
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          locale: const Locale('en', 'SG'),
+          child: StatefulBuilder(
+            builder: (context, setState) => FDateField(
+              key: key,
+              control: .lifted(value: value, onChange: (v) => setState(() => value = v)),
+              calendar: FDateFieldCalendarProperties(today: .utc(2025, 1, 15)),
+            ),
+          ),
+        ),
+      );
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.text('12'));
+      await tester.pumpAndSettle();
+
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('date-field/lifted-selection-short-long.png'));
+    });
+
+    testWidgets('managed - long to short', (tester) async {
+      DateTime? value = .utc(2025);
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          locale: const Locale('en', 'SG'),
+          child: StatefulBuilder(
+            builder: (context, setState) => FDateField(
+              key: key,
+              control: .lifted(value: value, onChange: (v) => setState(() => value = v)),
+              calendar: FDateFieldCalendarProperties(today: DateTime.utc(2025, 12, 15)),
+            ),
+          ),
+        ),
+      );
+
+      // Focus and select day part (second part)
+      await tester.tapAt(tester.getTopLeft(find.byKey(key)));
+      await tester.pumpAndSettle();
+      await tester.sendKeyEvent(.arrowRight);
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.text('5'));
+      await tester.pumpAndSettle();
+
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('date-field/lifted-selection-long-short.png'));
+    });
+  });
 }

@@ -46,7 +46,7 @@ final class Lifted extends FGoldenControl with _$LiftedMixin {
   const Lifted({required this.expanded, required this.onChange}) : super._();
 
   @override
-  FGoldenController _create(VoidCallback _, int children) => FGoldenController();
+  FGoldenController createController(int children) => FGoldenController();
 
   @override
   void _updateController(FGoldenController controller, int children) {}
@@ -64,8 +64,7 @@ final class Managed extends FGoldenControl with _$ManagedMixin {
   const Managed({this.controller, this.min, this.max}) : super._();
 
   @override
-  FGoldenController _create(VoidCallback callback, int children) =>
-      (controller ?? FGoldenController())..addListener(callback);
+  FGoldenController createController(int children) => controller ?? FGoldenController();
 }
 ''';
 
@@ -86,29 +85,29 @@ part of 'sample.dart';
 
 @internal
 extension InternalFGoldenControl on FGoldenControl {
-  FGoldenController create(void Function() callback, int children) => _create(callback, children);
+  FGoldenController create(VoidCallback callback, int children) => createController(children)..addListener(callback);
 
   (FGoldenController, bool) update(
     FGoldenControl old,
     FGoldenController controller,
-    void Function() callback,
+    VoidCallback callback,
     int children,
   ) => _update(old, controller, callback, children);
 
-  void dispose(FGoldenController controller, void Function() callback) => _dispose(controller, callback);
+  void dispose(FGoldenController controller, VoidCallback callback) => _dispose(controller, callback);
 }
 
 mixin _$FGoldenControlMixin {
-  FGoldenController _create(void Function() callback, int children);
-  void _dispose(FGoldenController controller, void Function() callback);
+  /// Creates a [FGoldenController].
+  ///
+  /// Overriding managed subclasses should always return `controller` if it is non-null, e.g. `return controller ?? MyController();`
+  @visibleForOverriding
+  FGoldenController createController(int children);
+  void _dispose(FGoldenController controller, VoidCallback callback);
   // TODO: https://github.com/dart-lang/sdk/issues/62198
   // ignore: unused_element
-  FGoldenController _default(
-    FGoldenControl old,
-    FGoldenController controller,
-    void Function() callback,
-    int children,
-  ) => controller;
+  FGoldenController _default(FGoldenControl old, FGoldenController controller, VoidCallback callback, int children) =>
+      controller;
 }
 mixin _$LiftedMixin on Diagnosticable, FGoldenControl {
   bool Function(int) get expanded;
@@ -117,7 +116,7 @@ mixin _$LiftedMixin on Diagnosticable, FGoldenControl {
   (FGoldenController, bool) _update(
     FGoldenControl old,
     FGoldenController controller,
-    void Function() callback,
+    VoidCallback callback,
     int children,
   ) {
     switch (old) {
@@ -132,12 +131,12 @@ mixin _$LiftedMixin on Diagnosticable, FGoldenControl {
       // External -> Lifted
       case Managed(controller: _?):
         controller.removeListener(callback);
-        return (_create(callback, children), true);
+        return (createController(children)..addListener(callback), true);
 
       // Internal -> Lifted
       case Managed():
         controller.dispose();
-        return (_create(callback, children), true);
+        return (createController(children)..addListener(callback), true);
 
       default:
         return (_default(old, controller, callback, children), false);
@@ -146,7 +145,7 @@ mixin _$LiftedMixin on Diagnosticable, FGoldenControl {
 
   void _updateController(FGoldenController controller, int children);
   @override
-  void _dispose(FGoldenController controller, void Function() callback) {
+  void _dispose(FGoldenController controller, VoidCallback callback) {
     controller.dispose();
   }
 
@@ -174,7 +173,7 @@ mixin _$ManagedMixin on Diagnosticable, FGoldenControl {
   (FGoldenController, bool) _update(
     FGoldenControl old,
     FGoldenController controller,
-    void Function() callback,
+    VoidCallback callback,
     int children,
   ) {
     switch (old) {
@@ -184,22 +183,22 @@ mixin _$ManagedMixin on Diagnosticable, FGoldenControl {
       // External (Controller A) -> External (Controller B)
       case Managed(controller: final old?) when this.controller != null && this.controller != old:
         controller.removeListener(callback);
-        return (_create(callback, children), true);
+        return (createController(children)..addListener(callback), true);
 
       // Internal -> External
       case Managed(controller: final old) when this.controller != null && old == null:
         controller.dispose();
-        return (_create(callback, children), true);
+        return (createController(children)..addListener(callback), true);
 
       // External -> Internal
       case Managed(controller: _?) when this.controller == null:
         controller.removeListener(callback);
-        return (_create(callback, children), true);
+        return (createController(children)..addListener(callback), true);
 
       // Lifted -> Managed
       case Lifted():
         controller.dispose();
-        return (_create(callback, children), true);
+        return (createController(children)..addListener(callback), true);
 
       default:
         return (_default(old, controller, callback, children), false);
@@ -207,7 +206,7 @@ mixin _$ManagedMixin on Diagnosticable, FGoldenControl {
   }
 
   @override
-  void _dispose(FGoldenController controller, void Function() callback) {
+  void _dispose(FGoldenController controller, VoidCallback callback) {
     if (this.controller != null) {
       controller.removeListener(callback);
     } else {
@@ -280,7 +279,7 @@ final class Lifted<T> extends FGenericControl<T> with _$LiftedMixin<T> {
   const Lifted({required this.value, required this.onChange}) : super._();
 
   @override
-  FGenericController<T> _create(VoidCallback _) => FGenericController<T>();
+  FGenericController<T> createController() => FGenericController<T>();
 
   @override
   void _updateController(FGenericController<T> controller) {}
@@ -296,8 +295,7 @@ final class Managed<T> extends FGenericControl<T> with _$ManagedMixin<T> {
   const Managed({this.controller, this.initialValue}) : super._();
 
   @override
-  FGenericController<T> _create(VoidCallback callback) =>
-      (controller ?? FGenericController<T>())..addListener(callback);
+  FGenericController<T> createController() => controller ?? FGenericController<T>();
 }
 ''';
 
@@ -318,23 +316,27 @@ part of 'sample.dart';
 
 @internal
 extension InternalFGenericControl<T> on FGenericControl<T> {
-  FGenericController<T> create(void Function() callback) => _create(callback);
+  FGenericController<T> create(VoidCallback callback) => createController()..addListener(callback);
 
   (FGenericController<T>, bool) update(
     FGenericControl<T> old,
     FGenericController<T> controller,
-    void Function() callback,
+    VoidCallback callback,
   ) => _update(old, controller, callback);
 
-  void dispose(FGenericController<T> controller, void Function() callback) => _dispose(controller, callback);
+  void dispose(FGenericController<T> controller, VoidCallback callback) => _dispose(controller, callback);
 }
 
 mixin _$FGenericControlMixin<T> {
-  FGenericController<T> _create(void Function() callback);
-  void _dispose(FGenericController<T> controller, void Function() callback);
+  /// Creates a [FGenericController<T>].
+  ///
+  /// Overriding managed subclasses should always return `controller` if it is non-null, e.g. `return controller ?? MyController();`
+  @visibleForOverriding
+  FGenericController<T> createController();
+  void _dispose(FGenericController<T> controller, VoidCallback callback);
   // TODO: https://github.com/dart-lang/sdk/issues/62198
   // ignore: unused_element
-  FGenericController<T> _default(FGenericControl<T> old, FGenericController<T> controller, void Function() callback) =>
+  FGenericController<T> _default(FGenericControl<T> old, FGenericController<T> controller, VoidCallback callback) =>
       controller;
 }
 mixin _$LiftedMixin<T> on Diagnosticable, FGenericControl<T> {
@@ -344,7 +346,7 @@ mixin _$LiftedMixin<T> on Diagnosticable, FGenericControl<T> {
   (FGenericController<T>, bool) _update(
     FGenericControl<T> old,
     FGenericController<T> controller,
-    void Function() callback,
+    VoidCallback callback,
   ) {
     switch (old) {
       case _ when old == this:
@@ -358,12 +360,12 @@ mixin _$LiftedMixin<T> on Diagnosticable, FGenericControl<T> {
       // External -> Lifted
       case Managed(controller: _?):
         controller.removeListener(callback);
-        return (_create(callback), true);
+        return (createController()..addListener(callback), true);
 
       // Internal -> Lifted
       case Managed():
         controller.dispose();
-        return (_create(callback), true);
+        return (createController()..addListener(callback), true);
 
       default:
         return (_default(old, controller, callback), false);
@@ -372,7 +374,7 @@ mixin _$LiftedMixin<T> on Diagnosticable, FGenericControl<T> {
 
   void _updateController(FGenericController<T> controller);
   @override
-  void _dispose(FGenericController<T> controller, void Function() callback) {
+  void _dispose(FGenericController<T> controller, VoidCallback callback) {
     controller.dispose();
   }
 
@@ -399,7 +401,7 @@ mixin _$ManagedMixin<T> on Diagnosticable, FGenericControl<T> {
   (FGenericController<T>, bool) _update(
     FGenericControl<T> old,
     FGenericController<T> controller,
-    void Function() callback,
+    VoidCallback callback,
   ) {
     switch (old) {
       case _ when old == this:
@@ -408,22 +410,22 @@ mixin _$ManagedMixin<T> on Diagnosticable, FGenericControl<T> {
       // External (Controller A) -> External (Controller B)
       case Managed(controller: final old?) when this.controller != null && this.controller != old:
         controller.removeListener(callback);
-        return (_create(callback), true);
+        return (createController()..addListener(callback), true);
 
       // Internal -> External
       case Managed(controller: final old) when this.controller != null && old == null:
         controller.dispose();
-        return (_create(callback), true);
+        return (createController()..addListener(callback), true);
 
       // External -> Internal
       case Managed(controller: _?) when this.controller == null:
         controller.removeListener(callback);
-        return (_create(callback), true);
+        return (createController()..addListener(callback), true);
 
       // Lifted -> Managed
       case Lifted():
         controller.dispose();
-        return (_create(callback), true);
+        return (createController()..addListener(callback), true);
 
       default:
         return (_default(old, controller, callback), false);
@@ -431,7 +433,7 @@ mixin _$ManagedMixin<T> on Diagnosticable, FGenericControl<T> {
   }
 
   @override
-  void _dispose(FGenericController<T> controller, void Function() callback) {
+  void _dispose(FGenericController<T> controller, VoidCallback callback) {
     if (this.controller != null) {
       controller.removeListener(callback);
     } else {
@@ -507,7 +509,7 @@ class Lifted extends FSubclassControl with _$LiftedMixin {
   const Lifted({required this.value, required this.onChange}) : super._();
 
   @override
-  FSubclassController _create(VoidCallback _) => FSubclassController();
+  FSubclassController createController() => FSubclassController();
 
   @override
   void _updateController(FSubclassController controller) {}
@@ -528,8 +530,7 @@ class Normal extends Managed with _$NormalMixin {
   const Normal({super.controller, super.onChange});
 
   @override
-  FSubclassController _create(VoidCallback callback) =>
-      (controller ?? FSubclassController())..addListener(callback);
+  FSubclassController createController() => controller ?? FSubclassController();
 }
 
 @internal
@@ -537,8 +538,7 @@ class Cascade extends Managed with _$CascadeMixin {
   const Cascade({super.controller, super.onChange});
 
   @override
-  FSubclassController _create(VoidCallback callback) =>
-      (controller ?? FSubclassController())..addListener(callback);
+  FSubclassController createController() => controller ?? FSubclassController();
 }
 ''';
 
@@ -559,27 +559,31 @@ part of 'sample.dart';
 
 @internal
 extension InternalFSubclassControl on FSubclassControl {
-  FSubclassController create(void Function() callback) => _create(callback);
+  FSubclassController create(VoidCallback callback) => createController()..addListener(callback);
 
-  (FSubclassController, bool) update(FSubclassControl old, FSubclassController controller, void Function() callback) =>
+  (FSubclassController, bool) update(FSubclassControl old, FSubclassController controller, VoidCallback callback) =>
       _update(old, controller, callback);
 
-  void dispose(FSubclassController controller, void Function() callback) => _dispose(controller, callback);
+  void dispose(FSubclassController controller, VoidCallback callback) => _dispose(controller, callback);
 }
 
 mixin _$FSubclassControlMixin {
-  FSubclassController _create(void Function() callback);
-  void _dispose(FSubclassController controller, void Function() callback);
+  /// Creates a [FSubclassController].
+  ///
+  /// Overriding managed subclasses should always return `controller` if it is non-null, e.g. `return controller ?? MyController();`
+  @visibleForOverriding
+  FSubclassController createController();
+  void _dispose(FSubclassController controller, VoidCallback callback);
   // TODO: https://github.com/dart-lang/sdk/issues/62198
   // ignore: unused_element
-  FSubclassController _default(FSubclassControl old, FSubclassController controller, void Function() callback) =>
+  FSubclassController _default(FSubclassControl old, FSubclassController controller, VoidCallback callback) =>
       controller;
 }
 mixin _$LiftedMixin on Diagnosticable, FSubclassControl {
   int get value;
   void Function(int) get onChange;
   @override
-  (FSubclassController, bool) _update(FSubclassControl old, FSubclassController controller, void Function() callback) {
+  (FSubclassController, bool) _update(FSubclassControl old, FSubclassController controller, VoidCallback callback) {
     switch (old) {
       case _ when old == this:
         return (_default(old, controller, callback), false);
@@ -592,12 +596,12 @@ mixin _$LiftedMixin on Diagnosticable, FSubclassControl {
       // External -> Lifted
       case Managed(controller: _?):
         controller.removeListener(callback);
-        return (_create(callback), true);
+        return (createController()..addListener(callback), true);
 
       // Internal -> Lifted
       case Managed():
         controller.dispose();
-        return (_create(callback), true);
+        return (createController()..addListener(callback), true);
 
       default:
         return (_default(old, controller, callback), false);
@@ -606,7 +610,7 @@ mixin _$LiftedMixin on Diagnosticable, FSubclassControl {
 
   void _updateController(FSubclassController controller);
   @override
-  void _dispose(FSubclassController controller, void Function() callback) {
+  void _dispose(FSubclassController controller, VoidCallback callback) {
     controller.dispose();
   }
 
@@ -630,7 +634,7 @@ mixin _$ManagedMixin on Diagnosticable, FSubclassControl {
   FSubclassController? get controller;
   void Function(int)? get onChange;
   @override
-  (FSubclassController, bool) _update(FSubclassControl old, FSubclassController controller, void Function() callback) {
+  (FSubclassController, bool) _update(FSubclassControl old, FSubclassController controller, VoidCallback callback) {
     switch (old) {
       case _ when old == this:
         return (_default(old, controller, callback), false);
@@ -638,27 +642,27 @@ mixin _$ManagedMixin on Diagnosticable, FSubclassControl {
       // External (Controller A) -> External (Controller B)
       case Managed(controller: final old?) when this.controller != null && this.controller != old:
         controller.removeListener(callback);
-        return (_create(callback), true);
+        return (createController()..addListener(callback), true);
 
       // Internal -> External
       case Managed(controller: final old) when this.controller != null && old == null:
         controller.dispose();
-        return (_create(callback), true);
+        return (createController()..addListener(callback), true);
 
       // External -> Internal
       case Managed(controller: _?) when this.controller == null:
         controller.removeListener(callback);
-        return (_create(callback), true);
+        return (createController()..addListener(callback), true);
 
       // Lifted -> Managed
       case Lifted():
         controller.dispose();
-        return (_create(callback), true);
+        return (createController()..addListener(callback), true);
 
       // Internal -> Internal (different type, e.g. Normal -> Cascade)
       case final Managed old when old != this:
         controller.dispose();
-        return (_create(callback), true);
+        return (createController()..addListener(callback), true);
 
       default:
         return (_default(old, controller, callback), false);
@@ -666,7 +670,7 @@ mixin _$ManagedMixin on Diagnosticable, FSubclassControl {
   }
 
   @override
-  void _dispose(FSubclassController controller, void Function() callback) {
+  void _dispose(FSubclassController controller, VoidCallback callback) {
     if (this.controller != null) {
       controller.removeListener(callback);
     } else {

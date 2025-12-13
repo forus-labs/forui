@@ -68,7 +68,7 @@ class _Controller<T> extends FMultiSelectController<T> {
     }
 
     _onValueChange = onValueChange;
-    _popover = InternalPopoverController.updateNested(_popover, vsync, popoverShown, onPopoverChange);
+    _popover = InternalFPopoverController.updateNested(_popover, vsync, popoverShown, onPopoverChange);
   }
 
   @override
@@ -90,7 +90,9 @@ class _Controller<T> extends FMultiSelectController<T> {
   FPopoverController get popover => _popover;
 }
 
-/// Defines how a [FMultiSelect]'s value is controlled.
+/// A [FMultiSelectControl] defines how a [FMultiSelect] is controlled.
+///
+/// {@macro forui.foundation.doc_templates.control}
 sealed class FMultiSelectControl<T> with Diagnosticable, _$FMultiSelectControlMixin<T> {
   /// Creates a [FMultiSelectControl] for controlling multi-select using lifted state.
   ///
@@ -109,18 +111,7 @@ sealed class FMultiSelectControl<T> with Diagnosticable, _$FMultiSelectControlMi
     FPopoverMotion motion,
   }) = Lifted<T>;
 
-  /// Creates a [FMultiSelectControl] for controlling multi-select using a controller.
-  ///
-  /// Either [controller] or [initial] can be provided. If neither is provided, an internal controller with no initial
-  /// values is created.
-  ///
-  /// The [min] and [max] parameters define the selection constraints.
-  /// The [onChange] callback is invoked when the selected values change.
-  ///
-  /// ## Contract
-  /// Throws [AssertionError] if both [controller] and [initial] are provided.
-  /// Throws [AssertionError] if both [controller] and [min]/[max] are provided.
-  /// Throws [AssertionError] if both [controller] and [motion] are provided.
+  /// Creates a [FMultiSelectControl].
   const factory FMultiSelectControl.managed({
     FMultiSelectController<T>? controller,
     Set<T>? initial,
@@ -128,7 +119,7 @@ sealed class FMultiSelectControl<T> with Diagnosticable, _$FMultiSelectControlMi
     int? max,
     ValueChanged<Set<T>>? onChange,
     FPopoverMotion? motion,
-  }) = Managed<T>;
+  }) = FMultiSelectManagedControl<T>;
 
   const FMultiSelectControl._();
 
@@ -166,36 +157,64 @@ class Lifted<T> extends FMultiSelectControl<T> with _$LiftedMixin<T> {
        super._();
 
   @override
-  FMultiSelectController<T> _create(VoidCallback callback, TickerProvider vsync) => _Controller(
+  FMultiSelectController<T> createController(TickerProvider vsync) => _Controller(
     value: value,
     vsync: vsync,
     onValueChange: onChange,
     popoverShown: popoverShown,
     onPopoverChange: onPopoverChange,
     popoverMotion: motion,
-  )..addListener(callback);
+  );
 
   @override
   void _updateController(FMultiSelectController<T> controller, TickerProvider vsync) =>
       (controller as _Controller<T>).updateState(vsync, value, onChange, popoverShown, onPopoverChange);
 }
 
-@internal
-class Managed<T> extends FMultiSelectControl<T> with Diagnosticable, _$ManagedMixin<T> {
+/// A [FMultiSelectManagedControl] enables widgets to manage their own controller internally while exposing parameters
+/// for common configurations.
+///
+/// {@macro forui.foundation.doc_templates.managed}
+class FMultiSelectManagedControl<T> extends FMultiSelectControl<T>
+    with Diagnosticable, _$FMultiSelectManagedControlMixin<T> {
+  /// The controller.
   @override
   final FMultiSelectController<T>? controller;
+
+  /// The initial values. Defaults to an empty set.
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if [initial] and [controller] are both provided.
   @override
   final Set<T>? initial;
+
+  /// The minimum number of selected items. Defaults to 0.
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if [min] is non-zero and [controller] is provided.
   @override
   final int min;
+
+  /// The maximum number of selected items. Defaults to no limit.
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if [max] and [controller] are both provided.
   @override
   final int? max;
+
+  /// Called when the selected values change.
   @override
   final ValueChanged<Set<T>>? onChange;
+
+  /// The popover motion. Defaults to [FPopoverMotion].
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if [motion] and [controller] are both provided.
   @override
   final FPopoverMotion? motion;
 
-  const Managed({this.controller, this.initial, this.min = 0, this.max, this.onChange, this.motion})
+  /// Creates a [FMultiSelectControl].
+  const FMultiSelectManagedControl({this.controller, this.initial, this.min = 0, this.max, this.onChange, this.motion})
     : assert(
         controller == null || initial == null,
         'Cannot provide both controller and initial. Set the value directly in the controller.',
@@ -215,14 +234,13 @@ class Managed<T> extends FMultiSelectControl<T> with Diagnosticable, _$ManagedMi
       super._();
 
   @override
-  FMultiSelectController<T> _create(VoidCallback callback, TickerProvider vsync) =>
-      (controller ??
-            FMultiSelectController<T>(
-              vsync: vsync,
-              value: initial ?? {},
-              min: min,
-              max: max,
-              popoverMotion: motion ?? const FPopoverMotion(),
-            ))
-        ..addListener(callback);
+  FMultiSelectController<T> createController(TickerProvider vsync) =>
+      controller ??
+      FMultiSelectController<T>(
+        vsync: vsync,
+        value: initial ?? {},
+        min: min,
+        max: max,
+        popoverMotion: motion ?? const FPopoverMotion(),
+      );
 }

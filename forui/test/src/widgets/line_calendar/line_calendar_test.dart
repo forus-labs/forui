@@ -39,7 +39,7 @@ void main() {
     });
 
     testWidgets('old controller is not disposed', (tester) async {
-      final first = autoDispose(FCalendarController.date(initialSelection: DateTime(2023)));
+      final first = autoDispose(FCalendarController.date(initial: DateTime(2023)));
       await tester.pumpWidget(
         TestScaffold.app(
           child: FLineCalendar(control: .managed(controller: first)),

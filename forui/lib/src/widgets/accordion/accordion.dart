@@ -77,7 +77,7 @@ class _FAccordionState extends State<FAccordion> {
   }
 
   void _handleOnChange() {
-    if (widget.control case Managed(:final onChange?)) {
+    if (widget.control case FAccordionManagedControl(:final onChange?)) {
       onChange(_controller.expanded);
     }
   }
@@ -108,7 +108,7 @@ class InheritedAccordionData extends InheritedWidget {
   final FAccordionController controller;
   final FAccordionStyle style;
   final int index;
-  final Set<int> _expanded;
+  final Set<int> expanded;
 
   InheritedAccordionData({
     required this.controller,
@@ -116,11 +116,11 @@ class InheritedAccordionData extends InheritedWidget {
     required this.index,
     required super.child,
     super.key,
-  }) : _expanded = controller is LiftedController ? controller.items : {};
+  }) : expanded = controller.expanded;
 
   @override
   bool updateShouldNotify(covariant InheritedAccordionData old) =>
-      controller != old.controller || style != old.style || index != old.index || !setEquals(_expanded, old._expanded);
+      controller != old.controller || style != old.style || index != old.index || !setEquals(expanded, old.expanded);
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -128,7 +128,8 @@ class InheritedAccordionData extends InheritedWidget {
     properties
       ..add(DiagnosticsProperty('controller', controller))
       ..add(DiagnosticsProperty('style', style))
-      ..add(IntProperty('index', index));
+      ..add(IntProperty('index', index))
+      ..add(IterableProperty('expanded', expanded));
   }
 }
 

@@ -2,6 +2,7 @@ part of '../date_field.dart';
 
 // ignore: avoid_implementing_value_types
 class _CalendarDateField extends FDateField implements FDateFieldCalendarProperties {
+  final FPopoverControl popoverControl;
   final DateFormat? format;
   final String? hint;
   final TextAlign textAlign;
@@ -39,6 +40,7 @@ class _CalendarDateField extends FDateField implements FDateFieldCalendarPropert
   final bool autoHide;
 
   const _CalendarDateField({
+    this.popoverControl = const .managed(),
     this.format,
     this.hint,
     this.textAlign = .start,
@@ -86,6 +88,7 @@ class _CalendarDateField extends FDateField implements FDateFieldCalendarPropert
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
+      ..add(DiagnosticsProperty('popoverControl', popoverControl))
       ..add(DiagnosticsProperty('format', format))
       ..add(StringProperty('hint', hint))
       ..add(EnumProperty('textAlign', textAlign))
@@ -101,6 +104,7 @@ class _CalendarDateField extends FDateField implements FDateFieldCalendarPropert
 
 class _CalendarDatePickerState extends _FDateFieldState<_CalendarDateField> {
   final TextEditingController _textController = .new();
+  late FPopoverController _popoverController;
   DateFormat? _format;
 
   @override
@@ -109,6 +113,7 @@ class _CalendarDatePickerState extends _FDateFieldState<_CalendarDateField> {
   @override
   void initState() {
     super.initState();
+    _popoverController = widget.popoverControl.create(_handleOnPopoverChange, this);
     _controller = widget.control.create(_handleOnChange, this);
   }
 
@@ -122,6 +127,9 @@ class _CalendarDatePickerState extends _FDateFieldState<_CalendarDateField> {
   @override
   void didUpdateWidget(covariant _CalendarDateField old) {
     super.didUpdateWidget(old);
+    _popoverController = widget.popoverControl
+        .update(old.popoverControl, _popoverController, _handleOnPopoverChange, this)
+        .$1;
     final (controller, updated) = widget.control.update(old.control, _controller, _handleOnChange, this);
     if (updated) {
       _controller = controller;
@@ -131,6 +139,7 @@ class _CalendarDatePickerState extends _FDateFieldState<_CalendarDateField> {
 
   @override
   void dispose() {
+    widget.popoverControl.dispose(_popoverController, _handleOnPopoverChange);
     widget.control.dispose(_controller, _handleOnChange);
     _textController.dispose();
     super.dispose();
@@ -138,7 +147,7 @@ class _CalendarDatePickerState extends _FDateFieldState<_CalendarDateField> {
 
   void _handleOnChange() {
     _updateTextController();
-    if (widget.control case Managed(:final onChange?)) {
+    if (widget.control case FDateFieldManagedControl(:final onChange?)) {
       onChange(_controller.value);
     }
   }
@@ -148,6 +157,12 @@ class _CalendarDatePickerState extends _FDateFieldState<_CalendarDateField> {
       _textController.text = widget.format?.format(value) ?? _format?.format(value) ?? '';
     } else {
       _textController.text = '';
+    }
+  }
+
+  void _handleOnPopoverChange() {
+    if (_popoverController case FPopoverManagedControl(:final onChange?)) {
+      onChange(_popoverController.status.isForwardOrCompleted);
     }
   }
 
@@ -193,7 +208,8 @@ class _CalendarDatePickerState extends _FDateFieldState<_CalendarDateField> {
         error: state.hasError ? widget.errorBuilder(context, state.errorText ?? '') : null,
         enabled: widget.enabled,
         builder: (context, _, states, field) => _CalendarPopover(
-          controller: _controller,
+          popoverController: _popoverController,
+          calendarController: _controller.calendar,
           style: style,
           properties: widget,
           autofocus: true,
@@ -208,15 +224,16 @@ class _CalendarDatePickerState extends _FDateFieldState<_CalendarDateField> {
   }
 
   void _onTap() {
-    const {AnimationStatus.completed, AnimationStatus.reverse}.contains(_controller.popover.status)
+    const {AnimationStatus.completed, AnimationStatus.reverse}.contains(_popoverController.status)
         ? _focus.requestFocus()
         : _focus.unfocus();
-    _controller.popover.toggle();
+    _popoverController.toggle();
   }
 }
 
 class _CalendarPopover extends StatelessWidget {
-  final FDateFieldController controller;
+  final FPopoverController popoverController;
+  final FCalendarController<DateTime?> calendarController;
   final FDateFieldStyle style;
   final FDateFieldCalendarProperties properties;
   final bool autofocus;
@@ -224,7 +241,8 @@ class _CalendarPopover extends StatelessWidget {
   final Widget child;
 
   const _CalendarPopover({
-    required this.controller,
+    required this.popoverController,
+    required this.calendarController,
     required this.style,
     required this.properties,
     required this.autofocus,
@@ -234,7 +252,7 @@ class _CalendarPopover extends StatelessWidget {
 
   @override
   Widget build(BuildContext _) => FPopover(
-    control: .managed(controller: controller.popover),
+    control: .managed(controller: popoverController),
     traversalEdgeBehavior: .parentScope,
     style: style.popoverStyle,
     popoverAnchor: properties.anchor,
@@ -247,9 +265,9 @@ class _CalendarPopover extends StatelessWidget {
     shortcuts: {const SingleActivator(.escape): _hide},
     popoverBuilder: (_, _) => TextFieldTapRegion(
       child: ValueListenableBuilder(
-        valueListenable: controller.calendar,
+        valueListenable: calendarController,
         builder: (_, value, _) => FCalendar(
-          control: .managedDate(controller: controller.calendar),
+          control: .managedDate(controller: calendarController),
           style: style.calendarStyle,
           initialMonth: switch (value) {
             null => null,
@@ -271,14 +289,15 @@ class _CalendarPopover extends StatelessWidget {
 
   void _hide() {
     fieldFocusNode?.requestFocus();
-    controller.popover.hide();
+    popoverController.hide();
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('controller', controller))
+      ..add(DiagnosticsProperty('popoverController', popoverController))
+      ..add(DiagnosticsProperty('calendarController', calendarController))
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('properties', this.properties))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))

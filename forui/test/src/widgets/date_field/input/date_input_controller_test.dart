@@ -37,7 +37,7 @@ void main() {
     test('FieldController.() - $index', () {
       expect(
         DateInputController(
-          FCalendarController.date(initialSelection: initial),
+          FCalendarController.date(initial: initial),
           localizations,
           TestScaffold.blueScreen.dateFieldStyle.textFieldStyle,
           2000,
@@ -247,7 +247,7 @@ void main() {
       const TextEditingValue(text: '01. 02. 2024.', selection: TextSelection(baseOffset: 0, extentOffset: 13)),
       1,
       const TextEditingValue(text: '01. 02. 2024.', selection: TextSelection(baseOffset: 0, extentOffset: 13)),
-      DateTime.utc(2024, 2),
+      null, // Null because we initialized the calendar controller value to null.
     ),
     (
       const TextEditingValue(text: '01. 02. 2024.', selection: TextSelection(baseOffset: 0, extentOffset: 2)),
@@ -341,7 +341,7 @@ void main() {
           2000,
           null,
         );
-        expect(controller.selector.resolve(value), expected);
+        expect(controller.selector.navigate(value), expected);
       });
     }
 
@@ -398,7 +398,7 @@ void main() {
           2000,
           null,
         );
-        expect(controller.selector.resolve(value), expected);
+        expect(controller.selector.navigate(value), expected);
       });
     }
 
@@ -438,7 +438,7 @@ void main() {
           2000,
           null,
         );
-        expect(controller.selector.resolve(value), expected);
+        expect(controller.selector.navigate(value), expected);
       });
     }
   });
@@ -448,7 +448,7 @@ void main() {
     (DateTime.utc(2025, 2), null, const TextEditingValue(text: 'DD/MM/YYYY')),
   ].indexed) {
     test('update from calendar(...) - $index', () {
-      calendarController = FCalendarController.date(initialSelection: initial);
+      calendarController = FCalendarController.date(initial: initial);
       controller = DateInputController.test(
         calendarController,
         FLocalizationsEnSg(),

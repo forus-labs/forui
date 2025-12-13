@@ -74,7 +74,7 @@ class _FPaginationState extends State<FPagination> {
   }
 
   void _handleOnChange() {
-    if (widget.control case Managed(:final onChange?)) {
+    if (widget.control case FPaginationManagedControl(:final onChange?)) {
       onChange(_controller.page);
     }
   }

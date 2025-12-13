@@ -40,10 +40,10 @@ class Time12InputController extends TimeInputController {
     FLocalizations localizations,
     super.controller,
     super.format,
+    super.value,
     super.style,
     super.parser,
     super.placeholder,
-    super.value,
   ) : selector = Time12Selector(localizations, format),
       super.fromValue();
 
@@ -53,8 +53,8 @@ class Time12InputController extends TimeInputController {
       mutating = true;
       rawValue =
           (forward
-              ? selector.resolve(value, onFirst: _onMiddle, onMiddle: _onLast)
-              : selector.resolve(value, onLast: _onMiddle, onMiddle: _onFirst)) ??
+              ? selector.navigate(value, onFirst: _onMiddle, onMiddle: _onLast)
+              : selector.navigate(value, onLast: _onMiddle, onMiddle: _onFirst)) ??
           value;
     } finally {
       mutating = false;
@@ -67,7 +67,7 @@ class Time12InputController extends TimeInputController {
       mutating = true;
       final parts = selector.split(text);
       rawValue =
-          selector.resolve(
+          selector.navigate(
             value,
             onFirst: (_, _, _, _, _, _) => selector.select(parser.adjust(parts, 0, amount), 0),
             onMiddle: (_, _, _, _, _, _) => selector.select(parser.adjust(parts, 1, amount), 1),
@@ -96,7 +96,7 @@ class Time12Selector extends Selector {
       super(localizations, RegExp(RegExp.escape(localizations.timeFieldSuffix) + r'$'));
 
   @override
-  TextEditingValue? resolve(
+  TextEditingValue? navigate(
     TextEditingValue value, {
     Select12 onFirst = _onFirst,
     Select12 onMiddle = _onMiddle,

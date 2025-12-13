@@ -106,7 +106,7 @@ abstract class Selector {
 
   Selector(this.localizations, this.suffix);
 
-  TextEditingValue? resolve(TextEditingValue value);
+  TextEditingValue? navigate(TextEditingValue value);
 
   TextEditingValue select(List<String> parts, int index);
 

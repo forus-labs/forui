@@ -19,6 +19,7 @@ dart fix --apply
 
 
 ### `FAutocomplete`
+* Add `FAutocomplete.popoverControl`.
 * Add `FAutocompleteControl`.
 * Add `FAutocompleteItemMixin.item(...)`.
 * Add `FAutocompleteItemMixin.raw(...)`.
@@ -29,6 +30,13 @@ dart fix --apply
 * **Breaking** Rename `FAutocomplete.shift` to `FAutocomplete.overflow`.
 * **Breaking** Remove `FAutocomplete.controller`. Use `FAutocomplete(control: .managed(...))` instead.
 * **Breaking** Remove `FAutocomplete.initialText`. Use `FAutocomplete(control: .managed(...))` instead.
+* **Breaking** Remove `FAutocompleteController.vsync`. Use `FAutocomplete(popoverControl: ...)` instead.
+* **Breaking** Remove `FAutocompleteController.popoverMotion`. Use `FAutocomplete(popoverControl: .managed(motion: ...))` instead.
+* **Breaking** Remove `FAutocompleteController.content`. Use `FAutocomplete(popoverControl: .managed(controller: ...))` instead.
+* **Breaking** Remove `FAutocompleteControl.lifted(popoverShown: ...)`. Use `FAutocomplete(popoverControl: .lifted(...))` instead.
+* **Breaking** Remove `FAutocompleteControl.lifted(onPopoverChange: ...)`. Use `FAutocomplete(popoverControl: .lifted(...))` instead.
+* **Breaking** Remove `FAutocompleteControl.lifted(motion: ...)`. Use `FAutocomplete(popoverControl: .managed(motion: ...))` instead.
+* **Breaking** Remove `FAutocompleteControl.managed(motion: ...)`. Use `FAutocomplete(popoverControl: .managed(motion: ...))` instead.
 * **Breaking** Change `FAutocompleteContentStyle` to extend `FPopoverStyle`.
 * **Breaking** Remove `FAutocompleteStyle.popoverStyle` - use `FAutocompleteStyle.contentStyle` instead.
 
@@ -50,6 +58,9 @@ Unfortunately, `FCalendar` cannot be easily migrated using data driven fixes due
 
 * Add `FCalendarControl`.
 
+* **Breaking** Rename `FCalendarController.date(initialSelection: ...)` to `FCalendarController.date(initial: ...)`.
+* **Breaking** Rename `FCalendarController.dates(initialSelections: ...)` to `FCalendarController.dates(initial: ...)`.
+* **Breaking** Rename `FCalendarController.range(initialSelection: ...)` to `FCalendarController.range(initial: ...)`.
 * **Breaking** Remove `FCalendar.controller`. Use `FCalendar(control: .managedDate(...))` instead.
 
 
@@ -63,12 +74,18 @@ Unfortunately, `FCalendar` cannot be easily migrated using data driven fixes due
 
 ### `FDateField`
 * Add `FDateFieldControl`.
+* Add `FDateField(popoverControl: ...)`.
+* Add `FDateField.calendar(popoverControl: ...)`.
 
+* Change `FDateField`'s input to preserve text selection when changing dates programmatically or via the calendar.
 * **Breaking** Rename `FDateField.shift` to `FDateField.overflow`.
 * **Breaking** Rename `FDateFieldController.calendar` to `FDateFieldController.popover`.
+* **Breaking** Rename `FDateFieldController(initialDate: ...)` to `FDateFieldController(initial: ...)`.
 * **Breaking** Remove `FDateField.controller`. Use `FDateField(control: .managed(controller: ...))` instead.
 * **Breaking** Remove `FDateField.initialDate`. Use `FDateField(control: .managed(initial: ...))` instead.
 * **Breaking** Remove `FDateField.onChange`. Use `FDateField(control: .managed(onChange: ...))` instead.
+* **Breaking** Remove `FDateFieldController(vsync: ..., popoverMotion: ...)`. Use `FDateField(popoverControl: ...)` instead.
+* **Breaking** Remove `FDateFieldController(truncateAndStripTimezone: ...)`.
 
 
 ### `FItem` & `FItemGroup`

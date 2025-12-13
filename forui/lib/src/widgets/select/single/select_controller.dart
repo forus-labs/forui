@@ -73,7 +73,7 @@ class _Controller<T> extends FSelectController<T> {
     }
 
     _onValueChange = onValueChange;
-    _popover = InternalPopoverController.updateNested(_popover, vsync, popoverShown, onPopoverChange);
+    _popover = InternalFPopoverController.updateNested(_popover, vsync, popoverShown, onPopoverChange);
   }
 
   @override
@@ -87,7 +87,9 @@ class _Controller<T> extends FSelectController<T> {
   FPopoverController get popover => _popover;
 }
 
-/// Defines how a [FSelect]'s value is controlled.
+/// A [FSelectControl] defines how a [FSelect] is controlled.
+///
+/// {@macro forui.foundation.doc_templates.control}
 sealed class FSelectControl<T> with Diagnosticable, _$FSelectControlMixin<T> {
   /// Creates a [FSelectControl] for controlling select using lifted state.
   ///
@@ -106,23 +108,14 @@ sealed class FSelectControl<T> with Diagnosticable, _$FSelectControlMixin<T> {
     FPopoverMotion motion,
   }) = Lifted<T>;
 
-  /// Creates a [FSelectControl] for controlling select using a controller.
-  ///
-  /// Either [controller] or [initial] can be provided. If neither is provided, an internal controller with no initial
-  /// value is created.
-  ///
-  /// The [onChange] callback is invoked when the selected value changes.
-  ///
-  /// ## Contract
-  /// Throws [AssertionError] if both [controller] and [initial] are provided.
-  /// Throws [AssertionError] if both [controller] and [motion] are provided.
+  /// Creates a [FSelectControl].
   const factory FSelectControl.managed({
     FSelectController<T>? controller,
     T? initial,
     bool toggleable,
     ValueChanged<T?>? onChange,
     FPopoverMotion? motion,
-  }) = Managed<T>;
+  }) = FSelectManagedControl<T>;
 
   const FSelectControl._();
 
@@ -160,34 +153,53 @@ class Lifted<T> extends FSelectControl<T> with _$LiftedMixin<T> {
        super._();
 
   @override
-  FSelectController<T> _create(VoidCallback callback, TickerProvider vsync) => _Controller(
+  FSelectController<T> createController(TickerProvider vsync) => _Controller(
     value: value,
     vsync: vsync,
     onValueChange: onChange,
     popoverShown: popoverShown,
     onPopoverChange: onPopoverChange,
     popoverMotion: motion,
-  )..addListener(callback);
+  );
 
   @override
   void _updateController(FSelectController<T> controller, TickerProvider vsync) =>
       (controller as _Controller<T>).update(vsync, value, onChange, popoverShown, onPopoverChange);
 }
 
-@internal
-class Managed<T> extends FSelectControl<T> with Diagnosticable, _$ManagedMixin<T> {
+/// A [FSelectManagedControl] enables widgets to manage their own controller internally while exposing parameters for
+/// common configurations.
+///
+/// {@macro forui.foundation.doc_templates.managed}
+class FSelectManagedControl<T> extends FSelectControl<T> with Diagnosticable, _$FSelectManagedControlMixin<T> {
+  /// The controller.
   @override
   final FSelectController<T>? controller;
+
+  /// The initial value. Defaults to null.
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if [initial] and [controller] are both provided.
   @override
   final T? initial;
+
+  /// Whether the selection is toggleable. Defaults to false.
   @override
   final bool toggleable;
+
+  /// Called when the selected value changes.
   @override
   final ValueChanged<T?>? onChange;
+
+  /// The popover motion. Defaults to [FPopoverMotion].
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if [motion] and [controller] are both provided.
   @override
   final FPopoverMotion? motion;
 
-  const Managed({this.controller, this.initial, this.toggleable = false, this.onChange, this.motion})
+  /// Creates a [FSelectControl].
+  const FSelectManagedControl({this.controller, this.initial, this.toggleable = false, this.onChange, this.motion})
     : assert(
         controller == null || initial == null,
         'Cannot provide both controller and initialValue. Set the value directly in the controller.',
@@ -199,13 +211,12 @@ class Managed<T> extends FSelectControl<T> with Diagnosticable, _$ManagedMixin<T
       super._();
 
   @override
-  FSelectController<T> _create(VoidCallback callback, TickerProvider vsync) =>
-      (controller ??
-            FSelectController<T>(
-              vsync: vsync,
-              value: initial,
-              toggleable: toggleable,
-              popoverMotion: motion ?? const FPopoverMotion(),
-            ))
-        ..addListener(callback);
+  FSelectController<T> createController(TickerProvider vsync) =>
+      controller ??
+      FSelectController<T>(
+        vsync: vsync,
+        value: initial,
+        toggleable: toggleable,
+        popoverMotion: motion ?? const FPopoverMotion(),
+      );
 }

@@ -72,35 +72,8 @@ void main() {
   });
 
   group('controller', () {
-    testWidgets('old controller is not disposed', (tester) async {
-      final first = autoDispose(FDateFieldController(vsync: tester));
-      await tester.pumpWidget(
-        TestScaffold.app(
-          child: FDateField(
-            control: .managed(controller: first),
-            key: key,
-            calendar: FDateFieldCalendarProperties(today: DateTime.utc(2025, 1, 15)),
-          ),
-        ),
-      );
-
-      final second = autoDispose(FDateFieldController(vsync: tester));
-      await tester.pumpWidget(
-        TestScaffold.app(
-          child: FDateField(
-            control: .managed(controller: second),
-            key: key,
-            calendar: FDateFieldCalendarProperties(today: DateTime.utc(2025, 1, 15)),
-          ),
-        ),
-      );
-
-      expect(first.disposed, false);
-      expect(second.disposed, false);
-    });
-
-    testWidgets('input only - change locale without changing controller', (tester) async {
-      final controller = autoDispose(FDateFieldController(vsync: tester));
+    testWidgets('input only - change locale', (tester) async {
+      final controller = autoDispose(FDateFieldController());
 
       await tester.pumpWidget(
         TestScaffold.app(
@@ -122,8 +95,8 @@ void main() {
       expect(find.text('YYYY. MM. DD.'), findsOneWidget);
     });
 
-    testWidgets('calendar only - change locale without changing controller', (tester) async {
-      final controller = autoDispose(FDateFieldController(vsync: tester));
+    testWidgets('calendar only - change locale', (tester) async {
+      final controller = autoDispose(FDateFieldController());
 
       await tester.pumpWidget(
         TestScaffold.app(
@@ -282,12 +255,88 @@ void main() {
 
       expect(find.text('DD/MM/YYYY'), findsOneWidget);
     });
+
+    testWidgets('adjustment does not work when text is valid date', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          locale: const Locale('en', 'SG'),
+          child: StatefulBuilder(
+            builder: (context, setState) => FDateField(
+              key: key,
+              control: .lifted(value: DateTime.utc(2025, 1, 15), onChange: (_) {}),
+            ),
+          ),
+        ),
+      );
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+
+      await tester.sendKeyEvent(.arrowUp);
+      await tester.pumpAndSettle();
+
+      expect(find.text('15/01/2025'), findsOneWidget);
+    });
+
+    testWidgets('adjustment does not produce full date from placeholder', (tester) async {
+      DateTime? value;
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          locale: const Locale('en', 'SG'),
+          child: StatefulBuilder(
+            builder: (context, setState) => FDateField(
+              key: key,
+              control: .lifted(value: value, onChange: (_) {}),
+            ),
+          ),
+        ),
+      );
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+
+      await tester.sendKeyEvent(.arrowUp);
+      await tester.pumpAndSettle();
+      await tester.sendKeyEvent(.arrowRight);
+      await tester.pumpAndSettle();
+
+      await tester.sendKeyEvent(.arrowUp);
+      await tester.pumpAndSettle();
+      await tester.sendKeyEvent(.arrowRight);
+      await tester.pumpAndSettle();
+
+      await tester.sendKeyEvent(.arrowUp);
+      await tester.pumpAndSettle();
+
+      expect(value, null);
+    });
+
+    testWidgets('adjustment produces partial date from placeholder', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          locale: const Locale('en', 'SG'),
+          child: FDateField(
+            key: key,
+            control: .lifted(value: null, onChange: (_) {}),
+          ),
+        ),
+      );
+
+      await tester.tapAt(tester.getTopLeft(find.byKey(key)));
+      await tester.pumpAndSettle();
+
+      await tester.sendKeyEvent(.arrowUp);
+      await tester.pumpAndSettle();
+
+      expect(find.text('01/MM/YYYY'), findsOneWidget);
+    });
   });
 
-  group('managed onChange', () {
+  group('managed', () {
     testWidgets('called when value changes', (tester) async {
       DateTime? changed;
-      final controller = autoDispose(FDateFieldController(vsync: tester));
+      final controller = autoDispose(FDateFieldController());
 
       await tester.pumpWidget(
         TestScaffold.app(

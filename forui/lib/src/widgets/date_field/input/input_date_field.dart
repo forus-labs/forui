@@ -1,6 +1,7 @@
 part of '../date_field.dart';
 
 class _InputDateField extends FDateField {
+  final FPopoverControl popoverControl;
   final TextInputAction? textInputAction;
   final TextAlign textAlign;
   final TextAlignVertical? textAlignVertical;
@@ -15,6 +16,7 @@ class _InputDateField extends FDateField {
   final FDateFieldCalendarProperties? calendar;
 
   const _InputDateField({
+    this.popoverControl = const .managed(),
     this.textInputAction,
     this.textAlign = TextAlign.start,
     this.textAlignVertical,
@@ -52,6 +54,7 @@ class _InputDateField extends FDateField {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
+      ..add(DiagnosticsProperty('popoverControl', popoverControl))
       ..add(EnumProperty('textInputAction', textInputAction))
       ..add(EnumProperty('textAlign', textAlign))
       ..add(DiagnosticsProperty('textAlignVertical', textAlignVertical))
@@ -68,30 +71,43 @@ class _InputDateField extends FDateField {
 }
 
 class _InputDateFieldState extends _FDateFieldState<_InputDateField> {
+  late FPopoverController _popoverController;
+
   @override
   String get _focusLabel => 'InputDateField';
 
   @override
   void initState() {
     super.initState();
+    _popoverController = widget.popoverControl.create(_handleOnPopoverChange, this);
     _controller = widget.control.create(_handleOnChange, this);
   }
 
   @override
   void didUpdateWidget(covariant _InputDateField old) {
     super.didUpdateWidget(old);
+    _popoverController = widget.popoverControl
+        .update(old.popoverControl, _popoverController, _handleOnPopoverChange, this)
+        .$1;
     _controller = widget.control.update(old.control, _controller, _handleOnChange, this).$1;
   }
 
   @override
   void dispose() {
+    widget.popoverControl.dispose(_popoverController, _handleOnPopoverChange);
     widget.control.dispose(_controller, _handleOnChange);
     super.dispose();
   }
 
   void _handleOnChange() {
-    if (widget.control case Managed(:final onChange?)) {
+    if (widget.control case FDateFieldManagedControl(:final onChange?)) {
       onChange(_controller.value);
+    }
+  }
+
+  void _handleOnPopoverChange() {
+    if (_popoverController case FPopoverManagedControl(:final onChange?)) {
+      onChange(_popoverController.status.isForwardOrCompleted);
     }
   }
 
@@ -102,13 +118,13 @@ class _InputDateFieldState extends _FDateFieldState<_InputDateField> {
       bindings: {
         const SingleActivator(.enter): () {
           _focus.unfocus();
-          _controller.popover.hide();
+          _popoverController.hide();
         },
       },
       child: DateInput(
         controller: _controller,
         calendarController: _controller.calendar,
-        onTap: widget.calendar == null ? null : _controller.popover.show,
+        onTap: widget.calendar == null ? null : _popoverController.show,
         style: style,
         label: widget.label,
         description: widget.description,
@@ -141,7 +157,8 @@ class _InputDateFieldState extends _FDateFieldState<_InputDateField> {
         builder: switch (widget.calendar) {
           null => (context, _, states, child) => widget.builder(context, style, states, child),
           final properties => (context, _, states, child) => _CalendarPopover(
-            controller: _controller,
+            popoverController: _popoverController,
+            calendarController: _controller.calendar,
             style: style,
             properties: properties,
             autofocus: false,
@@ -241,7 +258,7 @@ class _InputOnlyDateFieldState extends _FDateFieldState<_InputOnlyDateField> {
   }
 
   void _handleOnChange() {
-    if (widget.control case Managed(:final onChange?)) {
+    if (widget.control case FDateFieldManagedControl(:final onChange?)) {
       onChange(_controller.value);
     }
   }

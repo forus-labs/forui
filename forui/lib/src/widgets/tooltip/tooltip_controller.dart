@@ -122,7 +122,9 @@ class _Controller extends FTooltipController {
   Future<void> hide() async => _onChange(false);
 }
 
-/// Defines how a tooltip's shown state is controlled.
+/// A [FTooltipControl] defines how a [FTooltip] is controlled.
+///
+/// {@macro forui.foundation.doc_templates.control}
 sealed class FTooltipControl with Diagnosticable, _$FTooltipControlMixin {
   /// Creates a [FTooltipControl] for controlling a tooltip using lifted state.
   ///
@@ -134,20 +136,12 @@ sealed class FTooltipControl with Diagnosticable, _$FTooltipControlMixin {
     FTooltipMotion motion,
   }) = Lifted;
 
-  /// Creates a [FTooltipControl] for controlling a tooltip using a controller.
-  ///
-  /// Either [controller] or [motion] can be provided. If neither is provided,
-  /// an internal controller with default motion is created.
-  ///
-  /// The [onChange] callback is invoked when the tooltip's shown state changes.
-  ///
-  /// ## Contract
-  /// Throws [AssertionError] if both [controller] and [motion] are provided.
+  /// Creates a [FTooltipControl].
   const factory FTooltipControl.managed({
     FTooltipController? controller,
     FTooltipMotion? motion,
     void Function(bool shown)? onChange,
-  }) = Managed;
+  }) = FTooltipManagedControl;
 
   const FTooltipControl._();
 
@@ -171,7 +165,7 @@ class Lifted extends FTooltipControl with _$LiftedMixin {
   const Lifted({required this.shown, required this.onChange, this.motion = const FTooltipMotion()}) : super._();
 
   @override
-  FTooltipController _create(VoidCallback callback, TickerProvider vsync) =>
+  FTooltipController createController(TickerProvider vsync) =>
       _Controller(vsync: vsync, shown, onChange, motion: motion);
 
   @override
@@ -179,20 +173,32 @@ class Lifted extends FTooltipControl with _$LiftedMixin {
       (controller as _Controller).update(shown, onChange);
 }
 
-@internal
-class Managed extends FTooltipControl with Diagnosticable, _$ManagedMixin {
+/// A [FTooltipManagedControl] enables widgets to manage their own controller internally while exposing parameters for
+/// common configurations.
+///
+/// {@macro forui.foundation.doc_templates.managed}
+class FTooltipManagedControl extends FTooltipControl with Diagnosticable, _$FTooltipManagedControlMixin {
+  /// The controller.
   @override
   final FTooltipController? controller;
+
+  /// The tooltip motion. Defaults to [FTooltipMotion].
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if [motion] and [controller] are both provided.
   @override
   final FTooltipMotion? motion;
+
+  /// Called when the shown state changes.
   @override
   final void Function(bool shown)? onChange;
 
-  const Managed({this.controller, this.motion, this.onChange})
+  /// Creates a [FTooltipControl].
+  const FTooltipManagedControl({this.controller, this.motion, this.onChange})
     : assert(controller == null || motion == null, 'Cannot provide both controller and motion'),
       super._();
 
   @override
-  FTooltipController _create(VoidCallback callback, TickerProvider vsync) =>
-      (controller ?? .new(vsync: vsync, motion: motion ?? const .new()))..addListener(callback);
+  FTooltipController createController(TickerProvider vsync) =>
+      controller ?? .new(vsync: vsync, motion: motion ?? const .new());
 }

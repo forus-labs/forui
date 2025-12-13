@@ -29,7 +29,7 @@ class ControlGenerator extends Generator {
     }
 
     for (final MapEntry(key: supertype, value: subtypes) in types.entries) {
-      final create = supertype.methods.firstWhereOrNull((m) => m.name == '_create');
+      final createController = supertype.methods.firstWhereOrNull((m) => m.name == 'createController');
       final update = supertype.methods.firstWhereOrNull((m) => m.name == '_update');
       final dispose = supertype.methods.firstWhereOrNull((m) => m.name == '_dispose');
 
@@ -37,8 +37,13 @@ class ControlGenerator extends Generator {
         continue;
       }
 
-      final parentMixin = ControlParentMixin(supertype: supertype, create: create, update: update, dispose: dispose);
-      final createMethod = parentMixin.createMethod;
+      final parentMixin = ControlParentMixin(
+        supertype: supertype,
+        createController: createController,
+        update: update,
+        dispose: dispose,
+      );
+      final createControllerMethod = parentMixin.createControllerMethod;
       final disposeMethod = parentMixin.disposeMethod;
       final defaultMethod = parentMixin.defaultMethod;
 
@@ -53,7 +58,7 @@ class ControlGenerator extends Generator {
                   supertype: supertype,
                   update: update,
                   dispose: disposeMethod,
-                  create: createMethod,
+                  createController: createControllerMethod,
                 ).generate(),
               )
               .toString(),
@@ -67,7 +72,7 @@ class ControlGenerator extends Generator {
                     element: type,
                     supertype: supertype,
                     update: update,
-                    create: createMethod,
+                    createController: createControllerMethod,
                     dispose: disposeMethod,
                     default_: defaultMethod,
                     siblings: direct.whereNot((t) => t == type).toList(),

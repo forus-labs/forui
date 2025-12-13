@@ -1,5 +1,6 @@
 import 'package:analyzer/dart/element/element.dart';
-import 'package:code_builder/code_builder.dart';
+import 'package:analyzer/dart/element/type.dart';
+import 'package:code_builder/code_builder.dart' hide RecordType;
 import 'package:forui_internal_gen/src/source/types.dart';
 import 'package:meta/meta.dart';
 
@@ -16,6 +17,7 @@ abstract class FunctionsMixin {
   @protected
   final List<FieldElement> transitiveFields;
 
+  /// The fields defined in [element].
   @protected
   final List<FieldElement> fields;
 
@@ -31,7 +33,7 @@ abstract class FunctionsMixin {
       .map(
         (field) => Method(
           (m) => m
-            ..returns = refer(field.type.getDisplayString())
+            ..returns = refer(aliasAwareType(field.type))
             ..type = MethodType.getter
             ..name = field.name,
         ),

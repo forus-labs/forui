@@ -111,7 +111,9 @@ class FTabMotion with Diagnosticable, _$FTabMotionFunctions {
   const FTabMotion({this.duration = const Duration(milliseconds: 300), this.curve = Curves.easeOutCubic});
 }
 
-/// Defines how a [FTabs]'s value is controlled.
+/// A [FTabControl] defines how a [FTabs] is controlled.
+///
+/// {@macro forui.foundation.doc_templates.control}
 sealed class FTabControl with Diagnosticable, _$FTabControlMixin {
   /// Creates lifted state control.
   ///
@@ -122,22 +124,13 @@ sealed class FTabControl with Diagnosticable, _$FTabControlMixin {
   const factory FTabControl.lifted({required int index, required ValueChanged<int> onChange, FTabMotion motion}) =
       Lifted;
 
-  /// Creates managed control using a [FTabController].
-  ///
-  /// Either [controller] or [initial] can be provided. If neither is provided,
-  /// an internal controller with default index (0) is created.
-  ///
-  /// The [onChange] callback is invoked when the tab changes.
-  ///
-  /// ## Contract
-  /// Throws [AssertionError] if both [controller] and [initial] are provided.
-  /// Throws [AssertionError] if both [controller] and [motion] are provided.
+  /// Creates a [FTabControl].
   const factory FTabControl.managed({
     FTabController? controller,
     int? initial,
     FTabMotion? motion,
     ValueChanged<int>? onChange,
-  }) = Managed;
+  }) = FTabManagedControl;
 
   const FTabControl._();
 
@@ -162,39 +155,49 @@ class Lifted extends FTabControl with _$LiftedMixin {
   const Lifted({required this.index, required this.onChange, this.motion = const FTabMotion()}) : super._();
 
   @override
-  FTabController _create(VoidCallback callback, TickerProvider vsync, int length) =>
-      FTabController._lifted(length: length, vsync: vsync, index: index, onChange: onChange, motion: motion)
-        ..addListener(callback);
+  FTabController createController(TickerProvider vsync, int length) =>
+      FTabController._lifted(length: length, vsync: vsync, index: index, onChange: onChange, motion: motion);
 
   @override
   void _updateController(FTabController controller, TickerProvider vsync, int length) =>
       (controller._controller as _TabController)._update(index, onChange);
 }
 
-@internal
-class Managed extends FTabControl with _$ManagedMixin {
+/// A [FTabManagedControl] enables widgets to manage their own controller internally while exposing parameters for
+/// common configurations.
+///
+/// {@macro forui.foundation.doc_templates.managed}
+class FTabManagedControl extends FTabControl with _$FTabManagedControlMixin {
+  /// The controller.
   @override
   final FTabController? controller;
+
+  /// The initial tab index. Defaults to 0.
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if [initial] and [controller] are both provided.
   @override
   final int? initial;
+
+  /// The tab motion. Defaults to [FTabMotion].
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if [motion] and [controller] are both provided.
   @override
   final FTabMotion? motion;
+
+  /// Called when the tab index changes.
   @override
   final ValueChanged<int>? onChange;
 
-  const Managed({this.controller, this.initial, this.motion, this.onChange})
+  /// Creates a [FTabControl].
+  const FTabManagedControl({this.controller, this.initial, this.motion, this.onChange})
     : assert(controller == null || initial == null, 'Cannot provide both controller and initial.'),
       assert(controller == null || motion == null, 'Cannot provide both controller and motion.'),
       super._();
 
   @override
-  FTabController _create(VoidCallback callback, TickerProvider vsync, int length) =>
-      (controller ??
-            FTabController(
-              length: length,
-              vsync: vsync,
-              initialIndex: initial ?? 0,
-              motion: motion ?? const FTabMotion(),
-            ))
-        ..addListener(callback);
+  FTabController createController(TickerProvider vsync, int length) =>
+      controller ??
+      FTabController(length: length, vsync: vsync, initialIndex: initial ?? 0, motion: motion ?? const FTabMotion());
 }

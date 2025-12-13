@@ -612,7 +612,7 @@ abstract class _FMultiSelectState<S extends FMultiSelect<T>, T> extends State<S>
   }
 
   void _handleChange() {
-    if (widget.control case Managed(:final onChange?)) {
+    if (widget.control case FMultiSelectManagedControl(:final onChange?)) {
       onChange(_controller.value);
     }
   }

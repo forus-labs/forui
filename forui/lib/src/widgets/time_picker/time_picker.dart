@@ -121,7 +121,7 @@ class _FTimePickerState extends State<FTimePicker> {
   }
 
   void _handleOnChange() {
-    if (widget.control case Managed(:final onChange?)) {
+    if (widget.control case FTimePickerManagedControl(:final onChange?)) {
       onChange(_controller.value);
     }
   }

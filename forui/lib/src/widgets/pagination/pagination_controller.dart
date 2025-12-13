@@ -149,7 +149,9 @@ class _Controller extends FPaginationController {
   }
 }
 
-/// Defines how a [FPagination]'s page is controlled.
+/// A [FPaginationControl] defines how a [FPagination] is controlled.
+///
+/// {@macro forui.foundation.doc_templates.control}
 sealed class FPaginationControl with Diagnosticable, _$FPaginationControlMixin {
   /// Creates a [FPaginationControl] for controlling pagination using lifted state.
   ///
@@ -163,16 +165,7 @@ sealed class FPaginationControl with Diagnosticable, _$FPaginationControlMixin {
     bool showEdges,
   }) = Lifted;
 
-  /// Creates a [FPaginationControl] for controlling pagination using a controller.
-  ///
-  /// Either [controller] or [pages] can be provided. If neither is provided,
-  /// an internal controller with 1 page is created.
-  ///
-  /// The [onChange] callback is invoked when the page changes.
-  ///
-  /// ## Contract
-  /// Throws [AssertionError] if both [controller] and [initial] are provided.
-  /// Throws [AssertionError] if both [controller] and [pages] are provided.
+  /// Creates a [FPaginationControl].
   const factory FPaginationControl.managed({
     FPaginationController? controller,
     int? initial,
@@ -180,7 +173,7 @@ sealed class FPaginationControl with Diagnosticable, _$FPaginationControlMixin {
     int siblings,
     bool showEdges,
     ValueChanged<int>? onChange,
-  }) = Managed;
+  }) = FPaginationManagedControl;
 
   const FPaginationControl._();
 
@@ -213,55 +206,82 @@ class Lifted extends FPaginationControl with _$LiftedMixin {
   }) : super._();
 
   @override
-  FPaginationController _create(VoidCallback _) =>
+  FPaginationController createController() =>
       _Controller(page: page, pages: pages, onChange: onChange, siblings: siblings, showEdges: showEdges);
 
   @override
   void _updateController(FPaginationController controller) => (controller as _Controller).update(page, onChange);
 }
 
-@internal
-class Managed extends FPaginationControl with Diagnosticable, _$ManagedMixin {
+/// A [FPaginationManagedControl] enables widgets to manage their own controller internally while exposing parameters
+/// for common configurations.
+///
+/// {@macro forui.foundation.doc_templates.managed}
+class FPaginationManagedControl extends FPaginationControl with Diagnosticable, _$FPaginationManagedControlMixin {
+  /// The controller.
   @override
   final FPaginationController? controller;
+
+  /// The initial page index. Defaults to 0.
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if [initial] and [controller] are both provided.
   @override
   final int? initial;
+
+  /// The total number of pages. Defaults to 1.
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if [pages] and [controller] are both provided.
   @override
   final int? pages;
+
+  /// The number of sibling pages to show. Defaults to 1.
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if [siblings] is not 1 and [controller] is provided.
   @override
   final int siblings;
+
+  /// Whether to show first/last page buttons. Defaults to true.
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if [showEdges] is false and [controller] is provided.
   @override
   final bool showEdges;
+
+  /// Called when the page changes.
   @override
   final ValueChanged<int>? onChange;
 
-  const Managed({this.controller, this.initial, this.pages, this.siblings = 1, this.showEdges = true, this.onChange})
-    : assert(
-        controller == null || initial == null,
-        'Cannot provide both controller and initial. Set the page directly in the controller.',
-      ),
-      assert(
-        controller == null || pages == null,
-        'Cannot provide both controller and pages. Set the pages directly in the controller.',
-      ),
-      assert(
-        controller == null || siblings == 1,
-        'Cannot provide both controller and siblings. Set siblings directly in the controller.',
-      ),
-      assert(
-        controller == null || showEdges,
-        'Cannot provide both controller and showEdges. Set showEdges directly in the controller.',
-      ),
-      super._();
+  /// Creates a [FPaginationControl].
+  const FPaginationManagedControl({
+    this.controller,
+    this.initial,
+    this.pages,
+    this.siblings = 1,
+    this.showEdges = true,
+    this.onChange,
+  }) : assert(
+         controller == null || initial == null,
+         'Cannot provide both controller and initial. Set the page directly in the controller.',
+       ),
+       assert(
+         controller == null || pages == null,
+         'Cannot provide both controller and pages. Set the pages directly in the controller.',
+       ),
+       assert(
+         controller == null || siblings == 1,
+         'Cannot provide both controller and siblings. Set siblings directly in the controller.',
+       ),
+       assert(
+         controller == null || showEdges,
+         'Cannot provide both controller and showEdges. Set showEdges directly in the controller.',
+       ),
+       super._();
 
   @override
-  FPaginationController _create(VoidCallback callback) =>
-      (controller ??
-            FPaginationController(
-              initialPage: initial ?? 0,
-              pages: pages ?? 1,
-              siblings: siblings,
-              showEdges: showEdges,
-            ))
-        ..addListener(callback);
+  FPaginationController createController() =>
+      controller ??
+      FPaginationController(initialPage: initial ?? 0, pages: pages ?? 1, siblings: siblings, showEdges: showEdges);
 }

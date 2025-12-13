@@ -6,18 +6,16 @@ import 'package:forui/forui.dart';
 
 /// Creates a [FAutocompleteController] that is automatically disposed.
 FAutocompleteController useFAutocompleteController({
-  required TickerProvider vsync,
   String? text,
   List<String> suggestions = const [],
   List<Object?>? keys,
-}) => use(_AutocompleteControllerHook(vsync: vsync, text: text, suggestions: suggestions, keys: keys));
+}) => use(_AutocompleteControllerHook(text: text, suggestions: suggestions, keys: keys));
 
 class _AutocompleteControllerHook extends Hook<FAutocompleteController> {
-  final TickerProvider vsync;
   final String? text;
   final List<String> suggestions;
 
-  const _AutocompleteControllerHook({required this.vsync, required this.text, required this.suggestions, super.keys});
+  const _AutocompleteControllerHook({required this.text, required this.suggestions, super.keys});
 
   @override
   _AutocompleteControllerHookState createState() => .new();
@@ -26,14 +24,13 @@ class _AutocompleteControllerHook extends Hook<FAutocompleteController> {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('vsync', vsync))
       ..add(StringProperty('text', text))
       ..add(IterableProperty('suggestions', suggestions));
   }
 }
 
 class _AutocompleteControllerHookState extends HookState<FAutocompleteController, _AutocompleteControllerHook> {
-  late final _controller = FAutocompleteController(vsync: hook.vsync, text: hook.text, suggestions: hook.suggestions);
+  late final _controller = FAutocompleteController(text: hook.text, suggestions: hook.suggestions);
 
   @override
   FAutocompleteController build(BuildContext context) => _controller;

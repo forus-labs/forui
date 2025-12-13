@@ -14,11 +14,13 @@ void main() {
 
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FCalendar(
-            control: .lifted(selected: (_) => false, select: (date) => selected = date),
-            start: DateTime(2024, 7),
-            end: DateTime(2024, 7, 31),
-            today: DateTime(2024, 7, 14),
+          child: StatefulBuilder(
+            builder: (context, setState) => FCalendar(
+              control: .lifted(selected: (date) => date == selected, select: (date) => setState(() => selected = date)),
+              start: DateTime(2024, 7),
+              end: DateTime(2024, 7, 31),
+              today: DateTime(2024, 7, 14),
+            ),
           ),
         ),
       );
@@ -103,7 +105,7 @@ void main() {
   });
 
   testWidgets('initial type changes', (tester) async {
-    final controller = autoDispose(FCalendarController.date(initialSelection: DateTime(2024, 7, 14)));
+    final controller = autoDispose(FCalendarController.date(initial: DateTime(2024, 7, 14)));
     final type = autoDispose(ValueNotifier(FCalendarPickerType.yearMonth));
 
     await tester.pumpWidget(
@@ -130,7 +132,7 @@ void main() {
   }, experimentalLeakTesting: LeakTesting.settings.withIgnoredAll());
 
   testWidgets('initial month changes', (tester) async {
-    final controller = autoDispose(FCalendarController.date(initialSelection: DateTime(2024, 7, 14)));
+    final controller = autoDispose(FCalendarController.date(initial: DateTime(2024, 7, 14)));
 
     await tester.pumpWidget(
       TestScaffold.app(

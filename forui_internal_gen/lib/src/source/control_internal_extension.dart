@@ -1,5 +1,6 @@
 import 'package:analyzer/dart/element/element.dart';
 import 'package:code_builder/code_builder.dart';
+import 'package:forui_internal_gen/src/source/types.dart';
 import 'package:meta/meta.dart';
 
 /// Generates an `@internal` extension on a sealed control class that delegates
@@ -12,8 +13,8 @@ class ControlInternalExtension {
   /// The `_update` method.
   final MethodElement update;
 
-  /// The `_create` method.
-  final Method create;
+  /// The `create` method.
+  final Method createController;
 
   /// The `_dispose` method.
   final Method dispose;
@@ -22,7 +23,7 @@ class ControlInternalExtension {
   ControlInternalExtension({
     required this.supertype,
     required this.update,
-    required this.create,
+    required this.createController,
     required this.dispose,
   });
 
@@ -38,11 +39,22 @@ class ControlInternalExtension {
           ..types.addAll([for (final t in supertype.typeParameters) refer(t.name!)])
           ..on = refer('${supertype.name}$typeParameters')
           ..methods.addAll([
-            (create.toBuilder()
-                  ..name = create.name!.replaceFirst('_', '')
+            (createController.toBuilder()
+                  ..annotations.clear()
+                  ..docs.clear()
+                  ..name = 'create'
                   ..lambda = true
+                  ..requiredParameters.insert(
+                    0,
+                    Parameter(
+                      (p) => p
+                        ..name = 'callback'
+                        ..type = refer('VoidCallback'),
+                    ),
+                  )
                   ..body = Code('''
-                    ${create.name!}(${create.requiredParameters.map((p) => p.name).join(', ')})
+                    createController(${createController.requiredParameters.map((p) => p.name).join(', ')})
+                    ..addListener(callback)
             '''))
                 .build(),
             _update,
@@ -69,7 +81,7 @@ class ControlInternalExtension {
             Parameter(
               (p) => p
                 ..name = parameter.name!
-                ..type = refer(parameter.type.getDisplayString()),
+                ..type = refer(aliasAwareType(parameter.type)),
             ),
         ])
         ..lambda = true

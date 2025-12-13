@@ -8,6 +8,7 @@ import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/form/form_field.dart';
 import 'package:forui/src/widgets/date_field/date_field_controller.dart';
 import 'package:forui/src/widgets/date_field/input/date_input.dart';
+import 'package:forui/src/widgets/popover/popover_controller.dart';
 
 part 'calendar/calendar_date_field.dart';
 part 'input/input_date_field.dart';
@@ -168,6 +169,7 @@ abstract class FDateField extends StatefulWidget {
   /// * [FDateField.input] - Creates a date field with only an input field.
   const factory FDateField({
     FDateFieldControl control,
+    FPopoverControl popoverControl,
     FDateFieldStyle Function(FDateFieldStyle style)? style,
     FocusNode? focusNode,
     TextInputAction? textInputAction,
@@ -250,6 +252,7 @@ abstract class FDateField extends StatefulWidget {
   /// * [FDateField.input] - Creates a date field with only an input field.
   const factory FDateField.calendar({
     FDateFieldControl control,
+    FPopoverControl popoverControl,
     FDateFieldStyle Function(FDateFieldStyle style)? style,
     DateFormat? format,
     TextAlign textAlign,

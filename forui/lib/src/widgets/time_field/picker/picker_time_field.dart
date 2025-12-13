@@ -135,7 +135,7 @@ class _PickerTimeFieldState extends _FTimeFieldState<_PickerTimeField> {
   @override
   void _handleOnChange() {
     _updateTextController();
-    if (widget.control case Managed(:final onChange?)) {
+    if (widget.control case FTimeFieldManagedControl(:final onChange?)) {
       onChange(_controller.value);
     }
   }

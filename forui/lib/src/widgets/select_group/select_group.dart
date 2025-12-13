@@ -166,7 +166,7 @@ class _FSelectGroupState<T> extends State<FSelectGroup<T>> {
 
   void _handleChange() {
     setState(() {});
-    if (widget.control case Managed(:final onChange?)) {
+    if (widget.control case FSelectGroupManagedControl(:final onChange?)) {
       onChange(_controller.value);
     }
   }

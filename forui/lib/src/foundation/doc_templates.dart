@@ -2,6 +2,43 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
 @internal
+extension Control on Never {
+  /// {@template forui.foundation.doc_templates.control}
+  /// A `Control` defines how a widget's state is managed:
+  ///
+  /// * **Managed**: The widget manages its own controller. Pass configuration parameters directly
+  ///   or provide an external controller for programmatic access.
+  ///
+  /// ```dart
+  /// // Let widget create controller with configuration
+  /// FPopover(control: .managed(motion: myMotion, onChange: print));
+  ///
+  /// // Or provide your own controller
+  /// FPopover(control: .managed(controller: _myController));
+  /// ```
+  ///
+  /// * **Lifted**: The parent owns the state. Pass the current value and an `onChange` callback.
+  ///   Useful for unidirectional data flow or integrating with external state management.
+  ///
+  /// ```dart
+  /// FPopover(
+  ///   control: .lifted(
+  ///     shown: _shown,
+  ///     onChange: (shown) => setState(() => _shown = shown),
+  ///   ),
+  /// )
+  /// ```
+  /// {@endtemplate}
+  static const control = '';
+
+  /// {@template forui.foundation.doc_templates.managed}
+  /// Subclass `ManagedControl` to create variants with different defaults or behaviors, e.g., `FCalendarControl.date()`
+  /// vs `FCalendarControl.range()`.
+  /// {@endtemplate}
+  static const managed = '';
+}
+
+@internal
 extension Focus on Never {
   /// {@template forui.foundation.doc_templates.autofocus}
   /// True if this widget will be selected as the initial focus when no other node in its scope is currently focused.

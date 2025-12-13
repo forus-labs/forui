@@ -6,56 +6,14 @@ import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/debug.dart';
 import 'package:forui/src/widgets/autocomplete/autocomplete.dart';
-import 'package:forui/src/widgets/popover/popover_controller.dart';
-
-// ignore_for_file: avoid_positional_boolean_parameters
 
 part 'autocomplete_controller.control.dart';
 
 /// A controller for managing autocomplete functionality in a text field.
 class FAutocompleteController extends FTypeaheadController {
-  /// The popover controller used to show all autocomplete suggestions.
-  final FPopoverController popover;
-
   /// Creates a [FAutocompleteController] with an optional initial text and suggestions.
-  FAutocompleteController({
-    required TickerProvider vsync,
-    super.text,
-    super.suggestions,
-    FPopoverMotion popoverMotion = const FPopoverMotion(),
-  }) : popover = FPopoverController(vsync: vsync, motion: popoverMotion),
-       super(
-         textStyles: (context) {
-           final InheritedAutocompleteStyle(:style, :states) = .of(context);
-           return (
-             style.fieldStyle.contentTextStyle.resolve(states),
-             style.composingTextStyle.resolve(states),
-             style.typeaheadTextStyle.resolve(states),
-           );
-         },
-       );
-
-  /// Creates a [FAutocompleteController] from a [TextEditingValue].
-  FAutocompleteController.fromValue(
-    super.value, {
-    required TickerProvider vsync,
-    super.suggestions = const [],
-    FPopoverMotion popoverMotion = const FPopoverMotion(),
-  }) : popover = FPopoverController(vsync: vsync, motion: popoverMotion),
-       super.fromValue(
-         textStyles: (context) {
-           final InheritedAutocompleteStyle(:style, :states) = .of(context);
-           return (
-             style.fieldStyle.contentTextStyle.resolve(states),
-             style.composingTextStyle.resolve(states),
-             style.typeaheadTextStyle.resolve(states),
-           );
-         },
-       );
-
-  /// Creates a [FAutocompleteController] from a [TextEditingValue].
-  FAutocompleteController._(super.value, {required this.popover})
-    : super.fromValue(
+  FAutocompleteController({super.text, super.suggestions})
+    : super(
         textStyles: (context) {
           final InheritedAutocompleteStyle(:style, :states) = .of(context);
           return (
@@ -66,57 +24,44 @@ class FAutocompleteController extends FTypeaheadController {
         },
       );
 
-  @override
-  void dispose() {
-    popover.dispose();
-    super.dispose();
-  }
+  /// Creates a [FAutocompleteController] from a [TextEditingValue].
+  FAutocompleteController.fromValue(super.value, {super.suggestions = const []})
+    : super.fromValue(
+        textStyles: (context) {
+          final InheritedAutocompleteStyle(:style, :states) = .of(context);
+          return (
+            style.fieldStyle.contentTextStyle.resolve(states),
+            style.composingTextStyle.resolve(states),
+            style.typeaheadTextStyle.resolve(states),
+          );
+        },
+      );
 }
 
-class _Controller extends FAutocompleteController {
-  late FPopoverController _popover;
-  ValueChanged<TextEditingValue> _onValueChange;
+class _ProxyController extends FAutocompleteController {
+  TextEditingValue? _unsynced;
+  ValueChanged<TextEditingValue> _onChange;
 
-  _Controller(
-    super.value, {
-    required TickerProvider vsync,
-    required ValueChanged<TextEditingValue> onValueChange,
-    bool? popoverShown,
-    ValueChanged<bool>? onPopoverChange,
-    FPopoverMotion popoverMotion = const FPopoverMotion(),
-  }) : _onValueChange = onValueChange,
-       super._(
-         popover: popoverShown != null && onPopoverChange != null
-             ? LiftedPopoverController(popoverShown, onPopoverChange, vsync: vsync, motion: popoverMotion)
-             : FPopoverController(vsync: vsync, motion: popoverMotion),
-       ) {
-    _popover = super.popover; // This prevents the creation of two popover controllers, with one being shadowed.
-  }
+  _ProxyController(super.value, this._onChange) : _unsynced = value, super.fromValue();
 
-  void update(
-    TickerProvider vsync,
-    TextEditingValue value,
-    ValueChanged<TextEditingValue> onValueChange,
-    bool? popoverShown,
-    ValueChanged<bool>? onPopoverChange,
-  ) {
-    if (super.value != value) {
-      super.value = value;
-    }
-
-    _onValueChange = onValueChange;
-    _popover = InternalPopoverController.updateNested(_popover, vsync, popoverShown, onPopoverChange);
-  }
-
-  @override
-  set value(TextEditingValue value) {
-    if (super.value != value) {
-      _onValueChange(value);
+  void update(TextEditingValue newValue, ValueChanged<TextEditingValue> onChange) {
+    _onChange = onChange;
+    if (super.rawValue != newValue) {
+      _unsynced = newValue;
+      super.rawValue = newValue;
+    } else if (_unsynced != newValue) {
+      _unsynced = newValue;
+      notifyListeners();
     }
   }
 
   @override
-  FPopoverController get popover => _popover;
+  set rawValue(TextEditingValue value) {
+    _unsynced = value;
+    if (super.value != value) {
+      _onChange(value);
+    }
+  }
 }
 
 @internal
@@ -151,34 +96,22 @@ class InheritedAutocompleteController extends InheritedWidget {
   }
 }
 
-/// Defines how [FAutocomplete]'s state is controlled.
+/// A [FAutocompleteControl] defines how a [FAutocomplete] is controlled.
+///
+/// {@macro forui.foundation.doc_templates.control}
 sealed class FAutocompleteControl with Diagnosticable, _$FAutocompleteControlMixin {
-  /// Creates lifted state control.
-  ///
-  /// Text is always lifted.
-  /// Content visibility is optionally lifted - if [popoverShown] is provided, [onPopoverChange] must also be provided.
-  ///
-  /// ## Contract
-  /// Throws [AssertionError] if only one of [popoverShown]/[onPopoverChange] is provided.
-  const factory FAutocompleteControl.lifted({
-    required TextEditingValue value,
-    required ValueChanged<TextEditingValue> onValueChange,
-    bool? popoverShown,
-    ValueChanged<bool>? onPopoverChange,
-    FPopoverMotion motion,
-  }) = Lifted;
-
-  /// Creates managed control using an [FAutocompleteController].
-  ///
-  /// ## Contract
-  /// Throws [AssertionError] if both [controller] and [initial] are provided.
-  /// Throws [AssertionError] if both [controller] and [motion] are provided.
+  /// Creates a [FAutocompleteControl].
   const factory FAutocompleteControl.managed({
     FAutocompleteController? controller,
     TextEditingValue? initial,
     ValueChanged<TextEditingValue>? onChange,
-    FPopoverMotion? motion,
-  }) = Managed;
+  }) = FAutocompleteManagedControl;
+
+  /// Creates a [FAutocompleteControl] for controlling an autocomplete using lifted state.
+  const factory FAutocompleteControl.lifted({
+    required TextEditingValue value,
+    required ValueChanged<TextEditingValue> onChange,
+  }) = _Lifted;
 
   const FAutocompleteControl._();
 
@@ -186,84 +119,56 @@ sealed class FAutocompleteControl with Diagnosticable, _$FAutocompleteControlMix
     FAutocompleteControl old,
     FAutocompleteController controller,
     VoidCallback callback,
-    TickerProvider vsync,
     FutureOr<Iterable<String>> Function(String) filter,
   );
 }
 
-@internal
-class Lifted extends FAutocompleteControl with _$LiftedMixin {
-  @override
-  final TextEditingValue value;
-  @override
-  final ValueChanged<TextEditingValue> onValueChange;
-  @override
-  final bool? popoverShown;
-  @override
-  final ValueChanged<bool>? onPopoverChange;
-  @override
-  final FPopoverMotion motion;
-
-  const Lifted({
-    required this.value,
-    required this.onValueChange,
-    this.popoverShown,
-    this.onPopoverChange,
-    this.motion = const FPopoverMotion(),
-  }) : assert(
-         (popoverShown == null) == (onPopoverChange == null),
-         'popoverShown and onPopoverChange must both be provided or both be null.',
-       ),
-       super._();
-
-  @override
-  FAutocompleteController _create(
-    VoidCallback callback,
-    TickerProvider vsync,
-    FutureOr<Iterable<String>> Function(String) _,
-  ) => _Controller(
-    value,
-    vsync: vsync,
-    onValueChange: onValueChange,
-    popoverShown: popoverShown,
-    onPopoverChange: onPopoverChange,
-    popoverMotion: motion,
-  )..addListener(callback);
-
-  @override
-  void _updateController(
-    FAutocompleteController controller,
-    TickerProvider vsync,
-    FutureOr<Iterable<String>> Function(String) filter,
-  ) {
-    (controller as _Controller)
-      ..update(vsync, value, onValueChange, popoverShown, onPopoverChange)
-      ..loadSuggestions(filter(controller.text));
-  }
-}
-
-@internal
-class Managed extends FAutocompleteControl with _$ManagedMixin {
+/// A [FAutocompleteManagedControl] enables widgets to manage their own controller internally while exposing parameters
+/// for common configurations.
+///
+/// {@macro forui.foundation.doc_templates.managed}
+class FAutocompleteManagedControl extends FAutocompleteControl with _$FAutocompleteManagedControlMixin {
+  /// The controller.
   @override
   final FAutocompleteController? controller;
+
+  /// The initial value. Defaults to null.
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if [initial] and [controller] are both provided.
   @override
   final TextEditingValue? initial;
+
+  /// Called when the value changes.
   @override
   final ValueChanged<TextEditingValue>? onChange;
-  @override
-  final FPopoverMotion? motion;
 
-  const Managed({this.controller, this.initial, this.onChange, this.motion})
+  /// Creates a [FAutocompleteControl].
+  const FAutocompleteManagedControl({this.controller, this.initial, this.onChange})
     : assert(controller == null || initial == null, 'Cannot provide both a controller and initial.'),
-      assert(controller == null || motion == null, 'Cannot provide both controller and motion.'),
       super._();
 
   @override
-  FAutocompleteController _create(
-    VoidCallback callback,
-    TickerProvider vsync,
-    FutureOr<Iterable<String>> Function(String) _,
-  ) =>
-      (controller ?? .fromValue(initial, vsync: vsync, popoverMotion: motion ?? const FPopoverMotion()))
-        ..addListener(callback);
+  FAutocompleteController createController(FutureOr<Iterable<String>> Function(String) _) =>
+      controller ?? .fromValue(initial);
+}
+
+class _Lifted extends FAutocompleteControl with _$_LiftedMixin {
+  @override
+  final TextEditingValue value;
+  @override
+  final ValueChanged<TextEditingValue> onChange;
+
+  const _Lifted({required this.value, required this.onChange}) : super._();
+
+  @override
+  FAutocompleteController createController(FutureOr<Iterable<String>> Function(String) _) =>
+      _ProxyController(value, onChange);
+
+  @override
+  void _updateController(FAutocompleteController controller, FutureOr<Iterable<String>> Function(String) filter) {
+    (controller as _ProxyController)
+      ..update(value, onChange)
+      ..loadSuggestions(filter(controller.text));
+  }
 }

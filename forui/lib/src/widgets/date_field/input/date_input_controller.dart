@@ -10,7 +10,7 @@ import 'package:forui/src/widgets/date_field/input/date_parser.dart';
 
 ///
 @internal
-typedef Select = TextEditingValue Function(TextEditingValue value, int first, int last, int end, int separator);
+typedef Select<T> = T Function(TextEditingValue value, int first, int last, int end, int separator);
 
 TextEditingValue _first(TextEditingValue value, int first, int _, int _, int _) =>
     value.copyWith(selection: .new(baseOffset: 0, extentOffset: first));
@@ -55,7 +55,7 @@ class DateInputController extends InputController {
     TextEditingValue? value,
   ) : selector = DateSelector(localizations),
       _format = .yMd(localizations.localeName),
-      super(style, DateParser(localizations.localeName, initialYear), placeholder, value) {
+      super(value, style, DateParser(localizations.localeName, initialYear), placeholder) {
     controller.addListener(updateFromCalendar);
   }
 
@@ -65,8 +65,8 @@ class DateInputController extends InputController {
       mutating = true;
       rawValue =
           (forward
-              ? selector.resolve(value, onFirst: _middle, onMiddle: _last)
-              : selector.resolve(value, onMiddle: _first, onLast: _middle)) ??
+              ? selector.navigate(value, onFirst: _middle, onMiddle: _last)
+              : selector.navigate(value, onMiddle: _first, onLast: _middle)) ??
           value;
     } finally {
       mutating = false;
@@ -79,30 +79,52 @@ class DateInputController extends InputController {
       mutating = true;
       final parts = selector.split(text);
       rawValue =
-          selector.resolve(
+          selector.navigate(
             value,
             onFirst: (_, _, _, _, _) => selector.select(parser.adjust(parts, 0, amount), 0),
             onMiddle: (_, _, _, _, _) => selector.select(parser.adjust(parts, 1, amount), 1),
             onLast: (_, _, _, _, _) => selector.select(parser.adjust(parts, 2, amount), 2),
           ) ??
           value;
-      onValueChanged(text);
     } finally {
       mutating = false;
     }
   }
 
+  // Used for input-driven changes only.
   @override
-  void onValueChanged(String newValue) => controller.value = _format.tryParseStrict(newValue, true);
+  set rawValue(TextEditingValue newValue) {
+    // Allow selection & arrow key traversal
+    if (super.rawValue.text == newValue.text) {
+      super.rawValue = newValue;
+      return;
+    }
 
+    final proposed = _format.tryParseStrict(newValue.text, true);
+    if (proposed == controller.value) {
+      // Prevent toggling controller.value.
+      super.rawValue = newValue;
+      return;
+    }
+
+    controller.value = proposed;
+    if (controller.value == proposed) {
+      super.rawValue = newValue;
+    }
+  }
+
+  // Used for calendar/external-driven changes only.
   @visibleForTesting
   void updateFromCalendar() {
     if (!mutating) {
-      rawValue = TextEditingValue(
-        text: switch (controller.value) {
-          null => placeholder,
-          final value => selector.localizations.shortDate(value),
-        },
+      super.rawValue = selector.map(
+        rawValue,
+        TextEditingValue(
+          text: switch (controller.value) {
+            null => placeholder,
+            final value => selector.localizations.shortDate(value),
+          },
+        ),
       );
     }
   }
@@ -120,11 +142,29 @@ class DateSelector extends Selector {
     : super(localizations, RegExp(RegExp.escape(localizations.shortDateSuffix) + r'$'));
 
   @override
-  TextEditingValue? resolve(
+  TextEditingValue? navigate(
     TextEditingValue value, {
-    Select onFirst = _first,
-    Select onMiddle = _middle,
-    Select onLast = _last,
+    Select<TextEditingValue> onFirst = _first,
+    Select<TextEditingValue> onMiddle = _middle,
+    Select<TextEditingValue> onLast = _last,
+  }) => _map(value, onFirst: onFirst, onMiddle: onMiddle, onLast: onLast);
+
+  TextEditingValue map(TextEditingValue oldValue, TextEditingValue newValue) {
+    final index = _map(
+      oldValue,
+      onFirst: (_, _, _, _, _) => 0,
+      onMiddle: (_, _, _, _, _) => 1,
+      onLast: (_, _, _, _, _) => 2,
+    );
+
+    return index == null ? newValue : select(split(newValue.text), index);
+  }
+
+  T? _map<T>(
+    TextEditingValue value, {
+    required Select<T> onFirst,
+    required Select<T> onMiddle,
+    required Select<T> onLast,
   }) {
     // precondition: value's text is valid.
     // There's generally 2 cases:

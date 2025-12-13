@@ -5,7 +5,8 @@ import 'package:meta/meta.dart';
 import 'package:sugar/sugar.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/widgets/calendar/calendar_controller.dart' show InternalFCalendarControl, Managed;
+import 'package:forui/src/widgets/calendar/calendar_controller.dart'
+    show FCalendarManagedControl, InternalFCalendarControl;
 import 'package:forui/src/widgets/calendar/day/day_picker.dart';
 import 'package:forui/src/widgets/calendar/day/paged_day_picker.dart';
 import 'package:forui/src/widgets/calendar/shared/header.dart';
@@ -150,7 +151,7 @@ class _State extends State<FCalendar> {
   }
 
   void _handleOnChange() {
-    if (widget.control case final Managed managed) {
+    if (widget.control case final FCalendarManagedControl managed) {
       managed.handleOnChange(_controller);
     }
   }
