@@ -7,5 +7,5 @@ library forui.widgets.pagination;
 
 export '../src/widgets/pagination/pagination.dart' hide Action, FPaginationItemData;
 export '../src/widgets/pagination/pagination_controller.dart'
-    hide FPaginationManagedControl, InternalFPaginationControl, InternalPaginationController, Lifted;
+    hide FPaginationManagedControl, InternalFPaginationControl, InternalFPaginationController, Lifted;
 export '../src/widgets/pagination/pagination_style.dart';

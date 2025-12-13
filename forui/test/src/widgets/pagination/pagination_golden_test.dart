@@ -60,7 +60,7 @@ void main() {
           theme: theme.data,
           child: FPagination(
             control: FPaginationControl.managed(
-              controller: autoDispose(FPaginationController(pages: 10, siblings: 0, initialPage: 2)),
+              controller: autoDispose(FPaginationController(pages: 10, siblings: 0, page: 2)),
             ),
           ),
         ),
@@ -88,7 +88,7 @@ void main() {
 
     testWidgets('custom icon', (tester) async {
       final style = theme.data.paginationStyle;
-      final controller = autoDispose(FPaginationController(pages: 10, initialPage: 4));
+      final controller = autoDispose(FPaginationController(pages: 10, page: 4));
 
       await tester.pumpWidget(
         TestScaffold(

@@ -90,8 +90,8 @@ class _ProxyCalendarController implements FCalendarController<DateTime?> {
 
   @override
   void select(DateTime date) {
+    _unsynced = date;
     if (_controller.value != date) {
-      _unsynced = date;
       _onChange(date);
     }
   }
@@ -102,8 +102,8 @@ class _ProxyCalendarController implements FCalendarController<DateTime?> {
 
   @override
   set value(DateTime? date) {
+    _unsynced = date;
     if (_controller.value != date) {
-      _unsynced = date;
       _onChange(date);
     }
   }

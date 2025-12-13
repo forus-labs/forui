@@ -55,7 +55,7 @@ class _PaginationControllerHook extends Hook<FPaginationController> {
 class _PaginationControllerHookState extends HookState<FPaginationController, _PaginationControllerHook> {
   late final _controller = FPaginationController(
     pages: hook.pages,
-    initialPage: hook.initialPage,
+    page: hook.initialPage,
     siblings: hook.siblings,
     showEdges: hook.showEdges,
   );

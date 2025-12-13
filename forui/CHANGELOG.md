@@ -113,6 +113,9 @@ Unfortunately, `FCalendar` cannot be easily migrated using data driven fixes due
 * **Breaking** Remove `FPagination.initialPage`. Use `FPagination(control: .managed(initialPage: ...))` instead.
 * **Breaking** Remove `FPagination.pages`. Use `FPagination(control: .managed(pages: ...))` instead.
 * **Breaking** Remove `FPagination.onChange`. Use `FPagination(control: .managed(onChange: ...))` instead.
+* **Breaking** Change `FPaginationController` to extend `ValueNotifier<int>` instead of `FChangeNotifier`.
+* **Breaking** Rename `FPaginationController(initialPage: ...)` to `FPaginationController(page: ...)`.
+* **Breaking** Rename `FPaginationController.page` to `FPaginationController.value`.
 
 
 ### `FPicker`

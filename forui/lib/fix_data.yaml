@@ -1024,6 +1024,38 @@ transforms:
           - kind: removeParameter
             name: 'initialPage'
 
+  # FPaginationController
+  - title: 'Rename FPaginationController(initialPage: ...) to page'
+    date: 2025-12-13
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FPaginationController
+    changes:
+      - kind: renameParameter
+        oldName: 'initialPage'
+        newName: 'page'
+
+  - title: 'Rename FPaginationController.page getter to value'
+    date: 2025-12-13
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      getter: 'page'
+      inClass: FPaginationController
+    changes:
+      - kind: rename
+        newName: 'value'
+
+  - title: 'Rename FPaginationController.page setter to value'
+    date: 2025-12-13
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      setter: 'page'
+      inClass: FPaginationController
+    changes:
+      - kind: rename
+        newName: 'value'
+
   # FPicker
   - title: 'Migrate FPicker to control parameter'
     date: 2025-12-08

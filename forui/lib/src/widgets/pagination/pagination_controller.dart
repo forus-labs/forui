@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_positional_boolean_parameters
+
 import 'package:flutter/foundation.dart';
 
 import 'package:forui/forui.dart';
@@ -5,7 +7,7 @@ import 'package:forui/forui.dart';
 part 'pagination_controller.control.dart';
 
 /// A controller that controls which page is selected.
-class FPaginationController extends FChangeNotifier {
+class FPaginationController extends ValueNotifier<int> {
   /// The number of sibling pages displayed beside the current page number. Defaults to 1.
   ///
   /// This value determines how many pages are shown on either side of the currently selected page in the pagination.
@@ -21,131 +23,122 @@ class FPaginationController extends FChangeNotifier {
   /// This can be useful for allowing users to quickly navigate to the beginning or end of the paginated content.
   final bool showEdges;
 
-  /// The total number of pages in the pagination.
+  /// The total number of pages.
   final int pages;
-  int _page;
 
   /// Creates a [FPaginationController].
   ///
   /// # Contract:
-  /// * Throws [AssertionError] if 0 <= [initialPage] and [initialPage] < [pages].
-  FPaginationController({required this.pages, int initialPage = 0, this.showEdges = true, this.siblings = 1})
+  /// * Throws [AssertionError] if 0 <= [page] and [page] < [pages].
+  FPaginationController({required this.pages, int page = 0, this.siblings = 1, this.showEdges = true})
     : assert(0 < pages, 'pages ($pages) should be > 0'),
       assert(0 <= siblings, 'siblings ($siblings) >= 0'),
-      assert(
-        0 <= initialPage && initialPage < pages,
-        'initialPage ($initialPage) must be between 0 and pages ($pages), exclusive.',
-      ),
-      _page = initialPage;
+      assert(0 <= page && page < pages, 'initialPage ($page) must be between 0 and pages ($pages), exclusive.'),
+      super(page);
 
-  /// The current page index.
-  int get page => _page;
-
-  set page(int index) {
-    if (index >= pages || index < 0) {
-      throw StateError('The index must be within the allowed range.');
+  /// Moves to the next page if the current page is less than the total number of pages.
+  void next() {
+    if (_rawValue < pages - 1) {
+      _rawValue++;
     }
-    _page = index;
-    notifyListeners();
   }
 
   /// Moves to the previous page if the current page is greater than 1.
   void previous() {
-    if (0 < _page) {
-      _page = _page - 1;
-      notifyListeners();
-    }
-  }
-
-  /// Moves to the next page if the current page is less than the total number of pages.
-  void next() {
-    if (_page < pages - 1) {
-      _page = _page + 1;
-      notifyListeners();
+    if (0 < _rawValue) {
+      _rawValue--;
     }
   }
 
   /// The start and end pages to display around the current page.
   (int, int) get siblingRange {
-    final int rangeStart;
-    final int rangeEnd;
-    if (pages.isFinite) {
-      final last = pages - 1;
-      if (pages <= minPagesDisplayedAtEdges) {
-        return (0, last);
-      }
-      rangeStart = switch (_page) {
-        _ when _page - siblings < 0 => 0,
-        _ when _page > (last - minPagesDisplayedAtEdges) => (last - minPagesDisplayedAtEdges) - siblings,
-        _ when _page <= minPagesDisplayedAtEdges => 0,
-        _ => _page - siblings,
-      };
-
-      rangeEnd = switch (_page) {
-        _ when _page + siblings > last => last,
-        _ when _page < minPagesDisplayedAtEdges + 1 => minPagesDisplayedAtEdges + siblings,
-        _ when _page >= (last - minPagesDisplayedAtEdges) => last,
-        _ => _page + siblings,
-      };
-    } else {
-      rangeStart = switch (_page) {
-        _ when _page - siblings < 0 => 0,
-        _ when _page <= minPagesDisplayedAtEdges => 0,
-        _ => _page - siblings,
-      };
-
-      rangeEnd = switch (_page) {
-        _ when _page < minPagesDisplayedAtEdges + 1 => minPagesDisplayedAtEdges,
-        _ => _page + siblings,
-      };
+    final last = pages - 1;
+    if (pages <= minPagesDisplayedAtEdges) {
+      return (0, last);
     }
-    return (rangeStart, rangeEnd);
+
+    return (
+      switch (_rawValue) {
+        _ when _rawValue - siblings < 0 => 0,
+        _ when _rawValue > (last - minPagesDisplayedAtEdges) => (last - minPagesDisplayedAtEdges) - siblings,
+        _ when _rawValue <= minPagesDisplayedAtEdges => 0,
+        _ => _rawValue - siblings,
+      },
+      switch (_rawValue) {
+        _ when _rawValue + siblings > last => last,
+        _ when _rawValue < minPagesDisplayedAtEdges + 1 => minPagesDisplayedAtEdges + siblings,
+        _ when _rawValue >= (last - minPagesDisplayedAtEdges) => last,
+        _ => _rawValue + siblings,
+      },
+    );
   }
+
+  @override
+  set value(int value) {
+    if (value >= pages || value < 0) {
+      throw StateError('The index must be within the allowed range.');
+    }
+    _rawValue = value;
+  }
+
+  int get _rawValue => super.value;
+
+  set _rawValue(int value) => super.value = value;
 }
 
 @internal
-extension InternalPaginationController on FPaginationController {
+extension InternalFPaginationController on FPaginationController {
   /// The minimum number of pages to display at both the start and end of the pagination.
   ///
   /// If the total number of pages is too small to accommodate both the edge pages
   /// and the full set of sibling pages around the current page, all pages are displayed instead.
   int get minPagesDisplayedAtEdges {
-    if (pages.isFinite) {
-      final minDisplayedAtEnds = siblings + 1 + (showEdges ? 1 : 0);
-      return pages <= (minDisplayedAtEnds + (siblings * 2 + 2)) ? pages : minDisplayedAtEnds;
-    }
-    return siblings + 1 + (showEdges ? 1 : 0);
+    final minDisplayedAtEnds = siblings + 1 + (showEdges ? 1 : 0);
+    return pages <= (minDisplayedAtEnds + (siblings * 2 + 2)) ? pages : minDisplayedAtEnds;
   }
 }
 
-class _Controller extends FPaginationController {
-  int _value;
+class _ProxyController extends FPaginationController {
+  int _unsynced;
   ValueChanged<int> _onChange;
+  int _pages;
+  int _siblings;
+  bool _showEdges;
 
-  _Controller({
-    required int page,
-    required super.pages,
-    required ValueChanged<int> onChange,
-    super.siblings,
-    super.showEdges,
-  }) : _value = page,
-       _onChange = onChange,
-       super();
+  _ProxyController(this._unsynced, this._pages, this._onChange, this._siblings, this._showEdges)
+    : super(page: _unsynced, pages: _pages, siblings: _siblings, showEdges: _showEdges);
 
-  void update(int page, ValueChanged<int> onChange) {
+  void update(int page, int pages, ValueChanged<int> onChange, int siblings, bool showEdges) {
+    final configChanged = _pages != pages || _siblings != siblings || _showEdges != showEdges;
     _onChange = onChange;
-    if (_value != page) {
-      _value = page;
+    _pages = pages;
+    _siblings = siblings;
+    _showEdges = showEdges;
+
+    if (super._rawValue != page) {
+      _unsynced = page;
+      super._rawValue = page;
+    } else if (_unsynced != page || configChanged) {
+      _unsynced = page;
       notifyListeners();
     }
   }
 
   @override
-  int get _page => _value;
+  int get pages => _pages;
 
   @override
-  set _page(int index) {
-    _onChange(index);
+  int get siblings => _siblings;
+
+  @override
+  bool get showEdges => _showEdges;
+
+  @override
+  set _rawValue(int value) {
+    _unsynced = value;
+    if (super.value != value) {
+      _onChange(value);
+    }
   }
 }
 
@@ -206,11 +199,11 @@ class Lifted extends FPaginationControl with _$LiftedMixin {
   }) : super._();
 
   @override
-  FPaginationController createController() =>
-      _Controller(page: page, pages: pages, onChange: onChange, siblings: siblings, showEdges: showEdges);
+  FPaginationController createController() => _ProxyController(page, pages, onChange, siblings, showEdges);
 
   @override
-  void _updateController(FPaginationController controller) => (controller as _Controller).update(page, onChange);
+  void _updateController(FPaginationController controller) =>
+      (controller as _ProxyController).update(page, pages, onChange, siblings, showEdges);
 }
 
 /// A [FPaginationManagedControl] enables widgets to manage their own controller internally while exposing parameters
@@ -246,9 +239,9 @@ class FPaginationManagedControl extends FPaginationControl with Diagnosticable, 
   /// Whether to show first/last page buttons. Defaults to true.
   ///
   /// ## Contract
-  /// Throws [AssertionError] if [showEdges] is false and [controller] is provided.
+  /// Throws [AssertionError] if [showEdges] and [controller] are both provided.
   @override
-  final bool showEdges;
+  final bool? showEdges;
 
   /// Called when the page changes.
   @override
@@ -260,7 +253,7 @@ class FPaginationManagedControl extends FPaginationControl with Diagnosticable, 
     this.initial,
     this.pages,
     this.siblings = 1,
-    this.showEdges = true,
+    this.showEdges,
     this.onChange,
   }) : assert(
          controller == null || initial == null,
@@ -275,13 +268,12 @@ class FPaginationManagedControl extends FPaginationControl with Diagnosticable, 
          'Cannot provide both controller and siblings. Set siblings directly in the controller.',
        ),
        assert(
-         controller == null || showEdges,
+         controller == null || showEdges == null,
          'Cannot provide both controller and showEdges. Set showEdges directly in the controller.',
        ),
        super._();
 
   @override
   FPaginationController createController() =>
-      controller ??
-      FPaginationController(initialPage: initial ?? 0, pages: pages ?? 1, siblings: siblings, showEdges: showEdges);
+      controller ?? .new(page: initial ?? 0, pages: pages ?? 1, siblings: siblings, showEdges: showEdges ?? true);
 }

@@ -66,61 +66,61 @@ void main() {
           child: FPagination(control: .managed(controller: controller)),
         ),
       );
-      expect(controller.page, 0);
+      expect(controller.value, 0);
 
       await tester.tap(find.byType(Action).first);
       await tester.pumpAndSettle(const Duration(milliseconds: 200));
-      expect(controller.page, 0);
+      expect(controller.value, 0);
 
       await tester.tap(find.byType(Action).last);
       await tester.pumpAndSettle(const Duration(milliseconds: 200));
-      expect(controller.page, 1);
+      expect(controller.value, 1);
 
       await tester.tap(find.text('10'));
       await tester.pumpAndSettle(const Duration(milliseconds: 200));
 
       await tester.tap(find.byType(Action).last);
       await tester.pumpAndSettle(const Duration(milliseconds: 200));
-      expect(controller.page, 9);
+      expect(controller.value, 9);
 
       await tester.tap(find.byType(Action).first);
       await tester.pumpAndSettle(const Duration(milliseconds: 200));
-      expect(controller.page, 8);
+      expect(controller.value, 8);
     });
 
     testWidgets('next', (tester) async {
-      final controller = autoDispose(FPaginationController(pages: 10, initialPage: 9));
+      final controller = autoDispose(FPaginationController(pages: 10, page: 9));
 
       await tester.pumpWidget(
         TestScaffold(
           child: FPagination(control: .managed(controller: controller)),
         ),
       );
-      expect(controller.page, 9);
+      expect(controller.value, 9);
 
       await tester.tap(find.byType(Action).last);
       await tester.pumpAndSettle(const Duration(milliseconds: 200));
-      expect(controller.page, 9);
+      expect(controller.value, 9);
 
       await tester.tap(find.byType(Action).first);
       await tester.pumpAndSettle(const Duration(milliseconds: 200));
-      expect(controller.page, 8);
+      expect(controller.value, 8);
     });
   });
 
   testWidgets('select page', (tester) async {
-    final controller = autoDispose(FPaginationController(pages: 10, initialPage: 2));
+    final controller = autoDispose(FPaginationController(pages: 10, page: 2));
 
     await tester.pumpWidget(
       TestScaffold(
         child: FPagination(control: .managed(controller: controller)),
       ),
     );
-    expect(controller.page, 2);
+    expect(controller.value, 2);
 
     await tester.tap(find.text('5'));
     await tester.pumpAndSettle(const Duration(milliseconds: 200));
-    expect(controller.page, 4);
+    expect(controller.value, 4);
   });
 
   testWidgets('notifyListener', (tester) async {
@@ -137,7 +137,7 @@ void main() {
       ),
     );
 
-    controller.page = 6;
+    controller.value = 6;
     await tester.pumpAndSettle();
     controller.previous();
     await tester.pumpAndSettle();
