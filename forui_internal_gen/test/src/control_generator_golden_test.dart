@@ -99,6 +99,8 @@ extension InternalFGoldenControl on FGoldenControl {
 
 mixin _$FGoldenControlMixin {
   /// Creates a [FGoldenController].
+  ///
+  /// Overriding managed subclasses should always return `controller` if it is non-null, e.g. `return controller ?? MyController();`
   @visibleForOverriding
   FGoldenController createController(int children);
   void _dispose(FGoldenController controller, VoidCallback callback);
@@ -327,6 +329,8 @@ extension InternalFGenericControl<T> on FGenericControl<T> {
 
 mixin _$FGenericControlMixin<T> {
   /// Creates a [FGenericController<T>].
+  ///
+  /// Overriding managed subclasses should always return `controller` if it is non-null, e.g. `return controller ?? MyController();`
   @visibleForOverriding
   FGenericController<T> createController();
   void _dispose(FGenericController<T> controller, VoidCallback callback);
@@ -565,6 +569,8 @@ extension InternalFSubclassControl on FSubclassControl {
 
 mixin _$FSubclassControlMixin {
   /// Creates a [FSubclassController].
+  ///
+  /// Overriding managed subclasses should always return `controller` if it is non-null, e.g. `return controller ?? MyController();`
   @visibleForOverriding
   FSubclassController createController();
   void _dispose(FSubclassController controller, VoidCallback callback);
