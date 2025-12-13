@@ -146,7 +146,6 @@ void main() {
 
         final controller = autoDispose(
           FDateFieldController(
-            vsync: const TestVSync(),
             validator: (date) {
               if (date == DateTime.utc(1984)) {
                 return 'Custom error.';
@@ -254,7 +253,7 @@ void main() {
   group('managed onChange', () {
     testWidgets('called when value changes', (tester) async {
       DateTime? changed;
-      final controller = autoDispose(FDateFieldController(vsync: tester));
+      final controller = autoDispose(FDateFieldController());
 
       await tester.pumpWidget(
         TestScaffold.app(

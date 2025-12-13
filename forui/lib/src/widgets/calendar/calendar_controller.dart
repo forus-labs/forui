@@ -40,15 +40,15 @@ abstract class FCalendarController<T> extends FValueNotifier<T> {
   /// timezone or with a time component when [truncateAndStripTimezone] is false is undefined behavior.
   ///
   /// ## Contract
-  /// Throws [AssertionError] if [initialSelection] is not in UTC timezone and [truncateAndStripTimezone] is false.
+  /// Throws [AssertionError] if [initial] is not in UTC timezone and [truncateAndStripTimezone] is false.
   static FCalendarController<DateTime?> date({
-    DateTime? initialSelection,
+    DateTime? initial,
     Predicate<DateTime>? selectable,
     bool toggleable = true,
     bool truncateAndStripTimezone = true,
   }) => truncateAndStripTimezone
-      ? _AutoDateController(initialSelection: initialSelection, selectable: selectable, toggleable: toggleable)
-      : _DateController(initialSelection: initialSelection, selectable: selectable, toggleable: toggleable);
+      ? _AutoDateController(initial: initial, selectable: selectable, toggleable: toggleable)
+      : _DateController(initial: initial, selectable: selectable, toggleable: toggleable);
 
   /// Creates a [FCalendarController] that allows multiple dates to be selected, with the given initial selected dates.
   ///
@@ -66,15 +66,15 @@ abstract class FCalendarController<T> extends FValueNotifier<T> {
   /// timezone or with a time component when [truncateAndStripTimezone] is false is undefined behavior.
   ///
   /// ## Contract
-  /// Throws [AssertionError] if the dates in [initialSelections] are not in UTC timezone and [truncateAndStripTimezone]
+  /// Throws [AssertionError] if the dates in [initial] are not in UTC timezone and [truncateAndStripTimezone]
   /// is false.
   static FCalendarController<Set<DateTime>> dates({
-    Set<DateTime> initialSelections = const {},
+    Set<DateTime> initial = const {},
     Predicate<DateTime>? selectable,
     bool truncateAndStripTimezone = true,
   }) => truncateAndStripTimezone
-      ? _AutoDatesController(initialSelections: initialSelections, selectable: selectable)
-      : _DatesController(initialSelections: initialSelections, selectable: selectable);
+      ? _AutoDatesController(initial: initial, selectable: selectable)
+      : _DatesController(initial: initial, selectable: selectable);
 
   /// Creates a [FCalendarController] that allows a single range to be selected, with the given initial range.
   ///
@@ -96,15 +96,15 @@ abstract class FCalendarController<T> extends FValueNotifier<T> {
   ///
   /// ## Contract
   /// Throws [AssertionError] if:
-  /// * the given dates in [initialSelection] are not in UTC timezone and [truncateAndStripTimezone] is false.
+  /// * the given dates in [initial] are not in UTC timezone and [truncateAndStripTimezone] is false.
   /// * the end date is less than start date.
   static FCalendarController<(DateTime, DateTime)?> range({
-    (DateTime, DateTime)? initialSelection,
+    (DateTime, DateTime)? initial,
     Predicate<DateTime>? selectable,
     bool truncateAndStripTimezone = true,
   }) => truncateAndStripTimezone
-      ? _AutoRangeController(initialSelection: initialSelection, selectable: selectable)
-      : _RangeController(initialSelection: initialSelection, selectable: selectable);
+      ? _AutoRangeController(initial: initial, selectable: selectable)
+      : _RangeController(initial: initial, selectable: selectable);
 
   /// Creates a [FCalendarController] with the given initial [value].
   FCalendarController(super._value);
@@ -123,17 +123,53 @@ abstract class FCalendarController<T> extends FValueNotifier<T> {
   void select(DateTime date);
 }
 
+@internal
+class ProxyController extends FCalendarController<Object?> {
+  Predicate<DateTime> _selectable;
+  bool Function(DateTime) _selected;
+  void Function(DateTime) _select;
+
+  ProxyController({
+    required Predicate<DateTime> selectable,
+    required bool Function(DateTime) selected,
+    required void Function(DateTime) select,
+  }) : _selectable = selectable,
+        _selected = selected,
+        _select = select,
+        super(0);
+
+  void update({
+    required Predicate<DateTime> selectable,
+    required bool Function(DateTime) selected,
+    required void Function(DateTime) select,
+  }) {
+    _selectable = selectable;
+    _selected = selected;
+    _select = select;
+    notifyListeners();
+  }
+
+  @override
+  bool selectable(DateTime date) => _selectable(date);
+
+  @override
+  bool selected(DateTime date) => _selected(date);
+
+  @override
+  void select(DateTime date) => _select(date);
+}
+
 // The single date controllers.
 class _AutoDateController extends FCalendarController<DateTime?> {
   final Predicate<DateTime> _selectable;
   final bool toggleable;
 
   _AutoDateController({
-    required DateTime? initialSelection,
+    required DateTime? initial,
     required Predicate<DateTime>? selectable,
     required this.toggleable,
   }) : _selectable = selectable ?? _true,
-       super(initialSelection = initialSelection == null ? null : _truncateAndStripTimezone(initialSelection));
+       super(initial = initial == null ? null : _truncateAndStripTimezone(initial));
 
   @override
   bool selectable(DateTime date) => _selectable(_truncateAndStripTimezone(date));
@@ -162,12 +198,12 @@ class _DateController extends FCalendarController<DateTime?> {
   final bool toggleable;
 
   _DateController({
-    required DateTime? initialSelection,
+    required DateTime? initial,
     required Predicate<DateTime>? selectable,
     required this.toggleable,
-  }) : assert(initialSelection?.isUtc ?? true, 'initialSelection ($initialSelection) must be in UTC timezone'),
+  }) : assert(initial?.isUtc ?? true, 'initialSelection ($initial) must be in UTC timezone'),
        _selectable = selectable ?? _true,
-       super(initialSelection);
+       super(initial);
 
   @override
   bool selectable(DateTime date) => _selectable(date);
@@ -186,9 +222,9 @@ class _DateController extends FCalendarController<DateTime?> {
 final class _AutoDatesController extends FCalendarController<Set<DateTime>> {
   final Predicate<DateTime> _selectable;
 
-  _AutoDatesController({Set<DateTime> initialSelections = const {}, Predicate<DateTime>? selectable})
+  _AutoDatesController({Set<DateTime> initial = const {}, Predicate<DateTime>? selectable})
     : _selectable = selectable ?? _true,
-      super(initialSelections.map(_truncateAndStripTimezone).toSet());
+      super(initial.map(_truncateAndStripTimezone).toSet());
 
   @override
   bool selectable(DateTime date) => _selectable(_truncateAndStripTimezone(date));
@@ -209,10 +245,10 @@ final class _AutoDatesController extends FCalendarController<Set<DateTime>> {
 final class _DatesController extends FCalendarController<Set<DateTime>> {
   final Predicate<DateTime> _selectable;
 
-  _DatesController({Set<DateTime> initialSelections = const {}, Predicate<DateTime>? selectable})
-    : assert(initialSelections.every((d) => d.isUtc), 'initialSelections ($initialSelections) must be in UTC timezone'),
+  _DatesController({Set<DateTime> initial = const {}, Predicate<DateTime>? selectable})
+    : assert(initial.every((d) => d.isUtc), 'initialSelections ($initial) must be in UTC timezone'),
       _selectable = selectable ?? _true,
-      super(initialSelections);
+      super(initial);
 
   @override
   bool selectable(DateTime date) => _selectable(date);
@@ -228,12 +264,12 @@ final class _DatesController extends FCalendarController<Set<DateTime>> {
 final class _AutoRangeController extends FCalendarController<(DateTime, DateTime)?> {
   final Predicate<DateTime> _selectable;
 
-  _AutoRangeController({(DateTime, DateTime)? initialSelection, Predicate<DateTime>? selectable})
+  _AutoRangeController({(DateTime, DateTime)? initial, Predicate<DateTime>? selectable})
     : _selectable = selectable ?? _true,
       super(
-        initialSelection = initialSelection == null
+        initial = initial == null
             ? null
-            : (_truncateAndStripTimezone(initialSelection.$1), _truncateAndStripTimezone(initialSelection.$2)),
+            : (_truncateAndStripTimezone(initial.$1), _truncateAndStripTimezone(initial.$2)),
       ) {
     final range = value;
     assert(
@@ -281,19 +317,19 @@ final class _AutoRangeController extends FCalendarController<(DateTime, DateTime
 final class _RangeController extends FCalendarController<(DateTime, DateTime)?> {
   final Predicate<DateTime> _selectable;
 
-  _RangeController({(DateTime, DateTime)? initialSelection, Predicate<DateTime>? selectable})
+  _RangeController({(DateTime, DateTime)? initial, Predicate<DateTime>? selectable})
     : assert(
-        initialSelection == null || (initialSelection.$1.isUtc && initialSelection.$2.isUtc),
+        initial == null || (initial.$1.isUtc && initial.$2.isUtc),
         'value must be in UTC timezone',
       ),
       assert(
-        initialSelection == null ||
-            (initialSelection.$1.isBefore(initialSelection.$2) ||
-                initialSelection.$1.isAtSameMomentAs(initialSelection.$2)),
+        initial == null ||
+            (initial.$1.isBefore(initial.$2) ||
+                initial.$1.isAtSameMomentAs(initial.$2)),
         'end date must be greater than or equal to start date',
       ),
       _selectable = selectable ?? _true,
-      super(initialSelection);
+      super(initial);
 
   @override
   bool selectable(DateTime date) => _selectable(date);

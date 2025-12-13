@@ -692,7 +692,7 @@ class _State extends State<FAutocomplete> with TickerProviderStateMixin {
     _fieldFocus = widget.focusNode ?? .new(debugLabel: 'FAutocomplete field');
     _fieldFocus.addListener(_focus);
     _popoverFocus = FocusScopeNode(debugLabel: 'FAutocomplete popover');
-    _popoverController = widget.popoverControl.create(() {}, this);
+    _popoverController = widget.popoverControl.create(_handleOnPopoverChange, this);
     _controller = widget.control.create(_update, widget.filter);
     _controller.loadSuggestions(_data = widget.filter(_controller.text));
   }
@@ -713,7 +713,9 @@ class _State extends State<FAutocomplete> with TickerProviderStateMixin {
       _controller = controller;
       _controller.loadSuggestions(widget.filter(_controller.text));
     }
-    _popoverController = widget.popoverControl.update(old.popoverControl, _popoverController, () {}, this).$1;
+    _popoverController = widget.popoverControl
+        .update(old.popoverControl, _popoverController, _handleOnPopoverChange, this)
+        .$1;
   }
 
   @override
@@ -724,7 +726,7 @@ class _State extends State<FAutocomplete> with TickerProviderStateMixin {
       _fieldFocus.dispose();
     }
 
-    widget.popoverControl.dispose(_popoverController, () {});
+    widget.popoverControl.dispose(_popoverController, _handleOnPopoverChange);
     widget.control.dispose(_controller, _update);
     super.dispose();
   }
@@ -769,6 +771,12 @@ class _State extends State<FAutocomplete> with TickerProviderStateMixin {
     }
 
     _restore = null;
+  }
+
+  void _handleOnPopoverChange() {
+    if (_popoverController case FPopoverManagedControl(:final onChange?)) {
+      onChange(_popoverController.status.isForwardOrCompleted);
+    }
   }
 
   @override

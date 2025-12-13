@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -23,8 +21,10 @@ void main() {
       ),
     );
 
-    unawaited(controller.popover.show());
+    controller.value = DateTime.utc(2025, 1, 15);
 
     await tester.pumpAndSettle();
+
+    expect(controller.value, DateTime.utc(2025, 1, 15));
   });
 }

@@ -90,7 +90,7 @@ class FLineCalendarManagedControl extends FLineCalendarControl with Diagnosticab
 
   @override
   FCalendarController<DateTime?> createController() =>
-      controller ?? FCalendarController.date(initialSelection: initial, toggleable: toggleable);
+      controller ?? FCalendarController.date(initial: initial, toggleable: toggleable);
 }
 
 class _Controller implements FCalendarController<DateTime?> {
@@ -99,7 +99,7 @@ class _Controller implements FCalendarController<DateTime?> {
   bool _toggleable;
 
   _Controller({required DateTime? value, required ValueChanged<DateTime?> onChange, required bool toggleable})
-    : _controller = FCalendarController.date(initialSelection: value, toggleable: toggleable),
+    : _controller = FCalendarController.date(initial: value, toggleable: toggleable),
       _onChange = onChange,
       _toggleable = toggleable;
 
@@ -109,7 +109,7 @@ class _Controller implements FCalendarController<DateTime?> {
 
     if (_toggleable != toggleable) {
       _controller.dispose();
-      _controller = FCalendarController.date(initialSelection: value, toggleable: toggleable);
+      _controller = FCalendarController.date(initial: value, toggleable: toggleable);
       _toggleable = toggleable;
     } else if (_controller.value != value) {
       _controller.value = value;

@@ -42,15 +42,15 @@ abstract class TimeInputController extends InputController {
   ) => switch (format.pattern!.contains('a')) {
     true => Time12InputController.new,
     false => Time24InputController.new,
-  }(localizations, controller, format, style, TimeParser(format), placeholder, value);
+  }(localizations, controller, format, value, style, TimeParser(format), placeholder);
 
   TimeInputController.fromValue(
     this.controller,
     this.format,
+    super.value,
     super.style,
     super.parser,
     super.placeholder,
-    super.value,
   ) {
     controller.addListener(updateFromTimeController);
   }

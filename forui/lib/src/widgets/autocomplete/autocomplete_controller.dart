@@ -42,7 +42,7 @@ class _ProxyController extends FAutocompleteController {
   TextEditingValue? _unsynced;
   ValueChanged<TextEditingValue> _onChange;
 
-  _ProxyController(super.value, this._onChange) : super.fromValue();
+  _ProxyController(super.value, this._onChange) : _unsynced = value, super.fromValue();
 
   void update(TextEditingValue newValue, ValueChanged<TextEditingValue> onChange) {
     _onChange = onChange;

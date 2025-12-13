@@ -7,6 +7,6 @@ library forui.widgets.date_field;
 
 export '../src/widgets/date_field/date_field.dart';
 export '../src/widgets/date_field/date_field_controller.dart'
-    hide FDateFieldManagedControl, InternalFDateFieldControl, InternalFDateFieldController, Lifted;
+    hide FDateFieldManagedControl, InternalFDateFieldControl, InternalFDateFieldController;
 export '../src/widgets/date_field/date_field_style.dart';
 export '../src/widgets/date_field/calendar/properties.dart';

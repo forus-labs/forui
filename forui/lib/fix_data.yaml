@@ -304,6 +304,39 @@ transforms:
           - kind: removeParameter
             name: 'controller'
 
+  - title: 'Rename FCalendarController.date(initialSelection: ...) to initial'
+    date: 2025-12-12
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      method: 'date'
+      inClass: FCalendarController
+    changes:
+      - kind: renameParameter
+        oldName: 'initialSelection'
+        newName: 'initial'
+
+  - title: 'Rename FCalendarController.dates(initialSelections: ...) to initial'
+    date: 2025-12-12
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      method: 'dates'
+      inClass: FCalendarController
+    changes:
+      - kind: renameParameter
+        oldName: 'initialSelections'
+        newName: 'initial'
+
+  - title: 'Rename FCalendarController.range(initialSelection: ...) to initial'
+    date: 2025-12-12
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      method: 'range'
+      inClass: FCalendarController
+    changes:
+      - kind: renameParameter
+        oldName: 'initialSelection'
+        newName: 'initial'
+
 
   # FBreadcrumb
   - title: 'Rename FBreadcrumb(shift: ...) to overflow'
@@ -713,6 +746,31 @@ transforms:
     changes:
       - kind: rename
         newName: 'popover'
+
+  - title: 'Rename FDateFieldController(initialDate: ...) to initial'
+    date: 2025-12-12
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FDateFieldController
+    changes:
+      - kind: renameParameter
+        oldName: 'initialDate'
+        newName: 'initial'
+
+  - title: 'Remove FDateFieldController(vsync: ..., popoverMotion: ..., truncateAndStripTimezone: ...)'
+    date: 2025-12-12
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FDateFieldController
+    changes:
+      - kind: removeParameter
+        name: 'vsync'
+      - kind: removeParameter
+        name: 'popoverMotion'
+      - kind: removeParameter
+        name: 'truncateAndStripTimezone'
 
   # FLineCalendar
   - title: 'Migrate FLineCalendar to control parameter'

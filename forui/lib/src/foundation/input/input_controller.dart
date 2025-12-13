@@ -13,42 +13,42 @@ abstract class InputController extends TextEditingController {
   final String placeholder;
   bool mutating = false;
 
-  InputController(this.style, this.parser, this.placeholder, TextEditingValue? value)
+  InputController(super.value, this.style, this.parser, this.placeholder)
     : statesController = WidgetStatesController(),
-      super.fromValue(value);
+      super.fromValue();
 
   void traverse({required bool forward});
 
   void adjust(int amount);
 
   @override
-  set value(TextEditingValue value) {
+  set value(TextEditingValue newValue) {
     if (mutating) {
       return;
     }
 
-    final TextSelection(:baseOffset, :extentOffset) = value.selection;
+    final TextSelection(:baseOffset, :extentOffset) = newValue.selection;
     // Selected the entire text without doing anything else.
-    if (baseOffset == 0 && extentOffset == value.text.length && text == value.text) {
-      super.value = value;
+    if (baseOffset == 0 && extentOffset == newValue.text.length && text == newValue.text) {
+      rawValue = newValue;
       return;
     }
 
     try {
       mutating = true;
-      final current = this.value;
+      final current = rawValue;
 
-      super.value = switch (value) {
-        _ when value.text.isEmpty => TextEditingValue(
+      rawValue = switch (newValue) {
+        _ when newValue.text.isEmpty => TextEditingValue(
           text: placeholder,
           selection: .new(baseOffset: 0, extentOffset: placeholder.length),
         ),
-        _ when text != value.text => _update(value),
-        _ => selector.resolve(value) ?? this.value,
+        _ when text != newValue.text => _update(newValue),
+        _ => selector.navigate(newValue) ?? rawValue,
       };
 
-      if (current.text != this.value.text) {
-        onValueChanged(this.value.text);
+      if (current.text != rawValue.text) {
+        onValueChanged(rawValue.text);
       }
     } finally {
       mutating = false;
@@ -58,13 +58,13 @@ abstract class InputController extends TextEditingController {
   TextEditingValue _update(TextEditingValue value) {
     final current = selector.split(value.text);
     if (current.length != parser.pattern.length) {
-      return this.value;
+      return rawValue;
     }
 
     final (parts, selected) = parser.update(selector.split(text), current);
     switch (selected) {
       case None():
-        return this.value;
+        return rawValue;
 
       case Single(:final index):
         return selector.select(parts, index);
@@ -80,11 +80,16 @@ abstract class InputController extends TextEditingController {
 
   Selector get selector;
 
+  // TODO: remove
   @protected
+  @Deprecated('Remove')
   void onValueChanged(String newValue) {}
 
   @protected
-  set rawValue(TextEditingValue value) => super.value = value; // ignore: avoid_setters_without_getters
+  TextEditingValue get rawValue => super.value;
+
+  @protected
+  set rawValue(TextEditingValue value) => super.value = value;
 
   @override
   TextSpan buildTextSpan({required BuildContext context, required bool withComposing, TextStyle? style}) {

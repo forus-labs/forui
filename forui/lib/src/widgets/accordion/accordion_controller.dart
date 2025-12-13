@@ -5,6 +5,7 @@ import 'package:flutter/widgets.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/debug.dart';
+import 'package:sugar/core.dart';
 
 part 'accordion_controller.control.dart';
 
@@ -179,7 +180,7 @@ sealed class FAccordionControl with Diagnosticable, _$FAccordionControlMixin {
   /// The [expanded] function should return true if the item at the given index is expanded. It must be idempotent.
   /// The [onChange] callback is invoked when the user toggles an item.
   const factory FAccordionControl.lifted({
-    required bool Function(int index) expanded,
+    required Predicate<int> expanded,
     required void Function(int index, bool expanded) onChange,
   }) = _Lifted;
 
@@ -228,7 +229,7 @@ class FAccordionManagedControl extends FAccordionControl with _$FAccordionManage
 
 class _Lifted extends FAccordionControl with _$_LiftedMixin {
   @override
-  final bool Function(int index) expanded;
+  final Predicate<int> expanded;
   @override
   final void Function(int index, bool expanded) onChange;
 

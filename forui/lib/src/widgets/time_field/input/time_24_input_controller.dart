@@ -26,10 +26,10 @@ class Time24InputController extends TimeInputController {
     FLocalizations localizations,
     super.controller,
     super.format,
+    super.value,
     super.style,
     super.parser,
     super.placeholder,
-    super.value,
   ) : selector = Time24Selector(localizations),
       super.fromValue();
 
@@ -37,7 +37,7 @@ class Time24InputController extends TimeInputController {
   void traverse({required bool forward}) {
     try {
       mutating = true;
-      rawValue = (forward ? selector.resolve(value, onFirst: _last) : selector.resolve(value, onLast: _first)) ?? value;
+      rawValue = (forward ? selector.navigate(value, onFirst: _last) : selector.navigate(value, onLast: _first)) ?? value;
     } finally {
       mutating = false;
     }
@@ -49,7 +49,7 @@ class Time24InputController extends TimeInputController {
       mutating = true;
       final parts = selector.split(text);
       rawValue =
-          selector.resolve(
+          selector.navigate(
             value,
             onFirst: (_, _, _, _) => selector.select(parser.adjust(parts, 0, amount), 0),
             onLast: (_, _, _, _) => selector.select(parser.adjust(parts, 1, amount), 1),
@@ -68,7 +68,7 @@ class Time24Selector extends Selector {
     : super(localizations, RegExp(RegExp.escape(localizations.timeFieldSuffix) + r'$'));
 
   @override
-  TextEditingValue? resolve(TextEditingValue value, {Select24 onFirst = _first, Select24 onLast = _last}) {
+  TextEditingValue? navigate(TextEditingValue value, {Select24 onFirst = _first, Select24 onLast = _last}) {
     final separator = localizations.timeFieldTimeSeparator.length;
     final only = value.text.indexOf(localizations.timeFieldTimeSeparator);
     final end = value.text.length - localizations.timeFieldSuffix.length;

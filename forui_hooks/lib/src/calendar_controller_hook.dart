@@ -38,7 +38,7 @@ FCalendarController<DateTime?> useFDateCalendarController({
     toggleable: toggleable,
     debugLabel: 'useFDateCalendarController',
     create: (hook) => .date(
-      initialSelection: hook.value,
+      initial: hook.value,
       selectable: hook.selectable,
       toggleable: hook.toggleable,
       truncateAndStripTimezone: truncateAndStripTimezone,
@@ -75,7 +75,7 @@ FCalendarController<Set<DateTime>> useFDatesCalendarController({
     selectable: selectable,
     debugLabel: 'useFDatesCalendarController',
     create: (hook) => .dates(
-      initialSelections: hook.value,
+      initial: hook.value,
       selectable: hook.selectable,
       truncateAndStripTimezone: truncateAndStripTimezone,
     ),
@@ -116,7 +116,7 @@ FCalendarController<(DateTime, DateTime)?> useFRangeCalendarController({
     selectable: selectable,
     debugLabel: 'useFRangeCalendarController',
     create: (hook) => .range(
-      initialSelection: hook.value,
+      initial: hook.value,
       selectable: hook.selectable,
       truncateAndStripTimezone: truncateAndStripTimezone,
     ),

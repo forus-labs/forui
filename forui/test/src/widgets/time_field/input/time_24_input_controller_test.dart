@@ -213,7 +213,7 @@ void main() {
           TestScaffold.blueScreen.textFieldStyle,
         );
 
-        expect(controller.selector.resolve(value), expected);
+        expect(controller.selector.navigate(value), expected);
       });
     }
 
@@ -256,7 +256,7 @@ void main() {
           TestScaffold.blueScreen.textFieldStyle,
         );
 
-        expect(controller.selector.resolve(value), expected);
+        expect(controller.selector.navigate(value), expected);
       });
     }
 
@@ -286,7 +286,7 @@ void main() {
           TestScaffold.blueScreen.textFieldStyle,
         );
 
-        expect(controller.selector.resolve(value), expected);
+        expect(controller.selector.navigate(value), expected);
       });
     }
   });
