@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
 
@@ -33,11 +35,27 @@ class Sandbox extends StatefulWidget {
 enum Notification { all, direct, nothing, limitedTime, timeSensitive, selectedApps }
 
 class _SandboxState extends State<Sandbox> with SingleTickerProviderStateMixin {
+  DateTime? _date;
+
   @override
   Widget build(BuildContext context) => Center(
     child: Column(
       mainAxisSize: .min,
-      children: [FButton(onPress: () => setState(() {}), child: Text('Button'))],
+      children: [
+        FDateField(
+          control: .lifted(
+            value: _date,
+            onChange: (v) {
+              setState(() {
+                _date = v;
+              });
+            },
+          ),
+          label: const Text('Appointment Date'),
+          description: const Text('Select a date for your appointment'),
+          clearable: true,
+        ),
+      ],
     ),
   );
 }

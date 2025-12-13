@@ -70,14 +70,15 @@ class _ProxyCalendarController implements FCalendarController<DateTime?> {
   DateTime? _unsynced;
 
   _ProxyCalendarController(this._unsynced, this._onChange, this._validator)
-    : _controller = .date(initial: _unsynced, selectable: (date) => _validator(date) == null);
+    : _controller = .date(initial: _unsynced, selectable: (date) => _validator(date) == null, toggleable: false);
 
   void update(DateTime? newValue, ValueChanged<DateTime?> onChange, String? Function(DateTime?) validator) {
     _onChange = onChange;
     if (_validator != validator) {
+      _unsynced = newValue;
       _validator = validator;
       _controller.dispose();
-      _controller = .date(initial: newValue, selectable: (date) => validator(date) == null);
+      _controller = .date(initial: newValue, selectable: (date) => validator(date) == null, toggleable: false);
     } else if (_controller.value != newValue) {
       _unsynced = newValue;
       _controller.value = newValue;
@@ -89,6 +90,18 @@ class _ProxyCalendarController implements FCalendarController<DateTime?> {
 
   @override
   void select(DateTime date) {
+    if (_controller.value != date) {
+      _unsynced = date;
+      _onChange(date);
+    }
+  }
+
+
+  @override
+  DateTime? get value => _controller.value;
+
+  @override
+  set value(DateTime? date) {
     if (_controller.value != date) {
       _unsynced = date;
       _onChange(date);
@@ -124,17 +137,6 @@ class _ProxyCalendarController implements FCalendarController<DateTime?> {
 
   @override
   void removeValueListener(ValueChanged<DateTime?>? listener) => _controller.removeValueListener(listener);
-
-  @override
-  DateTime? get value => _controller.value;
-
-  @override
-  set value(DateTime? date) {
-    if (_controller.value != date) {
-      _unsynced = date;
-      _onChange(date);
-    }
-  }
 }
 
 /// A [FDateFieldControl] defines how a [FDateField] is controlled.
