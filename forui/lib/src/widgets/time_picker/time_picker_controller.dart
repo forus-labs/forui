@@ -86,7 +86,7 @@ extension FTimePickerControllers on FTimePickerController {
       .._minuteInterval = minuteInterval;
 
     _picker?.dispose();
-    _picker = FPickerController(initialIndexes: encode(value));
+    _picker = FPickerController(initial: encode(value));
     _picker?.addListener(decode);
   }
 

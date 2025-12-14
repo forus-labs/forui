@@ -278,11 +278,15 @@ void main() {
   testWidgets('arrow key traversal works without setState', (tester) async {
     await tester.pumpWidget(
       TestScaffold.app(
+        alignment: Alignment.topCenter,
         locale: const Locale('en', 'SG'),
         child: StatefulBuilder(
           builder: (context, setState) => FDateField(
             key: key,
             control: .lifted(value: null, onChange: (_) {}),
+            calendar: .new(
+              today: .utc(2025, 1, 15),
+            ),
           ),
         ),
       ),

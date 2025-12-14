@@ -1107,6 +1107,17 @@ transforms:
           - kind: removeParameter
             name: 'onChange'
 
+  - title: 'Rename FPickerController(initialIndexes: ...) to initial'
+    date: 2025-12-14
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FPickerController
+    changes:
+      - kind: renameParameter
+        oldName: 'initialIndexes'
+        newName: 'initial'
+
   # FPopover
   - title: 'Migrate FPopover(controller: ...) to control parameter'
     date: 2025-12-03

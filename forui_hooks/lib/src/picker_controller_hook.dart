@@ -24,7 +24,7 @@ class _PickerControllerHook extends Hook<FPickerController> {
 }
 
 class _PickerControllerHookState extends HookState<FPickerController, _PickerControllerHook> {
-  late final _controller = FPickerController(initialIndexes: hook.initialIndexes);
+  late final _controller = FPickerController(initial: hook.initialIndexes);
 
   @override
   FPickerController build(BuildContext context) => _controller;

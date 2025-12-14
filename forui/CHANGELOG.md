@@ -120,7 +120,9 @@ Unfortunately, `FCalendar` cannot be easily migrated using data driven fixes due
 
 ### `FPicker`
 * Add `FPickerControl`.
+* Add `FPickerController.animateTo(...)`.
 
+* **Breaking** Rename `FPickerController(initialIndexes: ...)` to `FPickerController(initial: ...)`.
 * **Breaking** Remove `FPicker.controller`. Use `FPicker(control: .managed(...))` instead.
 * **Breaking** Remove `FPicker.onChange`. Use `FPicker(control: .managed(...))` instead.
 

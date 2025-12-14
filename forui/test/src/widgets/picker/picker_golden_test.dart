@@ -25,7 +25,7 @@ const months = [
 void main() {
   late FPickerController controller;
 
-  setUp(() => controller = FPickerController(initialIndexes: [1, 5]));
+  setUp(() => controller = FPickerController(initial: [1, 5]));
 
   tearDown(() => controller.dispose());
 
@@ -83,7 +83,7 @@ void main() {
     });
 
     testWidgets('${theme.name} non-looping', (tester) async {
-      controller = FPickerController(initialIndexes: [1]);
+      controller = FPickerController(initial: [1]);
 
       await tester.pumpWidget(
         TestScaffold(
@@ -195,14 +195,13 @@ void main() {
   group('lifted', () {
     testWidgets('animates programmatically changed value', (tester) async {
       final sheet = autoDispose(AnimationSheetBuilder(frameSize: const Size(400, 300)));
-      var value = [1];
 
       await tester.pumpWidget(
         sheet.record(
           TestScaffold(
             child: StatefulBuilder(
               builder: (_, setState) => FPicker(
-                control: .lifted(value: value, onChange: (v) => setState(() => value = v)),
+                control: .lifted(value: [1], onChange: (v) {}),
                 children: const [FPickerWheel(flex: 3, children: months)],
               ),
             ),
@@ -210,7 +209,7 @@ void main() {
         ),
       );
 
-      value = [8];
+      var value = [8];
 
       await tester.pumpFrames(
         sheet.record(
@@ -223,7 +222,7 @@ void main() {
             ),
           ),
         ),
-        const Duration(milliseconds: 200),
+        const Duration(milliseconds: 300),
       );
 
       await expectLater(sheet.collate(5), matchesGoldenFile('picker/lifted-value-change-animation.png'));

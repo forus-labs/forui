@@ -9,7 +9,7 @@ void main() {
   late FPickerController controller;
 
   setUp(() {
-    controller = FPickerController(initialIndexes: [0, 1]);
+    controller = FPickerController(initial: [0, 1]);
   });
 
   tearDown(() {
@@ -70,7 +70,7 @@ void main() {
   });
 
   test('dispose cleans up wheel controllers', () {
-    final controller = FPickerController(initialIndexes: [0, 1]);
+    final controller = FPickerController(initial: [0, 1]);
     controller.wheels.addAll([FixedExtentScrollController(), FixedExtentScrollController()]);
 
     controller.dispose();

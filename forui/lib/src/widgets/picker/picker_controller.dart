@@ -15,7 +15,7 @@ part 'picker_controller.control.dart';
 /// * From right to left if the current text direction is RTL
 class FPickerController extends FValueNotifier<List<int>> {
   /// The picker wheels' initial indexes.
-  final List<int> initialIndexes;
+  final List<int> initial;
 
   /// The controllers for the individual picker wheels.
   ///
@@ -30,10 +30,33 @@ class FPickerController extends FValueNotifier<List<int>> {
   final List<FixedExtentScrollController> wheels = [];
 
   /// Creates a [FPickerController].
-  FPickerController({required this.initialIndexes}) : super([...initialIndexes]);
+  FPickerController({required this.initial}) : super([...initial]);
+
+  /// Animates the wheels to the given [value].
+  Future<void> animateTo(
+    List<int> value, {
+    Duration duration = const Duration(milliseconds: 300),
+    Curve curve = Curves.easeOutCubic,
+  }) async {
+    if (!listEquals(_rawValue, value)) {
+      _rawValue = value;
+      await _animateTo(value, duration, curve);
+    }
+  }
+
+  Future<void> _animateTo(List<int> value, Duration duration, Curve curve) async {
+    assert(
+      wheels.isEmpty || value.length == wheels.length,
+      'The value must have the same length as the number of wheels.',
+    );
+
+    await Future.wait([
+      for (final (i, index) in value.indexed) wheels[i].animateToItem(index, duration: duration, curve: curve),
+    ]);
+  }
 
   @override
-  List<int> get value => [...super.value];
+  List<int> get value => [..._rawValue];
 
   @override
   set value(List<int> value) {
@@ -48,15 +71,14 @@ class FPickerController extends FValueNotifier<List<int>> {
       }
     }
 
-    _value = value;
-  }
-
-  // ignore: avoid_setters_without_getters
-  set _value(List<int> value) {
-    if (!listEquals(super.value, value)) {
-      super.value = value;
+    if (!listEquals(_rawValue, value)) {
+      _rawValue = value;
     }
   }
+
+  List<int> get _rawValue => super.value;
+
+  set _rawValue(List<int> value) => super.value = value;
 
   @override
   void dispose() {
@@ -68,49 +90,79 @@ class FPickerController extends FValueNotifier<List<int>> {
 }
 
 @internal
-extension InternalPickerController on FPickerController {
-  // ignore: use_setters_to_change_properties
-  void replace(List<int> value) => _value = value;
+extension InternalFPickerController on FPickerController {
+  void replace(List<int> value) {
+    if (!listEquals(_rawValue, value)) {
+      _rawValue = value;
+    }
+  }
 }
 
-class _Controller extends FPickerController {
-  /// The indexes that the user scrolled to, which differs from the controller's value.
-  List<int> _scrolled;
+class _ProxyController extends FPickerController {
+  List<int> _unsynced;
   ValueChanged<List<int>> _onChange;
+  Duration _duration;
+  Curve _curve;
   int _monotonic = 0;
 
-  _Controller({required super.initialIndexes, required ValueChanged<List<int>> onChange})
-    : _scrolled = initialIndexes,
-      _onChange = onChange;
+  _ProxyController(this._unsynced, this._onChange, this._duration, this._curve) : super(initial: _unsynced);
 
-  void update(List<int> value, ValueChanged<List<int>> onChange, Duration duration, Curve curve) {
+
+  void update(List<int> newValue, ValueChanged<List<int>> onChange, Duration duration, Curve curve) {
     _onChange = onChange;
-    if (!listEquals(_scrolled, value)) {
-      for (final (i, index) in value.indexed) {
-        wheels[i].animateToItem(index, duration: duration, curve: curve);
+    _duration = duration;
+    _curve = curve;
+
+    ++_monotonic;
+    if (!listEquals(super._rawValue, newValue)) {
+      _unsynced = newValue;
+      super._rawValue = newValue;
+      for (final (i, index) in super._rawValue.indexed) {
+        wheels[i].animateToItem(index, duration: _duration, curve: _curve);
       }
-      super._value = value;
+    } else if (!listEquals(_unsynced, newValue)) {
+      _unsynced = newValue;
+      for (final (i, index) in super._rawValue.indexed) {
+        wheels[i].animateToItem(index, duration: _duration, curve: _curve);
+      }
+      notifyListeners();
     }
   }
 
   @override
-  set value(List<int> value) {
-    _scrolled = value;
-    _onChange(value);
+  set _rawValue(List<int> value) {
+    _unsynced = value;
+
+    final current = ++_monotonic;
+    if (!listEquals(super._rawValue, value)) {
+      // Scrolling the wheels to the new value is done in _rawValue.
+      _onChange(value);
+
+      // The animation is wrapped in a post frame callback since _rawValue is called when ScrollEndNotification is
+      // fired, and animating during that notification causes the animation to be ignored.
+      SchedulerBinding.instance.addPostFrameCallback((_) {
+        if (current == _monotonic) {
+          for (final (i, index) in super._rawValue.indexed) {
+            wheels[i].animateToItem(index, duration: _duration, curve: _curve);
+          }
+        }
+      });
+    }
   }
 
-  @override
-  // TODO: https://github.com/dart-lang/sdk/issues/62198
-  // ignore: unused_element
-  set _value(List<int> value) {
+  Future<void> _animate(List<int> value) async {
     final current = ++_monotonic;
-    SchedulerBinding.instance.addPostFrameCallback((_) {
-      if (current == _monotonic) {
-        _scrolled = value;
-        _onChange(value);
-      }
-    });
+    await Future.wait([
+      for (final (i, index) in value.indexed)
+        wheels[i].animateToItem(index, duration: _duration, curve: _curve),
+    ]);
+
+    if (current == _monotonic) {
+      super._rawValue = value;
+    }
   }
+
+
 }
 
 /// A [FPickerControl] defines how a [FPicker] is controlled.
@@ -124,14 +176,14 @@ sealed class FPickerControl with Diagnosticable, _$FPickerControlMixin {
   ///
   /// The [value] parameter contains the current indexes.
   /// The [onChange] callback is invoked when the user changes the value.
-  /// The [duration] when animating to [value] from an invalid/different index. Defaults to 200 milliseconds.
+  /// The [duration] when animating to [value] from an invalid/different index. Defaults to 300 milliseconds.
   /// The [curve] when animating to [value] from an invalid/different index. Defaults to [Curves.easeOutCubic].
   const factory FPickerControl.lifted({
     required List<int> value,
     required ValueChanged<List<int>> onChange,
     Duration duration,
     Curve curve,
-  }) = Lifted;
+  }) = _Lifted;
 
   /// Creates a [FPickerControl].
   const factory FPickerControl.managed({
@@ -175,38 +227,6 @@ sealed class FPickerControl with Diagnosticable, _$FPickerControlMixin {
   }
 }
 
-@internal
-class Lifted extends FPickerControl with _$LiftedMixin {
-  @override
-  final List<int> value;
-  @override
-  final ValueChanged<List<int>> onChange;
-  @override
-  final Duration duration;
-  @override
-  final Curve curve;
-
-  const Lifted({
-    required this.value,
-    required this.onChange,
-    this.duration = const Duration(milliseconds: 200),
-    this.curve = Curves.easeOutCubic,
-  }) : super._();
-
-  @override
-  FPickerController createController(int wheelCount) {
-    final controller = _Controller(initialIndexes: value, onChange: onChange);
-    _updateWheels(controller);
-
-    return controller;
-  }
-
-  @override
-  void _updateController(FPickerController controller, int _) {
-    (controller as _Controller).update(value, onChange, duration, curve);
-  }
-}
-
 /// A [FPickerManagedControl] enables widgets to manage their own controller internally while exposing parameters for
 /// common configurations.
 ///
@@ -237,9 +257,40 @@ class FPickerManagedControl extends FPickerControl with Diagnosticable, _$FPicke
 
   @override
   FPickerController createController(int wheelCount) {
-    final created = controller ?? FPickerController(initialIndexes: initial ?? .filled(wheelCount, 0));
+    final created = controller ?? .new(initial: initial ?? .filled(wheelCount, 0));
     _updateWheels(created);
 
     return created;
+  }
+}
+
+class _Lifted extends FPickerControl with _$_LiftedMixin {
+  @override
+  final List<int> value;
+  @override
+  final ValueChanged<List<int>> onChange;
+  @override
+  final Duration duration;
+  @override
+  final Curve curve;
+
+  const _Lifted({
+    required this.value,
+    required this.onChange,
+    this.duration = const Duration(milliseconds: 300),
+    this.curve = Curves.easeOutCubic,
+  }) : super._();
+
+  @override
+  FPickerController createController(int _) {
+    final created = _ProxyController(value, onChange, duration, curve);
+    _updateWheels(created);
+
+    return created;
+  }
+
+  @override
+  void _updateController(FPickerController controller, int _) {
+    (controller as _ProxyController).update(value, onChange, duration, curve);
   }
 }

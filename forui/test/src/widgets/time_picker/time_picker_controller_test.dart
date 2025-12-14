@@ -175,7 +175,7 @@ void main() {
 
         controller
           ..picker?.dispose()
-          ..picker = FPickerController(initialIndexes: [1, 13, 30])
+          ..picker = FPickerController(initial: [1, 13, 30])
           ..decode();
 
         expect(controller.value, const FTime(13, 30));
@@ -191,7 +191,7 @@ void main() {
 
         controller
           ..picker?.dispose()
-          ..picker = FPickerController(initialIndexes: [0, 5, 30])
+          ..picker = FPickerController(initial: [0, 5, 30])
           ..decode();
 
         expect(controller.value, const FTime(5, 30));
@@ -208,7 +208,7 @@ void main() {
 
         controller
           ..picker?.dispose()
-          ..picker = FPickerController(initialIndexes: [13, 30, 1])
+          ..picker = FPickerController(initial: [13, 30, 1])
           ..decode();
 
         expect(controller.value, const FTime(13, 30));
@@ -223,7 +223,7 @@ void main() {
 
         controller
           ..picker?.dispose()
-          ..picker = FPickerController(initialIndexes: [5, 30, 0])
+          ..picker = FPickerController(initial: [5, 30, 0])
           ..decode();
 
         expect(controller.value, const FTime(5, 30));
@@ -240,7 +240,7 @@ void main() {
 
         controller
           ..picker?.dispose()
-          ..picker = FPickerController(initialIndexes: [14, 30])
+          ..picker = FPickerController(initial: [14, 30])
           ..decode();
 
         expect(controller.value, const FTime(14, 30));
@@ -255,7 +255,7 @@ void main() {
 
         controller
           ..picker?.dispose()
-          ..picker = FPickerController(initialIndexes: [2, 30])
+          ..picker = FPickerController(initial: [2, 30])
           ..decode();
 
         expect(controller.value, const FTime(12, 30));
@@ -270,7 +270,7 @@ void main() {
 
         controller
           ..picker?.dispose()
-          ..picker = FPickerController(initialIndexes: [14, 7])
+          ..picker = FPickerController(initial: [14, 7])
           ..decode();
 
         expect(controller.value, const FTime(14, 35));
