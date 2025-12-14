@@ -129,7 +129,7 @@ Unfortunately, `FCalendar` cannot be easily migrated using data driven fixes due
 
 ### `FPopover`
 * Add `FPopoverControl`.
-* Add `FPopoverController.initial`.
+* Add `FPopoverController(shown: ...)`.
 
 * **Breaking** Change `FPopover.shift` to `FPopover.overflow`.
 * **Breaking** Remove `FPopover.controller`. Use `FPopover(control: .managed(...))` instead.

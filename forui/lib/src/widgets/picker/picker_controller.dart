@@ -150,18 +150,6 @@ class _ProxyController extends FPickerController {
     }
   }
 
-  Future<void> _animate(List<int> value) async {
-    final current = ++_monotonic;
-    await Future.wait([
-      for (final (i, index) in value.indexed)
-        wheels[i].animateToItem(index, duration: _duration, curve: _curve),
-    ]);
-
-    if (current == _monotonic) {
-      super._rawValue = value;
-    }
-  }
-
 
 }
 
