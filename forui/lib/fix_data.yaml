@@ -2369,16 +2369,25 @@ transforms:
           - kind: removeParameter
             name: 'onChange'
 
+  - title: 'Rename FSelectGroupController to FMultiValueNotifier'
+    date: 2025-12-15
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      typedef: FSelectGroupController
+    changes:
+      - kind: rename
+        newName: 'FMultiValueNotifier'
+
 
   # FSelectTileGroup
-  - title: 'Rename FSelectTileGroupController to FSelectGroupController'
+  - title: 'Rename FSelectTileGroupController to FMultiValueNotifier'
     date: 2025-11-30
     element:
       uris: [ 'package:forui/forui.dart' ]
       typedef: FSelectTileGroupController
     changes:
       - kind: rename
-        newName: 'FSelectGroupController'
+        newName: 'FMultiValueNotifier'
 
   - title: 'Migrate FSelectTileGroup to control parameter'
     date: 2025-12-07
@@ -2617,14 +2626,14 @@ transforms:
         oldName: 'shift'
         newName: 'overflow'
 
-  - title: 'Rename FSelectMenuTileController to FSelectGroupController'
+  - title: 'Rename FSelectMenuTileController to FMultiValueNotifier'
     date: 2025-12-08
     element:
       uris: [ 'package:forui/forui.dart' ]
       typedef: FSelectMenuTileController
     changes:
       - kind: rename
-        newName: 'FSelectGroupController'
+        newName: 'FMultiValueNotifier'
 
   - title: 'Migrate FSelectMenuTile to control parameters'
     date: 2025-12-08

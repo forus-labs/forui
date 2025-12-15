@@ -10,7 +10,7 @@ mixin FTileGroupMixin on Widget {
   /// This function is a shorthand for [FSelectTileGroup.new].
   static FSelectTileGroup<T> selectGroup<T>({
     required List<FSelectTile<T>> children,
-    FSelectGroupControl<T>? control,
+    FMultiValueControl<T>? control,
     ScrollController? scrollController,
     FTileGroupStyle? style,
     double? cacheExtent,
@@ -58,7 +58,7 @@ mixin FTileGroupMixin on Widget {
   static FSelectTileGroup<T> selectGroupBuilder<T>({
     required FSelectTile<T>? Function(BuildContext context, int index) tileBuilder,
     int? count,
-    FSelectGroupControl<T>? control,
+    FMultiValueControl<T>? control,
     ScrollController? scrollController,
     FTileGroupStyle? style,
     double? cacheExtent,

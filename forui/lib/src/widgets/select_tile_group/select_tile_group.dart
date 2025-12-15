@@ -4,7 +4,7 @@ import 'package:flutter/widgets.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/form/multi_value_form_field.dart';
-import 'package:forui/src/widgets/select_group/select_group_controller.dart';
+import 'package:forui/src/foundation/notifiers.dart';
 import 'package:forui/src/widgets/select_tile_group/select_tile.dart';
 
 /// A set of tiles that are treated as a single selection.
@@ -20,8 +20,8 @@ import 'package:forui/src/widgets/select_tile_group/select_tile.dart';
 class FSelectTileGroup<T> extends StatefulWidget with FTileGroupMixin, FFormFieldProperties<Set<T>> {
   /// Defines how the select tile group's value is controlled.
   ///
-  /// Defaults to [FSelectGroupControl.managed].
-  final FSelectGroupControl<T>? control;
+  /// Defaults to [FMultiValueControl.managed].
+  final FMultiValueControl<T>? control;
 
   /// {@macro forui.widgets.FTileGroup.scrollController}
   final ScrollController? scrollController;
@@ -178,24 +178,30 @@ class FSelectTileGroup<T> extends StatefulWidget with FTileGroupMixin, FFormFiel
 }
 
 class _FSelectTileGroupState<T> extends State<FSelectTileGroup<T>> {
-  late FSelectGroupController<T> _controller;
+  late FMultiValueNotifier<T> _controller;
 
   @override
   void initState() {
     super.initState();
-    _controller = (widget.control ?? FSelectGroupControl<T>.managed()).create(_handleChange);
+    _controller = (widget.control ?? FMultiValueControl<T>.managed()).create(_handleChange);
   }
 
   @override
   void didUpdateWidget(covariant FSelectTileGroup<T> old) {
     super.didUpdateWidget(old);
-    final current = widget.control ?? FSelectGroupControl<T>.managed();
-    final previous = old.control ?? FSelectGroupControl<T>.managed();
+    final current = widget.control ?? FMultiValueControl<T>.managed();
+    final previous = old.control ?? FMultiValueControl<T>.managed();
     _controller = current.update(previous, _controller, _handleChange).$1;
   }
 
+  @override
+  void dispose() {
+    (widget.control ?? FMultiValueControl<T>.managed()).dispose(_controller, _handleChange);
+    super.dispose();
+  }
+
   void _handleChange() {
-    if (widget.control case FSelectGroupManagedControl(:final onChange?)) {
+    if (widget.control case FMultiValueManagedControl(:final onChange?)) {
       onChange(_controller.value);
     }
   }
@@ -266,11 +272,5 @@ class _FSelectTileGroupState<T> extends State<FSelectTileGroup<T>> {
         );
       },
     );
-  }
-
-  @override
-  void dispose() {
-    (widget.control ?? FSelectGroupControl<T>.managed()).dispose(_controller, _handleChange);
-    super.dispose();
   }
 }

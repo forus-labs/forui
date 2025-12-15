@@ -19,7 +19,7 @@ void main() {
       TestScaffold(
         child: StatefulBuilder(
           builder: (context, setState) => FSelectTileGroup<int>(
-            control: FSelectGroupControl.lifted(value: value, onChange: (v) => setState(() => value = v)),
+            control: FMultiValueControl.lifted(value: value, onChange: (v) => setState(() => value = v)),
             children: const [
               FSelectTile(title: Text('1'), value: 1),
               FSelectTile(title: Text('2'), value: 2),
@@ -53,7 +53,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold(
           child: FSelectTileGroup<int>(
-            control: FSelectGroupControl.managed(controller: controller, onChange: (value) => changedValue = value),
+            control: FMultiValueControl.managed(controller: controller, onChange: (value) => changedValue = value),
             children: const [
               FSelectTile(title: Text('1'), value: 1),
               FSelectTile(title: Text('2'), value: 2),
@@ -73,7 +73,7 @@ void main() {
     await tester.pumpWidget(
       TestScaffold(
         child: FSelectTileGroup(
-          control: FSelectGroupControl.managed(controller: controller),
+          control: FMultiValueControl.managed(controller: controller),
           children: const [
             FSelectTile(title: Text('1'), value: 1),
             FSelectTile(title: Text('2'), value: 2),
@@ -93,7 +93,7 @@ void main() {
     await tester.pumpWidget(
       TestScaffold(
         child: FSelectTileGroup(
-          control: FSelectGroupControl.managed(controller: controller),
+          control: FMultiValueControl.managed(controller: controller),
           children: const [
             FSelectTile.suffix(title: Text('1'), value: 1),
             FSelectTile.suffix(title: Text('2'), value: 2),
@@ -115,7 +115,7 @@ void main() {
     await tester.pumpWidget(
       TestScaffold(
         child: FSelectTileGroup(
-          control: FSelectGroupControl.managed(controller: controller),
+          control: FMultiValueControl.managed(controller: controller),
           children: const [
             FSelectTile.suffix(title: Text('1'), value: 1),
             FSelectTile.suffix(title: Text('2'), value: 2),
@@ -135,7 +135,7 @@ void main() {
     await tester.pumpWidget(
       TestScaffold(
         child: FSelectTileGroup(
-          control: FSelectGroupControl.managed(controller: controller),
+          control: FMultiValueControl.managed(controller: controller),
           autovalidateMode: AutovalidateMode.always,
           validator: (values) => values?.isEmpty ?? true ? 'error message' : null,
           children: const [
@@ -168,7 +168,7 @@ void main() {
               ],
             ),
             FSelectTileGroup(
-              control: FSelectGroupControl.managed(controller: controller),
+              control: FMultiValueControl.managed(controller: controller),
               children: const [
                 FSelectTile(title: Text('1'), value: 1),
                 FSelectTile(title: Text('2'), value: 2),
@@ -195,7 +195,7 @@ void main() {
         child: Form(
           key: key,
           child: FSelectTileGroup<int>(
-            control: FSelectGroupControl.managed(controller: autoDispose(FMultiValueNotifier(value: {1}))),
+            control: FMultiValueControl.managed(controller: autoDispose(FMultiValueNotifier(value: {1}))),
             children: const [FSelectTile(title: Text('1'), value: 1)],
             onSaved: (value) => initial = value,
           ),
@@ -207,110 +207,5 @@ void main() {
     await tester.pumpAndSettle(const Duration(seconds: 5));
 
     expect(initial, {1});
-  });
-
-  testWidgets('onChange callback called', (tester) async {
-    var changes = 0;
-
-    await tester.pumpWidget(
-      TestScaffold(
-        child: FSelectTileGroup<int>(
-          control: FSelectGroupControl.managed(controller: controller, onChange: (_) => changes++),
-          children: const [FSelectTile(title: Text('1'), value: 1)],
-        ),
-      ),
-    );
-
-    await tester.tap(find.text('1'));
-    await tester.pumpAndSettle();
-
-    expect(changes, 1);
-  });
-
-  testWidgets('update callbacks', (tester) async {
-    final controller = autoDispose(FMultiValueNotifier<int>());
-
-    var firstChanges = 0;
-
-    await tester.pumpWidget(
-      TestScaffold(
-        child: FSelectTileGroup<int>(
-          control: FSelectGroupControl.managed(controller: controller, onChange: (_) => firstChanges++),
-          children: const [FSelectTile(title: Text('1'), value: 1)],
-        ),
-      ),
-    );
-
-    await tester.tap(find.text('1'));
-    await tester.pumpAndSettle();
-
-    expect(firstChanges, 1);
-    expect(controller.hasListeners, true);
-
-    var secondChanges = 0;
-
-    await tester.pumpWidget(
-      TestScaffold(
-        child: FSelectTileGroup<int>(
-          control: FSelectGroupControl.managed(controller: controller, onChange: (_) => secondChanges++),
-          children: const [FSelectTile(title: Text('1'), value: 1)],
-        ),
-      ),
-    );
-
-    await tester.tap(find.text('1'));
-    await tester.pumpAndSettle();
-
-    expect(firstChanges, 1);
-    expect(secondChanges, 1);
-  });
-
-  testWidgets('update controller', (tester) async {
-    final first = autoDispose(FMultiValueNotifier<int>());
-    await tester.pumpWidget(
-      TestScaffold(
-        child: FSelectTileGroup<int>(
-          control: FSelectGroupControl.managed(controller: first),
-          children: const [FSelectTile(title: Text('1'), value: 1)],
-        ),
-      ),
-    );
-
-    expect(first.hasListeners, true);
-    expect(first.disposed, false);
-
-    final second = autoDispose(FMultiValueNotifier<int>());
-    await tester.pumpWidget(
-      TestScaffold(
-        child: FSelectTileGroup<int>(
-          control: FSelectGroupControl.managed(controller: second),
-          children: const [FSelectTile(title: Text('1'), value: 1)],
-        ),
-      ),
-    );
-
-    expect(first.hasListeners, false);
-    expect(first.disposed, false);
-    expect(second.hasListeners, true);
-    expect(second.disposed, false);
-  });
-
-  testWidgets('dispose controller', (tester) async {
-    await tester.pumpWidget(
-      TestScaffold(
-        child: FSelectTileGroup<int>(
-          control: FSelectGroupControl.managed(controller: controller),
-          children: const [FSelectTile(title: Text('1'), value: 1)],
-        ),
-      ),
-    );
-
-    expect(controller.hasListeners, true);
-    expect(controller.disposed, false);
-
-    await tester.pumpWidget(TestScaffold(child: const SizedBox()));
-
-    expect(controller.hasListeners, false);
-    expect(controller.disposed, false);
   });
 }

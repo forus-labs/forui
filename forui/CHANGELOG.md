@@ -165,7 +165,6 @@ Unfortunately, `FCalendar` cannot be easily migrated using data driven fixes due
 
 ### `FSelect` & `FMultiSelect`
 * Add `FSelectControl`.
-* Add `FMultiSelectControl`.
 * Add `FSelectItemMixin.item(...)`.
 * Add `FSelectItemMixin.raw(...)`.
 * Add `FSelectItemMixin.section(...)`.
@@ -190,13 +189,13 @@ Unfortunately, `FCalendar` cannot be easily migrated using data driven fixes due
 
 
 ### `FSelectGroup` & `FSelectTileGroup`
-* Add `FSelectGroupControl` - shared by both `FSelectGroup` and `FSelectTileGroup`.
 * Add `FSelectGroupItemMixin.checkbox(...)`.
 * Add `FSelectGroupItemMixin.radio(...)`.
 
 * **Breaking** Remove `FSelectGroup.controller`. Use `FSelectGroup(control: .managed(...))` instead.
 * **Breaking** Remove `FSelectGroup.onChange`. Use `FSelectGroup(control: .managed(...))` instead.
 * **Breaking** Remove `FSelectGroup.onSelect`.
+* **Breaking** Remove `FSelectGroupController`. Use `FMultiValueNotifier` instead.
 * **Breaking** Rename `FSelectGroupItem` to `FSelectGroupItemMixin`.
 
 
@@ -207,11 +206,12 @@ Unfortunately, `FCalendar` cannot be easily migrated using data driven fixes due
 * **Breaking** Remove `FSelectMenuTile.onChange`. Use `FSelectMenuTile(selectControl: .managed(...))` instead.
 * **Breaking** Remove `FSelectMenuTile.initialValue`. Use `FSelectMenuTile(selectControl: .managed(...))` instead.
 * **Breaking** Remove `FSelectMenuTile.onSelect`.
-* **Breaking** Remove `FSelectMenuTileController`. Use `FSelectGroupController` instead.
+* **Breaking** Remove `FSelectMenuTileController`. Use `FMultiValueNotifier` instead.
 
 
 ### `FSelectTileGroup`
-* **Breaking** Remove `FSelectTileGroupController`. Use `FSelectGroupController` instead.
+* **Breaking** Remove `FSelectTileGroupController`. Use `FMultiValueNotifier` instead.
+* **Breaking** Remove `FSelectGroupController`. Use `FMultiValueNotifier` instead.
 * **Breaking** Remove `FSelectTileGroup.selectController`. Use `FSelectTileGroup(control: .managed(...))` instead.
 * **Breaking** Remove `FSelectTileGroup.onChange`. Use `FSelectTileGroup(control: .managed(...))` instead.
 * **Breaking** Remove `FSelectTileGroup.onSelect`.
@@ -331,6 +331,7 @@ Unfortunately, `FCalendar` cannot be easily migrated using data driven fixes due
 
 
 ### Others
+* Add `FMultiValueControl`.
 * Add `FTypeaheadController.fromValue(...)`.
 * Add `FTypeheadTextStyles`.
 

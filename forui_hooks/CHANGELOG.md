@@ -4,9 +4,11 @@
 * **Breaking** Rename `useFDateFieldController(initialDate: ...)` to `useFDateFieldController(initial: ...)`.
 * **Breaking** Remove `useFMultiSelectController`. Use `useFMultiValueNotifier` instead.
 * **Breaking** Remove `useFSelectController(vsync: ..., popoverMotion: ...)`. Use `FSelect(popoverControl: ...)` instead.
-* **Breaking** Remove `useFSelectTileGroupController`. Use `useFSelectGroupController` instead.
-* **Breaking** Remove `useFSelectMenuTileController`. Use `useFSelectGroupController` instead.
-* **Breaking** Remove `useFRadioSelectMenuTileController`. Use `useFRadioSelectGroupController` instead.
+* **Breaking** Remove `useFSelectTileGroupController`. Use `useFMultiValueNotifier` instead.
+* **Breaking** Remove `useFSelectMenuTileController`. Use `useFMultiValueNotifier` instead.
+* **Breaking** Remove `useFRadioSelectMenuTileController`. Use `useFRadioMultiValueNotifier` instead.
+* **Breaking** Remove `useFSelectGroupController`. Use `useFMultiValueNotifier` instead.
+* **Breaking** Remove `useFRadioSelectGroupController`. Use `useFRadioMultiValueNotifier` instead.
 * **Breaking** Remove `useFTimeFieldController(vsync: ..., popoverMotion: ...)`. Use `FTimeField(popoverControl: ...)` instead.
 
 

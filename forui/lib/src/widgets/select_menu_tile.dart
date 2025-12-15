@@ -6,8 +6,8 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/form/multi_value_form_field.dart';
+import 'package:forui/src/foundation/notifiers.dart' as notifiers;
 import 'package:forui/src/widgets/popover/popover_controller.dart' as popover;
-import 'package:forui/src/widgets/select_group/select_group_controller.dart' as select;
 
 part 'select_menu_tile.design.dart';
 
@@ -28,7 +28,7 @@ class FSelectMenuTile<T> extends StatefulWidget with FTileMixin, FFormFieldPrope
   /// The control that manages the selected values.
   ///
   /// Defaults to a managed radio selection if not provided.
-  final FSelectGroupControl<T>? selectControl;
+  final FMultiValueControl<T>? selectControl;
 
   /// The control that manages the popover visibility.
   ///
@@ -252,7 +252,7 @@ class FSelectMenuTile<T> extends StatefulWidget with FTileMixin, FFormFieldPrope
   factory FSelectMenuTile.fromMap(
     Map<String, T> menu, {
     required Text title,
-    FSelectGroupControl<T>? selectControl,
+    FMultiValueControl<T>? selectControl,
     FPopoverControl popoverControl = const .managed(),
     ScrollController? scrollController,
     FSelectMenuTileStyle Function(FSelectMenuTileStyle style)? style,
@@ -461,7 +461,7 @@ class _FSelectMenuTileState<T> extends State<FSelectMenuTile<T>> with TickerProv
   @override
   void initState() {
     super.initState();
-    final selectController = (widget.selectControl ?? FSelectGroupControl<T>.managed()).create(_handleChange);
+    final selectController = (widget.selectControl ?? FMultiValueControl<T>.managed()).create(_handleChange);
     final popoverController = widget.popoverControl.create(_handlePopoverChange, this);
     _controller = _Notifier(selectController, popoverController, autoHide: widget.autoHide);
   }
@@ -471,8 +471,8 @@ class _FSelectMenuTileState<T> extends State<FSelectMenuTile<T>> with TickerProv
     super.didUpdateWidget(old);
     _controller.autoHide = widget.autoHide;
 
-    final selectControl = widget.selectControl ?? FSelectGroupControl<T>.managed();
-    final oldSelectControl = old.selectControl ?? FSelectGroupControl<T>.managed();
+    final selectControl = widget.selectControl ?? FMultiValueControl<T>.managed();
+    final oldSelectControl = old.selectControl ?? FMultiValueControl<T>.managed();
     _controller
       ..delegate = selectControl.update(oldSelectControl, _controller.delegate, _handleChange).$1
       .._popover = widget.popoverControl
@@ -483,12 +483,12 @@ class _FSelectMenuTileState<T> extends State<FSelectMenuTile<T>> with TickerProv
   @override
   void dispose() {
     widget.popoverControl.dispose(_controller._popover, _handlePopoverChange);
-    (widget.selectControl ?? FSelectGroupControl<T>.managed()).dispose(_controller.delegate, _handleChange);
+    (widget.selectControl ?? FMultiValueControl<T>.managed()).dispose(_controller.delegate, _handleChange);
     super.dispose();
   }
 
   void _handleChange() {
-    if (widget.selectControl case select.FSelectGroupManagedControl(:final onChange?)) {
+    if (widget.selectControl case notifiers.FMultiValueManagedControl(:final onChange?)) {
       onChange(_controller.value);
     }
   }

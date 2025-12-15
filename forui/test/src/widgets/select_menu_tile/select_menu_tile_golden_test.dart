@@ -12,7 +12,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold.blue(
             child: FSelectMenuTile(
-              selectControl: const .managed(initial: {1}),
+              selectControl: const FMultiValueControl.managed(initial: {1}),
               style: TestScaffold.blueScreen.selectMenuTileStyle,
               prefix: const Icon(FIcons.bluetooth),
               label: const Text('Label'),
@@ -32,7 +32,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold.blue(
             child: FSelectMenuTile(
-              selectControl: const .managed(initial: {1}),
+              selectControl: const FMultiValueControl.managed(initial: {1}),
               enabled: false,
               style: TestScaffold.blueScreen.selectMenuTileStyle,
               prefix: const Icon(FIcons.bluetooth),
@@ -56,7 +56,7 @@ void main() {
           TestScaffold.app(
             theme: theme.data,
             child: FSelectMenuTile(
-              selectControl: const .managed(initial: {1}),
+              selectControl: const FMultiValueControl.managed(initial: {1}),
               prefix: const Icon(FIcons.calendar),
               label: const Text('Label'),
               description: const Text('Description'),
@@ -111,7 +111,7 @@ void main() {
           TestScaffold.app(
             theme: theme.data,
             child: FSelectMenuTile(
-              selectControl: const .managed(initial: {1}),
+              selectControl: const FMultiValueControl.managed(initial: {1}),
               maxHeight: 150,
               title: const Text('Title'),
               menu: const [
@@ -139,7 +139,7 @@ void main() {
           TestScaffold.app(
             theme: theme.data,
             child: FSelectMenuTile(
-              selectControl: const .managed(initial: {1}),
+              selectControl: const FMultiValueControl.managed(initial: {1}),
               enabled: false,
               prefix: const Icon(FIcons.calendar),
               label: const Text('Label'),
@@ -163,7 +163,7 @@ void main() {
           TestScaffold.app(
             theme: theme.data,
             child: FSelectMenuTile(
-              selectControl: const .managed(initial: {1}),
+              selectControl: const FMultiValueControl.managed(initial: {1}),
               prefix: const Icon(FIcons.calendar),
               label: const Text('Label'),
               description: const Text('Description'),
@@ -189,7 +189,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           child: FSelectMenuTile.builder(
-            selectControl: const .managed(initial: {1}),
+            selectControl: const FMultiValueControl.managed(initial: {1}),
             label: const Text('Network'),
             description: const Text('Description'),
             maxHeight: 250,
@@ -209,7 +209,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           child: FSelectMenuTile.builder(
-            selectControl: const .managed(initial: {1}),
+            selectControl: const FMultiValueControl.managed(initial: {1}),
             label: const Text('Network'),
             description: const Text('Description'),
             maxHeight: 500,
@@ -230,7 +230,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           child: FSelectMenuTile.builder(
-            selectControl: const .managed(initial: {1}),
+            selectControl: const FMultiValueControl.managed(initial: {1}),
             label: const Text('Network'),
             description: const Text('Description'),
             maxHeight: 500,

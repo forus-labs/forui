@@ -28,8 +28,10 @@ void main() {
               control: .lifted(
                 value: value,
                 onChange: (v) => setState(() => value = v),
-                popoverShown: popoverShown,
-                onPopoverChange: (shown) => setState(() => popoverShown = shown),
+              ),
+              popoverControl: .lifted(
+                shown: popoverShown,
+                onChange: (shown) => setState(() => popoverShown = shown),
               ),
             ),
           ),
@@ -61,8 +63,10 @@ void main() {
               control: .lifted(
                 value: value,
                 onChange: (v) => setState(() => value = v),
-                popoverShown: false,
-                onPopoverChange: (_) {},
+              ),
+              popoverControl: .lifted(
+                shown: false,
+                onChange: (_) {},
               ),
             ),
           ),
@@ -141,7 +145,6 @@ void main() {
   testWidgets('validator', (tester) async {
     final controller = autoDispose(
       FTimeFieldController(
-        vsync: tester,
         validator: (date) {
           if (date == const FTime(10)) {
             return 'Custom error.';

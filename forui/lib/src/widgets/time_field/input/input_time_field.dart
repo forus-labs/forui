@@ -22,6 +22,7 @@ class _InputTimeField extends FTimeField {
     this.mouseCursor,
     this.canRequestFocus = true,
     super.control,
+    super.popoverControl,
     super.style,
     super.hour24,
     super.autofocus,
@@ -63,7 +64,8 @@ class _InputTimeFieldState extends _FTimeFieldState<_InputTimeField> {
   @override
   void didUpdateWidget(covariant _InputTimeField old) {
     super.didUpdateWidget(old);
-    _controller = widget.control.update(old.control, _controller, _handleOnChange, this).$1;
+    _popoverController = widget.popoverControl.update(old.popoverControl, _popoverController, _handlePopoverChange, this).$1;
+    _controller = widget.control.update(old.control, _controller, _handleOnChange, _popoverController).$1;
   }
 
   @override

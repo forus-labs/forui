@@ -1,6 +1,6 @@
 version: 1
 transforms:
-  - title: 'Rename useFSelectTileGroupController to useFSelectGroupController'
+  - title: 'Rename useFSelectTileGroupController to useFMultiValueNotifier'
     date: 2025-11-30
     element:
       uris: [ 'package:forui_hooks/forui_hooks.dart' ]
@@ -9,9 +9,9 @@ transforms:
       - kind: replacedBy
         newElement:
           uris: [ 'package:forui_hooks/forui_hooks.dart' ]
-          function: 'useFSelectGroupController'
+          function: 'useFMultiValueNotifier'
 
-  - title: 'Rename useFSelectMenuTileController to useFSelectGroupController'
+  - title: 'Rename useFSelectMenuTileController to useFMultiValueNotifier'
     date: 2025-12-08
     element:
       uris: [ 'package:forui_hooks/forui_hooks.dart' ]
@@ -20,9 +20,9 @@ transforms:
       - kind: replacedBy
         newElement:
           uris: [ 'package:forui_hooks/forui_hooks.dart' ]
-          function: 'useFSelectGroupController'
+          function: 'useFMultiValueNotifier'
 
-  - title: 'Rename useFRadioSelectMenuTileController to useFRadioSelectGroupController'
+  - title: 'Rename useFRadioSelectMenuTileController to useFRadioMultiValueNotifier'
     date: 2025-12-08
     element:
       uris: [ 'package:forui_hooks/forui_hooks.dart' ]
@@ -31,7 +31,7 @@ transforms:
       - kind: replacedBy
         newElement:
           uris: [ 'package:forui_hooks/forui_hooks.dart' ]
-          function: 'useFRadioSelectGroupController'
+          function: 'useFRadioMultiValueNotifier'
 
   - title: 'Replace useFMultiSelectController with useFMultiValueNotifier'
     date: 2025-12-15
@@ -43,3 +43,25 @@ transforms:
         newElement:
           uris: [ 'package:forui_hooks/forui_hooks.dart' ]
           function: 'useFMultiValueNotifier'
+
+  - title: 'Replace useFSelectGroupController with useFMultiValueNotifier'
+    date: 2025-12-15
+    element:
+      uris: [ 'package:forui_hooks/forui_hooks.dart' ]
+      function: useFSelectGroupController
+    changes:
+      - kind: replacedBy
+        newElement:
+          uris: [ 'package:forui_hooks/forui_hooks.dart' ]
+          function: 'useFMultiValueNotifier'
+
+  - title: 'Replace useFRadioSelectGroupController with useFRadioMultiValueNotifier'
+    date: 2025-12-15
+    element:
+      uris: [ 'package:forui_hooks/forui_hooks.dart' ]
+      function: useFRadioSelectGroupController
+    changes:
+      - kind: replacedBy
+        newElement:
+          uris: [ 'package:forui_hooks/forui_hooks.dart' ]
+          function: 'useFRadioMultiValueNotifier'

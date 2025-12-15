@@ -1,6 +1,10 @@
 import 'package:flutter/foundation.dart';
 
+import 'package:collection/collection.dart';
+
 import 'package:forui/src/foundation/debug.dart';
+
+part 'notifiers.control.dart';
 
 /// A [ChangeNotifier] that provides additional life-cycle tracking capabilities.
 class FChangeNotifier with ChangeNotifier {
@@ -189,4 +193,175 @@ class _RadioNotifier<T> extends FMultiValueNotifier<T> {
 
     super.value = {...value};
   }
+}
+
+class _ProxyNotifier<T> extends FMultiValueNotifier<T> {
+  Set<T> _unsynced;
+  ValueChanged<Set<T>> _onChange;
+
+  _ProxyNotifier({required super.value, required ValueChanged<Set<T>> onChange})
+    : _unsynced = value,
+      _onChange = onChange;
+
+  void _update(Set<T> newValue, ValueChanged<Set<T>> onChange) {
+    _onChange = onChange;
+    if (!setEquals(super.value, newValue)) {
+      _unsynced = newValue;
+      super.value = newValue;
+    } else if (!setEquals(_unsynced, newValue)) {
+      _unsynced = newValue;
+      notifyListeners();
+    }
+  }
+
+  @override
+  void update(T newValue, {required bool add}) {
+    final copy = {...super.value};
+    if ((add && copy.add(newValue)) || (!add && copy.remove(newValue))) {
+      _unsynced = {...copy};
+      _onChange(copy);
+    }
+  }
+
+  @override
+  set value(Set<T> newValue) {
+    _unsynced = {...newValue};
+    if (!setEquals(super.value, newValue)) {
+      _onChange(newValue);
+    }
+  }
+}
+
+/// A [FMultiValueControl] defines how a [FMultiValueNotifier] is controlled.
+///
+/// {@macro forui.foundation.doc_templates.control}
+sealed class FMultiValueControl<T> with Diagnosticable, _$FMultiValueControlMixin<T> {
+  /// Creates a [FMultiValueControl] for multiple value selection.
+  const factory FMultiValueControl.managed({
+    FMultiValueNotifier<T>? controller,
+    Set<T>? initial,
+    int min,
+    int? max,
+    ValueChanged<Set<T>>? onChange,
+  }) = _Normal<T>;
+
+  /// Creates a [FMultiValueControl] for single value selection.
+  ///
+  /// The [initial] parameter contains the initially selected value. It may be null.
+  /// The [onChange] callback is invoked when the user selects a different item.
+  const factory FMultiValueControl.managedRadio({
+    FMultiValueNotifier<T>? controller,
+    T? initial,
+    ValueChanged<Set<T>>? onChange,
+  }) = _Radio<T>;
+
+  /// Creates a [FMultiValueControl] for controlling multi-value notifier using lifted state.
+  ///
+  /// The [value] parameter contains the current selected values.
+  /// The [onChange] callback is invoked when the user selects or deselects an item.
+  const factory FMultiValueControl.lifted({required Set<T> value, required ValueChanged<Set<T>> onChange}) = _Lifted<T>;
+
+  const FMultiValueControl._();
+
+  (FMultiValueNotifier<T>, bool) _update(
+    FMultiValueControl<T> old,
+    FMultiValueNotifier<T> controller,
+    VoidCallback callback,
+  );
+}
+
+/// A [FMultiValueManagedControl] enables widgets to manage their own controller internally while exposing parameters
+/// for common configurations.
+///
+/// {@macro forui.foundation.doc_templates.managed}
+abstract class FMultiValueManagedControl<T> extends FMultiValueControl<T>
+    with Diagnosticable, _$FMultiValueManagedControlMixin<T> {
+  /// The controller.
+  @override
+  final FMultiValueNotifier<T>? controller;
+
+  /// The minimum number of selected items. Defaults to 0.
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if [min] is non-zero and [controller] is provided.
+  @override
+  final int? min;
+
+  /// The maximum number of selected items. Defaults to no limit.
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if [max] and [controller] are both provided.
+  @override
+  final int? max;
+
+  /// Called when the selected values change.
+  @override
+  final ValueChanged<Set<T>>? onChange;
+
+  /// Creates a [FMultiValueControl].
+  const FMultiValueManagedControl({this.controller, this.min, this.max, this.onChange})
+    : assert(
+        controller == null || min == null,
+        'Cannot provide both controller and min. Set the min directly in the controller.',
+      ),
+      assert(
+        controller == null || max == null,
+        'Cannot provide both controller and max. Set the max directly in the controller.',
+      ),
+      super._();
+}
+
+class _Normal<T> extends FMultiValueManagedControl<T> {
+  final Set<T>? initial;
+
+  const _Normal({this.initial, super.controller, super.min, super.max, super.onChange})
+    : assert(
+        controller == null || initial == null,
+        'Cannot provide both controller and initial. Set the value directly in the controller.',
+      );
+
+  @override
+  FMultiValueNotifier<T> createController() =>
+      controller ?? FMultiValueNotifier<T>(value: initial ?? const {}, min: min ?? 0, max: max);
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty('initial', initial));
+  }
+}
+
+class _Radio<T> extends FMultiValueManagedControl<T> {
+  final T? initial;
+
+  const _Radio({this.initial, super.controller, super.onChange})
+    : assert(
+        controller == null || initial == null,
+        'Cannot provide both controller and initial. Set the value directly in the controller.',
+      );
+
+  @override
+  FMultiValueNotifier<T> createController() => controller ?? FMultiValueNotifier<T>.radio(initial);
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('initial', initial));
+  }
+}
+
+class _Lifted<T> extends FMultiValueControl<T> with _$_LiftedMixin<T> {
+  @override
+  final Set<T> value;
+  @override
+  final ValueChanged<Set<T>> onChange;
+
+  const _Lifted({required this.value, required this.onChange}) : super._();
+
+  @override
+  FMultiValueNotifier<T> createController() => _ProxyNotifier(value: value, onChange: onChange);
+
+  @override
+  void _updateController(FMultiValueNotifier<T> controller) =>
+      (controller as _ProxyNotifier<T>)._update(value, onChange);
 }

@@ -6,6 +6,7 @@ import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart' hide TextDirection;
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/widgets/popover/popover_controller.dart';
 import 'package:forui/src/widgets/time_field/input/time_input.dart';
 import 'package:forui/src/widgets/time_field/picker/picker_form_field.dart';
 import 'package:forui/src/widgets/time_field/picker/properties.dart';
@@ -52,6 +53,11 @@ abstract class FTimeField extends StatefulWidget {
 
   /// The control for managing the time field's state.
   final FTimeFieldControl control;
+
+  /// Defines how the time field's popover is controlled.
+  ///
+  /// Defaults to [FPopoverControl.managed].
+  final FPopoverControl popoverControl;
 
   /// The style.
   ///
@@ -126,6 +132,7 @@ abstract class FTimeField extends StatefulWidget {
 
   const FTimeField._({
     this.control = const .managed(),
+    this.popoverControl = const FPopoverControl.managed(),
     this.style,
     this.hour24 = false,
     this.autofocus = false,
@@ -169,6 +176,7 @@ abstract class FTimeField extends StatefulWidget {
   /// * [FTimeField.picker] - Creates a time field with only a picker.
   const factory FTimeField({
     FTimeFieldControl control,
+    FPopoverControl popoverControl,
     FTimeFieldStyle Function(FTimeFieldStyle style)? style,
     bool hour24,
     bool autofocus,
@@ -238,6 +246,7 @@ abstract class FTimeField extends StatefulWidget {
   /// * [FTimeField.new] - Creates a time field with only an input field.
   const factory FTimeField.picker({
     FTimeFieldControl control,
+    FPopoverControl popoverControl,
     FTimeFieldStyle Function(FTimeFieldStyle style)? style,
     bool hour24,
     DateFormat? format,
@@ -278,6 +287,7 @@ abstract class FTimeField extends StatefulWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('control', control))
+      ..add(DiagnosticsProperty('popoverControl', popoverControl))
       ..add(DiagnosticsProperty('style', style))
       ..add(FlagProperty('hour24', value: hour24, ifTrue: 'hour24'))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
@@ -296,18 +306,27 @@ abstract class FTimeField extends StatefulWidget {
 
 abstract class _FTimeFieldState<T extends FTimeField> extends State<T> with TickerProviderStateMixin {
   late FTimeFieldController _controller;
+  late FPopoverController _popoverController;
 
   @override
   void initState() {
     super.initState();
-    _controller = widget.control.create(_handleOnChange, this);
+    _popoverController = widget.popoverControl.create(_handlePopoverChange, this);
+    _controller = widget.control.create(_handleOnChange, _popoverController);
   }
 
   @override
   void dispose() {
     widget.control.dispose(_controller, _handleOnChange);
+    widget.popoverControl.dispose(_popoverController, _handlePopoverChange);
     super.dispose();
   }
 
   void _handleOnChange();
+
+  void _handlePopoverChange() {
+    if (widget.popoverControl case FPopoverManagedControl(:final onChange?)) {
+      onChange(_popoverController.status.isForwardOrCompleted);
+    }
+  }
 }

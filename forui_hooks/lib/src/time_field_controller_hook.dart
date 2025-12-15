@@ -12,34 +12,21 @@ String? _defaultValidator(FTime? _) => null;
 /// [validator] returns an error string to display if the input is invalid, or null otherwise.
 /// Defaults to always returning null.
 FTimeFieldController useFTimeFieldController({
-  TickerProvider? vsync,
   FTime? initialTime,
   FormFieldValidator<FTime> validator = _defaultValidator,
-  FPopoverMotion popoverMotion = const FPopoverMotion(),
   List<Object?>? keys,
 }) => use(
-  _TimeFieldHook(
-    vsync: vsync ??= useSingleTickerProvider(keys: keys),
-    initialTime: initialTime,
-    validator: validator,
-    popoverMotion: popoverMotion,
-    debugLabel: 'useFTimeFieldController',
-    keys: keys,
-  ),
+  _TimeFieldHook(initialTime: initialTime, validator: validator, debugLabel: 'useFTimeFieldController', keys: keys),
 );
 
 class _TimeFieldHook extends Hook<FTimeFieldController> {
-  final TickerProvider vsync;
   final FTime? initialTime;
   final FormFieldValidator<FTime> validator;
-  final FPopoverMotion popoverMotion;
   final String _debugLabel;
 
   const _TimeFieldHook({
-    required this.vsync,
     required this.initialTime,
     required this.validator,
-    required this.popoverMotion,
     required String debugLabel,
     super.keys,
   }) : _debugLabel = debugLabel;
@@ -51,20 +38,13 @@ class _TimeFieldHook extends Hook<FTimeFieldController> {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('vsync', vsync))
       ..add(DiagnosticsProperty('initialTime', initialTime))
-      ..add(ObjectFlagProperty.has('validator', validator))
-      ..add(DiagnosticsProperty('popoverMotion', popoverMotion));
+      ..add(ObjectFlagProperty.has('validator', validator));
   }
 }
 
 class _TimeFieldHookState extends HookState<FTimeFieldController, _TimeFieldHook> {
-  late final _controller = FTimeFieldController(
-    vsync: hook.vsync,
-    initialTime: hook.initialTime,
-    validator: hook.validator,
-    popoverMotion: hook.popoverMotion,
-  );
+  late final _controller = FTimeFieldController(initialTime: hook.initialTime, validator: hook.validator);
 
   @override
   FTimeFieldController build(BuildContext context) => _controller;

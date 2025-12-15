@@ -125,7 +125,7 @@ class SelectTileGroupRadioPage extends StatefulSample {
 
 class _SelectTileGroupRadioPageState extends StatefulSampleState<SelectTileGroupRadioPage> {
   final _key = GlobalKey<FormState>();
-  final _controller = FSelectGroupController<Notification>.radio();
+  final _controller = FMultiValueNotifier<Notification>.radio();
 
   @override
   void dispose() {
@@ -179,7 +179,7 @@ class SelectTileGroupSuffixPage extends StatefulSample {
 }
 
 class _SelectTileGroupSuffixPageState extends StatefulSampleState<SelectTileGroupSuffixPage> {
-  final _controller = FSelectGroupController<String>.radio();
+  final _controller = FMultiValueNotifier<String>.radio();
 
   @override
   void dispose() {

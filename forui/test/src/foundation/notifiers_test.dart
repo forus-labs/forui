@@ -1,6 +1,26 @@
+import 'package:flutter/widgets.dart';
+
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:forui/forui.dart';
+import 'package:forui/src/foundation/notifiers.dart';
+
+class _Notifier<T> extends FMultiValueNotifier<T> {
+  int listeners = 0;
+
+  _Notifier({super.value = const {}});
+
+  @override
+  void addListener(VoidCallback listener) {
+    super.addListener(listener);
+    listeners++;
+  }
+
+  @override
+  void removeListener(VoidCallback listener) {
+    super.removeListener(listener);
+    listeners--;
+  }
+}
 
 void main() {
   late int count;
@@ -312,6 +332,140 @@ void main() {
         expect(count, 1);
         expect(changeCount, 0);
       });
+    });
+  });
+
+  group('FMultiValueControl - transitions', () {
+    void callback() {}
+
+    test('managed -> managedRadio', () {
+      const managed = FMultiValueControl<int>.managed(initial: {1, 2});
+      const managedRadio = FMultiValueControl<int>.managedRadio(initial: 1);
+
+      final controller = managed.create(callback);
+      expect(controller.value, {1, 2});
+
+      final (newController, updated) = managedRadio.update(managed, controller, callback);
+
+      expect(updated, true);
+      expect(newController, isNot(controller));
+      expect(newController.value, {1});
+      expect(controller.disposed, true);
+    });
+
+    test('managedRadio -> managed', () {
+      const managedRadio = FMultiValueControl<int>.managedRadio(initial: 1);
+      const managed = FMultiValueControl<int>.managed(initial: {1, 2});
+
+      final controller = managedRadio.create(callback);
+      expect(controller.value, {1});
+
+      final (newController, updated) = managed.update(managedRadio, controller, callback);
+
+      expect(updated, true);
+      expect(newController, isNot(controller));
+      expect(newController.value, {1, 2});
+      expect(controller.disposed, true);
+    });
+
+    test('external A -> external B', () {
+      final first = _Notifier<int>(value: {1});
+      final second = _Notifier<int>(value: {2});
+      final controlA = FMultiValueControl<int>.managed(controller: first);
+      final controlB = FMultiValueControl<int>.managed(controller: second);
+
+      final controller = controlA.create(callback);
+      expect(first.listeners, 1);
+      expect(second.listeners, 0);
+
+      final (newController, updated) = controlB.update(controlA, controller, callback);
+
+      expect(updated, true);
+      expect(newController, second);
+      expect(first.listeners, 0);
+      expect(first.disposed, false);
+      expect(second.listeners, 1);
+      expect(second.disposed, false);
+    });
+
+    test('external A -> external A', () {
+      final external = _Notifier<int>(value: {1});
+      final controlA = FMultiValueControl<int>.managed(controller: external);
+      final controlB = FMultiValueControl<int>.managed(controller: external);
+
+      final controller = controlA.create(callback);
+      expect(external.listeners, 1);
+
+      final (newController, updated) = controlB.update(controlA, controller, callback);
+
+      expect(updated, false);
+      expect(newController, controller);
+      expect(external.listeners, 1);
+      expect(external.disposed, false);
+    });
+
+    test('internal -> external', () {
+      final external = _Notifier<int>(value: {2});
+      const internal = FMultiValueControl<int>.managed(initial: {1});
+      final externalControl = FMultiValueControl<int>.managed(controller: external);
+
+      final controller = internal.create(callback);
+      expect(controller.value, {1});
+      expect(external.listeners, 0);
+
+      final (newController, updated) = externalControl.update(internal, controller, callback);
+
+      expect(updated, true);
+      expect(newController, external);
+      expect(controller.disposed, true);
+      expect(external.listeners, 1);
+    });
+
+    test('external -> internal', () {
+      final external = _Notifier<int>(value: {1});
+      final externalControl = FMultiValueControl<int>.managed(controller: external);
+      const internal = FMultiValueControl<int>.managed(initial: {2});
+
+      final controller = externalControl.create(callback);
+      expect(external.listeners, 1);
+
+      final (newController, updated) = internal.update(externalControl, controller, callback);
+
+      expect(updated, true);
+      expect(newController, isNot(external));
+      expect(newController.value, {2});
+      expect(external.listeners, 0);
+      expect(external.disposed, false);
+    });
+
+    test('managed -> lifted', () {
+      const managed = FMultiValueControl<int>.managed(initial: {1});
+      final lifted = FMultiValueControl<int>.lifted(value: {2}, onChange: (_) {});
+
+      final controller = managed.create(callback);
+      expect(controller.value, {1});
+
+      final (newController, updated) = lifted.update(managed, controller, callback);
+
+      expect(updated, true);
+      expect(newController, isNot(controller));
+      expect(newController.value, {2});
+      expect(controller.disposed, true);
+    });
+
+    test('lifted -> managed', () {
+      final lifted = FMultiValueControl<int>.lifted(value: {1}, onChange: (_) {});
+      const managed = FMultiValueControl<int>.managed(initial: {2});
+
+      final controller = lifted.create(callback);
+      expect(controller.value, {1});
+
+      final (newController, updated) = managed.update(lifted, controller, callback);
+
+      expect(updated, true);
+      expect(newController, isNot(controller));
+      expect(newController.value, {2});
+      expect(controller.disposed, true);
     });
   });
 }

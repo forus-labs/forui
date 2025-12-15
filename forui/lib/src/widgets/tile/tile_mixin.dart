@@ -12,7 +12,7 @@ mixin FTileMixin on Widget {
   static FSelectMenuTile<T> selectMenu<T>({
     required Widget title,
     required List<FSelectTile<T>> menu,
-    FSelectGroupControl<T>? selectControl,
+    FMultiValueControl<T>? selectControl,
     FPopoverControl popoverControl = const .managed(),
     ScrollController? scrollController,
     FSelectMenuTileStyle Function(FSelectMenuTileStyle style)? style,
@@ -105,7 +105,7 @@ mixin FTileMixin on Widget {
   static FSelectMenuTile<T> selectMenuFromMap<T>(
     Map<String, T> menu, {
     required Text title,
-    FSelectGroupControl<T>? selectControl,
+    FMultiValueControl<T>? selectControl,
     FPopoverControl popoverControl = const .managed(),
     ScrollController? scrollController,
     FSelectMenuTileStyle Function(FSelectMenuTileStyle style)? style,
@@ -199,7 +199,7 @@ mixin FTileMixin on Widget {
     required Widget title,
     required FSelectTile<T>? Function(BuildContext context, int index) menuBuilder,
     int? count,
-    FSelectGroupControl<T>? selectControl,
+    FMultiValueControl<T>? selectControl,
     FPopoverControl popoverControl = const .managed(),
     ScrollController? scrollController,
     FSelectMenuTileStyle Function(FSelectMenuTileStyle style)? style,

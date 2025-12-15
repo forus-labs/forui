@@ -175,7 +175,6 @@ void main() {
 
       final controller = autoDispose(
         FTimeFieldController(
-          vsync: const TestVSync(),
           validator: (time) {
             if (time == const FTime(12, 30)) {
               return 'Custom error.';

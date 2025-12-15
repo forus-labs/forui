@@ -3,19 +3,12 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/widgets/popover/popover_controller.dart';
 
 part 'time_field_controller.control.dart';
 
 /// The time field's controller.
 class FTimeFieldController extends FValueNotifier<FTime?> {
   static String? _defaultValidator(FTime? _) => null;
-
-  /// The controller for the popover. Does nothing if the time field is input only.
-  ///
-  /// ## Contract
-  /// Manually disposing this controller is undefined behavior. Dispose this [FTimeFieldController] instead.
-  final FPopoverController popover;
 
   /// Returns an error string to display if the input is invalid, or null otherwise. It is also used to determine
   /// whether a time in a picker is selectable.
@@ -27,18 +20,7 @@ class FTimeFieldController extends FValueNotifier<FTime?> {
   bool _mutating = false;
 
   /// Creates a [FTimeFieldController].
-  FTimeFieldController({
-    required TickerProvider vsync,
-    FTime? initialTime,
-    String? Function(FTime?) validator = _defaultValidator,
-    FPopoverMotion popoverMotion = const FPopoverMotion(),
-  }) : this._(
-         popover: FPopoverController(vsync: vsync, motion: popoverMotion),
-         initialTime: initialTime,
-         validator: validator,
-       );
-
-  FTimeFieldController._({required this.popover, required FTime? initialTime, this.validator = _defaultValidator})
+  FTimeFieldController({FTime? initialTime, this.validator = _defaultValidator})
     : _picker = FTimePickerController(initial: initialTime ?? const FTime()),
       super(initialTime) {
     _picker.addValueListener((time) {
@@ -50,13 +32,18 @@ class FTimeFieldController extends FValueNotifier<FTime?> {
       }
     });
 
-    addValueListener(update);
+    addValueListener(_update);
+  }
+
+  void _update(FTime? time) {
+    if (!_mutating && time != null) {
+      _picker.value = time;
+    }
   }
 
   @override
   void dispose() {
     _picker.dispose();
-    popover.dispose();
     super.dispose();
   }
 }
@@ -73,44 +60,21 @@ extension InternalFTimeFieldController on FTimeFieldController {
 }
 
 class _Controller extends FTimeFieldController {
-  late FPopoverController _popover;
   ValueChanged<FTime?> _onChange;
   int _monotonic = 0;
 
-  _Controller({
-    required TickerProvider vsync,
-    required FTime? value,
-    required ValueChanged<FTime?> onChange,
-    bool? popoverShown,
-    ValueChanged<bool>? onPopoverChange,
-    FPopoverMotion popoverMotion = const FPopoverMotion(),
-  }) : _onChange = onChange,
-       super._(
-         popover: popoverShown != null && onPopoverChange != null
-             ? LiftedPopoverController(popoverShown, onPopoverChange, vsync: vsync, motion: popoverMotion)
-             : FPopoverController(vsync: vsync, motion: popoverMotion),
-         initialTime: value,
-       ) {
-    _popover = super.popover; // This prevents the creation of two popover controllers, with one being shadowed.
-  }
+  _Controller({required FTime? value, required ValueChanged<FTime?> onChange})
+    : _onChange = onChange,
+      super(initialTime: value);
 
-  void _update(
-    TickerProvider vsync,
-    FTime? value,
-    ValueChanged<FTime?> onChange,
-    bool? popoverShown,
-    ValueChanged<bool>? onPopoverChange,
-    Duration duration,
-    Curve curve,
-  ) {
+  void _updateLifted(FTime? value, ValueChanged<FTime?> onChange, bool isPopoverShown, Duration duration, Curve curve) {
     _onChange = onChange;
-    _popover = InternalFPopoverController.updateNested(_popover, vsync, popoverShown, onPopoverChange);
 
     if (super.value == value) {
       return;
     }
 
-    if (_popover.status.isForwardOrCompleted) {
+    if (isPopoverShown) {
       final current = ++_monotonic;
       SchedulerBinding.instance.addPostFrameCallback((_) {
         if (current == _monotonic) {
@@ -134,9 +98,6 @@ class _Controller extends FTimeFieldController {
       });
     }
   }
-
-  @override
-  FPopoverController get popover => _popover;
 }
 
 /// A [FTimeFieldControl] defines how a [FTimeField] is controlled.
@@ -145,22 +106,13 @@ class _Controller extends FTimeFieldController {
 sealed class FTimeFieldControl with Diagnosticable, _$FTimeFieldControlMixin {
   /// Creates lifted state control.
   ///
-  /// Time value is always lifted.
-  /// Popover visibility is optionally lifted - if [popoverShown] is provided, [onPopoverChange] must also be provided.
-  ///
   /// The [value] parameter contains the current selected time.
   /// The [onChange] callback is invoked when the user selects a time.
   /// The [duration] when animating to [value] from an invalid/different time. Defaults to 200 milliseconds.
   /// The [curve] when animating to [value] from an invalid/different time. Defaults to [Curves.easeOutCubic].
-  ///
-  /// ## Contract
-  /// Throws [AssertionError] if only one of [popoverShown]/[onPopoverChange] is provided.
   const factory FTimeFieldControl.lifted({
     required FTime? value,
     required ValueChanged<FTime?> onChange,
-    bool? popoverShown,
-    ValueChanged<bool>? onPopoverChange,
-    FPopoverMotion motion,
     Duration duration,
     Curve curve,
   }) = Lifted;
@@ -170,7 +122,6 @@ sealed class FTimeFieldControl with Diagnosticable, _$FTimeFieldControlMixin {
     FTimeFieldController? controller,
     FTime? initial,
     FormFieldValidator<FTime>? validator,
-    FPopoverMotion? popoverMotion,
     ValueChanged<FTime?>? onChange,
   }) = FTimeFieldManagedControl;
 
@@ -180,7 +131,7 @@ sealed class FTimeFieldControl with Diagnosticable, _$FTimeFieldControlMixin {
     FTimeFieldControl old,
     FTimeFieldController controller,
     VoidCallback callback,
-    TickerProvider vsync,
+    FPopoverController popover,
   );
 }
 
@@ -191,12 +142,6 @@ class Lifted extends FTimeFieldControl with _$LiftedMixin {
   @override
   final ValueChanged<FTime?> onChange;
   @override
-  final bool? popoverShown;
-  @override
-  final ValueChanged<bool>? onPopoverChange;
-  @override
-  final FPopoverMotion motion;
-  @override
   final Duration duration;
   @override
   final Curve curve;
@@ -204,30 +149,16 @@ class Lifted extends FTimeFieldControl with _$LiftedMixin {
   const Lifted({
     required this.value,
     required this.onChange,
-    this.popoverShown,
-    this.onPopoverChange,
-    this.motion = const FPopoverMotion(),
     this.duration = const Duration(milliseconds: 200),
     this.curve = Curves.easeOutCubic,
-  }) : assert(
-         (popoverShown == null) == (onPopoverChange == null),
-         'popoverShown and onPopoverChange must both be provided or both be null.',
-       ),
-       super._();
+  }) : super._();
 
   @override
-  FTimeFieldController createController(TickerProvider vsync) => _Controller(
-    vsync: vsync,
-    value: value,
-    onChange: onChange,
-    popoverShown: popoverShown,
-    onPopoverChange: onPopoverChange,
-    popoverMotion: motion,
-  );
+  FTimeFieldController createController(FPopoverController popover) => _Controller(value: value, onChange: onChange);
 
   @override
-  void _updateController(FTimeFieldController controller, TickerProvider vsync) =>
-      (controller as _Controller)._update(vsync, value, onChange, popoverShown, onPopoverChange, duration, curve);
+  void _updateController(FTimeFieldController controller, FPopoverController popover) =>
+      (controller as _Controller)._updateLifted(value, onChange, popover.status.isForwardOrCompleted, duration, curve);
 }
 
 /// A [FTimeFieldManagedControl] enables widgets to manage their own controller internally while exposing parameters for
@@ -253,31 +184,17 @@ class FTimeFieldManagedControl extends FTimeFieldControl with Diagnosticable, _$
   @override
   final FormFieldValidator<FTime>? validator;
 
-  /// The popover motion. Defaults to [FPopoverMotion].
-  ///
-  /// ## Contract
-  /// Throws [AssertionError] if [popoverMotion] and [controller] are both provided.
-  @override
-  final FPopoverMotion? popoverMotion;
-
   /// Called when the selected time changes.
   @override
   final ValueChanged<FTime?>? onChange;
 
   /// Creates a [FTimeFieldControl].
-  const FTimeFieldManagedControl({this.controller, this.initial, this.validator, this.popoverMotion, this.onChange})
+  const FTimeFieldManagedControl({this.controller, this.initial, this.validator, this.onChange})
     : assert(controller == null || initial == null, 'Cannot provide both controller and initial.'),
-      assert(controller == null || popoverMotion == null, 'Cannot provide both controller and popoverMotion.'),
       assert(controller == null || validator == null, 'Cannot provide both controller and validator.'),
       super._();
 
   @override
-  FTimeFieldController createController(TickerProvider vsync) =>
-      controller ??
-      FTimeFieldController(
-        vsync: vsync,
-        initialTime: initial,
-        validator: validator ?? FTimeFieldController._defaultValidator,
-        popoverMotion: popoverMotion ?? const FPopoverMotion(),
-      );
+  FTimeFieldController createController(FPopoverController popover) =>
+      controller ?? FTimeFieldController(initialTime: initial, validator: validator ?? FTimeFieldController._defaultValidator);
 }
