@@ -10,7 +10,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:forui/forui.dart';
 
 @internal
-class Field extends StatefulWidget {
+class Input extends StatefulWidget {
   static bool defaultClearable(TextEditingValue _) => false;
 
   static Widget defaultContextMenuBuilder(BuildContext _, EditableTextState state) =>
@@ -92,7 +92,7 @@ class Field extends StatefulWidget {
   final bool Function(TextEditingValue) clearable;
   final FFieldClearIconBuilder clearIconBuilder;
 
-  const Field({
+  const Input({
     required this.controller,
     required this.builder,
     required this.groupId,
@@ -158,7 +158,7 @@ class Field extends StatefulWidget {
   });
 
   @override
-  State<Field> createState() => _FieldState();
+  State<Input> createState() => _InputState();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -239,7 +239,7 @@ class Field extends StatefulWidget {
   }
 }
 
-class _FieldState extends State<Field> {
+class _InputState extends State<Input> {
   late WidgetStatesController _statesController;
 
   @override
@@ -250,7 +250,7 @@ class _FieldState extends State<Field> {
   }
 
   @override
-  void didUpdateWidget(covariant Field old) {
+  void didUpdateWidget(covariant Input old) {
     super.didUpdateWidget(old);
     if (widget.statesController != old.statesController) {
       if (old.statesController == null) {

@@ -58,22 +58,30 @@ class _TextFieldControlState extends State<TextFieldControl> {
   Widget build(BuildContext context) => widget.builder(context, _controller, null);
 }
 
-class _Controller extends TextEditingController {
+class _ProxyController extends TextEditingController {
+  TextEditingValue? _unsynced;
   ValueChanged<TextEditingValue> _onChange;
 
-  _Controller(super.value, this._onChange) : super.fromValue();
+  _ProxyController(super.value, this._onChange)
+    : _unsynced = value,
+      super.fromValue();
 
-  void update(TextEditingValue value, ValueChanged<TextEditingValue> onChange) {
-    if (super.value != value) {
-      super.value = value;
-    }
+  void update(TextEditingValue newValue, ValueChanged<TextEditingValue> onChange) {
     _onChange = onChange;
+    if (super.value != newValue) {
+      _unsynced = newValue;
+      super.value = newValue;
+    } else if (_unsynced != newValue) {
+      _unsynced = newValue;
+      notifyListeners();
+    }
   }
 
   @override
-  set value(TextEditingValue value) {
-    if (super.value != value) {
-      _onChange(value);
+  set value(TextEditingValue newValue) {
+    _unsynced = newValue;
+    if (super.value != newValue) {
+      _onChange(newValue);
     }
   }
 }
@@ -82,12 +90,6 @@ class _Controller extends TextEditingController {
 ///
 /// {@macro forui.foundation.doc_templates.control}
 sealed class FTextFieldControl with Diagnosticable, _$FTextFieldControlMixin {
-  /// Creates a [FTextFieldControl] for controlling a text field using lifted state.
-  const factory FTextFieldControl.lifted({
-    required TextEditingValue value,
-    required ValueChanged<TextEditingValue> onChange,
-  }) = _Lifted;
-
   /// Creates a [FTextFieldControl].
   const factory FTextFieldControl.managed({
     TextEditingController? controller,
@@ -95,24 +97,15 @@ sealed class FTextFieldControl with Diagnosticable, _$FTextFieldControlMixin {
     ValueChanged<TextEditingValue>? onChange,
   }) = FTextFieldManagedControl;
 
+  /// Creates a [FTextFieldControl] for controlling a text field using lifted state.
+  const factory FTextFieldControl.lifted({
+    required TextEditingValue value,
+    required ValueChanged<TextEditingValue> onChange,
+  }) = _Lifted;
+
   const FTextFieldControl._();
 
   (TextEditingController, bool) _update(FTextFieldControl old, TextEditingController controller, VoidCallback callback);
-}
-
-class _Lifted extends FTextFieldControl with _$_LiftedMixin {
-  @override
-  final TextEditingValue value;
-  @override
-  final ValueChanged<TextEditingValue> onChange;
-
-  const _Lifted({required this.value, required this.onChange}) : super._();
-
-  @override
-  TextEditingController createController() => _Controller(value, onChange);
-
-  @override
-  void _updateController(TextEditingController controller) => (controller as _Controller).update(value, onChange);
 }
 
 /// A [FTextFieldManagedControl] enables widgets to manage their own controller internally while exposing parameters for
@@ -142,4 +135,19 @@ class FTextFieldManagedControl extends FTextFieldControl with _$FTextFieldManage
 
   @override
   TextEditingController createController() => controller ?? .fromValue(initial);
+}
+
+class _Lifted extends FTextFieldControl with _$_LiftedMixin {
+  @override
+  final TextEditingValue value;
+  @override
+  final ValueChanged<TextEditingValue> onChange;
+
+  const _Lifted({required this.value, required this.onChange}) : super._();
+
+  @override
+  TextEditingController createController() => _ProxyController(value, onChange);
+
+  @override
+  void _updateController(TextEditingController controller) => (controller as _ProxyController).update(value, onChange);
 }
