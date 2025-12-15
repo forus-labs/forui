@@ -243,6 +243,7 @@ Unfortunately, `FCalendar` cannot be easily migrated using data driven fixes due
 * **Breaking** Remove `FTabs.controller`. Use `FTabs(control: .managed(...))` instead.
 * **Breaking** Remove `FTabs.initialIndex`. Use `FTabs(control: .managed(...))` instead.
 * **Breaking** Remove `FTabs.onChange`. Use `FTabs(control: .managed(...))` instead.
+* **Breaking** Rename `FTabController(initialIndex: ...)` to `FTabController(initial: ...)`.
 
 
 ### `FTappable`

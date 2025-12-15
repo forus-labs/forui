@@ -2,44 +2,43 @@ part of 'tabs.dart';
 
 /// A controller that controls selection in a [FTabs].
 final class FTabController extends FChangeNotifier {
-  final TabController _controller;
-  final Curve _curve;
+  TabController _controller;
+  FTabMotion _motion;
 
   /// Creates a [FTabController].
   FTabController({
     required int length,
     required TickerProvider vsync,
-    int initialIndex = 0,
-    FTabMotion motion = const FTabMotion(),
+    int initial = 0,
+    FTabMotion motion = const .new(),
   }) : this._(
-         TabController(initialIndex: initialIndex, length: length, animationDuration: motion.duration, vsync: vsync),
-         motion.curve,
+         TabController(initialIndex: initial, length: length, animationDuration: motion.duration, vsync: vsync),
+         motion,
        );
 
-  FTabController._lifted({
-    required int length,
-    required TickerProvider vsync,
-    required int index,
-    required ValueChanged<int> onChange,
-    FTabMotion motion = const FTabMotion(),
-  }) : this._(
-         _TabController(
-           length: length,
-           vsync: vsync,
-           initialIndex: index,
-           onChange: onChange,
-           animationDuration: motion.duration,
-         ),
-         motion.curve,
-       );
+  FTabController._(this._controller, this._motion);
 
-  FTabController._(this._controller, this._curve);
+  void _update(int index, TickerProvider vsync, int length, FTabMotion motion, ValueChanged<int> onChange) {
+    if (_motion != motion) {
+      _controller.dispose();
+      _controller = _ProxyController(
+        initialIndex: index,
+        length: length,
+        animationDuration: motion.duration,
+        vsync: vsync,
+        onChange: onChange,
+      );
+      _motion = motion;
+    } else {
+      (_controller as _ProxyController)._update(index, onChange);
+    }
+  }
 
   /// Animates to the given [index].
   ///
   /// [curve] defaults to the [FTabMotion.curve] if not provided.
   void animateTo(int index, {Duration? duration, Curve? curve}) =>
-      _controller.animateTo(index, duration: duration, curve: curve ?? _curve);
+      _controller.animateTo(index, duration: duration, curve: curve ?? _motion.curve);
 
   @override
   void addListener(VoidCallback listener) => _controller.addListener(listener);
@@ -68,31 +67,38 @@ final class FTabController extends FChangeNotifier {
   }
 }
 
-class _TabController extends TabController {
+class _ProxyController extends TabController {
+  int _unsynced;
   ValueChanged<int> _onChange;
 
-  _TabController({
+  _ProxyController({
     required super.length,
     required super.vsync,
     required ValueChanged<int> onChange,
     super.initialIndex,
     super.animationDuration,
-  }) : _onChange = onChange;
+  }) : _unsynced = initialIndex,
+       _onChange = onChange;
 
   void _update(int index, ValueChanged<int> onChange) {
     _onChange = onChange;
     if (super.index != index) {
+      _unsynced = index;
       super.animateTo(index);
+    } else if (_unsynced != index) {
+      _unsynced = index;
     }
   }
 
   @override
   void animateTo(int value, {Duration? duration, Curve curve = Curves.ease}) {
+    _unsynced = value;
     _onChange(value);
   }
 
   @override
   set index(int value) {
+    _unsynced = value;
     _onChange(value);
   }
 }
@@ -122,7 +128,7 @@ sealed class FTabControl with Diagnosticable, _$FTabControlMixin {
   /// The [index] parameter contains the current selected tab index.
   /// The [onChange] callback is invoked when the user selects a tab.
   const factory FTabControl.lifted({required int index, required ValueChanged<int> onChange, FTabMotion motion}) =
-      Lifted;
+      _Lifted;
 
   /// Creates a [FTabControl].
   const factory FTabControl.managed({
@@ -141,26 +147,6 @@ sealed class FTabControl with Diagnosticable, _$FTabControlMixin {
     TickerProvider vsync,
     int length,
   );
-}
-
-@internal
-class Lifted extends FTabControl with _$LiftedMixin {
-  @override
-  final int index;
-  @override
-  final ValueChanged<int> onChange;
-  @override
-  final FTabMotion motion;
-
-  const Lifted({required this.index, required this.onChange, this.motion = const FTabMotion()}) : super._();
-
-  @override
-  FTabController createController(TickerProvider vsync, int length) =>
-      FTabController._lifted(length: length, vsync: vsync, index: index, onChange: onChange, motion: motion);
-
-  @override
-  void _updateController(FTabController controller, TickerProvider vsync, int length) =>
-      (controller._controller as _TabController)._update(index, onChange);
 }
 
 /// A [FTabManagedControl] enables widgets to manage their own controller internally while exposing parameters for
@@ -198,6 +184,32 @@ class FTabManagedControl extends FTabControl with _$FTabManagedControlMixin {
 
   @override
   FTabController createController(TickerProvider vsync, int length) =>
-      controller ??
-      FTabController(length: length, vsync: vsync, initialIndex: initial ?? 0, motion: motion ?? const FTabMotion());
+      controller ?? .new(length: length, vsync: vsync, initial: initial ?? 0, motion: motion ?? const .new());
+}
+
+class _Lifted extends FTabControl with _$_LiftedMixin {
+  @override
+  final int index;
+  @override
+  final ValueChanged<int> onChange;
+  @override
+  final FTabMotion motion;
+
+  const _Lifted({required this.index, required this.onChange, this.motion = const .new()}) : super._();
+
+  @override
+  FTabController createController(TickerProvider vsync, int length) => FTabController._(
+    _ProxyController(
+      length: length,
+      vsync: vsync,
+      initialIndex: index,
+      onChange: onChange,
+      animationDuration: motion.duration,
+    ),
+    motion,
+  );
+
+  @override
+  void _updateController(FTabController controller, TickerProvider vsync, int length) =>
+      controller._update(index, vsync, length, motion, onChange);
 }

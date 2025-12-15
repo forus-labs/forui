@@ -51,7 +51,7 @@ class _TabControllerHook extends Hook<FTabController> {
 
 class _TabControllerHookState extends HookState<FTabController, _TabControllerHook> {
   late final _controller = FTabController(
-    initialIndex: hook.initialIndex,
+    initial: hook.initialIndex,
     length: hook.length,
     vsync: hook.vsync,
     motion: hook.motion,

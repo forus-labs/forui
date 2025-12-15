@@ -136,7 +136,7 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.app(
         child: FTabs(
-          control: .managed(controller: autoDispose(FTabController(initialIndex: 1, length: 2, vsync: tester))),
+          control: .managed(controller: autoDispose(FTabController(initial: 1, length: 2, vsync: tester))),
           children: [
             FTabEntry(
               label: const Text('Account'),
