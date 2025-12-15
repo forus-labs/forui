@@ -95,6 +95,22 @@ void main() {
         expect(controller.mutating, false);
       });
 
+      testWidgets('set to 12-hour time after noon with period-first locale', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold.app(
+            locale: const Locale('ko'),
+            child: FTimePicker(control: .managed(controller: controller)),
+          ),
+        );
+
+        function(const FTime(13, 30));
+        await tester.pumpAndSettle(const Duration(seconds: 1));
+
+        expect(controller.value, const FTime(13, 30));
+        expect(controller.picker?.value, [1, 13, 30]);
+        expect(controller.mutating, false);
+      });
+
       testWidgets('set to 24-hour time', (tester) async {
         await tester.pumpWidget(
           TestScaffold.app(

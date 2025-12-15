@@ -314,6 +314,8 @@ Unfortunately, `FCalendar` cannot be easily migrated using data driven fixes due
 * **Breaking** Remove `FTimePicker.controller`. Use `FTimePicker(control: .managed(...))` instead.
 * **Breaking** Remove `FTimePicker.onChange`. Use `FTimePicker(control: .managed(...))` instead.
 
+* Fix `FTimePickerController.animateTo(...)` not working with period-first locales (e.g. Korean).
+
 
 ### `FTooltip`
 * Add `FTooltipControl`.

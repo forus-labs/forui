@@ -1,3 +1,4 @@
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
@@ -12,10 +13,10 @@ part 'time_picker_controller.control.dart';
 final class FTimePickerController extends FValueNotifier<FTime> {
   FPickerController? _picker;
   bool _mutating = false;
-  late String _pattern;
-  late bool _hours24;
-  late int _hourInterval;
-  late int _minuteInterval;
+  String? _pattern;
+  bool? _hours24;
+  int? _hourInterval;
+  int? _minuteInterval;
 
   /// Creates a [FTimePickerController].
   FTimePickerController({FTime initial = const FTime()}) : super(initial);
@@ -23,25 +24,18 @@ final class FTimePickerController extends FValueNotifier<FTime> {
   /// Animates the controller to the given [value].
   Future<void> animateTo(
     FTime value, {
-    Duration duration = const Duration(milliseconds: 200),
+    Duration duration = const Duration(milliseconds: 300),
     Curve curve = Curves.easeOutCubic,
   }) async {
-    if (value == super.value) {
-      return;
+    if (_rawValue != value) {
+      await _animateTo(value, duration, curve);
     }
+  }
 
-    final values = [
-      (value.hour / _hourInterval).round(),
-      (value.minute / _minuteInterval).round(),
-      if (!_hours24) value.hour < 12 ? 0 : 1,
-    ];
-
+  Future<void> _animateTo(FTime value, Duration duration, Curve curve) async {
     try {
       _mutating = true;
-      await Future.wait([
-        for (final (index, wheel) in (_picker?.wheels ?? []).indexed)
-          wheel.animateToItem(values[index], duration: duration, curve: curve),
-      ]);
+      await _picker?.animateTo(encode(value), duration: duration, curve: curve);
       // The value does not need to be explicitly set as the picker will update it via a listener.
     } finally {
       _mutating = false;
@@ -50,21 +44,20 @@ final class FTimePickerController extends FValueNotifier<FTime> {
 
   @override
   set value(FTime value) {
-    if (value == super.value) {
-      return;
-    }
-
-    try {
-      _mutating = true;
-      super.value = value;
-      _picker?.value = encode(value);
-    } finally {
-      _mutating = false;
+    if (value != _rawValue) {
+      try {
+        _mutating = true;
+        _rawValue = value;
+        _picker?.value = encode(value);
+      } finally {
+        _mutating = false;
+      }
     }
   }
 
-  // ignore: avoid_setters_without_getters
-  set _value(FTime value) => super.value = value;
+  FTime get _rawValue => super.value;
+
+  set _rawValue(FTime value) => super.value = value;
 
   @override
   void dispose() {
@@ -74,29 +67,38 @@ final class FTimePickerController extends FValueNotifier<FTime> {
 }
 
 @internal
-extension FTimePickerControllers on FTimePickerController {
-  void configure(DateFormat format, int hourInterval, int minuteInterval) {
+extension InternalFTimePickerController on FTimePickerController {
+  bool configure(DateFormat format, int hourInterval, int minuteInterval) {
     // This behavior isn't ideal since changing the hour/minute interval causes an unintuitive time to be shown.
     // It is difficult to fix without FixedExtentScrollController exposing the keepOffset parameter.
     // See https://github.com/flutter/flutter/issues/162972
-    this
-      .._pattern = format.pattern!
-      .._hours24 = !format.pattern!.contains('a')
-      .._hourInterval = hourInterval
-      .._minuteInterval = minuteInterval;
+    final pattern = format.pattern!;
+    final hours24 = !pattern.contains('a');
+    if (_pattern == pattern &&
+        _hours24 == hours24 &&
+        _hourInterval == hourInterval &&
+        _minuteInterval == minuteInterval) {
+      return false;
+    }
+
+    _pattern = pattern;
+    _hours24 = hours24;
+    _hourInterval = hourInterval;
+    _minuteInterval = minuteInterval;
 
     _picker?.dispose();
     _picker = FPickerController(initial: encode(value));
     _picker?.addListener(decode);
+    return true;
   }
 
   /// Encodes the given [value] as picker wheels.
   List<int> encode(FTime value) {
-    final indexes = [(value.hour / _hourInterval).round(), (value.minute / _minuteInterval).round()];
+    final indexes = [(value.hour / _hourInterval!).round(), (value.minute / _minuteInterval!).round()];
 
-    if (!_hours24) {
+    if (!_hours24!) {
       final period = value.hour < 12 ? 0 : 1;
-      _pattern.startsWith('a') ? indexes.insert(0, period) : indexes.add(period);
+      _pattern!.startsWith('a') ? indexes.insert(0, period) : indexes.add(period);
     }
 
     return indexes;
@@ -105,15 +107,15 @@ extension FTimePickerControllers on FTimePickerController {
   /// Decodes the current picker wheels as an [FTime].
   void decode() {
     final indexes = _picker!.value;
-    final hourIndex = _pattern.startsWith('a') ? 1 : 0;
-    final periodIndex = _pattern.startsWith('a') ? 0 : 2;
+    final hourIndex = _pattern!.startsWith('a') ? 1 : 0;
+    final periodIndex = _pattern!.startsWith('a') ? 0 : 2;
 
-    var hour = (indexes[hourIndex] * _hourInterval) % (_hours24 ? 24 : 12);
-    if (!_hours24 && indexes[periodIndex].isOdd) {
+    var hour = (indexes[hourIndex] * _hourInterval!) % (_hours24! ? 24 : 12);
+    if (!_hours24! && indexes[periodIndex].isOdd) {
       hour += 12;
     }
 
-    _value = FTime(hour, (indexes[hourIndex + 1] * _minuteInterval) % 60);
+    _rawValue = FTime(hour, (indexes[hourIndex + 1] * _minuteInterval!) % 60);
   }
 
   FPickerController? get picker => _picker;
@@ -122,55 +124,67 @@ extension FTimePickerControllers on FTimePickerController {
 
   bool get mutating => _mutating;
 
-  String get pattern => _pattern;
+  bool get hours24 => _hours24!;
 
-  bool get hours24 => _hours24;
+  int get hourInterval => _hourInterval!;
 
-  int get hourInterval => _hourInterval;
-
-  int get minuteInterval => _minuteInterval;
+  int get minuteInterval => _minuteInterval!;
 }
 
-final class _Controller extends FTimePickerController {
+final class _ProxyController extends FTimePickerController {
+  FTime _unsynced;
   ValueChanged<FTime> _onChange;
+  Duration _duration;
+  Curve _curve;
   int _monotonic = 0;
 
-  _Controller({required FTime value, required ValueChanged<FTime> onChange})
-    : _onChange = onChange,
-      super(initial: value);
+  _ProxyController(this._unsynced, this._onChange, this._duration, this._curve) : super(initial: _unsynced);
 
-  void update(FTime value, ValueChanged<FTime> onChange, Duration duration, Curve curve) {
+  void update(
+    FTime newValue,
+    ValueChanged<FTime> onChange,
+    Duration duration,
+    Curve curve,
+    DateFormat format,
+    int hourInterval,
+    int minuteInterval,
+  ) {
     _onChange = onChange;
+    _duration = duration;
+    _curve = curve;
+    final current = ++_monotonic;
+
+    if (configure(format, hourInterval, minuteInterval)) {
+      return;
+    }
+
+    if (super._rawValue != newValue) {
+      _unsynced = newValue;
+      super._rawValue = newValue;
+      _scrollTo(newValue, current);
+    } else if (_unsynced != newValue) {
+      _unsynced = newValue;
+      _scrollTo(newValue, current);
+    }
+  }
+
+  @override
+  set _rawValue(FTime value) {
+    _unsynced = value;
 
     final current = ++_monotonic;
+    if (super._rawValue != value) {
+      _onChange(value);
+      _scrollTo(super._rawValue, current);
+    }
+  }
+
+  void _scrollTo(FTime value, int current) {
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      if (super.value != value && current == _monotonic) {
-        animateTo(value, duration: duration, curve: curve);
+      if (current == _monotonic) {
+        _animateTo(value, _duration, _curve);
       }
     });
-  }
-
-  @override
-  set value(FTime value) {
-    if (super.value != value) {
-      super.value = value;
-      _onChange(value);
-    }
-  }
-
-  @override
-  // TODO: https://github.com/dart-lang/sdk/issues/62198
-  // ignore: unused_element
-  set _value(FTime value) {
-    if (super.value != value) {
-      super._value = value;
-      final current = ++_monotonic;
-      SchedulerBinding.instance.addPostFrameCallback((_) {
-        if (current == _monotonic) {
-          _onChange(value);
-        }
-      });
-    }
   }
 }
 
@@ -178,6 +192,13 @@ final class _Controller extends FTimePickerController {
 ///
 /// {@macro forui.foundation.doc_templates.control}
 sealed class FTimePickerControl with Diagnosticable, _$FTimePickerControlMixin {
+  /// Creates a [FTimePickerControl].
+  const factory FTimePickerControl.managed({
+    FTimePickerController? controller,
+    FTime? initial,
+    ValueChanged<FTime>? onChange,
+  }) = FTimePickerManagedControl;
+
   /// Creates a [FTimePickerControl] for controlling time picker using lifted state.
   ///
   /// It does not prevent the user from scrolling to invalid indexes. To animate back to the provided [value],
@@ -192,14 +213,7 @@ sealed class FTimePickerControl with Diagnosticable, _$FTimePickerControlMixin {
     required ValueChanged<FTime> onChange,
     Duration duration,
     Curve curve,
-  }) = Lifted;
-
-  /// Creates a [FTimePickerControl].
-  const factory FTimePickerControl.managed({
-    FTimePickerController? controller,
-    FTime? initial,
-    ValueChanged<FTime>? onChange,
-  }) = FTimePickerManagedControl;
+  }) = _Lifted;
 
   const FTimePickerControl._();
 
@@ -221,36 +235,6 @@ sealed class FTimePickerControl with Diagnosticable, _$FTimePickerControlMixin {
     int hourInterval,
     int minuteInterval,
   ) => controller..configure(format, hourInterval, minuteInterval);
-}
-
-@internal
-class Lifted extends FTimePickerControl with _$LiftedMixin {
-  @override
-  final FTime value;
-  @override
-  final ValueChanged<FTime> onChange;
-  @override
-  final Duration duration;
-  @override
-  final Curve curve;
-
-  const Lifted({
-    required this.value,
-    required this.onChange,
-    this.duration = const Duration(milliseconds: 200),
-    this.curve = Curves.easeOutCubic,
-  }) : super._();
-
-  @override
-  FTimePickerController createController(DateFormat format, int hourInterval, int minuteInterval) =>
-      (_Controller(value: value, onChange: onChange))..configure(format, hourInterval, minuteInterval);
-
-  @override
-  void _updateController(FTimePickerController controller, DateFormat format, int hourInterval, int minuteInterval) {
-    (controller as _Controller)
-      ..configure(format, hourInterval, minuteInterval)
-      ..update(value, onChange, duration, curve);
-  }
 }
 
 /// A [FTimePickerManagedControl] enables widgets to manage their own controller internally while exposing parameters
@@ -280,6 +264,32 @@ class FTimePickerManagedControl extends FTimePickerControl with Diagnosticable, 
 
   @override
   FTimePickerController createController(DateFormat format, int hourInterval, int minuteInterval) =>
-      (controller ?? FTimePickerController(initial: initial ?? const FTime()))
-        ..configure(format, hourInterval, minuteInterval);
+      (controller ?? .new(initial: initial ?? const .new()))..configure(format, hourInterval, minuteInterval);
+}
+
+class _Lifted extends FTimePickerControl with _$_LiftedMixin {
+  @override
+  final FTime value;
+  @override
+  final ValueChanged<FTime> onChange;
+  @override
+  final Duration duration;
+  @override
+  final Curve curve;
+
+  const _Lifted({
+    required this.value,
+    required this.onChange,
+    this.duration = const Duration(milliseconds: 300),
+    this.curve = Curves.easeOutCubic,
+  }) : super._();
+
+  @override
+  FTimePickerController createController(DateFormat format, int hourInterval, int minuteInterval) =>
+      (_ProxyController(value, onChange, duration, curve))..configure(format, hourInterval, minuteInterval);
+
+  @override
+  void _updateController(FTimePickerController controller, DateFormat format, int hourInterval, int minuteInterval) {
+    (controller as _ProxyController).update(value, onChange, duration, curve, format, hourInterval, minuteInterval);
+  }
 }

@@ -104,7 +104,7 @@ void main() {
             ),
           ),
         ),
-        const Duration(milliseconds: 200),
+        const Duration(milliseconds: 300),
       );
 
       await expectLater(sheet.collate(5), matchesGoldenFile('time-picker/lifted-value-change-animation.png'));
@@ -112,32 +112,24 @@ void main() {
 
     testWidgets('animates drag back', (tester) async {
       final sheet = autoDispose(AnimationSheetBuilder(frameSize: const Size(300, 300)));
-      const value = FTime(10, 30);
 
-      Widget buildWidget() => sheet.record(
+      final widget = sheet.record(
         TestScaffold.app(
           locale: const Locale('en'),
-          child: StatefulBuilder(
-            builder: (_, setState) => SizedBox(
-              width: 300,
-              height: 300,
-              child: FTimePicker(
-                control: .lifted(value: value, onChange: (v) => setState(() {})),
-              ),
+          child: SizedBox(
+            width: 300,
+            height: 300,
+            child: FTimePicker(
+              control: .lifted(value: const FTime(10, 30), onChange: (_) {}),
             ),
           ),
         ),
       );
 
-      await tester.pumpWidget(buildWidget());
-
-      final gesture = await tester.startGesture(tester.getCenter(find.byType(BuilderWheel).first));
-      await tester.pump(const Duration(milliseconds: 50));
-      await gesture.moveBy(const Offset(0, -100));
-      await tester.pump();
-      await gesture.up();
-
-      await tester.pumpFrames(buildWidget(), const Duration(milliseconds: 200));
+      await tester.pumpWidget(widget);
+      await tester.drag(find.byType(BuilderWheel).first, const Offset(0, -50));
+      // This doesn't fully wait for animation to end but it's a good enough approximation.
+      await tester.pumpFrames(widget, const Duration(milliseconds: 500));
 
       await expectLater(sheet.collate(5), matchesGoldenFile('time-picker/lifted-drag-back-animation.png'));
     });
@@ -219,7 +211,7 @@ void main() {
       await tester.pumpAndSettle();
 
       await tester.drag(find.byType(BuilderWheel).first, const Offset(0, -50));
-      await tester.pumpAndSettle(const Duration(seconds: 1));
+      await tester.pumpAndSettle();
 
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('time-picker/lifted-change-locale.png'));
     });
