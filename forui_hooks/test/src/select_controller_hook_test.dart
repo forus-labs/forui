@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -27,19 +25,17 @@ void main() {
       ),
     );
 
-    unawaited(controller.popover.show());
-
-    await tester.pumpAndSettle();
+    expect(controller.value, null);
   });
 
-  testWidgets('useFMultiSelectController', (tester) async {
-    late FMultiSelectController<String> controller;
+  testWidgets('useFMultiValueNotifier', (tester) async {
+    late FMultiValueNotifier<String> controller;
 
     await tester.pumpWidget(
       MaterialApp(
         home: HookBuilder(
           builder: (context) {
-            controller = useFMultiSelectController();
+            controller = useFMultiValueNotifier();
             return FMultiSelect.rich(
               control: .managed(controller: controller),
               format: (v) => const SizedBox(),
@@ -50,8 +46,6 @@ void main() {
       ),
     );
 
-    unawaited(controller.popover.show());
-
-    await tester.pumpAndSettle();
+    expect(controller.value, <String>{});
   });
 }

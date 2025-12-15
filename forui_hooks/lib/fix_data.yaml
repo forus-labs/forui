@@ -32,3 +32,14 @@ transforms:
         newElement:
           uris: [ 'package:forui_hooks/forui_hooks.dart' ]
           function: 'useFRadioSelectGroupController'
+
+  - title: 'Replace useFMultiSelectController with useFMultiValueNotifier'
+    date: 2025-12-15
+    element:
+      uris: [ 'package:forui_hooks/forui_hooks.dart' ]
+      function: useFMultiSelectController
+    changes:
+      - kind: replacedBy
+        newElement:
+          uris: [ 'package:forui_hooks/forui_hooks.dart' ]
+          function: 'useFMultiValueNotifier'

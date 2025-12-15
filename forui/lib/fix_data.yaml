@@ -2247,6 +2247,43 @@ transforms:
           - kind: removeParameter
             name: 'max'
 
+  # FMultiSelectController
+  - title: 'Remove FMultiSelectController vsync and popoverMotion parameters'
+    date: 2025-12-15
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FMultiSelectController
+    changes:
+      - kind: removeParameter
+        name: 'vsync'
+      - kind: removeParameter
+        name: 'popoverMotion'
+
+  - title: 'Rename FMultiSelectController to FMultiValueNotifier'
+    date: 2025-12-15
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      class: FMultiSelectController
+    changes:
+      - kind: replacedBy
+        newElement:
+          uris: [ 'package:forui/forui.dart' ]
+          class: 'FMultiValueNotifier'
+
+  # FSelectController
+  - title: 'Remove FSelectController vsync and popoverMotion parameters'
+    date: 2025-12-15
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FSelectController
+    changes:
+      - kind: removeParameter
+        name: 'vsync'
+      - kind: removeParameter
+        name: 'popoverMotion'
+
 
   # FSelectSearchFieldProperties
   - title: 'Migrate FSelectSearchFieldProperties(controller: ...) to control parameter'
@@ -4439,6 +4476,19 @@ transforms:
               expression: '.managed(onChange: {% onChange %})'
           - kind: removeParameter
             name: 'onChange'
+
+  # FTimeFieldController
+  - title: 'Remove FTimeFieldController vsync and popoverMotion parameters'
+    date: 2025-12-15
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FTimeFieldController
+    changes:
+      - kind: removeParameter
+        name: 'vsync'
+      - kind: removeParameter
+        name: 'popoverMotion'
 
 
   # FTabs

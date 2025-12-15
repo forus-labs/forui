@@ -69,9 +69,9 @@ class FormDateFieldPage extends StatefulSample {
   State<FormDateFieldPage> createState() => _FormDateFieldPageState();
 }
 
-class _FormDateFieldPageState extends StatefulSampleState<FormDateFieldPage> with TickerProviderStateMixin {
+class _FormDateFieldPageState extends StatefulSampleState<FormDateFieldPage> {
   final _key = GlobalKey<FormState>();
-  late final _startDateController = FDateFieldController(
+  late final _startController = FDateFieldController(
     validator: (date) => switch (date) {
       null => 'Please select a start date',
       final date when date.isBefore(.now()) => 'Start date must be in the future',
@@ -81,7 +81,7 @@ class _FormDateFieldPageState extends StatefulSampleState<FormDateFieldPage> wit
 
   @override
   void dispose() {
-    _startDateController.dispose();
+    _startController.dispose();
     super.dispose();
   }
 
@@ -91,7 +91,7 @@ class _FormDateFieldPageState extends StatefulSampleState<FormDateFieldPage> wit
     child: Column(
       children: [
         FDateField(
-          control: .managed(controller: _startDateController),
+          control: .managed(controller: _startController),
           label: const Text('Start Date'),
           description: const Text('Select a start date'),
           autovalidateMode: .disabled,
@@ -101,7 +101,7 @@ class _FormDateFieldPageState extends StatefulSampleState<FormDateFieldPage> wit
           control: .managed(
             validator: (date) => switch (date) {
               null => 'Please select an end date',
-              final date when _startDateController.value != null && date.isBefore(_startDateController.value!) =>
+              final date when _startController.value != null && date.isBefore(_startController.value!) =>
                 'Start date must be in the future',
               _ => null,
             },

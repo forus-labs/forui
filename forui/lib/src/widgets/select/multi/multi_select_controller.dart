@@ -1,174 +1,75 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/widgets.dart';
 
 import 'package:collection/collection.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/widgets/popover/popover_controller.dart';
-
-// ignore_for_file: avoid_positional_boolean_parameters
 
 part 'multi_select_controller.control.dart';
 
-/// The [FMultiSelect]'s controller.
-class FMultiSelectController<T> extends FMultiValueNotifier<T> {
-  /// The controller for the popover.
-  ///
-  /// ## Contract
-  /// Manually disposing this controller is undefined behavior. Dispose this [FMultiSelectController] instead.
-  final FPopoverController popover;
+class _ProxyController<T> extends FMultiValueNotifier<T> {
+  Set<T> _unsynced;
+  ValueChanged<Set<T>> _onChange;
 
-  /// Creates a [FMultiSelectController].
-  FMultiSelectController({
-    required TickerProvider vsync,
-    super.min,
-    super.max,
-    super.value,
-    FPopoverMotion popoverMotion = const FPopoverMotion(),
-  }) : popover = FPopoverController(vsync: vsync, motion: popoverMotion);
+  _ProxyController({required super.value, required ValueChanged<Set<T>> onChange})
+    : _unsynced = value,
+      _onChange = onChange;
 
-  FMultiSelectController._({required super.value, required this.popover, super.min, super.max});
-
-  @override
-  void dispose() {
-    popover.dispose();
-    super.dispose();
-  }
-}
-
-class _Controller<T> extends FMultiSelectController<T> {
-  late FPopoverController _popover;
-  ValueChanged<Set<T>> _onValueChange;
-
-  _Controller({
-    required super.value,
-    required TickerProvider vsync,
-    required ValueChanged<Set<T>> onValueChange,
-    bool? popoverShown,
-    ValueChanged<bool>? onPopoverChange,
-    FPopoverMotion popoverMotion = const FPopoverMotion(),
-  }) : _onValueChange = onValueChange,
-       super._(
-         popover: popoverShown != null && onPopoverChange != null
-             ? LiftedPopoverController(popoverShown, onPopoverChange, vsync: vsync, motion: popoverMotion)
-             : FPopoverController(vsync: vsync, motion: popoverMotion),
-       ) {
-    _popover = super.popover; // This prevents the creation of two popover controllers, with one being shadowed.
-  }
-
-  void updateState(
-    TickerProvider vsync,
-    Set<T> value,
-    ValueChanged<Set<T>> onValueChange,
-    bool? popoverShown,
-    ValueChanged<bool>? onPopoverChange,
-  ) {
-    if (super.value != value) {
-      super.value = value;
+  void _update(Set<T> newValue, ValueChanged<Set<T>> onChange) {
+    _onChange = onChange;
+    if (!setEquals(super.value, newValue)) {
+      _unsynced = newValue;
+      super.value = newValue;
+    } else if (!setEquals(_unsynced, newValue)) {
+      _unsynced = newValue;
+      notifyListeners();
     }
-
-    _onValueChange = onValueChange;
-    _popover = InternalFPopoverController.updateNested(_popover, vsync, popoverShown, onPopoverChange);
   }
 
   @override
-  void update(T value, {required bool add}) {
+  void update(T newValue, {required bool add}) {
     final copy = {...super.value};
-    if ((add && copy.add(value)) || (!add && copy.remove(value))) {
-      _onValueChange(copy);
+    if ((add && copy.add(newValue)) || (!add && copy.remove(newValue))) {
+      _unsynced = {...copy};
+      _onChange(copy);
     }
   }
 
   @override
-  set value(Set<T> value) {
-    if (super.value != value) {
-      _onValueChange(value);
+  set value(Set<T> newValue) {
+    _unsynced = {...newValue};
+    if (!setEquals(super.value, newValue)) {
+      _onChange(newValue);
     }
   }
-
-  @override
-  FPopoverController get popover => _popover;
 }
 
 /// A [FMultiSelectControl] defines how a [FMultiSelect] is controlled.
 ///
 /// {@macro forui.foundation.doc_templates.control}
 sealed class FMultiSelectControl<T> with Diagnosticable, _$FMultiSelectControlMixin<T> {
-  /// Creates a [FMultiSelectControl] for controlling multi-select using lifted state.
-  ///
-  /// The [value] parameter contains the current selected values.
-  /// The [onChange] callback is invoked when the user selects or deselects an item.
-  ///
-  /// Content visibility is optionally lifted - if [popoverShown] is provided, [onPopoverChange] must also be provided.
-  ///
-  /// ## Contract
-  /// Throws [AssertionError] if only one of [popoverShown]/[onPopoverChange] is provided.
-  const factory FMultiSelectControl.lifted({
-    required Set<T> value,
-    required ValueChanged<Set<T>> onChange,
-    bool? popoverShown,
-    ValueChanged<bool>? onPopoverChange,
-    FPopoverMotion motion,
-  }) = Lifted<T>;
-
   /// Creates a [FMultiSelectControl].
   const factory FMultiSelectControl.managed({
-    FMultiSelectController<T>? controller,
+    FMultiValueNotifier<T>? controller,
     Set<T>? initial,
     int min,
     int? max,
     ValueChanged<Set<T>>? onChange,
-    FPopoverMotion? motion,
   }) = FMultiSelectManagedControl<T>;
+
+  /// Creates a [FMultiSelectControl] for controlling multi-select using lifted state.
+  ///
+  /// The [value] parameter contains the current selected values.
+  /// The [onChange] callback is invoked when the user selects or deselects an item.
+  const factory FMultiSelectControl.lifted({required Set<T> value, required ValueChanged<Set<T>> onChange}) =
+      _Lifted<T>;
 
   const FMultiSelectControl._();
 
-  (FMultiSelectController<T>, bool) _update(
+  (FMultiValueNotifier<T>, bool) _update(
     FMultiSelectControl<T> old,
-    FMultiSelectController<T> controller,
+    FMultiValueNotifier<T> controller,
     VoidCallback callback,
-    TickerProvider vsync,
   );
-}
-
-@internal
-class Lifted<T> extends FMultiSelectControl<T> with _$LiftedMixin<T> {
-  @override
-  final Set<T> value;
-  @override
-  final ValueChanged<Set<T>> onChange;
-  @override
-  final bool? popoverShown;
-  @override
-  final ValueChanged<bool>? onPopoverChange;
-  @override
-  final FPopoverMotion motion;
-
-  const Lifted({
-    required this.value,
-    required this.onChange,
-    this.popoverShown,
-    this.onPopoverChange,
-    this.motion = const FPopoverMotion(),
-  }) : assert(
-         (popoverShown == null) == (onPopoverChange == null),
-         'popoverShown and onPopoverChange must both be provided or both be null.',
-       ),
-       super._();
-
-  @override
-  FMultiSelectController<T> createController(TickerProvider vsync) => _Controller(
-    value: value,
-    vsync: vsync,
-    onValueChange: onChange,
-    popoverShown: popoverShown,
-    onPopoverChange: onPopoverChange,
-    popoverMotion: motion,
-  );
-
-  @override
-  void _updateController(FMultiSelectController<T> controller, TickerProvider vsync) =>
-      (controller as _Controller<T>).updateState(vsync, value, onChange, popoverShown, onPopoverChange);
 }
 
 /// A [FMultiSelectManagedControl] enables widgets to manage their own controller internally while exposing parameters
@@ -179,7 +80,7 @@ class FMultiSelectManagedControl<T> extends FMultiSelectControl<T>
     with Diagnosticable, _$FMultiSelectManagedControlMixin<T> {
   /// The controller.
   @override
-  final FMultiSelectController<T>? controller;
+  final FMultiValueNotifier<T>? controller;
 
   /// The initial values. Defaults to an empty set.
   ///
@@ -206,15 +107,8 @@ class FMultiSelectManagedControl<T> extends FMultiSelectControl<T>
   @override
   final ValueChanged<Set<T>>? onChange;
 
-  /// The popover motion. Defaults to [FPopoverMotion].
-  ///
-  /// ## Contract
-  /// Throws [AssertionError] if [motion] and [controller] are both provided.
-  @override
-  final FPopoverMotion? motion;
-
   /// Creates a [FMultiSelectControl].
-  const FMultiSelectManagedControl({this.controller, this.initial, this.min = 0, this.max, this.onChange, this.motion})
+  const FMultiSelectManagedControl({this.controller, this.initial, this.min = 0, this.max, this.onChange})
     : assert(
         controller == null || initial == null,
         'Cannot provide both controller and initial. Set the value directly in the controller.',
@@ -227,20 +121,25 @@ class FMultiSelectManagedControl<T> extends FMultiSelectControl<T>
         controller == null || max == null,
         'Cannot provide both controller and max. Set the max directly in the controller.',
       ),
-      assert(
-        controller == null || motion == null,
-        'Cannot provide both controller and motion. Set the motion directly in the controller.',
-      ),
       super._();
 
   @override
-  FMultiSelectController<T> createController(TickerProvider vsync) =>
-      controller ??
-      FMultiSelectController<T>(
-        vsync: vsync,
-        value: initial ?? {},
-        min: min,
-        max: max,
-        popoverMotion: motion ?? const FPopoverMotion(),
-      );
+  FMultiValueNotifier<T> createController() =>
+      controller ?? FMultiValueNotifier<T>(value: initial ?? const {}, min: min, max: max);
+}
+
+class _Lifted<T> extends FMultiSelectControl<T> with _$_LiftedMixin<T> {
+  @override
+  final Set<T> value;
+  @override
+  final ValueChanged<Set<T>> onChange;
+
+  const _Lifted({required this.value, required this.onChange}) : super._();
+
+  @override
+  FMultiValueNotifier<T> createController() => _ProxyController(value: value, onChange: onChange);
+
+  @override
+  void _updateController(FMultiValueNotifier<T> controller) =>
+      (controller as _ProxyController<T>)._update(value, onChange);
 }

@@ -146,6 +146,16 @@ class _ProxyController extends FPaginationController {
 ///
 /// {@macro forui.foundation.doc_templates.control}
 sealed class FPaginationControl with Diagnosticable, _$FPaginationControlMixin {
+  /// Creates a [FPaginationControl].
+  const factory FPaginationControl.managed({
+    FPaginationController? controller,
+    int? initial,
+    int? pages,
+    int siblings,
+    bool showEdges,
+    ValueChanged<int>? onChange,
+  }) = FPaginationManagedControl;
+
   /// Creates a [FPaginationControl] for controlling pagination using lifted state.
   ///
   /// The [page] parameter contains the current page index.
@@ -157,16 +167,6 @@ sealed class FPaginationControl with Diagnosticable, _$FPaginationControlMixin {
     int siblings,
     bool showEdges,
   }) = Lifted;
-
-  /// Creates a [FPaginationControl].
-  const factory FPaginationControl.managed({
-    FPaginationController? controller,
-    int? initial,
-    int? pages,
-    int siblings,
-    bool showEdges,
-    ValueChanged<int>? onChange,
-  }) = FPaginationManagedControl;
 
   const FPaginationControl._();
 

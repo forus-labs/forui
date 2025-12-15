@@ -12,7 +12,7 @@ void main() {
   late FSelectController<String> controller;
 
   setUp(() {
-    controller = FSelectController<String>(vsync: const TestVSync());
+    controller = FSelectController<String>();
   });
 
   tearDown(() {

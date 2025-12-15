@@ -28,10 +28,10 @@ const letters = {
 void main() {
   const key = ValueKey('select');
 
-  late FMultiSelectController<String> controller;
+  late FMultiValueNotifier<String> controller;
 
   setUp(() {
-    controller = FMultiSelectController<String>(vsync: const TestVSync());
+    controller = FMultiValueNotifier<String>();
   });
 
   tearDown(() => controller.dispose());
@@ -181,8 +181,10 @@ void main() {
               control: .lifted(
                 value: value,
                 onChange: (v) => setState(() => value = v),
-                popoverShown: popoverShown,
-                onPopoverChange: (shown) => setState(() => popoverShown = shown),
+              ),
+              popoverControl: .lifted(
+                shown: popoverShown,
+                onChange: (shown) => setState(() => popoverShown = shown),
               ),
               items: letters,
             ),
@@ -214,8 +216,10 @@ void main() {
               control: .lifted(
                 value: value,
                 onChange: (v) => setState(() => value = v),
-                popoverShown: false,
-                onPopoverChange: (_) {},
+              ),
+              popoverControl: .lifted(
+                shown: false,
+                onChange: (_) {},
               ),
               items: letters,
             ),

@@ -8,6 +8,7 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/form/form_field.dart';
+import 'package:forui/src/widgets/popover/popover_controller.dart';
 import 'package:forui/src/widgets/select/content/content.dart';
 import 'package:forui/src/widgets/select/content/inherited_controller.dart';
 import 'package:forui/src/widgets/select/content/search_content.dart';
@@ -61,6 +62,11 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
   ///
   /// Defaults to [FSelectControl.managed] if not provided.
   final FSelectControl<T>? control;
+
+  /// Defines how the select's popover is controlled.
+  ///
+  /// Defaults to [FPopoverControl.managed].
+  final FPopoverControl popoverControl;
 
   /// The style.
   ///
@@ -197,6 +203,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
   factory FSelect({
     required Map<String, T> items,
     FSelectControl<T>? control,
+    FPopoverControl popoverControl = const .managed(),
     FSelectStyle Function(FSelectStyle style)? style,
     bool autofocus = false,
     FocusNode? focusNode,
@@ -241,6 +248,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     final inverse = {for (final MapEntry(:key, :value) in items.entries) value: key};
     return .rich(
       control: control,
+      popoverControl: popoverControl,
       style: style,
       autofocus: autofocus,
       focusNode: focusNode,
@@ -288,6 +296,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     required String Function(T value) format,
     required List<FSelectItemMixin> children,
     FSelectControl<T>? control,
+    FPopoverControl popoverControl,
     FSelectStyle Function(FSelectStyle style)? style,
     bool autofocus,
     FocusNode? focusNode,
@@ -353,6 +362,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
         FSelect.defaultContentLoadingBuilder,
     Widget Function(BuildContext context, Object? error, StackTrace stackTrace)? contentErrorBuilder,
     FSelectControl<T>? control,
+    FPopoverControl popoverControl = const .managed(),
     FSelectStyle Function(FSelectStyle style)? style,
     bool autofocus = false,
     FocusNode? focusNode,
@@ -410,6 +420,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
       contentLoadingBuilder: contentLoadingBuilder,
       contentErrorBuilder: contentErrorBuilder,
       control: control,
+      popoverControl: popoverControl,
       style: style,
       autofocus: autofocus,
       focusNode: focusNode,
@@ -467,6 +478,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     Widget Function(BuildContext context, FSelectSearchStyle style) contentLoadingBuilder,
     Widget Function(BuildContext context, Object? error, StackTrace stackTrace)? contentErrorBuilder,
     FSelectControl<T>? control,
+    FPopoverControl popoverControl,
     FSelectStyle Function(FSelectStyle style)? style,
     bool autofocus,
     FocusNode? focusNode,
@@ -512,6 +524,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
   const FSelect._({
     required this.format,
     this.control,
+    this.popoverControl = const .managed(),
     this.style,
     this.autofocus = false,
     this.focusNode,
@@ -559,6 +572,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('control', control))
+      ..add(DiagnosticsProperty('popoverControl', popoverControl))
       ..add(DiagnosticsProperty('style', style))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
@@ -599,6 +613,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
 
 abstract class _State<S extends FSelect<T>, T> extends State<S> with TickerProviderStateMixin {
   late FSelectController<T> _controller;
+  late FPopoverController _popoverController;
   late final TextEditingController _textController;
   late FocusNode _focus;
   bool _mutating = false;
@@ -606,7 +621,8 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with TickerProvi
   @override
   void initState() {
     super.initState();
-    _controller = (widget.control ?? FSelectControl<T>.managed()).create(_updateTextController, this);
+    _controller = (widget.control ?? FSelectControl<T>.managed()).create(_updateTextController);
+    _popoverController = widget.popoverControl.create(_handlePopoverChange, this);
     _textController = TextEditingController(
       text: _controller.value == null ? '' : widget.format(_controller.value as T),
     )..addListener(_updateSelectController);
@@ -627,11 +643,12 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with TickerProvi
 
     final current = widget.control ?? FSelectControl<T>.managed();
     final previous = old.control ?? FSelectControl<T>.managed();
-    final (controller, updated) = current.update(previous, _controller, _updateTextController, this);
+    final (controller, updated) = current.update(previous, _controller, _updateTextController);
     if (updated) {
       _controller = controller;
       _updateTextController();
     }
+    _popoverController = widget.popoverControl.update(old.popoverControl, _popoverController, _handlePopoverChange, this).$1;
   }
 
   void _updateSelectController() {
@@ -666,6 +683,12 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with TickerProvi
 
     if (widget.control case FSelectManagedControl(:final onChange?)) {
       onChange(_controller.value);
+    }
+  }
+
+  void _handlePopoverChange() {
+    if (widget.popoverControl case FPopoverManagedControl(:final onChange?)) {
+      onChange(_popoverController.status.isForwardOrCompleted);
     }
   }
 
@@ -709,7 +732,7 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with TickerProvi
         error: state.hasError ? widget.errorBuilder(state.context, state.errorText ?? '') : null,
         enabled: widget.enabled,
         builder: (context, _, states, field) => FPopover(
-          control: .managed(controller: _controller.popover),
+          control: .managed(controller: _popoverController),
           style: style.popoverStyle,
           constraints: widget.popoverConstraints,
           popoverAnchor: widget.anchor,
@@ -727,7 +750,7 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with TickerProvi
               onPress: (value) async {
                 if (widget.autoHide) {
                   _focus.requestFocus();
-                  await _controller.popover.hide();
+                  await _popoverController.hide();
                 }
 
                 _controller.value = value;
@@ -747,13 +770,14 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with TickerProvi
   Widget content(BuildContext context, FSelectStyle style);
 
   void _toggle() {
-    _controller.popover.status.isCompleted ? _focus.requestFocus() : _focus.unfocus();
-    _controller.popover.toggle();
+    _popoverController.status.isCompleted ? _focus.requestFocus() : _focus.unfocus();
+    _popoverController.toggle();
   }
 
   @override
   void dispose() {
     _textController.dispose();
+    widget.popoverControl.dispose(_popoverController, _handlePopoverChange);
     (widget.control ?? FSelectControl<T>.managed()).dispose(_controller, _updateTextController);
 
     if (widget.focusNode == null) {

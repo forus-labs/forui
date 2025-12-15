@@ -7,6 +7,7 @@ class _BasicSelect<T> extends FMultiSelect<T> {
     required this.children,
     required super.format,
     super.control,
+    super.popoverControl,
     super.style,
     super.autofocus,
     super.focusNode,

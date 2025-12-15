@@ -326,7 +326,7 @@ class FormMultiSelectPage extends StatefulSample {
   State<FormMultiSelectPage> createState() => _FormMultiSelectPageState();
 }
 
-class _FormMultiSelectPageState extends StatefulSampleState<FormMultiSelectPage> with SingleTickerProviderStateMixin {
+class _FormMultiSelectPageState extends StatefulSampleState<FormMultiSelectPage> {
   final _key = GlobalKey<FormState>();
 
   @override

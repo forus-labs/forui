@@ -15,6 +15,7 @@ class _SearchSelect<T> extends FSelect<T> {
     this.contentLoadingBuilder = FSelect.defaultContentLoadingBuilder,
     this.contentErrorBuilder,
     super.control,
+    super.popoverControl,
     super.style,
     super.autofocus,
     super.focusNode,

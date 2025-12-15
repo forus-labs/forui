@@ -173,16 +173,18 @@ Unfortunately, `FCalendar` cannot be easily migrated using data driven fixes due
 * Add `FSelectItem.item(...)`.
 
 * **Breaking** Rename `FSelect.shift` to `FSelect.overflow`.
-* **Breaking** Rename `FMultiSelect.shift` to `FMultiSelect.overflow`.
 * **Breaking** Remove `FSelect.controller`. Use `FSelect(control: .managed(...))` instead.
 * **Breaking** Remove `FSelect.onChange`. Use `FSelect(control: .managed(...))` instead.
 * **Breaking** Remove `FSelect.initialValue`. Use `FSelect(control: .managed(...))` instead.
+* **Breaking** Remove `FSelectController(vsync: ..., popoverMotion: ...)`. Use `FSelect(popoverControl: ...)` instead.
+* **Breaking** Remove `FSelectSearchFieldProperties.controller`. Use `FSelectSearchFieldProperties(control: .managed(...))` instead.
+* **Breaking** Rename `FMultiSelect.shift` to `FMultiSelect.overflow`.
 * **Breaking** Remove `FMultiSelect.controller`. Use `FMultiSelect(control: .managed(...))` instead.
 * **Breaking** Remove `FMultiSelect.onChange`. Use `FMultiSelect(control: .managed(...))` instead.
 * **Breaking** Remove `FMultiSelect.initialValue`. Use `FMultiSelect(control: .managed(...))` instead.
 * **Breaking** Remove `FMultiSelect.min`. Use `FMultiSelect(control: .managed(...))` instead.
 * **Breaking** Remove `FMultiSelect.max`. Use `FMultiSelect(control: .managed(...))` instead.
-* **Breaking** Remove `FSelectSearchFieldProperties.controller`. Use `FSelectSearchFieldProperties(control: .managed(...))` instead.
+* **Breaking** Remove `FMultiSelectController`. Use `FMultiValueNotifier` instead.
 * Fix `FSelect.mouseCursor` defaulting to `SystemMouseCursors.click` instead of `MouseCursor.defer`.
 * Deprecate `FSelect.contentScrollHandles`. Please [open an issue](https://github.com/forus-labs/forui/issues) if you use & and need this.
 
@@ -302,6 +304,7 @@ Unfortunately, `FCalendar` cannot be easily migrated using data driven fixes due
 * **Breaking** Remove `FTimeField.controller`. Use `FTimeField(control: .managed(...))` instead.
 * **Breaking** Remove `FTimeField.onChange`. Use `FTimeField(control: .managed(...))` instead.
 * **Breaking** Remove `FTimeField.initialTime`. Use `FTimeField(control: .managed(...))` instead.
+* **Breaking** Remove `FTimeFieldController(vsync: ..., popoverMotion: ...)`. Use `FTimeField(popoverControl: ...)` instead.
 
 
 ### `FTimePicker`

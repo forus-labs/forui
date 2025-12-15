@@ -31,10 +31,241 @@ void main() {
   late FSelectController<String> controller;
 
   setUp(() {
-    controller = FSelectController<String>(vsync: const TestVSync());
+    controller = FSelectController<String>();
   });
 
   tearDown(() => controller.dispose());
+
+  group('lifted', () {
+    testWidgets('FSelect', (tester) async {
+      String? value;
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: StatefulBuilder(
+            builder: (context, setState) => FSelect<String>(
+              key: key,
+              control: .lifted(value: value, onChange: (v) => setState(() {
+                value = v;
+              })),
+              items: letters,
+            ),
+          ),
+        ),
+      );
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.text('A'));
+      await tester.pumpAndSettle();
+
+      expect(value, 'A');
+
+      await tester.pumpWidget(const SizedBox());
+    });
+
+    testWidgets('FSelect.rich', (tester) async {
+      String? value;
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: StatefulBuilder(
+            builder: (context, setState) => FSelect<String>.rich(
+              key: key,
+              control: .lifted(value: value, onChange: (v) => setState(() => value = v)),
+              format: (v) => v,
+              children: const [
+                FSelectItem(title: Text('A'), value: 'A'),
+                FSelectItem(title: Text('B'), value: 'B'),
+              ],
+            ),
+          ),
+        ),
+      );
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.text('A'));
+      await tester.pumpAndSettle();
+
+      expect(value, 'A');
+
+      await tester.pumpWidget(const SizedBox());
+    });
+
+    testWidgets('FSelect.search', (tester) async {
+      String? value;
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: StatefulBuilder(
+            builder: (context, setState) => FSelect<String>.search(
+              key: key,
+              control: .lifted(value: value, onChange: (v) => setState(() => value = v)),
+              items: letters,
+            ),
+          ),
+        ),
+      );
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.text('A'));
+      await tester.pumpAndSettle();
+
+      expect(value, 'A');
+
+      await tester.pumpWidget(const SizedBox());
+    });
+
+    testWidgets('FSelect.searchBuilder', (tester) async {
+      String? value;
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: StatefulBuilder(
+            builder: (context, setState) => FSelect<String>.searchBuilder(
+              key: key,
+              control: .lifted(value: value, onChange: (v) => setState(() => value = v)),
+              format: (v) => v,
+              filter: (query) => letters.keys.where((k) => k.toLowerCase().contains(query.toLowerCase())),
+              contentBuilder: (context, query, items) => [
+                for (final item in items) FSelectItem(title: Text(item), value: item),
+              ],
+            ),
+          ),
+        ),
+      );
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.text('A'));
+      await tester.pumpAndSettle();
+
+      expect(value, 'A');
+
+      await tester.pumpWidget(const SizedBox());
+    });
+
+    testWidgets('showing popover does not cause error', (tester) async {
+      String? value;
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: StatefulBuilder(
+            builder: (context, setState) => FSelect<String>(
+              key: key,
+              control: .lifted(value: value, onChange: (v) => setState(() => value = v)),
+              items: letters,
+            ),
+          ),
+        ),
+      );
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.text('A'));
+      await tester.pumpAndSettle();
+
+      expect(tester.takeException(), null);
+
+      await tester.pumpWidget(const SizedBox());
+    });
+
+    testWidgets('onPopoverChange called', (tester) async {
+      String? value;
+      var popoverShown = false;
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: StatefulBuilder(
+            builder: (context, setState) => FSelect<String>(
+              key: key,
+              control: .lifted(
+                value: value,
+                onChange: (v) => setState(() => value = v),
+              ),
+              popoverControl: .lifted(
+                shown: popoverShown,
+                onChange: (shown) => setState(() => popoverShown = shown),
+              ),
+              items: letters,
+            ),
+          ),
+        ),
+      );
+
+      expect(popoverShown, false);
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+
+      expect(popoverShown, true);
+
+      await tester.tapAt(Offset.zero);
+      await tester.pumpAndSettle();
+
+      expect(popoverShown, false);
+
+      await tester.pumpWidget(const SizedBox());
+    });
+
+    testWidgets('popoverShown controls visibility', (tester) async {
+      String? value;
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: StatefulBuilder(
+            builder: (context, setState) => FSelect<String>(
+              key: key,
+              control: .lifted(
+                value: value,
+                onChange: (v) => setState(() => value = v),
+              ),
+              popoverControl: .lifted(
+                shown: false,
+                onChange: (_) {},
+              ),
+              items: letters,
+            ),
+          ),
+        ),
+      );
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+
+      expect(find.text('A'), findsNothing);
+
+      await tester.pumpWidget(const SizedBox());
+    });
+  });
+
+  group('managed', () {
+    testWidgets('onChange callback called', (tester) async {
+      String? changedValue;
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FSelect<String>(
+            key: key,
+            control: .managed(controller: controller, onChange: (value) => changedValue = value),
+            items: letters,
+          ),
+        ),
+      );
+
+      controller.value = 'A';
+      await tester.pump();
+
+      expect(changedValue, 'A');
+    });
+  });
 
   group('form', () {
     testWidgets('set initial value using initialValue', (tester) async {
@@ -76,7 +307,7 @@ void main() {
             key: key,
             child: FSelect<String>.rich(
               control: .managed(
-                controller: autoDispose(FSelectController(vsync: tester, value: 'A')),
+                controller: autoDispose(FSelectController(value: 'A')),
               ),
               format: (value) => '$value!',
               onSaved: (value) => initial = value,
@@ -273,231 +504,6 @@ void main() {
       expect(focus.hasFocus, false);
 
       debugDefaultTargetPlatformOverride = null;
-    });
-  });
-
-  group('lifted', () {
-    testWidgets('FSelect', (tester) async {
-      String? value;
-
-      await tester.pumpWidget(
-        TestScaffold.app(
-          child: StatefulBuilder(
-            builder: (context, setState) => FSelect<String>(
-              key: key,
-              control: .lifted(value: value, onChange: (v) => setState(() => value = v)),
-              items: letters,
-            ),
-          ),
-        ),
-      );
-
-      await tester.tap(find.byKey(key));
-      await tester.pumpAndSettle();
-
-      await tester.tap(find.text('A'));
-      await tester.pumpAndSettle();
-
-      expect(value, 'A');
-
-      await tester.pumpWidget(const SizedBox());
-    });
-
-    testWidgets('FSelect.rich', (tester) async {
-      String? value;
-
-      await tester.pumpWidget(
-        TestScaffold.app(
-          child: StatefulBuilder(
-            builder: (context, setState) => FSelect<String>.rich(
-              key: key,
-              control: .lifted(value: value, onChange: (v) => setState(() => value = v)),
-              format: (v) => v,
-              children: const [
-                FSelectItem(title: Text('A'), value: 'A'),
-                FSelectItem(title: Text('B'), value: 'B'),
-              ],
-            ),
-          ),
-        ),
-      );
-
-      await tester.tap(find.byKey(key));
-      await tester.pumpAndSettle();
-
-      await tester.tap(find.text('A'));
-      await tester.pumpAndSettle();
-
-      expect(value, 'A');
-
-      await tester.pumpWidget(const SizedBox());
-    });
-
-    testWidgets('FSelect.search', (tester) async {
-      String? value;
-
-      await tester.pumpWidget(
-        TestScaffold.app(
-          child: StatefulBuilder(
-            builder: (context, setState) => FSelect<String>.search(
-              key: key,
-              control: .lifted(value: value, onChange: (v) => setState(() => value = v)),
-              items: letters,
-            ),
-          ),
-        ),
-      );
-
-      await tester.tap(find.byKey(key));
-      await tester.pumpAndSettle();
-
-      await tester.tap(find.text('A'));
-      await tester.pumpAndSettle();
-
-      expect(value, 'A');
-
-      await tester.pumpWidget(const SizedBox());
-    });
-
-    testWidgets('FSelect.searchBuilder', (tester) async {
-      String? value;
-
-      await tester.pumpWidget(
-        TestScaffold.app(
-          child: StatefulBuilder(
-            builder: (context, setState) => FSelect<String>.searchBuilder(
-              key: key,
-              control: .lifted(value: value, onChange: (v) => setState(() => value = v)),
-              format: (v) => v,
-              filter: (query) => letters.keys.where((k) => k.toLowerCase().contains(query.toLowerCase())),
-              contentBuilder: (context, query, items) => [
-                for (final item in items) FSelectItem(title: Text(item), value: item),
-              ],
-            ),
-          ),
-        ),
-      );
-
-      await tester.tap(find.byKey(key));
-      await tester.pumpAndSettle();
-
-      await tester.tap(find.text('A'));
-      await tester.pumpAndSettle();
-
-      expect(value, 'A');
-
-      await tester.pumpWidget(const SizedBox());
-    });
-
-    testWidgets('showing popover does not cause error', (tester) async {
-      String? value;
-
-      await tester.pumpWidget(
-        TestScaffold.app(
-          child: StatefulBuilder(
-            builder: (context, setState) => FSelect<String>(
-              key: key,
-              control: .lifted(value: value, onChange: (v) => setState(() => value = v)),
-              items: letters,
-            ),
-          ),
-        ),
-      );
-
-      await tester.tap(find.byKey(key));
-      await tester.pumpAndSettle();
-
-      await tester.tap(find.text('A'));
-      await tester.pumpAndSettle();
-
-      expect(tester.takeException(), null);
-
-      await tester.pumpWidget(const SizedBox());
-    });
-
-    testWidgets('onPopoverChange called', (tester) async {
-      String? value;
-      var popoverShown = false;
-
-      await tester.pumpWidget(
-        TestScaffold.app(
-          child: StatefulBuilder(
-            builder: (context, setState) => FSelect<String>(
-              key: key,
-              control: .lifted(
-                value: value,
-                onChange: (v) => setState(() => value = v),
-                popoverShown: popoverShown,
-                onPopoverChange: (shown) => setState(() => popoverShown = shown),
-              ),
-              items: letters,
-            ),
-          ),
-        ),
-      );
-
-      expect(popoverShown, false);
-
-      await tester.tap(find.byKey(key));
-      await tester.pumpAndSettle();
-
-      expect(popoverShown, true);
-
-      await tester.tapAt(Offset.zero);
-      await tester.pumpAndSettle();
-
-      expect(popoverShown, false);
-
-      await tester.pumpWidget(const SizedBox());
-    });
-
-    testWidgets('popoverShown controls visibility', (tester) async {
-      String? value;
-
-      await tester.pumpWidget(
-        TestScaffold.app(
-          child: StatefulBuilder(
-            builder: (context, setState) => FSelect<String>(
-              key: key,
-              control: .lifted(
-                value: value,
-                onChange: (v) => setState(() => value = v),
-                popoverShown: false,
-                onPopoverChange: (_) {},
-              ),
-              items: letters,
-            ),
-          ),
-        ),
-      );
-
-      await tester.tap(find.byKey(key));
-      await tester.pumpAndSettle();
-
-      expect(find.text('A'), findsNothing);
-
-      await tester.pumpWidget(const SizedBox());
-    });
-  });
-
-  group('managed', () {
-    testWidgets('onChange callback called', (tester) async {
-      String? changedValue;
-
-      await tester.pumpWidget(
-        TestScaffold.app(
-          child: FSelect<String>(
-            key: key,
-            control: .managed(controller: controller, onChange: (value) => changedValue = value),
-            items: letters,
-          ),
-        ),
-      );
-
-      controller.value = 'A';
-      await tester.pump();
-
-      expect(changedValue, 'A');
     });
   });
 }

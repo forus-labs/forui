@@ -12,8 +12,8 @@ export '../src/widgets/select/content/scroll_handle.dart' hide ScrollHandle;
 export '../src/widgets/select/content/search_content.dart' hide SearchContent;
 export '../src/widgets/select/content/search_field_properties.dart';
 export '../src/widgets/select/multi/multi_select_controller.dart'
-    hide FMultiSelectManagedControl, InternalFMultiSelectControl, Lifted;
+    hide FMultiSelectManagedControl, InternalFMultiSelectControl;
 export '../src/widgets/select/multi/select.dart';
 export '../src/widgets/select/multi/tag.dart';
 export '../src/widgets/select/single/select.dart';
-export '../src/widgets/select/single/select_controller.dart' hide FSelectManagedControl, InternalFSelectControl, Lifted;
+export '../src/widgets/select/single/select_controller.dart' hide FSelectManagedControl, InternalFSelectControl;

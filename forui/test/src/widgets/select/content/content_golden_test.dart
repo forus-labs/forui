@@ -38,7 +38,7 @@ void main() {
   late ScrollController scrollController;
 
   setUp(() {
-    controller = FSelectController<String>(vsync: const TestVSync());
+    controller = FSelectController<String>();
     scrollController = ScrollController();
   });
 

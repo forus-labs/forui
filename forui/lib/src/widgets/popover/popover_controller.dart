@@ -1,14 +1,12 @@
+// ignore_for_file: avoid_positional_boolean_parameters
+
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
 
-import 'package:meta/meta.dart';
-
 import 'package:forui/forui.dart';
-
-// ignore_for_file: avoid_positional_boolean_parameters
 
 part 'popover_controller.control.dart';
 
@@ -23,13 +21,14 @@ class FPopoverController extends FChangeNotifier {
 
   /// Creates a [FPopoverController] with the given [vsync], [shown] and [motion].
   FPopoverController({required TickerProvider vsync, bool shown = false, FPopoverMotion motion = const .new()}) {
-    shown ? _overlay.show() : _overlay.hide();
+    if (shown) {
+      _overlay.show();
+    }
     _animation = AnimationController(
       vsync: vsync,
       duration: motion.entranceDuration,
       reverseDuration: motion.exitDuration,
-    )
-      ..value = shown ? 1 : 0;
+    )..value = shown ? 1 : 0;
     _curveFade = CurvedAnimation(parent: _animation, curve: motion.fadeInCurve, reverseCurve: motion.fadeOutCurve);
     _curveScale = CurvedAnimation(parent: _animation, curve: motion.expandCurve, reverseCurve: motion.collapseCurve);
     _scale = motion.scaleTween.animate(_curveScale);
@@ -90,15 +89,14 @@ extension InternalFPopoverController on FPopoverController {
   Animation<double> get fade => _fade;
 }
 
-@internal
-class ProxyPopoverController extends FPopoverController {
+class _ProxyController extends FPopoverController {
   int _monotonic;
   ValueChanged<bool> _onChange;
   FPopoverMotion _motion;
 
-  ProxyPopoverController(this._onChange, this._motion, {required super.vsync, super.shown})
-      : _monotonic = 0,
-        super(motion: _motion);
+  _ProxyController(this._onChange, this._motion, {required super.vsync, super.shown})
+    : _monotonic = 0,
+      super(motion: _motion);
 
   void update(bool shown, ValueChanged<bool> onChange, FPopoverMotion motion) {
     _onChange = onChange;
@@ -124,10 +122,12 @@ class ProxyPopoverController extends FPopoverController {
           await _animation.reverse();
           if (current == _monotonic) {
             _overlay.hide();
+            notifyListeners();
           }
         } else if (shown && !status.isForwardOrCompleted) {
           _overlay.show();
           await _animation.forward();
+          notifyListeners();
         }
       }
     });
@@ -164,10 +164,12 @@ sealed class FPopoverControl with Diagnosticable, _$FPopoverControlMixin {
 
   const FPopoverControl._();
 
-  (FPopoverController, bool) _update(FPopoverControl old,
-      FPopoverController controller,
-      VoidCallback callback,
-      TickerProvider vsync,);
+  (FPopoverController, bool) _update(
+    FPopoverControl old,
+    FPopoverController controller,
+    VoidCallback callback,
+    TickerProvider vsync,
+  );
 }
 
 /// A [FPopoverManagedControl] enables widgets to manage their own controller internally while exposing parameters for
@@ -199,9 +201,9 @@ class FPopoverManagedControl extends FPopoverControl with Diagnosticable, _$FPop
 
   /// Creates a [FPopoverControl].
   const FPopoverManagedControl({this.controller, this.initial, this.motion, this.onChange})
-      : assert(controller == null || initial == null, 'Cannot provide both controller and initial.'),
-        assert(controller == null || motion == null, 'Cannot provide both controller and motion.'),
-        super._();
+    : assert(controller == null || initial == null, 'Cannot provide both controller and initial.'),
+      assert(controller == null || motion == null, 'Cannot provide both controller and motion.'),
+      super._();
 
   @override
   FPopoverController createController(TickerProvider vsync) =>
@@ -220,9 +222,9 @@ class _Lifted extends FPopoverControl with _$_LiftedMixin {
 
   @override
   FPopoverController createController(TickerProvider vsync) =>
-      ProxyPopoverController(vsync: vsync, onChange, motion, shown: shown);
+      _ProxyController(vsync: vsync, onChange, motion, shown: shown);
 
   @override
   void _updateController(FPopoverController controller, TickerProvider vsync) =>
-      (controller as ProxyPopoverController).update(shown, onChange, motion);
+      (controller as _ProxyController).update(shown, onChange, motion);
 }
