@@ -356,7 +356,7 @@ void main() {
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('date-field/managed-selection-long-short.png'));
     });
 
-    testWidgets('managed - short to long', (tester) async {
+    testWidgets('lifted - short to long', (tester) async {
       DateTime? value = .utc(2025);
 
       await tester.pumpWidget(
@@ -381,7 +381,7 @@ void main() {
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('date-field/lifted-selection-short-long.png'));
     });
 
-    testWidgets('managed - long to short', (tester) async {
+    testWidgets('lifted - long to short', (tester) async {
       DateTime? value = .utc(2025);
 
       await tester.pumpWidget(
@@ -410,6 +410,30 @@ void main() {
       await tester.pumpAndSettle();
 
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('date-field/lifted-selection-long-short.png'));
+    });
+
+    testWidgets('lifted - arrow adjustment', (tester) async {
+      DateTime? value = DateTime.utc(2025, 1, 15);
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          locale: const Locale('en', 'SG'),
+          child: StatefulBuilder(
+            builder: (context, setState) => FDateField.input(
+              key: key,
+              control: .lifted(value: value, onChange: (v) => setState(() => value = v)),
+            ),
+          ),
+        ),
+      );
+
+      await tester.tapAt(tester.getTopLeft(find.byKey(key)));
+      await tester.pumpAndSettle();
+
+      await tester.sendKeyEvent(.arrowUp);
+      await tester.pumpAndSettle();
+
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('date-field/lifted-selection-arrow-adjustment.png'));
     });
   });
 }

@@ -248,6 +248,28 @@ void main() {
 
       expect(find.text('DD/MM/YYYY'), findsOneWidget);
     });
+
+    testWidgets('arrow adjustment does not change', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          locale: const Locale('en', 'SG'),
+          child: StatefulBuilder(
+            builder: (context, setState) => FDateField.input(
+              key: key,
+              control: .lifted(value: DateTime.utc(2025, 1, 15), onChange: (v) => setState(() {})),
+            ),
+          ),
+        ),
+      );
+
+      await tester.tapAt(tester.getTopLeft(find.byKey(key)));
+      await tester.pumpAndSettle();
+
+      await tester.sendKeyEvent(.arrowUp);
+      await tester.pumpAndSettle();
+
+      expect(find.text('15/01/2025'), findsOneWidget);
+    });
   });
 
   group('managed onChange', () {
