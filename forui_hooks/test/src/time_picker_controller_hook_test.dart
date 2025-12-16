@@ -13,7 +13,7 @@ void main() {
     await tester.pumpWidget(
       HookBuilder(
         builder: (context) {
-          controller = useFTimePickerController(initial: const FTime(12, 30));
+          controller = useFTimePickerController(time: const FTime(12, 30));
           return Container();
         },
       ),

@@ -110,6 +110,8 @@ abstract class Selector {
 
   TextEditingValue select(List<String> parts, int index);
 
+  TextEditingValue map(TextEditingValue oldValue, TextEditingValue newValue);
+
   List<String> split(String raw);
 
   String join(List<String> parts);

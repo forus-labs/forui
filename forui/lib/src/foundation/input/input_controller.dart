@@ -36,8 +36,6 @@ abstract class InputController extends TextEditingController {
 
     try {
       mutating = true;
-      final current = rawValue;
-
       rawValue = switch (newValue) {
         _ when newValue.text.isEmpty => TextEditingValue(
           text: placeholder,
@@ -46,10 +44,6 @@ abstract class InputController extends TextEditingController {
         _ when text != newValue.text => _update(newValue),
         _ => selector.navigate(newValue) ?? rawValue,
       };
-
-      if (current.text != rawValue.text) {
-        onValueChanged(rawValue.text);
-      }
     } finally {
       mutating = false;
     }
@@ -79,11 +73,6 @@ abstract class InputController extends TextEditingController {
   }
 
   Selector get selector;
-
-  // TODO: remove
-  @protected
-  @Deprecated('Remove')
-  void onValueChanged(String newValue) {}
 
   @protected
   TextEditingValue get rawValue => super.value;

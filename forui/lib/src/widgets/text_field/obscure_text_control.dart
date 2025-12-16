@@ -1,42 +1,52 @@
-import 'package:flutter/foundation.dart';
-
 // ignore_for_file: avoid_positional_boolean_parameters
 
+import 'package:flutter/foundation.dart';
+
 part 'obscure_text_control.control.dart';
+
+class _ProxyController extends ValueNotifier<bool> {
+  bool _unsynced;
+  ValueChanged<bool> _onChange;
+
+  _ProxyController(super._value, this._onChange) : _unsynced = _value;
+
+  void update(bool newValue, ValueChanged<bool> onChange) {
+    _onChange = onChange;
+    if (super.value != newValue) {
+      _unsynced = newValue;
+      super.value = newValue;
+    } else if (_unsynced != newValue) {
+      _unsynced = newValue;
+      notifyListeners();
+    }
+  }
+
+  @override
+  set value(bool newValue) {
+    if (super.value != newValue) {
+      _unsynced = newValue;
+      _onChange(newValue);
+    }
+  }
+}
 
 /// A [FObscureTextControl] defines how a password field's obscured state is controlled.
 ///
 /// {@macro forui.foundation.doc_templates.control}
 sealed class FObscureTextControl with Diagnosticable, _$FObscureTextControlMixin {
-  /// Creates a [FObscureTextControl] for controlling the obscure text using lifted state.
-  const factory FObscureTextControl.lifted({required bool value, required ValueChanged<bool> onChange}) = Lifted;
-
   /// Creates a [FObscureTextControl].
   const factory FObscureTextControl.managed({
     ValueNotifier<bool>? controller,
-    bool initial,
+    bool? initial,
     ValueChanged<bool>? onChange,
   }) = FObscureTextManagedControl;
+
+  /// Creates a [FObscureTextControl] for controlling the obscure text using lifted state.
+  const factory FObscureTextControl.lifted({required bool value, required ValueChanged<bool> onChange}) = _Lifted;
 
   const FObscureTextControl._();
 
   (ValueNotifier<bool>, bool) _update(FObscureTextControl old, ValueNotifier<bool> controller, VoidCallback callback);
-}
-
-@internal
-final class Lifted extends FObscureTextControl with _$LiftedMixin {
-  @override
-  final bool value;
-  @override
-  final ValueChanged<bool> onChange;
-
-  const Lifted({required this.value, required this.onChange}) : super._();
-
-  @override
-  ValueNotifier<bool> createController() => _Controller(value, onChange);
-
-  @override
-  void _updateController(ValueNotifier<bool> controller) => (controller as _Controller).update(value, onChange);
 }
 
 /// A [FObscureTextManagedControl] enables widgets to manage their own controller internally while exposing parameters
@@ -51,39 +61,37 @@ final class FObscureTextManagedControl extends FObscureTextControl with _$FObscu
   /// Whether the text is initially obscured. Defaults to true.
   ///
   /// ## Contract
-  /// Throws [AssertionError] if [initial] is false and [controller] is provided.
+  /// Throws [AssertionError] if [initial] and [controller] are provided.
   @override
-  final bool initial;
+  final bool? initial;
 
   /// Called when the obscured state changes.
   @override
   final ValueChanged<bool>? onChange;
 
   /// Creates a [FObscureTextControl].
-  const FObscureTextManagedControl({this.controller, this.initial = true, this.onChange})
-    : assert(controller == null || initial, 'Cannot provide both an initial value and a controller.'),
+  const FObscureTextManagedControl({this.controller, this.initial, this.onChange})
+    : assert(
+        controller == null || initial == null,
+        'Cannot provide both controller and initially obscured. Pass initial value to the controller instead.',
+      ),
       super._();
 
   @override
-  ValueNotifier<bool> createController() => controller ?? ValueNotifier(initial);
+  ValueNotifier<bool> createController() => controller ?? .new(initial ?? true);
 }
 
-class _Controller extends ValueNotifier<bool> {
-  ValueChanged<bool> _onChange;
+final class _Lifted extends FObscureTextControl with _$_LiftedMixin {
+  @override
+  final bool value;
+  @override
+  final ValueChanged<bool> onChange;
 
-  _Controller(super._value, this._onChange);
-
-  void update(bool value, ValueChanged<bool> onChange) {
-    if (super.value != value) {
-      super.value = value;
-    }
-    _onChange = onChange;
-  }
+  const _Lifted({required this.value, required this.onChange}) : super._();
 
   @override
-  set value(bool value) {
-    if (super.value != value) {
-      _onChange(value);
-    }
-  }
+  ValueNotifier<bool> createController() => _ProxyController(value, onChange);
+
+  @override
+  void _updateController(ValueNotifier<bool> controller) => (controller as _ProxyController).update(value, onChange);
 }

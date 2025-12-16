@@ -1,14 +1,12 @@
+// ignore_for_file: avoid_positional_boolean_parameters
+
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
 
-import 'package:meta/meta.dart';
-
 import 'package:forui/forui.dart';
-
-// ignore_for_file: avoid_positional_boolean_parameters
 
 part 'popover_controller.control.dart';
 
@@ -18,16 +16,19 @@ class FPopoverController extends FChangeNotifier {
   late final AnimationController _animation;
   late final CurvedAnimation _curveScale;
   late final CurvedAnimation _curveFade;
-  late final Animation<double> _scale;
-  late final Animation<double> _fade;
+  late Animation<double> _scale;
+  late Animation<double> _fade;
 
-  /// Creates a [FPopoverController] with the given [vsync], [initial] and [motion].
-  FPopoverController({required TickerProvider vsync, double initial = 0.0, FPopoverMotion motion = const .new()}) {
+  /// Creates a [FPopoverController] with the given [vsync], [shown] and [motion].
+  FPopoverController({required TickerProvider vsync, bool shown = false, FPopoverMotion motion = const .new()}) {
+    if (shown) {
+      _overlay.show();
+    }
     _animation = AnimationController(
       vsync: vsync,
       duration: motion.entranceDuration,
       reverseDuration: motion.exitDuration,
-    )..value = initial;
+    )..value = shown ? 1 : 0;
     _curveFade = CurvedAnimation(parent: _animation, curve: motion.fadeInCurve, reverseCurve: motion.fadeOutCurve);
     _curveScale = CurvedAnimation(parent: _animation, curve: motion.expandCurve, reverseCurve: motion.collapseCurve);
     _scale = motion.scaleTween.animate(_curveScale);
@@ -81,37 +82,6 @@ class FPopoverController extends FChangeNotifier {
 
 @internal
 extension InternalFPopoverController on FPopoverController {
-  /// Updates the given [controller] based on the [shown] and [onChange].
-  ///
-  /// Typically used when updating a popover controller nested in another controller.
-  @useResult
-  static FPopoverController updateNested(
-    FPopoverController controller,
-    TickerProvider vsync,
-    bool? shown,
-    ValueChanged<bool>? onChange,
-  ) {
-    switch ((controller, shown != null)) {
-      // Lifted -> Lifted
-      case (final LiftedPopoverController lifted, true):
-        lifted.update(shown!, onChange!);
-        return lifted;
-
-      // Lifted -> Internal
-      case (LiftedPopoverController(), false):
-        controller.dispose();
-        return FPopoverController(vsync: vsync);
-
-      // Internal -> Lifted
-      case (_, true) when controller is! LiftedPopoverController:
-        controller.dispose();
-        return LiftedPopoverController(shown!, onChange!, vsync: vsync);
-
-      default:
-        return controller;
-    }
-  }
-
   OverlayPortalController get overlay => _overlay;
 
   Animation<double> get scale => _scale;
@@ -119,20 +89,32 @@ extension InternalFPopoverController on FPopoverController {
   Animation<double> get fade => _fade;
 }
 
-@internal
-class LiftedPopoverController extends FPopoverController {
+class _ProxyController extends FPopoverController {
   int _monotonic;
-  void Function(bool shown) _onChange;
+  ValueChanged<bool> _onChange;
+  FPopoverMotion _motion;
 
-  LiftedPopoverController(bool shown, this._onChange, {required super.vsync, super.motion}) : _monotonic = 0 {
-    if (shown) {
-      _overlay.show();
-      _animation.value = 1;
-    }
-  }
+  _ProxyController(this._onChange, this._motion, {required super.vsync, super.shown})
+    : _monotonic = 0,
+      super(motion: _motion);
 
-  void update(bool shown, void Function(bool shown) onChange) {
+  void update(bool shown, ValueChanged<bool> onChange, FPopoverMotion motion) {
     _onChange = onChange;
+    if (_motion != motion) {
+      _motion = motion;
+      _animation
+        ..duration = motion.entranceDuration
+        ..reverseDuration = motion.exitDuration;
+      _curveFade
+        ..curve = motion.fadeInCurve
+        ..reverseCurve = motion.fadeOutCurve;
+      _curveScale
+        ..curve = motion.expandCurve
+        ..reverseCurve = motion.collapseCurve;
+      _scale = motion.scaleTween.animate(_curveScale);
+      _fade = motion.fadeTween.animate(_curveFade);
+    }
+
     final current = ++_monotonic;
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       if (current == _monotonic) {
@@ -140,10 +122,12 @@ class LiftedPopoverController extends FPopoverController {
           await _animation.reverse();
           if (current == _monotonic) {
             _overlay.hide();
+            notifyListeners();
           }
         } else if (shown && !status.isForwardOrCompleted) {
           _overlay.show();
           await _animation.forward();
+          notifyListeners();
         }
       }
     });
@@ -163,6 +147,7 @@ sealed class FPopoverControl with Diagnosticable, _$FPopoverControlMixin {
   /// Creates a [FPopoverControl].
   const factory FPopoverControl.managed({
     FPopoverController? controller,
+    bool? initial,
     FPopoverMotion? motion,
     ValueChanged<bool>? onChange,
   }) = FPopoverManagedControl;
@@ -196,6 +181,13 @@ class FPopoverManagedControl extends FPopoverControl with Diagnosticable, _$FPop
   @override
   final FPopoverController? controller;
 
+  /// Whether the popover is initially shown. Defaults to false (hidden).
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if [initial] and [controller] are both provided.
+  @override
+  final bool? initial;
+
   /// The popover motion. Defaults to [FPopoverMotion].
   ///
   /// ## Contract
@@ -208,13 +200,20 @@ class FPopoverManagedControl extends FPopoverControl with Diagnosticable, _$FPop
   final ValueChanged<bool>? onChange;
 
   /// Creates a [FPopoverControl].
-  const FPopoverManagedControl({this.controller, this.motion, this.onChange})
-    : assert(controller == null || motion == null, 'Cannot provide both controller and motion'),
+  const FPopoverManagedControl({this.controller, this.initial, this.motion, this.onChange})
+    : assert(
+        controller == null || initial == null,
+        'Cannot provide both controller and initially shown. Pass initially shown to the controller instead.',
+      ),
+      assert(
+        controller == null || motion == null,
+        'Cannot provide both controller and motion. Pass motion to the controller instead.',
+      ),
       super._();
 
   @override
   FPopoverController createController(TickerProvider vsync) =>
-      controller ?? .new(vsync: vsync, motion: motion ?? const .new());
+      controller ?? .new(vsync: vsync, shown: initial ?? false, motion: motion ?? const .new());
 }
 
 class _Lifted extends FPopoverControl with _$_LiftedMixin {
@@ -229,9 +228,9 @@ class _Lifted extends FPopoverControl with _$_LiftedMixin {
 
   @override
   FPopoverController createController(TickerProvider vsync) =>
-      LiftedPopoverController(vsync: vsync, shown, onChange, motion: motion);
+      _ProxyController(vsync: vsync, shown: shown, onChange, motion);
 
   @override
   void _updateController(FPopoverController controller, TickerProvider vsync) =>
-      (controller as LiftedPopoverController).update(shown, onChange);
+      (controller as _ProxyController).update(shown, onChange, motion);
 }

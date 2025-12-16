@@ -14,14 +14,14 @@ void main() {
       'input only',
       (Key key, FTime? value, ValueChanged<FTime?> onChange) => FTimeField(
         key: key,
-        control: .lifted(value: value, onChange: onChange),
+        control: .lifted(time: value, onChange: onChange),
       ),
     ),
     (
       'picker only',
       (Key key, FTime? value, ValueChanged<FTime?> onChange) => FTimeField.picker(
         key: key,
-        control: .lifted(value: value, onChange: onChange),
+        control: .lifted(time: value, onChange: onChange),
       ),
     ),
   ]) {
@@ -85,11 +85,7 @@ void main() {
             locale: const Locale('en', 'SG'),
             child: Form(
               key: key,
-              child: field(
-                autoDispose(FTimeFieldController(vsync: tester, initialTime: const FTime(10, 30))),
-                null,
-                (v) => initial = v,
-              ),
+              child: field(autoDispose(FTimeFieldController(time: const FTime(10, 30))), null, (v) => initial = v),
             ),
           ),
         );
@@ -167,7 +163,7 @@ void main() {
         int count = 0;
         void onChange(FTime? _) => count++;
 
-        final firstController = autoDispose(FTimeFieldController(vsync: tester));
+        final firstController = autoDispose(FTimeFieldController());
         await tester.pumpWidget(TestScaffold.app(child: field(firstController, onChange)));
 
         firstController.value = const FTime(1);
@@ -175,7 +171,7 @@ void main() {
 
         expect(count, 1);
 
-        final secondController = autoDispose(FTimeFieldController(vsync: tester));
+        final secondController = autoDispose(FTimeFieldController());
         await tester.pumpWidget(TestScaffold.app(child: field(secondController, onChange)));
 
         secondController.value = const FTime(2);
@@ -188,7 +184,7 @@ void main() {
         int first = 0;
         int second = 0;
 
-        final controller = autoDispose(FTimeFieldController(vsync: tester));
+        final controller = autoDispose(FTimeFieldController());
         await tester.pumpWidget(TestScaffold.app(child: field(controller, (_) => first++)));
 
         controller.value = const FTime(1);
@@ -209,14 +205,14 @@ void main() {
         int first = 0;
         int second = 0;
 
-        final firstController = autoDispose(FTimeFieldController(vsync: tester));
+        final firstController = autoDispose(FTimeFieldController());
         await tester.pumpWidget(TestScaffold.app(child: field(firstController, (_) => first++)));
 
         firstController.value = const FTime(1);
         await tester.pump();
         expect(first, 1);
 
-        final secondController = autoDispose(FTimeFieldController(vsync: tester));
+        final secondController = autoDispose(FTimeFieldController());
         await tester.pumpWidget(TestScaffold.app(child: field(secondController, (_) => second++)));
 
         secondController.value = const FTime(2);
@@ -232,7 +228,7 @@ void main() {
       testWidgets('disposed when controller is external', (tester) async {
         int count = 0;
 
-        final controller = autoDispose(FTimeFieldController(vsync: tester));
+        final controller = autoDispose(FTimeFieldController());
         await tester.pumpWidget(TestScaffold.app(child: field(controller, (_) => count++)));
 
         controller.value = const FTime(1);

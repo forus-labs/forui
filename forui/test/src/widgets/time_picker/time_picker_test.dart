@@ -20,7 +20,7 @@ void main() {
           locale: const Locale('en'),
           child: StatefulBuilder(
             builder: (_, setState) => FTimePicker(
-              control: .lifted(value: value, onChange: (v) => setState(() => value = v)),
+              control: .lifted(time: value, onChange: (v) => setState(() => value = v)),
             ),
           ),
         ),
@@ -38,7 +38,7 @@ void main() {
     testWidgets('onChange callback called', (tester) async {
       FTime? changedValue;
 
-      final controller = autoDispose(FTimePickerController(initial: const FTime(10, 30)));
+      final controller = autoDispose(FTimePickerController(time: const FTime(10, 30)));
       await tester.pumpWidget(
         TestScaffold.app(
           locale: const Locale('en'),
@@ -57,7 +57,7 @@ void main() {
 
   group('state', () {
     testWidgets('crossing 12pm does not cause controller value to update', (tester) async {
-      final controller = autoDispose(FTimePickerController(initial: const FTime(10, 30)));
+      final controller = autoDispose(FTimePickerController(time: const FTime(10, 30)));
 
       await tester.pumpWidget(
         TestScaffold.app(
@@ -81,8 +81,8 @@ void main() {
     });
 
     testWidgets('swap external controller', (tester) async {
-      final initial = autoDispose(FTimePickerController(initial: const FTime(10, 30)));
-      final current = autoDispose(FTimePickerController(initial: const FTime(14, 45)));
+      final initial = autoDispose(FTimePickerController(time: const FTime(10, 30)));
+      final current = autoDispose(FTimePickerController(time: const FTime(14, 45)));
 
       await tester.pumpWidget(
         TestScaffold.app(
@@ -126,7 +126,7 @@ void main() {
     });
 
     testWidgets('change intervals', (tester) async {
-      final controller = autoDispose(FTimePickerController(initial: const FTime(10, 31)));
+      final controller = autoDispose(FTimePickerController(time: const FTime(10, 31)));
 
       await tester.pumpWidget(
         TestScaffold.app(
@@ -150,7 +150,7 @@ void main() {
     });
 
     testWidgets('swap internal controller with external controller', (tester) async {
-      final controller = autoDispose(FTimePickerController(initial: const FTime(10, 30)));
+      final controller = autoDispose(FTimePickerController(time: const FTime(10, 30)));
 
       await tester.pumpWidget(TestScaffold.app(locale: const Locale('en'), child: const FTimePicker()));
 
@@ -164,7 +164,7 @@ void main() {
     });
 
     testWidgets('swap external controller with internal controller', (tester) async {
-      final controller = autoDispose(FTimePickerController(initial: const FTime(10, 30)));
+      final controller = autoDispose(FTimePickerController(time: const FTime(10, 30)));
 
       await tester.pumpWidget(
         TestScaffold.app(
@@ -178,7 +178,7 @@ void main() {
     });
 
     testWidgets('dispose controller', (tester) async {
-      final controller = autoDispose(FTimePickerController(initial: const FTime(10, 30)));
+      final controller = autoDispose(FTimePickerController(time: const FTime(10, 30)));
 
       await tester.pumpWidget(
         TestScaffold.app(
@@ -193,7 +193,7 @@ void main() {
   });
 
   testWidgets('period first', (tester) async {
-    final controller = autoDispose(FTimePickerController(initial: const FTime(22)));
+    final controller = autoDispose(FTimePickerController(time: const FTime(22)));
 
     await tester.pumpWidget(
       TestScaffold.app(
@@ -219,7 +219,7 @@ void main() {
       int count = 0;
       void onChange(FTime _) => count++;
 
-      final firstController = autoDispose(FTimePickerController(initial: const FTime(10, 30)));
+      final firstController = autoDispose(FTimePickerController(time: const FTime(10, 30)));
       await tester.pumpWidget(
         TestScaffold.app(
           child: FTimePicker(
@@ -233,7 +233,7 @@ void main() {
 
       expect(count, 3);
 
-      final secondController = autoDispose(FTimePickerController(initial: const FTime(12)));
+      final secondController = autoDispose(FTimePickerController(time: const FTime(12)));
       await tester.pumpWidget(
         TestScaffold.app(
           child: FTimePicker(
@@ -253,7 +253,7 @@ void main() {
       int first = 0;
       int second = 0;
 
-      final controller = autoDispose(FTimePickerController(initial: const FTime(10, 30)));
+      final controller = autoDispose(FTimePickerController(time: const FTime(10, 30)));
       await tester.pumpWidget(
         TestScaffold.app(
           child: FTimePicker(
@@ -286,7 +286,7 @@ void main() {
       int first = 0;
       int second = 0;
 
-      final firstController = autoDispose(FTimePickerController(initial: const FTime(10, 30)));
+      final firstController = autoDispose(FTimePickerController(time: const FTime(10, 30)));
       await tester.pumpWidget(
         TestScaffold.app(
           child: FTimePicker(
@@ -300,7 +300,7 @@ void main() {
 
       expect(first, 3);
 
-      final secondController = autoDispose(FTimePickerController(initial: const FTime(12)));
+      final secondController = autoDispose(FTimePickerController(time: const FTime(12)));
       await tester.pumpWidget(
         TestScaffold.app(
           child: FTimePicker(
@@ -320,7 +320,7 @@ void main() {
     testWidgets('disposed when controller is external', (tester) async {
       int count = 0;
 
-      final controller = autoDispose(FTimePickerController(initial: const FTime(10, 30)));
+      final controller = autoDispose(FTimePickerController(time: const FTime(10, 30)));
       await tester.pumpWidget(
         TestScaffold.app(
           child: FTimePicker(

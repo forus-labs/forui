@@ -3,10 +3,10 @@ import 'package:flutter/widgets.dart';
 
 // We call this InputFormField to avoid confusion with Flutter's TextFormField.
 @internal
-class InputFormField extends FormField<String> {
+class FormInput extends FormField<String> {
   final TextEditingController controller;
 
-  InputFormField({
+  FormInput({
     required this.controller,
     required super.initialValue,
     required super.onSaved,
@@ -44,7 +44,7 @@ class TextFormFieldState extends FormFieldState<String> {
   }
 
   @override
-  void didUpdateWidget(covariant InputFormField old) {
+  void didUpdateWidget(covariant FormInput old) {
     super.didUpdateWidget(old);
     if (widget.controller != old.controller) {
       old.controller.removeListener(_handleTextEditingChange);
@@ -85,5 +85,5 @@ class TextFormFieldState extends FormFieldState<String> {
   }
 
   @override
-  InputFormField get widget => super.widget as InputFormField;
+  FormInput get widget => super.widget as FormInput;
 }

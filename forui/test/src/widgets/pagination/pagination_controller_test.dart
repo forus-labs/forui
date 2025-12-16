@@ -3,25 +3,25 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:forui/src/widgets/pagination/pagination_controller.dart';
 
 void main() {
-  test('value', () {
-    final controller = FPaginationController(pages: 10, initialPage: 8)..page = 5;
-    expect(controller.page, 5);
-  });
-
   test('next', () {
-    final controller = FPaginationController(pages: 10, initialPage: 8)..next();
-    expect(controller.page, 9);
+    final controller = FPaginationController(pages: 10, page: 8)..next();
+    expect(controller.value, 9);
 
     controller.next();
-    expect(controller.page, 9);
+    expect(controller.value, 9);
   });
 
   test('previous', () {
-    final controller = FPaginationController(pages: 10, initialPage: 1)..previous();
-    expect(controller.page, 0);
+    final controller = FPaginationController(pages: 10, page: 1)..previous();
+    expect(controller.value, 0);
 
     controller.previous();
-    expect(controller.page, 0);
+    expect(controller.value, 0);
+  });
+
+  test('value', () {
+    final controller = FPaginationController(pages: 10, page: 8)..value = 5;
+    expect(controller.value, 5);
   });
 
   group('calculateSiblingRange(...)', () {
@@ -38,7 +38,7 @@ void main() {
       (9, (5, 9)),
     ]) {
       test('siblings = 1', () {
-        final controller = FPaginationController(pages: 10)..page = currentPage;
+        final controller = FPaginationController(pages: 10)..value = currentPage;
         expect(controller.siblingRange, expected);
       });
     }
@@ -56,7 +56,7 @@ void main() {
       (9, (7, 9)),
     ]) {
       test('siblings = 0', () {
-        final controller = FPaginationController(siblings: 0, pages: 10)..page = currentPage;
+        final controller = FPaginationController(siblings: 0, pages: 10)..value = currentPage;
         expect(controller.siblingRange, expected);
       });
     }

@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/widgets/text_field/form_field.dart';
+import 'package:forui/src/widgets/text_field/input/form_input.dart';
 import 'package:forui/src/widgets/text_field/password_field.dart';
 import 'package:forui/src/widgets/text_field/text_field_control.dart';
 
@@ -47,7 +47,7 @@ class PasswordFormField extends StatelessWidget with FFormFieldProperties<String
   Widget build(BuildContext context) => TextFieldControl(
     key: key,
     control: control,
-    builder: (context, controller, _) => InputFormField(
+    builder: (context, controller, _) => FormInput(
       controller: controller,
       onSaved: onSaved,
       onReset: onReset,

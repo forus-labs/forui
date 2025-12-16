@@ -18,10 +18,10 @@ class FDateFieldController implements FValueNotifier<DateTime?> {
   final FCalendarController<DateTime?> _calendar;
 
   /// Creates a [FDateFieldController].
-  FDateFieldController({DateTime? initial, String? Function(DateTime?) validator = _defaultValidator})
+  FDateFieldController({DateTime? date, String? Function(DateTime?) validator = _defaultValidator})
     : this._(
         validator: validator,
-        calendar: .date(initial: initial, selectable: (date) => validator(date) == null),
+        calendar: .date(initial: date, selectable: (date) => validator(date) == null),
       );
 
   FDateFieldController._({required this.validator, required FCalendarController<DateTime?> calendar})
@@ -70,14 +70,15 @@ class _ProxyCalendarController implements FCalendarController<DateTime?> {
   DateTime? _unsynced;
 
   _ProxyCalendarController(this._unsynced, this._onChange, this._validator)
-    : _controller = .date(initial: _unsynced, selectable: (date) => _validator(date) == null);
+    : _controller = .date(initial: _unsynced, selectable: (date) => _validator(date) == null, toggleable: false);
 
   void update(DateTime? newValue, ValueChanged<DateTime?> onChange, String? Function(DateTime?) validator) {
     _onChange = onChange;
     if (_validator != validator) {
+      _unsynced = newValue;
       _validator = validator;
       _controller.dispose();
-      _controller = .date(initial: newValue, selectable: (date) => validator(date) == null);
+      _controller = .date(initial: newValue, selectable: (date) => validator(date) == null, toggleable: false);
     } else if (_controller.value != newValue) {
       _unsynced = newValue;
       _controller.value = newValue;
@@ -89,6 +90,17 @@ class _ProxyCalendarController implements FCalendarController<DateTime?> {
 
   @override
   void select(DateTime date) {
+    if (_controller.value != date) {
+      _unsynced = date;
+      _onChange(date);
+    }
+  }
+
+  @override
+  DateTime? get value => _controller.value;
+
+  @override
+  set value(DateTime? date) {
     if (_controller.value != date) {
       _unsynced = date;
       _onChange(date);
@@ -124,17 +136,6 @@ class _ProxyCalendarController implements FCalendarController<DateTime?> {
 
   @override
   void removeValueListener(ValueChanged<DateTime?>? listener) => _controller.removeValueListener(listener);
-
-  @override
-  DateTime? get value => _controller.value;
-
-  @override
-  set value(DateTime? date) {
-    if (_controller.value != date) {
-      _unsynced = date;
-      _onChange(date);
-    }
-  }
 }
 
 /// A [FDateFieldControl] defines how a [FDateField] is controlled.
@@ -151,7 +152,7 @@ sealed class FDateFieldControl with Diagnosticable, _$FDateFieldControlMixin {
 
   /// Creates a [FDateFieldControl] for controlling a date field using lifted state.
   ///
-  /// The [value] represents the currently selected date.
+  /// The [date] represents the currently selected date.
   /// The [onChange] callback is invoked when the user selects a date. The given date is always in UTC.
   ///
   /// [validator] returns an error string to display if the input is invalid, or null otherwise. It is also used to
@@ -160,7 +161,7 @@ sealed class FDateFieldControl with Diagnosticable, _$FDateFieldControlMixin {
   /// ## Note
   /// Partial dates typed into input fields are treated as `null`, and not validated incrementally.
   const factory FDateFieldControl.lifted({
-    required DateTime? value,
+    required DateTime? date,
     required ValueChanged<DateTime?> onChange,
     FormFieldValidator<DateTime> validator,
   }) = _Lifted;
@@ -187,14 +188,14 @@ class FDateFieldManagedControl extends FDateFieldControl with Diagnosticable, _$
   /// The initial date. Defaults to null.
   ///
   /// ## Contract
-  /// Throws [AssertionError] if [initial] and [controller] are both provided.
+  /// Throws [AssertionError] if [controller] and [initial] are both provided.
   @override
   final DateTime? initial;
 
   /// The validator. Defaults to no validation.
   ///
   /// ## Contract
-  /// Throws [AssertionError] if [validator] and [controller] are both provided.
+  /// Throws [AssertionError] if [controller] and [validator] are both provided.
   @override
   final FormFieldValidator<DateTime>? validator;
 
@@ -204,32 +205,38 @@ class FDateFieldManagedControl extends FDateFieldControl with Diagnosticable, _$
 
   /// Creates a [FDateFieldControl].
   const FDateFieldManagedControl({this.controller, this.initial, this.validator, this.onChange})
-    : assert(controller == null || initial == null, 'Cannot provide both controller and initial.'),
-      assert(controller == null || validator == null, 'Cannot provide both controller and validator.'),
+    : assert(
+        controller == null || initial == null,
+        'Cannot provide both controller and initial date. Pass initial date to the controller instead.',
+      ),
+      assert(
+        controller == null || validator == null,
+        'Cannot provide both controller and validator. Pass validator to the controller instead.',
+      ),
       super._();
 
   @override
   FDateFieldController createController(TickerProvider vsync) =>
-      controller ?? .new(initial: initial, validator: validator ?? FDateFieldController._defaultValidator);
+      controller ?? .new(date: initial, validator: validator ?? FDateFieldController._defaultValidator);
 }
 
 class _Lifted extends FDateFieldControl with _$_LiftedMixin {
   @override
-  final DateTime? value;
+  final DateTime? date;
   @override
   final ValueChanged<DateTime?> onChange;
   @override
   final FormFieldValidator<DateTime> validator;
 
-  const _Lifted({required this.value, required this.onChange, this.validator = FDateFieldController._defaultValidator})
+  const _Lifted({required this.date, required this.onChange, this.validator = FDateFieldController._defaultValidator})
     : super._();
 
   @override
   FDateFieldController createController(TickerProvider vsync) =>
-      FDateFieldController._(calendar: _ProxyCalendarController(value, onChange, validator), validator: validator);
+      FDateFieldController._(calendar: _ProxyCalendarController(date, onChange, validator), validator: validator);
 
   @override
   void _updateController(FDateFieldController controller, TickerProvider vsync) {
-    (controller._calendar as _ProxyCalendarController).update(value, onChange, validator);
+    (controller._calendar as _ProxyCalendarController).update(date, onChange, validator);
   }
 }

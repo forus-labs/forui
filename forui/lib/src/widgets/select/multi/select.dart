@@ -10,10 +10,11 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/form/multi_value_form_field.dart';
+import 'package:forui/src/foundation/notifiers.dart';
+import 'package:forui/src/widgets/popover/popover_controller.dart';
 import 'package:forui/src/widgets/select/content/content.dart';
 import 'package:forui/src/widgets/select/content/inherited_controller.dart';
 import 'package:forui/src/widgets/select/content/search_content.dart';
-import 'package:forui/src/widgets/select/multi/multi_select_controller.dart';
 
 part 'basic_select.dart';
 
@@ -25,7 +26,7 @@ part 'select.design.dart';
 typedef FMultiSelectTagBuilder<T> =
     Widget Function(
       BuildContext context,
-      FMultiSelectController<T> controller,
+      FMultiValueNotifier<T> controller,
       FMultiSelectStyle style,
       T value,
       Widget label,
@@ -41,7 +42,7 @@ typedef FMultiSelectTagBuilder<T> =
 ///
 /// See:
 /// * https://forui.dev/docs/form/multi-select for working examples.
-/// * [FMultiSelectController] for customizing the behavior of a select.
+/// * [FMultiValueNotifier] for customizing the behavior of a select.
 /// * [FMultiSelectStyle] for customizing the appearance of a select.
 abstract class FMultiSelect<T> extends StatefulWidget {
   /// The default suffix builder that shows a upward and downward facing chevron icon.
@@ -53,7 +54,7 @@ abstract class FMultiSelect<T> extends StatefulWidget {
   /// The default tag builder that builds a [FMultiSelectTag] with the given value.
   static Widget defaultTagBuilder<T>(
     BuildContext context,
-    FMultiSelectController<T> controller,
+    FMultiValueNotifier<T> controller,
     FMultiSelectStyle style,
     T value,
     Widget label,
@@ -78,8 +79,13 @@ abstract class FMultiSelect<T> extends StatefulWidget {
 
   /// The control that manages the multi-select's state.
   ///
-  /// Defaults to [FMultiSelectControl.managed] if not provided.
-  final FMultiSelectControl<T>? control;
+  /// Defaults to [FMultiValueControl.managed] if not provided.
+  final FMultiValueControl<T>? control;
+
+  /// Defines how the multi-select's popover is controlled.
+  ///
+  /// Defaults to [FPopoverControl.managed].
+  final FPopoverControl popoverControl;
 
   /// The style.
   ///
@@ -199,7 +205,8 @@ abstract class FMultiSelect<T> extends StatefulWidget {
   /// undefined behavior.
   factory FMultiSelect({
     required Map<String, T> items,
-    FMultiSelectControl<T>? control,
+    FMultiValueControl<T>? control,
+    FPopoverControl popoverControl = const .managed(),
     FMultiSelectStyle Function(FMultiSelectStyle style)? style,
     bool autofocus = false,
     FocusNode? focusNode,
@@ -219,7 +226,7 @@ abstract class FMultiSelect<T> extends StatefulWidget {
     int Function(T a, T b)? sort,
     Widget Function(
       BuildContext context,
-      FMultiSelectController<T> controller,
+      FMultiValueNotifier<T> controller,
       FMultiSelectStyle style,
       T value,
       Widget label,
@@ -246,6 +253,7 @@ abstract class FMultiSelect<T> extends StatefulWidget {
     final inverse = {for (final MapEntry(:key, :value) in items.entries) value: key};
     return .rich(
       control: control,
+      popoverControl: popoverControl,
       style: style,
       autofocus: autofocus,
       focusNode: focusNode,
@@ -289,7 +297,8 @@ abstract class FMultiSelect<T> extends StatefulWidget {
   const factory FMultiSelect.rich({
     required Widget Function(T value) format,
     required List<FSelectItemMixin> children,
-    FMultiSelectControl<T>? control,
+    FMultiValueControl<T>? control,
+    FPopoverControl popoverControl,
     FMultiSelectStyle Function(FMultiSelectStyle style)? style,
     bool autofocus,
     FocusNode? focusNode,
@@ -348,7 +357,8 @@ abstract class FMultiSelect<T> extends StatefulWidget {
     Widget Function(BuildContext context, FSelectSearchStyle style) contentLoadingBuilder =
         FMultiSelect.defaultContentLoadingBuilder,
     Widget Function(BuildContext context, Object? error, StackTrace stackTrace)? contentErrorBuilder,
-    FMultiSelectControl<T>? control,
+    FMultiValueControl<T>? control,
+    FPopoverControl popoverControl = const .managed(),
     FMultiSelectStyle Function(FMultiSelectStyle style)? style,
     bool autofocus = false,
     FocusNode? focusNode,
@@ -400,6 +410,7 @@ abstract class FMultiSelect<T> extends StatefulWidget {
       contentLoadingBuilder: contentLoadingBuilder,
       contentErrorBuilder: contentErrorBuilder,
       control: control,
+      popoverControl: popoverControl,
       style: style,
       autofocus: autofocus,
       focusNode: focusNode,
@@ -453,7 +464,8 @@ abstract class FMultiSelect<T> extends StatefulWidget {
     FSelectSearchFieldProperties searchFieldProperties,
     Widget Function(BuildContext context, FSelectSearchStyle style) contentLoadingBuilder,
     Widget Function(BuildContext context, Object? error, StackTrace stackTrace)? contentErrorBuilder,
-    FMultiSelectControl<T>? control,
+    FMultiValueControl<T>? control,
+    FPopoverControl popoverControl,
     FMultiSelectStyle Function(FMultiSelectStyle style)? style,
     bool autofocus,
     FocusNode? focusNode,
@@ -493,6 +505,7 @@ abstract class FMultiSelect<T> extends StatefulWidget {
   const FMultiSelect._({
     required this.format,
     this.control,
+    this.popoverControl = const .managed(),
     this.style,
     this.autofocus = false,
     this.focusNode,
@@ -527,7 +540,7 @@ abstract class FMultiSelect<T> extends StatefulWidget {
     this.contentDivider = .none,
     Widget Function(
       BuildContext context,
-      FMultiSelectController<T> controller,
+      FMultiValueNotifier<T> controller,
       FMultiSelectStyle style,
       T value,
       Widget label,
@@ -541,6 +554,7 @@ abstract class FMultiSelect<T> extends StatefulWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('control', control))
+      ..add(DiagnosticsProperty('popoverControl', popoverControl))
       ..add(DiagnosticsProperty('style', style))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
@@ -576,13 +590,15 @@ abstract class FMultiSelect<T> extends StatefulWidget {
 }
 
 abstract class _FMultiSelectState<S extends FMultiSelect<T>, T> extends State<S> with TickerProviderStateMixin {
-  late FMultiSelectController<T> _controller;
+  late FMultiValueNotifier<T> _controller;
+  late FPopoverController _popoverController;
   late FocusNode _focus;
 
   @override
   void initState() {
     super.initState();
-    _controller = (widget.control ?? FMultiSelectControl<T>.managed()).create(_handleChange, this);
+    _controller = (widget.control ?? FMultiValueControl<T>.managed()).create(_handleChange);
+    _popoverController = widget.popoverControl.create(_handlePopoverChange, this);
     _focus = widget.focusNode ?? FocusNode(debugLabel: 'FMultiSelect');
   }
 
@@ -597,14 +613,18 @@ abstract class _FMultiSelectState<S extends FMultiSelect<T>, T> extends State<S>
       _focus = widget.focusNode ?? FocusNode(debugLabel: 'FMultiSelect');
     }
 
-    final current = widget.control ?? FMultiSelectControl<T>.managed();
-    final previous = old.control ?? FMultiSelectControl<T>.managed();
-    _controller = current.update(previous, _controller, _handleChange, this).$1;
+    final current = widget.control ?? FMultiValueControl<T>.managed();
+    final previous = old.control ?? FMultiValueControl<T>.managed();
+    _controller = current.update(previous, _controller, _handleChange).$1;
+    _popoverController = widget.popoverControl
+        .update(old.popoverControl, _popoverController, _handlePopoverChange, this)
+        .$1;
   }
 
   @override
   void dispose() {
-    (widget.control ?? FMultiSelectControl<T>.managed()).dispose(_controller, _handleChange);
+    widget.popoverControl.dispose(_popoverController, _handlePopoverChange);
+    (widget.control ?? FMultiValueControl<T>.managed()).dispose(_controller, _handleChange);
     if (widget.focusNode == null) {
       _focus.dispose();
     }
@@ -612,8 +632,14 @@ abstract class _FMultiSelectState<S extends FMultiSelect<T>, T> extends State<S>
   }
 
   void _handleChange() {
-    if (widget.control case FMultiSelectManagedControl(:final onChange?)) {
+    if (widget.control case FMultiValueManagedControl(:final onChange?)) {
       onChange(_controller.value);
+    }
+  }
+
+  void _handlePopoverChange() {
+    if (widget.popoverControl case FPopoverManagedControl(:final onChange?)) {
+      onChange(_popoverController.status.isForwardOrCompleted);
     }
   }
 
@@ -644,7 +670,7 @@ abstract class _FMultiSelectState<S extends FMultiSelect<T>, T> extends State<S>
             // Error should never be null as doing so causes the widget tree to change.
             error: state.errorText == null ? const SizedBox() : widget.errorBuilder(context, state.errorText!),
             child: FPopover(
-              control: FPopoverControl.managed(controller: _controller.popover),
+              control: .managed(controller: _popoverController),
               style: style.popoverStyle,
               constraints: widget.popoverConstraints,
               popoverAnchor: widget.anchor,
@@ -655,7 +681,7 @@ abstract class _FMultiSelectState<S extends FMultiSelect<T>, T> extends State<S>
               hideRegion: widget.hideRegion,
               shortcuts: {const SingleActivator(LogicalKeyboardKey.escape): _toggle},
               popoverBuilder: (context, controller) => InheritedSelectController<T>(
-                popover: _controller.popover,
+                popover: _popoverController,
                 contains: (value) => _controller.value.contains(value),
                 focus: (value) => _controller.value.lastOrNull == value,
                 onPress: (value) => _controller.update(value, add: !_controller.value.contains(value)),
@@ -731,8 +757,8 @@ abstract class _FMultiSelectState<S extends FMultiSelect<T>, T> extends State<S>
   }
 
   void _toggle() {
-    _controller.popover.status.isCompleted ? _focus.requestFocus() : _focus.unfocus();
-    _controller.popover.toggle();
+    _popoverController.status.isCompleted ? _focus.requestFocus() : _focus.unfocus();
+    _popoverController.toggle();
   }
 
   /// Builds the content displayed in the popover.

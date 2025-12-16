@@ -39,7 +39,7 @@ class AnimatedTimePickerPage extends StatefulSample {
 
 class _AnimatedTimePickerPageState extends StatefulSampleState<AnimatedTimePickerPage> {
   static final _random = Random();
-  final _controller = FTimePickerController(initial: .now());
+  final _controller = FTimePickerController(time: .now());
 
   @override
   void dispose() {

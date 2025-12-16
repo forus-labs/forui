@@ -57,8 +57,8 @@ class _ProxyController extends FAutocompleteController {
 
   @override
   set rawValue(TextEditingValue value) {
-    _unsynced = value;
     if (super.value != value) {
+      _unsynced = value;
       _onChange(value);
     }
   }
@@ -145,7 +145,10 @@ class FAutocompleteManagedControl extends FAutocompleteControl with _$FAutocompl
 
   /// Creates a [FAutocompleteControl].
   const FAutocompleteManagedControl({this.controller, this.initial, this.onChange})
-    : assert(controller == null || initial == null, 'Cannot provide both a controller and initial.'),
+    : assert(
+        controller == null || initial == null,
+        'Cannot provide both controller and initial value. Pass initial value to the controller instead.',
+      ),
       super._();
 
   @override

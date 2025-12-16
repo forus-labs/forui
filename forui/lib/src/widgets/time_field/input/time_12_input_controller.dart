@@ -7,17 +7,9 @@ import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/input/parser.dart';
 import 'package:forui/src/widgets/time_field/input/time_input_controller.dart';
 
-///
 @internal
-typedef Select12 =
-    TextEditingValue Function(
-      TextEditingValue value,
-      int first,
-      int last,
-      int end,
-      int firstSeparator,
-      int lastSeparator,
-    );
+typedef Select12<T> =
+    T Function(TextEditingValue value, int first, int last, int end, int firstSeparator, int lastSeparator);
 
 TextEditingValue _onFirst(TextEditingValue value, int first, int _, int _, int _, int _) =>
     value.copyWith(selection: .new(baseOffset: 0, extentOffset: first));
@@ -74,7 +66,6 @@ class Time12InputController extends TimeInputController {
             onLast: (_, _, _, _, _, _) => selector.select(parser.adjust(parts, 2, amount), 2),
           ) ??
           value;
-      onValueChanged(text);
     } finally {
       mutating = false;
     }
@@ -98,9 +89,28 @@ class Time12Selector extends Selector {
   @override
   TextEditingValue? navigate(
     TextEditingValue value, {
-    Select12 onFirst = _onFirst,
-    Select12 onMiddle = _onMiddle,
-    Select12 onLast = _onLast,
+    Select12<TextEditingValue> onFirst = _onFirst,
+    Select12<TextEditingValue> onMiddle = _onMiddle,
+    Select12<TextEditingValue> onLast = _onLast,
+  }) => _map(value, onFirst: onFirst, onMiddle: onMiddle, onLast: onLast);
+
+  @override
+  TextEditingValue map(TextEditingValue oldValue, TextEditingValue newValue) {
+    final index = _map(
+      oldValue,
+      onFirst: (_, _, _, _, _, _) => 0,
+      onMiddle: (_, _, _, _, _, _) => 1,
+      onLast: (_, _, _, _, _, _) => 2,
+    );
+
+    return index == null ? newValue : select(split(newValue.text), index);
+  }
+
+  T? _map<T>(
+    TextEditingValue value, {
+    required Select12<T> onFirst,
+    required Select12<T> onMiddle,
+    required Select12<T> onLast,
   }) {
     // precondition: value's text is valid.
     // There's generally 2 cases:

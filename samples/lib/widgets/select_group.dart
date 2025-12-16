@@ -91,7 +91,7 @@ class SelectGroupRadioFormPage extends StatefulSample {
 // TODO: Replace with FSelectGroup.managedRadio when available.
 class _SelectGroupRadioFormPageState extends StatefulSampleState<SelectGroupRadioFormPage> {
   final _key = GlobalKey<FormState>();
-  final _controller = FSelectGroupController<Notification>.radio();
+  final _controller = FMultiValueNotifier<Notification>.radio();
 
   @override
   void dispose() {

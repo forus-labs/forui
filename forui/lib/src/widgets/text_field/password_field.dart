@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/widgets/text_field/field.dart';
+import 'package:forui/src/widgets/text_field/input/input.dart';
 import 'package:forui/src/widgets/text_field/obscure_text_control.dart';
 
 /// A callback for building a field's icon.
@@ -290,7 +290,7 @@ class _State extends State<PasswordField> {
   @override
   Widget build(BuildContext context) => ValueListenableBuilder(
     valueListenable: _controller,
-    builder: (context, obscured, child) => Field(
+    builder: (context, obscured, child) => Input(
       controller: widget.controller,
       style: widget.properties.style,
       builder: widget.properties.builder,

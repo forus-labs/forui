@@ -6,7 +6,7 @@ import 'package:flutter/services.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/localizations/localized_text.dart';
-import 'package:forui/src/widgets/text_field/field.dart';
+import 'package:forui/src/widgets/text_field/input/input.dart';
 import 'package:forui/src/widgets/text_field/password_field.dart';
 import 'package:forui/src/widgets/text_field/text_field_control.dart';
 
@@ -66,7 +66,7 @@ class FTextField extends StatelessWidget {
     FTextFieldControl control = const .managed(),
     FObscureTextControl obscureTextControl = const .managed(),
     FTextFieldStyle Function(FTextFieldStyle style)? style,
-    FFieldBuilder<FTextFieldStyle> builder = Field.defaultBuilder,
+    FFieldBuilder<FTextFieldStyle> builder = Input.defaultBuilder,
     Widget? label = const LocalizedText.password(),
     String? hint,
     Widget? description,
@@ -116,14 +116,14 @@ class FTextField extends StatelessWidget {
     bool stylusHandwritingEnabled = true,
     bool enableIMEPersonalizedLearning = true,
     ContentInsertionConfiguration? contentInsertionConfiguration,
-    EditableTextContextMenuBuilder contextMenuBuilder = Field.defaultContextMenuBuilder,
+    EditableTextContextMenuBuilder contextMenuBuilder = Input.defaultContextMenuBuilder,
     bool canRequestFocus = true,
     UndoHistoryController? undoController,
     SpellCheckConfiguration? spellCheckConfiguration,
     FPasswordFieldIconBuilder<FTextFieldStyle>? prefixBuilder,
     FPasswordFieldIconBuilder<FTextFieldStyle>? suffixBuilder = PasswordField.defaultToggleBuilder,
-    bool Function(TextEditingValue) clearable = Field.defaultClearable,
-    FFieldClearIconBuilder clearIconBuilder = Field.defaultClearIconBuilder,
+    bool Function(TextEditingValue) clearable = Input.defaultClearable,
+    FFieldClearIconBuilder clearIconBuilder = Input.defaultClearIconBuilder,
     Key? key,
   }) => TextFieldControl(
     key: key,
@@ -813,7 +813,7 @@ class FTextField extends StatelessWidget {
   const FTextField({
     this.control = const .managed(),
     this.style,
-    this.builder = Field.defaultBuilder,
+    this.builder = Input.defaultBuilder,
     this.label,
     this.hint,
     this.description,
@@ -864,14 +864,14 @@ class FTextField extends StatelessWidget {
     this.stylusHandwritingEnabled = true,
     this.enableIMEPersonalizedLearning = true,
     this.contentInsertionConfiguration,
-    this.contextMenuBuilder = Field.defaultContextMenuBuilder,
+    this.contextMenuBuilder = Input.defaultContextMenuBuilder,
     this.canRequestFocus = true,
     this.undoController,
     this.spellCheckConfiguration,
     this.prefixBuilder,
     this.suffixBuilder,
-    this.clearable = Field.defaultClearable,
-    this.clearIconBuilder = Field.defaultClearIconBuilder,
+    this.clearable = Input.defaultClearable,
+    this.clearIconBuilder = Input.defaultClearIconBuilder,
     super.key,
   });
 
@@ -879,7 +879,7 @@ class FTextField extends StatelessWidget {
   const FTextField.email({
     this.control = const .managed(),
     this.style,
-    this.builder = Field.defaultBuilder,
+    this.builder = Input.defaultBuilder,
     this.label = const LocalizedText.email(),
     this.hint,
     this.description,
@@ -930,14 +930,14 @@ class FTextField extends StatelessWidget {
     this.stylusHandwritingEnabled = true,
     this.enableIMEPersonalizedLearning = true,
     this.contentInsertionConfiguration,
-    this.contextMenuBuilder = Field.defaultContextMenuBuilder,
+    this.contextMenuBuilder = Input.defaultContextMenuBuilder,
     this.canRequestFocus = true,
     this.undoController,
     this.spellCheckConfiguration,
     this.prefixBuilder,
     this.suffixBuilder,
-    this.clearable = Field.defaultClearable,
-    this.clearIconBuilder = Field.defaultClearIconBuilder,
+    this.clearable = Input.defaultClearable,
+    this.clearIconBuilder = Input.defaultClearIconBuilder,
     super.key,
   });
 
@@ -949,7 +949,7 @@ class FTextField extends StatelessWidget {
   const FTextField.multiline({
     this.control = const .managed(),
     this.style,
-    this.builder = Field.defaultBuilder,
+    this.builder = Input.defaultBuilder,
     this.label,
     this.hint,
     this.description,
@@ -1000,21 +1000,21 @@ class FTextField extends StatelessWidget {
     this.stylusHandwritingEnabled = true,
     this.enableIMEPersonalizedLearning = true,
     this.contentInsertionConfiguration,
-    this.contextMenuBuilder = Field.defaultContextMenuBuilder,
+    this.contextMenuBuilder = Input.defaultContextMenuBuilder,
     this.canRequestFocus = true,
     this.undoController,
     this.spellCheckConfiguration,
     this.prefixBuilder,
     this.suffixBuilder,
-    this.clearable = Field.defaultClearable,
-    this.clearIconBuilder = Field.defaultClearIconBuilder,
+    this.clearable = Input.defaultClearable,
+    this.clearIconBuilder = Input.defaultClearIconBuilder,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) => TextFieldControl(
     control: control,
-    builder: (context, controller, _) => Field(
+    builder: (context, controller, _) => Input(
       controller: controller,
       style: style,
       builder: builder,

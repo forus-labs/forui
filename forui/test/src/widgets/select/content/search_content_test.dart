@@ -31,7 +31,7 @@ void main() {
   late TextEditingController textController;
 
   setUp(() {
-    controller = FSelectController<String>(vsync: const TestVSync());
+    controller = FSelectController<String>();
     textController = TextEditingController();
   });
 

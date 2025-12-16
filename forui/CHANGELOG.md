@@ -80,7 +80,7 @@ Unfortunately, `FCalendar` cannot be easily migrated using data driven fixes due
 * Change `FDateField`'s input to preserve text selection when changing dates programmatically or via the calendar.
 * **Breaking** Rename `FDateField.shift` to `FDateField.overflow`.
 * **Breaking** Rename `FDateFieldController.calendar` to `FDateFieldController.popover`.
-* **Breaking** Rename `FDateFieldController(initialDate: ...)` to `FDateFieldController(initial: ...)`.
+* **Breaking** Rename `FDateFieldController(initialDate: ...)` to `FDateFieldController(date: ...)`.
 * **Breaking** Remove `FDateField.controller`. Use `FDateField(control: .managed(controller: ...))` instead.
 * **Breaking** Remove `FDateField.initialDate`. Use `FDateField(control: .managed(initial: ...))` instead.
 * **Breaking** Remove `FDateField.onChange`. Use `FDateField(control: .managed(onChange: ...))` instead.
@@ -113,18 +113,23 @@ Unfortunately, `FCalendar` cannot be easily migrated using data driven fixes due
 * **Breaking** Remove `FPagination.initialPage`. Use `FPagination(control: .managed(initialPage: ...))` instead.
 * **Breaking** Remove `FPagination.pages`. Use `FPagination(control: .managed(pages: ...))` instead.
 * **Breaking** Remove `FPagination.onChange`. Use `FPagination(control: .managed(onChange: ...))` instead.
+* **Breaking** Change `FPaginationController` to extend `ValueNotifier<int>` instead of `FChangeNotifier`.
+* **Breaking** Rename `FPaginationController(initialPage: ...)` to `FPaginationController(page: ...)`.
+* **Breaking** Rename `FPaginationController.page` to `FPaginationController.value`.
 
 
 ### `FPicker`
 * Add `FPickerControl`.
+* Add `FPickerController.animateTo(...)`.
 
+* **Breaking** Rename `FPickerController(initialIndexes: ...)` to `FPickerController(indexes: ...)`.
 * **Breaking** Remove `FPicker.controller`. Use `FPicker(control: .managed(...))` instead.
 * **Breaking** Remove `FPicker.onChange`. Use `FPicker(control: .managed(...))` instead.
 
 
 ### `FPopover`
 * Add `FPopoverControl`.
-* Add `FPopoverController.initial`.
+* Add `FPopoverController.shown`.
 
 * **Breaking** Change `FPopover.shift` to `FPopover.overflow`.
 * **Breaking** Remove `FPopover.controller`. Use `FPopover(control: .managed(...))` instead.
@@ -160,7 +165,6 @@ Unfortunately, `FCalendar` cannot be easily migrated using data driven fixes due
 
 ### `FSelect` & `FMultiSelect`
 * Add `FSelectControl`.
-* Add `FMultiSelectControl`.
 * Add `FSelectItemMixin.item(...)`.
 * Add `FSelectItemMixin.raw(...)`.
 * Add `FSelectItemMixin.section(...)`.
@@ -168,28 +172,30 @@ Unfortunately, `FCalendar` cannot be easily migrated using data driven fixes due
 * Add `FSelectItem.item(...)`.
 
 * **Breaking** Rename `FSelect.shift` to `FSelect.overflow`.
-* **Breaking** Rename `FMultiSelect.shift` to `FMultiSelect.overflow`.
 * **Breaking** Remove `FSelect.controller`. Use `FSelect(control: .managed(...))` instead.
 * **Breaking** Remove `FSelect.onChange`. Use `FSelect(control: .managed(...))` instead.
 * **Breaking** Remove `FSelect.initialValue`. Use `FSelect(control: .managed(...))` instead.
+* **Breaking** Remove `FSelectController(vsync: ..., popoverMotion: ...)`. Use `FSelect(popoverControl: ...)` instead.
+* **Breaking** Remove `FSelectSearchFieldProperties.controller`. Use `FSelectSearchFieldProperties(control: .managed(...))` instead.
+* **Breaking** Rename `FMultiSelect.shift` to `FMultiSelect.overflow`.
 * **Breaking** Remove `FMultiSelect.controller`. Use `FMultiSelect(control: .managed(...))` instead.
 * **Breaking** Remove `FMultiSelect.onChange`. Use `FMultiSelect(control: .managed(...))` instead.
 * **Breaking** Remove `FMultiSelect.initialValue`. Use `FMultiSelect(control: .managed(...))` instead.
 * **Breaking** Remove `FMultiSelect.min`. Use `FMultiSelect(control: .managed(...))` instead.
 * **Breaking** Remove `FMultiSelect.max`. Use `FMultiSelect(control: .managed(...))` instead.
-* **Breaking** Remove `FSelectSearchFieldProperties.controller`. Use `FSelectSearchFieldProperties(control: .managed(...))` instead.
+* **Breaking** Remove `FMultiSelectController`. Use `FMultiValueNotifier` instead.
 * Fix `FSelect.mouseCursor` defaulting to `SystemMouseCursors.click` instead of `MouseCursor.defer`.
 * Deprecate `FSelect.contentScrollHandles`. Please [open an issue](https://github.com/forus-labs/forui/issues) if you use & and need this.
 
 
 ### `FSelectGroup` & `FSelectTileGroup`
-* Add `FSelectGroupControl` - shared by both `FSelectGroup` and `FSelectTileGroup`.
 * Add `FSelectGroupItemMixin.checkbox(...)`.
 * Add `FSelectGroupItemMixin.radio(...)`.
 
 * **Breaking** Remove `FSelectGroup.controller`. Use `FSelectGroup(control: .managed(...))` instead.
 * **Breaking** Remove `FSelectGroup.onChange`. Use `FSelectGroup(control: .managed(...))` instead.
 * **Breaking** Remove `FSelectGroup.onSelect`.
+* **Breaking** Remove `FSelectGroupController`. Use `FMultiValueNotifier` instead.
 * **Breaking** Rename `FSelectGroupItem` to `FSelectGroupItemMixin`.
 
 
@@ -200,11 +206,12 @@ Unfortunately, `FCalendar` cannot be easily migrated using data driven fixes due
 * **Breaking** Remove `FSelectMenuTile.onChange`. Use `FSelectMenuTile(selectControl: .managed(...))` instead.
 * **Breaking** Remove `FSelectMenuTile.initialValue`. Use `FSelectMenuTile(selectControl: .managed(...))` instead.
 * **Breaking** Remove `FSelectMenuTile.onSelect`.
-* **Breaking** Remove `FSelectMenuTileController`. Use `FSelectGroupController` instead.
+* **Breaking** Remove `FSelectMenuTileController`. Use `FMultiValueNotifier` instead.
 
 
 ### `FSelectTileGroup`
-* **Breaking** Remove `FSelectTileGroupController`. Use `FSelectGroupController` instead.
+* **Breaking** Remove `FSelectTileGroupController`. Use `FMultiValueNotifier` instead.
+* **Breaking** Remove `FSelectGroupController`. Use `FMultiValueNotifier` instead.
 * **Breaking** Remove `FSelectTileGroup.selectController`. Use `FSelectTileGroup(control: .managed(...))` instead.
 * **Breaking** Remove `FSelectTileGroup.onChange`. Use `FSelectTileGroup(control: .managed(...))` instead.
 * **Breaking** Remove `FSelectTileGroup.onSelect`.
@@ -236,6 +243,7 @@ Unfortunately, `FCalendar` cannot be easily migrated using data driven fixes due
 * **Breaking** Remove `FTabs.controller`. Use `FTabs(control: .managed(...))` instead.
 * **Breaking** Remove `FTabs.initialIndex`. Use `FTabs(control: .managed(...))` instead.
 * **Breaking** Remove `FTabs.onChange`. Use `FTabs(control: .managed(...))` instead.
+* **Breaking** Rename `FTabController(initialIndex: ...)` to `FTabController(index: ...)`.
 
 
 ### `FTappable`
@@ -297,6 +305,8 @@ Unfortunately, `FCalendar` cannot be easily migrated using data driven fixes due
 * **Breaking** Remove `FTimeField.controller`. Use `FTimeField(control: .managed(...))` instead.
 * **Breaking** Remove `FTimeField.onChange`. Use `FTimeField(control: .managed(...))` instead.
 * **Breaking** Remove `FTimeField.initialTime`. Use `FTimeField(control: .managed(...))` instead.
+* **Breaking** Remove `FTimeFieldController(vsync: ..., popoverMotion: ...)`. Use `FTimeField(popoverControl: ...)` instead.
+* **Breaking** Rename `FTimeFieldController(initialTime: ...)` to `FTimeFieldController(time: ...)`.
 
 
 ### `FTimePicker`
@@ -304,11 +314,14 @@ Unfortunately, `FCalendar` cannot be easily migrated using data driven fixes due
 
 * **Breaking** Remove `FTimePicker.controller`. Use `FTimePicker(control: .managed(...))` instead.
 * **Breaking** Remove `FTimePicker.onChange`. Use `FTimePicker(control: .managed(...))` instead.
+* **Breaking** Rename `FTimePickerController(initial: ...)` to `FTimePickerController(time: ...)`.
+
+* Fix `FTimePickerController.animateTo(...)` not working with period-first locales (e.g. Korean).
 
 
 ### `FTooltip`
 * Add `FTooltipControl`.
-* Add `FTooltipController.initial`.
+* Add `FTooltipController.shown`.
 
 * Change `FTooltip` to not be focusable.
 * Change `FTooltip`'s focus-triggered behavior to only show if its immediate focusable descendant has primary focus.
@@ -323,6 +336,7 @@ Unfortunately, `FCalendar` cannot be easily migrated using data driven fixes due
 
 
 ### Others
+* Add `FMultiValueControl`.
 * Add `FTypeaheadController.fromValue(...)`.
 * Add `FTypeheadTextStyles`.
 

@@ -65,7 +65,7 @@ void main() {
       test('multiple separator - $index', () {
         final controller = TimeInputController.test(
           FLocalizationsFrCa(),
-          autoDispose(FTimeFieldController(vsync: const TestVSync())),
+          autoDispose(FTimeFieldController()),
           DateFormat.jm('fr_CA'),
           TestScaffold.blueScreen.textFieldStyle,
           'HH h MM',
@@ -95,7 +95,7 @@ void main() {
       test('forward - $index', () {
         final controller = TimeInputController.test(
           FLocalizationsFrCa(),
-          autoDispose(FTimeFieldController(vsync: const TestVSync())),
+          autoDispose(FTimeFieldController()),
           DateFormat.jm('fr_CA'),
           TestScaffold.blueScreen.textFieldStyle,
           'HH h MM',
@@ -123,7 +123,7 @@ void main() {
       test('backward - $index', () {
         final controller = TimeInputController.test(
           FLocalizationsFrCa(),
-          autoDispose(FTimeFieldController(vsync: const TestVSync())),
+          autoDispose(FTimeFieldController()),
           DateFormat.jm('fr_CA'),
           TestScaffold.blueScreen.textFieldStyle,
           'HH h MM',
@@ -162,7 +162,7 @@ void main() {
       final controller = autoDispose(
         TimeInputController.test(
           FLocalizationsFrCa(),
-          autoDispose(FTimeFieldController(vsync: const TestVSync())),
+          autoDispose(FTimeFieldController()),
           DateFormat.jm('fr_CA'),
           TestScaffold.blueScreen.textFieldStyle,
           'HH h MM',
@@ -208,7 +208,7 @@ void main() {
       test('single time separator - $index', () {
         final controller = TimeInputController(
           FLocalizationsEu(),
-          autoDispose(FTimeFieldController(vsync: const TestVSync())),
+          autoDispose(FTimeFieldController()),
           DateFormat.jm('eu'),
           TestScaffold.blueScreen.textFieldStyle,
         );
@@ -251,7 +251,7 @@ void main() {
       test('multiple time separator - $index', () {
         final controller = TimeInputController(
           FLocalizationsFrCa(),
-          autoDispose(FTimeFieldController(vsync: const TestVSync())),
+          autoDispose(FTimeFieldController()),
           DateFormat.jm('fr_CA'),
           TestScaffold.blueScreen.textFieldStyle,
         );
@@ -281,7 +281,7 @@ void main() {
       test('suffix - $index', () {
         final controller = TimeInputController(
           FLocalizationsBg(),
-          autoDispose(FTimeFieldController(vsync: const TestVSync())),
+          autoDispose(FTimeFieldController()),
           DateFormat.jm('bg'),
           TestScaffold.blueScreen.textFieldStyle,
         );
@@ -296,7 +296,7 @@ void main() {
     (const FTime(9, 30), null, const TextEditingValue(text: 'HH:MM ч.')),
   ].indexed) {
     test('update from time controller(...) - $index', () {
-      final timeController = autoDispose(FTimeFieldController(vsync: const TestVSync(), initialTime: initial));
+      final timeController = autoDispose(FTimeFieldController(time: initial));
       final controller = TimeInputController(
         FLocalizationsBg(),
         timeController,

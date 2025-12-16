@@ -32,7 +32,7 @@ void main() {
     });
 
     testWidgets('toggle shows when reverse', (tester) async {
-      final controller = autoDispose(FPopoverController(vsync: tester, initial: 1.0));
+      final controller = autoDispose(FPopoverController(vsync: tester, shown: true));
 
       await tester.pumpWidget(
         TestScaffold.app(

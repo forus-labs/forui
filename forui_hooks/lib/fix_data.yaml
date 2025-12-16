@@ -1,6 +1,6 @@
 version: 1
 transforms:
-  - title: 'Rename useFSelectTileGroupController to useFSelectGroupController'
+  - title: 'Rename useFSelectTileGroupController to useFMultiValueNotifier'
     date: 2025-11-30
     element:
       uris: [ 'package:forui_hooks/forui_hooks.dart' ]
@@ -9,9 +9,9 @@ transforms:
       - kind: replacedBy
         newElement:
           uris: [ 'package:forui_hooks/forui_hooks.dart' ]
-          function: 'useFSelectGroupController'
+          function: 'useFMultiValueNotifier'
 
-  - title: 'Rename useFSelectMenuTileController to useFSelectGroupController'
+  - title: 'Rename useFSelectMenuTileController to useFMultiValueNotifier'
     date: 2025-12-08
     element:
       uris: [ 'package:forui_hooks/forui_hooks.dart' ]
@@ -20,9 +20,9 @@ transforms:
       - kind: replacedBy
         newElement:
           uris: [ 'package:forui_hooks/forui_hooks.dart' ]
-          function: 'useFSelectGroupController'
+          function: 'useFMultiValueNotifier'
 
-  - title: 'Rename useFRadioSelectMenuTileController to useFRadioSelectGroupController'
+  - title: 'Rename useFRadioSelectMenuTileController to useFRadioMultiValueNotifier'
     date: 2025-12-08
     element:
       uris: [ 'package:forui_hooks/forui_hooks.dart' ]
@@ -31,4 +31,138 @@ transforms:
       - kind: replacedBy
         newElement:
           uris: [ 'package:forui_hooks/forui_hooks.dart' ]
-          function: 'useFRadioSelectGroupController'
+          function: 'useFRadioMultiValueNotifier'
+
+  - title: 'Replace useFMultiSelectController with useFMultiValueNotifier'
+    date: 2025-12-15
+    element:
+      uris: [ 'package:forui_hooks/forui_hooks.dart' ]
+      function: useFMultiSelectController
+    changes:
+      - kind: replacedBy
+        newElement:
+          uris: [ 'package:forui_hooks/forui_hooks.dart' ]
+          function: 'useFMultiValueNotifier'
+
+  - title: 'Replace useFSelectGroupController with useFMultiValueNotifier'
+    date: 2025-12-15
+    element:
+      uris: [ 'package:forui_hooks/forui_hooks.dart' ]
+      function: useFSelectGroupController
+    changes:
+      - kind: replacedBy
+        newElement:
+          uris: [ 'package:forui_hooks/forui_hooks.dart' ]
+          function: 'useFMultiValueNotifier'
+
+  - title: 'Replace useFRadioSelectGroupController with useFRadioMultiValueNotifier'
+    date: 2025-12-15
+    element:
+      uris: [ 'package:forui_hooks/forui_hooks.dart' ]
+      function: useFRadioSelectGroupController
+    changes:
+      - kind: replacedBy
+        newElement:
+          uris: [ 'package:forui_hooks/forui_hooks.dart' ]
+          function: 'useFRadioMultiValueNotifier'
+
+  - title: 'Rename useFTimeFieldController(initialTime: ...) to time'
+    date: 2025-12-16
+    element:
+      uris: [ 'package:forui_hooks/forui_hooks.dart' ]
+      function: useFTimeFieldController
+    changes:
+      - kind: renameParameter
+        oldName: 'initialTime'
+        newName: 'time'
+
+  - title: 'Replace useFRadioAccordionController with useFAccordionController'
+    date: 2025-12-16
+    element:
+      uris: [ 'package:forui_hooks/forui_hooks.dart' ]
+      function: useFRadioAccordionController
+    changes:
+      - kind: replacedBy
+        newElement:
+          uris: [ 'package:forui_hooks/forui_hooks.dart' ]
+          function: 'useFAccordionController'
+
+  - title: 'Rename useFDateCalendarController(initialSelection: ...) to initial'
+    date: 2025-12-16
+    element:
+      uris: [ 'package:forui_hooks/forui_hooks.dart' ]
+      function: useFDateCalendarController
+    changes:
+      - kind: renameParameter
+        oldName: 'initialSelection'
+        newName: 'initial'
+
+  - title: 'Rename useFDatesCalendarController(initialSelections: ...) to initial'
+    date: 2025-12-16
+    element:
+      uris: [ 'package:forui_hooks/forui_hooks.dart' ]
+      function: useFDatesCalendarController
+    changes:
+      - kind: renameParameter
+        oldName: 'initialSelections'
+        newName: 'initial'
+
+  - title: 'Rename useFRangeCalendarController(initialSelection: ...) to initial'
+    date: 2025-12-16
+    element:
+      uris: [ 'package:forui_hooks/forui_hooks.dart' ]
+      function: useFRangeCalendarController
+    changes:
+      - kind: renameParameter
+        oldName: 'initialSelection'
+        newName: 'initial'
+
+  - title: 'Rename useFDateFieldController(initialDate: ...) to date'
+    date: 2025-12-16
+    element:
+      uris: [ 'package:forui_hooks/forui_hooks.dart' ]
+      function: useFDateFieldController
+    changes:
+      - kind: renameParameter
+        oldName: 'initialDate'
+        newName: 'date'
+
+  - title: 'Rename useFPaginationController(initialPage: ...) to page'
+    date: 2025-12-16
+    element:
+      uris: [ 'package:forui_hooks/forui_hooks.dart' ]
+      function: useFPaginationController
+    changes:
+      - kind: renameParameter
+        oldName: 'initialPage'
+        newName: 'page'
+
+  - title: 'Rename useFPickerController(initialIndexes: ...) to indexes'
+    date: 2025-12-16
+    element:
+      uris: [ 'package:forui_hooks/forui_hooks.dart' ]
+      function: useFPickerController
+    changes:
+      - kind: renameParameter
+        oldName: 'initialIndexes'
+        newName: 'indexes'
+
+  - title: 'Rename useFTabController(initialIndex: ...) to index'
+    date: 2025-12-16
+    element:
+      uris: [ 'package:forui_hooks/forui_hooks.dart' ]
+      function: useFTabController
+    changes:
+      - kind: renameParameter
+        oldName: 'initialIndex'
+        newName: 'index'
+
+  - title: 'Rename useFTimePickerController(initial: ...) to time'
+    date: 2025-12-16
+    element:
+      uris: [ 'package:forui_hooks/forui_hooks.dart' ]
+      function: useFTimePickerController
+    changes:
+      - kind: renameParameter
+        oldName: 'initial'
+        newName: 'time'

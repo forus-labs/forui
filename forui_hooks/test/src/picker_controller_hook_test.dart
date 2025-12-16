@@ -13,7 +13,7 @@ void main() {
     await tester.pumpWidget(
       HookBuilder(
         builder: (context) {
-          controller = useFPickerController(initialIndexes: [1, 2, 3]);
+          controller = useFPickerController(indexes: [1, 2, 3]);
           return Container();
         },
       ),

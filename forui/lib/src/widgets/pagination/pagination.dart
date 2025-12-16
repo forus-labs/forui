@@ -75,7 +75,7 @@ class _FPaginationState extends State<FPagination> {
 
   void _handleOnChange() {
     if (widget.control case FPaginationManagedControl(:final onChange?)) {
-      onChange(_controller.page);
+      onChange(_controller.value);
     }
   }
 
@@ -123,14 +123,14 @@ class _FPaginationState extends State<FPagination> {
           mainAxisAlignment: .center,
           children: [
             previous,
-            if (_controller.page > _controller.minPagesDisplayedAtEdges) ...[
+            if (_controller.value > _controller.minPagesDisplayedAtEdges) ...[
               if (_controller.showEdges)
                 FPaginationItemData(page: 0, style: style, controller: _controller, child: const _Page()),
               ellipsis,
             ],
             for (int i = start; i <= end; i++)
               FPaginationItemData(page: i, style: style, controller: _controller, child: const _Page()),
-            if (_controller.page < (lastPage - _controller.minPagesDisplayedAtEdges)) ...[
+            if (_controller.value < (lastPage - _controller.minPagesDisplayedAtEdges)) ...[
               ellipsis,
               if (_controller.showEdges)
                 FPaginationItemData(page: lastPage, style: style, controller: _controller, child: const _Page()),
@@ -239,8 +239,8 @@ class _Page extends StatelessWidget {
         builder: (_, _) => FTappable(
           style: style.pageTappableStyle,
           focusedOutlineStyle: style.focusedOutlineStyle,
-          selected: controller.page == page,
-          onPress: () => controller.page = page,
+          selected: controller.value == page,
+          onPress: () => controller.value = page,
           builder: (_, states, _) => DecoratedBox(
             decoration: style.itemDecoration.resolve(states),
             child: ConstrainedBox(

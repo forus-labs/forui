@@ -201,7 +201,7 @@ class FormAutocompletePage extends StatefulSample {
   State<FormAutocompletePage> createState() => _FormAutocompletePageState();
 }
 
-class _FormAutocompletePageState extends StatefulSampleState<FormAutocompletePage> with SingleTickerProviderStateMixin {
+class _FormAutocompletePageState extends StatefulSampleState<FormAutocompletePage> {
   final _key = GlobalKey<FormState>();
 
   @override

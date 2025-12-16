@@ -6,7 +6,7 @@ import 'package:meta/meta.dart';
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/debug.dart';
 import 'package:forui/src/foundation/form/multi_value_form_field.dart';
-import 'package:forui/src/widgets/select_group/select_group_controller.dart';
+import 'package:forui/src/foundation/notifiers.dart';
 
 part 'select_group.design.dart';
 
@@ -19,7 +19,7 @@ class FSelectGroupItemData<T> extends InheritedWidget {
   }
 
   /// The controller.
-  final FSelectGroupController<T> controller;
+  final FMultiValueNotifier<T> controller;
 
   /// The style.
   final FSelectGroupStyle style;
@@ -62,8 +62,8 @@ class FSelectGroupItemData<T> extends InheritedWidget {
 class FSelectGroup<T> extends StatefulWidget with FFormFieldProperties<Set<T>> {
   /// Defines how the select group's value is controlled.
   ///
-  /// Defaults to [FSelectGroupControl.managed].
-  final FSelectGroupControl<T>? control;
+  /// Defaults to [FMultiValueControl.managed].
+  final FMultiValueControl<T>? control;
 
   /// The style. Defaults to [FThemeData.selectGroupStyle].
   ///
@@ -148,25 +148,25 @@ class FSelectGroup<T> extends StatefulWidget with FFormFieldProperties<Set<T>> {
 }
 
 class _FSelectGroupState<T> extends State<FSelectGroup<T>> {
-  late FSelectGroupController<T> _controller;
+  late FMultiValueNotifier<T> _controller;
 
   @override
   void initState() {
     super.initState();
-    _controller = (widget.control ?? FSelectGroupControl<T>.managed()).create(_handleChange);
+    _controller = (widget.control ?? FMultiValueControl<T>.managed()).create(_handleChange);
   }
 
   @override
   void didUpdateWidget(covariant FSelectGroup<T> old) {
     super.didUpdateWidget(old);
-    final current = widget.control ?? FSelectGroupControl<T>.managed();
-    final previous = old.control ?? FSelectGroupControl<T>.managed();
+    final current = widget.control ?? FMultiValueControl<T>.managed();
+    final previous = old.control ?? FMultiValueControl<T>.managed();
     _controller = current.update(previous, _controller, _handleChange).$1;
   }
 
   void _handleChange() {
     setState(() {});
-    if (widget.control case FSelectGroupManagedControl(:final onChange?)) {
+    if (widget.control case FMultiValueManagedControl(:final onChange?)) {
       onChange(_controller.value);
     }
   }
@@ -213,7 +213,7 @@ class _FSelectGroupState<T> extends State<FSelectGroup<T>> {
 
   @override
   void dispose() {
-    (widget.control ?? FSelectGroupControl<T>.managed()).dispose(_controller, _handleChange);
+    (widget.control ?? FMultiValueControl<T>.managed()).dispose(_controller, _handleChange);
     super.dispose();
   }
 }

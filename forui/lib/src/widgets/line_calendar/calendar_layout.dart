@@ -100,6 +100,13 @@ class _CalendarLayoutState extends State<CalendarLayout> {
     _controller = widget.control.update(old.control, _controller, _handleOnChange).$1;
   }
 
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    widget.control.dispose(_controller, _handleOnChange);
+    super.dispose();
+  }
+
   double _estimateWidth() {
     final scale = widget.scale;
     final textStyle = widget.textStyle;
@@ -161,13 +168,6 @@ class _CalendarLayoutState extends State<CalendarLayout> {
         ),
       ],
     );
-  }
-
-  @override
-  void dispose() {
-    _scrollController.dispose();
-    widget.control.dispose(_controller, _handleOnChange);
-    super.dispose();
   }
 }
 

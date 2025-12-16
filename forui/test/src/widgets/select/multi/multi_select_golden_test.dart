@@ -181,7 +181,7 @@ void main() {
           theme: theme.data,
           alignment: Alignment.topCenter,
           child: FMultiSelect(
-            control: const .managed(initial: {'Apple', 'Banana'}),
+            control: const FMultiValueControl.managed(initial: {'Apple', 'Banana'}),
             items: letters,
             key: key,
           ),
@@ -238,7 +238,7 @@ void main() {
           theme: theme.data,
           alignment: Alignment.topCenter,
           child: FMultiSelect(
-            control: const .managed(initial: {'Apple', 'Banana'}),
+            control: const FMultiValueControl.managed(initial: {'Apple', 'Banana'}),
             items: letters,
             clearable: true,
             key: key,
@@ -258,7 +258,7 @@ void main() {
           theme: theme.data,
           alignment: Alignment.topCenter,
           child: FMultiSelect(
-            control: const .managed(initial: {'Apple', 'Banana'}),
+            control: const FMultiValueControl.managed(initial: {'Apple', 'Banana'}),
             items: letters,
             clearable: true,
             key: key,
@@ -285,7 +285,7 @@ void main() {
           theme: theme.data,
           alignment: Alignment.topCenter,
           child: FMultiSelect(
-            control: const .managed(initial: {'Apple', 'Banana'}),
+            control: const FMultiValueControl.managed(initial: {'Apple', 'Banana'}),
             items: letters,
             label: const Text('Fruits'),
             description: const Text('Select your favorite fruits'),
@@ -304,7 +304,7 @@ void main() {
           theme: theme.data,
           alignment: Alignment.topCenter,
           child: FMultiSelect(
-            control: const .managed(initial: {'Apple', 'Banana'}),
+            control: const FMultiValueControl.managed(initial: {'Apple', 'Banana'}),
             items: letters,
             enabled: false,
             label: const Text('Fruits'),
@@ -324,7 +324,7 @@ void main() {
           theme: theme.data,
           alignment: Alignment.topCenter,
           child: FMultiSelect(
-            control: const .managed(initial: {'Apple', 'Banana'}),
+            control: const FMultiValueControl.managed(initial: {'Apple', 'Banana'}),
             items: letters,
             label: const Text('Fruits'),
             description: const Text('Select your favorite fruits'),
@@ -397,7 +397,7 @@ void main() {
       TestScaffold.app(
         alignment: Alignment.topCenter,
         child: FMultiSelect<String>(
-          control: const .managed(
+          control: const FMultiValueControl.managed(
             initial: {
               'Apple',
               'Banana',
@@ -427,7 +427,7 @@ void main() {
       TestScaffold.app(
         alignment: Alignment.topCenter,
         child: FMultiSelect<String>(
-          control: const .managed(
+          control: const FMultiValueControl.managed(
             initial: {'Apple', 'Banana', 'Cherry', 'Dragonfruit', 'Elderberry', 'Fig', 'Grape', 'Honeydew'},
           ),
           items: letters,
@@ -447,7 +447,7 @@ void main() {
       TestScaffold.app(
         alignment: Alignment.topCenter,
         child: FMultiSelect<String>(
-          control: const .managed(initial: {'Apple', 'Banana', 'Cherry'}),
+          control: const FMultiValueControl.managed(initial: {'Apple', 'Banana', 'Cherry'}),
           items: letters,
           tagBuilder: (context, _, _, _, child) => child,
           key: key,
@@ -466,7 +466,7 @@ void main() {
       TestScaffold.app(
         alignment: Alignment.topCenter,
         child: FMultiSelect<String>(
-          control: const .managed(initial: {'Grape', 'Apple', 'Banana'}),
+          control: const FMultiValueControl.managed(initial: {'Grape', 'Apple', 'Banana'}),
           items: letters,
           key: key,
         ),
@@ -484,7 +484,7 @@ void main() {
       TestScaffold.app(
         alignment: Alignment.topCenter,
         child: FMultiSelect<String>(
-          control: const .managed(initial: {'Grape', 'Apple', 'Banana'}),
+          control: const FMultiValueControl.managed(initial: {'Grape', 'Apple', 'Banana'}),
           items: letters,
           sort: (a, b) => a.compareTo(b),
           key: key,

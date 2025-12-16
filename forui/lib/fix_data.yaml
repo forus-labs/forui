@@ -1024,6 +1024,38 @@ transforms:
           - kind: removeParameter
             name: 'initialPage'
 
+  # FPaginationController
+  - title: 'Rename FPaginationController(initialPage: ...) to page'
+    date: 2025-12-13
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FPaginationController
+    changes:
+      - kind: renameParameter
+        oldName: 'initialPage'
+        newName: 'page'
+
+  - title: 'Rename FPaginationController.page getter to value'
+    date: 2025-12-13
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      getter: 'page'
+      inClass: FPaginationController
+    changes:
+      - kind: rename
+        newName: 'value'
+
+  - title: 'Rename FPaginationController.page setter to value'
+    date: 2025-12-13
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      setter: 'page'
+      inClass: FPaginationController
+    changes:
+      - kind: rename
+        newName: 'value'
+
   # FPicker
   - title: 'Migrate FPicker to control parameter'
     date: 2025-12-08
@@ -1074,6 +1106,17 @@ transforms:
               expression: '.managed(onChange: {% onChange %})'
           - kind: removeParameter
             name: 'onChange'
+
+  - title: 'Rename FPickerController(initialIndexes: ...) to indexes'
+    date: 2025-12-14
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FPickerController
+    changes:
+      - kind: renameParameter
+        oldName: 'initialIndexes'
+        newName: 'indexes'
 
   # FPopover
   - title: 'Migrate FPopover(controller: ...) to control parameter'
@@ -2204,6 +2247,43 @@ transforms:
           - kind: removeParameter
             name: 'max'
 
+  # FMultiSelectController
+  - title: 'Remove FMultiSelectController vsync and popoverMotion parameters'
+    date: 2025-12-15
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FMultiSelectController
+    changes:
+      - kind: removeParameter
+        name: 'vsync'
+      - kind: removeParameter
+        name: 'popoverMotion'
+
+  - title: 'Rename FMultiSelectController to FMultiValueNotifier'
+    date: 2025-12-15
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      class: FMultiSelectController
+    changes:
+      - kind: replacedBy
+        newElement:
+          uris: [ 'package:forui/forui.dart' ]
+          class: 'FMultiValueNotifier'
+
+  # FSelectController
+  - title: 'Remove FSelectController vsync and popoverMotion parameters'
+    date: 2025-12-15
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FSelectController
+    changes:
+      - kind: removeParameter
+        name: 'vsync'
+      - kind: removeParameter
+        name: 'popoverMotion'
+
 
   # FSelectSearchFieldProperties
   - title: 'Migrate FSelectSearchFieldProperties(controller: ...) to control parameter'
@@ -2289,16 +2369,25 @@ transforms:
           - kind: removeParameter
             name: 'onChange'
 
+  - title: 'Rename FSelectGroupController to FMultiValueNotifier'
+    date: 2025-12-15
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      typedef: FSelectGroupController
+    changes:
+      - kind: rename
+        newName: 'FMultiValueNotifier'
+
 
   # FSelectTileGroup
-  - title: 'Rename FSelectTileGroupController to FSelectGroupController'
+  - title: 'Rename FSelectTileGroupController to FMultiValueNotifier'
     date: 2025-11-30
     element:
       uris: [ 'package:forui/forui.dart' ]
       typedef: FSelectTileGroupController
     changes:
       - kind: rename
-        newName: 'FSelectGroupController'
+        newName: 'FMultiValueNotifier'
 
   - title: 'Migrate FSelectTileGroup to control parameter'
     date: 2025-12-07
@@ -2537,14 +2626,14 @@ transforms:
         oldName: 'shift'
         newName: 'overflow'
 
-  - title: 'Rename FSelectMenuTileController to FSelectGroupController'
+  - title: 'Rename FSelectMenuTileController to FMultiValueNotifier'
     date: 2025-12-08
     element:
       uris: [ 'package:forui/forui.dart' ]
       typedef: FSelectMenuTileController
     changes:
       - kind: rename
-        newName: 'FSelectGroupController'
+        newName: 'FMultiValueNotifier'
 
   - title: 'Migrate FSelectMenuTile to control parameters'
     date: 2025-12-08
@@ -4208,6 +4297,17 @@ transforms:
           - kind: removeParameter
             name: 'onChange'
 
+  - title: 'Rename FTimePickerController(initial: ...) to time'
+    date: 2025-12-16
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FTimePickerController
+    changes:
+      - kind: renameParameter
+        oldName: 'initial'
+        newName: 'time'
+
   # FTooltip
   - title: 'Migrate FTooltip(controller: ...) to control parameter'
     date: 2025-12-06
@@ -4397,6 +4497,29 @@ transforms:
           - kind: removeParameter
             name: 'onChange'
 
+  - title: 'Remove FTimeFieldController vsync and popoverMotion parameters'
+    date: 2025-12-15
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FTimeFieldController
+    changes:
+      - kind: removeParameter
+        name: 'vsync'
+      - kind: removeParameter
+        name: 'popoverMotion'
+
+  - title: 'Rename FTimeFieldController(initialTime: ...) to time'
+    date: 2025-12-16
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FTimeFieldController
+    changes:
+      - kind: renameParameter
+        oldName: 'initialTime'
+        newName: 'time'
+
 
   # FTabs
   - title: 'Migrate FTabs to control parameter'
@@ -4475,3 +4598,14 @@ transforms:
               expression: '.managed(onChange: {% onChange %})'
           - kind: removeParameter
             name: 'onChange'
+
+  - title: 'Rename FTabController(initialIndex: ...) to index'
+    date: 2025-12-15
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FTabController
+    changes:
+      - kind: renameParameter
+        oldName: 'initialIndex'
+        newName: 'index'

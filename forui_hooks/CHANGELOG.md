@@ -1,10 +1,28 @@
 ## 0.17.0
-* **Breaking** Remove `useFAutocompleteController(vsync: ...)`.
+* Add `useFPopoverController(shown: ...)`.
+* Add `useFTooltipController(shown: ...)`.
+
+* **Breaking** Remove `useFAutocompleteController(vsync: ..., popoverMotion: ...)`. Use `FSelect(popoverControl: ...)` instead.
 * **Breaking** Remove `useFDateFieldController(vsync: ..., popoverMotion: ..., truncateAndStripTimezone: ...)`. Use `FDateField(popoverControl: ...)` instead.
-* **Breaking** Rename `useFDateFieldController(initialDate: ...)` to `useFDateFieldController(initial: ...)`.
-* **Breaking** Remove `useFSelectTileGroupController`. Use `useFSelectGroupController` instead.
-* **Breaking** Remove `useFSelectMenuTileController`. Use `useFSelectGroupController` instead.
-* **Breaking** Remove `useFRadioSelectMenuTileController`. Use `useFRadioSelectGroupController` instead.
+* **Breaking** Rename `useFDateFieldController(initialDate: ...)` to `useFDateFieldController(date: ...)`.
+* **Breaking** Remove `useFMultiSelectController`. Use `useFMultiValueNotifier` instead.
+* **Breaking** Remove `useFSelectController(vsync: ..., popoverMotion: ...)`. Use `FSelect(popoverControl: ...)` instead.
+* **Breaking** Remove `useFSelectTileGroupController`. Use `useFMultiValueNotifier` instead.
+* **Breaking** Remove `useFSelectMenuTileController`. Use `useFMultiValueNotifier` instead.
+* **Breaking** Remove `useFRadioSelectMenuTileController`. Use `useFRadioMultiValueNotifier` instead.
+* **Breaking** Remove `useFSelectGroupController`. Use `useFMultiValueNotifier` instead.
+* **Breaking** Remove `useFRadioSelectGroupController`. Use `useFRadioMultiValueNotifier` instead.
+* **Breaking** Remove `useFRadioAccordionController`. Use `useFAccordionController` instead.
+* **Breaking** Remove `useFTimeFieldController(vsync: ..., popoverMotion: ...)`. Use `FTimeField(popoverControl: ...)` instead.
+* **Breaking** Rename `useFTimeFieldController(initialTime: ...)` to `useFTimeFieldController(time: ...)`.
+* **Breaking** Rename `useFDateCalendarController(initialSelection: ...)` to `useFDateCalendarController(initial: ...)`.
+* **Breaking** Rename `useFDatesCalendarController(initialSelections: ...)` to `useFDatesCalendarController(initial: ...)`.
+* **Breaking** Rename `useFRangeCalendarController(initialSelection: ...)` to `useFRangeCalendarController(initial: ...)`.
+* **Breaking** Rename `useFPaginationController(initialPage: ...)` to `useFPaginationController(page: ...)`.
+* **Breaking** Rename `useFPickerController(initialIndexes: ...)` to `useFPickerController(indexes: ...)`.
+* **Breaking** Rename `useFTabController(initialIndex: ...)` to `useFTabController(index: ...)`.
+* **Breaking** Rename `useFTimePickerController(initial: ...)` to `useFTimePickerController(time: ...)`.
+* Fix `useFDateCalendarController(togglable: ...)` defaulting to false instead of true.
 
 
 ## 0.16.0

@@ -35,6 +35,30 @@ void main() {
     });
   });
 
+  group('lifted', () {
+    testWidgets('arrow adjustment does not change', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          locale: const Locale('en', 'SG'),
+          child: StatefulBuilder(
+            builder: (context, setState) => FTimeField(
+              key: key,
+              control: .lifted(time: const FTime(10, 30), onChange: (v) => setState(() {})),
+            ),
+          ),
+        ),
+      );
+
+      await tester.tapAt(tester.getTopLeft(find.byKey(key)));
+      await tester.pumpAndSettle();
+
+      await tester.sendKeyEvent(.arrowUp);
+      await tester.pumpAndSettle();
+
+      expect(find.text('10:30 am'), findsOneWidget);
+    });
+  });
+
   for (final (index, (locale, placeholder)) in const [
     (null, 'HH:MM --'),
     (Locale('en', 'SG'), 'HH:MM --'),
@@ -175,7 +199,6 @@ void main() {
 
       final controller = autoDispose(
         FTimeFieldController(
-          vsync: const TestVSync(),
           validator: (time) {
             if (time == const FTime(12, 30)) {
               return 'Custom error.';

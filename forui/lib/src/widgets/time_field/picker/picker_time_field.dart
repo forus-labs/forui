@@ -48,6 +48,7 @@ class _PickerTimeField extends FTimeField implements FTimeFieldPickerProperties 
     this.hourInterval = 1,
     this.minuteInterval = 1,
     super.control,
+    super.popoverControl,
     super.style,
     super.hour24,
     super.autofocus,
@@ -116,7 +117,12 @@ class _PickerTimeFieldState extends _FTimeFieldState<_PickerTimeField> {
       _format = widget.hour24 ? .Hm(localizations) : .jm(localizations);
     }
 
-    final (controller, updated) = widget.control.update(old.control, _controller, _handleOnChange, this);
+    final (controller, updated) = widget.control.update(
+      old.control,
+      _controller,
+      _handleOnChange,
+      _popoverController.status.isForwardOrCompleted,
+    );
     if (updated) {
       _controller = controller;
       _updateTextController();
@@ -135,9 +141,7 @@ class _PickerTimeFieldState extends _FTimeFieldState<_PickerTimeField> {
   @override
   void _handleOnChange() {
     _updateTextController();
-    if (widget.control case FTimeFieldManagedControl(:final onChange?)) {
-      onChange(_controller.value);
-    }
+    super._handleOnChange();
   }
 
   void _updateTextController() {
@@ -189,6 +193,7 @@ class _PickerTimeFieldState extends _FTimeFieldState<_PickerTimeField> {
         error: state.hasError ? widget.errorBuilder(state.context, state.errorText ?? '') : null,
         builder: (context, _, states, field) => _PickerPopover(
           controller: _controller,
+          popoverController: _popoverController,
           style: style,
           hour24: widget.hour24,
           properties: widget,
@@ -204,15 +209,16 @@ class _PickerTimeFieldState extends _FTimeFieldState<_PickerTimeField> {
   }
 
   void _onTap() {
-    const {AnimationStatus.completed, AnimationStatus.reverse}.contains(_controller.popover.status)
+    const {AnimationStatus.completed, AnimationStatus.reverse}.contains(_popoverController.status)
         ? _focus.requestFocus()
         : _focus.unfocus();
-    _controller.popover.toggle();
+    _popoverController.toggle();
   }
 }
 
 class _PickerPopover extends StatelessWidget {
   final FTimeFieldController controller;
+  final FPopoverController popoverController;
   final FTimeFieldStyle style;
   final FTimeFieldPickerProperties properties;
   final bool hour24;
@@ -222,6 +228,7 @@ class _PickerPopover extends StatelessWidget {
 
   const _PickerPopover({
     required this.controller,
+    required this.popoverController,
     required this.style,
     required this.properties,
     required this.hour24,
@@ -232,7 +239,7 @@ class _PickerPopover extends StatelessWidget {
 
   @override
   Widget build(BuildContext _) => FPopover(
-    control: .managed(controller: controller.popover),
+    control: .managed(controller: popoverController),
     style: style.popoverStyle,
     constraints: style.popoverConstraints,
     popoverAnchor: properties.anchor,
@@ -261,7 +268,7 @@ class _PickerPopover extends StatelessWidget {
 
   void _hide() {
     fieldFocusNode?.requestFocus();
-    controller.popover.hide();
+    popoverController.hide();
   }
 
   @override
@@ -269,6 +276,7 @@ class _PickerPopover extends StatelessWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('controller', controller))
+      ..add(DiagnosticsProperty('popoverController', popoverController))
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('properties', this.properties))
       ..add(DiagnosticsProperty('hour24', hour24))

@@ -30,7 +30,7 @@ class PaginationCustomIconPage extends StatefulSample {
 }
 
 class _PaginationCustomIconPageState extends StatefulSampleState<PaginationCustomIconPage> {
-  late final _controller = FPaginationController(pages: 10, initialPage: 4);
+  late final _controller = FPaginationController(pages: 10, page: 4);
 
   @override
   void dispose() {
@@ -84,7 +84,7 @@ class _PaginationWithViewPageState extends StatefulSampleState<PaginationWithVie
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    _paginationController.page = PageStorage.maybeOf(context)?.readState(context) ?? 0;
+    _paginationController.value = PageStorage.maybeOf(context)?.readState(context) ?? 0;
   }
 
   void _handlePageChange(int page) {
@@ -123,7 +123,7 @@ class _PaginationWithViewPageState extends StatefulSampleState<PaginationWithVie
           child: NotificationListener<ScrollEndNotification>(
             onNotification: (notification) {
               if (_controller.hasClients) {
-                _paginationController.page = _controller.page!.round();
+                _paginationController.value = _controller.page!.round();
                 return true;
               }
 

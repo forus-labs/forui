@@ -95,6 +95,22 @@ void main() {
         expect(controller.mutating, false);
       });
 
+      testWidgets('set to 12-hour time after noon with period-first locale', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold.app(
+            locale: const Locale('ko'),
+            child: FTimePicker(control: .managed(controller: controller)),
+          ),
+        );
+
+        function(const FTime(13, 30));
+        await tester.pumpAndSettle(const Duration(seconds: 1));
+
+        expect(controller.value, const FTime(13, 30));
+        expect(controller.picker?.value, [1, 13, 30]);
+        expect(controller.mutating, false);
+      });
+
       testWidgets('set to 24-hour time', (tester) async {
         await tester.pumpWidget(
           TestScaffold.app(
@@ -175,7 +191,7 @@ void main() {
 
         controller
           ..picker?.dispose()
-          ..picker = FPickerController(initialIndexes: [1, 13, 30])
+          ..picker = FPickerController(indexes: [1, 13, 30])
           ..decode();
 
         expect(controller.value, const FTime(13, 30));
@@ -191,7 +207,7 @@ void main() {
 
         controller
           ..picker?.dispose()
-          ..picker = FPickerController(initialIndexes: [0, 5, 30])
+          ..picker = FPickerController(indexes: [0, 5, 30])
           ..decode();
 
         expect(controller.value, const FTime(5, 30));
@@ -208,7 +224,7 @@ void main() {
 
         controller
           ..picker?.dispose()
-          ..picker = FPickerController(initialIndexes: [13, 30, 1])
+          ..picker = FPickerController(indexes: [13, 30, 1])
           ..decode();
 
         expect(controller.value, const FTime(13, 30));
@@ -223,7 +239,7 @@ void main() {
 
         controller
           ..picker?.dispose()
-          ..picker = FPickerController(initialIndexes: [5, 30, 0])
+          ..picker = FPickerController(indexes: [5, 30, 0])
           ..decode();
 
         expect(controller.value, const FTime(5, 30));
@@ -240,7 +256,7 @@ void main() {
 
         controller
           ..picker?.dispose()
-          ..picker = FPickerController(initialIndexes: [14, 30])
+          ..picker = FPickerController(indexes: [14, 30])
           ..decode();
 
         expect(controller.value, const FTime(14, 30));
@@ -255,7 +271,7 @@ void main() {
 
         controller
           ..picker?.dispose()
-          ..picker = FPickerController(initialIndexes: [2, 30])
+          ..picker = FPickerController(indexes: [2, 30])
           ..decode();
 
         expect(controller.value, const FTime(12, 30));
@@ -270,7 +286,7 @@ void main() {
 
         controller
           ..picker?.dispose()
-          ..picker = FPickerController(initialIndexes: [14, 7])
+          ..picker = FPickerController(indexes: [14, 7])
           ..decode();
 
         expect(controller.value, const FTime(14, 35));

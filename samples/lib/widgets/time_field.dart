@@ -50,10 +50,9 @@ class FormTimeFieldPage extends StatefulSample {
   State<FormTimeFieldPage> createState() => _FormTimeFieldPageState();
 }
 
-class _FormTimeFieldPageState extends StatefulSampleState<FormTimeFieldPage> with TickerProviderStateMixin {
+class _FormTimeFieldPageState extends StatefulSampleState<FormTimeFieldPage> {
   final _key = GlobalKey<FormState>();
-  late final _startTimeController = FTimeFieldController(
-    vsync: this,
+  late final _startController = FTimeFieldController(
     validator: (time) => switch (time) {
       null => 'Please select a start time.',
       _ when time < .now() => 'Start Time must be in the future.',
@@ -63,7 +62,7 @@ class _FormTimeFieldPageState extends StatefulSampleState<FormTimeFieldPage> wit
 
   @override
   void dispose() {
-    _startTimeController.dispose();
+    _startController.dispose();
     super.dispose();
   }
 
@@ -73,7 +72,7 @@ class _FormTimeFieldPageState extends StatefulSampleState<FormTimeFieldPage> wit
     child: Column(
       children: [
         FTimeField(
-          control: .managed(controller: _startTimeController),
+          control: .managed(controller: _startController),
           label: const Text('Start Time'),
           description: const Text('Select a start time.'),
           autovalidateMode: .disabled,
@@ -83,7 +82,7 @@ class _FormTimeFieldPageState extends StatefulSampleState<FormTimeFieldPage> wit
           control: .managed(
             validator: (time) => switch (time) {
               null => 'Please select an end time.',
-              _ when _startTimeController.value != null && time < _startTimeController.value! =>
+              _ when _startController.value != null && time < _startController.value! =>
                 'End Time must be after start time.',
               _ => null,
             },

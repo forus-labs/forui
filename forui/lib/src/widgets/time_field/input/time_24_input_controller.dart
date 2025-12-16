@@ -6,9 +6,8 @@ import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/input/parser.dart';
 import 'package:forui/src/widgets/time_field/input/time_input_controller.dart';
 
-///
 @internal
-typedef Select24 = TextEditingValue Function(TextEditingValue, int only, int end, int separator);
+typedef Select24<T> = T Function(TextEditingValue, int only, int end, int separator);
 
 TextEditingValue _first(TextEditingValue value, int only, int _, int _) =>
     value.copyWith(selection: .new(baseOffset: 0, extentOffset: only));
@@ -56,7 +55,6 @@ class Time24InputController extends TimeInputController {
             onLast: (_, _, _, _) => selector.select(parser.adjust(parts, 1, amount), 1),
           ) ??
           value;
-      onValueChanged(text);
     } finally {
       mutating = false;
     }
@@ -69,7 +67,20 @@ class Time24Selector extends Selector {
     : super(localizations, RegExp(RegExp.escape(localizations.timeFieldSuffix) + r'$'));
 
   @override
-  TextEditingValue? navigate(TextEditingValue value, {Select24 onFirst = _first, Select24 onLast = _last}) {
+  TextEditingValue? navigate(
+    TextEditingValue value, {
+    Select24<TextEditingValue> onFirst = _first,
+    Select24<TextEditingValue> onLast = _last,
+  }) => _map(value, onFirst: onFirst, onLast: onLast);
+
+  @override
+  TextEditingValue map(TextEditingValue oldValue, TextEditingValue newValue) {
+    final index = _map(oldValue, onFirst: (_, _, _, _) => 0, onLast: (_, _, _, _) => 1);
+
+    return index == null ? newValue : select(split(newValue.text), index);
+  }
+
+  T? _map<T>(TextEditingValue value, {required Select24<T> onFirst, required Select24<T> onLast}) {
     final separator = localizations.timeFieldTimeSeparator.length;
     final only = value.text.indexOf(localizations.timeFieldTimeSeparator);
     final end = value.text.length - localizations.timeFieldSuffix.length;

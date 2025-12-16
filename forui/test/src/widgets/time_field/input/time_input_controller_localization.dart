@@ -27,7 +27,7 @@ void main() {
               builder: (context) {
                 final controller = TimeInputController(
                   FLocalizations.of(context)!,
-                  FTimeFieldController(vsync: const TestVSync(), initialTime: const FTime(12, 15)),
+                  FTimeFieldController(time: const FTime(12, 15)),
                   DateFormat.jm(locale.toString()),
                   context.theme.textFieldStyle,
                 );
@@ -56,7 +56,7 @@ void main() {
               builder: (context) {
                 final controller = TimeInputController(
                   FLocalizations.of(context)!,
-                  FTimeFieldController(vsync: const TestVSync(), initialTime: const FTime(12, 15)),
+                  FTimeFieldController(time: const FTime(12, 15)),
                   DateFormat.Hm(locale.toString()),
                   context.theme.textFieldStyle,
                 );
