@@ -43,7 +43,7 @@ void main() {
           child: StatefulBuilder(
             builder: (context, setState) => FTimeField(
               key: key,
-              control: .lifted(value: const FTime(10, 30), onChange: (v) => setState(() {})),
+              control: .lifted(time: const FTime(10, 30), onChange: (v) => setState(() {})),
             ),
           ),
         ),

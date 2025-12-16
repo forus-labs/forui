@@ -24,7 +24,7 @@ void main() {
         child: StatefulBuilder(
           builder: (context, setState) => FTimeField(
             key: key,
-            control: .lifted(value: value, onChange: (v) => setState(() => value = v)),
+            control: .lifted(time: value, onChange: (v) => setState(() => value = v)),
           ),
         ),
       ),

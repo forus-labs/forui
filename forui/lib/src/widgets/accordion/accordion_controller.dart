@@ -205,10 +205,16 @@ class FAccordionManagedControl extends FAccordionControl with _$FAccordionManage
   final FAccordionController? controller;
 
   /// The minimum number of expanded items. Defaults to 0.
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if [min]/[max] and [controller] are provided.
   @override
   final int? min;
 
   /// The maximum number of expanded items. Defaults to no limit.
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if [min]/[max] and [controller] are provided.
   @override
   final int? max;
 
@@ -220,7 +226,7 @@ class FAccordionManagedControl extends FAccordionControl with _$FAccordionManage
   const FAccordionManagedControl({this.controller, this.min, this.max, this.onChange})
     : assert(
         controller == null || (min == null && max == null),
-        'Cannot provide both controller and min/max constraints',
+        'Cannot provide both controller and min/max constraints. Pass min/max to the controller instead.',
       ),
       super._();
 

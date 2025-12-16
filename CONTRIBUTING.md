@@ -112,9 +112,9 @@ class Foo extends StatelessWidget {
 }
 ```
 
-### Extend `FChangeNotifier` & `FValueNotifier<T>` instead of `ChangeNotifier` & `ValueNotifier<T>`
+### Extend `FChangeNotifier` instead of `ChangeNotifier`
 
-These subclasses have additional life-cycle tracking capabilities baked-in.
+This subclass have additional life-cycle tracking capabilities baked-in.
 
 ### Minimize dependency on Cupertino/Material
 
@@ -165,6 +165,152 @@ They should:
    an ancestor `FTheme`.
 
 Lastly, the order of the fields and methods should be as shown above.
+
+
+### Widget Controls
+
+Controls define how a widget is controlled. They follow a pattern using sealed classes with two variants:
+* **Managed**: The widget manages its own controller internally while exposing parameters for common configurations.
+* **Lifted**: The widget uses external state management, with the parent providing expanded/collapsed state and callbacks.
+
+The control pattern is code-generated using `forui_internal_gen`. Files are organized as follows:
+```
+lib/src/widgets/my_widget/
+├── my_widget_controller.dart          (Controller + Control definition)
+├── my_widget_controller.control.dart  (GENERATED)
+├── my_widget.dart                     (Widget + Style + Motion)
+└── my_widget.design.dart              (GENERATED)
+```
+
+#### Proxy Controllers
+
+Flutter is a controller-centric framework. Therefore, widgets that support lifted state require a proxy controller
+that delegates operations to external callbacks given by the user instead of managing state internally.
+
+For example, when a user expands an accordion item using `FAccordionControl.lifted(...)`, the proxy controller:
+1. Receives the expansion request via the controller's public API (e.g., `expand(index)`)
+2. Delegates to the parent's `onChange` callback instead of updating internal state
+3. Reads current state from the parent's `expanded` predicate
+
+```dart
+@internal
+class ProxyMyWidgetController extends FMyWidgetController {
+  bool Function(int index) _supply;
+  void Function(int index, bool value) _onChange;
+
+  ProxyMyWidgetController(this._supply, this._onChange);
+
+  void update(bool Function(int index) supply, void Function(int index, bool value) onChange) {
+    _supply = supply;
+    _onChange = onChange;
+  }
+
+  @override
+  Future<bool> toggle(int index) async {
+    _onChange(index, !_supply(index));
+    return true;
+  }
+}
+```
+
+This allows the widget to use a consistent controller-based internal API regardless of whether state is managed
+internally or lifted to a parent widget.
+
+#### Control Sealed Class
+
+The control sealed class should:
+1. Mix in `Diagnosticable` and `_$FMyWidgetControlMixin` (generated).
+2. Define `managed` and `lifted` factory constructors.
+3. Define an `_update` method signature that returns `(FMyWidgetController, bool)`.
+
+```dart
+sealed class FMyWidgetControl with Diagnosticable, _$FMyWidgetControlMixin {
+  const factory FMyWidgetControl.managed({
+    FMyWidgetController? controller,
+    // ... other managed parameters
+  }) = FMyWidgetManagedControl;
+
+  const factory FMyWidgetControl.lifted({
+    // ... lifted state parameters
+  }) = _Lifted;
+
+  const FMyWidgetControl._();
+
+  (FMyWidgetController, bool) _update(
+    FMyWidgetControl old,
+    FMyWidgetController controller,
+    VoidCallback callback,
+    // ... other parameters passed to createController
+  );
+}
+```
+
+#### Control Subclasses
+
+The managed control should be a **public** class that mixes in the generated `_$FMyWidgetManagedControlMixin`:
+
+```dart
+class FMyWidgetManagedControl extends FMyWidgetControl with _$FMyWidgetManagedControlMixin {
+  @override
+  final FMyWidgetController? controller;
+  // ... other @override fields
+
+  const FMyWidgetManagedControl({this.controller, ...}) : super._();
+
+  @override
+  FMyWidgetController createController(/* parameters */) =>
+    controller ?? FMyWidgetController(/* ... */);
+}
+```
+
+The lifted control should be a **private** class that mixes in the generated `_$_LiftedMixin`:
+
+```dart
+class _Lifted extends FMyWidgetControl with _$_LiftedMixin {
+  @override
+  final /* lifted state fields */;
+
+  const _Lifted({required /* ... */}) : super._();
+
+  @override
+  FMyWidgetController createController(/* parameters */) => /* ... */;
+
+  @override
+  void _updateController(FMyWidgetController controller, /* parameters */) { /* ... */ }
+}
+```
+
+#### Using Control in Widget
+
+Use the generated extension methods in your widget's `State`:
+
+```dart
+class _FMyWidgetState extends State<FMyWidget> {
+  late FMyWidgetController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = widget.control.create(_handleChange, /* ... */);
+  }
+
+  @override
+  void didUpdateWidget(covariant FMyWidget old) {
+    super.didUpdateWidget(old);
+    final (controller, _) = widget.control.update(old.control, _controller, _handleChange, /* ... */);
+    _controller = controller;
+  }
+
+  @override
+  void dispose() {
+    widget.control.dispose(_controller, _handleChange);
+    super.dispose();
+  }
+}
+```
+
+See [FAccordionController](https://github.com/forus-labs/forui/blob/main/forui/lib/src/widgets/accordion/accordion_controller.dart)
+for a reference implementation.
 
 ### Hide, not Show
 

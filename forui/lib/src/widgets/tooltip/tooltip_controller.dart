@@ -147,6 +147,7 @@ sealed class FTooltipControl with Diagnosticable, _$FTooltipControlMixin {
   /// Creates a [FTooltipControl].
   const factory FTooltipControl.managed({
     FTooltipController? controller,
+    bool? initial,
     FTooltipMotion? motion,
     ValueChanged<bool>? onChange,
   }) = FTooltipManagedControl;
@@ -200,8 +201,14 @@ class FTooltipManagedControl extends FTooltipControl with Diagnosticable, _$FToo
 
   /// Creates a [FTooltipControl].
   const FTooltipManagedControl({this.controller, this.initial, this.motion, this.onChange})
-    : assert(controller == null || initial == null, 'Cannot provide both initial and controller'),
-      assert(controller == null || motion == null, 'Cannot provide both controller and motion'),
+    : assert(
+        controller == null || initial == null,
+        'Cannot provide both initially shown and controller. Pass initially shown to the controller instead.',
+      ),
+      assert(
+        controller == null || motion == null,
+        'Cannot provide both controller and motion. Pass motion to the controller instead.',
+      ),
       super._();
 
   @override

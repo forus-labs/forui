@@ -95,11 +95,11 @@ sealed class FLineCalendarControl with Diagnosticable, _$FLineCalendarControlMix
 
   /// Creates lifted state control.
   ///
-  /// The [value] parameter contains the current selected date.
+  /// The [date] parameter contains the current selected date.
   /// The [onChange] callback is invoked when the user selects a date.
   /// The [selectable] predicate determines whether a date can be selected. Defaults to always returning true.
   const factory FLineCalendarControl.lifted({
-    required DateTime? value,
+    required DateTime? date,
     required ValueChanged<DateTime?> onChange,
     Predicate<DateTime> selectable,
   }) = _Lifted;
@@ -132,7 +132,7 @@ class FLineCalendarManagedControl extends FLineCalendarControl with Diagnosticab
   /// Whether the selection is toggleable. Defaults to false.
   ///
   /// ## Contract
-  /// Throws [AssertionError] if [toggleable] is true and [controller] is provided.
+  /// Throws [AssertionError] if [toggleable] and [controller] are both provided.
   @override
   final bool? toggleable;
 
@@ -142,8 +142,14 @@ class FLineCalendarManagedControl extends FLineCalendarControl with Diagnosticab
 
   /// Creates a [FLineCalendarControl].
   const FLineCalendarManagedControl({this.controller, this.initial, this.toggleable, this.onChange})
-    : assert(controller == null || initial == null, 'Cannot provide both controller and initial.'),
-      assert(controller == null || toggleable == null, 'Cannot provide both controller and toggleable.'),
+    : assert(
+        controller == null || initial == null,
+        'Cannot provide both controller and initial date. Pass initial date to the controller instead.',
+      ),
+      assert(
+        controller == null || toggleable == null,
+        'Cannot provide both controller and toggleable. Pass toggleable to the controller instead.',
+      ),
       super._();
 
   @override
@@ -155,18 +161,18 @@ class _Lifted extends FLineCalendarControl with _$_LiftedMixin {
   static bool _defaultSelectable(DateTime _) => true;
 
   @override
-  final DateTime? value;
+  final DateTime? date;
   @override
   final ValueChanged<DateTime?> onChange;
   @override
   final Predicate<DateTime> selectable;
 
-  const _Lifted({required this.value, required this.onChange, this.selectable = _defaultSelectable}) : super._();
+  const _Lifted({required this.date, required this.onChange, this.selectable = _defaultSelectable}) : super._();
 
   @override
-  FCalendarController<DateTime?> createController() => _ProxyController(value, onChange, selectable);
+  FCalendarController<DateTime?> createController() => _ProxyController(date, onChange, selectable);
 
   @override
   void _updateController(FCalendarController<DateTime?> controller) =>
-      (controller as _ProxyController).update(value, onChange, selectable);
+      (controller as _ProxyController).update(date, onChange, selectable);
 }

@@ -10,14 +10,14 @@ void main() {
     child: FPicker(
       control: .managed(controller: controller, onChange: onChange),
       children: [
-        for (var i = 0; i < (controller?.initial.length ?? 2); i++)
+        for (var i = 0; i < (controller?.value.length ?? 2); i++)
           FPickerWheel(children: [Text('${i}A'), Text('${i}B'), Text('${i}C')]),
       ],
     ),
   );
 
   testWidgets('different controller size', (tester) async {
-    final initialController = autoDispose(FPickerController(initial: [1, 1]));
+    final initialController = autoDispose(FPickerController(indexes: [1, 1]));
 
     await tester.pumpWidget(picker(initialController));
 
@@ -27,7 +27,7 @@ void main() {
     expect(initialController.value, [2, 1]);
     expect(initialController.wheels.map((w) => w.selectedItem).toList(), [2, 1]);
 
-    final newController = autoDispose(FPickerController(initial: [1, 2, 0]));
+    final newController = autoDispose(FPickerController(indexes: [1, 2, 0]));
 
     await tester.pumpWidget(picker(newController));
     await tester.pumpAndSettle();
@@ -60,7 +60,7 @@ void main() {
   });
 
   testWidgets('same controller size', (tester) async {
-    final initialController = autoDispose(FPickerController(initial: [1, 1, 1]));
+    final initialController = autoDispose(FPickerController(indexes: [1, 1, 1]));
 
     await tester.pumpWidget(picker(initialController));
 
@@ -70,7 +70,7 @@ void main() {
     expect(initialController.value, [2, 1, 1]);
     expect(initialController.wheels.map((w) => w.selectedItem).toList(), [2, 1, 1]);
 
-    final newController = autoDispose(FPickerController(initial: [1, 2, 0]));
+    final newController = autoDispose(FPickerController(indexes: [1, 2, 0]));
 
     await tester.pumpWidget(picker(newController));
     await tester.pumpAndSettle();
@@ -91,7 +91,7 @@ void main() {
     await tester.drag(find.text('0A'), const Offset(0, -100));
     await tester.pumpAndSettle();
 
-    final newController = autoDispose(FPickerController(initial: [0, 1]));
+    final newController = autoDispose(FPickerController(indexes: [0, 1]));
     await tester.pumpWidget(picker(newController));
     await tester.pumpAndSettle();
 
@@ -107,7 +107,7 @@ void main() {
         count++;
       }
 
-      final firstController = autoDispose(FPickerController(initial: [0, 0]));
+      final firstController = autoDispose(FPickerController(indexes: [0, 0]));
       await tester.pumpWidget(picker(firstController, onChange));
 
       firstController.value = [1, 1];
@@ -115,7 +115,7 @@ void main() {
 
       expect(count, 2);
 
-      final secondController = autoDispose(FPickerController(initial: [0, 0]));
+      final secondController = autoDispose(FPickerController(indexes: [0, 0]));
       await tester.pumpWidget(picker(secondController, onChange));
 
       firstController.value = [2, 2];
@@ -129,7 +129,7 @@ void main() {
       int first = 0;
       int second = 0;
 
-      final controller = autoDispose(FPickerController(initial: [0, 0]));
+      final controller = autoDispose(FPickerController(indexes: [0, 0]));
       await tester.pumpWidget(picker(controller, (_) => first++));
 
       controller.value = [1, 1];
@@ -150,7 +150,7 @@ void main() {
       int first = 0;
       int second = 0;
 
-      final firstController = autoDispose(FPickerController(initial: [0, 0]));
+      final firstController = autoDispose(FPickerController(indexes: [0, 0]));
       await tester.pumpWidget(picker(firstController, (_) => first++));
 
       firstController.value = [1, 1];
@@ -158,7 +158,7 @@ void main() {
 
       expect(first, 2);
 
-      final secondController = autoDispose(FPickerController(initial: [0, 0]));
+      final secondController = autoDispose(FPickerController(indexes: [0, 0]));
       await tester.pumpWidget(picker(secondController, (_) => second++));
 
       firstController.value = [2, 2];
@@ -172,7 +172,7 @@ void main() {
     testWidgets('disposed when controller is external', (tester) async {
       int count = 0;
 
-      final controller = autoDispose(FPickerController(initial: [0, 0]));
+      final controller = autoDispose(FPickerController(indexes: [0, 0]));
       await tester.pumpWidget(picker(controller, (_) => count++));
 
       controller.value = [1, 1];
@@ -192,7 +192,7 @@ void main() {
       List<int>? changedValue;
       int callCount = 0;
 
-      final controller = autoDispose(FPickerController(initial: [0, 0]));
+      final controller = autoDispose(FPickerController(indexes: [0, 0]));
       await tester.pumpWidget(
         picker(controller, (value) {
           changedValue = value;
@@ -229,7 +229,7 @@ void main() {
         StatefulBuilder(
           builder: (_, setState) => TestScaffold(
             child: FPicker(
-              control: .lifted(value: value, onChange: (v) => setState(() => value = v)),
+              control: .lifted(indexes: value, onChange: (v) => setState(() => value = v)),
               children: const [
                 FPickerWheel(key: ValueKey('first'), children: [Text('0A'), Text('0B'), Text('0C')]),
                 FPickerWheel(key: ValueKey('second'), children: [Text('1A'), Text('1B'), Text('1C')]),
@@ -266,7 +266,7 @@ void main() {
       StatefulBuilder(
         builder: (_, setState) => TestScaffold(
           child: FPicker(
-            control: .lifted(value: value, onChange: (v) => setState(() => value = v)),
+            control: .lifted(indexes: value, onChange: (v) => setState(() => value = v)),
             children: const [
               FPickerWheel(children: [Text('0A'), Text('0B'), Text('0C')]),
             ],
@@ -284,7 +284,7 @@ void main() {
         builder: (_, setState) => TestScaffold(
           child: FPicker(
             key: const ValueKey('expanded'),
-            control: .lifted(value: value, onChange: (v) => setState(() => value = v)),
+            control: .lifted(indexes: value, onChange: (v) => setState(() => value = v)),
             children: const [
               FPickerWheel(children: [Text('0A'), Text('0B'), Text('0C')]),
               FPickerWheel(children: [Text('1A'), Text('1B'), Text('1C')]),

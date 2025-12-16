@@ -44,7 +44,7 @@ class _SandboxState extends State<Sandbox> with SingleTickerProviderStateMixin {
       children: [
         FDateField(
           control: .lifted(
-            value: _date,
+            date: _date,
             onChange: (v) {
               setState(() {
                 _date = v;

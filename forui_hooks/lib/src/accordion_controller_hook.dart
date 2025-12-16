@@ -6,19 +6,13 @@ import 'package:forui/forui.dart';
 
 /// Creates a [FAccordionController] that is automatically disposed.
 FAccordionController useFAccordionController({int min = 0, int? max, List<Object?>? keys}) =>
-    use(_AccordionControllerHook(min: min, max: max, debugLabel: 'useFAccordionController', keys: keys));
-
-/// Creates a [FAccordionController] that allows only one section to be expanded at a time and is automatically disposed.
-FAccordionController useFRadioAccordionController({int min = 0, int? max, List<Object?>? keys}) =>
-    use(_AccordionControllerHook(min: min, max: max, debugLabel: 'useFRadioAccordionController', keys: keys));
+    use(_AccordionControllerHook(min: min, max: max, keys: keys));
 
 class _AccordionControllerHook extends Hook<FAccordionController> {
   final int min;
   final int? max;
-  final String _debugLabel;
 
-  const _AccordionControllerHook({required this.min, required this.max, required String debugLabel, super.keys})
-    : _debugLabel = debugLabel;
+  const _AccordionControllerHook({required this.min, required this.max, super.keys});
 
   @override
   _AccordionControllerHookState createState() => .new();
@@ -45,5 +39,5 @@ class _AccordionControllerHookState extends HookState<FAccordionController, _Acc
   bool get debugHasShortDescription => false;
 
   @override
-  String get debugLabel => hook._debugLabel;
+  String get debugLabel => 'useFAccordionController';
 }

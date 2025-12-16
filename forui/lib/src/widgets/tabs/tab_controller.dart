@@ -6,15 +6,11 @@ final class FTabController extends FChangeNotifier {
   FTabMotion _motion;
 
   /// Creates a [FTabController].
-  FTabController({
-    required int length,
-    required TickerProvider vsync,
-    int initial = 0,
-    FTabMotion motion = const .new(),
-  }) : this._(
-         TabController(initialIndex: initial, length: length, animationDuration: motion.duration, vsync: vsync),
-         motion,
-       );
+  FTabController({required int length, required TickerProvider vsync, int index = 0, FTabMotion motion = const .new()})
+    : this._(
+        TabController(initialIndex: index, length: length, animationDuration: motion.duration, vsync: vsync),
+        motion,
+      );
 
   FTabController._(this._controller, this._motion);
 
@@ -92,14 +88,18 @@ class _ProxyController extends TabController {
 
   @override
   void animateTo(int value, {Duration? duration, Curve curve = Curves.ease}) {
-    _unsynced = value;
-    _onChange(value);
+    if (super.index != value) {
+      _unsynced = value;
+      _onChange(value);
+    }
   }
 
   @override
   set index(int value) {
-    _unsynced = value;
-    _onChange(value);
+    if (super.index != value) {
+      _unsynced = value;
+      _onChange(value);
+    }
   }
 }
 
@@ -121,6 +121,14 @@ class FTabMotion with Diagnosticable, _$FTabMotionFunctions {
 ///
 /// {@macro forui.foundation.doc_templates.control}
 sealed class FTabControl with Diagnosticable, _$FTabControlMixin {
+  /// Creates a [FTabControl].
+  const factory FTabControl.managed({
+    FTabController? controller,
+    int? initial,
+    FTabMotion? motion,
+    ValueChanged<int>? onChange,
+  }) = FTabManagedControl;
+
   /// Creates lifted state control.
   ///
   /// Tab index is controlled by the parent widget.
@@ -129,14 +137,6 @@ sealed class FTabControl with Diagnosticable, _$FTabControlMixin {
   /// The [onChange] callback is invoked when the user selects a tab.
   const factory FTabControl.lifted({required int index, required ValueChanged<int> onChange, FTabMotion motion}) =
       _Lifted;
-
-  /// Creates a [FTabControl].
-  const factory FTabControl.managed({
-    FTabController? controller,
-    int? initial,
-    FTabMotion? motion,
-    ValueChanged<int>? onChange,
-  }) = FTabManagedControl;
 
   const FTabControl._();
 
@@ -178,13 +178,19 @@ class FTabManagedControl extends FTabControl with _$FTabManagedControlMixin {
 
   /// Creates a [FTabControl].
   const FTabManagedControl({this.controller, this.initial, this.motion, this.onChange})
-    : assert(controller == null || initial == null, 'Cannot provide both controller and initial.'),
-      assert(controller == null || motion == null, 'Cannot provide both controller and motion.'),
+    : assert(
+        controller == null || initial == null,
+        'Cannot provide both controller and initial. Pass initial index to controller instead.',
+      ),
+      assert(
+        controller == null || motion == null,
+        'Cannot provide both controller and motion. Pass motion to controller instead.',
+      ),
       super._();
 
   @override
   FTabController createController(TickerProvider vsync, int length) =>
-      controller ?? .new(length: length, vsync: vsync, initial: initial ?? 0, motion: motion ?? const .new());
+      controller ?? .new(length: length, vsync: vsync, index: initial ?? 0, motion: motion ?? const .new());
 }
 
 class _Lifted extends FTabControl with _$_LiftedMixin {

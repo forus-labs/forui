@@ -1107,7 +1107,7 @@ transforms:
           - kind: removeParameter
             name: 'onChange'
 
-  - title: 'Rename FPickerController(initialIndexes: ...) to initial'
+  - title: 'Rename FPickerController(initialIndexes: ...) to indexes'
     date: 2025-12-14
     element:
       uris: [ 'package:forui/forui.dart' ]
@@ -1116,7 +1116,7 @@ transforms:
     changes:
       - kind: renameParameter
         oldName: 'initialIndexes'
-        newName: 'initial'
+        newName: 'indexes'
 
   # FPopover
   - title: 'Migrate FPopover(controller: ...) to control parameter'
@@ -4297,6 +4297,17 @@ transforms:
           - kind: removeParameter
             name: 'onChange'
 
+  - title: 'Rename FTimePickerController(initial: ...) to time'
+    date: 2025-12-16
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FTimePickerController
+    changes:
+      - kind: renameParameter
+        oldName: 'initial'
+        newName: 'time'
+
   # FTooltip
   - title: 'Migrate FTooltip(controller: ...) to control parameter'
     date: 2025-12-06
@@ -4486,7 +4497,6 @@ transforms:
           - kind: removeParameter
             name: 'onChange'
 
-  # FTimeFieldController
   - title: 'Remove FTimeFieldController vsync and popoverMotion parameters'
     date: 2025-12-15
     element:
@@ -4499,7 +4509,7 @@ transforms:
       - kind: removeParameter
         name: 'popoverMotion'
 
-  - title: 'Rename FTimeFieldController(initialTime: ...) to initial'
+  - title: 'Rename FTimeFieldController(initialTime: ...) to time'
     date: 2025-12-16
     element:
       uris: [ 'package:forui/forui.dart' ]
@@ -4508,7 +4518,7 @@ transforms:
     changes:
       - kind: renameParameter
         oldName: 'initialTime'
-        newName: 'initial'
+        newName: 'time'
 
 
   # FTabs
@@ -4589,7 +4599,7 @@ transforms:
           - kind: removeParameter
             name: 'onChange'
 
-  - title: 'Rename FTabController(initialIndex: ...) to initial'
+  - title: 'Rename FTabController(initialIndex: ...) to index'
     date: 2025-12-15
     element:
       uris: [ 'package:forui/forui.dart' ]
@@ -4598,4 +4608,4 @@ transforms:
     changes:
       - kind: renameParameter
         oldName: 'initialIndex'
-        newName: 'initial'
+        newName: 'index'

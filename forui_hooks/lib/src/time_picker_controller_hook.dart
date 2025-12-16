@@ -5,13 +5,13 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:forui/forui.dart';
 
 /// Creates a [FTimePickerController] that is automatically disposed.
-FTimePickerController useFTimePickerController({FTime initial = const FTime(), List<Object?>? keys}) =>
-    use(_TimePickerControllerHook(initial: initial, keys: keys));
+FTimePickerController useFTimePickerController({FTime time = const FTime(), List<Object?>? keys}) =>
+    use(_TimePickerControllerHook(time: time, keys: keys));
 
 class _TimePickerControllerHook extends Hook<FTimePickerController> {
-  final FTime initial;
+  final FTime time;
 
-  const _TimePickerControllerHook({required this.initial, super.keys});
+  const _TimePickerControllerHook({required this.time, super.keys});
 
   @override
   _TimePickerControllerHookState createState() => .new();
@@ -19,12 +19,12 @@ class _TimePickerControllerHook extends Hook<FTimePickerController> {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('initial', initial));
+    properties.add(DiagnosticsProperty('time', time));
   }
 }
 
 class _TimePickerControllerHookState extends HookState<FTimePickerController, _TimePickerControllerHook> {
-  late final _controller = FTimePickerController(initial: hook.initial);
+  late final _controller = FTimePickerController(time: hook.time);
 
   @override
   FTimePickerController build(BuildContext context) => _controller;

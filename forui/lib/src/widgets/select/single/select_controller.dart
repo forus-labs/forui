@@ -35,8 +35,8 @@ class _ProyController<T> extends FSelectController<T> {
 
   @override
   set value(T? newValue) {
-    _unsynced = newValue;
     if (super.value != newValue) {
+      _unsynced = newValue;
       _onChange(newValue);
     }
   }
@@ -82,6 +82,9 @@ class FSelectManagedControl<T> extends FSelectControl<T> with Diagnosticable, _$
   final T? initial;
 
   /// Whether the selection is toggleable. Defaults to false.
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if [toggleable] and [controller] are both provided
   @override
   final bool? toggleable;
 
@@ -93,16 +96,17 @@ class FSelectManagedControl<T> extends FSelectControl<T> with Diagnosticable, _$
   const FSelectManagedControl({this.controller, this.initial, this.toggleable, this.onChange})
     : assert(
         controller == null || initial == null,
-        'Cannot provide both controller and initial. Set the value directly in the controller.',
+        'Cannot provide both controller and initial. Pass initial value to the controller.',
       ),
       assert(
         controller == null || toggleable == null,
-        'Cannot provide both controller and toggleable. Set toggleable directly in the controller.',
+        'Cannot provide both controller and toggleable. Pass toggleable to the controller.',
       ),
       super._();
 
   @override
-  FSelectController<T> createController() => controller ?? FSelectController<T>(value: initial, toggleable: toggleable?? false);
+  FSelectController<T> createController() =>
+      controller ?? FSelectController<T>(value: initial, toggleable: toggleable ?? false);
 }
 
 class _Lifted<T> extends FSelectControl<T> with _$_LiftedMixin<T> {

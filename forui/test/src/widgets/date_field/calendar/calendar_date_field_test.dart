@@ -267,7 +267,7 @@ void main() {
           child: StatefulBuilder(
             builder: (context, setState) => FDateField.calendar(
               key: key,
-              control: .lifted(value: value, onChange: (v) => setState(() => value = v)),
+              control: .lifted(date: value, onChange: (v) => setState(() => value = v)),
               today: DateTime.utc(2025, 1, 15),
             ),
           ),
@@ -290,7 +290,7 @@ void main() {
           child: StatefulBuilder(
             builder: (context, setState) => FDateField.calendar(
               key: key,
-              control: .lifted(value: null, onChange: (v) => setState(() {})),
+              control: .lifted(date: null, onChange: (v) => setState(() {})),
               today: DateTime.utc(2025, 1, 15),
             ),
           ),

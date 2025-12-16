@@ -25,7 +25,7 @@ const months = [
 void main() {
   late FPickerController controller;
 
-  setUp(() => controller = FPickerController(initial: [1, 5]));
+  setUp(() => controller = FPickerController(indexes: [1, 5]));
 
   tearDown(() => controller.dispose());
 
@@ -55,7 +55,7 @@ void main() {
           TestScaffold(
             child: StatefulBuilder(
               builder: (_, setState) => FPicker(
-                control: .lifted(value: [1], onChange: (v) {}),
+                control: .lifted(indexes: [1], onChange: (v) {}),
                 children: const [FPickerWheel(flex: 3, children: months)],
               ),
             ),
@@ -70,7 +70,7 @@ void main() {
           TestScaffold(
             child: StatefulBuilder(
               builder: (_, setState) => FPicker(
-                control: .lifted(value: value, onChange: (v) => setState(() => value = v)),
+                control: .lifted(indexes: value, onChange: (v) => setState(() => value = v)),
                 children: const [FPickerWheel(children: months)],
               ),
             ),
@@ -88,7 +88,7 @@ void main() {
       final widget = sheet.record(
         TestScaffold(
           child: FPicker(
-            control: .lifted(value: [1], onChange: (_) {}),
+            control: .lifted(indexes: [1], onChange: (_) {}),
             children: const [FPickerWheel(flex: 3, children: months)],
           ),
         ),
@@ -140,7 +140,7 @@ void main() {
     });
 
     testWidgets('${theme.name} non-looping', (tester) async {
-      controller = FPickerController(initial: [1]);
+      controller = FPickerController(indexes: [1]);
 
       await tester.pumpWidget(
         TestScaffold(

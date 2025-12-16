@@ -36,7 +36,7 @@ void main() {
           child: StatefulBuilder(
             builder: (_, setState) => FTimeField.picker(
               key: key,
-              control: .lifted(value: value, onChange: (v) => setState(() => value = v)),
+              control: .lifted(time: value, onChange: (v) => setState(() => value = v)),
             ),
           ),
         ),
@@ -54,7 +54,7 @@ void main() {
           child: StatefulBuilder(
             builder: (_, setState) => FTimeField.picker(
               key: key,
-              control: .lifted(value: value, onChange: (v) => setState(() => value = v)),
+              control: .lifted(time: value, onChange: (v) => setState(() => value = v)),
             ),
           ),
         ),
@@ -71,7 +71,7 @@ void main() {
           alignment: .topCenter,
           child: FTimeField.picker(
             key: key,
-            control: .lifted(value: const FTime(10, 30), onChange: (_) {}),
+            control: .lifted(time: const FTime(10, 30), onChange: (_) {}),
           ),
         ),
       );

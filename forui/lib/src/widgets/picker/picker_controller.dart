@@ -14,9 +14,6 @@ part 'picker_controller.control.dart';
 /// * From left to right if the current text direction is LTR
 /// * From right to left if the current text direction is RTL
 class FPickerController extends FValueNotifier<List<int>> {
-  /// The picker wheels' initial indexes.
-  final List<int> initial;
-
   /// The controllers for the individual picker wheels.
   ///
   /// The controllers are ordered:
@@ -30,7 +27,7 @@ class FPickerController extends FValueNotifier<List<int>> {
   final List<FixedExtentScrollController> wheels = [];
 
   /// Creates a [FPickerController].
-  FPickerController({required this.initial}) : super([...initial]);
+  FPickerController({required List<int> indexes}) : super([...indexes]);
 
   /// Animates the wheels to the given [value].
   Future<void> animateTo(
@@ -105,8 +102,7 @@ class _ProxyController extends FPickerController {
   Curve _curve;
   int _monotonic = 0;
 
-  _ProxyController(this._unsynced, this._onChange, this._duration, this._curve) : super(initial: _unsynced);
-
+  _ProxyController(this._unsynced, this._onChange, this._duration, this._curve) : super(indexes: _unsynced);
 
   void update(List<int> newValue, ValueChanged<List<int>> onChange, Duration duration, Curve curve) {
     _onChange = onChange;
@@ -131,11 +127,9 @@ class _ProxyController extends FPickerController {
 
   @override
   set _rawValue(List<int> value) {
-    _unsynced = value;
-
     final current = ++_monotonic;
     if (!listEquals(super._rawValue, value)) {
-      // Scrolling the wheels to the new value is done in _rawValue.
+      _unsynced = value;
       _onChange(value);
 
       // The animation is wrapped in a post frame callback since _rawValue is called when ScrollEndNotification is
@@ -149,36 +143,34 @@ class _ProxyController extends FPickerController {
       });
     }
   }
-
-
 }
 
 /// A [FPickerControl] defines how a [FPicker] is controlled.
 ///
 /// {@macro forui.foundation.doc_templates.control}
 sealed class FPickerControl with Diagnosticable, _$FPickerControlMixin {
-  /// Creates a [FPickerControl] for controlling a picker using lifted state.
-  ///
-  /// It does not prevent the user from scrolling to invalid indexes. To animate back to the provided [value],
-  /// consider passing in `onChange: (_) => setState(() {})`.
-  ///
-  /// The [value] parameter contains the current indexes.
-  /// The [onChange] callback is invoked when the user changes the value.
-  /// The [duration] when animating to [value] from an invalid/different index. Defaults to 300 milliseconds.
-  /// The [curve] when animating to [value] from an invalid/different index. Defaults to [Curves.easeOutCubic].
-  const factory FPickerControl.lifted({
-    required List<int> value,
-    required ValueChanged<List<int>> onChange,
-    Duration duration,
-    Curve curve,
-  }) = _Lifted;
-
   /// Creates a [FPickerControl].
   const factory FPickerControl.managed({
     FPickerController? controller,
     List<int>? initial,
     ValueChanged<List<int>>? onChange,
   }) = FPickerManagedControl;
+
+  /// Creates a [FPickerControl] for controlling a picker using lifted state.
+  ///
+  /// It does not prevent the user from scrolling to invalid indexes. To animate back to the provided [indexes],
+  /// consider passing in `onChange: (_) => setState(() {})`.
+  ///
+  /// The [indexes] represent the current indexes.
+  /// The [onChange] callback is invoked when the user changes the value.
+  /// The [duration] when animating to [indexes] from an invalid/different index. Defaults to 300 milliseconds.
+  /// The [curve] when animating to [indexes] from an invalid/different index. Defaults to [Curves.easeOutCubic].
+  const factory FPickerControl.lifted({
+    required List<int> indexes,
+    required ValueChanged<List<int>> onChange,
+    Duration duration,
+    Curve curve,
+  }) = _Lifted;
 
   const FPickerControl._();
 
@@ -239,13 +231,13 @@ class FPickerManagedControl extends FPickerControl with Diagnosticable, _$FPicke
   const FPickerManagedControl({this.controller, this.initial, this.onChange})
     : assert(
         controller == null || initial == null,
-        'Cannot provide both controller and initial. Set the value directly in the controller.',
+        'Cannot provide both controller and initial indexes. Pass the initial indexes to the controller instead.',
       ),
       super._();
 
   @override
   FPickerController createController(int wheelCount) {
-    final created = controller ?? .new(initial: initial ?? .filled(wheelCount, 0));
+    final created = controller ?? .new(indexes: initial ?? .filled(wheelCount, 0));
     _updateWheels(created);
 
     return created;
@@ -254,7 +246,7 @@ class FPickerManagedControl extends FPickerControl with Diagnosticable, _$FPicke
 
 class _Lifted extends FPickerControl with _$_LiftedMixin {
   @override
-  final List<int> value;
+  final List<int> indexes;
   @override
   final ValueChanged<List<int>> onChange;
   @override
@@ -263,7 +255,7 @@ class _Lifted extends FPickerControl with _$_LiftedMixin {
   final Curve curve;
 
   const _Lifted({
-    required this.value,
+    required this.indexes,
     required this.onChange,
     this.duration = const Duration(milliseconds: 300),
     this.curve = Curves.easeOutCubic,
@@ -271,7 +263,7 @@ class _Lifted extends FPickerControl with _$_LiftedMixin {
 
   @override
   FPickerController createController(int _) {
-    final created = _ProxyController(value, onChange, duration, curve);
+    final created = _ProxyController(indexes, onChange, duration, curve);
     _updateWheels(created);
 
     return created;
@@ -279,6 +271,6 @@ class _Lifted extends FPickerControl with _$_LiftedMixin {
 
   @override
   void _updateController(FPickerController controller, int _) {
-    (controller as _ProxyController).update(value, onChange, duration, curve);
+    (controller as _ProxyController).update(indexes, onChange, duration, curve);
   }
 }

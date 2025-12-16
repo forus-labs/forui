@@ -177,7 +177,7 @@ void main() {
           child: StatefulBuilder(
             builder: (context, setState) => FDateField(
               key: key,
-              control: .lifted(value: value, onChange: (v) => setState(() => value = v)),
+              control: .lifted(date: value, onChange: (v) => setState(() => value = v)),
             ),
           ),
         ),
@@ -198,7 +198,7 @@ void main() {
           child: StatefulBuilder(
             builder: (context, setState) => FDateField(
               key: key,
-              control: .lifted(value: value, onChange: (v) => setState(() => value = v)),
+              control: .lifted(date: value, onChange: (v) => setState(() => value = v)),
               calendar: FDateFieldCalendarProperties(today: DateTime.utc(2025, 1, 15)),
             ),
           ),
@@ -221,7 +221,7 @@ void main() {
           child: StatefulBuilder(
             builder: (context, setState) => FDateField(
               key: key,
-              control: .lifted(value: null, onChange: (v) => setState(() {})),
+              control: .lifted(date: null, onChange: (v) => setState(() {})),
             ),
           ),
         ),
@@ -240,7 +240,7 @@ void main() {
           child: StatefulBuilder(
             builder: (context, setState) => FDateField(
               key: key,
-              control: .lifted(value: null, onChange: (v) => setState(() {})),
+              control: .lifted(date: null, onChange: (v) => setState(() {})),
               calendar: FDateFieldCalendarProperties(today: DateTime.utc(2025, 1, 15)),
             ),
           ),
@@ -263,7 +263,7 @@ void main() {
           child: StatefulBuilder(
             builder: (context, setState) => FDateField(
               key: key,
-              control: .lifted(value: DateTime.utc(2025, 1, 15), onChange: (_) {}),
+              control: .lifted(date: DateTime.utc(2025, 1, 15), onChange: (_) {}),
             ),
           ),
         ),
@@ -287,7 +287,7 @@ void main() {
           child: StatefulBuilder(
             builder: (context, setState) => FDateField(
               key: key,
-              control: .lifted(value: value, onChange: (_) {}),
+              control: .lifted(date: value, onChange: (_) {}),
             ),
           ),
         ),
@@ -318,7 +318,7 @@ void main() {
           locale: const Locale('en', 'SG'),
           child: FDateField(
             key: key,
-            control: .lifted(value: null, onChange: (_) {}),
+            control: .lifted(date: null, onChange: (_) {}),
           ),
         ),
       );

@@ -1,6 +1,6 @@
-import 'package:flutter/foundation.dart';
-
 // ignore_for_file: avoid_positional_boolean_parameters
+
+import 'package:flutter/foundation.dart';
 
 part 'obscure_text_control.control.dart';
 
@@ -23,8 +23,8 @@ class _ProxyController extends ValueNotifier<bool> {
 
   @override
   set value(bool newValue) {
-    _unsynced = newValue;
     if (super.value != newValue) {
+      _unsynced = newValue;
       _onChange(newValue);
     }
   }
@@ -34,15 +34,15 @@ class _ProxyController extends ValueNotifier<bool> {
 ///
 /// {@macro forui.foundation.doc_templates.control}
 sealed class FObscureTextControl with Diagnosticable, _$FObscureTextControlMixin {
-  /// Creates a [FObscureTextControl] for controlling the obscure text using lifted state.
-  const factory FObscureTextControl.lifted({required bool value, required ValueChanged<bool> onChange}) = _Lifted;
-
   /// Creates a [FObscureTextControl].
   const factory FObscureTextControl.managed({
     ValueNotifier<bool>? controller,
     bool? initial,
     ValueChanged<bool>? onChange,
   }) = FObscureTextManagedControl;
+
+  /// Creates a [FObscureTextControl] for controlling the obscure text using lifted state.
+  const factory FObscureTextControl.lifted({required bool value, required ValueChanged<bool> onChange}) = _Lifted;
 
   const FObscureTextControl._();
 
@@ -61,7 +61,7 @@ final class FObscureTextManagedControl extends FObscureTextControl with _$FObscu
   /// Whether the text is initially obscured. Defaults to true.
   ///
   /// ## Contract
-  /// Throws [AssertionError] if [initial] is not null and [controller] is provided.
+  /// Throws [AssertionError] if [initial] and [controller] are provided.
   @override
   final bool? initial;
 
@@ -71,7 +71,10 @@ final class FObscureTextManagedControl extends FObscureTextControl with _$FObscu
 
   /// Creates a [FObscureTextControl].
   const FObscureTextManagedControl({this.controller, this.initial, this.onChange})
-    : assert(controller == null || initial == null, 'Cannot provide both an initial value and a controller.'),
+    : assert(
+        controller == null || initial == null,
+        'Cannot provide both controller and initially obscured. Pass initial value to the controller instead.',
+      ),
       super._();
 
   @override

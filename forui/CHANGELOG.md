@@ -80,7 +80,7 @@ Unfortunately, `FCalendar` cannot be easily migrated using data driven fixes due
 * Change `FDateField`'s input to preserve text selection when changing dates programmatically or via the calendar.
 * **Breaking** Rename `FDateField.shift` to `FDateField.overflow`.
 * **Breaking** Rename `FDateFieldController.calendar` to `FDateFieldController.popover`.
-* **Breaking** Rename `FDateFieldController(initialDate: ...)` to `FDateFieldController(initial: ...)`.
+* **Breaking** Rename `FDateFieldController(initialDate: ...)` to `FDateFieldController(date: ...)`.
 * **Breaking** Remove `FDateField.controller`. Use `FDateField(control: .managed(controller: ...))` instead.
 * **Breaking** Remove `FDateField.initialDate`. Use `FDateField(control: .managed(initial: ...))` instead.
 * **Breaking** Remove `FDateField.onChange`. Use `FDateField(control: .managed(onChange: ...))` instead.
@@ -122,7 +122,7 @@ Unfortunately, `FCalendar` cannot be easily migrated using data driven fixes due
 * Add `FPickerControl`.
 * Add `FPickerController.animateTo(...)`.
 
-* **Breaking** Rename `FPickerController(initialIndexes: ...)` to `FPickerController(initial: ...)`.
+* **Breaking** Rename `FPickerController(initialIndexes: ...)` to `FPickerController(indexes: ...)`.
 * **Breaking** Remove `FPicker.controller`. Use `FPicker(control: .managed(...))` instead.
 * **Breaking** Remove `FPicker.onChange`. Use `FPicker(control: .managed(...))` instead.
 
@@ -243,7 +243,7 @@ Unfortunately, `FCalendar` cannot be easily migrated using data driven fixes due
 * **Breaking** Remove `FTabs.controller`. Use `FTabs(control: .managed(...))` instead.
 * **Breaking** Remove `FTabs.initialIndex`. Use `FTabs(control: .managed(...))` instead.
 * **Breaking** Remove `FTabs.onChange`. Use `FTabs(control: .managed(...))` instead.
-* **Breaking** Rename `FTabController(initialIndex: ...)` to `FTabController(initial: ...)`.
+* **Breaking** Rename `FTabController(initialIndex: ...)` to `FTabController(index: ...)`.
 
 
 ### `FTappable`
@@ -306,7 +306,7 @@ Unfortunately, `FCalendar` cannot be easily migrated using data driven fixes due
 * **Breaking** Remove `FTimeField.onChange`. Use `FTimeField(control: .managed(...))` instead.
 * **Breaking** Remove `FTimeField.initialTime`. Use `FTimeField(control: .managed(...))` instead.
 * **Breaking** Remove `FTimeFieldController(vsync: ..., popoverMotion: ...)`. Use `FTimeField(popoverControl: ...)` instead.
-* **Breaking** Rename `FTimeFieldController(initialTime: ...)` to `FTimeFieldController(initial: ...)`.
+* **Breaking** Rename `FTimeFieldController(initialTime: ...)` to `FTimeFieldController(time: ...)`.
 
 
 ### `FTimePicker`
@@ -314,6 +314,7 @@ Unfortunately, `FCalendar` cannot be easily migrated using data driven fixes due
 
 * **Breaking** Remove `FTimePicker.controller`. Use `FTimePicker(control: .managed(...))` instead.
 * **Breaking** Remove `FTimePicker.onChange`. Use `FTimePicker(control: .managed(...))` instead.
+* **Breaking** Rename `FTimePickerController(initial: ...)` to `FTimePickerController(time: ...)`.
 
 * Fix `FTimePickerController.animateTo(...)` not working with period-first locales (e.g. Korean).
 

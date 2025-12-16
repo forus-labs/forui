@@ -41,7 +41,7 @@ void main() {
       ('Western 24-hour interval', const Locale('en'), true, 2, 5, 'western-24-interval.png'),
     ]) {
       testWidgets('${theme.name} $name', (tester) async {
-        controller = autoDispose(FTimePickerController(initial: const FTime(10, 30)));
+        controller = autoDispose(FTimePickerController(time: const FTime(10, 30)));
 
         await tester.pumpWidget(
           TestScaffold.app(
@@ -79,7 +79,7 @@ void main() {
                 width: 300,
                 height: 300,
                 child: FTimePicker(
-                  control: .lifted(value: value, onChange: (v) => setState(() => value = v)),
+                  control: .lifted(time: value, onChange: (v) => setState(() => value = v)),
                 ),
               ),
             ),
@@ -98,7 +98,7 @@ void main() {
                 width: 300,
                 height: 300,
                 child: FTimePicker(
-                  control: .lifted(value: value, onChange: (v) => setState(() => value = v)),
+                  control: .lifted(time: value, onChange: (v) => setState(() => value = v)),
                 ),
               ),
             ),
@@ -120,7 +120,7 @@ void main() {
             width: 300,
             height: 300,
             child: FTimePicker(
-              control: .lifted(value: const FTime(10, 30), onChange: (_) {}),
+              control: .lifted(time: const FTime(10, 30), onChange: (_) {}),
             ),
           ),
         ),
@@ -145,7 +145,7 @@ void main() {
               width: 300,
               height: 300,
               child: FTimePicker(
-                control: .lifted(value: value, onChange: (v) => setState(() => value = v)),
+                control: .lifted(time: value, onChange: (v) => setState(() => value = v)),
               ),
             ),
           ),
@@ -160,7 +160,7 @@ void main() {
               width: 300,
               height: 300,
               child: FTimePicker(
-                control: .lifted(value: value, onChange: (v) => setState(() => value = v)),
+                control: .lifted(time: value, onChange: (v) => setState(() => value = v)),
                 hour24: true,
               ),
             ),
@@ -186,7 +186,7 @@ void main() {
               width: 300,
               height: 300,
               child: FTimePicker(
-                control: .lifted(value: value, onChange: (v) => setState(() => value = v)),
+                control: .lifted(time: value, onChange: (v) => setState(() => value = v)),
               ),
             ),
           ),
@@ -202,7 +202,7 @@ void main() {
               width: 300,
               height: 300,
               child: FTimePicker(
-                control: .lifted(value: value, onChange: (v) => setState(() => value = v)),
+                control: .lifted(time: value, onChange: (v) => setState(() => value = v)),
               ),
             ),
           ),
@@ -222,7 +222,7 @@ void main() {
     // emit a scroll notification that crosses said boundary.
     for (final locale in [const Locale('ar'), const Locale('en')]) {
       testWidgets('11am to 12pm - $locale', (tester) async {
-        controller = autoDispose(FTimePickerController(initial: const FTime(10)));
+        controller = autoDispose(FTimePickerController(time: const FTime(10)));
 
         await tester.pumpWidget(
           TestScaffold.app(
@@ -247,7 +247,7 @@ void main() {
       });
 
       testWidgets('11pm to 12am - $locale', (tester) async {
-        controller = autoDispose(FTimePickerController(initial: const FTime(22)));
+        controller = autoDispose(FTimePickerController(time: const FTime(22)));
 
         await tester.pumpWidget(
           TestScaffold.app(
@@ -272,7 +272,7 @@ void main() {
       });
 
       testWidgets('12pm to 11am - $locale', (tester) async {
-        controller = autoDispose(FTimePickerController(initial: const FTime(13)));
+        controller = autoDispose(FTimePickerController(time: const FTime(13)));
 
         await tester.pumpWidget(
           TestScaffold.app(
@@ -297,7 +297,7 @@ void main() {
       });
 
       testWidgets('12am to 11pm - $locale', (tester) async {
-        controller = autoDispose(FTimePickerController(initial: const FTime(1)));
+        controller = autoDispose(FTimePickerController(time: const FTime(1)));
 
         await tester.pumpWidget(
           TestScaffold.app(

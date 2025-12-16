@@ -13,16 +13,16 @@ String? _defaultValidator(DateTime? _) => null;
 /// It is also used to determine whether a date in a calendar is selectable.
 /// Defaults to always returning null.
 FDateFieldController useFDateFieldController({
-  DateTime? initial,
+  DateTime? date,
   FormFieldValidator<DateTime> validator = _defaultValidator,
   List<Object?>? keys,
-}) => use(_DateFieldHook(initial: initial, validator: validator, keys: keys));
+}) => use(_DateFieldHook(date: date, validator: validator, keys: keys));
 
 class _DateFieldHook extends Hook<FDateFieldController> {
-  final DateTime? initial;
+  final DateTime? date;
   final FormFieldValidator<DateTime> validator;
 
-  const _DateFieldHook({required this.initial, required this.validator, super.keys});
+  const _DateFieldHook({required this.date, required this.validator, super.keys});
 
   @override
   _DateFieldHookState createState() => .new();
@@ -31,13 +31,13 @@ class _DateFieldHook extends Hook<FDateFieldController> {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('initial', initial))
+      ..add(DiagnosticsProperty('initial', date))
       ..add(ObjectFlagProperty.has('validator', validator));
   }
 }
 
 class _DateFieldHookState extends HookState<FDateFieldController, _DateFieldHook> {
-  late final _controller = FDateFieldController(initial: hook.initial, validator: hook.validator);
+  late final _controller = FDateFieldController(date: hook.date, validator: hook.validator);
 
   @override
   FDateFieldController build(BuildContext context) => _controller;

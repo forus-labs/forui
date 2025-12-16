@@ -44,7 +44,7 @@ void main() {
         StatefulBuilder(
           builder: (context, setState) => TestScaffold.app(
             child: FLineCalendar(
-              control: .lifted(value: value, onChange: (date) => setState(() => value = date)),
+              control: .lifted(date: value, onChange: (date) => setState(() => value = date)),
               today: DateTime(2024, 11, 28),
             ),
           ),
@@ -64,7 +64,7 @@ void main() {
         StatefulBuilder(
           builder: (context, setState) => TestScaffold.app(
             child: FLineCalendar(
-              control: .lifted(value: value, onChange: (date) => setState(() {})),
+              control: .lifted(date: value, onChange: (date) => setState(() {})),
               today: DateTime(2024, 11, 28),
             ),
           ),

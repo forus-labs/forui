@@ -7,36 +7,33 @@ import 'package:forui/forui.dart';
 /// Creates a [FPaginationController] that is automatically disposed.
 FPaginationController useFPaginationController({
   required int pages,
-  int initialPage = 0,
-  bool showEdges = true,
+  int page = 0,
   int siblings = 1,
+  bool showEdges = true,
   List<Object?>? keys,
 }) => use(
   _PaginationControllerHook(
     pages: pages,
-    initialPage: initialPage,
+    page: page,
     siblings: siblings,
     showEdges: showEdges,
-    debugLabel: 'useFPaginationController',
     keys: keys,
   ),
 );
 
 class _PaginationControllerHook extends Hook<FPaginationController> {
   final int pages;
-  final int initialPage;
+  final int page;
   final int siblings;
   final bool showEdges;
-  final String _debugLabel;
 
   const _PaginationControllerHook({
     required this.pages,
-    required this.initialPage,
+    required this.page,
     required this.siblings,
     required this.showEdges,
-    required String debugLabel,
     super.keys,
-  }) : _debugLabel = debugLabel;
+  });
 
   @override
   _PaginationControllerHookState createState() => .new();
@@ -46,7 +43,7 @@ class _PaginationControllerHook extends Hook<FPaginationController> {
     super.debugFillProperties(properties);
     properties
       ..add(IntProperty('pages', pages))
-      ..add(IntProperty('initialPage', initialPage))
+      ..add(IntProperty('page', page))
       ..add(IntProperty('siblings', siblings))
       ..add(FlagProperty('showEdges', value: showEdges, ifTrue: 'showEdges'));
   }
@@ -54,8 +51,8 @@ class _PaginationControllerHook extends Hook<FPaginationController> {
 
 class _PaginationControllerHookState extends HookState<FPaginationController, _PaginationControllerHook> {
   late final _controller = FPaginationController(
+    page: hook.page,
     pages: hook.pages,
-    page: hook.initialPage,
     siblings: hook.siblings,
     showEdges: hook.showEdges,
   );
@@ -70,5 +67,5 @@ class _PaginationControllerHookState extends HookState<FPaginationController, _P
   bool get debugHasShortDescription => false;
 
   @override
-  String get debugLabel => hook._debugLabel;
+  String get debugLabel => 'useFPaginationController';
 }

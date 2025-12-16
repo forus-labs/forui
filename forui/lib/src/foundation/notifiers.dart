@@ -302,11 +302,11 @@ abstract class FMultiValueManagedControl<T> extends FMultiValueControl<T>
   const FMultiValueManagedControl({this.controller, this.min, this.max, this.onChange})
     : assert(
         controller == null || min == null,
-        'Cannot provide both controller and min. Set the min directly in the controller.',
+        'Cannot provide both controller and min. Pass min to the controller.',
       ),
       assert(
         controller == null || max == null,
-        'Cannot provide both controller and max. Set the max directly in the controller.',
+        'Cannot provide both controller and max. Pass max to the controller.',
       ),
       super._();
 }
@@ -317,7 +317,7 @@ class _Normal<T> extends FMultiValueManagedControl<T> {
   const _Normal({this.initial, super.controller, super.min, super.max, super.onChange})
     : assert(
         controller == null || initial == null,
-        'Cannot provide both controller and initial. Set the value directly in the controller.',
+        'Cannot provide both controller and initial. Pass initial value to the controller.',
       );
 
   @override
@@ -337,7 +337,7 @@ class _Radio<T> extends FMultiValueManagedControl<T> {
   const _Radio({this.initial, super.controller, super.onChange})
     : assert(
         controller == null || initial == null,
-        'Cannot provide both controller and initial. Set the value directly in the controller.',
+        'Cannot provide both controller and initial. Pass initial value to the controller.',
       );
 
   @override

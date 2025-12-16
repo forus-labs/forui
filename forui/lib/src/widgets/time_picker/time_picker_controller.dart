@@ -1,4 +1,3 @@
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
@@ -19,7 +18,7 @@ final class FTimePickerController extends FValueNotifier<FTime> {
   int? _minuteInterval;
 
   /// Creates a [FTimePickerController].
-  FTimePickerController({FTime initial = const FTime()}) : super(initial);
+  FTimePickerController({FTime time = const FTime()}) : super(time);
 
   /// Animates the controller to the given [value].
   Future<void> animateTo(
@@ -87,7 +86,7 @@ extension InternalFTimePickerController on FTimePickerController {
     _minuteInterval = minuteInterval;
 
     _picker?.dispose();
-    _picker = FPickerController(initial: encode(value));
+    _picker = FPickerController(indexes: encode(value));
     _picker?.addListener(decode);
     return true;
   }
@@ -138,7 +137,7 @@ final class _ProxyController extends FTimePickerController {
   Curve _curve;
   int _monotonic = 0;
 
-  _ProxyController(this._unsynced, this._onChange, this._duration, this._curve) : super(initial: _unsynced);
+  _ProxyController(this._unsynced, this._onChange, this._duration, this._curve) : super(time: _unsynced);
 
   void update(
     FTime newValue,
@@ -170,10 +169,9 @@ final class _ProxyController extends FTimePickerController {
 
   @override
   set _rawValue(FTime value) {
-    _unsynced = value;
-
     final current = ++_monotonic;
     if (super._rawValue != value) {
+      _unsynced = value;
       _onChange(value);
       _scrollTo(super._rawValue, current);
     }
@@ -201,15 +199,15 @@ sealed class FTimePickerControl with Diagnosticable, _$FTimePickerControlMixin {
 
   /// Creates a [FTimePickerControl] for controlling time picker using lifted state.
   ///
-  /// It does not prevent the user from scrolling to invalid indexes. To animate back to the provided [value],
+  /// It does not prevent the user from scrolling to invalid indexes. To animate back to the provided [time],
   /// consider passing in `onChange: (_) => setState(() {})`.
   ///
-  /// The [value] parameter contains the current selected time.
+  /// The [time] parameter contains the current selected time.
   /// The [onChange] callback is invoked when the user selects a time.
-  /// The [duration] when animating to [value] from an invalid/different time. Defaults to 200 milliseconds.
-  /// The [curve] when animating to [value] from an invalid/different time. Defaults to [Curves.easeOutCubic].
+  /// The [duration] when animating to [time] from an invalid/different time. Defaults to 200 milliseconds.
+  /// The [curve] when animating to [time] from an invalid/different time. Defaults to [Curves.easeOutCubic].
   const factory FTimePickerControl.lifted({
-    required FTime value,
+    required FTime time,
     required ValueChanged<FTime> onChange,
     Duration duration,
     Curve curve,
@@ -259,17 +257,20 @@ class FTimePickerManagedControl extends FTimePickerControl with Diagnosticable, 
 
   /// Creates a [FTimePickerControl].
   const FTimePickerManagedControl({this.controller, this.initial, this.onChange})
-    : assert(controller == null || initial == null, 'Cannot provide both controller and initial.'),
+    : assert(
+        controller == null || initial == null,
+        'Cannot provide both controller and initial time. Pass initial time to the controller instead.',
+      ),
       super._();
 
   @override
   FTimePickerController createController(DateFormat format, int hourInterval, int minuteInterval) =>
-      (controller ?? .new(initial: initial ?? const .new()))..configure(format, hourInterval, minuteInterval);
+      (controller ?? .new(time: initial ?? const .new()))..configure(format, hourInterval, minuteInterval);
 }
 
 class _Lifted extends FTimePickerControl with _$_LiftedMixin {
   @override
-  final FTime value;
+  final FTime time;
   @override
   final ValueChanged<FTime> onChange;
   @override
@@ -278,7 +279,7 @@ class _Lifted extends FTimePickerControl with _$_LiftedMixin {
   final Curve curve;
 
   const _Lifted({
-    required this.value,
+    required this.time,
     required this.onChange,
     this.duration = const Duration(milliseconds: 300),
     this.curve = Curves.easeOutCubic,
@@ -286,10 +287,10 @@ class _Lifted extends FTimePickerControl with _$_LiftedMixin {
 
   @override
   FTimePickerController createController(DateFormat format, int hourInterval, int minuteInterval) =>
-      (_ProxyController(value, onChange, duration, curve))..configure(format, hourInterval, minuteInterval);
+      (_ProxyController(time, onChange, duration, curve))..configure(format, hourInterval, minuteInterval);
 
   @override
   void _updateController(FTimePickerController controller, DateFormat format, int hourInterval, int minuteInterval) {
-    (controller as _ProxyController).update(value, onChange, duration, curve, format, hourInterval, minuteInterval);
+    (controller as _ProxyController).update(time, onChange, duration, curve, format, hourInterval, minuteInterval);
   }
 }

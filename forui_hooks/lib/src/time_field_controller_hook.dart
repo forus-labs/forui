@@ -12,24 +12,16 @@ String? _defaultValidator(FTime? _) => null;
 /// [validator] returns an error string to display if the input is invalid, or null otherwise.
 /// Defaults to always returning null.
 FTimeFieldController useFTimeFieldController({
-  FTime? initial,
+  FTime? time,
   FormFieldValidator<FTime> validator = _defaultValidator,
   List<Object?>? keys,
-}) => use(
-  _TimeFieldHook(initial: initial, validator: validator, debugLabel: 'useFTimeFieldController', keys: keys),
-);
+}) => use(_TimeFieldHook(time: time, validator: validator, keys: keys));
 
 class _TimeFieldHook extends Hook<FTimeFieldController> {
-  final FTime? initial;
+  final FTime? time;
   final FormFieldValidator<FTime> validator;
-  final String _debugLabel;
 
-  const _TimeFieldHook({
-    required this.initial,
-    required this.validator,
-    required String debugLabel,
-    super.keys,
-  }) : _debugLabel = debugLabel;
+  const _TimeFieldHook({required this.time, required this.validator, super.keys});
 
   @override
   _TimeFieldHookState createState() => .new();
@@ -38,13 +30,13 @@ class _TimeFieldHook extends Hook<FTimeFieldController> {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('initial', initial))
+      ..add(DiagnosticsProperty('time', time))
       ..add(ObjectFlagProperty.has('validator', validator));
   }
 }
 
 class _TimeFieldHookState extends HookState<FTimeFieldController, _TimeFieldHook> {
-  late final _controller = FTimeFieldController(initial: hook.initial, validator: hook.validator);
+  late final _controller = FTimeFieldController(time: hook.time, validator: hook.validator);
 
   @override
   FTimeFieldController build(BuildContext context) => _controller;
@@ -56,5 +48,5 @@ class _TimeFieldHookState extends HookState<FTimeFieldController, _TimeFieldHook
   bool get debugHasShortDescription => false;
 
   @override
-  String get debugLabel => hook._debugLabel;
+  String get debugLabel => 'useFTimeFieldController';
 }

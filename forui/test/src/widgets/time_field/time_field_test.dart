@@ -14,14 +14,14 @@ void main() {
       'input only',
       (Key key, FTime? value, ValueChanged<FTime?> onChange) => FTimeField(
         key: key,
-        control: .lifted(value: value, onChange: onChange),
+        control: .lifted(time: value, onChange: onChange),
       ),
     ),
     (
       'picker only',
       (Key key, FTime? value, ValueChanged<FTime?> onChange) => FTimeField.picker(
         key: key,
-        control: .lifted(value: value, onChange: onChange),
+        control: .lifted(time: value, onChange: onChange),
       ),
     ),
   ]) {
@@ -86,7 +86,7 @@ void main() {
             child: Form(
               key: key,
               child: field(
-                autoDispose(FTimeFieldController(initial: const FTime(10, 30))),
+                autoDispose(FTimeFieldController(time: const FTime(10, 30))),
                 null,
                 (v) => initial = v,
               ),

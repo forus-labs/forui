@@ -114,11 +114,17 @@ abstract class FCalendarManagedControl<T> extends FCalendarControl<T> with _$FCa
     this.selectable,
     this.truncateAndStripTimezone = true,
     this.onChange,
-  }) : assert(controller == null || initial == null, 'Cannot provide both controller and initial.'),
-       assert(controller == null || selectable == null, 'Cannot provide both controller and selectable.'),
+  }) : assert(
+         controller == null || initial == null,
+         'Cannot provide both controller and initial. Pass initial value to the controller instead.',
+       ),
+       assert(
+         controller == null || selectable == null,
+         'Cannot provide both controller and selectable. Pass selectable to the controller instead.',
+       ),
        assert(
          controller == null || truncateAndStripTimezone,
-         'Cannot provide both controller and truncateAndStripTimezone.',
+         'Cannot provide both controller and truncateAndStripTimezone. Pass truncateAndStripTimezone to the controller instead.',
        ),
        super._();
 
@@ -136,7 +142,10 @@ class _Date extends FCalendarManagedControl<DateTime?> {
     super.selectable,
     super.truncateAndStripTimezone,
     super.onChange,
-  }) : assert(controller == null || toggleable, 'Cannot provide both controller and toggleable.');
+  }) : assert(
+         controller == null || toggleable,
+         'Cannot provide both controller and toggleable. Pass toggleable to the controller instead.',
+       );
 
   @override
   FCalendarController<DateTime?> createController() =>

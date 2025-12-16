@@ -62,9 +62,7 @@ class _ProxyController extends TextEditingController {
   TextEditingValue? _unsynced;
   ValueChanged<TextEditingValue> _onChange;
 
-  _ProxyController(super.value, this._onChange)
-    : _unsynced = value,
-      super.fromValue();
+  _ProxyController(super.value, this._onChange) : _unsynced = value, super.fromValue();
 
   void update(TextEditingValue newValue, ValueChanged<TextEditingValue> onChange) {
     _onChange = onChange;
@@ -79,8 +77,8 @@ class _ProxyController extends TextEditingController {
 
   @override
   set value(TextEditingValue newValue) {
-    _unsynced = newValue;
     if (super.value != newValue) {
+      _unsynced = newValue;
       _onChange(newValue);
     }
   }
@@ -130,7 +128,10 @@ class FTextFieldManagedControl extends FTextFieldControl with _$FTextFieldManage
 
   /// Creates a [FTextFieldControl].
   const FTextFieldManagedControl({this.controller, this.initial, this.onChange})
-    : assert(controller == null || initial == null, 'Cannot provide both an initial value and a controller.'),
+    : assert(
+        controller == null || initial == null,
+        'Cannot provide both controller and initial value. Pass initial value to the controller instead.',
+      ),
       super._();
 
   @override

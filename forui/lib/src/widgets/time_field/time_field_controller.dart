@@ -22,9 +22,9 @@ class FTimeFieldController extends FValueNotifier<FTime?> {
   bool _mutating = false;
 
   /// Creates a [FTimeFieldController].
-  FTimeFieldController({FTime? initial, this.validator = _defaultValidator})
-    : _picker = FTimePickerController(initial: initial ?? const FTime()),
-      super(initial) {
+  FTimeFieldController({FTime? time, this.validator = _defaultValidator})
+    : _picker = FTimePickerController(time: time ?? const FTime()),
+      super(time) {
     _picker.addValueListener((time) {
       try {
         _mutating = true;
@@ -63,11 +63,11 @@ class _ProxyController extends FTimeFieldController {
   int _monotonic = 0;
 
   _ProxyController({
-    required super.initial,
+    required super.time,
     required ValueChanged<FTime?> onChange,
     required Duration duration,
     required Curve curve,
-  }) : _unsynced = initial,
+  }) : _unsynced = time,
        _onChange = onChange,
        _duration = duration,
        _curve = curve;
@@ -96,10 +96,9 @@ class _ProxyController extends FTimeFieldController {
 
   @override
   set value(FTime? value) {
-    _unsynced = value;
-
     final current = ++_monotonic;
     if (super.value != value) {
+      _unsynced = value;
       _onChange(value);
       _animateTo(super.value, current);
     }
@@ -128,12 +127,12 @@ sealed class FTimeFieldControl with Diagnosticable, _$FTimeFieldControlMixin {
 
   /// Creates lifted state control.
   ///
-  /// The [value] parameter contains the current selected time.
+  /// The [time] parameter contains the current selected time.
   /// The [onChange] callback is invoked when the user selects a time.
-  /// The [duration] when animating to [value] from an invalid/different time. Defaults to 200 milliseconds.
-  /// The [curve] when animating to [value] from an invalid/different time. Defaults to [Curves.easeOutCubic].
+  /// The [duration] when animating to [time] from an invalid/different time. Defaults to 200 milliseconds.
+  /// The [curve] when animating to [time] from an invalid/different time. Defaults to [Curves.easeOutCubic].
   const factory FTimeFieldControl.lifted({
-    required FTime? value,
+    required FTime? time,
     required ValueChanged<FTime?> onChange,
     Duration duration,
     Curve curve,
@@ -178,18 +177,24 @@ class FTimeFieldManagedControl extends FTimeFieldControl with Diagnosticable, _$
 
   /// Creates a [FTimeFieldControl].
   const FTimeFieldManagedControl({this.controller, this.initial, this.validator, this.onChange})
-    : assert(controller == null || initial == null, 'Cannot provide both controller and initial.'),
-      assert(controller == null || validator == null, 'Cannot provide both controller and validator.'),
+    : assert(
+        controller == null || initial == null,
+        'Cannot provide both controller and initial time. Pass initial time to the controller instead.',
+      ),
+      assert(
+        controller == null || validator == null,
+        'Cannot provide both controller and validator. pass validator to the controller instead.',
+      ),
       super._();
 
   @override
   FTimeFieldController createController(bool _) =>
-      controller ?? .new(initial: initial, validator: validator ?? FTimeFieldController._defaultValidator);
+      controller ?? .new(time: initial, validator: validator ?? FTimeFieldController._defaultValidator);
 }
 
 class _Lifted extends FTimeFieldControl with _$_LiftedMixin {
   @override
-  final FTime? value;
+  final FTime? time;
   @override
   final ValueChanged<FTime?> onChange;
   @override
@@ -198,7 +203,7 @@ class _Lifted extends FTimeFieldControl with _$_LiftedMixin {
   final Curve curve;
 
   const _Lifted({
-    required this.value,
+    required this.time,
     required this.onChange,
     this.duration = const Duration(milliseconds: 300),
     this.curve = Curves.easeOutCubic,
@@ -206,9 +211,9 @@ class _Lifted extends FTimeFieldControl with _$_LiftedMixin {
 
   @override
   FTimeFieldController createController(bool _) =>
-      _ProxyController(initial: value, onChange: onChange, duration: duration, curve: curve);
+      _ProxyController(time: time, onChange: onChange, duration: duration, curve: curve);
 
   @override
   void _updateController(FTimeFieldController controller, bool shown) =>
-      (controller as _ProxyController).update(value, onChange, shown, duration, curve);
+      (controller as _ProxyController).update(time, onChange, shown, duration, curve);
 }

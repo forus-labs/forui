@@ -201,8 +201,14 @@ class FPopoverManagedControl extends FPopoverControl with Diagnosticable, _$FPop
 
   /// Creates a [FPopoverControl].
   const FPopoverManagedControl({this.controller, this.initial, this.motion, this.onChange})
-    : assert(controller == null || initial == null, 'Cannot provide both controller and initial.'),
-      assert(controller == null || motion == null, 'Cannot provide both controller and motion.'),
+    : assert(
+        controller == null || initial == null,
+        'Cannot provide both controller and initially shown. Pass initially shown to the controller instead.',
+      ),
+      assert(
+        controller == null || motion == null,
+        'Cannot provide both controller and motion. Pass motion to the controller instead.',
+      ),
       super._();
 
   @override

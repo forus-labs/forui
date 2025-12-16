@@ -7,13 +7,13 @@ import 'package:forui/forui.dart';
 /// Creates a [FTabController] that is automatically disposed.
 FTabController useFTabController({
   required int length,
-  int initialIndex = 0,
+  int index = 0,
   TickerProvider? vsync,
   FTabMotion motion = const FTabMotion(),
   List<Object?>? keys,
 }) => use(
   _TabControllerHook(
-    initialIndex: initialIndex,
+    index: index,
     length: length,
     vsync: vsync ??= useSingleTickerProvider(keys: keys),
     motion: motion,
@@ -22,13 +22,13 @@ FTabController useFTabController({
 );
 
 class _TabControllerHook extends Hook<FTabController> {
-  final int initialIndex;
+  final int index;
   final int length;
   final TickerProvider vsync;
   final FTabMotion motion;
 
   const _TabControllerHook({
-    required this.initialIndex,
+    required this.index,
     required this.length,
     required this.vsync,
     required this.motion,
@@ -42,7 +42,7 @@ class _TabControllerHook extends Hook<FTabController> {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(IntProperty('initialIndex', initialIndex))
+      ..add(IntProperty('index', index))
       ..add(IntProperty('length', length))
       ..add(DiagnosticsProperty('vsync', vsync))
       ..add(DiagnosticsProperty('motion', motion));
@@ -51,7 +51,7 @@ class _TabControllerHook extends Hook<FTabController> {
 
 class _TabControllerHookState extends HookState<FTabController, _TabControllerHook> {
   late final _controller = FTabController(
-    initial: hook.initialIndex,
+    index: hook.index,
     length: hook.length,
     vsync: hook.vsync,
     motion: hook.motion,

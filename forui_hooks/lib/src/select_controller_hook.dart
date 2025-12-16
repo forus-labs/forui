@@ -5,17 +5,14 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:forui/forui.dart';
 
 /// Creates a [FSelectController] that allows an item to be selected.
-FSelectController<T> useFSelectController<T>({T? value, bool toggleable = false, List<Object?>? keys}) => use(
-  _SelectHook(value: value, toggleable: toggleable, debugLabel: 'useFSelectController', keys: keys),
-);
+FSelectController<T> useFSelectController<T>({T? value, bool toggleable = false, List<Object?>? keys}) =>
+    use(_SelectHook(value: value, toggleable: toggleable, keys: keys));
 
 class _SelectHook<T> extends Hook<FSelectController<T>> {
   final T? value;
   final bool toggleable;
-  final String _debugLabel;
 
-  const _SelectHook({required this.value, required this.toggleable, required String debugLabel, super.keys})
-    : _debugLabel = debugLabel;
+  const _SelectHook({required this.value, required this.toggleable, super.keys});
 
   @override
   _SelectHookState<T> createState() => .new();
@@ -42,5 +39,5 @@ class _SelectHookState<T> extends HookState<FSelectController<T>, _SelectHook<T>
   bool get debugHasShortDescription => false;
 
   @override
-  String get debugLabel => hook._debugLabel;
+  String get debugLabel => 'useFSelectController';
 }

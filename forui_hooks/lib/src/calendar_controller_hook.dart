@@ -24,16 +24,16 @@ typedef _Create<T> = FCalendarController<T> Function(_CalendarControllerHook<T>)
 /// timezone or with a time component when [truncateAndStripTimezone] is false is undefined behavior.
 ///
 /// ## Contract
-/// Throws [AssertionError] if [initialSelection] is not in UTC timezone and [truncateAndStripTimezone] is false.
+/// Throws [AssertionError] if [initial] is not in UTC timezone and [truncateAndStripTimezone] is false.
 FCalendarController<DateTime?> useFDateCalendarController({
-  DateTime? initialSelection,
+  DateTime? initial,
   bool Function(DateTime)? selectable,
-  bool toggleable = false,
+  bool toggleable = true,
   bool truncateAndStripTimezone = true,
   List<Object?>? keys,
 }) => use(
   _CalendarControllerHook<DateTime?>(
-    value: initialSelection,
+    value: initial,
     selectable: selectable,
     toggleable: toggleable,
     debugLabel: 'useFDateCalendarController',
@@ -62,16 +62,16 @@ FCalendarController<DateTime?> useFDateCalendarController({
 /// timezone or with a time component when [truncateAndStripTimezone] is false is undefined behavior.
 ///
 /// ## Contract
-/// Throws [AssertionError] if the dates in [initialSelections] are not in UTC timezone and [truncateAndStripTimezone]
+/// Throws [AssertionError] if the dates in [initial] are not in UTC timezone and [truncateAndStripTimezone]
 /// is false.
 FCalendarController<Set<DateTime>> useFDatesCalendarController({
-  Set<DateTime> initialSelections = const {},
+  Set<DateTime> initial = const {},
   bool Function(DateTime)? selectable,
   bool truncateAndStripTimezone = true,
   List<Object?>? keys,
 }) => use(
   _CalendarControllerHook<Set<DateTime>>(
-    value: initialSelections,
+    value: initial,
     selectable: selectable,
     debugLabel: 'useFDatesCalendarController',
     create: (hook) =>
@@ -100,16 +100,16 @@ FCalendarController<Set<DateTime>> useFDatesCalendarController({
 ///
 /// ## Contract
 /// Throws [AssertionError] if:
-/// * the given dates in [initialSelection] is not in UTC timezone and [truncateAndStripTimezone] is false.
+/// * the given dates in [initial] is not in UTC timezone and [truncateAndStripTimezone] is false.
 /// * the end date is less than start date.
 FCalendarController<(DateTime, DateTime)?> useFRangeCalendarController({
-  (DateTime, DateTime)? initialSelection,
+  (DateTime, DateTime)? initial,
   bool Function(DateTime)? selectable,
   bool truncateAndStripTimezone = true,
   List<Object?>? keys,
 }) => use(
   _CalendarControllerHook<(DateTime, DateTime)?>(
-    value: initialSelection,
+    value: initial,
     selectable: selectable,
     debugLabel: 'useFRangeCalendarController',
     create: (hook) =>
