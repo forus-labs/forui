@@ -8,7 +8,6 @@ import 'package:forui/src/foundation/input/input_controller.dart';
 import 'package:forui/src/foundation/input/parser.dart';
 import 'package:forui/src/widgets/date_field/input/date_parser.dart';
 
-///
 @internal
 typedef Select<T> = T Function(TextEditingValue value, int first, int last, int end, int separator);
 
@@ -149,6 +148,7 @@ class DateSelector extends Selector {
     Select<TextEditingValue> onLast = _last,
   }) => _map(value, onFirst: onFirst, onMiddle: onMiddle, onLast: onLast);
 
+  @override
   TextEditingValue map(TextEditingValue oldValue, TextEditingValue newValue) {
     final index = _map(
       oldValue,

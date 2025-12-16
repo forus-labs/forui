@@ -86,7 +86,7 @@ void main() {
             child: Form(
               key: key,
               child: field(
-                autoDispose(FTimeFieldController(initialTime: const FTime(10, 30))),
+                autoDispose(FTimeFieldController(initial: const FTime(10, 30))),
                 null,
                 (v) => initial = v,
               ),

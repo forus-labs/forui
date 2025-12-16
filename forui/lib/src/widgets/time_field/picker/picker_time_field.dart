@@ -117,8 +117,12 @@ class _PickerTimeFieldState extends _FTimeFieldState<_PickerTimeField> {
       _format = widget.hour24 ? .Hm(localizations) : .jm(localizations);
     }
 
-    _popoverController = widget.popoverControl.update(old.popoverControl, _popoverController, _handlePopoverChange, this).$1;
-    final (controller, updated) = widget.control.update(old.control, _controller, _handleOnChange, _popoverController);
+    final (controller, updated) = widget.control.update(
+      old.control,
+      _controller,
+      _handleOnChange,
+      _popoverController.status.isForwardOrCompleted,
+    );
     if (updated) {
       _controller = controller;
       _updateTextController();
@@ -137,9 +141,7 @@ class _PickerTimeFieldState extends _FTimeFieldState<_PickerTimeField> {
   @override
   void _handleOnChange() {
     _updateTextController();
-    if (widget.control case FTimeFieldManagedControl(:final onChange?)) {
-      onChange(_controller.value);
-    }
+    super._handleOnChange();
   }
 
   void _updateTextController() {

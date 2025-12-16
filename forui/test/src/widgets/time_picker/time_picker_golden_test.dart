@@ -66,7 +66,7 @@ void main() {
   }
 
   group('lifted', () {
-    testWidgets('animates programmatically changed value', (tester) async {
+    testWidgets('programmatically changed value', (tester) async {
       final sheet = autoDispose(AnimationSheetBuilder(frameSize: const Size(300, 300)));
       FTime value = const FTime(10, 30);
 
@@ -107,10 +107,10 @@ void main() {
         const Duration(milliseconds: 300),
       );
 
-      await expectLater(sheet.collate(5), matchesGoldenFile('time-picker/lifted-value-change-animation.png'));
+      await expectLater(sheet.collate(5), matchesGoldenFile('time-picker/lifted-value-change.png'));
     });
 
-    testWidgets('animates drag back', (tester) async {
+    testWidgets('drag back', (tester) async {
       final sheet = autoDispose(AnimationSheetBuilder(frameSize: const Size(300, 300)));
 
       final widget = sheet.record(
@@ -131,7 +131,7 @@ void main() {
       // This doesn't fully wait for animation to end but it's a good enough approximation.
       await tester.pumpFrames(widget, const Duration(milliseconds: 500));
 
-      await expectLater(sheet.collate(5), matchesGoldenFile('time-picker/lifted-drag-back-animation.png'));
+      await expectLater(sheet.collate(5), matchesGoldenFile('time-picker/lifted-drag-back.png'));
     });
 
     testWidgets('change hour24 format', (tester) async {

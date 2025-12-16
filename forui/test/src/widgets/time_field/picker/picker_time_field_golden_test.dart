@@ -25,6 +25,67 @@ void main() {
     await expectBlueScreen();
   });
 
+  group('lifted', () {
+    testWidgets('programmatically changed value', (tester) async {
+      FTime? value = const FTime(10, 30);
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          locale: const Locale('en'),
+          alignment: .topCenter,
+          child: StatefulBuilder(
+            builder: (_, setState) => FTimeField.picker(
+              key: key,
+              control: .lifted(value: value, onChange: (v) => setState(() => value = v)),
+            ),
+          ),
+        ),
+      );
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+
+      value = const FTime(14, 45);
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          locale: const Locale('en'),
+          alignment: .topCenter,
+          child: StatefulBuilder(
+            builder: (_, setState) => FTimeField.picker(
+              key: key,
+              control: .lifted(value: value, onChange: (v) => setState(() => value = v)),
+            ),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('time-field/picker/lifted-value-change.png'));
+    });
+
+    testWidgets('drag back', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          locale: const Locale('en'),
+          alignment: .topCenter,
+          child: FTimeField.picker(
+            key: key,
+            control: .lifted(value: const FTime(10, 30), onChange: (_) {}),
+          ),
+        ),
+      );
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+
+      await tester.drag(find.byType(BuilderWheel).first, const Offset(0, -50));
+      await tester.pumpAndSettle();
+
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('time-field/picker/lifted-drag-back.png'));
+    });
+  });
+
   for (final theme in TestScaffold.themes) {
     testWidgets('${theme.name} with no icon', (tester) async {
       await tester.pumpWidget(TestScaffold(theme: theme.data, child: const FTimeField.picker(prefixBuilder: null)));

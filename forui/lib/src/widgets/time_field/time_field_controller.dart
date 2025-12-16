@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_positional_boolean_parameters
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
@@ -20,9 +22,9 @@ class FTimeFieldController extends FValueNotifier<FTime?> {
   bool _mutating = false;
 
   /// Creates a [FTimeFieldController].
-  FTimeFieldController({FTime? initialTime, this.validator = _defaultValidator})
-    : _picker = FTimePickerController(initial: initialTime ?? const FTime()),
-      super(initialTime) {
+  FTimeFieldController({FTime? initial, this.validator = _defaultValidator})
+    : _picker = FTimePickerController(initial: initial ?? const FTime()),
+      super(initial) {
     _picker.addValueListener((time) {
       try {
         _mutating = true;
@@ -50,53 +52,65 @@ class FTimeFieldController extends FValueNotifier<FTime?> {
 
 @internal
 extension InternalFTimeFieldController on FTimeFieldController {
-  void update(FTime? time) {
-    if (!_mutating && time != null) {
-      _picker.value = time;
-    }
-  }
-
   FTimePickerController get picker => _picker;
 }
 
-class _Controller extends FTimeFieldController {
+class _ProxyController extends FTimeFieldController {
+  FTime? _unsynced;
   ValueChanged<FTime?> _onChange;
+  Duration _duration;
+  Curve _curve;
   int _monotonic = 0;
 
-  _Controller({required FTime? value, required ValueChanged<FTime?> onChange})
-    : _onChange = onChange,
-      super(initialTime: value);
+  _ProxyController({
+    required super.initial,
+    required ValueChanged<FTime?> onChange,
+    required Duration duration,
+    required Curve curve,
+  }) : _unsynced = initial,
+       _onChange = onChange,
+       _duration = duration,
+       _curve = curve;
 
-  void _updateLifted(FTime? value, ValueChanged<FTime?> onChange, bool isPopoverShown, Duration duration, Curve curve) {
+  void update(FTime? newValue, ValueChanged<FTime?> onChange, bool shown, Duration duration, Curve curve) {
     _onChange = onChange;
+    _duration = duration;
+    _curve = curve;
 
-    if (super.value == value) {
-      return;
-    }
-
-    if (isPopoverShown) {
-      final current = ++_monotonic;
-      SchedulerBinding.instance.addPostFrameCallback((_) {
-        if (current == _monotonic) {
-          _picker.animateTo(value ?? const FTime(), duration: duration, curve: curve);
-        }
-      });
-    } else {
-      super.value = value;
+    final current = ++_monotonic;
+    if (super.value != newValue) {
+      _unsynced = newValue;
+      if (shown) {
+        _animateTo(newValue, current);
+      } else {
+        super.value = newValue;
+      }
+    } else if (_unsynced != newValue) {
+      _unsynced = newValue;
+      if (shown) {
+        _animateTo(newValue, current);
+      }
+      notifyListeners();
     }
   }
 
   @override
   set value(FTime? value) {
+    _unsynced = value;
+
+    final current = ++_monotonic;
     if (super.value != value) {
-      super.value = value;
-      final current = ++_monotonic;
-      SchedulerBinding.instance.addPostFrameCallback((_) {
-        if (current == _monotonic) {
-          _onChange(value);
-        }
-      });
+      _onChange(value);
+      _animateTo(super.value, current);
     }
+  }
+
+  void _animateTo(FTime? value, int current) {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      if (current == _monotonic) {
+        _picker.animateTo(value ?? const FTime(), duration: _duration, curve: _curve);
+      }
+    });
   }
 }
 
@@ -104,6 +118,14 @@ class _Controller extends FTimeFieldController {
 ///
 /// {@macro forui.foundation.doc_templates.control}
 sealed class FTimeFieldControl with Diagnosticable, _$FTimeFieldControlMixin {
+  /// Creates a [FTimeFieldControl].
+  const factory FTimeFieldControl.managed({
+    FTimeFieldController? controller,
+    FTime? initial,
+    FormFieldValidator<FTime>? validator,
+    ValueChanged<FTime?>? onChange,
+  }) = FTimeFieldManagedControl;
+
   /// Creates lifted state control.
   ///
   /// The [value] parameter contains the current selected time.
@@ -115,15 +137,7 @@ sealed class FTimeFieldControl with Diagnosticable, _$FTimeFieldControlMixin {
     required ValueChanged<FTime?> onChange,
     Duration duration,
     Curve curve,
-  }) = Lifted;
-
-  /// Creates a [FTimeFieldControl].
-  const factory FTimeFieldControl.managed({
-    FTimeFieldController? controller,
-    FTime? initial,
-    FormFieldValidator<FTime>? validator,
-    ValueChanged<FTime?>? onChange,
-  }) = FTimeFieldManagedControl;
+  }) = _Lifted;
 
   const FTimeFieldControl._();
 
@@ -131,34 +145,8 @@ sealed class FTimeFieldControl with Diagnosticable, _$FTimeFieldControlMixin {
     FTimeFieldControl old,
     FTimeFieldController controller,
     VoidCallback callback,
-    FPopoverController popover,
+    bool shown,
   );
-}
-
-@internal
-class Lifted extends FTimeFieldControl with _$LiftedMixin {
-  @override
-  final FTime? value;
-  @override
-  final ValueChanged<FTime?> onChange;
-  @override
-  final Duration duration;
-  @override
-  final Curve curve;
-
-  const Lifted({
-    required this.value,
-    required this.onChange,
-    this.duration = const Duration(milliseconds: 200),
-    this.curve = Curves.easeOutCubic,
-  }) : super._();
-
-  @override
-  FTimeFieldController createController(FPopoverController popover) => _Controller(value: value, onChange: onChange);
-
-  @override
-  void _updateController(FTimeFieldController controller, FPopoverController popover) =>
-      (controller as _Controller)._updateLifted(value, onChange, popover.status.isForwardOrCompleted, duration, curve);
 }
 
 /// A [FTimeFieldManagedControl] enables widgets to manage their own controller internally while exposing parameters for
@@ -195,6 +183,32 @@ class FTimeFieldManagedControl extends FTimeFieldControl with Diagnosticable, _$
       super._();
 
   @override
-  FTimeFieldController createController(FPopoverController popover) =>
-      controller ?? FTimeFieldController(initialTime: initial, validator: validator ?? FTimeFieldController._defaultValidator);
+  FTimeFieldController createController(bool _) =>
+      controller ?? .new(initial: initial, validator: validator ?? FTimeFieldController._defaultValidator);
+}
+
+class _Lifted extends FTimeFieldControl with _$_LiftedMixin {
+  @override
+  final FTime? value;
+  @override
+  final ValueChanged<FTime?> onChange;
+  @override
+  final Duration duration;
+  @override
+  final Curve curve;
+
+  const _Lifted({
+    required this.value,
+    required this.onChange,
+    this.duration = const Duration(milliseconds: 300),
+    this.curve = Curves.easeOutCubic,
+  }) : super._();
+
+  @override
+  FTimeFieldController createController(bool _) =>
+      _ProxyController(initial: value, onChange: onChange, duration: duration, curve: curve);
+
+  @override
+  void _updateController(FTimeFieldController controller, bool shown) =>
+      (controller as _ProxyController).update(value, onChange, shown, duration, curve);
 }

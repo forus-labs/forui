@@ -64,15 +64,9 @@ class _InputTimeFieldState extends _FTimeFieldState<_InputTimeField> {
   @override
   void didUpdateWidget(covariant _InputTimeField old) {
     super.didUpdateWidget(old);
-    _popoverController = widget.popoverControl.update(old.popoverControl, _popoverController, _handlePopoverChange, this).$1;
-    _controller = widget.control.update(old.control, _controller, _handleOnChange, _popoverController).$1;
-  }
-
-  @override
-  void _handleOnChange() {
-    if (widget.control case FTimeFieldManagedControl(:final onChange?)) {
-      onChange(_controller.value);
-    }
+    _controller = widget.control
+        .update(old.control, _controller, _handleOnChange, _popoverController.status.isForwardOrCompleted)
+        .$1;
   }
 
   @override

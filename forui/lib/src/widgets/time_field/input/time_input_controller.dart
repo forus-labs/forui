@@ -55,20 +55,40 @@ abstract class TimeInputController extends InputController {
     controller.addListener(updateFromTimeController);
   }
 
+  // Used for input-driven changes only.
   @override
-  void onValueChanged(String newValue) {
-    final time = format.tryParseStrict(newValue, true);
-    controller.value = time == null ? null : .fromDateTime(time);
+  set rawValue(TextEditingValue newValue) {
+    // Allow selection & arrow key traversal
+    if (super.rawValue.text == newValue.text) {
+      super.rawValue = newValue;
+      return;
+    }
+
+    final dateTime = format.tryParseStrict(newValue.text, true);
+    final proposed = dateTime == null ? null : FTime.fromDateTime(dateTime);
+    if (proposed == controller.value) {
+      // Prevent toggling controller.value.
+      super.rawValue = newValue;
+      return;
+    }
+
+    controller.value = proposed;
+    if (controller.value == proposed) {
+      super.rawValue = newValue;
+    }
   }
 
   @visibleForTesting
   void updateFromTimeController() {
     if (!mutating) {
-      rawValue = TextEditingValue(
-        text: switch (controller.value) {
-          null => placeholder,
-          final value => format.format(value.withDate(DateTime(1970))),
-        },
+      super.rawValue = selector.map(
+        rawValue,
+        TextEditingValue(
+          text: switch (controller.value) {
+            null => placeholder,
+            final value => format.format(value.withDate(DateTime(1970))),
+          },
+        ),
       );
     }
   }

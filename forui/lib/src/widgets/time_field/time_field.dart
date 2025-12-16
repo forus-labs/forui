@@ -312,7 +312,15 @@ abstract class _FTimeFieldState<T extends FTimeField> extends State<T> with Tick
   void initState() {
     super.initState();
     _popoverController = widget.popoverControl.create(_handlePopoverChange, this);
-    _controller = widget.control.create(_handleOnChange, _popoverController);
+    _controller = widget.control.create(_handleOnChange, _popoverController.status.isForwardOrCompleted);
+  }
+
+  @override
+  void didUpdateWidget(covariant T old) {
+    super.didUpdateWidget(old);
+    _popoverController = widget.popoverControl
+        .update(old.popoverControl, _popoverController, _handlePopoverChange, this)
+        .$1;
   }
 
   @override
@@ -322,7 +330,11 @@ abstract class _FTimeFieldState<T extends FTimeField> extends State<T> with Tick
     super.dispose();
   }
 
-  void _handleOnChange();
+  void _handleOnChange() {
+    if (widget.control case FTimeFieldManagedControl(:final onChange?)) {
+      onChange(_controller.value);
+    }
+  }
 
   void _handlePopoverChange() {
     if (widget.popoverControl case FPopoverManagedControl(:final onChange?)) {

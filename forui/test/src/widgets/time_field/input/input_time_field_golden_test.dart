@@ -15,7 +15,7 @@ void main() {
     await expectBlueScreen();
   });
 
-  testWidgets('lifted does not cause entire text to be selected', (tester) async {
+  testWidgets('lifted arrow adjustment', (tester) async {
     FTime? value = const FTime(10, 30);
 
     await tester.pumpWidget(
@@ -39,7 +39,10 @@ void main() {
     await tester.sendKeyEvent(.arrowUp);
     await tester.pumpAndSettle();
 
-    await expectLater(find.byType(TestScaffold), matchesGoldenFile('time-field/lifted-arrow-scroll.png'));
+    await expectLater(
+      find.byType(TestScaffold),
+      matchesGoldenFile('time-field/input/lifted-selection-arrow-adjustment.png'),
+    );
   });
 
   for (final theme in TestScaffold.themes) {

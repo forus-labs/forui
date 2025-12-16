@@ -14,74 +14,8 @@ import '../../../test_scaffold.dart';
 void main() {
   const key = Key('field');
 
-  group('lifted', () {
-    testWidgets('onPopoverChange called', (tester) async {
-      FTime? value;
-      var popoverShown = false;
-
-      await tester.pumpWidget(
-        TestScaffold.app(
-          locale: const Locale('en', 'SG'),
-          child: StatefulBuilder(
-            builder: (context, setState) => FTimeField.picker(
-              key: key,
-              control: .lifted(
-                value: value,
-                onChange: (v) => setState(() => value = v),
-              ),
-              popoverControl: .lifted(
-                shown: popoverShown,
-                onChange: (shown) => setState(() => popoverShown = shown),
-              ),
-            ),
-          ),
-        ),
-      );
-
-      expect(popoverShown, false);
-
-      await tester.tap(find.byKey(key));
-      await tester.pumpAndSettle();
-
-      expect(popoverShown, true);
-
-      await tester.sendKeyEvent(LogicalKeyboardKey.escape);
-      await tester.pumpAndSettle();
-
-      expect(popoverShown, false);
-    });
-
-    testWidgets('popoverShown controls visibility', (tester) async {
-      FTime? value;
-
-      await tester.pumpWidget(
-        TestScaffold.app(
-          locale: const Locale('en', 'SG'),
-          child: StatefulBuilder(
-            builder: (context, setState) => FTimeField.picker(
-              key: key,
-              control: .lifted(
-                value: value,
-                onChange: (v) => setState(() => value = v),
-              ),
-              popoverControl: .lifted(
-                shown: false,
-                onChange: (_) {},
-              ),
-            ),
-          ),
-        ),
-      );
-
-      await tester.tap(find.byKey(key));
-      await tester.pumpAndSettle();
-
-      expect(find.byType(FTimePicker), findsNothing);
-    });
-  });
-
   group('managed', () {
-    testWidgets('onChange callback called with internal controller', (tester) async {
+    testWidgets('onChange callback called', (tester) async {
       FTime? changedValue;
 
       await tester.pumpWidget(

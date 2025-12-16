@@ -329,7 +329,7 @@ void main() {
     (const FTime(9, 30), null, const TextEditingValue(text: 'HH:MM --')),
   ].indexed) {
     test('update from time controller(...) - $index', () {
-      final timeController = autoDispose(FTimeFieldController(initialTime: initial));
+      final timeController = autoDispose(FTimeFieldController(initial: initial));
       final controller = TimeInputController(
         FLocalizationsEnSg(),
         timeController,

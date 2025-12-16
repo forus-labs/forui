@@ -44,7 +44,7 @@ class _TimeFieldHook extends Hook<FTimeFieldController> {
 }
 
 class _TimeFieldHookState extends HookState<FTimeFieldController, _TimeFieldHook> {
-  late final _controller = FTimeFieldController(initialTime: hook.initialTime, validator: hook.validator);
+  late final _controller = FTimeFieldController(initial: hook.initialTime, validator: hook.validator);
 
   @override
   FTimeFieldController build(BuildContext context) => _controller;
