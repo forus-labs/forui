@@ -119,7 +119,7 @@ class Time12Selector extends Selector {
 
     final f = _first.length;
     final first = switch (localizations.localeName) {
-    // These locales do not have a separator between the period and time.
+      // These locales do not have a separator between the period and time.
       'zh_HK' || 'zh_TW' => 2,
       _ => value.text.indexOf(_first),
     };

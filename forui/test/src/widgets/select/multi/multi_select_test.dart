@@ -178,14 +178,8 @@ void main() {
           child: StatefulBuilder(
             builder: (context, setState) => FMultiSelect<String>(
               key: key,
-              control: .lifted(
-                value: value,
-                onChange: (v) => setState(() => value = v),
-              ),
-              popoverControl: .lifted(
-                shown: popoverShown,
-                onChange: (shown) => setState(() => popoverShown = shown),
-              ),
+              control: .lifted(value: value, onChange: (v) => setState(() => value = v)),
+              popoverControl: .lifted(shown: popoverShown, onChange: (shown) => setState(() => popoverShown = shown)),
               items: letters,
             ),
           ),
@@ -213,14 +207,8 @@ void main() {
           child: StatefulBuilder(
             builder: (context, setState) => FMultiSelect<String>(
               key: key,
-              control: .lifted(
-                value: value,
-                onChange: (v) => setState(() => value = v),
-              ),
-              popoverControl: .lifted(
-                shown: false,
-                onChange: (_) {},
-              ),
+              control: .lifted(value: value, onChange: (v) => setState(() => value = v)),
+              popoverControl: .lifted(shown: false, onChange: (_) {}),
               items: letters,
             ),
           ),

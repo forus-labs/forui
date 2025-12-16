@@ -284,9 +284,7 @@ void main() {
           builder: (context, setState) => FDateField(
             key: key,
             control: .lifted(date: null, onChange: (_) {}),
-            calendar: .new(
-              today: .utc(2025, 1, 15),
-            ),
+            calendar: .new(today: .utc(2025, 1, 15)),
           ),
         ),
       ),
@@ -433,7 +431,10 @@ void main() {
       await tester.sendKeyEvent(.arrowUp);
       await tester.pumpAndSettle();
 
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('date-field/lifted-selection-arrow-adjustment.png'));
+      await expectLater(
+        find.byType(TestScaffold),
+        matchesGoldenFile('date-field/lifted-selection-arrow-adjustment.png'),
+      );
     });
   });
 }

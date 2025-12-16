@@ -85,11 +85,7 @@ void main() {
             locale: const Locale('en', 'SG'),
             child: Form(
               key: key,
-              child: field(
-                autoDispose(FTimeFieldController(time: const FTime(10, 30))),
-                null,
-                (v) => initial = v,
-              ),
+              child: field(autoDispose(FTimeFieldController(time: const FTime(10, 30))), null, (v) => initial = v),
             ),
           ),
         );

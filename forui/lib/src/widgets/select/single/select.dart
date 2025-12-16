@@ -648,7 +648,9 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with TickerProvi
       _controller = controller;
       _updateTextController();
     }
-    _popoverController = widget.popoverControl.update(old.popoverControl, _popoverController, _handlePopoverChange, this).$1;
+    _popoverController = widget.popoverControl
+        .update(old.popoverControl, _popoverController, _handlePopoverChange, this)
+        .$1;
   }
 
   void _updateSelectController() {

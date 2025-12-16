@@ -300,14 +300,8 @@ abstract class FMultiValueManagedControl<T> extends FMultiValueControl<T>
 
   /// Creates a [FMultiValueControl].
   const FMultiValueManagedControl({this.controller, this.min, this.max, this.onChange})
-    : assert(
-        controller == null || min == null,
-        'Cannot provide both controller and min. Pass min to the controller.',
-      ),
-      assert(
-        controller == null || max == null,
-        'Cannot provide both controller and max. Pass max to the controller.',
-      ),
+    : assert(controller == null || min == null, 'Cannot provide both controller and min. Pass min to the controller.'),
+      assert(controller == null || max == null, 'Cannot provide both controller and max. Pass max to the controller.'),
       super._();
 }
 

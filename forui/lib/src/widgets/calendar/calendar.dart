@@ -5,12 +5,13 @@ import 'package:meta/meta.dart';
 import 'package:sugar/sugar.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/widgets/calendar/calendar_controller.dart'
-    show FCalendarManagedControl, InternalFCalendarControl;
 import 'package:forui/src/widgets/calendar/day/day_picker.dart';
 import 'package:forui/src/widgets/calendar/day/paged_day_picker.dart';
 import 'package:forui/src/widgets/calendar/shared/header.dart';
 import 'package:forui/src/widgets/calendar/year_month_picker.dart';
+
+import 'package:forui/src/widgets/calendar/calendar_controller.dart'
+    show FCalendarManagedControl, InternalFCalendarControl;
 
 part 'calendar.design.dart';
 

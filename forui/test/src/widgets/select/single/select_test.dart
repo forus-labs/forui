@@ -45,9 +45,12 @@ void main() {
           child: StatefulBuilder(
             builder: (context, setState) => FSelect<String>(
               key: key,
-              control: .lifted(value: value, onChange: (v) => setState(() {
-                value = v;
-              })),
+              control: .lifted(
+                value: value,
+                onChange: (v) => setState(() {
+                  value = v;
+                }),
+              ),
               items: letters,
             ),
           ),
@@ -186,14 +189,8 @@ void main() {
           child: StatefulBuilder(
             builder: (context, setState) => FSelect<String>(
               key: key,
-              control: .lifted(
-                value: value,
-                onChange: (v) => setState(() => value = v),
-              ),
-              popoverControl: .lifted(
-                shown: popoverShown,
-                onChange: (shown) => setState(() => popoverShown = shown),
-              ),
+              control: .lifted(value: value, onChange: (v) => setState(() => value = v)),
+              popoverControl: .lifted(shown: popoverShown, onChange: (shown) => setState(() => popoverShown = shown)),
               items: letters,
             ),
           ),
@@ -223,14 +220,8 @@ void main() {
           child: StatefulBuilder(
             builder: (context, setState) => FSelect<String>(
               key: key,
-              control: .lifted(
-                value: value,
-                onChange: (v) => setState(() => value = v),
-              ),
-              popoverControl: .lifted(
-                shown: false,
-                onChange: (_) {},
-              ),
+              control: .lifted(value: value, onChange: (v) => setState(() => value = v)),
+              popoverControl: .lifted(shown: false, onChange: (_) {}),
               items: letters,
             ),
           ),
@@ -306,9 +297,7 @@ void main() {
           child: Form(
             key: key,
             child: FSelect<String>.rich(
-              control: .managed(
-                controller: autoDispose(FSelectController(value: 'A')),
-              ),
+              control: .managed(controller: autoDispose(FSelectController(value: 'A'))),
               format: (value) => '$value!',
               onSaved: (value) => initial = value,
               children: const [

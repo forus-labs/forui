@@ -1,7 +1,8 @@
 import 'package:flutter/foundation.dart';
 
-import 'package:forui/forui.dart';
 import 'package:sugar/core.dart';
+
+import 'package:forui/forui.dart';
 
 part 'line_calendar_controller.control.dart';
 

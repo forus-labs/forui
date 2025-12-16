@@ -5,8 +5,8 @@ import 'package:flutter/services.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/localizations/localized_text.dart';
-import 'package:forui/src/widgets/text_field/input/input.dart';
 import 'package:forui/src/widgets/text_field/input/form_input.dart';
+import 'package:forui/src/widgets/text_field/input/input.dart';
 import 'package:forui/src/widgets/text_field/password_field.dart';
 import 'package:forui/src/widgets/text_field/password_form_field.dart';
 import 'package:forui/src/widgets/text_field/text_field_control.dart';

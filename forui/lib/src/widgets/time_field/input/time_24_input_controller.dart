@@ -75,11 +75,7 @@ class Time24Selector extends Selector {
 
   @override
   TextEditingValue map(TextEditingValue oldValue, TextEditingValue newValue) {
-    final index = _map(
-      oldValue,
-      onFirst: (_, _, _, _) => 0,
-      onLast: (_, _, _, _) => 1,
-    );
+    final index = _map(oldValue, onFirst: (_, _, _, _) => 0, onLast: (_, _, _, _) => 1);
 
     return index == null ? newValue : select(split(newValue.text), index);
   }
