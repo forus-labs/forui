@@ -144,6 +144,14 @@ class _ProxyController extends FPopoverController {
 ///
 /// {@macro forui.foundation.doc_templates.control}
 sealed class FPopoverControl with Diagnosticable, _$FPopoverControlMixin {
+  /// Creates a [FPopoverControl].
+  const factory FPopoverControl.managed({
+    FPopoverController? controller,
+    bool? initial,
+    FPopoverMotion? motion,
+    ValueChanged<bool>? onChange,
+  }) = FPopoverManagedControl;
+
   /// Creates a [FPopoverControl] for controlling a popover using lifted state.
   ///
   /// The [shown] parameter indicates whether the popover is currently shown.
@@ -153,14 +161,6 @@ sealed class FPopoverControl with Diagnosticable, _$FPopoverControlMixin {
     required ValueChanged<bool> onChange,
     FPopoverMotion motion,
   }) = _Lifted;
-
-  /// Creates a [FPopoverControl].
-  const factory FPopoverControl.managed({
-    FPopoverController? controller,
-    bool? initial,
-    FPopoverMotion? motion,
-    ValueChanged<bool>? onChange,
-  }) = FPopoverManagedControl;
 
   const FPopoverControl._();
 
@@ -222,7 +222,7 @@ class _Lifted extends FPopoverControl with _$_LiftedMixin {
 
   @override
   FPopoverController createController(TickerProvider vsync) =>
-      _ProxyController(vsync: vsync, onChange, motion, shown: shown);
+      _ProxyController(vsync: vsync, shown: shown, onChange, motion);
 
   @override
   void _updateController(FPopoverController controller, TickerProvider vsync) =>

@@ -129,7 +129,7 @@ Unfortunately, `FCalendar` cannot be easily migrated using data driven fixes due
 
 ### `FPopover`
 * Add `FPopoverControl`.
-* Add `FPopoverController(shown: ...)`.
+* Add `FPopoverController.shown`.
 
 * **Breaking** Change `FPopover.shift` to `FPopover.overflow`.
 * **Breaking** Remove `FPopover.controller`. Use `FPopover(control: .managed(...))` instead.
@@ -320,7 +320,7 @@ Unfortunately, `FCalendar` cannot be easily migrated using data driven fixes due
 
 ### `FTooltip`
 * Add `FTooltipControl`.
-* Add `FTooltipController.initial`.
+* Add `FTooltipController.shown`.
 
 * Change `FTooltip` to not be focusable.
 * Change `FTooltip`'s focus-triggered behavior to only show if its immediate focusable descendant has primary focus.

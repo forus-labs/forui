@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_positional_boolean_parameters
+
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
@@ -5,8 +7,6 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:forui/forui.dart';
-
-// ignore_for_file: avoid_positional_boolean_parameters
 
 part 'tooltip_controller.control.dart';
 
@@ -19,13 +19,16 @@ class FTooltipController extends FChangeNotifier {
   late final Animation<double> _fade;
   late final Animation<double> _scale;
 
-  /// Creates a [FTooltipController] with the given [vsync] and [motion].
-  FTooltipController({required TickerProvider vsync, double initial = 0.0, FTooltipMotion motion = const .new()}) {
+  /// Creates a [FTooltipController] with the given [vsync], [shown] and [motion].
+  FTooltipController({required TickerProvider vsync, bool shown = false, FTooltipMotion motion = const .new()}) {
+    if (shown) {
+      _overlay.show();
+    }
     _animation = AnimationController(
       vsync: vsync,
       duration: motion.entranceDuration,
       reverseDuration: motion.exitDuration,
-    )..value = initial;
+    )..value = shown ? 1 : 0;
     _curveFade = CurvedAnimation(parent: _animation, curve: motion.fadeInCurve, reverseCurve: motion.fadeOutCurve);
     _curveScale = CurvedAnimation(parent: _animation, curve: motion.expandCurve, reverseCurve: motion.collapseCurve);
     _fade = motion.fadeTween.animate(_curveFade);
@@ -86,19 +89,32 @@ extension InternalTooltipController on FTooltipController {
   Animation<double> get scale => _scale;
 }
 
-class _Controller extends FTooltipController {
+class _ProxyController extends FTooltipController {
   int _monotonic;
-  void Function(bool shown) _onChange;
+  ValueChanged<bool> _onChange;
+  FTooltipMotion _motion;
 
-  _Controller(bool shown, this._onChange, {required super.vsync, super.motion}) : _monotonic = 0 {
-    if (shown) {
-      _overlay.show();
-      _animation.value = 1;
-    }
-  }
+  _ProxyController(this._onChange, this._motion, {required super.vsync, super.shown})
+    : _monotonic = 0,
+      super(motion: _motion);
 
-  void update(bool shown, void Function(bool shown) onChange) {
+  void update(bool shown, ValueChanged<bool> onChange, FTooltipMotion motion) {
     _onChange = onChange;
+    if (_motion != motion) {
+      _motion = motion;
+      _animation
+        ..duration = motion.entranceDuration
+        ..reverseDuration = motion.exitDuration;
+      _curveFade
+        ..curve = motion.fadeInCurve
+        ..reverseCurve = motion.fadeOutCurve;
+      _curveScale
+        ..curve = motion.expandCurve
+        ..reverseCurve = motion.collapseCurve;
+      _scale = motion.scaleTween.animate(_curveScale);
+      _fade = motion.fadeTween.animate(_curveFade);
+    }
+
     final current = ++_monotonic;
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       if (current == _monotonic) {
@@ -106,10 +122,12 @@ class _Controller extends FTooltipController {
           await _animation.reverse();
           if (current == _monotonic) {
             _overlay.hide();
+            notifyListeners();
           }
         } else if (shown && !status.isForwardOrCompleted) {
           _overlay.show();
           await _animation.forward();
+          notifyListeners();
         }
       }
     });
@@ -126,22 +144,22 @@ class _Controller extends FTooltipController {
 ///
 /// {@macro forui.foundation.doc_templates.control}
 sealed class FTooltipControl with Diagnosticable, _$FTooltipControlMixin {
+  /// Creates a [FTooltipControl].
+  const factory FTooltipControl.managed({
+    FTooltipController? controller,
+    FTooltipMotion? motion,
+    ValueChanged<bool>? onChange,
+  }) = FTooltipManagedControl;
+
   /// Creates a [FTooltipControl] for controlling a tooltip using lifted state.
   ///
   /// The [shown] parameter indicates whether the tooltip is currently shown.
   /// The [onChange] callback is invoked when the user triggers a show/hide action.
   const factory FTooltipControl.lifted({
     required bool shown,
-    required void Function(bool shown) onChange,
+    required ValueChanged<bool> onChange,
     FTooltipMotion motion,
-  }) = Lifted;
-
-  /// Creates a [FTooltipControl].
-  const factory FTooltipControl.managed({
-    FTooltipController? controller,
-    FTooltipMotion? motion,
-    void Function(bool shown)? onChange,
-  }) = FTooltipManagedControl;
+  }) = _Lifted;
 
   const FTooltipControl._();
 
@@ -153,26 +171,6 @@ sealed class FTooltipControl with Diagnosticable, _$FTooltipControlMixin {
   );
 }
 
-@internal
-class Lifted extends FTooltipControl with _$LiftedMixin {
-  @override
-  final bool shown;
-  @override
-  final void Function(bool shown) onChange;
-  @override
-  final FTooltipMotion motion;
-
-  const Lifted({required this.shown, required this.onChange, this.motion = const FTooltipMotion()}) : super._();
-
-  @override
-  FTooltipController createController(TickerProvider vsync) =>
-      _Controller(vsync: vsync, shown, onChange, motion: motion);
-
-  @override
-  void _updateController(FTooltipController controller, TickerProvider vsync) =>
-      (controller as _Controller).update(shown, onChange);
-}
-
 /// A [FTooltipManagedControl] enables widgets to manage their own controller internally while exposing parameters for
 /// common configurations.
 ///
@@ -181,6 +179,13 @@ class FTooltipManagedControl extends FTooltipControl with Diagnosticable, _$FToo
   /// The controller.
   @override
   final FTooltipController? controller;
+
+  /// Whether the tooltip is initially shown. Defaults to false (hidden).
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if [initial] and [controller] are both provided.
+  @override
+  final bool? initial;
 
   /// The tooltip motion. Defaults to [FTooltipMotion].
   ///
@@ -191,14 +196,34 @@ class FTooltipManagedControl extends FTooltipControl with Diagnosticable, _$FToo
 
   /// Called when the shown state changes.
   @override
-  final void Function(bool shown)? onChange;
+  final ValueChanged<bool>? onChange;
 
   /// Creates a [FTooltipControl].
-  const FTooltipManagedControl({this.controller, this.motion, this.onChange})
-    : assert(controller == null || motion == null, 'Cannot provide both controller and motion'),
+  const FTooltipManagedControl({this.controller, this.initial, this.motion, this.onChange})
+    : assert(controller == null || initial == null, 'Cannot provide both initial and controller'),
+      assert(controller == null || motion == null, 'Cannot provide both controller and motion'),
       super._();
 
   @override
   FTooltipController createController(TickerProvider vsync) =>
       controller ?? .new(vsync: vsync, motion: motion ?? const .new());
+}
+
+class _Lifted extends FTooltipControl with _$_LiftedMixin {
+  @override
+  final bool shown;
+  @override
+  final ValueChanged<bool> onChange;
+  @override
+  final FTooltipMotion motion;
+
+  const _Lifted({required this.shown, required this.onChange, this.motion = const .new()}) : super._();
+
+  @override
+  FTooltipController createController(TickerProvider vsync) =>
+      _ProxyController(vsync: vsync, shown: shown, onChange, motion);
+
+  @override
+  void _updateController(FTooltipController controller, TickerProvider vsync) =>
+      (controller as _ProxyController).update(shown, onChange, motion);
 }

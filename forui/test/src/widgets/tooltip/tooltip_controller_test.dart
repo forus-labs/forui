@@ -33,7 +33,7 @@ void main() {
     });
 
     testWidgets('toggle shows when reverse', (tester) async {
-      final controller = FTooltipController(vsync: tester, initial: 1.0);
+      final controller = FTooltipController(vsync: tester, shown: true);
       addTearDown(controller.dispose);
 
       await tester.pumpWidget(
