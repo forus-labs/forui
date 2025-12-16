@@ -10,6 +10,7 @@
 * **Breaking** Remove `useFSelectGroupController`. Use `useFMultiValueNotifier` instead.
 * **Breaking** Remove `useFRadioSelectGroupController`. Use `useFRadioMultiValueNotifier` instead.
 * **Breaking** Remove `useFTimeFieldController(vsync: ..., popoverMotion: ...)`. Use `FTimeField(popoverControl: ...)` instead.
+* **Breaking** Rename `useFTimeFieldController(initialTime: ...)` to `useFTimeFieldController(initial: ...)`.
 
 
 ## 0.16.0

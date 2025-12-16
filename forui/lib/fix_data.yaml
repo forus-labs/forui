@@ -4499,6 +4499,17 @@ transforms:
       - kind: removeParameter
         name: 'popoverMotion'
 
+  - title: 'Rename FTimeFieldController(initialTime: ...) to initial'
+    date: 2025-12-16
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FTimeFieldController
+    changes:
+      - kind: renameParameter
+        oldName: 'initialTime'
+        newName: 'initial'
+
 
   # FTabs
   - title: 'Migrate FTabs to control parameter'

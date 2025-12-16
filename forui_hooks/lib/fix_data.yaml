@@ -65,3 +65,13 @@ transforms:
         newElement:
           uris: [ 'package:forui_hooks/forui_hooks.dart' ]
           function: 'useFRadioMultiValueNotifier'
+
+  - title: 'Rename useFTimeFieldController(initialTime: ...) to initial'
+    date: 2025-12-16
+    element:
+      uris: [ 'package:forui_hooks/forui_hooks.dart' ]
+      function: useFTimeFieldController
+    changes:
+      - kind: renameParameter
+        oldName: 'initialTime'
+        newName: 'initial'

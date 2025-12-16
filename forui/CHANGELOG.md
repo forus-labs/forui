@@ -306,6 +306,7 @@ Unfortunately, `FCalendar` cannot be easily migrated using data driven fixes due
 * **Breaking** Remove `FTimeField.onChange`. Use `FTimeField(control: .managed(...))` instead.
 * **Breaking** Remove `FTimeField.initialTime`. Use `FTimeField(control: .managed(...))` instead.
 * **Breaking** Remove `FTimeFieldController(vsync: ..., popoverMotion: ...)`. Use `FTimeField(popoverControl: ...)` instead.
+* **Breaking** Rename `FTimeFieldController(initialTime: ...)` to `FTimeFieldController(initial: ...)`.
 
 
 ### `FTimePicker`

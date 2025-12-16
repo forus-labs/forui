@@ -12,20 +12,20 @@ String? _defaultValidator(FTime? _) => null;
 /// [validator] returns an error string to display if the input is invalid, or null otherwise.
 /// Defaults to always returning null.
 FTimeFieldController useFTimeFieldController({
-  FTime? initialTime,
+  FTime? initial,
   FormFieldValidator<FTime> validator = _defaultValidator,
   List<Object?>? keys,
 }) => use(
-  _TimeFieldHook(initialTime: initialTime, validator: validator, debugLabel: 'useFTimeFieldController', keys: keys),
+  _TimeFieldHook(initial: initial, validator: validator, debugLabel: 'useFTimeFieldController', keys: keys),
 );
 
 class _TimeFieldHook extends Hook<FTimeFieldController> {
-  final FTime? initialTime;
+  final FTime? initial;
   final FormFieldValidator<FTime> validator;
   final String _debugLabel;
 
   const _TimeFieldHook({
-    required this.initialTime,
+    required this.initial,
     required this.validator,
     required String debugLabel,
     super.keys,
@@ -38,13 +38,13 @@ class _TimeFieldHook extends Hook<FTimeFieldController> {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('initialTime', initialTime))
+      ..add(DiagnosticsProperty('initial', initial))
       ..add(ObjectFlagProperty.has('validator', validator));
   }
 }
 
 class _TimeFieldHookState extends HookState<FTimeFieldController, _TimeFieldHook> {
-  late final _controller = FTimeFieldController(initial: hook.initialTime, validator: hook.validator);
+  late final _controller = FTimeFieldController(initial: hook.initial, validator: hook.validator);
 
   @override
   FTimeFieldController build(BuildContext context) => _controller;
