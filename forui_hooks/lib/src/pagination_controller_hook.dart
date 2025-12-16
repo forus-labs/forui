@@ -11,15 +11,7 @@ FPaginationController useFPaginationController({
   int siblings = 1,
   bool showEdges = true,
   List<Object?>? keys,
-}) => use(
-  _PaginationControllerHook(
-    pages: pages,
-    page: page,
-    siblings: siblings,
-    showEdges: showEdges,
-    keys: keys,
-  ),
-);
+}) => use(_PaginationControllerHook(pages: pages, page: page, siblings: siblings, showEdges: showEdges, keys: keys));
 
 class _PaginationControllerHook extends Hook<FPaginationController> {
   final int pages;
