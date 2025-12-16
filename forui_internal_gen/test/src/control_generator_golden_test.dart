@@ -660,7 +660,7 @@ mixin _$ManagedMixin on Diagnosticable, FSubclassControl {
         return (createController()..addListener(callback), true);
 
       // Internal -> Internal (different type, e.g. Normal -> Cascade)
-      case final Managed old when old != this:
+      case final Managed old when old.runtimeType != runtimeType:
         controller.dispose();
         return (createController()..addListener(callback), true);
 
