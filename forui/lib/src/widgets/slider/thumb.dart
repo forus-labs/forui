@@ -38,37 +38,15 @@ class Thumb extends StatefulWidget {
 }
 
 class _ThumbState extends State<Thumb> with TickerProviderStateMixin {
-  late FSliderController _controller;
-  late UniqueKey _key;
-  FSliderStyle? _style;
-  FTooltipController? _tooltip;
   MouseCursor _cursor = SystemMouseCursors.grab;
   ({double min, double max})? _origin;
   bool _gesture = false;
   bool _focused = false;
 
   @override
-  void initState() {
-    super.initState();
-    _key = widget.min ? FSliderTooltipsController.min : FSliderTooltipsController.max;
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    final style = InheritedData.of(context).style;
-    if (_style != style) {
-      _tooltip?.dispose();
-      _tooltip = FTooltipController(vsync: this, motion: style.tooltipMotion);
-      _style = style;
-    }
-
-    _controller = InheritedController.of(context);
-    _controller.tooltips.add(_key, _tooltip!);
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final InheritedController(:controller, minTooltipController:min, maxTooltipController:max) = .of(context);
+    final tooltip = widget.min ? min : max;
     final states = InheritedStates.of(context).states;
     final InheritedData(
       style: FSliderStyle(:thumbSize, :thumbStyle, :tooltipTipAnchor, :tooltipThumbAnchor),
@@ -81,27 +59,27 @@ class _ThumbState extends State<Thumb> with TickerProviderStateMixin {
     );
 
     String? increasedValue;
-    if (_controller.selection.step(min: widget.min, extend: !widget.min) case final selection
-        when _controller.selection != selection) {
+    if (controller.selection.step(min: widget.min, extend: !widget.min) case final selection
+        when controller.selection != selection) {
       increasedValue = semanticValueFormatterCallback(_offset(selection));
     }
 
     String? decreasedValue;
-    if (_controller.selection.step(min: widget.min, extend: widget.min) case final selection
-        when _controller.selection != selection) {
+    if (controller.selection.step(min: widget.min, extend: widget.min) case final selection
+        when controller.selection != selection) {
       decreasedValue = semanticValueFormatterCallback(_offset(selection));
     }
 
     Widget thumb = Semantics(
       enabled: enabled,
-      value: semanticValueFormatterCallback(_offset(_controller.selection)),
+      value: semanticValueFormatterCallback(_offset(controller.selection)),
       increasedValue: increasedValue,
       decreasedValue: decreasedValue,
       child: FocusableActionDetector(
         shortcuts: _shortcuts(layout),
         actions: {
-          _ExtendIntent: CallbackAction(onInvoke: (_) => _controller.step(min: widget.min, extend: true)),
-          _ShrinkIntent: CallbackAction(onInvoke: (_) => _controller.step(min: widget.min, extend: false)),
+          _ExtendIntent: CallbackAction(onInvoke: (_) => controller.step(min: widget.min, extend: true)),
+          _ShrinkIntent: CallbackAction(onInvoke: (_) => controller.step(min: widget.min, extend: false)),
         },
         enabled: enabled,
         mouseCursor: enabled ? _cursor : .defer,
@@ -126,19 +104,19 @@ class _ThumbState extends State<Thumb> with TickerProviderStateMixin {
       return thumb;
     }
 
-    if (_controller.tooltips.enabled) {
+    if (tooltip != null) {
       thumb = MouseRegion(
-        onEnter: (_) => _controller.tooltips.show(_key),
+        onEnter: (_) => tooltip.show(),
         onExit: (_) {
           if (!_gesture) {
-            _controller.tooltips.hide(_key);
+            tooltip.hide();
           }
         },
         child: FTooltip(
-          control: .managed(controller: _tooltip),
+          control: .managed(controller: tooltip),
           tipAnchor: tooltipTipAnchor,
           childAnchor: tooltipThumbAnchor,
-          tipBuilder: (_, controller) => tooltipBuilder(controller, _offset(_controller.selection)),
+          tipBuilder: (_, tooltipController) => tooltipBuilder(tooltipController, _offset(controller.selection)),
           longPress: false,
           hover: false,
           child: thumb,
@@ -149,28 +127,28 @@ class _ThumbState extends State<Thumb> with TickerProviderStateMixin {
     void down(TapDownDetails _) {
       setState(() => _cursor = SystemMouseCursors.grabbing);
       _gesture = true;
-      _controller.tooltips.show(_key);
+      tooltip?.show();
     }
 
     void up(TapUpDetails _) {
       setState(() => _cursor = SystemMouseCursors.grab);
       _gesture = false;
-      _controller.tooltips.hide(_key);
+      tooltip?.hide();
     }
 
     void start(DragStartDetails _) {
       setState(() => _cursor = SystemMouseCursors.grabbing);
       _origin = null;
-      _origin = _controller.selection.rawOffset;
+      _origin = controller.selection.rawOffset;
       _gesture = true;
-      _controller.tooltips.show(_key);
+      tooltip?.show();
     }
 
     void end(DragEndDetails _) {
       setState(() => _cursor = SystemMouseCursors.grab);
       _origin = null;
       _gesture = false;
-      _controller.tooltips.hide(_key);
+      tooltip?.hide();
     }
 
     if (layout.vertical) {
@@ -178,7 +156,7 @@ class _ThumbState extends State<Thumb> with TickerProviderStateMixin {
         onTapDown: down,
         onTapUp: up,
         onVerticalDragStart: start,
-        onVerticalDragUpdate: _drag(_controller, thumbSize, layout),
+        onVerticalDragUpdate: _drag(controller, thumbSize, layout),
         onVerticalDragEnd: end,
         child: thumb,
       );
@@ -187,7 +165,7 @@ class _ThumbState extends State<Thumb> with TickerProviderStateMixin {
         onTapDown: down,
         onTapUp: up,
         onHorizontalDragStart: start,
-        onHorizontalDragUpdate: _drag(_controller, thumbSize, layout),
+        onHorizontalDragUpdate: _drag(controller, thumbSize, layout),
         onHorizontalDragEnd: end,
         child: thumb,
       );
@@ -222,13 +200,6 @@ class _ThumbState extends State<Thumb> with TickerProviderStateMixin {
     }
 
     return drag;
-  }
-
-  @override
-  void dispose() {
-    _controller.tooltips.remove(_key);
-    _tooltip?.dispose();
-    super.dispose();
   }
 }
 

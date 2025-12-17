@@ -12,22 +12,36 @@ class InheritedController extends InheritedModel<UniqueKey> {
 
   static final rawExtent = UniqueKey();
 
-  static FSliderController of(BuildContext context, [UniqueKey? aspect]) {
+  static InheritedController of(BuildContext context, [UniqueKey? aspect]) {
     assert(debugCheckHasAncestor<InheritedController>('$FSlider', context));
-    return InheritedModel.inheritFrom<InheritedController>(context, aspect: aspect)!.controller;
+    return InheritedModel.inheritFrom<InheritedController>(context, aspect: aspect)!;
   }
 
   final FSliderController controller;
+  final FTooltipController? minTooltipController;
+  final FTooltipController? maxTooltipController;
   final FSliderSelection _selection;
 
-  InheritedController({required this.controller, required super.child, super.key}) : _selection = controller.selection;
+  InheritedController({
+    required this.controller,
+    required this.minTooltipController,
+    required this.maxTooltipController,
+    required super.child,
+    super.key,
+  }) : _selection = controller.selection;
 
   @override
-  bool updateShouldNotify(InheritedController old) => _selection != old._selection || controller != old.controller;
+  bool updateShouldNotify(InheritedController old) =>
+      _selection != old._selection ||
+      controller != old.controller ||
+      minTooltipController != old.minTooltipController ||
+      maxTooltipController != old.maxTooltipController;
 
   @override
   bool updateShouldNotifyDependent(covariant InheritedController old, Set<UniqueKey> dependencies) =>
       controller != old.controller ||
+      minTooltipController != old.minTooltipController ||
+      maxTooltipController != old.maxTooltipController ||
       dependencies.contains(rawOffset) && _selection.rawOffset != old._selection.rawOffset ||
       dependencies.contains(rawExtent) && _selection.rawExtent != old._selection.rawExtent ||
       dependencies.contains(extendable) && controller.extendable != old.controller.extendable;
@@ -35,6 +49,9 @@ class InheritedController extends InheritedModel<UniqueKey> {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('controller', controller));
+    properties
+      ..add(DiagnosticsProperty('controller', controller))
+      ..add(DiagnosticsProperty('min', minTooltipController))
+      ..add(DiagnosticsProperty('max', maxTooltipController));
   }
 }

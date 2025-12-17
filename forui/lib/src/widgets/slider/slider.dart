@@ -7,6 +7,7 @@ import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/slider/form_field.dart';
 import 'package:forui/src/widgets/slider/inherited_controller.dart';
 import 'package:forui/src/widgets/slider/inherited_data.dart';
+import 'package:forui/src/widgets/tooltip/tooltip_controller.dart';
 
 /// An input where the user selects a value from within a given range.
 ///
@@ -71,6 +72,9 @@ class FSlider extends StatelessWidget with FFormFieldProperties<FSliderSelection
   /// * 0 on non-primarily touch devices.
   final double? trackHitRegionCrossExtent;
 
+  /// The control for the slider's tooltips.
+  final FSliderTooltipControls tooltipControls;
+
   /// A builder that creates the tooltip. Defaults to printing the current percentage.
   final Widget Function(FTooltipController controller, double value) tooltipBuilder;
 
@@ -125,6 +129,7 @@ class FSlider extends StatelessWidget with FFormFieldProperties<FSliderSelection
     this.initialSelection,
     this.trackMainAxisExtent,
     this.trackHitRegionCrossExtent,
+    this.tooltipControls = const .new(),
     this.tooltipBuilder = _tooltipBuilder,
     this.semanticValueFormatterCallback = _semanticValueFormatter,
     this.semanticFormatterCallback,
@@ -175,6 +180,7 @@ class FSlider extends StatelessWidget with FFormFieldProperties<FSliderSelection
         constraints: constraints,
         mainAxisExtent: trackMainAxisExtent,
         trackHitRegionCrossExtent: trackHitRegionCrossExtent,
+        tooltipControls: tooltipControls,
         tooltipBuilder: tooltipBuilder,
         semanticFormatterCallback: semanticFormatterCallback,
         semanticValueFormatterCallback: semanticValueFormatterCallback,
@@ -202,6 +208,7 @@ class FSlider extends StatelessWidget with FFormFieldProperties<FSliderSelection
       ..add(DiagnosticsProperty('initialSelection', initialSelection))
       ..add(DoubleProperty('trackMainAxisExtent', trackMainAxisExtent))
       ..add(DoubleProperty('trackHitRegionCrossExtent', trackHitRegionCrossExtent))
+      ..add(DiagnosticsProperty('tooltipControls', tooltipControls))
       ..add(ObjectFlagProperty.has('tooltipBuilder', tooltipBuilder))
       ..add(ObjectFlagProperty.has('semanticFormatterCallback', semanticFormatterCallback))
       ..add(ObjectFlagProperty.has('semanticValueFormatterCallback', semanticValueFormatterCallback))
@@ -227,6 +234,7 @@ class _Slider extends StatefulWidget {
   final BoxConstraints constraints;
   final double? mainAxisExtent;
   final double? trackHitRegionCrossExtent;
+  final FSliderTooltipControls tooltipControls;
   final Widget Function(FTooltipController controller, double value) tooltipBuilder;
   final String Function(FSliderSelection)? semanticFormatterCallback;
   final String Function(double) semanticValueFormatterCallback;
@@ -251,6 +259,7 @@ class _Slider extends StatefulWidget {
     required this.constraints,
     required this.mainAxisExtent,
     required this.trackHitRegionCrossExtent,
+    required this.tooltipControls,
     required this.tooltipBuilder,
     required this.semanticFormatterCallback,
     required this.semanticValueFormatterCallback,
@@ -307,6 +316,7 @@ class _Slider extends StatefulWidget {
       ..add(ObjectFlagProperty.has('forceErrorText', forceErrorText))
       ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled', ifFalse: 'disabled'))
       ..add(ObjectFlagProperty.has('trackHitRegionCrossExtent', trackHitRegionCrossExtent))
+      ..add(DiagnosticsProperty('tooltipControls', tooltipControls))
       ..add(DiagnosticsProperty('initialSelection', initialSelection))
       ..add(ObjectFlagProperty.has('tooltipBuilder', tooltipBuilder))
       ..add(ObjectFlagProperty.has('semanticFormatterCallback', semanticFormatterCallback))
@@ -315,8 +325,10 @@ class _Slider extends StatefulWidget {
   }
 }
 
-class _SliderState extends State<_Slider> {
+class _SliderState extends State<_Slider> with TickerProviderStateMixin {
   late FSliderController _controller;
+  late FTooltipController _minTooltipController;
+  late FTooltipController _maxTooltipController;
 
   @override
   void initState() {
@@ -325,6 +337,8 @@ class _SliderState extends State<_Slider> {
     _controller
       ..attach(widget._mainAxisExtent, widget.marks)
       ..addListener(_onChange);
+    _minTooltipController = widget.tooltipControls.min.create(_handleMinTooltipChange, this);
+    _maxTooltipController = widget.tooltipControls.max.create(_handleMaxTooltipChange, this);
   }
 
   @override
@@ -346,12 +360,49 @@ class _SliderState extends State<_Slider> {
         !widget.marks.equals(old.marks)) {
       _controller.attach(widget._mainAxisExtent, widget.marks);
     }
+
+    _minTooltipController = widget.tooltipControls.min.update(
+      old.tooltipControls.min,
+      _minTooltipController,
+      _handleMinTooltipChange,
+      this,
+    ).$1;
+    _maxTooltipController = widget.tooltipControls.max.update(
+      old.tooltipControls.max,
+      _maxTooltipController,
+      _handleMaxTooltipChange,
+      this,
+    ).$1;
+  }
+
+  @override
+  void dispose() {
+    _maxTooltipController.dispose();
+    _minTooltipController.dispose();
+    if (widget.controller == null) {
+      _controller.dispose();
+    } else {
+      _controller.removeListener(_onChange);
+    }
+    super.dispose();
   }
 
   FSliderController _createController() =>
       widget.controller ?? FContinuousSliderController(selection: widget.initialSelection ?? .new(max: 0));
 
   void _onChange() => widget.onChange?.call(_controller.selection);
+
+  void _handleMinTooltipChange() {
+    if (widget.tooltipControls.min case FTooltipManagedControl(:final onChange?)) {
+      onChange.call(_minTooltipController.status.isForwardOrCompleted);
+    }
+  }
+
+  void _handleMaxTooltipChange() {
+    if (widget.tooltipControls.max case FTooltipManagedControl(:final onChange?)) {
+      onChange.call(_maxTooltipController.status.isForwardOrCompleted);
+    }
+  }
 
   @override
   Widget build(BuildContext _) => InheritedData(
@@ -368,6 +419,8 @@ class _SliderState extends State<_Slider> {
       listenable: _controller,
       builder: (_, _) => InheritedController(
         controller: _controller,
+        minTooltipController: widget.tooltipControls.enabled ? _minTooltipController : null,
+        maxTooltipController: widget.tooltipControls.enabled ? _maxTooltipController : null,
         child: SliderFormField(
           controller: _controller,
           constraints: widget.constraints,
@@ -377,7 +430,7 @@ class _SliderState extends State<_Slider> {
           onSaved: widget.onSaved,
           onReset: widget.onReset,
           validator: widget.validator,
-          autovalidateMode: widget.autovalidateMode ?? AutovalidateMode.disabled,
+          autovalidateMode: widget.autovalidateMode ?? .disabled,
           forceErrorText: widget.forceErrorText,
           enabled: widget.enabled,
         ),
@@ -394,18 +447,8 @@ class _SliderState extends State<_Slider> {
   };
 
   @override
-  void dispose() {
-    if (widget.controller == null) {
-      _controller.dispose();
-    } else {
-      _controller.removeListener(_onChange);
-    }
-    super.dispose();
-  }
-
-  @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(ObjectFlagProperty<String Function(FSliderSelection)>.has('formatter', formatter));
+    properties.add(ObjectFlagProperty.has('formatter', formatter));
   }
 }

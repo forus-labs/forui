@@ -17,7 +17,7 @@ class Track extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final InheritedData(:style, :layout, :semanticFormatterCallback) = .of(context);
-    final controller = InheritedController.of(context);
+    final controller = InheritedController.of(context).controller;
     final position = layout.position;
 
     final crossAxisExtent = max(style.thumbSize, style.crossAxisExtent);
@@ -67,8 +67,8 @@ class _GestureDetectorState extends State<_GestureDetector> {
 
   @override
   Widget build(BuildContext context) {
+    final InheritedController(:controller, :minTooltipController, :maxTooltipController) = .of(context);
     final InheritedData(:style, :layout, :trackHitRegionCrossExtent, :enabled) = .of(context);
-    final controller = InheritedController.of(context);
 
     Widget track = const Center(child: _Track());
 
@@ -86,19 +86,24 @@ class _GestureDetectorState extends State<_GestureDetector> {
     void start(DragStartDetails details) {
       _origin = controller.selection.rawOffset;
       _pointerOrigin = details.localPosition;
-      controller.tooltips.show();
+      minTooltipController?.show();
+      maxTooltipController?.show();
     }
 
     void end(DragEndDetails _) {
       _origin = null;
       _pointerOrigin = null;
-      controller.tooltips.hide();
+      minTooltipController?.hide();
+      maxTooltipController?.hide();
     }
 
     if (layout.vertical) {
       return GestureDetector(
-        onTapDown: _tap(controller, style.thumbSize, layout),
-        onTapUp: (_) => controller.tooltips.hide(),
+        onTapDown: _tap(controller, minTooltipController, maxTooltipController, style.thumbSize, layout),
+        onTapUp: (_) {
+          minTooltipController?.hide();
+          maxTooltipController?.hide();
+        },
         onVerticalDragStart: start,
         onVerticalDragUpdate: _drag(controller, layout),
         onVerticalDragEnd: end,
@@ -106,8 +111,11 @@ class _GestureDetectorState extends State<_GestureDetector> {
       );
     } else {
       return GestureDetector(
-        onTapDown: _tap(controller, style.thumbSize, layout),
-        onTapUp: (_) => controller.tooltips.hide(),
+        onTapDown: _tap(controller, minTooltipController, maxTooltipController, style.thumbSize, layout),
+        onTapUp: (_) {
+          minTooltipController?.hide();
+          maxTooltipController?.hide();
+        },
         onHorizontalDragStart: start,
         onHorizontalDragUpdate: _drag(controller, layout),
         onHorizontalDragEnd: end,
@@ -116,7 +124,13 @@ class _GestureDetectorState extends State<_GestureDetector> {
     }
   }
 
-  GestureTapDownCallback? _tap(FSliderController controller, double thumbSize, FLayout layout) {
+  GestureTapDownCallback? _tap(
+    FSliderController controller,
+    FTooltipController? min,
+    FTooltipController? max,
+    double thumbSize,
+    FLayout layout,
+  ) {
     final translate = layout.translateTrackTap(controller.selection.rawExtent.total, thumbSize);
 
     void down(TapDownDetails details) {
@@ -128,9 +142,9 @@ class _GestureDetectorState extends State<_GestureDetector> {
 
       switch (controller.tap(offset)) {
         case true:
-          controller.tooltips.show(FSliderTooltipsController.min);
+          min?.show();
         case false:
-          controller.tooltips.show(FSliderTooltipsController.max);
+          max?.show();
         default:
       }
     }
@@ -166,7 +180,7 @@ class _Track extends StatelessWidget {
     final states = InheritedStates.of(context).states;
     final crossAxisExtent = style.crossAxisExtent;
 
-    final extent = InheritedController.of(context, InheritedController.rawExtent).selection.rawExtent.total;
+    final extent = InheritedController.of(context, InheritedController.rawExtent).controller.selection.rawExtent.total;
 
     final position = layout.position;
     final half = style.thumbSize / 2;
@@ -206,7 +220,7 @@ class ActiveTrack extends StatelessWidget {
     final InheritedData(:style, :layout) = .of(context);
     final states = InheritedStates.of(context).states;
     final crossAxisExtent = style.crossAxisExtent;
-    final rawOffset = InheritedController.of(context, InheritedController.rawOffset).selection.rawOffset;
+    final rawOffset = InheritedController.of(context, InheritedController.rawOffset).controller.selection.rawOffset;
 
     final mainAxisExtent = rawOffset.max - rawOffset.min + style.thumbSize / 2;
     final (height, width) = layout.vertical ? (mainAxisExtent, crossAxisExtent) : (crossAxisExtent, mainAxisExtent);

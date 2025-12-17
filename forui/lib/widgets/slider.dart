@@ -10,5 +10,5 @@ export '../src/widgets/slider/slider_controller.dart';
 export '../src/widgets/slider/slider_mark.dart';
 export '../src/widgets/slider/slider_selection.dart' hide ContinuousSelection, DiscreteSelection, SplayTreeMaps;
 export '../src/widgets/slider/slider_styles.dart';
-export '../src/widgets/slider/slider_tooltips_controller.dart';
+export '../src/widgets/slider/slider_control.dart';
 export '../src/widgets/slider/thumb.dart' hide Layouts, Thumb;

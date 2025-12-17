@@ -217,15 +217,6 @@ Unfortunately, `FCalendar` cannot be easily migrated using data driven fixes due
 * **Breaking** Remove `FSelectTileGroup.onSelect`.
 
 
-### `FTileGroupMixin`
-* **Breaking** Remove `FTileGroupMixin.selectGroup(selectController: ...)`. Use `FTileGroupMixin.selectGroup(control: .managed(...))` instead.
-* **Breaking** Remove `FTileGroupMixin.selectGroup(onChange: ...)`. Use `FTileGroupMixin.selectGroup(control: .managed(...))` instead.
-* **Breaking** Remove `FTileGroupMixin.selectGroup(onSelect: ...)`.
-* **Breaking** Remove `FTileGroupMixin.selectGroupBuilder(selectController: ...)`. Use `FTileGroupMixin.selectGroupBuilder(control: .managed(...))` instead.
-* **Breaking** Remove `FTileGroupMixin.selectGroupBuilder(onChange: ...)`. Use `FTileGroupMixin.selectGroupBuilder(control: .managed(...))` instead.
-* **Breaking** Remove `FTileGroupMixin.selectGroupBuilder(onSelect: ...)`.
-
-
 ### `FScaffold`
 * **Breaking** Remove `FToaster` from `FScaffold`. This was causing toasts to be cleared when switching between pages. 
   Use `FToaster` directly instead.
@@ -233,6 +224,9 @@ Unfortunately, `FCalendar` cannot be easily migrated using data driven fixes due
 
 ### `FSlider`
 * Add `FSliderMark.mark(...)`.
+
+* **Breaking** Remove `FSliderController.tooltips`. Use `FSlider.tooltipControls`. instead.
+* **Breaking** Remove `FSliderTooltipsController`. Use `FSliderTooltipControls` instead.
 
 
 ### `FTabs`
@@ -296,6 +290,12 @@ Unfortunately, `FCalendar` cannot be easily migrated using data driven fixes due
 * **Breaking** Remove `FTileMixin.selectMenuBuilder(onChange: ...)`. Use `FTileMixin.selectMenuBuilder(selectControl: .managed(...))` instead.
 * **Breaking** Remove `FTileMixin.selectMenuBuilder(onSelect: ...)`.
 * **Breaking** Remove `FTileMixin.selectMenuBuilder(initialValue: ...)`. Use `FTileMixin.selectMenuBuilder(selectControl: .managed(...))` instead.
+* **Breaking** Remove `FTileGroupMixin.selectGroup(selectController: ...)`. Use `FTileGroupMixin.selectGroup(control: .managed(...))` instead.
+* **Breaking** Remove `FTileGroupMixin.selectGroup(onChange: ...)`. Use `FTileGroupMixin.selectGroup(control: .managed(...))` instead.
+* **Breaking** Remove `FTileGroupMixin.selectGroup(onSelect: ...)`.
+* **Breaking** Remove `FTileGroupMixin.selectGroupBuilder(selectController: ...)`. Use `FTileGroupMixin.selectGroupBuilder(control: .managed(...))` instead.
+* **Breaking** Remove `FTileGroupMixin.selectGroupBuilder(onChange: ...)`. Use `FTileGroupMixin.selectGroupBuilder(control: .managed(...))` instead.
+* **Breaking** Remove `FTileGroupMixin.selectGroupBuilder(onSelect: ...)`.
 
 
 ### `FTimeField`
