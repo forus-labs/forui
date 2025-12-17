@@ -35,25 +35,31 @@ class Sandbox extends StatefulWidget {
 enum Notification { all, direct, nothing, limitedTime, timeSensitive, selectedApps }
 
 class _SandboxState extends State<Sandbox> with SingleTickerProviderStateMixin {
-  DateTime? _date;
+  var _v = FSliderValue(max: 0.35);
 
   @override
   Widget build(BuildContext context) => Center(
     child: Column(
       mainAxisSize: .min,
       children: [
-        FDateField(
-          control: .lifted(
-            date: _date,
+        FSlider(
+          control: .liftedDiscrete(
+            value: _v,
             onChange: (v) {
               setState(() {
-                _date = v;
+                _v = v;
               });
             },
           ),
-          label: const Text('Appointment Date'),
-          description: const Text('Select a date for your appointment'),
-          clearable: true,
+          label: const Text('Brightness'),
+          description: const Text('Adjust the brightness level.'),
+          marks: const [
+            .mark(value: 0, label: Text('0%')),
+            .mark(value: 0.25, tick: false),
+            .mark(value: 0.5, label: Text('50%')),
+            .mark(value: 0.75, tick: false),
+            .mark(value: 1, label: Text('100%')),
+          ],
         ),
       ],
     ),
