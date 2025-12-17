@@ -12,7 +12,7 @@ jobs:
     environment: docs-development
     steps:
       # Extract PR metadata
-      - uses: actions/download-artifact@v6
+      - uses: actions/download-artifact@v7
         with:
           name: pr-metadata
           path: ./pr-metadata
@@ -36,7 +36,7 @@ jobs:
           echo "sha=${SHA:0:7}" >> $GITHUB_OUTPUT
 
       # Deploy samples
-      - uses: actions/download-artifact@v6
+      - uses: actions/download-artifact@v7
         with:
           name: samples-build
           path: ./samples-build
@@ -50,7 +50,7 @@ jobs:
           command: pages deploy ./samples-build --project-name=${{ vars.CLOUDFLARE_DEMO_PROJECT_NAME }} --branch=${{ steps.escape-branch.outputs.branch }}-${{ steps.short-sha.outputs.sha }}
 
       # Deploy docs
-      - uses: actions/download-artifact@v6
+      - uses: actions/download-artifact@v7
         with:
           name: docs-build
           path: ./docs-build
