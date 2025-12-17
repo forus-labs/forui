@@ -37,12 +37,12 @@ class Track extends StatelessWidget {
             const _GestureDetector(),
             if (controller.extendable.min)
               position(
-                offset: controller.selection.offset.min * controller.selection.rawExtent.total,
+                offset: controller.selection.min * controller.selection.pixelConstraints.total,
                 child: const Thumb(min: true),
               ),
             if (controller.extendable.max)
               position(
-                offset: controller.selection.offset.max * controller.selection.rawExtent.total,
+                offset: controller.selection.max * controller.selection.pixelConstraints.total,
                 child: const Thumb(min: false),
               ),
           ],
@@ -84,7 +84,7 @@ class _GestureDetectorState extends State<_GestureDetector> {
     }
 
     void start(DragStartDetails details) {
-      _origin = controller.selection.rawOffset;
+      _origin = controller.selection.pixels;
       _pointerOrigin = details.localPosition;
       minTooltipController?.show();
       maxTooltipController?.show();
@@ -131,12 +131,12 @@ class _GestureDetectorState extends State<_GestureDetector> {
     double thumbSize,
     FLayout layout,
   ) {
-    final translate = layout.translateTrackTap(controller.selection.rawExtent.total, thumbSize);
+    final translate = layout.translateTrackTap(controller.selection.pixelConstraints.total, thumbSize);
 
     void down(TapDownDetails details) {
       final offset = switch (translate(details.localPosition)) {
         < 0 => 0.0,
-        final translated when controller.selection.rawExtent.total < translated => controller.selection.rawExtent.total,
+        final translated when controller.selection.pixelConstraints.total < translated => controller.selection.pixelConstraints.total,
         final translated => translated,
       };
 
@@ -149,17 +149,17 @@ class _GestureDetectorState extends State<_GestureDetector> {
       }
     }
 
-    return tappable.contains(controller.allowedInteraction) ? down : null;
+    return tappable.contains(controller.interaction) ? down : null;
   }
 
   GestureDragUpdateCallback? _drag(FSliderController controller, FLayout layout) {
-    if (controller.allowedInteraction != FSliderInteraction.slide) {
+    if (controller.interaction != FSliderInteraction.slide) {
       return null;
     }
 
     assert(
       controller.extendable.min ^ controller.extendable.max,
-      'Slider must be extendable at one edge when ${controller.allowedInteraction}.',
+      'Slider must be extendable at one edge when ${controller.interaction}.',
     );
 
     final translate = layout.translateTrackDrag();
@@ -180,7 +180,7 @@ class _Track extends StatelessWidget {
     final states = InheritedStates.of(context).states;
     final crossAxisExtent = style.crossAxisExtent;
 
-    final extent = InheritedController.of(context, InheritedController.rawExtent).controller.selection.rawExtent.total;
+    final extent = InheritedController.of(context, InheritedController.rawExtent).controller.selection.pixelConstraints.total;
 
     final position = layout.position;
     final half = style.thumbSize / 2;
@@ -220,7 +220,7 @@ class ActiveTrack extends StatelessWidget {
     final InheritedData(:style, :layout) = .of(context);
     final states = InheritedStates.of(context).states;
     final crossAxisExtent = style.crossAxisExtent;
-    final rawOffset = InheritedController.of(context, InheritedController.rawOffset).controller.selection.rawOffset;
+    final rawOffset = InheritedController.of(context, InheritedController.rawOffset).controller.selection.pixels;
 
     final mainAxisExtent = rawOffset.max - rawOffset.min + style.thumbSize / 2;
     final (height, width) = layout.vertical ? (mainAxisExtent, crossAxisExtent) : (crossAxisExtent, mainAxisExtent);

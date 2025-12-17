@@ -9,10 +9,10 @@ void main() {
     test('fields', () {
       final selection = FSliderSelection(min: 0.4, max: 0.5);
 
-      expect(selection.offset, (min: 0.4, max: 0.5));
-      expect(selection.extent, (min: 0.0, max: 1.0));
-      expect(selection.rawExtent, (min: 0.0, max: 0.0, total: 0));
-      expect(selection.rawOffset, (min: 0.0, max: 0.0));
+      expect((selection.min, selection.max), (0.4, 0.5));
+      expect(selection.constraints, (min: 0.0, max: 1.0));
+      expect(selection.pixelConstraints, (min: 0.0, max: 0.0, total: 0));
+      expect(selection.pixels, (min: 0.0, max: 0.0));
     });
   });
 
@@ -22,7 +22,7 @@ void main() {
       double max, {
       double step = 0.05,
       ({double min, double max}) extent = (min: 0.1, max: 0.3),
-    }) => ContinuousSelection(step: step, mainAxisExtent: 100.0, extent: extent, offset: (min: min, max: max));
+    }) => ContinuousSelection(step: step, mainAxisExtent: 100.0, constraints: extent, min: min, max: max);
 
     for (final (description, selection) in [
       ('step negative', () => value(0.2, 0.4, step: -0.05)),
@@ -103,28 +103,32 @@ void main() {
     }) => DiscreteSelection(
       ticks: SplayTreeMap.fromIterable(ticks, value: (_) {}),
       mainAxisExtent: 100.0,
-      extent: extent,
-      offset: (min: min, max: max),
+      constraints: extent,
+      min: min,
+      max: max,
     );
 
     for (final constructor in [
       () => DiscreteSelection(
         ticks: SplayTreeMap(),
         mainAxisExtent: 100.0,
-        extent: (min: 0, max: 1),
-        offset: (min: 0.1, max: 0.2),
+        constraints: (min: 0, max: 1),
+        min: 0.1,
+        max: 0.2,
       ),
       () => DiscreteSelection(
         ticks: SplayTreeMap.fromIterable([-1.0], value: (_) {}),
         mainAxisExtent: 100.0,
-        extent: (min: 0, max: 1),
-        offset: (min: 0.1, max: 0.2),
+        constraints: (min: 0, max: 1),
+        min: 0.1,
+        max: 0.2,
       ),
       () => DiscreteSelection(
         ticks: SplayTreeMap.fromIterable([1.1], value: (_) {}),
         mainAxisExtent: 100.0,
-        extent: (min: 0, max: 1),
-        offset: (min: 0.1, max: 0.2),
+        constraints: (min: 0, max: 1),
+        min: 0.1,
+        max: 0.2,
       ),
     ]) {
       test('constructor', () => expect(constructor, throwsAssertionError));

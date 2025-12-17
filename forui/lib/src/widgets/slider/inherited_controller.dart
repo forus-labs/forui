@@ -42,8 +42,8 @@ class InheritedController extends InheritedModel<UniqueKey> {
       controller != old.controller ||
       minTooltipController != old.minTooltipController ||
       maxTooltipController != old.maxTooltipController ||
-      dependencies.contains(rawOffset) && _selection.rawOffset != old._selection.rawOffset ||
-      dependencies.contains(rawExtent) && _selection.rawExtent != old._selection.rawExtent ||
+      dependencies.contains(rawOffset) && _selection.pixels != old._selection.pixels ||
+      dependencies.contains(rawExtent) && _selection.pixelConstraints != old._selection.pixelConstraints ||
       dependencies.contains(extendable) && controller.extendable != old.controller.extendable;
 
   @override

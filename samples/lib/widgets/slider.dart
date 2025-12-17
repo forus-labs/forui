@@ -36,8 +36,8 @@ class SliderPage extends StatefulSample {
 
 class _SliderPageState extends StatefulSampleState<SliderPage> {
   late final _controller = FContinuousSliderController(
-    selection: FSliderSelection(max: 0.6, extent: widget.extent),
-    allowedInteraction: widget.interaction,
+    selection: FSliderSelection(max: 0.6, constraints: widget.extent),
+    interaction: widget.interaction,
   );
 
   @override

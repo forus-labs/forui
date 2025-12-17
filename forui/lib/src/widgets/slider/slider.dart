@@ -439,11 +439,11 @@ class _SliderState extends State<_Slider> with TickerProviderStateMixin {
   );
 
   String Function(FSliderSelection) get formatter => switch (_controller.extendable) {
-    (min: true, max: false) => (selection) => '${(selection.offset.min * 100).toStringAsFixed(0)}%',
-    (min: false, max: true) => (selection) => '${(selection.offset.max * 100).toStringAsFixed(0)}%',
+    (min: true, max: false) => (selection) => '${(selection.min * 100).toStringAsFixed(0)}%',
+    (min: false, max: true) => (selection) => '${(selection.max * 100).toStringAsFixed(0)}%',
     (min: true, max: true) || (min: false, max: false) =>
       (selection) =>
-          '${(selection.offset.min * 100).toStringAsFixed(0)}% - ${(selection.offset.max * 100).toStringAsFixed(0)}%',
+          '${(selection.min * 100).toStringAsFixed(0)}% - ${(selection.max * 100).toStringAsFixed(0)}%',
   };
 
   @override

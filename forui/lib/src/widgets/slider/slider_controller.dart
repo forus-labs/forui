@@ -29,27 +29,27 @@ enum FSliderInteraction {
 /// * [FDiscreteSliderController.range] for selecting a discrete range.
 abstract class FSliderController extends FChangeNotifier {
   /// The allowed ways to interaction with the slider. Defaults to [FSliderInteraction.tapAndSlideThumb].
-  final FSliderInteraction allowedInteraction;
+  final FSliderInteraction interaction;
 
   /// Whether the active track is extendable at its min and max edges.
   final ({bool min, bool max}) extendable;
 
-  final FSliderSelection _initialSelection;
+  final FSliderSelection _initial;
   FSliderSelection? _selection;
 
   /// Creates a [FSliderController] for selecting a single value.
   FSliderController({
     required FSliderSelection selection,
-    this.allowedInteraction = .tapAndSlideThumb,
+    this.interaction = .tapAndSlideThumb,
     bool minExtendable = false,
   }) : extendable = (min: minExtendable, max: !minExtendable),
-       _initialSelection = selection;
+       _initial = selection;
 
   /// Creates a [FSliderController] for selecting a range.
   FSliderController.range({required FSliderSelection selection})
-    : allowedInteraction = .tapAndSlideThumb,
+    : interaction = .tapAndSlideThumb,
       extendable = (min: true, max: true),
-      _initialSelection = selection;
+      _initial = selection;
 
   /// Registers the controller to a slider with the given extent and marks.
   ///
@@ -67,7 +67,7 @@ abstract class FSliderController extends FChangeNotifier {
   ///
   /// The delta is relative to the origin defined by [FSlider.layout].
   void slide(double offset, {required bool min}) {
-    if (allowedInteraction == .tap) {
+    if (interaction == .tap) {
       return;
     }
 
@@ -87,14 +87,14 @@ abstract class FSliderController extends FChangeNotifier {
   ///
   /// The offset is relative to the origin defined by [FSlider.layout].
   bool? tap(double offset) {
-    if (allowedInteraction == .slide || allowedInteraction == .slideThumb) {
+    if (interaction == .slide || interaction == .slideThumb) {
       return null;
     }
 
     if (_selection case final selection?) {
       final min = switch (extendable) {
-        (min: true, max: true) when offset < selection.rawOffset.min => true,
-        (min: true, max: true) when selection.rawOffset.max < offset => false,
+        (min: true, max: true) when offset < selection.pixels.min => true,
+        (min: true, max: true) when selection.pixels.max < offset => false,
         (min: true, max: false) => true,
         (min: false, max: true) => false,
         _ => null,
@@ -114,7 +114,7 @@ abstract class FSliderController extends FChangeNotifier {
   void reset();
 
   /// The slider's active track/selection.
-  FSliderSelection get selection => _selection ?? _initialSelection;
+  FSliderSelection get selection => _selection ?? _initial;
 
   set selection(FSliderSelection? selection) {
     if (selection == null || _selection == selection) {
@@ -138,7 +138,7 @@ class FContinuousSliderController extends FSliderController {
   FContinuousSliderController({
     required super.selection,
     this.stepPercentage = 0.05,
-    super.allowedInteraction,
+    super.interaction,
     super.minExtendable,
   }) : assert(
          0 <= stepPercentage && stepPercentage <= 1,
@@ -159,8 +159,9 @@ class FContinuousSliderController extends FSliderController {
     final proposed = ContinuousSelection(
       step: stepPercentage,
       mainAxisExtent: extent,
-      extent: selection.extent,
-      offset: selection.offset,
+      constraints: selection.constraints,
+      min: selection.min,
+      max: selection.max,
     );
 
     if (_selection == null) {
@@ -172,12 +173,13 @@ class FContinuousSliderController extends FSliderController {
 
   @override
   void reset() {
-    if (_selection case FSliderSelection(:final rawExtent)) {
+    if (_selection case FSliderSelection(pixelConstraints: final rawExtent)) {
       selection = ContinuousSelection(
         step: stepPercentage,
         mainAxisExtent: rawExtent.total,
-        extent: _initialSelection.extent,
-        offset: _initialSelection.offset,
+        constraints: _initial.constraints,
+        min: _initial.min,
+        max: _initial.max,
       );
     }
   }
@@ -186,11 +188,7 @@ class FContinuousSliderController extends FSliderController {
 /// A controller that manages a slider's active track which represents a discrete range/value.
 class FDiscreteSliderController extends FSliderController {
   /// Creates a [FDiscreteSliderController] for selecting a single value.
-  FDiscreteSliderController({
-    required super.selection,
-    super.allowedInteraction,
-    super.minExtendable,
-  });
+  FDiscreteSliderController({required super.selection, super.interaction, super.minExtendable});
 
   /// Creates a [FDiscreteSliderController] for selecting a range.
   FDiscreteSliderController.range({required super.selection}) : super.range();
@@ -201,9 +199,10 @@ class FDiscreteSliderController extends FSliderController {
 
     final proposed = DiscreteSelection(
       mainAxisExtent: extent,
-      extent: selection.extent,
-      offset: selection.offset,
-      ticks: SplayTreeMap.fromIterable(marks.map((mark) => mark.value), value: (_) {}),
+      constraints: selection.constraints,
+      min: selection.min,
+      max: selection.max,
+      ticks: .fromIterable(marks.map((mark) => mark.value), value: (_) {}),
     );
 
     if (_selection == null) {
@@ -215,12 +214,13 @@ class FDiscreteSliderController extends FSliderController {
 
   @override
   void reset() {
-    if (_selection case DiscreteSelection(:final ticks, :final rawExtent)) {
+    if (_selection case DiscreteSelection(:final ticks, pixelConstraints: final rawExtent)) {
       selection = DiscreteSelection(
         ticks: ticks,
         mainAxisExtent: rawExtent.total,
-        extent: _initialSelection.extent,
-        offset: _initialSelection.offset,
+        constraints: _initial.constraints,
+        min: _initial.min,
+        max: _initial.max,
       );
     }
   }

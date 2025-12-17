@@ -14,9 +14,9 @@ void main() {
 
   for (final constructor in [
     (selection, [FSliderInteraction interaction = FSliderInteraction.tapAndSlideThumb, bool min = false]) =>
-        FContinuousSliderController(selection: selection, allowedInteraction: interaction, minExtendable: min),
+        FContinuousSliderController(selection: selection, interaction: interaction, minExtendable: min),
     (selection, [FSliderInteraction interaction = FSliderInteraction.tapAndSlideThumb, bool min = false]) =>
-        FDiscreteSliderController(selection: selection, allowedInteraction: interaction, minExtendable: min),
+        FDiscreteSliderController(selection: selection, interaction: interaction, minExtendable: min),
   ]) {
     group('FSlider', () {
       final value = FSliderSelection(max: 0.75);
@@ -36,10 +36,10 @@ void main() {
             ..attach(1000, marks);
 
           expect(calls, 0);
-          expect(controller.selection.extent, (min: 0, max: 1));
-          expect(controller.selection.rawExtent, (min: 0, max: 1000, total: 1000));
-          expect(controller.selection.offset, (min: 0, max: 0.75));
-          expect(controller.selection.rawOffset, (min: 0, max: 750));
+          expect(controller.selection.constraints, (min: 0, max: 1));
+          expect(controller.selection.pixelConstraints, (min: 0, max: 1000, total: 1000));
+          expect((controller.selection.min, controller.selection.max), (0, 0.75));
+          expect(controller.selection.pixels, (min: 0, max: 750));
         });
 
         test('existing selection', () {
@@ -54,10 +54,10 @@ void main() {
             ..attach(100, marks);
 
           expect(calls, 1);
-          expect(controller.selection.extent, (min: 0, max: 1));
-          expect(controller.selection.rawExtent, (min: 0, max: 100, total: 100));
-          expect(controller.selection.offset, selection.offset);
-          expect(controller.selection.rawOffset, (min: 0, max: selection.offset.max * 100));
+          expect(controller.selection.constraints, (min: 0, max: 1));
+          expect(controller.selection.pixelConstraints, (min: 0, max: 100, total: 100));
+          expect((controller.selection.min, controller.selection.max), (selection.min, selection.max));
+          expect(controller.selection.pixels, (min: 0, max: selection.max * 100));
         });
       });
 
@@ -92,8 +92,8 @@ void main() {
             ..slide(50, min: false);
 
           expect(calls, 1);
-          expect(controller.selection.offset, (min: 0, max: 0.5));
-          expect(controller.selection.rawOffset, (min: 0, max: 50));
+          expect((controller.selection.min, controller.selection.max), (0, 0.5));
+          expect(controller.selection.pixels, (min: 0, max: 50));
         });
 
         test('tap only', () {
@@ -104,7 +104,7 @@ void main() {
             ..slide(50, min: false);
 
           expect(calls, 0);
-          expect(controller.selection.offset, range.offset);
+          expect((controller.selection.min, controller.selection.max), (range.min, range.max));
         });
       });
 
@@ -118,14 +118,14 @@ void main() {
 
             expect(controller.tap(50), null);
             expect(calls, 0);
-            expect(controller.selection.offset, value.offset);
+            expect((controller.selection.min, controller.selection.max), (value.min, value.max));
           });
         }
 
         for (final (offset, expected, min, thumb) in [
-          (0.0, (min: 0, max: 0.75), true, true),
+          (0.0, (min: 0.0, max: 0.75), true, true),
           (50.0, (min: 0.5, max: 0.75), true, true),
-          (100.0, (min: 0.25, max: 1), false, false),
+          (100.0, (min: 0.25, max: 1.0), false, false),
           (50.0, (min: 0.25, max: 0.5), false, false),
         ]) {
           test('tap value', () {
@@ -136,8 +136,8 @@ void main() {
 
             expect(controller.tap(offset), thumb);
             expect(calls, 1);
-            expect(controller.selection.offset, expected);
-            expect(controller.selection.rawOffset, (min: expected.min * 100, max: expected.max * 100));
+            expect((controller.selection.min, controller.selection.max), (expected.min, expected.max));
+            expect(controller.selection.pixels, (min: expected.min * 100, max: expected.max * 100));
           });
         }
 
@@ -159,8 +159,8 @@ void main() {
             ..reset();
 
           expect(calls, 0);
-          expect(controller.selection.extent, (min: 0, max: 1));
-          expect(controller.selection.offset, (min: 0, max: 0.75));
+          expect(controller.selection.constraints, (min: 0, max: 1));
+          expect((controller.selection.min, controller.selection.max), (0, 0.75));
         });
 
         test('existing selection', () {
@@ -172,10 +172,10 @@ void main() {
             ..reset();
 
           expect(calls, 1);
-          expect(controller.selection.extent, (min: 0, max: 1));
-          expect(controller.selection.rawExtent, (min: 0, max: 1000, total: 1000));
-          expect(controller.selection.offset, (min: 0, max: 0.75));
-          expect(controller.selection.rawOffset, (min: 0, max: 750));
+          expect(controller.selection.constraints, (min: 0, max: 1));
+          expect(controller.selection.pixelConstraints, (min: 0, max: 1000, total: 1000));
+          expect((controller.selection.min, controller.selection.max), (0, 0.75));
+          expect(controller.selection.pixels, (min: 0, max: 750));
         });
       });
 
@@ -188,7 +188,7 @@ void main() {
             ..selection = null;
 
           expect(calls, 0);
-          expect(controller.selection.offset, value.offset);
+          expect((controller.selection.min, controller.selection.max), (value.min, value.max));
         });
 
         test('same', () {
@@ -209,7 +209,7 @@ void main() {
             ..selection = FSliderSelection(max: 0.6);
 
           expect(calls, 1);
-          expect(controller.selection.offset, (min: 0, max: 0.6));
+          expect((controller.selection.min, controller.selection.max), (0, 0.6));
         });
       });
     });
@@ -232,7 +232,7 @@ void main() {
       test('constructor', () => expect(constructor, throwsAssertionError));
     }
 
-    for (final (min, extend, offset) in [
+    for (final (min, extend, expected) in [
       (true, true, (min: 0.2, max: 0.75)),
       (true, false, (min: 0.3, max: 0.75)),
       (false, true, (min: 0.25, max: 0.8)),
@@ -246,14 +246,14 @@ void main() {
           ..step(min: min, extend: extend);
 
         expect(calls, 1);
-        expect(controller.selection.offset, offset);
-        expect(controller.selection.rawOffset, (min: offset.min * 100, max: offset.max * 100));
+        expect((controller.selection.min, controller.selection.max), (expected.min, expected.max));
+        expect(controller.selection.pixels, (min: expected.min * 100, max: expected.max * 100));
       });
     }
 
     for (final (offset, expected, times, thumb) in [
-      (0.0, (min: 0, max: 0.75), 1, true),
-      (100.0, (min: 0.25, max: 1), 1, false),
+      (0.0, (min: 0.0, max: 0.75), 1, true),
+      (100.0, (min: 0.25, max: 1.0), 1, false),
       (50.0, (min: 0.25, max: 0.75), 0, null),
     ]) {
       test('tap range', () {
@@ -264,8 +264,8 @@ void main() {
 
         expect(controller.tap(offset), thumb);
         expect(calls, times);
-        expect(controller.selection.offset, expected);
-        expect(controller.selection.rawOffset, (min: expected.min * 100, max: expected.max * 100));
+        expect((controller.selection.min, controller.selection.max), (expected.min, expected.max));
+        expect(controller.selection.pixels, (min: expected.min * 100, max: expected.max * 100));
       });
     }
   });
@@ -280,10 +280,10 @@ void main() {
 
     test('attach', () => expect(() => controller.attach(1000, []), throwsAssertionError));
 
-    for (final (min, extend, offset) in [
-      (true, true, (min: 0, max: 0.75)),
+    for (final (min, extend, expected) in [
+      (true, true, (min: 0.0, max: 0.75)),
       (true, false, (min: 0.5, max: 0.75)),
-      (false, true, (min: 0.25, max: 1)),
+      (false, true, (min: 0.25, max: 1.0)),
       (false, false, (min: 0.25, max: 0.6)),
     ]) {
       test('step ${min ? 'min' : 'max'} edge - ${extend ? 'extend' : 'shrink'}', () {
@@ -294,14 +294,14 @@ void main() {
           ..step(min: min, extend: extend);
 
         expect(calls, 1);
-        expect(controller.selection.offset, offset);
-        expect(controller.selection.rawOffset, (min: offset.min * 100, max: offset.max * 100));
+        expect((controller.selection.min, controller.selection.max), (expected.min, expected.max));
+        expect(controller.selection.pixels, (min: expected.min * 100, max: expected.max * 100));
       });
     }
 
     for (final (offset, expected, times, thumb) in [
-      (0.0, (min: 0, max: 0.75), 1, true),
-      (100.0, (min: 0.25, max: 1), 1, false),
+      (0.0, (min: 0.0, max: 0.75), 1, true),
+      (100.0, (min: 0.25, max: 1.0), 1, false),
       (50.0, (min: 0.25, max: 0.75), 0, null),
     ]) {
       test('tap range', () {
@@ -312,8 +312,8 @@ void main() {
 
         expect(controller.tap(offset), thumb);
         expect(calls, times);
-        expect(controller.selection.offset, expected);
-        expect(controller.selection.rawOffset, (min: expected.min * 100, max: expected.max * 100));
+        expect((controller.selection.min, controller.selection.max), (expected.min, expected.max));
+        expect(controller.selection.pixels, (min: expected.min * 100, max: expected.max * 100));
       });
     }
   });

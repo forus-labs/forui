@@ -139,7 +139,7 @@ class _ThumbState extends State<Thumb> with TickerProviderStateMixin {
     void start(DragStartDetails _) {
       setState(() => _cursor = SystemMouseCursors.grabbing);
       _origin = null;
-      _origin = controller.selection.rawOffset;
+      _origin = controller.selection.pixels;
       _gesture = true;
       tooltip?.show();
     }
@@ -172,7 +172,7 @@ class _ThumbState extends State<Thumb> with TickerProviderStateMixin {
     }
   }
 
-  double _offset(FSliderSelection selection) => widget.min ? selection.offset.min : selection.offset.max;
+  double _offset(FSliderSelection selection) => widget.min ? selection.min : selection.max;
 
   Map<ShortcutActivator, Intent> _shortcuts(FLayout layout) => switch ((layout, widget.min)) {
     (.ltr, true) || (.rtl, false) => const {
@@ -188,7 +188,7 @@ class _ThumbState extends State<Thumb> with TickerProviderStateMixin {
   };
 
   GestureDragUpdateCallback? _drag(FSliderController controller, double thumbSize, FLayout layout) {
-    if (controller.allowedInteraction == FSliderInteraction.tap) {
+    if (controller.interaction == FSliderInteraction.tap) {
       return null;
     }
 
