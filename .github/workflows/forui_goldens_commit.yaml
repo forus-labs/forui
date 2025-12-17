@@ -14,7 +14,7 @@ jobs:
       # Try to download PR metadata from either OS
       - id: download-metadata-macos
         continue-on-error: true
-        uses: actions/download-artifact@v6
+        uses: actions/download-artifact@v7
         with:
           name: pr-metadata-macos-latest
           path: ./pr-metadata
@@ -24,7 +24,7 @@ jobs:
       - id: download-metadata-windows
         continue-on-error: true
         if: steps.download-metadata-macos.outcome == 'failure'
-        uses: actions/download-artifact@v6
+        uses: actions/download-artifact@v7
         with:
           name: pr-metadata-windows-latest
           path: ./pr-metadata
@@ -41,7 +41,7 @@ jobs:
       # Download patches from both OS
       - id: download-patch-macos
         continue-on-error: true
-        uses: actions/download-artifact@v6
+        uses: actions/download-artifact@v7
         with:
           name: golden-changes-macos-latest
           path: ./
@@ -50,7 +50,7 @@ jobs:
 
       - id: download-patch-windows
         continue-on-error: true
-        uses: actions/download-artifact@v6
+        uses: actions/download-artifact@v7
         with:
           name: golden-changes-windows-latest
           path: ./
