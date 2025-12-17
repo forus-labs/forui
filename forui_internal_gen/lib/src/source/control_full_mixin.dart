@@ -178,15 +178,15 @@ class _LiftedControlMixin extends ControlMixin {
     required super.default_,
     required super.siblings,
   }) : assert(siblings.length == 1, '_LiftedControlMixin only supports exactly 2 variants.'),
-        super._();
+       super._();
 
   @override
   Mixin generate() =>
       (MixinBuilder()
-        ..name = '_\$${element.name}Mixin'
-        ..types.addAll([for (final t in supertype.typeParameters) refer(t.name!)])
-        ..on = refer('Diagnosticable, ${supertype.name}$_typeParameters')
-        ..methods.addAll([...getters, _update, _updateController, _dispose, debugFillProperties, equals, hash]))
+            ..name = '_\$${element.name}Mixin'
+            ..types.addAll([for (final t in supertype.typeParameters) refer(t.name!)])
+            ..on = refer('Diagnosticable, ${supertype.name}$_typeParameters')
+            ..methods.addAll([...getters, _update, _updateController, _dispose, debugFillProperties, equals, hash]))
           .build();
 
   @override
@@ -228,14 +228,14 @@ class _LiftedControlMixin extends ControlMixin {
   }
 
   Method get _updateController => Method(
-        (m) => m
+    (m) => m
       ..returns = refer('void')
       ..name = '_updateController'
       ..requiredParameters.addAll([
         for (final parameter in update.formalParameters)
           if (parameter.name case final name? when name != 'old' && name != 'callback')
             Parameter(
-                  (p) => p
+              (p) => p
                 ..name = name
                 ..type = refer(aliasAwareType(parameter.type)),
             ),
@@ -244,7 +244,7 @@ class _LiftedControlMixin extends ControlMixin {
 
   Method get _dispose =>
       (dispose.toBuilder()
-        ..annotations.add(refer('override'))
-        ..body = const Code('controller.dispose();'))
+            ..annotations.add(refer('override'))
+            ..body = const Code('controller.dispose();'))
           .build();
 }
