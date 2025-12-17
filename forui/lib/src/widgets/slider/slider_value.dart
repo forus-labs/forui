@@ -52,11 +52,7 @@ sealed class FSliderValue with Diagnosticable {
     required double min,
     required double max,
   }) : this._copy(
-         pixelConstraints: (
-           min: constraints.min * extent,
-           max: constraints.max * extent,
-           extent: extent,
-         ),
+         pixelConstraints: (min: constraints.min * extent, max: constraints.max * extent, extent: extent),
          constraints: constraints,
          pixels: (min: min * extent, max: max * extent),
          min: min,
@@ -213,9 +209,7 @@ final class DiscreteValue extends FSliderValue {
     required super.constraints,
     required super.min,
     required super.max,
-  }) : super._copy(
-         pixels: (min: min * pixelConstraints.extent, max: max * pixelConstraints.extent),
-       );
+  }) : super._copy(pixels: (min: min * pixelConstraints.extent, max: max * pixelConstraints.extent));
 
   @override
   DiscreteValue step({required bool min, required bool expand}) => _move(

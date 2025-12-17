@@ -13,10 +13,16 @@ void main() {
   ];
 
   for (final constructor in [
-    (selection, [FSliderInteraction interaction = FSliderInteraction.tapAndSlideThumb, FSliderActiveThumb thumb = FSliderActiveThumb.max]) =>
-        FContinuousSliderController(value: selection, interaction: interaction, thumb: thumb),
-    (selection, [FSliderInteraction interaction = FSliderInteraction.tapAndSlideThumb, FSliderActiveThumb thumb = FSliderActiveThumb.max]) =>
-        FDiscreteSliderController(value: selection, interaction: interaction, thumb: thumb),
+    (
+      selection, [
+      FSliderInteraction interaction = FSliderInteraction.tapAndSlideThumb,
+      FSliderActiveThumb thumb = FSliderActiveThumb.max,
+    ]) => FContinuousSliderController(value: selection, interaction: interaction, thumb: thumb),
+    (
+      selection, [
+      FSliderInteraction interaction = FSliderInteraction.tapAndSlideThumb,
+      FSliderActiveThumb thumb = FSliderActiveThumb.max,
+    ]) => FDiscreteSliderController(value: selection, interaction: interaction, thumb: thumb),
   ]) {
     group('FSlider', () {
       final value = FSliderValue(max: 0.75);

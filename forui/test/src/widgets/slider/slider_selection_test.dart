@@ -109,13 +109,7 @@ void main() {
     );
 
     for (final constructor in [
-      () => DiscreteValue(
-        ticks: SplayTreeMap(),
-        extent: 100.0,
-        constraints: (min: 0, max: 1),
-        min: 0.1,
-        max: 0.2,
-      ),
+      () => DiscreteValue(ticks: SplayTreeMap(), extent: 100.0, constraints: (min: 0, max: 1), min: 0.1, max: 0.2),
       () => DiscreteValue(
         ticks: SplayTreeMap.fromIterable([-1.0], value: (_) {}),
         extent: 100.0,

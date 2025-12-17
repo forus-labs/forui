@@ -142,15 +142,11 @@ class FContinuousSliderController extends FSliderController {
   final double stepPercentage;
 
   /// Creates a [FContinuousSliderController] for selecting a single value.
-  FContinuousSliderController({
-    required super.value,
-    this.stepPercentage = 0.05,
-    super.interaction,
-    super.thumb,
-  }) : assert(
-         0 <= stepPercentage && stepPercentage <= 1,
-         'stepPercentage ($stepPercentage) must be between 0 and 1, inclusive.',
-       );
+  FContinuousSliderController({required super.value, this.stepPercentage = 0.05, super.interaction, super.thumb})
+    : assert(
+        0 <= stepPercentage && stepPercentage <= 1,
+        'stepPercentage ($stepPercentage) must be between 0 and 1, inclusive.',
+      );
 
   /// Creates a [FContinuousSliderController] for selecting a range.
   FContinuousSliderController.range({required super.value, this.stepPercentage = 0.05})
@@ -266,10 +262,7 @@ class ProxyContinuousSliderController extends FContinuousSliderController {
     );
   }
 
-  void update({
-    required FSliderValue value,
-    required ValueChanged<FSliderValue> onChange,
-  }) {
+  void update({required FSliderValue value, required ValueChanged<FSliderValue> onChange}) {
     _onChange = onChange;
     // Update the value from parent without notifying (parent owns state)
     if (_value?.min != value.min || _value?.max != value.max) {
@@ -277,6 +270,7 @@ class ProxyContinuousSliderController extends FContinuousSliderController {
       notifyListeners();
     }
   }
+
   @override
   set value(FSliderValue? value) {
     if (value == null || _value == value) {
@@ -300,11 +294,9 @@ class ProxyDiscreteSliderController extends FDiscreteSliderController {
   }) : _onChange = onChange,
        super();
 
-  ProxyDiscreteSliderController.range({
-    required super.value,
-    required ValueChanged<FSliderValue> onChange,
-  }) : _onChange = onChange,
-       super.range();
+  ProxyDiscreteSliderController.range({required super.value, required ValueChanged<FSliderValue> onChange})
+    : _onChange = onChange,
+      super.range();
 
   @override
   void attach(double extent, List<FSliderMark> marks) {
@@ -320,10 +312,7 @@ class ProxyDiscreteSliderController extends FDiscreteSliderController {
     );
   }
 
-  void update({
-    required FSliderValue value,
-    required ValueChanged<FSliderValue> onChange,
-  }) {
+  void update({required FSliderValue value, required ValueChanged<FSliderValue> onChange}) {
     _onChange = onChange;
     // Update the value from parent without notifying (parent owns state)
     if (_value?.min != value.min || _value?.max != value.max) {

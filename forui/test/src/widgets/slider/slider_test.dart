@@ -38,21 +38,16 @@ void main() {
   });
 
   group('value slider tooltip', () {
-    Widget slider({
-      FSliderValue? selection,
-      FSliderInteraction interaction = FSliderInteraction.tapAndSlideThumb,
-    }) => TestScaffold.app(
-      child: FSlider(
-        control: .managedContinuous(
-          controller: autoDispose(
-            FContinuousSliderController(
-              value: selection ?? FSliderValue(max: 0.75),
-              interaction: interaction,
+    Widget slider({FSliderValue? selection, FSliderInteraction interaction = FSliderInteraction.tapAndSlideThumb}) =>
+        TestScaffold.app(
+          child: FSlider(
+            control: .managedContinuous(
+              controller: autoDispose(
+                FContinuousSliderController(value: selection ?? FSliderValue(max: 0.75), interaction: interaction),
+              ),
             ),
           ),
-        ),
-      ),
-    );
+        );
 
     for (final (interaction, expected) in [
       (FSliderInteraction.slide, findsNothing),
@@ -118,9 +113,7 @@ void main() {
       theme: FThemes.zinc.light,
       child: FSlider(
         control: .managedContinuousRange(
-          controller: autoDispose(
-            FContinuousSliderController.range(value: selection ?? FSliderValue(max: 0.75)),
-          ),
+          controller: autoDispose(FContinuousSliderController.range(value: selection ?? FSliderValue(max: 0.75))),
         ),
       ),
     );
@@ -291,8 +284,7 @@ void main() {
         value: FSliderValue(min: 0.25, max: 0.75, constraints: (min: 0.3, max: 0.8)),
       );
 
-      FSliderController discrete() =>
-          FDiscreteSliderController.range(value: FSliderValue(min: 0.25, max: 0.75));
+      FSliderController discrete() => FDiscreteSliderController.range(value: FSliderValue(min: 0.25, max: 0.75));
 
       for (final (index, constructor) in [continuous, discrete].indexed) {
         testWidgets('tap active track - $index', (tester) async {

@@ -80,12 +80,18 @@ class _ThumbState extends State<Thumb> with TickerProviderStateMixin {
             SingleActivator(.arrowLeft): _ExpandIntent(),
             SingleActivator(.arrowRight): _ShrinkIntent(),
           },
-          (.ltr, false) ||
-          (.rtl, true) => const {SingleActivator(.arrowLeft): _ShrinkIntent(), SingleActivator(.arrowRight): _ExpandIntent()},
-          (.ttb, true) ||
-          (.btt, false) => const {SingleActivator(.arrowUp): _ExpandIntent(), SingleActivator(.arrowDown): _ShrinkIntent()},
-          (.ttb, false) ||
-          (.btt, true) => const {SingleActivator(.arrowUp): _ShrinkIntent(), SingleActivator(.arrowDown): _ExpandIntent()},
+          (.ltr, false) || (.rtl, true) => const {
+            SingleActivator(.arrowLeft): _ShrinkIntent(),
+            SingleActivator(.arrowRight): _ExpandIntent(),
+          },
+          (.ttb, true) || (.btt, false) => const {
+            SingleActivator(.arrowUp): _ExpandIntent(),
+            SingleActivator(.arrowDown): _ShrinkIntent(),
+          },
+          (.ttb, false) || (.btt, true) => const {
+            SingleActivator(.arrowUp): _ShrinkIntent(),
+            SingleActivator(.arrowDown): _ExpandIntent(),
+          },
         },
         actions: {
           _ExpandIntent: CallbackAction(onInvoke: (_) => controller.step(min: widget.min, expand: true)),
