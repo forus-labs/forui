@@ -1,9 +1,7 @@
-import 'dart:collection';
-
-import 'package:meta/meta.dart';
+import 'package:flutter/foundation.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/widgets/slider/slider_selection.dart';
+import 'package:forui/src/widgets/slider/slider_value.dart';
 
 /// Possible ways for a user to interact with a slider.
 enum FSliderInteraction {
@@ -20,9 +18,18 @@ enum FSliderInteraction {
   tap,
 }
 
+/// The active thumb in a single-value slider.
+enum FSliderActiveThumb {
+  /// The thumb at the min edge is active.
+  min,
+
+  /// The thumb at the max edge is active.
+  max,
+}
+
 /// A controller that manages a slider's active track.
 ///
-/// This class should be extended to customize selection. By default, the following controllers are provided:
+/// This class should be extended to customize value. By default, the following controllers are provided:
 /// * [FContinuousSliderController.new] for selecting a single continuous value.
 /// * [FContinuousSliderController.range] for selecting continuous range.
 /// * [FDiscreteSliderController.new] for selecting a discrete value.
@@ -31,25 +38,25 @@ abstract class FSliderController extends FChangeNotifier {
   /// The allowed ways to interaction with the slider. Defaults to [FSliderInteraction.tapAndSlideThumb].
   final FSliderInteraction interaction;
 
-  /// Whether the active track is extendable at its min and max edges.
-  final ({bool min, bool max}) extendable;
+  /// Whether the active track is expandable at the min and max edges.
+  final ({bool min, bool max}) active;
 
-  final FSliderSelection _initial;
-  FSliderSelection? _selection;
+  final FSliderValue _initial;
+  FSliderValue? _value;
 
   /// Creates a [FSliderController] for selecting a single value.
   FSliderController({
-    required FSliderSelection selection,
+    required FSliderValue value,
     this.interaction = .tapAndSlideThumb,
-    bool minExtendable = false,
-  }) : extendable = (min: minExtendable, max: !minExtendable),
-       _initial = selection;
+    FSliderActiveThumb thumb = .max,
+  }) : active = (min: thumb == .min, max: thumb == .max),
+       _initial = value;
 
   /// Creates a [FSliderController] for selecting a range.
-  FSliderController.range({required FSliderSelection selection})
+  FSliderController.range({required FSliderValue value})
     : interaction = .tapAndSlideThumb,
-      extendable = (min: true, max: true),
-      _initial = selection;
+      active = (min: true, max: true),
+      _initial = value;
 
   /// Registers the controller to a slider with the given extent and marks.
   ///
@@ -57,9 +64,9 @@ abstract class FSliderController extends FChangeNotifier {
   void attach(double extent, List<FSliderMark> marks);
 
   /// Moves the active track on the [min] edge to the previous/next step.
-  void step({required bool min, required bool extend}) {
-    if (_selection case final selection?) {
-      this.selection = selection.step(min: min, extend: extend);
+  void step({required bool min, required bool expand}) {
+    if (_value case final value?) {
+      this.value = value.step(min: min, expand: expand);
     }
   }
 
@@ -71,10 +78,10 @@ abstract class FSliderController extends FChangeNotifier {
       return;
     }
 
-    assert(min ? extendable.min : extendable.max, 'Slider is not extendable at the ${min ? 'min' : 'max'} edge.');
+    assert(min ? active.min : active.max, 'Slider is not extendable at the ${min ? 'min' : 'max'} edge.');
 
-    if (_selection case final selection?) {
-      this.selection = selection.move(min: min, to: offset);
+    if (_value case final value?) {
+      this.value = value.move(min: min, to: offset);
     }
   }
 
@@ -91,17 +98,17 @@ abstract class FSliderController extends FChangeNotifier {
       return null;
     }
 
-    if (_selection case final selection?) {
-      final min = switch (extendable) {
-        (min: true, max: true) when offset < selection.pixels.min => true,
-        (min: true, max: true) when selection.pixels.max < offset => false,
+    if (_value case final value?) {
+      final min = switch (active) {
+        (min: true, max: true) when offset < value.pixels.min => true,
+        (min: true, max: true) when value.pixels.max < offset => false,
         (min: true, max: false) => true,
         (min: false, max: true) => false,
         _ => null,
       };
 
       if (min != null) {
-        this.selection = selection.move(min: min, to: offset);
+        this.value = value.move(min: min, to: offset);
       }
 
       return min;
@@ -113,15 +120,15 @@ abstract class FSliderController extends FChangeNotifier {
   /// Resets the controller to its initial state.
   void reset();
 
-  /// The slider's active track/selection.
-  FSliderSelection get selection => _selection ?? _initial;
+  /// The slider's active track/value.
+  FSliderValue get value => _value ?? _initial;
 
-  set selection(FSliderSelection? selection) {
-    if (selection == null || _selection == selection) {
+  set value(FSliderValue? value) {
+    if (value == null || _value == value) {
       return;
     }
 
-    _selection = selection;
+    _value = value;
     notifyListeners();
   }
 }
@@ -136,17 +143,17 @@ class FContinuousSliderController extends FSliderController {
 
   /// Creates a [FContinuousSliderController] for selecting a single value.
   FContinuousSliderController({
-    required super.selection,
+    required super.value,
     this.stepPercentage = 0.05,
     super.interaction,
-    super.minExtendable,
+    super.thumb,
   }) : assert(
          0 <= stepPercentage && stepPercentage <= 1,
          'stepPercentage ($stepPercentage) must be between 0 and 1, inclusive.',
        );
 
   /// Creates a [FContinuousSliderController] for selecting a range.
-  FContinuousSliderController.range({required super.selection, this.stepPercentage = 0.05})
+  FContinuousSliderController.range({required super.value, this.stepPercentage = 0.05})
     : assert(
         0 <= stepPercentage && stepPercentage <= 1,
         'stepPercentage ($stepPercentage) must be between 0 and 1, inclusive.',
@@ -156,27 +163,27 @@ class FContinuousSliderController extends FSliderController {
   @override
   @internal
   void attach(double extent, List<FSliderMark> _) {
-    final proposed = ContinuousSelection(
+    final proposed = ContinuousValue(
       step: stepPercentage,
-      mainAxisExtent: extent,
-      constraints: selection.constraints,
-      min: selection.min,
-      max: selection.max,
+      extent: extent,
+      constraints: value.constraints,
+      min: value.min,
+      max: value.max,
     );
 
-    if (_selection == null) {
-      _selection = proposed; // We don't want to notify listeners when performing initialization.
+    if (_value == null) {
+      _value = proposed; // We don't want to notify listeners when performing initialization.
     } else {
-      selection = proposed;
+      value = proposed;
     }
   }
 
   @override
   void reset() {
-    if (_selection case FSliderSelection(pixelConstraints: final rawExtent)) {
-      selection = ContinuousSelection(
+    if (_value case FSliderValue(:final pixelConstraints)) {
+      value = ContinuousValue(
         step: stepPercentage,
-        mainAxisExtent: rawExtent.total,
+        extent: pixelConstraints.extent,
         constraints: _initial.constraints,
         min: _initial.min,
         max: _initial.max,
@@ -188,40 +195,149 @@ class FContinuousSliderController extends FSliderController {
 /// A controller that manages a slider's active track which represents a discrete range/value.
 class FDiscreteSliderController extends FSliderController {
   /// Creates a [FDiscreteSliderController] for selecting a single value.
-  FDiscreteSliderController({required super.selection, super.interaction, super.minExtendable});
+  FDiscreteSliderController({required super.value, super.interaction, super.thumb});
 
   /// Creates a [FDiscreteSliderController] for selecting a range.
-  FDiscreteSliderController.range({required super.selection}) : super.range();
+  FDiscreteSliderController.range({required super.value}) : super.range();
 
   @override
   void attach(double extent, List<FSliderMark> marks) {
     assert(marks.isNotEmpty, 'At least one mark is required.');
 
-    final proposed = DiscreteSelection(
-      mainAxisExtent: extent,
-      constraints: selection.constraints,
-      min: selection.min,
-      max: selection.max,
+    final proposed = DiscreteValue(
+      extent: extent,
+      constraints: value.constraints,
+      min: value.min,
+      max: value.max,
       ticks: .fromIterable(marks.map((mark) => mark.value), value: (_) {}),
     );
 
-    if (_selection == null) {
-      _selection = proposed; // We don't want to notify listeners when performing initialization.
+    if (_value == null) {
+      _value = proposed; // We don't want to notify listeners when performing initialization.
     } else {
-      selection = proposed;
+      value = proposed;
     }
   }
 
   @override
   void reset() {
-    if (_selection case DiscreteSelection(:final ticks, pixelConstraints: final rawExtent)) {
-      selection = DiscreteSelection(
+    if (_value case DiscreteValue(:final ticks, :final pixelConstraints)) {
+      value = DiscreteValue(
         ticks: ticks,
-        mainAxisExtent: rawExtent.total,
+        extent: pixelConstraints.extent,
         constraints: _initial.constraints,
         min: _initial.min,
         max: _initial.max,
       );
     }
+  }
+}
+
+/// A proxy controller for lifted mode that forwards all changes to the parent's onSelect callback.
+@internal
+class ProxyContinuousSliderController extends FContinuousSliderController {
+  ValueChanged<FSliderValue> _onChange;
+
+  ProxyContinuousSliderController({
+    required super.value,
+    required ValueChanged<FSliderValue> onChange,
+    required super.stepPercentage,
+    required super.interaction,
+    required super.thumb,
+  }) : _onChange = onChange,
+       super();
+
+  ProxyContinuousSliderController.range({
+    required super.value,
+    required ValueChanged<FSliderValue> onChange,
+    required super.stepPercentage,
+  }) : _onChange = onChange,
+       super.range();
+
+  @override
+  void attach(double extent, List<FSliderMark> _) {
+    // Directly set _value without triggering _onChange - attach is internal, not user-initiated
+    _value = ContinuousValue(
+      step: stepPercentage,
+      extent: extent,
+      constraints: value.constraints,
+      min: value.min,
+      max: value.max,
+    );
+  }
+
+  void update({
+    required FSliderValue value,
+    required ValueChanged<FSliderValue> onChange,
+  }) {
+    _onChange = onChange;
+    // Update the value from parent without notifying (parent owns state)
+    if (_value?.min != value.min || _value?.max != value.max) {
+      _value = value;
+      notifyListeners();
+    }
+  }
+  @override
+  set value(FSliderValue? value) {
+    if (value == null || _value == value) {
+      return;
+    }
+
+    _onChange(value);
+  }
+}
+
+/// A proxy controller for lifted mode that forwards all changes to the parent's onSelect callback.
+@internal
+class ProxyDiscreteSliderController extends FDiscreteSliderController {
+  ValueChanged<FSliderValue> _onChange;
+
+  ProxyDiscreteSliderController({
+    required super.value,
+    required ValueChanged<FSliderValue> onChange,
+    required super.interaction,
+    required super.thumb,
+  }) : _onChange = onChange,
+       super();
+
+  ProxyDiscreteSliderController.range({
+    required super.value,
+    required ValueChanged<FSliderValue> onChange,
+  }) : _onChange = onChange,
+       super.range();
+
+  @override
+  void attach(double extent, List<FSliderMark> marks) {
+    assert(marks.isNotEmpty, 'At least one mark is required.');
+
+    // Directly set _value without triggering _onChange - attach is internal, not user-initiated
+    _value = DiscreteValue(
+      extent: extent,
+      constraints: value.constraints,
+      min: value.min,
+      max: value.max,
+      ticks: .fromIterable(marks.map((mark) => mark.value), value: (_) {}),
+    );
+  }
+
+  void update({
+    required FSliderValue value,
+    required ValueChanged<FSliderValue> onChange,
+  }) {
+    _onChange = onChange;
+    // Update the value from parent without notifying (parent owns state)
+    if (_value?.min != value.min || _value?.max != value.max) {
+      _value = value;
+      notifyListeners();
+    }
+  }
+
+  @override
+  set value(FSliderValue? value) {
+    if (value == null || _value == value) {
+      return;
+    }
+
+    _onChange(value);
   }
 }

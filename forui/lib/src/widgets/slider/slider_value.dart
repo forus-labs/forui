@@ -6,12 +6,12 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 
-/// A [FSlider]'s active track/selection.
-sealed class FSliderSelection with Diagnosticable {
-  /// The selection's minimum and maximum constraints along the slider's track, in logical pixels.
-  final ({double min, double max, double total}) pixelConstraints;
+/// A [FSlider]'s active track/value.
+sealed class FSliderValue with Diagnosticable {
+  /// The value's minimum and maximum constraints along the slider's track, in logical pixels.
+  final ({double min, double max, double extent}) pixelConstraints;
 
-  /// The selection's minimum and maximum constraints along the slider's track, in percentage.
+  /// The value's minimum and maximum constraints along the slider's track, in percentage.
   ///
   /// ## Contract
   /// Throws [AssertionError] if:
@@ -20,10 +20,10 @@ sealed class FSliderSelection with Diagnosticable {
   /// * 1 < max
   final ({double min, double max}) constraints;
 
-  /// The selection's current minimum and maximum offset along the slider's track, in logical pixels.
+  /// The value's current minimum and maximum offset along the slider's track, in logical pixels.
   final ({double min, double max}) pixels;
 
-  /// The selection's current minimum value along the slider's track, in percentage.
+  /// The value's current minimum value along the slider's track, in percentage.
   ///
   ///
   /// ## Contract
@@ -33,7 +33,7 @@ sealed class FSliderSelection with Diagnosticable {
   /// * total percentage is greater than `constraints.max`.
   final double min;
 
-  /// The selection's current maximum value along the slider's track, in percentage.
+  /// The value's current maximum value along the slider's track, in percentage.
   ///
   /// ## Contract
   /// Throws [AssertionError] if:
@@ -43,27 +43,27 @@ sealed class FSliderSelection with Diagnosticable {
   /// * total percentage is greater than `constraints.max`.
   final double max;
 
-  /// Creates a [FSliderSelection].
-  factory FSliderSelection({required double max, double min, ({double min, double max}) constraints}) = _Selection;
+  /// Creates a [FSliderValue].
+  factory FSliderValue({required double max, double min, ({double min, double max}) constraints}) = _Value;
 
-  FSliderSelection._({
-    required double mainAxisExtent,
+  FSliderValue._({
+    required double extent,
     required ({double min, double max}) constraints,
     required double min,
     required double max,
   }) : this._copy(
          pixelConstraints: (
-           min: constraints.min * mainAxisExtent,
-           max: constraints.max * mainAxisExtent,
-           total: mainAxisExtent,
+           min: constraints.min * extent,
+           max: constraints.max * extent,
+           extent: extent,
          ),
          constraints: constraints,
-         pixels: (min: min * mainAxisExtent, max: max * mainAxisExtent),
+         pixels: (min: min * extent, max: max * extent),
          min: min,
          max: max,
        );
 
-  FSliderSelection._copy({
+  FSliderValue._copy({
     required this.pixelConstraints,
     required this.constraints,
     required this.pixels,
@@ -79,13 +79,13 @@ sealed class FSliderSelection with Diagnosticable {
        assert(max >= min, 'min ($min) must be <= max ($max)'),
        assert(max <= 1, 'max ($max) must be <= 1');
 
-  /// Returns a [FSliderSelection] which [min] edge is extended/shrunk to the previous/next step.
+  /// Returns a [FSliderValue] which [min] edge is increased/decreased to the next/previous step.
   @useResult
-  FSliderSelection step({required bool min, required bool extend});
+  FSliderValue step({required bool min, required bool expand});
 
-  /// Returns a [FSliderSelection] which [min] edge is extended/shrunk to the given offset.
+  /// Returns a [FSliderValue] which [min] edge is moved to [to].
   @useResult
-  FSliderSelection move({required bool min, required double to});
+  FSliderValue move({required bool min, required double to});
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -99,20 +99,20 @@ sealed class FSliderSelection with Diagnosticable {
   }
 }
 
-final class _Selection extends FSliderSelection {
-  _Selection({required super.max, super.min = 0, super.constraints = (min: 0, max: 1)})
-    : super._copy(pixelConstraints: (min: 0, max: 0, total: 0), pixels: (min: 0, max: 0));
+final class _Value extends FSliderValue {
+  _Value({required super.max, super.min = 0, super.constraints = (min: 0, max: 1)})
+    : super._copy(pixelConstraints: (min: 0, max: 0, extent: 0), pixels: (min: 0, max: 0));
 
   @override
-  FSliderSelection step({required bool min, required bool extend}) => this;
+  FSliderValue step({required bool min, required bool expand}) => this;
 
   @override
-  FSliderSelection move({required bool min, required double to}) => this;
+  FSliderValue move({required bool min, required double to}) => this;
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is FSliderSelection &&
+      other is FSliderValue &&
           runtimeType == other.runtimeType &&
           pixelConstraints == other.pixelConstraints &&
           constraints == other.constraints &&
@@ -125,12 +125,12 @@ final class _Selection extends FSliderSelection {
 }
 
 @internal
-final class ContinuousSelection extends FSliderSelection {
+final class ContinuousValue extends FSliderValue {
   final double _step;
 
-  ContinuousSelection({
+  ContinuousValue({
     required double step,
-    required super.mainAxisExtent,
+    required super.extent,
     required super.constraints,
     required super.min,
     required super.max,
@@ -138,32 +138,32 @@ final class ContinuousSelection extends FSliderSelection {
        _step = step,
        super._();
 
-  ContinuousSelection._({
+  ContinuousValue._({
     required double step,
     required super.pixelConstraints,
     required super.constraints,
     required super.pixels,
   }) : _step = step,
-       super._copy(min: pixels.min / pixelConstraints.total, max: pixels.max / pixelConstraints.total);
+       super._copy(min: pixels.min / pixelConstraints.extent, max: pixels.max / pixelConstraints.extent);
 
   @override
-  ContinuousSelection step({required bool min, required bool extend}) {
+  ContinuousValue step({required bool min, required bool expand}) {
     final edge = min ? pixels.min : pixels.max;
-    final step = pixelConstraints.total * _step;
-    return move(min: min, to: edge + ((min ^ extend) ? step : -step));
+    final step = pixelConstraints.extent * _step;
+    return move(min: min, to: edge + ((min ^ expand) ? step : -step));
   }
 
   @override
-  ContinuousSelection move({required bool min, required double to}) {
+  ContinuousValue move({required bool min, required double to}) {
     if (to < 0) {
       to = 0;
-    } else if (pixelConstraints.total < to) {
-      to = pixelConstraints.total;
+    } else if (pixelConstraints.extent < to) {
+      to = pixelConstraints.extent;
     }
 
-    return ContinuousSelection._(
+    return ContinuousValue._(
       step: _step,
-      pixelConstraints: (min: pixelConstraints.min, max: pixelConstraints.max, total: pixelConstraints.total),
+      pixelConstraints: (min: pixelConstraints.min, max: pixelConstraints.max, extent: pixelConstraints.extent),
       constraints: constraints,
       pixels: switch (min) {
         true when pixels.max - to < pixelConstraints.min => (min: pixels.max - pixelConstraints.min, max: pixels.max),
@@ -179,7 +179,7 @@ final class ContinuousSelection extends FSliderSelection {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is ContinuousSelection &&
+      other is ContinuousValue &&
           runtimeType == other.runtimeType &&
           pixelConstraints == other.pixelConstraints &&
           constraints == other.constraints &&
@@ -194,36 +194,33 @@ final class ContinuousSelection extends FSliderSelection {
 }
 
 @internal
-final class DiscreteSelection extends FSliderSelection {
+final class DiscreteValue extends FSliderValue {
   final SplayTreeMap<double, void> ticks;
 
-  DiscreteSelection({
+  DiscreteValue({
     required this.ticks,
     required double min,
     required double max,
-    required super.mainAxisExtent,
+    required super.extent,
     required super.constraints,
   }) : assert(ticks.isNotEmpty, 'ticks must not be empty.'),
        assert(ticks.keys.every((tick) => 0 <= tick && tick <= 1), 'Every tick must be >= 0 and <= 1.'),
        super._(min: ticks.round(min), max: ticks.round(max));
 
-  DiscreteSelection._({
+  DiscreteValue._({
     required this.ticks,
-    required ({double min, double max, double total}) pixelConstraints,
+    required super.pixelConstraints,
     required super.constraints,
-    required double min,
-    required double max,
+    required super.min,
+    required super.max,
   }) : super._copy(
-         min: min,
-         max: max,
-         pixelConstraints: pixelConstraints,
-         pixels: (min: min * pixelConstraints.total, max: max * pixelConstraints.total),
+         pixels: (min: min * pixelConstraints.extent, max: max * pixelConstraints.extent),
        );
 
   @override
-  DiscreteSelection step({required bool min, required bool extend}) => _move(
+  DiscreteValue step({required bool min, required bool expand}) => _move(
     min: min,
-    to: switch ((min, extend)) {
+    to: switch ((min, expand)) {
       (true, true) => ticks.lastKeyBefore(this.min) ?? this.min,
       (true, false) => ticks.firstKeyAfter(this.min) ?? this.min,
       (false, true) => ticks.firstKeyAfter(max) ?? max,
@@ -232,9 +229,9 @@ final class DiscreteSelection extends FSliderSelection {
   );
 
   @override
-  DiscreteSelection move({required bool min, required double to}) => _move(min: min, to: to / pixelConstraints.total);
+  DiscreteValue move({required bool min, required double to}) => _move(min: min, to: to / pixelConstraints.extent);
 
-  DiscreteSelection _move({required bool min, required double to}) {
+  DiscreteValue _move({required bool min, required double to}) {
     if ((min ? this.min : max) == to) {
       return this;
     }
@@ -274,7 +271,7 @@ final class DiscreteSelection extends FSliderSelection {
       false => (this.min, to),
     };
 
-    return DiscreteSelection._(
+    return DiscreteValue._(
       ticks: ticks,
       pixelConstraints: pixelConstraints,
       constraints: constraints,
@@ -292,7 +289,7 @@ final class DiscreteSelection extends FSliderSelection {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is DiscreteSelection &&
+      other is DiscreteValue &&
           runtimeType == other.runtimeType &&
           pixelConstraints == other.pixelConstraints &&
           constraints == other.constraints &&

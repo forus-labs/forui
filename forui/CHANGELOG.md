@@ -3,7 +3,7 @@
 This update focuses on overhauling the API to better declarative state & support the new dot-shorthand syntax.
 
 To simplify updating to the latest version, we've included [Data Driven Fixes](https://github.com/flutter/flutter/blob/master/docs/contributing/Data-driven-Fixes.md).
-This allows you to run automated fixes on your codebase to update deprecated APIs to the latest version.
+This allows you to run automated fixes on your codebase to update it to be compatible with the latest version of `forui`.
 
 After updating to the latest version, run:
 ```dart
@@ -224,9 +224,15 @@ Unfortunately, `FCalendar` cannot be easily migrated using data driven fixes due
 
 ### `FSlider`
 * Add `FSliderMark.mark(...)`.
+* Add `FSliderControl`.
+* Add `FSliderManagedControl`.
 
+* **Breaking** Rename `FSliderSelection` to `FSliderValue`.
 * **Breaking** Remove `FSliderController.tooltips`. Use `FSlider.tooltipControls`. instead.
 * **Breaking** Remove `FSliderTooltipsController`. Use `FSliderTooltipControls` instead.
+* **Breaking** Remove `FSlider.controller`. Use `FSlider(control: .managed(...))` instead.
+* **Breaking** Remove `FSlider.onChange`. Use `FSlider(control: .managed(...))` instead.
+* **Breaking** Remove `FSlider.initialSelection`. Use `FSlider(control: .managed(...))` instead.
 
 
 ### `FTabs`

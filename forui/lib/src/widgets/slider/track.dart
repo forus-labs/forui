@@ -30,19 +30,19 @@ class Track extends StatelessWidget {
         container: true,
         slider: true,
         enabled: true,
-        value: semanticFormatterCallback(controller.selection),
+        value: semanticFormatterCallback(controller.value),
         child: Stack(
           alignment: .center,
           children: [
             const _GestureDetector(),
-            if (controller.extendable.min)
+            if (controller.active.min)
               position(
-                offset: controller.selection.min * controller.selection.pixelConstraints.total,
+                offset: controller.value.min * controller.value.pixelConstraints.extent,
                 child: const Thumb(min: true),
               ),
-            if (controller.extendable.max)
+            if (controller.active.max)
               position(
-                offset: controller.selection.max * controller.selection.pixelConstraints.total,
+                offset: controller.value.max * controller.value.pixelConstraints.extent,
                 child: const Thumb(min: false),
               ),
           ],
@@ -84,7 +84,7 @@ class _GestureDetectorState extends State<_GestureDetector> {
     }
 
     void start(DragStartDetails details) {
-      _origin = controller.selection.pixels;
+      _origin = controller.value.pixels;
       _pointerOrigin = details.localPosition;
       minTooltipController?.show();
       maxTooltipController?.show();
@@ -131,12 +131,13 @@ class _GestureDetectorState extends State<_GestureDetector> {
     double thumbSize,
     FLayout layout,
   ) {
-    final translate = layout.translateTrackTap(controller.selection.pixelConstraints.total, thumbSize);
+    final translate = layout.translateTrackTap(controller.value.pixelConstraints.extent, thumbSize);
 
     void down(TapDownDetails details) {
       final offset = switch (translate(details.localPosition)) {
         < 0 => 0.0,
-        final translated when controller.selection.pixelConstraints.total < translated => controller.selection.pixelConstraints.total,
+        final translated when controller.value.pixelConstraints.extent < translated =>
+          controller.value.pixelConstraints.extent,
         final translated => translated,
       };
 
@@ -158,15 +159,15 @@ class _GestureDetectorState extends State<_GestureDetector> {
     }
 
     assert(
-      controller.extendable.min ^ controller.extendable.max,
-      'Slider must be extendable at one edge when ${controller.interaction}.',
+      controller.active.min ^ controller.active.max,
+      'Slider must be actuve at one edge when ${controller.interaction}.',
     );
 
     final translate = layout.translateTrackDrag();
 
     return (details) {
-      final origin = controller.extendable.min ? _origin!.min : _origin!.max;
-      controller.slide(origin + translate(details.localPosition - _pointerOrigin!), min: controller.extendable.min);
+      final origin = controller.active.min ? _origin!.min : _origin!.max;
+      controller.slide(origin + translate(details.localPosition - _pointerOrigin!), min: controller.active.min);
     };
   }
 }
@@ -180,7 +181,10 @@ class _Track extends StatelessWidget {
     final states = InheritedStates.of(context).states;
     final crossAxisExtent = style.crossAxisExtent;
 
-    final extent = InheritedController.of(context, InheritedController.rawExtent).controller.selection.pixelConstraints.total;
+    final extent = InheritedController.of(
+      context,
+      InheritedController.pixelConstraints,
+    ).controller.value.pixelConstraints.extent;
 
     final position = layout.position;
     final half = style.thumbSize / 2;
@@ -220,13 +224,13 @@ class ActiveTrack extends StatelessWidget {
     final InheritedData(:style, :layout) = .of(context);
     final states = InheritedStates.of(context).states;
     final crossAxisExtent = style.crossAxisExtent;
-    final rawOffset = InheritedController.of(context, InheritedController.rawOffset).controller.selection.pixels;
+    final pixels = InheritedController.of(context, InheritedController.pixels).controller.value.pixels;
 
-    final mainAxisExtent = rawOffset.max - rawOffset.min + style.thumbSize / 2;
+    final mainAxisExtent = pixels.max - pixels.min + style.thumbSize / 2;
     final (height, width) = layout.vertical ? (mainAxisExtent, crossAxisExtent) : (crossAxisExtent, mainAxisExtent);
 
     return layout.position(
-      offset: rawOffset.min,
+      offset: pixels.min,
       child: DecoratedBox(
         decoration: BoxDecoration(borderRadius: style.borderRadius, color: style.activeColor.resolve(states)),
         child: SizedBox(height: height, width: width),

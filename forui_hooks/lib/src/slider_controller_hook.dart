@@ -6,32 +6,32 @@ import 'package:forui/forui.dart';
 
 /// Creates a [FContinuousSliderController] that represents a continuous value and is automatically disposed.
 FContinuousSliderController useFContinuousSliderController({
-  required FSliderSelection selection,
-  FSliderInteraction allowedInteraction = .tapAndSlideThumb,
+  required FSliderValue value,
+  FSliderInteraction interaction = .tapAndSlideThumb,
   double stepPercentage = 0.05,
-  bool minExtendable = false,
+  FSliderActiveThumb activeThumb = .max,
   List<Object?>? keys,
 }) => use(
   _ContinuousControllerHook(
-    selection: selection,
+    value: value,
     stepPercentage: stepPercentage,
-    allowedInteraction: allowedInteraction,
-    minExtendable: minExtendable,
+    interaction: interaction,
+    activeThumb: activeThumb,
     keys: keys,
   ),
 );
 
 class _ContinuousControllerHook extends Hook<FContinuousSliderController> {
-  final FSliderSelection selection;
+  final FSliderValue value;
   final double stepPercentage;
-  final FSliderInteraction allowedInteraction;
-  final bool minExtendable;
+  final FSliderInteraction interaction;
+  final FSliderActiveThumb activeThumb;
 
   const _ContinuousControllerHook({
-    required this.selection,
+    required this.value,
     required this.stepPercentage,
-    required this.allowedInteraction,
-    required this.minExtendable,
+    required this.interaction,
+    required this.activeThumb,
     super.keys,
   });
 
@@ -42,19 +42,19 @@ class _ContinuousControllerHook extends Hook<FContinuousSliderController> {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('selection', selection))
+      ..add(DiagnosticsProperty('value', value))
       ..add(PercentProperty('stepPercentage', stepPercentage))
-      ..add(EnumProperty('allowedInteraction', allowedInteraction))
-      ..add(FlagProperty('minExtendable', value: minExtendable, ifTrue: 'min extendable', ifFalse: 'max extendable'));
+      ..add(EnumProperty('interaction', interaction))
+      ..add(EnumProperty('activeThumb', activeThumb));
   }
 }
 
 class _ContinuousControllerHookState extends HookState<FContinuousSliderController, _ContinuousControllerHook> {
   late final _controller = FContinuousSliderController(
-    selection: hook.selection,
+    value: hook.value,
     stepPercentage: hook.stepPercentage,
-    allowedInteraction: hook.allowedInteraction,
-    minExtendable: hook.minExtendable,
+    interaction: hook.interaction,
+    thumb: hook.activeThumb,
   );
 
   @override
@@ -72,19 +72,19 @@ class _ContinuousControllerHookState extends HookState<FContinuousSliderControll
 
 /// Creates a [FContinuousSliderController] that represents a continuous range and is automatically disposed.
 FContinuousSliderController useFContinuousRangeSliderController({
-  required FSliderSelection selection,
+  required FSliderValue value,
   double stepPercentage = 0.05,
   List<Object?>? keys,
 }) => use(
-  _ContinuousRangeControllerHook(selection: selection, stepPercentage: stepPercentage, keys: keys),
+  _ContinuousRangeControllerHook(value: value, stepPercentage: stepPercentage, keys: keys),
 );
 
 class _ContinuousRangeControllerHook extends Hook<FContinuousSliderController> {
-  final FSliderSelection selection;
+  final FSliderValue value;
   final double stepPercentage;
 
   const _ContinuousRangeControllerHook({
-    required this.selection,
+    required this.value,
     required this.stepPercentage,
     super.keys,
   });
@@ -96,7 +96,7 @@ class _ContinuousRangeControllerHook extends Hook<FContinuousSliderController> {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('selection', selection))
+      ..add(DiagnosticsProperty('value', value))
       ..add(DoubleProperty('stepPercentage', stepPercentage));
   }
 }
@@ -104,7 +104,7 @@ class _ContinuousRangeControllerHook extends Hook<FContinuousSliderController> {
 class _ContinuousRangeControllerHookState
     extends HookState<FContinuousSliderController, _ContinuousRangeControllerHook> {
   late final _controller = FContinuousSliderController.range(
-    selection: hook.selection,
+    value: hook.value,
     stepPercentage: hook.stepPercentage,
   );
 
@@ -123,28 +123,28 @@ class _ContinuousRangeControllerHookState
 
 /// Creates a [FDiscreteSliderController] that represents a discrete value and is automatically disposed.
 FDiscreteSliderController useFDiscreteSliderController({
-  required FSliderSelection selection,
-  FSliderInteraction allowedInteraction = .tapAndSlideThumb,
-  bool minExtendable = false,
+  required FSliderValue value,
+  FSliderInteraction interaction = .tapAndSlideThumb,
+  FSliderActiveThumb activeThumb = .max,
   List<Object?>? keys,
 }) => use(
   _DiscreteControllerHook(
-    selection: selection,
-    allowedInteraction: allowedInteraction,
-    minExtendable: minExtendable,
+    value: value,
+    interaction: interaction,
+    activeThumb: activeThumb,
     keys: keys,
   ),
 );
 
 class _DiscreteControllerHook extends Hook<FDiscreteSliderController> {
-  final FSliderSelection selection;
-  final FSliderInteraction allowedInteraction;
-  final bool minExtendable;
+  final FSliderValue value;
+  final FSliderInteraction interaction;
+  final FSliderActiveThumb activeThumb;
 
   const _DiscreteControllerHook({
-    required this.selection,
-    required this.allowedInteraction,
-    required this.minExtendable,
+    required this.value,
+    required this.interaction,
+    required this.activeThumb,
     super.keys,
   });
 
@@ -155,17 +155,17 @@ class _DiscreteControllerHook extends Hook<FDiscreteSliderController> {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('selection', selection))
-      ..add(EnumProperty('allowedInteraction', allowedInteraction))
-      ..add(FlagProperty('minExtendable', value: minExtendable, ifTrue: 'min extendable', ifFalse: 'max extendable'));
+      ..add(DiagnosticsProperty('value', value))
+      ..add(EnumProperty('interaction', interaction))
+      ..add(EnumProperty('activeThumb', activeThumb));
   }
 }
 
 class _DiscreteControllerHookState extends HookState<FDiscreteSliderController, _DiscreteControllerHook> {
   late final _controller = FDiscreteSliderController(
-    selection: hook.selection,
-    allowedInteraction: hook.allowedInteraction,
-    minExtendable: hook.minExtendable,
+    value: hook.value,
+    interaction: hook.interaction,
+    thumb: hook.activeThumb,
   );
 
   @override
@@ -183,14 +183,14 @@ class _DiscreteControllerHookState extends HookState<FDiscreteSliderController, 
 
 /// Creates a [FDiscreteSliderController] that represents a discrete range and is automatically disposed.
 FDiscreteSliderController useFDiscreteRangeSliderController({
-  required FSliderSelection selection,
+  required FSliderValue value,
   List<Object?>? keys,
-}) => use(_DiscreteRangeControllerHook(selection: selection, keys: keys));
+}) => use(_DiscreteRangeControllerHook(value: value, keys: keys));
 
 class _DiscreteRangeControllerHook extends Hook<FDiscreteSliderController> {
-  final FSliderSelection selection;
+  final FSliderValue value;
 
-  const _DiscreteRangeControllerHook({required this.selection, super.keys});
+  const _DiscreteRangeControllerHook({required this.value, super.keys});
 
   @override
   _DiscreteRangeControllerHookState createState() => .new();
@@ -198,12 +198,12 @@ class _DiscreteRangeControllerHook extends Hook<FDiscreteSliderController> {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('selection', selection));
+    properties.add(DiagnosticsProperty('value', value));
   }
 }
 
 class _DiscreteRangeControllerHookState extends HookState<FDiscreteSliderController, _DiscreteRangeControllerHook> {
-  late final _controller = FDiscreteSliderController.range(selection: hook.selection);
+  late final _controller = FDiscreteSliderController.range(value: hook.value);
 
   @override
   FDiscreteSliderController build(BuildContext context) => _controller;

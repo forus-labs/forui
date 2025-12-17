@@ -6,9 +6,10 @@
 library forui.widgets.slider;
 
 export '../src/widgets/slider/slider.dart';
-export '../src/widgets/slider/slider_controller.dart';
+export '../src/widgets/slider/slider_controller.dart'
+    hide ProxyContinuousSliderController, ProxyDiscreteSliderController;
 export '../src/widgets/slider/slider_mark.dart';
-export '../src/widgets/slider/slider_selection.dart' hide ContinuousSelection, DiscreteSelection, SplayTreeMaps;
+export '../src/widgets/slider/slider_value.dart' hide ContinuousValue, DiscreteValue, SplayTreeMaps;
 export '../src/widgets/slider/slider_styles.dart';
-export '../src/widgets/slider/slider_control.dart';
+export '../src/widgets/slider/slider_control.dart' hide InternalFSliderControl;
 export '../src/widgets/slider/thumb.dart' hide Layouts, Thumb;

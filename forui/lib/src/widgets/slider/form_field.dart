@@ -8,7 +8,7 @@ import 'package:forui/src/widgets/slider/slider_render_object.dart';
 import 'package:forui/src/widgets/slider/track.dart';
 
 @internal
-class SliderFormField extends FormField<FSliderSelection> with FFormFieldProperties<FSliderSelection> {
+class SliderFormField extends FormField<FSliderValue> with FFormFieldProperties<FSliderValue> {
   final FSliderController controller;
   final BoxConstraints constraints;
   @override
@@ -31,7 +31,7 @@ class SliderFormField extends FormField<FSliderSelection> with FFormFieldPropert
     super.restorationId,
     super.key,
   }) : super(
-         initialValue: controller.selection,
+         initialValue: controller.value,
          errorBuilder: errorBuilder,
          builder: (field) {
            final state = field as _State;
@@ -78,7 +78,7 @@ class SliderFormField extends FormField<FSliderSelection> with FFormFieldPropert
        );
 
   @override
-  FormFieldState<FSliderSelection> createState() => _State();
+  FormFieldState<FSliderValue> createState() => _State();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -90,7 +90,7 @@ class SliderFormField extends FormField<FSliderSelection> with FFormFieldPropert
   }
 }
 
-class _State extends FormFieldState<FSliderSelection> {
+class _State extends FormFieldState<FSliderValue> {
   @override
   void initState() {
     super.initState();
@@ -107,13 +107,13 @@ class _State extends FormFieldState<FSliderSelection> {
   }
 
   @override
-  void didChange(FSliderSelection? value) {
-    // This is not 100% accurate since a controller's selection can never be null. However, users will have to go out
-    // of their way to obtain a FormFieldState<FSliderSelection> via a GlobalKey AND call didChange(null).
-    assert(value != null, "slider's selection cannot be null");
+  void didChange(FSliderValue? value) {
+    // This is not 100% accurate since a controller's value can never be null. However, users will have to go out
+    // of their way to obtain a FormFieldState<FSliderValue> via a GlobalKey AND call didChange(null).
+    assert(value != null, "slider's value cannot be null");
     super.didChange(value);
-    if (widget.controller.selection != value) {
-      widget.controller.selection = value;
+    if (widget.controller.value != value) {
+      widget.controller.value = value;
     }
   }
 
@@ -136,8 +136,8 @@ class _State extends FormFieldState<FSliderSelection> {
     // In the case where a controller has been passed in to this widget, we register this change listener. In these
     // cases, we'll also receive change notifications for changes originating from within this class -- for example, the
     // reset() method. In such cases, the FormField value will already have been set.
-    if (widget.controller.selection != value) {
-      didChange(widget.controller.selection);
+    if (widget.controller.value != value) {
+      didChange(widget.controller.value);
     }
   }
 

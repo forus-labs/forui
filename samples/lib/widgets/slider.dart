@@ -6,7 +6,7 @@ import 'package:forui/forui.dart';
 import 'package:forui_samples/sample.dart';
 
 @RoutePage()
-class SliderPage extends StatefulSample {
+class SliderPage extends Sample {
   final String? label;
   final String? description;
   final String? error;
@@ -31,51 +31,25 @@ class SliderPage extends StatefulSample {
        extent = extent ? (min: 0.25, max: 0.75) : (min: 0, max: 1);
 
   @override
-  State<SliderPage> createState() => _SliderPageState();
-}
-
-class _SliderPageState extends StatefulSampleState<SliderPage> {
-  late final _controller = FContinuousSliderController(
-    selection: FSliderSelection(max: 0.6, constraints: widget.extent),
-    interaction: widget.interaction,
-  );
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget sample(BuildContext context) => FSlider(
-    label: widget.label == null ? null : Text(widget.label!),
-    description: widget.description == null ? null : Text(widget.description!),
-    forceErrorText: widget.error,
-    controller: _controller,
-    enabled: widget.enabled,
+    control: .managedContinuous(
+      initial: FSliderValue(max: 0.6, constraints: extent),
+      interaction: interaction,
+    ),
+    label: label == null ? null : Text(label!),
+    description: description == null ? null : Text(description!),
+    forceErrorText: error,
+    enabled: enabled,
   );
 }
 
 @RoutePage()
-class TooltipSliderPage extends StatefulSample {
+class TooltipSliderPage extends Sample {
   TooltipSliderPage({@queryParam super.theme});
 
   @override
-  State<TooltipSliderPage> createState() => _TooltipSliderPageState();
-}
-
-class _TooltipSliderPageState extends StatefulSampleState<TooltipSliderPage> {
-  final _controller = FContinuousSliderController(selection: FSliderSelection(max: 0.6));
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget sample(BuildContext context) => FSlider(
-    controller: _controller,
+    control: .managedContinuous(initial: FSliderValue(max: 0.6)),
     tooltipBuilder: (style, value) {
       final hex = (value * 100).round().toRadixString(16).padLeft(2, '0');
       return Text('0x$hex');
@@ -84,25 +58,12 @@ class _TooltipSliderPageState extends StatefulSampleState<TooltipSliderPage> {
 }
 
 @RoutePage()
-class MarksSliderPage extends StatefulSample {
+class MarksSliderPage extends Sample {
   MarksSliderPage({@queryParam super.theme, super.top = 35});
 
   @override
-  State<MarksSliderPage> createState() => _MarksSliderPageState();
-}
-
-class _MarksSliderPageState extends StatefulSampleState<MarksSliderPage> {
-  final _controller = FContinuousSliderController(selection: FSliderSelection(max: 0.35));
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget sample(BuildContext context) => FSlider(
-    controller: _controller,
+    control: .managedContinuous(initial: FSliderValue(max: 0.35)),
     marks: const [
       .mark(value: 0, label: Text('0%')),
       .mark(value: 0.25, tick: false),
@@ -114,25 +75,12 @@ class _MarksSliderPageState extends StatefulSampleState<MarksSliderPage> {
 }
 
 @RoutePage()
-class DiscreteSliderPage extends StatefulSample {
+class DiscreteSliderPage extends Sample {
   DiscreteSliderPage({@queryParam super.theme});
 
   @override
-  State<DiscreteSliderPage> createState() => _DiscreteSliderPageState();
-}
-
-class _DiscreteSliderPageState extends StatefulSampleState<DiscreteSliderPage> {
-  final _controller = FDiscreteSliderController(selection: FSliderSelection(max: 0.25));
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget sample(BuildContext context) => FSlider(
-    controller: _controller,
+    control: .managedDiscrete(initial: FSliderValue(max: 0.25)),
     marks: const [
       .mark(value: 0, label: Text('0%')),
       .mark(value: 0.25, tick: false),
@@ -144,49 +92,24 @@ class _DiscreteSliderPageState extends StatefulSampleState<DiscreteSliderPage> {
 }
 
 @RoutePage()
-class RangeSliderPage extends StatefulSample {
+class RangeSliderPage extends Sample {
   RangeSliderPage({@queryParam super.theme});
 
   @override
-  State<RangeSliderPage> createState() => _RangeSliderPageState();
-}
-
-class _RangeSliderPageState extends StatefulSampleState<RangeSliderPage> {
-  final _controller = FContinuousSliderController.range(selection: FSliderSelection(min: 0.25, max: 0.75));
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget sample(BuildContext context) => FSlider(controller: _controller);
+  Widget sample(BuildContext context) =>
+      FSlider(control: .managedContinuousRange(initial: FSliderValue(min: 0.25, max: 0.75)));
 }
 
 @RoutePage()
-class VerticalSliderPage extends StatefulSample {
+class VerticalSliderPage extends Sample {
   VerticalSliderPage({@queryParam super.theme, super.top = 35});
 
   @override
-  State<VerticalSliderPage> createState() => _VerticalSliderPageState();
-}
-
-class _VerticalSliderPageState extends StatefulSampleState<VerticalSliderPage> {
-  final _controller = FContinuousSliderController(selection: FSliderSelection(max: 0.35));
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget sample(BuildContext context) => FSlider(
+    control: .managedContinuous(initial: FSliderValue(max: 0.35)),
     label: const Text('Volume'),
     description: const Text('Adjust the volume by dragging the slider.'),
     layout: .btt,
-    controller: _controller,
     trackMainAxisExtent: 350,
     marks: const [
       .mark(value: 0, label: Text('0%')),
@@ -208,13 +131,6 @@ class SliderFormPage extends StatefulSample {
 
 class _SliderFormPageState extends StatefulSampleState<SliderFormPage> {
   final _key = GlobalKey<FormState>();
-  final _controller = FContinuousSliderController(selection: FSliderSelection(max: 0.35));
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
 
   @override
   Widget sample(BuildContext context) => Form(
@@ -225,9 +141,9 @@ class _SliderFormPageState extends StatefulSampleState<SliderFormPage> {
       spacing: 20,
       children: [
         FSlider(
+          control: .managedContinuous(initial: FSliderValue(max: 0.35)),
           label: const Text('Brightness'),
           description: const Text('Adjust the brightness level.'),
-          controller: _controller,
           marks: const [
             .mark(value: 0, label: Text('0%')),
             .mark(value: 0.25, tick: false),

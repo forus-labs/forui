@@ -1,4 +1,13 @@
 ## 0.17.0
+To simplify updating to the latest version, we've included [Data Driven Fixes](https://github.com/flutter/flutter/blob/master/docs/contributing/Data-driven-Fixes.md).
+This allows you to run automated fixes on your codebase to update it to be compatible with the latest version of `forui_hooks`.
+
+After updating to the latest version, run:
+```dart
+dart fix --apply
+```
+
+
 * Add `useFPopoverController(shown: ...)`.
 * Add `useFTooltipController(shown: ...)`.
 
@@ -22,6 +31,12 @@
 * **Breaking** Rename `useFPickerController(initialIndexes: ...)` to `useFPickerController(indexes: ...)`.
 * **Breaking** Rename `useFTabController(initialIndex: ...)` to `useFTabController(index: ...)`.
 * **Breaking** Rename `useFTimePickerController(initial: ...)` to `useFTimePickerController(time: ...)`.
+* **Breaking** Rename `useFContinuousSliderController(selection: ...)` to `useFContinuousSliderController(value: ...)`.
+* **Breaking** Rename `useFContinuousSliderController(allowedInteraction: ...)` to `useFContinuousSliderController(interaction: ...)`.
+* **Breaking** Rename `useFContinuousRangeSliderController(selection: ...)` to `useFContinuousRangeSliderController(value: ...)`.
+* **Breaking** Rename `useFDiscreteSliderController(selection: ...)` to `useFDiscreteSliderController(value: ...)`.
+* **Breaking** Rename `useFDiscreteSliderController(allowedInteraction: ...)` to `useFDiscreteSliderController(interaction: ...)`.
+* **Breaking** Rename `useFDiscreteRangeSliderController(selection: ...)` to `useFDiscreteRangeSliderController(value: ...)`.
 * Fix `useFDateCalendarController(togglable: ...)` defaulting to false instead of true.
 
 

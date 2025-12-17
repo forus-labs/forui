@@ -8,9 +8,9 @@ import 'package:forui/src/foundation/debug.dart';
 class InheritedController extends InheritedModel<UniqueKey> {
   static final extendable = UniqueKey();
 
-  static final rawOffset = UniqueKey();
+  static final pixels = UniqueKey();
 
-  static final rawExtent = UniqueKey();
+  static final pixelConstraints = UniqueKey();
 
   static InheritedController of(BuildContext context, [UniqueKey? aspect]) {
     assert(debugCheckHasAncestor<InheritedController>('$FSlider', context));
@@ -20,7 +20,7 @@ class InheritedController extends InheritedModel<UniqueKey> {
   final FSliderController controller;
   final FTooltipController? minTooltipController;
   final FTooltipController? maxTooltipController;
-  final FSliderSelection _selection;
+  final FSliderValue _value;
 
   InheritedController({
     required this.controller,
@@ -28,11 +28,11 @@ class InheritedController extends InheritedModel<UniqueKey> {
     required this.maxTooltipController,
     required super.child,
     super.key,
-  }) : _selection = controller.selection;
+  }) : _value = controller.value;
 
   @override
   bool updateShouldNotify(InheritedController old) =>
-      _selection != old._selection ||
+      _value != old._value ||
       controller != old.controller ||
       minTooltipController != old.minTooltipController ||
       maxTooltipController != old.maxTooltipController;
@@ -42,16 +42,16 @@ class InheritedController extends InheritedModel<UniqueKey> {
       controller != old.controller ||
       minTooltipController != old.minTooltipController ||
       maxTooltipController != old.maxTooltipController ||
-      dependencies.contains(rawOffset) && _selection.pixels != old._selection.pixels ||
-      dependencies.contains(rawExtent) && _selection.pixelConstraints != old._selection.pixelConstraints ||
-      dependencies.contains(extendable) && controller.extendable != old.controller.extendable;
+      dependencies.contains(pixels) && _value.pixels != old._value.pixels ||
+      dependencies.contains(pixelConstraints) && _value.pixelConstraints != old._value.pixelConstraints ||
+      dependencies.contains(extendable) && controller.active != old.controller.active;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('controller', controller))
-      ..add(DiagnosticsProperty('min', minTooltipController))
-      ..add(DiagnosticsProperty('max', maxTooltipController));
+      ..add(DiagnosticsProperty('minTooltipController', minTooltipController))
+      ..add(DiagnosticsProperty('maxTooltipController', maxTooltipController));
   }
 }
