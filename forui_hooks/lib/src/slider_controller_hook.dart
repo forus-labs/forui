@@ -75,19 +75,13 @@ FContinuousSliderController useFContinuousRangeSliderController({
   required FSliderValue value,
   double stepPercentage = 0.05,
   List<Object?>? keys,
-}) => use(
-  _ContinuousRangeControllerHook(value: value, stepPercentage: stepPercentage, keys: keys),
-);
+}) => use(_ContinuousRangeControllerHook(value: value, stepPercentage: stepPercentage, keys: keys));
 
 class _ContinuousRangeControllerHook extends Hook<FContinuousSliderController> {
   final FSliderValue value;
   final double stepPercentage;
 
-  const _ContinuousRangeControllerHook({
-    required this.value,
-    required this.stepPercentage,
-    super.keys,
-  });
+  const _ContinuousRangeControllerHook({required this.value, required this.stepPercentage, super.keys});
 
   @override
   _ContinuousRangeControllerHookState createState() => .new();
@@ -103,10 +97,7 @@ class _ContinuousRangeControllerHook extends Hook<FContinuousSliderController> {
 
 class _ContinuousRangeControllerHookState
     extends HookState<FContinuousSliderController, _ContinuousRangeControllerHook> {
-  late final _controller = FContinuousSliderController.range(
-    value: hook.value,
-    stepPercentage: hook.stepPercentage,
-  );
+  late final _controller = FContinuousSliderController.range(value: hook.value, stepPercentage: hook.stepPercentage);
 
   @override
   FContinuousSliderController build(BuildContext context) => _controller;
@@ -127,14 +118,7 @@ FDiscreteSliderController useFDiscreteSliderController({
   FSliderInteraction interaction = .tapAndSlideThumb,
   FSliderActiveThumb activeThumb = .max,
   List<Object?>? keys,
-}) => use(
-  _DiscreteControllerHook(
-    value: value,
-    interaction: interaction,
-    activeThumb: activeThumb,
-    keys: keys,
-  ),
-);
+}) => use(_DiscreteControllerHook(value: value, interaction: interaction, activeThumb: activeThumb, keys: keys));
 
 class _DiscreteControllerHook extends Hook<FDiscreteSliderController> {
   final FSliderValue value;
@@ -182,10 +166,8 @@ class _DiscreteControllerHookState extends HookState<FDiscreteSliderController, 
 }
 
 /// Creates a [FDiscreteSliderController] that represents a discrete range and is automatically disposed.
-FDiscreteSliderController useFDiscreteRangeSliderController({
-  required FSliderValue value,
-  List<Object?>? keys,
-}) => use(_DiscreteRangeControllerHook(value: value, keys: keys));
+FDiscreteSliderController useFDiscreteRangeSliderController({required FSliderValue value, List<Object?>? keys}) =>
+    use(_DiscreteRangeControllerHook(value: value, keys: keys));
 
 class _DiscreteRangeControllerHook extends Hook<FDiscreteSliderController> {
   final FSliderValue value;

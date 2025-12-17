@@ -15,7 +15,7 @@ void main() {
         home: HookBuilder(
           builder: (context) {
             controller = useFContinuousSliderController(value: FSliderValue(max: 0.2));
-            return FSlider(control: .managedContinuous(controller: controller),);
+            return FSlider(control: .managedContinuous(controller: controller));
           },
         ),
       ),
