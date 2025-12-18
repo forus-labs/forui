@@ -124,9 +124,14 @@ mixin _$LiftedMixin on Diagnosticable, FGoldenControl {
         return (_default(old, controller, callback, children), false);
 
       // Lifted (Value A) -> Lifted (Value B)
-      case Lifted():
+      case Lifted() when old.runtimeType == runtimeType:
         _updateController(controller, children);
         return (controller, true);
+
+      // LiftedFoo -> LiftedBar
+      case Lifted():
+        controller.dispose();
+        return (createController(children)..addListener(callback), true);
 
       // External -> Lifted
       case Managed(controller: _?):
@@ -353,9 +358,14 @@ mixin _$LiftedMixin<T> on Diagnosticable, FGenericControl<T> {
         return (_default(old, controller, callback), false);
 
       // Lifted (Value A) -> Lifted (Value B)
-      case Lifted():
+      case Lifted() when old.runtimeType == runtimeType:
         _updateController(controller);
         return (controller, true);
+
+      // LiftedFoo -> LiftedBar
+      case Lifted():
+        controller.dispose();
+        return (createController()..addListener(callback), true);
 
       // External -> Lifted
       case Managed(controller: _?):
@@ -589,9 +599,14 @@ mixin _$LiftedMixin on Diagnosticable, FSubclassControl {
         return (_default(old, controller, callback), false);
 
       // Lifted (Value A) -> Lifted (Value B)
-      case Lifted():
+      case Lifted() when old.runtimeType == runtimeType:
         _updateController(controller);
         return (controller, true);
+
+      // LiftedFoo -> LiftedBar
+      case Lifted():
+        controller.dispose();
+        return (createController()..addListener(callback), true);
 
       // External -> Lifted
       case Managed(controller: _?):

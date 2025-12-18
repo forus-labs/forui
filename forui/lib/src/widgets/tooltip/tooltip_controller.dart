@@ -46,9 +46,11 @@ class FTooltipController extends FChangeNotifier {
   ///
   /// This method should typically not be called while the widget tree is being rebuilt.
   Future<void> show() async {
-    _overlay.show();
-    await _animation.forward();
-    notifyListeners();
+    if (!_animation.isForwardOrCompleted) {
+      _overlay.show();
+      await _animation.forward();
+      notifyListeners();
+    }
   }
 
   /// Hides the tooltip.
@@ -58,9 +60,11 @@ class FTooltipController extends FChangeNotifier {
   ///
   /// This method should typically not be called while the widget tree is being rebuilt.
   Future<void> hide() async {
-    await _animation.reverse();
-    _overlay.hide();
-    notifyListeners();
+    if (_animation.isForwardOrCompleted) {
+      await _animation.reverse();
+      _overlay.hide();
+      notifyListeners();
+    }
   }
 
   /// The current status.
@@ -213,7 +217,7 @@ class FTooltipManagedControl extends FTooltipControl with Diagnosticable, _$FToo
 
   @override
   FTooltipController createController(TickerProvider vsync) =>
-      controller ?? .new(vsync: vsync, motion: motion ?? const .new());
+      controller ?? .new(vsync: vsync, shown: initial ?? false, motion: motion ?? const .new());
 }
 
 class _Lifted extends FTooltipControl with _$_LiftedMixin {

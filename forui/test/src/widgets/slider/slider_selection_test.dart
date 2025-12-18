@@ -2,27 +2,27 @@ import 'dart:collection';
 
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:forui/src/widgets/slider/slider_selection.dart';
+import 'package:forui/src/widgets/slider/slider_value.dart';
 
 void main() {
   group('_Selection', () {
     test('fields', () {
-      final selection = FSliderSelection(min: 0.4, max: 0.5);
+      final selection = FSliderValue(min: 0.4, max: 0.5);
 
-      expect(selection.offset, (min: 0.4, max: 0.5));
-      expect(selection.extent, (min: 0.0, max: 1.0));
-      expect(selection.rawExtent, (min: 0.0, max: 0.0, total: 0));
-      expect(selection.rawOffset, (min: 0.0, max: 0.0));
+      expect((selection.min, selection.max), (0.4, 0.5));
+      expect(selection.constraints, (min: 0.0, max: 1.0));
+      expect(selection.pixelConstraints, (min: 0.0, max: 0.0, extent: 0.0));
+      expect(selection.pixels, (min: 0.0, max: 0.0));
     });
   });
 
   group('ContinuousSelection', () {
-    ContinuousSelection value(
+    ContinuousValue value(
       double min,
       double max, {
       double step = 0.05,
       ({double min, double max}) extent = (min: 0.1, max: 0.3),
-    }) => ContinuousSelection(step: step, mainAxisExtent: 100.0, extent: extent, offset: (min: min, max: max));
+    }) => ContinuousValue(step: step, extent: 100.0, constraints: extent, min: min, max: max);
 
     for (final (description, selection) in [
       ('step negative', () => value(0.2, 0.4, step: -0.05)),
@@ -33,28 +33,28 @@ void main() {
 
     group('step', () {
       test('min step negative', () {
-        expect(value(0.1, 0.2, step: 0.5).step(min: true, extend: true), value(0.0, 0.2, step: 0.5));
+        expect(value(0.1, 0.2, step: 0.5).step(min: true, expand: true), value(0.0, 0.2, step: 0.5));
       });
 
       test('max step > extent', () {
-        expect(value(0.7, 0.8, step: 0.5).step(min: false, extend: true), value(0.7, 1.0, step: 0.5));
+        expect(value(0.7, 0.8, step: 0.5).step(min: false, expand: true), value(0.7, 1.0, step: 0.5));
       });
 
       test('min step > max raw offset', () {
-        expect(value(0.2, 0.4, step: 0.5).step(min: true, extend: false), value(0.3, 0.4, step: 0.5));
+        expect(value(0.2, 0.4, step: 0.5).step(min: true, expand: false), value(0.3, 0.4, step: 0.5));
       });
 
       test('max step < max min offset', () {
-        expect(value(0.2, 0.4, step: 0.5).step(min: false, extend: false), value(0.2, 0.3, step: 0.5));
+        expect(value(0.2, 0.4, step: 0.5).step(min: false, expand: false), value(0.2, 0.3, step: 0.5));
       });
 
-      test('min extend', () => expect(value(0.2, 0.4).step(min: true, extend: true), value(0.15, 0.4)));
+      test('min extend', () => expect(value(0.2, 0.4).step(min: true, expand: true), value(0.15, 0.4)));
 
-      test('min shrink', () => expect(value(0.2, 0.4).step(min: true, extend: false), value(0.25, 0.4)));
+      test('min shrink', () => expect(value(0.2, 0.4).step(min: true, expand: false), value(0.25, 0.4)));
 
-      test('max extend', () => expect(value(0.2, 0.4).step(min: false, extend: true), value(0.2, 0.45)));
+      test('max extend', () => expect(value(0.2, 0.4).step(min: false, expand: true), value(0.2, 0.45)));
 
-      test('max shrink', () => expect(value(0.2, 0.4).step(min: false, extend: false), value(0.2, 0.35)));
+      test('max shrink', () => expect(value(0.2, 0.4).step(min: false, expand: false), value(0.2, 0.35)));
     });
 
     group('move', () {
@@ -95,36 +95,34 @@ void main() {
   });
 
   group('DiscreteSelection', () {
-    DiscreteSelection value(
+    DiscreteValue value(
       double min,
       double max, {
       List<double> ticks = const [0, 0.125, 0.25, 0.5, 0.75, 0.875, 1],
       ({double min, double max}) extent = (min: 0.01, max: 0.6),
-    }) => DiscreteSelection(
+    }) => DiscreteValue(
       ticks: SplayTreeMap.fromIterable(ticks, value: (_) {}),
-      mainAxisExtent: 100.0,
-      extent: extent,
-      offset: (min: min, max: max),
+      extent: 100.0,
+      constraints: extent,
+      min: min,
+      max: max,
     );
 
     for (final constructor in [
-      () => DiscreteSelection(
-        ticks: SplayTreeMap(),
-        mainAxisExtent: 100.0,
-        extent: (min: 0, max: 1),
-        offset: (min: 0.1, max: 0.2),
-      ),
-      () => DiscreteSelection(
+      () => DiscreteValue(ticks: SplayTreeMap(), extent: 100.0, constraints: (min: 0, max: 1), min: 0.1, max: 0.2),
+      () => DiscreteValue(
         ticks: SplayTreeMap.fromIterable([-1.0], value: (_) {}),
-        mainAxisExtent: 100.0,
-        extent: (min: 0, max: 1),
-        offset: (min: 0.1, max: 0.2),
+        extent: 100.0,
+        constraints: (min: 0, max: 1),
+        min: 0.1,
+        max: 0.2,
       ),
-      () => DiscreteSelection(
+      () => DiscreteValue(
         ticks: SplayTreeMap.fromIterable([1.1], value: (_) {}),
-        mainAxisExtent: 100.0,
-        extent: (min: 0, max: 1),
-        offset: (min: 0.1, max: 0.2),
+        extent: 100.0,
+        constraints: (min: 0, max: 1),
+        min: 0.1,
+        max: 0.2,
       ),
     ]) {
       test('constructor', () => expect(constructor, throwsAssertionError));
@@ -140,14 +138,14 @@ void main() {
         (value(0.25, 0.75), false, false, value(0.25, 0.5)),
       ]) {
         test('${min ? 'min' : 'max'} ${extend ? 'extend' : 'shrink'}', () {
-          expect(value.step(min: min, extend: extend), expected);
+          expect(value.step(min: min, expand: extend), expected);
         });
       }
 
       for (final (min, extend) in [(true, true), (false, true), (true, false), (false, false)]) {
         test('single point - ${min ? 'min' : 'max'} ${extend ? 'extend' : 'shrink'}', () {
           expect(
-            value(0.5, 0.5, extent: (min: 0, max: 1), ticks: [0.5]).step(min: min, extend: extend),
+            value(0.5, 0.5, extent: (min: 0, max: 1), ticks: [0.5]).step(min: min, expand: extend),
             value(0.5, 0.5, extent: (min: 0, max: 1), ticks: [0.5]),
           );
         });

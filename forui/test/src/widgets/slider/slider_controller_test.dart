@@ -13,14 +13,20 @@ void main() {
   ];
 
   for (final constructor in [
-    (selection, [FSliderInteraction interaction = FSliderInteraction.tapAndSlideThumb, bool min = false]) =>
-        FContinuousSliderController(selection: selection, allowedInteraction: interaction, minExtendable: min),
-    (selection, [FSliderInteraction interaction = FSliderInteraction.tapAndSlideThumb, bool min = false]) =>
-        FDiscreteSliderController(selection: selection, allowedInteraction: interaction, minExtendable: min),
+    (
+      selection, [
+      FSliderInteraction interaction = FSliderInteraction.tapAndSlideThumb,
+      FSliderActiveThumb thumb = FSliderActiveThumb.max,
+    ]) => FContinuousSliderController(value: selection, interaction: interaction, thumb: thumb),
+    (
+      selection, [
+      FSliderInteraction interaction = FSliderInteraction.tapAndSlideThumb,
+      FSliderActiveThumb thumb = FSliderActiveThumb.max,
+    ]) => FDiscreteSliderController(value: selection, interaction: interaction, thumb: thumb),
   ]) {
     group('FSlider', () {
-      final value = FSliderSelection(max: 0.75);
-      final range = FSliderSelection(min: 0.25, max: 0.75);
+      final value = FSliderValue(max: 0.75);
+      final range = FSliderValue(min: 0.25, max: 0.75);
 
       late FSliderController controller;
 
@@ -36,28 +42,28 @@ void main() {
             ..attach(1000, marks);
 
           expect(calls, 0);
-          expect(controller.selection.extent, (min: 0, max: 1));
-          expect(controller.selection.rawExtent, (min: 0, max: 1000, total: 1000));
-          expect(controller.selection.offset, (min: 0, max: 0.75));
-          expect(controller.selection.rawOffset, (min: 0, max: 750));
+          expect(controller.value.constraints, (min: 0, max: 1));
+          expect(controller.value.pixelConstraints, (min: 0.0, max: 1000.0, extent: 1000.0));
+          expect((controller.value.min, controller.value.max), (0, 0.75));
+          expect(controller.value.pixels, (min: 0, max: 750));
         });
 
         test('existing selection', () {
           controller
             ..attach(1000, marks)
-            ..step(min: false, extend: true);
+            ..step(min: false, expand: true);
 
-          final selection = controller.selection;
+          final selection = controller.value;
           var calls = 0;
           controller
             ..addListener(() => calls++)
             ..attach(100, marks);
 
           expect(calls, 1);
-          expect(controller.selection.extent, (min: 0, max: 1));
-          expect(controller.selection.rawExtent, (min: 0, max: 100, total: 100));
-          expect(controller.selection.offset, selection.offset);
-          expect(controller.selection.rawOffset, (min: 0, max: selection.offset.max * 100));
+          expect(controller.value.constraints, (min: 0, max: 1));
+          expect(controller.value.pixelConstraints, (min: 0.0, max: 100.0, extent: 100.0));
+          expect((controller.value.min, controller.value.max), (selection.min, selection.max));
+          expect(controller.value.pixels, (min: 0, max: selection.max * 100));
         });
       });
 
@@ -66,10 +72,10 @@ void main() {
           var calls = 0;
           controller
             ..addListener(() => calls++)
-            ..step(min: false, extend: true);
+            ..step(min: false, expand: true);
 
           expect(calls, 0);
-          expect(controller.selection, value);
+          expect(controller.value, value);
         });
       });
 
@@ -81,7 +87,7 @@ void main() {
             ..slide(50, min: false);
 
           expect(calls, 0);
-          expect(controller.selection, value);
+          expect(controller.value, value);
         });
 
         test('move', () {
@@ -92,8 +98,8 @@ void main() {
             ..slide(50, min: false);
 
           expect(calls, 1);
-          expect(controller.selection.offset, (min: 0, max: 0.5));
-          expect(controller.selection.rawOffset, (min: 0, max: 50));
+          expect((controller.value.min, controller.value.max), (0, 0.5));
+          expect(controller.value.pixels, (min: 0, max: 50));
         });
 
         test('tap only', () {
@@ -104,7 +110,7 @@ void main() {
             ..slide(50, min: false);
 
           expect(calls, 0);
-          expect(controller.selection.offset, range.offset);
+          expect((controller.value.min, controller.value.max), (range.min, range.max));
         });
       });
 
@@ -118,26 +124,26 @@ void main() {
 
             expect(controller.tap(50), null);
             expect(calls, 0);
-            expect(controller.selection.offset, value.offset);
+            expect((controller.value.min, controller.value.max), (value.min, value.max));
           });
         }
 
-        for (final (offset, expected, min, thumb) in [
-          (0.0, (min: 0, max: 0.75), true, true),
-          (50.0, (min: 0.5, max: 0.75), true, true),
-          (100.0, (min: 0.25, max: 1), false, false),
-          (50.0, (min: 0.25, max: 0.5), false, false),
+        for (final (offset, expected, activeThumb, thumb) in [
+          (0.0, (min: 0.0, max: 0.75), FSliderActiveThumb.min, true),
+          (50.0, (min: 0.5, max: 0.75), FSliderActiveThumb.min, true),
+          (100.0, (min: 0.25, max: 1.0), FSliderActiveThumb.max, false),
+          (50.0, (min: 0.25, max: 0.5), FSliderActiveThumb.max, false),
         ]) {
           test('tap value', () {
             var calls = 0;
-            controller = constructor(range, FSliderInteraction.tap, min)
+            controller = constructor(range, FSliderInteraction.tap, activeThumb)
               ..attach(100, marks)
               ..addListener(() => calls++);
 
             expect(controller.tap(offset), thumb);
             expect(calls, 1);
-            expect(controller.selection.offset, expected);
-            expect(controller.selection.rawOffset, (min: expected.min * 100, max: expected.max * 100));
+            expect((controller.value.min, controller.value.max), (expected.min, expected.max));
+            expect(controller.value.pixels, (min: expected.min * 100, max: expected.max * 100));
           });
         }
 
@@ -147,7 +153,7 @@ void main() {
 
           expect(controller.tap(50), null);
           expect(calls, 0);
-          expect(controller.selection, range);
+          expect(controller.value, range);
         });
       });
 
@@ -159,23 +165,23 @@ void main() {
             ..reset();
 
           expect(calls, 0);
-          expect(controller.selection.extent, (min: 0, max: 1));
-          expect(controller.selection.offset, (min: 0, max: 0.75));
+          expect(controller.value.constraints, (min: 0, max: 1));
+          expect((controller.value.min, controller.value.max), (0, 0.75));
         });
 
         test('existing selection', () {
           var calls = 0;
           controller
             ..attach(1000, marks)
-            ..step(min: false, extend: true)
+            ..step(min: false, expand: true)
             ..addListener(() => calls++)
             ..reset();
 
           expect(calls, 1);
-          expect(controller.selection.extent, (min: 0, max: 1));
-          expect(controller.selection.rawExtent, (min: 0, max: 1000, total: 1000));
-          expect(controller.selection.offset, (min: 0, max: 0.75));
-          expect(controller.selection.rawOffset, (min: 0, max: 750));
+          expect(controller.value.constraints, (min: 0, max: 1));
+          expect(controller.value.pixelConstraints, (min: 0.0, max: 1000.0, extent: 1000.0));
+          expect((controller.value.min, controller.value.max), (0, 0.75));
+          expect(controller.value.pixels, (min: 0, max: 750));
         });
       });
 
@@ -185,10 +191,10 @@ void main() {
           controller
             ..attach(1000, marks)
             ..addListener(() => calls++)
-            ..selection = null;
+            ..value = null;
 
           expect(calls, 0);
-          expect(controller.selection.offset, value.offset);
+          expect((controller.value.min, controller.value.max), (value.min, value.max));
         });
 
         test('same', () {
@@ -196,7 +202,7 @@ void main() {
           controller
             ..attach(1000, marks)
             ..addListener(() => calls++)
-            ..selection = controller.selection;
+            ..value = controller.value;
 
           expect(calls, 0);
         });
@@ -206,33 +212,33 @@ void main() {
           controller
             ..attach(1000, marks)
             ..addListener(() => calls++)
-            ..selection = FSliderSelection(max: 0.6);
+            ..value = FSliderValue(max: 0.6);
 
           expect(calls, 1);
-          expect(controller.selection.offset, (min: 0, max: 0.6));
+          expect((controller.value.min, controller.value.max), (0, 0.6));
         });
       });
     });
   }
 
   group('FContinuousSlider', () {
-    final selection = FSliderSelection(max: 0.75);
+    final selection = FSliderValue(max: 0.75);
     late FContinuousSliderController controller;
 
     setUp(() {
-      controller = FContinuousSliderController(selection: selection);
+      controller = FContinuousSliderController(value: selection);
     });
 
     for (final constructor in [
-      () => FContinuousSliderController(selection: selection, stepPercentage: -0.1),
-      () => FContinuousSliderController(selection: selection, stepPercentage: 1.1),
-      () => FContinuousSliderController.range(selection: selection, stepPercentage: -0.1),
-      () => FContinuousSliderController.range(selection: selection, stepPercentage: 1.1),
+      () => FContinuousSliderController(value: selection, stepPercentage: -0.1),
+      () => FContinuousSliderController(value: selection, stepPercentage: 1.1),
+      () => FContinuousSliderController.range(value: selection, stepPercentage: -0.1),
+      () => FContinuousSliderController.range(value: selection, stepPercentage: 1.1),
     ]) {
       test('constructor', () => expect(constructor, throwsAssertionError));
     }
 
-    for (final (min, extend, offset) in [
+    for (final (min, extend, expected) in [
       (true, true, (min: 0.2, max: 0.75)),
       (true, false, (min: 0.3, max: 0.75)),
       (false, true, (min: 0.25, max: 0.8)),
@@ -240,80 +246,80 @@ void main() {
     ]) {
       test('step ${min ? 'min' : 'max'} edge - ${extend ? 'extend' : 'shrink'}', () {
         var calls = 0;
-        controller = FContinuousSliderController.range(selection: FSliderSelection(min: 0.25, max: 0.75))
+        controller = FContinuousSliderController.range(value: FSliderValue(min: 0.25, max: 0.75))
           ..attach(100, [])
           ..addListener(() => calls++)
-          ..step(min: min, extend: extend);
+          ..step(min: min, expand: extend);
 
         expect(calls, 1);
-        expect(controller.selection.offset, offset);
-        expect(controller.selection.rawOffset, (min: offset.min * 100, max: offset.max * 100));
+        expect((controller.value.min, controller.value.max), (expected.min, expected.max));
+        expect(controller.value.pixels, (min: expected.min * 100, max: expected.max * 100));
       });
     }
 
     for (final (offset, expected, times, thumb) in [
-      (0.0, (min: 0, max: 0.75), 1, true),
-      (100.0, (min: 0.25, max: 1), 1, false),
+      (0.0, (min: 0.0, max: 0.75), 1, true),
+      (100.0, (min: 0.25, max: 1.0), 1, false),
       (50.0, (min: 0.25, max: 0.75), 0, null),
     ]) {
       test('tap range', () {
         var calls = 0;
-        controller = FContinuousSliderController.range(selection: FSliderSelection(min: 0.25, max: 0.75))
+        controller = FContinuousSliderController.range(value: FSliderValue(min: 0.25, max: 0.75))
           ..attach(100, [])
           ..addListener(() => calls++);
 
         expect(controller.tap(offset), thumb);
         expect(calls, times);
-        expect(controller.selection.offset, expected);
-        expect(controller.selection.rawOffset, (min: expected.min * 100, max: expected.max * 100));
+        expect((controller.value.min, controller.value.max), (expected.min, expected.max));
+        expect(controller.value.pixels, (min: expected.min * 100, max: expected.max * 100));
       });
     }
   });
 
   group('FDiscreteSlider', () {
-    final selection = FSliderSelection(max: 0.75);
+    final selection = FSliderValue(max: 0.75);
     late FDiscreteSliderController controller;
 
     setUp(() {
-      controller = FDiscreteSliderController(selection: selection);
+      controller = FDiscreteSliderController(value: selection);
     });
 
     test('attach', () => expect(() => controller.attach(1000, []), throwsAssertionError));
 
-    for (final (min, extend, offset) in [
-      (true, true, (min: 0, max: 0.75)),
+    for (final (min, extend, expected) in [
+      (true, true, (min: 0.0, max: 0.75)),
       (true, false, (min: 0.5, max: 0.75)),
-      (false, true, (min: 0.25, max: 1)),
+      (false, true, (min: 0.25, max: 1.0)),
       (false, false, (min: 0.25, max: 0.6)),
     ]) {
       test('step ${min ? 'min' : 'max'} edge - ${extend ? 'extend' : 'shrink'}', () {
         var calls = 0;
-        controller = FDiscreteSliderController.range(selection: FSliderSelection(min: 0.25, max: 0.75))
+        controller = FDiscreteSliderController.range(value: FSliderValue(min: 0.25, max: 0.75))
           ..attach(100, marks)
           ..addListener(() => calls++)
-          ..step(min: min, extend: extend);
+          ..step(min: min, expand: extend);
 
         expect(calls, 1);
-        expect(controller.selection.offset, offset);
-        expect(controller.selection.rawOffset, (min: offset.min * 100, max: offset.max * 100));
+        expect((controller.value.min, controller.value.max), (expected.min, expected.max));
+        expect(controller.value.pixels, (min: expected.min * 100, max: expected.max * 100));
       });
     }
 
     for (final (offset, expected, times, thumb) in [
-      (0.0, (min: 0, max: 0.75), 1, true),
-      (100.0, (min: 0.25, max: 1), 1, false),
+      (0.0, (min: 0.0, max: 0.75), 1, true),
+      (100.0, (min: 0.25, max: 1.0), 1, false),
       (50.0, (min: 0.25, max: 0.75), 0, null),
     ]) {
       test('tap range', () {
         var calls = 0;
-        controller = FDiscreteSliderController.range(selection: FSliderSelection(min: 0.25, max: 0.75))
+        controller = FDiscreteSliderController.range(value: FSliderValue(min: 0.25, max: 0.75))
           ..attach(100, marks)
           ..addListener(() => calls++);
 
         expect(controller.tap(offset), thumb);
         expect(calls, times);
-        expect(controller.selection.offset, expected);
-        expect(controller.selection.rawOffset, (min: expected.min * 100, max: expected.max * 100));
+        expect((controller.value.min, controller.value.max), (expected.min, expected.max));
+        expect(controller.value.pixels, (min: expected.min * 100, max: expected.max * 100));
       });
     }
   });

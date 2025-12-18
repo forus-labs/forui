@@ -14,8 +14,8 @@ void main() {
       MaterialApp(
         home: HookBuilder(
           builder: (context) {
-            controller = useFContinuousSliderController(selection: FSliderSelection(max: 0.2));
-            return FSlider(controller: controller);
+            controller = useFContinuousSliderController(value: FSliderValue(max: 0.2));
+            return FSlider(control: .managedContinuous(controller: controller));
           },
         ),
       ),
@@ -33,8 +33,8 @@ void main() {
       MaterialApp(
         home: HookBuilder(
           builder: (context) {
-            controller = useFContinuousRangeSliderController(selection: FSliderSelection(max: 0.2));
-            return FSlider(controller: controller);
+            controller = useFContinuousRangeSliderController(value: FSliderValue(max: 0.2));
+            return FSlider(control: .managedContinuousRange(controller: controller));
           },
         ),
       ),
@@ -52,9 +52,9 @@ void main() {
       MaterialApp(
         home: HookBuilder(
           builder: (context) {
-            controller = useFDiscreteSliderController(selection: FSliderSelection(max: 0.2));
+            controller = useFDiscreteSliderController(value: FSliderValue(max: 0.2));
             return FSlider(
-              controller: controller,
+              control: .managedDiscrete(controller: controller),
               marks: const [FSliderMark(value: 0), FSliderMark(value: 0.2), FSliderMark(value: 0.5)],
             );
           },
@@ -74,9 +74,9 @@ void main() {
       MaterialApp(
         home: HookBuilder(
           builder: (context) {
-            controller = useFDiscreteRangeSliderController(selection: FSliderSelection(max: 0.2));
+            controller = useFDiscreteRangeSliderController(value: FSliderValue(max: 0.2));
             return FSlider(
-              controller: controller,
+              control: .managedDiscreteRange(controller: controller),
               marks: const [FSliderMark(value: 0), FSliderMark(value: 0.2), FSliderMark(value: 0.5)],
             );
           },

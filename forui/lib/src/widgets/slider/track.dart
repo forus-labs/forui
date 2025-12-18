@@ -17,7 +17,7 @@ class Track extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final InheritedData(:style, :layout, :semanticFormatterCallback) = .of(context);
-    final controller = InheritedController.of(context);
+    final controller = InheritedController.of(context).controller;
     final position = layout.position;
 
     final crossAxisExtent = max(style.thumbSize, style.crossAxisExtent);
@@ -30,19 +30,19 @@ class Track extends StatelessWidget {
         container: true,
         slider: true,
         enabled: true,
-        value: semanticFormatterCallback(controller.selection),
+        value: semanticFormatterCallback(controller.value),
         child: Stack(
           alignment: .center,
           children: [
             const _GestureDetector(),
-            if (controller.extendable.min)
+            if (controller.active.min)
               position(
-                offset: controller.selection.offset.min * controller.selection.rawExtent.total,
+                offset: controller.value.min * controller.value.pixelConstraints.extent,
                 child: const Thumb(min: true),
               ),
-            if (controller.extendable.max)
+            if (controller.active.max)
               position(
-                offset: controller.selection.offset.max * controller.selection.rawExtent.total,
+                offset: controller.value.max * controller.value.pixelConstraints.extent,
                 child: const Thumb(min: false),
               ),
           ],
@@ -67,8 +67,8 @@ class _GestureDetectorState extends State<_GestureDetector> {
 
   @override
   Widget build(BuildContext context) {
+    final InheritedController(:controller, :minTooltipController, :maxTooltipController) = .of(context);
     final InheritedData(:style, :layout, :trackHitRegionCrossExtent, :enabled) = .of(context);
-    final controller = InheritedController.of(context);
 
     Widget track = const Center(child: _Track());
 
@@ -84,21 +84,26 @@ class _GestureDetectorState extends State<_GestureDetector> {
     }
 
     void start(DragStartDetails details) {
-      _origin = controller.selection.rawOffset;
+      _origin = controller.value.pixels;
       _pointerOrigin = details.localPosition;
-      controller.tooltips.show();
+      minTooltipController?.show();
+      maxTooltipController?.show();
     }
 
     void end(DragEndDetails _) {
       _origin = null;
       _pointerOrigin = null;
-      controller.tooltips.hide();
+      minTooltipController?.hide();
+      maxTooltipController?.hide();
     }
 
     if (layout.vertical) {
       return GestureDetector(
-        onTapDown: _tap(controller, style.thumbSize, layout),
-        onTapUp: (_) => controller.tooltips.hide(),
+        onTapDown: _tap(controller, minTooltipController, maxTooltipController, style.thumbSize, layout),
+        onTapUp: (_) {
+          minTooltipController?.hide();
+          maxTooltipController?.hide();
+        },
         onVerticalDragStart: start,
         onVerticalDragUpdate: _drag(controller, layout),
         onVerticalDragEnd: end,
@@ -106,8 +111,11 @@ class _GestureDetectorState extends State<_GestureDetector> {
       );
     } else {
       return GestureDetector(
-        onTapDown: _tap(controller, style.thumbSize, layout),
-        onTapUp: (_) => controller.tooltips.hide(),
+        onTapDown: _tap(controller, minTooltipController, maxTooltipController, style.thumbSize, layout),
+        onTapUp: (_) {
+          minTooltipController?.hide();
+          maxTooltipController?.hide();
+        },
         onHorizontalDragStart: start,
         onHorizontalDragUpdate: _drag(controller, layout),
         onHorizontalDragEnd: end,
@@ -116,43 +124,50 @@ class _GestureDetectorState extends State<_GestureDetector> {
     }
   }
 
-  GestureTapDownCallback? _tap(FSliderController controller, double thumbSize, FLayout layout) {
-    final translate = layout.translateTrackTap(controller.selection.rawExtent.total, thumbSize);
+  GestureTapDownCallback? _tap(
+    FSliderController controller,
+    FTooltipController? min,
+    FTooltipController? max,
+    double thumbSize,
+    FLayout layout,
+  ) {
+    final translate = layout.translateTrackTap(controller.value.pixelConstraints.extent, thumbSize);
 
     void down(TapDownDetails details) {
       final offset = switch (translate(details.localPosition)) {
         < 0 => 0.0,
-        final translated when controller.selection.rawExtent.total < translated => controller.selection.rawExtent.total,
+        final translated when controller.value.pixelConstraints.extent < translated =>
+          controller.value.pixelConstraints.extent,
         final translated => translated,
       };
 
       switch (controller.tap(offset)) {
         case true:
-          controller.tooltips.show(FSliderTooltipsController.min);
+          min?.show();
         case false:
-          controller.tooltips.show(FSliderTooltipsController.max);
+          max?.show();
         default:
       }
     }
 
-    return tappable.contains(controller.allowedInteraction) ? down : null;
+    return tappable.contains(controller.interaction) ? down : null;
   }
 
   GestureDragUpdateCallback? _drag(FSliderController controller, FLayout layout) {
-    if (controller.allowedInteraction != FSliderInteraction.slide) {
+    if (controller.interaction != FSliderInteraction.slide) {
       return null;
     }
 
     assert(
-      controller.extendable.min ^ controller.extendable.max,
-      'Slider must be extendable at one edge when ${controller.allowedInteraction}.',
+      controller.active.min ^ controller.active.max,
+      'Slider must be active at one edge when ${controller.interaction}.',
     );
 
     final translate = layout.translateTrackDrag();
 
     return (details) {
-      final origin = controller.extendable.min ? _origin!.min : _origin!.max;
-      controller.slide(origin + translate(details.localPosition - _pointerOrigin!), min: controller.extendable.min);
+      final origin = controller.active.min ? _origin!.min : _origin!.max;
+      controller.slide(origin + translate(details.localPosition - _pointerOrigin!), min: controller.active.min);
     };
   }
 }
@@ -166,7 +181,10 @@ class _Track extends StatelessWidget {
     final states = InheritedStates.of(context).states;
     final crossAxisExtent = style.crossAxisExtent;
 
-    final extent = InheritedController.of(context, InheritedController.rawExtent).selection.rawExtent.total;
+    final extent = InheritedController.of(
+      context,
+      InheritedController.pixelConstraints,
+    ).controller.value.pixelConstraints.extent;
 
     final position = layout.position;
     final half = style.thumbSize / 2;
@@ -206,13 +224,13 @@ class ActiveTrack extends StatelessWidget {
     final InheritedData(:style, :layout) = .of(context);
     final states = InheritedStates.of(context).states;
     final crossAxisExtent = style.crossAxisExtent;
-    final rawOffset = InheritedController.of(context, InheritedController.rawOffset).selection.rawOffset;
+    final pixels = InheritedController.of(context, InheritedController.pixels).controller.value.pixels;
 
-    final mainAxisExtent = rawOffset.max - rawOffset.min + style.thumbSize / 2;
+    final mainAxisExtent = pixels.max - pixels.min + style.thumbSize / 2;
     final (height, width) = layout.vertical ? (mainAxisExtent, crossAxisExtent) : (crossAxisExtent, mainAxisExtent);
 
     return layout.position(
-      offset: rawOffset.min,
+      offset: pixels.min,
       child: DecoratedBox(
         decoration: BoxDecoration(borderRadius: style.borderRadius, color: style.activeColor.resolve(states)),
         child: SizedBox(height: height, width: width),

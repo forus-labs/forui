@@ -4,6 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/slider/thumb.dart';
+import 'package:forui/src/widgets/slider/track.dart';
 import '../../test_scaffold.dart';
 
 void main() {
@@ -14,7 +15,7 @@ void main() {
       TestScaffold.blue(
         child: FSlider(
           style: TestScaffold.blueScreen.sliderStyles.horizontalStyle,
-          controller: autoDispose(FContinuousSliderController(selection: FSliderSelection(min: 0.30, max: 0.60))),
+          control: .managedContinuous(initial: FSliderValue(min: 0.30, max: 0.60)),
           marks: const [
             FSliderMark(value: 0.0, label: Text('0')),
             FSliderMark(value: 0.25, label: Text('25'), tick: false),
@@ -27,6 +28,78 @@ void main() {
     );
 
     await expectBlueScreen();
+  });
+
+  group('lifted', () {
+    for (final (name, control) in [
+      (
+        'continuous',
+        (FSliderValue v, ValueChanged<FSliderValue> c) => FSliderControl.liftedContinuous(value: v, onChange: c),
+      ),
+      (
+        'continuous-range',
+        (FSliderValue v, ValueChanged<FSliderValue> c) => FSliderControl.liftedContinuousRange(value: v, onChange: c),
+      ),
+      (
+        'discrete',
+        (FSliderValue v, ValueChanged<FSliderValue> c) => FSliderControl.liftedDiscrete(value: v, onChange: c),
+      ),
+      (
+        'discrete-range',
+        (FSliderValue v, ValueChanged<FSliderValue> c) => FSliderControl.liftedDiscreteRange(value: v, onChange: c),
+      ),
+    ]) {
+      testWidgets('$name - updates when onChange sets state', (tester) async {
+        FSliderValue? value = FSliderValue(max: 0.25);
+
+        await tester.pumpWidget(
+          TestScaffold.app(
+            child: StatefulBuilder(
+              builder: (context, setState) => FSlider(
+                control: control(value!, (v) => setState(() => value = v)),
+                marks: const [
+                  FSliderMark(value: 0),
+                  FSliderMark(value: 0.25),
+                  FSliderMark(value: 0.5),
+                  FSliderMark(value: 1),
+                ],
+              ),
+            ),
+          ),
+        );
+
+        final track = tester.getRect(find.byType(Track));
+        await tester.tapAt(track.centerRight.translate(-10, 0));
+        await tester.pumpAndSettle();
+
+        expect(value!.max, greaterThan(0.25));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('slider/lifted/$name-update.png'));
+      });
+
+      testWidgets('$name - does not update when onChange does not set state', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold.app(
+            child: StatefulBuilder(
+              builder: (context, setState) => FSlider(
+                control: control(FSliderValue(max: 0.25), (v) {}),
+                marks: const [
+                  FSliderMark(value: 0),
+                  FSliderMark(value: 0.25),
+                  FSliderMark(value: 0.5),
+                  FSliderMark(value: 1),
+                ],
+              ),
+            ),
+          ),
+        );
+
+        final track = tester.getRect(find.byType(Track));
+        await tester.tapAt(track.centerRight.translate(-10, 0));
+        await tester.pumpAndSettle();
+
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('slider/lifted/$name-no-update.png'));
+      });
+    }
   });
 
   for (final theme in TestScaffold.themes) {
@@ -48,9 +121,7 @@ void main() {
                   style: layout.vertical ? styles.verticalStyle : styles.horizontalStyle,
                   label: const Text('Label'),
                   description: const Text('Description'),
-                  controller: autoDispose(
-                    FContinuousSliderController.range(selection: FSliderSelection(min: 0.30, max: 0.60)),
-                  ),
+                  control: .managedContinuousRange(initial: FSliderValue(min: 0.30, max: 0.60)),
                   layout: layout,
                   enabled: enabled,
                   trackMainAxisExtent: 300,
@@ -96,9 +167,7 @@ void main() {
                 label: const Text('Label'),
                 description: const Text('Description'),
                 forceErrorText: 'Error',
-                controller: autoDispose(
-                  FContinuousSliderController.range(selection: FSliderSelection(min: 0.30, max: 0.60)),
-                ),
+                control: .managedContinuousRange(initial: FSliderValue(min: 0.30, max: 0.60)),
                 layout: layout,
                 trackMainAxisExtent: 300,
                 marks: const [
@@ -137,9 +206,7 @@ void main() {
                 label: const Text('Label'),
                 description: const Text('Description'),
                 forceErrorText: 'Error',
-                controller: autoDispose(
-                  FContinuousSliderController.range(selection: FSliderSelection(min: 0.30, max: 0.60)),
-                ),
+                control: .managedContinuousRange(initial: FSliderValue(min: 0.30, max: 0.60)),
                 layout: layout,
                 trackMainAxisExtent: 300,
                 marks: const [
@@ -174,9 +241,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold.app(
             child: FSlider(
-              controller: autoDispose(
-                FContinuousSliderController(minExtendable: min, selection: FSliderSelection(min: 0.30, max: 0.60)),
-              ),
+              control: .managedContinuous(initial: FSliderValue(min: 0.30, max: 0.60), thumb: min ? .min : .max),
               layout: layout,
               marks: const [
                 FSliderMark(value: 0.0, label: Text('0')),
@@ -244,7 +309,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold.app(
             child: FSlider(
-              controller: autoDispose(FContinuousSliderController(selection: FSliderSelection(min: 0.30, max: 0.60))),
+              control: .managedContinuous(initial: FSliderValue(min: 0.30, max: 0.60)),
               layout: layout,
               marks: marks,
             ),
@@ -261,7 +326,7 @@ void main() {
               style: sliderStyle.copyWith(
                 childPadding: const EdgeInsets.only(left: 20, top: 40, right: 10, bottom: 30),
               ),
-              controller: autoDispose(FContinuousSliderController(selection: FSliderSelection(min: 0.30, max: 0.60))),
+              control: .managedContinuous(initial: FSliderValue(min: 0.30, max: 0.60)),
               layout: layout,
               marks: marks,
             ),
@@ -278,7 +343,7 @@ void main() {
               label: const Text('Label'),
               description: const Text('Description'),
               trackMainAxisExtent: 300,
-              controller: autoDispose(FContinuousSliderController(selection: FSliderSelection(min: 0.30, max: 0.60))),
+              control: .managedContinuous(initial: FSliderValue(min: 0.30, max: 0.60)),
               layout: layout,
               marks: marks,
             ),
@@ -294,7 +359,7 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.app(
         child: FSlider(
-          controller: autoDispose(FContinuousSliderController(selection: FSliderSelection(min: 0.30, max: 0.60))),
+          control: .managedContinuous(initial: FSliderValue(min: 0.30, max: 0.60)),
           marks: const [
             FSliderMark(value: 0, label: Text('0%')),
             FSliderMark(value: 0.25, tick: false),

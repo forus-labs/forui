@@ -17,8 +17,8 @@ class _ShrinkIntent extends Intent {
   const _ShrinkIntent();
 }
 
-class _ExtendIntent extends Intent {
-  const _ExtendIntent();
+class _ExpandIntent extends Intent {
+  const _ExpandIntent();
 }
 
 @internal
@@ -38,37 +38,16 @@ class Thumb extends StatefulWidget {
 }
 
 class _ThumbState extends State<Thumb> with TickerProviderStateMixin {
-  late FSliderController _controller;
-  late UniqueKey _key;
-  FSliderStyle? _style;
-  FTooltipController? _tooltip;
   MouseCursor _cursor = SystemMouseCursors.grab;
   ({double min, double max})? _origin;
   bool _gesture = false;
   bool _focused = false;
 
   @override
-  void initState() {
-    super.initState();
-    _key = widget.min ? FSliderTooltipsController.min : FSliderTooltipsController.max;
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    final style = InheritedData.of(context).style;
-    if (_style != style) {
-      _tooltip?.dispose();
-      _tooltip = FTooltipController(vsync: this, motion: style.tooltipMotion);
-      _style = style;
-    }
-
-    _controller = InheritedController.of(context);
-    _controller.tooltips.add(_key, _tooltip!);
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final InheritedController(:controller, :minTooltipController, :maxTooltipController) = .of(context);
+    final tooltip = widget.min ? minTooltipController : maxTooltipController;
+    final offset = widget.min ? controller.value.min : controller.value.max;
     final states = InheritedStates.of(context).states;
     final InheritedData(
       style: FSliderStyle(:thumbSize, :thumbStyle, :tooltipTipAnchor, :tooltipThumbAnchor),
@@ -81,27 +60,42 @@ class _ThumbState extends State<Thumb> with TickerProviderStateMixin {
     );
 
     String? increasedValue;
-    if (_controller.selection.step(min: widget.min, extend: !widget.min) case final selection
-        when _controller.selection != selection) {
-      increasedValue = semanticValueFormatterCallback(_offset(selection));
+    if (controller.value.step(min: widget.min, expand: !widget.min) case final value when controller.value != value) {
+      increasedValue = semanticValueFormatterCallback(offset);
     }
 
     String? decreasedValue;
-    if (_controller.selection.step(min: widget.min, extend: widget.min) case final selection
-        when _controller.selection != selection) {
-      decreasedValue = semanticValueFormatterCallback(_offset(selection));
+    if (controller.value.step(min: widget.min, expand: widget.min) case final value when controller.value != value) {
+      decreasedValue = semanticValueFormatterCallback(offset);
     }
 
     Widget thumb = Semantics(
       enabled: enabled,
-      value: semanticValueFormatterCallback(_offset(_controller.selection)),
+      value: semanticValueFormatterCallback(offset),
       increasedValue: increasedValue,
       decreasedValue: decreasedValue,
       child: FocusableActionDetector(
-        shortcuts: _shortcuts(layout),
+        shortcuts: switch ((layout, widget.min)) {
+          (.ltr, true) || (.rtl, false) => const {
+            SingleActivator(.arrowLeft): _ExpandIntent(),
+            SingleActivator(.arrowRight): _ShrinkIntent(),
+          },
+          (.ltr, false) || (.rtl, true) => const {
+            SingleActivator(.arrowLeft): _ShrinkIntent(),
+            SingleActivator(.arrowRight): _ExpandIntent(),
+          },
+          (.ttb, true) || (.btt, false) => const {
+            SingleActivator(.arrowUp): _ExpandIntent(),
+            SingleActivator(.arrowDown): _ShrinkIntent(),
+          },
+          (.ttb, false) || (.btt, true) => const {
+            SingleActivator(.arrowUp): _ShrinkIntent(),
+            SingleActivator(.arrowDown): _ExpandIntent(),
+          },
+        },
         actions: {
-          _ExtendIntent: CallbackAction(onInvoke: (_) => _controller.step(min: widget.min, extend: true)),
-          _ShrinkIntent: CallbackAction(onInvoke: (_) => _controller.step(min: widget.min, extend: false)),
+          _ExpandIntent: CallbackAction(onInvoke: (_) => controller.step(min: widget.min, expand: true)),
+          _ShrinkIntent: CallbackAction(onInvoke: (_) => controller.step(min: widget.min, expand: false)),
         },
         enabled: enabled,
         mouseCursor: enabled ? _cursor : .defer,
@@ -126,19 +120,19 @@ class _ThumbState extends State<Thumb> with TickerProviderStateMixin {
       return thumb;
     }
 
-    if (_controller.tooltips.enabled) {
+    if (tooltip != null) {
       thumb = MouseRegion(
-        onEnter: (_) => _controller.tooltips.show(_key),
+        onEnter: (_) => tooltip.show(),
         onExit: (_) {
           if (!_gesture) {
-            _controller.tooltips.hide(_key);
+            tooltip.hide();
           }
         },
         child: FTooltip(
-          control: .managed(controller: _tooltip),
+          control: .managed(controller: tooltip),
           tipAnchor: tooltipTipAnchor,
           childAnchor: tooltipThumbAnchor,
-          tipBuilder: (_, controller) => tooltipBuilder(controller, _offset(_controller.selection)),
+          tipBuilder: (_, tooltipController) => tooltipBuilder(tooltipController, offset),
           longPress: false,
           hover: false,
           child: thumb,
@@ -149,28 +143,28 @@ class _ThumbState extends State<Thumb> with TickerProviderStateMixin {
     void down(TapDownDetails _) {
       setState(() => _cursor = SystemMouseCursors.grabbing);
       _gesture = true;
-      _controller.tooltips.show(_key);
+      tooltip?.show();
     }
 
     void up(TapUpDetails _) {
       setState(() => _cursor = SystemMouseCursors.grab);
       _gesture = false;
-      _controller.tooltips.hide(_key);
+      tooltip?.hide();
     }
 
     void start(DragStartDetails _) {
       setState(() => _cursor = SystemMouseCursors.grabbing);
       _origin = null;
-      _origin = _controller.selection.rawOffset;
+      _origin = controller.value.pixels;
       _gesture = true;
-      _controller.tooltips.show(_key);
+      tooltip?.show();
     }
 
     void end(DragEndDetails _) {
       setState(() => _cursor = SystemMouseCursors.grab);
       _origin = null;
       _gesture = false;
-      _controller.tooltips.hide(_key);
+      tooltip?.hide();
     }
 
     if (layout.vertical) {
@@ -178,7 +172,7 @@ class _ThumbState extends State<Thumb> with TickerProviderStateMixin {
         onTapDown: down,
         onTapUp: up,
         onVerticalDragStart: start,
-        onVerticalDragUpdate: _drag(_controller, thumbSize, layout),
+        onVerticalDragUpdate: _drag(controller, thumbSize, layout),
         onVerticalDragEnd: end,
         child: thumb,
       );
@@ -187,30 +181,15 @@ class _ThumbState extends State<Thumb> with TickerProviderStateMixin {
         onTapDown: down,
         onTapUp: up,
         onHorizontalDragStart: start,
-        onHorizontalDragUpdate: _drag(_controller, thumbSize, layout),
+        onHorizontalDragUpdate: _drag(controller, thumbSize, layout),
         onHorizontalDragEnd: end,
         child: thumb,
       );
     }
   }
 
-  double _offset(FSliderSelection selection) => widget.min ? selection.offset.min : selection.offset.max;
-
-  Map<ShortcutActivator, Intent> _shortcuts(FLayout layout) => switch ((layout, widget.min)) {
-    (.ltr, true) || (.rtl, false) => const {
-      SingleActivator(.arrowLeft): _ExtendIntent(),
-      SingleActivator(.arrowRight): _ShrinkIntent(),
-    },
-    (.ltr, false) ||
-    (.rtl, true) => const {SingleActivator(.arrowLeft): _ShrinkIntent(), SingleActivator(.arrowRight): _ExtendIntent()},
-    (.ttb, true) ||
-    (.btt, false) => const {SingleActivator(.arrowUp): _ExtendIntent(), SingleActivator(.arrowDown): _ShrinkIntent()},
-    (.ttb, false) ||
-    (.btt, true) => const {SingleActivator(.arrowUp): _ShrinkIntent(), SingleActivator(.arrowDown): _ExtendIntent()},
-  };
-
   GestureDragUpdateCallback? _drag(FSliderController controller, double thumbSize, FLayout layout) {
-    if (controller.allowedInteraction == FSliderInteraction.tap) {
+    if (controller.interaction == FSliderInteraction.tap) {
       return null;
     }
 
@@ -222,13 +201,6 @@ class _ThumbState extends State<Thumb> with TickerProviderStateMixin {
     }
 
     return drag;
-  }
-
-  @override
-  void dispose() {
-    _controller.tooltips.remove(_key);
-    _tooltip?.dispose();
-    super.dispose();
   }
 }
 

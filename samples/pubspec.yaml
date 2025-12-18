@@ -9,7 +9,7 @@ environment:
 resolution: workspace
 
 dependencies:
-  auto_route: 11.0.0
+  auto_route: ^11.0.0
   cupertino_icons: ^1.0.6
   flutter:
     sdk: flutter

@@ -166,3 +166,63 @@ transforms:
       - kind: renameParameter
         oldName: 'initial'
         newName: 'time'
+
+  - title: 'Rename useFContinuousSliderController(selection: ...) to value'
+    date: 2025-12-17
+    element:
+      uris: [ 'package:forui_hooks/forui_hooks.dart' ]
+      function: useFContinuousSliderController
+    changes:
+      - kind: renameParameter
+        oldName: 'selection'
+        newName: 'value'
+
+  - title: 'Rename useFContinuousSliderController(allowedInteraction: ...) to interaction'
+    date: 2025-12-17
+    element:
+      uris: [ 'package:forui_hooks/forui_hooks.dart' ]
+      function: useFContinuousSliderController
+    changes:
+      - kind: renameParameter
+        oldName: 'allowedInteraction'
+        newName: 'interaction'
+
+  - title: 'Rename useFContinuousRangeSliderController(selection: ...) to value'
+    date: 2025-12-17
+    element:
+      uris: [ 'package:forui_hooks/forui_hooks.dart' ]
+      function: useFContinuousRangeSliderController
+    changes:
+      - kind: renameParameter
+        oldName: 'selection'
+        newName: 'value'
+
+  - title: 'Rename useFDiscreteSliderController(selection: ...) to value'
+    date: 2025-12-17
+    element:
+      uris: [ 'package:forui_hooks/forui_hooks.dart' ]
+      function: useFDiscreteSliderController
+    changes:
+      - kind: renameParameter
+        oldName: 'selection'
+        newName: 'value'
+
+  - title: 'Rename useFDiscreteSliderController(allowedInteraction: ...) to interaction'
+    date: 2025-12-17
+    element:
+      uris: [ 'package:forui_hooks/forui_hooks.dart' ]
+      function: useFDiscreteSliderController
+    changes:
+      - kind: renameParameter
+        oldName: 'allowedInteraction'
+        newName: 'interaction'
+
+  - title: 'Rename useFDiscreteRangeSliderController(selection: ...) to value'
+    date: 2025-12-17
+    element:
+      uris: [ 'package:forui_hooks/forui_hooks.dart' ]
+      function: useFDiscreteRangeSliderController
+    changes:
+      - kind: renameParameter
+        oldName: 'selection'
+        newName: 'value'
