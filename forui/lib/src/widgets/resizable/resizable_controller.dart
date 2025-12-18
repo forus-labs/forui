@@ -1,6 +1,6 @@
-import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 
+import 'package:collection/collection.dart';
 import 'package:sugar/collection_aggregate.dart';
 
 import 'package:forui/forui.dart';
