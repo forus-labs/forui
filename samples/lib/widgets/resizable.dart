@@ -64,8 +64,8 @@ class _NoCascadingResizablePageState extends StatefulSampleState<NoCascadingResi
       borderRadius: .circular(8),
     ),
     child: FResizable(
+      control: .managed(controller: _controller),
       axis: .vertical,
-      controller: _controller,
       crossAxisExtent: 300,
       children: [
         .region(

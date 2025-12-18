@@ -162,6 +162,11 @@ Unfortunately, `FCalendar` cannot be easily migrated using data driven fixes due
 
 ### `FResizable`
 * Add `FResizable.region(...)`.
+* Add `FResizableControl`.
+* Add `FResizableManagedControl`.
+
+* **Breaking** Remove `FResizable.controller`. Use `FResizable(control: .managed(...))` or `FResizable(control: .managedCascade(...))` instead.
+* **Breaking** Remove `FResizable.onChange`. Use `FResizable(control: .managed(...))` instead.
 
 
 ### `FSelect` & `FMultiSelect`
