@@ -160,7 +160,7 @@ class _GestureDetectorState extends State<_GestureDetector> {
 
     assert(
       controller.active.min ^ controller.active.max,
-      'Slider must be actuve at one edge when ${controller.interaction}.',
+      'Slider must be active at one edge when ${controller.interaction}.',
     );
 
     final translate = layout.translateTrackDrag();
