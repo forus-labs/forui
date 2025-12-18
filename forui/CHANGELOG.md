@@ -1,6 +1,6 @@
 ## 0.17.0 (Next)
 
-This update overhauls the API by introducing [controls](forui.dev/docs/controls) to support declarative state, and 
+This update overhauls the API by introducing [controls](https://forui.dev/docs/controls) to support declarative state, and 
 support for the new dot-shorthand syntax.
 
 To simplify updating to the latest version, we've included [Data Driven Fixes](https://github.com/flutter/flutter/blob/master/docs/contributing/Data-driven-Fixes.md).
