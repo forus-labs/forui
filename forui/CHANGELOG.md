@@ -1,6 +1,7 @@
 ## 0.17.0 (Next)
 
-This update focuses on overhauling the API to better declarative state & support the new dot-shorthand syntax.
+This update overhauls the API by introducing [controls](https://forui.dev/docs/controls) to support declarative state
+and adding support for the new dot-shorthand syntax.
 
 To simplify updating to the latest version, we've included [Data Driven Fixes](https://github.com/flutter/flutter/blob/master/docs/contributing/Data-driven-Fixes.md).
 This allows you to run automated fixes on your codebase to update it to be compatible with the latest version of `forui`.

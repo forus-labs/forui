@@ -100,6 +100,39 @@ void main() {
         await expectLater(find.byType(TestScaffold), matchesGoldenFile('slider/lifted/$name-no-update.png'));
       });
     }
+
+    testWidgets('transition between subclasses', (tester) async {
+      FSliderValue value = FSliderValue(max: 0.25);
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: StatefulBuilder(
+            builder: (context, setState) => FSlider(
+              control: .liftedDiscrete(value: value, onChange: (v) => setState(() => value = v)),
+              marks: const [FSliderMark(value: 0), FSliderMark(value: 0.5), FSliderMark(value: 1)],
+            ),
+          ),
+        ),
+      );
+
+      final track = tester.getRect(find.byType(Track));
+      await tester.tapAt(track.centerRight.translate(-10, 0));
+      await tester.pumpAndSettle();
+      expect(value.max, greaterThan(0.25));
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: StatefulBuilder(
+            builder: (context, setState) => FSlider(
+              control: .liftedContinuousRange(value: value, onChange: (v) => setState(() => value = v)),
+              marks: const [FSliderMark(value: 0), FSliderMark(value: 0.5), FSliderMark(value: 1)],
+            ),
+          ),
+        ),
+      );
+
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('slider/lifted/transition.png'));
+    });
   });
 
   for (final theme in TestScaffold.themes) {
