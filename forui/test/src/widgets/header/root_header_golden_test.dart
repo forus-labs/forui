@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/widgets.dart';
 
 import 'package:flutter_test/flutter_test.dart';
@@ -52,14 +50,14 @@ void main() {
         TestScaffold(
           theme: theme.data,
           child: Column(
-            mainAxisSize: MainAxisSize.min,
+            mainAxisSize: .min,
             children: [
               Stack(
                 children: [
                   const Text('Lorem ipsum dolor sit amet, consectetur adipiscing elit.'),
                   FHeader(
                     style: theme.data.headerStyles.rootStyle.copyWith(
-                      backgroundFilter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+                      backgroundFilter: .blur(sigmaX: 5, sigmaY: 5),
                       decoration: BoxDecoration(color: theme.data.colors.background.withValues(alpha: 0.5)),
                     ),
                     title: const Text('Title'),
@@ -84,10 +82,10 @@ void main() {
           theme: theme.data,
           child: Builder(
             builder: (context) => Column(
-              mainAxisSize: MainAxisSize.min,
+              mainAxisSize: .min,
               children: [
                 DecoratedBox(
-                  decoration: BoxDecoration(border: Border.all(color: context.theme.colors.primary)),
+                  decoration: BoxDecoration(border: .all(color: context.theme.colors.primary)),
                   child: FHeader(
                     title: Text('Title', style: context.theme.typography.xl3),
                     suffixes: [FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {})],
@@ -108,10 +106,10 @@ void main() {
           theme: theme.data,
           child: Builder(
             builder: (context) => Column(
-              mainAxisSize: MainAxisSize.min,
+              mainAxisSize: .min,
               children: [
                 DecoratedBox(
-                  decoration: BoxDecoration(border: Border.all(color: context.theme.colors.primary)),
+                  decoration: BoxDecoration(border: .all(color: context.theme.colors.primary)),
                   child: FHeader(
                     title: Text('Title', style: context.theme.typography.xs),
                     suffixes: [FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {})],
@@ -147,7 +145,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold(
           theme: theme.data,
-          textDirection: TextDirection.rtl,
+          textDirection: .rtl,
           child: const FHeader(
             title: Text(title),
             suffixes: [

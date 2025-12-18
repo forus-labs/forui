@@ -35,11 +35,11 @@ void main() {
             format: (s) => s,
             style: TestScaffold.blueScreen.selectStyle,
             children: [
-              const FSelectSection.rich(
-                label: Text('A'),
-                children: [FSelectItem(title: Text('B'), value: 'B')],
+              .richSection(
+                label: const Text('A'),
+                children: [const .item(title: Text('B'), value: 'B')],
               ),
-              for (int i = 0; i < 10; i++) FSelectItem(title: Text('$i'), value: '$i'),
+              for (int i = 0; i < 10; i++) .item(title: Text('$i'), value: '$i'),
             ],
           ),
         ),
@@ -78,11 +78,11 @@ void main() {
             style: TestScaffold.blueScreen.selectStyle,
             contentScrollHandles: true,
             children: [
-              const FSelectSection.rich(
-                label: Text('A'),
-                children: [FSelectItem(title: Text('B'), value: 'B')],
+              .richSection(
+                label: const Text('A'),
+                children: [const .item(title: Text('B'), value: 'B')],
               ),
-              for (int i = 0; i < 10; i++) FSelectItem(title: Text('$i'), value: '$i'),
+              for (int i = 0; i < 10; i++) .item(title: Text('$i'), value: '$i'),
             ],
           ),
         ),
@@ -139,7 +139,7 @@ void main() {
               await Future.delayed(const Duration(seconds: 1));
               return [];
             },
-            contentBuilder: (_, _, _) => [for (int i = 0; i < 10; i++) FSelectItem(title: Text('$i'), value: '$i')],
+            contentBuilder: (_, _, _) => [for (int i = 0; i < 10; i++) .item(title: Text('$i'), value: '$i')],
           ),
         ),
       );
@@ -175,7 +175,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           theme: theme.data,
-          alignment: Alignment.topCenter,
+          alignment: .topCenter,
           child: FSelect<int>(items: const {'1': 1, '2': 2}, key: key),
         ),
       );
@@ -190,7 +190,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           theme: theme.data,
-          alignment: Alignment.topCenter,
+          alignment: .topCenter,
           child: FSelect<String>.search(
             items: letters,
             key: key,
@@ -213,7 +213,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           theme: theme.data,
-          alignment: Alignment.topCenter,
+          alignment: .topCenter,
           child: FSelect<String>(items: const {'A': 'A', 'B': 'B'}, key: key, autoHide: false),
         ),
       );
@@ -231,14 +231,14 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           theme: theme.data,
-          alignment: Alignment.topCenter,
+          alignment: .topCenter,
           child: FSelect<String>.rich(
             key: key,
             format: (s) => s,
             autoHide: false,
-            children: const [
-              FSelectItem(title: Text('A'), value: 'A'),
-              FSelectItem(title: Text('B'), value: 'B'),
+            children: [
+              .item(title: const Text('A'), value: 'A'),
+              .item(title: const Text('B'), value: 'B'),
             ],
             builder: (_, _, _, child) => DecoratedBox(
               decoration: const BoxDecoration(color: Colors.red),
@@ -261,7 +261,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           theme: theme.data,
-          alignment: Alignment.topCenter,
+          alignment: .topCenter,
           child: FSelect<String>(items: const {}, key: key),
         ),
       );
@@ -276,7 +276,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           theme: theme.data,
-          alignment: Alignment.topCenter,
+          alignment: .topCenter,
           child: FSelect<String>(
             control: const .managed(initial: 'A'),
             items: letters,
@@ -301,7 +301,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           theme: theme.data,
-          alignment: Alignment.topCenter,
+          alignment: .topCenter,
           child: FSelect(
             control: const .managed(initial: 'A'),
             items: letters,
@@ -324,13 +324,13 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           theme: theme.data,
-          alignment: Alignment.topCenter,
+          alignment: .topCenter,
           child: FSelect(
             control: const .managed(initial: 'A'),
             items: letters,
             label: const Text('Letters'),
             description: const Text('Select your favorite letters'),
-            autovalidateMode: AutovalidateMode.always,
+            autovalidateMode: .always,
             validator: (value) => value == null ? null : 'Too many letters',
             clearable: true,
             key: key,

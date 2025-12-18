@@ -22,7 +22,7 @@ void main() {
           locale: locale,
           child: Builder(
             builder: (context) {
-              final selector = DateSelector(FLocalizations.of(context)!);
+              final selector = DateSelector(.of(context)!);
 
               parts = selector.split(DateFormat.yMd(locale.toString()).format(_date));
               joined = selector.join(parts);

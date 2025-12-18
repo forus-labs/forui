@@ -9,7 +9,7 @@ import '../../test_scaffold.dart';
 void main() {
   late FMultiValueNotifier<int> controller;
 
-  setUp(() => controller = FMultiValueNotifier.radio(1));
+  setUp(() => controller = .radio(1));
 
   tearDown(() => controller.dispose());
 

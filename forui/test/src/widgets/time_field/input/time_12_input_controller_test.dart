@@ -31,12 +31,12 @@ void main() {
       // Malformed paste
       (
         const TextEditingValue(text: '12:30 pm'),
-        const TextEditingValue(text: '13 h 30', selection: TextSelection.collapsed(offset: 4)),
+        const TextEditingValue(text: '13 h 30', selection: .collapsed(offset: 4)),
         const TextEditingValue(text: '12:30 pm'),
       ),
       (
         const TextEditingValue(text: '12:30 pm'),
-        const TextEditingValue(text: '12:30 :00 pm', selection: TextSelection.collapsed(offset: 4)),
+        const TextEditingValue(text: '12:30 :00 pm', selection: .collapsed(offset: 4)),
         const TextEditingValue(text: '12:30 pm'),
       ),
       // Changes
@@ -47,7 +47,7 @@ void main() {
       ),
       (
         const TextEditingValue(text: '12:30 pm'),
-        const TextEditingValue(text: '1:30 pm', selection: TextSelection.collapsed(offset: 1)),
+        const TextEditingValue(text: '1:30 pm', selection: .collapsed(offset: 1)),
         const TextEditingValue(text: '1:30 pm', selection: TextSelection(baseOffset: 0, extentOffset: 1)),
       ),
       (
@@ -63,7 +63,7 @@ void main() {
       // Select part
       (
         const TextEditingValue(text: '12:30 pm'),
-        const TextEditingValue(text: '12:30 pm', selection: TextSelection.collapsed(offset: 1)),
+        const TextEditingValue(text: '12:30 pm', selection: .collapsed(offset: 1)),
         const TextEditingValue(text: '12:30 pm', selection: TextSelection(baseOffset: 0, extentOffset: 2)),
       ),
     ].indexed) {
@@ -194,41 +194,41 @@ void main() {
     for (final (index, (value, expected)) in [
       // 1st part
       (
-        const TextEditingValue(text: '12:30 e pasdites', selection: TextSelection.collapsed(offset: 0)),
+        const TextEditingValue(text: '12:30 e pasdites', selection: .collapsed(offset: 0)),
         const TextEditingValue(text: '12:30 e pasdites', selection: TextSelection(baseOffset: 0, extentOffset: 2)),
       ),
       (
-        const TextEditingValue(text: '12:30 e pasdites', selection: TextSelection.collapsed(offset: 1)),
+        const TextEditingValue(text: '12:30 e pasdites', selection: .collapsed(offset: 1)),
         const TextEditingValue(text: '12:30 e pasdites', selection: TextSelection(baseOffset: 0, extentOffset: 2)),
       ),
       (
-        const TextEditingValue(text: '12:30 e pasdites', selection: TextSelection.collapsed(offset: 2)),
+        const TextEditingValue(text: '12:30 e pasdites', selection: .collapsed(offset: 2)),
         const TextEditingValue(text: '12:30 e pasdites', selection: TextSelection(baseOffset: 0, extentOffset: 2)),
       ),
       // 2nd part
       (
-        const TextEditingValue(text: '12:30 e pasdites', selection: TextSelection.collapsed(offset: 3)),
+        const TextEditingValue(text: '12:30 e pasdites', selection: .collapsed(offset: 3)),
         const TextEditingValue(text: '12:30 e pasdites', selection: TextSelection(baseOffset: 3, extentOffset: 5)),
       ),
       (
-        const TextEditingValue(text: '12:30 e pasdites', selection: TextSelection.collapsed(offset: 4)),
+        const TextEditingValue(text: '12:30 e pasdites', selection: .collapsed(offset: 4)),
         const TextEditingValue(text: '12:30 e pasdites', selection: TextSelection(baseOffset: 3, extentOffset: 5)),
       ),
       (
-        const TextEditingValue(text: '12:30 e pasdites', selection: TextSelection.collapsed(offset: 5)),
+        const TextEditingValue(text: '12:30 e pasdites', selection: .collapsed(offset: 5)),
         const TextEditingValue(text: '12:30 e pasdites', selection: TextSelection(baseOffset: 3, extentOffset: 5)),
       ),
       // 3rd part
       (
-        const TextEditingValue(text: '12:30 e pasdites', selection: TextSelection.collapsed(offset: 6)),
+        const TextEditingValue(text: '12:30 e pasdites', selection: .collapsed(offset: 6)),
         const TextEditingValue(text: '12:30 e pasdites', selection: TextSelection(baseOffset: 6, extentOffset: 16)),
       ),
       (
-        const TextEditingValue(text: '12:30 e pasdites', selection: TextSelection.collapsed(offset: 8)),
+        const TextEditingValue(text: '12:30 e pasdites', selection: .collapsed(offset: 8)),
         const TextEditingValue(text: '12:30 e pasdites', selection: TextSelection(baseOffset: 6, extentOffset: 16)),
       ),
       (
-        const TextEditingValue(text: '12:30 e pasdites', selection: TextSelection.collapsed(offset: 16)),
+        const TextEditingValue(text: '12:30 e pasdites', selection: .collapsed(offset: 16)),
         const TextEditingValue(text: '12:30 e pasdites', selection: TextSelection(baseOffset: 6, extentOffset: 16)),
       ),
     ].indexed) {
@@ -248,28 +248,28 @@ void main() {
     for (final (index, (value, expected)) in [
       // 1st part
       (
-        const TextEditingValue(text: 'PM 12:30', selection: TextSelection.collapsed(offset: 0)),
+        const TextEditingValue(text: 'PM 12:30', selection: .collapsed(offset: 0)),
         const TextEditingValue(text: 'PM 12:30', selection: TextSelection(baseOffset: 0, extentOffset: 2)),
       ),
       (
-        const TextEditingValue(text: 'PM 12:30', selection: TextSelection.collapsed(offset: 1)),
+        const TextEditingValue(text: 'PM 12:30', selection: .collapsed(offset: 1)),
         const TextEditingValue(text: 'PM 12:30', selection: TextSelection(baseOffset: 0, extentOffset: 2)),
       ),
       (
-        const TextEditingValue(text: 'PM 12:30', selection: TextSelection.collapsed(offset: 2)),
+        const TextEditingValue(text: 'PM 12:30', selection: .collapsed(offset: 2)),
         const TextEditingValue(text: 'PM 12:30', selection: TextSelection(baseOffset: 0, extentOffset: 2)),
       ),
       // 2nd part
       (
-        const TextEditingValue(text: 'PM 12:30', selection: TextSelection.collapsed(offset: 3)),
+        const TextEditingValue(text: 'PM 12:30', selection: .collapsed(offset: 3)),
         const TextEditingValue(text: 'PM 12:30', selection: TextSelection(baseOffset: 3, extentOffset: 5)),
       ),
       (
-        const TextEditingValue(text: 'PM 12:30', selection: TextSelection.collapsed(offset: 4)),
+        const TextEditingValue(text: 'PM 12:30', selection: .collapsed(offset: 4)),
         const TextEditingValue(text: 'PM 12:30', selection: TextSelection(baseOffset: 3, extentOffset: 5)),
       ),
       (
-        const TextEditingValue(text: 'PM 12:30', selection: TextSelection.collapsed(offset: 5)),
+        const TextEditingValue(text: 'PM 12:30', selection: .collapsed(offset: 5)),
         const TextEditingValue(text: 'PM 12:30', selection: TextSelection(baseOffset: 3, extentOffset: 5)),
       ),
     ].indexed) {
@@ -289,24 +289,24 @@ void main() {
       for (final (index, (value, expected)) in [
         // 1st part
         (
-          const TextEditingValue(text: '下午12:30', selection: TextSelection.collapsed(offset: 0)),
+          const TextEditingValue(text: '下午12:30', selection: .collapsed(offset: 0)),
           const TextEditingValue(text: '下午12:30', selection: TextSelection(baseOffset: 0, extentOffset: 2)),
         ),
         (
-          const TextEditingValue(text: '下午12:30', selection: TextSelection.collapsed(offset: 1)),
+          const TextEditingValue(text: '下午12:30', selection: .collapsed(offset: 1)),
           const TextEditingValue(text: '下午12:30', selection: TextSelection(baseOffset: 0, extentOffset: 2)),
         ),
         (
-          const TextEditingValue(text: '下午12:30', selection: TextSelection.collapsed(offset: 2)),
+          const TextEditingValue(text: '下午12:30', selection: .collapsed(offset: 2)),
           const TextEditingValue(text: '下午12:30', selection: TextSelection(baseOffset: 0, extentOffset: 2)),
         ),
         // 2nd part
         (
-          const TextEditingValue(text: '下午12:30', selection: TextSelection.collapsed(offset: 3)),
+          const TextEditingValue(text: '下午12:30', selection: .collapsed(offset: 3)),
           const TextEditingValue(text: '下午12:30', selection: TextSelection(baseOffset: 2, extentOffset: 4)),
         ),
         (
-          const TextEditingValue(text: '下午12:30', selection: TextSelection.collapsed(offset: 4)),
+          const TextEditingValue(text: '下午12:30', selection: .collapsed(offset: 4)),
           const TextEditingValue(text: '下午12:30', selection: TextSelection(baseOffset: 2, extentOffset: 4)),
         ),
       ].indexed) {

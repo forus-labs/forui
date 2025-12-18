@@ -75,10 +75,10 @@ void main() {
         TestScaffold.app(
           theme: theme.data,
           locale: const Locale('hr'),
-          alignment: Alignment.topCenter,
+          alignment: .topCenter,
           child: FDateField(
             key: key,
-            calendar: FDateFieldCalendarProperties(today: DateTime.utc(2025, 1, 15)),
+            calendar: FDateFieldCalendarProperties(today: .utc(2025, 1, 15)),
           ),
         ),
       );
@@ -97,10 +97,10 @@ void main() {
         TestScaffold.app(
           theme: theme.data,
           locale: const Locale('en', 'SG'),
-          alignment: Alignment.topCenter,
+          alignment: .topCenter,
           child: FDateField(
             key: key,
-            calendar: FDateFieldCalendarProperties(today: DateTime.utc(2025, 1, 15)),
+            calendar: FDateFieldCalendarProperties(today: .utc(2025, 1, 15)),
           ),
         ),
       );
@@ -119,10 +119,10 @@ void main() {
         TestScaffold.app(
           theme: theme.data,
           locale: const Locale('en', 'SG'),
-          alignment: Alignment.topCenter,
+          alignment: .topCenter,
           child: FDateField(
             key: key,
-            calendar: FDateFieldCalendarProperties(today: DateTime.utc(2025, 1, 15)),
+            calendar: FDateFieldCalendarProperties(today: .utc(2025, 1, 15)),
           ),
         ),
       );
@@ -144,10 +144,10 @@ void main() {
         TestScaffold.app(
           theme: theme.data,
           locale: const Locale('en', 'SG'),
-          alignment: Alignment.topCenter,
+          alignment: .topCenter,
           child: FDateField(
             key: key,
-            calendar: FDateFieldCalendarProperties(today: DateTime.utc(2025, 1, 15)),
+            calendar: FDateFieldCalendarProperties(today: .utc(2025, 1, 15)),
           ),
         ),
       );
@@ -169,10 +169,10 @@ void main() {
         TestScaffold.app(
           theme: theme.data,
           locale: const Locale('en', 'SG'),
-          alignment: Alignment.topCenter,
+          alignment: .topCenter,
           child: FDateField(
             key: key,
-            calendar: FDateFieldCalendarProperties(today: DateTime.utc(2025, 1, 15), autoHide: false),
+            calendar: FDateFieldCalendarProperties(today: .utc(2025, 1, 15), autoHide: false),
           ),
         ),
       );
@@ -209,10 +209,10 @@ void main() {
     testWidgets('${theme.name} error', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
-          alignment: Alignment.topCenter,
           theme: theme.data,
+          alignment: .topCenter,
           child: FDateField(
-            calendar: FDateFieldCalendarProperties(today: DateTime.utc(2025, 1, 15)),
+            calendar: FDateFieldCalendarProperties(today: .utc(2025, 1, 15)),
             forceErrorText: 'Error',
             key: key,
           ),
@@ -232,7 +232,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           theme: theme.data,
-          alignment: Alignment.topCenter,
+          alignment: .topCenter,
           child: const FDateField(key: key),
         ),
       );
@@ -240,7 +240,7 @@ void main() {
       await tester.tap(find.byKey(key));
       await tester.pumpAndSettle();
 
-      await tester.tapAt(Offset.zero);
+      await tester.tapAt(.zero);
       await tester.pumpAndSettle();
 
       await expectLater(
@@ -250,12 +250,12 @@ void main() {
     });
 
     testWidgets('${theme.name} tap outside unfocuses on desktop', (tester) async {
-      debugDefaultTargetPlatformOverride = TargetPlatform.macOS;
+      debugDefaultTargetPlatformOverride = .macOS;
 
       await tester.pumpWidget(
         TestScaffold.app(
           theme: theme.data,
-          alignment: Alignment.topCenter,
+          alignment: .topCenter,
           child: const FDateField(key: key),
         ),
       );
@@ -263,7 +263,7 @@ void main() {
       await tester.tap(find.byKey(key));
       await tester.pumpAndSettle();
 
-      await tester.tapAt(Offset.zero);
+      await tester.tapAt(.zero);
       await tester.pumpAndSettle();
 
       await expectLater(
@@ -278,7 +278,7 @@ void main() {
   testWidgets('arrow key traversal works without setState', (tester) async {
     await tester.pumpWidget(
       TestScaffold.app(
-        alignment: Alignment.topCenter,
+        alignment: .topCenter,
         locale: const Locale('en', 'SG'),
         child: StatefulBuilder(
           builder: (context, setState) => FDateField(
@@ -389,7 +389,7 @@ void main() {
             builder: (context, setState) => FDateField(
               key: key,
               control: .lifted(date: value, onChange: (v) => setState(() => value = v)),
-              calendar: FDateFieldCalendarProperties(today: DateTime.utc(2025, 12, 15)),
+              calendar: FDateFieldCalendarProperties(today: .utc(2025, 12, 15)),
             ),
           ),
         ),
@@ -411,7 +411,7 @@ void main() {
     });
 
     testWidgets('lifted - arrow adjustment', (tester) async {
-      DateTime? value = DateTime.utc(2025, 1, 15);
+      DateTime? value = .utc(2025, 1, 15);
 
       await tester.pumpWidget(
         TestScaffold.app(

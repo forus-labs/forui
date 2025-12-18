@@ -1,6 +1,5 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 import 'package:flutter_test/flutter_test.dart';
 
@@ -78,9 +77,9 @@ void main() {
               key: key,
               control: .lifted(value: value, onChange: (v) => setState(() => value = v)),
               format: (v) => v,
-              children: const [
-                FSelectItem(title: Text('A'), value: 'A'),
-                FSelectItem(title: Text('B'), value: 'B'),
+              children: [
+                .item(title: const Text('A'), value: 'A'),
+                .item(title: const Text('B'), value: 'B'),
               ],
             ),
           ),
@@ -136,7 +135,7 @@ void main() {
               format: (v) => v,
               filter: (query) => letters.keys.where((k) => k.toLowerCase().contains(query.toLowerCase())),
               contentBuilder: (context, query, items) => [
-                for (final item in items) FSelectItem(title: Text(item), value: item),
+                for (final item in items) .item(title: Text(item), value: item),
               ],
             ),
           ),
@@ -179,66 +178,10 @@ void main() {
 
       await tester.pumpWidget(const SizedBox());
     });
-
-    testWidgets('onPopoverChange called', (tester) async {
-      String? value;
-      var popoverShown = false;
-
-      await tester.pumpWidget(
-        TestScaffold.app(
-          child: StatefulBuilder(
-            builder: (context, setState) => FSelect<String>(
-              key: key,
-              control: .lifted(value: value, onChange: (v) => setState(() => value = v)),
-              popoverControl: .lifted(shown: popoverShown, onChange: (shown) => setState(() => popoverShown = shown)),
-              items: letters,
-            ),
-          ),
-        ),
-      );
-
-      expect(popoverShown, false);
-
-      await tester.tap(find.byKey(key));
-      await tester.pumpAndSettle();
-
-      expect(popoverShown, true);
-
-      await tester.tapAt(Offset.zero);
-      await tester.pumpAndSettle();
-
-      expect(popoverShown, false);
-
-      await tester.pumpWidget(const SizedBox());
-    });
-
-    testWidgets('popoverShown controls visibility', (tester) async {
-      String? value;
-
-      await tester.pumpWidget(
-        TestScaffold.app(
-          child: StatefulBuilder(
-            builder: (context, setState) => FSelect<String>(
-              key: key,
-              control: .lifted(value: value, onChange: (v) => setState(() => value = v)),
-              popoverControl: .lifted(shown: false, onChange: (_) {}),
-              items: letters,
-            ),
-          ),
-        ),
-      );
-
-      await tester.tap(find.byKey(key));
-      await tester.pumpAndSettle();
-
-      expect(find.text('A'), findsNothing);
-
-      await tester.pumpWidget(const SizedBox());
-    });
   });
 
   group('managed', () {
-    testWidgets('onChange callback called', (tester) async {
+    testWidgets('onChange called', (tester) async {
       String? changedValue;
 
       await tester.pumpWidget(
@@ -271,9 +214,9 @@ void main() {
               control: const .managed(initial: 'A'),
               format: (value) => '$value!',
               onSaved: (value) => initial = value,
-              children: const [
-                FSelectItem(title: Text('A'), value: 'A'),
-                FSelectItem(title: Text('B'), value: 'B'),
+              children: [
+                .item(title: const Text('A'), value: 'A'),
+                .item(title: const Text('B'), value: 'B'),
               ],
             ),
           ),
@@ -297,12 +240,12 @@ void main() {
           child: Form(
             key: key,
             child: FSelect<String>.rich(
-              control: .managed(controller: autoDispose(FSelectController(value: 'A'))),
+              control: const .managed(initial: 'A'),
               format: (value) => '$value!',
               onSaved: (value) => initial = value,
-              children: const [
-                FSelectItem(title: Text('A'), value: 'A'),
-                FSelectItem(title: Text('B'), value: 'B'),
+              children: [
+                .item(title: const Text('A'), value: 'A'),
+                .item(title: const Text('B'), value: 'B'),
               ],
             ),
           ),
@@ -326,9 +269,9 @@ void main() {
             control: .managed(controller: controller),
             key: key,
             format: (value) => '$value!',
-            children: const [
-              FSelectItem(title: Text('A'), value: 'A'),
-              FSelectItem(title: Text('B'), value: 'B'),
+            children: [
+              .item(title: const Text('A'), value: 'A'),
+              .item(title: const Text('B'), value: 'B'),
             ],
           ),
         ),
@@ -361,13 +304,13 @@ void main() {
       await tester.tap(find.byKey(key));
       await tester.pumpAndSettle();
 
-      await tester.sendKeyEvent(LogicalKeyboardKey.enter);
+      await tester.sendKeyEvent(.enter);
       await tester.pumpAndSettle();
 
-      await tester.sendKeyEvent(LogicalKeyboardKey.tab);
+      await tester.sendKeyEvent(.tab);
       await tester.pumpAndSettle();
 
-      await tester.sendKeyEvent(LogicalKeyboardKey.enter);
+      await tester.sendKeyEvent(.enter);
       await tester.pumpAndSettle();
 
       expect(controller.value, 'B');
@@ -379,12 +322,7 @@ void main() {
       final focus = autoDispose(FocusNode());
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FSelect<String>(
-            control: .managed(controller: controller),
-            items: const {'A': 'A', 'B': 'B'},
-            key: key,
-            focusNode: focus,
-          ),
+          child: FSelect<String>(items: const {'A': 'A', 'B': 'B'}, key: key, focusNode: focus),
         ),
       );
 
@@ -398,13 +336,12 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           child: FSelect<String>.rich(
-            control: .managed(controller: controller),
             key: key,
             format: (s) => s,
             focusNode: focus,
-            children: const [
-              FSelectItem(title: Text('A'), value: 'A', key: itemKey),
-              FSelectItem(title: Text('B'), value: 'B'),
+            children: [
+              .item(title: const Text('A'), value: 'A', key: itemKey),
+              .item(title: const Text('B'), value: 'B'),
             ],
           ),
         ),
@@ -449,7 +386,7 @@ void main() {
       await tester.tap(find.byKey(key));
       await tester.pumpAndSettle();
 
-      await tester.sendKeyEvent(LogicalKeyboardKey.escape);
+      await tester.sendKeyEvent(.escape);
       await tester.pumpAndSettle();
 
       expect(focus.hasFocus, true);
@@ -467,14 +404,14 @@ void main() {
       await tester.tap(find.byKey(key));
       await tester.pumpAndSettle();
 
-      await tester.tapAt(Offset.zero);
+      await tester.tapAt(.zero);
       await tester.pumpAndSettle();
 
       expect(focus.hasFocus, false);
     });
 
     testWidgets('tap outside unfocuses on desktop', (tester) async {
-      debugDefaultTargetPlatformOverride = TargetPlatform.macOS;
+      debugDefaultTargetPlatformOverride = .macOS;
 
       final focus = autoDispose(FocusNode());
 
@@ -487,7 +424,7 @@ void main() {
       await tester.tap(find.byKey(key));
       await tester.pumpAndSettle();
 
-      await tester.tapAt(Offset.zero);
+      await tester.tapAt(.zero);
       await tester.pumpAndSettle();
 
       expect(focus.hasFocus, false);

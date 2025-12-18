@@ -8,124 +8,6 @@ import '../../test_scaffold.dart';
 const key = Key('key');
 
 void main() {
-  testWidgets('leaky inherited FItemData does not affect popover', (tester) async {
-    await tester.pumpWidget(
-      TestScaffold.app(
-        child: FTileGroup(
-          children: [
-            FSelectMenuTile(
-              key: key,
-              prefix: const Icon(FIcons.calendar),
-              label: const Text('Label'),
-              description: const Text('Description'),
-              title: const Text('Repeat'),
-              subtitle: const Text('Fee, Fo, Fum'),
-              details: const Text('None'),
-              menu: const [
-                FSelectTile(title: Text('Item 1'), value: 1),
-                FSelectTile(title: Text('Item 2'), value: 2),
-              ],
-            ),
-          ],
-        ),
-      ),
-    );
-
-    await tester.tap(find.byKey(key));
-    await tester.pumpAndSettle();
-
-    expect(tester.takeException(), null);
-  });
-
-  testWidgets('tap on tile opens menu', (tester) async {
-    await tester.pumpWidget(
-      TestScaffold.app(
-        child: FSelectMenuTile(
-          prefix: const Icon(FIcons.calendar),
-          label: const Text('Label'),
-          description: const Text('Description'),
-          title: const Text('Repeat'),
-          subtitle: const Text('Fee, Fo, Fum'),
-          details: const Text('None'),
-          menu: const [
-            FSelectTile(title: Text('Item 1'), value: 1),
-            FSelectTile(title: Text('Item 2'), value: 2),
-          ],
-        ),
-      ),
-    );
-
-    expect(find.text('Item 1'), findsNothing);
-    expect(find.text('Item 2'), findsNothing);
-
-    await tester.tap(find.byType(FSelectMenuTile<int>));
-    await tester.pumpAndSettle();
-
-    expect(find.text('Item 1'), findsOne);
-    expect(find.text('Item 2'), findsOne);
-  });
-
-  testWidgets('selecting item in menu does not close it', (tester) async {
-    await tester.pumpWidget(
-      TestScaffold.app(
-        child: FSelectMenuTile(
-          autoHide: false,
-          prefix: const Icon(FIcons.calendar),
-          label: const Text('Label'),
-          description: const Text('Description'),
-          title: const Text('Repeat'),
-          subtitle: const Text('Fee, Fo, Fum'),
-          details: const Text('None'),
-          menu: const [
-            FSelectTile(title: Text('Item 1'), value: 1),
-            FSelectTile(title: Text('Item 2'), value: 2),
-          ],
-        ),
-      ),
-    );
-    await tester.tap(find.byType(FSelectMenuTile<int>));
-    await tester.pumpAndSettle();
-
-    expect(find.text('Item 1'), findsOne);
-    expect(find.text('Item 2'), findsOne);
-
-    await tester.tap(find.text('Item 1'));
-    await tester.pumpAndSettle();
-
-    expect(find.text('Item 1'), findsOne);
-    expect(find.text('Item 2'), findsOne);
-  });
-
-  testWidgets('selecting item in menu closes it', (tester) async {
-    await tester.pumpWidget(
-      TestScaffold.app(
-        child: FSelectMenuTile(
-          prefix: const Icon(FIcons.calendar),
-          label: const Text('Label'),
-          description: const Text('Description'),
-          title: const Text('Repeat'),
-          subtitle: const Text('Fee, Fo, Fum'),
-          details: const Text('None'),
-          menu: const [
-            FSelectTile(title: Text('Item 1'), value: 1),
-            FSelectTile(title: Text('Item 2'), value: 2),
-          ],
-        ),
-      ),
-    );
-    await tester.tap(find.byType(FSelectMenuTile<int>));
-    await tester.pumpAndSettle();
-
-    expect(find.text('Item 1'), findsOne);
-    expect(find.text('Item 2'), findsOne);
-
-    await tester.tap(find.text('Item 1'));
-    await tester.pumpAndSettle();
-
-    expect(find.text('Item 1'), findsNothing);
-    expect(find.text('Item 2'), findsNothing);
-  });
-
   group('lifted', () {
     testWidgets('FSelectMenuTile', (tester) async {
       Set<int> value = {};
@@ -137,8 +19,8 @@ void main() {
               selectControl: .lifted(value: value, onChange: (v) => setState(() => value = v)),
               title: const Text('Title'),
               menu: const [
-                FSelectTile(title: Text('1'), value: 1),
-                FSelectTile(title: Text('2'), value: 2),
+                .tile(title: Text('1'), value: 1),
+                .tile(title: Text('2'), value: 2),
               ],
             ),
           ),
@@ -164,7 +46,7 @@ void main() {
               selectControl: .lifted(value: value, onChange: (v) => setState(() => value = v)),
               title: const Text('Title'),
               count: 2,
-              menuBuilder: (context, index) => FSelectTile(title: Text('${index + 1}'), value: index + 1),
+              menuBuilder: (context, index) => .tile(title: Text('${index + 1}'), value: index + 1),
             ),
           ),
         ),
@@ -204,7 +86,7 @@ void main() {
     });
   });
 
-  testWidgets('managed onChange callback called on controller value change', (tester) async {
+  testWidgets('managed onChange called', (tester) async {
     final controller = autoDispose(FMultiValueNotifier<int>());
     Set<int>? changedValue;
 
@@ -225,5 +107,123 @@ void main() {
     await tester.pump();
 
     expect(changedValue, {1, 2});
+  });
+
+  testWidgets('leaky inherited FItemData does not affect popover', (tester) async {
+    await tester.pumpWidget(
+      TestScaffold.app(
+        child: FTileGroup(
+          children: [
+            FSelectMenuTile(
+              key: key,
+              prefix: const Icon(FIcons.calendar),
+              label: const Text('Label'),
+              description: const Text('Description'),
+              title: const Text('Repeat'),
+              subtitle: const Text('Fee, Fo, Fum'),
+              details: const Text('None'),
+              menu: const [
+                .tile(title: Text('Item 1'), value: 1),
+                .tile(title: Text('Item 2'), value: 2),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+
+    await tester.tap(find.byKey(key));
+    await tester.pumpAndSettle();
+
+    expect(tester.takeException(), null);
+  });
+
+  testWidgets('tap on tile opens menu', (tester) async {
+    await tester.pumpWidget(
+      TestScaffold.app(
+        child: FSelectMenuTile(
+          prefix: const Icon(FIcons.calendar),
+          label: const Text('Label'),
+          description: const Text('Description'),
+          title: const Text('Repeat'),
+          subtitle: const Text('Fee, Fo, Fum'),
+          details: const Text('None'),
+          menu: const [
+            .tile(title: Text('Item 1'), value: 1),
+            .tile(title: Text('Item 2'), value: 2),
+          ],
+        ),
+      ),
+    );
+
+    expect(find.text('Item 1'), findsNothing);
+    expect(find.text('Item 2'), findsNothing);
+
+    await tester.tap(find.byType(FSelectMenuTile<int>));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Item 1'), findsOne);
+    expect(find.text('Item 2'), findsOne);
+  });
+
+  testWidgets('selecting item in menu does not close it', (tester) async {
+    await tester.pumpWidget(
+      TestScaffold.app(
+        child: FSelectMenuTile(
+          autoHide: false,
+          prefix: const Icon(FIcons.calendar),
+          label: const Text('Label'),
+          description: const Text('Description'),
+          title: const Text('Repeat'),
+          subtitle: const Text('Fee, Fo, Fum'),
+          details: const Text('None'),
+          menu: const [
+            .tile(title: Text('Item 1'), value: 1),
+            .tile(title: Text('Item 2'), value: 2),
+          ],
+        ),
+      ),
+    );
+    await tester.tap(find.byType(FSelectMenuTile<int>));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Item 1'), findsOne);
+    expect(find.text('Item 2'), findsOne);
+
+    await tester.tap(find.text('Item 1'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Item 1'), findsOne);
+    expect(find.text('Item 2'), findsOne);
+  });
+
+  testWidgets('selecting item in menu closes it', (tester) async {
+    await tester.pumpWidget(
+      TestScaffold.app(
+        child: FSelectMenuTile(
+          prefix: const Icon(FIcons.calendar),
+          label: const Text('Label'),
+          description: const Text('Description'),
+          title: const Text('Repeat'),
+          subtitle: const Text('Fee, Fo, Fum'),
+          details: const Text('None'),
+          menu: const [
+            .tile(title: Text('Item 1'), value: 1),
+            .tile(title: Text('Item 2'), value: 2),
+          ],
+        ),
+      ),
+    );
+    await tester.tap(find.byType(FSelectMenuTile<int>));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Item 1'), findsOne);
+    expect(find.text('Item 2'), findsOne);
+
+    await tester.tap(find.text('Item 1'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Item 1'), findsNothing);
+    expect(find.text('Item 2'), findsNothing);
   });
 }

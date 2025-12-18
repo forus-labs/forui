@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 import 'package:flutter_test/flutter_test.dart';
 
@@ -68,8 +67,8 @@ void main() {
         TestScaffold.app(
           theme: theme.data,
           locale: const Locale('hr'),
-          alignment: Alignment.topCenter,
-          child: FDateField.calendar(key: key, today: DateTime.utc(2025, 1, 15)),
+          alignment: .topCenter,
+          child: FDateField.calendar(key: key, today: .utc(2025, 1, 15)),
         ),
       );
 
@@ -87,8 +86,8 @@ void main() {
         TestScaffold.app(
           theme: theme.data,
           locale: const Locale('en', 'SG'),
-          alignment: Alignment.topCenter,
-          child: FDateField.calendar(key: key, today: DateTime.utc(2025, 1, 15)),
+          alignment: .topCenter,
+          child: FDateField.calendar(key: key, today: .utc(2025, 1, 15)),
         ),
       );
 
@@ -106,8 +105,8 @@ void main() {
         TestScaffold.app(
           theme: theme.data,
           locale: const Locale('en', 'SG'),
-          alignment: Alignment.topCenter,
-          child: FDateField.calendar(key: key, today: DateTime.utc(2025, 1, 15), autoHide: false),
+          alignment: .topCenter,
+          child: FDateField.calendar(key: key, today: .utc(2025, 1, 15), autoHide: false),
         ),
       );
 
@@ -140,7 +139,7 @@ void main() {
     testWidgets('${theme.name} error', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
-          alignment: Alignment.topCenter,
+          alignment: .topCenter,
           theme: theme.data,
           child: FDateField.calendar(forceErrorText: 'Error', key: key, today: DateTime(2025, 4)),
         ),
@@ -156,16 +155,16 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           theme: theme.data,
-          alignment: Alignment.topCenter,
+          alignment: .topCenter,
           child: FDateField.calendar(today: DateTime(2025, 5, 21)),
         ),
       );
 
-      await tester.sendKeyEvent(LogicalKeyboardKey.tab);
-      await tester.sendKeyEvent(LogicalKeyboardKey.enter);
+      await tester.sendKeyEvent(.tab);
+      await tester.sendKeyEvent(.enter);
       await tester.pumpAndSettle();
 
-      await tester.sendKeyEvent(LogicalKeyboardKey.tab);
+      await tester.sendKeyEvent(.tab);
       await tester.pumpAndSettle();
 
       await expectLater(

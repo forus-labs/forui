@@ -9,7 +9,7 @@ void main() {
   testWidgets('blue screen', (tester) async {
     await tester.pumpWidget(
       TestScaffold.blue(
-        child: FDivider(style: TestScaffold.blueScreen.dividerStyles.verticalStyle, axis: Axis.vertical),
+        child: FDivider(style: TestScaffold.blueScreen.dividerStyles.verticalStyle, axis: .vertical),
       ),
     );
 
@@ -25,7 +25,7 @@ void main() {
             height: 100,
             decoration: BoxDecoration(
               borderRadius: theme.data.style.borderRadius,
-              border: Border.all(color: theme.data.colors.secondary),
+              border: .all(color: theme.data.colors.secondary),
             ),
           ),
           FDivider(axis: axis),
@@ -34,7 +34,7 @@ void main() {
             height: 100,
             decoration: BoxDecoration(
               borderRadius: theme.data.style.borderRadius,
-              border: Border.all(color: theme.data.colors.secondary),
+              border: .all(color: theme.data.colors.secondary),
             ),
           ),
         ];
@@ -42,9 +42,9 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme.data,
-            child: axis == Axis.vertical
-                ? Row(mainAxisAlignment: MainAxisAlignment.center, children: children)
-                : Column(mainAxisAlignment: MainAxisAlignment.center, children: children),
+            child: axis == .vertical
+                ? Row(mainAxisAlignment: .center, children: children)
+                : Column(mainAxisAlignment: .center, children: children),
           ),
         );
 

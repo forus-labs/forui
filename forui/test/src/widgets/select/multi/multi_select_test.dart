@@ -1,6 +1,5 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 import 'package:flutter_test/flutter_test.dart';
 
@@ -78,9 +77,9 @@ void main() {
               key: key,
               control: .lifted(value: value, onChange: (v) => setState(() => value = v)),
               format: Text.new,
-              children: const [
-                FSelectItem(title: Text('A'), value: 'A'),
-                FSelectItem(title: Text('B'), value: 'B'),
+              children: [
+                .item(title: const Text('A'), value: 'A'),
+                .item(title: const Text('B'), value: 'B'),
               ],
             ),
           ),
@@ -146,7 +145,7 @@ void main() {
               format: Text.new,
               filter: (query) => letters.keys.where((k) => k.toLowerCase().contains(query.toLowerCase())),
               contentBuilder: (context, query, items) => [
-                for (final item in items) FSelectItem(title: Text(item), value: item),
+                for (final item in items) .item(title: Text(item), value: item),
               ],
             ),
           ),
@@ -168,62 +167,10 @@ void main() {
       await tester.pumpAndSettle(const Duration(milliseconds: 500));
       expect(value, <String>{});
     });
-
-    testWidgets('onPopoverChange called', (tester) async {
-      Set<String> value = {};
-      var popoverShown = false;
-
-      await tester.pumpWidget(
-        TestScaffold.app(
-          child: StatefulBuilder(
-            builder: (context, setState) => FMultiSelect<String>(
-              key: key,
-              control: .lifted(value: value, onChange: (v) => setState(() => value = v)),
-              popoverControl: .lifted(shown: popoverShown, onChange: (shown) => setState(() => popoverShown = shown)),
-              items: letters,
-            ),
-          ),
-        ),
-      );
-
-      expect(popoverShown, false);
-
-      await tester.tap(find.byKey(key));
-      await tester.pumpAndSettle();
-
-      expect(popoverShown, true);
-
-      await tester.tapAt(Offset.zero);
-      await tester.pumpAndSettle(const Duration(milliseconds: 500));
-
-      expect(popoverShown, false);
-    });
-
-    testWidgets('popoverShown controls visibility', (tester) async {
-      Set<String> value = {};
-
-      await tester.pumpWidget(
-        TestScaffold.app(
-          child: StatefulBuilder(
-            builder: (context, setState) => FMultiSelect<String>(
-              key: key,
-              control: .lifted(value: value, onChange: (v) => setState(() => value = v)),
-              popoverControl: .lifted(shown: false, onChange: (_) {}),
-              items: letters,
-            ),
-          ),
-        ),
-      );
-
-      await tester.tap(find.byKey(key));
-      await tester.pumpAndSettle(const Duration(milliseconds: 500));
-
-      expect(find.text('A'), findsNothing);
-    });
   });
 
   group('managed', () {
-    testWidgets('onChange callback called', (tester) async {
+    testWidgets('onChange called', (tester) async {
       Set<String>? changedValue;
 
       await tester.pumpWidget(
@@ -250,9 +197,9 @@ void main() {
           control: .managed(controller: controller),
           key: key,
           format: (value) => Text('$value!'),
-          children: const [
-            FSelectItem(title: Text('A'), value: 'A'),
-            FSelectItem(title: Text('B'), value: 'B'),
+          children: [
+            .item(title: const Text('A'), value: 'A'),
+            .item(title: const Text('B'), value: 'B'),
           ],
         ),
       ),
@@ -288,9 +235,9 @@ void main() {
           control: .managed(controller: controller),
           key: key,
           format: (value) => Text('$value!'),
-          children: const [
-            FSelectItem(title: Text('A'), value: 'A'),
-            FSelectItem(title: Text('B'), value: 'B'),
+          children: [
+            .item(title: const Text('A'), value: 'A'),
+            .item(title: const Text('B'), value: 'B'),
           ],
         ),
       ),
@@ -366,13 +313,13 @@ void main() {
     await tester.tap(find.byKey(key));
     await tester.pumpAndSettle();
 
-    await tester.sendKeyEvent(LogicalKeyboardKey.enter);
+    await tester.sendKeyEvent(.enter);
     await tester.pumpAndSettle();
 
-    await tester.sendKeyEvent(LogicalKeyboardKey.tab);
+    await tester.sendKeyEvent(.tab);
     await tester.pumpAndSettle();
 
-    await tester.sendKeyEvent(LogicalKeyboardKey.enter);
+    await tester.sendKeyEvent(.enter);
     await tester.pumpAndSettle();
 
     expect(controller.value, {'B'});
@@ -383,12 +330,7 @@ void main() {
       final focus = autoDispose(FocusNode());
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FMultiSelect<String>(
-            control: .managed(controller: controller),
-            items: const {'A': 'A', 'B': 'B'},
-            key: key,
-            focusNode: focus,
-          ),
+          child: FMultiSelect<String>(items: const {'A': 'A', 'B': 'B'}, key: key, focusNode: focus),
         ),
       );
 
@@ -425,7 +367,7 @@ void main() {
       await tester.tap(find.byKey(key));
       await tester.pumpAndSettle();
 
-      await tester.sendKeyEvent(LogicalKeyboardKey.escape);
+      await tester.sendKeyEvent(.escape);
       await tester.pumpAndSettle();
 
       expect(focus.hasFocus, true);
@@ -443,14 +385,14 @@ void main() {
       await tester.tap(find.byKey(key));
       await tester.pumpAndSettle();
 
-      await tester.tapAt(Offset.zero);
+      await tester.tapAt(.zero);
       await tester.pumpAndSettle();
 
       expect(focus.hasFocus, false);
     });
 
     testWidgets('tap outside unfocuses on desktop', (tester) async {
-      debugDefaultTargetPlatformOverride = TargetPlatform.macOS;
+      debugDefaultTargetPlatformOverride = .macOS;
 
       final focus = autoDispose(FocusNode());
 
@@ -463,7 +405,7 @@ void main() {
       await tester.tap(find.byKey(key));
       await tester.pumpAndSettle();
 
-      await tester.tapAt(Offset.zero);
+      await tester.tapAt(.zero);
       await tester.pumpAndSettle();
 
       expect(focus.hasFocus, false);

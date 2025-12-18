@@ -1,3 +1,5 @@
+// ignore_for_file: unused_import
+
 import 'dart:ui';
 
 import 'package:flutter/widgets.dart';
@@ -56,14 +58,14 @@ void main() {
         TestScaffold(
           theme: theme.data,
           child: Column(
-            mainAxisSize: MainAxisSize.min,
+            mainAxisSize: .min,
             children: [
               Stack(
                 children: [
                   const Text('Lorem ipsum dolor sit amet, consectetur adipiscing elit.'),
                   FHeader.nested(
                     style: theme.data.headerStyles.nestedStyle.copyWith(
-                      backgroundFilter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+                      backgroundFilter: .blur(sigmaX: 5, sigmaY: 5),
                       decoration: BoxDecoration(color: theme.data.colors.background.withValues(alpha: 0.5)),
                     ),
                     title: const Text('Title'),
@@ -92,10 +94,10 @@ void main() {
           theme: theme.data,
           child: Builder(
             builder: (context) => Column(
-              mainAxisSize: MainAxisSize.min,
+              mainAxisSize: .min,
               children: [
                 DecoratedBox(
-                  decoration: BoxDecoration(border: Border.all(color: context.theme.colors.primary)),
+                  decoration: BoxDecoration(border: .all(color: context.theme.colors.primary)),
                   child: FHeader.nested(
                     title: Text('Title', style: context.theme.typography.xl3),
                     prefixes: [FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {})],
@@ -117,10 +119,10 @@ void main() {
           theme: theme.data,
           child: Builder(
             builder: (context) => Column(
-              mainAxisSize: MainAxisSize.min,
+              mainAxisSize: .min,
               children: [
                 DecoratedBox(
-                  decoration: BoxDecoration(border: Border.all(color: context.theme.colors.primary)),
+                  decoration: BoxDecoration(border: .all(color: context.theme.colors.primary)),
                   child: FHeader.nested(
                     title: Text('Title', style: context.theme.typography.xs),
                     prefixes: [FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {})],
@@ -172,7 +174,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold(
           theme: theme.data,
-          textDirection: TextDirection.rtl,
+          textDirection: .rtl,
           child: FHeader.nested(
             title: const Text('Title'),
             prefixes: [
@@ -195,7 +197,7 @@ void main() {
         TestScaffold(
           theme: theme.data,
           child: FHeader.nested(
-            titleAlignment: Alignment.centerLeft,
+            titleAlignment: .centerLeft,
             title: const Text('Title'),
             prefixes: [FHeaderAction.back(onPress: () {})],
           ),
@@ -213,7 +215,7 @@ void main() {
         TestScaffold(
           theme: theme.data,
           child: FHeader.nested(
-            titleAlignment: Alignment.centerRight,
+            titleAlignment: .centerRight,
             title: const Text('Title'),
             prefixes: [FHeaderAction.back(onPress: () {})],
           ),
@@ -231,7 +233,7 @@ void main() {
         TestScaffold(
           theme: theme.data,
           child: FHeader.nested(
-            titleAlignment: Alignment.centerLeft,
+            titleAlignment: .centerLeft,
             title: const Text('Title'),
             suffixes: [FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {})],
           ),
@@ -249,7 +251,7 @@ void main() {
         TestScaffold(
           theme: theme.data,
           child: FHeader.nested(
-            titleAlignment: Alignment.centerRight,
+            titleAlignment: .centerRight,
             title: const Text('Title'),
             suffixes: [FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {})],
           ),
@@ -266,7 +268,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold(
           theme: theme.data,
-          child: const FHeader.nested(titleAlignment: Alignment.centerLeft, title: Text('Title')),
+          child: const FHeader.nested(titleAlignment: .centerLeft, title: Text('Title')),
         ),
       );
 
@@ -280,7 +282,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold(
           theme: theme.data,
-          child: const FHeader.nested(titleAlignment: Alignment.centerRight, title: Text('Title')),
+          child: const FHeader.nested(titleAlignment: .centerRight, title: Text('Title')),
         ),
       );
 

@@ -12,6 +12,8 @@ void main() {
     controller = ScrollController(initialScrollOffset: 30);
   });
 
+  tearDown(() => controller.dispose());
+
   group('FTileGroup', () {
     group('blue screen', () {
       testWidgets('enabled', (tester) async {
@@ -22,14 +24,14 @@ void main() {
               label: const Text('Network'),
               description: const Text('Description'),
               children: [
-                FTile(
+                .tile(
                   prefix: const Icon(FIcons.wifi),
                   title: const Text('WiFi'),
                   details: const Text('Forus Labs (5G)'),
                   suffix: const Icon(FIcons.chevronRight),
                   onPress: () {},
                 ),
-                FTile(
+                .tile(
                   prefix: const Icon(FIcons.bluetooth),
                   title: const Text('Bluetooth'),
                   subtitle: const Text('Fee, Fo, Fum'),
@@ -52,14 +54,14 @@ void main() {
               style: TestScaffold.blueScreen.tileGroupStyle,
               label: const Text('Network'),
               children: [
-                FTile(
+                .tile(
                   prefix: const Icon(FIcons.wifi),
                   title: const Text('WiFi'),
                   details: const Text('Forus Labs (5G)'),
                   suffix: const Icon(FIcons.chevronRight),
                   onPress: () {},
                 ),
-                FTile(
+                .tile(
                   prefix: const Icon(FIcons.bluetooth),
                   title: const Text('Bluetooth'),
                   subtitle: const Text('Fee, Fo, Fum'),
@@ -88,7 +90,7 @@ void main() {
               style: TestScaffold.blueScreen.tileGroupStyle,
               label: const Text('Network'),
               children: [
-                FTile(
+                .tile(
                   enabled: false,
                   prefix: const Icon(FIcons.wifi),
                   title: const Text('WiFi'),
@@ -96,7 +98,7 @@ void main() {
                   suffix: const Icon(FIcons.chevronRight),
                   onPress: () {},
                 ),
-                FTile(
+                .tile(
                   prefix: const Icon(FIcons.bluetooth),
                   title: const Text('Bluetooth'),
                   subtitle: const Text('Fee, Fo, Fum'),
@@ -121,14 +123,14 @@ void main() {
               description: const Text('Description'),
               error: const Text('This should not appear'),
               children: [
-                FTile(
+                .tile(
                   prefix: const Icon(FIcons.wifi),
                   title: const Text('WiFi'),
                   details: const Text('Forus Labs (5G)'),
                   suffix: const Icon(FIcons.chevronRight),
                   onPress: () {},
                 ),
-                FTile(
+                .tile(
                   prefix: const Icon(FIcons.bluetooth),
                   title: const Text('Bluetooth'),
                   subtitle: const Text('Fee, Fo, Fum'),
@@ -156,19 +158,19 @@ void main() {
                 description: const Text('Description'),
                 divider: divider,
                 children: [
-                  FTile(
+                  .tile(
                     prefix: const Icon(FIcons.wifi),
                     title: const Text('WiFi'),
                     suffix: const Icon(FIcons.chevronRight),
                     onPress: () {},
                   ),
-                  FTile(
+                  .tile(
                     prefix: const Icon(FIcons.mail),
                     title: const Text('Mail'),
                     suffix: const Icon(FIcons.chevronRight),
                     onPress: () {},
                   ),
-                  FTile(
+                  .tile(
                     prefix: const Icon(FIcons.bluetooth),
                     title: const Text('Bluetooth'),
                     suffix: const Icon(FIcons.chevronRight),
@@ -195,17 +197,17 @@ void main() {
                 description: const Text('Description'),
                 divider: divider,
                 children: [
-                  FTile(
+                  .tile(
                     prefix: const Icon(FIcons.wifi),
                     title: const Text('WiFi'),
                     suffix: const Icon(FIcons.chevronRight),
                   ),
-                  FTile(
+                  .tile(
                     prefix: const Icon(FIcons.mail),
                     title: const Text('Mail'),
                     suffix: const Icon(FIcons.chevronRight),
                   ),
-                  FTile(
+                  .tile(
                     prefix: const Icon(FIcons.bluetooth),
                     title: const Text('Bluetooth'),
                     suffix: const Icon(FIcons.chevronRight),
@@ -232,17 +234,17 @@ void main() {
                 description: const Text('Description'),
                 divider: divider,
                 children: [
-                  FTile(
+                  .tile(
                     prefix: const Icon(FIcons.wifi),
                     title: const Text('WiFi'),
                     suffix: const Icon(FIcons.chevronRight),
                   ),
-                  FTile(
+                  .tile(
                     prefix: const Icon(FIcons.mail),
                     title: const Text('Mail'),
                     suffix: const Icon(FIcons.chevronRight),
                   ),
-                  FTile(
+                  .tile(
                     prefix: const Icon(FIcons.bluetooth),
                     title: const Text('Bluetooth'),
                     suffix: const Icon(FIcons.chevronRight),
@@ -271,25 +273,25 @@ void main() {
                 description: const Text('Description'),
                 divider: divider,
                 children: [
-                  FTile(
+                  .tile(
                     prefix: const Icon(FIcons.wifi),
                     title: const Text('WiFi'),
                     suffix: const Icon(FIcons.chevronRight),
                   ),
-                  FTile(
+                  .tile(
                     focusNode: focusNode,
                     prefix: const Icon(FIcons.mail),
                     title: const Text('Mail'),
                     suffix: const Icon(FIcons.chevronRight),
                     onPress: () {},
                   ),
-                  FTile(
+                  .tile(
                     prefix: const Icon(FIcons.bluetooth),
                     title: const Text('Bluetooth'),
                     suffix: const Icon(FIcons.chevronRight),
                     onPress: () {},
                   ),
-                  FTile(
+                  .tile(
                     prefix: const Icon(FIcons.arrowDown),
                     title: const Text('Last'),
                     suffix: const Icon(FIcons.chevronRight),
@@ -315,25 +317,25 @@ void main() {
           await tester.pumpWidget(
             TestScaffold(
               theme: theme.data,
-              textDirection: TextDirection.rtl,
+              textDirection: .rtl,
               child: FTileGroup(
                 label: const Text('Network'),
                 description: const Text('Description'),
                 divider: divider,
                 children: [
-                  FTile(
+                  .tile(
                     prefix: const Icon(FIcons.wifi),
                     title: const Text('WiFi'),
                     suffix: const Icon(FIcons.chevronRight),
                     onPress: () {},
                   ),
-                  FTile(
+                  .tile(
                     prefix: const Icon(FIcons.mail),
                     title: const Text('Mail'),
                     suffix: const Icon(FIcons.chevronRight),
                     onPress: () {},
                   ),
-                  FTile(
+                  .tile(
                     prefix: const Icon(FIcons.bluetooth),
                     title: const Text('Bluetooth'),
                     suffix: const Icon(FIcons.chevronRight),
@@ -356,13 +358,13 @@ void main() {
                   label: const Text('Network'),
                   divider: divider,
                   children: [
-                    FTile(
+                    .tile(
                       prefix: const Icon(FIcons.wifi),
                       title: const Text('WiFi'),
                       suffix: const Icon(FIcons.chevronRight),
                       onPress: () {},
                     ),
-                    FTile(
+                    .tile(
                       prefix: const Icon(FIcons.bluetooth),
                       title: const Text('Bluetooth'),
                       subtitle: const Text('Fee, Fo'),
@@ -394,14 +396,14 @@ void main() {
                   label: const Text('Network'),
                   divider: divider,
                   children: [
-                    FTile(
+                    .tile(
                       autofocus: index == 0,
                       prefix: const Icon(FIcons.wifi),
                       title: const Text('WiFi'),
                       suffix: const Icon(FIcons.chevronRight),
                       onPress: () {},
                     ),
-                    FTile(
+                    .tile(
                       autofocus: index == 1,
                       prefix: const Icon(FIcons.bluetooth),
                       title: const Text('Bluetooth'),
@@ -430,14 +432,14 @@ void main() {
                   enabled: false,
                   divider: divider,
                   children: [
-                    FTile(
+                    .tile(
                       enabled: index == 0,
                       prefix: const Icon(FIcons.wifi),
                       title: const Text('WiFi'),
                       suffix: const Icon(FIcons.chevronRight),
                       onPress: () {},
                     ),
-                    FTile(
+                    .tile(
                       enabled: index == 1,
                       prefix: const Icon(FIcons.bluetooth),
                       title: const Text('Bluetooth'),
@@ -467,13 +469,13 @@ void main() {
               description: const Text('Description'),
               error: const Text('This should appear'),
               children: [
-                FTile(
+                .tile(
                   prefix: const Icon(FIcons.wifi),
                   title: const Text('WiFi'),
                   suffix: const Icon(FIcons.chevronRight),
                   onPress: () {},
                 ),
-                FTile(
+                .tile(
                   prefix: const Icon(FIcons.bluetooth),
                   title: const Text('Bluetooth'),
                   subtitle: const Text('Fee, Fo'),
@@ -495,7 +497,7 @@ void main() {
             child: FTileGroup(
               label: const Text('Network'),
               children: [
-                FTile(
+                .tile(
                   prefix: const Icon(FIcons.wifi),
                   title: const Text('WiFi'),
                   details: const Text('FL (5G)'),
@@ -528,14 +530,14 @@ void main() {
           child: FTileGroup(
             label: const Text('Network'),
             children: [
-              FTile(
+              .tile(
                 prefix: const Icon(FIcons.wifi),
                 title: const Text('WiFi'),
                 details: const Text('FL (5G)'),
                 suffix: const Icon(FIcons.chevronRight),
                 onPress: () {},
               ),
-              FTile(
+              .tile(
                 style: FThemes.blue.dark.tileGroupStyle.tileStyle,
                 prefix: const Icon(FIcons.bluetooth),
                 title: const Text('Bluetooth'),
@@ -558,7 +560,7 @@ void main() {
             label: const Text('Network'),
             enabled: false,
             children: [
-              FTile(
+              .tile(
                 enabled: true,
                 prefix: const Icon(FIcons.wifi),
                 title: const Text('WiFi'),
@@ -566,7 +568,7 @@ void main() {
                 suffix: const Icon(FIcons.chevronRight),
                 onPress: () {},
               ),
-              FTile(
+              .tile(
                 prefix: const Icon(FIcons.bluetooth),
                 title: const Text('Bluetooth'),
                 subtitle: const Text('Fee, Fo'),
@@ -647,6 +649,4 @@ void main() {
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/group/builder/null-limited.png'));
     });
   });
-
-  tearDown(() => controller.dispose());
 }

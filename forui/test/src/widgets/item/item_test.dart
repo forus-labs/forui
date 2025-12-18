@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 import 'package:flutter_test/flutter_test.dart';
 
@@ -110,7 +109,7 @@ void main() {
     await gesture.moveTo(tester.getCenter(find.byType(FItem)));
     await tester.pumpAndSettle();
 
-    expect(delta, FWidgetStatesDelta({}, {WidgetState.hovered}));
+    expect(delta, FWidgetStatesDelta({}, {.hovered}));
   });
 
   testWidgets('enabled when secondary long press given', (tester) async {
@@ -126,7 +125,7 @@ void main() {
     await gesture.moveTo(tester.getCenter(find.byType(FItem)));
     await tester.pumpAndSettle();
 
-    expect(delta, FWidgetStatesDelta({}, {WidgetState.hovered}));
+    expect(delta, FWidgetStatesDelta({}, {.hovered}));
   });
 
   testWidgets('child hit test', (tester) async {
@@ -161,7 +160,7 @@ void main() {
       ),
     );
 
-    await tester.sendKeyEvent(LogicalKeyboardKey.tab);
+    await tester.sendKeyEvent(.tab);
     await tester.pumpAndSettle(const Duration(seconds: 1));
 
     await tester.tap(find.byIcon(FIcons.pencil));

@@ -1,6 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:intl/date_symbol_data_local.dart';
-import 'package:intl/intl.dart';
 
 import 'package:forui/src/foundation/input/parser.dart';
 import 'package:forui/src/widgets/time_field/input/time_parser.dart';
@@ -15,12 +14,12 @@ void main() {
 
   setUpAll(() {
     initializeDateFormatting();
-    enSG = Time12Parser(DateFormat.jm('en_SG'));
-    enUS = Time12Parser(DateFormat.jm('en_US'));
-    ms = Time12Parser(DateFormat.jm('ms'));
-    zhHK = Time12Parser(DateFormat.jm('zh_HK'));
-    ja = Time24Parser(DateFormat.jm('ja'));
-    frCA = Time24Parser(DateFormat.jm('fr_CA'));
+    enSG = Time12Parser(.jm('en_SG'));
+    enUS = Time12Parser(.jm('en_US'));
+    ms = Time12Parser(.jm('ms'));
+    zhHK = Time12Parser(.jm('zh_HK'));
+    ja = Time24Parser(.jm('ja'));
+    frCA = Time24Parser(.jm('fr_CA'));
   });
 
   group('update(...)', () {

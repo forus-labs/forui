@@ -8,7 +8,7 @@ import '../../test_scaffold.dart';
 void main() {
   late FMultiValueNotifier<int> controller;
 
-  setUp(() => controller = FMultiValueNotifier.radio());
+  setUp(() => controller = .radio());
 
   tearDown(() => controller.dispose());
 
@@ -19,10 +19,10 @@ void main() {
       TestScaffold(
         child: StatefulBuilder(
           builder: (context, setState) => FSelectTileGroup<int>(
-            control: FMultiValueControl.lifted(value: value, onChange: (v) => setState(() => value = v)),
+            control: .lifted(value: value, onChange: (v) => setState(() => value = v)),
             children: const [
-              FSelectTile(title: Text('1'), value: 1),
-              FSelectTile(title: Text('2'), value: 2),
+              .tile(title: Text('1'), value: 1),
+              .tile(title: Text('2'), value: 2),
             ],
           ),
         ),
@@ -53,10 +53,10 @@ void main() {
       await tester.pumpWidget(
         TestScaffold(
           child: FSelectTileGroup<int>(
-            control: FMultiValueControl.managed(controller: controller, onChange: (value) => changedValue = value),
+            control: .managed(controller: controller, onChange: (value) => changedValue = value),
             children: const [
-              FSelectTile(title: Text('1'), value: 1),
-              FSelectTile(title: Text('2'), value: 2),
+              .tile(title: Text('1'), value: 1),
+              .tile(title: Text('2'), value: 2),
             ],
           ),
         ),
@@ -73,10 +73,10 @@ void main() {
     await tester.pumpWidget(
       TestScaffold(
         child: FSelectTileGroup(
-          control: FMultiValueControl.managed(controller: controller),
+          control: .managed(controller: controller),
           children: const [
-            FSelectTile(title: Text('1'), value: 1),
-            FSelectTile(title: Text('2'), value: 2),
+            .tile(title: Text('1'), value: 1),
+            .tile(title: Text('2'), value: 2),
           ],
         ),
       ),
@@ -93,10 +93,10 @@ void main() {
     await tester.pumpWidget(
       TestScaffold(
         child: FSelectTileGroup(
-          control: FMultiValueControl.managed(controller: controller),
+          control: .managed(controller: controller),
           children: const [
-            FSelectTile.suffix(title: Text('1'), value: 1),
-            FSelectTile.suffix(title: Text('2'), value: 2),
+            .suffix(title: Text('1'), value: 1),
+            .suffix(title: Text('2'), value: 2),
           ],
         ),
       ),
@@ -115,10 +115,10 @@ void main() {
     await tester.pumpWidget(
       TestScaffold(
         child: FSelectTileGroup(
-          control: FMultiValueControl.managed(controller: controller),
+          control: .managed(controller: controller),
           children: const [
-            FSelectTile.suffix(title: Text('1'), value: 1),
-            FSelectTile.suffix(title: Text('2'), value: 2),
+            .suffix(title: Text('1'), value: 1),
+            .suffix(title: Text('2'), value: 2),
           ],
         ),
       ),
@@ -135,12 +135,12 @@ void main() {
     await tester.pumpWidget(
       TestScaffold(
         child: FSelectTileGroup(
-          control: FMultiValueControl.managed(controller: controller),
-          autovalidateMode: AutovalidateMode.always,
+          control: .managed(controller: controller),
+          autovalidateMode: .always,
           validator: (values) => values?.isEmpty ?? true ? 'error message' : null,
           children: const [
-            FSelectTile.suffix(title: Text('1'), value: 1),
-            FSelectTile.suffix(title: Text('2'), value: 2),
+            .suffix(title: Text('1'), value: 1),
+            .suffix(title: Text('2'), value: 2),
           ],
         ),
       ),
@@ -161,17 +161,17 @@ void main() {
       TestScaffold(
         child: FTileGroup.merge(
           children: [
-            FTileGroup(
+            .group(
               children: [
-                FTile(title: const Text('A')),
-                FTile(title: const Text('B')),
+                .tile(title: const Text('A')),
+                .tile(title: const Text('B')),
               ],
             ),
-            FSelectTileGroup(
-              control: FMultiValueControl.managed(controller: controller),
+            .selectGroup(
+              control: .managed(controller: controller),
               children: const [
-                FSelectTile(title: Text('1'), value: 1),
-                FSelectTile(title: Text('2'), value: 2),
+                .tile(title: Text('1'), value: 1),
+                .tile(title: Text('2'), value: 2),
               ],
             ),
           ],
@@ -195,8 +195,8 @@ void main() {
         child: Form(
           key: key,
           child: FSelectTileGroup<int>(
-            control: FMultiValueControl.managed(controller: autoDispose(FMultiValueNotifier(value: {1}))),
-            children: const [FSelectTile(title: Text('1'), value: 1)],
+            control: const .managed(initial: {1}),
+            children: const [.tile(title: Text('1'), value: 1)],
             onSaved: (value) => initial = value,
           ),
         ),

@@ -33,7 +33,7 @@ void main() {
     expect(delta, FWidgetStatesDelta({}, {WidgetState.hovered}));
     expect(hovered, true);
 
-    await gesture.moveTo(Offset.zero);
+    await gesture.moveTo(.zero);
     await tester.pumpAndSettle();
 
     expect(delta, FWidgetStatesDelta({WidgetState.hovered}, {}));

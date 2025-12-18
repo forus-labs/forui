@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 import 'package:flutter_test/flutter_test.dart';
 
@@ -187,7 +186,7 @@ void main() {
 
       expect(find.text('tip'), findsOneWidget);
 
-      await gesture.moveTo(Offset.zero);
+      await gesture.moveTo(.zero);
       await tester.pumpAndSettle();
 
       expect(find.text('tip'), findsNothing);
@@ -210,7 +209,7 @@ void main() {
       await gesture.moveTo(tester.getCenter(find.byType(FButton)));
       await tester.pumpAndSettle();
 
-      await gesture.moveTo(Offset.zero);
+      await gesture.moveTo(.zero);
       await tester.pumpAndSettle();
 
       await gesture.moveTo(tester.getCenter(find.byType(FButton)));
@@ -227,7 +226,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           child: FTooltip(
-            hoverEnterDuration: Duration.zero,
+            hoverEnterDuration: .zero,
             hoverExitDuration: const Duration(seconds: 1),
             tipBuilder: (context, _) => const Text('tip'),
             child: FButton(onPress: () {}, child: const Text('button')),
@@ -241,13 +240,13 @@ void main() {
       await gesture.moveTo(tester.getCenter(find.byType(FButton)));
       await tester.pumpAndSettle();
 
-      await gesture.moveTo(Offset.zero);
+      await gesture.moveTo(.zero);
       await tester.pumpAndSettle();
 
       await gesture.moveTo(tester.getCenter(find.byType(FButton)));
       await tester.pumpAndSettle();
 
-      await gesture.moveTo(Offset.zero);
+      await gesture.moveTo(.zero);
       await tester.pumpAndSettle();
 
       expect(find.text('tip'), findsOneWidget);
@@ -289,14 +288,14 @@ void main() {
           child: FTooltip(
             tipBuilder: (context, controller) => const Text('Tooltip'),
             child: DecoratedBox(
-              decoration: BoxDecoration(border: Border.all()),
+              decoration: BoxDecoration(border: .all()),
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const .all(8.0),
                 child: FTappable(
                   focusedOutlineStyle: FThemes.zinc.light.style.focusedOutlineStyle,
                   onPress: () {},
                   child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const .all(8.0),
                     child: FButton.icon(onPress: () {}, child: const Icon(FIcons.pencil)),
                   ),
                 ),
@@ -306,7 +305,7 @@ void main() {
         ),
       );
 
-      await tester.sendKeyEvent(LogicalKeyboardKey.tab);
+      await tester.sendKeyEvent(.tab);
       await tester.pumpAndSettle(const Duration(seconds: 5));
 
       expect(find.text('Tooltip'), findsOne);
@@ -318,14 +317,14 @@ void main() {
           child: FTooltip(
             tipBuilder: (context, controller) => const Text('Tooltip'),
             child: DecoratedBox(
-              decoration: BoxDecoration(border: Border.all()),
+              decoration: BoxDecoration(border: .all()),
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const .all(8.0),
                 child: FTappable(
                   focusedOutlineStyle: FThemes.zinc.light.style.focusedOutlineStyle,
                   onPress: () {},
                   child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const .all(8.0),
                     child: FButton.icon(onPress: () {}, child: const Icon(FIcons.pencil)),
                   ),
                 ),
@@ -335,12 +334,12 @@ void main() {
         ),
       );
 
-      await tester.sendKeyEvent(LogicalKeyboardKey.tab);
+      await tester.sendKeyEvent(.tab);
       await tester.pumpAndSettle(const Duration(seconds: 5));
 
       expect(find.text('Tooltip'), findsOne);
 
-      await tester.sendKeyEvent(LogicalKeyboardKey.tab);
+      await tester.sendKeyEvent(.tab);
       await tester.pumpAndSettle(const Duration(seconds: 5));
 
       expect(find.text('Tooltip'), findsNothing);

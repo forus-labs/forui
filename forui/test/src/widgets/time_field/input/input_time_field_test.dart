@@ -1,5 +1,4 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:flutter_test/flutter_test.dart';
@@ -89,19 +88,19 @@ void main() {
     await tester.tapAt(tester.getTopLeft(find.byKey(key)));
     await tester.pumpAndSettle();
 
-    await tester.sendKeyEvent(LogicalKeyboardKey.arrowUp);
+    await tester.sendKeyEvent(.arrowUp);
     await tester.pumpAndSettle();
-    await tester.sendKeyEvent(LogicalKeyboardKey.arrowRight);
-    await tester.pumpAndSettle();
-
-    await tester.sendKeyEvent(LogicalKeyboardKey.arrowDown);
-    await tester.pumpAndSettle();
-    await tester.sendKeyEvent(LogicalKeyboardKey.arrowRight);
+    await tester.sendKeyEvent(.arrowRight);
     await tester.pumpAndSettle();
 
-    await tester.sendKeyEvent(LogicalKeyboardKey.arrowUp);
+    await tester.sendKeyEvent(.arrowDown);
     await tester.pumpAndSettle();
-    await tester.sendKeyEvent(LogicalKeyboardKey.arrowRight);
+    await tester.sendKeyEvent(.arrowRight);
+    await tester.pumpAndSettle();
+
+    await tester.sendKeyEvent(.arrowUp);
+    await tester.pumpAndSettle();
+    await tester.sendKeyEvent(.arrowRight);
     await tester.pumpAndSettle();
 
     expect(find.text('1:00 am'), findsOneWidget);
@@ -109,7 +108,7 @@ void main() {
 
   group('validator', () {
     testWidgets('placeholder', (tester) async {
-      debugDefaultTargetPlatformOverride = TargetPlatform.macOS;
+      debugDefaultTargetPlatformOverride = .macOS;
 
       await tester.pumpWidget(
         TestScaffold.app(
@@ -121,7 +120,7 @@ void main() {
       await tester.tapAt(tester.getTopLeft(find.byKey(key)));
       await tester.pumpAndSettle();
 
-      await tester.sendKeyEvent(LogicalKeyboardKey.backspace);
+      await tester.sendKeyEvent(.backspace);
       await tester.pumpAndSettle();
 
       await tester.tapAt(tester.getBottomRight(find.byType(TestScaffold)));
@@ -132,7 +131,7 @@ void main() {
     });
 
     testWidgets('partial time', (tester) async {
-      debugDefaultTargetPlatformOverride = TargetPlatform.macOS;
+      debugDefaultTargetPlatformOverride = .macOS;
 
       await tester.pumpWidget(
         TestScaffold.app(
@@ -144,7 +143,7 @@ void main() {
       await tester.enterText(find.byKey(key), '12:MM --');
       await tester.pumpAndSettle();
 
-      await tester.tapAt(Offset.zero);
+      await tester.tapAt(.zero);
       await tester.pumpAndSettle();
 
       expect(find.text('Invalid time.'), findsOneWidget);
@@ -153,7 +152,7 @@ void main() {
     });
 
     testWidgets('partial time - zh HK', (tester) async {
-      debugDefaultTargetPlatformOverride = TargetPlatform.macOS;
+      debugDefaultTargetPlatformOverride = .macOS;
 
       await tester.pumpWidget(
         TestScaffold.app(
@@ -165,7 +164,7 @@ void main() {
       await tester.enterText(find.byKey(key), '--HH:12');
       await tester.pumpAndSettle();
 
-      await tester.tapAt(Offset.zero);
+      await tester.tapAt(.zero);
       await tester.pumpAndSettle();
 
       expect(find.text('無效的時間。'), findsOneWidget);
@@ -174,7 +173,7 @@ void main() {
     });
 
     testWidgets('full time', (tester) async {
-      debugDefaultTargetPlatformOverride = TargetPlatform.macOS;
+      debugDefaultTargetPlatformOverride = .macOS;
 
       await tester.pumpWidget(
         TestScaffold.app(
@@ -186,7 +185,7 @@ void main() {
       await tester.enterText(find.byKey(key), '12:30 pm');
       await tester.pumpAndSettle();
 
-      await tester.tapAt(Offset.zero);
+      await tester.tapAt(.zero);
       await tester.pumpAndSettle();
 
       expect(find.text('Invalid time.'), findsNothing);
@@ -195,7 +194,7 @@ void main() {
     });
 
     testWidgets('custom invalid time', (tester) async {
-      debugDefaultTargetPlatformOverride = TargetPlatform.macOS;
+      debugDefaultTargetPlatformOverride = .macOS;
 
       final controller = autoDispose(
         FTimeFieldController(
@@ -222,7 +221,7 @@ void main() {
       await tester.enterText(find.byKey(key), '12:30 pm');
       await tester.pumpAndSettle();
 
-      await tester.tapAt(Offset.zero);
+      await tester.tapAt(.zero);
       await tester.pumpAndSettle();
 
       expect(find.text('Custom error.'), findsOneWidget);

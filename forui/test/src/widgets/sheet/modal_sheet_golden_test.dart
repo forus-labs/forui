@@ -77,9 +77,8 @@ void main() {
                   width: .infinity,
                   color: context.theme.colors.background,
                   child: ListView.builder(
-                    scrollDirection: side.vertical ? Axis.vertical : Axis.horizontal,
-                    itemBuilder: (context, index) =>
-                        Padding(padding: const EdgeInsets.all(8.0), child: Text('Tile $index')),
+                    scrollDirection: side.vertical ? .vertical : .horizontal,
+                    itemBuilder: (context, index) => Padding(padding: const .all(8.0), child: Text('Tile $index')),
                     itemCount: 20,
                   ),
                 ),

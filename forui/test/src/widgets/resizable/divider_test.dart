@@ -15,11 +15,7 @@ void main() {
       height: 4,
       width: 4,
     ),
-    focusedOutlineStyle: FFocusedOutlineStyle(
-      color: const Color(0xFF000000),
-      width: 2,
-      borderRadius: BorderRadius.circular(4),
-    ),
+    focusedOutlineStyle: FFocusedOutlineStyle(color: const Color(0xFF000000), width: 2, borderRadius: .circular(4)),
   );
 
   final left = FResizableRegionData(index: 0, extent: (min: 10, max: 100, total: 100), offset: (min: 0, max: 50));
@@ -33,24 +29,24 @@ void main() {
     () => HorizontalDivider(
       controller: controller,
       style: style,
-      type: FResizableDivider.divider,
+      type: .divider,
       left: -1,
       right: 0,
       crossAxisExtent: null,
       hitRegionExtent: 100,
-      cursor: MouseCursor.defer,
+      cursor: .defer,
       resizePercentage: 0.1,
       semanticFormatterCallback: (l, r) => '',
     ),
     () => HorizontalDivider(
       controller: controller,
       style: style,
-      type: FResizableDivider.divider,
+      type: .divider,
       left: 0,
       right: 0,
       crossAxisExtent: null,
       hitRegionExtent: 100,
-      cursor: MouseCursor.defer,
+      cursor: .defer,
       resizePercentage: 0.1,
       semanticFormatterCallback: (l, r) => '',
     ),

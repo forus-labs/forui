@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -130,7 +128,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           theme: theme.data,
-          alignment: Alignment.topCenter,
+          alignment: .topCenter,
           child: FAutocomplete(key: key, items: const ['item']),
         ),
       );
@@ -138,7 +136,7 @@ void main() {
       await tester.tap(find.byKey(key));
       await tester.pumpAndSettle();
 
-      final gesture = await tester.createPointerGesture(kind: PointerDeviceKind.touch);
+      final gesture = await tester.createPointerGesture(kind: .touch);
       await gesture.down(tester.getCenter(find.text('item')));
       await tester.pumpAndSettle();
 
@@ -151,7 +149,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           theme: theme.data,
-          alignment: Alignment.topCenter,
+          alignment: .topCenter,
           child: FAutocomplete.builder(
             key: key,
             filter: (query) => ['v'],

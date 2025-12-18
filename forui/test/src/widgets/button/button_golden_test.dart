@@ -73,7 +73,7 @@ void main() {
             theme: theme.data,
             child: FButton(
               style: variant,
-              mainAxisSize: MainAxisSize.min,
+              mainAxisSize: .min,
               prefix: const Icon(FIcons.circlePlay),
               suffix: const Icon(FIcons.circleStop),
               onPress: () {},
@@ -186,7 +186,7 @@ void main() {
               style: variant,
               onPress: () {},
               child: Padding(
-                padding: const EdgeInsets.all(50),
+                padding: const .all(50),
                 child: Container(
                   width: 50,
                   height: 50,
@@ -196,7 +196,7 @@ void main() {
                     height: 50,
                     decoration: BoxDecoration(
                       color: Colors.amber,
-                      border: Border.all(color: Colors.blueAccent, width: 2),
+                      border: .all(color: Colors.blueAccent, width: 2),
                     ),
                   ),
                 ),
@@ -216,7 +216,7 @@ void main() {
               style: variant,
               onPress: null,
               child: Padding(
-                padding: const EdgeInsets.all(50),
+                padding: const .all(50),
                 child: Container(
                   width: 50,
                   height: 50,
@@ -226,7 +226,7 @@ void main() {
                     height: 50,
                     decoration: BoxDecoration(
                       color: Colors.amber,
-                      border: Border.all(color: Colors.blueAccent, width: 2),
+                      border: .all(color: Colors.blueAccent, width: 2),
                     ),
                   ),
                 ),

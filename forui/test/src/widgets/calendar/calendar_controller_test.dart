@@ -60,7 +60,7 @@ void main() {
     test(
       'constructor throws error',
       () => expect(
-        () => FCalendarController.date(initial: DateTime.now(), truncateAndStripTimezone: false),
+        () => FCalendarController.date(initial: .now(), truncateAndStripTimezone: false),
         throwsAssertionError,
       ),
     );
@@ -139,7 +139,7 @@ void main() {
 
     for (final (date, expected) in [(DateTime(2024), true), (DateTime(2025), false)]) {
       test('selected(...)', () {
-        final controller = FCalendarController.dates(initial: {DateTime.utc(2024)});
+        final controller = FCalendarController.dates(initial: {.utc(2024)});
         expect(controller.selected(date), expected);
       });
     }
@@ -165,7 +165,7 @@ void main() {
     test(
       'constructor throws error',
       () => expect(
-        () => FCalendarController.dates(initial: {DateTime.now()}, truncateAndStripTimezone: false),
+        () => FCalendarController.dates(initial: {.now()}, truncateAndStripTimezone: false),
         throwsAssertionError,
       ),
     );
@@ -182,7 +182,7 @@ void main() {
 
     for (final (date, expected) in [(DateTime.utc(2024), true), (DateTime.utc(2025), false)]) {
       test('selected(...)', () {
-        final controller = FCalendarController.dates(initial: {DateTime.utc(2024)}, truncateAndStripTimezone: false);
+        final controller = FCalendarController.dates(initial: {.utc(2024)}, truncateAndStripTimezone: false);
         expect(controller.selected(date), expected);
       });
     }

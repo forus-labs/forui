@@ -77,7 +77,7 @@ void main() {
         TestScaffold(
           theme: theme.data,
           child: Column(
-            mainAxisSize: MainAxisSize.min,
+            mainAxisSize: .min,
             children: [
               Stack(
                 children: [

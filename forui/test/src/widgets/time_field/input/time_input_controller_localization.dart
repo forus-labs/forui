@@ -28,7 +28,7 @@ void main() {
                 final controller = TimeInputController(
                   FLocalizations.of(context)!,
                   FTimeFieldController(time: const FTime(12, 15)),
-                  DateFormat.jm(locale.toString()),
+                  .jm(locale.toString()),
                   context.theme.textFieldStyle,
                 );
 
@@ -57,7 +57,7 @@ void main() {
                 final controller = TimeInputController(
                   FLocalizations.of(context)!,
                   FTimeFieldController(time: const FTime(12, 15)),
-                  DateFormat.Hm(locale.toString()),
+                  .Hm(locale.toString()),
                   context.theme.textFieldStyle,
                 );
 

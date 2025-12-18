@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart' hide VerticalDivider;
 
 import 'package:flutter_test/flutter_test.dart';
@@ -27,7 +26,7 @@ void main() {
   tearDown(() => FTouch.primary = null);
 
   for (final (index, constructor) in [
-    () => FResizable(crossAxisExtent: 0, axis: Axis.vertical, children: [top, bottom]),
+    () => FResizable(crossAxisExtent: 0, axis: .vertical, children: [top, bottom]),
   ].indexed) {
     test('[$index] constructor throws error', () => expect(constructor, throwsAssertionError));
   }
@@ -36,7 +35,7 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.app(
         child: Center(
-          child: FResizable(crossAxisExtent: 50, axis: Axis.vertical, children: [top, bottom]),
+          child: FResizable(crossAxisExtent: 50, axis: .vertical, children: [top, bottom]),
         ),
       ),
     );
@@ -52,7 +51,7 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.app(
         child: Center(
-          child: FResizable(crossAxisExtent: 50, axis: Axis.vertical, children: [top, bottom]),
+          child: FResizable(crossAxisExtent: 50, axis: .vertical, children: [top, bottom]),
         ),
       ),
     );
@@ -68,7 +67,7 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.app(
         child: Center(
-          child: FResizable(crossAxisExtent: 50, axis: Axis.horizontal, children: [top, bottom]),
+          child: FResizable(crossAxisExtent: 50, axis: .horizontal, children: [top, bottom]),
         ),
       ),
     );
@@ -84,7 +83,7 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.app(
         child: Center(
-          child: FResizable(crossAxisExtent: 50, axis: Axis.horizontal, children: [top, bottom]),
+          child: FResizable(crossAxisExtent: 50, axis: .horizontal, children: [top, bottom]),
         ),
       ),
     );

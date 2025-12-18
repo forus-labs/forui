@@ -147,9 +147,9 @@ class _FResizableState extends State<FResizable> {
         FResizableRegionData(
           index: index,
           extent: (
-          min: region.minExtent ?? widget.hitRegionExtent,
-          max: totalExtent - minTotalExtent + max(region.minExtent ?? 0, widget.hitRegionExtent),
-          total: totalExtent,
+            min: region.minExtent ?? widget.hitRegionExtent,
+            max: totalExtent - minTotalExtent + max(region.minExtent ?? 0, widget.hitRegionExtent),
+            total: totalExtent,
           ),
           offset: (min: minOffset, max: minOffset += region.initialExtent),
         ),

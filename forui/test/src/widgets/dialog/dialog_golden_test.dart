@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 
 import 'package:flutter_test/flutter_test.dart';
@@ -14,7 +12,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold.app(
             theme: theme.data,
-            alignment: Alignment.topCenter,
+            alignment: .topCenter,
             child: Builder(
               builder: (context) => FButton(
                 onPress: () => showFDialog(
@@ -47,12 +45,12 @@ void main() {
         await tester.pumpWidget(
           TestScaffold.app(
             theme: theme.data,
-            alignment: Alignment.topCenter,
+            alignment: .topCenter,
             child: Builder(
               builder: (context) => FButton(
                 onPress: () => showFDialog(
                   routeStyle: theme.data.dialogRouteStyle.copyWith(
-                    barrierFilter: (animation) => ImageFilter.blur(sigmaX: animation * 5, sigmaY: animation * 5),
+                    barrierFilter: (animation) => .blur(sigmaX: animation * 5, sigmaY: animation * 5),
                   ),
                   context: context,
                   builder: (context, _, animation) => FDialog(
@@ -87,7 +85,7 @@ void main() {
               builder: (context) => FButton(
                 onPress: () => showFDialog(
                   style: theme.data.dialogStyle.copyWith(
-                    backgroundFilter: (v) => ImageFilter.blur(sigmaX: v * 5, sigmaY: v * 5),
+                    backgroundFilter: (v) => .blur(sigmaX: v * 5, sigmaY: v * 5),
                     decoration: BoxDecoration(
                       borderRadius: theme.data.style.borderRadius,
                       color: theme.data.colors.background.withValues(alpha: 0.5),
@@ -127,7 +125,7 @@ void main() {
         TestScaffold.blue(
           child: FDialog(
             style: TestScaffold.blueScreen.dialogStyle,
-            direction: Axis.horizontal,
+            direction: .horizontal,
             title: const Text('Are you absolutely sure?'),
             body: const Text(
               'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',

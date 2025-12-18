@@ -1,6 +1,5 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 import 'package:flutter_test/flutter_test.dart';
 
@@ -109,7 +108,7 @@ void main() {
         TestScaffold(
           theme: theme.data,
           child: FPicker(
-            control: .managed(controller: controller),
+            control: const .managed(initial: [1, 5]),
             children: [
               const FPickerWheel(flex: 3, loop: true, children: months),
               FPickerWheel.builder(builder: (context, index) => Text('Item $index')),
@@ -126,7 +125,7 @@ void main() {
         TestScaffold(
           theme: theme.data,
           child: FPicker(
-            control: .managed(controller: controller),
+            control: const .managed(initial: [1, 5]),
             children: [
               const FPickerWheel(flex: 3, loop: true, children: months),
               const Text(':'),
@@ -140,14 +139,12 @@ void main() {
     });
 
     testWidgets('${theme.name} non-looping', (tester) async {
-      controller = FPickerController(indexes: [1]);
-
       await tester.pumpWidget(
         TestScaffold(
           theme: theme.data,
-          child: FPicker(
-            control: .managed(controller: controller),
-            children: const [FPickerWheel(flex: 3, children: months)],
+          child: const FPicker(
+            control: .managed(initial: [1]),
+            children: [FPickerWheel(flex: 3, children: months)],
           ),
         ),
       );
@@ -160,7 +157,7 @@ void main() {
         TestScaffold(
           theme: theme.data,
           child: FPicker(
-            control: .managed(controller: controller),
+            control: const .managed(initial: [1, 5]),
             children: [
               const FPickerWheel(autofocus: true, flex: 3, loop: true, children: months),
               const Text(':'),
@@ -198,7 +195,7 @@ void main() {
   });
 
   testWidgets('desktop dragged', (tester) async {
-    debugDefaultTargetPlatformOverride = TargetPlatform.macOS;
+    debugDefaultTargetPlatformOverride = .macOS;
     const key = ValueKey('1st');
 
     await tester.pumpWidget(
@@ -224,7 +221,7 @@ void main() {
   });
 
   testWidgets('arrow key', (tester) async {
-    debugDefaultTargetPlatformOverride = TargetPlatform.macOS;
+    debugDefaultTargetPlatformOverride = .macOS;
     const key = ValueKey('1st');
 
     await tester.pumpWidget(
@@ -240,7 +237,7 @@ void main() {
       ),
     );
 
-    await tester.sendKeyEvent(LogicalKeyboardKey.arrowDown);
+    await tester.sendKeyEvent(.arrowDown);
     await tester.pumpAndSettle();
 
     expect(controller.value, [2, 5]);

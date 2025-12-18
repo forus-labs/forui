@@ -12,6 +12,8 @@ void main() {
     controller = ScrollController(initialScrollOffset: 30);
   });
 
+  tearDown(() => controller.dispose());
+
   group('FItemGroup', () {
     group('blue screen', () {
       testWidgets('enabled', (tester) async {
@@ -590,6 +592,4 @@ void main() {
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('item/group/builder/null-limited.png'));
     });
   });
-
-  tearDown(() => controller.dispose());
 }

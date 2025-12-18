@@ -114,7 +114,7 @@ void main() {
     });
 
     testWidgets('pressed', (tester) async {
-      debugDefaultTargetPlatformOverride = TargetPlatform.iOS;
+      debugDefaultTargetPlatformOverride = .iOS;
 
       await tester.pumpWidget(
         TestScaffold(
@@ -142,7 +142,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold(
           theme: theme.data,
-          textDirection: TextDirection.rtl,
+          textDirection: .rtl,
           child: FTile(
             autofocus: true,
             prefix: const Icon(FIcons.bluetooth),
@@ -286,7 +286,7 @@ void main() {
           child: SizedBox(
             width: 300,
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const .all(8.0),
               child: FTile(
                 prefix: const Icon(FIcons.bluetooth),
                 title: const Text('L                               ong'),
@@ -308,7 +308,7 @@ void main() {
           child: SizedBox(
             width: 300,
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const .all(8.0),
               child: FTile(
                 prefix: const Icon(FIcons.bluetooth),
                 title: const Text('Title'),
@@ -331,7 +331,7 @@ void main() {
           child: SizedBox(
             width: 300,
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const .all(8.0),
               child: FTile(
                 prefix: const Icon(FIcons.bluetooth),
                 title: const Text('Title'),

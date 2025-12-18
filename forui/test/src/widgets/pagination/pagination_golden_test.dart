@@ -16,10 +16,7 @@ void main() {
   testWidgets('blue screen', (tester) async {
     await tester.pumpWidget(
       TestScaffold.blue(
-        child: FPagination(
-          style: TestScaffold.blueScreen.paginationStyle,
-          control: .managed(controller: controller),
-        ),
+        child: FPagination(style: TestScaffold.blueScreen.paginationStyle, control: const .managed(pages: 10)),
       ),
     );
 
@@ -31,7 +28,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold(
           theme: theme.data,
-          child: FPagination(control: .managed(controller: controller)),
+          child: const FPagination(control: .managed(pages: 10)),
         ),
       );
 
@@ -39,12 +36,10 @@ void main() {
     });
 
     testWidgets('hide edges', (tester) async {
-      final controller = autoDispose(FPaginationController(pages: 10, showEdges: false));
-
       await tester.pumpWidget(
         TestScaffold(
           theme: theme.data,
-          child: FPagination(control: FPaginationControl.managed(controller: controller)),
+          child: const FPagination(control: .managed(pages: 10, showEdges: false)),
         ),
       );
 
@@ -58,11 +53,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold(
           theme: theme.data,
-          child: FPagination(
-            control: FPaginationControl.managed(
-              controller: autoDispose(FPaginationController(pages: 10, siblings: 0, page: 2)),
-            ),
-          ),
+          child: const FPagination(control: .managed(initial: 2, pages: 10, siblings: 0)),
         ),
       );
       await tester.tap(find.byType(Action).last);
@@ -75,9 +66,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold(
           theme: theme.data,
-          child: FPagination(
-            control: FPaginationControl.managed(controller: autoDispose(FPaginationController(pages: 14, siblings: 2))),
-          ),
+          child: const FPagination(control: .managed(pages: 14, siblings: 2)),
         ),
       );
       await tester.tap(find.text('7'));
@@ -94,7 +83,7 @@ void main() {
         TestScaffold(
           theme: theme.data,
           child: FPagination(
-            control: FPaginationControl.managed(controller: controller),
+            control: .managed(controller: controller),
             next: Padding(
               padding: style.itemPadding,
               child: ConstrainedBox(

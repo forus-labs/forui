@@ -1,6 +1,3 @@
-import 'dart:async';
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 
 import 'package:flutter_test/flutter_test.dart';
@@ -9,13 +6,8 @@ import 'package:forui/forui.dart';
 import '../../test_scaffold.dart';
 
 void main() {
-  late FPopoverController controller;
-
-  setUp(() => controller = FPopoverController(vsync: const TestVSync()));
-
   tearDown(() {
     FTouch.primary = null;
-    controller.dispose();
   });
 
   for (final theme in TestScaffold.themes) {
@@ -24,7 +16,6 @@ void main() {
         TestScaffold.app(
           theme: theme.data,
           child: FPopover(
-            control: .managed(controller: controller),
             popoverBuilder: (context, _) => const SizedBox.square(dimension: 100),
             child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 100)),
           ),
@@ -41,14 +32,12 @@ void main() {
         TestScaffold.app(
           theme: theme.data,
           child: FPopover(
-            control: .managed(controller: controller),
+            control: const .managed(initial: true),
             popoverBuilder: (context, _) => const SizedBox.square(dimension: 100),
             child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 100)),
           ),
         ),
       );
-
-      unawaited(controller.show());
       await tester.pumpAndSettle();
 
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('popover/shown-touch-device-${theme.name}.png'));
@@ -61,14 +50,12 @@ void main() {
         TestScaffold.app(
           theme: theme.data,
           child: FPopover(
-            control: .managed(controller: controller),
+            control: const .managed(initial: true),
             popoverBuilder: (context, _) => const SizedBox.square(dimension: 100),
             child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 100)),
           ),
         ),
       );
-
-      unawaited(controller.show());
       await tester.pumpAndSettle();
 
       await expectLater(
@@ -84,38 +71,38 @@ void main() {
         TestScaffold.app(
           theme: theme.data,
           child: FPopover(
-            control: .managed(controller: controller),
+            control: const .managed(initial: true),
             style: theme.data.popoverStyle.copyWith(
-              barrierFilter: (animation) => ImageFilter.blur(sigmaX: animation * 5, sigmaY: animation * 5),
+              barrierFilter: (animation) => .blur(sigmaX: animation * 5, sigmaY: animation * 5),
             ),
             popoverBuilder: (context, _) => const SizedBox.square(dimension: 100),
             child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 100)),
           ),
         ),
       );
-
-      unawaited(controller.show());
       await tester.pumpAndSettle();
 
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('popover/barrier-${theme.name}.png'));
     });
 
     testWidgets('${theme.name} glassmorphic', (tester) async {
+      final controller = autoDispose(FPopoverController(shown: true, vsync: tester));
+
       await tester.pumpWidget(
         TestScaffold.app(
           theme: theme.data,
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: .center,
             children: [
               FButton(onPress: controller.toggle, child: const Text('Toggle Popover')),
               FPopover(
                 control: .managed(controller: controller),
                 style: theme.data.popoverStyle.copyWith(
-                  backgroundFilter: (v) => ImageFilter.blur(sigmaX: v * 5, sigmaY: v * 5),
+                  backgroundFilter: (v) => .blur(sigmaX: v * 5, sigmaY: v * 5),
                   decoration: BoxDecoration(
                     color: theme.data.colors.background.withValues(alpha: 0.5),
                     borderRadius: theme.data.style.borderRadius,
-                    border: Border.all(width: theme.data.style.borderWidth, color: theme.data.colors.border),
+                    border: .all(width: theme.data.style.borderWidth, color: theme.data.colors.border),
                   ),
                 ),
                 popoverBuilder: (_, _) => const SizedBox.square(dimension: 100),
@@ -125,8 +112,6 @@ void main() {
           ),
         ),
       );
-
-      unawaited(controller.show());
       await tester.pumpAndSettle();
 
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('popover/glassmorphic-${theme.name}.png'));

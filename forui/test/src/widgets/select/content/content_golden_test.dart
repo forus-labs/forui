@@ -12,18 +12,18 @@ class ItemWrapper extends StatelessWidget with FItemMixin {
 
   @override
   Widget build(BuildContext context) => Padding(
-    padding: const EdgeInsets.all(5.0),
+    padding: const .all(5.0),
     child: Center(
       child: FSelect<String>.rich(
         format: (s) => s,
-        children: const [
-          FSelectSection.rich(
-            label: Text('Section 1'),
-            children: [FSelectItem<String>(title: Text('Item 1'), value: 'item 1')],
+        children: [
+          .richSection(
+            label: const Text('Section 1'),
+            children: [const .item(title: Text('Item 1'), value: 'item 1')],
           ),
-          FSelectSection.rich(
-            label: Text('Section 2'),
-            children: [FSelectItem<String>(title: Text('Item 2'), value: 'item 2')],
+          .richSection(
+            label: const Text('Section 2'),
+            children: [const .item(title: Text('Item 2'), value: 'item 2')],
           ),
         ],
       ),
@@ -33,18 +33,14 @@ class ItemWrapper extends StatelessWidget with FItemMixin {
 
 void main() {
   const key = ValueKey('select');
-
-  late FSelectController<String> controller;
   late ScrollController scrollController;
 
   setUp(() {
-    controller = FSelectController<String>();
     scrollController = ScrollController();
   });
 
   tearDown(() {
     scrollController.dispose();
-    controller.dispose();
   });
 
   for (final theme in TestScaffold.themes) {
@@ -53,16 +49,16 @@ void main() {
         await tester.pumpWidget(
           TestScaffold.app(
             theme: theme.data,
-            alignment: Alignment.topCenter,
+            alignment: .topCenter,
             child: FSelect<String>.rich(
               key: key,
               format: (string) => string,
               contentScrollController: scrollController,
               contentScrollHandles: true,
               children: [
-                FSelectSection.rich(
+                .richSection(
                   label: const Text('Lorem'),
-                  children: [for (final letter in letters) FSelectItem(title: Text(letter), value: letter)],
+                  children: [for (final letter in letters) .item(title: Text(letter), value: letter)],
                 ),
               ],
             ),
@@ -85,16 +81,15 @@ void main() {
         await tester.pumpWidget(
           TestScaffold.app(
             theme: theme.data,
-            alignment: Alignment.topCenter,
+            alignment: .topCenter,
             child: FSelect<String>.rich(
               key: key,
               format: (string) => string,
-              contentScrollController: scrollController,
               contentScrollHandles: true,
               children: [
-                FSelectSection.rich(
+                .richSection(
                   label: const Text('Lorem'),
-                  children: [for (final letter in letters) FSelectItem(title: Text(letter), value: letter)],
+                  children: [for (final letter in letters) .item(title: Text(letter), value: letter)],
                 ),
               ],
             ),
@@ -114,16 +109,16 @@ void main() {
         await tester.pumpWidget(
           TestScaffold.app(
             theme: theme.data,
-            alignment: Alignment.topCenter,
+            alignment: .topCenter,
             child: FSelect<String>.rich(
               key: key,
               format: (string) => string,
               contentScrollController: scrollController,
               contentScrollHandles: true,
               children: [
-                FSelectSection.rich(
+                .richSection(
                   label: const Text('Lorem'),
-                  children: [for (final letter in letters) FSelectItem(title: Text(letter), value: letter)],
+                  children: [for (final letter in letters) .item(title: Text(letter), value: letter)],
                 ),
               ],
             ),
@@ -146,15 +141,15 @@ void main() {
         await tester.pumpWidget(
           TestScaffold.app(
             theme: theme.data,
-            alignment: Alignment.topCenter,
+            alignment: .topCenter,
             child: FSelect<String>.rich(
               key: key,
               format: (string) => string,
               contentScrollController: scrollController,
               children: [
-                FSelectSection.rich(
+                .richSection(
                   label: const Text('Lorem'),
-                  children: [for (final letter in letters) FSelectItem(title: Text(letter), value: letter)],
+                  children: [for (final letter in letters) .item(title: Text(letter), value: letter)],
                 ),
               ],
             ),
@@ -177,16 +172,16 @@ void main() {
         await tester.pumpWidget(
           TestScaffold.app(
             theme: theme.data,
-            alignment: Alignment.topCenter,
+            alignment: .topCenter,
             child: FSelect<String>.rich(
               key: key,
               format: (string) => string,
               contentScrollController: scrollController,
               contentScrollHandles: true,
-              children: const [
-                FSelectSection.rich(
-                  label: Text('Lorem'),
-                  children: [FSelectItem(title: Text('1'), value: '1')],
+              children: [
+                .richSection(
+                  label: const Text('Lorem'),
+                  children: [const .item(title: Text('1'), value: '1')],
                 ),
               ],
             ),
@@ -210,27 +205,27 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           theme: theme.data,
-          alignment: Alignment.topCenter,
+          alignment: .topCenter,
           child: FSelect<String>.rich(
             key: key,
-            contentDivider: FItemDivider.full,
+            contentDivider: .full,
             format: (s) => s,
             children: [
-              FSelectSection(
+              .section(
                 label: const Text('Group 1'),
-                divider: FItemDivider.indented,
+                divider: .indented,
                 items: {
                   for (final item in ['1A', '1B']) item: item,
                 },
               ),
-              FSelectSection(
+              .section(
                 label: const Text('Group 2'),
                 items: {
                   for (final item in ['2A', '2B']) item: item,
                 },
               ),
-              const FSelectItem(title: Text('Item 3'), value: 'Item 3'),
-              const FSelectItem(title: Text('Item 4'), value: 'Item 4'),
+              .item(title: const Text('Item 3'), value: 'Item 3'),
+              .item(title: const Text('Item 4'), value: 'Item 4'),
             ],
           ),
         ),
@@ -246,12 +241,12 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           theme: theme.data,
-          alignment: Alignment.topCenter,
+          alignment: .topCenter,
           child: FSelect<String>.rich(
             key: key,
-            contentDivider: FItemDivider.full,
+            contentDivider: .full,
             format: (s) => s,
-            children: const [FSelectItem(title: Text('Item 1'), value: 'Item 1')],
+            children: [.item(title: const Text('Item 1'), value: 'Item 1')],
           ),
         ),
       );
@@ -269,27 +264,27 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           theme: theme.data,
-          alignment: Alignment.topCenter,
+          alignment: .topCenter,
           child: FSelect<String>.rich(
             key: key,
-            contentDivider: FItemDivider.full,
+            contentDivider: .full,
             format: (s) => s,
             children: [
-              FSelectSection(
+              .section(
                 label: const Text('Group 1'),
-                divider: FItemDivider.indented,
+                divider: .indented,
                 items: {
                   for (final item in ['1A', '1B']) item: item,
                 },
               ),
-              FSelectSection(
+              .section(
                 label: const Text('Group 2'),
                 items: {
                   for (final item in ['2A', '2B']) item: item,
                 },
               ),
-              const FSelectItem(title: Text('Item 3'), value: 'Item 3'),
-              const FSelectItem(title: Text('Item 4'), value: 'Item 4'),
+              .item(title: const Text('Item 3'), value: 'Item 3'),
+              .item(title: const Text('Item 4'), value: 'Item 4'),
             ],
           ),
         ),
@@ -309,21 +304,20 @@ void main() {
     });
 
     testWidgets('focus on selected item', (tester) async {
-      controller.value = 'O';
+      final controller = autoDispose(FSelectController<String>())..value = 'O';
 
       await tester.pumpWidget(
         TestScaffold.app(
           theme: theme.data,
-          alignment: Alignment.topCenter,
+          alignment: .topCenter,
           child: FSelect<String>.rich(
             key: key,
             format: (string) => string,
-            control: FSelectControl.managed(controller: controller),
-            contentScrollController: scrollController,
+            control: .managed(controller: controller),
             children: [
-              FSelectSection.rich(
+              .richSection(
                 label: const Text('Lorem'),
-                children: [for (final letter in letters) FSelectItem(title: Text(letter), value: letter)],
+                children: [for (final letter in letters) .item(title: Text(letter), value: letter)],
               ),
             ],
           ),
@@ -344,9 +338,9 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.app(
         child: FItemGroup(
-          divider: FItemDivider.indented,
+          divider: .indented,
           children: [
-            FItem(title: const Text('2nd')),
+            .item(title: const Text('2nd')),
             const ItemWrapper(key: key),
           ],
         ),

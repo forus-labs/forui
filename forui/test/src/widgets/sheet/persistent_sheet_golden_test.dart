@@ -30,7 +30,7 @@ void main() {
                         height: .infinity,
                         width: .infinity,
                         decoration: BoxDecoration(
-                          border: Border.all(color: context.theme.colors.primary),
+                          border: .all(color: context.theme.colors.primary),
                           color: context.theme.colors.background,
                         ),
                         child: const Center(child: Text('Sheet')),
@@ -67,7 +67,7 @@ void main() {
                         height: .infinity,
                         width: .infinity,
                         decoration: BoxDecoration(
-                          border: Border.all(color: context.theme.colors.primary),
+                          border: .all(color: context.theme.colors.primary),
                           color: context.theme.colors.background,
                         ),
                         child: const Center(child: Text('Sheet')),
@@ -104,13 +104,13 @@ void main() {
                         height: .infinity,
                         width: .infinity,
                         decoration: BoxDecoration(
-                          border: Border.all(color: context.theme.colors.primary),
+                          border: .all(color: context.theme.colors.primary),
                           color: context.theme.colors.background,
                         ),
                         child: ListView.builder(
-                          scrollDirection: side.vertical ? Axis.vertical : Axis.horizontal,
+                          scrollDirection: side.vertical ? .vertical : .horizontal,
                           itemBuilder: (context, index) =>
-                              Padding(padding: const EdgeInsets.all(8.0), child: Text('Tile $index')),
+                              Padding(padding: const .all(8.0), child: Text('Tile $index')),
                           itemCount: 20,
                         ),
                       ),

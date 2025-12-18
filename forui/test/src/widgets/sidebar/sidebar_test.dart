@@ -1,4 +1,3 @@
-import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:flutter_test/flutter_test.dart';
@@ -15,7 +14,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           child: Column(
-            mainAxisSize: MainAxisSize.min,
+            mainAxisSize: .min,
             children: [
               Expanded(
                 child: FSidebar(
@@ -34,7 +33,7 @@ void main() {
       expect(first.hasFocus, true);
       expect(second.hasFocus, false);
 
-      await tester.sendKeyEvent(LogicalKeyboardKey.tab);
+      await tester.sendKeyEvent(.tab);
       await tester.pumpAndSettle();
 
       expect(first.hasFocus, false);
@@ -48,11 +47,11 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           child: Column(
-            mainAxisSize: MainAxisSize.min,
+            mainAxisSize: .min,
             children: [
               Expanded(
                 child: FSidebar(
-                  traversalEdgeBehavior: TraversalEdgeBehavior.closedLoop,
+                  traversalEdgeBehavior: .closedLoop,
                   children: [FSidebarItem(focusNode: first, label: const Text('Item 1'), onPress: () {})],
                 ),
               ),
@@ -68,7 +67,7 @@ void main() {
       expect(first.hasFocus, true);
       expect(second.hasFocus, false);
 
-      await tester.sendKeyEvent(LogicalKeyboardKey.tab);
+      await tester.sendKeyEvent(.tab);
       await tester.pumpAndSettle();
 
       expect(first.hasFocus, true);

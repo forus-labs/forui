@@ -1,4 +1,3 @@
-import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:flutter_test/flutter_test.dart';
@@ -27,14 +26,14 @@ void main() {
             key: key,
             format: (s) => s,
             control: .managed(controller: controller),
-            children: const [
-              FSelectSection.rich(
-                label: Text('1st'),
-                children: [FSelectItem(title: Text('A'), value: 'A')],
+            children: [
+              .richSection(
+                label: const Text('1st'),
+                children: [const .item(title: Text('A'), value: 'A')],
               ),
-              FSelectSection.rich(
-                label: Text('2nd'),
-                children: [FSelectItem(title: Text('B'), value: 'B')],
+              .richSection(
+                label: const Text('2nd'),
+                children: [const .item(title: Text('B'), value: 'B')],
               ),
             ],
           ),
@@ -44,10 +43,10 @@ void main() {
       await tester.tap(find.byKey(key));
       await tester.pumpAndSettle();
 
-      await tester.sendKeyEvent(LogicalKeyboardKey.arrowDown);
+      await tester.sendKeyEvent(.arrowDown);
       await tester.pumpAndSettle();
 
-      await tester.sendKeyEvent(LogicalKeyboardKey.enter);
+      await tester.sendKeyEvent(.enter);
       await tester.pumpAndSettle();
 
       expect(find.text('B'), findsOne);
@@ -63,9 +62,9 @@ void main() {
             key: key,
             format: (s) => s,
             control: .managed(controller: controller),
-            children: const [
-              FSelectItem(title: Text('A'), value: 'A'),
-              FSelectItem(title: Text('B'), value: 'B'),
+            children: [
+              .item(title: const Text('A'), value: 'A'),
+              .item(title: const Text('B'), value: 'B'),
             ],
           ),
         ),
@@ -74,10 +73,10 @@ void main() {
       await tester.tap(find.byKey(key));
       await tester.pumpAndSettle();
 
-      await tester.sendKeyEvent(LogicalKeyboardKey.arrowDown);
+      await tester.sendKeyEvent(.arrowDown);
       await tester.pumpAndSettle();
 
-      await tester.sendKeyEvent(LogicalKeyboardKey.enter);
+      await tester.sendKeyEvent(.enter);
       await tester.pumpAndSettle();
 
       expect(find.text('B'), findsOne);

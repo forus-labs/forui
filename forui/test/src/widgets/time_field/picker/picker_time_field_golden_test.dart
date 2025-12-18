@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 import 'package:flutter_test/flutter_test.dart';
 
@@ -116,7 +115,7 @@ void main() {
         TestScaffold.app(
           theme: theme.data,
           locale: const Locale('zh', 'HK'),
-          alignment: Alignment.topCenter,
+          alignment: .topCenter,
           child: const FTimeField.picker(key: key),
         ),
       );
@@ -135,7 +134,7 @@ void main() {
         TestScaffold.app(
           theme: theme.data,
           locale: const Locale('en', 'SG'),
-          alignment: Alignment.topCenter,
+          alignment: .topCenter,
           child: const FTimeField.picker(key: key),
         ),
       );
@@ -166,7 +165,7 @@ void main() {
     testWidgets('${theme.name} error', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
-          alignment: Alignment.topCenter,
+          alignment: .topCenter,
           theme: theme.data,
           child: const FTimeField.picker(forceErrorText: 'Error', key: key),
         ),
@@ -186,11 +185,11 @@ void main() {
         ),
       );
 
-      await tester.sendKeyEvent(LogicalKeyboardKey.tab);
-      await tester.sendKeyEvent(LogicalKeyboardKey.enter);
+      await tester.sendKeyEvent(.tab);
+      await tester.sendKeyEvent(.enter);
       await tester.pumpAndSettle();
 
-      await tester.sendKeyEvent(LogicalKeyboardKey.tab);
+      await tester.sendKeyEvent(.tab);
       await tester.pumpAndSettle();
 
       await expectLater(

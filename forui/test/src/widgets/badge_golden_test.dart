@@ -41,7 +41,7 @@ void main() {
             child: FBadge.raw(
               style: variant,
               builder: (_, style) => Padding(
-                padding: const EdgeInsets.all(50),
+                padding: const .all(50),
                 child: Container(
                   width: 50,
                   height: 50,
@@ -51,7 +51,7 @@ void main() {
                     height: 50,
                     decoration: BoxDecoration(
                       color: (style.decoration as dynamic).color,
-                      border: Border.all(color: Colors.blueAccent, width: 2),
+                      border: .all(color: Colors.blueAccent, width: 2),
                     ),
                   ),
                 ),

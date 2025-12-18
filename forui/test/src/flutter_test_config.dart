@@ -10,7 +10,7 @@ import 'test_scaffold.dart';
 
 Future<void> testExecutable(FutureOr<void> Function() testMain) async {
   LeakTesting.enable();
-  LeakTesting.settings = LeakTesting.settings.withIgnored(
+  LeakTesting.settings = .settings.withIgnored(
     createdByTestHelpers: true,
     classes: ['Image', 'ImageInfo', 'ImageStreamCompleterHandle', '_CachedImage'],
   );

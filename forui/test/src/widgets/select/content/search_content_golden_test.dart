@@ -15,7 +15,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           theme: theme.data,
-          alignment: Alignment.topCenter,
+          alignment: .topCenter,
           child: FSelect<String>.searchBuilder(
             key: key,
             format: (s) => s,
@@ -38,14 +38,14 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           theme: theme.data,
-          alignment: Alignment.topCenter,
+          alignment: .topCenter,
           child: FSelect<String>.searchBuilder(
             key: key,
             format: (s) => s,
             filter: (_) => [],
             contentBuilder: (_, _, _) => [
-              const FSelectItem(title: Text('A'), value: 'A'),
-              const FSelectItem(title: Text('B'), value: 'B'),
+              .item(title: const Text('A'), value: 'A'),
+              .item(title: const Text('B'), value: 'B'),
             ],
           ),
         ),
@@ -70,12 +70,12 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           theme: theme.data,
-          alignment: Alignment.topCenter,
+          alignment: .topCenter,
           child: FSelect<String>.searchBuilder(
             key: key,
             format: (s) => s,
             filter: (_) => [],
-            contentBuilder: (_, _, _) => [const FSelectItem(title: Text('A'), value: 'A')],
+            contentBuilder: (_, _, _) => [.item(title: const Text('A'), value: 'A')],
           ),
         ),
       );
@@ -90,7 +90,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           theme: theme.data,
-          alignment: Alignment.topCenter,
+          alignment: .topCenter,
           child: FSelect<String>.searchBuilder(
             key: key,
             format: (s) => s,
@@ -98,7 +98,7 @@ void main() {
               await Future.delayed(const Duration(seconds: 1));
               return [];
             },
-            contentBuilder: (_, _, _) => [const FSelectItem(title: Text('A'), value: 'A')],
+            contentBuilder: (_, _, _) => [.item(title: const Text('A'), value: 'A')],
           ),
         ),
       );
@@ -113,7 +113,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           theme: theme.data,
-          alignment: Alignment.topCenter,
+          alignment: .topCenter,
           child: FSelect<String>.searchBuilder(
             key: key,
             format: (s) => s,
@@ -121,7 +121,7 @@ void main() {
               await Future.delayed(const Duration(seconds: 5));
               throw ArgumentError();
             },
-            contentBuilder: (_, _, _) => [const FSelectItem(title: Text('A'), value: 'A')],
+            contentBuilder: (_, _, _) => [.item(title: const Text('A'), value: 'A')],
             contentErrorBuilder: (_, error, trace) => Container(color: Colors.red, height: 10, width: 10),
           ),
         ),
@@ -142,7 +142,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           theme: theme.data,
-          alignment: Alignment.topCenter,
+          alignment: .topCenter,
           child: FSelect<String>.searchBuilder(
             key: key,
             format: (s) => s,
@@ -150,7 +150,7 @@ void main() {
               await Future.delayed(const Duration(seconds: 5));
               throw ArgumentError();
             },
-            contentBuilder: (_, _, values) => [for (final v in values) FSelectItem(title: Text(v), value: v)],
+            contentBuilder: (_, _, values) => [for (final v in values) .item(title: Text(v), value: v)],
           ),
         ),
       );
@@ -172,7 +172,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           theme: theme.data,
-          alignment: Alignment.topCenter,
+          alignment: .topCenter,
           child: FSelect<String>.searchBuilder(
             key: key,
             format: (s) => s,

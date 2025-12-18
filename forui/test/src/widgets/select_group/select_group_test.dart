@@ -40,7 +40,7 @@ void main() {
   });
 
   group('managed', () {
-    testWidgets('onChange callback called on controller value change', (tester) async {
+    testWidgets('onChange called', (tester) async {
       final controller = autoDispose(FMultiValueNotifier<int>());
       Set<int>? changedValue;
 
@@ -72,7 +72,7 @@ void main() {
         child: Form(
           key: key,
           child: FSelectGroup<int>(
-            control: .managed(controller: autoDispose(FMultiValueNotifier(value: {1}))),
+            control: const .managed(initial: {1}),
             children: [.radio(label: const Text('1'), value: 1)],
             onSaved: (value) => initial = value,
           ),

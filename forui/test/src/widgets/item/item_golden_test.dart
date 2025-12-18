@@ -286,7 +286,7 @@ void main() {
           child: SizedBox(
             width: 300,
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const .all(8.0),
               child: FItem(
                 prefix: const Icon(FIcons.bluetooth),
                 title: const Text('L                               ong'),
@@ -308,7 +308,7 @@ void main() {
           child: SizedBox(
             width: 300,
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const .all(8.0),
               child: FItem(
                 prefix: const Icon(FIcons.bluetooth),
                 title: const Text('Title'),
@@ -331,7 +331,7 @@ void main() {
           child: SizedBox(
             width: 300,
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const .all(8.0),
               child: FItem(
                 prefix: const Icon(FIcons.bluetooth),
                 title: const Text('Title'),

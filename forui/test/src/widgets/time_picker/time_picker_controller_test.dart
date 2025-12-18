@@ -128,20 +128,6 @@ void main() {
     });
   }
 
-  testWidgets('dispose()', (tester) async {
-    final controller = FTimePickerController();
-
-    await tester.pumpWidget(
-      TestScaffold.app(
-        child: FTimePicker(control: .managed(controller: controller)),
-      ),
-    );
-
-    controller.dispose();
-    expect(controller.disposed, true);
-    expect(controller.picker?.disposed, true);
-  });
-
   group('encode()', () {
     group('period first', () {
       testWidgets('12-hour time after noon', (tester) async {

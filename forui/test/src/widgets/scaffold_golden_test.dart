@@ -83,7 +83,7 @@ void main() {
                               height: .infinity,
                               width: .infinity,
                               decoration: BoxDecoration(
-                                border: Border.all(color: context.theme.colors.primary),
+                                border: .all(color: context.theme.colors.primary),
                                 color: context.theme.colors.background,
                               ),
                               child: const Center(child: Text('sheet')),
