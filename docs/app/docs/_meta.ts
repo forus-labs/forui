@@ -2,6 +2,7 @@ const meta = {
   index: 'Getting Started',
   themes: 'Themes',
   cli: 'CLI',
+  controls: 'Controls',
   localization: 'Localization',
   responsive: 'Responsive',
   'icon-library': 'Icon Library',
