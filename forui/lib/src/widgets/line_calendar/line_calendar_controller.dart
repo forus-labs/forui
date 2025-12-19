@@ -159,10 +159,10 @@ class FLineCalendarManagedControl extends FLineCalendarControl with Diagnosticab
         controller == null || selectable == null,
         'Cannot provide both controller and selectable. Pass selectable to the controller instead.',
       ),
-        assert(
+      assert(
         controller == null || toggleable == null,
         'Cannot provide both controller and toggleable. Pass toggleable to the controller instead.',
-        ),
+      ),
       super._();
 
   @override

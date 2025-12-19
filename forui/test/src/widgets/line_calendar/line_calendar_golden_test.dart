@@ -106,10 +106,7 @@ void main() {
           ),
         );
 
-        await expectLater(
-          find.byType(TestScaffold),
-          matchesGoldenFile('line-calendar/${theme.name}/disabled.png'),
-        );
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('line-calendar/${theme.name}/disabled.png'));
       });
 
       testWidgets('${theme.name} - disabled focused', (tester) async {

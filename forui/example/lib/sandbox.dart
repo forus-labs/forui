@@ -41,8 +41,12 @@ class _SandboxState extends State<Sandbox> with SingleTickerProviderStateMixin {
       spacing: 5,
       mainAxisSize: .min,
       children: [
-        FLineCalendar(control: .managed(initial: .now().subtract(const Duration(days: 1)), selectable: (d) => d.day != 18)),
-        FCalendar(control: .managedDate(initial: DateTime(2025, 12, 18), selectable: (d) => d.day != 18)),
+        FLineCalendar(
+          control: .managed(initial: .now().subtract(const Duration(days: 1)), selectable: (d) => d.day != 18),
+        ),
+        FCalendar(
+          control: .managedDate(initial: DateTime(2025, 12, 18), selectable: (d) => d.day != 18),
+        ),
       ],
     ),
   );
