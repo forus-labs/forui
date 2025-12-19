@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/widgets.dart';
 
 import 'package:flutter_test/flutter_test.dart';
@@ -50,14 +48,11 @@ void main() {
             const Text('Lorem ipsum dolor sit amet, consectetur adipiscing elit.'),
             FToast(
               style: FThemes.zinc.light.toasterStyle.toastStyle.copyWith(
-                backgroundFilter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+                backgroundFilter: .blur(sigmaX: 5, sigmaY: 5),
                 decoration: BoxDecoration(
                   color: FThemes.zinc.light.colors.background.withValues(alpha: 0.5),
                   borderRadius: FThemes.zinc.light.style.borderRadius,
-                  border: Border.all(
-                    width: FThemes.zinc.light.style.borderWidth,
-                    color: FThemes.zinc.light.colors.border,
-                  ),
+                  border: .all(width: FThemes.zinc.light.style.borderWidth, color: FThemes.zinc.light.colors.border),
                 ),
               ),
               title: const Text('Event has been created'),

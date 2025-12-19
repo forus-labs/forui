@@ -35,11 +35,11 @@ void main() {
             format: Text.new,
             style: TestScaffold.blueScreen.multiSelectStyle,
             children: [
-              const FSelectSection.rich(
-                label: Text('A'),
-                children: [FSelectItem(title: Text('B'), value: 'B')],
+              .richSection(
+                label: const Text('A'),
+                children: [const .item(title: Text('B'), value: 'B')],
               ),
-              for (int i = 0; i < 10; i++) FSelectItem(title: Text('$i'), value: '$i'),
+              for (int i = 0; i < 10; i++) .item(title: Text('$i'), value: '$i'),
             ],
           ),
         ),
@@ -78,11 +78,11 @@ void main() {
             style: TestScaffold.blueScreen.multiSelectStyle,
             contentScrollHandles: true,
             children: [
-              const FSelectSection.rich(
-                label: Text('A'),
-                children: [FSelectItem(title: Text('B'), value: 'B')],
+              .richSection(
+                label: const Text('A'),
+                children: [const .item(title: Text('B'), value: 'B')],
               ),
-              for (int i = 0; i < 10; i++) FSelectItem(title: Text('$i'), value: '$i'),
+              for (int i = 0; i < 10; i++) .item(title: Text('$i'), value: '$i'),
             ],
           ),
         ),
@@ -120,7 +120,7 @@ void main() {
             style: TestScaffold.blueScreen.multiSelectStyle,
             contentScrollHandles: true,
             filter: (_) => [],
-            contentBuilder: (_, _, _) => [for (int i = 0; i < 10; i++) FSelectItem(title: Text('$i'), value: '$i')],
+            contentBuilder: (_, _, _) => [for (int i = 0; i < 10; i++) .item(title: Text('$i'), value: '$i')],
           ),
         ),
       );
@@ -143,7 +143,7 @@ void main() {
               await Future.delayed(const Duration(seconds: 1));
               return [];
             },
-            contentBuilder: (_, _, _) => [for (int i = 0; i < 10; i++) FSelectItem(title: Text('$i'), value: '$i')],
+            contentBuilder: (_, _, _) => [for (int i = 0; i < 10; i++) .item(title: Text('$i'), value: '$i')],
           ),
         ),
       );
@@ -179,9 +179,9 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           theme: theme.data,
-          alignment: Alignment.topCenter,
+          alignment: .topCenter,
           child: FMultiSelect(
-            control: const FMultiValueControl.managed(initial: {'Apple', 'Banana'}),
+            control: const .managed(initial: {'Apple', 'Banana'}),
             items: letters,
             key: key,
           ),
@@ -198,7 +198,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           theme: theme.data,
-          alignment: Alignment.topCenter,
+          alignment: .topCenter,
           child: FMultiSelect<String>.search(
             letters,
             key: key,
@@ -221,7 +221,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           theme: theme.data,
-          alignment: Alignment.topCenter,
+          alignment: .topCenter,
           child: FMultiSelect<String>(items: const {}, key: key),
         ),
       );
@@ -236,9 +236,9 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           theme: theme.data,
-          alignment: Alignment.topCenter,
+          alignment: .topCenter,
           child: FMultiSelect(
-            control: const FMultiValueControl.managed(initial: {'Apple', 'Banana'}),
+            control: const .managed(initial: {'Apple', 'Banana'}),
             items: letters,
             clearable: true,
             key: key,
@@ -256,9 +256,9 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           theme: theme.data,
-          alignment: Alignment.topCenter,
+          alignment: .topCenter,
           child: FMultiSelect(
-            control: const FMultiValueControl.managed(initial: {'Apple', 'Banana'}),
+            control: const .managed(initial: {'Apple', 'Banana'}),
             items: letters,
             clearable: true,
             key: key,
@@ -283,9 +283,9 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           theme: theme.data,
-          alignment: Alignment.topCenter,
+          alignment: .topCenter,
           child: FMultiSelect(
-            control: const FMultiValueControl.managed(initial: {'Apple', 'Banana'}),
+            control: const .managed(initial: {'Apple', 'Banana'}),
             items: letters,
             label: const Text('Fruits'),
             description: const Text('Select your favorite fruits'),
@@ -302,9 +302,9 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           theme: theme.data,
-          alignment: Alignment.topCenter,
+          alignment: .topCenter,
           child: FMultiSelect(
-            control: const FMultiValueControl.managed(initial: {'Apple', 'Banana'}),
+            control: const .managed(initial: {'Apple', 'Banana'}),
             items: letters,
             enabled: false,
             label: const Text('Fruits'),
@@ -322,13 +322,13 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           theme: theme.data,
-          alignment: Alignment.topCenter,
+          alignment: .topCenter,
           child: FMultiSelect(
-            control: const FMultiValueControl.managed(initial: {'Apple', 'Banana'}),
+            control: const .managed(initial: {'Apple', 'Banana'}),
             items: letters,
             label: const Text('Fruits'),
             description: const Text('Select your favorite fruits'),
-            autovalidateMode: AutovalidateMode.always,
+            autovalidateMode: .always,
             validator: (value) => value.isNotEmpty ? 'Too many fruits' : null,
             clearable: true,
             key: key,
@@ -350,7 +350,7 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.app(
         locale: const Locale('fr'),
-        alignment: Alignment.topCenter,
+        alignment: .topCenter,
         child: FMultiSelect<int>(items: const {'1': 1, '2': 2}, key: key),
       ),
     );
@@ -364,7 +364,7 @@ void main() {
   testWidgets('show hint when no items selected', (tester) async {
     await tester.pumpWidget(
       TestScaffold.app(
-        alignment: Alignment.topCenter,
+        alignment: .topCenter,
         child: FMultiSelect<int>(items: const {'1': 1, '2': 2}, hint: const Text('hint'), keepHint: false, key: key),
       ),
     );
@@ -378,7 +378,7 @@ void main() {
   testWidgets('hide hint when items selected', (tester) async {
     await tester.pumpWidget(
       TestScaffold.app(
-        alignment: Alignment.topCenter,
+        alignment: .topCenter,
         child: FMultiSelect<int>(items: const {'1': 1, '2': 2}, hint: const Text('hint'), keepHint: false, key: key),
       ),
     );
@@ -395,9 +395,9 @@ void main() {
   testWidgets('automatically wraps tag', (tester) async {
     await tester.pumpWidget(
       TestScaffold.app(
-        alignment: Alignment.topCenter,
+        alignment: .topCenter,
         child: FMultiSelect<String>(
-          control: const FMultiValueControl.managed(
+          control: const .managed(
             initial: {
               'Apple',
               'Banana',
@@ -425,9 +425,9 @@ void main() {
   testWidgets('automatically wraps', (tester) async {
     await tester.pumpWidget(
       TestScaffold.app(
-        alignment: Alignment.topCenter,
+        alignment: .topCenter,
         child: FMultiSelect<String>(
-          control: const FMultiValueControl.managed(
+          control: const .managed(
             initial: {'Apple', 'Banana', 'Cherry', 'Dragonfruit', 'Elderberry', 'Fig', 'Grape', 'Honeydew'},
           ),
           items: letters,
@@ -445,9 +445,9 @@ void main() {
   testWidgets('custom tag builder', (tester) async {
     await tester.pumpWidget(
       TestScaffold.app(
-        alignment: Alignment.topCenter,
+        alignment: .topCenter,
         child: FMultiSelect<String>(
-          control: const FMultiValueControl.managed(initial: {'Apple', 'Banana', 'Cherry'}),
+          control: const .managed(initial: {'Apple', 'Banana', 'Cherry'}),
           items: letters,
           tagBuilder: (context, _, _, _, child) => child,
           key: key,
@@ -464,9 +464,9 @@ void main() {
   testWidgets('focus on most recently selected item', (tester) async {
     await tester.pumpWidget(
       TestScaffold.app(
-        alignment: Alignment.topCenter,
+        alignment: .topCenter,
         child: FMultiSelect<String>(
-          control: const FMultiValueControl.managed(initial: {'Grape', 'Apple', 'Banana'}),
+          control: const .managed(initial: {'Grape', 'Apple', 'Banana'}),
           items: letters,
           key: key,
         ),
@@ -482,9 +482,9 @@ void main() {
   testWidgets('sort', (tester) async {
     await tester.pumpWidget(
       TestScaffold.app(
-        alignment: Alignment.topCenter,
+        alignment: .topCenter,
         child: FMultiSelect<String>(
-          control: const FMultiValueControl.managed(initial: {'Grape', 'Apple', 'Banana'}),
+          control: const .managed(initial: {'Grape', 'Apple', 'Banana'}),
           items: letters,
           sort: (a, b) => a.compareTo(b),
           key: key,

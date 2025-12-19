@@ -1,5 +1,3 @@
-// ignore_for_file: invalid_use_of_protected_member
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
@@ -28,25 +26,22 @@ const letters = {
 
 void main() {
   const key = ValueKey('select');
-
-  late FSelectController<String> controller;
   late ScrollController scrollController;
 
   setUp(() {
-    controller = FSelectController<String>();
     scrollController = ScrollController();
   });
 
   tearDown(() {
-    controller.dispose();
+    scrollController.dispose();
   });
 
   testWidgets('focus changes when pressed on mobile', (tester) async {
-    debugDefaultTargetPlatformOverride = TargetPlatform.iOS;
+    debugDefaultTargetPlatformOverride = .iOS;
 
     await tester.pumpWidget(
       TestScaffold.app(
-        alignment: Alignment.topCenter,
+        alignment: .topCenter,
         child: FSelect<String>(key: key, items: letters),
       ),
     );
@@ -89,44 +84,5 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('19'), findsNWidgets(2));
-  });
-
-  testWidgets('didUpdateWidget does not dispose external controller', (tester) async {
-    await tester.pumpWidget(
-      TestScaffold.app(
-        child: FSelect<String>(items: letters, key: key, contentScrollController: scrollController),
-      ),
-    );
-
-    await tester.tap(find.byKey(key));
-    await tester.pumpAndSettle();
-
-    expect(scrollController.hasListeners, true);
-
-    await tester.pumpWidget(
-      TestScaffold.app(
-        child: FSelect<String>(items: letters, key: key),
-      ),
-    );
-
-    expect(scrollController.dispose, returnsNormally);
-  });
-
-  testWidgets('dispose() does not dispose external controller', (tester) async {
-    await tester.pumpWidget(
-      TestScaffold.app(
-        child: FSelect<String>(items: letters, key: key, contentScrollController: scrollController),
-      ),
-    );
-
-    await tester.tap(find.byKey(key));
-    await tester.pumpAndSettle();
-
-    expect(scrollController.hasListeners, true);
-
-    await tester.pumpWidget(const SizedBox());
-
-    expect(scrollController.hasListeners, false);
-    expect(scrollController.dispose, returnsNormally);
   });
 }

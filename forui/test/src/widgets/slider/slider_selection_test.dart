@@ -101,7 +101,7 @@ void main() {
       List<double> ticks = const [0, 0.125, 0.25, 0.5, 0.75, 0.875, 1],
       ({double min, double max}) extent = (min: 0.01, max: 0.6),
     }) => DiscreteValue(
-      ticks: SplayTreeMap.fromIterable(ticks, value: (_) {}),
+      ticks: .fromIterable(ticks, value: (_) {}),
       extent: 100.0,
       constraints: extent,
       min: min,
@@ -111,14 +111,14 @@ void main() {
     for (final constructor in [
       () => DiscreteValue(ticks: SplayTreeMap(), extent: 100.0, constraints: (min: 0, max: 1), min: 0.1, max: 0.2),
       () => DiscreteValue(
-        ticks: SplayTreeMap.fromIterable([-1.0], value: (_) {}),
+        ticks: .fromIterable([-1.0], value: (_) {}),
         extent: 100.0,
         constraints: (min: 0, max: 1),
         min: 0.1,
         max: 0.2,
       ),
       () => DiscreteValue(
-        ticks: SplayTreeMap.fromIterable([1.1], value: (_) {}),
+        ticks: .fromIterable([1.1], value: (_) {}),
         extent: 100.0,
         constraints: (min: 0, max: 1),
         min: 0.1,

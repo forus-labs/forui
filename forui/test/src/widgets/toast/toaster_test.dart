@@ -9,11 +9,11 @@ import '../../test_scaffold.dart';
 Widget small(
   String text, [
   String? button,
-  FToastAlignment alignment = FToastAlignment.bottomRight,
+  FToastAlignment alignment = .bottomRight,
   Duration? duration = const Duration(seconds: 5),
 ]) => Builder(
   builder: (context) => FButton(
-    mainAxisSize: MainAxisSize.min,
+    mainAxisSize: .min,
     onPress: () => showRawFToast(
       alignment: alignment,
       context: context,
@@ -21,8 +21,8 @@ Widget small(
       builder: (_, _) => Container(
         width: 250,
         height: 143,
-        alignment: Alignment.center,
-        decoration: BoxDecoration(border: Border.all(), borderRadius: BorderRadius.circular(8), color: Colors.blue),
+        alignment: .center,
+        decoration: BoxDecoration(border: .all(), borderRadius: .circular(8), color: Colors.blue),
         child: Text(text),
       ),
     ),
@@ -31,12 +31,12 @@ Widget small(
 );
 
 Widget button([
-  FToastAlignment alignment = FToastAlignment.bottomRight,
+  FToastAlignment alignment = .bottomRight,
   List<AxisDirection>? swipeToDismiss,
   Duration? duration = const Duration(seconds: 5),
 ]) => Builder(
   builder: (context) => FButton(
-    mainAxisSize: MainAxisSize.min,
+    mainAxisSize: .min,
     onPress: () {
       for (var i = 1; i <= 3; i++) {
         showRawFToast(
@@ -47,8 +47,8 @@ Widget button([
           builder: (_, _) => Container(
             width: 250,
             height: 143,
-            alignment: Alignment.center,
-            decoration: BoxDecoration(border: Border.all(), borderRadius: BorderRadius.circular(8), color: Colors.blue),
+            alignment: .center,
+            decoration: BoxDecoration(border: .all(), borderRadius: .circular(8), color: Colors.blue),
             child: Text('$i'),
           ),
         );
@@ -67,7 +67,7 @@ void main() {
             child: FToaster(
               style: FThemes.zinc.light.toasterStyle.copyWith(expandBehavior: behavior),
               child: Center(
-                child: Column(mainAxisSize: MainAxisSize.min, children: [small('1')]),
+                child: Column(mainAxisSize: .min, children: [small('1')]),
               ),
             ),
           ),
@@ -89,10 +89,7 @@ void main() {
             child: FToaster(
               style: FThemes.zinc.light.toasterStyle.copyWith(expandBehavior: behavior),
               child: Center(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [small('1', null, FToastAlignment.bottomRight, null)],
-                ),
+                child: Column(mainAxisSize: .min, children: [small('1', null, .bottomRight, null)]),
               ),
             ),
           ),
@@ -114,7 +111,7 @@ void main() {
             child: FToaster(
               style: FThemes.zinc.light.toasterStyle.copyWith(expandBehavior: behavior),
               child: Center(
-                child: Column(mainAxisSize: MainAxisSize.min, children: [small('1')]),
+                child: Column(mainAxisSize: .min, children: [small('1')]),
               ),
             ),
           ),
@@ -141,7 +138,7 @@ void main() {
             child: FToaster(
               style: FThemes.zinc.light.toasterStyle.copyWith(expandBehavior: behavior),
               child: Center(
-                child: Column(mainAxisSize: MainAxisSize.min, children: [small('1'), small('2'), small('3')]),
+                child: Column(mainAxisSize: .min, children: [small('1'), small('2'), small('3')]),
               ),
             ),
           ),
@@ -174,7 +171,7 @@ void main() {
       TestScaffold(
         child: FToaster(
           child: Center(
-            child: Column(mainAxisSize: MainAxisSize.min, children: [button()]),
+            child: Column(mainAxisSize: .min, children: [button()]),
           ),
         ),
       ),
@@ -218,9 +215,9 @@ void main() {
               child: FToaster(
                 child: Center(
                   child: Column(
-                    mainAxisSize: MainAxisSize.min,
+                    mainAxisSize: .min,
                     children: [
-                      button(FToastAlignment.bottomCenter, [direction]),
+                      button(.bottomCenter, [direction]),
                     ],
                   ),
                 ),
@@ -251,9 +248,9 @@ void main() {
               child: FToaster(
                 child: Center(
                   child: Column(
-                    mainAxisSize: MainAxisSize.min,
+                    mainAxisSize: .min,
                     children: [
-                      button(FToastAlignment.bottomCenter, [direction]),
+                      button(.bottomCenter, [direction]),
                     ],
                   ),
                 ),
@@ -283,7 +280,7 @@ void main() {
             TestScaffold(
               child: FToaster(
                 child: Center(
-                  child: Column(mainAxisSize: MainAxisSize.min, children: [button(FToastAlignment.bottomCenter, [])]),
+                  child: Column(mainAxisSize: .min, children: [button(.bottomCenter, [])]),
                 ),
               ),
             ),
@@ -313,9 +310,9 @@ void main() {
                 child: FToaster(
                   child: Center(
                     child: Column(
-                      mainAxisSize: MainAxisSize.min,
+                      mainAxisSize: .min,
                       children: [
-                        button(FToastAlignment.bottomCenter, [direction]),
+                        button(.bottomCenter, [direction]),
                       ],
                     ),
                   ),

@@ -36,14 +36,11 @@ void main() {
 
   group('managed', () {
     testWidgets('onChange called', (tester) async {
-      final controller = autoDispose(FPaginationController(pages: 10));
       var value = -1;
 
       await tester.pumpWidget(
         TestScaffold(
-          child: FPagination(
-            control: .managed(controller: controller, onChange: (v) => value = v),
-          ),
+          child: FPagination(control: .managed(pages: 10, onChange: (v) => value = v)),
         ),
       );
 

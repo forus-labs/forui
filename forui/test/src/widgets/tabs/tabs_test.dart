@@ -136,7 +136,7 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.app(
         child: FTabs(
-          control: .managed(controller: autoDispose(FTabController(index: 1, length: 2, vsync: tester))),
+          control: const .managed(initial: 1),
           children: [
             FTabEntry(
               label: const Text('Account'),
@@ -204,33 +204,10 @@ void main() {
     expect(find.text('bar content'), findsNothing);
   });
 
-  testWidgets('tapping on tab with internal controller switches tab entry', (tester) async {
+  testWidgets('tapping on tab switches tab entry', (tester) async {
     await tester.pumpWidget(
       TestScaffold.app(
         child: FTabs(
-          children: const [
-            FTabEntry(label: Text('foo'), child: Text('foo content')),
-            FTabEntry(label: Text('bar'), child: Text('bar content')),
-          ],
-        ),
-      ),
-    );
-
-    expect(find.text('bar content'), findsNothing);
-
-    await tester.tap(find.text('bar'));
-    await tester.pumpAndSettle();
-
-    expect(find.text('bar content'), findsOneWidget);
-  });
-
-  testWidgets('tapping on tab with external controller switches tab entry', (tester) async {
-    final controller = autoDispose(FTabController(length: 2, vsync: tester));
-
-    await tester.pumpWidget(
-      TestScaffold.app(
-        child: FTabs(
-          control: .managed(controller: controller),
           children: const [
             FTabEntry(label: Text('foo'), child: Text('foo content')),
             FTabEntry(label: Text('bar'), child: Text('bar content')),

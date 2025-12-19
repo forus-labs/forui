@@ -105,7 +105,6 @@ void main() {
   });
 
   testWidgets('initial type changes', (tester) async {
-    final controller = autoDispose(FCalendarController.date(initial: DateTime(2024, 7, 14)));
     final type = autoDispose(ValueNotifier(FCalendarPickerType.yearMonth));
 
     await tester.pumpWidget(
@@ -113,7 +112,7 @@ void main() {
         child: ValueListenableBuilder(
           valueListenable: type,
           builder: (context, value, _) => FCalendar(
-            control: .managedDate(controller: controller),
+            control: .managedDate(initial: DateTime(2024, 7, 14)),
             start: DateTime(1900, 1, 8),
             end: DateTime(2025, 7, 10),
             initialType: value,
@@ -125,7 +124,7 @@ void main() {
 
     expect(find.text('2023'), findsOneWidget);
 
-    type.value = FCalendarPickerType.day;
+    type.value = .day;
     await tester.pumpAndSettle();
 
     expect(find.text('2023'), findsOneWidget);
@@ -246,24 +245,18 @@ void main() {
   });
 
   group('year month picker', () {
-    late FCalendarController<Set<DateTime>> controller;
     late Widget calendar;
 
     setUp(() {
-      controller = FCalendarController.dates();
       calendar = TestScaffold.app(
         child: FCalendar(
-          control: .managedDates(controller: controller),
-          initialType: FCalendarPickerType.yearMonth,
+          control: .managedDates(),
+          initialType: .yearMonth,
           start: DateTime(2023, 2, 8),
           end: DateTime(2025, 8, 10),
           today: DateTime(2024, 7, 14),
         ),
       );
-    });
-
-    tearDown(() {
-      controller.dispose();
     });
 
     for (final (year, mmm, mmmm) in [(2023, 'Feb', 'February'), (2025, 'Aug', 'August')]) {
@@ -324,7 +317,7 @@ void main() {
           TestScaffold.app(
             child: FCalendar(
               control: .managedDates(),
-              initialType: FCalendarPickerType.yearMonth,
+              initialType: .yearMonth,
               start: DateTime(2023, 9, 8),
               end: DateTime(2025, 5, 10),
               today: DateTime(2024, 7, 14),

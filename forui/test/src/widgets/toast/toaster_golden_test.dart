@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 
 import 'package:flutter_test/flutter_test.dart';
@@ -7,17 +5,17 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:forui/forui.dart';
 import '../../test_scaffold.dart';
 
-Widget small(String text, [FToastAlignment alignment = FToastAlignment.bottomRight]) => Builder(
+Widget small(String text, [FToastAlignment alignment = .bottomRight]) => Builder(
   builder: (context) => FButton(
-    mainAxisSize: MainAxisSize.min,
+    mainAxisSize: .min,
     onPress: () => showRawFToast(
       alignment: alignment,
       context: context,
       builder: (_, _) => Container(
         width: 250,
         height: 143,
-        alignment: Alignment.center,
-        decoration: BoxDecoration(border: Border.all(), borderRadius: BorderRadius.circular(8), color: Colors.blue),
+        alignment: .center,
+        decoration: BoxDecoration(border: .all(), borderRadius: .circular(8), color: Colors.blue),
         child: Text(text),
       ),
     ),
@@ -25,17 +23,17 @@ Widget small(String text, [FToastAlignment alignment = FToastAlignment.bottomRig
   ),
 );
 
-Widget big(String text, [FToastAlignment alignment = FToastAlignment.bottomRight]) => Builder(
+Widget big(String text, [FToastAlignment alignment = .bottomRight]) => Builder(
   builder: (context) => FButton(
-    mainAxisSize: MainAxisSize.min,
+    mainAxisSize: .min,
     onPress: () => showRawFToast(
       alignment: alignment,
       context: context,
       builder: (_, _) => Container(
         width: 312,
         height: 201,
-        alignment: Alignment.center,
-        decoration: BoxDecoration(border: Border.all(), borderRadius: BorderRadius.circular(8), color: Colors.red),
+        alignment: .center,
+        decoration: BoxDecoration(border: .all(), borderRadius: .circular(8), color: Colors.red),
         child: Text(text),
       ),
     ),
@@ -43,9 +41,9 @@ Widget big(String text, [FToastAlignment alignment = FToastAlignment.bottomRight
   ),
 );
 
-Widget closeable(String text, [FToastAlignment alignment = FToastAlignment.bottomRight]) => Builder(
+Widget closeable(String text, [FToastAlignment alignment = .bottomRight]) => Builder(
   builder: (context) => FButton(
-    mainAxisSize: MainAxisSize.min,
+    mainAxisSize: .min,
     onPress: () => showRawFToast(
       alignment: alignment,
       context: context,
@@ -54,8 +52,8 @@ Widget closeable(String text, [FToastAlignment alignment = FToastAlignment.botto
         child: Container(
           width: 312,
           height: 201,
-          alignment: Alignment.center,
-          decoration: BoxDecoration(border: Border.all(), borderRadius: BorderRadius.circular(8), color: Colors.red),
+          alignment: .center,
+          decoration: BoxDecoration(border: .all(), borderRadius: .circular(8), color: Colors.red),
           child: const Text('close'),
         ),
       ),
@@ -98,7 +96,7 @@ void main() {
             child: FToaster(
               child: Center(
                 child: Column(
-                  mainAxisSize: MainAxisSize.min,
+                  mainAxisSize: .min,
                   children: [small('1', alignment), small('2', alignment), small('3', alignment)],
                 ),
               ),
@@ -122,7 +120,7 @@ void main() {
             child: FToaster(
               child: Center(
                 child: Column(
-                  mainAxisSize: MainAxisSize.min,
+                  mainAxisSize: .min,
                   children: [small('1', alignment), big('2', alignment), small('3', alignment)],
                 ),
               ),
@@ -146,7 +144,7 @@ void main() {
             child: FToaster(
               child: Center(
                 child: Column(
-                  mainAxisSize: MainAxisSize.min,
+                  mainAxisSize: .min,
                   children: [small('1', alignment), small('2', alignment), big('3', alignment)],
                 ),
               ),
@@ -172,7 +170,7 @@ void main() {
             child: FToaster(
               child: Center(
                 child: Column(
-                  mainAxisSize: MainAxisSize.min,
+                  mainAxisSize: .min,
                   children: [small('1', alignment), small('2', alignment), small('3', alignment)],
                 ),
               ),
@@ -199,7 +197,7 @@ void main() {
             child: FToaster(
               child: Center(
                 child: Column(
-                  mainAxisSize: MainAxisSize.min,
+                  mainAxisSize: .min,
                   children: [small('1', alignment), big('2', alignment), small('3', alignment)],
                 ),
               ),
@@ -226,7 +224,7 @@ void main() {
             child: FToaster(
               child: Center(
                 child: Column(
-                  mainAxisSize: MainAxisSize.min,
+                  mainAxisSize: .min,
                   children: [small('1', alignment), small('2', alignment), big('3', alignment)],
                 ),
               ),
@@ -254,7 +252,7 @@ void main() {
       TestScaffold(
         child: FToaster(
           child: Center(
-            child: Column(mainAxisSize: MainAxisSize.min, children: [small('1'), small('2'), big('3'), small('4')]),
+            child: Column(mainAxisSize: .min, children: [small('1'), small('2'), big('3'), small('4')]),
           ),
         ),
       ),
@@ -277,7 +275,7 @@ void main() {
       TestScaffold(
         child: FToaster(
           child: Center(
-            child: Column(mainAxisSize: MainAxisSize.min, children: [small('1'), small('2'), closeable('3')]),
+            child: Column(mainAxisSize: .min, children: [small('1'), small('2'), closeable('3')]),
           ),
         ),
       ),
@@ -306,9 +304,9 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             child: FToaster(
-              style: FThemes.zinc.light.toasterStyle.copyWith(expandBehavior: FToasterExpandBehavior.always),
+              style: FThemes.zinc.light.toasterStyle.copyWith(expandBehavior: .always),
               child: Center(
-                child: Column(mainAxisSize: MainAxisSize.min, children: [small('1'), small('2'), big('3')]),
+                child: Column(mainAxisSize: .min, children: [small('1'), small('2'), big('3')]),
               ),
             ),
           ),
@@ -326,9 +324,9 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             child: FToaster(
-              style: FThemes.zinc.light.toasterStyle.copyWith(expandBehavior: FToasterExpandBehavior.always),
+              style: FThemes.zinc.light.toasterStyle.copyWith(expandBehavior: .always),
               child: Center(
-                child: Column(mainAxisSize: MainAxisSize.min, children: [small('1'), small('2'), big('3')]),
+                child: Column(mainAxisSize: .min, children: [small('1'), small('2'), big('3')]),
               ),
             ),
           ),
@@ -352,9 +350,9 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             child: FToaster(
-              style: FThemes.zinc.light.toasterStyle.copyWith(expandBehavior: FToasterExpandBehavior.disabled),
+              style: FThemes.zinc.light.toasterStyle.copyWith(expandBehavior: .disabled),
               child: Center(
-                child: Column(mainAxisSize: MainAxisSize.min, children: [small('1'), small('2'), big('3')]),
+                child: Column(mainAxisSize: .min, children: [small('1'), small('2'), big('3')]),
               ),
             ),
           ),
@@ -380,7 +378,7 @@ void main() {
           TestScaffold(
             child: FToaster(
               child: Center(
-                child: Column(mainAxisSize: MainAxisSize.min, children: [small('1'), small('2'), big('3')]),
+                child: Column(mainAxisSize: .min, children: [small('1'), small('2'), big('3')]),
               ),
             ),
           ),
@@ -399,7 +397,7 @@ void main() {
         await gesture.moveTo(tester.getCenter(find.text('3').last));
         await tester.pumpAndSettle(const Duration(seconds: 1));
 
-        await tester.tap(find.text('3').last, kind: PointerDeviceKind.mouse);
+        await tester.tap(find.text('3').last, kind: .mouse);
         await tester.pumpAndSettle(const Duration(seconds: 1));
         await expectLater(find.byType(TestScaffold), matchesGoldenFile('toast/hover-press.png'));
       });
@@ -409,7 +407,7 @@ void main() {
           TestScaffold(
             child: FToaster(
               child: Center(
-                child: Column(mainAxisSize: MainAxisSize.min, children: [small('1'), small('2'), big('3')]),
+                child: Column(mainAxisSize: .min, children: [small('1'), small('2'), big('3')]),
               ),
             ),
           ),
@@ -436,7 +434,7 @@ void main() {
           TestScaffold(
             child: FToaster(
               child: Center(
-                child: Column(mainAxisSize: MainAxisSize.min, children: [small('1'), small('2'), big('3')]),
+                child: Column(mainAxisSize: .min, children: [small('1'), small('2'), big('3')]),
               ),
             ),
           ),
@@ -453,7 +451,7 @@ void main() {
         await gesture.moveTo(tester.getCenter(find.text('3').last));
         await tester.pumpAndSettle(const Duration(seconds: 1));
 
-        await tester.drag(find.text('2').last, const Offset(200, 0), kind: PointerDeviceKind.mouse);
+        await tester.drag(find.text('2').last, const Offset(200, 0), kind: .mouse);
         await tester.pumpAndSettle(const Duration(seconds: 1));
         await expectLater(find.byType(TestScaffold), matchesGoldenFile('toast/mouse-swipe-dismiss.png'));
       });
@@ -463,7 +461,7 @@ void main() {
           TestScaffold(
             child: FToaster(
               child: Center(
-                child: Column(mainAxisSize: MainAxisSize.min, children: [small('1'), small('2'), big('3')]),
+                child: Column(mainAxisSize: .min, children: [small('1'), small('2'), big('3')]),
               ),
             ),
           ),
@@ -489,7 +487,7 @@ void main() {
           TestScaffold(
             child: FToaster(
               child: Center(
-                child: Column(mainAxisSize: MainAxisSize.min, children: [small('1'), small('2')]),
+                child: Column(mainAxisSize: .min, children: [small('1'), small('2')]),
               ),
             ),
           ),
@@ -523,9 +521,9 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             child: FToaster(
-              style: FThemes.zinc.light.toasterStyle.copyWith(expandBehavior: FToasterExpandBehavior.disabled),
+              style: FThemes.zinc.light.toasterStyle.copyWith(expandBehavior: .disabled),
               child: Center(
-                child: Column(mainAxisSize: MainAxisSize.min, children: [small('1'), small('2'), big('3')]),
+                child: Column(mainAxisSize: .min, children: [small('1'), small('2'), big('3')]),
               ),
             ),
           ),
@@ -549,9 +547,9 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             child: FToaster(
-              style: FThemes.zinc.light.toasterStyle.copyWith(expandBehavior: FToasterExpandBehavior.disabled),
+              style: FThemes.zinc.light.toasterStyle.copyWith(expandBehavior: .disabled),
               child: Center(
-                child: Column(mainAxisSize: MainAxisSize.min, children: [small('1'), small('2'), big('3')]),
+                child: Column(mainAxisSize: .min, children: [small('1'), small('2'), big('3')]),
               ),
             ),
           ),

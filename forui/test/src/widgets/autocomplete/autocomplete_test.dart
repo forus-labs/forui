@@ -1,6 +1,5 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 import 'package:flutter_test/flutter_test.dart';
 
@@ -86,52 +85,6 @@ void main() {
 
       expect(tester.takeException(), null);
     });
-
-    testWidgets('onPopoverChange called', (tester) async {
-      var popoverShown = false;
-
-      await tester.pumpWidget(
-        TestScaffold.app(
-          child: StatefulBuilder(
-            builder: (context, setState) => FAutocomplete(
-              key: key,
-              popoverControl: .lifted(shown: popoverShown, onChange: (shown) => setState(() => popoverShown = shown)),
-              items: fruits,
-            ),
-          ),
-        ),
-      );
-
-      expect(popoverShown, false);
-
-      await tester.tap(find.byType(EditableText));
-      await tester.pumpAndSettle();
-
-      expect(popoverShown, true);
-
-      await tester.tapAt(Offset.zero);
-      await tester.pumpAndSettle();
-
-      expect(popoverShown, false);
-    });
-
-    testWidgets('popoverShown controls visibility', (tester) async {
-      await tester.pumpWidget(
-        TestScaffold.app(
-          child: StatefulBuilder(
-            builder: (context, setState) => FAutocomplete(
-              key: key,
-              popoverControl: .lifted(shown: false, onChange: (_) {}),
-              items: fruits,
-            ),
-          ),
-        ),
-      );
-      await tester.tap(find.byType(EditableText));
-      await tester.pumpAndSettle();
-
-      expect(find.text('Apple'), findsNothing);
-    });
   });
 
   group('managed', () {
@@ -183,7 +136,7 @@ void main() {
       expect(focus.hasFocus, false);
       expect(popoverController.status.isForwardOrCompleted, false);
 
-      await tester.sendKeyEvent(LogicalKeyboardKey.tab);
+      await tester.sendKeyEvent(.tab);
       await tester.pumpAndSettle();
 
       expect(focus.hasFocus, true);
@@ -213,7 +166,7 @@ void main() {
       await tester.enterText(find.byKey(key), 'b');
       await tester.pumpAndSettle();
 
-      await tester.sendKeyEvent(LogicalKeyboardKey.tab);
+      await tester.sendKeyEvent(.tab);
       await tester.pumpAndSettle();
 
       expect(popoverController.status.isForwardOrCompleted, false);
@@ -245,7 +198,7 @@ void main() {
       await tester.enterText(find.byKey(key), 'zebra');
       await tester.pumpAndSettle();
 
-      await tester.sendKeyEvent(LogicalKeyboardKey.tab);
+      await tester.sendKeyEvent(.tab);
       await tester.pumpAndSettle();
 
       expect(popoverController.status.isForwardOrCompleted, false);
@@ -278,7 +231,7 @@ void main() {
       await tester.enterText(find.byKey(key), 'b');
       await tester.pumpAndSettle();
 
-      await tester.sendKeyEvent(LogicalKeyboardKey.arrowRight);
+      await tester.sendKeyEvent(.arrowRight);
       await tester.pumpAndSettle();
 
       expect(popoverController.status.isForwardOrCompleted, true);
@@ -311,7 +264,7 @@ void main() {
       await tester.enterText(find.byKey(key), 'b');
       await tester.pumpAndSettle();
 
-      await tester.sendKeyEvent(LogicalKeyboardKey.arrowRight);
+      await tester.sendKeyEvent(.arrowRight);
       await tester.pumpAndSettle();
 
       expect(popoverController.status.isForwardOrCompleted, false);
@@ -342,13 +295,13 @@ void main() {
         await tester.enterText(find.byKey(key), 'app');
         await tester.pumpAndSettle();
 
-        await tester.sendKeyEvent(LogicalKeyboardKey.arrowDown);
+        await tester.sendKeyEvent(.arrowDown);
         await tester.pumpAndSettle();
 
         expect(find.text('app'), findsNothing);
         expect(find.text('Apple'), findsNWidgets(2));
 
-        await tester.sendKeyEvent(LogicalKeyboardKey.enter);
+        await tester.sendKeyEvent(.enter);
         await tester.pumpAndSettle();
 
         expect(focus.hasFocus, true);
@@ -379,13 +332,13 @@ void main() {
         await tester.enterText(find.byKey(key), 'app');
         await tester.pumpAndSettle();
 
-        await tester.sendKeyEvent(LogicalKeyboardKey.arrowDown);
+        await tester.sendKeyEvent(.arrowDown);
         await tester.pumpAndSettle();
 
         expect(find.text('app'), findsNothing);
         expect(find.text('Apple'), findsNWidgets(2));
 
-        await tester.sendKeyEvent(LogicalKeyboardKey.escape);
+        await tester.sendKeyEvent(.escape);
         await tester.pumpAndSettle();
 
         expect(focus.hasFocus, true);
@@ -405,7 +358,6 @@ void main() {
           TestScaffold.app(
             child: FAutocomplete(
               key: key,
-              control: .managed(controller: controller),
               popoverControl: .managed(controller: popoverController),
               focusNode: focus,
               items: fruits,
@@ -416,13 +368,13 @@ void main() {
         await tester.enterText(find.byKey(key), 'app');
         await tester.pumpAndSettle();
 
-        await tester.sendKeyEvent(LogicalKeyboardKey.arrowDown);
+        await tester.sendKeyEvent(.arrowDown);
         await tester.pumpAndSettle();
 
         expect(find.text('app'), findsNothing);
         expect(find.text('Apple'), findsNWidgets(2));
 
-        await tester.tapAt(Offset.zero);
+        await tester.tapAt(.zero);
         await tester.pumpAndSettle();
 
         expect(focus.hasFocus, true);

@@ -10,7 +10,7 @@ void main() {
     testWidgets('tap on barrier does not dismiss dialog', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
-          alignment: Alignment.topCenter,
+          alignment: .topCenter,
           child: Builder(
             builder: (context) => FButton(
               onPress: () => showFDialog(
@@ -46,7 +46,7 @@ void main() {
     testWidgets('tap on barrier dismisses dialog', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
-          alignment: Alignment.topCenter,
+          alignment: .topCenter,
           child: Builder(
             builder: (context) => FButton(
               onPress: () => showFDialog(
@@ -115,7 +115,7 @@ void main() {
         TestScaffold.app(
           child: Builder(
             builder: (context) => FButton(
-              mainAxisSize: MainAxisSize.min,
+              mainAxisSize: .min,
               onPress: () => showFDialog(
                 context: context,
                 builder: (context, style, animation) => FDialog(

@@ -174,7 +174,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold(
           theme: theme.data,
-          textDirection: TextDirection.rtl,
+          textDirection: .rtl,
           child: FSidebarItem(icon: const Icon(FIcons.box), label: const Text('Item'), onPress: () {}),
         ),
       );

@@ -25,30 +25,25 @@ const letters = {
 };
 
 void main() {
-  final localizations = FDefaultLocalizations();
   const key = ValueKey('select');
-
-  late FSelectController<String> controller;
+  final localizations = FDefaultLocalizations();
   late ScrollController scrollController;
 
   setUp(() {
-    controller = FSelectController<String>();
     scrollController = ScrollController();
   });
 
   tearDown(() {
     scrollController.dispose();
-    controller.dispose();
   });
 
   testWidgets('hover scrolls up', (tester) async {
     await tester.pumpWidget(
       TestScaffold.app(
-        alignment: Alignment.topCenter,
+        alignment: .topCenter,
         child: FSelect<String>(
           items: letters,
           key: key,
-          control: FSelectControl.managed(controller: controller),
           contentScrollController: scrollController,
           contentScrollHandles: true,
         ),
@@ -72,11 +67,10 @@ void main() {
   testWidgets('hover scrolls down', (tester) async {
     await tester.pumpWidget(
       TestScaffold.app(
-        alignment: Alignment.topCenter,
+        alignment: .topCenter,
         child: FSelect<String>(
           items: letters,
           key: key,
-          control: FSelectControl.managed(controller: controller),
           contentScrollController: scrollController,
           contentScrollHandles: true,
         ),
@@ -97,11 +91,10 @@ void main() {
   testWidgets('un-hover stops scroll', (tester) async {
     await tester.pumpWidget(
       TestScaffold.app(
-        alignment: Alignment.topCenter,
+        alignment: .topCenter,
         child: FSelect<String>(
           items: letters,
           key: key,
-          control: FSelectControl.managed(controller: controller),
           contentScrollController: scrollController,
           contentScrollHandles: true,
         ),
@@ -117,7 +110,7 @@ void main() {
     await tester.pump(const Duration(milliseconds: 200)); // Initial enter delay.
     await tester.pump(const Duration(milliseconds: 500));
 
-    await gesture.moveTo(Offset.zero);
+    await gesture.moveTo(.zero);
     await tester.pumpAndSettle(const Duration(milliseconds: 200));
 
     expect(scrollController.offset, isNot(0));
@@ -125,15 +118,14 @@ void main() {
   });
 
   testWidgets('press and un-press scrolls until the end on mobile', (tester) async {
-    debugDefaultTargetPlatformOverride = TargetPlatform.iOS;
+    debugDefaultTargetPlatformOverride = .iOS;
 
     await tester.pumpWidget(
       TestScaffold.app(
-        alignment: Alignment.topCenter,
+        alignment: .topCenter,
         child: FSelect<String>(
           items: letters,
           key: key,
-          control: FSelectControl.managed(controller: controller),
           contentScrollController: scrollController,
           contentScrollHandles: true,
         ),

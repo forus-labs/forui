@@ -73,11 +73,11 @@ void main() {
       TestScaffold.app(
         child: FPopoverMenu.tiles(
           menu: [
-            FTileGroup(
-              children: [FTile(title: const Text('Group 1'), onPress: () {})],
+            .group(
+              children: [.tile(title: const Text('Group 1'), onPress: () {})],
             ),
-            FTileGroup(
-              children: [FTile(title: const Text('Group 2'), onPress: () {})],
+            .group(
+              children: [.tile(title: const Text('Group 2'), onPress: () {})],
             ),
           ],
           builder: (_, controller, _) => FButton(onPress: controller.toggle, child: const Text('target')),
@@ -90,7 +90,7 @@ void main() {
 
     expect(find.text('Group 1'), findsOneWidget);
 
-    await tester.tapAt(Offset.zero);
+    await tester.tapAt(.zero);
     await tester.pumpAndSettle();
 
     expect(find.text('Group 1'), findsNothing);
@@ -100,13 +100,13 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.app(
         child: FPopoverMenu.tiles(
-          hideRegion: FPopoverHideRegion.none,
+          hideRegion: .none,
           menu: [
-            FTileGroup(
-              children: [FTile(title: const Text('Group 1'), onPress: () {})],
+            .group(
+              children: [.tile(title: const Text('Group 1'), onPress: () {})],
             ),
-            FTileGroup(
-              children: [FTile(title: const Text('Group 2'), onPress: () {})],
+            .group(
+              children: [.tile(title: const Text('Group 2'), onPress: () {})],
             ),
           ],
           builder: (_, controller, _) => FButton(onPress: controller.toggle, child: const Text('target')),
@@ -119,7 +119,7 @@ void main() {
 
     expect(find.text('Group 1'), findsOneWidget);
 
-    await tester.tapAt(Offset.zero);
+    await tester.tapAt(.zero);
     await tester.pumpAndSettle();
 
     expect(find.text('Group 1'), findsOneWidget);
@@ -130,11 +130,11 @@ void main() {
       TestScaffold.app(
         child: FPopoverMenu.tiles(
           menu: [
-            FTileGroup(
-              children: [FTile(title: const Text('Group 1'), onPress: () {})],
+            .group(
+              children: [.tile(title: const Text('Group 1'), onPress: () {})],
             ),
-            FTileGroup(
-              children: [FTile(title: const Text('Group 2'), onPress: () {})],
+            .group(
+              children: [.tile(title: const Text('Group 2'), onPress: () {})],
             ),
           ],
           builder: (_, controller, _) => FButton(onPress: controller.toggle, child: const Text('target')),

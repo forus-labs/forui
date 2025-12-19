@@ -4609,3 +4609,25 @@ transforms:
       - kind: renameParameter
         oldName: 'initialIndex'
         newName: 'index'
+
+  - title: 'Migrate FResizable(controller: ...) to control parameter'
+    date: 2025-12-18
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FResizable
+    variables:
+      controller:
+        kind: fragment
+        value: arguments[controller]
+    oneOf:
+      - if: "controller != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managedCascade(controller: {% controller %})'
+          - kind: removeParameter
+            name: 'controller'

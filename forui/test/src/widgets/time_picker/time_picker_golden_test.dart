@@ -41,8 +41,6 @@ void main() {
       ('Western 24-hour interval', const Locale('en'), true, 2, 5, 'western-24-interval.png'),
     ]) {
       testWidgets('${theme.name} $name', (tester) async {
-        controller = autoDispose(FTimePickerController(time: const FTime(10, 30)));
-
         await tester.pumpWidget(
           TestScaffold.app(
             theme: theme.data,
@@ -51,7 +49,7 @@ void main() {
               width: 300,
               height: 300,
               child: FTimePicker(
-                control: .managed(controller: controller),
+                control: const .managed(initial: FTime(10, 30)),
                 hour24: hour24,
                 hourInterval: hourInterval,
                 minuteInterval: minuteInterval,

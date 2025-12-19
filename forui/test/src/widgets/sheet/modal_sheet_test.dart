@@ -14,7 +14,7 @@ void main() {
             child: const Icon(FIcons.chevronRight),
             onPress: () => showFSheet(
               context: context,
-              side: FLayout.btt,
+              side: .btt,
               builder: (context) => Container(
                 height: .infinity,
                 width: .infinity,

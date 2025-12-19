@@ -54,7 +54,7 @@ void main() {
                 autoDispose(
                   showFPersistentSheet(
                     context: context,
-                    side: FLayout.btt,
+                    side: .btt,
                     keepAliveOffstage: true,
                     builder: (context, controller) => Container(
                       height: .infinity,
@@ -90,7 +90,7 @@ void main() {
               autoDispose(
                 showFPersistentSheet(
                   context: context,
-                  side: FLayout.btt,
+                  side: .btt,
                   builder: (context, controller) => Container(
                     height: .infinity,
                     width: .infinity,
@@ -123,7 +123,7 @@ void main() {
                   showFPersistentSheet(
                     key: const Key('test'),
                     context: context,
-                    side: FLayout.btt,
+                    side: .btt,
                     builder: (context, controller) => Container(
                       height: .infinity,
                       width: .infinity,
@@ -162,7 +162,7 @@ void main() {
               onPress: () {
                 controller = showFPersistentSheet(
                   context: context,
-                  side: FLayout.btt,
+                  side: .btt,
                   builder: (context, controller) => Container(
                     height: .infinity,
                     width: .infinity,

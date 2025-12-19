@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 import 'package:flutter_test/flutter_test.dart';
 
@@ -262,7 +261,7 @@ void main() {
       await tester.tap(find.byKey(key));
       await tester.pumpAndSettle(const Duration(seconds: 1));
 
-      await tester.tapAt(Offset.zero);
+      await tester.tapAt(.zero);
       await tester.pumpAndSettle(const Duration(seconds: 1));
 
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('autocomplete/${theme.name}/error.png'));
@@ -343,7 +342,7 @@ void main() {
 
     expect(focus.hasFocus, true);
 
-    await tester.sendKeyEvent(LogicalKeyboardKey.backspace);
+    await tester.sendKeyEvent(.backspace);
     await tester.pumpAndSettle();
 
     await expectLater(find.byType(TestScaffold), matchesGoldenFile('autocomplete/select-enter-text.png'));
@@ -366,7 +365,7 @@ void main() {
 
     expect(focus.hasFocus, true);
 
-    await tester.sendKeyEvent(LogicalKeyboardKey.arrowLeft);
+    await tester.sendKeyEvent(.arrowLeft);
     await tester.pumpAndSettle();
 
     await expectLater(find.byType(TestScaffold), matchesGoldenFile('autocomplete/select-move-selection.png'));

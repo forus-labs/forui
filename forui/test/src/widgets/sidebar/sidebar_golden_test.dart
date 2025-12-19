@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/widgets.dart';
 
 import 'package:flutter_test/flutter_test.dart';
@@ -216,7 +214,7 @@ void main() {
               const Text('Lorem ipsum dolor sit amet, consectetur adipiscing elit.'),
               FSidebar(
                 style: theme.data.sidebarStyle.copyWith(
-                  backgroundFilter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+                  backgroundFilter: .blur(sigmaX: 5, sigmaY: 5),
                   decoration: BoxDecoration(
                     color: theme.data.colors.background.withValues(alpha: 0.5),
                     borderRadius: theme.data.style.borderRadius,
@@ -254,7 +252,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold(
           theme: theme.data,
-          textDirection: TextDirection.rtl,
+          textDirection: .rtl,
           child: FSidebar(
             header: const Text('Header'),
             footer: const Text('Footer'),

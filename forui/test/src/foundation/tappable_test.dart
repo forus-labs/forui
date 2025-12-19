@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 import 'package:flutter_test/flutter_test.dart';
 
@@ -69,7 +68,7 @@ void main() {
 
         expect(find.text({...set(enabled), WidgetState.hovered}.toString()), findsOneWidget);
 
-        await gesture.moveTo(Offset.zero);
+        await gesture.moveTo(.zero);
         await tester.pumpAndSettle();
 
         expect(find.text(set(enabled).toString()), findsOneWidget);
@@ -158,7 +157,7 @@ void main() {
         expect(find.text({...set(enabled), WidgetState.pressed}.toString()), findsOneWidget);
         expect(key.currentState?.bounce?.value, enabled ? 0.97 : 1.0);
 
-        await gesture.moveTo(Offset.zero);
+        await gesture.moveTo(.zero);
         await tester.pumpAndSettle(const Duration(milliseconds: 200));
 
         expect(find.text({...set(enabled)}.toString()), findsOneWidget);
@@ -180,7 +179,7 @@ void main() {
           ),
         );
 
-        await tester.sendKeyEvent(LogicalKeyboardKey.enter);
+        await tester.sendKeyEvent(.enter);
         await tester.pumpAndSettle();
 
         expect(pressCount, enabled ? 1 : 0);
@@ -292,7 +291,7 @@ void main() {
       expect(delta, FWidgetStatesDelta({}, {.hovered}));
       expect(tester.takeException(), isNotNull);
 
-      await gesture.moveTo(Offset.zero);
+      await gesture.moveTo(.zero);
       await tester.pumpAndSettle();
 
       expect(delta, FWidgetStatesDelta({.hovered}, {}));
@@ -335,7 +334,7 @@ void main() {
 
         expect(find.text({...set(enabled), WidgetState.hovered}.toString()), findsOneWidget);
 
-        await gesture.moveTo(Offset.zero);
+        await gesture.moveTo(.zero);
         await tester.pumpAndSettle();
 
         expect(find.text(set(enabled).toString()), findsOneWidget);
@@ -415,7 +414,7 @@ void main() {
         await tester.pumpAndSettle(const Duration(milliseconds: 200));
         expect(find.text({...set(enabled), WidgetState.pressed}.toString()), findsOneWidget);
 
-        await gesture.moveTo(Offset.zero);
+        await gesture.moveTo(.zero);
         await tester.pumpAndSettle();
         expect(find.text(set(enabled).toString()), findsOneWidget);
       });
@@ -435,7 +434,7 @@ void main() {
           ),
         );
 
-        await tester.sendKeyEvent(LogicalKeyboardKey.enter);
+        await tester.sendKeyEvent(.enter);
         await tester.pumpAndSettle();
 
         expect(pressCount, enabled ? 1 : 0);
@@ -518,7 +517,7 @@ void main() {
       expect(delta, FWidgetStatesDelta({}, {.hovered}));
       expect(hovered, true);
 
-      await gesture.moveTo(Offset.zero);
+      await gesture.moveTo(.zero);
       await tester.pumpAndSettle();
 
       expect(delta, FWidgetStatesDelta({.hovered}, {}));

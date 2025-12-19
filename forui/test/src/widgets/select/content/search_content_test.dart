@@ -1,4 +1,3 @@
-import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:flutter_test/flutter_test.dart';
@@ -28,11 +27,9 @@ void main() {
   const key = ValueKey('select');
 
   late FSelectController<String> controller;
-  late TextEditingController textController;
 
   setUp(() {
     controller = FSelectController<String>();
-    textController = TextEditingController();
   });
 
   tearDown(() {
@@ -46,12 +43,9 @@ void main() {
           control: .managed(controller: controller),
           key: key,
           format: (s) => s,
-          searchFieldProperties: FSelectSearchFieldProperties(control: .managed(controller: textController)),
           filter: (query) =>
               query.isEmpty ? fruits : fruits.where((fruit) => fruit.toLowerCase().startsWith(query.toLowerCase())),
-          contentBuilder: (context, _, fruits) => [
-            for (final fruit in fruits) FSelectItem(title: Text(fruit), value: fruit),
-          ],
+          contentBuilder: (context, _, fruits) => [for (final fruit in fruits) .item(title: Text(fruit), value: fruit)],
         ),
       ),
     );
@@ -62,10 +56,10 @@ void main() {
     await tester.enterText(find.byType(FTextField).last, 'Ba');
     await tester.pumpAndSettle();
 
-    await tester.sendKeyEvent(LogicalKeyboardKey.enter);
+    await tester.sendKeyEvent(.enter);
     await tester.pumpAndSettle();
 
-    await tester.sendKeyEvent(LogicalKeyboardKey.enter);
+    await tester.sendKeyEvent(.enter);
     await tester.pumpAndSettle();
 
     expect(controller.value, 'Banana');
@@ -130,7 +124,7 @@ void main() {
     });
 
     group('managed', () {
-      testWidgets('onChange callback called', (tester) async {
+      testWidgets('onChange called', (tester) async {
         TextEditingValue? changedValue;
 
         await tester.pumpWidget(

@@ -17,11 +17,11 @@ void main() {
           style: TestScaffold.blueScreen.sliderStyles.horizontalStyle,
           control: .managedContinuous(initial: FSliderValue(min: 0.30, max: 0.60)),
           marks: const [
-            FSliderMark(value: 0.0, label: Text('0')),
-            FSliderMark(value: 0.25, label: Text('25'), tick: false),
-            FSliderMark(value: 0.5, label: Text('50')),
-            FSliderMark(value: 0.75, label: Text('75'), tick: false),
-            FSliderMark(value: 1.0, label: Text('100')),
+            .mark(value: 0.0, label: Text('0')),
+            .mark(value: 0.25, label: Text('25'), tick: false),
+            .mark(value: 0.5, label: Text('50')),
+            .mark(value: 0.75, label: Text('75'), tick: false),
+            .mark(value: 1.0, label: Text('100')),
           ],
         ),
       ),
@@ -57,12 +57,7 @@ void main() {
             child: StatefulBuilder(
               builder: (context, setState) => FSlider(
                 control: control(value!, (v) => setState(() => value = v)),
-                marks: const [
-                  FSliderMark(value: 0),
-                  FSliderMark(value: 0.25),
-                  FSliderMark(value: 0.5),
-                  FSliderMark(value: 1),
-                ],
+                marks: const [.mark(value: 0), .mark(value: 0.25), .mark(value: 0.5), .mark(value: 1)],
               ),
             ),
           ),
@@ -82,12 +77,7 @@ void main() {
             child: StatefulBuilder(
               builder: (context, setState) => FSlider(
                 control: control(FSliderValue(max: 0.25), (v) {}),
-                marks: const [
-                  FSliderMark(value: 0),
-                  FSliderMark(value: 0.25),
-                  FSliderMark(value: 0.5),
-                  FSliderMark(value: 1),
-                ],
+                marks: const [.mark(value: 0), .mark(value: 0.25), .mark(value: 0.5), .mark(value: 1)],
               ),
             ),
           ),
@@ -109,7 +99,7 @@ void main() {
           child: StatefulBuilder(
             builder: (context, setState) => FSlider(
               control: .liftedDiscrete(value: value, onChange: (v) => setState(() => value = v)),
-              marks: const [FSliderMark(value: 0), FSliderMark(value: 0.5), FSliderMark(value: 1)],
+              marks: const [.mark(value: 0), .mark(value: 0.5), .mark(value: 1)],
             ),
           ),
         ),
@@ -125,7 +115,7 @@ void main() {
           child: StatefulBuilder(
             builder: (context, setState) => FSlider(
               control: .liftedContinuousRange(value: value, onChange: (v) => setState(() => value = v)),
-              marks: const [FSliderMark(value: 0), FSliderMark(value: 0.5), FSliderMark(value: 1)],
+              marks: const [.mark(value: 0), .mark(value: 0.5), .mark(value: 1)],
             ),
           ),
         ),
@@ -159,11 +149,11 @@ void main() {
                   enabled: enabled,
                   trackMainAxisExtent: 300,
                   marks: const [
-                    FSliderMark(value: 0.0, label: Text('0')),
-                    FSliderMark(value: 0.25, label: Text('25'), tick: false),
-                    FSliderMark(value: 0.5, label: Text('50')),
-                    FSliderMark(value: 0.75, label: Text('75'), tick: false),
-                    FSliderMark(value: 1.0, label: Text('100')),
+                    .mark(value: 0.0, label: Text('0')),
+                    .mark(value: 0.25, label: Text('25'), tick: false),
+                    .mark(value: 0.5, label: Text('50')),
+                    .mark(value: 0.75, label: Text('75'), tick: false),
+                    .mark(value: 1.0, label: Text('100')),
                   ],
                 ),
               ),
@@ -204,11 +194,11 @@ void main() {
                 layout: layout,
                 trackMainAxisExtent: 300,
                 marks: const [
-                  FSliderMark(value: 0.0, label: Text('0')),
-                  FSliderMark(value: 0.25, label: Text('25'), tick: false),
-                  FSliderMark(value: 0.5, label: Text('50')),
-                  FSliderMark(value: 0.75, label: Text('75'), tick: false),
-                  FSliderMark(value: 1.0, label: Text('100')),
+                  .mark(value: 0.0, label: Text('0')),
+                  .mark(value: 0.25, label: Text('25'), tick: false),
+                  .mark(value: 0.5, label: Text('50')),
+                  .mark(value: 0.75, label: Text('75'), tick: false),
+                  .mark(value: 1.0, label: Text('100')),
                 ],
               ),
             ),
@@ -243,11 +233,11 @@ void main() {
                 layout: layout,
                 trackMainAxisExtent: 300,
                 marks: const [
-                  FSliderMark(value: 0.0, label: Text('0')),
-                  FSliderMark(value: 0.25, label: Text('25'), tick: false),
-                  FSliderMark(value: 0.5, label: Text('50')),
-                  FSliderMark(value: 0.75, label: Text('75'), tick: false),
-                  FSliderMark(value: 1.0, label: Text('100')),
+                  .mark(value: 0.0, label: Text('0')),
+                  .mark(value: 0.25, label: Text('25'), tick: false),
+                  .mark(value: 0.5, label: Text('50')),
+                  .mark(value: 0.75, label: Text('75'), tick: false),
+                  .mark(value: 1.0, label: Text('100')),
                 ],
               ),
             ),
@@ -277,11 +267,11 @@ void main() {
               control: .managedContinuous(initial: FSliderValue(min: 0.30, max: 0.60), thumb: min ? .min : .max),
               layout: layout,
               marks: const [
-                FSliderMark(value: 0.0, label: Text('0')),
-                FSliderMark(value: 0.25, label: Text('25'), tick: false),
-                FSliderMark(value: 0.5, label: Text('50')),
-                FSliderMark(value: 0.75, label: Text('75'), tick: false),
-                FSliderMark(value: 1.0, label: Text('100')),
+                .mark(value: 0.0, label: Text('0')),
+                .mark(value: 0.25, label: Text('25'), tick: false),
+                .mark(value: 0.5, label: Text('50')),
+                .mark(value: 0.75, label: Text('75'), tick: false),
+                .mark(value: 1.0, label: Text('100')),
               ],
             ),
           ),
@@ -312,8 +302,8 @@ void main() {
         final sliderStyles = FThemes.zinc.light.sliderStyles;
         sliderStyle = layout.vertical ? sliderStyles.verticalStyle : sliderStyles.horizontalStyle;
 
-        positive = layout.vertical ? Alignment.centerLeft : Alignment.topCenter;
-        negative = layout.vertical ? Alignment.centerRight : Alignment.bottomCenter;
+        positive = layout.vertical ? .centerLeft : .topCenter;
+        negative = layout.vertical ? .centerRight : .bottomCenter;
         marks = [
           FSliderMark(
             value: 0.0,
@@ -356,9 +346,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold.app(
             child: FSlider(
-              style: sliderStyle.copyWith(
-                childPadding: const EdgeInsets.only(left: 20, top: 40, right: 10, bottom: 30),
-              ),
+              style: sliderStyle.copyWith(childPadding: const .only(left: 20, top: 40, right: 10, bottom: 30)),
               control: .managedContinuous(initial: FSliderValue(min: 0.30, max: 0.60)),
               layout: layout,
               marks: marks,
@@ -394,11 +382,11 @@ void main() {
         child: FSlider(
           control: .managedContinuous(initial: FSliderValue(min: 0.30, max: 0.60)),
           marks: const [
-            FSliderMark(value: 0, label: Text('0%')),
-            FSliderMark(value: 0.25, tick: false),
-            FSliderMark(value: 0.5, label: Text('50%')),
-            FSliderMark(value: 0.75, tick: false),
-            FSliderMark(value: 1, label: Text('100%')),
+            .mark(value: 0, label: Text('0%')),
+            .mark(value: 0.25, tick: false),
+            .mark(value: 0.5, label: Text('50%')),
+            .mark(value: 0.75, tick: false),
+            .mark(value: 1, label: Text('100%')),
           ],
         ),
       ),

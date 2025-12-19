@@ -6,29 +6,23 @@ import 'package:forui/forui.dart';
 import '../../test_scaffold.dart';
 
 void main() {
-  late FMultiValueNotifier<int> controller;
-
-  setUp(() => controller = FMultiValueNotifier.radio(1));
-
-  tearDown(() => controller.dispose());
-
   group('FSelectTileGroup', () {
     group('blue screen', () {
       testWidgets('enabled', (tester) async {
         await tester.pumpWidget(
           TestScaffold.blue(
             child: FSelectTileGroup(
-              control: .managed(controller: controller),
+              control: const .managedRadio(initial: 1),
               style: TestScaffold.blueScreen.tileGroupStyle,
               label: const Text('Network'),
               children: const [
-                FSelectTile(
+                .tile(
                   title: Text('WiFi'),
                   details: Text('Forus Labs (5G)'),
                   suffix: Icon(FIcons.chevronRight),
                   value: 1,
                 ),
-                FSelectTile.suffix(
+                .suffix(
                   prefix: Icon(FIcons.bluetooth),
                   title: Text('Bluetooth'),
                   subtitle: Text('Fee, Fo, Fum'),
@@ -47,17 +41,17 @@ void main() {
         await tester.pumpWidget(
           TestScaffold.blue(
             child: FSelectTileGroup(
-              control: .managed(controller: controller),
+              control: const .managedRadio(initial: 1),
               style: TestScaffold.blueScreen.tileGroupStyle,
               label: const Text('Network'),
               children: const [
-                FSelectTile(
+                .tile(
                   title: Text('WiFi'),
                   details: Text('Forus Labs (5G)'),
                   suffix: Icon(FIcons.chevronRight),
                   value: 1,
                 ),
-                FSelectTile.suffix(
+                .suffix(
                   prefix: Icon(FIcons.bluetooth),
                   title: Text('Bluetooth'),
                   subtitle: Text('Fee, Fo, Fum'),
@@ -82,18 +76,18 @@ void main() {
         await tester.pumpWidget(
           TestScaffold.blue(
             child: FSelectTileGroup(
-              control: .managed(controller: controller),
+              control: const .managedRadio(initial: 1),
               style: TestScaffold.blueScreen.tileGroupStyle,
               enabled: false,
               label: const Text('Network'),
               children: const [
-                FSelectTile(
+                .tile(
                   title: Text('WiFi'),
                   details: Text('Forus Labs (5G)'),
                   suffix: Icon(FIcons.chevronRight),
                   value: 1,
                 ),
-                FSelectTile.suffix(
+                .suffix(
                   prefix: Icon(FIcons.bluetooth),
                   title: Text('Bluetooth'),
                   subtitle: Text('Fee, Fo, Fum'),
@@ -116,20 +110,15 @@ void main() {
             TestScaffold(
               theme: theme.data,
               child: FSelectTileGroup(
-                control: .managed(controller: controller),
+                control: const .managedRadio(initial: 1),
                 label: const Text('Network'),
                 description: const Text('Configure your network'),
                 errorBuilder: (context, error) => Text(error),
                 divider: divider,
                 children: const [
-                  FSelectTile(
-                    title: Text('WiFi'),
-                    details: Text('FL (5G)'),
-                    suffix: Icon(FIcons.chevronRight),
-                    value: 1,
-                  ),
-                  FSelectTile(title: Text('Mail'), details: Text('42'), suffix: Icon(FIcons.chevronRight), value: 2),
-                  FSelectTile(
+                  .tile(title: Text('WiFi'), details: Text('FL (5G)'), suffix: Icon(FIcons.chevronRight), value: 1),
+                  .tile(title: Text('Mail'), details: Text('42'), suffix: Icon(FIcons.chevronRight), value: 2),
+                  .tile(
                     title: Text('Bluetooth'),
                     subtitle: Text('Fee, Fo'),
                     details: Text('FL (5G)'),
@@ -152,15 +141,15 @@ void main() {
             TestScaffold.app(
               theme: theme.data,
               child: FSelectTileGroup(
-                control: .managed(controller: controller),
+                control: const .managedRadio(initial: 1),
                 maxHeight: 150,
                 divider: divider,
                 children: const [
-                  FSelectTile(title: Text('Tile 1'), value: 1),
-                  FSelectTile(title: Text('Tile 2'), value: 2),
-                  FSelectTile(title: Text('Tile 3'), value: 3),
-                  FSelectTile(title: Text('Tile 4'), value: 4),
-                  FSelectTile(title: Text('Tile 5'), value: 4),
+                  .tile(title: Text('Tile 1'), value: 1),
+                  .tile(title: Text('Tile 2'), value: 2),
+                  .tile(title: Text('Tile 3'), value: 3),
+                  .tile(title: Text('Tile 4'), value: 4),
+                  .tile(title: Text('Tile 5'), value: 4),
                 ],
               ),
             ),
@@ -178,19 +167,14 @@ void main() {
               TestScaffold(
                 theme: theme.data,
                 child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const .all(8.0),
                   child: FSelectTileGroup(
-                    control: .managed(controller: controller),
+                    control: const .managedRadio(initial: 1),
                     label: const Text('Network'),
                     divider: divider,
                     children: const [
-                      FSelectTile(
-                        title: Text('WiFi'),
-                        details: Text('FL (5G)'),
-                        value: 1,
-                        suffix: Icon(FIcons.chevronRight),
-                      ),
-                      FSelectTile(
+                      .tile(title: Text('WiFi'), details: Text('FL (5G)'), value: 1, suffix: Icon(FIcons.chevronRight)),
+                      .tile(
                         title: Text('Bluetooth'),
                         subtitle: Text('Fee, Fo'),
                         details: Text('FL (5G)'),
@@ -220,20 +204,20 @@ void main() {
               TestScaffold(
                 theme: theme.data,
                 child: FSelectTileGroup(
-                  control: .managed(controller: controller),
+                  control: const .managedRadio(initial: 1),
                   label: const Text('Network'),
                   description: const Text('Configure your network'),
                   enabled: false,
                   divider: divider,
                   children: [
-                    FSelectTile(
+                    .tile(
                       enabled: index == 0,
                       title: const Text('WiFi'),
                       details: const Text('FL (5G)'),
                       suffix: const Icon(FIcons.chevronRight),
                       value: 1,
                     ),
-                    FSelectTile(
+                    .tile(
                       enabled: index == 1,
                       title: const Text('Bluetooth'),
                       subtitle: const Text('Fee, Fo'),
@@ -259,20 +243,15 @@ void main() {
           TestScaffold(
             theme: theme.data,
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const .all(8.0),
               child: FSelectTileGroup(
-                control: .managed(controller: controller),
+                control: const .managedRadio(initial: 1),
                 label: const Text('Network'),
                 description: const Text('Configure your network'),
                 forceErrorText: 'This should appear',
                 children: const [
-                  FSelectTile(
-                    title: Text('WiFi'),
-                    details: Text('FL (5G)'),
-                    suffix: Icon(FIcons.chevronRight),
-                    value: 1,
-                  ),
-                  FSelectTile(
+                  .tile(title: Text('WiFi'), details: Text('FL (5G)'), suffix: Icon(FIcons.chevronRight), value: 1),
+                  .tile(
                     title: Text('Bluetooth'),
                     subtitle: Text('Fee, Fo'),
                     details: Text('FL (5G)'),
@@ -296,10 +275,10 @@ void main() {
           TestScaffold(
             theme: theme.data,
             child: FSelectTileGroup(
-              control: .managed(controller: controller),
+              control: const .managedRadio(initial: 1),
               label: const Text('Network'),
               children: const [
-                FSelectTile(title: Text('WiFi'), details: Text('FL (5G)'), suffix: Icon(FIcons.chevronRight), value: 1),
+                .tile(title: Text('WiFi'), details: Text('FL (5G)'), suffix: Icon(FIcons.chevronRight), value: 1),
               ],
             ),
           ),
@@ -316,9 +295,9 @@ void main() {
           TestScaffold(
             theme: theme.data,
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const .all(8.0),
               child: FSelectTileGroup(
-                control: .managed(controller: controller),
+                control: const .managedRadio(initial: 1),
                 label: const Text('Network'),
                 children: const [],
               ),
@@ -337,16 +316,11 @@ void main() {
       await tester.pumpWidget(
         TestScaffold(
           child: FSelectTileGroup(
-            control: .managed(controller: controller),
+            control: const .managedRadio(initial: 1),
             label: const Text('Network'),
             children: [
-              const FSelectTile(
-                title: Text('WiFi'),
-                details: Text('FL (5G)'),
-                suffix: Icon(FIcons.chevronRight),
-                value: 1,
-              ),
-              FSelectTile(
+              const .tile(title: Text('WiFi'), details: Text('FL (5G)'), suffix: Icon(FIcons.chevronRight), value: 1),
+              .tile(
                 style: FThemes.blue.dark.tileGroupStyle.tileStyle,
                 title: const Text('Bluetooth'),
                 subtitle: const Text('Fee, Fo'),
@@ -366,18 +340,18 @@ void main() {
       await tester.pumpWidget(
         TestScaffold(
           child: FSelectTileGroup(
-            control: .managed(controller: controller),
+            control: const .managedRadio(initial: 1),
             label: const Text('Network'),
             enabled: false,
             children: const [
-              FSelectTile(
+              .tile(
                 enabled: true,
                 title: Text('WiFi'),
                 details: Text('FL (5G)'),
                 suffix: Icon(FIcons.chevronRight),
                 value: 1,
               ),
-              FSelectTile(
+              .tile(
                 title: Text('Bluetooth'),
                 subtitle: Text('Fee, Fo'),
                 details: Text('FL (5G)'),
@@ -398,12 +372,12 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.blue(
           child: FSelectTileGroup.builder(
-            control: .managed(controller: controller),
+            control: const .managedRadio(initial: 1),
             style: TestScaffold.blueScreen.tileGroupStyle,
             maxHeight: 200,
             count: 5,
             label: const Text('Network'),
-            tileBuilder: (context, index) => FSelectTile(title: Text('Tile $index'), value: index + 1),
+            tileBuilder: (context, index) => .tile(title: Text('Tile $index'), value: index + 1),
           ),
         ),
       );
@@ -415,11 +389,11 @@ void main() {
       await tester.pumpWidget(
         TestScaffold(
           child: FSelectTileGroup.builder(
-            control: .managed(controller: controller),
+            control: const .managedRadio(initial: 1),
             label: const Text('Network'),
             description: const Text('Description'),
             maxHeight: 250,
-            tileBuilder: (context, index) => FSelectTile(title: Text('Tile $index'), value: index),
+            tileBuilder: (context, index) => .tile(title: Text('Tile $index'), value: index),
           ),
         ),
       );
@@ -431,12 +405,12 @@ void main() {
       await tester.pumpWidget(
         TestScaffold(
           child: FSelectTileGroup.builder(
-            control: .managed(controller: controller),
+            control: const .managedRadio(initial: 1),
             label: const Text('Network'),
             description: const Text('Description'),
             maxHeight: 500,
             count: 2,
-            tileBuilder: (context, index) => FSelectTile(title: Text('Tile $index'), value: index),
+            tileBuilder: (context, index) => .tile(title: Text('Tile $index'), value: index),
           ),
         ),
       );
@@ -451,12 +425,12 @@ void main() {
       await tester.pumpWidget(
         TestScaffold(
           child: FSelectTileGroup.builder(
-            control: .managed(controller: controller),
+            control: const .managedRadio(initial: 1),
             label: const Text('Network'),
             description: const Text('Description'),
             maxHeight: 500,
             count: 24,
-            tileBuilder: (context, index) => index < 2 ? FSelectTile(title: Text('Tile $index'), value: index) : null,
+            tileBuilder: (context, index) => index < 2 ? .tile(title: Text('Tile $index'), value: index) : null,
           ),
         ),
       );

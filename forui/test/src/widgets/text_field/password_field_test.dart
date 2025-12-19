@@ -32,9 +32,7 @@ void main() {
 
   testWidgets('hide', (tester) async {
     await tester.pumpWidget(
-      TestScaffold.app(
-        child: FTextField.password(obscureTextControl: .managed(controller: autoDispose(ValueNotifier(false)))),
-      ),
+      TestScaffold.app(child: FTextField.password(obscureTextControl: const .managed(initial: false))),
     );
 
     expect(find.bySemanticsLabel('Hide password'), findsOne);

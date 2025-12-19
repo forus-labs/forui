@@ -180,7 +180,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold(
           theme: theme.data,
-          textDirection: TextDirection.rtl,
+          textDirection: .rtl,
           child: FSidebarGroup(
             label: const Text('Group'),
             action: const Icon(FIcons.plus),

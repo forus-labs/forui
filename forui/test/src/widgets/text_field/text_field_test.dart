@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -126,13 +124,11 @@ void main() {
     });
 
     testWidgets('clears text-field', (tester) async {
-      final controller = autoDispose(TextEditingController(text: 'Testing'));
-
       await tester.pumpWidget(
         TestScaffold.app(
           theme: FThemes.zinc.light,
           child: FTextField(
-            control: .managed(controller: controller),
+            control: const .managed(initial: TextEditingValue(text: 'Testing')),
             clearable: (value) => value.text.isNotEmpty,
           ),
         ),
@@ -147,13 +143,11 @@ void main() {
     });
 
     testWidgets('suffix & clears text-field', (tester) async {
-      final controller = autoDispose(TextEditingController(text: 'Testing'));
-
       await tester.pumpWidget(
         TestScaffold.app(
           theme: FThemes.zinc.light,
           child: FTextField(
-            control: .managed(controller: controller),
+            control: const .managed(initial: TextEditingValue(text: 'Testing')),
             clearable: (value) => value.text.isNotEmpty,
             suffixBuilder: (_, _, _) => const SizedBox(),
           ),
@@ -188,13 +182,13 @@ void main() {
   });
 
   testWidgets('height does not change due to visual density on different platforms', (tester) async {
-    debugDefaultTargetPlatformOverride = TargetPlatform.macOS;
+    debugDefaultTargetPlatformOverride = .macOS;
     await tester.pumpWidget(TestScaffold.app(theme: FThemes.zinc.light, child: const FTextField()));
     final macos = tester.getSize(find.byType(FTextField)).height;
 
     await tester.pumpWidget(const SizedBox());
 
-    debugDefaultTargetPlatformOverride = TargetPlatform.iOS;
+    debugDefaultTargetPlatformOverride = .iOS;
     await tester.pumpWidget(TestScaffold.app(theme: FThemes.zinc.light, child: const FTextField()));
     final ios = tester.getSize(find.byType(FTextField)).height;
 
@@ -204,21 +198,17 @@ void main() {
   });
 
   testWidgets('error does not cause overlay to fail', (tester) async {
-    final controller = autoDispose(FPopoverController(vsync: tester));
-
     await tester.pumpWidget(
       TestScaffold.app(
         child: FTextField(
           builder: (_, _, _, child) => FPopover(
-            control: .managed(controller: controller),
+            control: const .managed(initial: true),
             popoverBuilder: (_, _) => Container(height: 100, width: 100, color: Colors.blue),
             child: child,
           ),
         ),
       ),
     );
-
-    unawaited(controller.show());
     await tester.pumpAndSettle();
 
     await tester.pumpWidget(
@@ -226,7 +216,7 @@ void main() {
         child: FTextField(
           error: Container(height: 100, width: 100, color: Colors.red),
           builder: (_, _, _, child) => FPopover(
-            control: .managed(controller: controller),
+            control: const .managed(initial: true),
             popoverBuilder: (_, _) => Container(height: 100, width: 100, color: Colors.blue),
             child: child,
           ),

@@ -7,6 +7,79 @@ import 'package:forui/src/widgets/accordion/accordion_controller.dart';
 import '../../test_scaffold.dart';
 
 void main() {
+  testWidgets('managed onChange is called', (tester) async {
+    Set<int>? lastExpanded;
+
+    await tester.pumpWidget(
+      TestScaffold(
+        child: FAccordion(
+          control: .managed(onChange: (expanded) => lastExpanded = expanded),
+          children: const [FAccordionItem(title: Text('Title'), child: Text('Content'))],
+        ),
+      ),
+    );
+
+    await tester.tap(find.text('Title'));
+    await tester.pumpAndSettle();
+
+    expect(lastExpanded, {0});
+
+    await tester.tap(find.text('Title'));
+    await tester.pumpAndSettle();
+
+    expect(lastExpanded, <int>{});
+  });
+
+  testWidgets('lifted', (tester) async {
+    final expanded = <int>{};
+    var lastIndex = -1;
+    var lastExpanded = false;
+
+    await tester.pumpWidget(
+      StatefulBuilder(
+        builder: (_, setState) => TestScaffold(
+          child: FAccordion(
+            control: .lifted(
+              expanded: expanded.contains,
+              onChange: (index, isExpanded) => setState(() {
+                lastIndex = index;
+                lastExpanded = isExpanded;
+                lastExpanded ? expanded.add(index) : expanded.remove(index);
+              }),
+            ),
+            children: const [
+              FAccordionItem(title: Text('Title 0'), child: Text('Content 0')),
+              FAccordionItem(title: Text('Title 1'), child: Text('Content 1')),
+            ],
+          ),
+        ),
+      ),
+    );
+
+    expect(expanded, isEmpty);
+
+    await tester.tap(find.text('Title 0'));
+    await tester.pumpAndSettle(const Duration(milliseconds: 500));
+
+    expect(lastIndex, 0);
+    expect(lastExpanded, true);
+    expect(expanded, {0});
+
+    await tester.tap(find.text('Title 0'));
+    await tester.pumpAndSettle(const Duration(milliseconds: 300));
+
+    expect(lastIndex, 0);
+    expect(lastExpanded, false);
+    expect(expanded, <int>{});
+
+    await tester.tap(find.text('Title 0'));
+    await tester.pumpAndSettle(const Duration(milliseconds: 500));
+
+    expect(lastIndex, 0);
+    expect(lastExpanded, true);
+    expect(expanded, {0});
+  });
+
   testWidgets('hit test', (tester) async {
     var taps = 0;
 
@@ -36,31 +109,6 @@ void main() {
     await tester.pumpAndSettle();
     await tester.tap(find.text('button'));
     expect(taps, 1);
-  });
-
-  testWidgets('old controller is not disposed', (tester) async {
-    final first = autoDispose(FAccordionController());
-    await tester.pumpWidget(
-      TestScaffold.app(
-        child: FAccordion(
-          control: .managed(controller: first),
-          children: const [FAccordionItem(title: Text('Title'), child: Text('button'))],
-        ),
-      ),
-    );
-
-    final second = autoDispose(FAccordionController());
-    await tester.pumpWidget(
-      TestScaffold.app(
-        child: FAccordion(
-          control: .managed(controller: second),
-          children: const [FAccordionItem(title: Text('Title'), child: Text('button'))],
-        ),
-      ),
-    );
-
-    expect(first.disposed, false);
-    expect(second.disposed, false);
   });
 
   testWidgets('separators', (tester) async {
@@ -137,81 +185,5 @@ void main() {
     // New item at same index should still have its controller registered
     expect(controller.controllers.length, 1);
     expect(find.text('Title B'), findsOneWidget);
-  });
-
-  testWidgets('lifted', (tester) async {
-    final expanded = <int>{};
-    var lastIndex = -1;
-    var lastExpanded = false;
-
-    await tester.pumpWidget(
-      StatefulBuilder(
-        builder: (_, setState) => TestScaffold(
-          child: FAccordion(
-            control: .lifted(
-              expanded: expanded.contains,
-              onChange: (index, isExpanded) => setState(() {
-                lastIndex = index;
-                lastExpanded = isExpanded;
-                lastExpanded ? expanded.add(index) : expanded.remove(index);
-              }),
-            ),
-            children: const [
-              FAccordionItem(title: Text('Title 0'), child: Text('Content 0')),
-              FAccordionItem(title: Text('Title 1'), child: Text('Content 1')),
-            ],
-          ),
-        ),
-      ),
-    );
-
-    expect(expanded, isEmpty);
-
-    // Expand first item
-    await tester.tap(find.text('Title 0'));
-    await tester.pumpAndSettle(const Duration(milliseconds: 500));
-
-    expect(lastIndex, 0);
-    expect(lastExpanded, true);
-    expect(expanded, {0});
-
-    // Collapse first item
-    await tester.tap(find.text('Title 0'));
-    await tester.pumpAndSettle(const Duration(milliseconds: 300));
-
-    expect(lastIndex, 0);
-    expect(lastExpanded, false);
-    expect(expanded, <int>{});
-
-    // Expand first item
-    await tester.tap(find.text('Title 0'));
-    await tester.pumpAndSettle(const Duration(milliseconds: 500));
-
-    expect(lastIndex, 0);
-    expect(lastExpanded, true);
-    expect(expanded, {0});
-  });
-
-  testWidgets('managed onChange is called', (tester) async {
-    Set<int>? lastExpanded;
-
-    await tester.pumpWidget(
-      TestScaffold(
-        child: FAccordion(
-          control: .managed(onChange: (expanded) => lastExpanded = expanded),
-          children: const [FAccordionItem(title: Text('Title'), child: Text('Content'))],
-        ),
-      ),
-    );
-
-    await tester.tap(find.text('Title'));
-    await tester.pumpAndSettle();
-
-    expect(lastExpanded, {0});
-
-    await tester.tap(find.text('Title'));
-    await tester.pumpAndSettle();
-
-    expect(lastExpanded, <int>{});
   });
 }

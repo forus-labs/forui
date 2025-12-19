@@ -13,16 +13,10 @@ void main() {
   ];
 
   for (final constructor in [
-    (
-      selection, [
-      FSliderInteraction interaction = FSliderInteraction.tapAndSlideThumb,
-      FSliderActiveThumb thumb = FSliderActiveThumb.max,
-    ]) => FContinuousSliderController(value: selection, interaction: interaction, thumb: thumb),
-    (
-      selection, [
-      FSliderInteraction interaction = FSliderInteraction.tapAndSlideThumb,
-      FSliderActiveThumb thumb = FSliderActiveThumb.max,
-    ]) => FDiscreteSliderController(value: selection, interaction: interaction, thumb: thumb),
+    (selection, [FSliderInteraction interaction = .tapAndSlideThumb, FSliderActiveThumb thumb = .max]) =>
+        FContinuousSliderController(value: selection, interaction: interaction, thumb: thumb),
+    (selection, [FSliderInteraction interaction = .tapAndSlideThumb, FSliderActiveThumb thumb = .max]) =>
+        FDiscreteSliderController(value: selection, interaction: interaction, thumb: thumb),
   ]) {
     group('FSlider', () {
       final value = FSliderValue(max: 0.75);
@@ -104,7 +98,7 @@ void main() {
 
         test('tap only', () {
           var calls = 0;
-          controller = constructor(range, FSliderInteraction.tap)
+          controller = constructor(range, .tap)
             ..attach(100, marks)
             ..addListener(() => calls++)
             ..slide(50, min: false);
@@ -136,7 +130,7 @@ void main() {
         ]) {
           test('tap value', () {
             var calls = 0;
-            controller = constructor(range, FSliderInteraction.tap, activeThumb)
+            controller = constructor(range, .tap, activeThumb)
               ..attach(100, marks)
               ..addListener(() => calls++);
 
@@ -149,7 +143,7 @@ void main() {
 
         test('initial selection', () {
           var calls = 0;
-          controller = constructor(range, FSliderInteraction.tap)..addListener(() => calls++);
+          controller = constructor(range, .tap)..addListener(() => calls++);
 
           expect(controller.tap(50), null);
           expect(calls, 0);
@@ -246,7 +240,7 @@ void main() {
     ]) {
       test('step ${min ? 'min' : 'max'} edge - ${extend ? 'extend' : 'shrink'}', () {
         var calls = 0;
-        controller = FContinuousSliderController.range(value: FSliderValue(min: 0.25, max: 0.75))
+        controller = .range(value: FSliderValue(min: 0.25, max: 0.75))
           ..attach(100, [])
           ..addListener(() => calls++)
           ..step(min: min, expand: extend);
@@ -264,7 +258,7 @@ void main() {
     ]) {
       test('tap range', () {
         var calls = 0;
-        controller = FContinuousSliderController.range(value: FSliderValue(min: 0.25, max: 0.75))
+        controller = .range(value: FSliderValue(min: 0.25, max: 0.75))
           ..attach(100, [])
           ..addListener(() => calls++);
 
@@ -294,7 +288,7 @@ void main() {
     ]) {
       test('step ${min ? 'min' : 'max'} edge - ${extend ? 'extend' : 'shrink'}', () {
         var calls = 0;
-        controller = FDiscreteSliderController.range(value: FSliderValue(min: 0.25, max: 0.75))
+        controller = .range(value: FSliderValue(min: 0.25, max: 0.75))
           ..attach(100, marks)
           ..addListener(() => calls++)
           ..step(min: min, expand: extend);
@@ -312,7 +306,7 @@ void main() {
     ]) {
       test('tap range', () {
         var calls = 0;
-        controller = FDiscreteSliderController.range(value: FSliderValue(min: 0.25, max: 0.75))
+        controller = .range(value: FSliderValue(min: 0.25, max: 0.75))
           ..attach(100, marks)
           ..addListener(() => calls++);
 

@@ -12,7 +12,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold.blue(
             child: FSelectMenuTile(
-              selectControl: const FMultiValueControl.managed(initial: {1}),
+              selectControl: const .managed(initial: {1}),
               style: TestScaffold.blueScreen.selectMenuTileStyle,
               prefix: const Icon(FIcons.bluetooth),
               label: const Text('Label'),
@@ -20,7 +20,7 @@ void main() {
               title: const Text('Bluetooth'),
               subtitle: const Text('Fee, Fo, Fum'),
               details: const Text('Forus Labs (5G)'),
-              menu: const [FSelectTile(title: Text('Menu'), value: 1)],
+              menu: const [.tile(title: Text('Menu'), value: 1)],
             ),
           ),
         );
@@ -32,7 +32,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold.blue(
             child: FSelectMenuTile(
-              selectControl: const FMultiValueControl.managed(initial: {1}),
+              selectControl: const .managed(initial: {1}),
               enabled: false,
               style: TestScaffold.blueScreen.selectMenuTileStyle,
               prefix: const Icon(FIcons.bluetooth),
@@ -41,7 +41,7 @@ void main() {
               title: const Text('Bluetooth'),
               subtitle: const Text('Fee, Fo, Fum'),
               details: const Text('Forus Labs (5G)'),
-              menu: const [FSelectTile(title: Text('Menu'), value: 1)],
+              menu: const [.tile(title: Text('Menu'), value: 1)],
             ),
           ),
         );
@@ -56,7 +56,7 @@ void main() {
           TestScaffold.app(
             theme: theme.data,
             child: FSelectMenuTile(
-              selectControl: const FMultiValueControl.managed(initial: {1}),
+              selectControl: const .managed(initial: {1}),
               prefix: const Icon(FIcons.calendar),
               label: const Text('Label'),
               description: const Text('Description'),
@@ -64,8 +64,8 @@ void main() {
               subtitle: const Text('Fee, Fo, Fum'),
               details: const Text('None'),
               menu: const [
-                FSelectTile(title: Text('Item 1'), value: 1),
-                FSelectTile(title: Text('Item 2'), value: 2),
+                .tile(title: Text('Item 1'), value: 1),
+                .tile(title: Text('Item 2'), value: 2),
               ],
             ),
           ),
@@ -82,7 +82,7 @@ void main() {
           TestScaffold.app(
             theme: theme.data,
             child: FSelectMenuTile(
-              selectControl: .managed(controller: autoDispose(.radio(1))),
+              selectControl: const .managedRadio(initial: 1),
               prefix: const Icon(FIcons.calendar),
               label: const Text('Label'),
               description: const Text('Description'),
@@ -90,8 +90,8 @@ void main() {
               subtitle: const Text('Fee, Fo, Fum'),
               details: const Text('None'),
               menu: const [
-                FSelectTile(title: Text('Item 1'), value: 1),
-                FSelectTile(title: Text('Item 2'), value: 2),
+                .tile(title: Text('Item 1'), value: 1),
+                .tile(title: Text('Item 2'), value: 2),
               ],
             ),
           ),
@@ -111,15 +111,15 @@ void main() {
           TestScaffold.app(
             theme: theme.data,
             child: FSelectMenuTile(
-              selectControl: const FMultiValueControl.managed(initial: {1}),
+              selectControl: const .managed(initial: {1}),
               maxHeight: 150,
               title: const Text('Title'),
               menu: const [
-                FSelectTile(title: Text('Tile 1'), value: 1),
-                FSelectTile(title: Text('Tile 2'), value: 2),
-                FSelectTile(title: Text('Tile 3'), value: 3),
-                FSelectTile(title: Text('Tile 4'), value: 4),
-                FSelectTile(title: Text('Tile 5'), value: 4),
+                .tile(title: Text('Tile 1'), value: 1),
+                .tile(title: Text('Tile 2'), value: 2),
+                .tile(title: Text('Tile 3'), value: 3),
+                .tile(title: Text('Tile 4'), value: 4),
+                .tile(title: Text('Tile 5'), value: 4),
               ],
             ),
           ),
@@ -139,7 +139,7 @@ void main() {
           TestScaffold.app(
             theme: theme.data,
             child: FSelectMenuTile(
-              selectControl: const FMultiValueControl.managed(initial: {1}),
+              selectControl: const .managed(initial: {1}),
               enabled: false,
               prefix: const Icon(FIcons.calendar),
               label: const Text('Label'),
@@ -148,8 +148,8 @@ void main() {
               subtitle: const Text('Fee, Fo, Fum'),
               details: const Text('None'),
               menu: const [
-                FSelectTile(title: Text('Item 1'), value: 1),
-                FSelectTile(title: Text('Item 2'), value: 2),
+                .tile(title: Text('Item 1'), value: 1),
+                .tile(title: Text('Item 2'), value: 2),
               ],
             ),
           ),
@@ -163,7 +163,7 @@ void main() {
           TestScaffold.app(
             theme: theme.data,
             child: FSelectMenuTile(
-              selectControl: const FMultiValueControl.managed(initial: {1}),
+              selectControl: const .managed(initial: {1}),
               prefix: const Icon(FIcons.calendar),
               label: const Text('Label'),
               description: const Text('Description'),
@@ -172,8 +172,8 @@ void main() {
               subtitle: const Text('Fee, Fo, Fum'),
               details: const Text('None'),
               menu: const [
-                FSelectTile(title: Text('Item 1'), value: 1),
-                FSelectTile(title: Text('Item 2'), value: 2),
+                .tile(title: Text('Item 1'), value: 1),
+                .tile(title: Text('Item 2'), value: 2),
               ],
             ),
           ),
@@ -189,12 +189,12 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           child: FSelectMenuTile.builder(
-            selectControl: const FMultiValueControl.managed(initial: {1}),
+            selectControl: const .managed(initial: {1}),
             label: const Text('Network'),
             description: const Text('Description'),
             maxHeight: 250,
             title: const Text('Title'),
-            menuBuilder: (context, index) => FSelectTile(title: Text('Tile $index'), value: index),
+            menuBuilder: (context, index) => .tile(title: Text('Tile $index'), value: index),
           ),
         ),
       );
@@ -209,13 +209,13 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           child: FSelectMenuTile.builder(
-            selectControl: const FMultiValueControl.managed(initial: {1}),
+            selectControl: const .managed(initial: {1}),
             label: const Text('Network'),
             description: const Text('Description'),
             maxHeight: 500,
             count: 2,
             title: const Text('Title'),
-            menuBuilder: (context, index) => FSelectTile(title: Text('Tile $index'), value: index),
+            menuBuilder: (context, index) => .tile(title: Text('Tile $index'), value: index),
           ),
         ),
       );
@@ -230,13 +230,13 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           child: FSelectMenuTile.builder(
-            selectControl: const FMultiValueControl.managed(initial: {1}),
+            selectControl: const .managed(initial: {1}),
             label: const Text('Network'),
             description: const Text('Description'),
             maxHeight: 500,
             count: 24,
             title: const Text('Title'),
-            menuBuilder: (context, index) => index < 2 ? FSelectTile(title: Text('Tile $index'), value: index) : null,
+            menuBuilder: (context, index) => index < 2 ? .tile(title: Text('Tile $index'), value: index) : null,
           ),
         ),
       );
@@ -254,7 +254,7 @@ void main() {
         TestScaffold.app(
           child: FSelectMenuTile.fromMap(
             const {'Item 1': 1, 'Item 2': 2},
-            selectControl: .managed(controller: autoDispose(.radio(1))),
+            selectControl: const .managedRadio(initial: 1),
             prefix: const Icon(FIcons.calendar),
             label: const Text('Label'),
             description: const Text('Description'),

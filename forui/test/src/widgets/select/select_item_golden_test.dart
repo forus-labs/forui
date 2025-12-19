@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/gestures.dart';
 
 import 'package:flutter_test/flutter_test.dart';
 
@@ -27,18 +26,14 @@ const letters = {
 
 void main() {
   const key = ValueKey('select');
-
-  late FSelectController<String> controller;
   late ScrollController scrollController;
 
   setUp(() {
-    controller = FSelectController<String>();
     scrollController = ScrollController();
   });
 
   tearDown(() {
     scrollController.dispose();
-    controller.dispose();
   });
 
   for (final theme in TestScaffold.themes) {
@@ -47,11 +42,11 @@ void main() {
         await tester.pumpWidget(
           TestScaffold.app(
             theme: theme.data,
-            alignment: Alignment.topCenter,
+            alignment: .topCenter,
             child: FSelect<String>.rich(
               key: key,
               format: (s) => s,
-              children: [FSelectSection(label: const Text('Lorem'), items: letters)],
+              children: [.section(label: const Text('Lorem'), items: letters)],
             ),
           ),
         );
@@ -66,18 +61,18 @@ void main() {
         await tester.pumpWidget(
           TestScaffold.app(
             theme: theme.data,
-            alignment: Alignment.topCenter,
+            alignment: .topCenter,
             child: FSelect<String>.rich(
               key: key,
               format: (s) => s,
-              children: const [
-                FSelectSection.rich(
-                  label: Text('Lorem'),
+              children: [
+                .richSection(
+                  label: const Text('Lorem'),
                   enabled: false,
                   children: [
-                    FSelectItem(title: Text('A'), value: 'A'),
-                    FSelectItem(title: Text('B'), value: 'B'),
-                    FSelectItem(title: Text('C'), value: 'C', enabled: true),
+                    const .item(title: Text('A'), value: 'A'),
+                    const .item(title: Text('B'), value: 'B'),
+                    const .item(title: Text('C'), value: 'C', enabled: true),
                   ],
                 ),
               ],
@@ -95,11 +90,11 @@ void main() {
         await tester.pumpWidget(
           TestScaffold.app(
             theme: theme.data,
-            alignment: Alignment.topCenter,
+            alignment: .topCenter,
             child: FSelect<String>.rich(
               key: key,
               format: (s) => s,
-              children: [FSelectSection(label: const Text('Lorem'), items: letters)],
+              children: [.section(label: const Text('Lorem'), items: letters)],
             ),
           ),
         );
@@ -121,12 +116,17 @@ void main() {
         await tester.pumpWidget(
           TestScaffold.app(
             theme: theme.data,
-            alignment: Alignment.topCenter,
+            alignment: .topCenter,
             child: FSelect<String>.rich(
               key: key,
               format: (s) => s,
-              children: const [
-                FSelectItem(value: 'v', prefix: Icon(FIcons.circle), title: Text('Title'), subtitle: Text('subtitle')),
+              children: [
+                .item(
+                  value: 'v',
+                  prefix: const Icon(FIcons.circle),
+                  title: const Text('Title'),
+                  subtitle: const Text('subtitle'),
+                ),
               ],
             ),
           ),
@@ -142,13 +142,8 @@ void main() {
         await tester.pumpWidget(
           TestScaffold.app(
             theme: theme.data,
-            alignment: Alignment.topCenter,
-            child: FSelect<String>(
-              items: letters,
-              key: key,
-              control: .managed(controller: controller),
-              contentScrollController: scrollController,
-            ),
+            alignment: .topCenter,
+            child: FSelect<String>(items: letters, key: key, contentScrollController: scrollController),
           ),
         );
 
@@ -171,12 +166,12 @@ void main() {
         await tester.pumpWidget(
           TestScaffold.app(
             theme: theme.data,
-            alignment: Alignment.topCenter,
+            alignment: .topCenter,
             child: FSelect<String>.rich(
               key: key,
               format: (s) => s,
-              control: .managed(controller: controller..value = 'A'),
-              children: [FSelectItem(title: Text(letters.keys.first), value: letters.keys.first, enabled: false)],
+              control: const .managed(initial: 'A'),
+              children: [.item(title: Text(letters.keys.first), value: letters.keys.first, enabled: false)],
             ),
           ),
         );
@@ -194,11 +189,11 @@ void main() {
         await tester.pumpWidget(
           TestScaffold.app(
             theme: theme.data,
-            alignment: Alignment.topCenter,
+            alignment: .topCenter,
             child: FSelect<String>.rich(
               key: key,
               format: (s) => s,
-              children: [FSelectItem(title: Text(letters.keys.first), value: letters.keys.first, enabled: false)],
+              children: [.item(title: Text(letters.keys.first), value: letters.keys.first, enabled: false)],
             ),
           ),
         );
@@ -216,7 +211,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold.app(
             theme: theme.data,
-            alignment: Alignment.topCenter,
+            alignment: .topCenter,
             child: FSelect<String>(items: const {'A': 'A'}, key: key),
           ),
         );
@@ -233,12 +228,12 @@ void main() {
       });
 
       testWidgets('press effect on mobile', (tester) async {
-        debugDefaultTargetPlatformOverride = TargetPlatform.iOS;
+        debugDefaultTargetPlatformOverride = .iOS;
 
         await tester.pumpWidget(
           TestScaffold.app(
             theme: theme.data,
-            alignment: Alignment.topCenter,
+            alignment: .topCenter,
             child: FSelect<String>(items: const {'A': 'A'}, key: key),
           ),
         );
@@ -246,7 +241,7 @@ void main() {
         await tester.tap(find.byKey(key));
         await tester.pumpAndSettle();
 
-        final gesture = await tester.createPointerGesture(kind: PointerDeviceKind.touch);
+        final gesture = await tester.createPointerGesture(kind: .touch);
         await gesture.down(tester.getCenter(find.text('A')));
         await tester.pumpAndSettle();
 
@@ -259,11 +254,11 @@ void main() {
         await tester.pumpWidget(
           TestScaffold.app(
             theme: theme.data,
-            alignment: Alignment.topCenter,
+            alignment: .topCenter,
             child: FSelect<String>.rich(
               key: key,
               format: (s) => s,
-              children: const [FSelectItem.raw(value: 'v', prefix: Icon(FIcons.circle), child: Text('Title'))],
+              children: [.raw(value: 'v', prefix: const Icon(FIcons.circle), child: const Text('Title'))],
             ),
           ),
         );

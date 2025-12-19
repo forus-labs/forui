@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 
 import 'package:flutter_test/flutter_test.dart';
@@ -8,24 +6,19 @@ import 'package:forui/forui.dart';
 import '../../test_scaffold.dart';
 
 void main() {
-  late FPopoverController controller;
-
-  setUp(() => controller = FPopoverController(vsync: const TestVSync()));
-
-  tearDown(() => controller.dispose());
-
   group('blue screen', () {
     testWidgets('items ', (tester) async {
       await tester.pumpWidget(
         TestScaffold.blue(
           child: FPopoverMenu(
+            control: const .managed(initial: true),
             style: TestScaffold.blueScreen.popoverMenuStyle,
             menu: [
-              FItemGroup(
-                children: [FItem(title: const Text('Item 1'), onPress: () {})],
+              .group(
+                children: [.item(title: const Text('Item 1'), onPress: () {})],
               ),
-              FItemGroup(
-                children: [FItem(title: const Text('Item 1'), onPress: () {})],
+              .group(
+                children: [.item(title: const Text('Item 1'), onPress: () {})],
               ),
             ],
             child: ColoredBox(
@@ -35,6 +28,7 @@ void main() {
           ),
         ),
       );
+      await tester.pumpAndSettle();
 
       await expectBlueScreen();
     });
@@ -43,13 +37,14 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.blue(
           child: FPopoverMenu.tiles(
+            control: const .managed(initial: true),
             style: TestScaffold.blueScreen.popoverMenuStyle,
             menu: [
-              FTileGroup(
-                children: [FTile(title: const Text('Item 1'), onPress: () {})],
+              .group(
+                children: [.tile(title: const Text('Item 1'), onPress: () {})],
               ),
-              FTileGroup(
-                children: [FTile(title: const Text('Item 1'), onPress: () {})],
+              .group(
+                children: [.tile(title: const Text('Item 1'), onPress: () {})],
               ),
             ],
             child: ColoredBox(
@@ -59,6 +54,7 @@ void main() {
           ),
         ),
       );
+      await tester.pumpAndSettle();
 
       await expectBlueScreen();
     });
@@ -71,11 +67,11 @@ void main() {
           theme: theme.data,
           child: FPopoverMenu.tiles(
             menu: [
-              FTileGroup(
-                children: [FTile(title: const Text('Item 1'), onPress: () {})],
+              .group(
+                children: [.tile(title: const Text('Item 1'), onPress: () {})],
               ),
-              FTileGroup(
-                children: [FTile(title: const Text('Item 1'), onPress: () {})],
+              .group(
+                children: [.tile(title: const Text('Item 1'), onPress: () {})],
               ),
             ],
             child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
@@ -91,18 +87,18 @@ void main() {
         TestScaffold.app(
           theme: theme.data,
           child: FPopoverMenu(
-            control: .managed(controller: controller),
+            control: const .managed(initial: true),
             menu: [
-              FItemGroup(
+              .group(
                 children: [
-                  FItem(title: const Text('Group 1 - Tile 1'), onPress: () {}),
-                  FItem(title: const Text('Group 1 - Tile 2'), onPress: () {}),
+                  .item(title: const Text('Group 1 - Tile 1'), onPress: () {}),
+                  .item(title: const Text('Group 1 - Tile 2'), onPress: () {}),
                 ],
               ),
-              FItemGroup(
+              .group(
                 children: [
-                  FItem(title: const Text('Group 2 - Tile 1'), onPress: () {}),
-                  FItem(title: const Text('Group 2 - Tile 2'), onPress: () {}),
+                  .item(title: const Text('Group 2 - Tile 1'), onPress: () {}),
+                  .item(title: const Text('Group 2 - Tile 2'), onPress: () {}),
                 ],
               ),
             ],
@@ -110,8 +106,6 @@ void main() {
           ),
         ),
       );
-
-      unawaited(controller.show());
       await tester.pumpAndSettle();
 
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('popover-menu/items-shown-${theme.name}.png'));
@@ -122,21 +116,19 @@ void main() {
         TestScaffold.app(
           theme: theme.data,
           child: FPopoverMenu.tiles(
-            control: .managed(controller: controller),
+            control: const .managed(initial: true),
             menu: [
-              FTileGroup(
-                children: [FTile(title: const Text('Group 1'), onPress: () {})],
+              .group(
+                children: [.tile(title: const Text('Group 1'), onPress: () {})],
               ),
-              FTileGroup(
-                children: [FTile(title: const Text('Group 2'), onPress: () {})],
+              .group(
+                children: [.tile(title: const Text('Group 2'), onPress: () {})],
               ),
             ],
             child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
           ),
         ),
       );
-
-      unawaited(controller.show());
       await tester.pumpAndSettle();
 
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('popover-menu/tiles-shown-${theme.name}.png'));
@@ -147,20 +139,20 @@ void main() {
         TestScaffold.app(
           theme: theme.data,
           child: FPopoverMenu.tiles(
-            control: .managed(controller: controller),
+            control: const .managed(initial: true),
             maxHeight: 200,
             menu: [
-              FTileGroup(
+              .group(
                 children: [
-                  FTile(title: const Text('Group 1 - Tile 1'), onPress: () {}),
-                  FTile(title: const Text('Group 1 - Tile 2'), onPress: () {}),
+                  .tile(title: const Text('Group 1 - Tile 1'), onPress: () {}),
+                  .tile(title: const Text('Group 1 - Tile 2'), onPress: () {}),
                 ],
               ),
-              FTileGroup(
+              .group(
                 children: [
-                  FTile(title: const Text('Group 2- Tile 1'), onPress: () {}),
-                  FTile(title: const Text('Group 2 - Tile 2'), onPress: () {}),
-                  FTile(title: const Text('Group 2 - Tile 3'), onPress: () {}),
+                  .tile(title: const Text('Group 2- Tile 1'), onPress: () {}),
+                  .tile(title: const Text('Group 2 - Tile 2'), onPress: () {}),
+                  .tile(title: const Text('Group 2 - Tile 3'), onPress: () {}),
                 ],
               ),
             ],
@@ -168,8 +160,6 @@ void main() {
           ),
         ),
       );
-
-      unawaited(controller.show());
       await tester.pumpAndSettle();
 
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('popover-menu/scrollable-${theme.name}.png'));

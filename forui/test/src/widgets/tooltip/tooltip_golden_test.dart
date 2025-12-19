@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 
 import 'package:flutter_test/flutter_test.dart';
@@ -48,17 +46,17 @@ void main() {
         TestScaffold.app(
           theme: theme.data,
           child: Column(
-            mainAxisSize: MainAxisSize.min,
+            mainAxisSize: .min,
             spacing: 5,
             children: [
               const Text('Lorem ipsum dolor sit amet, consectetur adipiscing elit.'),
               FTooltip(
                 style: theme.data.tooltipStyle.copyWith(
-                  backgroundFilter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+                  backgroundFilter: .blur(sigmaX: 5, sigmaY: 5),
                   decoration: BoxDecoration(
                     color: theme.data.colors.background.withValues(alpha: 0.5),
                     borderRadius: theme.data.style.borderRadius,
-                    border: Border.all(width: theme.data.style.borderWidth, color: theme.data.colors.border),
+                    border: .all(width: theme.data.style.borderWidth, color: theme.data.colors.border),
                   ),
                 ),
                 tipBuilder: (context, _) => const Text('Lorem'),

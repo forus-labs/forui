@@ -17,7 +17,7 @@ void main() {
   setUpAll(initializeDateFormatting);
 
   setUp(() {
-    calendarController = FCalendarController.date();
+    calendarController = .date();
     controller = DateInputController.test(
       calendarController,
       FLocalizationsEnSg(),
@@ -37,7 +37,7 @@ void main() {
     test('FieldController.() - $index', () {
       expect(
         DateInputController(
-          FCalendarController.date(initial: initial),
+          .date(initial: initial),
           localizations,
           TestScaffold.blueScreen.dateFieldStyle.textFieldStyle,
           2000,
@@ -46,6 +46,11 @@ void main() {
       );
     });
   }
+
+  tearDown(() {
+    calendarController.dispose();
+    controller.dispose();
+  });
 
   group('value', () {
     for (final (index, (old, value, expected, date)) in [
@@ -104,7 +109,7 @@ void main() {
       ),
     ].indexed) {
       test('single separator - $index', () {
-        controller = DateInputController.test(
+        controller = .test(
           calendarController,
           FLocalizationsEnSg(),
           TestScaffold.blueScreen.dateFieldStyle.textFieldStyle,
@@ -165,7 +170,7 @@ void main() {
       ),
     ].indexed) {
       test('multiple separator & suffix - $index', () {
-        controller = DateInputController.test(
+        controller = .test(
           calendarController,
           FLocalizationsHr(),
           TestScaffold.blueScreen.dateFieldStyle.textFieldStyle,
@@ -198,7 +203,7 @@ void main() {
       ),
     ].indexed) {
       test('forward - $index', () {
-        controller = DateInputController.test(
+        controller = .test(
           calendarController,
           FLocalizationsHr(),
           TestScaffold.blueScreen.dateFieldStyle.textFieldStyle,
@@ -229,7 +234,7 @@ void main() {
       ),
     ].indexed) {
       test('backward - $index', () {
-        controller = DateInputController.test(
+        controller = .test(
           calendarController,
           FLocalizationsHr(),
           TestScaffold.blueScreen.dateFieldStyle.textFieldStyle,
@@ -275,7 +280,7 @@ void main() {
     ),
   ].indexed) {
     test('adjust - $index', () {
-      controller = DateInputController.test(
+      controller = .test(
         calendarController,
         FLocalizationsHr(),
         TestScaffold.blueScreen.dateFieldStyle.textFieldStyle,
@@ -333,7 +338,7 @@ void main() {
       (const TextEditingValue(text: '01/02/2024'), null),
     ].indexed) {
       test('single separator - $index', () {
-        controller = DateInputController.test(
+        controller = .test(
           calendarController,
           FLocalizationsEnSg(),
           TestScaffold.blueScreen.dateFieldStyle.textFieldStyle,
@@ -390,7 +395,7 @@ void main() {
       (const TextEditingValue(text: '01. 02. 2024.', selection: TextSelection.collapsed(offset: 3)), null),
     ].indexed) {
       test('multiple separator - $index', () {
-        controller = DateInputController.test(
+        controller = .test(
           calendarController,
           FLocalizationsHr(),
           TestScaffold.blueScreen.dateFieldStyle.textFieldStyle,
@@ -430,7 +435,7 @@ void main() {
       (const TextEditingValue(text: '01.02.2024\u202f\u0433.', selection: TextSelection.collapsed(offset: 12)), null),
     ].indexed) {
       test('suffix - $index', () {
-        controller = DateInputController.test(
+        controller = .test(
           calendarController,
           FLocalizationsBg(),
           TestScaffold.blueScreen.dateFieldStyle.textFieldStyle,
@@ -449,7 +454,7 @@ void main() {
   ].indexed) {
     test('update from calendar(...) - $index', () {
       calendarController = FCalendarController.date(initial: initial);
-      controller = DateInputController.test(
+      controller = .test(
         calendarController,
         FLocalizationsEnSg(),
         TestScaffold.blueScreen.dateFieldStyle.textFieldStyle,
@@ -462,9 +467,4 @@ void main() {
       expect(controller.value, expected);
     });
   }
-
-  tearDown(() {
-    calendarController.dispose();
-    controller.dispose();
-  });
 }

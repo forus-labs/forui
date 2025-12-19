@@ -51,7 +51,7 @@ void main() {
   testWidgets('setting value works in RTL direction', (tester) async {
     await tester.pumpWidget(
       TestScaffold(
-        textDirection: TextDirection.rtl,
+        textDirection: .rtl,
         child: FPicker(
           control: .managed(controller: controller),
           children: const [

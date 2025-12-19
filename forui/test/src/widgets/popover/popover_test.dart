@@ -1,8 +1,6 @@
 import 'dart:async';
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 import 'package:flutter_test/flutter_test.dart';
 
@@ -79,11 +77,11 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.app(
         child: Row(
-          mainAxisSize: MainAxisSize.min,
+          mainAxisSize: .min,
           children: [
             FPopover(
               style: FThemes.zinc.light.popoverStyle.copyWith(
-                barrierFilter: (animation) => ImageFilter.blur(sigmaX: animation * 5, sigmaY: animation * 5),
+                barrierFilter: (animation) => .blur(sigmaX: animation * 5, sigmaY: animation * 5),
               ),
               popoverBuilder: (context, _) => const Text('popover'),
               builder: (_, controller, _) => FButton(onPress: controller.toggle, child: const Text('target')),
@@ -123,7 +121,7 @@ void main() {
 
     expect(find.text('popover'), findsOneWidget);
 
-    await tester.tapAt(Offset.zero);
+    await tester.tapAt(.zero);
     await tester.pumpAndSettle();
 
     expect(count, 1);
@@ -136,7 +134,7 @@ void main() {
       TestScaffold.app(
         child: FPopover(
           style: FThemes.zinc.light.popoverStyle.copyWith(
-            barrierFilter: (animation) => ImageFilter.blur(sigmaX: animation * 5, sigmaY: animation * 5),
+            barrierFilter: (animation) => .blur(sigmaX: animation * 5, sigmaY: animation * 5),
           ),
           onTapHide: () => count++,
           popoverBuilder: (context, _) => const Text('popover'),
@@ -150,7 +148,7 @@ void main() {
 
     expect(find.text('popover'), findsOneWidget);
 
-    await tester.tapAt(Offset.zero);
+    await tester.tapAt(.zero);
     await tester.pumpAndSettle();
 
     expect(count, 1);
@@ -163,10 +161,10 @@ void main() {
       TestScaffold.app(
         child: FPopover(
           style: FThemes.zinc.light.popoverStyle.copyWith(
-            barrierFilter: (animation) => ImageFilter.blur(sigmaX: animation * 5, sigmaY: animation * 5),
+            barrierFilter: (animation) => .blur(sigmaX: animation * 5, sigmaY: animation * 5),
           ),
           onTapHide: () => count++,
-          hideRegion: FPopoverHideRegion.none,
+          hideRegion: .none,
           popoverBuilder: (context, _) => const Text('popover'),
           builder: (_, controller, _) => FButton(onPress: controller.toggle, child: const Text('target')),
         ),
@@ -178,7 +176,7 @@ void main() {
 
     expect(find.text('popover'), findsOneWidget);
 
-    await tester.tapAt(Offset.zero);
+    await tester.tapAt(.zero);
     await tester.pumpAndSettle();
 
     expect(count, 0);
@@ -191,7 +189,7 @@ void main() {
       TestScaffold.app(
         child: FPopover(
           onTapHide: () => count++,
-          hideRegion: FPopoverHideRegion.none,
+          hideRegion: .none,
           popoverBuilder: (context, _) => const Text('popover'),
           builder: (_, controller, _) => FButton(onPress: controller.toggle, child: const Text('target')),
         ),
@@ -203,7 +201,7 @@ void main() {
 
     expect(find.text('popover'), findsOneWidget);
 
-    await tester.tapAt(Offset.zero);
+    await tester.tapAt(.zero);
     await tester.pumpAndSettle();
 
     expect(count, 0);
@@ -237,7 +235,7 @@ void main() {
 
     expect(find.text('popover'), findsOneWidget);
 
-    await tester.tapAt(Offset.zero);
+    await tester.tapAt(.zero);
     await tester.pumpAndSettle();
 
     expect(count, 1);
@@ -250,7 +248,7 @@ void main() {
       TestScaffold.app(
         child: FPopover(
           onTapHide: () => count++,
-          hideRegion: FPopoverHideRegion.anywhere,
+          hideRegion: .anywhere,
           popoverBuilder: (context, _) => const Text('follower'),
           builder: (_, controller, _) => Row(
             children: [
@@ -292,7 +290,7 @@ void main() {
                 child: Container(color: Colors.black, height: 10, width: 10),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
+                padding: const .symmetric(horizontal: 20),
                 child: FButton(onPress: () {}, child: const Text('Underneath')),
               ),
             ],
@@ -305,23 +303,22 @@ void main() {
 
       expect(find.text('1'), findsOneWidget);
 
-      await tester.sendKeyEvent(LogicalKeyboardKey.tab);
+      await tester.sendKeyEvent(.tab);
       await tester.pumpAndSettle();
 
-      await tester.sendKeyEvent(LogicalKeyboardKey.tab);
+      await tester.sendKeyEvent(.tab);
       await tester.pumpAndSettle();
 
-      await tester.sendKeyEvent(LogicalKeyboardKey.tab);
+      await tester.sendKeyEvent(.tab);
       await tester.pumpAndSettle();
 
-      await tester.sendKeyEvent(LogicalKeyboardKey.tab);
+      await tester.sendKeyEvent(.tab);
       await tester.pumpAndSettle();
 
       expect(Focus.of(tester.element(find.text('3'))).hasFocus, true);
     });
 
     testWidgets('shift focus outside', (tester) async {
-      final controller = autoDispose(FPopoverController(vsync: tester));
       final first = autoDispose(FocusNode());
       final second = autoDispose(FocusNode());
 
@@ -330,8 +327,8 @@ void main() {
           child: Column(
             children: [
               FPopover(
-                control: .managed(controller: controller),
-                traversalEdgeBehavior: TraversalEdgeBehavior.parentScope,
+                control: const .managed(initial: true),
+                traversalEdgeBehavior: .parentScope,
                 popoverBuilder: (_, _) => SizedBox.square(dimension: 100, child: FTextField(focusNode: first)),
                 child: Container(color: Colors.black, height: 10, width: 10),
               ),
@@ -340,8 +337,6 @@ void main() {
           ),
         ),
       );
-
-      unawaited(controller.show());
       await tester.pumpAndSettle();
 
       first.requestFocus();
@@ -350,7 +345,7 @@ void main() {
       expect(first.hasFocus, true);
       expect(second.hasFocus, false);
 
-      await tester.sendKeyEvent(LogicalKeyboardKey.tab);
+      await tester.sendKeyEvent(.tab);
       await tester.pumpAndSettle();
 
       expect(first.hasFocus, false);
@@ -358,7 +353,6 @@ void main() {
     });
 
     testWidgets('does not shift focus outside', (tester) async {
-      final controller = autoDispose(FPopoverController(vsync: tester));
       final first = autoDispose(FocusNode());
       final second = autoDispose(FocusNode());
 
@@ -367,7 +361,7 @@ void main() {
           child: Column(
             children: [
               FPopover(
-                control: .managed(controller: controller),
+                control: const .managed(initial: true),
                 popoverBuilder: (_, _) => SizedBox.square(dimension: 100, child: FTextField(focusNode: first)),
                 child: Container(color: Colors.black, height: 10, width: 10),
               ),
@@ -376,8 +370,6 @@ void main() {
           ),
         ),
       );
-
-      unawaited(controller.show());
       await tester.pumpAndSettle();
 
       first.requestFocus();
@@ -386,7 +378,7 @@ void main() {
       expect(first.hasFocus, true);
       expect(second.hasFocus, false);
 
-      await tester.sendKeyEvent(LogicalKeyboardKey.tab);
+      await tester.sendKeyEvent(.tab);
       await tester.pumpAndSettle();
 
       expect(first.hasFocus, true);

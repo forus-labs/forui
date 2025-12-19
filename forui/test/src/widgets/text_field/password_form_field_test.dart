@@ -32,9 +32,7 @@ void main() {
 
   testWidgets('hide', (tester) async {
     await tester.pumpWidget(
-      TestScaffold.app(
-        child: FTextFormField.password(obscureTextControl: .managed(controller: autoDispose(ValueNotifier(false)))),
-      ),
+      TestScaffold.app(child: FTextFormField.password(obscureTextControl: const .managed(initial: false))),
     );
 
     expect(find.bySemanticsLabel('Hide password'), findsOne);
@@ -123,7 +121,6 @@ void main() {
 
   testWidgets('reset preserves obscured state', (tester) async {
     final key = GlobalKey<FormState>();
-    final obscure = autoDispose(ValueNotifier<bool>(false));
 
     await tester.pumpWidget(
       TestScaffold.app(
@@ -131,7 +128,7 @@ void main() {
           key: key,
           child: FTextFormField.password(
             control: const .managed(initial: TextEditingValue(text: 'initial')),
-            obscureTextControl: .managed(controller: obscure),
+            obscureTextControl: const .managed(initial: false),
           ),
         ),
       ),

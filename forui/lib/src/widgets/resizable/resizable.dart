@@ -7,6 +7,7 @@ import 'package:sugar/sugar.dart';
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/debug.dart';
 import 'package:forui/src/widgets/resizable/divider.dart';
+import 'package:forui/src/widgets/resizable/resizable_controller.dart';
 
 part 'resizable.design.dart';
 
@@ -25,8 +26,8 @@ class FResizable extends StatefulWidget {
   static String _label(FResizableRegionData left, FResizableRegionData right) =>
       '${left.extent.current}, ${right.extent.current}';
 
-  /// The controller that manages the resizing of regions. Defaults to [FResizableController.cascade].
-  final FResizableController? controller;
+  /// The control that manages the resizing of regions. Defaults to [FResizableControl.managedCascade].
+  final FResizableControl control;
 
   /// The resizable' style.
   ///
@@ -70,9 +71,6 @@ class FResizable extends StatefulWidget {
   /// A callback that formats the semantic label for the resizable. Defaults to announcing the extents of both regions.
   final String Function(FResizableRegionData first, FResizableRegionData second) semanticFormatterCallback;
 
-  /// Handler called when the resizable regions change.
-  final ValueChanged<List<FResizableRegionData>>? onChange;
-
   /// The children that may be resized.
   final List<FResizableRegion> children;
 
@@ -80,13 +78,12 @@ class FResizable extends StatefulWidget {
   FResizable({
     required this.axis,
     required this.children,
-    this.controller,
+    this.control = const .managedCascade(),
     this.style,
-    this.divider = FResizableDivider.dividerWithThumb,
+    this.divider = .dividerWithThumb,
     this.crossAxisExtent,
     this.resizePercentage = 0.005,
     this.semanticFormatterCallback = _label,
-    this.onChange,
     double? hitRegionExtent,
     super.key,
   }) : assert(crossAxisExtent == null || 0 < crossAxisExtent, 'crossAxisExtent ($crossAxisExtent) must be > 0'),
@@ -100,7 +97,7 @@ class FResizable extends StatefulWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('controller', controller))
+      ..add(DiagnosticsProperty('control', control))
       ..add(ObjectFlagProperty.has('style', style))
       ..add(EnumProperty('axis', axis))
       ..add(EnumProperty('divider', divider))
@@ -108,41 +105,37 @@ class FResizable extends StatefulWidget {
       ..add(DoubleProperty('hitRegionExtent', hitRegionExtent))
       ..add(PercentProperty('resizePercentage', resizePercentage))
       ..add(ObjectFlagProperty.has('semanticFormatterCallback', semanticFormatterCallback))
-      ..add(ObjectFlagProperty.has('onChange', onChange))
       ..add(IterableProperty('children', children));
   }
 }
 
 class _FResizableState extends State<FResizable> {
-  late FResizableController _controller = widget.controller ?? .cascade();
+  late FResizableController _controller;
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
+  void initState() {
+    super.initState();
+    _controller = widget.control.create(() {});
     _update();
-    _controller.addListener(_onChange);
   }
 
   @override
   void didUpdateWidget(FResizable old) {
     super.didUpdateWidget(old);
-    if (widget.controller != old.controller) {
-      if (old.controller == null) {
-        _controller.dispose();
-      } else {
-        old.controller?.removeListener(_onChange);
-      }
-
-      _controller = widget.controller ?? .cascade();
-      _controller.addListener(_onChange);
-    }
-
-    if (widget.axis != old.axis ||
+    final (controller, updated) = widget.control.update(old.control, _controller, () {});
+    if (updated ||
+        widget.axis != old.axis ||
         widget.crossAxisExtent != old.crossAxisExtent ||
-        widget.controller != old.controller ||
         !widget.children.equals(old.children)) {
+      _controller = controller;
       _update();
     }
+  }
+
+  @override
+  void dispose() {
+    widget.control.dispose(_controller, () {});
+    super.dispose();
   }
 
   void _update() {
@@ -165,8 +158,6 @@ class _FResizableState extends State<FResizable> {
     _controller.regions.clear();
     _controller.regions.addAll(regions);
   }
-
-  void _onChange() => widget.onChange?.call(_controller.regions);
 
   @override
   Widget build(BuildContext context) {
@@ -253,16 +244,6 @@ class _FResizableState extends State<FResizable> {
         ),
       );
     }
-  }
-
-  @override
-  void dispose() {
-    if (widget.controller == null) {
-      _controller.dispose();
-    } else {
-      _controller.removeListener(_onChange);
-    }
-    super.dispose();
   }
 }
 

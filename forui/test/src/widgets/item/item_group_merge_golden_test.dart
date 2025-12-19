@@ -400,7 +400,7 @@ void main() {
         child: FItemGroup.merge(
           children: [
             FItemGroup(
-              divider: FItemDivider.indented,
+              divider: .indented,
               children: [
                 FItem(
                   prefix: const Icon(FIcons.list, color: Colors.transparent),
@@ -417,7 +417,7 @@ void main() {
               ],
             ),
             FItemGroup(
-              divider: FItemDivider.indented,
+              divider: .indented,
               children: [
                 FItem(
                   prefix: const Icon(FIcons.list, color: Colors.transparent),

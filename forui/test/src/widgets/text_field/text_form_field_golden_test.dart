@@ -33,12 +33,11 @@ void main() {
     for (final (focused, focused_) in [('focused', true), ('unfocused', false)]) {
       for (final text in ['short text', null]) {
         testWidgets('default - ${theme.name} - $focused ${text == null ? '- no text' : ''}', (tester) async {
-          final controller = text == null ? null : autoDispose(TextEditingController(text: text));
           await tester.pumpWidget(
             TestScaffold.app(
               theme: theme.data,
               child: FTextFormField(
-                control: .managed(controller: controller),
+                control: .managed(initial: text == null ? null : TextEditingValue(text: text)),
                 autofocus: focused_,
                 label: const Text('My Label'),
                 hint: 'hint',
@@ -56,12 +55,11 @@ void main() {
         });
 
         testWidgets('error - ${theme.name} - $focused ${text == null ? '- no text' : ''}', (tester) async {
-          final controller = text == null ? null : autoDispose(TextEditingController(text: text));
           await tester.pumpWidget(
             TestScaffold.app(
               theme: theme.data,
               child: FTextFormField(
-                control: .managed(controller: controller),
+                control: .managed(initial: text == null ? null : TextEditingValue(text: text)),
                 autofocus: focused_,
                 label: const Text('My Label'),
                 hint: 'hint',
@@ -79,12 +77,11 @@ void main() {
         });
 
         testWidgets('email - ${theme.name} - $focused ${text == null ? '- no text' : ''}', (tester) async {
-          final controller = text == null ? null : autoDispose(TextEditingController(text: text));
           await tester.pumpWidget(
             TestScaffold.app(
               theme: theme.data,
               child: FTextFormField.email(
-                control: .managed(controller: controller),
+                control: .managed(initial: text == null ? null : TextEditingValue(text: text)),
                 autofocus: focused_,
                 hint: 'janedoe@foruslabs.com',
               ),
@@ -100,12 +97,11 @@ void main() {
         });
 
         testWidgets('password - ${theme.name} - $focused ${text == null ? '- no text' : ''}', (tester) async {
-          final controller = text == null ? null : autoDispose(TextEditingController(text: text));
           await tester.pumpWidget(
             TestScaffold.app(
               theme: theme.data,
               child: FTextFormField.password(
-                control: .managed(controller: controller),
+                control: .managed(initial: text == null ? null : TextEditingValue(text: text)),
                 autofocus: focused_,
                 hint: 'password',
               ),
@@ -123,15 +119,12 @@ void main() {
         testWidgets('password - unobscured - ${theme.name} - $focused ${text == null ? '- no text' : ''}', (
           tester,
         ) async {
-          final controller = text == null ? null : autoDispose(TextEditingController(text: text));
-          final obscure = autoDispose(ValueNotifier<bool>(false));
-
           await tester.pumpWidget(
             TestScaffold.app(
               theme: theme.data,
               child: FTextFormField.password(
-                control: .managed(controller: controller),
-                obscureTextControl: .managed(controller: obscure),
+                control: .managed(initial: text == null ? null : TextEditingValue(text: text)),
+                obscureTextControl: const .managed(initial: false),
                 autofocus: focused_,
                 hint: 'password',
               ),
@@ -151,12 +144,11 @@ void main() {
 
       for (final (text) in [_longText, null]) {
         testWidgets('multiline - ${theme.name} - $focused ${text == null ? '- no text' : ''}', (tester) async {
-          final controller = text == null ? null : autoDispose(TextEditingController(text: text));
           await tester.pumpWidget(
             TestScaffold.app(
               theme: theme.data,
               child: FTextFormField.multiline(
-                control: .managed(controller: controller),
+                control: .managed(initial: text == null ? null : TextEditingValue(text: text)),
                 autofocus: focused_,
                 label: const Text('My Label'),
                 hint: 'hint',
@@ -189,14 +181,14 @@ void main() {
     });
 
     testWidgets('iOS selection handles - ${theme.name}', (tester) async {
-      debugDefaultTargetPlatformOverride = TargetPlatform.iOS;
-
-      final controller = autoDispose(TextEditingController(text: 'text'));
+      debugDefaultTargetPlatformOverride = .iOS;
 
       await tester.pumpWidget(
         TestScaffold.app(
           theme: theme.data,
-          child: FTextFormField(control: .managed(controller: controller)),
+          child: const FTextFormField(
+            control: .managed(initial: TextEditingValue(text: 'text')),
+          ),
         ),
       );
 

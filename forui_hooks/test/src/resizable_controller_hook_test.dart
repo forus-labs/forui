@@ -17,8 +17,8 @@ void main() {
             controller = useFResizableController();
             return Center(
               child: FResizable(
-                axis: Axis.vertical,
-                controller: controller,
+                axis: .vertical,
+                control: .managed(controller: controller),
                 children: [
                   FResizableRegion(
                     initialExtent: 100,
@@ -54,8 +54,8 @@ void main() {
             controller = useFCascadeResizableController();
             return Center(
               child: FResizable(
-                axis: Axis.vertical,
-                controller: controller,
+                axis: .vertical,
+                control: .managed(controller: controller),
                 children: [
                   FResizableRegion(
                     initialExtent: 100,

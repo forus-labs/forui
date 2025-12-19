@@ -13,11 +13,11 @@ void main() {
           width: 300,
           child: FLabel(
             style: TestScaffold.blueScreen.labelStyles.horizontalStyle,
-            axis: Axis.horizontal,
+            axis: .horizontal,
             label: const Text('Email'),
             description: const Text('Enter your email address.'),
             error: const Text('Please enter a valid email address.'),
-            states: const {WidgetState.error},
+            states: const {.error},
             child: const SizedBox(width: 16, height: 16),
           ),
         ),
@@ -40,13 +40,13 @@ void main() {
             child: SizedBox(
               width: 300,
               child: FLabel(
-                axis: Axis.horizontal,
+                axis: .horizontal,
                 label: const Text('Email'),
                 description: const Text('Enter your email address.'),
                 error: const Text('Please enter a valid email address.'),
                 states: states,
                 child: const DecoratedBox(
-                  decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(5)), color: Colors.grey),
+                  decoration: BoxDecoration(borderRadius: .all(.circular(5)), color: Colors.grey),
                   child: SizedBox(width: 16, height: 16),
                 ),
               ),
@@ -68,13 +68,13 @@ void main() {
           TestScaffold(
             theme: theme.data,
             child: FLabel(
-              axis: Axis.vertical,
+              axis: .vertical,
               label: const Text('Email'),
               description: const Text('Enter your email address.'),
               error: const Text('Please enter a valid email address.'),
               states: state,
               child: const DecoratedBox(
-                decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(5)), color: Colors.grey),
+                decoration: BoxDecoration(borderRadius: .all(.circular(5)), color: Colors.grey),
                 child: SizedBox(width: 200, height: 30),
               ),
             ),

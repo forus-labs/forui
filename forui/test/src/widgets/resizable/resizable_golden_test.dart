@@ -12,7 +12,7 @@ void main() {
         TestScaffold.blue(
           child: FResizable(
             style: TestScaffold.blueScreen.resizableStyle,
-            axis: Axis.vertical,
+            axis: .vertical,
             crossAxisExtent: 100,
             children: [
               FResizableRegion(
@@ -42,8 +42,8 @@ void main() {
                 theme: theme.data,
                 child: DecoratedBox(
                   decoration: BoxDecoration(
-                    border: Border.all(color: theme.data.colors.border),
-                    borderRadius: BorderRadius.circular(8),
+                    border: .all(color: theme.data.colors.border),
+                    borderRadius: .circular(8),
                   ),
                   child: FResizable(
                     axis: axis,
@@ -75,8 +75,8 @@ void main() {
                 theme: theme.data,
                 child: DecoratedBox(
                   decoration: BoxDecoration(
-                    border: Border.all(color: theme.data.colors.border),
-                    borderRadius: BorderRadius.circular(8),
+                    border: .all(color: theme.data.colors.border),
+                    borderRadius: .circular(8),
                   ),
                   child: FResizable(
                     axis: axis,
@@ -112,8 +112,8 @@ void main() {
             child: FScaffold(
               child: DecoratedBox(
                 decoration: BoxDecoration(
-                  border: Border.all(color: FThemes.zinc.light.colors.border),
-                  borderRadius: BorderRadius.circular(8),
+                  border: .all(color: FThemes.zinc.light.colors.border),
+                  borderRadius: .circular(8),
                 ),
                 child: FResizable(
                   axis: axis,
