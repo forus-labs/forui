@@ -85,14 +85,14 @@ enum FPopoverHideRegion {
 
 /// A popover displays rich content in a portal that is aligned to a child.
 ///
-///  ### Nested FPopovers
-//
-// When placing widgets that use popovers internally, e.g. `FSelect` inside a `FPopover`, the outer popover will close when
-// interacting with the inner widget's dropdown. This happens because the inner dropdown is rendered in a separate overlay
-// layer, so tapping it is considered "outside" the outer popover.
-//
-// To prevent this, share the same `groupId` between the outer `FPopover` and the inner widget. Widgets with the same `groupId`
-// are treated as part of the same tap region.
+/// ### Nested Popovers
+///
+/// When placing widgets that use popovers internally, e.g. `FSelect` inside a `FPopover`, the outer popover will close
+/// when interacting with the inner widget's dropdown. This happens because the inner dropdown is rendered in a separate
+/// overlay layer, so tapping it is considered "outside" the outer popover.
+///
+/// To prevent this, share the same [groupId] between the outer `FPopover` and the inner widget. Widgets with the same
+/// `groupId` are treated as part of the same tap region.
 ///
 /// See:
 /// * https://forui.dev/docs/overlay/popover for working examples.
