@@ -27,8 +27,14 @@ dart fix --apply
 * Add `FAutocompleteItemMixin.section(...)`.
 * Add `FAutocompleteItemMixin.richSection(...)`.
 * Add `FAutocompleteItem.item(...)`.
+* Add `FAutocomplete.contentGroupId`.
 
-* **Breaking** Rename `FAutocomplete.shift` to `FAutocomplete.overflow`.
+* **Breaking** Rename `FAutocomplete.anchor` to `FAutocomplete.contentAnchor`.
+* **Breaking** Rename `FAutocomplete.popoverConstraints` to `FAutocomplete.contentConstraints`.
+* **Breaking** Rename `FAutocomplete.spacing` to `FAutocomplete.contentSpacing`.
+* **Breaking** Rename `FAutocomplete.overflow` to `FAutocomplete.contentOverflow`.
+* **Breaking** Rename `FAutocomplete.offset` to `FAutocomplete.contentOffset`.
+* **Breaking** Rename `FAutocomplete.hideRegion` to `FAutocomplete.contentHideRegion`.
 * **Breaking** Remove `FAutocomplete.controller`. Use `FAutocomplete(control: .managed(...))` instead.
 * **Breaking** Remove `FAutocomplete.initialText`. Use `FAutocomplete(control: .managed(...))` instead.
 * **Breaking** Remove `FAutocompleteController.vsync`. Use `FAutocomplete(popoverControl: ...)` instead.

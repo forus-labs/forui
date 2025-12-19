@@ -34,7 +34,7 @@ transforms:
     changes:
       - kind: renameParameter
         oldName: 'shift'
-        newName: 'overflow'
+        newName: 'contentOverflow'
 
   - title: 'Rename FAutocomplete.builder(shift: ...) to overflow'
     date: 2025-11-30
@@ -45,7 +45,117 @@ transforms:
     changes:
       - kind: renameParameter
         oldName: 'shift'
-        newName: 'overflow'
+        newName: 'contentOverflow'
+
+  - title: 'Rename FAutocomplete(anchor: ...) to contentAnchor'
+    date: 2025-12-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FAutocomplete
+    changes:
+      - kind: renameParameter
+        oldName: 'anchor'
+        newName: 'contentAnchor'
+
+  - title: 'Rename FAutocomplete.builder(anchor: ...) to contentAnchor'
+    date: 2025-12-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'builder'
+      inClass: FAutocomplete
+    changes:
+      - kind: renameParameter
+        oldName: 'anchor'
+        newName: 'contentAnchor'
+
+  - title: 'Rename FAutocomplete(popoverConstraints: ...) to contentConstraints'
+    date: 2025-12-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FAutocomplete
+    changes:
+      - kind: renameParameter
+        oldName: 'popoverConstraints'
+        newName: 'contentConstraints'
+
+  - title: 'Rename FAutocomplete.builder(popoverConstraints: ...) to contentConstraints'
+    date: 2025-12-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'builder'
+      inClass: FAutocomplete
+    changes:
+      - kind: renameParameter
+        oldName: 'popoverConstraints'
+        newName: 'contentConstraints'
+
+  - title: 'Rename FAutocomplete(spacing: ...) to contentSpacing'
+    date: 2025-12-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FAutocomplete
+    changes:
+      - kind: renameParameter
+        oldName: 'spacing'
+        newName: 'contentSpacing'
+
+  - title: 'Rename FAutocomplete.builder(spacing: ...) to contentSpacing'
+    date: 2025-12-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'builder'
+      inClass: FAutocomplete
+    changes:
+      - kind: renameParameter
+        oldName: 'spacing'
+        newName: 'contentSpacing'
+
+  - title: 'Rename FAutocomplete(offset: ...) to contentOffset'
+    date: 2025-12-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FAutocomplete
+    changes:
+      - kind: renameParameter
+        oldName: 'offset'
+        newName: 'contentOffset'
+
+  - title: 'Rename FAutocomplete.builder(offset: ...) to contentOffset'
+    date: 2025-12-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'builder'
+      inClass: FAutocomplete
+    changes:
+      - kind: renameParameter
+        oldName: 'offset'
+        newName: 'contentOffset'
+
+  - title: 'Rename FAutocomplete(hideRegion: ...) to contentHideRegion'
+    date: 2025-12-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FAutocomplete
+    changes:
+      - kind: renameParameter
+        oldName: 'hideRegion'
+        newName: 'contentHideRegion'
+
+  - title: 'Rename FAutocomplete.builder(hideRegion: ...) to contentHideRegion'
+    date: 2025-12-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'builder'
+      inClass: FAutocomplete
+    changes:
+      - kind: renameParameter
+        oldName: 'hideRegion'
+        newName: 'contentHideRegion'
 
   - title: 'Rename FAutocompleteStyle(popoverStyle: ...) to contentStyle'
     date: 2025-11-30

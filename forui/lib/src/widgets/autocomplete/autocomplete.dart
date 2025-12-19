@@ -57,7 +57,7 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
   /// Defaults to [FAutocompleteControl.managed].
   final FAutocompleteControl control;
 
-  /// Defines how the autocomplete's popover is controlled.
+  /// Defines how the autocomplete's popover content is controlled.
   ///
   /// Defaults to [FPopoverControl.managed].
   final FPopoverControl popoverControl;
@@ -253,25 +253,28 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
   final Widget Function(BuildContext context, String message) errorBuilder;
 
   /// The alignment point on the content popover. Defaults to [AlignmentDirectional.topStart].
-  final AlignmentGeometry anchor;
+  final AlignmentGeometry contentAnchor;
 
   /// The alignment point on the select's field. Defaults to [AlignmentDirectional.bottomStart].
   final AlignmentGeometry fieldAnchor;
 
   /// The constraints to apply to the content popover. Defaults to `const FAutoWidthPortalConstraints(maxHeight: 300)`.
-  final FPortalConstraints popoverConstraints;
+  final FPortalConstraints contentConstraints;
 
   /// {@macro forui.widgets.FPopover.spacing}
-  final FPortalSpacing spacing;
+  final FPortalSpacing contentSpacing;
 
   /// {@macro forui.widgets.FPopover.overflow}
-  final FPortalOverflow overflow;
+  final FPortalOverflow contentOverflow;
 
   /// {@macro forui.widgets.FPopover.offset}
-  final Offset offset;
+  final Offset contentOffset;
 
   /// {@macro forui.widgets.FPopover.hideRegion}
-  final FPopoverHideRegion hideRegion;
+  final FPopoverHideRegion contentHideRegion;
+
+  /// {@macro forui.widgets.FPopover.groupId}
+  final Object? contentGroupId;
 
   /// {@macro forui.widgets.FPopover.onTapHide}
   final VoidCallback? onTapHide;
@@ -380,13 +383,14 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
     AutovalidateMode autovalidateMode = .disabled,
     String? forceErrorText,
     Widget Function(BuildContext context, String message) errorBuilder = FFormFieldProperties.defaultErrorBuilder,
-    AlignmentGeometry anchor = AlignmentDirectional.topStart,
+    AlignmentGeometry contentAnchor = AlignmentDirectional.topStart,
     AlignmentGeometry fieldAnchor = AlignmentDirectional.bottomStart,
-    FPortalConstraints popoverConstraints = const FAutoWidthPortalConstraints(maxHeight: 300),
-    FPortalSpacing spacing = const .spacing(4),
-    FPortalOverflow overflow = .flip,
-    Offset offset = .zero,
-    FPopoverHideRegion hideRegion = .excludeChild,
+    FPortalConstraints contentConstraints = const FAutoWidthPortalConstraints(maxHeight: 300),
+    FPortalSpacing contentSpacing = const .spacing(4),
+    FPortalOverflow contentOverflow = .flip,
+    Offset contentOffset = .zero,
+    FPopoverHideRegion contentHideRegion = .excludeChild,
+    Object? contentGroupId,
     bool autoHide = true,
     FFieldBuilder<FAutocompleteStyle> builder = _builder,
     bool rightArrowToComplete = false,
@@ -468,13 +472,14 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
          autovalidateMode: autovalidateMode,
          forceErrorText: forceErrorText,
          errorBuilder: errorBuilder,
-         anchor: anchor,
+         contentAnchor: contentAnchor,
          fieldAnchor: fieldAnchor,
-         popoverConstraints: popoverConstraints,
-         spacing: spacing,
-         overflow: overflow,
-         offset: offset,
-         hideRegion: hideRegion,
+         contentConstraints: contentConstraints,
+         contentSpacing: contentSpacing,
+         contentOverflow: contentOverflow,
+         contentOffset: contentOffset,
+         contentHideRegion: contentHideRegion,
+         contentGroupId: contentGroupId,
          autoHide: autoHide,
          builder: builder,
          rightArrowToComplete: rightArrowToComplete,
@@ -555,13 +560,14 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
     this.autovalidateMode = .disabled,
     this.forceErrorText,
     this.errorBuilder = FFormFieldProperties.defaultErrorBuilder,
-    this.anchor = AlignmentDirectional.topStart,
+    this.contentAnchor = AlignmentDirectional.topStart,
     this.fieldAnchor = AlignmentDirectional.bottomStart,
-    this.popoverConstraints = const FAutoWidthPortalConstraints(maxHeight: 300),
-    this.spacing = const .spacing(4),
-    this.overflow = .flip,
-    this.offset = .zero,
-    this.hideRegion = .excludeChild,
+    this.contentConstraints = const FAutoWidthPortalConstraints(maxHeight: 300),
+    this.contentSpacing = const .spacing(4),
+    this.contentOverflow = .flip,
+    this.contentOffset = .zero,
+    this.contentHideRegion = .excludeChild,
+    this.contentGroupId,
     this.autoHide = true,
     this.builder = _builder,
     this.rightArrowToComplete = false,
@@ -651,13 +657,14 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
       ..add(EnumProperty('autovalidateMode', autovalidateMode))
       ..add(StringProperty('forceErrorText', forceErrorText))
       ..add(ObjectFlagProperty.has('errorBuilder', errorBuilder))
-      ..add(DiagnosticsProperty('anchor', anchor))
+      ..add(DiagnosticsProperty('contentAnchor', contentAnchor))
       ..add(DiagnosticsProperty('fieldAnchor', fieldAnchor))
-      ..add(DiagnosticsProperty('popoverConstraints', popoverConstraints))
-      ..add(DiagnosticsProperty('spacing', spacing))
-      ..add(ObjectFlagProperty.has('overflow', overflow))
-      ..add(DiagnosticsProperty('offset', offset))
-      ..add(EnumProperty('hideRegion', hideRegion))
+      ..add(DiagnosticsProperty('contentConstraints', contentConstraints))
+      ..add(DiagnosticsProperty('contentSpacing', contentSpacing))
+      ..add(ObjectFlagProperty.has('contentOverflow', contentOverflow))
+      ..add(DiagnosticsProperty('contentOffset', contentOffset))
+      ..add(EnumProperty('contentHideRegion', contentHideRegion))
+      ..add(DiagnosticsProperty('contentGroupId', contentGroupId))
       ..add(ObjectFlagProperty.has('onTapHide', onTapHide))
       ..add(FlagProperty('autoHide', value: autoHide, ifTrue: 'autoHide'))
       ..add(ObjectFlagProperty.has('builder', builder))
@@ -870,13 +877,14 @@ class _State extends State<FAutocomplete> with TickerProviderStateMixin {
           child: FPopover(
             control: .managed(controller: _popoverController),
             style: style.contentStyle,
-            constraints: widget.popoverConstraints,
-            popoverAnchor: widget.anchor,
+            constraints: widget.contentConstraints,
+            popoverAnchor: widget.contentAnchor,
             childAnchor: widget.fieldAnchor,
-            spacing: widget.spacing,
-            overflow: widget.overflow,
-            offset: widget.offset,
-            hideRegion: widget.hideRegion,
+            spacing: widget.contentSpacing,
+            overflow: widget.contentOverflow,
+            offset: widget.contentOffset,
+            hideRegion: widget.contentHideRegion,
+            groupId: widget.contentGroupId,
             onTapHide: () {
               if (_restore case final restore?) {
                 _previous = restore;
