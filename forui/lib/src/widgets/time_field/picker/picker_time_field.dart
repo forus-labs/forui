@@ -13,7 +13,7 @@ class _PickerTimeField extends FTimeField implements FTimeFieldPickerProperties 
   @override
   final Alignment anchor;
   @override
-  final Alignment inputAnchor;
+  final Alignment fieldAnchor;
   @override
   final FPortalSpacing spacing;
   @override
@@ -22,6 +22,8 @@ class _PickerTimeField extends FTimeField implements FTimeFieldPickerProperties 
   final Offset offset;
   @override
   final FPopoverHideRegion hideRegion;
+  @override
+  final Object? groupId;
   @override
   final VoidCallback? onTapHide;
   @override
@@ -39,11 +41,12 @@ class _PickerTimeField extends FTimeField implements FTimeFieldPickerProperties 
     this.mouseCursor = .defer,
     this.canRequestFocus = true,
     this.anchor = .topLeft,
-    this.inputAnchor = .bottomLeft,
+    this.fieldAnchor = .bottomLeft,
     this.spacing = const .spacing(4),
     this.overflow = .flip,
     this.offset = .zero,
     this.hideRegion = .excludeChild,
+    this.groupId,
     this.onTapHide,
     this.hourInterval = 1,
     this.minuteInterval = 1,
@@ -243,11 +246,12 @@ class _PickerPopover extends StatelessWidget {
     style: style.popoverStyle,
     constraints: style.popoverConstraints,
     popoverAnchor: properties.anchor,
-    childAnchor: properties.inputAnchor,
+    childAnchor: properties.fieldAnchor,
     spacing: properties.spacing,
     overflow: properties.overflow,
     offset: properties.offset,
     hideRegion: properties.hideRegion,
+    groupId: properties.groupId,
     onTapHide: properties.onTapHide,
     autofocus: autofocus,
     shortcuts: {const SingleActivator(.escape): _hide},

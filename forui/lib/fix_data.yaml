@@ -4791,6 +4791,17 @@ transforms:
         oldName: 'shift'
         newName: 'overflow'
 
+  - title: 'Rename FTimeField.picker(inputAnchor: ...) to fieldAnchor'
+    date: 2025-12-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'picker'
+      inClass: FTimeField
+    changes:
+      - kind: renameParameter
+        oldName: 'inputAnchor'
+        newName: 'fieldAnchor'
+
   # FTimePicker
   - title: 'Migrate FTimePicker to control parameter'
     date: 2025-12-09

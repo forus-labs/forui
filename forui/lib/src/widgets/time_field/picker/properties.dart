@@ -9,7 +9,7 @@ class FTimeFieldPickerProperties with Diagnosticable {
   final AlignmentGeometry anchor;
 
   /// The alignment point on the input field. Defaults to [Alignment.bottomLeft].
-  final AlignmentGeometry inputAnchor;
+  final AlignmentGeometry fieldAnchor;
 
   /// {@macro forui.widgets.FPopover.spacing}
   final FPortalSpacing spacing;
@@ -28,6 +28,9 @@ class FTimeFieldPickerProperties with Diagnosticable {
   /// when pressing and holding the input field, due to the popover being hidden and then immediately shown again.
   final FPopoverHideRegion hideRegion;
 
+  /// {@macro forui.widgets.FPopover.groupId}
+  final Object? groupId;
+
   /// Callback that is called when the time picker is tapped to hide it.
   final VoidCallback? onTapHide;
 
@@ -43,11 +46,12 @@ class FTimeFieldPickerProperties with Diagnosticable {
 
   const FTimeFieldPickerProperties({
     this.anchor = .topLeft,
-    this.inputAnchor = .bottomLeft,
+    this.fieldAnchor = .bottomLeft,
     this.spacing = const .spacing(4),
     this.overflow = .flip,
     this.offset = .zero,
     this.hideRegion = .excludeChild,
+    this.groupId,
     this.onTapHide,
     this.hourInterval = 1,
     this.minuteInterval = 1,
@@ -58,11 +62,12 @@ class FTimeFieldPickerProperties with Diagnosticable {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('anchor', anchor))
-      ..add(DiagnosticsProperty('inputAnchor', inputAnchor))
+      ..add(DiagnosticsProperty('fieldAnchor', fieldAnchor))
       ..add(DiagnosticsProperty('spacing', spacing))
       ..add(ObjectFlagProperty.has('overflow', overflow))
       ..add(DiagnosticsProperty('offset', offset))
       ..add(EnumProperty('hideRegion', hideRegion))
+      ..add(DiagnosticsProperty('groupId', groupId))
       ..add(ObjectFlagProperty.has('onTapHide', onTapHide))
       ..add(IntProperty('hourInterval', hourInterval))
       ..add(IntProperty('minuteInterval', minuteInterval));
@@ -74,11 +79,12 @@ class FTimeFieldPickerProperties with Diagnosticable {
       other is FTimeFieldPickerProperties &&
           runtimeType == other.runtimeType &&
           anchor == other.anchor &&
-          inputAnchor == other.inputAnchor &&
+          fieldAnchor == other.fieldAnchor &&
           spacing == other.spacing &&
           overflow == other.overflow &&
           offset == other.offset &&
           hideRegion == other.hideRegion &&
+          groupId == other.groupId &&
           onTapHide == other.onTapHide &&
           hourInterval == other.hourInterval &&
           minuteInterval == other.minuteInterval;
@@ -86,11 +92,12 @@ class FTimeFieldPickerProperties with Diagnosticable {
   @override
   int get hashCode =>
       anchor.hashCode ^
-      inputAnchor.hashCode ^
+      fieldAnchor.hashCode ^
       spacing.hashCode ^
       overflow.hashCode ^
       offset.hashCode ^
       hideRegion.hashCode ^
+      groupId.hashCode ^
       onTapHide.hashCode ^
       hourInterval.hashCode ^
       minuteInterval.hashCode;
