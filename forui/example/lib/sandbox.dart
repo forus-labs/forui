@@ -35,32 +35,14 @@ class Sandbox extends StatefulWidget {
 enum Notification { all, direct, nothing, limitedTime, timeSensitive, selectedApps }
 
 class _SandboxState extends State<Sandbox> with SingleTickerProviderStateMixin {
-  var _v = FSliderValue(max: 0.35);
-
   @override
   Widget build(BuildContext context) => Center(
     child: Column(
+      spacing: 5,
       mainAxisSize: .min,
       children: [
-        FSlider(
-          control: .liftedDiscrete(
-            value: _v,
-            onChange: (v) {
-              setState(() {
-                _v = v;
-              });
-            },
-          ),
-          label: const Text('Brightness'),
-          description: const Text('Adjust the brightness level.'),
-          marks: const [
-            .mark(value: 0, label: Text('0%')),
-            .mark(value: 0.25, tick: false),
-            .mark(value: 0.5, label: Text('50%')),
-            .mark(value: 0.75, tick: false),
-            .mark(value: 1, label: Text('100%')),
-          ],
-        ),
+        FLineCalendar(control: .managed(initial: .now().subtract(const Duration(days: 1)), selectable: (d) => d.day != 18)),
+        FCalendar(control: .managedDate(initial: DateTime(2025, 12, 18), selectable: (d) => d.day != 18)),
       ],
     ),
   );
