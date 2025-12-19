@@ -146,7 +146,7 @@ class FPopover extends StatefulWidget {
   /// {@template forui.widgets.FPopover.spacing}
   /// The spacing between the popover and child anchors.
   ///
-  /// Applied before [overflow].
+  /// Applied before `overflow`.
   /// {@endtemplate}
   ///
   /// Defaults to `FPortalSpacing(4)`.
@@ -155,7 +155,7 @@ class FPopover extends StatefulWidget {
   /// {@template forui.widgets.FPopover.overflow}
   /// The callback used to shift a popover when it overflows out of the viewport.
   ///
-  /// Applied after [spacing] and before [offset].
+  /// Applied after `spacing` and before `offset`.
   ///
   /// See [FPortalOverflow] for the different overflow strategies.
   /// {@endtemplate}
@@ -166,7 +166,7 @@ class FPopover extends StatefulWidget {
   /// {@template forui.widgets.FPopover.offset}
   /// Additional translation to apply to the popover's position.
   ///
-  /// Applied after [overflow].
+  /// Applied after `overflow`.
   /// {@endtemplate}
   ///
   /// Defaults to [Offset.zero].
@@ -179,7 +179,7 @@ class FPopover extends StatefulWidget {
   /// If the group id is null, then only this region is hit tested.
   ///
   /// ## Contract
-  /// Throws an [AssertionError] if the group id is not null and [hideRegion] is not set to
+  /// Throws an [AssertionError] if the group id is not null and `hideRegion` is not set to
   /// [FPopoverHideRegion.excludeChild].
   /// {@endtemplate}
   final Object? groupId;
@@ -214,7 +214,7 @@ class FPopover extends StatefulWidget {
   /// [TraversalEdgeBehavior.closedLoop].
   ///
   /// ## Contract
-  /// Throws [AssertionError] if both [focusNode] and [traversalEdgeBehavior] are not null.
+  /// Throws [AssertionError] if both `focusNode` and `traversalEdgeBehavior` are not null.
   /// {@endtemplate}
   final TraversalEdgeBehavior? traversalEdgeBehavior;
 
