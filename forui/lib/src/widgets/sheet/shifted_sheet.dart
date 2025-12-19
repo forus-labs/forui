@@ -126,7 +126,7 @@ class _ShiftedSheet extends RenderShiftedBox {
 
   Offset positionChild(Size size, Size childSize) => switch (_side) {
     .ttb => Offset(0, childSize.height * (_value - 1)),
-    .btt => Offset(0,  max(0, size.height - childSize.height * _value - _bottomViewInset)),
+    .btt => Offset(0, max(0, size.height - childSize.height * _value - _bottomViewInset)),
     .ltr => Offset(childSize.width * (_value - 1), 0),
     .rtl => Offset(size.width - childSize.width * _value, 0),
   };
