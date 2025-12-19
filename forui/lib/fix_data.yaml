@@ -2000,7 +2000,7 @@ transforms:
 
 
   # FMultiSelect
-  - title: 'Rename FMultiSelect(shift: ...) to overflow'
+  - title: 'Rename FMultiSelect(shift: ...) to contentOverflow'
     date: 2025-11-30
     element:
       uris: [ 'package:forui/forui.dart' ]
@@ -2009,9 +2009,9 @@ transforms:
     changes:
       - kind: renameParameter
         oldName: 'shift'
-        newName: 'overflow'
+        newName: 'contentOverflow'
 
-  - title: 'Rename FMultiSelect.rich(shift: ...) to overflow'
+  - title: 'Rename FMultiSelect.rich(shift: ...) to contentOverflow'
     date: 2025-11-30
     element:
       uris: [ 'package:forui/forui.dart' ]
@@ -2020,9 +2020,9 @@ transforms:
     changes:
       - kind: renameParameter
         oldName: 'shift'
-        newName: 'overflow'
+        newName: 'contentOverflow'
 
-  - title: 'Rename FMultiSelect.search(shift: ...) to overflow'
+  - title: 'Rename FMultiSelect.search(shift: ...) to contentOverflow'
     date: 2025-11-30
     element:
       uris: [ 'package:forui/forui.dart' ]
@@ -2031,9 +2031,9 @@ transforms:
     changes:
       - kind: renameParameter
         oldName: 'shift'
-        newName: 'overflow'
+        newName: 'contentOverflow'
 
-  - title: 'Rename FMultiSelect.searchBuilder(shift: ...) to overflow'
+  - title: 'Rename FMultiSelect.searchBuilder(shift: ...) to contentOverflow'
     date: 2025-11-30
     element:
       uris: [ 'package:forui/forui.dart' ]
@@ -2042,7 +2042,227 @@ transforms:
     changes:
       - kind: renameParameter
         oldName: 'shift'
-        newName: 'overflow'
+        newName: 'contentOverflow'
+
+  - title: 'Rename FMultiSelect(anchor: ...) to contentAnchor'
+    date: 2025-12-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FMultiSelect
+    changes:
+      - kind: renameParameter
+        oldName: 'anchor'
+        newName: 'contentAnchor'
+
+  - title: 'Rename FMultiSelect.rich(anchor: ...) to contentAnchor'
+    date: 2025-12-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'rich'
+      inClass: FMultiSelect
+    changes:
+      - kind: renameParameter
+        oldName: 'anchor'
+        newName: 'contentAnchor'
+
+  - title: 'Rename FMultiSelect.search(anchor: ...) to contentAnchor'
+    date: 2025-12-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'search'
+      inClass: FMultiSelect
+    changes:
+      - kind: renameParameter
+        oldName: 'anchor'
+        newName: 'contentAnchor'
+
+  - title: 'Rename FMultiSelect.searchBuilder(anchor: ...) to contentAnchor'
+    date: 2025-12-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'searchBuilder'
+      inClass: FMultiSelect
+    changes:
+      - kind: renameParameter
+        oldName: 'anchor'
+        newName: 'contentAnchor'
+
+  - title: 'Rename FMultiSelect(popoverConstraints: ...) to contentConstraints'
+    date: 2025-12-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FMultiSelect
+    changes:
+      - kind: renameParameter
+        oldName: 'popoverConstraints'
+        newName: 'contentConstraints'
+
+  - title: 'Rename FMultiSelect.rich(popoverConstraints: ...) to contentConstraints'
+    date: 2025-12-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'rich'
+      inClass: FMultiSelect
+    changes:
+      - kind: renameParameter
+        oldName: 'popoverConstraints'
+        newName: 'contentConstraints'
+
+  - title: 'Rename FMultiSelect.search(popoverConstraints: ...) to contentConstraints'
+    date: 2025-12-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'search'
+      inClass: FMultiSelect
+    changes:
+      - kind: renameParameter
+        oldName: 'popoverConstraints'
+        newName: 'contentConstraints'
+
+  - title: 'Rename FMultiSelect.searchBuilder(popoverConstraints: ...) to contentConstraints'
+    date: 2025-12-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'searchBuilder'
+      inClass: FMultiSelect
+    changes:
+      - kind: renameParameter
+        oldName: 'popoverConstraints'
+        newName: 'contentConstraints'
+
+  - title: 'Rename FMultiSelect(spacing: ...) to contentSpacing'
+    date: 2025-12-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FMultiSelect
+    changes:
+      - kind: renameParameter
+        oldName: 'spacing'
+        newName: 'contentSpacing'
+
+  - title: 'Rename FMultiSelect.rich(spacing: ...) to contentSpacing'
+    date: 2025-12-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'rich'
+      inClass: FMultiSelect
+    changes:
+      - kind: renameParameter
+        oldName: 'spacing'
+        newName: 'contentSpacing'
+
+  - title: 'Rename FMultiSelect.search(spacing: ...) to contentSpacing'
+    date: 2025-12-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'search'
+      inClass: FMultiSelect
+    changes:
+      - kind: renameParameter
+        oldName: 'spacing'
+        newName: 'contentSpacing'
+
+  - title: 'Rename FMultiSelect.searchBuilder(spacing: ...) to contentSpacing'
+    date: 2025-12-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'searchBuilder'
+      inClass: FMultiSelect
+    changes:
+      - kind: renameParameter
+        oldName: 'spacing'
+        newName: 'contentSpacing'
+
+  - title: 'Rename FMultiSelect(offset: ...) to contentOffset'
+    date: 2025-12-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FMultiSelect
+    changes:
+      - kind: renameParameter
+        oldName: 'offset'
+        newName: 'contentOffset'
+
+  - title: 'Rename FMultiSelect.rich(offset: ...) to contentOffset'
+    date: 2025-12-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'rich'
+      inClass: FMultiSelect
+    changes:
+      - kind: renameParameter
+        oldName: 'offset'
+        newName: 'contentOffset'
+
+  - title: 'Rename FMultiSelect.search(offset: ...) to contentOffset'
+    date: 2025-12-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'search'
+      inClass: FMultiSelect
+    changes:
+      - kind: renameParameter
+        oldName: 'offset'
+        newName: 'contentOffset'
+
+  - title: 'Rename FMultiSelect.searchBuilder(offset: ...) to contentOffset'
+    date: 2025-12-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'searchBuilder'
+      inClass: FMultiSelect
+    changes:
+      - kind: renameParameter
+        oldName: 'offset'
+        newName: 'contentOffset'
+
+  - title: 'Rename FMultiSelect(hideRegion: ...) to contentHideRegion'
+    date: 2025-12-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FMultiSelect
+    changes:
+      - kind: renameParameter
+        oldName: 'hideRegion'
+        newName: 'contentHideRegion'
+
+  - title: 'Rename FMultiSelect.rich(hideRegion: ...) to contentHideRegion'
+    date: 2025-12-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'rich'
+      inClass: FMultiSelect
+    changes:
+      - kind: renameParameter
+        oldName: 'hideRegion'
+        newName: 'contentHideRegion'
+
+  - title: 'Rename FMultiSelect.search(hideRegion: ...) to contentHideRegion'
+    date: 2025-12-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'search'
+      inClass: FMultiSelect
+    changes:
+      - kind: renameParameter
+        oldName: 'hideRegion'
+        newName: 'contentHideRegion'
+
+  - title: 'Rename FMultiSelect.searchBuilder(hideRegion: ...) to contentHideRegion'
+    date: 2025-12-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'searchBuilder'
+      inClass: FMultiSelect
+    changes:
+      - kind: renameParameter
+        oldName: 'hideRegion'
+        newName: 'contentHideRegion'
 
   - title: 'Migrate FMultiSelect to control parameter'
     date: 2025-12-07

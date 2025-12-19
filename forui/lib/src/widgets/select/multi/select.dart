@@ -161,25 +161,28 @@ abstract class FMultiSelect<T> extends StatefulWidget {
   final bool clearable;
 
   /// The alignment point on the popover. Defaults to [AlignmentDirectional.topStart].
-  final AlignmentGeometry anchor;
+  final AlignmentGeometry contentAnchor;
 
   /// The alignment point on the select's field. Defaults to [AlignmentDirectional.bottomStart].
   final AlignmentGeometry fieldAnchor;
 
   /// The constraints to apply to the popover. Defaults to `const FAutoWidthPortalConstraints(maxHeight: 300)`.
-  final FPortalConstraints popoverConstraints;
+  final FPortalConstraints contentConstraints;
 
   /// {@macro forui.widgets.FPopover.spacing}
-  final FPortalSpacing spacing;
+  final FPortalSpacing contentSpacing;
 
   /// {@macro forui.widgets.FPopover.overflow}
-  final FPortalOverflow overflow;
+  final FPortalOverflow contentOverflow;
 
   /// {@macro forui.widgets.FPopover.offset}
-  final Offset offset;
+  final Offset contentOffset;
 
   /// {@macro forui.widgets.FPopover.hideRegion}
-  final FPopoverHideRegion hideRegion;
+  final FPopoverHideRegion contentHideRegion;
+
+  /// {@macro forui.widgets.FPopover.groupId}
+  final Object? contentGroupId;
 
   /// The builder that is called when the select is empty. Defaults to [FSelect.defaultContentEmptyBuilder].
   final Widget Function(BuildContext context, FMultiSelectStyle style) contentEmptyBuilder;
@@ -235,13 +238,14 @@ abstract class FMultiSelect<T> extends StatefulWidget {
     TextAlign textAlign = .start,
     TextDirection? textDirection,
     bool clearable = false,
-    AlignmentGeometry anchor = AlignmentDirectional.topStart,
+    AlignmentGeometry contentAnchor = AlignmentDirectional.topStart,
     AlignmentGeometry fieldAnchor = AlignmentDirectional.bottomStart,
-    FPortalConstraints popoverConstraints = const FAutoWidthPortalConstraints(maxHeight: 300),
-    FPortalSpacing spacing = const .spacing(4),
-    FPortalOverflow overflow = .flip,
-    Offset offset = Offset.zero,
-    FPopoverHideRegion hideRegion = .excludeChild,
+    FPortalConstraints contentConstraints = const FAutoWidthPortalConstraints(maxHeight: 300),
+    FPortalSpacing contentSpacing = const .spacing(4),
+    FPortalOverflow contentOverflow = .flip,
+    Offset contentOffset = Offset.zero,
+    FPopoverHideRegion contentHideRegion = .excludeChild,
+    Object? contentGroupId,
     Widget Function(BuildContext context, FMultiSelectStyle style) contentEmptyBuilder =
         FMultiSelect.defaultContentEmptyBuilder,
     ScrollController? contentScrollController,
@@ -276,13 +280,14 @@ abstract class FMultiSelect<T> extends StatefulWidget {
       textAlign: textAlign,
       textDirection: textDirection,
       clearable: clearable,
-      anchor: anchor,
+      contentAnchor: contentAnchor,
       fieldAnchor: fieldAnchor,
-      popoverConstraints: popoverConstraints,
-      spacing: spacing,
-      overflow: overflow,
-      offset: offset,
-      hideRegion: hideRegion,
+      contentConstraints: contentConstraints,
+      contentSpacing: contentSpacing,
+      contentOverflow: contentOverflow,
+      contentOffset: contentOffset,
+      contentHideRegion: contentHideRegion,
+      contentGroupId: contentGroupId,
       contentEmptyBuilder: contentEmptyBuilder,
       contentScrollController: contentScrollController,
       contentScrollHandles: contentScrollHandles,
@@ -320,13 +325,14 @@ abstract class FMultiSelect<T> extends StatefulWidget {
     TextAlign textAlign,
     TextDirection? textDirection,
     bool clearable,
-    AlignmentGeometry anchor,
+    AlignmentGeometry contentAnchor,
     AlignmentGeometry fieldAnchor,
-    FPortalConstraints popoverConstraints,
-    FPortalSpacing spacing,
-    FPortalOverflow overflow,
-    Offset offset,
-    FPopoverHideRegion hideRegion,
+    FPortalConstraints contentConstraints,
+    FPortalSpacing contentSpacing,
+    FPortalOverflow contentOverflow,
+    Offset contentOffset,
+    FPopoverHideRegion contentHideRegion,
+    Object? contentGroupId,
     Widget Function(BuildContext context, FMultiSelectStyle style) contentEmptyBuilder,
     ScrollController? contentScrollController,
     bool contentScrollHandles,
@@ -380,13 +386,14 @@ abstract class FMultiSelect<T> extends StatefulWidget {
     TextAlign textAlign = .start,
     TextDirection? textDirection,
     bool clearable = false,
-    AlignmentGeometry anchor = AlignmentDirectional.topStart,
+    AlignmentGeometry contentAnchor = AlignmentDirectional.topStart,
     AlignmentGeometry fieldAnchor = AlignmentDirectional.bottomStart,
-    FPortalConstraints popoverConstraints = const FAutoWidthPortalConstraints(maxHeight: 300),
-    FPortalSpacing spacing = const .spacing(4),
-    FPortalOverflow overflow = .flip,
-    Offset offset = .zero,
-    FPopoverHideRegion hideRegion = .excludeChild,
+    FPortalConstraints contentConstraints = const FAutoWidthPortalConstraints(maxHeight: 300),
+    FPortalSpacing contentSpacing = const .spacing(4),
+    FPortalOverflow contentOverflow = .flip,
+    Offset contentOffset = .zero,
+    FPopoverHideRegion contentHideRegion = .excludeChild,
+    Object? contentGroupId,
     Widget Function(BuildContext context, FMultiSelectStyle style) contentEmptyBuilder = defaultContentEmptyBuilder,
     ScrollController? contentScrollController,
     bool contentScrollHandles = false,
@@ -432,13 +439,14 @@ abstract class FMultiSelect<T> extends StatefulWidget {
       textAlign: textAlign,
       textDirection: textDirection,
       clearable: clearable,
-      anchor: anchor,
+      contentAnchor: contentAnchor,
       fieldAnchor: fieldAnchor,
-      popoverConstraints: popoverConstraints,
-      spacing: spacing,
-      overflow: overflow,
-      offset: offset,
-      hideRegion: hideRegion,
+      contentConstraints: contentConstraints,
+      contentSpacing: contentSpacing,
+      contentOverflow: contentOverflow,
+      contentOffset: contentOffset,
+      contentHideRegion: contentHideRegion,
+      contentGroupId: contentGroupId,
       contentEmptyBuilder: contentEmptyBuilder,
       contentScrollController: contentScrollController,
       contentScrollHandles: contentScrollHandles,
@@ -487,13 +495,14 @@ abstract class FMultiSelect<T> extends StatefulWidget {
     TextAlign textAlign,
     TextDirection? textDirection,
     bool clearable,
-    AlignmentGeometry anchor,
+    AlignmentGeometry contentAnchor,
     AlignmentGeometry fieldAnchor,
-    FPortalConstraints popoverConstraints,
-    FPortalSpacing spacing,
-    FPortalOverflow overflow,
-    Offset offset,
-    FPopoverHideRegion hideRegion,
+    FPortalConstraints contentConstraints,
+    FPortalSpacing contentSpacing,
+    FPortalOverflow contentOverflow,
+    Offset contentOffset,
+    FPopoverHideRegion contentHideRegion,
+    Object? contentGroupId,
     Widget Function(BuildContext context, FMultiSelectStyle style) contentEmptyBuilder,
     ScrollController? contentScrollController,
     bool contentScrollHandles,
@@ -526,13 +535,14 @@ abstract class FMultiSelect<T> extends StatefulWidget {
     this.textAlign = .start,
     this.textDirection,
     this.clearable = false,
-    this.anchor = AlignmentDirectional.topStart,
+    this.contentAnchor = AlignmentDirectional.topStart,
     this.fieldAnchor = AlignmentDirectional.bottomStart,
-    this.popoverConstraints = const FAutoWidthPortalConstraints(maxHeight: 300),
-    this.spacing = const .spacing(4),
-    this.overflow = .flip,
-    this.offset = .zero,
-    this.hideRegion = .excludeChild,
+    this.contentConstraints = const FAutoWidthPortalConstraints(maxHeight: 300),
+    this.contentSpacing = const .spacing(4),
+    this.contentOverflow = .flip,
+    this.contentOffset = .zero,
+    this.contentHideRegion = .excludeChild,
+    this.contentGroupId,
     this.contentEmptyBuilder = FMultiSelect.defaultContentEmptyBuilder,
     this.contentScrollController,
     this.contentScrollHandles = false,
@@ -574,13 +584,14 @@ abstract class FMultiSelect<T> extends StatefulWidget {
       ..add(EnumProperty('textAlign', textAlign))
       ..add(EnumProperty('textDirection', textDirection))
       ..add(FlagProperty('clearable', value: clearable, ifTrue: 'clearable'))
-      ..add(DiagnosticsProperty('anchor', anchor))
+      ..add(DiagnosticsProperty('contentAnchor', contentAnchor))
       ..add(DiagnosticsProperty('fieldAnchor', fieldAnchor))
-      ..add(DiagnosticsProperty('popoverConstraints', popoverConstraints))
-      ..add(DiagnosticsProperty('spacing', spacing))
-      ..add(ObjectFlagProperty.has('overflow', overflow))
-      ..add(DiagnosticsProperty('offset', offset))
-      ..add(EnumProperty('hideRegion', hideRegion))
+      ..add(DiagnosticsProperty('contentConstraints', contentConstraints))
+      ..add(DiagnosticsProperty('contentSpacing', contentSpacing))
+      ..add(ObjectFlagProperty.has('contentOverflow', contentOverflow))
+      ..add(DiagnosticsProperty('contentOffset', contentOffset))
+      ..add(EnumProperty('contentHideRegion', contentHideRegion))
+      ..add(DiagnosticsProperty('contentGroupId', contentGroupId))
       ..add(ObjectFlagProperty.has('emptyBuilder', contentEmptyBuilder))
       ..add(DiagnosticsProperty('contentScrollController', contentScrollController))
       ..add(FlagProperty('contentScrollHandles', value: contentScrollHandles, ifTrue: 'contentScrollHandles'))
@@ -672,13 +683,14 @@ abstract class _FMultiSelectState<S extends FMultiSelect<T>, T> extends State<S>
             child: FPopover(
               control: .managed(controller: _popoverController),
               style: style.popoverStyle,
-              constraints: widget.popoverConstraints,
-              popoverAnchor: widget.anchor,
+              constraints: widget.contentConstraints,
+              popoverAnchor: widget.contentAnchor,
               childAnchor: widget.fieldAnchor,
-              spacing: widget.spacing,
-              overflow: widget.overflow,
-              offset: widget.offset,
-              hideRegion: widget.hideRegion,
+              spacing: widget.contentSpacing,
+              overflow: widget.contentOverflow,
+              offset: widget.contentOffset,
+              hideRegion: widget.contentHideRegion,
+              groupId: widget.contentGroupId,
               shortcuts: {const SingleActivator(LogicalKeyboardKey.escape): _toggle},
               popoverBuilder: (context, controller) => InheritedSelectController<T>(
                 popover: _popoverController,

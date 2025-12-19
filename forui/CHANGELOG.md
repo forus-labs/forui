@@ -187,6 +187,7 @@ Unfortunately, `FCalendar` cannot be easily migrated using data driven fixes due
 * Add `FSelectItemMixin.richSection(...)`.
 * Add `FSelectItem.item(...)`.
 * Add `FSelect.contentGroupId`.
+* Add `FMultiSelect.contentGroupId`.
 
 * **Breaking** Rename `FSelect.anchor` to `FSelect.contentAnchor`.
 * **Breaking** Rename `FSelect.popoverConstraints` to `FSelect.contentConstraints`.
@@ -199,7 +200,12 @@ Unfortunately, `FCalendar` cannot be easily migrated using data driven fixes due
 * **Breaking** Remove `FSelect.initialValue`. Use `FSelect(control: .managed(...))` instead.
 * **Breaking** Remove `FSelectController(vsync: ..., popoverMotion: ...)`. Use `FSelect(popoverControl: ...)` instead.
 * **Breaking** Remove `FSelectSearchFieldProperties.controller`. Use `FSelectSearchFieldProperties(control: .managed(...))` instead.
-* **Breaking** Rename `FMultiSelect.shift` to `FMultiSelect.overflow`.
+* **Breaking** Rename `FMultiSelect.anchor` to `FMultiSelect.contentAnchor`.
+* **Breaking** Rename `FMultiSelect.popoverConstraints` to `FMultiSelect.contentConstraints`.
+* **Breaking** Rename `FMultiSelect.spacing` to `FMultiSelect.contentSpacing`.
+* **Breaking** Rename `FMultiSelect.shift` to `FMultiSelect.contentOverflow`.
+* **Breaking** Rename `FMultiSelect.offset` to `FMultiSelect.contentOffset`.
+* **Breaking** Rename `FMultiSelect.hideRegion` to `FMultiSelect.contentHideRegion`.
 * **Breaking** Remove `FMultiSelect.controller`. Use `FMultiSelect(control: .managed(...))` instead.
 * **Breaking** Remove `FMultiSelect.onChange`. Use `FMultiSelect(control: .managed(...))` instead.
 * **Breaking** Remove `FMultiSelect.initialValue`. Use `FMultiSelect(control: .managed(...))` instead.
