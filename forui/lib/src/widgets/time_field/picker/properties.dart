@@ -8,7 +8,7 @@ class FTimeFieldPickerProperties with Diagnosticable {
   /// The alignment point on the picker popover. Defaults to [Alignment.topLeft].
   final AlignmentGeometry anchor;
 
-  /// The alignment point on the input field. Defaults to [Alignment.bottomLeft].
+  /// The alignment point on the field. Defaults to [Alignment.bottomLeft].
   final AlignmentGeometry fieldAnchor;
 
   /// The constraints to apply to the picker popover. Defaults to `const FPortalConstraints(maxWidth: 200, maxHeight: 200)`.
@@ -28,7 +28,7 @@ class FTimeFieldPickerProperties with Diagnosticable {
   /// Defaults to [FPopoverHideRegion.excludeChild].
   ///
   /// Setting [hideRegion] to [FPopoverHideRegion.anywhere] may result in the calendar disappearing and reappearing
-  /// when pressing and holding the input field, due to the popover being hidden and then immediately shown again.
+  /// when pressing and holding the field, due to the popover being hidden and then immediately shown again.
   final FPopoverHideRegion hideRegion;
 
   /// {@macro forui.widgets.FPopover.groupId}

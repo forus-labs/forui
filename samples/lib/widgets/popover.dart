@@ -103,7 +103,7 @@ class PopoverPage extends Sample {
 class NestedPopoverPage extends Sample {
   static const _groupId = 'nested-popover';
 
-  NestedPopoverPage({@queryParam super.theme, super.alignment = .topCenter, super.top = 30}) : super(maxHeight: 200);
+  NestedPopoverPage({@queryParam super.theme}) : super(maxHeight: 200, alignment: .topCenter, top: 30);
 
   @override
   Widget sample(BuildContext context) => FPopover(
