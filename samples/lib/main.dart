@@ -116,6 +116,7 @@ class _AppRouter extends RootStackRouter {
     AutoRoute(path: '/picker/separator', page: SeparatedPickerRoute.page),
     AutoRoute(path: '/popover/default', page: PopoverRoute.page),
     AutoRoute(path: '/popover/blurred', page: BlurredPopoverRoute.page),
+    AutoRoute(path: '/popover/nested', page: NestedPopoverRoute.page),
     AutoRoute(path: '/popover-menu/default', page: PopoverMenuRoute.page),
     AutoRoute(path: '/popover-menu/tiles', page: TilePopoverMenuRoute.page),
     AutoRoute(path: '/portal/default', page: PortalRoute.page),
