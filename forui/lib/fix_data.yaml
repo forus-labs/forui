@@ -25,7 +25,7 @@ transforms:
 
 
   # FAutocomplete
-  - title: 'Rename FAutocomplete(shift: ...) to overflow'
+  - title: 'Rename FAutocomplete(shift: ...) to contentOverflow'
     date: 2025-11-30
     element:
       uris: [ 'package:forui/forui.dart' ]
@@ -36,7 +36,7 @@ transforms:
         oldName: 'shift'
         newName: 'contentOverflow'
 
-  - title: 'Rename FAutocomplete.builder(shift: ...) to overflow'
+  - title: 'Rename FAutocomplete.builder(shift: ...) to contentOverflow'
     date: 2025-11-30
     element:
       uris: [ 'package:forui/forui.dart' ]
@@ -1426,7 +1426,7 @@ transforms:
 
 
   # FSelect
-  - title: 'Rename FSelect(shift: ...) to overflow'
+  - title: 'Rename FSelect(shift: ...) to contentOverflow'
     date: 2025-11-30
     element:
       uris: [ 'package:forui/forui.dart' ]
@@ -1435,9 +1435,9 @@ transforms:
     changes:
       - kind: renameParameter
         oldName: 'shift'
-        newName: 'overflow'
+        newName: 'contentOverflow'
 
-  - title: 'Rename FSelect.rich(shift: ...) to overflow'
+  - title: 'Rename FSelect.rich(shift: ...) to contentOverflow'
     date: 2025-11-30
     element:
       uris: [ 'package:forui/forui.dart' ]
@@ -1446,9 +1446,9 @@ transforms:
     changes:
       - kind: renameParameter
         oldName: 'shift'
-        newName: 'overflow'
+        newName: 'contentOverflow'
 
-  - title: 'Rename FSelect.search(shift: ...) to overflow'
+  - title: 'Rename FSelect.search(shift: ...) to contentOverflow'
     date: 2025-11-30
     element:
       uris: [ 'package:forui/forui.dart' ]
@@ -1457,9 +1457,9 @@ transforms:
     changes:
       - kind: renameParameter
         oldName: 'shift'
-        newName: 'overflow'
+        newName: 'contentOverflow'
 
-  - title: 'Rename FSelect.searchBuilder(shift: ...) to overflow'
+  - title: 'Rename FSelect.searchBuilder(shift: ...) to contentOverflow'
     date: 2025-11-30
     element:
       uris: [ 'package:forui/forui.dart' ]
@@ -1468,7 +1468,227 @@ transforms:
     changes:
       - kind: renameParameter
         oldName: 'shift'
-        newName: 'overflow'
+        newName: 'contentOverflow'
+
+  - title: 'Rename FSelect(anchor: ...) to contentAnchor'
+    date: 2025-12-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FSelect
+    changes:
+      - kind: renameParameter
+        oldName: 'anchor'
+        newName: 'contentAnchor'
+
+  - title: 'Rename FSelect.rich(anchor: ...) to contentAnchor'
+    date: 2025-12-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'rich'
+      inClass: FSelect
+    changes:
+      - kind: renameParameter
+        oldName: 'anchor'
+        newName: 'contentAnchor'
+
+  - title: 'Rename FSelect.search(anchor: ...) to contentAnchor'
+    date: 2025-12-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'search'
+      inClass: FSelect
+    changes:
+      - kind: renameParameter
+        oldName: 'anchor'
+        newName: 'contentAnchor'
+
+  - title: 'Rename FSelect.searchBuilder(anchor: ...) to contentAnchor'
+    date: 2025-12-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'searchBuilder'
+      inClass: FSelect
+    changes:
+      - kind: renameParameter
+        oldName: 'anchor'
+        newName: 'contentAnchor'
+
+  - title: 'Rename FSelect(popoverConstraints: ...) to contentConstraints'
+    date: 2025-12-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FSelect
+    changes:
+      - kind: renameParameter
+        oldName: 'popoverConstraints'
+        newName: 'contentConstraints'
+
+  - title: 'Rename FSelect.rich(popoverConstraints: ...) to contentConstraints'
+    date: 2025-12-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'rich'
+      inClass: FSelect
+    changes:
+      - kind: renameParameter
+        oldName: 'popoverConstraints'
+        newName: 'contentConstraints'
+
+  - title: 'Rename FSelect.search(popoverConstraints: ...) to contentConstraints'
+    date: 2025-12-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'search'
+      inClass: FSelect
+    changes:
+      - kind: renameParameter
+        oldName: 'popoverConstraints'
+        newName: 'contentConstraints'
+
+  - title: 'Rename FSelect.searchBuilder(popoverConstraints: ...) to contentConstraints'
+    date: 2025-12-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'searchBuilder'
+      inClass: FSelect
+    changes:
+      - kind: renameParameter
+        oldName: 'popoverConstraints'
+        newName: 'contentConstraints'
+
+  - title: 'Rename FSelect(spacing: ...) to contentSpacing'
+    date: 2025-12-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FSelect
+    changes:
+      - kind: renameParameter
+        oldName: 'spacing'
+        newName: 'contentSpacing'
+
+  - title: 'Rename FSelect.rich(spacing: ...) to contentSpacing'
+    date: 2025-12-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'rich'
+      inClass: FSelect
+    changes:
+      - kind: renameParameter
+        oldName: 'spacing'
+        newName: 'contentSpacing'
+
+  - title: 'Rename FSelect.search(spacing: ...) to contentSpacing'
+    date: 2025-12-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'search'
+      inClass: FSelect
+    changes:
+      - kind: renameParameter
+        oldName: 'spacing'
+        newName: 'contentSpacing'
+
+  - title: 'Rename FSelect.searchBuilder(spacing: ...) to contentSpacing'
+    date: 2025-12-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'searchBuilder'
+      inClass: FSelect
+    changes:
+      - kind: renameParameter
+        oldName: 'spacing'
+        newName: 'contentSpacing'
+
+  - title: 'Rename FSelect(offset: ...) to contentOffset'
+    date: 2025-12-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FSelect
+    changes:
+      - kind: renameParameter
+        oldName: 'offset'
+        newName: 'contentOffset'
+
+  - title: 'Rename FSelect.rich(offset: ...) to contentOffset'
+    date: 2025-12-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'rich'
+      inClass: FSelect
+    changes:
+      - kind: renameParameter
+        oldName: 'offset'
+        newName: 'contentOffset'
+
+  - title: 'Rename FSelect.search(offset: ...) to contentOffset'
+    date: 2025-12-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'search'
+      inClass: FSelect
+    changes:
+      - kind: renameParameter
+        oldName: 'offset'
+        newName: 'contentOffset'
+
+  - title: 'Rename FSelect.searchBuilder(offset: ...) to contentOffset'
+    date: 2025-12-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'searchBuilder'
+      inClass: FSelect
+    changes:
+      - kind: renameParameter
+        oldName: 'offset'
+        newName: 'contentOffset'
+
+  - title: 'Rename FSelect(hideRegion: ...) to contentHideRegion'
+    date: 2025-12-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FSelect
+    changes:
+      - kind: renameParameter
+        oldName: 'hideRegion'
+        newName: 'contentHideRegion'
+
+  - title: 'Rename FSelect.rich(hideRegion: ...) to contentHideRegion'
+    date: 2025-12-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'rich'
+      inClass: FSelect
+    changes:
+      - kind: renameParameter
+        oldName: 'hideRegion'
+        newName: 'contentHideRegion'
+
+  - title: 'Rename FSelect.search(hideRegion: ...) to contentHideRegion'
+    date: 2025-12-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'search'
+      inClass: FSelect
+    changes:
+      - kind: renameParameter
+        oldName: 'hideRegion'
+        newName: 'contentHideRegion'
+
+  - title: 'Rename FSelect.searchBuilder(hideRegion: ...) to contentHideRegion'
+    date: 2025-12-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'searchBuilder'
+      inClass: FSelect
+    changes:
+      - kind: renameParameter
+        oldName: 'hideRegion'
+        newName: 'contentHideRegion'
 
   - title: 'Migrate FSelect to control parameter'
     date: 2025-12-07

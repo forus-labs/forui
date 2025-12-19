@@ -32,7 +32,7 @@ dart fix --apply
 * **Breaking** Rename `FAutocomplete.anchor` to `FAutocomplete.contentAnchor`.
 * **Breaking** Rename `FAutocomplete.popoverConstraints` to `FAutocomplete.contentConstraints`.
 * **Breaking** Rename `FAutocomplete.spacing` to `FAutocomplete.contentSpacing`.
-* **Breaking** Rename `FAutocomplete.overflow` to `FAutocomplete.contentOverflow`.
+* **Breaking** Rename `FAutocomplete.shift` to `FAutocomplete.contentOverflow`.
 * **Breaking** Rename `FAutocomplete.offset` to `FAutocomplete.contentOffset`.
 * **Breaking** Rename `FAutocomplete.hideRegion` to `FAutocomplete.contentHideRegion`.
 * **Breaking** Remove `FAutocomplete.controller`. Use `FAutocomplete(control: .managed(...))` instead.
@@ -186,8 +186,14 @@ Unfortunately, `FCalendar` cannot be easily migrated using data driven fixes due
 * Add `FSelectItemMixin.section(...)`.
 * Add `FSelectItemMixin.richSection(...)`.
 * Add `FSelectItem.item(...)`.
+* Add `FSelect.contentGroupId`.
 
-* **Breaking** Rename `FSelect.shift` to `FSelect.overflow`.
+* **Breaking** Rename `FSelect.anchor` to `FSelect.contentAnchor`.
+* **Breaking** Rename `FSelect.popoverConstraints` to `FSelect.contentConstraints`.
+* **Breaking** Rename `FSelect.spacing` to `FSelect.contentSpacing`.
+* **Breaking** Rename `FSelect.shift` to `FSelect.contentOverflow`.
+* **Breaking** Rename `FSelect.offset` to `FSelect.contentOffset`.
+* **Breaking** Rename `FSelect.hideRegion` to `FSelect.contentHideRegion`.
 * **Breaking** Remove `FSelect.controller`. Use `FSelect(control: .managed(...))` instead.
 * **Breaking** Remove `FSelect.onChange`. Use `FSelect(control: .managed(...))` instead.
 * **Breaking** Remove `FSelect.initialValue`. Use `FSelect(control: .managed(...))` instead.

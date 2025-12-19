@@ -152,25 +152,28 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
   final bool clearable;
 
   /// The alignment point on the popover. Defaults to [AlignmentDirectional.topStart].
-  final AlignmentGeometry anchor;
+  final AlignmentGeometry contentAnchor;
 
   /// The alignment point on the select's field. Defaults to [AlignmentDirectional.bottomStart].
   final AlignmentGeometry fieldAnchor;
 
   /// The constraints to apply to the popover. Defaults to `const FAutoWidthPortalConstraints(maxHeight: 300)`.
-  final FPortalConstraints popoverConstraints;
+  final FPortalConstraints contentConstraints;
 
   /// {@macro forui.widgets.FPopover.spacing}
-  final FPortalSpacing spacing;
+  final FPortalSpacing contentSpacing;
 
   /// {@macro forui.widgets.FPopover.overflow}
-  final FPortalOverflow overflow;
+  final FPortalOverflow contentOverflow;
 
   /// {@macro forui.widgets.FPopover.offset}
-  final Offset offset;
+  final Offset contentOffset;
 
   /// {@macro forui.widgets.FPopover.hideRegion}
-  final FPopoverHideRegion hideRegion;
+  final FPopoverHideRegion contentHideRegion;
+
+  /// {@macro forui.widgets.FPopover.groupId}
+  final Object? contentGroupId;
 
   /// True if the select should be automatically hidden after an item is selected. Defaults to false.
   final bool autoHide;
@@ -227,13 +230,14 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     MouseCursor mouseCursor = .defer,
     bool canRequestFocus = true,
     bool clearable = false,
-    AlignmentGeometry anchor = AlignmentDirectional.topStart,
+    AlignmentGeometry contentAnchor = AlignmentDirectional.topStart,
     AlignmentGeometry fieldAnchor = AlignmentDirectional.bottomStart,
-    FPortalConstraints popoverConstraints = const FAutoWidthPortalConstraints(maxHeight: 300),
-    FPortalSpacing spacing = const .spacing(4),
-    FPortalOverflow overflow = .flip,
-    Offset offset = .zero,
-    FPopoverHideRegion hideRegion = .excludeChild,
+    FPortalConstraints contentConstraints = const FAutoWidthPortalConstraints(maxHeight: 300),
+    FPortalSpacing contentSpacing = const .spacing(4),
+    FPortalOverflow contentOverflow = .flip,
+    Offset contentOffset = .zero,
+    FPopoverHideRegion contentHideRegion = .excludeChild,
+    Object? contentGroupId,
     bool autoHide = true,
     Widget Function(BuildContext context, FSelectStyle style) contentEmptyBuilder = defaultContentEmptyBuilder,
     ScrollController? contentScrollController,
@@ -273,13 +277,14 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
       mouseCursor: mouseCursor,
       canRequestFocus: canRequestFocus,
       clearable: clearable,
-      anchor: anchor,
+      contentAnchor: contentAnchor,
       fieldAnchor: fieldAnchor,
-      popoverConstraints: popoverConstraints,
-      spacing: spacing,
-      overflow: overflow,
-      offset: offset,
-      hideRegion: hideRegion,
+      contentConstraints: contentConstraints,
+      contentSpacing: contentSpacing,
+      contentOverflow: contentOverflow,
+      contentOffset: contentOffset,
+      contentHideRegion: contentHideRegion,
+      contentGroupId: contentGroupId,
       autoHide: autoHide,
       contentEmptyBuilder: contentEmptyBuilder,
       contentScrollController: contentScrollController,
@@ -320,13 +325,14 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     MouseCursor mouseCursor,
     bool canRequestFocus,
     bool clearable,
-    AlignmentGeometry anchor,
+    AlignmentGeometry contentAnchor,
     AlignmentGeometry fieldAnchor,
-    FPortalConstraints popoverConstraints,
-    FPortalSpacing spacing,
-    FPortalOverflow overflow,
-    Offset offset,
-    FPopoverHideRegion hideRegion,
+    FPortalConstraints contentConstraints,
+    FPortalSpacing contentSpacing,
+    FPortalOverflow contentOverflow,
+    Offset contentOffset,
+    FPopoverHideRegion contentHideRegion,
+    Object? contentGroupId,
     bool autoHide,
     Widget Function(BuildContext context, FSelectStyle style) contentEmptyBuilder,
     ScrollController? contentScrollController,
@@ -386,13 +392,14 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     MouseCursor mouseCursor = .defer,
     bool canRequestFocus = true,
     bool clearable = false,
-    AlignmentGeometry anchor = AlignmentDirectional.topStart,
+    AlignmentGeometry contentAnchor = AlignmentDirectional.topStart,
     AlignmentGeometry fieldAnchor = AlignmentDirectional.bottomStart,
-    FPortalConstraints popoverConstraints = const FAutoWidthPortalConstraints(maxHeight: 300),
-    FPortalSpacing spacing = const .spacing(4),
-    FPortalOverflow overflow = .flip,
-    Offset offset = .zero,
-    FPopoverHideRegion hideRegion = .excludeChild,
+    FPortalConstraints contentConstraints = const FAutoWidthPortalConstraints(maxHeight: 300),
+    FPortalSpacing contentSpacing = const .spacing(4),
+    FPortalOverflow contentOverflow = .flip,
+    Offset contentOffset = .zero,
+    FPopoverHideRegion contentHideRegion = .excludeChild,
+    Object? contentGroupId,
     bool autoHide = true,
     Widget Function(BuildContext context, FSelectStyle style) contentEmptyBuilder = defaultContentEmptyBuilder,
     ScrollController? contentScrollController,
@@ -444,13 +451,14 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
       mouseCursor: mouseCursor,
       canRequestFocus: canRequestFocus,
       clearable: clearable,
-      anchor: anchor,
+      contentAnchor: contentAnchor,
       fieldAnchor: fieldAnchor,
-      popoverConstraints: popoverConstraints,
-      spacing: spacing,
-      overflow: overflow,
-      offset: offset,
-      hideRegion: hideRegion,
+      contentConstraints: contentConstraints,
+      contentSpacing: contentSpacing,
+      contentOverflow: contentOverflow,
+      contentOffset: contentOffset,
+      contentHideRegion: contentHideRegion,
+      contentGroupId: contentGroupId,
       autoHide: autoHide,
       contentEmptyBuilder: contentEmptyBuilder,
       contentScrollController: contentScrollController,
@@ -502,13 +510,14 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     MouseCursor mouseCursor,
     bool canRequestFocus,
     bool clearable,
-    AlignmentGeometry anchor,
+    AlignmentGeometry contentAnchor,
     AlignmentGeometry fieldAnchor,
-    FPortalConstraints popoverConstraints,
-    FPortalSpacing spacing,
-    FPortalOverflow overflow,
-    Offset offset,
-    FPopoverHideRegion hideRegion,
+    FPortalConstraints contentConstraints,
+    FPortalSpacing contentSpacing,
+    FPortalOverflow contentOverflow,
+    Offset contentOffset,
+    FPopoverHideRegion contentHideRegion,
+    Object? contentGroupId,
     bool autoHide,
     Widget Function(BuildContext context, FSelectStyle style) contentEmptyBuilder,
     ScrollController? contentScrollController,
@@ -548,13 +557,14 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     this.mouseCursor = .defer,
     this.canRequestFocus = true,
     this.clearable = false,
-    this.anchor = AlignmentDirectional.topStart,
+    this.contentAnchor = AlignmentDirectional.topStart,
     this.fieldAnchor = AlignmentDirectional.bottomStart,
-    this.popoverConstraints = const FAutoWidthPortalConstraints(maxHeight: 300),
-    this.spacing = const .spacing(4),
-    this.overflow = .flip,
-    this.offset = .zero,
-    this.hideRegion = .excludeChild,
+    this.contentConstraints = const FAutoWidthPortalConstraints(maxHeight: 300),
+    this.contentSpacing = const .spacing(4),
+    this.contentOverflow = .flip,
+    this.contentOffset = .zero,
+    this.contentHideRegion = .excludeChild,
+    this.contentGroupId,
     this.autoHide = true,
     this.contentEmptyBuilder = defaultContentEmptyBuilder,
     this.contentScrollController,
@@ -595,13 +605,14 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
       ..add(DiagnosticsProperty('mouseCursor', mouseCursor))
       ..add(FlagProperty('canRequestFocus', value: canRequestFocus, ifTrue: 'canRequestFocus'))
       ..add(FlagProperty('clearable', value: clearable, ifTrue: 'clearable'))
-      ..add(DiagnosticsProperty('anchor', anchor))
+      ..add(DiagnosticsProperty('contentAnchor', contentAnchor))
       ..add(DiagnosticsProperty('fieldAnchor', fieldAnchor))
-      ..add(DiagnosticsProperty('popoverConstraints', popoverConstraints))
-      ..add(DiagnosticsProperty('spacing', spacing))
-      ..add(ObjectFlagProperty.has('overflow', overflow))
-      ..add(DiagnosticsProperty('offset', offset))
-      ..add(EnumProperty('hideRegion', hideRegion))
+      ..add(DiagnosticsProperty('contentConstraints', contentConstraints))
+      ..add(DiagnosticsProperty('contentSpacing', contentSpacing))
+      ..add(ObjectFlagProperty.has('contentOverflow', contentOverflow))
+      ..add(DiagnosticsProperty('contentOffset', contentOffset))
+      ..add(EnumProperty('contentHideRegion', contentHideRegion))
+      ..add(DiagnosticsProperty('contentGroupId', contentGroupId))
       ..add(FlagProperty('autoHide', value: autoHide, ifTrue: 'autoHide'))
       ..add(ObjectFlagProperty.has('emptyBuilder', contentEmptyBuilder))
       ..add(DiagnosticsProperty('contentScrollController', contentScrollController))
@@ -736,13 +747,14 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with TickerProvi
         builder: (context, _, states, field) => FPopover(
           control: .managed(controller: _popoverController),
           style: style.popoverStyle,
-          constraints: widget.popoverConstraints,
-          popoverAnchor: widget.anchor,
+          constraints: widget.contentConstraints,
+          popoverAnchor: widget.contentAnchor,
           childAnchor: widget.fieldAnchor,
-          spacing: widget.spacing,
-          overflow: widget.overflow,
-          offset: widget.offset,
-          hideRegion: widget.hideRegion,
+          spacing: widget.contentSpacing,
+          overflow: widget.contentOverflow,
+          offset: widget.contentOffset,
+          hideRegion: widget.contentHideRegion,
+          groupId: widget.contentGroupId,
           shortcuts: {const SingleActivator(.escape): _toggle},
           popoverBuilder: (_, popoverController) => TextFieldTapRegion(
             child: InheritedSelectController<T>(
