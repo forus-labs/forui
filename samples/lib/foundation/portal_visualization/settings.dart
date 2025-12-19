@@ -223,7 +223,7 @@ class _ChildSettings extends StatelessWidget {
       FSelect<Alignment>(
         control: .managed(initial: value.childAnchor, onChange: (v) => value.childAnchor = v!),
         label: const Text('Anchor'),
-        popoverConstraints: const FAutoWidthPortalConstraints(maxHeight: 350),
+        contentConstraints: const FAutoWidthPortalConstraints(maxHeight: 350),
         items: _alignments,
       ),
       const SizedBox(height: 12),
@@ -311,7 +311,7 @@ class _PortalSettings extends StatelessWidget {
       FSelect<Alignment>(
         control: .managed(initial: value.portalAnchor, onChange: (v) => value.portalAnchor = v!),
         label: const Text('Anchor'),
-        popoverConstraints: const FAutoWidthPortalConstraints(maxHeight: 350),
+        contentConstraints: const FAutoWidthPortalConstraints(maxHeight: 350),
         items: _alignments,
       ),
       const SizedBox(height: 12),

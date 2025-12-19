@@ -225,8 +225,11 @@ abstract class FTimeField extends StatefulWidget {
   ///
   /// If [canRequestFocus] is false, the input field cannot obtain focus but can still be selected.
   ///
-  /// The [anchor] and [inputAnchor] control the alignment points for the picker popover positioning.
+  /// The [anchor] and [fieldAnchor] control the alignment points for the picker popover positioning.
   /// Defaults to [Alignment.topLeft] and [Alignment.bottomLeft] respectively.
+  ///
+  /// The [constraints] property controls the constraints of the picker popover. Defaults to
+  /// `const FPortalConstraints(maxWidth: 200, maxHeight: 200)`.
   ///
   /// The [spacing] property controls the spacing between the input field and the picker popover. Defaults to
   /// `FPortalSpacing(4)`.
@@ -238,6 +241,8 @@ abstract class FTimeField extends StatefulWidget {
   ///
   /// [hideRegion] controls the region that can be tapped to hide the popover. Defaults to
   /// [FPopoverHideRegion.anywhere].
+  ///
+  /// The [groupId] is used to group popovers together so that only one popover in the group can be shown at a time.
   ///
   /// [hourInterval] and [minuteInterval] control the increment/decrement interval of the hour and minute respectively.
   /// Default to 1.
@@ -260,11 +265,13 @@ abstract class FTimeField extends StatefulWidget {
     bool autofocus,
     FocusNode? focusNode,
     Alignment anchor,
-    Alignment inputAnchor,
+    Alignment fieldAnchor,
+    FPortalConstraints constraints,
     FPortalSpacing spacing,
     FPortalOverflow overflow,
     Offset offset,
     FPopoverHideRegion hideRegion,
+    Object? groupId,
     VoidCallback? onTapHide,
     int hourInterval,
     int minuteInterval,

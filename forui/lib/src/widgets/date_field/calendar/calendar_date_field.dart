@@ -15,7 +15,7 @@ class _CalendarDateField extends FDateField implements FDateFieldCalendarPropert
   @override
   final AlignmentGeometry anchor;
   @override
-  final AlignmentGeometry inputAnchor;
+  final AlignmentGeometry fieldAnchor;
   @override
   final FPortalSpacing spacing;
   @override
@@ -24,6 +24,8 @@ class _CalendarDateField extends FDateField implements FDateFieldCalendarPropert
   final Offset offset;
   @override
   final FPopoverHideRegion hideRegion;
+  @override
+  final Object? groupId;
   @override
   final VoidCallback? onTapHide;
   @override
@@ -51,11 +53,12 @@ class _CalendarDateField extends FDateField implements FDateFieldCalendarPropert
     this.canRequestFocus = true,
     this.clearable = false,
     this.anchor = .topLeft,
-    this.inputAnchor = .bottomLeft,
+    this.fieldAnchor = .bottomLeft,
     this.spacing = const .spacing(4),
     this.overflow = .flip,
     this.offset = .zero,
     this.hideRegion = .excludeChild,
+    this.groupId,
     this.onTapHide,
     this.dayBuilder = FCalendar.defaultDayBuilder,
     this.start,
@@ -256,11 +259,12 @@ class _CalendarPopover extends StatelessWidget {
     traversalEdgeBehavior: .parentScope,
     style: style.popoverStyle,
     popoverAnchor: properties.anchor,
-    childAnchor: properties.inputAnchor,
+    childAnchor: properties.fieldAnchor,
     spacing: properties.spacing,
     overflow: properties.overflow,
     offset: properties.offset,
     hideRegion: properties.hideRegion,
+    groupId: properties.groupId,
     autofocus: autofocus,
     shortcuts: {const SingleActivator(.escape): _hide},
     popoverBuilder: (_, _) => TextFieldTapRegion(

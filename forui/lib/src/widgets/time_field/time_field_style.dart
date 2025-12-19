@@ -17,10 +17,6 @@ class FTimeFieldStyle with Diagnosticable, _$FTimeFieldStyleFunctions {
   @override
   final FPopoverStyle popoverStyle;
 
-  /// The time field picker's popover constraints.
-  @override
-  final FPortalConstraints popoverConstraints;
-
   /// The time field's picker style.
   @override
   final FTimePickerStyle pickerStyle;
@@ -35,7 +31,6 @@ class FTimeFieldStyle with Diagnosticable, _$FTimeFieldStyleFunctions {
     required this.popoverStyle,
     required this.pickerStyle,
     required this.iconStyle,
-    this.popoverConstraints = const FPortalConstraints(maxWidth: 200, maxHeight: 200),
   });
 
   /// Creates a [FTimeFieldStyle] that inherits its properties.

@@ -85,6 +85,15 @@ enum FPopoverHideRegion {
 
 /// A popover displays rich content in a portal that is aligned to a child.
 ///
+/// ### Nested Popovers
+///
+/// When placing widgets that use popovers internally, e.g. `FSelect` inside a `FPopover`, the outer popover will close
+/// when interacting with the inner widget's dropdown. This happens because the inner dropdown is rendered in a separate
+/// overlay layer, so tapping it is considered "outside" the outer popover.
+///
+/// To prevent this, share the same [groupId] between the outer `FPopover` and the inner widget. Widgets with the same
+/// `groupId` are treated as part of the same tap region.
+///
 /// See:
 /// * https://forui.dev/docs/overlay/popover for working examples.
 /// * [FPopoverController] for controlling a popover.
@@ -137,7 +146,7 @@ class FPopover extends StatefulWidget {
   /// {@template forui.widgets.FPopover.spacing}
   /// The spacing between the popover and child anchors.
   ///
-  /// Applied before [overflow].
+  /// Applied before `overflow`.
   /// {@endtemplate}
   ///
   /// Defaults to `FPortalSpacing(4)`.
@@ -146,7 +155,7 @@ class FPopover extends StatefulWidget {
   /// {@template forui.widgets.FPopover.overflow}
   /// The callback used to shift a popover when it overflows out of the viewport.
   ///
-  /// Applied after [spacing] and before [offset].
+  /// Applied after `spacing` and before `offset`.
   ///
   /// See [FPortalOverflow] for the different overflow strategies.
   /// {@endtemplate}
@@ -157,7 +166,7 @@ class FPopover extends StatefulWidget {
   /// {@template forui.widgets.FPopover.offset}
   /// Additional translation to apply to the popover's position.
   ///
-  /// Applied after [overflow].
+  /// Applied after `overflow`.
   /// {@endtemplate}
   ///
   /// Defaults to [Offset.zero].
@@ -170,7 +179,7 @@ class FPopover extends StatefulWidget {
   /// If the group id is null, then only this region is hit tested.
   ///
   /// ## Contract
-  /// Throws an [AssertionError] if the group id is not null and [hideRegion] is not set to
+  /// Throws an [AssertionError] if the group id is not null and `hideRegion` is not set to
   /// [FPopoverHideRegion.excludeChild].
   /// {@endtemplate}
   final Object? groupId;
@@ -205,7 +214,7 @@ class FPopover extends StatefulWidget {
   /// [TraversalEdgeBehavior.closedLoop].
   ///
   /// ## Contract
-  /// Throws [AssertionError] if both [focusNode] and [traversalEdgeBehavior] are not null.
+  /// Throws [AssertionError] if both `focusNode` and `traversalEdgeBehavior` are not null.
   /// {@endtemplate}
   final TraversalEdgeBehavior? traversalEdgeBehavior;
 

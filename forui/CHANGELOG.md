@@ -27,8 +27,15 @@ dart fix --apply
 * Add `FAutocompleteItemMixin.section(...)`.
 * Add `FAutocompleteItemMixin.richSection(...)`.
 * Add `FAutocompleteItem.item(...)`.
+* Add `FAutocomplete.contentGroupId`.
 
-* **Breaking** Rename `FAutocomplete.shift` to `FAutocomplete.overflow`.
+* **Breaking** Rename `FAutocomplete.anchor` to `FAutocomplete.contentAnchor`.
+* **Breaking** Rename `FAutocomplete.popoverConstraints` to `FAutocomplete.contentConstraints`.
+* **Breaking** Rename `FAutocomplete.spacing` to `FAutocomplete.contentSpacing`.
+* **Breaking** Rename `FAutocomplete.shift` to `FAutocomplete.contentOverflow`.
+* **Breaking** Rename `FAutocomplete.offset` to `FAutocomplete.contentOffset`.
+* **Breaking** Rename `FAutocomplete.hideRegion` to `FAutocomplete.contentHideRegion`.
+* **Breaking** Rename `FAutocomplete.onTapHide` to `FAutocomplete.contentOnTapHide`.
 * **Breaking** Remove `FAutocomplete.controller`. Use `FAutocomplete(control: .managed(...))` instead.
 * **Breaking** Remove `FAutocomplete.initialText`. Use `FAutocomplete(control: .managed(...))` instead.
 * **Breaking** Remove `FAutocompleteController.vsync`. Use `FAutocomplete(popoverControl: ...)` instead.
@@ -77,9 +84,13 @@ Unfortunately, `FCalendar` cannot be easily migrated using data driven fixes due
 * Add `FDateFieldControl`.
 * Add `FDateField(popoverControl: ...)`.
 * Add `FDateField.calendar(popoverControl: ...)`.
+* Add `FDateField.calendar(groupId: ...)`.
+* Add `FDateFieldCalendarProperties.groupId`.
 
 * Change `FDateField`'s input to preserve text selection when changing dates programmatically or via the calendar.
 * **Breaking** Rename `FDateField.shift` to `FDateField.overflow`.
+* **Breaking** Rename `FDateFieldCalendarProperties.inputAnchor` to `FDateFieldCalendarProperties.fieldAnchor`.
+* **Breaking** Rename `FDateField.calendar(inputAnchor: ...)` to `FDateField.calendar(fieldAnchor: ...)`.
 * **Breaking** Rename `FDateFieldController.calendar` to `FDateFieldController.popover`.
 * **Breaking** Rename `FDateFieldController(initialDate: ...)` to `FDateFieldController(date: ...)`.
 * **Breaking** Remove `FDateField.controller`. Use `FDateField(control: .managed(controller: ...))` instead.
@@ -176,18 +187,33 @@ Unfortunately, `FCalendar` cannot be easily migrated using data driven fixes due
 * Add `FSelectItemMixin.section(...)`.
 * Add `FSelectItemMixin.richSection(...)`.
 * Add `FSelectItem.item(...)`.
+* Add `FSelect.contentGroupId`.
+* Add `FMultiSelect.contentGroupId`.
 
-* **Breaking** Rename `FSelect.shift` to `FSelect.overflow`.
+* **Breaking** Rename `FSelect.anchor` to `FSelect.contentAnchor`.
+* **Breaking** Rename `FSelect.popoverConstraints` to `FSelect.contentConstraints`.
+* **Breaking** Rename `FSelect.spacing` to `FSelect.contentSpacing`.
+* **Breaking** Rename `FSelect.shift` to `FSelect.contentOverflow`.
+* **Breaking** Rename `FSelect.offset` to `FSelect.contentOffset`.
+* **Breaking** Rename `FSelect.hideRegion` to `FSelect.contentHideRegion`.
 * **Breaking** Remove `FSelect.controller`. Use `FSelect(control: .managed(...))` instead.
 * **Breaking** Remove `FSelect.onChange`. Use `FSelect(control: .managed(...))` instead.
 * **Breaking** Remove `FSelect.initialValue`. Use `FSelect(control: .managed(...))` instead.
 * **Breaking** Remove `FSelectController(vsync: ..., popoverMotion: ...)`. Use `FSelect(popoverControl: ...)` instead.
 * **Breaking** Remove `FSelectSearchFieldProperties.controller`. Use `FSelectSearchFieldProperties(control: .managed(...))` instead.
-* **Breaking** Rename `FMultiSelect.shift` to `FMultiSelect.overflow`.
+* **Breaking** Rename `FMultiSelect.anchor` to `FMultiSelect.contentAnchor`.
+* **Breaking** Rename `FMultiSelect.popoverConstraints` to `FMultiSelect.contentConstraints`.
+* **Breaking** Rename `FMultiSelect.spacing` to `FMultiSelect.contentSpacing`.
+* **Breaking** Rename `FMultiSelect.shift` to `FMultiSelect.contentOverflow`.
+* **Breaking** Rename `FMultiSelect.offset` to `FMultiSelect.contentOffset`.
+* **Breaking** Rename `FMultiSelect.hideRegion` to `FMultiSelect.contentHideRegion`.
 * **Breaking** Remove `FMultiSelect.controller`. Use `FMultiSelect(control: .managed(...))` instead.
 * **Breaking** Remove `FMultiSelect.onChange`. Use `FMultiSelect(control: .managed(...))` instead.
 * **Breaking** Remove `FMultiSelect.initialValue`. Use `FMultiSelect(control: .managed(...))` instead.
 * **Breaking** Remove `FMultiSelect.min`. Use `FMultiSelect(control: .managed(...))` instead.
+* **Breaking** Change `FSelectContentStyle` to extend `FPopoverStyle`.
+* **Breaking** Remove `FSelectStyle.popoverStyle` - use `FSelectStyle.contentStyle` instead.
+* **Breaking** Remove `FMultiSelectStyle.popoverStyle` - use `FMultiSelectStyle.contentStyle` instead.
 * **Breaking** Remove `FMultiSelect.max`. Use `FMultiSelect(control: .managed(...))` instead.
 * **Breaking** Remove `FMultiSelectController`. Use `FMultiValueNotifier` instead.
 * Fix `FSelect.mouseCursor` defaulting to `SystemMouseCursors.click` instead of `MouseCursor.defer`.
@@ -206,7 +232,18 @@ Unfortunately, `FCalendar` cannot be easily migrated using data driven fixes due
 
 
 ### `FSelectMenuTile`
-* **Breaking** Rename `FSelectMenuTile.shift` to `FSelectMenuTile.overflow`.
+* Add `FSelectMenuTile.menuGroupId`.
+
+* **Breaking** Rename `FSelectMenuTile.shift` to `FSelectMenuTile.menuOverflow`.
+* **Breaking** Rename `FSelectMenuTile.spacing` to `FSelectMenuTile.menuSpacing`.
+* **Breaking** Rename `FSelectMenuTile.offset` to `FSelectMenuTile.menuOffset`.
+* **Breaking** Rename `FSelectMenuTile.hideRegion` to `FSelectMenuTile.menuHideRegion`.
+* **Breaking** Rename `FSelectMenuTile.onTapHide` to `FSelectMenuTile.menuOnTapHide`.
+* **Breaking** Rename `FSelectMenuTile.focusNode` to `FSelectMenuTile.menuFocusNode`.
+* **Breaking** Rename `FSelectMenuTile.onFocusChange` to `FSelectMenuTile.menuOnFocusChange`.
+* **Breaking** Rename `FSelectMenuTile.traversalEdgeBehavior` to `FSelectMenuTile.menuTraversalEdgeBehavior`.
+* **Breaking** Rename `FSelectMenuTile.barrierSemanticsLabel` to `FSelectMenuTile.menuBarrierSemanticsLabel`.
+* **Breaking** Rename `FSelectMenuTile.barrierSemanticsDismissible` to `FSelectMenuTile.menuBarrierSemanticsDismissible`.
 * **Breaking** Remove `FSelectMenuTile.selectController`. Use `FSelectMenuTile(selectControl: .managed(...))` instead.
 * **Breaking** Remove `FSelectMenuTile.popoverController`. Use `FSelectMenuTile(popoverControl: .managed(...))` instead.
 * **Breaking** Remove `FSelectMenuTile.onChange`. Use `FSelectMenuTile(selectControl: .managed(...))` instead.
@@ -312,8 +349,11 @@ Unfortunately, `FCalendar` cannot be easily migrated using data driven fixes due
 
 ### `FTimeField`
 * Add `FTimeFieldControl`.
+* Add `FTimeField.picker(groupId: ...)`.
 
 * **Breaking** Rename `FTimeField.shift` to `FTimeField.overflow`.
+* **Breaking** Rename `FTimeField.picker(inputAnchor: ...)` to `FTimeField.picker(fieldAnchor: ...)`.
+* **Breaking** Move `FTimeFieldStyle.popoverConstraints` to `FTimeField.picker(constraints: ...)`.
 * **Breaking** Remove `FTimeField.controller`. Use `FTimeField(control: .managed(...))` instead.
 * **Breaking** Remove `FTimeField.onChange`. Use `FTimeField(control: .managed(...))` instead.
 * **Breaking** Remove `FTimeField.initialTime`. Use `FTimeField(control: .managed(...))` instead.

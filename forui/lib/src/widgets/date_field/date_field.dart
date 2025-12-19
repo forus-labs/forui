@@ -233,7 +233,7 @@ abstract class FDateField extends StatefulWidget {
   ///
   /// When [autoHide] is true, the calendar will automatically hide after a date is selected.
   ///
-  /// The [anchor] and [inputAnchor] control the alignment points for the calendar popover positioning.
+  /// The [anchor] and [fieldAnchor] control the alignment points for the calendar popover positioning.
   /// Defaults to [Alignment.topLeft] and [Alignment.bottomLeft] respectively.
   ///
   /// The [spacing] property controls the spacing between the input field and the picker popover. Defaults to
@@ -272,7 +272,8 @@ abstract class FDateField extends StatefulWidget {
     FCalendarPickerType initialType,
     bool autoHide,
     Alignment anchor,
-    Alignment inputAnchor,
+    Alignment fieldAnchor,
+    Object? groupId,
     FPortalSpacing spacing,
     FPortalOverflow overflow,
     Offset offset,

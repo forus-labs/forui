@@ -105,6 +105,79 @@ FPopover(
 
 ## Examples
 
+### Nested Popover
+
+When placing widgets that use popovers internally, e.g. `FSelect` inside an `FPopover`, the outer popover will
+close when interacting with the inner widget's dropdown. This happens because the inner dropdown is rendered in a
+separate overlay layer, and tapping it is considered "outside" the outer popover.
+
+To prevent this, make both widgets share the same `groupId`.
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='popover' variant='nested' height={500}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart {6, 31} copy
+    class NestedPopover extends StatelessWidget {
+      static const groupId = 'nested-popover';
+
+      @override
+      Widget build(BuildContext context) => FPopover(
+        groupId: groupId,
+        popoverBuilder: (context, controller) => Padding(
+          padding: const EdgeInsets.only(left: 20, top: 14, right: 20, bottom: 10),
+          child: SizedBox(
+            width: 288,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('Dimensions', style: context.theme.typography.base),
+                const SizedBox(height: 7),
+                Text(
+                  'Set the dimensions for the layer.',
+                  style: context.theme.typography.sm.copyWith(
+                    color: context.theme.colors.mutedForeground,
+                    fontWeight: FontWeight.w300,
+                  ),
+                ),
+                const SizedBox(height: 15),
+                Row(
+                  children: [
+                    Expanded(child: Text('Width', style: context.theme.typography.sm)),
+                    Expanded(
+                      flex: 2,
+                      child: FSelect<String>.rich(
+                        contentGroupId: groupId,
+                        hint: 'Select',
+                        format: (s) => s,
+                        children: [
+                          FSelectItem.item(title: const Text('100%'), value: '100%'),
+                          FSelectItem.item(title: const Text('75%'), value: '75%'),
+                          FSelectItem.item(title: const Text('50%'), value: '50%'),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+        builder: (context, controller, child) => FButton(
+          style: FButtonStyle.outline(),
+          mainAxisSize: MainAxisSize.min,
+          onPress: controller.toggle,
+          child: const Text('Open popover'),
+        ),
+      );
+    }
+    ```
+
+  </Tabs.Tab>
+</Tabs>
+
 ### Horizontal Alignment
 
 You can change how the popover is aligned to the button.

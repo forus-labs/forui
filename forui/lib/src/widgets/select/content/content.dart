@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -231,7 +233,7 @@ class _ContentState<T> extends State<Content<T>> {
 }
 
 /// An [FSelect]'s contents style.
-class FSelectContentStyle with Diagnosticable, _$FSelectContentStyleFunctions {
+class FSelectContentStyle extends FPopoverStyle with Diagnosticable, _$FSelectContentStyleFunctions {
   /// A section's style.
   @override
   final FSelectSectionStyle sectionStyle;
@@ -245,16 +247,20 @@ class FSelectContentStyle with Diagnosticable, _$FSelectContentStyleFunctions {
   final EdgeInsetsGeometry padding;
 
   /// Creates a [FSelectContentStyle].
-  const FSelectContentStyle({
+  FSelectContentStyle({
     required this.sectionStyle,
     required this.scrollHandleStyle,
+    required super.decoration,
     this.padding = const .symmetric(vertical: 5),
+    super.barrierFilter,
+    super.backgroundFilter,
+    super.viewInsets,
   });
 
   /// Creates a [FSelectContentStyle] that inherits its properties.
-  FSelectContentStyle.inherit({required FColors colors, required FStyle style, required FTypography typography})
-    : this(
-        sectionStyle: .inherit(colors: colors, style: style, typography: typography),
-        scrollHandleStyle: .inherit(colors: colors),
-      );
+  FSelectContentStyle.inherit({required super.colors, required super.style, required FTypography typography})
+    : sectionStyle = .inherit(colors: colors, style: style, typography: typography),
+      scrollHandleStyle = .inherit(colors: colors),
+      padding = const .symmetric(vertical: 5),
+      super.inherit();
 }

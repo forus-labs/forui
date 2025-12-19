@@ -8,8 +8,8 @@ class FDateFieldCalendarProperties with Diagnosticable {
   /// The alignment point on the calendar popover. Defaults to [Alignment.topLeft].
   final AlignmentGeometry anchor;
 
-  /// The alignment point on the input field. Defaults to [Alignment.bottomLeft].
-  final AlignmentGeometry inputAnchor;
+  /// The alignment point on the field. Defaults to [Alignment.bottomLeft].
+  final AlignmentGeometry fieldAnchor;
 
   /// {@macro forui.widgets.FPopover.spacing}
   final FPortalSpacing spacing;
@@ -25,8 +25,11 @@ class FDateFieldCalendarProperties with Diagnosticable {
   /// Defaults to [FPopoverHideRegion.excludeChild].
   ///
   /// Setting [hideRegion] to [FPopoverHideRegion.anywhere] may result in the calendar disappearing and reappearing
-  /// when pressing and holding the input field, due to the popover being hidden and then immediately shown again.
+  /// when pressing and holding the field, due to the popover being hidden and then immediately shown again.
   final FPopoverHideRegion hideRegion;
+
+  /// {@macro forui.widgets.FPopover.groupId}
+  final Object? groupId;
 
   /// {@macro forui.widgets.FPopover.onTapHide}
   ///
@@ -54,11 +57,12 @@ class FDateFieldCalendarProperties with Diagnosticable {
   /// Creates calendar properties for a date picker.
   const FDateFieldCalendarProperties({
     this.anchor = .topLeft,
-    this.inputAnchor = .bottomLeft,
+    this.fieldAnchor = .bottomLeft,
     this.spacing = const .spacing(4),
     this.overflow = .flip,
     this.offset = .zero,
     this.hideRegion = .excludeChild,
+    this.groupId,
     this.onTapHide,
     this.dayBuilder = FCalendar.defaultDayBuilder,
     this.start,
@@ -73,11 +77,12 @@ class FDateFieldCalendarProperties with Diagnosticable {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('anchor', anchor))
-      ..add(DiagnosticsProperty('inputAnchor', inputAnchor))
+      ..add(DiagnosticsProperty('fieldAnchor', fieldAnchor))
       ..add(DiagnosticsProperty('spacing', spacing))
       ..add(ObjectFlagProperty.has('overflow', overflow))
       ..add(DiagnosticsProperty('offset', offset))
       ..add(EnumProperty('hideRegion', hideRegion))
+      ..add(DiagnosticsProperty('groupId', groupId))
       ..add(ObjectFlagProperty.has('onTapHide', onTapHide))
       ..add(ObjectFlagProperty.has('dayBuilder', dayBuilder))
       ..add(DiagnosticsProperty('start', start))
@@ -93,11 +98,12 @@ class FDateFieldCalendarProperties with Diagnosticable {
       other is FDateFieldCalendarProperties &&
           runtimeType == other.runtimeType &&
           anchor == other.anchor &&
-          inputAnchor == other.inputAnchor &&
+          fieldAnchor == other.fieldAnchor &&
           spacing == other.spacing &&
           overflow == other.overflow &&
           offset == other.offset &&
           hideRegion == other.hideRegion &&
+          groupId == other.groupId &&
           onTapHide == other.onTapHide &&
           dayBuilder == other.dayBuilder &&
           start == other.start &&
@@ -109,7 +115,7 @@ class FDateFieldCalendarProperties with Diagnosticable {
   @override
   int get hashCode =>
       anchor.hashCode ^
-      inputAnchor.hashCode ^
+      fieldAnchor.hashCode ^
       spacing.hashCode ^
       overflow.hashCode ^
       offset.hashCode ^
