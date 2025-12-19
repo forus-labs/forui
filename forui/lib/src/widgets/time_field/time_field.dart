@@ -228,6 +228,9 @@ abstract class FTimeField extends StatefulWidget {
   /// The [anchor] and [fieldAnchor] control the alignment points for the picker popover positioning.
   /// Defaults to [Alignment.topLeft] and [Alignment.bottomLeft] respectively.
   ///
+  /// The [constraints] property controls the constraints of the picker popover. Defaults to
+  /// `const FPortalConstraints(maxWidth: 200, maxHeight: 200)`.
+  ///
   /// The [spacing] property controls the spacing between the input field and the picker popover. Defaults to
   /// `FPortalSpacing(4)`.
   ///
@@ -263,6 +266,7 @@ abstract class FTimeField extends StatefulWidget {
     FocusNode? focusNode,
     Alignment anchor,
     Alignment fieldAnchor,
+    FPortalConstraints constraints,
     FPortalSpacing spacing,
     FPortalOverflow overflow,
     Offset offset,

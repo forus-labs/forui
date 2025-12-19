@@ -5146,6 +5146,16 @@ transforms:
         oldName: 'initialTime'
         newName: 'time'
 
+  - title: 'Remove FTimeFieldStyle.popoverConstraints - use FTimeField.picker(constraints: ...) instead'
+    date: 2025-12-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FTimeFieldStyle
+    changes:
+      - kind: removeParameter
+        name: 'popoverConstraints'
+
 
   # FTabs
   - title: 'Migrate FTabs to control parameter'

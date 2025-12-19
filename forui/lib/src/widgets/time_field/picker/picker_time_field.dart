@@ -15,6 +15,8 @@ class _PickerTimeField extends FTimeField implements FTimeFieldPickerProperties 
   @override
   final Alignment fieldAnchor;
   @override
+  final FPortalConstraints constraints;
+  @override
   final FPortalSpacing spacing;
   @override
   final FPortalOverflow overflow;
@@ -42,6 +44,7 @@ class _PickerTimeField extends FTimeField implements FTimeFieldPickerProperties 
     this.canRequestFocus = true,
     this.anchor = .topLeft,
     this.fieldAnchor = .bottomLeft,
+    this.constraints = const FPortalConstraints(maxWidth: 200, maxHeight: 200),
     this.spacing = const .spacing(4),
     this.overflow = .flip,
     this.offset = .zero,
@@ -244,7 +247,7 @@ class _PickerPopover extends StatelessWidget {
   Widget build(BuildContext _) => FPopover(
     control: .managed(controller: popoverController),
     style: style.popoverStyle,
-    constraints: style.popoverConstraints,
+    constraints: properties.constraints,
     popoverAnchor: properties.anchor,
     childAnchor: properties.fieldAnchor,
     spacing: properties.spacing,

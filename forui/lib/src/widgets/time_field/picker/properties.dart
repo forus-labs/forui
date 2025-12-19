@@ -11,6 +11,9 @@ class FTimeFieldPickerProperties with Diagnosticable {
   /// The alignment point on the input field. Defaults to [Alignment.bottomLeft].
   final AlignmentGeometry fieldAnchor;
 
+  /// The constraints to apply to the picker popover. Defaults to `const FPortalConstraints(maxWidth: 200, maxHeight: 200)`.
+  final FPortalConstraints constraints;
+
   /// {@macro forui.widgets.FPopover.spacing}
   final FPortalSpacing spacing;
 
@@ -47,6 +50,7 @@ class FTimeFieldPickerProperties with Diagnosticable {
   const FTimeFieldPickerProperties({
     this.anchor = .topLeft,
     this.fieldAnchor = .bottomLeft,
+    this.constraints = const FPortalConstraints(maxWidth: 200, maxHeight: 200),
     this.spacing = const .spacing(4),
     this.overflow = .flip,
     this.offset = .zero,
@@ -63,6 +67,7 @@ class FTimeFieldPickerProperties with Diagnosticable {
     properties
       ..add(DiagnosticsProperty('anchor', anchor))
       ..add(DiagnosticsProperty('fieldAnchor', fieldAnchor))
+      ..add(DiagnosticsProperty('constraints', constraints))
       ..add(DiagnosticsProperty('spacing', spacing))
       ..add(ObjectFlagProperty.has('overflow', overflow))
       ..add(DiagnosticsProperty('offset', offset))
@@ -80,6 +85,7 @@ class FTimeFieldPickerProperties with Diagnosticable {
           runtimeType == other.runtimeType &&
           anchor == other.anchor &&
           fieldAnchor == other.fieldAnchor &&
+          constraints == other.constraints &&
           spacing == other.spacing &&
           overflow == other.overflow &&
           offset == other.offset &&
@@ -93,6 +99,7 @@ class FTimeFieldPickerProperties with Diagnosticable {
   int get hashCode =>
       anchor.hashCode ^
       fieldAnchor.hashCode ^
+      constraints.hashCode ^
       spacing.hashCode ^
       overflow.hashCode ^
       offset.hashCode ^

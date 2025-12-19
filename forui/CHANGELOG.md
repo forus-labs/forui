@@ -342,6 +342,7 @@ Unfortunately, `FCalendar` cannot be easily migrated using data driven fixes due
 
 * **Breaking** Rename `FTimeField.shift` to `FTimeField.overflow`.
 * **Breaking** Rename `FTimeField.picker(inputAnchor: ...)` to `FTimeField.picker(fieldAnchor: ...)`.
+* **Breaking** Move `FTimeFieldStyle.popoverConstraints` to `FTimeField.picker(constraints: ...)`.
 * **Breaking** Remove `FTimeField.controller`. Use `FTimeField(control: .managed(...))` instead.
 * **Breaking** Remove `FTimeField.onChange`. Use `FTimeField(control: .managed(...))` instead.
 * **Breaking** Remove `FTimeField.initialTime`. Use `FTimeField(control: .managed(...))` instead.
