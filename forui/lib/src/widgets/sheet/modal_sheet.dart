@@ -29,6 +29,9 @@ part 'modal_sheet.design.dart';
 /// is [FLayout.ttb] or [FLayout.btt]. Consider setting [mainAxisMaxRatio] to null if this sheet has a scrollable child,
 /// i.e. [ListView], along the main axis, to have the sheet be draggable.
 ///
+/// [resizeToAvoidBottomInset] determines whether the sheet should avoid the system's bottom view inset, typically the
+/// keyboard, by shifting the entire sheet upwards. This is only applied if [side] is [FLayout.btt]. Default to true.
+///
 /// [barrierLabel] defaults to [FLocalizations.barrierLabel].
 ///
 /// [transitionAnimationController] can be used to provide a custom [AnimationController] for the sheet's entrance and
@@ -60,6 +63,8 @@ Future<T?> showFSheet<T>({
   bool useRootNavigator = false,
   FModalSheetStyle Function(FModalSheetStyle style)? style,
   double? mainAxisMaxRatio = 9 / 16,
+  bool useSafeArea = false,
+  bool resizeToAvoidBottomInset = true,
   String? barrierLabel,
   bool barrierDismissible = true,
   BoxConstraints constraints = const BoxConstraints(),
@@ -67,7 +72,6 @@ Future<T?> showFSheet<T>({
   RouteSettings? routeSettings,
   AnimationController? transitionAnimationController,
   Offset? anchorPoint,
-  bool useSafeArea = false,
   VoidCallback? onClosing,
 }) {
   assert(debugCheckHasMediaQuery(context));
@@ -91,6 +95,7 @@ Future<T?> showFSheet<T>({
       transitionAnimationController: transitionAnimationController,
       anchorPoint: anchorPoint,
       useSafeArea: useSafeArea,
+      resizeToAvoidBottomInset: resizeToAvoidBottomInset,
       onClosing: onClosing,
     ),
   );
@@ -171,6 +176,9 @@ class FModalSheetRoute<T> extends PopupRoute<T> {
   /// In either case, the sheet extends all the way to the [side] of the screen, including any system intrusions.
   final bool useSafeArea;
 
+  /// Whether the sheet should avoid the system's bottom view inset, typically the keyboard. Defaults to true.
+  final bool resizeToAvoidBottomInset;
+
   /// The semantic hint text that informs users what will happen if they tap on the widget. Announced in the format of
   /// 'Double tap to ...'.
   ///
@@ -212,6 +220,7 @@ class FModalSheetRoute<T> extends PopupRoute<T> {
     this.transitionAnimationController,
     this.anchorPoint,
     this.useSafeArea = false,
+    this.resizeToAvoidBottomInset = true,
     this.onClosing,
     super.settings,
   });
@@ -240,6 +249,7 @@ class FModalSheetRoute<T> extends PopupRoute<T> {
       anchorPoint: anchorPoint,
       draggable: draggable,
       useSafeArea: useSafeArea,
+      resizeToAvoidBottomInset: resizeToAvoidBottomInset,
       builder: builder,
       onChange: (size) => _didChangeBarrierSemanticsClip(switch (side) {
         .ttb => .fromLTRB(0, size.height, 0, 0),

@@ -19,6 +19,7 @@ class Sheet extends StatefulWidget {
   final Offset? anchorPoint;
   final bool draggable;
   final bool useSafeArea;
+  final bool resizeToAvoidBottomInset;
   final WidgetBuilder builder;
   final ValueChanged<Size>? onChange;
   final VoidCallback? onClosing;
@@ -33,6 +34,7 @@ class Sheet extends StatefulWidget {
     required this.anchorPoint,
     required this.draggable,
     required this.useSafeArea,
+    required this.resizeToAvoidBottomInset,
     required this.builder,
     required this.onChange,
     required this.onClosing,
@@ -55,6 +57,9 @@ class Sheet extends StatefulWidget {
       ..add(DiagnosticsProperty('anchorPoint', anchorPoint))
       ..add(FlagProperty('draggable', value: draggable, ifTrue: 'draggable'))
       ..add(FlagProperty('useSafeArea', value: useSafeArea, ifTrue: 'useSafeArea'))
+      ..add(
+        FlagProperty('resizeToAvoidBottomInset', value: resizeToAvoidBottomInset, ifTrue: 'resizeToAvoidBottomInset'),
+      )
       ..add(ObjectFlagProperty.has('builder', builder))
       ..add(ObjectFlagProperty.has('onChange', onChange))
       ..add(ObjectFlagProperty.has('onClosing', onClosing));
@@ -157,9 +162,10 @@ class _SheetState extends State<Sheet> with SingleTickerProviderStateMixin {
         child: ClipRect(
           child: ShiftedSheet(
             side: widget.side,
-            onChange: widget.onChange,
             value: _curve.transform(_animation.value),
+            bottomViewInset: widget.resizeToAvoidBottomInset ? MediaQuery.viewInsetsOf(context).bottom : 0,
             mainAxisMaxRatio: widget.mainAxisMaxRatio,
+            onChange: widget.onChange,
             child: child,
           ),
         ),

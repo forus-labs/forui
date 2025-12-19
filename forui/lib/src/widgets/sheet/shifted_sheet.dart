@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
@@ -9,12 +11,14 @@ import 'package:forui/src/foundation/rendering.dart';
 class ShiftedSheet extends SingleChildRenderObjectWidget {
   final FLayout side;
   final double value;
+  final double bottomViewInset;
   final double? mainAxisMaxRatio;
   final ValueChanged<Size>? onChange;
 
   const ShiftedSheet({
     required this.side,
     required this.value,
+    required this.bottomViewInset,
     required this.mainAxisMaxRatio,
     required this.onChange,
     required super.child,
@@ -22,14 +26,20 @@ class ShiftedSheet extends SingleChildRenderObjectWidget {
   });
 
   @override
-  RenderBox createRenderObject(BuildContext _) =>
-      _ShiftedSheet(side: side, value: value, mainAxisMaxRatio: mainAxisMaxRatio, onChange: onChange);
+  RenderBox createRenderObject(BuildContext _) => _ShiftedSheet(
+    side: side,
+    value: value,
+    bottomViewInset: bottomViewInset,
+    mainAxisMaxRatio: mainAxisMaxRatio,
+    onChange: onChange,
+  );
 
   @override
   // ignore: library_private_types_in_public_api
   void updateRenderObject(BuildContext _, _ShiftedSheet box) => box
     ..side = side
     ..value = value
+    ..bottomViewInset = bottomViewInset
     ..mainAxisMaxRatio = mainAxisMaxRatio
     ..onChange = onChange;
 
@@ -39,6 +49,7 @@ class ShiftedSheet extends SingleChildRenderObjectWidget {
     properties
       ..add(EnumProperty('side', side))
       ..add(DoubleProperty('value', value))
+      ..add(DoubleProperty('bottomViewInset', bottomViewInset))
       ..add(DoubleProperty('mainAxisMaxRatio', mainAxisMaxRatio))
       ..add(ObjectFlagProperty.has('onChange', onChange));
   }
@@ -47,17 +58,20 @@ class ShiftedSheet extends SingleChildRenderObjectWidget {
 class _ShiftedSheet extends RenderShiftedBox {
   FLayout _side;
   double _value;
+  double _bottomViewInset;
   double? _mainAxisMaxRatio;
   ValueChanged<Size>? _onChange;
-  Size _previous = Size.zero;
+  Size _previous = .zero;
 
   _ShiftedSheet({
     required FLayout side,
     required double value,
+    required double bottomViewInset,
     required double? mainAxisMaxRatio,
     required ValueChanged<Size>? onChange,
   }) : _side = side,
        _value = value,
+       _bottomViewInset = bottomViewInset,
        _mainAxisMaxRatio = mainAxisMaxRatio,
        _onChange = onChange,
        super(null);
@@ -98,7 +112,7 @@ class _ShiftedSheet extends RenderShiftedBox {
     return null;
   }
 
-  BoxConstraints constrainChild(BoxConstraints constraints) => side.vertical
+  BoxConstraints constrainChild(BoxConstraints constraints) => _side.vertical
       ? BoxConstraints(
           minWidth: constraints.maxWidth,
           maxWidth: constraints.maxWidth,
@@ -110,11 +124,11 @@ class _ShiftedSheet extends RenderShiftedBox {
           maxHeight: constraints.maxHeight,
         );
 
-  Offset positionChild(Size size, Size childSize) => switch (side) {
-    FLayout.ttb => Offset(0, childSize.height * (_value - 1)),
-    FLayout.btt => Offset(0, size.height - childSize.height * _value),
-    FLayout.ltr => Offset(childSize.width * (_value - 1), 0),
-    FLayout.rtl => Offset(size.width - childSize.width * _value, 0),
+  Offset positionChild(Size size, Size childSize) => switch (_side) {
+    .ttb => Offset(0, childSize.height * (_value - 1)),
+    .btt => Offset(0,  max(0, size.height - childSize.height * _value - _bottomViewInset)),
+    .ltr => Offset(childSize.width * (_value - 1), 0),
+    .rtl => Offset(size.width - childSize.width * _value, 0),
   };
 
   @override
@@ -150,6 +164,15 @@ class _ShiftedSheet extends RenderShiftedBox {
     }
   }
 
+  double get bottomViewInset => _bottomViewInset;
+
+  set bottomViewInset(double value) {
+    if (_bottomViewInset != value) {
+      _bottomViewInset = value;
+      markNeedsLayout();
+    }
+  }
+
   double? get mainAxisMaxRatio => _mainAxisMaxRatio;
 
   set mainAxisMaxRatio(double? value) {
@@ -174,6 +197,7 @@ class _ShiftedSheet extends RenderShiftedBox {
     properties
       ..add(EnumProperty('side', side))
       ..add(DoubleProperty('value', value))
+      ..add(DoubleProperty('bottomViewInset', bottomViewInset))
       ..add(DoubleProperty('mainAxisRatio', mainAxisMaxRatio))
       ..add(ObjectFlagProperty.has('onChange', onChange));
   }
