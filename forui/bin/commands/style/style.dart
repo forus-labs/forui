@@ -229,7 +229,7 @@ enum Style {
     'FMultiSelectStyle',
     <String>['multi-select', 'multiselect'],
     <String>['FMultiSelectStyle'],
-    'FMultiSelectStyle multiSelectStyle({\n  required FColors colors,\n  required FTypography typography,\n  required FStyle style,\n}) => FMultiSelectStyle(\n  fieldStyle: .inherit(colors: colors, typography: typography, style: style),\n  tagStyle: .inherit(colors: colors, typography: typography, style: style),\n  popoverStyle: .inherit(colors: colors, style: style),\n  searchStyle: .inherit(colors: colors, typography: typography, style: style),\n  contentStyle: .inherit(colors: colors, typography: typography, style: style),\n  emptyTextStyle: typography.sm,\n);\n',
+    'FMultiSelectStyle multiSelectStyle({\n  required FColors colors,\n  required FTypography typography,\n  required FStyle style,\n}) => FMultiSelectStyle(\n  fieldStyle: .inherit(colors: colors, typography: typography, style: style),\n  tagStyle: .inherit(colors: colors, typography: typography, style: style),\n  searchStyle: .inherit(colors: colors, typography: typography, style: style),\n  contentStyle: .inherit(colors: colors, typography: typography, style: style),\n  emptyTextStyle: typography.sm,\n);\n',
   ),
   fmultiselecttagstyle(
     'FMultiSelectTagStyle',
@@ -295,7 +295,7 @@ enum Style {
     'FSelectContentStyle',
     <String>['select-content', 'selectcontent'],
     <String>['FSelectContentStyle'],
-    'FSelectContentStyle selectContentStyle({\n  required FColors colors,\n  required FStyle style,\n  required FTypography typography,\n}) => FSelectContentStyle(\n  sectionStyle: .inherit(colors: colors, style: style, typography: typography),\n  scrollHandleStyle: .inherit(colors: colors),\n  padding: const .symmetric(vertical: 5),\n);\n',
+    'FSelectContentStyle selectContentStyle({\n  required FColors colors,\n  required FStyle style,\n  required FTypography typography,\n}) => FSelectContentStyle.inherit(\n  colors: colors,\n  style: style,\n  typography: typography,\n);\n',
   ),
   fselectgroupstyle(
     'FSelectGroupStyle',
@@ -331,7 +331,7 @@ enum Style {
     'FSelectStyle',
     <String>['select'],
     <String>['FSelectStyle'],
-    'FSelectStyle selectStyle({\n  required FColors colors,\n  required FTypography typography,\n  required FStyle style,\n}) => FSelectStyle(\n  selectFieldStyle: .inherit(\n    colors: colors,\n    typography: typography,\n    style: style,\n  ),\n  iconStyle: IconThemeData(color: colors.mutedForeground, size: 18),\n  popoverStyle: .inherit(colors: colors, style: style),\n  searchStyle: .inherit(colors: colors, typography: typography, style: style),\n  contentStyle: .inherit(colors: colors, typography: typography, style: style),\n  emptyTextStyle: typography.sm,\n);\n',
+    'FSelectStyle selectStyle({\n  required FColors colors,\n  required FTypography typography,\n  required FStyle style,\n}) => FSelectStyle(\n  selectFieldStyle: .inherit(\n    colors: colors,\n    typography: typography,\n    style: style,\n  ),\n  iconStyle: IconThemeData(color: colors.mutedForeground, size: 18),\n  searchStyle: .inherit(colors: colors, typography: typography, style: style),\n  contentStyle: .inherit(colors: colors, typography: typography, style: style),\n  emptyTextStyle: typography.sm,\n);\n',
   ),
   fsidebargroupstyle(
     'FSidebarGroupStyle',
@@ -397,7 +397,7 @@ enum Style {
     'FTimeFieldStyle',
     <String>['time-field', 'timefield'],
     <String>['FTimeFieldStyle'],
-    'FTimeFieldStyle timeFieldStyle({\n  required FColors colors,\n  required FTypography typography,\n  required FStyle style,\n}) => FTimeFieldStyle(\n  textFieldStyle: .inherit(\n    colors: colors,\n    typography: typography,\n    style: style,\n  ),\n  popoverStyle: .inherit(colors: colors, style: style),\n  pickerStyle: .inherit(colors: colors, typography: typography, style: style),\n  iconStyle: IconThemeData(\n    color: colors.mutedForeground,\n    size: 18,\n    weight: 100,\n  ),\n  popoverConstraints: const FPortalConstraints(maxWidth: 200, maxHeight: 200),\n);\n',
+    'FTimeFieldStyle timeFieldStyle({\n  required FColors colors,\n  required FTypography typography,\n  required FStyle style,\n}) => FTimeFieldStyle(\n  textFieldStyle: .inherit(\n    colors: colors,\n    typography: typography,\n    style: style,\n  ),\n  popoverStyle: .inherit(colors: colors, style: style),\n  pickerStyle: .inherit(colors: colors, typography: typography, style: style),\n  iconStyle: IconThemeData(\n    color: colors.mutedForeground,\n    size: 18,\n    weight: 100,\n  ),\n);\n',
   ),
   ftimepickerstyle(
     'FTimePickerStyle',
