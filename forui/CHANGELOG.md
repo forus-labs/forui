@@ -83,9 +83,13 @@ Unfortunately, `FCalendar` cannot be easily migrated using data driven fixes due
 * Add `FDateFieldControl`.
 * Add `FDateField(popoverControl: ...)`.
 * Add `FDateField.calendar(popoverControl: ...)`.
+* Add `FDateField.calendar(groupId: ...)`.
+* Add `FDateFieldCalendarProperties.groupId`.
 
 * Change `FDateField`'s input to preserve text selection when changing dates programmatically or via the calendar.
 * **Breaking** Rename `FDateField.shift` to `FDateField.overflow`.
+* **Breaking** Rename `FDateFieldCalendarProperties.inputAnchor` to `FDateFieldCalendarProperties.fieldAnchor`.
+* **Breaking** Rename `FDateField.calendar(inputAnchor: ...)` to `FDateField.calendar(fieldAnchor: ...)`.
 * **Breaking** Rename `FDateFieldController.calendar` to `FDateFieldController.popover`.
 * **Breaking** Rename `FDateFieldController(initialDate: ...)` to `FDateFieldController(date: ...)`.
 * **Breaking** Remove `FDateField.controller`. Use `FDateField(control: .managed(controller: ...))` instead.

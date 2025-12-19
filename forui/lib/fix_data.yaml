@@ -553,6 +553,28 @@ transforms:
         oldName: 'shift'
         newName: 'overflow'
 
+  - title: 'Rename FDateFieldCalendarProperties(inputAnchor: ...) to fieldAnchor'
+    date: 2025-12-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FDateFieldCalendarProperties
+    changes:
+      - kind: renameParameter
+        oldName: 'inputAnchor'
+        newName: 'fieldAnchor'
+
+  - title: 'Rename FDateField.calendar(inputAnchor: ...) to fieldAnchor'
+    date: 2025-12-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'calendar'
+      inClass: FDateField
+    changes:
+      - kind: renameParameter
+        oldName: 'inputAnchor'
+        newName: 'fieldAnchor'
+
   - title: 'Migrate FDateField to control parameter'
     date: 2025-12-10
     element:
