@@ -88,19 +88,22 @@ class FSelectMenuTile<T> extends StatefulWidget with FTileMixin, FFormFieldPrope
   final AlignmentGeometry tileAnchor;
 
   /// {@macro forui.widgets.FPopover.spacing}
-  final FPortalSpacing spacing;
+  final FPortalSpacing menuSpacing;
 
   /// {@macro forui.widgets.FPopover.overflow}
-  final FPortalOverflow overflow;
+  final FPortalOverflow menuOverflow;
 
   /// {@macro forui.widgets.FPopover.offset}
-  final Offset offset;
+  final Offset menuOffset;
 
   /// {@macro forui.widgets.FPopover.hideRegion}
-  final FPopoverHideRegion hideRegion;
+  final FPopoverHideRegion menuHideRegion;
 
   /// {@macro forui.widgets.FPopover.onTapHide}
-  final VoidCallback? onTapHide;
+  final VoidCallback? menuOnTapHide;
+
+  /// {@macro forui.widgets.FPopover.groupId}
+  final Object? menuGroupId;
 
   /// True if the menu should be automatically hidden after a menu option is selected. Defaults to true.
   final bool autoHide;
@@ -115,19 +118,19 @@ class FSelectMenuTile<T> extends StatefulWidget with FTileMixin, FFormFieldPrope
   final bool autofocus;
 
   /// {@macro forui.foundation.doc_templates.focusNode}
-  final FocusScopeNode? focusNode;
+  final FocusScopeNode? menuFocusNode;
 
   /// {@macro forui.foundation.doc_templates.onFocusChange}
-  final ValueChanged<bool>? onFocusChange;
+  final ValueChanged<bool>? menuOnFocusChange;
 
   /// {@macro forui.widgets.FPopover.traversalEdgeBehavior}
-  final TraversalEdgeBehavior? traversalEdgeBehavior;
+  final TraversalEdgeBehavior? menuTraversalEdgeBehavior;
 
   /// {@macro forui.widgets.FPopover.barrierSemanticsLabel}
-  final String? barrierSemanticsLabel;
+  final String? menuBarrierSemanticsLabel;
 
   /// {@macro forui.widgets.FPopover.barrierSemanticsDismissible}
-  final bool barrierSemanticsDismissible;
+  final bool menuBarrierSemanticsDismissible;
 
   /// The menu's semantic label used by accessibility frameworks.
   final String? semanticsLabel;
@@ -208,20 +211,21 @@ class FSelectMenuTile<T> extends StatefulWidget with FTileMixin, FFormFieldPrope
     this.divider = .full,
     this.menuAnchor = .topRight,
     this.tileAnchor = .bottomRight,
-    this.spacing = const .spacing(4),
-    this.overflow = .flip,
-    this.offset = .zero,
-    this.hideRegion = .excludeChild,
-    this.onTapHide,
+    this.menuSpacing = const .spacing(4),
+    this.menuOverflow = .flip,
+    this.menuOffset = .zero,
+    this.menuHideRegion = .excludeChild,
+    this.menuOnTapHide,
+    this.menuGroupId,
     this.autoHide = true,
     this.label,
     this.description,
     this.autofocus = false,
-    this.focusNode,
-    this.onFocusChange,
-    this.traversalEdgeBehavior,
-    this.barrierSemanticsLabel,
-    this.barrierSemanticsDismissible = true,
+    this.menuFocusNode,
+    this.menuOnFocusChange,
+    this.menuTraversalEdgeBehavior,
+    this.menuBarrierSemanticsLabel,
+    this.menuBarrierSemanticsDismissible = true,
     this.semanticsLabel,
     this.prefix,
     this.subtitle,
@@ -263,20 +267,21 @@ class FSelectMenuTile<T> extends StatefulWidget with FTileMixin, FFormFieldPrope
     FItemDivider divider = .full,
     AlignmentGeometry menuAnchor = .topRight,
     AlignmentGeometry tileAnchor = .bottomRight,
-    FPortalSpacing spacing = const .spacing(4),
-    FPortalOverflow overflow = .flip,
-    Offset offset = .zero,
-    FPopoverHideRegion hideRegion = .excludeChild,
-    VoidCallback? onTapHide,
+    FPortalSpacing menuSpacing = const .spacing(4),
+    FPortalOverflow menuOverflow = .flip,
+    Offset menuOffset = .zero,
+    FPopoverHideRegion menuHideRegion = .excludeChild,
+    VoidCallback? menuOnTapHide,
+    Object? menuGroupId,
     bool autoHide = true,
     Widget? label,
     Widget? description,
     bool autofocus = false,
-    FocusScopeNode? focusNode,
-    ValueChanged<bool>? onFocusChange,
-    TraversalEdgeBehavior? traversalEdgeBehavior,
-    String? barrierSemanticsLabel,
-    bool barrierSemanticsDismissible = true,
+    FocusScopeNode? menuFocusNode,
+    ValueChanged<bool>? menuOnFocusChange,
+    TraversalEdgeBehavior? menuTraversalEdgeBehavior,
+    String? menuBarrierSemanticsLabel,
+    bool menuBarrierSemanticsDismissible = true,
     String? semanticsLabel,
     Widget? prefix,
     Widget? subtitle,
@@ -307,20 +312,21 @@ class FSelectMenuTile<T> extends StatefulWidget with FTileMixin, FFormFieldPrope
     divider: divider,
     menuAnchor: menuAnchor,
     tileAnchor: tileAnchor,
-    spacing: spacing,
-    overflow: overflow,
-    offset: offset,
-    hideRegion: hideRegion,
-    onTapHide: onTapHide,
+    menuSpacing: menuSpacing,
+    menuOverflow: menuOverflow,
+    menuOffset: menuOffset,
+    menuHideRegion: menuHideRegion,
+    menuOnTapHide: menuOnTapHide,
+    menuGroupId: menuGroupId,
     autoHide: autoHide,
     label: label,
     description: description,
     autofocus: autofocus,
-    focusNode: focusNode,
-    onFocusChange: onFocusChange,
-    traversalEdgeBehavior: traversalEdgeBehavior,
-    barrierSemanticsLabel: barrierSemanticsLabel,
-    barrierSemanticsDismissible: barrierSemanticsDismissible,
+    menuFocusNode: menuFocusNode,
+    menuOnFocusChange: menuOnFocusChange,
+    menuTraversalEdgeBehavior: menuTraversalEdgeBehavior,
+    menuBarrierSemanticsLabel: menuBarrierSemanticsLabel,
+    menuBarrierSemanticsDismissible: menuBarrierSemanticsDismissible,
     semanticsLabel: semanticsLabel,
     prefix: prefix,
     subtitle: subtitle,
@@ -371,20 +377,21 @@ class FSelectMenuTile<T> extends StatefulWidget with FTileMixin, FFormFieldPrope
     this.divider = .full,
     this.menuAnchor = .topRight,
     this.tileAnchor = .bottomRight,
-    this.spacing = const .spacing(4),
-    this.overflow = .flip,
-    this.offset = .zero,
-    this.hideRegion = .excludeChild,
-    this.onTapHide,
+    this.menuSpacing = const .spacing(4),
+    this.menuOverflow = .flip,
+    this.menuOffset = .zero,
+    this.menuHideRegion = .excludeChild,
+    this.menuOnTapHide,
+    this.menuGroupId,
     this.autoHide = true,
     this.label,
     this.description,
     this.autofocus = false,
-    this.focusNode,
-    this.onFocusChange,
-    this.traversalEdgeBehavior,
-    this.barrierSemanticsLabel,
-    this.barrierSemanticsDismissible = true,
+    this.menuFocusNode,
+    this.menuOnFocusChange,
+    this.menuTraversalEdgeBehavior,
+    this.menuBarrierSemanticsLabel,
+    this.menuBarrierSemanticsDismissible = true,
     this.semanticsLabel,
     this.prefix,
     this.subtitle,
@@ -423,26 +430,27 @@ class FSelectMenuTile<T> extends StatefulWidget with FTileMixin, FFormFieldPrope
       ..add(EnumProperty('divider', divider))
       ..add(DiagnosticsProperty('menuAnchor', menuAnchor))
       ..add(DiagnosticsProperty('tileAnchor', tileAnchor))
-      ..add(DiagnosticsProperty('spacing', spacing))
-      ..add(ObjectFlagProperty.has('overflow', overflow))
-      ..add(DiagnosticsProperty('offset', offset))
-      ..add(EnumProperty('hideRegion', hideRegion))
-      ..add(ObjectFlagProperty.has('onTapHide', onTapHide))
+      ..add(DiagnosticsProperty('menuSpacing', menuSpacing))
+      ..add(ObjectFlagProperty.has('menuOverflow', menuOverflow))
+      ..add(DiagnosticsProperty('menuOffset', menuOffset))
+      ..add(EnumProperty('menuHideRegion', menuHideRegion))
+      ..add(ObjectFlagProperty.has('menuOnTapHide', menuOnTapHide))
+      ..add(DiagnosticsProperty('menuGroupId', menuGroupId))
       ..add(FlagProperty('autoHide', value: autoHide, ifTrue: 'autoHide'))
       ..add(ObjectFlagProperty.has('errorBuilder', errorBuilder))
-      ..add(StringProperty('barrierSemanticsLabel', barrierSemanticsLabel))
+      ..add(StringProperty('menuBarrierSemanticsLabel', menuBarrierSemanticsLabel))
       ..add(
         FlagProperty(
-          'barrierSemanticsDismissible',
-          value: barrierSemanticsDismissible,
+          'menuBarrierSemanticsDismissible',
+          value: menuBarrierSemanticsDismissible,
           ifTrue: 'barrier semantics dismissible',
         ),
       )
       ..add(StringProperty('semanticsLabel', semanticsLabel))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
-      ..add(DiagnosticsProperty('focusNode', focusNode))
-      ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))
-      ..add(EnumProperty('traversalEdgeBehavior', traversalEdgeBehavior))
+      ..add(DiagnosticsProperty('menuFocusNode', menuFocusNode))
+      ..add(ObjectFlagProperty.has('menuOnFocusChange', menuOnFocusChange))
+      ..add(EnumProperty('menuTraversalEdgeBehavior', menuTraversalEdgeBehavior))
       ..add(ObjectFlagProperty.has('detailsBuilder', detailsBuilder))
       ..add(DiagnosticsProperty('shortcuts', shortcuts))
       ..add(DiagnosticsProperty('actions', actions))
@@ -533,17 +541,18 @@ class _FSelectMenuTileState<T> extends State<FSelectMenuTile<T>> with TickerProv
           constraints: FPortalConstraints(maxWidth: menuStyle.maxWidth),
           popoverAnchor: widget.menuAnchor,
           childAnchor: widget.tileAnchor,
-          spacing: widget.spacing,
-          overflow: widget.overflow,
-          offset: widget.offset,
-          hideRegion: widget.hideRegion,
-          onTapHide: widget.onTapHide,
+          spacing: widget.menuSpacing,
+          overflow: widget.menuOverflow,
+          offset: widget.menuOffset,
+          hideRegion: widget.menuHideRegion,
+          onTapHide: widget.menuOnTapHide,
+          groupId: widget.menuGroupId,
           autofocus: widget.autofocus,
-          focusNode: widget.focusNode,
-          onFocusChange: widget.onFocusChange,
-          traversalEdgeBehavior: widget.traversalEdgeBehavior,
-          barrierSemanticsLabel: widget.barrierSemanticsLabel,
-          barrierSemanticsDismissible: widget.barrierSemanticsDismissible,
+          focusNode: widget.menuFocusNode,
+          onFocusChange: widget.menuOnFocusChange,
+          traversalEdgeBehavior: widget.menuTraversalEdgeBehavior,
+          barrierSemanticsLabel: widget.menuBarrierSemanticsLabel,
+          barrierSemanticsDismissible: widget.menuBarrierSemanticsDismissible,
           popoverBuilder: (_, _) {
             if (widget._menu case final menu?) {
               return FInheritedItemData(

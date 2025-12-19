@@ -3208,7 +3208,7 @@ transforms:
 
 
   # FSelectMenuTile
-  - title: 'Rename FSelectMenuTile(shift: ...) to overflow'
+  - title: 'Rename FSelectMenuTile(shift: ...) to menuOverflow'
     date: 2025-11-30
     element:
       uris: [ 'package:forui/forui.dart' ]
@@ -3217,9 +3217,9 @@ transforms:
     changes:
       - kind: renameParameter
         oldName: 'shift'
-        newName: 'overflow'
+        newName: 'menuOverflow'
 
-  - title: 'Rename FSelectMenuTile.fromMap(shift: ...) to overflow'
+  - title: 'Rename FSelectMenuTile.fromMap(shift: ...) to menuOverflow'
     date: 2025-11-30
     element:
       uris: [ 'package:forui/forui.dart' ]
@@ -3228,9 +3228,9 @@ transforms:
     changes:
       - kind: renameParameter
         oldName: 'shift'
-        newName: 'overflow'
+        newName: 'menuOverflow'
 
-  - title: 'Rename FSelectMenuTile.builder(shift: ...) to overflow'
+  - title: 'Rename FSelectMenuTile.builder(shift: ...) to menuOverflow'
     date: 2025-11-30
     element:
       uris: [ 'package:forui/forui.dart' ]
@@ -3239,7 +3239,304 @@ transforms:
     changes:
       - kind: renameParameter
         oldName: 'shift'
-        newName: 'overflow'
+        newName: 'menuOverflow'
+
+  - title: 'Rename FSelectMenuTile(spacing: ...) to menuSpacing'
+    date: 2025-12-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FSelectMenuTile
+    changes:
+      - kind: renameParameter
+        oldName: 'spacing'
+        newName: 'menuSpacing'
+
+  - title: 'Rename FSelectMenuTile.fromMap(spacing: ...) to menuSpacing'
+    date: 2025-12-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'fromMap'
+      inClass: FSelectMenuTile
+    changes:
+      - kind: renameParameter
+        oldName: 'spacing'
+        newName: 'menuSpacing'
+
+  - title: 'Rename FSelectMenuTile.builder(spacing: ...) to menuSpacing'
+    date: 2025-12-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'builder'
+      inClass: FSelectMenuTile
+    changes:
+      - kind: renameParameter
+        oldName: 'spacing'
+        newName: 'menuSpacing'
+
+  - title: 'Rename FSelectMenuTile(offset: ...) to menuOffset'
+    date: 2025-12-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FSelectMenuTile
+    changes:
+      - kind: renameParameter
+        oldName: 'offset'
+        newName: 'menuOffset'
+
+  - title: 'Rename FSelectMenuTile.fromMap(offset: ...) to menuOffset'
+    date: 2025-12-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'fromMap'
+      inClass: FSelectMenuTile
+    changes:
+      - kind: renameParameter
+        oldName: 'offset'
+        newName: 'menuOffset'
+
+  - title: 'Rename FSelectMenuTile.builder(offset: ...) to menuOffset'
+    date: 2025-12-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'builder'
+      inClass: FSelectMenuTile
+    changes:
+      - kind: renameParameter
+        oldName: 'offset'
+        newName: 'menuOffset'
+
+  - title: 'Rename FSelectMenuTile(hideRegion: ...) to menuHideRegion'
+    date: 2025-12-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FSelectMenuTile
+    changes:
+      - kind: renameParameter
+        oldName: 'hideRegion'
+        newName: 'menuHideRegion'
+
+  - title: 'Rename FSelectMenuTile.fromMap(hideRegion: ...) to menuHideRegion'
+    date: 2025-12-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'fromMap'
+      inClass: FSelectMenuTile
+    changes:
+      - kind: renameParameter
+        oldName: 'hideRegion'
+        newName: 'menuHideRegion'
+
+  - title: 'Rename FSelectMenuTile.builder(hideRegion: ...) to menuHideRegion'
+    date: 2025-12-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'builder'
+      inClass: FSelectMenuTile
+    changes:
+      - kind: renameParameter
+        oldName: 'hideRegion'
+        newName: 'menuHideRegion'
+
+  - title: 'Rename FSelectMenuTile(onTapHide: ...) to menuOnTapHide'
+    date: 2025-12-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FSelectMenuTile
+    changes:
+      - kind: renameParameter
+        oldName: 'onTapHide'
+        newName: 'menuOnTapHide'
+
+  - title: 'Rename FSelectMenuTile.fromMap(onTapHide: ...) to menuOnTapHide'
+    date: 2025-12-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'fromMap'
+      inClass: FSelectMenuTile
+    changes:
+      - kind: renameParameter
+        oldName: 'onTapHide'
+        newName: 'menuOnTapHide'
+
+  - title: 'Rename FSelectMenuTile.builder(onTapHide: ...) to menuOnTapHide'
+    date: 2025-12-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'builder'
+      inClass: FSelectMenuTile
+    changes:
+      - kind: renameParameter
+        oldName: 'onTapHide'
+        newName: 'menuOnTapHide'
+
+  - title: 'Rename FSelectMenuTile(focusNode: ...) to menuFocusNode'
+    date: 2025-12-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FSelectMenuTile
+    changes:
+      - kind: renameParameter
+        oldName: 'focusNode'
+        newName: 'menuFocusNode'
+
+  - title: 'Rename FSelectMenuTile.fromMap(focusNode: ...) to menuFocusNode'
+    date: 2025-12-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'fromMap'
+      inClass: FSelectMenuTile
+    changes:
+      - kind: renameParameter
+        oldName: 'focusNode'
+        newName: 'menuFocusNode'
+
+  - title: 'Rename FSelectMenuTile.builder(focusNode: ...) to menuFocusNode'
+    date: 2025-12-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'builder'
+      inClass: FSelectMenuTile
+    changes:
+      - kind: renameParameter
+        oldName: 'focusNode'
+        newName: 'menuFocusNode'
+
+  - title: 'Rename FSelectMenuTile(onFocusChange: ...) to menuOnFocusChange'
+    date: 2025-12-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FSelectMenuTile
+    changes:
+      - kind: renameParameter
+        oldName: 'onFocusChange'
+        newName: 'menuOnFocusChange'
+
+  - title: 'Rename FSelectMenuTile.fromMap(onFocusChange: ...) to menuOnFocusChange'
+    date: 2025-12-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'fromMap'
+      inClass: FSelectMenuTile
+    changes:
+      - kind: renameParameter
+        oldName: 'onFocusChange'
+        newName: 'menuOnFocusChange'
+
+  - title: 'Rename FSelectMenuTile.builder(onFocusChange: ...) to menuOnFocusChange'
+    date: 2025-12-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'builder'
+      inClass: FSelectMenuTile
+    changes:
+      - kind: renameParameter
+        oldName: 'onFocusChange'
+        newName: 'menuOnFocusChange'
+
+  - title: 'Rename FSelectMenuTile(traversalEdgeBehavior: ...) to menuTraversalEdgeBehavior'
+    date: 2025-12-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FSelectMenuTile
+    changes:
+      - kind: renameParameter
+        oldName: 'traversalEdgeBehavior'
+        newName: 'menuTraversalEdgeBehavior'
+
+  - title: 'Rename FSelectMenuTile.fromMap(traversalEdgeBehavior: ...) to menuTraversalEdgeBehavior'
+    date: 2025-12-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'fromMap'
+      inClass: FSelectMenuTile
+    changes:
+      - kind: renameParameter
+        oldName: 'traversalEdgeBehavior'
+        newName: 'menuTraversalEdgeBehavior'
+
+  - title: 'Rename FSelectMenuTile.builder(traversalEdgeBehavior: ...) to menuTraversalEdgeBehavior'
+    date: 2025-12-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'builder'
+      inClass: FSelectMenuTile
+    changes:
+      - kind: renameParameter
+        oldName: 'traversalEdgeBehavior'
+        newName: 'menuTraversalEdgeBehavior'
+
+  - title: 'Rename FSelectMenuTile(barrierSemanticsLabel: ...) to menuBarrierSemanticsLabel'
+    date: 2025-12-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FSelectMenuTile
+    changes:
+      - kind: renameParameter
+        oldName: 'barrierSemanticsLabel'
+        newName: 'menuBarrierSemanticsLabel'
+
+  - title: 'Rename FSelectMenuTile.fromMap(barrierSemanticsLabel: ...) to menuBarrierSemanticsLabel'
+    date: 2025-12-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'fromMap'
+      inClass: FSelectMenuTile
+    changes:
+      - kind: renameParameter
+        oldName: 'barrierSemanticsLabel'
+        newName: 'menuBarrierSemanticsLabel'
+
+  - title: 'Rename FSelectMenuTile.builder(barrierSemanticsLabel: ...) to menuBarrierSemanticsLabel'
+    date: 2025-12-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'builder'
+      inClass: FSelectMenuTile
+    changes:
+      - kind: renameParameter
+        oldName: 'barrierSemanticsLabel'
+        newName: 'menuBarrierSemanticsLabel'
+
+  - title: 'Rename FSelectMenuTile(barrierSemanticsDismissible: ...) to menuBarrierSemanticsDismissible'
+    date: 2025-12-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FSelectMenuTile
+    changes:
+      - kind: renameParameter
+        oldName: 'barrierSemanticsDismissible'
+        newName: 'menuBarrierSemanticsDismissible'
+
+  - title: 'Rename FSelectMenuTile.fromMap(barrierSemanticsDismissible: ...) to menuBarrierSemanticsDismissible'
+    date: 2025-12-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'fromMap'
+      inClass: FSelectMenuTile
+    changes:
+      - kind: renameParameter
+        oldName: 'barrierSemanticsDismissible'
+        newName: 'menuBarrierSemanticsDismissible'
+
+  - title: 'Rename FSelectMenuTile.builder(barrierSemanticsDismissible: ...) to menuBarrierSemanticsDismissible'
+    date: 2025-12-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'builder'
+      inClass: FSelectMenuTile
+    changes:
+      - kind: renameParameter
+        oldName: 'barrierSemanticsDismissible'
+        newName: 'menuBarrierSemanticsDismissible'
 
   - title: 'Rename FSelectMenuTileController to FMultiValueNotifier'
     date: 2025-12-08

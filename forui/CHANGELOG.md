@@ -232,7 +232,18 @@ Unfortunately, `FCalendar` cannot be easily migrated using data driven fixes due
 
 
 ### `FSelectMenuTile`
-* **Breaking** Rename `FSelectMenuTile.shift` to `FSelectMenuTile.overflow`.
+* Add `FSelectMenuTile.menuGroupId`.
+
+* **Breaking** Rename `FSelectMenuTile.shift` to `FSelectMenuTile.menuOverflow`.
+* **Breaking** Rename `FSelectMenuTile.spacing` to `FSelectMenuTile.menuSpacing`.
+* **Breaking** Rename `FSelectMenuTile.offset` to `FSelectMenuTile.menuOffset`.
+* **Breaking** Rename `FSelectMenuTile.hideRegion` to `FSelectMenuTile.menuHideRegion`.
+* **Breaking** Rename `FSelectMenuTile.onTapHide` to `FSelectMenuTile.menuOnTapHide`.
+* **Breaking** Rename `FSelectMenuTile.focusNode` to `FSelectMenuTile.menuFocusNode`.
+* **Breaking** Rename `FSelectMenuTile.onFocusChange` to `FSelectMenuTile.menuOnFocusChange`.
+* **Breaking** Rename `FSelectMenuTile.traversalEdgeBehavior` to `FSelectMenuTile.menuTraversalEdgeBehavior`.
+* **Breaking** Rename `FSelectMenuTile.barrierSemanticsLabel` to `FSelectMenuTile.menuBarrierSemanticsLabel`.
+* **Breaking** Rename `FSelectMenuTile.barrierSemanticsDismissible` to `FSelectMenuTile.menuBarrierSemanticsDismissible`.
 * **Breaking** Remove `FSelectMenuTile.selectController`. Use `FSelectMenuTile(selectControl: .managed(...))` instead.
 * **Breaking** Remove `FSelectMenuTile.popoverController`. Use `FSelectMenuTile(popoverControl: .managed(...))` instead.
 * **Breaking** Remove `FSelectMenuTile.onChange`. Use `FSelectMenuTile(selectControl: .managed(...))` instead.
