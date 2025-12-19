@@ -95,6 +95,85 @@ void main() {
         await expectLater(find.byType(TestScaffold), matchesGoldenFile('line-calendar/${theme.name}/default.png'));
       });
 
+      testWidgets('${theme.name} - disabled', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold(
+            theme: theme.data,
+            child: FLineCalendar(
+              control: .managed(selectable: (d) => d.day != 19),
+              today: DateTime(2025, 12, 19),
+            ),
+          ),
+        );
+
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('line-calendar/${theme.name}/disabled.png'));
+      });
+
+      testWidgets('${theme.name} - disabled focused', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold(
+            theme: theme.data,
+            child: Focus(
+              focusNode: focus,
+              child: FLineCalendar(
+                control: .managed(selectable: (d) => d.day != 19),
+                today: DateTime(2025, 12, 19),
+              ),
+            ),
+          ),
+        );
+
+        final nodes = focus.traversalDescendants.toList();
+        nodes[nodes.length ~/ 2].requestFocus();
+        await tester.pumpAndSettle();
+
+        await expectLater(
+          find.byType(TestScaffold),
+          matchesGoldenFile('line-calendar/${theme.name}/disabled-focused.png'),
+        );
+      });
+
+      testWidgets('${theme.name} - disabled selected', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold(
+            theme: theme.data,
+            child: FLineCalendar(
+              control: .managed(initial: DateTime(2025, 12, 19), selectable: (d) => d.day != 19),
+              today: DateTime(2025, 12, 19),
+            ),
+          ),
+        );
+
+        await expectLater(
+          find.byType(TestScaffold),
+          matchesGoldenFile('line-calendar/${theme.name}/disabled-selected.png'),
+        );
+      });
+
+      testWidgets('${theme.name} - disabled selected focused', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold(
+            theme: theme.data,
+            child: Focus(
+              focusNode: focus,
+              child: FLineCalendar(
+                control: .managed(initial: DateTime(2025, 12, 19), selectable: (d) => d.day != 19),
+                today: DateTime(2025, 12, 19),
+              ),
+            ),
+          ),
+        );
+
+        final nodes = focus.traversalDescendants.toList();
+        nodes[nodes.length ~/ 2].requestFocus();
+        await tester.pumpAndSettle();
+
+        await expectLater(
+          find.byType(TestScaffold),
+          matchesGoldenFile('line-calendar/${theme.name}/disabled-selected-focused.png'),
+        );
+      });
+
       testWidgets('${theme.name} - selected other date', (tester) async {
         await tester.pumpWidget(
           TestScaffold(

@@ -117,6 +117,8 @@ Unfortunately, `FCalendar` cannot be easily migrated using data driven fixes due
 * **Breaking** Remove `FLineCalendar.onChange`. Use `FLineCalendar(control: .managed(onChange: ...))` instead.
 * **Breaking** Remove `FLineCalendar.toggleable`. Use `FLineCalendar(control: .managed(toggleable: ...))` instead.
 
+* Fix `FLineCalendar` not respecting `FCalendarcontroller.selectable`.
+
 
 ### `FPagination`
 * Add `FPaginationControl`.

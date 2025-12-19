@@ -217,6 +217,26 @@ class FLineCalendarStyle with Diagnosticable, _$FLineCalendarStyleFunctions {
     final focusedBorder = Border.all(color: colors.primary, width: style.borderWidth);
     return .new(
       decoration: FWidgetStateMap({
+        WidgetState.disabled & WidgetState.selected & WidgetState.focused: BoxDecoration(
+          color: colors.disable(colors.primary),
+          border: focusedBorder,
+          borderRadius: style.borderRadius,
+        ),
+        WidgetState.disabled & WidgetState.selected: BoxDecoration(
+          color: colors.disable(colors.primary),
+          border: .all(color: colors.border),
+          borderRadius: style.borderRadius,
+        ),
+        WidgetState.disabled & WidgetState.focused: BoxDecoration(
+          color: colors.background,
+          border: focusedBorder,
+          borderRadius: style.borderRadius,
+        ),
+        WidgetState.disabled: BoxDecoration(
+          color: colors.background,
+          border: .all(color: colors.border),
+          borderRadius: style.borderRadius,
+        ),
         WidgetState.selected & (WidgetState.hovered | WidgetState.pressed) & WidgetState.focused: BoxDecoration(
           color: colors.hover(colors.primary),
           border: focusedBorder,
@@ -249,21 +269,43 @@ class FLineCalendarStyle with Diagnosticable, _$FLineCalendarStyleFunctions {
         ),
         WidgetState.any: BoxDecoration(
           color: colors.background,
-          border: Border.all(color: colors.border),
+          border: .all(color: colors.border),
           borderRadius: style.borderRadius,
         ),
       }),
       todayIndicatorColor: FWidgetStateMap({
+        WidgetState.disabled & WidgetState.selected: colors.disable(colors.primaryForeground),
+        WidgetState.disabled: colors.disable(colors.mutedForeground),
         WidgetState.selected & (WidgetState.hovered | WidgetState.pressed): colors.hover(colors.primaryForeground),
         WidgetState.selected: colors.primaryForeground,
         (WidgetState.hovered | WidgetState.pressed): colors.hover(colors.primary),
         WidgetState.any: colors.primary,
       }),
       dateTextStyle: FWidgetStateMap({
+        WidgetState.disabled & WidgetState.selected: typography.xl.copyWith(
+          color: colors.disable(colors.primaryForeground),
+          fontWeight: .w500,
+          height: 0,
+        ),
+        WidgetState.disabled: typography.xl.copyWith(
+          color: colors.disable(colors.mutedForeground),
+          fontWeight: .w500,
+          height: 0,
+        ),
         WidgetState.selected: typography.xl.copyWith(color: colors.primaryForeground, fontWeight: .w500, height: 0),
         WidgetState.any: typography.xl.copyWith(color: colors.primary, fontWeight: .w500, height: 0),
       }),
       weekdayTextStyle: FWidgetStateMap({
+        WidgetState.disabled & WidgetState.selected: typography.xs.copyWith(
+          color: colors.disable(colors.primaryForeground),
+          fontWeight: .w500,
+          height: 0,
+        ),
+        WidgetState.disabled: typography.xs.copyWith(
+          color: colors.disable(colors.mutedForeground),
+          fontWeight: .w500,
+          height: 0,
+        ),
         WidgetState.selected: typography.xs.copyWith(color: colors.primaryForeground, fontWeight: .w500, height: 0),
         WidgetState.any: typography.xs.copyWith(color: colors.mutedForeground, fontWeight: .w500, height: 0),
       }),

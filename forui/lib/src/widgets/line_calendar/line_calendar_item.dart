@@ -30,7 +30,7 @@ class Item extends StatelessWidget {
       style: style.tappableStyle,
       semanticsLabel: (FLocalizations.of(context) ?? FDefaultLocalizations()).fullDate(date),
       selected: selected == date,
-      onPress: () => controller.select(date),
+      onPress: controller.selectable(date) ? () => controller.select(date) : null,
       builder: (context, states, _) => builder(
         context,
         (style: style, date: date, today: today, states: states),

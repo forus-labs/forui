@@ -91,6 +91,7 @@ sealed class FLineCalendarControl with Diagnosticable, _$FLineCalendarControlMix
     FCalendarController<DateTime?>? controller,
     DateTime? initial,
     bool? toggleable,
+    Predicate<DateTime>? selectable,
     ValueChanged<DateTime?>? onChange,
   }) = FLineCalendarManagedControl;
 
@@ -130,6 +131,13 @@ class FLineCalendarManagedControl extends FLineCalendarControl with Diagnosticab
   @override
   final DateTime? initial;
 
+  /// A predicate that determines whether a date can be selected. Defaults to always returning true.
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if [selectable] and [controller] are both provided.
+  @override
+  final Predicate<DateTime>? selectable;
+
   /// Whether the selection is toggleable. Defaults to false.
   ///
   /// ## Contract
@@ -142,10 +150,14 @@ class FLineCalendarManagedControl extends FLineCalendarControl with Diagnosticab
   final ValueChanged<DateTime?>? onChange;
 
   /// Creates a [FLineCalendarControl].
-  const FLineCalendarManagedControl({this.controller, this.initial, this.toggleable, this.onChange})
+  const FLineCalendarManagedControl({this.controller, this.initial, this.selectable, this.toggleable, this.onChange})
     : assert(
         controller == null || initial == null,
         'Cannot provide both controller and initial date. Pass initial date to the controller instead.',
+      ),
+      assert(
+        controller == null || selectable == null,
+        'Cannot provide both controller and selectable. Pass selectable to the controller instead.',
       ),
       assert(
         controller == null || toggleable == null,
@@ -155,7 +167,7 @@ class FLineCalendarManagedControl extends FLineCalendarControl with Diagnosticab
 
   @override
   FCalendarController<DateTime?> createController() =>
-      controller ?? .date(initial: initial, toggleable: toggleable ?? false);
+      controller ?? .date(initial: initial, selectable: selectable, toggleable: toggleable ?? false);
 }
 
 class _Lifted extends FLineCalendarControl with _$_LiftedMixin {
