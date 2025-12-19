@@ -277,7 +277,7 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
   final Object? contentGroupId;
 
   /// {@macro forui.widgets.FPopover.onTapHide}
-  final VoidCallback? onTapHide;
+  final VoidCallback? contentOnTapHide;
 
   /// True if the content should be automatically hidden after an item is selected. Defaults to false.
   final bool autoHide;
@@ -335,7 +335,7 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
     TextAlign textAlign = .start,
     TextAlignVertical? textAlignVertical,
     TextDirection? textDirection,
-    VoidCallback? onTapHide,
+    VoidCallback? contentOnTapHide,
     bool autofocus = false,
     WidgetStatesController? statesController,
     String obscuringCharacter = '•',
@@ -424,7 +424,7 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
          textAlign: textAlign,
          textAlignVertical: textAlignVertical,
          textDirection: textDirection,
-         onTapHide: onTapHide,
+         contentOnTapHide: contentOnTapHide,
          autofocus: autofocus,
          statesController: statesController,
          obscuringCharacter: obscuringCharacter,
@@ -512,7 +512,7 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
     this.textAlign = .start,
     this.textAlignVertical,
     this.textDirection,
-    this.onTapHide,
+    this.contentOnTapHide,
     this.autofocus = false,
     this.statesController,
     this.obscuringCharacter = '•',
@@ -665,7 +665,7 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
       ..add(DiagnosticsProperty('contentOffset', contentOffset))
       ..add(EnumProperty('contentHideRegion', contentHideRegion))
       ..add(DiagnosticsProperty('contentGroupId', contentGroupId))
-      ..add(ObjectFlagProperty.has('onTapHide', onTapHide))
+      ..add(ObjectFlagProperty.has('contentOnTapHide', contentOnTapHide))
       ..add(FlagProperty('autoHide', value: autoHide, ifTrue: 'autoHide'))
       ..add(ObjectFlagProperty.has('builder', builder))
       ..add(FlagProperty('rightArrowToComplete', value: rightArrowToComplete, ifTrue: 'rightArrowToComplete'))
@@ -890,7 +890,7 @@ class _State extends State<FAutocomplete> with TickerProviderStateMixin {
                 _previous = restore;
                 _controller.text = restore;
               }
-              widget.onTapHide?.call();
+              widget.contentOnTapHide?.call();
             },
             focusNode: _popoverFocus,
             popoverBuilder: (_, popoverController) => TextFieldTapRegion(

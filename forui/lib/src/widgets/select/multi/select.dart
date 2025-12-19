@@ -682,7 +682,7 @@ abstract class _FMultiSelectState<S extends FMultiSelect<T>, T> extends State<S>
             error: state.errorText == null ? const SizedBox() : widget.errorBuilder(context, state.errorText!),
             child: FPopover(
               control: .managed(controller: _popoverController),
-              style: style.popoverStyle,
+              style: style.contentStyle,
               constraints: widget.contentConstraints,
               popoverAnchor: widget.contentAnchor,
               childAnchor: widget.fieldAnchor,
@@ -787,10 +787,6 @@ class FMultiSelectStyle with Diagnosticable, _$FMultiSelectStyleFunctions {
   @override
   final FMultiSelectTagStyle tagStyle;
 
-  /// The popover's style.
-  @override
-  final FPopoverStyle popoverStyle;
-
   /// The search's style.
   @override
   final FSelectSearchStyle searchStyle;
@@ -807,7 +803,6 @@ class FMultiSelectStyle with Diagnosticable, _$FMultiSelectStyleFunctions {
   FMultiSelectStyle({
     required this.fieldStyle,
     required this.tagStyle,
-    required this.popoverStyle,
     required this.searchStyle,
     required this.contentStyle,
     required this.emptyTextStyle,
@@ -818,7 +813,6 @@ class FMultiSelectStyle with Diagnosticable, _$FMultiSelectStyleFunctions {
     : this(
         fieldStyle: .inherit(colors: colors, typography: typography, style: style),
         tagStyle: .inherit(colors: colors, typography: typography, style: style),
-        popoverStyle: .inherit(colors: colors, style: style),
         searchStyle: .inherit(colors: colors, typography: typography, style: style),
         contentStyle: .inherit(colors: colors, typography: typography, style: style),
         emptyTextStyle: typography.sm,

@@ -35,6 +35,7 @@ dart fix --apply
 * **Breaking** Rename `FAutocomplete.shift` to `FAutocomplete.contentOverflow`.
 * **Breaking** Rename `FAutocomplete.offset` to `FAutocomplete.contentOffset`.
 * **Breaking** Rename `FAutocomplete.hideRegion` to `FAutocomplete.contentHideRegion`.
+* **Breaking** Rename `FAutocomplete.onTapHide` to `FAutocomplete.contentOnTapHide`.
 * **Breaking** Remove `FAutocomplete.controller`. Use `FAutocomplete(control: .managed(...))` instead.
 * **Breaking** Remove `FAutocomplete.initialText`. Use `FAutocomplete(control: .managed(...))` instead.
 * **Breaking** Remove `FAutocompleteController.vsync`. Use `FAutocomplete(popoverControl: ...)` instead.
@@ -210,6 +211,9 @@ Unfortunately, `FCalendar` cannot be easily migrated using data driven fixes due
 * **Breaking** Remove `FMultiSelect.onChange`. Use `FMultiSelect(control: .managed(...))` instead.
 * **Breaking** Remove `FMultiSelect.initialValue`. Use `FMultiSelect(control: .managed(...))` instead.
 * **Breaking** Remove `FMultiSelect.min`. Use `FMultiSelect(control: .managed(...))` instead.
+* **Breaking** Change `FSelectContentStyle` to extend `FPopoverStyle`.
+* **Breaking** Remove `FSelectStyle.popoverStyle` - use `FSelectStyle.contentStyle` instead.
+* **Breaking** Remove `FMultiSelectStyle.popoverStyle` - use `FMultiSelectStyle.contentStyle` instead.
 * **Breaking** Remove `FMultiSelect.max`. Use `FMultiSelect(control: .managed(...))` instead.
 * **Breaking** Remove `FMultiSelectController`. Use `FMultiValueNotifier` instead.
 * Fix `FSelect.mouseCursor` defaulting to `SystemMouseCursors.click` instead of `MouseCursor.defer`.

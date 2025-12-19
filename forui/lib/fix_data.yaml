@@ -157,6 +157,28 @@ transforms:
         oldName: 'hideRegion'
         newName: 'contentHideRegion'
 
+  - title: 'Rename FAutocomplete(onTapHide: ...) to contentOnTapHide'
+    date: 2025-12-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FAutocomplete
+    changes:
+      - kind: renameParameter
+        oldName: 'onTapHide'
+        newName: 'contentOnTapHide'
+
+  - title: 'Rename FAutocomplete.builder(onTapHide: ...) to contentOnTapHide'
+    date: 2025-12-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'builder'
+      inClass: FAutocomplete
+    changes:
+      - kind: renameParameter
+        oldName: 'onTapHide'
+        newName: 'contentOnTapHide'
+
   - title: 'Rename FAutocompleteStyle(popoverStyle: ...) to contentStyle'
     date: 2025-11-30
     element:
@@ -1998,6 +2020,16 @@ transforms:
           - kind: removeParameter
             name: 'onChange'
 
+  - title: 'Remove FSelectStyle.popoverStyle - use FSelectStyle.contentStyle instead'
+    date: 2025-12-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FSelectStyle
+    changes:
+      - kind: removeParameter
+        name: 'popoverStyle'
+
 
   # FMultiSelect
   - title: 'Rename FMultiSelect(shift: ...) to contentOverflow'
@@ -2842,6 +2874,17 @@ transforms:
         newElement:
           uris: [ 'package:forui/forui.dart' ]
           class: 'FMultiValueNotifier'
+
+  - title: 'Remove FMultiSelectStyle.popoverStyle - use FMultiSelectStyle.contentStyle instead'
+    date: 2025-12-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FMultiSelectStyle
+    changes:
+      - kind: removeParameter
+        name: 'popoverStyle'
+
 
   # FSelectController
   - title: 'Remove FSelectController vsync and popoverMotion parameters'

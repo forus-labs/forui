@@ -746,7 +746,7 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with TickerProvi
         enabled: widget.enabled,
         builder: (context, _, states, field) => FPopover(
           control: .managed(controller: _popoverController),
-          style: style.popoverStyle,
+          style: style.contentStyle,
           constraints: widget.contentConstraints,
           popoverAnchor: widget.contentAnchor,
           childAnchor: widget.fieldAnchor,
@@ -811,10 +811,6 @@ class FSelectStyle with Diagnosticable, _$FSelectStyleFunctions {
   @override
   final IconThemeData iconStyle;
 
-  /// The popover's style.
-  @override
-  final FPopoverStyle popoverStyle;
-
   /// The search's style.
   @override
   final FSelectSearchStyle searchStyle;
@@ -831,7 +827,6 @@ class FSelectStyle with Diagnosticable, _$FSelectStyleFunctions {
   FSelectStyle({
     required this.selectFieldStyle,
     required this.iconStyle,
-    required this.popoverStyle,
     required this.searchStyle,
     required this.contentStyle,
     required this.emptyTextStyle,
@@ -842,7 +837,6 @@ class FSelectStyle with Diagnosticable, _$FSelectStyleFunctions {
     : this(
         selectFieldStyle: .inherit(colors: colors, typography: typography, style: style),
         iconStyle: IconThemeData(color: colors.mutedForeground, size: 18),
-        popoverStyle: .inherit(colors: colors, style: style),
         searchStyle: .inherit(colors: colors, typography: typography, style: style),
         contentStyle: .inherit(colors: colors, typography: typography, style: style),
         emptyTextStyle: typography.sm,
