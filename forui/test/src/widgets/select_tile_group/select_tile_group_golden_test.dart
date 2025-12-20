@@ -16,12 +16,7 @@ void main() {
               style: TestScaffold.blueScreen.tileGroupStyle,
               label: const Text('Network'),
               children: const [
-                .tile(
-                  title: Text('WiFi'),
-                  details: Text('Duobase (5G)'),
-                  suffix: Icon(FIcons.chevronRight),
-                  value: 1,
-                ),
+                .tile(title: Text('WiFi'), details: Text('Duobase (5G)'), suffix: Icon(FIcons.chevronRight), value: 1),
                 .suffix(
                   prefix: Icon(FIcons.bluetooth),
                   title: Text('Bluetooth'),
@@ -45,12 +40,7 @@ void main() {
               style: TestScaffold.blueScreen.tileGroupStyle,
               label: const Text('Network'),
               children: const [
-                .tile(
-                  title: Text('WiFi'),
-                  details: Text('Duobase (5G)'),
-                  suffix: Icon(FIcons.chevronRight),
-                  value: 1,
-                ),
+                .tile(title: Text('WiFi'), details: Text('Duobase (5G)'), suffix: Icon(FIcons.chevronRight), value: 1),
                 .suffix(
                   prefix: Icon(FIcons.bluetooth),
                   title: Text('Bluetooth'),
@@ -81,12 +71,7 @@ void main() {
               enabled: false,
               label: const Text('Network'),
               children: const [
-                .tile(
-                  title: Text('WiFi'),
-                  details: Text('Duobase (5G)'),
-                  suffix: Icon(FIcons.chevronRight),
-                  value: 1,
-                ),
+                .tile(title: Text('WiFi'), details: Text('Duobase (5G)'), suffix: Icon(FIcons.chevronRight), value: 1),
                 .suffix(
                   prefix: Icon(FIcons.bluetooth),
                   title: Text('Bluetooth'),
