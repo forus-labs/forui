@@ -21,6 +21,7 @@ class InheritedData extends InheritedWidget {
   final Widget Function(FTooltipController controller, double value) tooltipBuilder;
   final String Function(FSliderValue) semanticFormatterCallback;
   final String Function(double) semanticValueFormatterCallback;
+  final ValueChanged<FSliderValue>? onEnd;
   final bool enabled;
 
   const InheritedData({
@@ -32,6 +33,7 @@ class InheritedData extends InheritedWidget {
     required this.tooltipBuilder,
     required this.semanticFormatterCallback,
     required this.semanticValueFormatterCallback,
+    required this.onEnd,
     required this.enabled,
     required super.child,
     super.key,
@@ -47,6 +49,7 @@ class InheritedData extends InheritedWidget {
       tooltipBuilder != old.tooltipBuilder ||
       semanticFormatterCallback != old.semanticFormatterCallback ||
       semanticValueFormatterCallback != old.semanticValueFormatterCallback ||
+      onEnd != old.onEnd ||
       enabled != old.enabled;
 
   @override
@@ -61,6 +64,7 @@ class InheritedData extends InheritedWidget {
       ..add(ObjectFlagProperty.has('tooltipBuilder', tooltipBuilder))
       ..add(ObjectFlagProperty.has('semanticFormatterCallback', semanticFormatterCallback))
       ..add(ObjectFlagProperty.has('semanticFormatterCallback', semanticValueFormatterCallback))
+      ..add(ObjectFlagProperty.has('onEnd', onEnd))
       ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled', ifFalse: 'disabled'));
   }
 }

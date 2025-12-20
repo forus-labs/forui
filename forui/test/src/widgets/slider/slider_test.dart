@@ -135,7 +135,7 @@ void main() {
   });
 
   for (final layout in FLayout.values) {
-    Widget slider(FSliderController controller) => TestScaffold.app(
+    Widget slider(FSliderController controller, {ValueChanged<FSliderValue>? onEnd}) => TestScaffold.app(
       padded: false,
       child: FSlider(
         layout: layout,
@@ -143,6 +143,7 @@ void main() {
             ? .managedContinuous(controller: autoDispose(controller))
             : .managedDiscrete(controller: autoDispose(controller as FDiscreteSliderController)),
         marks: const [.mark(value: 0), .mark(value: 0.25), .mark(value: 0.5), .mark(value: 0.75), .mark(value: 1)],
+        onEnd: onEnd,
       ),
     );
 
@@ -169,17 +170,20 @@ void main() {
       ]) {
         testWidgets('drag thumb - ${con ? 'continuous' : 'discrete'} - $interaction', (tester) async {
           final controller = con ? continuous(interaction) : discrete(interaction);
-          await tester.pumpWidget(slider(controller));
+          var onEndCalled = 0;
+          await tester.pumpWidget(slider(controller, onEnd: (_) => onEndCalled++));
 
           await tester.drag(find.byType(Thumb), layout.directional(100));
           await tester.pumpAndSettle();
           expect(controller.value.min, 0);
           expect(controller.value.max, expandExpected);
+          expect(onEndCalled, 1);
 
           await tester.drag(find.byType(Thumb), layout.directional(-200));
           await tester.pumpAndSettle();
           expect(controller.value.min, 0);
           expect(controller.value.max, shrinkExpected);
+          expect(onEndCalled, 2);
         });
       }
 
@@ -195,17 +199,20 @@ void main() {
       ]) {
         testWidgets('tap track - ${con ? 'continuous' : 'discrete'} - $interaction', (tester) async {
           final controller = con ? continuous(interaction) : discrete(interaction);
-          await tester.pumpWidget(slider(controller));
+          var onEndCalled = 0;
+          await tester.pumpWidget(slider(controller, onEnd: (_) => onEndCalled++));
 
           final track = tester.getRect(find.byType(ActiveTrack));
 
           await tester.tapAt(track.center);
           await tester.pumpAndSettle();
           expect((controller.value.min, controller.value.max), (0, shrinkExpected));
+          expect(onEndCalled, 1);
 
           await tester.tapAt(track.max(layout) + layout.directional(100));
           await tester.pumpAndSettle();
           expect((controller.value.min, controller.value.max), (0, expandExpected));
+          expect(onEndCalled, 2);
         });
       }
 
@@ -221,15 +228,18 @@ void main() {
       ]) {
         testWidgets('drag active track - ${con ? 'continuous' : 'discrete'} - $interaction', (tester) async {
           final controller = con ? continuous(interaction) : discrete(interaction);
-          await tester.pumpWidget(slider(controller));
+          var onEndCalled = 0;
+          await tester.pumpWidget(slider(controller, onEnd: (_) => onEndCalled++));
 
           await tester.drag(find.byType(ActiveTrack), layout.directional(500));
           await tester.pumpAndSettle();
           expect((controller.value.min, controller.value.max), (0, expandExpected));
+          expect(onEndCalled, 1);
 
           await tester.drag(find.byType(ActiveTrack), layout.directional(-500));
           await tester.pumpAndSettle();
           expect((controller.value.min, controller.value.max), (0, shrinkExpected));
+          expect(onEndCalled, 2);
         });
       }
 
@@ -245,7 +255,8 @@ void main() {
       ]) {
         testWidgets('drag inactive track - ${con ? 'continuous' : 'discrete'} - $interaction', (tester) async {
           final controller = con ? continuous(interaction) : discrete(interaction);
-          await tester.pumpWidget(slider(controller));
+          var onEndCalled = 0;
+          await tester.pumpWidget(slider(controller, onEnd: (_) => onEndCalled++));
 
           await tester.dragFrom(
             tester.getRect(find.byType(ActiveTrack)).max(layout) + layout.directional(50),
@@ -253,6 +264,7 @@ void main() {
           );
           await tester.pumpAndSettle();
           expect((controller.value.min, controller.value.max), (0, expandExpected));
+          expect(onEndCalled, 1);
 
           await tester.dragFrom(
             tester.getRect(find.byType(ActiveTrack)).max(layout) + layout.directional(50),
@@ -260,6 +272,7 @@ void main() {
           );
           await tester.pumpAndSettle();
           expect((controller.value.min, controller.value.max), (0, shrinkExpected));
+          expect(onEndCalled, 2);
         });
       }
     });
@@ -351,6 +364,64 @@ void main() {
       }
     });
   }
+
+  group('arrow key manipulation', () {
+    testWidgets('calls onEnd when expanded', (tester) async {
+      final controller = autoDispose(FContinuousSliderController(value: FSliderValue(max: 0.5)));
+      var onEndCalled = 0;
+      final focus = autoDispose(FocusNode());
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: Focus(
+            focusNode: focus,
+            child: FSlider(
+              control: .managedContinuous(controller: controller),
+              onEnd: (_) => onEndCalled++,
+            ),
+          ),
+        ),
+      );
+
+      focus.requestFocus();
+      await tester.pumpAndSettle();
+      await tester.sendKeyEvent(.tab);
+      await tester.pumpAndSettle();
+
+      await tester.sendKeyEvent(.arrowRight);
+      await tester.pumpAndSettle();
+
+      expect(controller.value.max, greaterThan(0.5));
+      expect(onEndCalled, 1);
+    });
+
+    testWidgets('calls onEnd when shrunk', (tester) async {
+      final controller = autoDispose(FContinuousSliderController(value: FSliderValue(max: 0.5)));
+      var onEndCalled = 0;
+      final focus = autoDispose(FocusNode());
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: Focus(
+            focusNode: focus,
+            child: FSlider(
+              control: .managedContinuous(controller: controller),
+              onEnd: (_) => onEndCalled++,
+            ),
+          ),
+        ),
+      );
+      // Focus the slider and tab into the thumb
+      focus.requestFocus();
+      await tester.pumpAndSettle();
+      await tester.sendKeyEvent(.tab);
+      await tester.pumpAndSettle();
+
+      await tester.sendKeyEvent(.arrowLeft);
+      await tester.pumpAndSettle();
+
+      expect(controller.value.max, lessThan(0.5));
+      expect(onEndCalled, 1);
+    });
+  });
 }
 
 extension on Rect {

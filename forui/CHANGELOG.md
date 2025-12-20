@@ -274,6 +274,7 @@ Unfortunately, `FCalendar` cannot be easily migrated using data driven fixes due
 
 
 ### `FSlider`
+* Add `FSlider.onEnd`.
 * Add `FSliderMark.mark(...)`.
 * Add `FSliderControl`.
 * Add `FSliderManagedControl`.

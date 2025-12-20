@@ -68,7 +68,7 @@ class _GestureDetectorState extends State<_GestureDetector> {
   @override
   Widget build(BuildContext context) {
     final InheritedController(:controller, :minTooltipController, :maxTooltipController) = .of(context);
-    final InheritedData(:style, :layout, :trackHitRegionCrossExtent, :enabled) = .of(context);
+    final InheritedData(:style, :layout, :trackHitRegionCrossExtent, :enabled, :onEnd) = .of(context);
 
     Widget track = const Center(child: _Track());
 
@@ -95,6 +95,7 @@ class _GestureDetectorState extends State<_GestureDetector> {
       _pointerOrigin = null;
       minTooltipController?.hide();
       maxTooltipController?.hide();
+      onEnd?.call(controller.value);
     }
 
     if (layout.vertical) {
@@ -103,6 +104,7 @@ class _GestureDetectorState extends State<_GestureDetector> {
         onTapUp: (_) {
           minTooltipController?.hide();
           maxTooltipController?.hide();
+          onEnd?.call(controller.value);
         },
         onVerticalDragStart: start,
         onVerticalDragUpdate: _drag(controller, layout),
@@ -115,6 +117,7 @@ class _GestureDetectorState extends State<_GestureDetector> {
         onTapUp: (_) {
           minTooltipController?.hide();
           maxTooltipController?.hide();
+          onEnd?.call(controller.value);
         },
         onHorizontalDragStart: start,
         onHorizontalDragUpdate: _drag(controller, layout),

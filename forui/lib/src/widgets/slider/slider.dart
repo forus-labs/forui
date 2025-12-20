@@ -74,6 +74,11 @@ class FSlider extends StatelessWidget with FFormFieldProperties<FSliderValue> {
   /// In practice, this is mostly useful for range sliders.
   final String Function(double) semanticValueFormatterCallback;
 
+  /// Called when the user finishes interacting with the slider.
+  ///
+  /// It is not called when the slider's value is changed programmatically.
+  final ValueChanged<FSliderValue>? onEnd;
+
   @override
   final Widget? label;
 
@@ -116,6 +121,7 @@ class FSlider extends StatelessWidget with FFormFieldProperties<FSliderValue> {
     this.tooltipBuilder = _tooltipBuilder,
     this.semanticValueFormatterCallback = _semanticValueFormatter,
     this.semanticFormatterCallback,
+    this.onEnd,
     this.onSaved,
     this.onReset,
     this.validator,
@@ -163,6 +169,7 @@ class FSlider extends StatelessWidget with FFormFieldProperties<FSliderValue> {
         tooltipBuilder: tooltipBuilder,
         semanticFormatterCallback: semanticFormatterCallback,
         semanticValueFormatterCallback: semanticValueFormatterCallback,
+        onEnd: onEnd,
         onSaved: onSaved,
         onReset: onReset,
         validator: validator,
@@ -188,6 +195,7 @@ class FSlider extends StatelessWidget with FFormFieldProperties<FSliderValue> {
       ..add(ObjectFlagProperty.has('tooltipBuilder', tooltipBuilder))
       ..add(ObjectFlagProperty.has('semanticFormatterCallback', semanticFormatterCallback))
       ..add(ObjectFlagProperty.has('semanticValueFormatterCallback', semanticValueFormatterCallback))
+      ..add(ObjectFlagProperty.has('onEnd', onEnd))
       ..add(ObjectFlagProperty.has('onSaved', onSaved))
       ..add(ObjectFlagProperty.has('validator', validator))
       ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled', ifFalse: 'disabled'))
@@ -212,6 +220,7 @@ class _Slider extends StatefulWidget {
   final Widget Function(FTooltipController controller, double value) tooltipBuilder;
   final String Function(FSliderValue)? semanticFormatterCallback;
   final String Function(double) semanticValueFormatterCallback;
+  final ValueChanged<FSliderValue>? onEnd;
   final FormFieldSetter<FSliderValue>? onSaved;
   final VoidCallback? onReset;
   final FormFieldValidator<FSliderValue>? validator;
@@ -235,6 +244,7 @@ class _Slider extends StatefulWidget {
     required this.tooltipBuilder,
     required this.semanticFormatterCallback,
     required this.semanticValueFormatterCallback,
+    required this.onEnd,
     required this.onSaved,
     required this.onReset,
     required this.validator,
@@ -290,7 +300,8 @@ class _Slider extends StatefulWidget {
       ..add(DiagnosticsProperty('tooltipControls', tooltipControls))
       ..add(ObjectFlagProperty.has('tooltipBuilder', tooltipBuilder))
       ..add(ObjectFlagProperty.has('semanticFormatterCallback', semanticFormatterCallback))
-      ..add(ObjectFlagProperty.has('semanticValueFormatterCallback', semanticValueFormatterCallback));
+      ..add(ObjectFlagProperty.has('semanticValueFormatterCallback', semanticValueFormatterCallback))
+      ..add(ObjectFlagProperty.has('onEnd', onEnd));
   }
 }
 
@@ -364,6 +375,7 @@ class _SliderState extends State<_Slider> with TickerProviderStateMixin {
     tooltipBuilder: widget.tooltipBuilder,
     semanticFormatterCallback: widget.semanticFormatterCallback ?? _formatter,
     semanticValueFormatterCallback: widget.semanticValueFormatterCallback,
+    onEnd: widget.onEnd,
     child: ListenableBuilder(
       listenable: _controller,
       builder: (_, _) => InheritedController(
