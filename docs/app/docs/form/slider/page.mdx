@@ -28,10 +28,7 @@ dart run forui style create slider
   <Tabs.Tab>
         ```dart copy
         FSlider(
-          controller: FContinuousSliderController(
-            selection: FSliderSelection(max: 0.6),
-          ),
-          initialSelection: FSliderSelection(max: 0.6),
+          control: FSliderControl.managedContinuous(initial: FSliderValue(max: 0.6)),
         );
         ```
   </Tabs.Tab>
@@ -41,19 +38,20 @@ dart run forui style create slider
 
 ```dart copy
 FSlider(
-  style: FSliderStyle(...),
+  control: FSliderControl.managedContinuous(
+    initial: FSliderValue(max: 0.75, constraints: (min: 0, max: 0.8)),
+    interaction: FSliderInteraction.tap,
+    onChange: (value) {},
+  ),
+  style: (style) => style.copyWith(...),
   layout: FLayout.rtl,
   tooltipBuilder: (style, value) => Text('${value.toStringAsFixed(2)}%'),
-  controller: FContinuousSliderController(
-    allowedInteraction: FSliderInteraction.tap,
-    selection: FSliderSelection(max: 0.75, extent: (min: 0, max: 0.8)),
-  ),
-  onChange: (selection) {},
   marks: const [
     FSliderMark(value: 0, label: Text('0%')),
     FSliderMark(value: 0.5, label: Text('50%')),
     FSliderMark(value: 1, label: Text('100%')),
   ],
+  onEnd: (value) {},
 );
 ```
 
@@ -68,11 +66,11 @@ FSlider(
     <Widget name='slider' query={{label: 'Volume', description: 'Adjust the volume by dragging the slider.'}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-        ```dart {2-3} copy
+        ```dart {3-4} copy
         FSlider(
+          control: FSliderControl.managedContinuous(initial: FSliderValue(max: 0.6)),
           label: const Text('Volume'),
           description: const Text('Adjust the volume by dragging the slider.'),
-          controller: FContinuousSliderController(selection: FSliderSelection(max: 0.6)),
         );
         ```
   </Tabs.Tab>
@@ -85,13 +83,11 @@ FSlider(
     <Widget name='slider' query={{enabled: 'false', label: 'Volume', description: 'Adjust the volume by dragging the slider.'}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-        ```dart {7} copy
+        ```dart {5} copy
         FSlider(
+          control: FSliderControl.managedContinuous(initial: FSliderValue(max: 0.6)),
           label: const Text('Volume'),
           description: const Text('Adjust the volume by dragging the slider.'),
-          controller: FContinuousSliderController(
-            selection: FSliderSelection(max: 0.6),
-          ),
           enabled: false,
         );
         ```
@@ -105,12 +101,12 @@ FSlider(
     <Widget name='slider' query={{label: 'Volume', description: 'Adjust the volume by dragging the slider.', error: 'Volume is too high.'}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-        ```dart {4} copy
+        ```dart {5} copy
         FSlider(
+          control: FSliderControl.managedContinuous(initial: FSliderValue(max: 0.6)),
           label: const Text('Volume'),
           description: const Text('Adjust the volume by dragging the slider.'),
           forceErrorText: 'Volume is too high.',
-          controller: FContinuousSliderController(selection: FSliderSelection(max: 0.6)),
         );
         ```
   </Tabs.Tab>
@@ -123,13 +119,13 @@ FSlider(
     <Widget name='slider' variant='tooltip'/>
   </Tabs.Tab>
   <Tabs.Tab>
-        ```dart {2-5} copy
+        ```dart {3-5} copy
         FSlider(
+          control: FSliderControl.managedContinuous(initial: FSliderValue(max: 0.6)),
           tooltipBuilder: (style, value) {
             final hex = (value * 100).round().toRadixString(16).padLeft(2, '0');
             return Text('0x$hex');
           },
-          controller: FContinuousSliderController(selection: FSliderSelection(max: 0.6)),
         );
         ```
   </Tabs.Tab>
@@ -147,9 +143,9 @@ Marks provide visual reference points on the slider track. Each mark consists of
     <Widget name='slider' variant='marks'/>
   </Tabs.Tab>
   <Tabs.Tab>
-        ```dart {4-8} copy
+        ```dart {3-8} copy
         FSlider(
-          controller: FContinuousSliderController(selection: FSliderSelection(max: 0.35)),
+          control: FSliderControl.managedContinuous(initial: FSliderValue(max: 0.35)),
           marks: const [
             FSliderMark(value: 0, label: Text('0%')),
             FSliderMark(value: 0.25, tick: false),
@@ -171,9 +167,9 @@ Marks provide visual reference points on the slider track. Each mark consists of
     <Widget name='slider' variant='discrete'/>
   </Tabs.Tab>
   <Tabs.Tab>
-        ```dart {4-8} copy
+        ```dart {3-8} copy
         FSlider(
-          controller: FDiscreteSliderController(selection: FSliderSelection(max: 0.25)),
+          control: FSliderControl.managedDiscrete(initial: FSliderValue(max: 0.25)),
           marks: const [
             FSliderMark(value: 0, label: Text('0%')),
             FSliderMark(value: 0.25, tick: false),
@@ -193,11 +189,9 @@ Marks provide visual reference points on the slider track. Each mark consists of
     <Widget name='slider' variant='range'/>
   </Tabs.Tab>
   <Tabs.Tab>
-        ```dart {2-4} copy
+        ```dart {2} copy
         FSlider(
-          controller: FContinuousSliderController.range(
-            selection: FSliderSelection(min: 0.25, max: 0.75),
-          ),
+          control: FSliderControl.managedContinuousRange(initial: FSliderValue(min: 0.25, max: 0.75)),
         );
         ```
   </Tabs.Tab>
@@ -210,14 +204,9 @@ Marks provide visual reference points on the slider track. Each mark consists of
     <Widget name='slider' query={{extent: 'true'}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-        ```dart {5} copy
+        ```dart {2} copy
         FSlider(
-          controller: FContinuousSliderController(
-            selection: FSliderSelection(
-              max: 0.6,
-              extent: (min: 0.25, max: 0.75),
-            ),
-          ),
+          control: FSliderControl.managedContinuous(initial: FSliderValue(max: 0.6, constraints: (min: 0.25, max: 0.75))),
         );
         ```
   </Tabs.Tab>
@@ -230,12 +219,12 @@ Marks provide visual reference points on the slider track. Each mark consists of
     <Widget name='slider' variant='vertical' height={500}/>
   </Tabs.Tab>
   <Tabs.Tab>
-        ```dart {4} copy
+        ```dart {5} copy
         FSlider(
+          control: FSliderControl.managedContinuous(initial: FSliderValue(max: 0.35)),
           label: const Text('Volume'),
           description: const Text('Adjust the volume by dragging the slider.'),
           layout: FLayout.btt,
-          controller: FContinuousSliderController(selection: FSliderSelection(max: 0.35)),
           trackMainAxisExtent: 350,
           marks: const [
             FSliderMark(value: 0, label: Text('0%')),
@@ -260,11 +249,11 @@ Slide anywhere on the track or thumb to select a value.
     <Widget name='slider' query={{interaction: 'slide'}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-        ```dart {3} copy
+        ```dart {4} copy
         FSlider(
-          controller: FContinuousSliderController(
-            allowedInteraction: FSliderInteraction.slide,
-            selection: FSliderSelection(max: 0.6),
+          control: FSliderControl.managedContinuous(
+            initial: FSliderValue(max: 0.6),
+            interaction: FSliderInteraction.slide,
           ),
         );
         ```
@@ -280,11 +269,11 @@ Slide the thumb to select a value.
     <Widget name='slider' query={{interaction: 'slideThumb'}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-        ```dart {3} copy
+        ```dart {4} copy
         FSlider(
-          controller: FContinuousSliderController(
-            allowedInteraction: FSliderInteraction.slideThumb,
-            selection: FSliderSelection(max: 0.6),
+          control: FSliderControl.managedContinuous(
+            initial: FSliderValue(max: 0.6),
+            interaction: FSliderInteraction.slideThumb,
           ),
         );
         ```
@@ -300,11 +289,11 @@ Tap anywhere on the track to select a value.
     <Widget name='slider' query={{interaction: 'tap'}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-        ```dart {3} copy
+        ```dart {4} copy
         FSlider(
-          controller: FContinuousSliderController(
-            allowedInteraction: FSliderInteraction.tap,
-            selection: FSliderSelection(max: 0.6),
+          control: FSliderControl.managedContinuous(
+            initial: FSliderValue(max: 0.6),
+            interaction: FSliderInteraction.tap,
           ),
         );
         ```
@@ -320,11 +309,11 @@ Tap anywhere or slide the thumb to select a value.
     <Widget name='slider' query={{interaction: 'tapAndSlideThumb'}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-        ```dart {3} copy
+        ```dart {4} copy
         FSlider(
-          controller: FContinuousSliderController(
-            allowedInteraction: FSliderInteraction.tapAndSlideThumb,
-            selection: FSliderSelection(max: 0.6),
+          control: FSliderControl.managedContinuous(
+            initial: FSliderValue(max: 0.6),
+            interaction: FSliderInteraction.tapAndSlideThumb,
           ),
         );
         ```
@@ -340,50 +329,48 @@ Tap anywhere or slide the thumb to select a value.
   <Tabs.Tab>
         ```dart copy
         class SliderForm extends StatefulWidget {
-          const SliderForm({super.key});
-
           @override
-          State<SliderForm> createState() => SliderFormState();
+          State<SliderForm> createState() => _SliderFormState();
         }
 
-        class SliderFormState extends State<SliderForm> {
-          final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+        class _SliderFormState extends State<SliderForm> {
+          final _key = GlobalKey<FormState>();
 
           @override
           Widget build(BuildContext context) => Form(
-                key: _formKey,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    FSlider(
-                      label: const Text('Brightness'),
-                      description: const Text('Adjust the brightness level.'),
-                      controller: FContinuousSliderController(selection: FSliderSelection(max: 0.35)),
-                      marks: const [
-                        FSliderMark(value: 0, label: Text('0%')),
-                        FSliderMark(value: 0.25, tick: false),
-                        FSliderMark(value: 0.5, label: Text('50%')),
-                        FSliderMark(value: 0.75, tick: false),
-                        FSliderMark(value: 1, label: Text('100%')),
-                      ],
-                    ),
-                    const SizedBox(height: 20),
-                    FButton(
-                      child: const Text('Save'),
-                      onPress: () {
-                        if (!_formKey.currentState!.validate()) {
-                          // Handle errors here.
-                          return;
-                        }
-
-                        _formKey.currentState!.save();
-                        // Do something.
-                      },
-                    ),
+            key: _key,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                FSlider(
+                  control: FSliderControl.managedContinuous(initial: FSliderValue(max: 0.35)),
+                  label: const Text('Brightness'),
+                  description: const Text('Adjust the brightness level.'),
+                  marks: const [
+                    FSliderMark(value: 0, label: Text('0%')),
+                    FSliderMark(value: 0.25, tick: false),
+                    FSliderMark(value: 0.5, label: Text('50%')),
+                    FSliderMark(value: 0.75, tick: false),
+                    FSliderMark(value: 1, label: Text('100%')),
                   ],
                 ),
-              );
+                const SizedBox(height: 20),
+                FButton(
+                  child: const Text('Save'),
+                  onPress: () {
+                    if (!_key.currentState!.validate()) {
+                      // Handle errors here.
+                      return;
+                    }
+
+                    _key.currentState!.save();
+                    // Do something.
+                  },
+                ),
+              ],
+            ),
+          );
         }
         ```
 

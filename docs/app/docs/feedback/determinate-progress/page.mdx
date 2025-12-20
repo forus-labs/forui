@@ -23,33 +23,28 @@ Displays a determinate linear indicator showing the completion progress of a tas
     }
 
     class _State extends State<Progress> {
-      late Timer timer;
-      double value = 0.2;
-
-      @override
-      void initState() {
-        super.initState();
-        timer = Timer(const Duration(seconds: 1), () => setState(() => value = 0.7));
-      }
+      late Timer _timer = Timer(const Duration(seconds: 1), () => setState(() => _value = 0.7));
+      double _value = 0.2;
 
       @override
       void dispose() {
-        timer.cancel();
+        _timer.cancel();
         super.dispose();
       }
 
       @override
       Widget build(BuildContext context) => Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        spacing: 20,
         children: [
-          FDeterminateProgress(value: value),
+          FDeterminateProgress(value: _value),
           FButton(
-            onPress:
-                () => setState(() {
-                  value = 0.2;
-                  timer.cancel();
-                  timer = Timer(const Duration(seconds: 1), () => setState(() => value = 0.7));
-                }),
             child: const Text('Reset'),
+            onPress: () => setState(() {
+              _value = 0.2;
+              _timer.cancel();
+              _timer = Timer(const Duration(seconds: 1), () => setState(() => _value = 0.7));
+            }),
           ),
         ],
       );
@@ -73,8 +68,8 @@ dart run forui style create determinate-progress
 
 ```dart copy
 FDeterminateProgress(
-  style: FDeterminateProgressStyle(...),
-  semanticsLabel: 'Label',
   value: 0.7,
+  style: (style) => style.copyWith(...),
+  semanticsLabel: 'Label',
 );
 ```

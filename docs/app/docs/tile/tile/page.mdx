@@ -23,10 +23,10 @@ A specialized [Item](/docs/data/item) for touch devices, typically used to group
   <Tabs.Tab>
     ```dart copy
     FTile(
-      prefix: Icon(FIcons.user),
+      prefix: const Icon(FIcons.user),
       title: const Text('Personalization'),
-      suffix: Icon(FIcons.chevronRight),
-      onPress: () { },
+      suffix: const Icon(FIcons.chevronRight),
+      onPress: () {},
     );
     ```
   </Tabs.Tab>
@@ -46,15 +46,13 @@ dart run forui style create tile
 
 ```dart copy
 FTile(
-  style: FTileStyle(...),
-  prefix: Icon(FIcons.user),
   title: const Text('Title'),
-  subtitle: const Text('Subtitle'),
-  details: const Text('Details'),
-  suffix: Icon(FIcons.chevronRight),
-  semanticsLabel: 'Label',
+  style: (style) => style.copyWith(...),
   enabled: true,
   selected: false,
+  semanticsLabel: 'Label',
+  autofocus: false,
+  focusNode: FocusNode(),
   onFocusChange: (focused) {},
   onHoverChange: (hovered) {},
   onStateChange: (delta) {},
@@ -62,8 +60,12 @@ FTile(
   onLongPress: () {},
   onSecondaryPress: () {},
   onSecondaryLongPress: () {},
-  shortcuts: { SingleActivator(LogicalKeyboardKey.enter): ActivateIntent() },
-  actions: { ActivateIntent: CallbackAction<ActivateIntent>(onInvoke: (_) {}) },
+  shortcuts: {SingleActivator(LogicalKeyboardKey.enter): ActivateIntent()},
+  actions: {ActivateIntent: CallbackAction<ActivateIntent>(onInvoke: (_) {})},
+  prefix: const Icon(FIcons.user),
+  subtitle: const Text('Subtitle'),
+  details: const Text('Details'),
+  suffix: const Icon(FIcons.chevronRight),
 );
 ```
 
@@ -71,12 +73,13 @@ FTile(
 
 ```dart copy
 FTile.raw(
-  style: FTileStyle(...),
-  prefix: Icon(FIcons.user),
   child: const Text('Title'),
-  semanticsLabel: 'Label',
+  style: (style) => style.copyWith(...),
   enabled: true,
   selected: false,
+  semanticsLabel: 'Label',
+  autofocus: false,
+  focusNode: FocusNode(),
   onFocusChange: (focused) {},
   onHoverChange: (hovered) {},
   onStateChange: (delta) {},
@@ -84,8 +87,9 @@ FTile.raw(
   onLongPress: () {},
   onSecondaryPress: () {},
   onSecondaryLongPress: () {},
-  shortcuts: { SingleActivator(LogicalKeyboardKey.enter): ActivateIntent() },
-  actions: { ActivateIntent: CallbackAction<ActivateIntent>(onInvoke: (_) {}) },
+  shortcuts: {SingleActivator(LogicalKeyboardKey.enter): ActivateIntent()},
+  actions: {ActivateIntent: CallbackAction<ActivateIntent>(onInvoke: (_) {})},
+  prefix: const Icon(FIcons.user),
 );
 ```
 
@@ -100,9 +104,9 @@ FTile.raw(
   <Tabs.Tab>
     ```dart copy
     FTile(
-      prefix: Icon(FIcons.user),
+      prefix: const Icon(FIcons.user),
       title: const Text('Personalization'),
-      suffix: Icon(FIcons.chevronRight),
+      suffix: const Icon(FIcons.chevronRight),
     );
     ```
   </Tabs.Tab>
@@ -118,10 +122,10 @@ FTile.raw(
     ```dart {2} copy
     FTile(
       enabled: false,
-      prefix: Icon(FIcons.user),
+      prefix: const Icon(FIcons.user),
       title: const Text('Personalization'),
-      suffix: Icon(FIcons.chevronRight),
-      onPress: () { },
+      suffix: const Icon(FIcons.chevronRight),
+      onPress: () {},
     );
     ```
   </Tabs.Tab>
@@ -136,10 +140,10 @@ FTile.raw(
   <Tabs.Tab>
     ```dart {4} copy
     FTile(
-      prefix: Icon(FIcons.bell),
+      prefix: const Icon(FIcons.bell),
       title: const Text('Notifications'),
       subtitle: const Text('Banners, Sounds, Badges'),
-      suffix: Icon(FIcons.chevronRight),
+      suffix: const Icon(FIcons.chevronRight),
       onPress: () {},
     );
     ```
@@ -155,10 +159,10 @@ FTile.raw(
   <Tabs.Tab>
     ```dart {4} copy
     FTile(
-      prefix: Icon(FIcons.wifi),
+      prefix: const Icon(FIcons.wifi),
       title: const Text('WiFi'),
       details: const Text('Forus Labs (5G)'),
-      suffix: Icon(FIcons.chevronRight),
+      suffix: const Icon(FIcons.chevronRight),
       onPress: () {},
     );
     ```

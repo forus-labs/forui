@@ -31,9 +31,9 @@ controls the date selection behavior, including single date, multiple dates, and
     <Tabs.Tab>
         ```dart copy
         FCalendar(
-          controller: FCalendarController.date(initialSelection: selected),
+          control: FCalendarControl.managedDate(),
           start: DateTime(2000),
-          end: DateTime(2030),
+          end: DateTime(2040),
         );
         ```
     </Tabs.Tab>
@@ -53,20 +53,24 @@ dart run forui style create calendar
 
 ```dart copy
 FCalendar(
-  controller: FCalendarController.date(
-    initialSelection: DateTime(2024, 9, 13),
+  control: FCalendarControl.managedDate(
+    controller: FCalendarController.date(...),
+    initial: DateTime(2024, 9, 13),
     selectable: (date) => allowedDates.contains(date),
+    toggleable: true,
+    truncateAndStripTimezone: true,
+    onChange: (date) {},
   ),
-  style: FCalendarStyle(...),
+  style: (style) => style.copyWith(...),
   dayBuilder: (context, data, child) => child!,
   start: DateTime(2024),
   end: DateTime(2030),
   today: DateTime(2024, 7, 14),
   initialType: FCalendarPickerType.yearMonth,
   initialMonth: DateTime(2024, 9),
-  onMonthChange: (date) => print(date),
-  onPress: (date) => print(date),
-  onLongPress: (date) => print(date),
+  onMonthChange: (date) {},
+  onPress: (date) {},
+  onLongPress: (date) {},
 );
 ```
 
@@ -81,9 +85,9 @@ FCalendar(
     <Tabs.Tab>
         ```dart {2} copy
         FCalendar(
-          controller: FCalendarController.date(),
+          control: FCalendarControl.managedDate(),
           start: DateTime(2000),
-          end: DateTime(2030),
+          end: DateTime(2040),
         );
         ```
     </Tabs.Tab>
@@ -98,8 +102,8 @@ FCalendar(
     <Tabs.Tab>
         ```dart {2-4} copy
         FCalendar(
-          controller: FCalendarController.dates(
-            initialSelections: {DateTime(2024, 7, 17), DateTime(2024, 7, 20)},
+          control: FCalendarControl.managedDates(
+            initial: {DateTime(2024, 7, 17), DateTime(2024, 7, 20)},
           ),
           start: DateTime(2000),
           today: DateTime(2024, 7, 15),
@@ -116,17 +120,17 @@ FCalendar(
         <Widget name='calendar' variant='unselectable' query={{}} height={500}/>
     </Tabs.Tab>
     <Tabs.Tab>
-      ```dart {4} copy
-      FCalendar(
-        controller: FCalendarController.dates(
-          initialSelections: {DateTime(2024, 7, 17), DateTime(2024, 7, 20)},
-          selectable: (date) => !{DateTime(2024, 7, 18), DateTime(2024, 7, 19)}.contains(date),
-        ),
-        start: DateTime(2000),
-        today: DateTime(2024, 7, 15),
-        end: DateTime(2030),
-      );
-      ```
+        ```dart {4} copy
+        FCalendar(
+          control: FCalendarControl.managedDates(
+            initial: {DateTime(2024, 7, 17), DateTime(2024, 7, 20)},
+            selectable: (date) => !{DateTime.utc(2024, 7, 18), DateTime.utc(2024, 7, 19)}.contains(date),
+          ),
+          start: DateTime(2000),
+          today: DateTime(2024, 7, 15),
+          end: DateTime(2030),
+        );
+        ```
     </Tabs.Tab>
 </Tabs>
 
@@ -139,8 +143,8 @@ FCalendar(
     <Tabs.Tab>
         ```dart {2-4} copy
         FCalendar(
-          controller: FCalendarController.range(
-            initialSelection: (DateTime(2024, 7, 17), DateTime(2024, 7, 20)),
+          control: FCalendarControl.managedRange(
+            initial: (DateTime(2024, 7, 17), DateTime(2024, 7, 20)),
           ),
           start: DateTime(2000),
           today: DateTime(2024, 7, 15),

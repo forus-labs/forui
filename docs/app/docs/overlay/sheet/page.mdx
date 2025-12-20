@@ -23,50 +23,45 @@ It navigates to a new page each time.
   </Tabs.Tab>
   <Tabs.Tab>
     ```dart copy
-    class ModalSheet extends StatelessWidget {
-      @override
-      Widget build(BuildContext context) => Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          FButton(
-            child: const Text('Left'),
-            onPress: () => showFSheet(
-              context: context,
-              side: FLayout.ltr,
-              builder: (context) => const Form(side: FLayout.ltr),
-            ),
+    Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisSize: MainAxisSize.min,
+      spacing: 5,
+      children: [
+        FButton(
+          child: const Text('Left'),
+          onPress: () => showFSheet(
+            context: context,
+            side: FLayout.ltr,
+            builder: (context) => const Form(side: FLayout.ltr),
           ),
-          const SizedBox(height: 5),
-          FButton(
-            child: const Text('Top'),
-            onPress: () => showFSheet(
-              context: context,
-              side: FLayout.ttb,
-              builder: (context) => const Form(side: FLayout.ttb),
-            ),
+        ),
+        FButton(
+          child: const Text('Top'),
+          onPress: () => showFSheet(
+            context: context,
+            side: FLayout.ttb,
+            builder: (context) => const Form(side: FLayout.ttb),
           ),
-          const SizedBox(height: 5),
-          FButton(
-            child: const Text('Right'),
-            onPress: () => showFSheet(
-              context: context,
-              side: FLayout.rtl,
-              builder: (context) => const Form(side: FLayout.rtl),
-            ),
+        ),
+        FButton(
+          child: const Text('Right'),
+          onPress: () => showFSheet(
+            context: context,
+            side: FLayout.rtl,
+            builder: (context) => const Form(side: FLayout.rtl),
           ),
-          const SizedBox(height: 5),
-          FButton(
-            child: const Text('Bottom'),
-            onPress: () => showFSheet(
-              context: context,
-              side: FLayout.btt,
-              builder: (context) => const Form(side: FLayout.btt),
-            ),
+        ),
+        FButton(
+          child: const Text('Bottom'),
+          onPress: () => showFSheet(
+            context: context,
+            side: FLayout.btt,
+            builder: (context) => const Form(side: FLayout.btt),
           ),
-        ],
-      );
-    }
+        ),
+      ],
+    );
 
     class Form extends StatelessWidget {
       final FLayout side;
@@ -100,29 +95,18 @@ It navigates to a new page each time.
                 ),
                 Text(
                   'Make changes to your account here. Click save when you are done.',
-                  style: context.theme.typography.sm.copyWith(
-                    color: context.theme.colors.mutedForeground,
-                  ),
+                  style: context.theme.typography.sm.copyWith(color: context.theme.colors.mutedForeground),
                 ),
                 const SizedBox(height: 8),
                 SizedBox(
                   width: 450,
                   child: Column(
                     children: [
-                      const FTextField(
-                        label: Text('Name'),
-                        hint: 'John Renalo',
-                      ),
+                      const FTextField(label: Text('Name'), hint: 'John Renalo'),
                       const SizedBox(height: 10),
-                      const FTextField(
-                        label: Text('Email'),
-                        hint: 'john@doe.com',
-                      ),
+                      const FTextField(label: Text('Email'), hint: 'john@doe.com'),
                       const SizedBox(height: 16),
-                      FButton(
-                        onPress: () => Navigator.of(context).pop(),
-                        child: const Text('Save'),
-                      ),
+                      FButton(child: const Text('Save'), onPress: () => Navigator.of(context).pop()),
                     ],
                   ),
                 ),
@@ -152,16 +136,21 @@ dart run forui style create modal-sheet
 ```dart copy
 showFSheet(
   context: context,
-  style: FModalSheetStyle(...),
   side: FLayout.ltr,
-  useRootNavigator: true,
+  useRootNavigator: false,
+  style: (style) => style.copyWith(...),
+  mainAxisMaxRatio: 9 / 16,
   useSafeArea: false,
-  mainAxisMaxRatio: null,
-  constraints: const BoxConstraints(maxWidth: 450, maxHeight: 450),
+  resizeToAvoidBottomInset: true,
+  barrierLabel: 'Dismiss',
   barrierDismissible: true,
+  constraints: BoxConstraints(),
   draggable: true,
-  builder: (context) => const Placeholder(),
+  routeSettings: RouteSettings(),
+  transitionAnimationController: AnimationController(...),
+  anchorPoint: Offset.zero,
   onClosing: () {},
+  builder: (context) => const Placeholder(),
 );
 ```
 
@@ -174,26 +163,21 @@ showFSheet(
     <Widget name='modal-sheet' variant='blurred' query={{}} height={500}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {7-12} copy
-    class ModalSheet extends StatelessWidget {
-      @override
-      Widget build(BuildContext context) => Center(
-        child: FButton(
-          child: const Text('Open'),
-          onPress: () => showFSheet(
-            style: context.theme.modalSheetStyle.copyWith(
-              barrierFilter: (animation) => ImageFilter.compose(
-                outer: ImageFilter.blur(sigmaX: animation * 5, sigmaY: animation * 5),
-                inner: ColorFilter.mode(context.theme.colors.barrier, BlendMode.srcOver),
-              ),
-            ),
-            context: context,
-            side: FLayout.ltr,
-            builder: (context) => const Form(side: FLayout.ltr),
+    ```dart {4-8} copy
+    FButton(
+      child: const Text('Open'),
+      onPress: () => showFSheet(
+        style: (style) => style.copyWith(
+          barrierFilter: (animation) => ImageFilter.compose(
+            outer: ImageFilter.blur(sigmaX: animation * 5, sigmaY: animation * 5),
+            inner: ColorFilter.mode(context.theme.colors.barrier, BlendMode.srcOver),
           ),
         ),
-      );
-    }
+        context: context,
+        side: FLayout.ltr,
+        builder: (context) => const Form(side: FLayout.ltr),
+      ),
+    );
 
     class Form extends StatelessWidget {
       final FLayout side;
@@ -227,29 +211,18 @@ showFSheet(
                 ),
                 Text(
                   'Make changes to your account here. Click save when you are done.',
-                  style: context.theme.typography.sm.copyWith(
-                    color: context.theme.colors.mutedForeground,
-                  ),
+                  style: context.theme.typography.sm.copyWith(color: context.theme.colors.mutedForeground),
                 ),
                 const SizedBox(height: 8),
                 SizedBox(
                   width: 450,
                   child: Column(
                     children: [
-                      const FTextField(
-                        label: Text('Name'),
-                        hint: 'John Renalo',
-                      ),
+                      const FTextField(label: Text('Name'), hint: 'John Renalo'),
                       const SizedBox(height: 10),
-                      const FTextField(
-                        label: Text('Email'),
-                        hint: 'john@doe.com',
-                      ),
+                      const FTextField(label: Text('Email'), hint: 'john@doe.com'),
                       const SizedBox(height: 16),
-                      FButton(
-                        onPress: () => Navigator.of(context).pop(),
-                        child: const Text('Save'),
-                      ),
+                      FButton(child: const Text('Save'), onPress: () => Navigator.of(context).pop()),
                     ],
                   ),
                 ),
@@ -283,11 +256,9 @@ showFSheet(
           builder: (context, controller) => ScrollConfiguration(
             // This is required to enable dragging on desktop.
             // See https://github.com/flutter/flutter/issues/101903 for more information.
-            behavior: ScrollConfiguration.of(context).copyWith(dragDevices: {
-              PointerDeviceKind.touch,
-              PointerDeviceKind.mouse,
-              PointerDeviceKind.trackpad,
-            }),
+            behavior: ScrollConfiguration.of(context).copyWith(
+              dragDevices: {PointerDeviceKind.touch, PointerDeviceKind.mouse, PointerDeviceKind.trackpad},
+            ),
             child: FTileGroup.builder(
               count: 25,
               scrollController: controller,

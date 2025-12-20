@@ -23,18 +23,19 @@ An item group that typically groups related information together.
   <Tabs.Tab>
     ```dart copy
     FItemGroup(
+      divider: FItemDivider.none,
       children: [
         FItem(
-          prefix: Icon(FIcons.user),
+          prefix: const Icon(FIcons.user),
           title: const Text('Personalization'),
-          suffix: Icon(FIcons.chevronRight),
+          suffix: const Icon(FIcons.chevronRight),
           onPress: () {},
         ),
         FItem(
-          prefix: Icon(FIcons.wifi),
+          prefix: const Icon(FIcons.wifi),
           title: const Text('WiFi'),
           details: const Text('Forus Labs (5G)'),
-          suffix: Icon(FIcons.chevronRight),
+          suffix: const Icon(FIcons.chevronRight),
           onPress: () {},
         ),
       ],
@@ -57,17 +58,18 @@ dart run forui style create item-group
 
 ```dart copy
 FItemGroup(
+  children: [
+    FItem(title: const Text('Item')),
+  ],
+  style: (style) => style.copyWith(...),
   scrollController: ScrollController(),
-  style: FItemGroupStyle(...),
   cacheExtent: 100,
   maxHeight: 200,
   dragStartBehavior: DragStartBehavior.start,
   physics: const ClampingScrollPhysics(),
+  enabled: true,
+  divider: FItemDivider.none,
   semanticsLabel: 'Settings',
-  divider: FItemDivider.indented,
-  children: [
-    FItem(title: const Text('Item'),
-  ],
 );
 ```
 
@@ -75,16 +77,17 @@ FItemGroup(
 
 ```dart copy
 FItemGroup.builder(
+  itemBuilder: (context, index) => index < 10 ? FItem(title: Text('Item $index')) : null,
+  count: 100,
+  style: (style) => style.copyWith(...),
   scrollController: ScrollController(),
-  style: FItemGroupStyle(...),
   cacheExtent: 100,
   maxHeight: 200,
   dragStartBehavior: DragStartBehavior.start,
   physics: const ClampingScrollPhysics(),
+  enabled: true,
+  divider: FItemDivider.none,
   semanticsLabel: 'Settings',
-  divider: FItemDivider.indented,
-  itemBuilder: (context, index) => index < 10 ? FItem(title: Text('Item $index')) : null,
-  count: 100,
 );
 ```
 
@@ -92,18 +95,18 @@ FItemGroup.builder(
 
 ```dart copy
 FItemGroup.merge(
+  children: [
+    FItemGroup(children: []),
+  ],
+  style: (style) => style.copyWith(...),
   scrollController: ScrollController(),
   cacheExtent: 100,
   maxHeight: 200,
   dragStartBehavior: DragStartBehavior.start,
   physics: const ClampingScrollPhysics(),
+  enabled: true,
+  divider: FItemDivider.full,
   semanticsLabel: 'Settings',
-  divider: FItemDivider.indented,
-  children: [
-    FItemGroup(
-      children: [],
-    )
-  ],
 );
 ```
 
@@ -118,39 +121,39 @@ FItemGroup.merge(
     <Widget name='item-group' variant='scrollable' query={{}} height={200}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {2} copy
+    ```dart copy
     FItemGroup(
       maxHeight: 150,
       children: [
         FItem(
-          prefix: Icon(FIcons.user),
+          prefix: const Icon(FIcons.user),
           title: const Text('Personalization'),
-          suffix: Icon(FIcons.chevronRight),
+          suffix: const Icon(FIcons.chevronRight),
           onPress: () {},
         ),
         FItem(
-          prefix: Icon(FIcons.mail),
+          prefix: const Icon(FIcons.mail),
           title: const Text('Mail'),
-          suffix: Icon(FIcons.chevronRight),
+          suffix: const Icon(FIcons.chevronRight),
           onPress: () {},
         ),
         FItem(
-          prefix: Icon(FIcons.wifi),
+          prefix: const Icon(FIcons.wifi),
           title: const Text('WiFi'),
           details: const Text('Forus Labs (5G)'),
-          suffix: Icon(FIcons.chevronRight),
+          suffix: const Icon(FIcons.chevronRight),
           onPress: () {},
         ),
         FItem(
-          prefix: Icon(FIcons.alarmClock),
+          prefix: const Icon(FIcons.alarmClock),
           title: const Text('Alarm Clock'),
-          suffix: Icon(FIcons.chevronRight),
+          suffix: const Icon(FIcons.chevronRight),
           onPress: () {},
         ),
         FItem(
-          prefix: Icon(FIcons.qrCode),
+          prefix: const Icon(FIcons.qrCode),
           title: const Text('QR code'),
-          suffix: Icon(FIcons.chevronRight),
+          suffix: const Icon(FIcons.chevronRight),
           onPress: () {},
         ),
       ],
@@ -172,7 +175,7 @@ FItemGroup.merge(
       count: 200,
       itemBuilder: (context, index) => FItem(
         title: Text('Item $index'),
-        suffix: Icon(FIcons.chevronRight),
+        suffix: const Icon(FIcons.chevronRight),
         onPress: () {},
       ),
     );
@@ -196,16 +199,16 @@ several sections.
         FItemGroup(
           children: [
             FItem(
-              prefix: Icon(FIcons.user),
+              prefix: const Icon(FIcons.user),
               title: const Text('Personalization'),
-              suffix: Icon(FIcons.chevronRight),
+              suffix: const Icon(FIcons.chevronRight),
               onPress: () {},
             ),
             FItem(
-              prefix: Icon(FIcons.wifi),
+              prefix: const Icon(FIcons.wifi),
               title: const Text('WiFi'),
               details: const Text('Forus Labs (5G)'),
-              suffix: Icon(FIcons.chevronRight),
+              suffix: const Icon(FIcons.chevronRight),
               onPress: () {},
             ),
           ],
@@ -246,16 +249,16 @@ several sections.
       divider: FItemDivider.full,
       children: [
         FItem(
-          prefix: Icon(FIcons.user),
+          prefix: const Icon(FIcons.user),
           title: const Text('Personalization'),
-          suffix: Icon(FIcons.chevronRight),
+          suffix: const Icon(FIcons.chevronRight),
           onPress: () {},
         ),
         FItem(
-          prefix: Icon(FIcons.wifi),
+          prefix: const Icon(FIcons.wifi),
           title: const Text('WiFi'),
           details: const Text('Forus Labs (5G)'),
-          suffix: Icon(FIcons.chevronRight),
+          suffix: const Icon(FIcons.chevronRight),
           onPress: () {},
         ),
       ],
@@ -271,21 +274,21 @@ several sections.
     <Widget name='item-group' variant='default' query={{divider: 'indented'}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart 23} copy
+    ```dart {2} copy
     FItemGroup(
       divider: FItemDivider.indented,
       children: [
         FItem(
-          prefix: Icon(FIcons.user),
+          prefix: const Icon(FIcons.user),
           title: const Text('Personalization'),
-          suffix: Icon(FIcons.chevronRight),
+          suffix: const Icon(FIcons.chevronRight),
           onPress: () {},
         ),
         FItem(
-          prefix: Icon(FIcons.wifi),
+          prefix: const Icon(FIcons.wifi),
           title: const Text('WiFi'),
           details: const Text('Forus Labs (5G)'),
-          suffix: Icon(FIcons.chevronRight),
+          suffix: const Icon(FIcons.chevronRight),
           onPress: () {},
         ),
       ],

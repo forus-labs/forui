@@ -22,25 +22,14 @@ A group of items that allow users to make a selection from a set of options.
   </Tabs.Tab>
   <Tabs.Tab>
     ```dart copy
-    enum Sidebar { recents, home, applications }
-
     FSelectGroup<Sidebar>(
-      controller: FMultiValueNotifier(values: {Sidebar.recents}),
+      control: const FSelectGroupControl.managed(initial: {Sidebar.recents}),
       label: const Text('Sidebar'),
       description: const Text('These will be shown in the sidebar.'),
       children: [
-        .checkbox(
-          value: Sidebar.recents,
-          label: const Text('Recents'),
-        ),
-        .checkbox(
-          value: Sidebar.home,
-          label: const Text('Home'),
-        ),
-        .checkbox(
-          value: Sidebar.applications,
-          label: const Text('Applications'),
-        ),
+        FSelectGroupItem.checkbox(value: Sidebar.recents, label: const Text('Recents')),
+        FSelectGroupItem.checkbox(value: Sidebar.home, label: const Text('Home')),
+        FSelectGroupItem.checkbox(value: Sidebar.applications, label: const Text('Applications')),
       ],
     );
     ```
@@ -62,22 +51,18 @@ dart run forui style create select-group
 
 ```dart copy
 FSelectGroup<Value>(
-  controller: FMultiValueNotifier(), // or FMultiValueNotifier.radio()
-  style: FSelectGroupStyle(...),
+  control: FSelectGroupControl.managed(
+    initial: {Value.checkbox},
+    onChange: (all) {},
+    onSelect: (selection) {},
+  ),
+  style: (style) => style.copyWith(...),
   label: const Text('Sidebar'),
   description: const Text('Select the items you want to display in the sidebar.'),
-  onChange: (all) => print(all),
-  onSelect: (selection) => print(selection),
   children: [
-    .checkbox(
-      value: Value.checkbox,
-      label: const Text('Checkbox'),
-    ),
+    FSelectGroupItem.checkbox(value: Value.checkbox, label: const Text('Checkbox')),
     // or
-    .radio(
-      value: Value.radio,
-      label: const Text('Radio'),
-    ),
+    FSelectGroupItem.radio(value: Value.radio, label: const Text('Radio')),
   ],
 );
 ```
@@ -92,72 +77,48 @@ FSelectGroup<Value>(
     </Tabs.Tab>
     <Tabs.Tab>
         ```dart copy
-        enum Language { dart, java, rust, python }
-
         class CheckboxForm extends StatefulWidget {
-          const CheckboxForm({super.key});
-
           @override
-          State<CheckboxForm> createState() => CheckboxFormState();
+          State<CheckboxForm> createState() => _CheckboxFormState();
         }
 
-        class CheckboxFormState extends State<CheckboxForm> {
-          final _formKey = GlobalKey<FormState>();
-          final controller = FMultiValueNotifier<Language>();
+        class _CheckboxFormState extends State<CheckboxForm> {
+          final _key = GlobalKey<FormState>();
 
           @override
           Widget build(BuildContext context) => Form(
-                key: _formKey,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+            key: _key,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                FSelectGroup<Language>(
+                  label: const Text('Favorite Languages'),
+                  description: const Text('Your favorite language.'),
+                  validator: (values) => values?.isEmpty ?? true ? 'Please select at least one language.' : null,
                   children: [
-                    FSelectGroup(
-                      controller: controller,
-                      label: const Text('Favorite Languages'),
-                      description: const Text('Your favorite language.'),
-                      validator: (values) => values?.isEmpty ?? true ? 'Please select at least one language.' : null,
-                      children: [
-                        .checkbox(
-                          value: Language.dart,
-                          label: const Text('Dart'),
-                        ),
-                        .checkbox(
-                          value: Language.java,
-                          label: const Text('Java'),
-                        ),
-                        .checkbox(
-                          value: Language.rust,
-                          label: const Text('Rust'),
-                        ),
-                        .checkbox(
-                          value: Language.python,
-                          label: const Text('Python'),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 20),
-                    FButton(
-                      child: const Text('Submit'),
-                      onPress: () {
-                        if (!_formKey.currentState!.validate()) {
-                          // Handle errors here.
-                          return;
-                        }
-
-                        _formKey.currentState!.save();
-                        // Do something.
-                      },
-                    ),
+                    FSelectGroupItem.checkbox(value: Language.dart, label: const Text('Dart')),
+                    FSelectGroupItem.checkbox(value: Language.java, label: const Text('Java')),
+                    FSelectGroupItem.checkbox(value: Language.rust, label: const Text('Rust')),
+                    FSelectGroupItem.checkbox(value: Language.python, label: const Text('Python')),
                   ],
                 ),
-              );
+                const SizedBox(height: 20),
+                FButton(
+                  child: const Text('Submit'),
+                  onPress: () {
+                    if (!_key.currentState!.validate()) {
+                      // Handle errors here.
+                      return;
+                    }
 
-          @override
-          void dispose() {
-            controller.dispose();
-            super.dispose();
-          }
+                    _key.currentState!.save();
+                    // Do something.
+                  },
+                ),
+              ],
+            ),
+          );
         }
         ```
     </Tabs.Tab>
@@ -175,65 +136,54 @@ FSelectGroup<Value>(
     enum Notification { all, direct, nothing }
 
     class RadioForm extends StatefulWidget {
-      const RadioForm({super.key});
-
       @override
-      State<RadioForm> createState() => RadioFormState();
+      State<RadioForm> createState() => _RadioFormState();
     }
 
-    class RadioFormState extends State<RadioForm> {
-      final _formKey = GlobalKey<FormState>();
-      final controller = FMultiValueNotifier<Notification>.radio();
-
-      @override
-      Widget build(BuildContext context) => Form(
-            key: _formKey,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                FSelectGroup(
-                  controller: controller,
-                  label: const Text('Notifications'),
-                  description: const Text('Select the notifications.'),
-                  validator: (values) => values?.isEmpty ?? true ? 'Please select a value.' : null,
-                  children: [
-                    .radio(
-                      value: Notification.all,
-                      label: const Text('All new messages'),
-                    ),
-                    .radio(
-                      value: Notification.direct,
-                      label: const Text('Direct messages and mentions'),
-                    ),
-                    .radio(
-                      value: Notification.nothing,
-                      label: const Text('Nothing'),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 20),
-                FButton(
-                  child: const Text('Save'),
-                  onPress: () {
-                    if (!_formKey.currentState!.validate()) {
-                      // Handle errors here.
-                      return;
-                    }
-
-                    _formKey.currentState!.save();
-                    // Do something.
-                  },
-                ),
-              ],
-            ),
-          );
+    class _RadioFormState extends State<RadioForm> {
+      final _key = GlobalKey<FormState>();
+      final _controller = FMultiValueNotifier<Notification>.radio();
 
       @override
       void dispose() {
-        controller.dispose();
+        _controller.dispose();
         super.dispose();
       }
+
+      @override
+      Widget build(BuildContext context) => Form(
+        key: _key,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            FSelectGroup<Notification>(
+              control: FSelectGroupControl.managed(controller: _controller),
+              label: const Text('Notifications'),
+              description: const Text('Select the notifications.'),
+              validator: (values) => values?.isEmpty ?? true ? 'Please select a value.' : null,
+              children: [
+                FSelectGroupItem.radio(value: Notification.all, label: const Text('All new messages')),
+                FSelectGroupItem.radio(value: Notification.direct, label: const Text('Direct messages and mentions')),
+                FSelectGroupItem.radio(value: Notification.nothing, label: const Text('Nothing')),
+              ],
+            ),
+            const SizedBox(height: 20),
+            FButton(
+              child: const Text('Save'),
+              onPress: () {
+                if (!_key.currentState!.validate()) {
+                  // Handle errors here.
+                  return;
+                }
+
+                _key.currentState!.save();
+                // Do something.
+              },
+            ),
+          ],
+        ),
+      );
     }
     ```
 

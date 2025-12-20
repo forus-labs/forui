@@ -30,11 +30,19 @@ It is part of [FScaffold](/docs/layout/scaffold), which should be preferred in m
     ```dart copy
     class Sheets extends StatefulWidget {
       @override
-      State<Sheets> createState() => _State();
+      State<Sheets> createState() => _SheetsState();
     }
 
-    class _State extends State<Sheets> {
+    class _SheetsState extends State<Sheets> {
       final Map<FLayout, FPersistentSheetController> _controllers = {};
+
+      @override
+      void dispose() {
+        for (final controller in _controllers.values) {
+          controller.dispose();
+        }
+        super.dispose();
+      }
 
       @override
       Widget build(BuildContext context) {
@@ -49,54 +57,33 @@ It is part of [FScaffold](/docs/layout/scaffold), which should be preferred in m
           if (controller == null) {
             controller = _controllers[side] ??= showFPersistentSheet(
               context: context,
-              side: FLayout.ltr,
-              builder: (context, controller) => Form(side: side),
+              side: side,
+              builder: (context, controller) => Form(side: side, controller: controller),
             );
           } else {
             controller.toggle();
           }
         };
 
-        return FScaffold( // This can be replaced with FSheets
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            spacing: 5,
-            children: [
-              FButton(
-                onPress: onPress(FLayout.ltr),
-                child: const Text('Left'),
-              ),
-              FButton(
-                onPress: onPress(FLayout.ttb),
-                child: const Text('Top'),
-              ),
-              FButton(
-                onPress: onPress(FLayout.rtl),
-                child: const Text('Right'),
-              ),
-              FButton(
-                onPress: onPress(FLayout.btt),
-                child: const Text('Bottom'),
-              ),
-            ],
-          ),
+        return Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          spacing: 5,
+          children: [
+            FButton(onPress: onPress(FLayout.ltr), child: const Text('Left')),
+            FButton(onPress: onPress(FLayout.ttb), child: const Text('Top')),
+            FButton(onPress: onPress(FLayout.rtl), child: const Text('Right')),
+            FButton(onPress: onPress(FLayout.btt), child: const Text('Bottom')),
+          ],
         );
-      }
-
-      @override
-      void dispose() {
-        for (final controller in _controllers.values) {
-          controller.dispose();
-        }
-        super.dispose();
       }
     }
 
     class Form extends StatelessWidget {
       final FLayout side;
+      final FPersistentSheetController controller;
 
-      const Form({required this.side, super.key});
+      const Form({required this.side, required this.controller, super.key});
 
       @override
       Widget build(BuildContext context) => Container(
@@ -110,49 +97,37 @@ It is part of [FScaffold](/docs/layout/scaffold), which should be preferred in m
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8.0),
-          child: Center(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Account',
-                  style: context.theme.typography.xl2.copyWith(
-                    fontWeight: FontWeight.w600,
-                    color: context.theme.colors.foreground,
-                    height: 1.5,
-                  ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Account',
+                style: context.theme.typography.xl2.copyWith(
+                  fontWeight: FontWeight.w600,
+                  color: context.theme.colors.foreground,
+                  height: 1.5,
                 ),
-                Text(
-                  'Make changes to your account here. Click save when you are done.',
-                  style: context.theme.typography.sm.copyWith(
-                    color: context.theme.colors.mutedForeground,
-                  ),
+              ),
+              Text(
+                'Make changes to your account here. Click save when you are done.',
+                style: context.theme.typography.sm.copyWith(color: context.theme.colors.mutedForeground),
+              ),
+              const SizedBox(height: 8),
+              SizedBox(
+                width: 450,
+                child: Column(
+                  children: [
+                    const FTextField(label: Text('Name'), hint: 'John Renalo'),
+                    const SizedBox(height: 10),
+                    const FTextField(label: Text('Email'), hint: 'john@doe.com'),
+                    const SizedBox(height: 16),
+                    FButton(onPress: controller.toggle, child: const Text('Save')),
+                  ],
                 ),
-                const SizedBox(height: 8),
-                SizedBox(
-                  width: 450,
-                  child: Column(
-                    children: [
-                      const FTextField(
-                        label: Text('Name'),
-                        hint: 'John Renalo',
-                      ),
-                      const SizedBox(height: 10),
-                      const FTextField(
-                        label: Text('Email'),
-                        hint: 'john@doe.com',
-                      ),
-                      const SizedBox(height: 16),
-                      FButton(
-                        onPress: () => Navigator.of(context).pop(),
-                        child: const Text('Save'),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       );
@@ -177,13 +152,16 @@ dart run forui style create persistent-sheet
 ```dart copy
 showFPersistentSheet(
   context: context,
-  style: FPersistentSheetStyle(...),
   side: FLayout.ltr,
-  useSafeArea: false,
-  keepAliveOffstage: true,
-  mainAxisMaxRatio: null,
+  style: (style) => style.copyWith(...),
+  mainAxisMaxRatio: 9 / 16,
   constraints: const BoxConstraints(maxWidth: 450, maxHeight: 450),
   draggable: true,
+  anchorPoint: Offset.zero,
+  useSafeArea: false,
+  resizeToAvoidBottomInset: true,
+  keepAliveOffstage: false,
+  onClosing: () {},
   builder: (context, controller) => const Placeholder(),
 );
 ```
@@ -197,14 +175,22 @@ showFPersistentSheet(
     <Widget name='persistent-sheet' query={{keepAliveOffstage: true}} height={500}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {23} copy
+    ```dart {31} copy
     class Sheets extends StatefulWidget {
       @override
-      State<Sheets> createState() => _State();
+      State<Sheets> createState() => _SheetsState();
     }
 
-    class _State extends State<Sheets> {
+    class _SheetsState extends State<Sheets> {
       final Map<FLayout, FPersistentSheetController> _controllers = {};
+
+      @override
+      void dispose() {
+        for (final controller in _controllers.values) {
+          controller.dispose();
+        }
+        super.dispose();
+      }
 
       @override
       Widget build(BuildContext context) {
@@ -219,55 +205,34 @@ showFPersistentSheet(
           if (controller == null) {
             controller = _controllers[side] ??= showFPersistentSheet(
               context: context,
-              side: FLayout.ltr,
+              side: side,
               keepAliveOffstage: true,
-              builder: (context, controller) => Form(side: side),
+              builder: (context, controller) => Form(side: side, controller: controller),
             );
           } else {
             controller.toggle();
           }
         };
 
-        return FScaffold( // This can be replaced with FSheets
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            spacing: 5,
-            children: [
-              FButton(
-                onPress: onPress(FLayout.ltr),
-                child: const Text('Left'),
-              ),
-              FButton(
-                onPress: onPress(FLayout.ttb),
-                child: const Text('Top'),
-              ),
-              FButton(
-                onPress: onPress(FLayout.rtl),
-                child: const Text('Right'),
-              ),
-              FButton(
-                onPress: onPress(FLayout.btt),
-                child: const Text('Bottom'),
-              ),
-            ],
-          ),
+        return Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          spacing: 5,
+          children: [
+            FButton(onPress: onPress(FLayout.ltr), child: const Text('Left')),
+            FButton(onPress: onPress(FLayout.ttb), child: const Text('Top')),
+            FButton(onPress: onPress(FLayout.rtl), child: const Text('Right')),
+            FButton(onPress: onPress(FLayout.btt), child: const Text('Bottom')),
+          ],
         );
-      }
-
-      @override
-      void dispose() {
-        for (final controller in _controllers.values) {
-          controller.dispose();
-        }
-        super.dispose();
       }
     }
 
     class Form extends StatelessWidget {
       final FLayout side;
+      final FPersistentSheetController controller;
 
-      const Form({required this.side, super.key});
+      const Form({required this.side, required this.controller, super.key});
 
       @override
       Widget build(BuildContext context) => Container(
@@ -281,49 +246,37 @@ showFPersistentSheet(
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8.0),
-          child: Center(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Account',
-                  style: context.theme.typography.xl2.copyWith(
-                    fontWeight: FontWeight.w600,
-                    color: context.theme.colors.foreground,
-                    height: 1.5,
-                  ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Account',
+                style: context.theme.typography.xl2.copyWith(
+                  fontWeight: FontWeight.w600,
+                  color: context.theme.colors.foreground,
+                  height: 1.5,
                 ),
-                Text(
-                  'Make changes to your account here. Click save when you are done.',
-                  style: context.theme.typography.sm.copyWith(
-                    color: context.theme.colors.mutedForeground,
-                  ),
+              ),
+              Text(
+                'Make changes to your account here. Click save when you are done.',
+                style: context.theme.typography.sm.copyWith(color: context.theme.colors.mutedForeground),
+              ),
+              const SizedBox(height: 8),
+              SizedBox(
+                width: 450,
+                child: Column(
+                  children: [
+                    const FTextField(label: Text('Name'), hint: 'John Renalo'),
+                    const SizedBox(height: 10),
+                    const FTextField(label: Text('Email'), hint: 'john@doe.com'),
+                    const SizedBox(height: 16),
+                    FButton(onPress: controller.toggle, child: const Text('Save')),
+                  ],
                 ),
-                const SizedBox(height: 8),
-                SizedBox(
-                  width: 450,
-                  child: Column(
-                    children: [
-                      const FTextField(
-                        label: Text('Name'),
-                        hint: 'John Renalo',
-                      ),
-                      const SizedBox(height: 10),
-                      const FTextField(
-                        label: Text('Email'),
-                        hint: 'john@doe.com',
-                      ),
-                      const SizedBox(height: 16),
-                      FButton(
-                        onPress: () => Navigator.of(context).pop(),
-                        child: const Text('Save'),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       );
@@ -343,55 +296,49 @@ showFPersistentSheet(
     ```dart copy
     class DraggableSheets extends StatefulWidget {
       @override
-      State<DraggableSheets> createState() => _State();
+      State<DraggableSheets> createState() => _DraggableSheetsState();
     }
 
-    class _State extends State<DraggableSheets> {
+    class _DraggableSheetsState extends State<DraggableSheets> {
       FPersistentSheetController? controller;
-
-      @override
-      Widget build(BuildContext context) => FScaffold(
-        child: FButton(
-          child: const Text('Click me'),
-          onPress: () {
-            if (controller != null) {
-              controller!.toggle();
-              return;
-            }
-
-            controller = showFPersistentSheet(
-              context: context,
-              side: FLayout.btt,
-              mainAxisMaxRatio: null,
-              builder: (context, _) => DraggableScrollableSheet(
-                expand: false,
-                builder: (context, controller) => ScrollConfiguration(
-                  // This is required to enable dragging on desktop.
-                  // See https://github.com/flutter/flutter/issues/101903 for more information.
-                  behavior: ScrollConfiguration.of(context).copyWith(
-                    dragDevices: {
-                      PointerDeviceKind.touch,
-                      PointerDeviceKind.mouse,
-                      PointerDeviceKind.trackpad,
-                    },
-                  ),
-                  child: FTileGroup.builder(
-                    count: 25,
-                    scrollController: controller,
-                    tileBuilder: (context, index) => FTile(title: Text('Tile $index')),
-                  ),
-                ),
-              ),
-            );
-          },
-        ),
-      );
 
       @override
       void dispose() {
         controller?.dispose();
         super.dispose();
       }
+
+      @override
+      Widget build(BuildContext context) => FButton(
+        child: const Text('Click me'),
+        onPress: () {
+          if (controller != null) {
+            controller!.toggle();
+            return;
+          }
+
+          controller = showFPersistentSheet(
+            context: context,
+            side: FLayout.btt,
+            mainAxisMaxRatio: null,
+            builder: (context, _) => DraggableScrollableSheet(
+              expand: false,
+              builder: (context, controller) => ScrollConfiguration(
+                // This is required to enable dragging on desktop.
+                // See https://github.com/flutter/flutter/issues/101903 for more information.
+                behavior: ScrollConfiguration.of(context).copyWith(
+                  dragDevices: {PointerDeviceKind.touch, PointerDeviceKind.mouse, PointerDeviceKind.trackpad},
+                ),
+                child: FTileGroup.builder(
+                  count: 25,
+                  scrollController: controller,
+                  tileBuilder: (context, index) => FTile(title: Text('Tile $index')),
+                ),
+              ),
+            ),
+          );
+        },
+      );
     }
     ```
 

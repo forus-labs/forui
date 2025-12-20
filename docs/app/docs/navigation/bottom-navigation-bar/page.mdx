@@ -27,35 +27,20 @@ It is used to navigate between a small number of views, typically between three 
       }
 
       class _ApplicationState extends State<Application> {
-        int index = 1;
+        int _index = 1;
 
         @override
         Widget build(BuildContext context) => FBottomNavigationBar(
-              index: index,
-              onChange: (index) => setState(() => this.index = index),
-              children: [
-                FBottomNavigationBarItem(
-                  icon: Icon(FIcons.house),
-                  label: const Text('Home'),
-                ),
-                FBottomNavigationBarItem(
-                  icon: Icon(FIcons.layoutGrid),
-                  label: const Text('Browse'),
-                ),
-                FBottomNavigationBarItem(
-                  icon: Icon(FIcons.radio),
-                  label: const Text('Radio'),
-                ),
-                FBottomNavigationBarItem(
-                  icon: Icon(FIcons.libraryBig),
-                  label: const Text('Library'),
-                ),
-                FBottomNavigationBarItem(
-                  icon: Icon(FIcons.search),
-                  label: const Text('Search'),
-                ),
-              ],
-            );
+          index: _index,
+          onChange: (index) => setState(() => _index = index),
+          children: const [
+            FBottomNavigationBarItem(icon: Icon(FIcons.house), label: Text('Home')),
+            FBottomNavigationBarItem(icon: Icon(FIcons.layoutGrid), label: Text('Browse')),
+            FBottomNavigationBarItem(icon: Icon(FIcons.radio), label: Text('Radio')),
+            FBottomNavigationBarItem(icon: Icon(FIcons.libraryBig), label: Text('Library')),
+            FBottomNavigationBarItem(icon: Icon(FIcons.search), label: Text('Search')),
+          ],
+        );
       }
       ```
     </Tabs.Tab>
@@ -80,13 +65,14 @@ dart run forui style create bottom-navigation-bar
 
 ```dart copy
 FBottomNavigationBar(
-  style: FBottomNavigationBarStyle(...),
   index: 0,
-  onChange: (index) => {},
+  onChange: (index) {},
+  style: (style) => style.copyWith(...),
   children: [
     FBottomNavigationBarItem(
-      icon: Icon(FIcons.house),
+      icon: const Icon(FIcons.house),
       label: const Text('Home'),
+      style: (style) => style.copyWith(...),
       autofocus: false,
       focusNode: FocusNode(),
       onFocusChange: (focused) {},

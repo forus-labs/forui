@@ -17,10 +17,7 @@ A button.
   </Tabs.Tab>
   <Tabs.Tab>
     ```dart copy
-    FButton(
-      onPress: () {},
-      child: const Text('Button'),
-    );
+    FButton(style: FButtonStyle.primary(), mainAxisSize: MainAxisSize.min, onPress: () {}, child: const Text('Button'));
     ```
   </Tabs.Tab>
 </Tabs>
@@ -39,14 +36,17 @@ dart run forui style create button
 
 ```dart copy
 FButton(
-  style: FButtonStyle(...),
+  child: const Text('Button'),
+  style: FButtonStyle.primary(),
+  prefix: const Icon(FIcons.mail),
+  suffix: const Icon(FIcons.chevronRight),
   mainAxisSize: MainAxisSize.min,
   onPress: () {},
+  onLongPress: () {},
   onSecondaryPress: () {},
   onSecondaryLongPress: () {},
-  shortcuts: { SingleActivator(LogicalKeyboardKey.enter): ActivateIntent() },
-  actions: { ActivateIntent: CallbackAction<ActivateIntent>(onInvoke: (_) {}) },
-  child: const Text('Button'),
+  shortcuts: {SingleActivator(LogicalKeyboardKey.enter): ActivateIntent()},
+  actions: {ActivateIntent: CallbackAction<ActivateIntent>(onInvoke: (_) {})},
 );
 ```
 
@@ -54,13 +54,14 @@ FButton(
 
 ```dart copy
 FButton.raw(
-  style: FButtonStyle(...),
+  child: const Text('Button'),
+  style: FButtonStyle.primary(),
   onPress: () {},
+  onLongPress: () {},
   onSecondaryPress: () {},
   onSecondaryLongPress: () {},
-  shortcuts: { SingleActivator(LogicalKeyboardKey.enter): ActivateIntent() },
-  actions: { ActivateIntent: CallbackAction<ActivateIntent>(onInvoke: (_) {}) },
-  child: const Text('Button'),
+  shortcuts: {SingleActivator(LogicalKeyboardKey.enter): ActivateIntent()},
+  actions: {ActivateIntent: CallbackAction<ActivateIntent>(onInvoke: (_) {})},
 );
 ```
 
@@ -76,10 +77,7 @@ FButton.raw(
   </Tabs.Tab>
   <Tabs.Tab>
     ```dart copy
-    FButton(
-      onPress: () {},
-      child: const Text('Button'),
-    );
+    FButton(style: FButtonStyle.primary(), mainAxisSize: MainAxisSize.min, onPress: () {}, child: const Text('Button'));
     ```
   </Tabs.Tab>
 </Tabs>
@@ -91,12 +89,8 @@ FButton.raw(
     <Widget name='button' variant='text' query={{style: 'secondary'}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {2} copy
-    FButton(
-      style: FButtonStyle.secondary(),
-      onPress: () {},
-      child: const Text('Button'),
-    );
+    ```dart copy
+    FButton(style: FButtonStyle.secondary(), mainAxisSize: MainAxisSize.min, onPress: () {}, child: const Text('Button'));
     ```
   </Tabs.Tab>
 </Tabs>
@@ -108,12 +102,8 @@ FButton.raw(
     <Widget name='button' variant='text' query={{style: 'destructive'}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {2} copy
-    FButton(
-      style: FButtonStyle.destructive(),
-      onPress: () {},
-      child: const Text('Button'),
-    );
+    ```dart copy
+    FButton(style: FButtonStyle.destructive(), mainAxisSize: MainAxisSize.min, onPress: () {}, child: const Text('Button'));
     ```
   </Tabs.Tab>
 </Tabs>
@@ -125,12 +115,8 @@ FButton.raw(
     <Widget name='button' variant='text' query={{style: 'outline'}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {2} copy
-    FButton(
-      style: FButtonStyle.outline(),
-      onPress: () {},
-      child: const Text('Button'),
-    );
+    ```dart copy
+    FButton(style: FButtonStyle.outline(), mainAxisSize: MainAxisSize.min, onPress: () {}, child: const Text('Button'));
     ```
   </Tabs.Tab>
 </Tabs>
@@ -142,12 +128,8 @@ FButton.raw(
     <Widget name='button' variant='text' query={{style: 'ghost'}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {2} copy
-    FButton(
-      style: FButtonStyle.ghost(),
-      onPress: () {},
-      child: const Text('Button'),
-    );
+    ```dart copy
+    FButton(style: FButtonStyle.ghost(), mainAxisSize: MainAxisSize.min, onPress: () {}, child: const Text('Button'));
     ```
   </Tabs.Tab>
 </Tabs>
@@ -161,12 +143,14 @@ FButton.raw(
     <Widget name='button' variant='icon' query={{}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {2} copy
+    ```dart {4} copy
     FButton(
-      prefix: Icon(FIcons.mail),
+      style: FButtonStyle.primary(),
+      mainAxisSize: MainAxisSize.min,
+      prefix: const Icon(FIcons.mail),
       onPress: () {},
       child: const Text('Login with Email'),
-    ),
+    );
     ```
   </Tabs.Tab>
 </Tabs>
@@ -178,11 +162,8 @@ FButton.raw(
     <Widget name='button' variant='only-icon' query={{}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {3} copy
-    FButton.icon(
-      onPress: () {},
-      child: Icon(FIcons.chevronRight),
-    ),
+    ```dart copy
+    FButton.icon(child: const Icon(FIcons.chevronRight), onPress: () {});
     ```
   </Tabs.Tab>
 </Tabs>
@@ -196,10 +177,11 @@ FButton.raw(
   <Tabs.Tab>
     ```dart {2} copy
     FButton(
+      mainAxisSize: MainAxisSize.min,
       prefix: const FCircularProgress(),
       onPress: null,
       child: const Text('Please wait'),
-    ),
+    );
     ```
   </Tabs.Tab>
 </Tabs>

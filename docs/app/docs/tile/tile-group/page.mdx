@@ -23,16 +23,16 @@ A tile group that typically groups related information together.
       description: const Text('Personalize your experience'),
       children: [
         FTile(
-          prefix: Icon(FIcons.user),
+          prefix: const Icon(FIcons.user),
           title: const Text('Personalization'),
-          suffix: Icon(FIcons.chevronRight),
+          suffix: const Icon(FIcons.chevronRight),
           onPress: () {},
         ),
         FTile(
-          prefix: Icon(FIcons.wifi),
+          prefix: const Icon(FIcons.wifi),
           title: const Text('WiFi'),
           details: const Text('Forus Labs (5G)'),
-          suffix: Icon(FIcons.chevronRight),
+          suffix: const Icon(FIcons.chevronRight),
           onPress: () {},
         ),
       ],
@@ -55,17 +55,19 @@ dart run forui style create tile-group
 
 ```dart copy
 FTileGroup(
+  children: [],
+  style: (style) => style.copyWith(...),
   scrollController: ScrollController(),
-  style: FTileGroupStyle(...),
   cacheExtent: 100,
   maxHeight: 200,
   dragStartBehavior: DragStartBehavior.start,
   physics: const ClampingScrollPhysics(),
+  enabled: true,
+  divider: FItemDivider.indented,
+  semanticsLabel: 'Settings',
   label: const Text('Settings'),
   description: const Text('Personalize your experience'),
-  semanticsLabel: 'Settings',
-  divider: FItemDivider.indented,
-  children: [],
+  error: const Text('Error message'),
 );
 ```
 
@@ -73,18 +75,20 @@ FTileGroup(
 
 ```dart copy
 FTileGroup.builder(
+  tileBuilder: (context, index) => FTile(title: Text('Tile $index')),
+  count: 100,
+  style: (style) => style.copyWith(...),
   scrollController: ScrollController(),
-  style: FTileGroupStyle(...),
   cacheExtent: 100,
   maxHeight: 200,
   dragStartBehavior: DragStartBehavior.start,
   physics: const ClampingScrollPhysics(),
+  enabled: true,
+  divider: FItemDivider.indented,
+  semanticsLabel: 'Settings',
   label: const Text('Settings'),
   description: const Text('Personalize your experience'),
-  semanticsLabel: 'Settings',
-  divider: FItemDivider.indented,
-  tileBuilder: (context, index) => index < 10 ? FTile(title: Text('Tile $index')) : null,
-  count: 100,
+  error: const Text('Error message'),
 );
 ```
 
@@ -92,15 +96,19 @@ FTileGroup.builder(
 
 ```dart copy
 FTileGroup.merge(
+  children: [],
+  style: (style) => style.copyWith(...),
   scrollController: ScrollController(),
   cacheExtent: 100,
   maxHeight: 200,
   dragStartBehavior: DragStartBehavior.start,
   physics: const ClampingScrollPhysics(),
-  label: const Text('Settings'),
+  enabled: true,
+  divider: FItemDivider.full,
   semanticsLabel: 'Settings',
-  divider: FItemDivider.indented,
-  children: [],
+  label: const Text('Settings'),
+  description: const Text('Personalize your experience'),
+  error: const Text('Error message'),
 );
 ```
 
@@ -115,41 +123,41 @@ FTileGroup.merge(
     <Widget name='tile-group' variant='scrollable' query={{}} height={300}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {4} copy
+    ```dart copy
     FTileGroup(
       label: const Text('Settings'),
       description: const Text('Personalize your experience'),
       maxHeight: 200,
       children: [
         FTile(
-          prefix: Icon(FIcons.user),
+          prefix: const Icon(FIcons.user),
           title: const Text('Personalization'),
-          suffix: Icon(FIcons.chevronRight),
+          suffix: const Icon(FIcons.chevronRight),
           onPress: () {},
         ),
         FTile(
-          prefix: Icon(FIcons.mail),
+          prefix: const Icon(FIcons.mail),
           title: const Text('Mail'),
-          suffix: Icon(FIcons.chevronRight),
+          suffix: const Icon(FIcons.chevronRight),
           onPress: () {},
         ),
         FTile(
-          prefix: Icon(FIcons.wifi),
+          prefix: const Icon(FIcons.wifi),
           title: const Text('WiFi'),
           details: const Text('Forus Labs (5G)'),
-          suffix: Icon(FIcons.chevronRight),
+          suffix: const Icon(FIcons.chevronRight),
           onPress: () {},
         ),
         FTile(
-          prefix: Icon(FIcons.alarmClock),
+          prefix: const Icon(FIcons.alarmClock),
           title: const Text('Alarm Clock'),
-          suffix: Icon(FIcons.chevronRight),
+          suffix: const Icon(FIcons.chevronRight),
           onPress: () {},
         ),
         FTile(
-          prefix: Icon(FIcons.qrCode),
+          prefix: const Icon(FIcons.qrCode),
           title: const Text('QR code'),
-          suffix: Icon(FIcons.chevronRight),
+          suffix: const Icon(FIcons.chevronRight),
           onPress: () {},
         ),
       ],
@@ -173,7 +181,7 @@ FTileGroup.merge(
       count: 200,
       tileBuilder: (context, index) => FTile(
         title: Text('Tile $index'),
-        suffix: Icon(FIcons.chevronRight),
+        suffix: const Icon(FIcons.chevronRight),
         onPress: () {},
       ),
     );
@@ -192,35 +200,53 @@ several sections.
   </Tabs.Tab>
   <Tabs.Tab>
     ```dart copy
-    FTileGroup.merge(
-      label: const Text('Settings'),
-      children: [
-        FTileGroup(
-          children: [
-            FTile(
-              prefix: Icon(FIcons.user),
-              title: const Text('Personalization'),
-              suffix: Icon(FIcons.chevronRight),
-              onPress: () {},
-            ),
-            FTile(
-              prefix: Icon(FIcons.wifi),
-              title: const Text('WiFi'),
-              details: const Text('Forus Labs (5G)'),
-              suffix: Icon(FIcons.chevronRight),
-              onPress: () {},
-            ),
-          ],
-        ),
-        FSelectTileGroup<String>(
-          selectController: FSelectTileGroupController.radio('List'),
-          children: [
-            FSelectTile(title: const Text('List View'), value: 'List'),
-            FSelectTile(title: const Text('Grid View'), value: 'Grid'),
-          ],
-        ),
-      ],
-    );
+    class MergeTileGroupExample extends StatefulWidget {
+      const MergeTileGroupExample({super.key});
+
+      @override
+      State<MergeTileGroupExample> createState() => _MergeTileGroupExampleState();
+    }
+
+    class _MergeTileGroupExampleState extends State<MergeTileGroupExample> {
+      final _controller = FMultiValueNotifier.radio('List');
+
+      @override
+      void dispose() {
+        _controller.dispose();
+        super.dispose();
+      }
+
+      @override
+      Widget build(BuildContext context) => FTileGroup.merge(
+        label: const Text('Settings'),
+        children: [
+          FTileGroup(
+            children: [
+              FTile(
+                prefix: const Icon(FIcons.user),
+                title: const Text('Personalization'),
+                suffix: const Icon(FIcons.chevronRight),
+                onPress: () {},
+              ),
+              FTile(
+                prefix: const Icon(FIcons.wifi),
+                title: const Text('WiFi'),
+                details: const Text('Forus Labs (5G)'),
+                suffix: const Icon(FIcons.chevronRight),
+                onPress: () {},
+              ),
+            ],
+          ),
+          FSelectTileGroup<String>(
+            control: FMultiValueControl.managed(controller: _controller),
+            children: const [
+              FSelectTile(title: Text('List View'), value: 'List'),
+              FSelectTile(title: Text('Grid View'), value: 'Grid'),
+            ],
+          ),
+        ],
+      );
+    }
     ```
   </Tabs.Tab>
 </Tabs>
@@ -240,16 +266,16 @@ several sections.
       divider: FItemDivider.full,
       children: [
         FTile(
-          prefix: Icon(FIcons.user),
+          prefix: const Icon(FIcons.user),
           title: const Text('Personalization'),
-          suffix: Icon(FIcons.chevronRight),
+          suffix: const Icon(FIcons.chevronRight),
           onPress: () {},
         ),
         FTile(
-          prefix: Icon(FIcons.wifi),
+          prefix: const Icon(FIcons.wifi),
           title: const Text('WiFi'),
           details: const Text('Forus Labs (5G)'),
-          suffix: Icon(FIcons.chevronRight),
+          suffix: const Icon(FIcons.chevronRight),
           onPress: () {},
         ),
       ],
@@ -271,16 +297,16 @@ several sections.
       divider: FItemDivider.none,
       children: [
         FTile(
-          prefix: Icon(FIcons.user),
+          prefix: const Icon(FIcons.user),
           title: const Text('Personalization'),
-          suffix: Icon(FIcons.chevronRight),
+          suffix: const Icon(FIcons.chevronRight),
           onPress: () {},
         ),
         FTile(
-          prefix: Icon(FIcons.wifi),
+          prefix: const Icon(FIcons.wifi),
           title: const Text('WiFi'),
           details: const Text('Forus Labs (5G)'),
-          suffix: Icon(FIcons.chevronRight),
+          suffix: const Icon(FIcons.chevronRight),
           onPress: () {},
         ),
       ],

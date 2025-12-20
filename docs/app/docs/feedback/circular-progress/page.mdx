@@ -17,18 +17,15 @@ Displays an indeterminate circular indicator showing the completion progress of 
   </Tabs.Tab>
   <Tabs.Tab>
     ```dart copy
-    class CircularProgress extends StatelessWidget {
-      @override
-      Widget build(BuildContext context) => const Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        spacing: 25,
-        children: [
-          FCircularProgress(),
-          FCircularProgress.loader(),
-          FCircularProgress.pinwheel(),
-        ],
-      );
-    }
+    Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      spacing: 25,
+      children: [
+        FCircularProgress(),
+        FCircularProgress.loader(),
+        FCircularProgress.pinwheel(),
+      ],
+    );
     ```
   </Tabs.Tab>
 </Tabs>
@@ -47,7 +44,7 @@ dart run forui style create circular-progress
 
 ```dart copy
 FCircularProgress(
-  style: FCircularProgressStyle(...),
+  style: (style) => style.copyWith(...),
   semanticsLabel: 'Label',
   icon: FIcons.loaderCircle,
 );
@@ -57,7 +54,7 @@ FCircularProgress(
 
 ```dart copy
 FCircularProgress.loader(
-  style: FCircularProgressStyle(...),
+  style: (style) => style.copyWith(...),
   semanticsLabel: 'Label',
 );
 ```
@@ -66,7 +63,7 @@ FCircularProgress.loader(
 
 ```dart copy
 FCircularProgress.pinwheel(
-  style: FCircularProgressStyle(...),
+  style: (style) => style.copyWith(...),
   semanticsLabel: 'Label',
 );
 ```

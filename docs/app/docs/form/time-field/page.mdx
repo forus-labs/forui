@@ -52,9 +52,10 @@ The following locales will default to Chinese (zh):
     </Tabs.Tab>
     <Tabs.Tab>
         ```dart copy
-        const FTimeField(
-          label: Text('Appointment Time'),
-          description: Text('Select a time for your appointment.'),
+        FTimeField(
+          hour24: false,
+          label: const Text('Appointment Time'),
+          description: const Text('Select a Time for your appointment.'),
         );
         ```
     </Tabs.Tab>
@@ -74,30 +75,29 @@ dart run forui style create time-field
 
 ```dart copy
 FTimeField(
-  controller: FTimeFieldController(
-    vsync: this,
-    initialTime: FTime(12, 30),
-    validator: (time) => time != null && time < const FTime(14, 30) ? 'Time must be in the future' : null,
+  control: FTimeFieldControl.managed(
+    initial: FTime(12, 30),
+    validator: (time) => time != null && time < FTime(14, 30) ? 'Time must be in the future' : null,
+    onChange: (time) {},
   ),
-  style: FTimeFieldStyle(...),
-  initialTime: FTime(12, 30),
+  style: (style) => style.copyWith(...),
+  hour24: false,
   textAlign: TextAlign.start,
   textAlignVertical: TextAlignVertical.center,
   autofocus: false,
   expands: false,
-  onEditingComplete: () => print('Editing complete'),
-  onSubmit: (time) => print('Time submitted: $time'),
+  onEditingComplete: () {},
+  onSubmit: (time) {},
   mouseCursor: SystemMouseCursors.text,
   canRequestFocus: true,
-  builder: (context, styles, child) => child!,
-  prefixBuilder: (context, styles, child) => Icon(FIcons.clock2),
+  builder: (context, styles, child) => child,
+  prefixBuilder: (context, styles, _) => Icon(FIcons.clock4),
   suffixBuilder: null,
-  label: Text('Select Time'),
-  description: Text('Choose a time'),
+  label: const Text('Select Time'),
+  description: const Text('Choose a time'),
   enabled: true,
-  onChange: (time) => print('Time changed: $time'),
-  onSaved: (time) => print('Time saved: $time'),
-  onReset: () => print('Reset'),
+  onSaved: (time) {},
+  onReset: () {},
   autovalidateMode: AutovalidateMode.onUnfocus,
 );
 ```
@@ -106,30 +106,25 @@ FTimeField(
 
 ```dart copy
 FTimeField.picker(
-  controller: FTimeFieldController(
-    vsync: this,
-    initialTime: FTime(12, 30),
-    validator: (time) => time != null && time < const FTime(14, 30) ? 'Time must be in the future' : null,
+  control: FTimeFieldControl.managed(
+    initial: FTime(12, 30),
+    validator: (time) => time != null && time < FTime(14, 30) ? 'Time must be in the future' : null,
+    onChange: (time) {},
   ),
-  initialTime: FTime(12, 30),
-  format: DateFormat.jms(),
-  textAlign: TextAlign.start,
-  textAlignVertical: TextAlignVertical.center,
-  expands: false,
-  mouseCursor: SystemMouseCursors.text,
-  canRequestFocus: true,
+  style: (style) => style.copyWith(...),
+  hour24: false,
   hint: 'Select a time',
-  spacing: FPortalSpacing(4),
-  overflow: FPortalOverflow.flip,
-  offset: Offset.zero,
   hourInterval: 1,
   minuteInterval: 1,
-  label: Text('Picker Time'),
-  description: Text('Select a time from the calendar'),
-  onChange: (time) => print('Time changed: $time'),
-  builder: (context, styles, child) => child!,
-  prefixBuilder: (context, styles, child) => Icon(Icons.calendar_today),
+  builder: (context, styles, child) => child,
+  prefixBuilder: (context, styles, _) => Icon(FIcons.clock4),
   suffixBuilder: null,
+  label: const Text('Picker Time'),
+  description: const Text('Select a time'),
+  enabled: true,
+  onSaved: (time) {},
+  onReset: () {},
+  autovalidateMode: AutovalidateMode.onUnfocus,
 );
 ```
 
@@ -143,10 +138,10 @@ FTimeField.picker(
     </Tabs.Tab>
     <Tabs.Tab>
         ```dart {2} copy
-        const FTimeField(
+        FTimeField(
           hour24: true,
-          label: Text('Appointment Time'),
-          description: Text('Select a time for your appointment.'),
+          label: const Text('Appointment Time'),
+          description: const Text('Select a Time for your appointment.'),
         );
         ```
     </Tabs.Tab>
@@ -160,9 +155,9 @@ FTimeField.picker(
     </Tabs.Tab>
     <Tabs.Tab>
         ```dart copy
-        const FTimeField.picker(
-          label: Text('Appointment Time'),
-          description: Text('Select a time for your appointment.'),
+        FTimeField.picker(
+          label: const Text('Appointment Time'),
+          description: const Text('Select a time for your appointment.'),
         );
         ```
     </Tabs.Tab>
@@ -175,35 +170,12 @@ FTimeField.picker(
         <Widget name='time-field' variant='validator' query={{}} height={500}/>
     </Tabs.Tab>
     <Tabs.Tab>
-        ```dart copy
-        class ValidatorTimeFieldPage extends StatefulWidget {
-          @override
-          State<ValidatorTimeFieldPage> createState() => _ValidationTimeFieldPageState();
-        }
-
-        class _ValidationTimeFieldPageState extends State<ValidatorTimeFieldPage> with SingleTickerProviderStateMixin {
-          late final FTimeFieldController _controller;
-
-          @override
-          void initState() {
-            super.initState();
-            _controller = FTimeFieldController(vsync: this, validator: _validate);
-          }
-
-          String? _validate(FTime? time) => time == FTime(12) ? 'Time cannot be noon.' : null;
-
-          @override
-          Widget build(BuildContext context) => FTimeField(
-                controller: _controller,
-                label: const Text('Appointment Time'),
-              );
-
-          @override
-          void dispose() {
-            _controller.dispose();
-            super.dispose();
-          }
-        }
+        ```dart {2} copy
+        FTimeField(
+          control: FTimeFieldControl.managed(validator: (time) => time?.hour == 12 ? 'Time cannot be noon.' : null),
+          label: const Text('Appointment Time'),
+          description: const Text('Select a time for your appointment.'),
+        );
         ```
     </Tabs.Tab>
 
@@ -222,78 +194,59 @@ FTimeField.picker(
           State<FormTimeFieldPage> createState() => _FormTimeFieldPageState();
         }
 
-        class _FormTimeFieldPageState extends State<FormTimeFieldPage> with TickerProviderStateMixin {
-          final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-          late final FTimeFieldController _startTimeController;
-          late final FTimeFieldController _endTimeController;
-
-          @override
-          void initState() {
-            super.initState();
-            _startTimeController = FTimeFieldController(
-              vsync: this,
-              validator: _validateStartTime,
-            );
-            _endTimeController = FTimeFieldController(
-              vsync: this,
-              validator: _validateEndTime,
-            );
-          }
-
-          String? _validateStartTime(FTime? time) {
-            if (time != null && time < FTime.now()) {
-              return 'Start time must be in the future.';
-            }
-            return null;
-          }
-
-          String? _validateEndTime(FTime? time) {
-            if (_startTimeController.value != null && time < _startTimeController.value!) {
-              return 'End time must be after start time.';
-            }
-            return null;
-          }
-
-          @override
-          Widget build(BuildContext context) => Padding(
-            padding: const EdgeInsets.all(30.0),
-            child: Form(
-              key: _formKey,
-              child: Column(
-                children: [
-                  FTimeField(
-                    controller: _startTimeController,
-                    label: const Text('Start Time'),
-                    description: const Text('Select a start time.'),
-                    autovalidateMode: AutovalidateMode.disabled,
-                  ),
-                  const SizedBox(height: 20),
-                  FTimeField(
-                    controller: _endTimeController,
-                    label: const Text('End Time'),
-                    description: const Text('Select an end time.'),
-                    autovalidateMode: AutovalidateMode.disabled,
-                  ),
-                  const SizedBox(height: 25),
-                  FButton(
-                    child: const Text('Submit'),
-                    onPress: () {
-                      if (_formKey.currentState!.validate()) {
-                        // Form is valid, process the dates
-                      }
-                    },
-                  ),
-                ],
-              ),
-            ),
+        class _FormTimeFieldPageState extends State<FormTimeFieldPage> {
+          final _key = GlobalKey<FormState>();
+          late final _startController = FTimeFieldController(
+            validator: (time) => switch (time) {
+              null => 'Please select a start time.',
+              _ when time < FTime.now() => 'Start Time must be in the future.',
+              _ => null,
+            },
           );
 
           @override
           void dispose() {
-            _startTimeController.dispose();
-            _endTimeController.dispose();
+            _startController.dispose();
             super.dispose();
           }
+
+          @override
+          Widget build(BuildContext context) => Form(
+            key: _key,
+            child: Column(
+              children: [
+                FTimeField(
+                  control: FTimeFieldControl.managed(controller: _startController),
+                  label: const Text('Start Time'),
+                  description: const Text('Select a start time.'),
+                  autovalidateMode: AutovalidateMode.disabled,
+                ),
+                const SizedBox(height: 20),
+                FTimeField(
+                  control: FTimeFieldControl.managed(
+                    validator: (time) => switch (time) {
+                      null => 'Please select an end time.',
+                      _ when _startController.value != null && time < _startController.value! =>
+                        'End Time must be after start time.',
+                      _ => null,
+                    },
+                  ),
+                  label: const Text('End Time'),
+                  description: const Text('Select an end time.'),
+                  autovalidateMode: AutovalidateMode.disabled,
+                ),
+                const SizedBox(height: 25),
+                FButton(
+                  child: const Text('Submit'),
+                  onPress: () {
+                    if (_key.currentState!.validate()) {
+                      // Form is valid, process the dates
+                    }
+                  },
+                ),
+              ],
+            ),
+          );
         }
         ```
     </Tabs.Tab>

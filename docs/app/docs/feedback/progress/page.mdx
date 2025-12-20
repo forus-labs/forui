@@ -36,7 +36,7 @@ dart run forui style create progress
 
 ```dart copy
 FProgress(
-  style: FProgressStyle(...),
+  style: (style) => style.copyWith(...),
   semanticsLabel: 'Label',
 );
 ```
