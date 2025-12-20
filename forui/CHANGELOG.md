@@ -219,7 +219,7 @@ Unfortunately, `FCalendar` cannot be easily migrated using data driven fixes due
 * **Breaking** Remove `FMultiSelect.max`. Use `FMultiSelect(control: .managed(...))` instead.
 * **Breaking** Remove `FMultiSelectController`. Use `FMultiValueNotifier` instead.
 * Fix `FSelect.mouseCursor` defaulting to `SystemMouseCursors.click` instead of `MouseCursor.defer`.
-* Deprecate `FSelect.contentScrollHandles`. Please [open an issue](https://github.com/forus-labs/forui/issues) if you use & and need this.
+* Deprecate `FSelect.contentScrollHandles`. Please [open an issue](https://github.com/duobaseio/forui/issues) if you use & and need this.
 
 
 ### `FSelectGroup` & `FSelectTileGroup`
@@ -403,11 +403,11 @@ Unfortunately, `FCalendar` cannot be easily migrated using data driven fixes due
 
 * **Breaking** Remove `FSidebar.width`. This field was never intended for public usage - Use `FSidebarStyle.constraints`
   instead.
-* Deprecate `FValueNotifier`. Please [open an issue](https://github.com/forus-labs/forui/issues) if there's a use-case that isn't covered.
-* Deprecate `FValueNotifier.addValueListener(...)`. Please [open an issue](https://github.com/forus-labs/forui/issues) if there's a use-case that isn't covered.
-* Deprecate `FValueNotifier.removeValueListener(...)`. Please [open an issue](https://github.com/forus-labs/forui/issues) if there's a use-case that isn't covered.
-* Deprecate `FMultiValueNotifier.addUpdateListener(...)`. Please [open an issue](https://github.com/forus-labs/forui/issues) if there's a use-case that isn't covered.
-* Deprecate `FMultiValueNotifier.removeUpdateListener(...)`. Please [open an issue](https://github.com/forus-labs/forui/issues) if there's a use-case that isn't covered.
+* Deprecate `FValueNotifier`. Please [open an issue](https://github.com/duobaseio/forui/issues) if there's a use-case that isn't covered.
+* Deprecate `FValueNotifier.addValueListener(...)`. Please [open an issue](https://github.com/duobaseio/forui/issues) if there's a use-case that isn't covered.
+* Deprecate `FValueNotifier.removeValueListener(...)`. Please [open an issue](https://github.com/duobaseio/forui/issues) if there's a use-case that isn't covered.
+* Deprecate `FMultiValueNotifier.addUpdateListener(...)`. Please [open an issue](https://github.com/duobaseio/forui/issues) if there's a use-case that isn't covered.
+* Deprecate `FMultiValueNotifier.removeUpdateListener(...)`. Please [open an issue](https://github.com/duobaseio/forui/issues) if there's a use-case that isn't covered.
 * Fix generated style docs being malformed.
 
 
@@ -2149,7 +2149,7 @@ This update adds responsive breakpoints, focused outlines & localization! It als
 ###
 
 * Fix `FTabs` not showing correct tab entry when switching tabs.
-  [Issue #203](https://github.com/forus-labs/forui/issues/203).
+  [Issue #203](https://github.com/duobaseio/forui/issues/203).
 
 ## 0.5.0
 

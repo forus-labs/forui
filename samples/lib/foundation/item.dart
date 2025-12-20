@@ -44,7 +44,7 @@ class ItemDetailsPage extends Sample {
   Widget sample(BuildContext _) => FItem(
     prefix: const Icon(FIcons.wifi),
     title: const Text('WiFi'),
-    details: const Text('Forus Labs (5G)'),
+    details: const Text('Duobase (5G)'),
     suffix: const Icon(FIcons.chevronRight),
     onPress: () {},
   );

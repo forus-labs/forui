@@ -29,7 +29,7 @@ class ItemGroupPage extends Sample {
       FItem(
         prefix: const Icon(FIcons.wifi),
         title: const Text('WiFi'),
-        details: const Text('Forus Labs (5G)'),
+        details: const Text('Duobase (5G)'),
         suffix: const Icon(FIcons.chevronRight),
         onPress: () {},
       ),
@@ -60,7 +60,7 @@ class ScrollableItemGroupPage extends Sample {
       .item(
         prefix: const Icon(FIcons.wifi),
         title: const Text('WiFi'),
-        details: const Text('Forus Labs (5G)'),
+        details: const Text('Duobase (5G)'),
         suffix: const Icon(FIcons.chevronRight),
         onPress: () {},
       ),
@@ -111,7 +111,7 @@ class MergeItemGroupPage extends Sample {
           .item(
             prefix: const Icon(FIcons.wifi),
             title: const Text('WiFi'),
-            details: const Text('Forus Labs (5G)'),
+            details: const Text('Duobase (5G)'),
             suffix: const Icon(FIcons.chevronRight),
             onPress: () {},
           ),

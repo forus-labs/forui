@@ -18,7 +18,7 @@ void main() {
               children: const [
                 .tile(
                   title: Text('WiFi'),
-                  details: Text('Forus Labs (5G)'),
+                  details: Text('Duobase (5G)'),
                   suffix: Icon(FIcons.chevronRight),
                   value: 1,
                 ),
@@ -26,7 +26,7 @@ void main() {
                   prefix: Icon(FIcons.bluetooth),
                   title: Text('Bluetooth'),
                   subtitle: Text('Fee, Fo, Fum'),
-                  details: Text('Forus Labs (5G)'),
+                  details: Text('Duobase (5G)'),
                   value: 2,
                 ),
               ],
@@ -47,7 +47,7 @@ void main() {
               children: const [
                 .tile(
                   title: Text('WiFi'),
-                  details: Text('Forus Labs (5G)'),
+                  details: Text('Duobase (5G)'),
                   suffix: Icon(FIcons.chevronRight),
                   value: 1,
                 ),
@@ -55,7 +55,7 @@ void main() {
                   prefix: Icon(FIcons.bluetooth),
                   title: Text('Bluetooth'),
                   subtitle: Text('Fee, Fo, Fum'),
-                  details: Text('Forus Labs (5G)'),
+                  details: Text('Duobase (5G)'),
                   value: 2,
                 ),
               ],
@@ -83,7 +83,7 @@ void main() {
               children: const [
                 .tile(
                   title: Text('WiFi'),
-                  details: Text('Forus Labs (5G)'),
+                  details: Text('Duobase (5G)'),
                   suffix: Icon(FIcons.chevronRight),
                   value: 1,
                 ),
@@ -91,7 +91,7 @@ void main() {
                   prefix: Icon(FIcons.bluetooth),
                   title: Text('Bluetooth'),
                   subtitle: Text('Fee, Fo, Fum'),
-                  details: Text('Forus Labs (5G)'),
+                  details: Text('Duobase (5G)'),
                   value: 2,
                 ),
               ],

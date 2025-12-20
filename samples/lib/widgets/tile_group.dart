@@ -31,7 +31,7 @@ class TileGroupPage extends Sample {
       .tile(
         prefix: const Icon(FIcons.wifi),
         title: const Text('WiFi'),
-        details: const Text('Forus Labs (5G)'),
+        details: const Text('Duobase (5G)'),
         suffix: const Icon(FIcons.chevronRight),
         onPress: () {},
       ),
@@ -64,7 +64,7 @@ class ScrollableTileGroupPage extends Sample {
       .tile(
         prefix: const Icon(FIcons.wifi),
         title: const Text('WiFi'),
-        details: const Text('Forus Labs (5G)'),
+        details: const Text('Duobase (5G)'),
         suffix: const Icon(FIcons.chevronRight),
         onPress: () {},
       ),
@@ -132,7 +132,7 @@ class _MergeTileGroupPageState extends StatefulSampleState<MergeTileGroup> {
           .tile(
             prefix: const Icon(FIcons.wifi),
             title: const Text('WiFi'),
-            details: const Text('Forus Labs (5G)'),
+            details: const Text('Duobase (5G)'),
             suffix: const Icon(FIcons.chevronRight),
             onPress: () {},
           ),

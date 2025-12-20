@@ -11,4 +11,4 @@ dartdoc:
     - ambiguous-reexport
   linkToSource:
     root: '.'
-    uriTemplate: "https://github.com/forus-labs/forui/tree/main/forui/%f%#L%l%"
+    uriTemplate: "https://github.com/duobaseio/forui/tree/main/forui/%f%#L%l%"

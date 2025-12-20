@@ -17,9 +17,9 @@ export const metadata = {
 
 const banner = <Banner storageKey="some-key">Forui 0.17.0 is released 🎉</Banner>;
 const navbar = (
-  <Navbar logo={<Logo />} projectLink="https://github.com/forus-labs/forui" chatLink="https://discord.gg/jrw3qHksjE" />
+  <Navbar logo={<Logo />} projectLink="https://github.com/duobaseio/forui" chatLink="https://discord.gg/jrw3qHksjE" />
 );
-const footer = <Footer>A Forus Labs initiative.</Footer>;
+const footer = <Footer>A Duobase IO initiative.</Footer>;
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -41,7 +41,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           banner={banner}
           navbar={navbar}
           pageMap={await getPageMap()}
-          docsRepositoryBase="https://github.com/forus-labs/forui/tree/main/docs"
+          docsRepositoryBase="https://github.com/duobaseio/forui/tree/main/docs"
           footer={footer}
           // ... Your additional layout options
         >
