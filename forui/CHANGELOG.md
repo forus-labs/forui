@@ -263,8 +263,14 @@ Unfortunately, `FCalendar` cannot be easily migrated using data driven fixes due
 
 
 ### `FScaffold`
-* **Breaking** Remove `FToaster` from `FScaffold`. This was causing toasts to be cleared when switching between pages. 
+* **Breaking** Remove `FToaster` from `FScaffold`. This was causing toasts to be cleared when switching between pages.
   Use `FToaster` directly instead.
+
+
+### `FSheet`
+* **Breaking** Add `showFSheet(resizeToAvoidBottomInset: ...)`. Set to false to restore previous behavior.
+* **Breaking** Add `showFPersistentSheet(resizeToAvoidBottomInset: ...)`. Set to false to restore previous behavior.
+* **Breaking** Add `FModalSheetRoute.resizeToAvoidBottomInset`. Set to false to restore previous behavior.
 
 
 ### `FSlider`

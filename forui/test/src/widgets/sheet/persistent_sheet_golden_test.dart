@@ -13,6 +13,86 @@ void main() {
     controller = null;
   });
 
+  group('resizeToAvoidBottomInset', () {
+    testWidgets('shifts up', (tester) async {
+      await tester.pumpWidget(
+        MediaQuery(
+          data: const MediaQueryData(viewInsets: .only(bottom: 100)),
+          child: TestScaffold.app(
+            child: FSheets(
+              child: Builder(
+                builder: (context) => Center(
+                  child: FButton.icon(
+                    child: const Icon(FIcons.chevronRight),
+                    onPress: () {
+                      controller = showFPersistentSheet(
+                        context: context,
+                        side: .btt,
+                        builder: (context, controller) => Container(
+                          height: .infinity,
+                          width: .infinity,
+                          decoration: BoxDecoration(
+                            border: .all(color: context.theme.colors.primary),
+                            color: context.theme.colors.background,
+                          ),
+                          child: const Center(child: Text('Sheet')),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+      );
+
+      await tester.tap(find.byType(FButton));
+      await tester.pumpAndSettle();
+
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('sheet/persistent/bottom-inset.png'));
+    });
+
+    testWidgets('does not overflow', (tester) async {
+      await tester.pumpWidget(
+        MediaQuery(
+          data: const MediaQueryData(viewInsets: .only(bottom: 1000)),
+          child: TestScaffold.app(
+            child: FSheets(
+              child: Builder(
+                builder: (context) => Center(
+                  child: FButton.icon(
+                    child: const Icon(FIcons.chevronRight),
+                    onPress: () {
+                      controller = showFPersistentSheet(
+                        context: context,
+                        side: .btt,
+                        builder: (context, controller) => Container(
+                          height: .infinity,
+                          width: .infinity,
+                          decoration: BoxDecoration(
+                            border: .all(color: context.theme.colors.primary),
+                            color: context.theme.colors.background,
+                          ),
+                          child: const Center(child: Text('Sheet')),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+      );
+
+      await tester.tap(find.byType(FButton));
+      await tester.pumpAndSettle();
+
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('sheet/persistent/bottom-inset-overflow.png'));
+    });
+  });
+
   for (final side in FLayout.values) {
     testWidgets('default - $side', (tester) async {
       await tester.pumpWidget(
