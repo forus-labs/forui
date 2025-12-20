@@ -1,4 +1,4 @@
-## 0.17.0 (Next)
+## 0.17.0
 
 This update overhauls the API by introducing [controls](https://forui.dev/docs/controls) to support declarative state
 and adding support for the new dot-shorthand syntax.
