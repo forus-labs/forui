@@ -51,7 +51,7 @@ class DetailedSelectPage extends Sample {
         value: 'Bug',
       ),
       .item(
-        prefix: const Icon(FIcons.filePlus2),
+        prefix: const Icon(FIcons.filePlusCorner),
         title: const Text('Feature'),
         subtitle: const Text('A new feature or enhancement'),
         value: 'Feature',

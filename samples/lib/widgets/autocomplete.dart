@@ -72,7 +72,7 @@ class DetailedAutocompletePage extends Sample {
           ),
           'Feature' => .item(
             value: 'Feature',
-            prefix: const Icon(FIcons.filePlus2),
+            prefix: const Icon(FIcons.filePlusCorner),
             title: const Text('Feature'),
             subtitle: const Text('A new feature or enhancement'),
           ),
