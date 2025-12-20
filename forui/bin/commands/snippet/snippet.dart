@@ -38,7 +38,7 @@ class Application extends StatelessWidget {
       // See https://api.flutter.dev/flutter/material/MaterialApp/themeAnimationStyle.html for how to configure this.
       //
       // There is a known issue with implicitly animated widgets where their transition occurs AFTER the theme's.
-      // See https://github.com/forus-labs/forui/issues/670.
+      // See https://github.com/duobaseio/forui/issues/670.
       theme: theme.toApproximateMaterialTheme(),
       builder: (_, child) => FAnimatedTheme(data: theme, child: child!),
       // You can also replace FScaffold with Material Scaffold.

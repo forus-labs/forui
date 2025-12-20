@@ -30,7 +30,7 @@ class FChangeNotifier with ChangeNotifier {
 
 /// A [ValueNotifier] that provides additional life-cycle tracking capabilities.
 @Deprecated(
-  "Use ValueNotifier instead. Please open an issue at https://github.com/forus-labs/forui/issues if that doesn't cover your use case.",
+  "Use ValueNotifier instead. Please open an issue at https://github.com/duobaseio/forui/issues if that doesn't cover your use case.",
 )
 class FValueNotifier<T> extends ValueNotifier<T> {
   final List<ValueChanged<T>> _listeners = [];
@@ -42,7 +42,7 @@ class FValueNotifier<T> extends ValueNotifier<T> {
 
   /// Registers a closure to be called with a new value when the notifier changes if not null.
   @Deprecated(
-    "Use lifted state instead. Please open an issue at https://github.com/forus-labs/forui/issues if that doesn't cover your use case.",
+    "Use lifted state instead. Please open an issue at https://github.com/duobaseio/forui/issues if that doesn't cover your use case.",
   )
   void addValueListener(ValueChanged<T>? listener) {
     if (listener != null) {
@@ -52,7 +52,7 @@ class FValueNotifier<T> extends ValueNotifier<T> {
 
   /// Removes a previously registered closure from the list of closures that are notified when the object changes.
   @Deprecated(
-    "Use lifted state instead. Please open an issue at https://github.com/forus-labs/forui/issues if that doesn't cover your use case.",
+    "Use lifted state instead. Please open an issue at https://github.com/duobaseio/forui/issues if that doesn't cover your use case.",
   )
   void removeValueListener(ValueChanged<T>? listener) => _listeners.remove(listener);
 
@@ -127,7 +127,7 @@ class FMultiValueNotifier<T> extends FValueNotifier<Set<T>> {
 
   /// Registers a closure to be called whenever [update] successfully adds/removes an element if not null.
   @Deprecated(
-    "Use lifted state instead. Please open an issue at https://github.com/forus-labs/forui/issues if that doesn't cover your use case.",
+    "Use lifted state instead. Please open an issue at https://github.com/duobaseio/forui/issues if that doesn't cover your use case.",
   )
   void addUpdateListener(ValueChanged<(T, bool)>? listener) {
     if (listener != null) {
@@ -138,7 +138,7 @@ class FMultiValueNotifier<T> extends FValueNotifier<Set<T>> {
   /// Removes a previously registered closure from the list of closures that are notified whenever [update] successfully
   /// adds/removes a value.
   @Deprecated(
-    "Use lifted state instead. Please open an issue at https://github.com/forus-labs/forui/issues if that doesn't cover your use case.",
+    "Use lifted state instead. Please open an issue at https://github.com/duobaseio/forui/issues if that doesn't cover your use case.",
   )
   void removeUpdateListener(ValueChanged<(T, bool)>? listener) => _updateListeners.remove(listener);
 

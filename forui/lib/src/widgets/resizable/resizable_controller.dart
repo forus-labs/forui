@@ -94,7 +94,7 @@ final class _ResizableController extends FResizableController {
         regions.sum((r) => r.extent.current, initial: 0.0) == regions[0].extent.total,
         'Current total extent: ${regions.sum((r) => r.extent.current, initial: 0.0)} != initial total extent: '
         '${regions[0].extent.total}. This is likely a bug in Forui. Please file a bug report: '
-        'https://github.com/forus-labs/forui/issues/new?template=bug_report.md',
+        'https://github.com/duobaseio/forui/issues/new?template=bug_report.md',
       );
 
       if (onResizeUpdate case final onResizeUpdate?) {
@@ -188,7 +188,7 @@ final class _CascadeController extends FResizableController {
     assert(
       regions.sum((r) => r.extent.current, initial: 0.0).around(regions[0].extent.total),
       'Current total size: ${regions.sum((r) => r.extent.current, initial: 0.0)} != initial total size: ${regions[0].extent.total}. '
-      'This is likely a bug in Forui. Please file a bug report: https://github.com/forus-labs/forui/issues/new?template=bug_report.md',
+      'This is likely a bug in Forui. Please file a bug report: https://github.com/duobaseio/forui/issues/new?template=bug_report.md',
     );
 
     onResizeUpdate?.call(moved!);

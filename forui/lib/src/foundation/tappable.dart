@@ -475,7 +475,7 @@ class AnimatedTappableState extends _FTappableState<AnimatedTappable> with Singl
 
   @override
   void onPressedStart() {
-    // Check if it's mounted due to a non-deterministic race condition, https://github.com/forus-labs/forui/issues/482.
+    // Check if it's mounted due to a non-deterministic race condition, https://github.com/duobaseio/forui/issues/482.
     if (mounted) {
       _bounceController.forward();
     }
@@ -483,7 +483,7 @@ class AnimatedTappableState extends _FTappableState<AnimatedTappable> with Singl
 
   @override
   void onPressedEnd() {
-    // Check if it's mounted due to a non-deterministic race condition, https://github.com/forus-labs/forui/issues/482.
+    // Check if it's mounted due to a non-deterministic race condition, https://github.com/duobaseio/forui/issues/482.
     if (mounted) {
       _bounceController.reverse();
     }

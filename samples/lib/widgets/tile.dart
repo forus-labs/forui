@@ -44,7 +44,7 @@ class TileDetailsPage extends Sample {
   Widget sample(BuildContext _) => FTile(
     prefix: const Icon(FIcons.wifi),
     title: const Text('WiFi'),
-    details: const Text('Forus Labs (5G)'),
+    details: const Text('Duobase (5G)'),
     suffix: const Icon(FIcons.chevronRight),
     onPress: () {},
   );

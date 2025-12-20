@@ -16,17 +16,12 @@ void main() {
               style: TestScaffold.blueScreen.tileGroupStyle,
               label: const Text('Network'),
               children: const [
-                .tile(
-                  title: Text('WiFi'),
-                  details: Text('Forus Labs (5G)'),
-                  suffix: Icon(FIcons.chevronRight),
-                  value: 1,
-                ),
+                .tile(title: Text('WiFi'), details: Text('Duobase (5G)'), suffix: Icon(FIcons.chevronRight), value: 1),
                 .suffix(
                   prefix: Icon(FIcons.bluetooth),
                   title: Text('Bluetooth'),
                   subtitle: Text('Fee, Fo, Fum'),
-                  details: Text('Forus Labs (5G)'),
+                  details: Text('Duobase (5G)'),
                   value: 2,
                 ),
               ],
@@ -45,17 +40,12 @@ void main() {
               style: TestScaffold.blueScreen.tileGroupStyle,
               label: const Text('Network'),
               children: const [
-                .tile(
-                  title: Text('WiFi'),
-                  details: Text('Forus Labs (5G)'),
-                  suffix: Icon(FIcons.chevronRight),
-                  value: 1,
-                ),
+                .tile(title: Text('WiFi'), details: Text('Duobase (5G)'), suffix: Icon(FIcons.chevronRight), value: 1),
                 .suffix(
                   prefix: Icon(FIcons.bluetooth),
                   title: Text('Bluetooth'),
                   subtitle: Text('Fee, Fo, Fum'),
-                  details: Text('Forus Labs (5G)'),
+                  details: Text('Duobase (5G)'),
                   value: 2,
                 ),
               ],
@@ -81,17 +71,12 @@ void main() {
               enabled: false,
               label: const Text('Network'),
               children: const [
-                .tile(
-                  title: Text('WiFi'),
-                  details: Text('Forus Labs (5G)'),
-                  suffix: Icon(FIcons.chevronRight),
-                  value: 1,
-                ),
+                .tile(title: Text('WiFi'), details: Text('Duobase (5G)'), suffix: Icon(FIcons.chevronRight), value: 1),
                 .suffix(
                   prefix: Icon(FIcons.bluetooth),
                   title: Text('Bluetooth'),
                   subtitle: Text('Fee, Fo, Fum'),
-                  details: Text('Forus Labs (5G)'),
+                  details: Text('Duobase (5G)'),
                   value: 2,
                 ),
               ],

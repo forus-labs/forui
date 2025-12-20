@@ -83,7 +83,7 @@ void main() {
               child: FTextFormField.email(
                 control: .managed(initial: text == null ? null : TextEditingValue(text: text)),
                 autofocus: focused_,
-                hint: 'janedoe@foruslabs.com',
+                hint: 'janedoe@duobase.io',
               ),
             ),
           );
