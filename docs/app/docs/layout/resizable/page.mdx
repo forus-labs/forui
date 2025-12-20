@@ -17,39 +17,36 @@ A box which children can be resized along either the horizontal or vertical axis
   </Tabs.Tab>
   <Tabs.Tab>
     ```dart copy
-    class TimeOfDay extends StatelessWidget {
-      @override
-      Widget build(BuildContext context) => DecoratedBox(
-        decoration: BoxDecoration(
-          border: Border.all(color: context.theme.colors.border),
-          borderRadius: BorderRadius.circular(8),
-        ),
-        child: FResizable(
-          axis: Axis.vertical,
-          crossAxisExtent: 300,
-          children: [
-            FResizableRegion(
-              initialExtent: 250,
-              minExtent: 100,
-              builder: (_, data, __) => Label(data: data, icon: FIcons.sunrise, label: 'Morning'),
-            ),
-            FResizableRegion(
-              initialExtent: 100,
-              minExtent: 100,
-              builder: (_, data, __) => Label(data: data, icon: FIcons.sun, label: 'Afternoon'),
-            ),
-            FResizableRegion(
-              initialExtent: 250,
-              minExtent: 100,
-              builder: (_, data, __) => Label(data: data, icon: FIcons.sunset, label: 'Evening'),
-            ),
-          ],
-        ),
-      );
-    }
+    DecoratedBox(
+      decoration: BoxDecoration(
+        border: Border.all(color: context.theme.colors.border),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: FResizable(
+        axis: Axis.vertical,
+        crossAxisExtent: 300,
+        children: [
+          FResizableRegion(
+            initialExtent: 250,
+            minExtent: 100,
+            builder: (_, data, _) => Label(data: data, icon: FIcons.sunrise, label: 'Morning'),
+          ),
+          FResizableRegion(
+            initialExtent: 100,
+            minExtent: 100,
+            builder: (_, data, _) => Label(data: data, icon: FIcons.sun, label: 'Afternoon'),
+          ),
+          FResizableRegion(
+            initialExtent: 250,
+            minExtent: 100,
+            builder: (_, data, _) => Label(data: data, icon: FIcons.sunset, label: 'Evening'),
+          ),
+        ],
+      ),
+    );
 
     class Label extends StatelessWidget {
-      static final DateFormat format = DateFormat.jm(); // Requires package:intl
+      static final format = DateFormat.jm(); // Requires package:intl
 
       final FResizableRegionData data;
       final IconData icon;
@@ -112,15 +109,17 @@ dart run forui style create resizable
 
 ```dart copy
 FResizable(
-  controller: FResizableController.cascade(
-    onResizeUpdate: (regions) => print(regions),
-    onResizeEnd: (regions) => print(regions),
+  control: FResizableControl.managedCascade(
+    onResizeUpdate: (regions) {},
+    onResizeEnd: (regions) {},
   ),
-  style: FResizableStyle(...),
+  style: (style) => style.copyWith(...),
   axis: Axis.vertical,
   divider: FResizableDivider.dividerWithThumb,
   crossAxisExtent: 400,
-  onChange: (regions) => print('Regions changed: $regions'),
+  hitRegionExtent: 10,
+  resizePercentage: 0.005,
+  semanticFormatterCallback: (left, right) => '${left.extent.current}, ${right.extent.current}',
   children: [
     FResizableRegion(
       initialExtent: 200,
@@ -141,8 +140,21 @@ FResizable(
     <Widget name='resizable' variant='no-cascading' query={{}} height={700}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {10} copy
-    class TimeOfDay extends StatelessWidget {
+    ```dart {22} copy
+    class TimeOfDay extends StatefulWidget {
+      @override
+      State<TimeOfDay> createState() => _TimeOfDayState();
+    }
+
+    class _TimeOfDayState extends State<TimeOfDay> {
+      final _controller = FResizableController();
+
+      @override
+      void dispose() {
+        _controller.dispose();
+        super.dispose();
+      }
+
       @override
       Widget build(BuildContext context) => DecoratedBox(
         decoration: BoxDecoration(
@@ -150,24 +162,24 @@ FResizable(
           borderRadius: BorderRadius.circular(8),
         ),
         child: FResizable(
+          control: FResizableControl.managed(controller: _controller),
           axis: Axis.vertical,
-          controller: FResizableController(),
           crossAxisExtent: 300,
           children: [
             FResizableRegion(
               initialExtent: 200,
               minExtent: 100,
-              builder: (_, data, __) => Label(data: data, icon: FIcons.sunrise, label: 'Morning'),
+              builder: (_, data, _) => Label(data: data, icon: FIcons.sunrise, label: 'Morning'),
             ),
             FResizableRegion(
               initialExtent: 200,
               minExtent: 100,
-              builder: (_, data, __) => Label(data: data, icon: FIcons.sun, label: 'Afternoon'),
+              builder: (_, data, _) => Label(data: data, icon: FIcons.sun, label: 'Afternoon'),
             ),
             FResizableRegion(
               initialExtent: 200,
               minExtent: 100,
-              builder: (_, data, __) => Label(data: data, icon: FIcons.sunset, label: 'Evening'),
+              builder: (_, data, _) => Label(data: data, icon: FIcons.sunset, label: 'Evening'),
             ),
           ],
         ),
@@ -175,7 +187,7 @@ FResizable(
     }
 
     class Label extends StatelessWidget {
-      static final DateFormat format = DateFormat.jm(); // Requires package:intl
+      static final format = DateFormat.jm(); // Requires package:intl
 
       final FResizableRegionData data;
       final IconData icon;

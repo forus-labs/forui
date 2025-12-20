@@ -20,15 +20,12 @@ A flexible container component that displays content with an optional title, sub
       FCard(
         image: Container(
           decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage(path('avatar.png')),
-              fit: BoxFit.cover,
-            ),
+            image: DecorationImage(image: AssetImage('avatar.png'), fit: BoxFit.cover),
           ),
           height: 200,
         ),
         title: const Text('Gratitude'),
-        subtitle: const Text('Being thankful and showing appreciation for kindness.'),
+        subtitle: const Text('The quality of being thankful; readiness to show appreciation for and to return kindness.'),
       );
       ```
   </Tabs.Tab>
@@ -48,10 +45,12 @@ dart run forui style create card
 
 ```dart copy
 FCard(
-  style: FCardStyle(...),
+  image: const Placeholder(),
   title: const Text('Notification'),
   subtitle: const Text('You have 3 unread messages.'),
   child: FButton(child: const Text('Read messages'), onPress: () {}),
+  mainAxisSize: MainAxisSize.min,
+  style: (style) => style.copyWith(...),
 );
 ```
 
@@ -59,7 +58,7 @@ FCard(
 
 ```dart copy
 FCard.raw(
-  style: FCardStyle(...),
   child: const Placeholder(),
+  style: (style) => style.copyWith(...),
 );
 ```

@@ -22,36 +22,12 @@ A text field lets the user enter text, either with a hardware keyboard or with a
   </Tabs.Tab>
   <Tabs.Tab>
     ```dart copy
-    class DefaultTextField extends StatefulWidget {
-      const DefaultTextField({super.key});
-
-      @override
-      State<DefaultTextField> createState() => _DefaultTextFieldState();
-    }
-
-    class _DefaultTextFieldState extends State<DefaultTextField> {
-      final TextEditingController _controller = TextEditingController();
-
-      @override
-      void initState() {
-        super.initState();
-      }
-
-      @override
-      Widget build(BuildContext context) => FTextField(
-        controller: _controller,
-        label: const Text('Username'),
-        hint: 'JaneDoe',
-        description: const Text('Please enter your username.'),
-        maxLines: 1,
-      );
-
-      @override
-      void dispose() {
-        _controller.dispose();
-        super.dispose();
-      }
-    }
+    FTextField(
+      enabled: true,
+      label: const Text('Username'),
+      hint: 'JaneDoe',
+      description: const Text('Please enter your username.'),
+    );
     ```
 
   </Tabs.Tab>
@@ -71,16 +47,16 @@ dart run forui style create text-field
 
 ```dart copy
 FTextField(
-  controller: _controller, // TextEditingController
-  style: FTextFieldStyle(...),
-  clearable: (value) => value.text.isNotEmpty,
-  enabled: true,
+  control: FTextFieldControl.managed(initial: TextEditingValue(text: '...')),
+  style: (style) => style.copyWith(...),
   label: const Text('Email'),
   hint: 'john@doe.com',
   description: const Text('Enter your email associated with your Forui account.'),
   error: const Text('Error'),
   keyboardType: TextInputType.emailAddress,
   textCapitalization: TextCapitalization.none,
+  enabled: true,
+  clearable: (value) => value.text.isNotEmpty,
   maxLines: 1,
 );
 ```
@@ -98,11 +74,10 @@ FTextField(
   <Tabs.Tab>
     ```dart copy
     FTextField(
-      controller: _controller, // TextEditingController
+      enabled: true,
       label: const Text('Username'),
       hint: 'JaneDoe',
       description: const Text('Please enter your username.'),
-      maxLines: 1,
     );
     ```
   </Tabs.Tab>
@@ -115,14 +90,12 @@ FTextField(
     <Widget name='text-field' query={{enabled: 'false'}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {7} copy
+    ```dart {2} copy
     FTextField(
-      controller: _controller, // TextEditingController
+      enabled: false,
       label: const Text('Username'),
       hint: 'JaneDoe',
       description: const Text('Please enter your username.'),
-      maxLines: 1,
-      enabled: false,
     );
     ```
   </Tabs.Tab>
@@ -135,28 +108,14 @@ FTextField(
     <Widget name='text-field' variant='clearable' query={{}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {18} copy
-    class ClearableTextField extends StatefulWidget {
-      @override
-      State<ClearableTextField> createState() => ClearableTextFieldState();
-    }
-
-    class ClearableTextFieldState extends State<ClearableTextField> {
-      late final TextEditingController _controller = TextEditingController(text: 'MyUsername');
-
-      @override
-      Widget build(BuildContext context) => Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
-        child: FTextField(
-          controller: _controller,
-          label: const Text('Username'),
-          hint: 'JaneDoe',
-          description: const Text('Please enter your username.'),
-          maxLines: 1,
-          clearable: (value) => value.text.isNotEmpty,
-        ),
-      );
-    }
+    ```dart {2, 6} copy
+    FTextField(
+      control: const FTextFieldControl.managed(initial: TextEditingValue(text: 'MyUsername')),
+      label: const Text('Username'),
+      hint: 'JaneDoe',
+      description: const Text('Please enter your username.'),
+      clearable: (value) => value.text.isNotEmpty,
+    );
     ```
 
   </Tabs.Tab>
@@ -172,7 +131,9 @@ FTextField(
   </Tabs.Tab>
   <Tabs.Tab>
     ```dart copy
-    FTextField.email(initialValue: 'jane@doe.com');
+    FTextField.email(
+      control: FTextFieldControl.managed(initial: TextEditingValue(text: 'jane@doe.com')),
+    );
     ```
   </Tabs.Tab>
 </Tabs>
@@ -185,7 +146,9 @@ FTextField(
   </Tabs.Tab>
   <Tabs.Tab>
     ```dart copy
-    FTextField.password();
+    FTextField.password(
+      control: FTextFieldControl.managed(initial: TextEditingValue(text: 'My password')),
+    );
     ```
   </Tabs.Tab>
 </Tabs>
@@ -198,10 +161,7 @@ FTextField(
   </Tabs.Tab>
   <Tabs.Tab>
     ```dart copy
-    FTextField.multiline(
-      label: const Text('Leave a review'),
-      maxLines: 4,
-    );
+    FTextField.multiline(label: const Text('Leave a review'), maxLines: 4);
     ```
   </Tabs.Tab>
 </Tabs>

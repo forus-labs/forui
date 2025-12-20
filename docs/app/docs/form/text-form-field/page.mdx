@@ -23,46 +23,28 @@ onscreen keyboard.
     <Widget name='text-form-field' height={550} query={{}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {9-11, 20-21, 27, 31-36, 38-42, 46-52} copy
-    class LoginForm extends StatefulWidget {
-      const LoginForm({super.key});
-
+    ```dart copy
+    class TextFormFieldPage extends StatefulWidget {
       @override
-      State<LoginForm> createState() => _LoginFormState();
+      State<TextFormFieldPage> createState() => _TextFormFieldPageState();
     }
 
-    class _LoginFormState extends State<LoginForm> {
-      final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-      final TextEditingController _emailController = TextEditingController();
-      final TextEditingController _passwordController = TextEditingController();
-
-      @override
-      void initState() {
-        super.initState();
-      }
-
-      @override
-      void dispose() {
-        _emailController.dispose();
-        _passwordController.dispose();
-        super.dispose();
-      }
+    class _TextFormFieldPageState extends State<TextFormFieldPage> {
+      final _key = GlobalKey<FormState>();
 
       @override
       Widget build(BuildContext context) => Form(
-        key: _formKey,
+        key: _key,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             FTextFormField.email(
-              controller: _emailController,
               hint: 'janedoe@foruslabs.com',
               autovalidateMode: AutovalidateMode.onUserInteraction,
               validator: (value) => (value?.contains('@') ?? false) ? null : 'Please enter a valid email.',
             ),
             const SizedBox(height: 10),
             FTextFormField.password(
-              controller: _passwordController,
               autovalidateMode: AutovalidateMode.onUserInteraction,
               validator: (value) => 8 <= (value?.length ?? 0) ? null : 'Password must be at least 8 characters long.',
             ),
@@ -70,7 +52,7 @@ onscreen keyboard.
             FButton(
               child: const Text('Login'),
               onPress: () {
-                if (!_formKey.currentState!.validate()) {
+                if (!_key.currentState!.validate()) {
                   return; // Form is invalid.
                 }
 
@@ -100,42 +82,40 @@ dart run forui style create text-field
 
 ```dart copy
 FTextFormField(
-  controller: _controller, // TextEditingController
-  style: FTextFieldStyle(...),
-  clearable: (value) => value.text.isNotEmpty,
-  enabled: true,
-  onSaved: (value) {},
-  onReset: () => print('Reset'),
-  validator: (value) => true,
+  control: FTextFieldControl.managed(initial: TextEditingValue(text: '...')),
+  style: (style) => style.copyWith(...),
   label: const Text('Email'),
   hint: 'john@doe.com',
   description: const Text('Enter your email associated with your Forui account.'),
-  forceErrorText: 'Error'
-  errorBuilder: (context, error) => const Text(error),
   keyboardType: TextInputType.emailAddress,
   textCapitalization: TextCapitalization.none,
-  maxLines: 1,
+  enabled: true,
+  clearable: (value) => value.text.isNotEmpty,
+  onSaved: (value) {},
+  onReset: () {},
+  validator: (value) => null,
+  autovalidateMode: AutovalidateMode.onUserInteraction,
+  forceErrorText: 'Error',
+  errorBuilder: (context, error) => Text(error),
 );
 ```
 
 ### `FTextFormField.email(...)`
 
-```
+```dart copy
 FTextFormField.email(
-  controller: _controller, // TextEditingController
-  clearable: (value) => value.text.isNotEmpty,
-  enabled: true,
-  onSaved: (value) {},
-  onReset: () => print('Reset'),
-  validator: (value) => true,
-  label: const Text('Email'),
+  control: FTextFieldControl.managed(initial: TextEditingValue(text: '...')),
+  style: (style) => style.copyWith(...),
   hint: 'john@doe.com',
   description: const Text('Enter your email associated with your Forui account.'),
-  forceErrorText: 'Error'
-  errorBuilder: (context, error) => const Text(error),
-  keyboardType: TextInputType.emailAddress,
-  textCapitalization: TextCapitalization.none,
-  maxLines: 1,
+  enabled: true,
+  clearable: (value) => value.text.isNotEmpty,
+  onSaved: (value) {},
+  onReset: () {},
+  validator: (value) => null,
+  autovalidateMode: AutovalidateMode.onUserInteraction,
+  forceErrorText: 'Error',
+  errorBuilder: (context, error) => Text(error),
 );
 ```
 
@@ -143,21 +123,19 @@ FTextFormField.email(
 
 ```dart copy
 FTextFormField.password(
-  controller: _controller, // TextEditingController
-  clearable: (value) => value.text.isNotEmpty,
-  enabled: true,
-  onSaved: (value) {},
-  onReset: () => print('Reset'),
-  validator: (value) => true,
-  label: const Text('Password'),
+  control: FTextFieldControl.managed(initial: TextEditingValue(text: '...')),
+  obscureTextControl: FObscureTextControl.managed(),
+  style: (style) => style.copyWith(...),
   hint: 'Enter password',
   description: const Text('Enter your password.'),
-  forceErrorText: 'Error'
-  errorBuilder: (context, error) => const Text(error),
-  keyboardType: TextInputType.visiblePassword,
-  textCapitalization: TextCapitalization.none,
-  maxLines: 1,
-  obscureTextController: ValueNotifier(false),
+  enabled: true,
+  clearable: (value) => value.text.isNotEmpty,
+  onSaved: (value) {},
+  onReset: () {},
+  validator: (value) => null,
+  autovalidateMode: AutovalidateMode.onUserInteraction,
+  forceErrorText: 'Error',
+  errorBuilder: (context, error) => Text(error),
 );
 ```
 
@@ -165,19 +143,18 @@ FTextFormField.password(
 
 ```dart copy
 FTextFormField.multiline(
-  controller: _controller, // TextEditingController
-  clearable: (value) => value.text.isNotEmpty,
-  enabled: true,
-  onSaved: (value) {},
-  onReset: () => print('Reset'),
-  validator: (value) => true,
+  control: FTextFieldControl.managed(initial: TextEditingValue(text: '...')),
+  style: (style) => style.copyWith(...),
   label: const Text('Description'),
   hint: 'Enter description',
   description: const Text('Enter your description.'),
-  forceErrorText: 'Error'
-  errorBuilder: (context, error) => const Text(error),
-  keyboardType: TextInputType.multiline,
-  textCapitalization: TextCapitalization.none,
-  maxLines: null,
+  enabled: true,
+  clearable: (value) => value.text.isNotEmpty,
+  onSaved: (value) {},
+  onReset: () {},
+  validator: (value) => null,
+  autovalidateMode: AutovalidateMode.onUserInteraction,
+  forceErrorText: 'Error',
+  errorBuilder: (context, error) => Text(error),
 );
 ```

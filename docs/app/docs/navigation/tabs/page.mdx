@@ -26,20 +26,11 @@ A set of layered sections of content—known as tab entries—that are displayed
             subtitle: const Text('Make changes to your account here. Click save when you are done.'),
             child: Column(
               children: [
-                const FTextField(
-                  label: Text('Name'),
-                  hint: 'John Renalo',
-                ),
+                const FTextField(label: Text('Name'), hint: 'John Renalo'),
                 const SizedBox(height: 10),
-                const FTextField(
-                  label: Text('Email'),
-                  hint: 'john@doe.com',
-                ),
+                const FTextField(label: Text('Email'), hint: 'john@doe.com'),
                 const SizedBox(height: 16),
-                FButton(
-                  onPress: () {},
-                  child: const Text('Save'),
-                ),
+                FButton(child: const Text('Save'), onPress: () {}),
               ],
             ),
           ),
@@ -55,10 +46,7 @@ A set of layered sections of content—known as tab entries—that are displayed
                 const SizedBox(height: 10),
                 const FTextField(label: Text('New password')),
                 const SizedBox(height: 16),
-                FButton(
-                  onPress: () {},
-                  child: const Text('Save'),
-                ),
+                FButton(child: const Text('Save'), onPress: () {}),
               ],
             ),
           ),
@@ -83,7 +71,7 @@ dart run forui style create tabs
 
 ```dart copy
 FTabs(
-  style: FTabsStyle(...),
+  style: (style) => style.copyWith(...),
   initialIndex: 1,
   onPress: (index) {},
   children: const [

@@ -20,6 +20,7 @@ Displays a callout for user attention.
     FAlert(
       title: const Text('Heads Up!'),
       subtitle: const Text('You can add components to your app using the cli.'),
+      style: FAlertStyle.primary(),
     );
     ```
   </Tabs.Tab>
@@ -39,10 +40,10 @@ dart run forui style create alerts
 
 ```dart copy
 FAlert(
-  style: FAlertStyle(...),
-  icon: Icon(FIcons.badgeAlert),
   title: const Text('Heads Up!'),
+  icon: const Icon(FIcons.circleAlert),
   subtitle: const Text('You can add components to your app using the cli.'),
+  style: FAlertStyle.primary(),
 );
 ```
 
@@ -59,6 +60,7 @@ FAlert(
     FAlert(
       title: const Text('Heads Up!'),
       subtitle: const Text('You can add components to your app using the cli.'),
+      style: FAlertStyle.primary(),
     );
     ```
   </Tabs.Tab>

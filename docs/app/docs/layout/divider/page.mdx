@@ -17,52 +17,38 @@ Visually or semantically separates content.
   </Tabs.Tab>
   <Tabs.Tab>
     ```dart copy
-    final theme = context.theme;
-    final colors = theme.colors;
-    final typography = theme.typography;
-
-    Padding(
-      padding: const EdgeInsets.all(16),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Flutter Forui',
-            style: typography.xl2.copyWith(
-              color: colors.foreground,
-              fontWeight: FontWeight.w600,
-            ),
+    Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text(
+          'Flutter Forui',
+          style: context.theme.typography.xl2.copyWith(
+            color: context.theme.colors.foreground,
+            fontWeight: FontWeight.w600,
           ),
-          Text(
-            'An open-source widget library.',
-            style: typography.sm.copyWith(color: colors.mutedForeground),
+        ),
+        Text(
+          'An open-source widget library.',
+          style: context.theme.typography.sm.copyWith(color: context.theme.colors.mutedForeground),
+        ),
+        const FDivider(),
+        SizedBox(
+          height: 30,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text('Blog', style: context.theme.typography.sm.copyWith(color: context.theme.colors.foreground)),
+              const FDivider(axis: Axis.vertical),
+              Text('Docs', style: context.theme.typography.sm.copyWith(color: context.theme.colors.foreground)),
+              const FDivider(axis: Axis.vertical),
+              Text('Source', style: context.theme.typography.sm.copyWith(color: context.theme.colors.foreground)),
+            ],
           ),
-          const FDivider(),
-          SizedBox(
-            height: 30,
-            child: Row(
-              children: [
-                Text(
-                  'Blog',
-                  style: typography.sm.copyWith(color: colors.foreground),
-                ),
-                const FDivider(axis : Axis.vertical),
-                Text(
-                  'Docs',
-                  style: typography.sm.copyWith(color: colors.foreground),
-                ),
-                const FDivider(axis : Axis.vertical),
-                Text(
-                  'Source',
-                  style: typography.sm.copyWith(color: colors.foreground),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-     );
+        ),
+      ],
+    );
     ```
 
   </Tabs.Tab>
@@ -81,8 +67,8 @@ dart run forui style create dividers
 ### `FDivider(...)`
 
 ```dart copy
-const FDivider(
-  style: FDividerStyle(...),
-  axis : Axis.vertical,
+FDivider(
+  style: (style) => style.copyWith(...),
+  axis: Axis.vertical,
 );
 ```

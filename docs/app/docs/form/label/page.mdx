@@ -19,16 +19,14 @@ form fields. All form fields in Forui come with this widget wrapped.
   <Tabs.Tab>
     ```dart copy
     FLabel(
-        axis: Axis.horizontal,
-        label: const Text('Accept terms and conditions'),
-        description: const Text('You agree to our terms and conditions.'),
-        child: const DecoratedBox(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(5)),
-            color: Colors.grey,
-          ),
-          child: SizedBox(width: 16, height: 16),
-        ),
+      axis: Axis.horizontal,
+      label: const Text('Accept terms and conditions'),
+      description: const Text('You agree to our terms and conditions.'),
+      error: const Text('Please accept the terms.'),
+      child: const DecoratedBox(
+        decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(5)), color: Colors.grey),
+        child: SizedBox(width: 16, height: 16),
+      ),
     );
     ```
   </Tabs.Tab>
@@ -48,13 +46,14 @@ dart run forui style create label
 
 ```dart copy
 FLabel(
-  style: FLabelStyle(...),
   axis: Axis.horizontal,
+  child: const Placeholder(),
+  style: (style) => style.copyWith(...),
   label: const Text('Accept terms and conditions'),
   description: const Text('You agree to our terms and conditions.'),
   error: const Text('Please accept the terms and conditions.'),
-  states: { WidgetState.error },
-  child: const Placeholder(),
+  expands: false,
+  states: {WidgetState.error},
 );
 ```
 
@@ -69,16 +68,14 @@ FLabel(
     <Tabs.Tab>
         ```dart {2} copy
         FLabel(
-            axis: Axis.vertical,
-            label: const Text('Email'),
-            description: const Text('Enter your email address.'),
-            child: const DecoratedBox(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(5)),
-                color: Colors.grey,
-              ),
-              child: SizedBox(width: 250, height: 30),
-            ),
+          axis: Axis.vertical,
+          label: const Text('Email'),
+          description: const Text('Enter your email address.'),
+          error: const Text('Please enter a valid email address.'),
+          child: const DecoratedBox(
+            decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(5)), color: Colors.grey),
+            child: SizedBox(width: 250, height: 30),
+          ),
         );
         ```
     </Tabs.Tab>
@@ -91,19 +88,17 @@ FLabel(
     <Widget name='label' variant='horizontal' query={{ state: 'disabled' }}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {5} copy
+    ```dart {6} copy
     FLabel(
-        axis: Axis.horizontal,
-        label: const Text('Accept terms and conditions'),
-        description: const Text('You agree to our terms and conditions.'),
-        states: { WidgetState.disabled },
-        child: const DecoratedBox(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(5)),
-            color: Colors.grey,
-          ),
-          child: SizedBox(width: 16, height: 16),
-        ),
+      axis: Axis.horizontal,
+      label: const Text('Accept terms and conditions'),
+      description: const Text('You agree to our terms and conditions.'),
+      error: const Text('Please accept the terms.'),
+      states: {WidgetState.disabled},
+      child: const DecoratedBox(
+        decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(5)), color: Colors.grey),
+        child: SizedBox(width: 16, height: 16),
+      ),
     );
     ```
   </Tabs.Tab>
@@ -118,18 +113,15 @@ FLabel(
   <Tabs.Tab>
     ```dart {6} copy
     FLabel(
-        axis: Axis.horizontal,
-        label: const Text('Accept terms and conditions'),
-        description: const Text('You agree to our terms and conditions.'),
-        error: const Text('Please accept the terms.'),
-        states: { WidgetState.error },
-        child: const DecoratedBox(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(5)),
-            color: Colors.grey,
-          ),
-          child: SizedBox(width: 16, height: 16),
-        ),
+      axis: Axis.horizontal,
+      label: const Text('Accept terms and conditions'),
+      description: const Text('You agree to our terms and conditions.'),
+      error: const Text('Please accept the terms.'),
+      states: {WidgetState.error},
+      child: const DecoratedBox(
+        decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(5)), color: Colors.grey),
+        child: SizedBox(width: 16, height: 16),
+      ),
     );
     ```
   </Tabs.Tab>

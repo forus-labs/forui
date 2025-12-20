@@ -23,10 +23,11 @@ An item is typically used to group related information together.
   <Tabs.Tab>
     ```dart copy
     FItem(
-      prefix: Icon(FIcons.user),
+      enabled: true,
+      prefix: const Icon(FIcons.user),
       title: const Text('Personalization'),
-      suffix: Icon(FIcons.chevronRight),
-      onPress: () { },
+      suffix: const Icon(FIcons.chevronRight),
+      onPress: () {},
     );
     ```
   </Tabs.Tab>
@@ -46,22 +47,26 @@ dart run forui style create item
 
 ```dart copy
 FItem(
-  style: FFItemStyle(...),
-  prefix: Icon(FIcons.user),
   title: const Text('Title'),
-  subtitle: const Text('Subtitle'),
-  details: const Text('Details'),
-  suffix: Icon(FIcons.chevronRight),
-  semanticsLabel: 'Label',
+  style: (style) => style.copyWith(...),
   enabled: true,
   selected: false,
+  semanticsLabel: 'Label',
+  autofocus: false,
+  focusNode: FocusNode(),
   onFocusChange: (focused) {},
   onHoverChange: (hovered) {},
   onStateChange: (delta) {},
   onPress: () {},
   onLongPress: () {},
-  shortcuts: { SingleActivator(LogicalKeyboardKey.enter): ActivateIntent() },
-  actions: { ActivateIntent: CallbackAction<ActivateIntent>(onInvoke: (_) {}) },
+  onSecondaryPress: () {},
+  onSecondaryLongPress: () {},
+  shortcuts: {SingleActivator(LogicalKeyboardKey.enter): ActivateIntent()},
+  actions: {ActivateIntent: CallbackAction<ActivateIntent>(onInvoke: (_) {})},
+  prefix: Icon(FIcons.user),
+  subtitle: const Text('Subtitle'),
+  details: const Text('Details'),
+  suffix: Icon(FIcons.chevronRight),
 );
 ```
 
@@ -69,19 +74,23 @@ FItem(
 
 ```dart copy
 FItem.raw(
-  style: FItemStyle(...),
-  prefix: Icon(FIcons.user),
   child: const Text('Title'),
-  semanticsLabel: 'Label',
+  style: (style) => style.copyWith(...),
   enabled: true,
   selected: false,
+  semanticsLabel: 'Label',
+  autofocus: false,
+  focusNode: FocusNode(),
   onFocusChange: (focused) {},
   onHoverChange: (hovered) {},
   onStateChange: (delta) {},
   onPress: () {},
   onLongPress: () {},
-  shortcuts: { SingleActivator(LogicalKeyboardKey.enter): ActivateIntent() },
-  actions: { ActivateIntent: CallbackAction<ActivateIntent>(onInvoke: (_) {}) },
+  onSecondaryPress: () {},
+  onSecondaryLongPress: () {},
+  shortcuts: {SingleActivator(LogicalKeyboardKey.enter): ActivateIntent()},
+  actions: {ActivateIntent: CallbackAction<ActivateIntent>(onInvoke: (_) {})},
+  prefix: Icon(FIcons.user),
 );
 ```
 
@@ -96,9 +105,10 @@ FItem.raw(
   <Tabs.Tab>
     ```dart copy
     FItem(
-      prefix: Icon(FIcons.user),
+      enabled: true,
+      prefix: const Icon(FIcons.user),
       title: const Text('Personalization'),
-      suffix: Icon(FIcons.chevronRight),
+      suffix: const Icon(FIcons.chevronRight),
     );
     ```
   </Tabs.Tab>
@@ -114,10 +124,10 @@ FItem.raw(
     ```dart {2} copy
     FItem(
       enabled: false,
-      prefix: Icon(FIcons.user),
+      prefix: const Icon(FIcons.user),
       title: const Text('Personalization'),
-      suffix: Icon(FIcons.chevronRight),
-      onPress: () { },
+      suffix: const Icon(FIcons.chevronRight),
+      onPress: () {},
     );
     ```
   </Tabs.Tab>
@@ -132,10 +142,10 @@ FItem.raw(
   <Tabs.Tab>
     ```dart {4} copy
     FItem(
-      prefix: Icon(FIcons.bell),
+      prefix: const Icon(FIcons.bell),
       title: const Text('Notifications'),
       subtitle: const Text('Banners, Sounds, Badges'),
-      suffix: Icon(FIcons.chevronRight),
+      suffix: const Icon(FIcons.chevronRight),
       onPress: () {},
     );
     ```
@@ -151,10 +161,10 @@ FItem.raw(
   <Tabs.Tab>
     ```dart {4} copy
     FItem(
-      prefix: Icon(FIcons.wifi),
+      prefix: const Icon(FIcons.wifi),
       title: const Text('WiFi'),
       details: const Text('Forus Labs (5G)'),
-      suffix: Icon(FIcons.chevronRight),
+      suffix: const Icon(FIcons.chevronRight),
       onPress: () {},
     );
     ```

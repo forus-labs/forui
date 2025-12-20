@@ -21,14 +21,8 @@ It is typically used on pages at the root of the navigation stack.
         FHeader(
           title: const Text('Edit Alarm'),
           suffixes: [
-            FHeaderAction(
-              icon: Icon(FIcons.alarmClock),
-              onPress: () {},
-            ),
-            FHeaderAction(
-              icon: Icon(FIcons.plus),
-              onPress: () {},
-            ),
+            FHeaderAction(icon: const Icon(FIcons.alarmClock), onPress: () {}),
+            FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {}),
           ],
         );
         ```
@@ -47,18 +41,10 @@ It is typically used on nested pages or sheets.
         ```dart copy
         FHeader.nested(
           title: const Text('Appointment'),
-          prefixes: [
-            FHeaderAction.back(onPress: () {}),
-          ],
+          prefixes: [FHeaderAction.back(onPress: () {})],
           suffixes: [
-            FHeaderAction(
-              icon: Icon(FIcons.info),
-              onPress: () {},
-            ),
-            FHeaderAction(
-              icon: Icon(FIcons.plus),
-              onPress: () {},
-            ),
+            FHeaderAction(icon: const Icon(FIcons.info), onPress: () {}),
+            FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {}),
           ],
         );
         ```
@@ -83,20 +69,17 @@ dart run forui style create headers
 
 ```dart copy
 FHeader(
-  style: FHeaderStyle(...),
   title: const Text('Title'),
+  style: (style) => style.copyWith(...),
   suffixes: [
     FHeaderAction(
-      style: FHeaderActionStyle(...),
-      icon: Icon(FIcons.alarmClock),
+      icon: const Icon(FIcons.alarmClock),
+      style: (style) => style.copyWith(...),
       onPress: () {},
       onHoverChange: (hovered) {},
       onStateChange: (delta) {},
     ),
-    FHeaderAction(
-      icon: Icon(FIcons.plus),
-      onPress: () {},
-    ),
+    FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {}),
   ],
 );
 ```
@@ -105,8 +88,8 @@ FHeader(
 
 ```dart copy
 FHeader.nested(
-  style: FHeaderStyle(...),
   title: const Text('Title'),
+  style: (style) => style.copyWith(...),
   titleAlignment: Alignment.center,
   prefixes: [
     FHeaderAction.back(
@@ -117,8 +100,8 @@ FHeader.nested(
   ],
   suffixes: [
     FHeaderAction(
-      style: FHeaderActionStyle(...),
-      icon: Icon(FIcons.info),
+      icon: const Icon(FIcons.info),
+      style: (style) => style.copyWith(...),
       onPress: () {},
     ),
     FHeaderAction.x(
@@ -143,14 +126,8 @@ FHeader.nested(
         FHeader(
           title: const Text('Edit Alarm'),
           suffixes: [
-            FHeaderAction(
-              icon: Icon(FIcons.alarmClock),
-              onPress: () {},
-            ),
-            FHeaderAction(
-              icon: Icon(FIcons.plus),
-              onPress: () {},
-            ),
+            FHeaderAction(icon: const Icon(FIcons.alarmClock), onPress: () {}),
+            FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {}),
           ],
         );
         ```
@@ -164,21 +141,13 @@ FHeader.nested(
     <Widget name='header' variant='nested' />
   </Tabs.Tab>
   <Tabs.Tab>
-        ```dart {4} copy
+        ```dart {3} copy
         FHeader.nested(
           title: const Text('Appointment'),
-          prefixes: [
-            FHeaderAction.back(onPress: () {}),
-          ],
+          prefixes: [FHeaderAction.back(onPress: () {})],
           suffixes: [
-            FHeaderAction(
-              icon: Icon(FIcons.info),
-              onPress: () {},
-            ),
-            FHeaderAction(
-              icon: Icon(FIcons.plus),
-              onPress: () {},
-            ),
+            FHeaderAction(icon: const Icon(FIcons.info), onPress: () {}),
+            FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {}),
           ],
         );
         ```
@@ -192,22 +161,14 @@ FHeader.nested(
     <Widget name='header' variant='nested-x' />
   </Tabs.Tab>
   <Tabs.Tab>
-        ```dart {14} copy
+        ```dart {7} copy
         FHeader.nested(
           title: const Text('Climate'),
           prefixes: [
-            FHeaderAction(
-              icon: Icon(FIcons.thermometer),
-              onPress: () {},
-            ),
-            FHeaderAction(
-              icon: Icon(FIcons.wind),
-              onPress: null,
-            ),
+            FHeaderAction(icon: const Icon(FIcons.thermometer), onPress: () {}),
+            const FHeaderAction(icon: Icon(FIcons.wind), onPress: null),
           ],
-          suffixes: [
-            FHeaderAction.x(onPress: () {}),
-          ],
+          suffixes: [FHeaderAction.x(onPress: () {})],
         );
         ```
   </Tabs.Tab>

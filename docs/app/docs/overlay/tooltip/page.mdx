@@ -17,12 +17,14 @@ A tooltip displays information related to a widget when focused, hovered over, o
   <Tabs.Tab>
     ```dart copy
     FTooltip(
-      tipBuilder: (context, controller) => const Text('Add to library'),
+      hover: true,
+      longPress: true,
+      tipBuilder: (context, _) => const Text('Add to library'),
       child: FButton(
         style: FButtonStyle.outline(),
         mainAxisSize: MainAxisSize.min,
         onPress: () {},
-        child: Text('Long press/Hover'),
+        child: const Text('Long press/Hover'),
       ),
     );
     ```
@@ -43,15 +45,19 @@ dart run forui style create tooltip
 
 ```dart copy
 FTooltip(
-  controller: _controller, // FTooltipController
-  style: FTooltipStyle(...),
-  hover: true,
-  longPress: true,
+  control: FTooltipControl.managed(),
+  style: (style) => style.copyWith(...),
   tipAnchor: Alignment.bottomCenter,
   childAnchor: Alignment.topCenter,
+  spacing: FPortalSpacing.spacing(4),
   overflow: FPortalOverflow.flip,
+  hover: true,
+  hoverEnterDuration: Duration(milliseconds: 500),
+  hoverExitDuration: Duration.zero,
+  longPress: true,
+  longPressExitDuration: Duration(milliseconds: 1500),
   tipBuilder: (context, controller) => const Text('Tooltip'),
-  builder: (context, controller, child) => const Text('Tooltip'),
+  builder: (context, controller, child) => child!,
   child: const Placeholder(),
 );
 ```
@@ -71,12 +77,12 @@ You can change how the tooltip is aligned to the button.
     FTooltip(
       tipAnchor: Alignment.topLeft,
       childAnchor: Alignment.topRight,
-      tipBuilder: (context, controller) => const Text('Add to library'),
+      tipBuilder: (context, _) => const Text('Add to library'),
       child: FButton(
         style: FButtonStyle.outline(),
         mainAxisSize: MainAxisSize.min,
         onPress: () {},
-        child: Text('Long press/Hover'),
+        child: const Text('Long press/Hover'),
       ),
     );
     ```
@@ -94,12 +100,12 @@ You can change how the tooltip is aligned to the button.
     FTooltip(
       hover: false,
       longPress: true,
-      tipBuilder: (context, controller) => const Text('Add to library'),
+      tipBuilder: (context, _) => const Text('Add to library'),
       child: FButton(
         style: FButtonStyle.outline(),
         mainAxisSize: MainAxisSize.min,
         onPress: () {},
-        child: Text('Long press'),
+        child: const Text('Long press'),
       ),
     );
     ```

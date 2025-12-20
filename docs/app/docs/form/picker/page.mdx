@@ -70,18 +70,16 @@ const FPicker(
     FPickerWheel(
       flex: 2,
       loop: true,
-      itemExtent: 20,
       autofocus: true,
       focusNode: FocusNode(),
       onFocusChange: (focused) {},
-      children: [
+      children: const [
         Text('1'),
         Text('2'),
       ],
     ),
     FPickerWheel.builder(
       flex: 2,
-      itemExtent: 20,
       autofocus: true,
       focusNode: FocusNode(),
       onFocusChange: (focused) {},

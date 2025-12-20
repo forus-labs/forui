@@ -25,20 +25,14 @@ It allows navigation up to any of the ancestors.
               menu: [
                 FItemGroup(
                   children: [
-                    FItem(
-                      title: const Text('Documentation'),
-                      onPress: () {},
-                    ),
-                    FItem(
-                      title: const Text('Themes'),
-                      onPress: () {},
-                    ),
+                    FItem(title: const Text('Documentation'), onPress: () {}),
+                    FItem(title: const Text('Themes'), onPress: () {}),
                   ],
                 ),
               ],
             ),
             FBreadcrumbItem(onPress: () {}, child: const Text('Layout')),
-            FBreadcrumbItem(current: true, child: const Text('Widgets')),
+            const FBreadcrumbItem(current: true, child: Text('Widgets')),
           ],
         );
         ```
@@ -59,30 +53,25 @@ dart run forui style create breadcrumb
 
 ```dart copy
 FBreadcrumb(
-  style: FBreadcrumbStyle(...),
+  style: (style) => style.copyWith(...),
+  divider: const Icon(FIcons.chevronRight, size: 14),
   children: [
     FBreadcrumbItem(onPress: () {}, child: const Text('Forui')),
     FBreadcrumbItem.collapsed(
       menu: [
-        FTileGroup(
+        FItemGroup(
           children: [
-            FTile(
-              title: const Text('Documentation'),
-              onPress: () {},
-            ),
-            FTile(
-              title: const Text('Themes'),
-              onPress: () {},
-            ),
+            FItem(title: const Text('Documentation'), onPress: () {}),
+            FItem(title: const Text('Themes'), onPress: () {}),
           ],
         ),
       ],
-      spacing: const FPortalSpacing(4),
+      spacing: FPortalSpacing.spacing(4),
       offset: Offset.zero,
       traversalEdgeBehavior: TraversalEdgeBehavior.closedLoop,
     ),
     FBreadcrumbItem(onPress: () {}, child: const Text('Themes')),
-    FBreadcrumbItem(current: true, child: const Text('Widgets')),
+    const FBreadcrumbItem(current: true, child: Text('Widgets')),
   ],
 );
 ```
@@ -104,20 +93,14 @@ FBreadcrumb(
               menu: [
                 FTileGroup(
                   children: [
-                    FTile(
-                      title: const Text('Documentation'),
-                      onPress: () {},
-                    ),
-                    FTile(
-                      title: const Text('Themes'),
-                      onPress: () {},
-                    ),
+                    FTile(title: const Text('Documentation'), onPress: () {}),
+                    FTile(title: const Text('Themes'), onPress: () {}),
                   ],
                 ),
               ],
             ),
             FBreadcrumbItem(onPress: () {}, child: const Text('Layout')),
-            FBreadcrumbItem(current: true, child: const Text('Widgets')),
+            const FBreadcrumbItem(current: true, child: Text('Widgets')),
           ],
         );
         ```
@@ -131,35 +114,23 @@ FBreadcrumb(
         <Widget name='breadcrumb' variant='divider' height={400}/>
     </Tabs.Tab>
     <Tabs.Tab>
-        ```dart copy
+        ```dart {2} copy
         FBreadcrumb(
-          divider: Transform.rotate(
-            angle: -60,
-            child: Icon(
-              FIcons.slash,
-              size: 14,
-            ),
-          ),
+          divider: Transform.rotate(angle: -60, child: const Icon(FIcons.slash, size: 14)),
           children: [
             FBreadcrumbItem(onPress: () {}, child: const Text('Forui')),
             FBreadcrumbItem.collapsed(
               menu: [
                 FItemGroup(
                   children: [
-                    FItem(
-                      title: const Text('Documentation'),
-                      onPress: () {},
-                    ),
-                    FItem(
-                      title: const Text('Themes'),
-                      onPress: () {},
-                    ),
+                    FItem(title: const Text('Documentation'), onPress: () {}),
+                    FItem(title: const Text('Themes'), onPress: () {}),
                   ],
                 ),
               ],
             ),
-            FBreadcrumbItem(onPress: () {}, child: const Text('Themes')),
-            FBreadcrumbItem(current: true, child: const Text('Widgets')),
+            FBreadcrumbItem(onPress: () {}, child: const Text('Layout')),
+            const FBreadcrumbItem(current: true, child: Text('Widgets')),
           ],
         );
         ```

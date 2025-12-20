@@ -24,25 +24,10 @@ Recommended for touch devices.
     </Tabs.Tab>
     <Tabs.Tab>
         ```dart copy
-        class Foo extends StatefulWidget {
-          Foo();
-
-          @override
-          State<Foo> createState() => _FooState();
-        }
-
-        class _FooState extends State<Foo> {
-          late final FTimePickerController _controller = FTimePickerController(initial: FTime.now());
-
-          @override
-          Widget build(BuildContext context) => FTimePicker(controller: _controller);
-
-          @override
-          void dispose() {
-            _controller.dispose();
-            super.dispose();
-          }
-        }
+        FTimePicker(
+          control: FTimePickerControl.managed(initial: FTime.now()),
+          hour24: false,
+        );
         ```
     </Tabs.Tab>
 
@@ -61,11 +46,10 @@ dart run forui style create time-picker
 ### `FTimePicker(...)`
 
 ```dart copy
-const FTimePicker(
-  controller: FTimePickerController(),
-  style: FTimePickerStyle(...),
-  onChange: (time) {},
-  hour24: true,
+FTimePicker(
+  control: FTimePickerControl.managed(initial: FTime.now(), onChange: (time) {}),
+  style: (style) => style.copyWith(...),
+  hour24: false,
   hourInterval: 1,
   minuteInterval: 1,
 );
@@ -80,26 +64,11 @@ const FTimePicker(
         <Widget name='time-picker' query={{hour24: 'true'}}/>
     </Tabs.Tab>
     <Tabs.Tab>
-        ```dart {12} copy
-        class Foo extends StatefulWidget {
-          Foo();
-
-          @override
-          State<Foo> createState() => _FooState();
-        }
-
-        class _FooState extends State<Foo> {
-          late final FTimePickerController _controller = FTimePickerController(initial: FTime.now());
-
-          @override
-          Widget build(BuildContext context) => FTimePicker(controller: _controller, hour24: true);
-
-          @override
-          void dispose() {
-            _controller.dispose();
-            super.dispose();
-          }
-        }
+        ```dart {3} copy
+        FTimePicker(
+          control: FTimePickerControl.managed(initial: FTime.now()),
+          hour24: true,
+        );
         ```
     </Tabs.Tab>
 
@@ -112,26 +81,12 @@ const FTimePicker(
         <Widget name='time-picker' variant='interval'/>
     </Tabs.Tab>
     <Tabs.Tab>
-        ```dart {12} copy
-        class Foo extends StatefulWidget {
-          Foo();
-
-          @override
-          State<Foo> createState() => _FooState();
-        }
-
-        class _FooState extends State<Foo> {
-          late final FTimePickerController _controller = FTimePickerController(initial: FTime.now());
-
-          @override
-          Widget build(BuildContext context) => FTimePicker(controller: _controller, hourInterval: 2, minuteInterval: 5);
-
-          @override
-          void dispose() {
-            _controller.dispose();
-            super.dispose();
-          }
-        }
+        ```dart {3-4} copy
+        FTimePicker(
+          control: FTimePickerControl.managed(initial: FTime.now()),
+          hourInterval: 2,
+          minuteInterval: 5,
+        );
         ```
     </Tabs.Tab>
 
@@ -145,34 +100,35 @@ const FTimePicker(
     </Tabs.Tab>
     <Tabs.Tab>
         ```dart copy
-        class Foo extends StatefulWidget {
-          Foo();
-
+        class AnimatedTimePickerPage extends StatefulWidget {
           @override
-          State<Foo> createState() => _FooState();
+          State<AnimatedTimePickerPage> createState() => _AnimatedTimePickerPageState();
         }
 
-        class _FooState extends State<Foo> {
+        class _AnimatedTimePickerPageState extends State<AnimatedTimePickerPage> {
           static final _random = Random();
-          late final FTimePickerController _controller = FTimePickerController(initial: FTime.now());
-
-          @override
-          Widget build(BuildContext context) => Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              SizedBox(height: 300, width: 250, child: FTimePicker(controller: _controller)),
-              FButton(
-                child: const Text('Funny button'),
-                onPress: () => _controller.animateTo(FTime(_random.nextInt(24), _random.nextInt(60))),
-              ),
-            ],
-          );
+          final _controller = FTimePickerController(time: FTime.now());
 
           @override
           void dispose() {
             _controller.dispose();
             super.dispose();
           }
+
+          @override
+          Widget build(BuildContext context) => Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              SizedBox(
+                height: 300,
+                child: FTimePicker(control: FTimePickerControl.managed(controller: _controller)),
+              ),
+              FButton(
+                child: const Text('Funny button'),
+                onPress: () => _controller.animateTo(FTime(_random.nextInt(24), _random.nextInt(60))),
+              ),
+            ],
+          );
         }
         ```
     </Tabs.Tab>
