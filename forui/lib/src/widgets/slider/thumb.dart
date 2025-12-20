@@ -55,6 +55,7 @@ class _ThumbState extends State<Thumb> with TickerProviderStateMixin {
       :tooltipBuilder,
       :semanticValueFormatterCallback,
       :enabled,
+      :onEnd,
     ) = .of(
       context,
     );
@@ -94,8 +95,20 @@ class _ThumbState extends State<Thumb> with TickerProviderStateMixin {
           },
         },
         actions: {
-          _ExpandIntent: CallbackAction(onInvoke: (_) => controller.step(min: widget.min, expand: true)),
-          _ShrinkIntent: CallbackAction(onInvoke: (_) => controller.step(min: widget.min, expand: false)),
+          _ExpandIntent: CallbackAction(
+            onInvoke: (_) {
+              controller.step(min: widget.min, expand: true);
+              onEnd?.call(controller.value);
+              return null;
+            },
+          ),
+          _ShrinkIntent: CallbackAction(
+            onInvoke: (_) {
+              controller.step(min: widget.min, expand: false);
+              onEnd?.call(controller.value);
+              return null;
+            },
+          ),
         },
         enabled: enabled,
         mouseCursor: enabled ? _cursor : .defer,
@@ -150,6 +163,7 @@ class _ThumbState extends State<Thumb> with TickerProviderStateMixin {
       setState(() => _cursor = SystemMouseCursors.grab);
       _gesture = false;
       tooltip?.hide();
+      InheritedData.of(context).onEnd?.call(controller.value);
     }
 
     void start(DragStartDetails _) {
@@ -165,6 +179,7 @@ class _ThumbState extends State<Thumb> with TickerProviderStateMixin {
       _origin = null;
       _gesture = false;
       tooltip?.hide();
+      InheritedData.of(context).onEnd?.call(controller.value);
     }
 
     if (layout.vertical) {
