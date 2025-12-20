@@ -22,13 +22,13 @@ class FIcons {
   const FIcons._();
 
   /// A [`a-arrow-down`](https://lucide.dev/icons/a-arrow-down) icon.
-  static const aArrowDown = IconData(58761, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const aArrowDown = IconData(58757, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`a-arrow-up`](https://lucide.dev/icons/a-arrow-up) icon.
-  static const aArrowUp = IconData(58762, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const aArrowUp = IconData(58758, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`a-large-small`](https://lucide.dev/icons/a-large-small) icon.
-  static const aLargeSmall = IconData(58763, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const aLargeSmall = IconData(58759, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`accessibility`](https://lucide.dev/icons/accessibility) icon.
   static const accessibility = IconData(58007, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -37,7 +37,7 @@ class FIcons {
   static const activity = IconData(57400, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`air-vent`](https://lucide.dev/icons/air-vent) icon.
-  static const airVent = IconData(58193, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const airVent = IconData(58189, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`airplay`](https://lucide.dev/icons/airplay) icon.
   static const airplay = IconData(57401, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -58,7 +58,7 @@ class FIcons {
   static const alarmClock = IconData(57402, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`alarm-smoke`](https://lucide.dev/icons/alarm-smoke) icon.
-  static const alarmSmoke = IconData(58751, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const alarmSmoke = IconData(58747, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`album`](https://lucide.dev/icons/album) icon.
   static const album = IconData(57403, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -174,16 +174,16 @@ class FIcons {
   static const alignVerticalSpaceBetween = IconData(57979, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`ambulance`](https://lucide.dev/icons/ambulance) icon.
-  static const ambulance = IconData(58815, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const ambulance = IconData(58811, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`ampersand`](https://lucide.dev/icons/ampersand) icon.
-  static const ampersand = IconData(58528, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const ampersand = IconData(58524, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`ampersands`](https://lucide.dev/icons/ampersands) icon.
-  static const ampersands = IconData(58529, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const ampersands = IconData(58525, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`amphora`](https://lucide.dev/icons/amphora) icon.
-  static const amphora = IconData(58911, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const amphora = IconData(58907, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`anchor`](https://lucide.dev/icons/anchor) icon.
   static const anchor = IconData(57407, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -195,28 +195,28 @@ class FIcons {
   static const annoyed = IconData(58109, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`antenna`](https://lucide.dev/icons/antenna) icon.
-  static const antenna = IconData(58598, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const antenna = IconData(58594, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`anvil`](https://lucide.dev/icons/anvil) icon.
-  static const anvil = IconData(58756, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const anvil = IconData(58752, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`aperture`](https://lucide.dev/icons/aperture) icon.
   static const aperture = IconData(57408, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`app-window-mac`](https://lucide.dev/icons/app-window-mac) icon.
-  static const appWindowMac = IconData(58838, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const appWindowMac = IconData(58834, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`app-window`](https://lucide.dev/icons/app-window) icon.
-  static const appWindow = IconData(58410, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const appWindow = IconData(58406, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`apple`](https://lucide.dev/icons/apple) icon.
-  static const apple = IconData(58194, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const apple = IconData(58190, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`archive-restore`](https://lucide.dev/icons/archive-restore) icon.
   static const archiveRestore = IconData(58061, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`archive-x`](https://lucide.dev/icons/archive-x) icon.
-  static const archiveX = IconData(58640, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const archiveX = IconData(58636, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`archive`](https://lucide.dev/icons/archive) icon.
   static const archive = IconData(57409, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -225,14 +225,14 @@ class FIcons {
   static const armchair = IconData(58048, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`arrow-big-down-dash`](https://lucide.dev/icons/arrow-big-down-dash) icon.
-  static const arrowBigDownDash = IconData(58401, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const arrowBigDownDash = IconData(58397, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`arrow-big-down`](https://lucide.dev/icons/arrow-big-down) icon.
   static const arrowBigDown = IconData(57825, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`arrow-big-left-dash`](https://lucide.dev/icons/arrow-big-left-dash) icon.
   static const arrowBigLeftDash = IconData(
-    58402,
+    58398,
     fontFamily: 'ForuiLucideIcons',
     fontPackage: 'forui_assets',
     matchTextDirection: true,
@@ -248,7 +248,7 @@ class FIcons {
 
   /// A [`arrow-big-right-dash`](https://lucide.dev/icons/arrow-big-right-dash) icon.
   static const arrowBigRightDash = IconData(
-    58403,
+    58399,
     fontFamily: 'ForuiLucideIcons',
     fontPackage: 'forui_assets',
     matchTextDirection: true,
@@ -263,22 +263,22 @@ class FIcons {
   );
 
   /// A [`arrow-big-up-dash`](https://lucide.dev/icons/arrow-big-up-dash) icon.
-  static const arrowBigUpDash = IconData(58404, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const arrowBigUpDash = IconData(58400, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`arrow-big-up`](https://lucide.dev/icons/arrow-big-up) icon.
   static const arrowBigUp = IconData(57828, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`arrow-down-0-1`](https://lucide.dev/icons/arrow-down-0-1) icon.
-  static const arrowDown01 = IconData(58391, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const arrowDown01 = IconData(58387, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`arrow-down-1-0`](https://lucide.dev/icons/arrow-down-1-0) icon.
-  static const arrowDown10 = IconData(58392, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const arrowDown10 = IconData(58388, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`arrow-down-a-z`](https://lucide.dev/icons/arrow-down-a-z) icon.
-  static const arrowDownAZ = IconData(58393, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const arrowDownAZ = IconData(58389, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`arrow-down-from-line`](https://lucide.dev/icons/arrow-down-from-line) icon.
-  static const arrowDownFromLine = IconData(58456, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const arrowDownFromLine = IconData(58452, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`arrow-down-left`](https://lucide.dev/icons/arrow-down-left) icon.
   static const arrowDownLeft = IconData(57411, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -290,10 +290,10 @@ class FIcons {
   static const arrowDownRight = IconData(57413, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`arrow-down-to-dot`](https://lucide.dev/icons/arrow-down-to-dot) icon.
-  static const arrowDownToDot = IconData(58449, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const arrowDownToDot = IconData(58445, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`arrow-down-to-line`](https://lucide.dev/icons/arrow-down-to-line) icon.
-  static const arrowDownToLine = IconData(58457, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const arrowDownToLine = IconData(58453, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`arrow-down-up`](https://lucide.dev/icons/arrow-down-up) icon.
   static const arrowDownUp = IconData(57414, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -302,14 +302,14 @@ class FIcons {
   static const arrowDownWideNarrow = IconData(57415, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`arrow-down-z-a`](https://lucide.dev/icons/arrow-down-z-a) icon.
-  static const arrowDownZA = IconData(58394, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const arrowDownZA = IconData(58390, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`arrow-down`](https://lucide.dev/icons/arrow-down) icon.
   static const arrowDown = IconData(57410, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`arrow-left-from-line`](https://lucide.dev/icons/arrow-left-from-line) icon.
   static const arrowLeftFromLine = IconData(
-    58458,
+    58454,
     fontFamily: 'ForuiLucideIcons',
     fontPackage: 'forui_assets',
     matchTextDirection: true,
@@ -320,7 +320,7 @@ class FIcons {
 
   /// A [`arrow-left-to-line`](https://lucide.dev/icons/arrow-left-to-line) icon.
   static const arrowLeftToLine = IconData(
-    58459,
+    58455,
     fontFamily: 'ForuiLucideIcons',
     fontPackage: 'forui_assets',
     matchTextDirection: true,
@@ -336,18 +336,18 @@ class FIcons {
 
   /// A [`arrow-right-from-line`](https://lucide.dev/icons/arrow-right-from-line) icon.
   static const arrowRightFromLine = IconData(
-    58460,
+    58456,
     fontFamily: 'ForuiLucideIcons',
     fontPackage: 'forui_assets',
     matchTextDirection: true,
   );
 
   /// A [`arrow-right-left`](https://lucide.dev/icons/arrow-right-left) icon.
-  static const arrowRightLeft = IconData(58395, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const arrowRightLeft = IconData(58391, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`arrow-right-to-line`](https://lucide.dev/icons/arrow-right-to-line) icon.
   static const arrowRightToLine = IconData(
-    58461,
+    58457,
     fontFamily: 'ForuiLucideIcons',
     fontPackage: 'forui_assets',
     matchTextDirection: true,
@@ -362,22 +362,22 @@ class FIcons {
   );
 
   /// A [`arrow-up-0-1`](https://lucide.dev/icons/arrow-up-0-1) icon.
-  static const arrowUp01 = IconData(58396, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const arrowUp01 = IconData(58392, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`arrow-up-1-0`](https://lucide.dev/icons/arrow-up-1-0) icon.
-  static const arrowUp10 = IconData(58397, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const arrowUp10 = IconData(58393, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`arrow-up-a-z`](https://lucide.dev/icons/arrow-up-a-z) icon.
-  static const arrowUpAZ = IconData(58398, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const arrowUpAZ = IconData(58394, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`arrow-up-down`](https://lucide.dev/icons/arrow-up-down) icon.
-  static const arrowUpDown = IconData(58241, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const arrowUpDown = IconData(58237, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`arrow-up-from-dot`](https://lucide.dev/icons/arrow-up-from-dot) icon.
-  static const arrowUpFromDot = IconData(58450, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const arrowUpFromDot = IconData(58446, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`arrow-up-from-line`](https://lucide.dev/icons/arrow-up-from-line) icon.
-  static const arrowUpFromLine = IconData(58462, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const arrowUpFromLine = IconData(58458, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`arrow-up-left`](https://lucide.dev/icons/arrow-up-left) icon.
   static const arrowUpLeft = IconData(57419, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -389,19 +389,19 @@ class FIcons {
   static const arrowUpRight = IconData(57421, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`arrow-up-to-line`](https://lucide.dev/icons/arrow-up-to-line) icon.
-  static const arrowUpToLine = IconData(58463, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const arrowUpToLine = IconData(58459, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`arrow-up-wide-narrow`](https://lucide.dev/icons/arrow-up-wide-narrow) icon.
-  static const arrowUpWideNarrow = IconData(58399, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const arrowUpWideNarrow = IconData(58395, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`arrow-up-z-a`](https://lucide.dev/icons/arrow-up-z-a) icon.
-  static const arrowUpZA = IconData(58400, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const arrowUpZA = IconData(58396, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`arrow-up`](https://lucide.dev/icons/arrow-up) icon.
   static const arrowUp = IconData(57418, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`arrows-up-from-line`](https://lucide.dev/icons/arrows-up-from-line) icon.
-  static const arrowsUpFromLine = IconData(58584, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const arrowsUpFromLine = IconData(58580, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`asterisk`](https://lucide.dev/icons/asterisk) icon.
   static const asterisk = IconData(57839, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -410,13 +410,13 @@ class FIcons {
   static const atSign = IconData(57422, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`atom`](https://lucide.dev/icons/atom) icon.
-  static const atom = IconData(58331, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const atom = IconData(58327, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`audio-lines`](https://lucide.dev/icons/audio-lines) icon.
-  static const audioLines = IconData(58718, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const audioLines = IconData(58714, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`audio-waveform`](https://lucide.dev/icons/audio-waveform) icon.
-  static const audioWaveform = IconData(58719, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const audioWaveform = IconData(58715, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`award`](https://lucide.dev/icons/award) icon.
   static const award = IconData(57423, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -434,88 +434,91 @@ class FIcons {
   static const backpack = IconData(58056, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`badge-alert`](https://lucide.dev/icons/badge-alert) icon.
-  static const badgeAlert = IconData(58489, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const badgeAlert = IconData(58485, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`badge-cent`](https://lucide.dev/icons/badge-cent) icon.
-  static const badgeCent = IconData(58643, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const badgeCent = IconData(58639, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`badge-check`](https://lucide.dev/icons/badge-check) icon.
   static const badgeCheck = IconData(57921, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`badge-dollar-sign`](https://lucide.dev/icons/badge-dollar-sign) icon.
-  static const badgeDollarSign = IconData(58490, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const badgeDollarSign = IconData(58486, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`badge-euro`](https://lucide.dev/icons/badge-euro) icon.
-  static const badgeEuro = IconData(58644, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const badgeEuro = IconData(58640, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`badge-indian-rupee`](https://lucide.dev/icons/badge-indian-rupee) icon.
-  static const badgeIndianRupee = IconData(58645, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const badgeIndianRupee = IconData(58641, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`badge-info`](https://lucide.dev/icons/badge-info) icon.
-  static const badgeInfo = IconData(58491, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const badgeInfo = IconData(58487, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`badge-japanese-yen`](https://lucide.dev/icons/badge-japanese-yen) icon.
-  static const badgeJapaneseYen = IconData(58646, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const badgeJapaneseYen = IconData(58642, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`badge-minus`](https://lucide.dev/icons/badge-minus) icon.
-  static const badgeMinus = IconData(58492, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const badgeMinus = IconData(58488, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`badge-percent`](https://lucide.dev/icons/badge-percent) icon.
-  static const badgePercent = IconData(58493, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const badgePercent = IconData(58489, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`badge-plus`](https://lucide.dev/icons/badge-plus) icon.
-  static const badgePlus = IconData(58494, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const badgePlus = IconData(58490, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`badge-pound-sterling`](https://lucide.dev/icons/badge-pound-sterling) icon.
-  static const badgePoundSterling = IconData(58647, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const badgePoundSterling = IconData(58643, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`badge-question-mark`](https://lucide.dev/icons/badge-question-mark) icon.
-  static const badgeQuestionMark = IconData(58495, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const badgeQuestionMark = IconData(58491, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`badge-russian-ruble`](https://lucide.dev/icons/badge-russian-ruble) icon.
-  static const badgeRussianRuble = IconData(58648, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const badgeRussianRuble = IconData(58644, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`badge-swiss-franc`](https://lucide.dev/icons/badge-swiss-franc) icon.
-  static const badgeSwissFranc = IconData(58649, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const badgeSwissFranc = IconData(58645, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`badge-turkish-lira`](https://lucide.dev/icons/badge-turkish-lira) icon.
-  static const badgeTurkishLira = IconData(59010, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const badgeTurkishLira = IconData(59006, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`badge-x`](https://lucide.dev/icons/badge-x) icon.
-  static const badgeX = IconData(58496, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const badgeX = IconData(58492, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`badge`](https://lucide.dev/icons/badge) icon.
-  static const badge = IconData(58488, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const badge = IconData(58484, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`baggage-claim`](https://lucide.dev/icons/baggage-claim) icon.
   static const baggageClaim = IconData(58057, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+
+  /// A [`balloon`](https://lucide.dev/icons/balloon) icon.
+  static const balloon = IconData(59055, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`ban`](https://lucide.dev/icons/ban) icon.
   static const ban = IconData(57425, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`banana`](https://lucide.dev/icons/banana) icon.
-  static const banana = IconData(58195, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const banana = IconData(58191, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`bandage`](https://lucide.dev/icons/bandage) icon.
-  static const bandage = IconData(58913, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const bandage = IconData(58909, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`banknote-arrow-down`](https://lucide.dev/icons/banknote-arrow-down) icon.
-  static const banknoteArrowDown = IconData(58960, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const banknoteArrowDown = IconData(58956, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`banknote-arrow-up`](https://lucide.dev/icons/banknote-arrow-up) icon.
-  static const banknoteArrowUp = IconData(58961, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const banknoteArrowUp = IconData(58957, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`banknote-x`](https://lucide.dev/icons/banknote-x) icon.
-  static const banknoteX = IconData(58962, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const banknoteX = IconData(58958, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`banknote`](https://lucide.dev/icons/banknote) icon.
   static const banknote = IconData(57426, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`barcode`](https://lucide.dev/icons/barcode) icon.
-  static const barcode = IconData(58679, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const barcode = IconData(58675, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`barrel`](https://lucide.dev/icons/barrel) icon.
-  static const barrel = IconData(59001, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const barrel = IconData(58997, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`baseline`](https://lucide.dev/icons/baseline) icon.
   static const baseline = IconData(57989, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -536,10 +539,10 @@ class FIcons {
   static const batteryMedium = IconData(57431, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`battery-plus`](https://lucide.dev/icons/battery-plus) icon.
-  static const batteryPlus = IconData(58946, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const batteryPlus = IconData(58942, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`battery-warning`](https://lucide.dev/icons/battery-warning) icon.
-  static const batteryWarning = IconData(58288, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const batteryWarning = IconData(58284, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`battery`](https://lucide.dev/icons/battery) icon.
   static const battery = IconData(57427, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -548,10 +551,10 @@ class FIcons {
   static const beaker = IconData(57432, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`bean-off`](https://lucide.dev/icons/bean-off) icon.
-  static const beanOff = IconData(58260, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const beanOff = IconData(58256, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`bean`](https://lucide.dev/icons/bean) icon.
-  static const bean = IconData(58259, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const bean = IconData(58255, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`bed-double`](https://lucide.dev/icons/bed-double) icon.
   static const bedDouble = IconData(58050, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -563,19 +566,19 @@ class FIcons {
   static const bed = IconData(58049, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`beef`](https://lucide.dev/icons/beef) icon.
-  static const beef = IconData(58281, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const beef = IconData(58277, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`beer-off`](https://lucide.dev/icons/beer-off) icon.
-  static const beerOff = IconData(58845, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const beerOff = IconData(58841, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`beer`](https://lucide.dev/icons/beer) icon.
   static const beer = IconData(58063, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`bell-dot`](https://lucide.dev/icons/bell-dot) icon.
-  static const bellDot = IconData(58415, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const bellDot = IconData(58411, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`bell-electric`](https://lucide.dev/icons/bell-electric) icon.
-  static const bellElectric = IconData(58752, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const bellElectric = IconData(58748, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`bell-minus`](https://lucide.dev/icons/bell-minus) icon.
   static const bellMinus = IconData(57840, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -593,19 +596,19 @@ class FIcons {
   static const bell = IconData(57433, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`between-horizontal-end`](https://lucide.dev/icons/between-horizontal-end) icon.
-  static const betweenHorizontalEnd = IconData(58773, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const betweenHorizontalEnd = IconData(58769, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`between-horizontal-start`](https://lucide.dev/icons/between-horizontal-start) icon.
-  static const betweenHorizontalStart = IconData(58774, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const betweenHorizontalStart = IconData(58770, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`between-vertical-end`](https://lucide.dev/icons/between-vertical-end) icon.
-  static const betweenVerticalEnd = IconData(58775, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const betweenVerticalEnd = IconData(58771, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`between-vertical-start`](https://lucide.dev/icons/between-vertical-start) icon.
-  static const betweenVerticalStart = IconData(58776, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const betweenVerticalStart = IconData(58772, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`biceps-flexed`](https://lucide.dev/icons/biceps-flexed) icon.
-  static const bicepsFlexed = IconData(58863, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const bicepsFlexed = IconData(58859, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`bike`](https://lucide.dev/icons/bike) icon.
   static const bike = IconData(57810, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -614,25 +617,28 @@ class FIcons {
   static const binary = IconData(57842, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`binoculars`](https://lucide.dev/icons/binoculars) icon.
-  static const binoculars = IconData(58917, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const binoculars = IconData(58913, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`biohazard`](https://lucide.dev/icons/biohazard) icon.
-  static const biohazard = IconData(58437, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const biohazard = IconData(58433, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`bird`](https://lucide.dev/icons/bird) icon.
-  static const bird = IconData(58313, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const bird = IconData(58309, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+
+  /// A [`birdhouse`](https://lucide.dev/icons/birdhouse) icon.
+  static const birdhouse = IconData(59034, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`bitcoin`](https://lucide.dev/icons/bitcoin) icon.
   static const bitcoin = IconData(57435, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`blend`](https://lucide.dev/icons/blend) icon.
-  static const blend = IconData(58784, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const blend = IconData(58780, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`blinds`](https://lucide.dev/icons/blinds) icon.
-  static const blinds = IconData(58308, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const blinds = IconData(58304, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`blocks`](https://lucide.dev/icons/blocks) icon.
-  static const blocks = IconData(58622, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const blocks = IconData(58618, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`bluetooth-connected`](https://lucide.dev/icons/bluetooth-connected) icon.
   static const bluetoothConnected = IconData(57784, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -650,91 +656,94 @@ class FIcons {
   static const bold = IconData(57437, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`bolt`](https://lucide.dev/icons/bolt) icon.
-  static const bolt = IconData(58768, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const bolt = IconData(58764, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`bomb`](https://lucide.dev/icons/bomb) icon.
   static const bomb = IconData(58111, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`bone`](https://lucide.dev/icons/bone) icon.
-  static const bone = IconData(58204, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const bone = IconData(58200, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`book-a`](https://lucide.dev/icons/book-a) icon.
-  static const bookA = IconData(58696, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const bookA = IconData(58692, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`book-alert`](https://lucide.dev/icons/book-alert) icon.
-  static const bookAlert = IconData(58998, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const bookAlert = IconData(58994, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`book-audio`](https://lucide.dev/icons/book-audio) icon.
-  static const bookAudio = IconData(58697, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const bookAudio = IconData(58693, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`book-check`](https://lucide.dev/icons/book-check) icon.
-  static const bookCheck = IconData(58698, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const bookCheck = IconData(58694, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`book-copy`](https://lucide.dev/icons/book-copy) icon.
-  static const bookCopy = IconData(58352, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const bookCopy = IconData(58348, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`book-dashed`](https://lucide.dev/icons/book-dashed) icon.
-  static const bookDashed = IconData(58353, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const bookDashed = IconData(58349, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`book-down`](https://lucide.dev/icons/book-down) icon.
-  static const bookDown = IconData(58354, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const bookDown = IconData(58350, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`book-headphones`](https://lucide.dev/icons/book-headphones) icon.
-  static const bookHeadphones = IconData(58699, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const bookHeadphones = IconData(58695, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`book-heart`](https://lucide.dev/icons/book-heart) icon.
-  static const bookHeart = IconData(58700, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const bookHeart = IconData(58696, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`book-image`](https://lucide.dev/icons/book-image) icon.
-  static const bookImage = IconData(58701, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const bookImage = IconData(58697, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`book-key`](https://lucide.dev/icons/book-key) icon.
-  static const bookKey = IconData(58355, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const bookKey = IconData(58351, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`book-lock`](https://lucide.dev/icons/book-lock) icon.
-  static const bookLock = IconData(58356, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const bookLock = IconData(58352, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`book-marked`](https://lucide.dev/icons/book-marked) icon.
-  static const bookMarked = IconData(58357, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const bookMarked = IconData(58353, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`book-minus`](https://lucide.dev/icons/book-minus) icon.
-  static const bookMinus = IconData(58358, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const bookMinus = IconData(58354, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`book-open-check`](https://lucide.dev/icons/book-open-check) icon.
-  static const bookOpenCheck = IconData(58245, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const bookOpenCheck = IconData(58241, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`book-open-text`](https://lucide.dev/icons/book-open-text) icon.
-  static const bookOpenText = IconData(58702, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const bookOpenText = IconData(58698, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`book-open`](https://lucide.dev/icons/book-open) icon.
   static const bookOpen = IconData(57439, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`book-plus`](https://lucide.dev/icons/book-plus) icon.
-  static const bookPlus = IconData(58359, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const bookPlus = IconData(58355, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+
+  /// A [`book-search`](https://lucide.dev/icons/book-search) icon.
+  static const bookSearch = IconData(59051, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`book-text`](https://lucide.dev/icons/book-text) icon.
-  static const bookText = IconData(58703, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const bookText = IconData(58699, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`book-type`](https://lucide.dev/icons/book-type) icon.
-  static const bookType = IconData(58704, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const bookType = IconData(58700, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`book-up-2`](https://lucide.dev/icons/book-up-2) icon.
-  static const bookUp2 = IconData(58538, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const bookUp2 = IconData(58534, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`book-up`](https://lucide.dev/icons/book-up) icon.
-  static const bookUp = IconData(58360, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const bookUp = IconData(58356, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`book-user`](https://lucide.dev/icons/book-user) icon.
-  static const bookUser = IconData(58705, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const bookUser = IconData(58701, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`book-x`](https://lucide.dev/icons/book-x) icon.
-  static const bookX = IconData(58361, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const bookX = IconData(58357, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`book`](https://lucide.dev/icons/book) icon.
   static const book = IconData(57438, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`bookmark-check`](https://lucide.dev/icons/bookmark-check) icon.
-  static const bookmarkCheck = IconData(58659, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const bookmarkCheck = IconData(58655, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`bookmark-minus`](https://lucide.dev/icons/bookmark-minus) icon.
   static const bookmarkMinus = IconData(57916, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -743,28 +752,28 @@ class FIcons {
   static const bookmarkPlus = IconData(57917, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`bookmark-x`](https://lucide.dev/icons/bookmark-x) icon.
-  static const bookmarkX = IconData(58660, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const bookmarkX = IconData(58656, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`bookmark`](https://lucide.dev/icons/bookmark) icon.
   static const bookmark = IconData(57440, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`boom-box`](https://lucide.dev/icons/boom-box) icon.
-  static const boomBox = IconData(58610, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const boomBox = IconData(58606, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`bot-message-square`](https://lucide.dev/icons/bot-message-square) icon.
-  static const botMessageSquare = IconData(58834, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const botMessageSquare = IconData(58830, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`bot-off`](https://lucide.dev/icons/bot-off) icon.
-  static const botOff = IconData(58852, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const botOff = IconData(58848, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`bot`](https://lucide.dev/icons/bot) icon.
   static const bot = IconData(57787, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`bottle-wine`](https://lucide.dev/icons/bottle-wine) icon.
-  static const bottleWine = IconData(59007, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const bottleWine = IconData(59003, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`bow-arrow`](https://lucide.dev/icons/bow-arrow) icon.
-  static const bowArrow = IconData(58978, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const bowArrow = IconData(58974, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`box`](https://lucide.dev/icons/box) icon.
   static const box = IconData(57441, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -773,58 +782,58 @@ class FIcons {
   static const boxes = IconData(58064, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`braces`](https://lucide.dev/icons/braces) icon.
-  static const braces = IconData(58222, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const braces = IconData(58218, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`brackets`](https://lucide.dev/icons/brackets) icon.
-  static const brackets = IconData(58439, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const brackets = IconData(58435, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`brain-circuit`](https://lucide.dev/icons/brain-circuit) icon.
-  static const brainCircuit = IconData(58315, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const brainCircuit = IconData(58311, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`brain-cog`](https://lucide.dev/icons/brain-cog) icon.
-  static const brainCog = IconData(58316, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const brainCog = IconData(58312, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`brain`](https://lucide.dev/icons/brain) icon.
-  static const brain = IconData(58314, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const brain = IconData(58310, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`brick-wall-fire`](https://lucide.dev/icons/brick-wall-fire) icon.
-  static const brickWallFire = IconData(58967, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const brickWallFire = IconData(58963, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`brick-wall-shield`](https://lucide.dev/icons/brick-wall-shield) icon.
-  static const brickWallShield = IconData(59028, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const brickWallShield = IconData(59024, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`brick-wall`](https://lucide.dev/icons/brick-wall) icon.
-  static const brickWall = IconData(58757, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const brickWall = IconData(58753, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`briefcase-business`](https://lucide.dev/icons/briefcase-business) icon.
-  static const briefcaseBusiness = IconData(58841, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const briefcaseBusiness = IconData(58837, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`briefcase-conveyor-belt`](https://lucide.dev/icons/briefcase-conveyor-belt) icon.
-  static const briefcaseConveyorBelt = IconData(58927, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const briefcaseConveyorBelt = IconData(58923, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`briefcase-medical`](https://lucide.dev/icons/briefcase-medical) icon.
-  static const briefcaseMedical = IconData(58842, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const briefcaseMedical = IconData(58838, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`briefcase`](https://lucide.dev/icons/briefcase) icon.
   static const briefcase = IconData(57442, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`bring-to-front`](https://lucide.dev/icons/bring-to-front) icon.
-  static const bringToFront = IconData(58611, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const bringToFront = IconData(58607, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`brush-cleaning`](https://lucide.dev/icons/brush-cleaning) icon.
-  static const brushCleaning = IconData(58986, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const brushCleaning = IconData(58982, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`brush`](https://lucide.dev/icons/brush) icon.
   static const brush = IconData(57811, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`bubbles`](https://lucide.dev/icons/bubbles) icon.
-  static const bubbles = IconData(58968, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const bubbles = IconData(58964, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`bug-off`](https://lucide.dev/icons/bug-off) icon.
-  static const bugOff = IconData(58641, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const bugOff = IconData(58637, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`bug-play`](https://lucide.dev/icons/bug-play) icon.
-  static const bugPlay = IconData(58642, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const bugPlay = IconData(58638, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`bug`](https://lucide.dev/icons/bug) icon.
   static const bug = IconData(57868, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -836,34 +845,34 @@ class FIcons {
   static const building = IconData(57804, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`bus-front`](https://lucide.dev/icons/bus-front) icon.
-  static const busFront = IconData(58623, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const busFront = IconData(58619, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`bus`](https://lucide.dev/icons/bus) icon.
   static const bus = IconData(57812, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`cable-car`](https://lucide.dev/icons/cable-car) icon.
-  static const cableCar = IconData(58624, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const cableCar = IconData(58620, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`cable`](https://lucide.dev/icons/cable) icon.
-  static const cable = IconData(58599, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const cable = IconData(58595, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`cake-slice`](https://lucide.dev/icons/cake-slice) icon.
-  static const cakeSlice = IconData(58557, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const cakeSlice = IconData(58553, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`cake`](https://lucide.dev/icons/cake) icon.
-  static const cake = IconData(58184, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const cake = IconData(58180, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`calculator`](https://lucide.dev/icons/calculator) icon.
   static const calculator = IconData(57788, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`calendar-1`](https://lucide.dev/icons/calendar-1) icon.
-  static const calendar1 = IconData(58932, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const calendar1 = IconData(58928, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`calendar-arrow-down`](https://lucide.dev/icons/calendar-arrow-down) icon.
-  static const calendarArrowDown = IconData(58882, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const calendarArrowDown = IconData(58878, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`calendar-arrow-up`](https://lucide.dev/icons/calendar-arrow-up) icon.
-  static const calendarArrowUp = IconData(58883, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const calendarArrowUp = IconData(58879, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`calendar-check-2`](https://lucide.dev/icons/calendar-check-2) icon.
   static const calendarCheck2 = IconData(58040, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -875,19 +884,19 @@ class FIcons {
   static const calendarClock = IconData(58116, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`calendar-cog`](https://lucide.dev/icons/calendar-cog) icon.
-  static const calendarCog = IconData(58865, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const calendarCog = IconData(58861, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`calendar-days`](https://lucide.dev/icons/calendar-days) icon.
   static const calendarDays = IconData(58041, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`calendar-fold`](https://lucide.dev/icons/calendar-fold) icon.
-  static const calendarFold = IconData(58808, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const calendarFold = IconData(58804, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`calendar-heart`](https://lucide.dev/icons/calendar-heart) icon.
   static const calendarHeart = IconData(58117, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`calendar-minus-2`](https://lucide.dev/icons/calendar-minus-2) icon.
-  static const calendarMinus2 = IconData(58809, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const calendarMinus2 = IconData(58805, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`calendar-minus`](https://lucide.dev/icons/calendar-minus) icon.
   static const calendarMinus = IconData(58042, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -896,7 +905,7 @@ class FIcons {
   static const calendarOff = IconData(58043, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`calendar-plus-2`](https://lucide.dev/icons/calendar-plus-2) icon.
-  static const calendarPlus2 = IconData(58810, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const calendarPlus2 = IconData(58806, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`calendar-plus`](https://lucide.dev/icons/calendar-plus) icon.
   static const calendarPlus = IconData(58044, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -908,7 +917,7 @@ class FIcons {
   static const calendarSearch = IconData(58118, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`calendar-sync`](https://lucide.dev/icons/calendar-sync) icon.
-  static const calendarSync = IconData(58938, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const calendarSync = IconData(58934, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`calendar-x-2`](https://lucide.dev/icons/calendar-x-2) icon.
   static const calendarX2 = IconData(58047, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -919,6 +928,9 @@ class FIcons {
   /// A [`calendar`](https://lucide.dev/icons/calendar) icon.
   static const calendar = IconData(57443, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
+  /// A [`calendars`](https://lucide.dev/icons/calendars) icon.
+  static const calendars = IconData(59047, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+
   /// A [`camera-off`](https://lucide.dev/icons/camera-off) icon.
   static const cameraOff = IconData(57445, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
@@ -926,88 +938,91 @@ class FIcons {
   static const camera = IconData(57444, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`candy-cane`](https://lucide.dev/icons/candy-cane) icon.
-  static const candyCane = IconData(58558, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const candyCane = IconData(58554, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`candy-off`](https://lucide.dev/icons/candy-off) icon.
-  static const candyOff = IconData(58262, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const candyOff = IconData(58258, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`candy`](https://lucide.dev/icons/candy) icon.
-  static const candy = IconData(58261, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const candy = IconData(58257, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+
+  /// A [`cannabis-off`](https://lucide.dev/icons/cannabis-off) icon.
+  static const cannabisOff = IconData(59063, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`cannabis`](https://lucide.dev/icons/cannabis) icon.
-  static const cannabis = IconData(58840, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const cannabis = IconData(58836, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`captions-off`](https://lucide.dev/icons/captions-off) icon.
-  static const captionsOff = IconData(58821, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const captionsOff = IconData(58817, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`captions`](https://lucide.dev/icons/captions) icon.
-  static const captions = IconData(58280, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const captions = IconData(58276, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`car-front`](https://lucide.dev/icons/car-front) icon.
-  static const carFront = IconData(58625, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const carFront = IconData(58621, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`car-taxi-front`](https://lucide.dev/icons/car-taxi-front) icon.
-  static const carTaxiFront = IconData(58626, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const carTaxiFront = IconData(58622, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`car`](https://lucide.dev/icons/car) icon.
   static const car = IconData(57813, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`caravan`](https://lucide.dev/icons/caravan) icon.
-  static const caravan = IconData(58685, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const caravan = IconData(58681, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`card-sim`](https://lucide.dev/icons/card-sim) icon.
-  static const cardSim = IconData(58997, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const cardSim = IconData(58993, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`carrot`](https://lucide.dev/icons/carrot) icon.
   static const carrot = IconData(57946, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`case-lower`](https://lucide.dev/icons/case-lower) icon.
-  static const caseLower = IconData(58332, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const caseLower = IconData(58328, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`case-sensitive`](https://lucide.dev/icons/case-sensitive) icon.
-  static const caseSensitive = IconData(58333, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const caseSensitive = IconData(58329, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`case-upper`](https://lucide.dev/icons/case-upper) icon.
-  static const caseUpper = IconData(58334, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const caseUpper = IconData(58330, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`cassette-tape`](https://lucide.dev/icons/cassette-tape) icon.
-  static const cassetteTape = IconData(58574, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const cassetteTape = IconData(58570, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`cast`](https://lucide.dev/icons/cast) icon.
   static const cast = IconData(57446, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`castle`](https://lucide.dev/icons/castle) icon.
-  static const castle = IconData(58340, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const castle = IconData(58336, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`cat`](https://lucide.dev/icons/cat) icon.
-  static const cat = IconData(58256, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const cat = IconData(58252, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`cctv`](https://lucide.dev/icons/cctv) icon.
-  static const cctv = IconData(58753, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const cctv = IconData(58749, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`chart-area`](https://lucide.dev/icons/chart-area) icon.
-  static const chartArea = IconData(58583, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const chartArea = IconData(58579, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`chart-bar-big`](https://lucide.dev/icons/chart-bar-big) icon.
-  static const chartBarBig = IconData(58539, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const chartBarBig = IconData(58535, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`chart-bar-decreasing`](https://lucide.dev/icons/chart-bar-decreasing) icon.
-  static const chartBarDecreasing = IconData(58891, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const chartBarDecreasing = IconData(58887, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`chart-bar-increasing`](https://lucide.dev/icons/chart-bar-increasing) icon.
-  static const chartBarIncreasing = IconData(58892, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const chartBarIncreasing = IconData(58888, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`chart-bar-stacked`](https://lucide.dev/icons/chart-bar-stacked) icon.
-  static const chartBarStacked = IconData(58893, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const chartBarStacked = IconData(58889, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`chart-bar`](https://lucide.dev/icons/chart-bar) icon.
   static const chartBar = IconData(58018, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`chart-candlestick`](https://lucide.dev/icons/chart-candlestick) icon.
-  static const chartCandlestick = IconData(58540, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const chartCandlestick = IconData(58536, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`chart-column-big`](https://lucide.dev/icons/chart-column-big) icon.
-  static const chartColumnBig = IconData(58541, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const chartColumnBig = IconData(58537, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`chart-column-decreasing`](https://lucide.dev/icons/chart-column-decreasing) icon.
   static const chartColumnDecreasing = IconData(57447, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -1016,19 +1031,19 @@ class FIcons {
   static const chartColumnIncreasing = IconData(58020, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`chart-column-stacked`](https://lucide.dev/icons/chart-column-stacked) icon.
-  static const chartColumnStacked = IconData(58894, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const chartColumnStacked = IconData(58890, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`chart-column`](https://lucide.dev/icons/chart-column) icon.
   static const chartColumn = IconData(58019, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`chart-gantt`](https://lucide.dev/icons/chart-gantt) icon.
-  static const chartGantt = IconData(58920, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const chartGantt = IconData(58916, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`chart-line`](https://lucide.dev/icons/chart-line) icon.
   static const chartLine = IconData(58021, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`chart-network`](https://lucide.dev/icons/chart-network) icon.
-  static const chartNetwork = IconData(58895, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const chartNetwork = IconData(58891, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`chart-no-axes-column-decreasing`](https://lucide.dev/icons/chart-no-axes-column-decreasing) icon.
   static const chartNoAxesColumnDecreasing = IconData(
@@ -1048,25 +1063,25 @@ class FIcons {
   static const chartNoAxesColumn = IconData(57448, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`chart-no-axes-combined`](https://lucide.dev/icons/chart-no-axes-combined) icon.
-  static const chartNoAxesCombined = IconData(58896, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const chartNoAxesCombined = IconData(58892, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`chart-no-axes-gantt`](https://lucide.dev/icons/chart-no-axes-gantt) icon.
-  static const chartNoAxesGantt = IconData(58568, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const chartNoAxesGantt = IconData(58564, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`chart-pie`](https://lucide.dev/icons/chart-pie) icon.
   static const chartPie = IconData(57451, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`chart-scatter`](https://lucide.dev/icons/chart-scatter) icon.
-  static const chartScatter = IconData(58510, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const chartScatter = IconData(58506, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`chart-spline`](https://lucide.dev/icons/chart-spline) icon.
-  static const chartSpline = IconData(58897, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const chartSpline = IconData(58893, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`check-check`](https://lucide.dev/icons/check-check) icon.
-  static const checkCheck = IconData(58258, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const checkCheck = IconData(58254, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`check-line`](https://lucide.dev/icons/check-line) icon.
-  static const checkLine = IconData(58991, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const checkLine = IconData(58987, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`check`](https://lucide.dev/icons/check) icon.
   static const check = IconData(57452, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -1075,7 +1090,25 @@ class FIcons {
   static const chefHat = IconData(58028, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`cherry`](https://lucide.dev/icons/cherry) icon.
-  static const cherry = IconData(58196, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const cherry = IconData(58192, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+
+  /// A [`chess-bishop`](https://lucide.dev/icons/chess-bishop) icon.
+  static const chessBishop = IconData(59040, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+
+  /// A [`chess-king`](https://lucide.dev/icons/chess-king) icon.
+  static const chessKing = IconData(59041, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+
+  /// A [`chess-knight`](https://lucide.dev/icons/chess-knight) icon.
+  static const chessKnight = IconData(59042, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+
+  /// A [`chess-pawn`](https://lucide.dev/icons/chess-pawn) icon.
+  static const chessPawn = IconData(59043, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+
+  /// A [`chess-queen`](https://lucide.dev/icons/chess-queen) icon.
+  static const chessQueen = IconData(59044, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+
+  /// A [`chess-rook`](https://lucide.dev/icons/chess-rook) icon.
+  static const chessRook = IconData(59045, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`chevron-down`](https://lucide.dev/icons/chevron-down) icon.
   static const chevronDown = IconData(57453, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -1122,7 +1155,7 @@ class FIcons {
   static const chevronsDown = IconData(57457, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`chevrons-left-right-ellipsis`](https://lucide.dev/icons/chevrons-left-right-ellipsis) icon.
-  static const chevronsLeftRightEllipsis = IconData(58915, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const chevronsLeftRightEllipsis = IconData(58911, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`chevrons-left-right`](https://lucide.dev/icons/chevrons-left-right) icon.
   static const chevronsLeftRight = IconData(58003, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -1156,7 +1189,7 @@ class FIcons {
   static const chromium = IconData(57461, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`church`](https://lucide.dev/icons/church) icon.
-  static const church = IconData(58341, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const church = IconData(58337, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`cigarette-off`](https://lucide.dev/icons/cigarette-off) icon.
   static const cigaretteOff = IconData(58055, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -1179,16 +1212,16 @@ class FIcons {
   );
 
   /// A [`circle-arrow-out-down-left`](https://lucide.dev/icons/circle-arrow-out-down-left) icon.
-  static const circleArrowOutDownLeft = IconData(58363, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const circleArrowOutDownLeft = IconData(58359, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`circle-arrow-out-down-right`](https://lucide.dev/icons/circle-arrow-out-down-right) icon.
-  static const circleArrowOutDownRight = IconData(58364, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const circleArrowOutDownRight = IconData(58360, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`circle-arrow-out-up-left`](https://lucide.dev/icons/circle-arrow-out-up-left) icon.
-  static const circleArrowOutUpLeft = IconData(58365, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const circleArrowOutUpLeft = IconData(58361, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`circle-arrow-out-up-right`](https://lucide.dev/icons/circle-arrow-out-up-right) icon.
-  static const circleArrowOutUpRight = IconData(58366, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const circleArrowOutUpRight = IconData(58362, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`circle-arrow-right`](https://lucide.dev/icons/circle-arrow-right) icon.
   static const circleArrowRight = IconData(
@@ -1208,11 +1241,11 @@ class FIcons {
   static const circleCheck = IconData(57894, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`circle-chevron-down`](https://lucide.dev/icons/circle-chevron-down) icon.
-  static const circleChevronDown = IconData(58593, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const circleChevronDown = IconData(58589, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`circle-chevron-left`](https://lucide.dev/icons/circle-chevron-left) icon.
   static const circleChevronLeft = IconData(
-    58594,
+    58590,
     fontFamily: 'ForuiLucideIcons',
     fontPackage: 'forui_assets',
     matchTextDirection: true,
@@ -1220,62 +1253,65 @@ class FIcons {
 
   /// A [`circle-chevron-right`](https://lucide.dev/icons/circle-chevron-right) icon.
   static const circleChevronRight = IconData(
-    58595,
+    58591,
     fontFamily: 'ForuiLucideIcons',
     fontPackage: 'forui_assets',
     matchTextDirection: true,
   );
 
   /// A [`circle-chevron-up`](https://lucide.dev/icons/circle-chevron-up) icon.
-  static const circleChevronUp = IconData(58596, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const circleChevronUp = IconData(58592, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`circle-dashed`](https://lucide.dev/icons/circle-dashed) icon.
-  static const circleDashed = IconData(58548, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const circleDashed = IconData(58544, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`circle-divide`](https://lucide.dev/icons/circle-divide) icon.
   static const circleDivide = IconData(57469, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`circle-dollar-sign`](https://lucide.dev/icons/circle-dollar-sign) icon.
-  static const circleDollarSign = IconData(58497, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const circleDollarSign = IconData(58493, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`circle-dot-dashed`](https://lucide.dev/icons/circle-dot-dashed) icon.
-  static const circleDotDashed = IconData(58549, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const circleDotDashed = IconData(58545, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`circle-dot`](https://lucide.dev/icons/circle-dot) icon.
-  static const circleDot = IconData(58185, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const circleDot = IconData(58181, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`circle-ellipsis`](https://lucide.dev/icons/circle-ellipsis) icon.
-  static const circleEllipsis = IconData(58186, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const circleEllipsis = IconData(58182, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`circle-equal`](https://lucide.dev/icons/circle-equal) icon.
-  static const circleEqual = IconData(58372, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const circleEqual = IconData(58368, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`circle-fading-arrow-up`](https://lucide.dev/icons/circle-fading-arrow-up) icon.
-  static const circleFadingArrowUp = IconData(58908, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const circleFadingArrowUp = IconData(58904, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`circle-fading-plus`](https://lucide.dev/icons/circle-fading-plus) icon.
-  static const circleFadingPlus = IconData(58816, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const circleFadingPlus = IconData(58812, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`circle-gauge`](https://lucide.dev/icons/circle-gauge) icon.
-  static const circleGauge = IconData(58597, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const circleGauge = IconData(58593, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`circle-minus`](https://lucide.dev/icons/circle-minus) icon.
   static const circleMinus = IconData(57470, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`circle-off`](https://lucide.dev/icons/circle-off) icon.
-  static const circleOff = IconData(58373, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const circleOff = IconData(58369, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`circle-parking-off`](https://lucide.dev/icons/circle-parking-off) icon.
-  static const circleParkingOff = IconData(58318, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const circleParkingOff = IconData(58314, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`circle-parking`](https://lucide.dev/icons/circle-parking) icon.
-  static const circleParking = IconData(58317, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const circleParking = IconData(58313, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`circle-pause`](https://lucide.dev/icons/circle-pause) icon.
   static const circlePause = IconData(57471, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`circle-percent`](https://lucide.dev/icons/circle-percent) icon.
-  static const circlePercent = IconData(58654, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const circlePercent = IconData(58650, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+
+  /// A [`circle-pile`](https://lucide.dev/icons/circle-pile) icon.
+  static const circlePile = IconData(59056, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`circle-play`](https://lucide.dev/icons/circle-play) icon.
   static const circlePlay = IconData(57472, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -1284,10 +1320,10 @@ class FIcons {
   static const circlePlus = IconData(57473, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`circle-pound-sterling`](https://lucide.dev/icons/circle-pound-sterling) icon.
-  static const circlePoundSterling = IconData(58993, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const circlePoundSterling = IconData(58989, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`circle-power`](https://lucide.dev/icons/circle-power) icon.
-  static const circlePower = IconData(58708, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const circlePower = IconData(58704, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`circle-question-mark`](https://lucide.dev/icons/circle-question-mark) icon.
   static const circleQuestionMark = IconData(57474, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -1296,22 +1332,22 @@ class FIcons {
   static const circleSlash2 = IconData(57875, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`circle-slash`](https://lucide.dev/icons/circle-slash) icon.
-  static const circleSlash = IconData(58374, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const circleSlash = IconData(58370, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`circle-small`](https://lucide.dev/icons/circle-small) icon.
-  static const circleSmall = IconData(58948, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const circleSmall = IconData(58944, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`circle-star`](https://lucide.dev/icons/circle-star) icon.
-  static const circleStar = IconData(59025, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const circleStar = IconData(59021, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`circle-stop`](https://lucide.dev/icons/circle-stop) icon.
   static const circleStop = IconData(57475, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`circle-user-round`](https://lucide.dev/icons/circle-user-round) icon.
-  static const circleUserRound = IconData(58470, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const circleUserRound = IconData(58466, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`circle-user`](https://lucide.dev/icons/circle-user) icon.
-  static const circleUser = IconData(58469, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const circleUser = IconData(58465, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`circle-x`](https://lucide.dev/icons/circle-x) icon.
   static const circleX = IconData(57476, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -1320,10 +1356,10 @@ class FIcons {
   static const circle = IconData(57462, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`circuit-board`](https://lucide.dev/icons/circuit-board) icon.
-  static const circuitBoard = IconData(58375, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const circuitBoard = IconData(58371, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`citrus`](https://lucide.dev/icons/citrus) icon.
-  static const citrus = IconData(58233, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const citrus = IconData(58229, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`clapperboard`](https://lucide.dev/icons/clapperboard) icon.
   static const clapperboard = IconData(58011, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -1332,7 +1368,7 @@ class FIcons {
   static const clipboardCheck = IconData(57881, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`clipboard-clock`](https://lucide.dev/icons/clipboard-clock) icon.
-  static const clipboardClock = IconData(59020, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const clipboardClock = IconData(59016, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`clipboard-copy`](https://lucide.dev/icons/clipboard-copy) icon.
   static const clipboardCopy = IconData(57893, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -1341,10 +1377,10 @@ class FIcons {
   static const clipboardList = IconData(57478, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`clipboard-minus`](https://lucide.dev/icons/clipboard-minus) icon.
-  static const clipboardMinus = IconData(58818, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const clipboardMinus = IconData(58814, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`clipboard-paste`](https://lucide.dev/icons/clipboard-paste) icon.
-  static const clipboardPaste = IconData(58348, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const clipboardPaste = IconData(58344, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`clipboard-pen-line`](https://lucide.dev/icons/clipboard-pen-line) icon.
   static const clipboardPenLine = IconData(58120, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -1353,7 +1389,7 @@ class FIcons {
   static const clipboardPen = IconData(58119, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`clipboard-plus`](https://lucide.dev/icons/clipboard-plus) icon.
-  static const clipboardPlus = IconData(58819, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const clipboardPlus = IconData(58815, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`clipboard-type`](https://lucide.dev/icons/clipboard-type) icon.
   static const clipboardType = IconData(58121, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -1401,31 +1437,37 @@ class FIcons {
   static const clock9 = IconData(57942, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`clock-alert`](https://lucide.dev/icons/clock-alert) icon.
-  static const clockAlert = IconData(58926, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const clockAlert = IconData(58922, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`clock-arrow-down`](https://lucide.dev/icons/clock-arrow-down) icon.
-  static const clockArrowDown = IconData(58884, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const clockArrowDown = IconData(58880, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`clock-arrow-up`](https://lucide.dev/icons/clock-arrow-up) icon.
-  static const clockArrowUp = IconData(58885, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const clockArrowUp = IconData(58881, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+
+  /// A [`clock-check`](https://lucide.dev/icons/clock-check) icon.
+  static const clockCheck = IconData(59038, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`clock-fading`](https://lucide.dev/icons/clock-fading) icon.
-  static const clockFading = IconData(58958, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const clockFading = IconData(58954, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`clock-plus`](https://lucide.dev/icons/clock-plus) icon.
-  static const clockPlus = IconData(58987, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const clockPlus = IconData(58983, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`clock`](https://lucide.dev/icons/clock) icon.
   static const clock = IconData(57479, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`closed-caption`](https://lucide.dev/icons/closed-caption) icon.
-  static const closedCaption = IconData(59022, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const closedCaption = IconData(59018, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`cloud-alert`](https://lucide.dev/icons/cloud-alert) icon.
-  static const cloudAlert = IconData(58935, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const cloudAlert = IconData(58931, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+
+  /// A [`cloud-backup`](https://lucide.dev/icons/cloud-backup) icon.
+  static const cloudBackup = IconData(59057, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`cloud-check`](https://lucide.dev/icons/cloud-check) icon.
-  static const cloudCheck = IconData(58994, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const cloudCheck = IconData(58990, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`cloud-cog`](https://lucide.dev/icons/cloud-cog) icon.
   static const cloudCog = IconData(58122, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -1469,6 +1511,9 @@ class FIcons {
   /// A [`cloud-sun`](https://lucide.dev/icons/cloud-sun) icon.
   static const cloudSun = IconData(57878, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
+  /// A [`cloud-sync`](https://lucide.dev/icons/cloud-sync) icon.
+  static const cloudSync = IconData(59058, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+
   /// A [`cloud-upload`](https://lucide.dev/icons/cloud-upload) icon.
   static const cloudUpload = IconData(57489, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
@@ -1482,7 +1527,7 @@ class FIcons {
   static const clover = IconData(57490, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`club`](https://lucide.dev/icons/club) icon.
-  static const club = IconData(58522, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const club = IconData(58518, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`code-xml`](https://lucide.dev/icons/code-xml) icon.
   static const codeXml = IconData(57862, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -1509,16 +1554,16 @@ class FIcons {
   static const columns2 = IconData(57496, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`columns-3-cog`](https://lucide.dev/icons/columns-3-cog) icon.
-  static const columns3Cog = IconData(58981, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const columns3Cog = IconData(58977, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`columns-3`](https://lucide.dev/icons/columns-3) icon.
   static const columns3 = IconData(57497, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`columns-4`](https://lucide.dev/icons/columns-4) icon.
-  static const columns4 = IconData(58765, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const columns4 = IconData(58761, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`combine`](https://lucide.dev/icons/combine) icon.
-  static const combine = IconData(58448, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const combine = IconData(58444, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`command`](https://lucide.dev/icons/command) icon.
   static const command = IconData(57498, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -1530,25 +1575,25 @@ class FIcons {
   static const component = IconData(58029, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`computer`](https://lucide.dev/icons/computer) icon.
-  static const computer = IconData(58600, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const computer = IconData(58596, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`concierge-bell`](https://lucide.dev/icons/concierge-bell) icon.
-  static const conciergeBell = IconData(58236, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const conciergeBell = IconData(58232, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`cone`](https://lucide.dev/icons/cone) icon.
-  static const cone = IconData(58663, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const cone = IconData(58659, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`construction`](https://lucide.dev/icons/construction) icon.
-  static const construction = IconData(58296, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const construction = IconData(58292, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`contact-round`](https://lucide.dev/icons/contact-round) icon.
-  static const contactRound = IconData(58471, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const contactRound = IconData(58467, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`contact`](https://lucide.dev/icons/contact) icon.
   static const contact = IconData(57500, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`container`](https://lucide.dev/icons/container) icon.
-  static const container = IconData(58585, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const container = IconData(58581, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`contrast`](https://lucide.dev/icons/contrast) icon.
   static const contrast = IconData(57501, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -1557,22 +1602,22 @@ class FIcons {
   static const cookie = IconData(57963, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`cooking-pot`](https://lucide.dev/icons/cooking-pot) icon.
-  static const cookingPot = IconData(58760, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const cookingPot = IconData(58756, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`copy-check`](https://lucide.dev/icons/copy-check) icon.
-  static const copyCheck = IconData(58367, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const copyCheck = IconData(58363, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`copy-minus`](https://lucide.dev/icons/copy-minus) icon.
-  static const copyMinus = IconData(58368, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const copyMinus = IconData(58364, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`copy-plus`](https://lucide.dev/icons/copy-plus) icon.
-  static const copyPlus = IconData(58369, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const copyPlus = IconData(58365, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`copy-slash`](https://lucide.dev/icons/copy-slash) icon.
-  static const copySlash = IconData(58370, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const copySlash = IconData(58366, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`copy-x`](https://lucide.dev/icons/copy-x) icon.
-  static const copyX = IconData(58371, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const copyX = IconData(58367, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`copy`](https://lucide.dev/icons/copy) icon.
   static const copy = IconData(57502, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -1611,7 +1656,7 @@ class FIcons {
   static const cpu = IconData(57513, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`creative-commons`](https://lucide.dev/icons/creative-commons) icon.
-  static const creativeCommons = IconData(58294, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const creativeCommons = IconData(58290, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`credit-card`](https://lucide.dev/icons/credit-card) icon.
   static const creditCard = IconData(57514, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -1632,7 +1677,7 @@ class FIcons {
   static const crown = IconData(57814, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`cuboid`](https://lucide.dev/icons/cuboid) icon.
-  static const cuboid = IconData(58664, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const cuboid = IconData(58660, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`cup-soda`](https://lucide.dev/icons/cup-soda) icon.
   static const cupSoda = IconData(58065, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -1641,43 +1686,43 @@ class FIcons {
   static const currency = IconData(57904, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`cylinder`](https://lucide.dev/icons/cylinder) icon.
-  static const cylinder = IconData(58665, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const cylinder = IconData(58661, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`dam`](https://lucide.dev/icons/dam) icon.
-  static const dam = IconData(58890, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const dam = IconData(58886, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`database-backup`](https://lucide.dev/icons/database-backup) icon.
-  static const databaseBackup = IconData(58287, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const databaseBackup = IconData(58283, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`database-zap`](https://lucide.dev/icons/database-zap) icon.
-  static const databaseZap = IconData(58639, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const databaseZap = IconData(58635, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`database`](https://lucide.dev/icons/database) icon.
   static const database = IconData(57517, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`decimals-arrow-left`](https://lucide.dev/icons/decimals-arrow-left) icon.
-  static const decimalsArrowLeft = IconData(58976, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const decimalsArrowLeft = IconData(58972, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`decimals-arrow-right`](https://lucide.dev/icons/decimals-arrow-right) icon.
-  static const decimalsArrowRight = IconData(58977, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const decimalsArrowRight = IconData(58973, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`delete`](https://lucide.dev/icons/delete) icon.
   static const delete = IconData(57518, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`dessert`](https://lucide.dev/icons/dessert) icon.
-  static const dessert = IconData(58559, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const dessert = IconData(58555, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`diameter`](https://lucide.dev/icons/diameter) icon.
-  static const diameter = IconData(58666, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const diameter = IconData(58662, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`diamond-minus`](https://lucide.dev/icons/diamond-minus) icon.
-  static const diamondMinus = IconData(58853, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const diamondMinus = IconData(58849, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`diamond-percent`](https://lucide.dev/icons/diamond-percent) icon.
-  static const diamondPercent = IconData(58655, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const diamondPercent = IconData(58651, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`diamond-plus`](https://lucide.dev/icons/diamond-plus) icon.
-  static const diamondPlus = IconData(58854, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const diamondPlus = IconData(58850, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`diamond`](https://lucide.dev/icons/diamond) icon.
   static const diamond = IconData(58066, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -1707,13 +1752,13 @@ class FIcons {
   static const diff = IconData(58124, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`disc-2`](https://lucide.dev/icons/disc-2) icon.
-  static const disc2 = IconData(58362, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const disc2 = IconData(58358, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`disc-3`](https://lucide.dev/icons/disc-3) icon.
-  static const disc3 = IconData(58520, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const disc3 = IconData(58516, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`disc-album`](https://lucide.dev/icons/disc-album) icon.
-  static const discAlbum = IconData(58720, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const discAlbum = IconData(58716, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`disc`](https://lucide.dev/icons/disc) icon.
   static const disc = IconData(57519, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -1722,55 +1767,55 @@ class FIcons {
   static const divide = IconData(57520, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`dna-off`](https://lucide.dev/icons/dna-off) icon.
-  static const dnaOff = IconData(58264, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const dnaOff = IconData(58260, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`dna`](https://lucide.dev/icons/dna) icon.
-  static const dna = IconData(58263, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const dna = IconData(58259, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`dock`](https://lucide.dev/icons/dock) icon.
-  static const dock = IconData(58839, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const dock = IconData(58835, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`dog`](https://lucide.dev/icons/dog) icon.
-  static const dog = IconData(58257, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const dog = IconData(58253, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`dollar-sign`](https://lucide.dev/icons/dollar-sign) icon.
   static const dollarSign = IconData(57521, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`donut`](https://lucide.dev/icons/donut) icon.
-  static const donut = IconData(58560, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const donut = IconData(58556, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`door-closed-locked`](https://lucide.dev/icons/door-closed-locked) icon.
-  static const doorClosedLocked = IconData(58984, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const doorClosedLocked = IconData(58980, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`door-closed`](https://lucide.dev/icons/door-closed) icon.
-  static const doorClosed = IconData(58329, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const doorClosed = IconData(58325, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`door-open`](https://lucide.dev/icons/door-open) icon.
-  static const doorOpen = IconData(58330, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const doorOpen = IconData(58326, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`dot`](https://lucide.dev/icons/dot) icon.
-  static const dot = IconData(58451, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const dot = IconData(58447, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`download`](https://lucide.dev/icons/download) icon.
   static const download = IconData(57522, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`drafting-compass`](https://lucide.dev/icons/drafting-compass) icon.
-  static const draftingCompass = IconData(58667, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const draftingCompass = IconData(58663, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`drama`](https://lucide.dev/icons/drama) icon.
-  static const drama = IconData(58661, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const drama = IconData(58657, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`dribbble`](https://lucide.dev/icons/dribbble) icon.
   static const dribbble = IconData(57523, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`drill`](https://lucide.dev/icons/drill) icon.
-  static const drill = IconData(58769, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const drill = IconData(58765, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`drone`](https://lucide.dev/icons/drone) icon.
-  static const drone = IconData(59002, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const drone = IconData(58998, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`droplet-off`](https://lucide.dev/icons/droplet-off) icon.
-  static const dropletOff = IconData(58940, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const dropletOff = IconData(58936, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`droplet`](https://lucide.dev/icons/droplet) icon.
   static const droplet = IconData(57524, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -1779,34 +1824,34 @@ class FIcons {
   static const droplets = IconData(57525, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`drum`](https://lucide.dev/icons/drum) icon.
-  static const drum = IconData(58721, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const drum = IconData(58717, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`drumstick`](https://lucide.dev/icons/drumstick) icon.
   static const drumstick = IconData(57947, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`dumbbell`](https://lucide.dev/icons/dumbbell) icon.
-  static const dumbbell = IconData(58277, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const dumbbell = IconData(58273, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`ear-off`](https://lucide.dev/icons/ear-off) icon.
-  static const earOff = IconData(58247, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const earOff = IconData(58243, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`ear`](https://lucide.dev/icons/ear) icon.
-  static const ear = IconData(58246, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const ear = IconData(58242, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`earth-lock`](https://lucide.dev/icons/earth-lock) icon.
-  static const earthLock = IconData(58832, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const earthLock = IconData(58828, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`earth`](https://lucide.dev/icons/earth) icon.
   static const earth = IconData(57843, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`eclipse`](https://lucide.dev/icons/eclipse) icon.
-  static const eclipse = IconData(58785, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const eclipse = IconData(58781, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`egg-fried`](https://lucide.dev/icons/egg-fried) icon.
-  static const eggFried = IconData(58197, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const eggFried = IconData(58193, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`egg-off`](https://lucide.dev/icons/egg-off) icon.
-  static const eggOff = IconData(58265, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const eggOff = IconData(58261, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`egg`](https://lucide.dev/icons/egg) icon.
   static const egg = IconData(57949, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -1818,7 +1863,7 @@ class FIcons {
   static const ellipsis = IconData(57526, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`equal-approximately`](https://lucide.dev/icons/equal-approximately) icon.
-  static const equalApproximately = IconData(58936, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const equalApproximately = IconData(58932, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`equal-not`](https://lucide.dev/icons/equal-not) icon.
   static const equalNot = IconData(57790, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -1830,13 +1875,13 @@ class FIcons {
   static const eraser = IconData(57999, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`ethernet-port`](https://lucide.dev/icons/ethernet-port) icon.
-  static const ethernetPort = IconData(58916, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const ethernetPort = IconData(58912, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`euro`](https://lucide.dev/icons/euro) icon.
   static const euro = IconData(57528, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`ev-charger`](https://lucide.dev/icons/ev-charger) icon.
-  static const evCharger = IconData(59035, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const evCharger = IconData(59031, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`expand`](https://lucide.dev/icons/expand) icon.
   static const expand = IconData(57882, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -1845,7 +1890,7 @@ class FIcons {
   static const externalLink = IconData(57529, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`eye-closed`](https://lucide.dev/icons/eye-closed) icon.
-  static const eyeClosed = IconData(58930, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const eyeClosed = IconData(58926, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`eye-off`](https://lucide.dev/icons/eye-off) icon.
   static const eyeOff = IconData(57531, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -1860,7 +1905,7 @@ class FIcons {
   static const factory = IconData(58015, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`fan`](https://lucide.dev/icons/fan) icon.
-  static const fan = IconData(58237, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const fan = IconData(58233, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`fast-forward`](https://lucide.dev/icons/fast-forward) icon.
   static const fastForward = IconData(57533, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -1869,10 +1914,10 @@ class FIcons {
   static const feather = IconData(57534, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`fence`](https://lucide.dev/icons/fence) icon.
-  static const fence = IconData(58758, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const fence = IconData(58754, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`ferris-wheel`](https://lucide.dev/icons/ferris-wheel) icon.
-  static const ferrisWheel = IconData(58499, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const ferrisWheel = IconData(58495, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`figma`](https://lucide.dev/icons/figma) icon.
   static const figma = IconData(57535, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -1880,173 +1925,161 @@ class FIcons {
   /// A [`file-archive`](https://lucide.dev/icons/file-archive) icon.
   static const fileArchive = IconData(58125, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`file-audio-2`](https://lucide.dev/icons/file-audio-2) icon.
-  static const fileAudio2 = IconData(58127, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
-
-  /// A [`file-audio`](https://lucide.dev/icons/file-audio) icon.
-  static const fileAudio = IconData(58126, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
-
   /// A [`file-axis-3d`](https://lucide.dev/icons/file-axis-3d) icon.
-  static const fileAxis3d = IconData(58128, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
-
-  /// A [`file-badge-2`](https://lucide.dev/icons/file-badge-2) icon.
-  static const fileBadge2 = IconData(58130, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const fileAxis3d = IconData(58126, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`file-badge`](https://lucide.dev/icons/file-badge) icon.
-  static const fileBadge = IconData(58129, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const fileBadge = IconData(58127, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`file-box`](https://lucide.dev/icons/file-box) icon.
-  static const fileBox = IconData(58131, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const fileBox = IconData(58128, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+
+  /// A [`file-braces-corner`](https://lucide.dev/icons/file-braces-corner) icon.
+  static const fileBracesCorner = IconData(58220, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+
+  /// A [`file-braces`](https://lucide.dev/icons/file-braces) icon.
+  static const fileBraces = IconData(58219, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`file-chart-column-increasing`](https://lucide.dev/icons/file-chart-column-increasing) icon.
-  static const fileChartColumnIncreasing = IconData(58133, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const fileChartColumnIncreasing = IconData(58130, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`file-chart-column`](https://lucide.dev/icons/file-chart-column) icon.
-  static const fileChartColumn = IconData(58132, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const fileChartColumn = IconData(58129, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`file-chart-line`](https://lucide.dev/icons/file-chart-line) icon.
-  static const fileChartLine = IconData(58134, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const fileChartLine = IconData(58131, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`file-chart-pie`](https://lucide.dev/icons/file-chart-pie) icon.
-  static const fileChartPie = IconData(58135, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const fileChartPie = IconData(58132, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`file-check-2`](https://lucide.dev/icons/file-check-2) icon.
-  static const fileCheck2 = IconData(57538, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  /// A [`file-check-corner`](https://lucide.dev/icons/file-check-corner) icon.
+  static const fileCheckCorner = IconData(57538, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`file-check`](https://lucide.dev/icons/file-check) icon.
   static const fileCheck = IconData(57537, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`file-clock`](https://lucide.dev/icons/file-clock) icon.
-  static const fileClock = IconData(58136, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const fileClock = IconData(58133, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`file-code-2`](https://lucide.dev/icons/file-code-2) icon.
-  static const fileCode2 = IconData(58466, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  /// A [`file-code-corner`](https://lucide.dev/icons/file-code-corner) icon.
+  static const fileCodeCorner = IconData(58462, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`file-code`](https://lucide.dev/icons/file-code) icon.
   static const fileCode = IconData(57539, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`file-cog`](https://lucide.dev/icons/file-cog) icon.
-  static const fileCog = IconData(58137, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const fileCog = IconData(58134, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`file-diff`](https://lucide.dev/icons/file-diff) icon.
-  static const fileDiff = IconData(58138, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const fileDiff = IconData(58135, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`file-digit`](https://lucide.dev/icons/file-digit) icon.
   static const fileDigit = IconData(57540, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`file-down`](https://lucide.dev/icons/file-down) icon.
-  static const fileDown = IconData(58139, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const fileDown = IconData(58136, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+
+  /// A [`file-exclamation-point`](https://lucide.dev/icons/file-exclamation-point) icon.
+  static const fileExclamationPoint = IconData(58137, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+
+  /// A [`file-headphone`](https://lucide.dev/icons/file-headphone) icon.
+  static const fileHeadphone = IconData(58138, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`file-heart`](https://lucide.dev/icons/file-heart) icon.
-  static const fileHeart = IconData(58140, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const fileHeart = IconData(58139, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`file-image`](https://lucide.dev/icons/file-image) icon.
-  static const fileImage = IconData(58141, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const fileImage = IconData(58140, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`file-input`](https://lucide.dev/icons/file-input) icon.
   static const fileInput = IconData(57541, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`file-json-2`](https://lucide.dev/icons/file-json-2) icon.
-  static const fileJson2 = IconData(58224, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
-
-  /// A [`file-json`](https://lucide.dev/icons/file-json) icon.
-  static const fileJson = IconData(58223, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
-
-  /// A [`file-key-2`](https://lucide.dev/icons/file-key-2) icon.
-  static const fileKey2 = IconData(58143, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
-
   /// A [`file-key`](https://lucide.dev/icons/file-key) icon.
-  static const fileKey = IconData(58142, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
-
-  /// A [`file-lock-2`](https://lucide.dev/icons/file-lock-2) icon.
-  static const fileLock2 = IconData(58145, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const fileKey = IconData(58141, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`file-lock`](https://lucide.dev/icons/file-lock) icon.
-  static const fileLock = IconData(58144, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const fileLock = IconData(58142, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`file-minus-2`](https://lucide.dev/icons/file-minus-2) icon.
-  static const fileMinus2 = IconData(57543, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  /// A [`file-minus-corner`](https://lucide.dev/icons/file-minus-corner) icon.
+  static const fileMinusCorner = IconData(57543, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`file-minus`](https://lucide.dev/icons/file-minus) icon.
   static const fileMinus = IconData(57542, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`file-music`](https://lucide.dev/icons/file-music) icon.
-  static const fileMusic = IconData(58722, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const fileMusic = IconData(58718, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`file-output`](https://lucide.dev/icons/file-output) icon.
   static const fileOutput = IconData(57544, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`file-pen-line`](https://lucide.dev/icons/file-pen-line) icon.
-  static const filePenLine = IconData(58147, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const filePenLine = IconData(58144, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`file-pen`](https://lucide.dev/icons/file-pen) icon.
-  static const filePen = IconData(58146, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const filePen = IconData(58143, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`file-play`](https://lucide.dev/icons/file-play) icon.
-  static const filePlay = IconData(58148, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const filePlay = IconData(58145, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`file-plus-2`](https://lucide.dev/icons/file-plus-2) icon.
-  static const filePlus2 = IconData(57546, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  /// A [`file-plus-corner`](https://lucide.dev/icons/file-plus-corner) icon.
+  static const filePlusCorner = IconData(57546, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`file-plus`](https://lucide.dev/icons/file-plus) icon.
   static const filePlus = IconData(57545, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`file-question-mark`](https://lucide.dev/icons/file-question-mark) icon.
-  static const fileQuestionMark = IconData(58149, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const fileQuestionMark = IconData(58146, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`file-scan`](https://lucide.dev/icons/file-scan) icon.
-  static const fileScan = IconData(58150, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const fileScan = IconData(58147, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`file-search-2`](https://lucide.dev/icons/file-search-2) icon.
-  static const fileSearch2 = IconData(58151, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  /// A [`file-search-corner`](https://lucide.dev/icons/file-search-corner) icon.
+  static const fileSearchCorner = IconData(58148, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`file-search`](https://lucide.dev/icons/file-search) icon.
   static const fileSearch = IconData(57547, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
+  /// A [`file-signal`](https://lucide.dev/icons/file-signal) icon.
+  static const fileSignal = IconData(58149, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+
   /// A [`file-sliders`](https://lucide.dev/icons/file-sliders) icon.
-  static const fileSliders = IconData(58788, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const fileSliders = IconData(58784, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`file-spreadsheet`](https://lucide.dev/icons/file-spreadsheet) icon.
-  static const fileSpreadsheet = IconData(58152, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const fileSpreadsheet = IconData(58150, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`file-stack`](https://lucide.dev/icons/file-stack) icon.
-  static const fileStack = IconData(58533, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const fileStack = IconData(58529, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`file-symlink`](https://lucide.dev/icons/file-symlink) icon.
-  static const fileSymlink = IconData(58153, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const fileSymlink = IconData(58151, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`file-terminal`](https://lucide.dev/icons/file-terminal) icon.
-  static const fileTerminal = IconData(58154, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const fileTerminal = IconData(58152, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`file-text`](https://lucide.dev/icons/file-text) icon.
   static const fileText = IconData(57548, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`file-type-2`](https://lucide.dev/icons/file-type-2) icon.
-  static const fileType2 = IconData(58225, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  /// A [`file-type-corner`](https://lucide.dev/icons/file-type-corner) icon.
+  static const fileTypeCorner = IconData(58221, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`file-type`](https://lucide.dev/icons/file-type) icon.
-  static const fileType = IconData(58155, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const fileType = IconData(58153, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`file-up`](https://lucide.dev/icons/file-up) icon.
-  static const fileUp = IconData(58156, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const fileUp = IconData(58154, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`file-user`](https://lucide.dev/icons/file-user) icon.
-  static const fileUser = IconData(58929, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const fileUser = IconData(58925, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`file-video-camera`](https://lucide.dev/icons/file-video-camera) icon.
-  static const fileVideoCamera = IconData(58157, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
-
-  /// A [`file-volume-2`](https://lucide.dev/icons/file-volume-2) icon.
-  static const fileVolume2 = IconData(58159, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const fileVideoCamera = IconData(58155, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`file-volume`](https://lucide.dev/icons/file-volume) icon.
-  static const fileVolume = IconData(58158, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const fileVolume = IconData(58156, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`file-warning`](https://lucide.dev/icons/file-warning) icon.
-  static const fileWarning = IconData(58160, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
-
-  /// A [`file-x-2`](https://lucide.dev/icons/file-x-2) icon.
-  static const fileX2 = IconData(57550, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  /// A [`file-x-corner`](https://lucide.dev/icons/file-x-corner) icon.
+  static const fileXCorner = IconData(57550, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`file-x`](https://lucide.dev/icons/file-x) icon.
   static const fileX = IconData(57549, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -2060,20 +2093,23 @@ class FIcons {
   /// A [`film`](https://lucide.dev/icons/film) icon.
   static const film = IconData(57552, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`fingerprint`](https://lucide.dev/icons/fingerprint) icon.
-  static const fingerprint = IconData(58059, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  /// A [`fingerprint-pattern`](https://lucide.dev/icons/fingerprint-pattern) icon.
+  static const fingerprintPattern = IconData(58059, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`fire-extinguisher`](https://lucide.dev/icons/fire-extinguisher) icon.
-  static const fireExtinguisher = IconData(58754, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const fireExtinguisher = IconData(58750, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`fish-off`](https://lucide.dev/icons/fish-off) icon.
-  static const fishOff = IconData(58292, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const fishOff = IconData(58288, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`fish-symbol`](https://lucide.dev/icons/fish-symbol) icon.
-  static const fishSymbol = IconData(58616, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const fishSymbol = IconData(58612, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`fish`](https://lucide.dev/icons/fish) icon.
-  static const fish = IconData(58282, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const fish = IconData(58278, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+
+  /// A [`fishing-hook`](https://lucide.dev/icons/fishing-hook) icon.
+  static const fishingHook = IconData(59062, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`flag-off`](https://lucide.dev/icons/flag-off) icon.
   static const flagOff = IconData(58002, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -2088,7 +2124,7 @@ class FIcons {
   static const flag = IconData(57553, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`flame-kindling`](https://lucide.dev/icons/flame-kindling) icon.
-  static const flameKindling = IconData(58686, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const flameKindling = IconData(58682, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`flame`](https://lucide.dev/icons/flame) icon.
   static const flame = IconData(57554, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -2100,7 +2136,7 @@ class FIcons {
   static const flashlight = IconData(57555, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`flask-conical-off`](https://lucide.dev/icons/flask-conical-off) icon.
-  static const flaskConicalOff = IconData(58266, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const flaskConicalOff = IconData(58262, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`flask-conical`](https://lucide.dev/icons/flask-conical) icon.
   static const flaskConical = IconData(57557, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -2109,16 +2145,16 @@ class FIcons {
   static const flaskRound = IconData(57558, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`flip-horizontal-2`](https://lucide.dev/icons/flip-horizontal-2) icon.
-  static const flipHorizontal2 = IconData(58210, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const flipHorizontal2 = IconData(58206, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`flip-horizontal`](https://lucide.dev/icons/flip-horizontal) icon.
-  static const flipHorizontal = IconData(58209, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const flipHorizontal = IconData(58205, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`flip-vertical-2`](https://lucide.dev/icons/flip-vertical-2) icon.
-  static const flipVertical2 = IconData(58212, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const flipVertical2 = IconData(58208, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`flip-vertical`](https://lucide.dev/icons/flip-vertical) icon.
-  static const flipVertical = IconData(58211, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const flipVertical = IconData(58207, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`flower-2`](https://lucide.dev/icons/flower-2) icon.
   static const flower2 = IconData(58068, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -2130,109 +2166,112 @@ class FIcons {
   static const focus = IconData(58014, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`fold-horizontal`](https://lucide.dev/icons/fold-horizontal) icon.
-  static const foldHorizontal = IconData(58431, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const foldHorizontal = IconData(58427, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`fold-vertical`](https://lucide.dev/icons/fold-vertical) icon.
-  static const foldVertical = IconData(58432, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const foldVertical = IconData(58428, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`folder-archive`](https://lucide.dev/icons/folder-archive) icon.
-  static const folderArchive = IconData(58161, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const folderArchive = IconData(58157, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`folder-check`](https://lucide.dev/icons/folder-check) icon.
-  static const folderCheck = IconData(58162, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const folderCheck = IconData(58158, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`folder-clock`](https://lucide.dev/icons/folder-clock) icon.
-  static const folderClock = IconData(58163, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const folderClock = IconData(58159, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`folder-closed`](https://lucide.dev/icons/folder-closed) icon.
-  static const folderClosed = IconData(58164, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const folderClosed = IconData(58160, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`folder-code`](https://lucide.dev/icons/folder-code) icon.
-  static const folderCode = IconData(58879, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const folderCode = IconData(58875, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`folder-cog`](https://lucide.dev/icons/folder-cog) icon.
-  static const folderCog = IconData(58165, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const folderCog = IconData(58161, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`folder-dot`](https://lucide.dev/icons/folder-dot) icon.
-  static const folderDot = IconData(58569, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const folderDot = IconData(58565, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`folder-down`](https://lucide.dev/icons/folder-down) icon.
-  static const folderDown = IconData(58166, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const folderDown = IconData(58162, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`folder-git-2`](https://lucide.dev/icons/folder-git-2) icon.
-  static const folderGit2 = IconData(58382, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const folderGit2 = IconData(58378, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`folder-git`](https://lucide.dev/icons/folder-git) icon.
-  static const folderGit = IconData(58381, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const folderGit = IconData(58377, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`folder-heart`](https://lucide.dev/icons/folder-heart) icon.
-  static const folderHeart = IconData(58167, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const folderHeart = IconData(58163, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`folder-input`](https://lucide.dev/icons/folder-input) icon.
-  static const folderInput = IconData(58168, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const folderInput = IconData(58164, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`folder-kanban`](https://lucide.dev/icons/folder-kanban) icon.
-  static const folderKanban = IconData(58570, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const folderKanban = IconData(58566, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`folder-key`](https://lucide.dev/icons/folder-key) icon.
-  static const folderKey = IconData(58169, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const folderKey = IconData(58165, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`folder-lock`](https://lucide.dev/icons/folder-lock) icon.
-  static const folderLock = IconData(58170, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const folderLock = IconData(58166, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`folder-minus`](https://lucide.dev/icons/folder-minus) icon.
   static const folderMinus = IconData(57560, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`folder-open-dot`](https://lucide.dev/icons/folder-open-dot) icon.
-  static const folderOpenDot = IconData(58571, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const folderOpenDot = IconData(58567, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`folder-open`](https://lucide.dev/icons/folder-open) icon.
   static const folderOpen = IconData(57927, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`folder-output`](https://lucide.dev/icons/folder-output) icon.
-  static const folderOutput = IconData(58171, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const folderOutput = IconData(58167, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`folder-pen`](https://lucide.dev/icons/folder-pen) icon.
-  static const folderPen = IconData(58172, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const folderPen = IconData(58168, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`folder-plus`](https://lucide.dev/icons/folder-plus) icon.
   static const folderPlus = IconData(57561, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`folder-root`](https://lucide.dev/icons/folder-root) icon.
-  static const folderRoot = IconData(58572, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const folderRoot = IconData(58568, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`folder-search-2`](https://lucide.dev/icons/folder-search-2) icon.
-  static const folderSearch2 = IconData(58174, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const folderSearch2 = IconData(58170, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`folder-search`](https://lucide.dev/icons/folder-search) icon.
-  static const folderSearch = IconData(58173, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const folderSearch = IconData(58169, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`folder-symlink`](https://lucide.dev/icons/folder-symlink) icon.
-  static const folderSymlink = IconData(58175, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const folderSymlink = IconData(58171, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`folder-sync`](https://lucide.dev/icons/folder-sync) icon.
-  static const folderSync = IconData(58573, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const folderSync = IconData(58569, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`folder-tree`](https://lucide.dev/icons/folder-tree) icon.
-  static const folderTree = IconData(58176, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const folderTree = IconData(58172, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`folder-up`](https://lucide.dev/icons/folder-up) icon.
-  static const folderUp = IconData(58177, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const folderUp = IconData(58173, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`folder-x`](https://lucide.dev/icons/folder-x) icon.
-  static const folderX = IconData(58178, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const folderX = IconData(58174, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`folder`](https://lucide.dev/icons/folder) icon.
   static const folder = IconData(57559, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`folders`](https://lucide.dev/icons/folders) icon.
-  static const folders = IconData(58179, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const folders = IconData(58175, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`footprints`](https://lucide.dev/icons/footprints) icon.
-  static const footprints = IconData(58301, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const footprints = IconData(58297, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`forklift`](https://lucide.dev/icons/forklift) icon.
-  static const forklift = IconData(58309, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const forklift = IconData(58305, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+
+  /// A [`form`](https://lucide.dev/icons/form) icon.
+  static const form = IconData(59048, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`forward`](https://lucide.dev/icons/forward) icon.
   static const forward = IconData(57897, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -2250,34 +2289,37 @@ class FIcons {
   static const fuel = IconData(58031, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`fullscreen`](https://lucide.dev/icons/fullscreen) icon.
-  static const fullscreen = IconData(58680, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const fullscreen = IconData(58676, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`funnel-plus`](https://lucide.dev/icons/funnel-plus) icon.
   static const funnelPlus = IconData(57565, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`funnel-x`](https://lucide.dev/icons/funnel-x) icon.
-  static const funnelX = IconData(58297, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const funnelX = IconData(58293, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`funnel`](https://lucide.dev/icons/funnel) icon.
   static const funnel = IconData(57564, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`gallery-horizontal-end`](https://lucide.dev/icons/gallery-horizontal-end) icon.
-  static const galleryHorizontalEnd = IconData(58579, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const galleryHorizontalEnd = IconData(58575, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`gallery-horizontal`](https://lucide.dev/icons/gallery-horizontal) icon.
-  static const galleryHorizontal = IconData(58578, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const galleryHorizontal = IconData(58574, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`gallery-thumbnails`](https://lucide.dev/icons/gallery-thumbnails) icon.
-  static const galleryThumbnails = IconData(58580, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const galleryThumbnails = IconData(58576, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`gallery-vertical-end`](https://lucide.dev/icons/gallery-vertical-end) icon.
-  static const galleryVerticalEnd = IconData(58582, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const galleryVerticalEnd = IconData(58578, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`gallery-vertical`](https://lucide.dev/icons/gallery-vertical) icon.
-  static const galleryVertical = IconData(58581, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const galleryVertical = IconData(58577, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`gamepad-2`](https://lucide.dev/icons/gamepad-2) icon.
   static const gamepad2 = IconData(57567, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+
+  /// A [`gamepad-directional`](https://lucide.dev/icons/gamepad-directional) icon.
+  static const gamepadDirectional = IconData(59035, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`gamepad`](https://lucide.dev/icons/gamepad) icon.
   static const gamepad = IconData(57566, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -2292,13 +2334,16 @@ class FIcons {
   static const gem = IconData(57922, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`georgian-lari`](https://lucide.dev/icons/georgian-lari) icon.
-  static const georgianLari = IconData(59004, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const georgianLari = IconData(59000, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`ghost`](https://lucide.dev/icons/ghost) icon.
   static const ghost = IconData(57870, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`gift`](https://lucide.dev/icons/gift) icon.
   static const gift = IconData(57569, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+
+  /// A [`git-branch-minus`](https://lucide.dev/icons/git-branch-minus) icon.
+  static const gitBranchMinus = IconData(59036, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`git-branch-plus`](https://lucide.dev/icons/git-branch-plus) icon.
   static const gitBranchPlus = IconData(57844, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -2310,37 +2355,37 @@ class FIcons {
   static const gitCommitHorizontal = IconData(57571, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`git-commit-vertical`](https://lucide.dev/icons/git-commit-vertical) icon.
-  static const gitCommitVertical = IconData(58710, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const gitCommitVertical = IconData(58706, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`git-compare-arrows`](https://lucide.dev/icons/git-compare-arrows) icon.
-  static const gitCompareArrows = IconData(58711, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const gitCompareArrows = IconData(58707, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`git-compare`](https://lucide.dev/icons/git-compare) icon.
-  static const gitCompare = IconData(58205, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const gitCompare = IconData(58201, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`git-fork`](https://lucide.dev/icons/git-fork) icon.
   static const gitFork = IconData(57997, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`git-graph`](https://lucide.dev/icons/git-graph) icon.
-  static const gitGraph = IconData(58712, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const gitGraph = IconData(58708, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`git-merge`](https://lucide.dev/icons/git-merge) icon.
   static const gitMerge = IconData(57572, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`git-pull-request-arrow`](https://lucide.dev/icons/git-pull-request-arrow) icon.
-  static const gitPullRequestArrow = IconData(58713, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const gitPullRequestArrow = IconData(58709, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`git-pull-request-closed`](https://lucide.dev/icons/git-pull-request-closed) icon.
-  static const gitPullRequestClosed = IconData(58206, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const gitPullRequestClosed = IconData(58202, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`git-pull-request-create-arrow`](https://lucide.dev/icons/git-pull-request-create-arrow) icon.
-  static const gitPullRequestCreateArrow = IconData(58715, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const gitPullRequestCreateArrow = IconData(58711, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`git-pull-request-create`](https://lucide.dev/icons/git-pull-request-create) icon.
-  static const gitPullRequestCreate = IconData(58714, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const gitPullRequestCreate = IconData(58710, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`git-pull-request-draft`](https://lucide.dev/icons/git-pull-request-draft) icon.
-  static const gitPullRequestDraft = IconData(58207, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const gitPullRequestDraft = IconData(58203, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`git-pull-request`](https://lucide.dev/icons/git-pull-request) icon.
   static const gitPullRequest = IconData(57573, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -2358,37 +2403,37 @@ class FIcons {
   static const glasses = IconData(57869, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`globe-lock`](https://lucide.dev/icons/globe-lock) icon.
-  static const globeLock = IconData(58833, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const globeLock = IconData(58829, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`globe`](https://lucide.dev/icons/globe) icon.
   static const globe = IconData(57576, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`goal`](https://lucide.dev/icons/goal) icon.
-  static const goal = IconData(58537, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const goal = IconData(58533, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`gpu`](https://lucide.dev/icons/gpu) icon.
-  static const gpu = IconData(58990, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const gpu = IconData(58986, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`graduation-cap`](https://lucide.dev/icons/graduation-cap) icon.
   static const graduationCap = IconData(57908, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`grape`](https://lucide.dev/icons/grape) icon.
-  static const grape = IconData(58198, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const grape = IconData(58194, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`grid-2x2-check`](https://lucide.dev/icons/grid-2x2-check) icon.
-  static const grid2x2Check = IconData(58856, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const grid2x2Check = IconData(58852, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`grid-2x2-plus`](https://lucide.dev/icons/grid-2x2-plus) icon.
-  static const grid2x2Plus = IconData(58924, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const grid2x2Plus = IconData(58920, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`grid-2x2-x`](https://lucide.dev/icons/grid-2x2-x) icon.
-  static const grid2x2X = IconData(58857, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const grid2x2X = IconData(58853, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`grid-2x2`](https://lucide.dev/icons/grid-2x2) icon.
-  static const grid2x2 = IconData(58627, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const grid2x2 = IconData(58623, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`grid-3x2`](https://lucide.dev/icons/grid-3x2) icon.
-  static const grid3x2 = IconData(58995, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const grid3x2 = IconData(58991, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`grid-3x3`](https://lucide.dev/icons/grid-3x3) icon.
   static const grid3x3 = IconData(57577, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -2400,58 +2445,58 @@ class FIcons {
   static const gripVertical = IconData(57579, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`grip`](https://lucide.dev/icons/grip) icon.
-  static const grip = IconData(58293, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const grip = IconData(58289, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`group`](https://lucide.dev/icons/group) icon.
-  static const group = IconData(58472, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const group = IconData(58468, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`guitar`](https://lucide.dev/icons/guitar) icon.
-  static const guitar = IconData(58723, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const guitar = IconData(58719, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`ham`](https://lucide.dev/icons/ham) icon.
-  static const ham = IconData(58843, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const ham = IconData(58839, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`hamburger`](https://lucide.dev/icons/hamburger) icon.
-  static const hamburger = IconData(58985, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const hamburger = IconData(58981, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`hammer`](https://lucide.dev/icons/hammer) icon.
   static const hammer = IconData(57580, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`hand-coins`](https://lucide.dev/icons/hand-coins) icon.
-  static const handCoins = IconData(58812, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const handCoins = IconData(58808, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`hand-fist`](https://lucide.dev/icons/hand-fist) icon.
-  static const handFist = IconData(59023, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const handFist = IconData(59019, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`hand-grab`](https://lucide.dev/icons/hand-grab) icon.
   static const handGrab = IconData(57830, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`hand-heart`](https://lucide.dev/icons/hand-heart) icon.
-  static const handHeart = IconData(58813, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const handHeart = IconData(58809, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`hand-helping`](https://lucide.dev/icons/hand-helping) icon.
-  static const handHelping = IconData(58300, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const handHelping = IconData(58296, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`hand-metal`](https://lucide.dev/icons/hand-metal) icon.
   static const handMetal = IconData(57900, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`hand-platter`](https://lucide.dev/icons/hand-platter) icon.
-  static const handPlatter = IconData(58814, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const handPlatter = IconData(58810, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`hand`](https://lucide.dev/icons/hand) icon.
   static const hand = IconData(57815, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`handbag`](https://lucide.dev/icons/handbag) icon.
-  static const handbag = IconData(59021, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const handbag = IconData(59017, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`handshake`](https://lucide.dev/icons/handshake) icon.
-  static const handshake = IconData(58820, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const handshake = IconData(58816, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`hard-drive-download`](https://lucide.dev/icons/hard-drive-download) icon.
-  static const hardDriveDownload = IconData(58601, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const hardDriveDownload = IconData(58597, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`hard-drive-upload`](https://lucide.dev/icons/hard-drive-upload) icon.
-  static const hardDriveUpload = IconData(58602, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const hardDriveUpload = IconData(58598, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`hard-drive`](https://lucide.dev/icons/hard-drive) icon.
   static const hardDrive = IconData(57581, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -2463,43 +2508,46 @@ class FIcons {
   static const hash = IconData(57583, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`hat-glasses`](https://lucide.dev/icons/hat-glasses) icon.
-  static const hatGlasses = IconData(59015, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const hatGlasses = IconData(59011, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`haze`](https://lucide.dev/icons/haze) icon.
   static const haze = IconData(57584, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
+  /// A [`hd`](https://lucide.dev/icons/hd) icon.
+  static const hd = IconData(59061, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+
   /// A [`hdmi-port`](https://lucide.dev/icons/hdmi-port) icon.
-  static const hdmiPort = IconData(58603, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const hdmiPort = IconData(58599, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`heading-1`](https://lucide.dev/icons/heading-1) icon.
-  static const heading1 = IconData(58249, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const heading1 = IconData(58245, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`heading-2`](https://lucide.dev/icons/heading-2) icon.
-  static const heading2 = IconData(58250, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const heading2 = IconData(58246, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`heading-3`](https://lucide.dev/icons/heading-3) icon.
-  static const heading3 = IconData(58251, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const heading3 = IconData(58247, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`heading-4`](https://lucide.dev/icons/heading-4) icon.
-  static const heading4 = IconData(58252, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const heading4 = IconData(58248, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`heading-5`](https://lucide.dev/icons/heading-5) icon.
-  static const heading5 = IconData(58253, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const heading5 = IconData(58249, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`heading-6`](https://lucide.dev/icons/heading-6) icon.
-  static const heading6 = IconData(58254, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const heading6 = IconData(58250, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`heading`](https://lucide.dev/icons/heading) icon.
-  static const heading = IconData(58248, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const heading = IconData(58244, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`headphone-off`](https://lucide.dev/icons/headphone-off) icon.
-  static const headphoneOff = IconData(58925, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const headphoneOff = IconData(58921, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`headphones`](https://lucide.dev/icons/headphones) icon.
   static const headphones = IconData(57585, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`headset`](https://lucide.dev/icons/headset) icon.
-  static const headset = IconData(58817, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const headset = IconData(58813, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`heart-crack`](https://lucide.dev/icons/heart-crack) icon.
   static const heartCrack = IconData(58070, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -2508,22 +2556,25 @@ class FIcons {
   static const heartHandshake = IconData(58071, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`heart-minus`](https://lucide.dev/icons/heart-minus) icon.
-  static const heartMinus = IconData(58965, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const heartMinus = IconData(58961, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`heart-off`](https://lucide.dev/icons/heart-off) icon.
   static const heartOff = IconData(58005, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`heart-plus`](https://lucide.dev/icons/heart-plus) icon.
-  static const heartPlus = IconData(58966, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const heartPlus = IconData(58962, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`heart-pulse`](https://lucide.dev/icons/heart-pulse) icon.
-  static const heartPulse = IconData(58226, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const heartPulse = IconData(58222, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`heart`](https://lucide.dev/icons/heart) icon.
   static const heart = IconData(57586, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`heater`](https://lucide.dev/icons/heater) icon.
-  static const heater = IconData(58770, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const heater = IconData(58766, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+
+  /// A [`helicopter`](https://lucide.dev/icons/helicopter) icon.
+  static const helicopter = IconData(59037, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`hexagon`](https://lucide.dev/icons/hexagon) icon.
   static const hexagon = IconData(57587, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -2535,49 +2586,49 @@ class FIcons {
   static const history = IconData(57845, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`hop-off`](https://lucide.dev/icons/hop-off) icon.
-  static const hopOff = IconData(58268, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const hopOff = IconData(58264, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`hop`](https://lucide.dev/icons/hop) icon.
-  static const hop = IconData(58267, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const hop = IconData(58263, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`hospital`](https://lucide.dev/icons/hospital) icon.
-  static const hospital = IconData(58844, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const hospital = IconData(58840, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`hotel`](https://lucide.dev/icons/hotel) icon.
-  static const hotel = IconData(58342, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const hotel = IconData(58338, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`hourglass`](https://lucide.dev/icons/hourglass) icon.
   static const hourglass = IconData(58006, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`house-heart`](https://lucide.dev/icons/house-heart) icon.
-  static const houseHeart = IconData(59033, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const houseHeart = IconData(59029, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`house-plug`](https://lucide.dev/icons/house-plug) icon.
-  static const housePlug = IconData(58868, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const housePlug = IconData(58864, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`house-plus`](https://lucide.dev/icons/house-plus) icon.
-  static const housePlus = IconData(58869, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const housePlus = IconData(58865, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`house-wifi`](https://lucide.dev/icons/house-wifi) icon.
-  static const houseWifi = IconData(58944, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const houseWifi = IconData(58940, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`house`](https://lucide.dev/icons/house) icon.
   static const house = IconData(57589, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`ice-cream-bowl`](https://lucide.dev/icons/ice-cream-bowl) icon.
-  static const iceCreamBowl = IconData(58283, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const iceCreamBowl = IconData(58279, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`ice-cream-cone`](https://lucide.dev/icons/ice-cream-cone) icon.
-  static const iceCreamCone = IconData(58199, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const iceCreamCone = IconData(58195, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`id-card-lanyard`](https://lucide.dev/icons/id-card-lanyard) icon.
-  static const idCardLanyard = IconData(58996, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const idCardLanyard = IconData(58992, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`id-card`](https://lucide.dev/icons/id-card) icon.
-  static const idCard = IconData(58907, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const idCard = IconData(58903, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`image-down`](https://lucide.dev/icons/image-down) icon.
-  static const imageDown = IconData(58688, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const imageDown = IconData(58684, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`image-minus`](https://lucide.dev/icons/image-minus) icon.
   static const imageMinus = IconData(57846, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -2586,22 +2637,22 @@ class FIcons {
   static const imageOff = IconData(57792, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`image-play`](https://lucide.dev/icons/image-play) icon.
-  static const imagePlay = IconData(58851, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const imagePlay = IconData(58847, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`image-plus`](https://lucide.dev/icons/image-plus) icon.
   static const imagePlus = IconData(57847, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`image-up`](https://lucide.dev/icons/image-up) icon.
-  static const imageUp = IconData(58831, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const imageUp = IconData(58827, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`image-upscale`](https://lucide.dev/icons/image-upscale) icon.
-  static const imageUpscale = IconData(58939, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const imageUpscale = IconData(58935, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`image`](https://lucide.dev/icons/image) icon.
   static const image = IconData(57590, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`images`](https://lucide.dev/icons/images) icon.
-  static const images = IconData(58824, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const images = IconData(58820, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`import`](https://lucide.dev/icons/import) icon.
   static const import = IconData(57903, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -2619,7 +2670,7 @@ class FIcons {
   static const info = IconData(57593, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`inspection-panel`](https://lucide.dev/icons/inspection-panel) icon.
-  static const inspectionPanel = IconData(58759, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const inspectionPanel = IconData(58755, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`instagram`](https://lucide.dev/icons/instagram) icon.
   static const instagram = IconData(57594, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -2628,37 +2679,37 @@ class FIcons {
   static const italic = IconData(57595, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`iteration-ccw`](https://lucide.dev/icons/iteration-ccw) icon.
-  static const iterationCcw = IconData(58407, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const iterationCcw = IconData(58403, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`iteration-cw`](https://lucide.dev/icons/iteration-cw) icon.
-  static const iterationCw = IconData(58408, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const iterationCw = IconData(58404, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`japanese-yen`](https://lucide.dev/icons/japanese-yen) icon.
   static const japaneseYen = IconData(57596, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`joystick`](https://lucide.dev/icons/joystick) icon.
-  static const joystick = IconData(58201, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const joystick = IconData(58197, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`kanban`](https://lucide.dev/icons/kanban) icon.
-  static const kanban = IconData(58592, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const kanban = IconData(58588, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`kayak`](https://lucide.dev/icons/kayak) icon.
-  static const kayak = IconData(59027, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const kayak = IconData(59023, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`key-round`](https://lucide.dev/icons/key-round) icon.
-  static const keyRound = IconData(58535, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const keyRound = IconData(58531, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`key-square`](https://lucide.dev/icons/key-square) icon.
-  static const keySquare = IconData(58536, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const keySquare = IconData(58532, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`key`](https://lucide.dev/icons/key) icon.
   static const key = IconData(57597, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`keyboard-music`](https://lucide.dev/icons/keyboard-music) icon.
-  static const keyboardMusic = IconData(58724, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const keyboardMusic = IconData(58720, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`keyboard-off`](https://lucide.dev/icons/keyboard-off) icon.
-  static const keyboardOff = IconData(58850, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const keyboardOff = IconData(58846, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`keyboard`](https://lucide.dev/icons/keyboard) icon.
   static const keyboard = IconData(57988, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -2682,7 +2733,7 @@ class FIcons {
   static const lamp = IconData(58072, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`land-plot`](https://lucide.dev/icons/land-plot) icon.
-  static const landPlot = IconData(58668, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const landPlot = IconData(58664, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`landmark`](https://lucide.dev/icons/landmark) icon.
   static const landmark = IconData(57914, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -2691,7 +2742,7 @@ class FIcons {
   static const languages = IconData(57598, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`laptop-minimal-check`](https://lucide.dev/icons/laptop-minimal-check) icon.
-  static const laptopMinimalCheck = IconData(58934, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const laptopMinimalCheck = IconData(58930, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`laptop-minimal`](https://lucide.dev/icons/laptop-minimal) icon.
   static const laptopMinimal = IconData(57816, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -2709,10 +2760,13 @@ class FIcons {
   static const laugh = IconData(58112, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`layers-2`](https://lucide.dev/icons/layers-2) icon.
-  static const layers2 = IconData(58670, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const layers2 = IconData(58666, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+
+  /// A [`layers-plus`](https://lucide.dev/icons/layers-plus) icon.
+  static const layersPlus = IconData(59059, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`layers`](https://lucide.dev/icons/layers) icon.
-  static const layers = IconData(58669, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const layers = IconData(58665, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`layout-dashboard`](https://lucide.dev/icons/layout-dashboard) icon.
   static const layoutDashboard = IconData(57793, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -2724,10 +2778,10 @@ class FIcons {
   static const layoutList = IconData(57817, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`layout-panel-left`](https://lucide.dev/icons/layout-panel-left) icon.
-  static const layoutPanelLeft = IconData(58484, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const layoutPanelLeft = IconData(58480, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`layout-panel-top`](https://lucide.dev/icons/layout-panel-top) icon.
-  static const layoutPanelTop = IconData(58485, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const layoutPanelTop = IconData(58481, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`layout-template`](https://lucide.dev/icons/layout-template) icon.
   static const layoutTemplate = IconData(57863, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -2736,13 +2790,13 @@ class FIcons {
   static const leaf = IconData(58078, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`leafy-green`](https://lucide.dev/icons/leafy-green) icon.
-  static const leafyGreen = IconData(58483, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const leafyGreen = IconData(58479, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`lectern`](https://lucide.dev/icons/lectern) icon.
-  static const lectern = IconData(58861, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const lectern = IconData(58857, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`library-big`](https://lucide.dev/icons/library-big) icon.
-  static const libraryBig = IconData(58706, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const libraryBig = IconData(58702, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`library`](https://lucide.dev/icons/library) icon.
   static const library = IconData(57600, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -2751,7 +2805,7 @@ class FIcons {
   static const lifeBuoy = IconData(57601, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`ligature`](https://lucide.dev/icons/ligature) icon.
-  static const ligature = IconData(58430, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const ligature = IconData(58426, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`lightbulb-off`](https://lucide.dev/icons/lightbulb-off) icon.
   static const lightbulbOff = IconData(57864, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -2760,7 +2814,7 @@ class FIcons {
   static const lightbulb = IconData(57794, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`line-squiggle`](https://lucide.dev/icons/line-squiggle) icon.
-  static const lineSquiggle = IconData(59006, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const lineSquiggle = IconData(59002, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`link-2-off`](https://lucide.dev/icons/link-2-off) icon.
   static const link2Off = IconData(57604, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -2775,28 +2829,28 @@ class FIcons {
   static const linkedin = IconData(57605, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`list-check`](https://lucide.dev/icons/list-check) icon.
-  static const listCheck = IconData(58878, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const listCheck = IconData(58874, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`list-checks`](https://lucide.dev/icons/list-checks) icon.
   static const listChecks = IconData(57808, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`list-chevrons-down-up`](https://lucide.dev/icons/list-chevrons-down-up) icon.
-  static const listChevronsDownUp = IconData(59032, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const listChevronsDownUp = IconData(59028, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`list-chevrons-up-down`](https://lucide.dev/icons/list-chevrons-up-down) icon.
-  static const listChevronsUpDown = IconData(59034, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const listChevronsUpDown = IconData(59030, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`list-collapse`](https://lucide.dev/icons/list-collapse) icon.
-  static const listCollapse = IconData(58783, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const listCollapse = IconData(58779, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`list-end`](https://lucide.dev/icons/list-end) icon.
   static const listEnd = IconData(58079, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`list-filter-plus`](https://lucide.dev/icons/list-filter-plus) icon.
-  static const listFilterPlus = IconData(58941, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const listFilterPlus = IconData(58937, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`list-filter`](https://lucide.dev/icons/list-filter) icon.
-  static const listFilter = IconData(58468, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const listFilter = IconData(58464, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`list-indent-decrease`](https://lucide.dev/icons/list-indent-decrease) icon.
   static const listIndentDecrease = IconData(57607, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -2817,16 +2871,16 @@ class FIcons {
   static const listPlus = IconData(57919, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`list-restart`](https://lucide.dev/icons/list-restart) icon.
-  static const listRestart = IconData(58454, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const listRestart = IconData(58450, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`list-start`](https://lucide.dev/icons/list-start) icon.
   static const listStart = IconData(58081, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`list-todo`](https://lucide.dev/icons/list-todo) icon.
-  static const listTodo = IconData(58567, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const listTodo = IconData(58563, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`list-tree`](https://lucide.dev/icons/list-tree) icon.
-  static const listTree = IconData(58380, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const listTree = IconData(58376, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`list-video`](https://lucide.dev/icons/list-video) icon.
   static const listVideo = IconData(58082, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -2841,7 +2895,7 @@ class FIcons {
   static const loaderCircle = IconData(57610, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`loader-pinwheel`](https://lucide.dev/icons/loader-pinwheel) icon.
-  static const loaderPinwheel = IconData(58858, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const loaderPinwheel = IconData(58854, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`loader`](https://lucide.dev/icons/loader) icon.
   static const loader = IconData(57609, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -2856,10 +2910,10 @@ class FIcons {
   static const locate = IconData(57818, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`lock-keyhole-open`](https://lucide.dev/icons/lock-keyhole-open) icon.
-  static const lockKeyholeOpen = IconData(58678, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const lockKeyholeOpen = IconData(58674, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`lock-keyhole`](https://lucide.dev/icons/lock-keyhole) icon.
-  static const lockKeyhole = IconData(58677, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const lockKeyhole = IconData(58673, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`lock-open`](https://lucide.dev/icons/lock-open) icon.
   static const lockOpen = IconData(57612, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -2874,10 +2928,10 @@ class FIcons {
   static const logOut = IconData(57614, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`logs`](https://lucide.dev/icons/logs) icon.
-  static const logs = IconData(58872, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const logs = IconData(58868, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`lollipop`](https://lucide.dev/icons/lollipop) icon.
-  static const lollipop = IconData(58561, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const lollipop = IconData(58557, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`luggage`](https://lucide.dev/icons/luggage) icon.
   static const luggage = IconData(58058, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -2886,91 +2940,91 @@ class FIcons {
   static const magnet = IconData(58037, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`mail-check`](https://lucide.dev/icons/mail-check) icon.
-  static const mailCheck = IconData(58213, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const mailCheck = IconData(58209, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`mail-minus`](https://lucide.dev/icons/mail-minus) icon.
-  static const mailMinus = IconData(58214, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const mailMinus = IconData(58210, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`mail-open`](https://lucide.dev/icons/mail-open) icon.
-  static const mailOpen = IconData(58215, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const mailOpen = IconData(58211, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`mail-plus`](https://lucide.dev/icons/mail-plus) icon.
-  static const mailPlus = IconData(58216, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const mailPlus = IconData(58212, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`mail-question-mark`](https://lucide.dev/icons/mail-question-mark) icon.
-  static const mailQuestionMark = IconData(58217, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const mailQuestionMark = IconData(58213, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`mail-search`](https://lucide.dev/icons/mail-search) icon.
-  static const mailSearch = IconData(58218, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const mailSearch = IconData(58214, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`mail-warning`](https://lucide.dev/icons/mail-warning) icon.
-  static const mailWarning = IconData(58219, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const mailWarning = IconData(58215, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`mail-x`](https://lucide.dev/icons/mail-x) icon.
-  static const mailX = IconData(58220, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const mailX = IconData(58216, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`mail`](https://lucide.dev/icons/mail) icon.
   static const mail = IconData(57615, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`mailbox`](https://lucide.dev/icons/mailbox) icon.
-  static const mailbox = IconData(58328, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const mailbox = IconData(58324, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`mails`](https://lucide.dev/icons/mails) icon.
-  static const mails = IconData(58221, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const mails = IconData(58217, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`map-minus`](https://lucide.dev/icons/map-minus) icon.
-  static const mapMinus = IconData(59018, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const mapMinus = IconData(59014, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`map-pin-check-inside`](https://lucide.dev/icons/map-pin-check-inside) icon.
-  static const mapPinCheckInside = IconData(58900, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const mapPinCheckInside = IconData(58896, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`map-pin-check`](https://lucide.dev/icons/map-pin-check) icon.
-  static const mapPinCheck = IconData(58899, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const mapPinCheck = IconData(58895, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`map-pin-house`](https://lucide.dev/icons/map-pin-house) icon.
-  static const mapPinHouse = IconData(58912, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const mapPinHouse = IconData(58908, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`map-pin-minus-inside`](https://lucide.dev/icons/map-pin-minus-inside) icon.
-  static const mapPinMinusInside = IconData(58902, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const mapPinMinusInside = IconData(58898, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`map-pin-minus`](https://lucide.dev/icons/map-pin-minus) icon.
-  static const mapPinMinus = IconData(58901, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const mapPinMinus = IconData(58897, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`map-pin-off`](https://lucide.dev/icons/map-pin-off) icon.
   static const mapPinOff = IconData(58022, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`map-pin-pen`](https://lucide.dev/icons/map-pin-pen) icon.
-  static const mapPinPen = IconData(58969, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const mapPinPen = IconData(58965, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`map-pin-plus-inside`](https://lucide.dev/icons/map-pin-plus-inside) icon.
-  static const mapPinPlusInside = IconData(58904, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const mapPinPlusInside = IconData(58900, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`map-pin-plus`](https://lucide.dev/icons/map-pin-plus) icon.
-  static const mapPinPlus = IconData(58903, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const mapPinPlus = IconData(58899, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`map-pin-x-inside`](https://lucide.dev/icons/map-pin-x-inside) icon.
-  static const mapPinXInside = IconData(58906, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const mapPinXInside = IconData(58902, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`map-pin-x`](https://lucide.dev/icons/map-pin-x) icon.
-  static const mapPinX = IconData(58905, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const mapPinX = IconData(58901, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`map-pin`](https://lucide.dev/icons/map-pin) icon.
   static const mapPin = IconData(57617, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`map-pinned`](https://lucide.dev/icons/map-pinned) icon.
-  static const mapPinned = IconData(58689, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const mapPinned = IconData(58685, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`map-plus`](https://lucide.dev/icons/map-plus) icon.
-  static const mapPlus = IconData(58947, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const mapPlus = IconData(58943, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`map`](https://lucide.dev/icons/map) icon.
   static const map = IconData(57616, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`mars-stroke`](https://lucide.dev/icons/mars-stroke) icon.
-  static const marsStroke = IconData(58950, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const marsStroke = IconData(58946, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`mars`](https://lucide.dev/icons/mars) icon.
-  static const mars = IconData(58949, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const mars = IconData(58945, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`martini`](https://lucide.dev/icons/martini) icon.
   static const martini = IconData(58083, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -2982,10 +3036,10 @@ class FIcons {
   static const maximize = IconData(57618, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`medal`](https://lucide.dev/icons/medal) icon.
-  static const medal = IconData(58227, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const medal = IconData(58223, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`megaphone-off`](https://lucide.dev/icons/megaphone-off) icon.
-  static const megaphoneOff = IconData(58228, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const megaphoneOff = IconData(58224, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`megaphone`](https://lucide.dev/icons/megaphone) icon.
   static const megaphone = IconData(57909, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -2994,124 +3048,124 @@ class FIcons {
   static const meh = IconData(57620, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`memory-stick`](https://lucide.dev/icons/memory-stick) icon.
-  static const memoryStick = IconData(58441, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const memoryStick = IconData(58437, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`menu`](https://lucide.dev/icons/menu) icon.
   static const menu = IconData(57621, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`merge`](https://lucide.dev/icons/merge) icon.
-  static const merge = IconData(58435, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const merge = IconData(58431, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`message-circle-code`](https://lucide.dev/icons/message-circle-code) icon.
-  static const messageCircleCode = IconData(58726, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const messageCircleCode = IconData(58722, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`message-circle-dashed`](https://lucide.dev/icons/message-circle-dashed) icon.
-  static const messageCircleDashed = IconData(58727, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const messageCircleDashed = IconData(58723, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`message-circle-heart`](https://lucide.dev/icons/message-circle-heart) icon.
-  static const messageCircleHeart = IconData(58728, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const messageCircleHeart = IconData(58724, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`message-circle-more`](https://lucide.dev/icons/message-circle-more) icon.
-  static const messageCircleMore = IconData(58729, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const messageCircleMore = IconData(58725, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`message-circle-off`](https://lucide.dev/icons/message-circle-off) icon.
-  static const messageCircleOff = IconData(58730, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const messageCircleOff = IconData(58726, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`message-circle-plus`](https://lucide.dev/icons/message-circle-plus) icon.
-  static const messageCirclePlus = IconData(58731, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const messageCirclePlus = IconData(58727, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`message-circle-question-mark`](https://lucide.dev/icons/message-circle-question-mark) icon.
-  static const messageCircleQuestionMark = IconData(58732, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const messageCircleQuestionMark = IconData(58728, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`message-circle-reply`](https://lucide.dev/icons/message-circle-reply) icon.
-  static const messageCircleReply = IconData(58733, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const messageCircleReply = IconData(58729, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`message-circle-warning`](https://lucide.dev/icons/message-circle-warning) icon.
-  static const messageCircleWarning = IconData(58734, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const messageCircleWarning = IconData(58730, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`message-circle-x`](https://lucide.dev/icons/message-circle-x) icon.
-  static const messageCircleX = IconData(58735, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const messageCircleX = IconData(58731, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`message-circle`](https://lucide.dev/icons/message-circle) icon.
   static const messageCircle = IconData(57622, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`message-square-code`](https://lucide.dev/icons/message-square-code) icon.
-  static const messageSquareCode = IconData(58736, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const messageSquareCode = IconData(58732, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`message-square-dashed`](https://lucide.dev/icons/message-square-dashed) icon.
-  static const messageSquareDashed = IconData(58383, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const messageSquareDashed = IconData(58379, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`message-square-diff`](https://lucide.dev/icons/message-square-diff) icon.
-  static const messageSquareDiff = IconData(58737, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const messageSquareDiff = IconData(58733, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`message-square-dot`](https://lucide.dev/icons/message-square-dot) icon.
-  static const messageSquareDot = IconData(58738, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const messageSquareDot = IconData(58734, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`message-square-heart`](https://lucide.dev/icons/message-square-heart) icon.
-  static const messageSquareHeart = IconData(58739, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const messageSquareHeart = IconData(58735, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`message-square-lock`](https://lucide.dev/icons/message-square-lock) icon.
-  static const messageSquareLock = IconData(58928, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const messageSquareLock = IconData(58924, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`message-square-more`](https://lucide.dev/icons/message-square-more) icon.
-  static const messageSquareMore = IconData(58740, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const messageSquareMore = IconData(58736, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`message-square-off`](https://lucide.dev/icons/message-square-off) icon.
-  static const messageSquareOff = IconData(58741, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const messageSquareOff = IconData(58737, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`message-square-plus`](https://lucide.dev/icons/message-square-plus) icon.
-  static const messageSquarePlus = IconData(58384, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const messageSquarePlus = IconData(58380, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`message-square-quote`](https://lucide.dev/icons/message-square-quote) icon.
-  static const messageSquareQuote = IconData(58742, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const messageSquareQuote = IconData(58738, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`message-square-reply`](https://lucide.dev/icons/message-square-reply) icon.
-  static const messageSquareReply = IconData(58743, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const messageSquareReply = IconData(58739, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`message-square-share`](https://lucide.dev/icons/message-square-share) icon.
-  static const messageSquareShare = IconData(58744, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const messageSquareShare = IconData(58740, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`message-square-text`](https://lucide.dev/icons/message-square-text) icon.
-  static const messageSquareText = IconData(58745, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const messageSquareText = IconData(58741, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`message-square-warning`](https://lucide.dev/icons/message-square-warning) icon.
-  static const messageSquareWarning = IconData(58746, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const messageSquareWarning = IconData(58742, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`message-square-x`](https://lucide.dev/icons/message-square-x) icon.
-  static const messageSquareX = IconData(58747, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const messageSquareX = IconData(58743, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`message-square`](https://lucide.dev/icons/message-square) icon.
   static const messageSquare = IconData(57623, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`messages-square`](https://lucide.dev/icons/messages-square) icon.
-  static const messagesSquare = IconData(58385, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const messagesSquare = IconData(58381, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`mic-off`](https://lucide.dev/icons/mic-off) icon.
   static const micOff = IconData(57625, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`mic-vocal`](https://lucide.dev/icons/mic-vocal) icon.
-  static const micVocal = IconData(58189, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const micVocal = IconData(58185, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`mic`](https://lucide.dev/icons/mic) icon.
   static const mic = IconData(57624, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`microchip`](https://lucide.dev/icons/microchip) icon.
-  static const microchip = IconData(58910, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const microchip = IconData(58906, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`microscope`](https://lucide.dev/icons/microscope) icon.
   static const microscope = IconData(58084, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`microwave`](https://lucide.dev/icons/microwave) icon.
-  static const microwave = IconData(58238, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const microwave = IconData(58234, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`milestone`](https://lucide.dev/icons/milestone) icon.
   static const milestone = IconData(58008, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`milk-off`](https://lucide.dev/icons/milk-off) icon.
-  static const milkOff = IconData(58270, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const milkOff = IconData(58266, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`milk`](https://lucide.dev/icons/milk) icon.
-  static const milk = IconData(58269, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const milk = IconData(58265, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`minimize-2`](https://lucide.dev/icons/minimize-2) icon.
   static const minimize2 = IconData(57627, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -3123,49 +3177,55 @@ class FIcons {
   static const minus = IconData(57628, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`monitor-check`](https://lucide.dev/icons/monitor-check) icon.
-  static const monitorCheck = IconData(58502, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const monitorCheck = IconData(58498, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+
+  /// A [`monitor-cloud`](https://lucide.dev/icons/monitor-cloud) icon.
+  static const monitorCloud = IconData(59033, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`monitor-cog`](https://lucide.dev/icons/monitor-cog) icon.
-  static const monitorCog = IconData(58887, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const monitorCog = IconData(58883, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`monitor-dot`](https://lucide.dev/icons/monitor-dot) icon.
-  static const monitorDot = IconData(58503, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const monitorDot = IconData(58499, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`monitor-down`](https://lucide.dev/icons/monitor-down) icon.
-  static const monitorDown = IconData(58405, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const monitorDown = IconData(58401, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`monitor-off`](https://lucide.dev/icons/monitor-off) icon.
   static const monitorOff = IconData(57820, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`monitor-pause`](https://lucide.dev/icons/monitor-pause) icon.
-  static const monitorPause = IconData(58504, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const monitorPause = IconData(58500, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`monitor-play`](https://lucide.dev/icons/monitor-play) icon.
-  static const monitorPlay = IconData(58505, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const monitorPlay = IconData(58501, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`monitor-smartphone`](https://lucide.dev/icons/monitor-smartphone) icon.
-  static const monitorSmartphone = IconData(58278, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const monitorSmartphone = IconData(58274, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`monitor-speaker`](https://lucide.dev/icons/monitor-speaker) icon.
   static const monitorSpeaker = IconData(57872, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`monitor-stop`](https://lucide.dev/icons/monitor-stop) icon.
-  static const monitorStop = IconData(58506, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const monitorStop = IconData(58502, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`monitor-up`](https://lucide.dev/icons/monitor-up) icon.
-  static const monitorUp = IconData(58406, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const monitorUp = IconData(58402, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`monitor-x`](https://lucide.dev/icons/monitor-x) icon.
-  static const monitorX = IconData(58507, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const monitorX = IconData(58503, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`monitor`](https://lucide.dev/icons/monitor) icon.
   static const monitor = IconData(57629, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`moon-star`](https://lucide.dev/icons/moon-star) icon.
-  static const moonStar = IconData(58388, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const moonStar = IconData(58384, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`moon`](https://lucide.dev/icons/moon) icon.
   static const moon = IconData(57630, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+
+  /// A [`motorbike`](https://lucide.dev/icons/motorbike) icon.
+  static const motorbike = IconData(59032, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`mountain-snow`](https://lucide.dev/icons/mountain-snow) icon.
   static const mountainSnow = IconData(57906, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -3174,13 +3234,16 @@ class FIcons {
   static const mountain = IconData(57905, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`mouse-off`](https://lucide.dev/icons/mouse-off) icon.
-  static const mouseOff = IconData(58847, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const mouseOff = IconData(58843, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+
+  /// A [`mouse-pointer-2-off`](https://lucide.dev/icons/mouse-pointer-2-off) icon.
+  static const mousePointer2Off = IconData(59046, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`mouse-pointer-2`](https://lucide.dev/icons/mouse-pointer-2) icon.
   static const mousePointer2 = IconData(57795, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`mouse-pointer-ban`](https://lucide.dev/icons/mouse-pointer-ban) icon.
-  static const mousePointerBan = IconData(58859, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const mousePointerBan = IconData(58855, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`mouse-pointer-click`](https://lucide.dev/icons/mouse-pointer-click) icon.
   static const mousePointerClick = IconData(57632, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -3201,31 +3264,31 @@ class FIcons {
   static const moveDiagonal = IconData(57796, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`move-down-left`](https://lucide.dev/icons/move-down-left) icon.
-  static const moveDownLeft = IconData(58513, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const moveDownLeft = IconData(58509, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`move-down-right`](https://lucide.dev/icons/move-down-right) icon.
-  static const moveDownRight = IconData(58514, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const moveDownRight = IconData(58510, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`move-down`](https://lucide.dev/icons/move-down) icon.
-  static const moveDown = IconData(58512, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const moveDown = IconData(58508, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`move-horizontal`](https://lucide.dev/icons/move-horizontal) icon.
   static const moveHorizontal = IconData(57798, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`move-left`](https://lucide.dev/icons/move-left) icon.
-  static const moveLeft = IconData(58515, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const moveLeft = IconData(58511, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`move-right`](https://lucide.dev/icons/move-right) icon.
-  static const moveRight = IconData(58516, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const moveRight = IconData(58512, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`move-up-left`](https://lucide.dev/icons/move-up-left) icon.
-  static const moveUpLeft = IconData(58518, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const moveUpLeft = IconData(58514, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`move-up-right`](https://lucide.dev/icons/move-up-right) icon.
-  static const moveUpRight = IconData(58519, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const moveUpRight = IconData(58515, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`move-up`](https://lucide.dev/icons/move-up) icon.
-  static const moveUp = IconData(58517, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const moveUp = IconData(58513, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`move-vertical`](https://lucide.dev/icons/move-vertical) icon.
   static const moveVertical = IconData(57799, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -3234,13 +3297,13 @@ class FIcons {
   static const move = IconData(57633, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`music-2`](https://lucide.dev/icons/music-2) icon.
-  static const music2 = IconData(58190, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const music2 = IconData(58186, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`music-3`](https://lucide.dev/icons/music-3) icon.
-  static const music3 = IconData(58191, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const music3 = IconData(58187, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`music-4`](https://lucide.dev/icons/music-4) icon.
-  static const music4 = IconData(58192, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const music4 = IconData(58188, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`music`](https://lucide.dev/icons/music) icon.
   static const music = IconData(57634, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -3261,43 +3324,43 @@ class FIcons {
   static const network = IconData(57637, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`newspaper`](https://lucide.dev/icons/newspaper) icon.
-  static const newspaper = IconData(58188, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const newspaper = IconData(58184, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`nfc`](https://lucide.dev/icons/nfc) icon.
-  static const nfc = IconData(58311, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const nfc = IconData(58307, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`non-binary`](https://lucide.dev/icons/non-binary) icon.
-  static const nonBinary = IconData(58951, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const nonBinary = IconData(58947, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`notebook-pen`](https://lucide.dev/icons/notebook-pen) icon.
-  static const notebookPen = IconData(58778, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const notebookPen = IconData(58774, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`notebook-tabs`](https://lucide.dev/icons/notebook-tabs) icon.
-  static const notebookTabs = IconData(58779, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const notebookTabs = IconData(58775, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`notebook-text`](https://lucide.dev/icons/notebook-text) icon.
-  static const notebookText = IconData(58780, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const notebookText = IconData(58776, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`notebook`](https://lucide.dev/icons/notebook) icon.
-  static const notebook = IconData(58777, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const notebook = IconData(58773, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`notepad-text-dashed`](https://lucide.dev/icons/notepad-text-dashed) icon.
-  static const notepadTextDashed = IconData(58782, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const notepadTextDashed = IconData(58778, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`notepad-text`](https://lucide.dev/icons/notepad-text) icon.
-  static const notepadText = IconData(58781, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const notepadText = IconData(58777, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`nut-off`](https://lucide.dev/icons/nut-off) icon.
-  static const nutOff = IconData(58272, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const nutOff = IconData(58268, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`nut`](https://lucide.dev/icons/nut) icon.
-  static const nut = IconData(58271, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const nut = IconData(58267, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`octagon-alert`](https://lucide.dev/icons/octagon-alert) icon.
   static const octagonAlert = IconData(57639, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`octagon-minus`](https://lucide.dev/icons/octagon-minus) icon.
-  static const octagonMinus = IconData(58923, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const octagonMinus = IconData(58919, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`octagon-pause`](https://lucide.dev/icons/octagon-pause) icon.
   static const octagonPause = IconData(57883, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -3309,19 +3372,19 @@ class FIcons {
   static const octagon = IconData(57638, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`omega`](https://lucide.dev/icons/omega) icon.
-  static const omega = IconData(58909, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const omega = IconData(58905, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`option`](https://lucide.dev/icons/option) icon.
   static const option = IconData(57848, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`orbit`](https://lucide.dev/icons/orbit) icon.
-  static const orbit = IconData(58347, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const orbit = IconData(58343, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`origami`](https://lucide.dev/icons/origami) icon.
-  static const origami = IconData(58855, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const origami = IconData(58851, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`package-2`](https://lucide.dev/icons/package-2) icon.
-  static const package2 = IconData(58180, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const package2 = IconData(58176, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`package-check`](https://lucide.dev/icons/package-check) icon.
   static const packageCheck = IconData(57958, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -3348,7 +3411,7 @@ class FIcons {
   static const paintBucket = IconData(58086, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`paint-roller`](https://lucide.dev/icons/paint-roller) icon.
-  static const paintRoller = IconData(58786, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const paintRoller = IconData(58782, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`paintbrush-vertical`](https://lucide.dev/icons/paintbrush-vertical) icon.
   static const paintbrushVertical = IconData(58088, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -3360,67 +3423,67 @@ class FIcons {
   static const palette = IconData(57821, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`panda`](https://lucide.dev/icons/panda) icon.
-  static const panda = IconData(58988, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const panda = IconData(58984, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`panel-bottom-close`](https://lucide.dev/icons/panel-bottom-close) icon.
-  static const panelBottomClose = IconData(58417, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const panelBottomClose = IconData(58413, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`panel-bottom-dashed`](https://lucide.dev/icons/panel-bottom-dashed) icon.
-  static const panelBottomDashed = IconData(58418, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const panelBottomDashed = IconData(58414, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`panel-bottom-open`](https://lucide.dev/icons/panel-bottom-open) icon.
-  static const panelBottomOpen = IconData(58419, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const panelBottomOpen = IconData(58415, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`panel-bottom`](https://lucide.dev/icons/panel-bottom) icon.
-  static const panelBottom = IconData(58416, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const panelBottom = IconData(58412, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`panel-left-close`](https://lucide.dev/icons/panel-left-close) icon.
   static const panelLeftClose = IconData(57884, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`panel-left-dashed`](https://lucide.dev/icons/panel-left-dashed) icon.
-  static const panelLeftDashed = IconData(58420, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const panelLeftDashed = IconData(58416, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`panel-left-open`](https://lucide.dev/icons/panel-left-open) icon.
   static const panelLeftOpen = IconData(57885, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`panel-left-right-dashed`](https://lucide.dev/icons/panel-left-right-dashed) icon.
-  static const panelLeftRightDashed = IconData(59030, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const panelLeftRightDashed = IconData(59026, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`panel-left`](https://lucide.dev/icons/panel-left) icon.
   static const panelLeft = IconData(57642, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`panel-right-close`](https://lucide.dev/icons/panel-right-close) icon.
-  static const panelRightClose = IconData(58422, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const panelRightClose = IconData(58418, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`panel-right-dashed`](https://lucide.dev/icons/panel-right-dashed) icon.
-  static const panelRightDashed = IconData(58423, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const panelRightDashed = IconData(58419, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`panel-right-open`](https://lucide.dev/icons/panel-right-open) icon.
-  static const panelRightOpen = IconData(58424, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const panelRightOpen = IconData(58420, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`panel-right`](https://lucide.dev/icons/panel-right) icon.
-  static const panelRight = IconData(58421, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const panelRight = IconData(58417, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`panel-top-bottom-dashed`](https://lucide.dev/icons/panel-top-bottom-dashed) icon.
-  static const panelTopBottomDashed = IconData(59031, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const panelTopBottomDashed = IconData(59027, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`panel-top-close`](https://lucide.dev/icons/panel-top-close) icon.
-  static const panelTopClose = IconData(58426, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const panelTopClose = IconData(58422, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`panel-top-dashed`](https://lucide.dev/icons/panel-top-dashed) icon.
-  static const panelTopDashed = IconData(58427, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const panelTopDashed = IconData(58423, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`panel-top-open`](https://lucide.dev/icons/panel-top-open) icon.
-  static const panelTopOpen = IconData(58428, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const panelTopOpen = IconData(58424, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`panel-top`](https://lucide.dev/icons/panel-top) icon.
-  static const panelTop = IconData(58425, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const panelTop = IconData(58421, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`panels-left-bottom`](https://lucide.dev/icons/panels-left-bottom) icon.
   static const panelsLeftBottom = IconData(57643, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`panels-right-bottom`](https://lucide.dev/icons/panels-right-bottom) icon.
-  static const panelsRightBottom = IconData(58764, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const panelsRightBottom = IconData(58760, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`panels-top-left`](https://lucide.dev/icons/panels-top-left) icon.
   static const panelsTopLeft = IconData(57644, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -3429,28 +3492,28 @@ class FIcons {
   static const paperclip = IconData(57645, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`parentheses`](https://lucide.dev/icons/parentheses) icon.
-  static const parentheses = IconData(58440, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const parentheses = IconData(58436, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`parking-meter`](https://lucide.dev/icons/parking-meter) icon.
-  static const parkingMeter = IconData(58628, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const parkingMeter = IconData(58624, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`party-popper`](https://lucide.dev/icons/party-popper) icon.
-  static const partyPopper = IconData(58183, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const partyPopper = IconData(58179, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`pause`](https://lucide.dev/icons/pause) icon.
   static const pause = IconData(57646, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`paw-print`](https://lucide.dev/icons/paw-print) icon.
-  static const pawPrint = IconData(58617, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const pawPrint = IconData(58613, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`pc-case`](https://lucide.dev/icons/pc-case) icon.
-  static const pcCase = IconData(58442, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const pcCase = IconData(58438, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`pen-line`](https://lucide.dev/icons/pen-line) icon.
   static const penLine = IconData(57648, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`pen-off`](https://lucide.dev/icons/pen-off) icon.
-  static const penOff = IconData(58866, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const penOff = IconData(58862, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`pen-tool`](https://lucide.dev/icons/pen-tool) icon.
   static const penTool = IconData(57649, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -3459,19 +3522,19 @@ class FIcons {
   static const pen = IconData(57647, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`pencil-line`](https://lucide.dev/icons/pencil-line) icon.
-  static const pencilLine = IconData(58612, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const pencilLine = IconData(58608, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`pencil-off`](https://lucide.dev/icons/pencil-off) icon.
-  static const pencilOff = IconData(58867, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const pencilOff = IconData(58863, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`pencil-ruler`](https://lucide.dev/icons/pencil-ruler) icon.
-  static const pencilRuler = IconData(58613, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const pencilRuler = IconData(58609, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`pencil`](https://lucide.dev/icons/pencil) icon.
   static const pencil = IconData(57849, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`pentagon`](https://lucide.dev/icons/pentagon) icon.
-  static const pentagon = IconData(58671, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const pentagon = IconData(58667, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`percent`](https://lucide.dev/icons/percent) icon.
   static const percent = IconData(57650, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -3480,7 +3543,7 @@ class FIcons {
   static const personStanding = IconData(57886, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`philippine-peso`](https://lucide.dev/icons/philippine-peso) icon.
-  static const philippinePeso = IconData(58888, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const philippinePeso = IconData(58884, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`phone-call`](https://lucide.dev/icons/phone-call) icon.
   static const phoneCall = IconData(57652, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -3504,37 +3567,37 @@ class FIcons {
   static const phone = IconData(57651, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`pi`](https://lucide.dev/icons/pi) icon.
-  static const pi = IconData(58486, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const pi = IconData(58482, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`piano`](https://lucide.dev/icons/piano) icon.
-  static const piano = IconData(58725, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const piano = IconData(58721, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`pickaxe`](https://lucide.dev/icons/pickaxe) icon.
-  static const pickaxe = IconData(58826, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const pickaxe = IconData(58822, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`picture-in-picture-2`](https://lucide.dev/icons/picture-in-picture-2) icon.
-  static const pictureInPicture2 = IconData(58291, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const pictureInPicture2 = IconData(58287, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`picture-in-picture`](https://lucide.dev/icons/picture-in-picture) icon.
-  static const pictureInPicture = IconData(58290, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const pictureInPicture = IconData(58286, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`piggy-bank`](https://lucide.dev/icons/piggy-bank) icon.
   static const piggyBank = IconData(57658, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`pilcrow-left`](https://lucide.dev/icons/pilcrow-left) icon.
-  static const pilcrowLeft = IconData(58848, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const pilcrowLeft = IconData(58844, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`pilcrow-right`](https://lucide.dev/icons/pilcrow-right) icon.
-  static const pilcrowRight = IconData(58849, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const pilcrowRight = IconData(58845, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`pilcrow`](https://lucide.dev/icons/pilcrow) icon.
-  static const pilcrow = IconData(58279, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const pilcrow = IconData(58275, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`pill-bottle`](https://lucide.dev/icons/pill-bottle) icon.
-  static const pillBottle = IconData(58862, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const pillBottle = IconData(58858, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`pill`](https://lucide.dev/icons/pill) icon.
-  static const pill = IconData(58305, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const pill = IconData(58301, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`pin-off`](https://lucide.dev/icons/pin-off) icon.
   static const pinOff = IconData(58038, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -3546,13 +3609,13 @@ class FIcons {
   static const pipette = IconData(57659, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`pizza`](https://lucide.dev/icons/pizza) icon.
-  static const pizza = IconData(58200, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const pizza = IconData(58196, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`plane-landing`](https://lucide.dev/icons/plane-landing) icon.
-  static const planeLanding = IconData(58321, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const planeLanding = IconData(58317, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`plane-takeoff`](https://lucide.dev/icons/plane-takeoff) icon.
-  static const planeTakeoff = IconData(58322, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const planeTakeoff = IconData(58318, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`plane`](https://lucide.dev/icons/plane) icon.
   static const plane = IconData(57822, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -3561,19 +3624,19 @@ class FIcons {
   static const play = IconData(57660, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`plug-2`](https://lucide.dev/icons/plug-2) icon.
-  static const plug2 = IconData(58244, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const plug2 = IconData(58240, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`plug-zap`](https://lucide.dev/icons/plug-zap) icon.
-  static const plugZap = IconData(58464, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const plugZap = IconData(58460, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`plug`](https://lucide.dev/icons/plug) icon.
-  static const plug = IconData(58243, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const plug = IconData(58239, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`plus`](https://lucide.dev/icons/plus) icon.
   static const plus = IconData(57661, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`pocket-knife`](https://lucide.dev/icons/pocket-knife) icon.
-  static const pocketKnife = IconData(58532, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const pocketKnife = IconData(58528, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`pocket`](https://lucide.dev/icons/pocket) icon.
   static const pocket = IconData(57662, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -3582,16 +3645,16 @@ class FIcons {
   static const podcast = IconData(57850, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`pointer-off`](https://lucide.dev/icons/pointer-off) icon.
-  static const pointerOff = IconData(58755, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const pointerOff = IconData(58751, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`pointer`](https://lucide.dev/icons/pointer) icon.
   static const pointer = IconData(57832, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`popcorn`](https://lucide.dev/icons/popcorn) icon.
-  static const popcorn = IconData(58562, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const popcorn = IconData(58558, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`popsicle`](https://lucide.dev/icons/popsicle) icon.
-  static const popsicle = IconData(58563, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const popsicle = IconData(58559, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`pound-sterling`](https://lucide.dev/icons/pound-sterling) icon.
   static const poundSterling = IconData(57663, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -3603,25 +3666,25 @@ class FIcons {
   static const power = IconData(57664, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`presentation`](https://lucide.dev/icons/presentation) icon.
-  static const presentation = IconData(58546, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const presentation = IconData(58542, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`printer-check`](https://lucide.dev/icons/printer-check) icon.
-  static const printerCheck = IconData(58873, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const printerCheck = IconData(58869, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`printer`](https://lucide.dev/icons/printer) icon.
   static const printer = IconData(57665, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`projector`](https://lucide.dev/icons/projector) icon.
-  static const projector = IconData(58547, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const projector = IconData(58543, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`proportions`](https://lucide.dev/icons/proportions) icon.
-  static const proportions = IconData(58835, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const proportions = IconData(58831, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`puzzle`](https://lucide.dev/icons/puzzle) icon.
   static const puzzle = IconData(58012, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`pyramid`](https://lucide.dev/icons/pyramid) icon.
-  static const pyramid = IconData(58672, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const pyramid = IconData(58668, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`qr-code`](https://lucide.dev/icons/qr-code) icon.
   static const qrCode = IconData(57823, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -3630,85 +3693,85 @@ class FIcons {
   static const quote = IconData(57913, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`rabbit`](https://lucide.dev/icons/rabbit) icon.
-  static const rabbit = IconData(58618, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const rabbit = IconData(58614, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`radar`](https://lucide.dev/icons/radar) icon.
-  static const radar = IconData(58523, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const radar = IconData(58519, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`radiation`](https://lucide.dev/icons/radiation) icon.
-  static const radiation = IconData(58438, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const radiation = IconData(58434, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`radical`](https://lucide.dev/icons/radical) icon.
-  static const radical = IconData(58822, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const radical = IconData(58818, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`radio-receiver`](https://lucide.dev/icons/radio-receiver) icon.
   static const radioReceiver = IconData(57851, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`radio-tower`](https://lucide.dev/icons/radio-tower) icon.
-  static const radioTower = IconData(58376, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const radioTower = IconData(58372, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`radio`](https://lucide.dev/icons/radio) icon.
   static const radio = IconData(57666, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`radius`](https://lucide.dev/icons/radius) icon.
-  static const radius = IconData(58673, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const radius = IconData(58669, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`rail-symbol`](https://lucide.dev/icons/rail-symbol) icon.
-  static const railSymbol = IconData(58629, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const railSymbol = IconData(58625, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`rainbow`](https://lucide.dev/icons/rainbow) icon.
-  static const rainbow = IconData(58566, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const rainbow = IconData(58562, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`rat`](https://lucide.dev/icons/rat) icon.
-  static const rat = IconData(58351, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const rat = IconData(58347, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`ratio`](https://lucide.dev/icons/ratio) icon.
-  static const ratio = IconData(58604, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const ratio = IconData(58600, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`receipt-cent`](https://lucide.dev/icons/receipt-cent) icon.
-  static const receiptCent = IconData(58793, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const receiptCent = IconData(58789, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`receipt-euro`](https://lucide.dev/icons/receipt-euro) icon.
-  static const receiptEuro = IconData(58794, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const receiptEuro = IconData(58790, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`receipt-indian-rupee`](https://lucide.dev/icons/receipt-indian-rupee) icon.
-  static const receiptIndianRupee = IconData(58795, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const receiptIndianRupee = IconData(58791, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`receipt-japanese-yen`](https://lucide.dev/icons/receipt-japanese-yen) icon.
-  static const receiptJapaneseYen = IconData(58796, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const receiptJapaneseYen = IconData(58792, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`receipt-pound-sterling`](https://lucide.dev/icons/receipt-pound-sterling) icon.
-  static const receiptPoundSterling = IconData(58797, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const receiptPoundSterling = IconData(58793, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`receipt-russian-ruble`](https://lucide.dev/icons/receipt-russian-ruble) icon.
-  static const receiptRussianRuble = IconData(58798, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const receiptRussianRuble = IconData(58794, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`receipt-swiss-franc`](https://lucide.dev/icons/receipt-swiss-franc) icon.
-  static const receiptSwissFranc = IconData(58799, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const receiptSwissFranc = IconData(58795, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`receipt-text`](https://lucide.dev/icons/receipt-text) icon.
-  static const receiptText = IconData(58800, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const receiptText = IconData(58796, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`receipt-turkish-lira`](https://lucide.dev/icons/receipt-turkish-lira) icon.
-  static const receiptTurkishLira = IconData(59011, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const receiptTurkishLira = IconData(59007, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`receipt`](https://lucide.dev/icons/receipt) icon.
-  static const receipt = IconData(58327, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const receipt = IconData(58323, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`rectangle-circle`](https://lucide.dev/icons/rectangle-circle) icon.
-  static const rectangleCircle = IconData(58999, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const rectangleCircle = IconData(58995, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`rectangle-ellipsis`](https://lucide.dev/icons/rectangle-ellipsis) icon.
   static const rectangleEllipsis = IconData(57887, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`rectangle-goggles`](https://lucide.dev/icons/rectangle-goggles) icon.
-  static const rectangleGoggles = IconData(58970, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const rectangleGoggles = IconData(58966, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`rectangle-horizontal`](https://lucide.dev/icons/rectangle-horizontal) icon.
-  static const rectangleHorizontal = IconData(58234, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const rectangleHorizontal = IconData(58230, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`rectangle-vertical`](https://lucide.dev/icons/rectangle-vertical) icon.
-  static const rectangleVertical = IconData(58235, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const rectangleVertical = IconData(58231, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`recycle`](https://lucide.dev/icons/recycle) icon.
   static const recycle = IconData(58089, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -3717,46 +3780,46 @@ class FIcons {
   static const redo2 = IconData(58016, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`redo-dot`](https://lucide.dev/icons/redo-dot) icon.
-  static const redoDot = IconData(58452, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const redoDot = IconData(58448, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`redo`](https://lucide.dev/icons/redo) icon.
   static const redo = IconData(57667, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`refresh-ccw-dot`](https://lucide.dev/icons/refresh-ccw-dot) icon.
-  static const refreshCcwDot = IconData(58550, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const refreshCcwDot = IconData(58546, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`refresh-ccw`](https://lucide.dev/icons/refresh-ccw) icon.
   static const refreshCcw = IconData(57668, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`refresh-cw-off`](https://lucide.dev/icons/refresh-cw-off) icon.
-  static const refreshCwOff = IconData(58524, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const refreshCwOff = IconData(58520, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`refresh-cw`](https://lucide.dev/icons/refresh-cw) icon.
   static const refreshCw = IconData(57669, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`refrigerator`](https://lucide.dev/icons/refrigerator) icon.
-  static const refrigerator = IconData(58239, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const refrigerator = IconData(58235, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`regex`](https://lucide.dev/icons/regex) icon.
   static const regex = IconData(57852, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`remove-formatting`](https://lucide.dev/icons/remove-formatting) icon.
-  static const removeFormatting = IconData(58295, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const removeFormatting = IconData(58291, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`repeat-1`](https://lucide.dev/icons/repeat-1) icon.
   static const repeat1 = IconData(57853, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`repeat-2`](https://lucide.dev/icons/repeat-2) icon.
-  static const repeat2 = IconData(58389, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const repeat2 = IconData(58385, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`repeat`](https://lucide.dev/icons/repeat) icon.
   static const repeat = IconData(57670, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`replace-all`](https://lucide.dev/icons/replace-all) icon.
-  static const replaceAll = IconData(58336, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const replaceAll = IconData(58332, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`replace`](https://lucide.dev/icons/replace) icon.
-  static const replace = IconData(58335, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const replace = IconData(58331, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`reply-all`](https://lucide.dev/icons/reply-all) icon.
   static const replyAll = IconData(57899, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -3768,7 +3831,7 @@ class FIcons {
   static const rewind = IconData(57671, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`ribbon`](https://lucide.dev/icons/ribbon) icon.
-  static const ribbon = IconData(58716, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const ribbon = IconData(58712, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`rocket`](https://lucide.dev/icons/rocket) icon.
   static const rocket = IconData(57990, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -3777,52 +3840,52 @@ class FIcons {
   static const rockingChair = IconData(57907, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`roller-coaster`](https://lucide.dev/icons/roller-coaster) icon.
-  static const rollerCoaster = IconData(58500, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const rollerCoaster = IconData(58496, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`rose`](https://lucide.dev/icons/rose) icon.
-  static const rose = IconData(59029, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const rose = IconData(59025, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`rotate-3d`](https://lucide.dev/icons/rotate-3d) icon.
   static const rotate3d = IconData(58090, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`rotate-ccw-key`](https://lucide.dev/icons/rotate-ccw-key) icon.
-  static const rotateCcwKey = IconData(58964, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const rotateCcwKey = IconData(58960, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`rotate-ccw-square`](https://lucide.dev/icons/rotate-ccw-square) icon.
-  static const rotateCcwSquare = IconData(58836, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const rotateCcwSquare = IconData(58832, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`rotate-ccw`](https://lucide.dev/icons/rotate-ccw) icon.
   static const rotateCcw = IconData(57672, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`rotate-cw-square`](https://lucide.dev/icons/rotate-cw-square) icon.
-  static const rotateCwSquare = IconData(58837, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const rotateCwSquare = IconData(58833, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`rotate-cw`](https://lucide.dev/icons/rotate-cw) icon.
   static const rotateCw = IconData(57673, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`route-off`](https://lucide.dev/icons/route-off) icon.
-  static const routeOff = IconData(58691, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const routeOff = IconData(58687, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`route`](https://lucide.dev/icons/route) icon.
-  static const route = IconData(58690, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const route = IconData(58686, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`router`](https://lucide.dev/icons/router) icon.
-  static const router = IconData(58307, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const router = IconData(58303, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`rows-2`](https://lucide.dev/icons/rows-2) icon.
-  static const rows2 = IconData(58429, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const rows2 = IconData(58425, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`rows-3`](https://lucide.dev/icons/rows-3) icon.
-  static const rows3 = IconData(58766, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const rows3 = IconData(58762, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`rows-4`](https://lucide.dev/icons/rows-4) icon.
-  static const rows4 = IconData(58767, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const rows4 = IconData(58763, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`rss`](https://lucide.dev/icons/rss) icon.
   static const rss = IconData(57674, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`ruler-dimension-line`](https://lucide.dev/icons/ruler-dimension-line) icon.
-  static const rulerDimensionLine = IconData(58982, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const rulerDimensionLine = IconData(58978, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`ruler`](https://lucide.dev/icons/ruler) icon.
   static const ruler = IconData(57675, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -3831,28 +3894,28 @@ class FIcons {
   static const russianRuble = IconData(57676, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`sailboat`](https://lucide.dev/icons/sailboat) icon.
-  static const sailboat = IconData(58242, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const sailboat = IconData(58238, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`salad`](https://lucide.dev/icons/salad) icon.
-  static const salad = IconData(58284, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const salad = IconData(58280, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`sandwich`](https://lucide.dev/icons/sandwich) icon.
-  static const sandwich = IconData(58285, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const sandwich = IconData(58281, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`satellite-dish`](https://lucide.dev/icons/satellite-dish) icon.
-  static const satelliteDish = IconData(58444, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const satelliteDish = IconData(58440, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`satellite`](https://lucide.dev/icons/satellite) icon.
-  static const satellite = IconData(58443, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const satellite = IconData(58439, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`saudi-riyal`](https://lucide.dev/icons/saudi-riyal) icon.
-  static const saudiRiyal = IconData(58959, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const saudiRiyal = IconData(58955, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`save-all`](https://lucide.dev/icons/save-all) icon.
-  static const saveAll = IconData(58387, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const saveAll = IconData(58383, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`save-off`](https://lucide.dev/icons/save-off) icon.
-  static const saveOff = IconData(58871, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const saveOff = IconData(58867, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`save`](https://lucide.dev/icons/save) icon.
   static const save = IconData(57677, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -3867,40 +3930,43 @@ class FIcons {
   static const scaling = IconData(58092, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`scan-barcode`](https://lucide.dev/icons/scan-barcode) icon.
-  static const scanBarcode = IconData(58681, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const scanBarcode = IconData(58677, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`scan-eye`](https://lucide.dev/icons/scan-eye) icon.
-  static const scanEye = IconData(58682, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const scanEye = IconData(58678, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`scan-face`](https://lucide.dev/icons/scan-face) icon.
-  static const scanFace = IconData(58229, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const scanFace = IconData(58225, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`scan-heart`](https://lucide.dev/icons/scan-heart) icon.
-  static const scanHeart = IconData(58942, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const scanHeart = IconData(58938, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`scan-line`](https://lucide.dev/icons/scan-line) icon.
   static const scanLine = IconData(57944, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`scan-qr-code`](https://lucide.dev/icons/scan-qr-code) icon.
-  static const scanQrCode = IconData(58874, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const scanQrCode = IconData(58870, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`scan-search`](https://lucide.dev/icons/scan-search) icon.
-  static const scanSearch = IconData(58683, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const scanSearch = IconData(58679, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`scan-text`](https://lucide.dev/icons/scan-text) icon.
-  static const scanText = IconData(58684, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const scanText = IconData(58680, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`scan`](https://lucide.dev/icons/scan) icon.
   static const scan = IconData(57943, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`school`](https://lucide.dev/icons/school) icon.
-  static const school = IconData(58343, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const school = IconData(58339, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`scissors-line-dashed`](https://lucide.dev/icons/scissors-line-dashed) icon.
-  static const scissorsLineDashed = IconData(58605, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const scissorsLineDashed = IconData(58601, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`scissors`](https://lucide.dev/icons/scissors) icon.
   static const scissors = IconData(57678, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+
+  /// A [`scooter`](https://lucide.dev/icons/scooter) icon.
+  static const scooter = IconData(59052, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`screen-share-off`](https://lucide.dev/icons/screen-share-off) icon.
   static const screenShareOff = IconData(57680, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -3909,34 +3975,37 @@ class FIcons {
   static const screenShare = IconData(57679, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`scroll-text`](https://lucide.dev/icons/scroll-text) icon.
-  static const scrollText = IconData(58467, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const scrollText = IconData(58463, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`scroll`](https://lucide.dev/icons/scroll) icon.
   static const scroll = IconData(58093, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
+  /// A [`search-alert`](https://lucide.dev/icons/search-alert) icon.
+  static const searchAlert = IconData(59060, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+
   /// A [`search-check`](https://lucide.dev/icons/search-check) icon.
-  static const searchCheck = IconData(58542, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const searchCheck = IconData(58538, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`search-code`](https://lucide.dev/icons/search-code) icon.
-  static const searchCode = IconData(58543, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const searchCode = IconData(58539, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`search-slash`](https://lucide.dev/icons/search-slash) icon.
-  static const searchSlash = IconData(58544, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const searchSlash = IconData(58540, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`search-x`](https://lucide.dev/icons/search-x) icon.
-  static const searchX = IconData(58545, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const searchX = IconData(58541, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`search`](https://lucide.dev/icons/search) icon.
   static const search = IconData(57681, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`section`](https://lucide.dev/icons/section) icon.
-  static const section = IconData(58860, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const section = IconData(58856, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`send-horizontal`](https://lucide.dev/icons/send-horizontal) icon.
-  static const sendHorizontal = IconData(58614, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const sendHorizontal = IconData(58610, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`send-to-back`](https://lucide.dev/icons/send-to-back) icon.
-  static const sendToBack = IconData(58615, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const sendToBack = IconData(58611, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`send`](https://lucide.dev/icons/send) icon.
   static const send = IconData(57682, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -3948,7 +4017,7 @@ class FIcons {
   static const separatorVertical = IconData(57801, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`server-cog`](https://lucide.dev/icons/server-cog) icon.
-  static const serverCog = IconData(58181, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const serverCog = IconData(58177, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`server-crash`](https://lucide.dev/icons/server-crash) icon.
   static const serverCrash = IconData(57833, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -3966,7 +4035,7 @@ class FIcons {
   static const settings = IconData(57684, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`shapes`](https://lucide.dev/icons/shapes) icon.
-  static const shapes = IconData(58551, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const shapes = IconData(58547, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`share-2`](https://lucide.dev/icons/share-2) icon.
   static const share2 = IconData(57686, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -3978,7 +4047,7 @@ class FIcons {
   static const sheet = IconData(57687, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`shell`](https://lucide.dev/icons/shell) icon.
-  static const shell = IconData(58619, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const shell = IconData(58615, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`shield-alert`](https://lucide.dev/icons/shield-alert) icon.
   static const shieldAlert = IconData(57854, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -3990,25 +4059,25 @@ class FIcons {
   static const shieldCheck = IconData(57855, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`shield-ellipsis`](https://lucide.dev/icons/shield-ellipsis) icon.
-  static const shieldEllipsis = IconData(58650, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const shieldEllipsis = IconData(58646, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`shield-half`](https://lucide.dev/icons/shield-half) icon.
-  static const shieldHalf = IconData(58651, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const shieldHalf = IconData(58647, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`shield-minus`](https://lucide.dev/icons/shield-minus) icon.
-  static const shieldMinus = IconData(58652, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const shieldMinus = IconData(58648, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`shield-off`](https://lucide.dev/icons/shield-off) icon.
   static const shieldOff = IconData(57690, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`shield-plus`](https://lucide.dev/icons/shield-plus) icon.
-  static const shieldPlus = IconData(58653, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const shieldPlus = IconData(58649, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`shield-question-mark`](https://lucide.dev/icons/shield-question-mark) icon.
-  static const shieldQuestionMark = IconData(58386, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const shieldQuestionMark = IconData(58382, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`shield-user`](https://lucide.dev/icons/shield-user) icon.
-  static const shieldUser = IconData(58955, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const shieldUser = IconData(58951, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`shield-x`](https://lucide.dev/icons/shield-x) icon.
   static const shieldX = IconData(57856, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -4017,10 +4086,10 @@ class FIcons {
   static const shield = IconData(57688, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`ship-wheel`](https://lucide.dev/icons/ship-wheel) icon.
-  static const shipWheel = IconData(58630, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const shipWheel = IconData(58626, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`ship`](https://lucide.dev/icons/ship) icon.
-  static const ship = IconData(58302, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const ship = IconData(58298, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`shirt`](https://lucide.dev/icons/shirt) icon.
   static const shirt = IconData(57802, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -4029,7 +4098,7 @@ class FIcons {
   static const shoppingBag = IconData(57691, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`shopping-basket`](https://lucide.dev/icons/shopping-basket) icon.
-  static const shoppingBasket = IconData(58606, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const shoppingBasket = IconData(58602, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`shopping-cart`](https://lucide.dev/icons/shopping-cart) icon.
   static const shoppingCart = IconData(57692, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -4038,13 +4107,13 @@ class FIcons {
   static const shovel = IconData(57693, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`shower-head`](https://lucide.dev/icons/shower-head) icon.
-  static const showerHead = IconData(58240, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const showerHead = IconData(58236, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`shredder`](https://lucide.dev/icons/shredder) icon.
-  static const shredder = IconData(58975, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const shredder = IconData(58971, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`shrimp`](https://lucide.dev/icons/shrimp) icon.
-  static const shrimp = IconData(58957, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const shrimp = IconData(58953, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`shrink`](https://lucide.dev/icons/shrink) icon.
   static const shrink = IconData(57888, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -4074,13 +4143,13 @@ class FIcons {
   static const signal = IconData(57951, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`signature`](https://lucide.dev/icons/signature) icon.
-  static const signature = IconData(58870, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const signature = IconData(58866, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`signpost-big`](https://lucide.dev/icons/signpost-big) icon.
-  static const signpostBig = IconData(58693, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const signpostBig = IconData(58689, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`signpost`](https://lucide.dev/icons/signpost) icon.
-  static const signpost = IconData(58692, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const signpost = IconData(58688, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`siren`](https://lucide.dev/icons/siren) icon.
   static const siren = IconData(58095, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -4098,7 +4167,7 @@ class FIcons {
   static const slack = IconData(57697, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`slash`](https://lucide.dev/icons/slash) icon.
-  static const slash = IconData(58657, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const slash = IconData(58653, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`slice`](https://lucide.dev/icons/slice) icon.
   static const slice = IconData(58096, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -4113,7 +4182,7 @@ class FIcons {
   static const smartphoneCharging = IconData(57902, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`smartphone-nfc`](https://lucide.dev/icons/smartphone-nfc) icon.
-  static const smartphoneNfc = IconData(58312, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const smartphoneNfc = IconData(58308, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`smartphone`](https://lucide.dev/icons/smartphone) icon.
   static const smartphone = IconData(57699, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -4125,120 +4194,123 @@ class FIcons {
   static const smile = IconData(57700, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`snail`](https://lucide.dev/icons/snail) icon.
-  static const snail = IconData(58620, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const snail = IconData(58616, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`snowflake`](https://lucide.dev/icons/snowflake) icon.
   static const snowflake = IconData(57701, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`soap-dispenser-droplet`](https://lucide.dev/icons/soap-dispenser-droplet) icon.
-  static const soapDispenserDroplet = IconData(58989, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const soapDispenserDroplet = IconData(58985, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`sofa`](https://lucide.dev/icons/sofa) icon.
   static const sofa = IconData(58052, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
+  /// A [`solar-panel`](https://lucide.dev/icons/solar-panel) icon.
+  static const solarPanel = IconData(59039, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+
   /// A [`soup`](https://lucide.dev/icons/soup) icon.
-  static const soup = IconData(58286, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const soup = IconData(58282, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`space`](https://lucide.dev/icons/space) icon.
-  static const space = IconData(58337, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const space = IconData(58333, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`spade`](https://lucide.dev/icons/spade) icon.
-  static const spade = IconData(58525, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const spade = IconData(58521, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`sparkle`](https://lucide.dev/icons/sparkle) icon.
-  static const sparkle = IconData(58498, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const sparkle = IconData(58494, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`sparkles`](https://lucide.dev/icons/sparkles) icon.
-  static const sparkles = IconData(58390, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const sparkles = IconData(58386, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`speaker`](https://lucide.dev/icons/speaker) icon.
   static const speaker = IconData(57702, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`speech`](https://lucide.dev/icons/speech) icon.
-  static const speech = IconData(58658, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const speech = IconData(58654, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`spell-check-2`](https://lucide.dev/icons/spell-check-2) icon.
-  static const spellCheck2 = IconData(58527, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const spellCheck2 = IconData(58523, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`spell-check`](https://lucide.dev/icons/spell-check) icon.
-  static const spellCheck = IconData(58526, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const spellCheck = IconData(58522, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`spline-pointer`](https://lucide.dev/icons/spline-pointer) icon.
-  static const splinePointer = IconData(58963, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const splinePointer = IconData(58959, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`spline`](https://lucide.dev/icons/spline) icon.
-  static const spline = IconData(58255, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const spline = IconData(58251, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`split`](https://lucide.dev/icons/split) icon.
-  static const split = IconData(58436, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const split = IconData(58432, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`spool`](https://lucide.dev/icons/spool) icon.
-  static const spool = IconData(59003, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const spool = IconData(58999, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`spotlight`](https://lucide.dev/icons/spotlight) icon.
-  static const spotlight = IconData(59014, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const spotlight = IconData(59010, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`spray-can`](https://lucide.dev/icons/spray-can) icon.
-  static const sprayCan = IconData(58521, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const sprayCan = IconData(58517, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`sprout`](https://lucide.dev/icons/sprout) icon.
   static const sprout = IconData(57835, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`square-activity`](https://lucide.dev/icons/square-activity) icon.
-  static const squareActivity = IconData(58552, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const squareActivity = IconData(58548, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`square-arrow-down-left`](https://lucide.dev/icons/square-arrow-down-left) icon.
-  static const squareArrowDownLeft = IconData(58553, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const squareArrowDownLeft = IconData(58549, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`square-arrow-down-right`](https://lucide.dev/icons/square-arrow-down-right) icon.
-  static const squareArrowDownRight = IconData(58554, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const squareArrowDownRight = IconData(58550, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`square-arrow-down`](https://lucide.dev/icons/square-arrow-down) icon.
-  static const squareArrowDown = IconData(58411, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const squareArrowDown = IconData(58407, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`square-arrow-left`](https://lucide.dev/icons/square-arrow-left) icon.
   static const squareArrowLeft = IconData(
-    58412,
+    58408,
     fontFamily: 'ForuiLucideIcons',
     fontPackage: 'forui_assets',
     matchTextDirection: true,
   );
 
   /// A [`square-arrow-out-down-left`](https://lucide.dev/icons/square-arrow-out-down-left) icon.
-  static const squareArrowOutDownLeft = IconData(58789, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const squareArrowOutDownLeft = IconData(58785, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`square-arrow-out-down-right`](https://lucide.dev/icons/square-arrow-out-down-right) icon.
-  static const squareArrowOutDownRight = IconData(58790, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const squareArrowOutDownRight = IconData(58786, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`square-arrow-out-up-left`](https://lucide.dev/icons/square-arrow-out-up-left) icon.
-  static const squareArrowOutUpLeft = IconData(58791, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const squareArrowOutUpLeft = IconData(58787, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`square-arrow-out-up-right`](https://lucide.dev/icons/square-arrow-out-up-right) icon.
-  static const squareArrowOutUpRight = IconData(58792, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const squareArrowOutUpRight = IconData(58788, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`square-arrow-right`](https://lucide.dev/icons/square-arrow-right) icon.
   static const squareArrowRight = IconData(
-    58413,
+    58409,
     fontFamily: 'ForuiLucideIcons',
     fontPackage: 'forui_assets',
     matchTextDirection: true,
   );
 
   /// A [`square-arrow-up-left`](https://lucide.dev/icons/square-arrow-up-left) icon.
-  static const squareArrowUpLeft = IconData(58555, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const squareArrowUpLeft = IconData(58551, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`square-arrow-up-right`](https://lucide.dev/icons/square-arrow-up-right) icon.
-  static const squareArrowUpRight = IconData(58556, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const squareArrowUpRight = IconData(58552, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`square-arrow-up`](https://lucide.dev/icons/square-arrow-up) icon.
-  static const squareArrowUp = IconData(58414, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const squareArrowUp = IconData(58410, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`square-asterisk`](https://lucide.dev/icons/square-asterisk) icon.
   static const squareAsterisk = IconData(57704, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`square-bottom-dashed-scissors`](https://lucide.dev/icons/square-bottom-dashed-scissors) icon.
   static const squareBottomDashedScissors = IconData(
-    58607,
+    58603,
     fontFamily: 'ForuiLucideIcons',
     fontPackage: 'forui_assets',
   );
@@ -4250,37 +4322,37 @@ class FIcons {
   static const squareCheckBig = IconData(57706, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`square-check`](https://lucide.dev/icons/square-check) icon.
-  static const squareCheck = IconData(58717, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const squareCheck = IconData(58713, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`square-chevron-down`](https://lucide.dev/icons/square-chevron-down) icon.
-  static const squareChevronDown = IconData(58323, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const squareChevronDown = IconData(58319, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`square-chevron-left`](https://lucide.dev/icons/square-chevron-left) icon.
-  static const squareChevronLeft = IconData(58324, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const squareChevronLeft = IconData(58320, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`square-chevron-right`](https://lucide.dev/icons/square-chevron-right) icon.
-  static const squareChevronRight = IconData(58325, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const squareChevronRight = IconData(58321, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`square-chevron-up`](https://lucide.dev/icons/square-chevron-up) icon.
-  static const squareChevronUp = IconData(58326, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const squareChevronUp = IconData(58322, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`square-code`](https://lucide.dev/icons/square-code) icon.
   static const squareCode = IconData(57707, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`square-dashed-bottom-code`](https://lucide.dev/icons/square-dashed-bottom-code) icon.
-  static const squareDashedBottomCode = IconData(58565, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const squareDashedBottomCode = IconData(58561, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`square-dashed-bottom`](https://lucide.dev/icons/square-dashed-bottom) icon.
-  static const squareDashedBottom = IconData(58564, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const squareDashedBottom = IconData(58560, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`square-dashed-kanban`](https://lucide.dev/icons/square-dashed-kanban) icon.
   static const squareDashedKanban = IconData(57708, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`square-dashed-mouse-pointer`](https://lucide.dev/icons/square-dashed-mouse-pointer) icon.
-  static const squareDashedMousePointer = IconData(58637, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const squareDashedMousePointer = IconData(58633, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`square-dashed-top-solid`](https://lucide.dev/icons/square-dashed-top-solid) icon.
-  static const squareDashedTopSolid = IconData(58992, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const squareDashedTopSolid = IconData(58988, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`square-dashed`](https://lucide.dev/icons/square-dashed) icon.
   static const squareDashed = IconData(57803, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -4301,13 +4373,13 @@ class FIcons {
   static const squareKanban = IconData(57712, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`square-library`](https://lucide.dev/icons/square-library) icon.
-  static const squareLibrary = IconData(58707, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const squareLibrary = IconData(58703, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`square-m`](https://lucide.dev/icons/square-m) icon.
-  static const squareM = IconData(58631, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const squareM = IconData(58627, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`square-menu`](https://lucide.dev/icons/square-menu) icon.
-  static const squareMenu = IconData(58455, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const squareMenu = IconData(58451, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`square-minus`](https://lucide.dev/icons/square-minus) icon.
   static const squareMinus = IconData(57713, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -4316,76 +4388,76 @@ class FIcons {
   static const squareMousePointer = IconData(57858, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`square-parking-off`](https://lucide.dev/icons/square-parking-off) icon.
-  static const squareParkingOff = IconData(58320, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const squareParkingOff = IconData(58316, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`square-parking`](https://lucide.dev/icons/square-parking) icon.
-  static const squareParking = IconData(58319, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const squareParking = IconData(58315, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`square-pause`](https://lucide.dev/icons/square-pause) icon.
-  static const squarePause = IconData(59016, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const squarePause = IconData(59012, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`square-pen`](https://lucide.dev/icons/square-pen) icon.
   static const squarePen = IconData(57714, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`square-percent`](https://lucide.dev/icons/square-percent) icon.
-  static const squarePercent = IconData(58656, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const squarePercent = IconData(58652, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`square-pi`](https://lucide.dev/icons/square-pi) icon.
-  static const squarePi = IconData(58508, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const squarePi = IconData(58504, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`square-pilcrow`](https://lucide.dev/icons/square-pilcrow) icon.
-  static const squarePilcrow = IconData(58511, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const squarePilcrow = IconData(58507, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`square-play`](https://lucide.dev/icons/square-play) icon.
-  static const squarePlay = IconData(58501, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const squarePlay = IconData(58497, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`square-plus`](https://lucide.dev/icons/square-plus) icon.
   static const squarePlus = IconData(57715, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`square-power`](https://lucide.dev/icons/square-power) icon.
-  static const squarePower = IconData(58709, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const squarePower = IconData(58705, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`square-radical`](https://lucide.dev/icons/square-radical) icon.
-  static const squareRadical = IconData(58823, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const squareRadical = IconData(58819, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`square-round-corner`](https://lucide.dev/icons/square-round-corner) icon.
-  static const squareRoundCorner = IconData(58956, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const squareRoundCorner = IconData(58952, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`square-scissors`](https://lucide.dev/icons/square-scissors) icon.
-  static const squareScissors = IconData(58608, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const squareScissors = IconData(58604, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`square-sigma`](https://lucide.dev/icons/square-sigma) icon.
-  static const squareSigma = IconData(58509, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const squareSigma = IconData(58505, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`square-slash`](https://lucide.dev/icons/square-slash) icon.
   static const squareSlash = IconData(57716, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`square-split-horizontal`](https://lucide.dev/icons/square-split-horizontal) icon.
-  static const squareSplitHorizontal = IconData(58298, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const squareSplitHorizontal = IconData(58294, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`square-split-vertical`](https://lucide.dev/icons/square-split-vertical) icon.
-  static const squareSplitVertical = IconData(58299, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const squareSplitVertical = IconData(58295, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`square-square`](https://lucide.dev/icons/square-square) icon.
-  static const squareSquare = IconData(58898, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const squareSquare = IconData(58894, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`square-stack`](https://lucide.dev/icons/square-stack) icon.
-  static const squareStack = IconData(58534, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const squareStack = IconData(58530, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`square-star`](https://lucide.dev/icons/square-star) icon.
-  static const squareStar = IconData(59026, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const squareStar = IconData(59022, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`square-stop`](https://lucide.dev/icons/square-stop) icon.
-  static const squareStop = IconData(59017, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const squareStop = IconData(59013, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`square-terminal`](https://lucide.dev/icons/square-terminal) icon.
   static const squareTerminal = IconData(57866, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`square-user-round`](https://lucide.dev/icons/square-user-round) icon.
-  static const squareUserRound = IconData(58474, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const squareUserRound = IconData(58470, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`square-user`](https://lucide.dev/icons/square-user) icon.
-  static const squareUser = IconData(58473, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const squareUser = IconData(58469, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`square-x`](https://lucide.dev/icons/square-x) icon.
   static const squareX = IconData(57717, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -4394,28 +4466,28 @@ class FIcons {
   static const square = IconData(57703, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`squares-exclude`](https://lucide.dev/icons/squares-exclude) icon.
-  static const squaresExclude = IconData(58971, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const squaresExclude = IconData(58967, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`squares-intersect`](https://lucide.dev/icons/squares-intersect) icon.
-  static const squaresIntersect = IconData(58972, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const squaresIntersect = IconData(58968, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`squares-subtract`](https://lucide.dev/icons/squares-subtract) icon.
-  static const squaresSubtract = IconData(58973, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const squaresSubtract = IconData(58969, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`squares-unite`](https://lucide.dev/icons/squares-unite) icon.
-  static const squaresUnite = IconData(58974, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const squaresUnite = IconData(58970, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`squircle-dashed`](https://lucide.dev/icons/squircle-dashed) icon.
-  static const squircleDashed = IconData(59005, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const squircleDashed = IconData(59001, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`squircle`](https://lucide.dev/icons/squircle) icon.
-  static const squircle = IconData(58750, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const squircle = IconData(58746, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`squirrel`](https://lucide.dev/icons/squirrel) icon.
-  static const squirrel = IconData(58531, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const squirrel = IconData(58527, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`stamp`](https://lucide.dev/icons/stamp) icon.
-  static const stamp = IconData(58303, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const stamp = IconData(58299, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`star-half`](https://lucide.dev/icons/star-half) icon.
   static const starHalf = IconData(57867, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -4427,10 +4499,10 @@ class FIcons {
   static const star = IconData(57718, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`step-back`](https://lucide.dev/icons/step-back) icon.
-  static const stepBack = IconData(58349, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const stepBack = IconData(58345, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`step-forward`](https://lucide.dev/icons/step-forward) icon.
-  static const stepForward = IconData(58350, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const stepForward = IconData(58346, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`stethoscope`](https://lucide.dev/icons/stethoscope) icon.
   static const stethoscope = IconData(58097, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -4441,8 +4513,11 @@ class FIcons {
   /// A [`sticky-note`](https://lucide.dev/icons/sticky-note) icon.
   static const stickyNote = IconData(58115, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
+  /// A [`stone`](https://lucide.dev/icons/stone) icon.
+  static const stone = IconData(59064, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+
   /// A [`store`](https://lucide.dev/icons/store) icon.
-  static const store = IconData(58344, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const store = IconData(58340, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`stretch-horizontal`](https://lucide.dev/icons/stretch-horizontal) icon.
   static const stretchHorizontal = IconData(57980, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -4466,7 +4541,7 @@ class FIcons {
   static const sunMoon = IconData(58034, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`sun-snow`](https://lucide.dev/icons/sun-snow) icon.
-  static const sunSnow = IconData(58230, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const sunSnow = IconData(58226, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`sun`](https://lucide.dev/icons/sun) icon.
   static const sun = IconData(57720, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -4481,7 +4556,7 @@ class FIcons {
   static const superscript = IconData(57950, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`swatch-book`](https://lucide.dev/icons/swatch-book) icon.
-  static const swatchBook = IconData(58787, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const swatchBook = IconData(58783, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`swiss-franc`](https://lucide.dev/icons/swiss-franc) icon.
   static const swissFranc = IconData(57723, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -4502,67 +4577,67 @@ class FIcons {
   static const table2 = IconData(58105, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`table-cells-merge`](https://lucide.dev/icons/table-cells-merge) icon.
-  static const tableCellsMerge = IconData(58827, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const tableCellsMerge = IconData(58823, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`table-cells-split`](https://lucide.dev/icons/table-cells-split) icon.
-  static const tableCellsSplit = IconData(58828, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const tableCellsSplit = IconData(58824, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`table-columns-split`](https://lucide.dev/icons/table-columns-split) icon.
-  static const tableColumnsSplit = IconData(58829, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const tableColumnsSplit = IconData(58825, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`table-of-contents`](https://lucide.dev/icons/table-of-contents) icon.
-  static const tableOfContents = IconData(58914, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const tableOfContents = IconData(58910, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`table-properties`](https://lucide.dev/icons/table-properties) icon.
-  static const tableProperties = IconData(58591, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const tableProperties = IconData(58587, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`table-rows-split`](https://lucide.dev/icons/table-rows-split) icon.
-  static const tableRowsSplit = IconData(58830, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const tableRowsSplit = IconData(58826, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`table`](https://lucide.dev/icons/table) icon.
   static const table = IconData(57725, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`tablet-smartphone`](https://lucide.dev/icons/tablet-smartphone) icon.
-  static const tabletSmartphone = IconData(58638, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const tabletSmartphone = IconData(58634, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`tablet`](https://lucide.dev/icons/tablet) icon.
   static const tablet = IconData(57726, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`tablets`](https://lucide.dev/icons/tablets) icon.
-  static const tablets = IconData(58306, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const tablets = IconData(58302, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`tag`](https://lucide.dev/icons/tag) icon.
   static const tag = IconData(57727, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`tags`](https://lucide.dev/icons/tags) icon.
-  static const tags = IconData(58208, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const tags = IconData(58204, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`tally-1`](https://lucide.dev/icons/tally-1) icon.
-  static const tally1 = IconData(58586, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const tally1 = IconData(58582, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`tally-2`](https://lucide.dev/icons/tally-2) icon.
-  static const tally2 = IconData(58587, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const tally2 = IconData(58583, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`tally-3`](https://lucide.dev/icons/tally-3) icon.
-  static const tally3 = IconData(58588, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const tally3 = IconData(58584, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`tally-4`](https://lucide.dev/icons/tally-4) icon.
-  static const tally4 = IconData(58589, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const tally4 = IconData(58585, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`tally-5`](https://lucide.dev/icons/tally-5) icon.
-  static const tally5 = IconData(58590, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const tally5 = IconData(58586, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`tangent`](https://lucide.dev/icons/tangent) icon.
-  static const tangent = IconData(58674, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const tangent = IconData(58670, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`target`](https://lucide.dev/icons/target) icon.
   static const target = IconData(57728, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`telescope`](https://lucide.dev/icons/telescope) icon.
-  static const telescope = IconData(58825, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const telescope = IconData(58821, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`tent-tree`](https://lucide.dev/icons/tent-tree) icon.
-  static const tentTree = IconData(58687, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const tentTree = IconData(58683, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`tent`](https://lucide.dev/icons/tent) icon.
   static const tent = IconData(57895, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -4571,13 +4646,13 @@ class FIcons {
   static const terminal = IconData(57729, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`test-tube-diagonal`](https://lucide.dev/icons/test-tube-diagonal) icon.
-  static const testTubeDiagonal = IconData(58378, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const testTubeDiagonal = IconData(58374, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`test-tube`](https://lucide.dev/icons/test-tube) icon.
-  static const testTube = IconData(58377, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const testTube = IconData(58373, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`test-tubes`](https://lucide.dev/icons/test-tubes) icon.
-  static const testTubes = IconData(58379, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const testTubes = IconData(58375, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`text-align-center`](https://lucide.dev/icons/text-align-center) icon.
   static const textAlignCenter = IconData(57730, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -4598,22 +4673,22 @@ class FIcons {
   static const textCursor = IconData(57956, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`text-initial`](https://lucide.dev/icons/text-initial) icon.
-  static const textInitial = IconData(58889, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const textInitial = IconData(58885, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`text-quote`](https://lucide.dev/icons/text-quote) icon.
-  static const textQuote = IconData(58530, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const textQuote = IconData(58526, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`text-search`](https://lucide.dev/icons/text-search) icon.
-  static const textSearch = IconData(58801, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const textSearch = IconData(58797, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`text-select`](https://lucide.dev/icons/text-select) icon.
-  static const textSelect = IconData(58338, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const textSelect = IconData(58334, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`text-wrap`](https://lucide.dev/icons/text-wrap) icon.
   static const textWrap = IconData(57928, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`theater`](https://lucide.dev/icons/theater) icon.
-  static const theater = IconData(58662, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const theater = IconData(58658, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`thermometer-snowflake`](https://lucide.dev/icons/thermometer-snowflake) icon.
   static const thermometerSnowflake = IconData(57735, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -4631,31 +4706,31 @@ class FIcons {
   static const thumbsUp = IconData(57738, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`ticket-check`](https://lucide.dev/icons/ticket-check) icon.
-  static const ticketCheck = IconData(58802, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const ticketCheck = IconData(58798, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`ticket-minus`](https://lucide.dev/icons/ticket-minus) icon.
-  static const ticketMinus = IconData(58803, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const ticketMinus = IconData(58799, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`ticket-percent`](https://lucide.dev/icons/ticket-percent) icon.
-  static const ticketPercent = IconData(58804, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const ticketPercent = IconData(58800, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`ticket-plus`](https://lucide.dev/icons/ticket-plus) icon.
-  static const ticketPlus = IconData(58805, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const ticketPlus = IconData(58801, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`ticket-slash`](https://lucide.dev/icons/ticket-slash) icon.
-  static const ticketSlash = IconData(58806, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const ticketSlash = IconData(58802, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`ticket-x`](https://lucide.dev/icons/ticket-x) icon.
-  static const ticketX = IconData(58807, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const ticketX = IconData(58803, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`ticket`](https://lucide.dev/icons/ticket) icon.
   static const ticket = IconData(57871, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`tickets-plane`](https://lucide.dev/icons/tickets-plane) icon.
-  static const ticketsPlane = IconData(58919, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const ticketsPlane = IconData(58915, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`tickets`](https://lucide.dev/icons/tickets) icon.
-  static const tickets = IconData(58918, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const tickets = IconData(58914, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`timer-off`](https://lucide.dev/icons/timer-off) icon.
   static const timerOff = IconData(57929, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -4673,49 +4748,52 @@ class FIcons {
   static const toggleRight = IconData(57740, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`toilet`](https://lucide.dev/icons/toilet) icon.
-  static const toilet = IconData(58937, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const toilet = IconData(58933, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`tool-case`](https://lucide.dev/icons/tool-case) icon.
-  static const toolCase = IconData(59009, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const toolCase = IconData(59005, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+
+  /// A [`toolbox`](https://lucide.dev/icons/toolbox) icon.
+  static const toolbox = IconData(59065, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`tornado`](https://lucide.dev/icons/tornado) icon.
   static const tornado = IconData(57880, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`torus`](https://lucide.dev/icons/torus) icon.
-  static const torus = IconData(58675, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const torus = IconData(58671, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`touchpad-off`](https://lucide.dev/icons/touchpad-off) icon.
-  static const touchpadOff = IconData(58446, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const touchpadOff = IconData(58442, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`touchpad`](https://lucide.dev/icons/touchpad) icon.
-  static const touchpad = IconData(58445, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const touchpad = IconData(58441, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`tower-control`](https://lucide.dev/icons/tower-control) icon.
-  static const towerControl = IconData(58304, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const towerControl = IconData(58300, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`toy-brick`](https://lucide.dev/icons/toy-brick) icon.
-  static const toyBrick = IconData(58187, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const toyBrick = IconData(58183, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`tractor`](https://lucide.dev/icons/tractor) icon.
-  static const tractor = IconData(58632, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const tractor = IconData(58628, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`traffic-cone`](https://lucide.dev/icons/traffic-cone) icon.
-  static const trafficCone = IconData(58633, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const trafficCone = IconData(58629, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`train-front-tunnel`](https://lucide.dev/icons/train-front-tunnel) icon.
-  static const trainFrontTunnel = IconData(58635, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const trainFrontTunnel = IconData(58631, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`train-front`](https://lucide.dev/icons/train-front) icon.
-  static const trainFront = IconData(58634, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const trainFront = IconData(58630, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`train-track`](https://lucide.dev/icons/train-track) icon.
-  static const trainTrack = IconData(58636, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const trainTrack = IconData(58632, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`tram-front`](https://lucide.dev/icons/tram-front) icon.
   static const tramFront = IconData(58025, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`transgender`](https://lucide.dev/icons/transgender) icon.
-  static const transgender = IconData(58952, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const transgender = IconData(58948, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`trash-2`](https://lucide.dev/icons/trash-2) icon.
   static const trash2 = IconData(57742, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -4742,7 +4820,7 @@ class FIcons {
   static const trendingDown = IconData(57744, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`trending-up-down`](https://lucide.dev/icons/trending-up-down) icon.
-  static const trendingUpDown = IconData(58921, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const trendingUpDown = IconData(58917, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`trending-up`](https://lucide.dev/icons/trending-up) icon.
   static const trendingUp = IconData(57745, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -4751,34 +4829,34 @@ class FIcons {
   static const triangleAlert = IconData(57747, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`triangle-dashed`](https://lucide.dev/icons/triangle-dashed) icon.
-  static const triangleDashed = IconData(58945, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const triangleDashed = IconData(58941, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`triangle-right`](https://lucide.dev/icons/triangle-right) icon.
-  static const triangleRight = IconData(58609, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const triangleRight = IconData(58605, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`triangle`](https://lucide.dev/icons/triangle) icon.
   static const triangle = IconData(57746, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`trophy`](https://lucide.dev/icons/trophy) icon.
-  static const trophy = IconData(58231, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const trophy = IconData(58227, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`truck-electric`](https://lucide.dev/icons/truck-electric) icon.
-  static const truckElectric = IconData(58979, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const truckElectric = IconData(58975, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`truck`](https://lucide.dev/icons/truck) icon.
   static const truck = IconData(57748, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`turkish-lira`](https://lucide.dev/icons/turkish-lira) icon.
-  static const turkishLira = IconData(59012, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const turkishLira = IconData(59008, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`turntable`](https://lucide.dev/icons/turntable) icon.
-  static const turntable = IconData(59024, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const turntable = IconData(59020, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`turtle`](https://lucide.dev/icons/turtle) icon.
-  static const turtle = IconData(58621, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const turtle = IconData(58617, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`tv-minimal-play`](https://lucide.dev/icons/tv-minimal-play) icon.
-  static const tvMinimalPlay = IconData(58864, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const tvMinimalPlay = IconData(58860, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`tv-minimal`](https://lucide.dev/icons/tv-minimal) icon.
   static const tvMinimal = IconData(57859, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -4793,13 +4871,13 @@ class FIcons {
   static const twitter = IconData(57751, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`type-outline`](https://lucide.dev/icons/type-outline) icon.
-  static const typeOutline = IconData(58886, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const typeOutline = IconData(58882, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`type`](https://lucide.dev/icons/type) icon.
   static const type = IconData(57752, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`umbrella-off`](https://lucide.dev/icons/umbrella-off) icon.
-  static const umbrellaOff = IconData(58695, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const umbrellaOff = IconData(58691, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`umbrella`](https://lucide.dev/icons/umbrella) icon.
   static const umbrella = IconData(57753, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -4811,22 +4889,22 @@ class FIcons {
   static const undo2 = IconData(58017, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`undo-dot`](https://lucide.dev/icons/undo-dot) icon.
-  static const undoDot = IconData(58453, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const undoDot = IconData(58449, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`undo`](https://lucide.dev/icons/undo) icon.
   static const undo = IconData(57755, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`unfold-horizontal`](https://lucide.dev/icons/unfold-horizontal) icon.
-  static const unfoldHorizontal = IconData(58433, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const unfoldHorizontal = IconData(58429, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`unfold-vertical`](https://lucide.dev/icons/unfold-vertical) icon.
-  static const unfoldVertical = IconData(58434, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const unfoldVertical = IconData(58430, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`ungroup`](https://lucide.dev/icons/ungroup) icon.
-  static const ungroup = IconData(58475, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const ungroup = IconData(58471, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`university`](https://lucide.dev/icons/university) icon.
-  static const university = IconData(58345, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const university = IconData(58341, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`unlink-2`](https://lucide.dev/icons/unlink-2) icon.
   static const unlink2 = IconData(57757, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -4835,61 +4913,61 @@ class FIcons {
   static const unlink = IconData(57756, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`unplug`](https://lucide.dev/icons/unplug) icon.
-  static const unplug = IconData(58465, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const unplug = IconData(58461, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`upload`](https://lucide.dev/icons/upload) icon.
   static const upload = IconData(57758, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`usb`](https://lucide.dev/icons/usb) icon.
-  static const usb = IconData(58202, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const usb = IconData(58198, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`user-check`](https://lucide.dev/icons/user-check) icon.
   static const userCheck = IconData(57760, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`user-cog`](https://lucide.dev/icons/user-cog) icon.
-  static const userCog = IconData(58182, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const userCog = IconData(58178, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`user-lock`](https://lucide.dev/icons/user-lock) icon.
-  static const userLock = IconData(58980, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const userLock = IconData(58976, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`user-minus`](https://lucide.dev/icons/user-minus) icon.
   static const userMinus = IconData(57761, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`user-pen`](https://lucide.dev/icons/user-pen) icon.
-  static const userPen = IconData(58880, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const userPen = IconData(58876, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`user-plus`](https://lucide.dev/icons/user-plus) icon.
   static const userPlus = IconData(57762, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`user-round-check`](https://lucide.dev/icons/user-round-check) icon.
-  static const userRoundCheck = IconData(58477, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const userRoundCheck = IconData(58473, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`user-round-cog`](https://lucide.dev/icons/user-round-cog) icon.
-  static const userRoundCog = IconData(58478, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const userRoundCog = IconData(58474, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`user-round-minus`](https://lucide.dev/icons/user-round-minus) icon.
-  static const userRoundMinus = IconData(58479, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const userRoundMinus = IconData(58475, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`user-round-pen`](https://lucide.dev/icons/user-round-pen) icon.
-  static const userRoundPen = IconData(58881, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const userRoundPen = IconData(58877, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`user-round-plus`](https://lucide.dev/icons/user-round-plus) icon.
-  static const userRoundPlus = IconData(58480, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const userRoundPlus = IconData(58476, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`user-round-search`](https://lucide.dev/icons/user-round-search) icon.
-  static const userRoundSearch = IconData(58748, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const userRoundSearch = IconData(58744, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`user-round-x`](https://lucide.dev/icons/user-round-x) icon.
-  static const userRoundX = IconData(58481, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const userRoundX = IconData(58477, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`user-round`](https://lucide.dev/icons/user-round) icon.
-  static const userRound = IconData(58476, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const userRound = IconData(58472, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`user-search`](https://lucide.dev/icons/user-search) icon.
-  static const userSearch = IconData(58749, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const userSearch = IconData(58745, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`user-star`](https://lucide.dev/icons/user-star) icon.
-  static const userStar = IconData(59019, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const userStar = IconData(59015, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`user-x`](https://lucide.dev/icons/user-x) icon.
   static const userX = IconData(57763, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -4898,7 +4976,7 @@ class FIcons {
   static const user = IconData(57759, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`users-round`](https://lucide.dev/icons/users-round) icon.
-  static const usersRound = IconData(58482, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const usersRound = IconData(58478, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`users`](https://lucide.dev/icons/users) icon.
   static const users = IconData(57764, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -4910,28 +4988,31 @@ class FIcons {
   static const utensils = IconData(58102, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`utility-pole`](https://lucide.dev/icons/utility-pole) icon.
-  static const utilityPole = IconData(58310, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const utilityPole = IconData(58306, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+
+  /// A [`van`](https://lucide.dev/icons/van) icon.
+  static const van = IconData(59053, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`variable`](https://lucide.dev/icons/variable) icon.
-  static const variable = IconData(58487, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const variable = IconData(58483, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`vault`](https://lucide.dev/icons/vault) icon.
-  static const vault = IconData(58771, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const vault = IconData(58767, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`vector-square`](https://lucide.dev/icons/vector-square) icon.
-  static const vectorSquare = IconData(59008, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const vectorSquare = IconData(59004, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`vegan`](https://lucide.dev/icons/vegan) icon.
-  static const vegan = IconData(58273, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const vegan = IconData(58269, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`venetian-mask`](https://lucide.dev/icons/venetian-mask) icon.
   static const venetianMask = IconData(58026, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`venus-and-mars`](https://lucide.dev/icons/venus-and-mars) icon.
-  static const venusAndMars = IconData(58954, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const venusAndMars = IconData(58950, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`venus`](https://lucide.dev/icons/venus) icon.
-  static const venus = IconData(58953, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const venus = IconData(58949, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`vibrate-off`](https://lucide.dev/icons/vibrate-off) icon.
   static const vibrateOff = IconData(58013, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -4946,7 +5027,7 @@ class FIcons {
   static const video = IconData(57765, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`videotape`](https://lucide.dev/icons/videotape) icon.
-  static const videotape = IconData(58575, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const videotape = IconData(58571, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`view`](https://lucide.dev/icons/view) icon.
   static const view = IconData(57767, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -4955,7 +5036,7 @@ class FIcons {
   static const voicemail = IconData(57768, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`volleyball`](https://lucide.dev/icons/volleyball) icon.
-  static const volleyball = IconData(58931, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const volleyball = IconData(58927, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`volume-1`](https://lucide.dev/icons/volume-1) icon.
   static const volume1 = IconData(57770, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -4964,7 +5045,7 @@ class FIcons {
   static const volume2 = IconData(57771, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`volume-off`](https://lucide.dev/icons/volume-off) icon.
-  static const volumeOff = IconData(58922, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const volumeOff = IconData(58918, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`volume-x`](https://lucide.dev/icons/volume-x) icon.
   static const volumeX = IconData(57772, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -4973,106 +5054,115 @@ class FIcons {
   static const volume = IconData(57769, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`vote`](https://lucide.dev/icons/vote) icon.
-  static const vote = IconData(58289, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const vote = IconData(58285, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`wallet-cards`](https://lucide.dev/icons/wallet-cards) icon.
-  static const walletCards = IconData(58576, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const walletCards = IconData(58572, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`wallet-minimal`](https://lucide.dev/icons/wallet-minimal) icon.
-  static const walletMinimal = IconData(58577, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const walletMinimal = IconData(58573, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`wallet`](https://lucide.dev/icons/wallet) icon.
   static const wallet = IconData(57860, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`wallpaper`](https://lucide.dev/icons/wallpaper) icon.
-  static const wallpaper = IconData(58447, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const wallpaper = IconData(58443, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`wand-sparkles`](https://lucide.dev/icons/wand-sparkles) icon.
-  static const wandSparkles = IconData(58203, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const wandSparkles = IconData(58199, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`wand`](https://lucide.dev/icons/wand) icon.
   static const wand = IconData(57926, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`warehouse`](https://lucide.dev/icons/warehouse) icon.
-  static const warehouse = IconData(58346, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const warehouse = IconData(58342, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`washing-machine`](https://lucide.dev/icons/washing-machine) icon.
-  static const washingMachine = IconData(58772, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const washingMachine = IconData(58768, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`watch`](https://lucide.dev/icons/watch) icon.
   static const watch = IconData(57773, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
+  /// A [`waves-arrow-down`](https://lucide.dev/icons/waves-arrow-down) icon.
+  static const wavesArrowDown = IconData(59049, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+
+  /// A [`waves-arrow-up`](https://lucide.dev/icons/waves-arrow-up) icon.
+  static const wavesArrowUp = IconData(59050, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+
   /// A [`waves-ladder`](https://lucide.dev/icons/waves-ladder) icon.
-  static const wavesLadder = IconData(58943, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const wavesLadder = IconData(58939, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`waves`](https://lucide.dev/icons/waves) icon.
   static const waves = IconData(57987, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`waypoints`](https://lucide.dev/icons/waypoints) icon.
-  static const waypoints = IconData(58694, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const waypoints = IconData(58690, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`webcam`](https://lucide.dev/icons/webcam) icon.
   static const webcam = IconData(57861, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`webhook-off`](https://lucide.dev/icons/webhook-off) icon.
-  static const webhookOff = IconData(58811, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const webhookOff = IconData(58807, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`webhook`](https://lucide.dev/icons/webhook) icon.
-  static const webhook = IconData(58232, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const webhook = IconData(58228, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+
+  /// A [`weight-tilde`](https://lucide.dev/icons/weight-tilde) icon.
+  static const weightTilde = IconData(59054, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`weight`](https://lucide.dev/icons/weight) icon.
-  static const weight = IconData(58676, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const weight = IconData(58672, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`wheat-off`](https://lucide.dev/icons/wheat-off) icon.
-  static const wheatOff = IconData(58275, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const wheatOff = IconData(58271, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`wheat`](https://lucide.dev/icons/wheat) icon.
-  static const wheat = IconData(58274, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const wheat = IconData(58270, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`whole-word`](https://lucide.dev/icons/whole-word) icon.
-  static const wholeWord = IconData(58339, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const wholeWord = IconData(58335, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`wifi-cog`](https://lucide.dev/icons/wifi-cog) icon.
-  static const wifiCog = IconData(59000, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const wifiCog = IconData(58996, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`wifi-high`](https://lucide.dev/icons/wifi-high) icon.
-  static const wifiHigh = IconData(58875, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const wifiHigh = IconData(58871, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`wifi-low`](https://lucide.dev/icons/wifi-low) icon.
-  static const wifiLow = IconData(58876, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const wifiLow = IconData(58872, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`wifi-off`](https://lucide.dev/icons/wifi-off) icon.
   static const wifiOff = IconData(57775, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`wifi-pen`](https://lucide.dev/icons/wifi-pen) icon.
-  static const wifiPen = IconData(58983, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const wifiPen = IconData(58979, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`wifi-sync`](https://lucide.dev/icons/wifi-sync) icon.
-  static const wifiSync = IconData(59013, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const wifiSync = IconData(59009, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`wifi-zero`](https://lucide.dev/icons/wifi-zero) icon.
-  static const wifiZero = IconData(58877, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const wifiZero = IconData(58873, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`wifi`](https://lucide.dev/icons/wifi) icon.
   static const wifi = IconData(57774, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`wind-arrow-down`](https://lucide.dev/icons/wind-arrow-down) icon.
-  static const windArrowDown = IconData(58933, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const windArrowDown = IconData(58929, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`wind`](https://lucide.dev/icons/wind) icon.
   static const wind = IconData(57776, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`wine-off`](https://lucide.dev/icons/wine-off) icon.
-  static const wineOff = IconData(58276, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const wineOff = IconData(58272, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`wine`](https://lucide.dev/icons/wine) icon.
   static const wine = IconData(58104, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`workflow`](https://lucide.dev/icons/workflow) icon.
-  static const workflow = IconData(58409, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const workflow = IconData(58405, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`worm`](https://lucide.dev/icons/worm) icon.
-  static const worm = IconData(58846, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const worm = IconData(58842, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// A [`wrench`](https://lucide.dev/icons/wrench) icon.
   static const wrench = IconData(57777, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
