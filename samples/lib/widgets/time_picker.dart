@@ -11,7 +11,7 @@ import 'package:forui_samples/sample.dart';
 class TimePickerPage extends Sample {
   final bool hour24;
 
-  TimePickerPage({@queryParam this.hour24 = false, @queryParam super.theme, super.maxWidth = 200});
+  TimePickerPage({@queryParam this.hour24 = false, @queryParam super.theme}): super(maxWidth: 200);
 
   @override
   Widget sample(BuildContext context) => FTimePicker(
@@ -22,7 +22,7 @@ class TimePickerPage extends Sample {
 
 @RoutePage()
 class IntervalTimePickerPage extends Sample {
-  IntervalTimePickerPage({@queryParam super.theme, super.maxWidth = 200});
+  IntervalTimePickerPage({@queryParam super.theme}): super(maxWidth: 200);
 
   @override
   Widget sample(BuildContext context) =>
@@ -31,7 +31,7 @@ class IntervalTimePickerPage extends Sample {
 
 @RoutePage()
 class AnimatedTimePickerPage extends StatefulSample {
-  AnimatedTimePickerPage({@queryParam super.theme, super.maxWidth = 200});
+  AnimatedTimePickerPage({@queryParam super.theme}): super(maxWidth: 200);
 
   @override
   State<AnimatedTimePickerPage> createState() => _AnimatedTimePickerPageState();

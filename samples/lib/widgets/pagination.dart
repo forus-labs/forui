@@ -9,7 +9,7 @@ import 'package:forui_samples/sample.dart';
 class PaginationPage extends Sample {
   final String controller;
 
-  PaginationPage({@queryParam super.theme, @queryParam super.maxWidth = 600, @queryParam this.controller = 'default'});
+  PaginationPage({@queryParam super.theme, @queryParam this.controller = 'default'}) : super(maxWidth: 600);
 
   @override
   Widget sample(BuildContext context) => FPagination(
@@ -23,7 +23,7 @@ class PaginationPage extends Sample {
 
 @RoutePage()
 class PaginationCustomIconPage extends StatefulSample {
-  PaginationCustomIconPage({@queryParam super.theme, @queryParam super.maxWidth = 400});
+  PaginationCustomIconPage({@queryParam super.theme}): super(maxWidth: 400);
 
   @override
   State<PaginationCustomIconPage> createState() => _PaginationCustomIconPageState();
@@ -71,7 +71,7 @@ class _PaginationCustomIconPageState extends StatefulSampleState<PaginationCusto
 
 @RoutePage()
 class PaginationWithViewPage extends StatefulSample {
-  PaginationWithViewPage({@queryParam super.theme, @queryParam super.maxWidth = 400});
+  PaginationWithViewPage({@queryParam super.theme}): super(maxWidth: 400);
 
   @override
   State<PaginationWithViewPage> createState() => _PaginationWithViewPageState();

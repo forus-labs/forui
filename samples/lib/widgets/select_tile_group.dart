@@ -15,12 +15,13 @@ enum Notification { all, direct, nothing }
 class SelectTileGroupPage extends Sample {
   final FItemDivider divider;
 
-  SelectTileGroupPage({@queryParam super.theme, @queryParam String divider = 'indented', super.maxWidth = 400})
+  SelectTileGroupPage({@queryParam super.theme, @queryParam String divider = 'indented'})
     : divider = switch (divider) {
         'indented' => .indented,
         'none' => .none,
         _ => .full,
-      };
+      },
+      super(maxWidth: 400);
 
   @override
   Widget sample(BuildContext _) => FSelectTileGroup<Sidebar>(
@@ -38,7 +39,7 @@ class SelectTileGroupPage extends Sample {
 
 @RoutePage()
 class ScrollableSelectTileGroupPage extends Sample {
-  ScrollableSelectTileGroupPage({@queryParam super.theme, super.maxWidth = 400});
+  ScrollableSelectTileGroupPage({@queryParam super.theme}) : super(maxWidth: 400);
 
   @override
   Widget sample(BuildContext _) => FSelectTileGroup<Sidebar>(
@@ -56,7 +57,7 @@ class ScrollableSelectTileGroupPage extends Sample {
 
 @RoutePage()
 class LazySelectTileGroupPage extends Sample {
-  LazySelectTileGroupPage({@queryParam super.theme, super.maxWidth = 400});
+  LazySelectTileGroupPage({@queryParam super.theme}) : super(maxWidth: 400);
 
   @override
   Widget sample(BuildContext _) => FSelectTileGroup.builder(
@@ -114,7 +115,6 @@ class _SelectTileGroupMultiValuePageState extends StatefulSampleState<SelectTile
   );
 }
 
-// TODO: Replace with FSelectControl.managedRadio(...).
 @RoutePage()
 class SelectTileGroupRadioPage extends StatefulSample {
   SelectTileGroupRadioPage({@queryParam super.theme});
@@ -125,13 +125,6 @@ class SelectTileGroupRadioPage extends StatefulSample {
 
 class _SelectTileGroupRadioPageState extends StatefulSampleState<SelectTileGroupRadioPage> {
   final _key = GlobalKey<FormState>();
-  final _controller = FMultiValueNotifier<Notification>.radio();
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
 
   @override
   Widget sample(BuildContext _) => Form(
@@ -142,7 +135,7 @@ class _SelectTileGroupRadioPageState extends StatefulSampleState<SelectTileGroup
       spacing: 20,
       children: [
         FSelectTileGroup<Notification>(
-          control: .managed(controller: _controller),
+          control: const .managedRadio(),
           label: const Text('Notifications'),
           description: const Text('Select the notifications.'),
           validator: (values) => values?.isEmpty ?? true ? 'Please select a value.' : null,
@@ -169,27 +162,18 @@ class _SelectTileGroupRadioPageState extends StatefulSampleState<SelectTileGroup
   );
 }
 
-// TODO: Replace with FSelectControl.managedRadio(...).
 @RoutePage()
 class SelectTileGroupSuffixPage extends StatefulSample {
-  SelectTileGroupSuffixPage({@queryParam super.theme, super.maxWidth = 300});
+  SelectTileGroupSuffixPage({@queryParam super.theme}) : super(maxWidth: 300);
 
   @override
   State<SelectTileGroupSuffixPage> createState() => _SelectTileGroupSuffixPageState();
 }
 
 class _SelectTileGroupSuffixPageState extends StatefulSampleState<SelectTileGroupSuffixPage> {
-  final _controller = FMultiValueNotifier<String>.radio();
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
   @override
   Widget sample(BuildContext _) => FSelectTileGroup(
-    control: .managed(controller: _controller),
+    control: const .managedRadio(),
     label: const Text('Settings'),
     children: const [
       FSelectTile.suffix(prefix: Icon(FIcons.list), title: Text('List View'), value: 'List'),

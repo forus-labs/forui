@@ -9,8 +9,9 @@ import 'package:forui_samples/sample.dart';
 class VerticalLabelPage extends Sample {
   final Set<WidgetState> states;
 
-  VerticalLabelPage({@queryParam super.theme, @queryParam bool enabled = true, super.maxWidth = 320})
-    : states = {if (!enabled) .disabled};
+  VerticalLabelPage({@queryParam super.theme, @queryParam bool enabled = true})
+    : states = {if (!enabled) .disabled},
+      super(maxWidth: 320);
 
   @override
   Widget sample(BuildContext _) => FLabel(
@@ -30,8 +31,9 @@ class VerticalLabelPage extends Sample {
 class HorizontalLabelPage extends Sample {
   final Set<WidgetState> states;
 
-  HorizontalLabelPage({@queryParam super.theme, @queryParam bool enabled = true, super.maxWidth = 320})
-    : states = {if (!enabled) .disabled};
+  HorizontalLabelPage({@queryParam super.theme, @queryParam bool enabled = true})
+    : states = {if (!enabled) .disabled},
+      super(maxWidth: 320);
 
   @override
   Widget sample(BuildContext _) => FLabel(
@@ -42,7 +44,7 @@ class HorizontalLabelPage extends Sample {
     states: states,
     child: const DecoratedBox(
       decoration: BoxDecoration(borderRadius: .all(.circular(5)), color: Colors.grey),
-      child: SizedBox(width: 16, height: 16),
+      child: SizedBox.square(dimension: 16),
     ),
   );
 }

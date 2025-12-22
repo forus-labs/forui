@@ -25,7 +25,7 @@ const fruits = [
 
 @RoutePage()
 class MultiSelectPage extends Sample {
-  MultiSelectPage({@queryParam super.theme, super.alignment = Alignment.topCenter, super.top = 15});
+  MultiSelectPage({@queryParam super.theme}): super(alignment: .topCenter, top: 15);
 
   @override
   Widget sample(BuildContext _) => FMultiSelect<String>.rich(
@@ -37,7 +37,7 @@ class MultiSelectPage extends Sample {
 
 @RoutePage()
 class DetailedMultiSelectPage extends Sample {
-  DetailedMultiSelectPage({@queryParam super.theme, super.alignment = Alignment.topCenter, super.top = 15});
+  DetailedMultiSelectPage({@queryParam super.theme}): super(alignment: .topCenter, top: 15);
 
   @override
   Widget sample(BuildContext _) => FMultiSelect<String>.rich(
@@ -68,7 +68,7 @@ class DetailedMultiSelectPage extends Sample {
 
 @RoutePage()
 class SectionMultiSelectPage extends Sample {
-  SectionMultiSelectPage({@queryParam super.theme, super.alignment = Alignment.topCenter, super.top = 15});
+  SectionMultiSelectPage({@queryParam super.theme}): super(alignment: .topCenter, top: 15);
 
   @override
   Widget sample(BuildContext _) => FMultiSelect<String>.rich(
@@ -148,7 +148,7 @@ class SectionMultiSelectPage extends Sample {
 
 @RoutePage()
 class DividerMultiSelectPage extends Sample {
-  DividerMultiSelectPage({@queryParam super.theme, super.alignment = Alignment.topCenter, super.top = 15});
+  DividerMultiSelectPage({@queryParam super.theme}): super(alignment: .topCenter, top: 15);
 
   @override
   Widget sample(BuildContext _) => FMultiSelect<String>.rich(
@@ -177,7 +177,7 @@ class DividerMultiSelectPage extends Sample {
 
 @RoutePage()
 class SyncMultiSelectPage extends Sample {
-  SyncMultiSelectPage({@queryParam super.theme, super.alignment = Alignment.topCenter, super.top = 15});
+  SyncMultiSelectPage({@queryParam super.theme}): super(alignment: .topCenter, top: 15);
 
   @override
   Widget sample(BuildContext _) => FMultiSelect<String>.searchBuilder(
@@ -190,7 +190,7 @@ class SyncMultiSelectPage extends Sample {
 
 @RoutePage()
 class AsyncMultiSelectPage extends Sample {
-  AsyncMultiSelectPage({@queryParam super.theme, super.alignment = Alignment.topCenter, super.top = 15});
+  AsyncMultiSelectPage({@queryParam super.theme}): super(alignment: .topCenter, top: 15);
 
   @override
   Widget sample(BuildContext _) => FMultiSelect<String>.searchBuilder(
@@ -206,7 +206,7 @@ class AsyncMultiSelectPage extends Sample {
 
 @RoutePage()
 class AsyncLoadingMultiSelectPage extends Sample {
-  AsyncLoadingMultiSelectPage({@queryParam super.theme, super.alignment = Alignment.topCenter, super.top = 15});
+  AsyncLoadingMultiSelectPage({@queryParam super.theme}): super(alignment: .topCenter, top: 15);
 
   @override
   Widget sample(BuildContext _) => FMultiSelect<String>.searchBuilder(
@@ -226,7 +226,7 @@ class AsyncLoadingMultiSelectPage extends Sample {
 
 @RoutePage()
 class AsyncErrorMultiSelectPage extends Sample {
-  AsyncErrorMultiSelectPage({@queryParam super.theme, super.alignment = Alignment.topCenter, super.top = 15});
+  AsyncErrorMultiSelectPage({@queryParam super.theme}): super(alignment: .topCenter, top: 15);
 
   @override
   Widget sample(BuildContext _) => FMultiSelect<String>.searchBuilder(
@@ -249,7 +249,7 @@ class AsyncErrorMultiSelectPage extends Sample {
 
 @RoutePage()
 class ClearableMultiSelectPage extends Sample {
-  ClearableMultiSelectPage({@queryParam super.theme, super.alignment = Alignment.topCenter, super.top = 15});
+  ClearableMultiSelectPage({@queryParam super.theme}): super(alignment: .topCenter, top: 15);
 
   @override
   Widget sample(BuildContext _) => FMultiSelect<String>.rich(
@@ -269,7 +269,7 @@ class FormatMultiSelectPage extends Sample {
     (firstName: 'Peter', lastName: 'Parker'),
   ];
 
-  FormatMultiSelectPage({@queryParam super.theme, super.alignment = Alignment.topCenter, super.top = 15});
+  FormatMultiSelectPage({@queryParam super.theme}): super(alignment: .topCenter, top: 15);
 
   @override
   Widget sample(BuildContext _) => FMultiSelect<({String firstName, String lastName})>.rich(
@@ -281,7 +281,7 @@ class FormatMultiSelectPage extends Sample {
 
 @RoutePage()
 class MinMaxMultiSelectPage extends Sample {
-  MinMaxMultiSelectPage({@queryParam super.theme, super.alignment = Alignment.topCenter, super.top = 15});
+  MinMaxMultiSelectPage({@queryParam super.theme}): super(alignment: .topCenter, top: 15);
 
   @override
   Widget sample(BuildContext context) => FMultiSelect<String>.rich(
@@ -294,7 +294,7 @@ class MinMaxMultiSelectPage extends Sample {
 
 @RoutePage()
 class ScrollHandlesMultiSelectPage extends Sample {
-  ScrollHandlesMultiSelectPage({@queryParam super.theme, super.alignment = Alignment.topCenter, super.top = 15});
+  ScrollHandlesMultiSelectPage({@queryParam super.theme}): super(alignment: .topCenter, top: 15);
 
   @override
   Widget sample(BuildContext _) => FMultiSelect<String>.rich(
@@ -307,7 +307,7 @@ class ScrollHandlesMultiSelectPage extends Sample {
 
 @RoutePage()
 class SortedMultiSelectPage extends Sample {
-  SortedMultiSelectPage({@queryParam super.theme, super.alignment = Alignment.topCenter, super.top = 15});
+  SortedMultiSelectPage({@queryParam super.theme}): super(alignment: .topCenter, top: 15);
 
   @override
   Widget sample(BuildContext _) => FMultiSelect<String>.rich(

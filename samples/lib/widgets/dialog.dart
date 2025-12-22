@@ -46,7 +46,7 @@ class DialogPage extends Sample {
 
 @RoutePage()
 class BlurredDialogPage extends Sample {
-  BlurredDialogPage({@queryParam super.theme, super.alignment = Alignment.topCenter, super.top = 10});
+  BlurredDialogPage({@queryParam super.theme}): super(alignment: .topCenter, top: 10);
 
   @override
   Widget sample(BuildContext context) => FButton(

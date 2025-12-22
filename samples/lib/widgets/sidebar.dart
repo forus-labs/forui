@@ -8,7 +8,7 @@ import 'package:forui_samples/sample.dart';
 
 @RoutePage()
 class SidebarPage extends Sample {
-  SidebarPage({@queryParam super.theme, super.maxWidth = 1000});
+  SidebarPage({@queryParam super.theme}): super(maxWidth: 1000);
 
   @override
   Widget sample(BuildContext context) => FScaffold(
@@ -148,102 +148,104 @@ class SidebarPage extends Sample {
 class SheetSidebarPage extends Sample {
   SheetSidebarPage({@queryParam super.theme});
 
-  Widget _sidebar(BuildContext context) => DecoratedBox(
-    decoration: BoxDecoration(color: context.theme.colors.background),
-    child: FSidebar(
-      style: (s) => s.copyWith(constraints: s.constraints.copyWith(minWidth: 300, maxWidth: 300)),
-      header: Padding(
-        padding: const .symmetric(horizontal: 16),
-        child: Column(
-          crossAxisAlignment: .start,
-          children: [
-            Padding(
-              padding: const .fromLTRB(16, 8, 16, 16),
-              child: SvgPicture.network(
-                theme.colors.brightness == .light
-                    ? 'https://forui.dev/light_logo.svg'
-                    : 'https://forui.dev/dark_logo.svg',
-                height: 24,
-                colorFilter: ColorFilter.mode(context.theme.colors.foreground, .srcIn),
-              ),
-            ),
-            FDivider(style: context.theme.dividerStyles.horizontalStyle.copyWith(padding: EdgeInsets.zero)),
-          ],
-        ),
-      ),
-      footer: Padding(
-        padding: const .symmetric(horizontal: 16),
-        child: FCard.raw(
-          child: Padding(
-            padding: const .symmetric(vertical: 12, horizontal: 16),
-            child: Row(
-              spacing: 10,
-              children: [
-                FAvatar.raw(child: Icon(FIcons.userRound, size: 18, color: context.theme.colors.mutedForeground)),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: .start,
-                    spacing: 2,
-                    children: [
-                      Text(
-                        'Dash',
-                        style: context.theme.typography.sm.copyWith(
-                          fontWeight: .bold,
-                          color: context.theme.colors.foreground,
-                        ),
-                        overflow: .ellipsis,
-                      ),
-                      Text(
-                        'dash@forui.dev',
-                        style: context.theme.typography.xs.copyWith(color: context.theme.colors.mutedForeground),
-                        overflow: .ellipsis,
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-      children: [
-        FSidebarGroup(
-          label: const Text('Overview'),
-          children: [
-            FSidebarItem(
-              icon: const Icon(FIcons.school),
-              label: const Text('Getting Started'),
-              initiallyExpanded: true,
-              onPress: () {},
-              children: [
-                FSidebarItem(label: const Text('Installation'), selected: true, onPress: () {}),
-                FSidebarItem(label: const Text('Themes'), onPress: () {}),
-                FSidebarItem(label: const Text('Typography'), onPress: () {}),
-              ],
-            ),
-            FSidebarItem(icon: const Icon(FIcons.code), label: const Text('API Reference'), onPress: () {}),
-            FSidebarItem(icon: const Icon(FIcons.box), label: const Text('Pub Dev'), onPress: () {}),
-          ],
-        ),
-        FSidebarGroup(
-          action: const Icon(FIcons.plus),
-          onActionPress: () {},
-          label: const Text('Widgets'),
-          children: [
-            FSidebarItem(icon: const Icon(FIcons.circleSlash), label: const Text('Divider'), onPress: () {}),
-            FSidebarItem(icon: const Icon(FIcons.scaling), label: const Text('Resizable'), onPress: () {}),
-            FSidebarItem(icon: const Icon(FIcons.layoutDashboard), label: const Text('Scaffold'), onPress: () {}),
-          ],
-        ),
-      ],
-    ),
-  );
-
   @override
   Widget sample(BuildContext context) => Center(
     child: FButton(
       child: const Text('Open Sidebar'),
-      onPress: () => showFSheet(context: context, side: .ltr, builder: _sidebar),
+      onPress: () => showFSheet(
+        context: context,
+        side: .ltr,
+        builder: (context) => DecoratedBox(
+          decoration: BoxDecoration(color: context.theme.colors.background),
+          child: FSidebar(
+            style: (s) => s.copyWith(constraints: s.constraints.copyWith(minWidth: 300, maxWidth: 300)),
+            header: Padding(
+              padding: const .symmetric(horizontal: 16),
+              child: Column(
+                crossAxisAlignment: .start,
+                children: [
+                  Padding(
+                    padding: const .fromLTRB(16, 8, 16, 16),
+                    child: SvgPicture.network(
+                      theme.colors.brightness == .light
+                          ? 'https://forui.dev/light_logo.svg'
+                          : 'https://forui.dev/dark_logo.svg',
+                      height: 24,
+                      colorFilter: ColorFilter.mode(context.theme.colors.foreground, .srcIn),
+                    ),
+                  ),
+                  FDivider(style: context.theme.dividerStyles.horizontalStyle.copyWith(padding: EdgeInsets.zero)),
+                ],
+              ),
+            ),
+            footer: Padding(
+              padding: const .symmetric(horizontal: 16),
+              child: FCard.raw(
+                child: Padding(
+                  padding: const .symmetric(vertical: 12, horizontal: 16),
+                  child: Row(
+                    spacing: 10,
+                    children: [
+                      FAvatar.raw(child: Icon(FIcons.userRound, size: 18, color: context.theme.colors.mutedForeground)),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: .start,
+                          spacing: 2,
+                          children: [
+                            Text(
+                              'Dash',
+                              style: context.theme.typography.sm.copyWith(
+                                fontWeight: .bold,
+                                color: context.theme.colors.foreground,
+                              ),
+                              overflow: .ellipsis,
+                            ),
+                            Text(
+                              'dash@forui.dev',
+                              style: context.theme.typography.xs.copyWith(color: context.theme.colors.mutedForeground),
+                              overflow: .ellipsis,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            children: [
+              FSidebarGroup(
+                label: const Text('Overview'),
+                children: [
+                  FSidebarItem(
+                    icon: const Icon(FIcons.school),
+                    label: const Text('Getting Started'),
+                    initiallyExpanded: true,
+                    onPress: () {},
+                    children: [
+                      FSidebarItem(label: const Text('Installation'), selected: true, onPress: () {}),
+                      FSidebarItem(label: const Text('Themes'), onPress: () {}),
+                      FSidebarItem(label: const Text('Typography'), onPress: () {}),
+                    ],
+                  ),
+                  FSidebarItem(icon: const Icon(FIcons.code), label: const Text('API Reference'), onPress: () {}),
+                  FSidebarItem(icon: const Icon(FIcons.box), label: const Text('Pub Dev'), onPress: () {}),
+                ],
+              ),
+              FSidebarGroup(
+                action: const Icon(FIcons.plus),
+                onActionPress: () {},
+                label: const Text('Widgets'),
+                children: [
+                  FSidebarItem(icon: const Icon(FIcons.circleSlash), label: const Text('Divider'), onPress: () {}),
+                  FSidebarItem(icon: const Icon(FIcons.scaling), label: const Text('Resizable'), onPress: () {}),
+                  FSidebarItem(icon: const Icon(FIcons.layoutDashboard), label: const Text('Scaffold'), onPress: () {}),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
     ),
   );
 }

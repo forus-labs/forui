@@ -59,7 +59,7 @@ class TooltipSliderPage extends Sample {
 
 @RoutePage()
 class MarksSliderPage extends Sample {
-  MarksSliderPage({@queryParam super.theme, super.top = 35});
+  MarksSliderPage({@queryParam super.theme}): super(top: 35);
 
   @override
   Widget sample(BuildContext context) => FSlider(

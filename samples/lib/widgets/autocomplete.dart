@@ -55,7 +55,7 @@ class AutocompletePage extends Sample {
 
 @RoutePage()
 class DetailedAutocompletePage extends Sample {
-  DetailedAutocompletePage({@queryParam super.theme, super.alignment = Alignment.topCenter, super.top = 20});
+  DetailedAutocompletePage({@queryParam super.theme}): super(alignment: .topCenter, top: 20);
 
   @override
   Widget sample(BuildContext _) => FAutocomplete.builder(
@@ -90,7 +90,7 @@ class DetailedAutocompletePage extends Sample {
 
 @RoutePage()
 class SectionAutocompletePage extends Sample {
-  SectionAutocompletePage({@queryParam super.theme, super.alignment = Alignment.topCenter, super.top = 20});
+  SectionAutocompletePage({@queryParam super.theme}): super(alignment: .topCenter, top: 20);
 
   @override
   Widget sample(BuildContext _) => FAutocomplete.builder(
@@ -108,7 +108,7 @@ class SectionAutocompletePage extends Sample {
 
 @RoutePage()
 class DividerAutocompletePage extends Sample {
-  DividerAutocompletePage({@queryParam super.theme, super.alignment = Alignment.topCenter, super.top = 20});
+  DividerAutocompletePage({@queryParam super.theme}): super(alignment: .topCenter, top: 20);
 
   @override
   Widget sample(BuildContext _) => FAutocomplete.builder(
@@ -133,7 +133,7 @@ class DividerAutocompletePage extends Sample {
 
 @RoutePage()
 class AsyncAutocompletePage extends Sample {
-  AsyncAutocompletePage({@queryParam super.theme, super.alignment = Alignment.topCenter, super.top = 20});
+  AsyncAutocompletePage({@queryParam super.theme}): super(alignment: .topCenter, top: 20);
 
   @override
   Widget sample(BuildContext _) => FAutocomplete.builder(
@@ -148,7 +148,7 @@ class AsyncAutocompletePage extends Sample {
 
 @RoutePage()
 class AsyncLoadingAutocompletePage extends Sample {
-  AsyncLoadingAutocompletePage({@queryParam super.theme, super.alignment = Alignment.topCenter, super.top = 20});
+  AsyncLoadingAutocompletePage({@queryParam super.theme}): super(alignment: .topCenter, top: 20);
 
   @override
   Widget sample(BuildContext _) => FAutocomplete.builder(
@@ -167,7 +167,7 @@ class AsyncLoadingAutocompletePage extends Sample {
 
 @RoutePage()
 class AsyncErrorAutocompletePage extends Sample {
-  AsyncErrorAutocompletePage({@queryParam super.theme, super.alignment = Alignment.topCenter, super.top = 20});
+  AsyncErrorAutocompletePage({@queryParam super.theme}): super(alignment: .topCenter, top: 20);
 
   @override
   Widget sample(BuildContext _) => FAutocomplete.builder(
@@ -186,7 +186,7 @@ class AsyncErrorAutocompletePage extends Sample {
 
 @RoutePage()
 class ClearableAutocompletePage extends Sample {
-  ClearableAutocompletePage({@queryParam super.theme, super.alignment = Alignment.topCenter, super.top = 20});
+  ClearableAutocompletePage({@queryParam super.theme}): super(alignment: .topCenter, top: 20);
 
   @override
   Widget sample(BuildContext _) =>
@@ -195,7 +195,7 @@ class ClearableAutocompletePage extends Sample {
 
 @RoutePage()
 class FormAutocompletePage extends StatefulSample {
-  FormAutocompletePage({@queryParam super.theme, super.alignment = Alignment.topCenter, super.top = 20});
+  FormAutocompletePage({@queryParam super.theme}): super(alignment: .topCenter, top: 20);
 
   @override
   State<FormAutocompletePage> createState() => _FormAutocompletePageState();
