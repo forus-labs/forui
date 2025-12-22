@@ -16,8 +16,7 @@ class CheckboxPage extends StatefulSample {
     @queryParam this.initialValue = false,
     @queryParam this.enabled = true,
     @queryParam this.error,
-    super.maxWidth = 320,
-  });
+  }): super(maxHeight: 320);
 
   @override
   State<CheckboxPage> createState() => _CheckboxPageState();

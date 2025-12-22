@@ -9,7 +9,7 @@ import 'package:forui_samples/sample.dart';
 class AccordionPage extends Sample {
   final int? max;
 
-  AccordionPage({@queryParam this.max, @queryParam super.theme, super.top = 20});
+  AccordionPage({@queryParam this.max, @queryParam super.theme}): super(top: 20);
 
   @override
   Widget sample(BuildContext _) => FAccordion(

@@ -7,7 +7,7 @@ import 'package:forui_samples/sample.dart';
 
 @RoutePage()
 class TextFormFieldPage extends StatefulSample {
-  TextFormFieldPage({@queryParam super.theme, super.top = 20});
+  TextFormFieldPage({@queryParam super.theme}): super(top: 20);
 
   @override
   State<TextFormFieldPage> createState() => _TextFormFieldPageState();

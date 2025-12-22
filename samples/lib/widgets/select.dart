@@ -25,7 +25,7 @@ const fruits = [
 
 @RoutePage()
 class SelectPage extends Sample {
-  SelectPage({@queryParam super.theme, super.alignment = Alignment.topCenter, super.top = 20});
+  SelectPage({@queryParam super.theme}) : super(alignment: .topCenter, top: 20);
 
   @override
   Widget sample(BuildContext context) => FSelect<String>.rich(
@@ -37,7 +37,7 @@ class SelectPage extends Sample {
 
 @RoutePage()
 class DetailedSelectPage extends Sample {
-  DetailedSelectPage({@queryParam super.theme, super.alignment = Alignment.topCenter, super.top = 20});
+  DetailedSelectPage({@queryParam super.theme}) : super(alignment: .topCenter, top: 20);
 
   @override
   Widget sample(BuildContext context) => FSelect<String>.rich(
@@ -68,7 +68,7 @@ class DetailedSelectPage extends Sample {
 
 @RoutePage()
 class SectionSelectPage extends Sample {
-  SectionSelectPage({@queryParam super.theme, super.alignment = Alignment.topCenter, super.top = 20});
+  SectionSelectPage({@queryParam super.theme}) : super(alignment: .topCenter, top: 20);
 
   @override
   Widget sample(BuildContext context) => FSelect<String>.rich(
@@ -148,7 +148,7 @@ class SectionSelectPage extends Sample {
 
 @RoutePage()
 class DividerSelectPage extends Sample {
-  DividerSelectPage({@queryParam super.theme, super.alignment = Alignment.topCenter, super.top = 20});
+  DividerSelectPage({@queryParam super.theme}) : super(alignment: .topCenter, top: 20);
 
   @override
   Widget sample(BuildContext context) => FSelect<String>.rich(
@@ -177,7 +177,7 @@ class DividerSelectPage extends Sample {
 
 @RoutePage()
 class SyncSelectPage extends Sample {
-  SyncSelectPage({@queryParam super.theme, super.alignment = Alignment.topCenter, super.top = 20});
+  SyncSelectPage({@queryParam super.theme}) : super(alignment: .topCenter, top: 20);
 
   @override
   Widget sample(BuildContext context) => FSelect<String>.searchBuilder(
@@ -190,7 +190,7 @@ class SyncSelectPage extends Sample {
 
 @RoutePage()
 class AsyncSelectPage extends Sample {
-  AsyncSelectPage({@queryParam super.theme, super.alignment = Alignment.topCenter, super.top = 20});
+  AsyncSelectPage({@queryParam super.theme}) : super(alignment: .topCenter, top: 20);
 
   @override
   Widget sample(BuildContext context) => FSelect<String>.searchBuilder(
@@ -206,7 +206,7 @@ class AsyncSelectPage extends Sample {
 
 @RoutePage()
 class AsyncLoadingSelectPage extends Sample {
-  AsyncLoadingSelectPage({@queryParam super.theme, super.alignment = Alignment.topCenter, super.top = 20});
+  AsyncLoadingSelectPage({@queryParam super.theme}) : super(alignment: .topCenter, top: 20);
 
   @override
   Widget sample(BuildContext context) => FSelect<String>.searchBuilder(
@@ -226,7 +226,7 @@ class AsyncLoadingSelectPage extends Sample {
 
 @RoutePage()
 class AsyncErrorSelectPage extends Sample {
-  AsyncErrorSelectPage({@queryParam super.theme, super.alignment = Alignment.topCenter, super.top = 20});
+  AsyncErrorSelectPage({@queryParam super.theme}) : super(alignment: .topCenter, top: 20);
 
   @override
   Widget sample(BuildContext context) => FSelect<String>.searchBuilder(
@@ -249,7 +249,7 @@ class AsyncErrorSelectPage extends Sample {
 
 @RoutePage()
 class ToggleableSelectPage extends Sample {
-  ToggleableSelectPage({@queryParam super.theme, super.alignment = Alignment.topCenter, super.top = 20});
+  ToggleableSelectPage({@queryParam super.theme}) : super(alignment: .topCenter, top: 20);
 
   @override
   Widget sample(BuildContext context) => FSelect<String>.rich(
@@ -262,7 +262,7 @@ class ToggleableSelectPage extends Sample {
 
 @RoutePage()
 class ClearableSelectPage extends Sample {
-  ClearableSelectPage({@queryParam super.theme, super.alignment = Alignment.topCenter, super.top = 20});
+  ClearableSelectPage({@queryParam super.theme}) : super(alignment: .topCenter, top: 20);
 
   @override
   Widget sample(BuildContext context) => FSelect<String>.rich(
@@ -282,7 +282,7 @@ class FormatSelectPage extends Sample {
     (firstName: 'Peter', lastName: 'Parker'),
   ];
 
-  FormatSelectPage({@queryParam super.theme, super.alignment = Alignment.topCenter, super.top = 20});
+  FormatSelectPage({@queryParam super.theme}) : super(alignment: .topCenter, top: 20);
 
   @override
   Widget sample(BuildContext context) => FSelect<({String firstName, String lastName})>.rich(

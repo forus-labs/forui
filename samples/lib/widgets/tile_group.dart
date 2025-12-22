@@ -107,16 +107,7 @@ class MergeTileGroup extends StatefulSample {
   State<MergeTileGroup> createState() => _MergeTileGroupPageState();
 }
 
-// TODO: Replace with FSelectGroupControl.radio(...).
 class _MergeTileGroupPageState extends StatefulSampleState<MergeTileGroup> {
-  final _controller = FMultiValueNotifier.radio('List');
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
   @override
   Widget sample(BuildContext context) => FTileGroup.merge(
     label: const Text('Settings'),
@@ -139,7 +130,7 @@ class _MergeTileGroupPageState extends StatefulSampleState<MergeTileGroup> {
         ],
       ),
       .selectGroup(
-        control: .managed(controller: _controller),
+        control: const .managedRadio(initial: 'List'),
         children: const [
           FSelectTile(title: Text('List View'), value: 'List'),
           FSelectTile(title: Text('Grid View'), value: 'Grid'),

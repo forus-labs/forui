@@ -21,7 +21,7 @@ class TimeFieldPage extends Sample {
 
 @RoutePage()
 class PickerTimeFieldPage extends Sample {
-  PickerTimeFieldPage({@queryParam super.theme, super.alignment = Alignment.topCenter, super.top = 30});
+  PickerTimeFieldPage({@queryParam super.theme}): super(alignment: .topCenter, top: 30);
 
   @override
   Widget sample(BuildContext _) => const FTimeField.picker(
@@ -44,7 +44,7 @@ class ValidatorTimeFieldPage extends Sample {
 
 @RoutePage()
 class FormTimeFieldPage extends StatefulSample {
-  FormTimeFieldPage({@queryParam super.theme, super.top = 30});
+  FormTimeFieldPage({@queryParam super.theme}): super(top: 30);
 
   @override
   State<FormTimeFieldPage> createState() => _FormTimeFieldPageState();

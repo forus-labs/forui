@@ -9,7 +9,7 @@ import 'package:forui_samples/sample.dart';
 class SwitchPage extends StatefulSample {
   final bool enabled;
 
-  SwitchPage({@queryParam this.enabled = true, @queryParam super.theme, super.maxWidth = 200});
+  SwitchPage({@queryParam this.enabled = true, @queryParam super.theme}): super(maxWidth: 200);
 
   @override
   State<SwitchPage> createState() => _SwitchPageState();
@@ -30,7 +30,7 @@ class _SwitchPageState extends StatefulSampleState<SwitchPage> {
 
 @RoutePage()
 class FormSwitchPage extends StatefulSample {
-  FormSwitchPage({@queryParam super.theme, super.top = 20});
+  FormSwitchPage({@queryParam super.theme}): super(top: 20);
 
   @override
   State<FormSwitchPage> createState() => _FormSwitchPageState();

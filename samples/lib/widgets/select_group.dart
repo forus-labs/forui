@@ -13,7 +13,7 @@ enum Notification { all, direct, nothing }
 
 @RoutePage()
 class SelectGroupPage extends Sample {
-  SelectGroupPage({@queryParam super.theme, super.maxWidth = 250});
+  SelectGroupPage({@queryParam super.theme,}): super(maxWidth: 250);
 
   @override
   Widget sample(BuildContext context) => Column(
@@ -35,7 +35,7 @@ class SelectGroupPage extends Sample {
 
 @RoutePage()
 class SelectGroupCheckboxFormPage extends StatefulSample {
-  SelectGroupCheckboxFormPage({@queryParam super.theme, super.maxWidth = 250});
+  SelectGroupCheckboxFormPage({@queryParam super.theme,}): super(maxWidth: 250);
 
   @override
   State<SelectGroupCheckboxFormPage> createState() => _SelectGroupCheckboxFormPageState();
@@ -82,22 +82,14 @@ class _SelectGroupCheckboxFormPageState extends StatefulSampleState<SelectGroupC
 
 @RoutePage()
 class SelectGroupRadioFormPage extends StatefulSample {
-  SelectGroupRadioFormPage({@queryParam super.theme, super.maxWidth = 320});
+  SelectGroupRadioFormPage({@queryParam super.theme}): super(maxWidth: 320);
 
   @override
   State<SelectGroupRadioFormPage> createState() => _SelectGroupRadioFormPageState();
 }
 
-// TODO: Replace with FSelectGroup.managedRadio when available.
 class _SelectGroupRadioFormPageState extends StatefulSampleState<SelectGroupRadioFormPage> {
   final _key = GlobalKey<FormState>();
-  final _controller = FMultiValueNotifier<Notification>.radio();
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
 
   @override
   Widget sample(BuildContext context) => Form(
@@ -108,7 +100,7 @@ class _SelectGroupRadioFormPageState extends StatefulSampleState<SelectGroupRadi
       spacing: 20,
       children: [
         FSelectGroup<Notification>(
-          control: .managed(controller: _controller),
+          control: const .managedRadio(),
           label: const Text('Notifications'),
           description: const Text('Select the notifications.'),
           validator: (values) => values?.isEmpty ?? true ? 'Please select a value.' : null,

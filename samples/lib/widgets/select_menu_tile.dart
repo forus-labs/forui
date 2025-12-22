@@ -64,7 +64,7 @@ class ScrollableSelectMenuTilePage extends Sample {
 
 @RoutePage()
 class LazySelectMenuTilePage extends Sample {
-  LazySelectMenuTilePage({@queryParam super.theme, super.maxWidth = 400});
+  LazySelectMenuTilePage({@queryParam super.theme}): super(maxWidth: 400);
 
   @override
   Widget sample(BuildContext _) => FSelectMenuTile.builder(
