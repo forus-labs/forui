@@ -29,13 +29,6 @@ class Snippet {
   /// The modified source code.
   String source = '';
 
-  Iterable<String> get linkedSources sync* {
-    for (final link in links) {
-      final text = source.substring(link.offset, link.offset + link.length);
-      yield '[$text](${link.url})';
-    }
-  }
-
   Map<String, dynamic> toJson() => {
     'highlights': [
       for (final h in highlights) {'start': h.$1, 'end': h.$2},
