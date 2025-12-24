@@ -1,0 +1,26 @@
+{
+  "highlights": [],
+  "links": [
+    {
+      "offset": 32,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/FButton.html"
+    },
+    {
+      "offset": 79,
+      "length": 17,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.progress/FCircularProgress/FCircularProgress.html"
+    },
+    {
+      "offset": 102,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/onPress.html"
+    },
+    {
+      "offset": 119,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/child.html"
+    }
+  ],
+  "source": "Widget build(BuildContext _) => FButton(\n  mainAxisSize: .min,\n  prefix: const FCircularProgress(),\n  onPress: null,\n  child: const Text('Please wait'),\n);\n"
+}

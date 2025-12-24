@@ -1,0 +1,51 @@
+{
+  "highlights": [],
+  "links": [
+    {
+      "offset": 329,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/FButton.html"
+    },
+    {
+      "offset": 366,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/onPress.html"
+    },
+    {
+      "offset": 509,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.card/FCard/FCard.html"
+    },
+    {
+      "offset": 526,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.card/FCard/style.html"
+    },
+    {
+      "offset": 962,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.card/FCard/child.html"
+    },
+    {
+      "offset": 969,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/FButton.html"
+    },
+    {
+      "offset": 990,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/onPress.html"
+    },
+    {
+      "offset": 1034,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/child.html"
+    },
+    {
+      "offset": 1105,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/child.html"
+    }
+  ],
+  "source": "Widget build(BuildContext context) {\n  final cardStyle = context.theme.cardStyle.copyWith(\n    contentStyle: context.theme.cardStyle.contentStyle.copyWith(\n      titleTextStyle: context.theme.typography.sm.copyWith(\n        color: context.theme.colors.primary,\n        fontWeight: FontWeight.w600,\n      ),\n    ),\n  );\n\n  return FButton(\n    mainAxisSize: .min,\n    onPress: () => showRawFToast(\n      context: context,\n      duration: null,\n      builder: (context, toast) => IntrinsicHeight(\n        child: FCard(\n          style: cardStyle,\n          title: const Text('Event has been created'),\n          subtitle: const Padding(\n            padding: .symmetric(vertical: 5),\n            child: Text(\n              'This is a more detailed description that provides comprehensive context and additional information '\n              'about the notification, explaining what happened and what the user might expect next.',\n            ),\n          ),\n          child: FButton(\n            onPress: () => toast.dismiss(),\n            child: const Text('undo'),\n          ),\n        ),\n      ),\n    ),\n    child: const Text('Show Toast'),\n  );\n}\n"
+}

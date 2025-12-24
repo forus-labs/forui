@@ -1,0 +1,66 @@
+{
+  "highlights": [],
+  "links": [
+    {
+      "offset": 505,
+      "length": 26,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_group/FSelectGroup/FSelectGroup.html"
+    },
+    {
+      "offset": 543,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_group/FSelectGroup/control.html"
+    },
+    {
+      "offset": 585,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_group/FSelectGroup/label.html"
+    },
+    {
+      "offset": 631,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_group/FSelectGroup/description.html"
+    },
+    {
+      "offset": 695,
+      "length": 9,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_group/FSelectGroup/validator.html"
+    },
+    {
+      "offset": 801,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_group/FSelectGroup/children.html"
+    },
+    {
+      "offset": 826,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_group/FSelectGroupItemMixin/radio.html"
+    },
+    {
+      "offset": 898,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_group/FSelectGroupItemMixin/radio.html"
+    },
+    {
+      "offset": 1028,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_group/FSelectGroupItemMixin/radio.html"
+    },
+    {
+      "offset": 1114,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/FButton.html"
+    },
+    {
+      "offset": 1133,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/child.html"
+    },
+    {
+      "offset": 1170,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/onPress.html"
+    }
+  ],
+  "source": "class SelectGroupRadioFormExample extends StatefulWidget {\n  @override\n  State<SelectGroupRadioFormExample> createState() =>\n      _SelectGroupRadioFormExampleState();\n}\n\nclass _SelectGroupRadioFormExampleState\n    extends State<SelectGroupRadioFormExample> {\n  final _key = GlobalKey<FormState>();\n\n  @override\n  Widget build(BuildContext context) => Form(\n    key: _key,\n    child: Column(\n      mainAxisAlignment: .center,\n      crossAxisAlignment: .start,\n      spacing: 20,\n      children: [\n        FSelectGroup<Notification>(\n          control: const .managedRadio(),\n          label: const Text('Notifications'),\n          description: const Text('Select the notifications.'),\n          validator: (values) =>\n              values?.isEmpty ?? true ? 'Please select a value.' : null,\n          children: [\n            .radio(value: .all, label: const Text('All new messages')),\n            .radio(\n              value: .direct,\n              label: const Text('Direct messages and mentions'),\n            ),\n            .radio(value: .nothing, label: const Text('Nothing')),\n          ],\n        ),\n        FButton(\n          child: const Text('Save'),\n          onPress: () {\n            if (!_key.currentState!.validate()) {\n              // Handle errors here.\n              return;\n            }\n\n            _key.currentState!.save();\n            // Do something.\n          },\n        ),\n      ],\n    ),\n  );\n}\n"
+}

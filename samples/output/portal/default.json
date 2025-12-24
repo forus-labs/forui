@@ -1,0 +1,56 @@
+{
+  "highlights": [],
+  "links": [
+    {
+      "offset": 32,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.foundation/FPortal/FPortal.html"
+    },
+    {
+      "offset": 43,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.foundation/FPortal/spacing.html"
+    },
+    {
+      "offset": 73,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/latest/forui.foundation/FPortal/viewInsets.html"
+    },
+    {
+      "offset": 102,
+      "length": 13,
+      "url": "https://pub.dev/documentation/forui/latest/forui.foundation/FPortal/portalBuilder.html"
+    },
+    {
+      "offset": 1292,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.text_field/FTextField/FTextField.html"
+    },
+    {
+      "offset": 1324,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.text_field/FTextField/control.html"
+    },
+    {
+      "offset": 1541,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.foundation/FPortal/builder.html"
+    },
+    {
+      "offset": 1584,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/FButton.html"
+    },
+    {
+      "offset": 1592,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/onPress.html"
+    },
+    {
+      "offset": 1620,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/child.html"
+    }
+  ],
+  "source": "Widget build(BuildContext _) => FPortal(\n  spacing: const .spacing(8),\n  viewInsets: const .all(5),\n  portalBuilder: (context, _) => Container(\n    decoration: BoxDecoration(\n      color: context.theme.colors.background,\n      border: .all(color: context.theme.colors.border),\n      borderRadius: .circular(4),\n    ),\n    padding: const .only(left: 20, top: 14, right: 20, bottom: 10),\n    child: SizedBox(\n      width: 288,\n      child: Column(\n        mainAxisSize: .min,\n        crossAxisAlignment: .start,\n        children: [\n          Text('Dimensions', style: context.theme.typography.base),\n          const SizedBox(height: 7),\n          Text(\n            'Set the dimensions for the layer.',\n            style: context.theme.typography.sm.copyWith(\n              color: context.theme.colors.mutedForeground,\n              fontWeight: FontWeight.w300,\n            ),\n          ),\n          const SizedBox(height: 15),\n          for (final (label, value) in [\n            ('Width', '100%'),\n            ('Max. Width', '300px'),\n          ]) ...[\n            Row(\n              children: [\n                Expanded(\n                  child: Text(label, style: context.theme.typography.sm),\n                ),\n                Expanded(\n                  flex: 2,\n                  child: FTextField(\n                    control: .managed(initial: TextEditingValue(text: value)),\n                  ),\n                ),\n              ],\n            ),\n            const SizedBox(height: 7),\n          ],\n        ],\n      ),\n    ),\n  ),\n  builder: (context, controller, _) =>\n      FButton(onPress: controller.toggle, child: const Text('Portal')),\n);\n"
+}

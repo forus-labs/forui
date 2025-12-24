@@ -1,0 +1,21 @@
+{
+  "highlights": [],
+  "links": [
+    {
+      "offset": 38,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.date_field/FDateField/FDateField.html"
+    },
+    {
+      "offset": 52,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.date_field/FDateField/label.html"
+    },
+    {
+      "offset": 87,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.date_field/FDateField/description.html"
+    }
+  ],
+  "source": "Widget build(BuildContext _) => const FDateField(\n  label: Text('Appointment Date'),\n  description: Text('Select a date for your appointment'),\n);\n"
+}

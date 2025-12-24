@@ -1,0 +1,66 @@
+{
+  "highlights": [],
+  "links": [
+    {
+      "offset": 130,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/FButton.html"
+    },
+    {
+      "offset": 145,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/child.html"
+    },
+    {
+      "offset": 178,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/onPress.html"
+    },
+    {
+      "offset": 325,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/FButton.html"
+    },
+    {
+      "offset": 340,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/child.html"
+    },
+    {
+      "offset": 372,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/onPress.html"
+    },
+    {
+      "offset": 519,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/FButton.html"
+    },
+    {
+      "offset": 534,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/child.html"
+    },
+    {
+      "offset": 568,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/onPress.html"
+    },
+    {
+      "offset": 715,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/FButton.html"
+    },
+    {
+      "offset": 730,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/child.html"
+    },
+    {
+      "offset": 765,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/onPress.html"
+    }
+  ],
+  "source": "Widget build(BuildContext context) => Column(\n  mainAxisAlignment: .center,\n  mainAxisSize: .min,\n  spacing: 5,\n  children: [\n    FButton(\n      child: const Text('Left'),\n      onPress: () => showFSheet(\n        context: context,\n        side: .ltr,\n        builder: (context) => const Form(side: .ltr),\n      ),\n    ),\n    FButton(\n      child: const Text('Top'),\n      onPress: () => showFSheet(\n        context: context,\n        side: .ttb,\n        builder: (context) => const Form(side: .ttb),\n      ),\n    ),\n    FButton(\n      child: const Text('Right'),\n      onPress: () => showFSheet(\n        context: context,\n        side: .rtl,\n        builder: (context) => const Form(side: .rtl),\n      ),\n    ),\n    FButton(\n      child: const Text('Bottom'),\n      onPress: () => showFSheet(\n        context: context,\n        side: .btt,\n        builder: (context) => const Form(side: .btt),\n      ),\n    ),\n  ],\n);\n"
+}

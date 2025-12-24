@@ -1,0 +1,31 @@
+{
+  "highlights": [],
+  "links": [
+    {
+      "offset": 32,
+      "length": 25,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FMultiSelect/FMultiSelect.rich.html"
+    },
+    {
+      "offset": 61,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FMultiSelect/hint.html"
+    },
+    {
+      "offset": 107,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FMultiSelect/format.html"
+    },
+    {
+      "offset": 127,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FMultiSelect/sort.html"
+    },
+    {
+      "offset": 206,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/item.html"
+    }
+  ],
+  "source": "Widget build(BuildContext _) => FMultiSelect<String>.rich(\n  hint: const Text('Select favorite fruits'),\n  format: Text.new,\n  sort: (a, b) => a.compareTo(b),\n  children: [\n    for (final fruit in fruits) .item(title: Text(fruit), value: fruit),\n  ],\n);\n"
+}

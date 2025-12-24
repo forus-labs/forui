@@ -1,0 +1,16 @@
+{
+  "highlights": [],
+  "links": [
+    {
+      "offset": 38,
+      "length": 15,
+      "url": "https://pub.dev/documentation/forui/latest/forui.foundation/FFocusedOutline/FFocusedOutline.html"
+    },
+    {
+      "offset": 57,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.foundation/FFocusedOutline/focused.html"
+    }
+  ],
+  "source": "Widget build(BuildContext context) => FFocusedOutline(\n  focused: true,\n  child: Container(\n    decoration: BoxDecoration(\n      color: context.theme.colors.primary,\n      borderRadius: .circular(8),\n    ),\n    padding: const .symmetric(vertical: 8.0, horizontal: 12),\n    child: Text(\n      'Focused',\n      style: context.theme.typography.base.copyWith(\n        color: context.theme.colors.primaryForeground,\n      ),\n    ),\n  ),\n);\n"
+}

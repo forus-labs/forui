@@ -1,0 +1,21 @@
+{
+  "highlights": [],
+  "links": [
+    {
+      "offset": 100,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.avatar/FAvatar/FAvatar.html"
+    },
+    {
+      "offset": 180,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.avatar/FAvatar/FAvatar.html"
+    },
+    {
+      "offset": 250,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.avatar/FAvatar/FAvatar.html"
+    }
+  ],
+  "source": "Widget build(BuildContext _) => Row(\n  mainAxisAlignment: .center,\n  spacing: 10,\n  children: [\n    FAvatar(image: AssetImage(path('avatar.png')), fallback: const Text('MN')),\n    FAvatar(image: const AssetImage(''), fallback: const Text('MN')),\n    FAvatar(image: const AssetImage('')),\n  ],\n);\n"
+}

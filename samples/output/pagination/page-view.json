@@ -1,0 +1,26 @@
+{
+  "highlights": [],
+  "links": [
+    {
+      "offset": 318,
+      "length": 21,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.pagination/FPaginationController/FPaginationController.html"
+    },
+    {
+      "offset": 340,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.pagination/FPaginationController/pages.html"
+    },
+    {
+      "offset": 2401,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.pagination/FPagination/FPagination.html"
+    },
+    {
+      "offset": 2424,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.pagination/FPagination/control.html"
+    }
+  ],
+  "source": "class PaginationWithViewExample extends StatefulWidget {\n  @override\n  State<PaginationWithViewExample> createState() =>\n      _PaginationWithViewExampleState();\n}\n\nclass _PaginationWithViewExampleState extends State<PaginationWithViewExample> {\n  final _controller = PageController();\n  final _paginationController = FPaginationController(pages: 10);\n\n  @override\n  void didChangeDependencies() {\n    super.didChangeDependencies();\n    _paginationController.value =\n        PageStorage.maybeOf(context)?.readState(context) ?? 0;\n  }\n\n  void _handlePageChange(int page) {\n    final old = _controller.page?.round();\n    if (old case final old when old != page) {\n      if (page == old! + 1 || page == old - 1) {\n        setState(() {\n          _controller.animateToPage(\n            page,\n            duration: const Duration(milliseconds: 300),\n            curve: Curves.easeInOut,\n          );\n        });\n      } else {\n        setState(() {\n          _controller.jumpToPage(page);\n        });\n      }\n    }\n  }\n\n  @override\n  void dispose() {\n    _paginationController.dispose();\n    _controller.dispose();\n    super.dispose();\n  }\n\n  @override\n  Widget build(BuildContext context) {\n    final colors = context.theme.colors;\n    return Column(\n      mainAxisSize: .min,\n      mainAxisAlignment: .center,\n      spacing: 10,\n      children: [\n        SizedBox(\n          height: 300,\n          width: 300,\n          child: NotificationListener<ScrollEndNotification>(\n            onNotification: (notification) {\n              if (_controller.hasClients) {\n                _paginationController.value = _controller.page!.round();\n                return true;\n              }\n\n              return false;\n            },\n            child: PageView.builder(\n              itemCount: 10,\n              controller: _controller,\n              itemBuilder: (context, index) => ColoredBox(\n                color: index.isEven\n                    ? colors.hover(colors.primary)\n                    : colors.mutedForeground,\n                child: Center(\n                  child: DefaultTextStyle(\n                    style: TextStyle(\n                      fontSize: 45,\n                      color: colors.primaryForeground,\n                    ),\n                    child: Text('Page ${index + 1}'),\n                  ),\n                ),\n              ),\n            ),\n          ),\n        ),\n        FPagination(\n          control: .managed(\n            controller: _paginationController,\n            onChange: _handlePageChange,\n          ),\n        ),\n      ],\n    );\n  }\n}\n"
+}

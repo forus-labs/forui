@@ -1,0 +1,51 @@
+{
+  "highlights": [],
+  "links": [
+    {
+      "offset": 38,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSlider/FSlider.html"
+    },
+    {
+      "offset": 49,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSlider/control.html"
+    },
+    {
+      "offset": 91,
+      "length": 12,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSliderValue/FSliderValue.html"
+    },
+    {
+      "offset": 104,
+      "length": 3,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSliderValue/max.html"
+    },
+    {
+      "offset": 114,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSliderValue/constraints.html"
+    },
+    {
+      "offset": 173,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSlider/label.html"
+    },
+    {
+      "offset": 219,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSlider/description.html"
+    },
+    {
+      "offset": 283,
+      "length": 14,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSlider/forceErrorText.html"
+    },
+    {
+      "offset": 308,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSlider/enabled.html"
+    }
+  ],
+  "source": "Widget build(BuildContext context) => FSlider(\n  control: .managedContinuous(\n    initial: FSliderValue(max: 0.6, constraints: extent),\n    interaction: interaction,\n  ),\n  label: label == null ? null : Text(label!),\n  description: description == null ? null : Text(description!),\n  forceErrorText: error,\n  enabled: enabled,\n);\n"
+}

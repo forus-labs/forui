@@ -1,0 +1,36 @@
+{
+  "highlights": [],
+  "links": [
+    {
+      "offset": 38,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.picker/FPicker/FPicker.html"
+    },
+    {
+      "offset": 49,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.picker/FPicker/children.html"
+    },
+    {
+      "offset": 71,
+      "length": 12,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.picker/FPickerWheel/FPickerWheel.html"
+    },
+    {
+      "offset": 91,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.picker/FPickerWheel/flex.html"
+    },
+    {
+      "offset": 446,
+      "length": 20,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.picker/FPickerWheel/FPickerWheel.builder.html"
+    },
+    {
+      "offset": 474,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.picker/FPickerWheel/flex.html"
+    }
+  ],
+  "source": "Widget build(BuildContext context) => FPicker(\n  children: [\n    const FPickerWheel(\n      flex: 3,\n      loop: true,\n      children: [\n        Text('January'),\n        Text('February'),\n        Text('March'),\n        Text('April'),\n        Text('May'),\n        Text('June'),\n        Text('July'),\n        Text('August'),\n        Text('September'),\n        Text('October'),\n        Text('November'),\n        Text('December'),\n      ],\n    ),\n    FPickerWheel.builder(\n      flex: 2,\n      builder: (context, index) => Text('${(index % 31) + 1}'),\n    ),\n  ],\n);\n"
+}

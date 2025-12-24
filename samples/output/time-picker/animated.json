@@ -1,0 +1,41 @@
+{
+  "highlights": [],
+  "links": [
+    {
+      "offset": 303,
+      "length": 21,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.time_picker/FTimePickerController/FTimePickerController.html"
+    },
+    {
+      "offset": 577,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.time_picker/FTimePicker/FTimePicker.html"
+    },
+    {
+      "offset": 589,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.time_picker/FTimePicker/control.html"
+    },
+    {
+      "offset": 649,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/FButton.html"
+    },
+    {
+      "offset": 666,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/child.html"
+    },
+    {
+      "offset": 709,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/onPress.html"
+    },
+    {
+      "offset": 757,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.foundation/FTime/FTime.html"
+    }
+  ],
+  "source": "class AnimatedTimePickerExample extends StatefulWidget {\n  @override\n  State<AnimatedTimePickerExample> createState() =>\n      _AnimatedTimePickerExampleState();\n}\n\nclass _AnimatedTimePickerExampleState extends State<AnimatedTimePickerExample> {\n  static final _random = Random();\n  final _controller = FTimePickerController(time: .now());\n\n  @override\n  void dispose() {\n    _controller.dispose();\n    super.dispose();\n  }\n\n  @override\n  Widget build(BuildContext context) => Column(\n    mainAxisSize: .min,\n    children: [\n      SizedBox(\n        height: 300,\n        child: FTimePicker(control: .managed(controller: _controller)),\n      ),\n      FButton(\n        child: const Text('Funny button'),\n        onPress: () => _controller.animateTo(\n          FTime(_random.nextInt(24), _random.nextInt(60)),\n        ),\n      ),\n    ],\n  );\n}\n"
+}

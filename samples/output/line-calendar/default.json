@@ -1,0 +1,16 @@
+{
+  "highlights": [],
+  "links": [
+    {
+      "offset": 32,
+      "length": 13,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.line_calendar/FLineCalendar/FLineCalendar.html"
+    },
+    {
+      "offset": 49,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.line_calendar/FLineCalendar/control.html"
+    }
+  ],
+  "source": "Widget build(BuildContext _) => FLineCalendar(\n  control: .managed(initial: .now().subtract(const Duration(days: 1))),\n);\n"
+}

@@ -1,0 +1,66 @@
+{
+  "highlights": [],
+  "links": [
+    {
+      "offset": 430,
+      "length": 20,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.text_field/FTextFormField/FTextFormField.email.html"
+    },
+    {
+      "offset": 462,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.text_field/FTextFormField/hint.html"
+    },
+    {
+      "offset": 503,
+      "length": 9,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.text_field/FTextFormField/validator.html"
+    },
+    {
+      "offset": 1184,
+      "length": 9,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.checkbox/FCheckbox/FCheckbox.html"
+    },
+    {
+      "offset": 1207,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.checkbox/FCheckbox/label.html"
+    },
+    {
+      "offset": 1269,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.checkbox/FCheckbox/description.html"
+    },
+    {
+      "offset": 1348,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.checkbox/FCheckbox/error.html"
+    },
+    {
+      "offset": 1424,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.checkbox/FCheckbox/value.html"
+    },
+    {
+      "offset": 1465,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.checkbox/FCheckbox/onChange.html"
+    },
+    {
+      "offset": 1578,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/FButton.html"
+    },
+    {
+      "offset": 1597,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/child.html"
+    },
+    {
+      "offset": 1638,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/onPress.html"
+    }
+  ],
+  "source": "class FormCheckboxExample extends StatefulWidget {\n  @override\n  State<FormCheckboxExample> createState() => _FormCheckboxExampleState();\n}\n\nclass _FormCheckboxExampleState extends State<FormCheckboxExample> {\n  final _key = GlobalKey<FormState>();\n\n  @override\n  Widget build(BuildContext _) => Form(\n    key: _key,\n    child: Column(\n      mainAxisAlignment: .center,\n      crossAxisAlignment: .start,\n      children: [\n        FTextFormField.email(\n          hint: 'janedoe@foruslabs.com',\n          validator: (value) => (value?.contains('@') ?? false)\n              ? null\n              : 'Please enter a valid email.',\n        ),\n        const SizedBox(height: 12),\n        FTextFormField.password(\n          validator: (value) => 8 <= (value?.length ?? 0)\n              ? null\n              : 'Password must be at least 8 characters long.',\n        ),\n        const SizedBox(height: 15),\n        FormField(\n          initialValue: false,\n          onSaved: (value) {\n            // Save values somewhere.\n          },\n          validator: (value) => (value ?? false)\n              ? null\n              : 'Please accept the terms and conditions.',\n          builder: (state) => FCheckbox(\n            label: const Text('Accept terms and conditions'),\n            description: const Text('You agree to our terms and conditions.'),\n            error: state.errorText == null ? null : Text(state.errorText!),\n            value: state.value ?? false,\n            onChange: (value) => state.didChange(value),\n          ),\n        ),\n        const SizedBox(height: 20),\n        FButton(\n          child: const Text('Register'),\n          onPress: () {\n            if (!_key.currentState!.validate()) {\n              // Handle errors here.\n              return;\n            }\n\n            _key.currentState!.save();\n            // Do something.\n          },\n        ),\n      ],\n    ),\n  );\n}\n"
+}

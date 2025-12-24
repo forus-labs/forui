@@ -1,0 +1,46 @@
+{
+  "highlights": [],
+  "links": [
+    {
+      "offset": 142,
+      "length": 15,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.toast/FToastAlignment-class.html"
+    },
+    {
+      "offset": 410,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/FButton.html"
+    },
+    {
+      "offset": 427,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/onPress.html"
+    },
+    {
+      "offset": 720,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/FButton.html"
+    },
+    {
+      "offset": 743,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/style.html"
+    },
+    {
+      "offset": 1264,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/onPress.html"
+    },
+    {
+      "offset": 1302,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/child.html"
+    },
+    {
+      "offset": 1376,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/child.html"
+    }
+  ],
+  "source": "Widget build(BuildContext context) => Column(\n  mainAxisSize: .min,\n  mainAxisAlignment: .center,\n  spacing: 5,\n  children: [\n    for (final (FToastAlignment alignment, description) in [\n      (.topLeft, 'Top Left'),\n      (.topCenter, 'Top Center'),\n      (.topRight, 'Top Right'),\n      (.bottomLeft, 'Bottom Left'),\n      (.bottomCenter, 'Bottom Center'),\n      (.bottomRight, 'Bottom Right'),\n    ])\n      FButton(\n        onPress: () => showFToast(\n          context: context,\n          alignment: alignment,\n          title: const Text('Event has been created'),\n          description: const Text('Friday, May 23, 2025 at 9:00 AM'),\n          suffixBuilder: (context, entry) => IntrinsicHeight(\n            child: FButton(\n              style: context.theme.buttonStyles.primary.copyWith(\n                contentStyle: context.theme.buttonStyles.primary.contentStyle\n                    .copyWith(\n                      padding: const .symmetric(horizontal: 12, vertical: 7.5),\n                      textStyle: .all(\n                        context.theme.typography.xs.copyWith(\n                          color: context.theme.colors.primaryForeground,\n                        ),\n                      ),\n                    ),\n              ),\n              onPress: entry.dismiss,\n              child: const Text('Undo'),\n            ),\n          ),\n        ),\n        child: Text('Show $description Toast'),\n      ),\n  ],\n);\n"
+}

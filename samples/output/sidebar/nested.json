@@ -1,0 +1,251 @@
+{
+  "highlights": [],
+  "links": [
+    {
+      "offset": 32,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sidebar/FSidebar/FSidebar.html"
+    },
+    {
+      "offset": 44,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sidebar/FSidebar/style.html"
+    },
+    {
+      "offset": 164,
+      "length": 13,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sidebar/FSidebarGroup/FSidebarGroup.html"
+    },
+    {
+      "offset": 185,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sidebar/FSidebarGroup/children.html"
+    },
+    {
+      "offset": 205,
+      "length": 12,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sidebar/FSidebarItem/FSidebarItem.html"
+    },
+    {
+      "offset": 229,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sidebar/FSidebarItem/icon.html"
+    },
+    {
+      "offset": 275,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sidebar/FSidebarItem/label.html"
+    },
+    {
+      "offset": 315,
+      "length": 17,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sidebar/FSidebarItem/initiallyExpanded.html"
+    },
+    {
+      "offset": 350,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sidebar/FSidebarItem/children.html"
+    },
+    {
+      "offset": 374,
+      "length": 12,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sidebar/FSidebarItem/FSidebarItem.html"
+    },
+    {
+      "offset": 402,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sidebar/FSidebarItem/label.html"
+    },
+    {
+      "offset": 446,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sidebar/FSidebarItem/children.html"
+    },
+    {
+      "offset": 474,
+      "length": 12,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sidebar/FSidebarItem/FSidebarItem.html"
+    },
+    {
+      "offset": 506,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sidebar/FSidebarItem/label.html"
+    },
+    {
+      "offset": 560,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sidebar/FSidebarItem/onPress.html"
+    },
+    {
+      "offset": 611,
+      "length": 12,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sidebar/FSidebarItem/FSidebarItem.html"
+    },
+    {
+      "offset": 624,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sidebar/FSidebarItem/label.html"
+    },
+    {
+      "offset": 658,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sidebar/FSidebarItem/onPress.html"
+    },
+    {
+      "offset": 719,
+      "length": 12,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sidebar/FSidebarItem/FSidebarItem.html"
+    },
+    {
+      "offset": 747,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sidebar/FSidebarItem/label.html"
+    },
+    {
+      "offset": 792,
+      "length": 17,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sidebar/FSidebarItem/initiallyExpanded.html"
+    },
+    {
+      "offset": 831,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sidebar/FSidebarItem/children.html"
+    },
+    {
+      "offset": 859,
+      "length": 12,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sidebar/FSidebarItem/FSidebarItem.html"
+    },
+    {
+      "offset": 891,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sidebar/FSidebarItem/label.html"
+    },
+    {
+      "offset": 940,
+      "length": 17,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sidebar/FSidebarItem/initiallyExpanded.html"
+    },
+    {
+      "offset": 983,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sidebar/FSidebarItem/children.html"
+    },
+    {
+      "offset": 1015,
+      "length": 12,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sidebar/FSidebarItem/FSidebarItem.html"
+    },
+    {
+      "offset": 1051,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sidebar/FSidebarItem/label.html"
+    },
+    {
+      "offset": 1111,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sidebar/FSidebarItem/onPress.html"
+    },
+    {
+      "offset": 1170,
+      "length": 12,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sidebar/FSidebarItem/FSidebarItem.html"
+    },
+    {
+      "offset": 1206,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sidebar/FSidebarItem/label.html"
+    },
+    {
+      "offset": 1267,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sidebar/FSidebarItem/onPress.html"
+    },
+    {
+      "offset": 1362,
+      "length": 12,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sidebar/FSidebarItem/FSidebarItem.html"
+    },
+    {
+      "offset": 1394,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sidebar/FSidebarItem/label.html"
+    },
+    {
+      "offset": 1460,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sidebar/FSidebarItem/onPress.html"
+    },
+    {
+      "offset": 1511,
+      "length": 12,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sidebar/FSidebarItem/FSidebarItem.html"
+    },
+    {
+      "offset": 1543,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sidebar/FSidebarItem/label.html"
+    },
+    {
+      "offset": 1598,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sidebar/FSidebarItem/onPress.html"
+    },
+    {
+      "offset": 1677,
+      "length": 12,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sidebar/FSidebarItem/FSidebarItem.html"
+    },
+    {
+      "offset": 1690,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sidebar/FSidebarItem/label.html"
+    },
+    {
+      "offset": 1726,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sidebar/FSidebarItem/onPress.html"
+    },
+    {
+      "offset": 1775,
+      "length": 12,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sidebar/FSidebarItem/FSidebarItem.html"
+    },
+    {
+      "offset": 1799,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sidebar/FSidebarItem/icon.html"
+    },
+    {
+      "offset": 1843,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sidebar/FSidebarItem/label.html"
+    },
+    {
+      "offset": 1886,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sidebar/FSidebarItem/onPress.html"
+    },
+    {
+      "offset": 1921,
+      "length": 12,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sidebar/FSidebarItem/FSidebarItem.html"
+    },
+    {
+      "offset": 1945,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sidebar/FSidebarItem/icon.html"
+    },
+    {
+      "offset": 1990,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sidebar/FSidebarItem/label.html"
+    },
+    {
+      "offset": 2029,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sidebar/FSidebarItem/onPress.html"
+    }
+  ],
+  "source": "Widget build(BuildContext _) => FSidebar(\n  style: (s) => s.copyWith(\n    constraints: s.constraints.copyWith(minWidth: 300, maxWidth: 300),\n  ),\n  children: [\n    FSidebarGroup(\n      children: [\n        FSidebarItem(\n          icon: const Icon(FIcons.userRound),\n          label: const Text('Account'),\n          initiallyExpanded: true,\n          children: [\n            FSidebarItem(\n              label: const Text('Profile'),\n              children: [\n                FSidebarItem(\n                  label: const Text('Personal Info'),\n                  onPress: () {},\n                ),\n                FSidebarItem(label: const Text('Preferences'), onPress: () {}),\n              ],\n            ),\n            FSidebarItem(\n              label: const Text('Security'),\n              initiallyExpanded: true,\n              children: [\n                FSidebarItem(\n                  label: const Text('Password'),\n                  initiallyExpanded: true,\n                  children: [\n                    FSidebarItem(\n                      label: const Text('Change Password'),\n                      onPress: () {},\n                    ),\n                    FSidebarItem(\n                      label: const Text('Password History'),\n                      onPress: () {},\n                    ),\n                  ],\n                ),\n                FSidebarItem(\n                  label: const Text('Two-Factor Authentication'),\n                  onPress: () {},\n                ),\n                FSidebarItem(\n                  label: const Text('Device History'),\n                  onPress: () {},\n                ),\n              ],\n            ),\n            FSidebarItem(label: const Text('Notifications'), onPress: () {}),\n          ],\n        ),\n        FSidebarItem(\n          icon: const Icon(FIcons.palette),\n          label: const Text('Appearance'),\n          onPress: () {},\n        ),\n        FSidebarItem(\n          icon: const Icon(FIcons.settings),\n          label: const Text('System'),\n          onPress: () {},\n        ),\n      ],\n    ),\n  ],\n);\n"
+}

@@ -1,0 +1,76 @@
+{
+  "highlights": [],
+  "links": [
+    {
+      "offset": 38,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSlider/FSlider.html"
+    },
+    {
+      "offset": 49,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSlider/control.html"
+    },
+    {
+      "offset": 86,
+      "length": 12,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSliderValue/FSliderValue.html"
+    },
+    {
+      "offset": 99,
+      "length": 3,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSliderValue/max.html"
+    },
+    {
+      "offset": 114,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSlider/marks.html"
+    },
+    {
+      "offset": 139,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSliderMark/value.html"
+    },
+    {
+      "offset": 149,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSliderMark/label.html"
+    },
+    {
+      "offset": 179,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSliderMark/value.html"
+    },
+    {
+      "offset": 192,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSliderMark/tick.html"
+    },
+    {
+      "offset": 216,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSliderMark/value.html"
+    },
+    {
+      "offset": 239,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSliderMark/value.html"
+    },
+    {
+      "offset": 252,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSliderMark/tick.html"
+    },
+    {
+      "offset": 276,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSliderMark/value.html"
+    },
+    {
+      "offset": 286,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSliderMark/label.html"
+    }
+  ],
+  "source": "Widget build(BuildContext context) => FSlider(\n  control: .managedContinuous(initial: FSliderValue(max: 0.35)),\n  marks: const [\n    .mark(value: 0, label: Text('0%')),\n    .mark(value: 0.25, tick: false),\n    .mark(value: 0.5),\n    .mark(value: 0.75, tick: false),\n    .mark(value: 1, label: Text('100%')),\n  ],\n);\n"
+}

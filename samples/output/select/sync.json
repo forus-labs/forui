@@ -1,0 +1,26 @@
+{
+  "highlights": [],
+  "links": [
+    {
+      "offset": 38,
+      "length": 29,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelect/FSelect.searchBuilder.html"
+    },
+    {
+      "offset": 71,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelect/hint.html"
+    },
+    {
+      "offset": 97,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelect/format.html"
+    },
+    {
+      "offset": 320,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/item.html"
+    }
+  ],
+  "source": "Widget build(BuildContext context) => FSelect<String>.searchBuilder(\n  hint: 'Select a fruit',\n  format: (s) => s,\n  filter: (query) => query.isEmpty\n      ? fruits\n      : fruits.where((f) => f.toLowerCase().startsWith(query.toLowerCase())),\n  contentBuilder: (context, _, fruits) => [\n    for (final fruit in fruits) .item(title: Text(fruit), value: fruit),\n  ],\n);\n"
+}

@@ -1,0 +1,81 @@
+{
+  "highlights": [],
+  "links": [
+    {
+      "offset": 205,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.foundation/FLayout-class.html"
+    },
+    {
+      "offset": 214,
+      "length": 26,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sheet/FPersistentSheetController-class.html"
+    },
+    {
+      "offset": 481,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.foundation/FLayout-class.html"
+    },
+    {
+      "offset": 1202,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/FButton.html"
+    },
+    {
+      "offset": 1210,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/onPress.html"
+    },
+    {
+      "offset": 1234,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/child.html"
+    },
+    {
+      "offset": 1270,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/FButton.html"
+    },
+    {
+      "offset": 1278,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/onPress.html"
+    },
+    {
+      "offset": 1302,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/child.html"
+    },
+    {
+      "offset": 1337,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/FButton.html"
+    },
+    {
+      "offset": 1345,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/onPress.html"
+    },
+    {
+      "offset": 1369,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/child.html"
+    },
+    {
+      "offset": 1406,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/FButton.html"
+    },
+    {
+      "offset": 1414,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/onPress.html"
+    },
+    {
+      "offset": 1438,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/child.html"
+    }
+  ],
+  "source": "class PersistentSheetExample extends StatefulWidget {\n  @override\n  State<PersistentSheetExample> createState() => _SheetsState();\n}\n\nclass _SheetsState extends State<PersistentSheetExample> {\n  final Map<FLayout, FPersistentSheetController> _controllers = {};\n\n  @override\n  void dispose() {\n    for (final controller in _controllers.values) {\n      controller.dispose();\n    }\n    super.dispose();\n  }\n\n  @override\n  Widget build(BuildContext context) {\n    VoidCallback onPress(FLayout side) => () {\n      for (final MapEntry(:key, :value) in _controllers.entries) {\n        if (key != side && value.status.isCompleted) {\n          return;\n        }\n      }\n\n      var controller = _controllers[side];\n      if (controller == null) {\n        controller = _controllers[side] ??= showFPersistentSheet(\n          context: context,\n          side: side,\n          keepAliveOffstage: widget.keepAliveOffstage,\n          builder: (context, controller) =>\n              Form(side: side, controller: controller),\n        );\n      } else {\n        controller.toggle();\n      }\n    };\n\n    return Column(\n      mainAxisAlignment: .center,\n      mainAxisSize: .min,\n      spacing: 5,\n      children: [\n        FButton(onPress: onPress(.ltr), child: const Text('Left')),\n        FButton(onPress: onPress(.ttb), child: const Text('Top')),\n        FButton(onPress: onPress(.rtl), child: const Text('Right')),\n        FButton(onPress: onPress(.btt), child: const Text('Bottom')),\n      ],\n    );\n  }\n}\n"
+}

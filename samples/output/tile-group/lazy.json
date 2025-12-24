@@ -1,0 +1,36 @@
+{
+  "highlights": [],
+  "links": [
+    {
+      "offset": 32,
+      "length": 18,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTileGroup/FTileGroup.builder.html"
+    },
+    {
+      "offset": 54,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTileGroup/label.html"
+    },
+    {
+      "offset": 87,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTileGroup/description.html"
+    },
+    {
+      "offset": 145,
+      "length": 9,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTileGroup/maxHeight.html"
+    },
+    {
+      "offset": 210,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTile/FTile.html"
+    },
+    {
+      "offset": 298,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTile/onPress.html"
+    }
+  ],
+  "source": "Widget build(BuildContext _) => FTileGroup.builder(\n  label: const Text('Settings'),\n  description: const Text('Personalize your experience'),\n  maxHeight: 200,\n  count: 200,\n  tileBuilder: (context, index) => FTile(\n    title: Text('Tile $index'),\n    suffix: const Icon(FIcons.chevronRight),\n    onPress: () {},\n  ),\n);\n"
+}

@@ -1,0 +1,26 @@
+{
+  "highlights": [],
+  "links": [
+    {
+      "offset": 32,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.alert/FAlert/FAlert.html"
+    },
+    {
+      "offset": 42,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.alert/FAlert/title.html"
+    },
+    {
+      "offset": 76,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.alert/FAlert/subtitle.html"
+    },
+    {
+      "offset": 153,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.alert/FAlert/style.html"
+    }
+  ],
+  "source": "Widget build(BuildContext _) => FAlert(\n  title: const Text('Heads Up!'),\n  subtitle: const Text('You can add components to your app using the cli.'),\n  style: style,\n);\n"
+}

@@ -1,0 +1,36 @@
+{
+  "highlights": [],
+  "links": [
+    {
+      "offset": 32,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.text_field/FTextField/FTextField.html"
+    },
+    {
+      "offset": 46,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.text_field/FTextField/control.html"
+    },
+    {
+      "offset": 120,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.text_field/FTextField/label.html"
+    },
+    {
+      "offset": 153,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.text_field/FTextField/hint.html"
+    },
+    {
+      "offset": 172,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.text_field/FTextField/description.html"
+    },
+    {
+      "offset": 230,
+      "length": 9,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.text_field/FTextField/clearable.html"
+    }
+  ],
+  "source": "Widget build(BuildContext _) => FTextField(\n  control: const .managed(initial: TextEditingValue(text: 'MyUsername')),\n  label: const Text('Username'),\n  hint: 'JaneDoe',\n  description: const Text('Please enter your username.'),\n  clearable: (value) => value.text.isNotEmpty,\n);\n"
+}

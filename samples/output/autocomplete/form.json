@@ -1,0 +1,46 @@
+{
+  "highlights": [],
+  "links": [
+    {
+      "offset": 422,
+      "length": 13,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.autocomplete/FAutocomplete/FAutocomplete.html"
+    },
+    {
+      "offset": 447,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.autocomplete/FAutocomplete/label.html"
+    },
+    {
+      "offset": 490,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.autocomplete/FAutocomplete/description.html"
+    },
+    {
+      "offset": 565,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.autocomplete/FAutocomplete/hint.html"
+    },
+    {
+      "offset": 603,
+      "length": 9,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.autocomplete/FAutocomplete/validator.html"
+    },
+    {
+      "offset": 958,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/FButton.html"
+    },
+    {
+      "offset": 977,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/child.html"
+    },
+    {
+      "offset": 1016,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/onPress.html"
+    }
+  ],
+  "source": "class FormAutocompleteExample extends StatefulWidget {\n  @override\n  State<FormAutocompleteExample> createState() =>\n      _FormAutocompleteExampleState();\n}\n\nclass _FormAutocompleteExampleState extends State<FormAutocompleteExample> {\n  final _key = GlobalKey<FormState>();\n\n  @override\n  Widget build(BuildContext _) => Form(\n    key: _key,\n    child: Column(\n      crossAxisAlignment: .start,\n      children: [\n        FAutocomplete(\n          label: const Text('Department'),\n          description: const Text('Type to search your dream department'),\n          hint: 'Search departments',\n          validator: (department) => department == null || department.isEmpty\n              ? 'Please select a department'\n              : null,\n          items: const [\n            'Engineering',\n            'Marketing',\n            'Sales',\n            'Human Resources',\n            'Finance',\n          ],\n        ),\n        const SizedBox(height: 25),\n        FButton(\n          child: const Text('Submit'),\n          onPress: () {\n            if (_key.currentState!.validate()) {\n              // Form is valid, do something with department.\n            }\n          },\n        ),\n      ],\n    ),\n  );\n}\n"
+}

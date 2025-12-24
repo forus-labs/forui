@@ -1,0 +1,36 @@
+{
+  "highlights": [],
+  "links": [
+    {
+      "offset": 38,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/FButton.html"
+    },
+    {
+      "offset": 49,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/child.html"
+    },
+    {
+      "offset": 82,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/onPress.html"
+    },
+    {
+      "offset": 592,
+      "length": 18,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTileGroup/FTileGroup.builder.html"
+    },
+    {
+      "offset": 643,
+      "length": 16,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTileGroup/scrollController.html"
+    },
+    {
+      "offset": 716,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTile/FTile.html"
+    }
+  ],
+  "source": "Widget build(BuildContext context) => FButton(\n  child: const Text('Click me'),\n  onPress: () => showFSheet(\n    context: context,\n    side: .btt,\n    mainAxisMaxRatio: null,\n    builder: (context) => DraggableScrollableSheet(\n      expand: false,\n      builder: (context, controller) => ScrollConfiguration(\n        // This is required to enable dragging on desktop.\n        // See https://github.com/flutter/flutter/issues/101903 for more information.\n        behavior: ScrollConfiguration.of(\n          context,\n        ).copyWith(dragDevices: {.touch, .mouse, .trackpad}),\n        child: FTileGroup.builder(\n          count: 25,\n          scrollController: controller,\n          tileBuilder: (context, index) => FTile(title: Text('Tile $index')),\n        ),\n      ),\n    ),\n  ),\n);\n"
+}

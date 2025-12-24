@@ -1,0 +1,31 @@
+{
+  "highlights": [],
+  "links": [
+    {
+      "offset": 244,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.radio/FRadio/FRadio.html"
+    },
+    {
+      "offset": 256,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.radio/FRadio/label.html"
+    },
+    {
+      "offset": 290,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.radio/FRadio/description.html"
+    },
+    {
+      "offset": 361,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.radio/FRadio/value.html"
+    },
+    {
+      "offset": 380,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.radio/FRadio/onChange.html"
+    }
+  ],
+  "source": "class RadioExample extends StatefulWidget {\n  @override\n  State<RadioExample> createState() => _RadioExampleState();\n}\n\nclass _RadioExampleState extends State<RadioExample> {\n  bool _value = true;\n\n  @override\n  Widget build(BuildContext _) => FRadio(\n    label: const Text('Default'),\n    description: const Text('The description of the default option.'),\n    value: _value,\n    onChange: (value) => setState(() => _value = value),\n  );\n}\n"
+}

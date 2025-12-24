@@ -1,0 +1,16 @@
+{
+  "highlights": [],
+  "links": [
+    {
+      "offset": 38,
+      "length": 16,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.text_field/FTextField/FTextField.email.html"
+    },
+    {
+      "offset": 58,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.text_field/FTextField/control.html"
+    }
+  ],
+  "source": "Widget build(BuildContext _) => const FTextField.email(\n  control: .managed(initial: TextEditingValue(text: 'jane@doe.com')),\n);\n"
+}

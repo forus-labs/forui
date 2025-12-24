@@ -1,0 +1,21 @@
+{
+  "highlights": [],
+  "links": [
+    {
+      "offset": 42,
+      "length": 20,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.text_field/FTextField/FTextField.multiline.html"
+    },
+    {
+      "offset": 63,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.text_field/FTextField/label.html"
+    },
+    {
+      "offset": 94,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.text_field/FTextField/maxLines.html"
+    }
+  ],
+  "source": "Widget build(BuildContext _) =>\n    const FTextField.multiline(label: Text('Leave a review'), maxLines: 4);\n"
+}

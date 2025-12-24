@@ -1,0 +1,41 @@
+{
+  "highlights": [],
+  "links": [
+    {
+      "offset": 32,
+      "length": 16,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItemGroup/FItemGroup.merge.html"
+    },
+    {
+      "offset": 69,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItemGroupMixin/group.html"
+    },
+    {
+      "offset": 103,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItemMixin/item.html"
+    },
+    {
+      "offset": 297,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItemMixin/item.html"
+    },
+    {
+      "offset": 539,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItemGroupMixin/group.html"
+    },
+    {
+      "offset": 573,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItemMixin/item.html"
+    },
+    {
+      "offset": 761,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItemMixin/item.html"
+    }
+  ],
+  "source": "Widget build(BuildContext _) => FItemGroup.merge(\n  children: [\n    .group(\n      children: [\n        .item(\n          prefix: const Icon(FIcons.user),\n          title: const Text('Personalization'),\n          suffix: const Icon(FIcons.chevronRight),\n          onPress: () {},\n        ),\n        .item(\n          prefix: const Icon(FIcons.wifi),\n          title: const Text('WiFi'),\n          details: const Text('Duobase (5G)'),\n          suffix: const Icon(FIcons.chevronRight),\n          onPress: () {},\n        ),\n      ],\n    ),\n    .group(\n      children: [\n        .item(\n          prefix: const Icon(FIcons.list),\n          title: const Text('List View'),\n          suffix: const Icon(FIcons.chevronRight),\n          onPress: () {},\n        ),\n        .item(\n          prefix: const Icon(FIcons.grid2x2),\n          title: const Text('Grid View'),\n          suffix: const Icon(FIcons.chevronRight),\n          onPress: () {},\n        ),\n      ],\n    ),\n  ],\n);\n"
+}

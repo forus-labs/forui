@@ -1,0 +1,51 @@
+{
+  "highlights": [],
+  "links": [
+    {
+      "offset": 85,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.breadcrumb/FBreadcrumb/FBreadcrumb.html"
+    },
+    {
+      "offset": 104,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.breadcrumb/FBreadcrumb/divider.html"
+    },
+    {
+      "offset": 217,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.breadcrumb/FBreadcrumb/children.html"
+    },
+    {
+      "offset": 237,
+      "length": 15,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.html"
+    },
+    {
+      "offset": 306,
+      "length": 25,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.collapsed.html"
+    },
+    {
+      "offset": 414,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItemMixin/item.html"
+    },
+    {
+      "offset": 489,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItemMixin/item.html"
+    },
+    {
+      "offset": 604,
+      "length": 15,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.html"
+    },
+    {
+      "offset": 680,
+      "length": 15,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.html"
+    }
+  ],
+  "source": "Widget build(BuildContext _) => Row(\n  mainAxisAlignment: .center,\n  children: [\n    FBreadcrumb(\n      divider: Transform.rotate(\n        angle: -60,\n        child: const Icon(FIcons.slash, size: 14),\n      ),\n      children: [\n        FBreadcrumbItem(onPress: () {}, child: const Text('Forui')),\n        FBreadcrumbItem.collapsed(\n          menu: [\n            .group(\n              children: [\n                .item(title: const Text('Documentation'), onPress: () {}),\n                .item(title: const Text('Themes'), onPress: () {}),\n              ],\n            ),\n          ],\n        ),\n        FBreadcrumbItem(onPress: () {}, child: const Text('Layout')),\n        const FBreadcrumbItem(current: true, child: Text('Widgets')),\n      ],\n    ),\n  ],\n);\n"
+}

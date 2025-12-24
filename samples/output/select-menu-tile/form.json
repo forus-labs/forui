@@ -1,0 +1,81 @@
+{
+  "highlights": [],
+  "links": [
+    {
+      "offset": 449,
+      "length": 29,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_menu_tile/FSelectMenuTile/FSelectMenuTile.html"
+    },
+    {
+      "offset": 490,
+      "length": 13,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_menu_tile/FSelectMenuTile/selectControl.html"
+    },
+    {
+      "offset": 548,
+      "length": 9,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_menu_tile/FSelectMenuTile/validator.html"
+    },
+    {
+      "offset": 621,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_menu_tile/FSelectMenuTile/prefix.html"
+    },
+    {
+      "offset": 664,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_menu_tile/FSelectMenuTile/title.html"
+    },
+    {
+      "offset": 710,
+      "length": 14,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_menu_tile/FSelectMenuTile/detailsBuilder.html"
+    },
+    {
+      "offset": 929,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_tile_group/FSelectTile/title.html"
+    },
+    {
+      "offset": 949,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_tile_group/FSelectTile/value.html"
+    },
+    {
+      "offset": 981,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_tile_group/FSelectTile/title.html"
+    },
+    {
+      "offset": 1013,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_tile_group/FSelectTile/value.html"
+    },
+    {
+      "offset": 1048,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_tile_group/FSelectTile/title.html"
+    },
+    {
+      "offset": 1069,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_tile_group/FSelectTile/value.html"
+    },
+    {
+      "offset": 1119,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/FButton.html"
+    },
+    {
+      "offset": 1138,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/child.html"
+    },
+    {
+      "offset": 1175,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/onPress.html"
+    }
+  ],
+  "source": "class SelectMenuTileFormExample extends StatefulWidget {\n  @override\n  State<SelectMenuTileFormExample> createState() =>\n      _SelectMenuTileFormExampleState();\n}\n\nclass _SelectMenuTileFormExampleState extends State<SelectMenuTileFormExample> {\n  final _key = GlobalKey<FormState>();\n\n  @override\n  Widget build(BuildContext context) => Form(\n    key: _key,\n    child: Column(\n      mainAxisSize: .min,\n      spacing: 20,\n      children: [\n        FSelectMenuTile<Notification>(\n          selectControl: const .managed(initial: {.all}),\n          validator: (value) => value == null ? 'Select an item' : null,\n          prefix: const Icon(FIcons.bell),\n          title: const Text('Notifications'),\n          detailsBuilder: (_, values, _) => Text(switch (values.firstOrNull) {\n            .all => 'All',\n            .direct => 'Direct Messages',\n            _ => 'None',\n          }),\n          menu: const [\n            .tile(title: Text('All'), value: .all),\n            .tile(title: Text('Direct Messages'), value: .direct),\n            .tile(title: Text('None'), value: .nothing),\n          ],\n        ),\n        FButton(\n          child: const Text('Save'),\n          onPress: () {\n            if (!_key.currentState!.validate()) {\n              // Handle errors here.\n              return;\n            }\n\n            _key.currentState!.save();\n            // Do something.\n          },\n        ),\n      ],\n    ),\n  );\n}\n"
+}

@@ -1,0 +1,31 @@
+{
+  "highlights": [],
+  "links": [
+    {
+      "offset": 100,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.avatar/FAvatar/FAvatar.raw.html"
+    },
+    {
+      "offset": 119,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.avatar/FAvatar/FAvatar.raw.html"
+    },
+    {
+      "offset": 131,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.avatar/FAvatar/child.html"
+    },
+    {
+      "offset": 199,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.avatar/FAvatar/FAvatar.raw.html"
+    },
+    {
+      "offset": 211,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.avatar/FAvatar/child.html"
+    }
+  ],
+  "source": "Widget build(BuildContext _) => Row(\n  mainAxisAlignment: .center,\n  spacing: 10,\n  children: [\n    FAvatar.raw(),\n    FAvatar.raw(child: Icon(FIcons.baby, color: theme.colors.mutedForeground)),\n    FAvatar.raw(child: const Text('MN')),\n  ],\n);\n"
+}

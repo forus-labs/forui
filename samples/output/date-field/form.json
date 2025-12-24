@@ -1,0 +1,81 @@
+{
+  "highlights": [],
+  "links": [
+    {
+      "offset": 286,
+      "length": 20,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.date_field/FDateFieldController/FDateFieldController.html"
+    },
+    {
+      "offset": 312,
+      "length": 9,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.date_field/FDateFieldController/validator.html"
+    },
+    {
+      "offset": 715,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.date_field/FDateField/FDateField.html"
+    },
+    {
+      "offset": 737,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.date_field/FDateField/control.html"
+    },
+    {
+      "offset": 796,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.date_field/FDateField/label.html"
+    },
+    {
+      "offset": 839,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.date_field/FDateField/description.html"
+    },
+    {
+      "offset": 897,
+      "length": 16,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.date_field/FDateField/autovalidateMode.html"
+    },
+    {
+      "offset": 981,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.date_field/FDateField/FDateField.html"
+    },
+    {
+      "offset": 1003,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.date_field/FDateField/control.html"
+    },
+    {
+      "offset": 1383,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.date_field/FDateField/label.html"
+    },
+    {
+      "offset": 1424,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.date_field/FDateField/description.html"
+    },
+    {
+      "offset": 1481,
+      "length": 16,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.date_field/FDateField/autovalidateMode.html"
+    },
+    {
+      "offset": 1565,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/FButton.html"
+    },
+    {
+      "offset": 1584,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/child.html"
+    },
+    {
+      "offset": 1623,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/onPress.html"
+    }
+  ],
+  "source": "class FormDateFieldExample extends StatefulWidget {\n  @override\n  State<FormDateFieldExample> createState() => _FormDateFieldExampleState();\n}\n\nclass _FormDateFieldExampleState extends State<FormDateFieldExample> {\n  final _key = GlobalKey<FormState>();\n  late final _startController = FDateFieldController(\n    validator: (date) => switch (date) {\n      null => 'Please select a start date',\n      final date when date.isBefore(.now()) =>\n        'Start date must be in the future',\n      _ => null,\n    },\n  );\n\n  @override\n  void dispose() {\n    _startController.dispose();\n    super.dispose();\n  }\n\n  @override\n  Widget build(BuildContext _) => Form(\n    key: _key,\n    child: Column(\n      children: [\n        FDateField(\n          control: .managed(controller: _startController),\n          label: const Text('Start Date'),\n          description: const Text('Select a start date'),\n          autovalidateMode: .disabled,\n        ),\n        const SizedBox(height: 20),\n        FDateField(\n          control: .managed(\n            validator: (date) => switch (date) {\n              null => 'Please select an end date',\n              final date\n                  when _startController.value != null &&\n                      date.isBefore(_startController.value!) =>\n                'Start date must be in the future',\n              _ => null,\n            },\n          ),\n          label: const Text('End Date'),\n          description: const Text('Select an end date'),\n          autovalidateMode: .disabled,\n        ),\n        const SizedBox(height: 25),\n        FButton(\n          child: const Text('Submit'),\n          onPress: () {\n            if (_key.currentState!.validate()) {\n              // Form is valid, process the dates\n            }\n          },\n        ),\n      ],\n    ),\n  );\n}\n"
+}

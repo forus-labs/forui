@@ -1,0 +1,41 @@
+{
+  "highlights": [],
+  "links": [
+    {
+      "offset": 32,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItemGroup/FItemGroup.html"
+    },
+    {
+      "offset": 46,
+      "length": 9,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItemGroup/maxHeight.html"
+    },
+    {
+      "offset": 81,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItemMixin/item.html"
+    },
+    {
+      "offset": 251,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItemMixin/item.html"
+    },
+    {
+      "offset": 410,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItemMixin/item.html"
+    },
+    {
+      "offset": 612,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItemMixin/item.html"
+    },
+    {
+      "offset": 784,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItemMixin/item.html"
+    }
+  ],
+  "source": "Widget build(BuildContext _) => FItemGroup(\n  maxHeight: 150,\n  children: [\n    .item(\n      prefix: const Icon(FIcons.user),\n      title: const Text('Personalization'),\n      suffix: const Icon(FIcons.chevronRight),\n      onPress: () {},\n    ),\n    .item(\n      prefix: const Icon(FIcons.mail),\n      title: const Text('Mail'),\n      suffix: const Icon(FIcons.chevronRight),\n      onPress: () {},\n    ),\n    .item(\n      prefix: const Icon(FIcons.wifi),\n      title: const Text('WiFi'),\n      details: const Text('Duobase (5G)'),\n      suffix: const Icon(FIcons.chevronRight),\n      onPress: () {},\n    ),\n    .item(\n      prefix: const Icon(FIcons.alarmClock),\n      title: const Text('Alarm Clock'),\n      suffix: const Icon(FIcons.chevronRight),\n      onPress: () {},\n    ),\n    .item(\n      prefix: const Icon(FIcons.qrCode),\n      title: const Text('QR code'),\n      suffix: const Icon(FIcons.chevronRight),\n      onPress: () {},\n    ),\n  ],\n);\n"
+}

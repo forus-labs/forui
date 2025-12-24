@@ -1,0 +1,61 @@
+{
+  "highlights": [],
+  "links": [
+    {
+      "offset": 32,
+      "length": 25,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_tile_group/FSelectTileGroup/FSelectTileGroup.html"
+    },
+    {
+      "offset": 61,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_tile_group/FSelectTileGroup/control.html"
+    },
+    {
+      "offset": 109,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_tile_group/FSelectTileGroup/label.html"
+    },
+    {
+      "offset": 141,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_tile_group/FSelectTileGroup/description.html"
+    },
+    {
+      "offset": 207,
+      "length": 9,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_tile_group/FSelectTileGroup/maxHeight.html"
+    },
+    {
+      "offset": 253,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_tile_group/FSelectTile/title.html"
+    },
+    {
+      "offset": 305,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_tile_group/FSelectTile/value.html"
+    },
+    {
+      "offset": 333,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_tile_group/FSelectTile/title.html"
+    },
+    {
+      "offset": 382,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_tile_group/FSelectTile/value.html"
+    },
+    {
+      "offset": 414,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_tile_group/FSelectTile/title.html"
+    },
+    {
+      "offset": 490,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_tile_group/FSelectTile/value.html"
+    }
+  ],
+  "source": "Widget build(BuildContext _) => FSelectTileGroup<Sidebar>(\n  control: const .managed(initial: {.recents}),\n  label: const Text('Sidebar'),\n  description: const Text('These will be shown in the sidebar.'),\n  maxHeight: 100,\n  children: const [\n    .tile(title: Text('Recents'), suffix: Icon(FIcons.timer), value: .recents),\n    .tile(title: Text('Home'), suffix: Icon(FIcons.house), value: .home),\n    .tile(\n      title: Text('Applications'),\n      suffix: Icon(FIcons.appWindowMac),\n      value: .applications,\n    ),\n  ],\n);\n"
+}

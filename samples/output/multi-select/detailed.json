@@ -1,0 +1,36 @@
+{
+  "highlights": [],
+  "links": [
+    {
+      "offset": 32,
+      "length": 25,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FMultiSelect/FMultiSelect.rich.html"
+    },
+    {
+      "offset": 61,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FMultiSelect/hint.html"
+    },
+    {
+      "offset": 89,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FMultiSelect/format.html"
+    },
+    {
+      "offset": 126,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/item.html"
+    },
+    {
+      "offset": 299,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/item.html"
+    },
+    {
+      "offset": 486,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/item.html"
+    }
+  ],
+  "source": "Widget build(BuildContext _) => FMultiSelect<String>.rich(\n  hint: const Text('Type'),\n  format: Text.new,\n  children: [\n    .item(\n      prefix: const Icon(FIcons.bug),\n      title: const Text('Bug'),\n      subtitle: const Text('An unexpected problem or behavior'),\n      value: 'Bug',\n    ),\n    .item(\n      prefix: const Icon(FIcons.filePlusCorner),\n      title: const Text('Feature'),\n      subtitle: const Text('A new feature or enhancement'),\n      value: 'Feature',\n    ),\n    .item(\n      prefix: const Icon(FIcons.messageCircleQuestionMark),\n      title: const Text('Question'),\n      subtitle: const Text('A question or clarification'),\n      value: 'Question',\n    ),\n  ],\n);\n"
+}

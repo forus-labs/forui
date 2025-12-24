@@ -1,0 +1,26 @@
+{
+  "highlights": [],
+  "links": [
+    {
+      "offset": 38,
+      "length": 9,
+      "url": "https://pub.dev/documentation/forui/latest/forui.foundation/FTappable/FTappable.html"
+    },
+    {
+      "offset": 51,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.foundation/FTappable/builder.html"
+    },
+    {
+      "offset": 519,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.foundation/FTappable/child.html"
+    },
+    {
+      "offset": 552,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.foundation/FTappable/onPress.html"
+    }
+  ],
+  "source": "Widget build(BuildContext context) => FTappable(\n  builder: (context, states, child) => Container(\n    decoration: BoxDecoration(\n      color:\n          (states.contains(WidgetState.hovered) ||\n              states.contains(WidgetState.pressed))\n          ? context.theme.colors.secondary\n          : context.theme.colors.background,\n      borderRadius: .circular(8),\n      border: .all(color: context.theme.colors.border),\n    ),\n    padding: const .symmetric(vertical: 8.0, horizontal: 12),\n    child: child!,\n  ),\n  child: const Text('Tappable'),\n  onPress: () {},\n);\n"
+}

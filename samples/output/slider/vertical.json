@@ -1,0 +1,101 @@
+{
+  "highlights": [],
+  "links": [
+    {
+      "offset": 38,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSlider/FSlider.html"
+    },
+    {
+      "offset": 49,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSlider/control.html"
+    },
+    {
+      "offset": 86,
+      "length": 12,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSliderValue/FSliderValue.html"
+    },
+    {
+      "offset": 99,
+      "length": 3,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSliderValue/max.html"
+    },
+    {
+      "offset": 114,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSlider/label.html"
+    },
+    {
+      "offset": 145,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSlider/description.html"
+    },
+    {
+      "offset": 217,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSlider/layout.html"
+    },
+    {
+      "offset": 233,
+      "length": 19,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSlider/trackMainAxisExtent.html"
+    },
+    {
+      "offset": 261,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSlider/marks.html"
+    },
+    {
+      "offset": 286,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSliderMark/value.html"
+    },
+    {
+      "offset": 296,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSliderMark/label.html"
+    },
+    {
+      "offset": 326,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSliderMark/value.html"
+    },
+    {
+      "offset": 339,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSliderMark/tick.html"
+    },
+    {
+      "offset": 363,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSliderMark/value.html"
+    },
+    {
+      "offset": 375,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSliderMark/label.html"
+    },
+    {
+      "offset": 406,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSliderMark/value.html"
+    },
+    {
+      "offset": 419,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSliderMark/tick.html"
+    },
+    {
+      "offset": 443,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSliderMark/value.html"
+    },
+    {
+      "offset": 453,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSliderMark/label.html"
+    }
+  ],
+  "source": "Widget build(BuildContext context) => FSlider(\n  control: .managedContinuous(initial: FSliderValue(max: 0.35)),\n  label: const Text('Volume'),\n  description: const Text('Adjust the volume by dragging the slider.'),\n  layout: .btt,\n  trackMainAxisExtent: 350,\n  marks: const [\n    .mark(value: 0, label: Text('0%')),\n    .mark(value: 0.25, tick: false),\n    .mark(value: 0.5, label: Text('50%')),\n    .mark(value: 0.75, tick: false),\n    .mark(value: 1, label: Text('100%')),\n  ],\n);\n"
+}

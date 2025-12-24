@@ -1,0 +1,26 @@
+{
+  "highlights": [],
+  "links": [
+    {
+      "offset": 32,
+      "length": 18,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItemGroup/FItemGroup.builder.html"
+    },
+    {
+      "offset": 54,
+      "length": 9,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItemGroup/maxHeight.html"
+    },
+    {
+      "offset": 119,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItem/FItem.html"
+    },
+    {
+      "offset": 207,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItem/onPress.html"
+    }
+  ],
+  "source": "Widget build(BuildContext _) => FItemGroup.builder(\n  maxHeight: 200,\n  count: 200,\n  itemBuilder: (context, index) => FItem(\n    title: Text('Item $index'),\n    suffix: const Icon(FIcons.chevronRight),\n    onPress: () {},\n  ),\n);\n"
+}

@@ -1,0 +1,11 @@
+{
+  "highlights": [],
+  "links": [
+    {
+      "offset": 32,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.card/FCard/FCard.html"
+    }
+  ],
+  "source": "Widget build(BuildContext _) => FCard(\n  image: Container(\n    decoration: BoxDecoration(\n      image: DecorationImage(\n        image: AssetImage(path('avatar.png')),\n        fit: .cover,\n      ),\n    ),\n    height: 200,\n  ),\n  title: const Text('Gratitude'),\n  subtitle: const Text(\n    'The quality of being thankful; readiness to show appreciation for and to return kindness.',\n  ),\n);\n"
+}
