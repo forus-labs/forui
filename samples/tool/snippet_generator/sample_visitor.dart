@@ -8,41 +8,47 @@ import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/dart/ast/visitor.dart';
 import 'package:analyzer/dart/constant/value.dart';
 import 'package:analyzer/dart/element/type.dart';
+import 'package:analyzer/file_system/overlay_file_system.dart';
 import 'package:collection/collection.dart';
 import 'package:path/path.dart' as p;
 
+import 'doc_linker.dart';
 import 'highlight.dart';
 import 'main.dart';
 import 'transformations.dart';
 import 'widget_visitors.dart';
 
-Future<Map<String, Sample>> transformSamples(AnalysisContextCollection collection, String samplesPath) async {
-  final routesVisitor = RoutesVisitor();
-  final main = p.join(samplesPath, 'main.dart');
+Future<Map<String, Snippet>> transformSamples(
+  AnalysisContextCollection collection,
+  String path,
+  OverlayResourceProvider overlay,
+) async {
+  final routesVisitor = _RoutesVisitor();
+  final main = p.join(path, 'main.dart');
   if (await collection.contextFor(main).currentSession.getResolvedUnit(main) case final ResolvedUnitResult result) {
     result.unit.visitChildren(routesVisitor);
   }
 
-  final samples = routesVisitor.samples;
+  final snippets = routesVisitor.snippets;
 
-  for (final file in Directory(samplesPath).listSync(recursive: true).whereType<File>()) {
+  for (final file in Directory(path).listSync(recursive: true).whereType<File>()) {
     if (!file.path.endsWith('.dart')) {
       continue;
     }
 
     final session = collection.contextFor(file.path).currentSession;
     if (await session.getResolvedUnit(file.path) case final ResolvedUnitResult result) {
-      final sampleVisitor = SampleVisitor(samples, result, session);
+      final sampleVisitor = _SampleVisitor(snippets, result, session, overlay);
       result.unit.visitChildren(sampleVisitor);
     }
   }
 
-  return samples;
+  return snippets;
 }
 
-class RoutesVisitor extends RecursiveAstVisitor<void> {
+class _RoutesVisitor extends RecursiveAstVisitor<void> {
   /// The extracted routes as a map of page -> list of routes.
-  final Map<String, Sample> samples = {};
+  final Map<String, Snippet> snippets = {};
 
   @override
   void visitClassDeclaration(ClassDeclaration node) {
@@ -71,7 +77,7 @@ class RoutesVisitor extends RecursiveAstVisitor<void> {
       }
 
       if (path != null && page != null) {
-        (samples[page] ??= Sample()).routes.add(path);
+        (snippets[page] ??= Snippet()).routes.add(path);
       }
     }
   }
@@ -80,12 +86,13 @@ class RoutesVisitor extends RecursiveAstVisitor<void> {
 // Assumptions:
 // * inline is always a class declaration.
 // * both the main and inlined widgets are in the same file.
-class SampleVisitor extends RecursiveAstVisitor<Future<void>> {
-  final Map<String, Sample> _samples;
+class _SampleVisitor extends RecursiveAstVisitor<Future<void>> {
+  final Map<String, Snippet> _snippets;
   final ResolvedUnitResult _result;
   final AnalysisSession _session;
+  final OverlayResourceProvider _overlay;
 
-  SampleVisitor(this._samples, this._result, this._session);
+  _SampleVisitor(this._snippets, this._result, this._session, this._overlay);
 
   @override
   Future<void> visitClassDeclaration(ClassDeclaration node) async {
@@ -103,26 +110,18 @@ class SampleVisitor extends RecursiveAstVisitor<Future<void>> {
       full = value.getField('full')?.toBoolValue() ?? false;
     }
 
-    final sample = _samples[node.name.lexeme] ??= Sample();
+    final snippet = _snippets[node.name.lexeme] ??= Snippet();
     if (inline == null) {
-      sample.source = await _include(
-        _result,
-        inclusions,
-        node,
-        visitWidget(_result, node, const {}, full: full),
-      );
+      snippet.source = await _include(_result, inclusions, node, visitWidget(_result, node, const {}, full: full));
     } else {
       final InlineCallSiteVisitor(:inlines) = InlineCallSiteVisitor(inline)..visitClassDeclaration(node);
       final (result, type as ClassDeclaration) = (await _session.declaration(inline.element!))!;
-      sample.source = await _include(
-        result,
-        inclusions,
-        node,
-        visitWidget(result, type, inlines, full: full),
-      );
+      snippet.source = await _include(result, inclusions, node, visitWidget(result, type, inlines, full: full));
     }
 
-    transformHighlights(sample);
+    transformHighlights(snippet);
+    await transformLinks(snippet, _session, _overlay);
+    // TODO: postprocessing step that removes all imports
   }
 
   Future<String> _include(

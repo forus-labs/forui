@@ -1,7 +1,7 @@
 import 'main.dart';
 
 // Nested highlighting isn't supported. That's just silly.
-void transformHighlights(Sample sample) {
+void transformHighlights(Snippet sample) {
   final lines = <String>[];
   int? start;
   var lineNumber = 0;
