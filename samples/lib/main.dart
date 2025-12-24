@@ -7,6 +7,14 @@ import 'package:forui/forui.dart';
 import 'package:forui_samples/main.gr.dart';
 import 'package:forui_samples/sample.dart';
 
+class Options {
+  final List<Type> include;
+  final Type? inline;
+  final bool full;
+
+  const Options({this.include = const [], this.inline, this.full = false});
+}
+
 void main() {
   usePathUrlStrategy();
   runApp(ForuiSamples());
@@ -183,7 +191,7 @@ class _AppRouter extends RootStackRouter {
     AutoRoute(path: '/tile-group/default', page: TileGroupRoute.page),
     AutoRoute(path: '/tile-group/scrollable', page: ScrollableTileGroupRoute.page),
     AutoRoute(path: '/tile-group/lazy', page: LazyTileGroupRoute.page),
-    AutoRoute(path: '/tile-group/merge', page: MergeTileGroup.page),
+    AutoRoute(path: '/tile-group/merge', page: MergeTileGroupRoute.page),
     AutoRoute(path: '/time-field/default', page: TimeFieldRoute.page),
     AutoRoute(path: '/time-field/picker', page: PickerTimeFieldRoute.page),
     AutoRoute(path: '/time-field/validator', page: ValidatorTimeFieldRoute.page),

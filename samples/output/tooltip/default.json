@@ -1,0 +1,86 @@
+{
+  "highlights": [],
+  "links": [
+    {
+      "offset": 38,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FTheme/FTheme.html"
+    },
+    {
+      "offset": 48,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FTheme/data.html"
+    },
+    {
+      "offset": 63,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FTheme/child.html"
+    },
+    {
+      "offset": 70,
+      "length": 9,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.scaffold/FScaffold/FScaffold.html"
+    },
+    {
+      "offset": 85,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.scaffold/FScaffold/child.html"
+    },
+    {
+      "offset": 387,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tooltip/FTooltip/FTooltip.html"
+    },
+    {
+      "offset": 413,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tooltip/FTooltip/hover.html"
+    },
+    {
+      "offset": 443,
+      "length": 9,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tooltip/FTooltip/longPress.html"
+    },
+    {
+      "offset": 481,
+      "length": 9,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tooltip/FTooltip/tipAnchor.html"
+    },
+    {
+      "offset": 556,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tooltip/FTooltip/childAnchor.html"
+    },
+    {
+      "offset": 631,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tooltip/FTooltip/tipBuilder.html"
+    },
+    {
+      "offset": 705,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tooltip/FTooltip/child.html"
+    },
+    {
+      "offset": 712,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/FButton.html"
+    },
+    {
+      "offset": 739,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/style.html"
+    },
+    {
+      "offset": 826,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/onPress.html"
+    },
+    {
+      "offset": 860,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/child.html"
+    }
+  ],
+  "source": "Widget build(BuildContext context) => FTheme(\n  data: theme,\n  child: FScaffold(\n    child: Center(\n      child: ConstrainedBox(\n        constraints: const BoxConstraints(maxWidth: 200, maxHeight: 200),\n        child: Builder(\n          builder: (context) => Column(\n            mainAxisAlignment: .center,\n            children: [\n              const SizedBox(height: 30),\n              FTooltip(\n                hover: hover,\n                longPress: longPress,\n                tipAnchor: axis == .horizontal ? .topLeft : .bottomCenter,\n                childAnchor: axis == .horizontal ? .topRight : .topCenter,\n                tipBuilder: (context, _) => const Text('Add to library'),\n                child: FButton(\n                  style: FButtonStyle.outline(),\n                  mainAxisSize: .min,\n                  onPress: () {},\n                  child: Text(\n                    [if (longPress) 'Long press', if (hover) 'Hover'].join('/'),\n                  ),\n                ),\n              ),\n            ],\n          ),\n        ),\n      ),\n    ),\n  ),\n);\n"
+}
