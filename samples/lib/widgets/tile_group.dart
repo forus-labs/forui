@@ -100,14 +100,14 @@ class LazyTileGroupPage extends Sample {
 }
 
 @RoutePage()
-class MergeTileGroup extends StatefulSample {
-  MergeTileGroup({@queryParam super.theme});
+class MergeTileGroupPage extends StatefulSample {
+  MergeTileGroupPage({@queryParam super.theme});
 
   @override
-  State<MergeTileGroup> createState() => _MergeTileGroupPageState();
+  State<MergeTileGroupPage> createState() => _MergeTileGroupPageState();
 }
 
-class _MergeTileGroupPageState extends StatefulSampleState<MergeTileGroup> {
+class _MergeTileGroupPageState extends StatefulSampleState<MergeTileGroupPage> {
   @override
   Widget sample(BuildContext context) => FTileGroup.merge(
     label: const Text('Settings'),

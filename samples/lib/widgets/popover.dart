@@ -19,7 +19,6 @@ class PopoverPage extends Sample {
     @queryParam String hideRegion = 'excludeChild',
     @queryParam String overflow = 'flip',
     @queryParam super.theme,
-    super.top = 30,
   }) : axis = switch (axis) {
          'horizontal' => .horizontal,
          _ => .vertical,
@@ -40,6 +39,7 @@ class PopoverPage extends Sample {
            _ => .center,
          },
          maxHeight: 200,
+         top: 30,
        );
 
   @override
@@ -74,6 +74,7 @@ class PopoverPage extends Sample {
             ].indexed) ...[
               Row(
                 children: [
+                  // {@highlight}
                   Expanded(child: Text(label, style: context.theme.typography.sm)),
                   Expanded(
                     flex: 2,
@@ -82,6 +83,7 @@ class PopoverPage extends Sample {
                       autofocus: index == 0,
                     ),
                   ),
+                  // {@endhighlight}
                 ],
               ),
               const SizedBox(height: 7),
