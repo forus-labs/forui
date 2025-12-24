@@ -52,7 +52,10 @@ class StatelessWidgetClassVisitor extends InliningVisitor {
     final superclass = node.extendsClause!.superclass;
     _sample = superclass.name.lexeme == 'Sample';
 
-    transformations.only(node);
+    transformations
+      ..only(node)
+      ..deleteAll(node.metadata);
+
     if (node.name case final name when name.lexeme.endsWith('Page')) {
       transformations.replace(name, name.lexeme.replaceAll('Page', 'Example'));
     }
@@ -120,7 +123,9 @@ class StatefulWidgetVisitor extends InliningVisitor {
     final superclass = node.extendsClause!.superclass;
     _sample = superclass.name.lexeme == 'StatefulSample';
 
-    transformations.only(node);
+    transformations
+      ..only(node)
+      ..deleteAll(node.metadata);
 
     if (node.name case final name when name.lexeme.endsWith('Page')) {
       transformations.replace(name, name.lexeme.replaceAll('Page', 'Example'));
@@ -172,7 +177,9 @@ class StateVisitor extends RecursiveAstVisitor {
     final superclass = node.extendsClause!.superclass;
     _sample = superclass.name.lexeme == 'StatefulSampleState';
 
-    transformations.only(node);
+    transformations
+      ..only(node)
+      ..deleteAll(node.metadata);
 
     if (node.name case final name when name.lexeme.contains('Page')) {
       transformations.replace(name, name.lexeme.replaceAll('Page', 'Example'));

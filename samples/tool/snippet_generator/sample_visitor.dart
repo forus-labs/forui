@@ -40,6 +40,8 @@ Future<Map<String, Snippet>> transformSamples(
     if (await session.getResolvedUnit(file.path) case final ResolvedUnitResult result) {
       final sampleVisitor = _SampleVisitor(snippets, result, session, overlay);
       result.unit.visitChildren(sampleVisitor);
+
+      await Future.wait(sampleVisitor.pendingTasks);
     }
   }
 
@@ -86,7 +88,8 @@ class _RoutesVisitor extends RecursiveAstVisitor<void> {
 // Assumptions:
 // * inline is always a class declaration.
 // * both the main and inlined widgets are in the same file.
-class _SampleVisitor extends RecursiveAstVisitor<Future<void>> {
+class _SampleVisitor extends RecursiveAstVisitor<void> {
+  final List<Future<void>> pendingTasks = [];
   final Map<String, Snippet> _snippets;
   final ResolvedUnitResult _result;
   final AnalysisSession _session;
@@ -95,11 +98,17 @@ class _SampleVisitor extends RecursiveAstVisitor<Future<void>> {
   _SampleVisitor(this._snippets, this._result, this._session, this._overlay);
 
   @override
-  Future<void> visitClassDeclaration(ClassDeclaration node) async {
+  void visitClassDeclaration(ClassDeclaration node) {
     if (node.metadata.none((a) => a.name.name == 'RoutePage')) {
       return;
     }
 
+    // We cannot make this async as the visitor pattern doesn't support async - visitChildren just calls each visitor
+    // method and ignores the returned Future.
+    pendingTasks.add(_schedule(node));
+  }
+
+  Future<void> _schedule(ClassDeclaration node) async {
     List<DartType> inclusions = const [];
     DartType? inline;
     bool full = false;
@@ -111,17 +120,19 @@ class _SampleVisitor extends RecursiveAstVisitor<Future<void>> {
     }
 
     final snippet = _snippets[node.name.lexeme] ??= Snippet();
+
+
     if (inline == null) {
       snippet.source = await _include(_result, inclusions, node, visitWidget(_result, node, const {}, full: full));
     } else {
       final InlineCallSiteVisitor(:inlines) = InlineCallSiteVisitor(inline)..visitClassDeclaration(node);
       final (result, type as ClassDeclaration) = (await _session.declaration(inline.element!))!;
-      snippet.source = await _include(result, inclusions, node, visitWidget(result, type, inlines, full: full));
+    snippet.source = await _include(result, inclusions, node, visitWidget(result, type, inlines, full: full));
     }
 
     transformHighlights(snippet);
     await transformLinks(snippet, _session, _overlay);
-    // TODO: postprocessing step that removes all imports
+    removeImports(snippet);
   }
 
   Future<String> _include(
