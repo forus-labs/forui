@@ -1,0 +1,16 @@
+{
+  "highlights": [],
+  "links": [
+    {
+      "offset": 38,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.pagination/FPagination/FPagination.html"
+    },
+    {
+      "offset": 53,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.pagination/FPagination/control.html"
+    }
+  ],
+  "source": "Widget build(BuildContext context) => FPagination(\n  control: switch (controller) {\n    'siblings' => const .managed(pages: 20, siblings: 2, initial: 9),\n    'hide-edges' => const .managed(pages: 8, showEdges: false),\n    _ => const .managed(pages: 10),\n  },\n);\n"
+}

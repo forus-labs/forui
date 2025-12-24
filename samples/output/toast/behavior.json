@@ -1,0 +1,61 @@
+{
+  "highlights": [],
+  "links": [
+    {
+      "offset": 38,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FTheme/FTheme.html"
+    },
+    {
+      "offset": 48,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FTheme/data.html"
+    },
+    {
+      "offset": 63,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FTheme/child.html"
+    },
+    {
+      "offset": 70,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.toast/FToaster/FToaster.html"
+    },
+    {
+      "offset": 84,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.toast/FToaster/style.html"
+    },
+    {
+      "offset": 158,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.toast/FToaster/child.html"
+    },
+    {
+      "offset": 165,
+      "length": 9,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.scaffold/FScaffold/FScaffold.html"
+    },
+    {
+      "offset": 182,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.scaffold/FScaffold/child.html"
+    },
+    {
+      "offset": 376,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/FButton.html"
+    },
+    {
+      "offset": 437,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/onPress.html"
+    },
+    {
+      "offset": 647,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/child.html"
+    }
+  ],
+  "source": "Widget build(BuildContext context) => FTheme(\n  data: theme,\n  child: FToaster(\n    style: context.theme.toasterStyle.copyWith(expandBehavior: behavior),\n    child: FScaffold(\n      child: Align(\n        child: ConstrainedBox(\n          constraints: const BoxConstraints(maxWidth: 400),\n          child: Builder(\n            builder: (context) => Center(\n              child: FButton(\n                mainAxisSize: .min,\n                onPress: () => showFToast(\n                  context: context,\n                  icon: const Icon(FIcons.info),\n                  title: const Text('Event has been created'),\n                ),\n                child: const Text('Show Toast'),\n              ),\n            ),\n          ),\n        ),\n      ),\n    ),\n  ),\n);\n"
+}

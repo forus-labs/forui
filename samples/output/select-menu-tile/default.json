@@ -1,0 +1,41 @@
+{
+  "highlights": [],
+  "links": [
+    {
+      "offset": 32,
+      "length": 37,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_menu_tile/FSelectMenuTile/FSelectMenuTile.fromMap.html"
+    },
+    {
+      "offset": 142,
+      "length": 13,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_menu_tile/FSelectMenuTile/selectControl.html"
+    },
+    {
+      "offset": 192,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_menu_tile/FSelectMenuTile/autoHide.html"
+    },
+    {
+      "offset": 214,
+      "length": 9,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_menu_tile/FSelectMenuTile/validator.html"
+    },
+    {
+      "offset": 279,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_menu_tile/FSelectMenuTile/prefix.html"
+    },
+    {
+      "offset": 314,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_menu_tile/FSelectMenuTile/title.html"
+    },
+    {
+      "offset": 352,
+      "length": 14,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_menu_tile/FSelectMenuTile/detailsBuilder.html"
+    }
+  ],
+  "source": "Widget build(BuildContext _) => FSelectMenuTile<Notification>.fromMap(\n  const {'All': .all, 'Direct Messages': .direct, 'None': .nothing},\n  selectControl: const .managed(initial: {.all}),\n  autoHide: autoHide,\n  validator: (value) => value == null ? 'Select an item' : null,\n  prefix: const Icon(FIcons.bell),\n  title: const Text('Notifications'),\n  detailsBuilder: (_, values, _) => Text(switch (values.firstOrNull) {\n    .all => 'All',\n    .direct => 'Direct Messages',\n    _ => 'None',\n  }),\n);\n"
+}

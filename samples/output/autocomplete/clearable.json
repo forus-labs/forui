@@ -1,0 +1,21 @@
+{
+  "highlights": [],
+  "links": [
+    {
+      "offset": 32,
+      "length": 13,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.autocomplete/FAutocomplete/FAutocomplete.html"
+    },
+    {
+      "offset": 49,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.autocomplete/FAutocomplete/hint.html"
+    },
+    {
+      "offset": 82,
+      "length": 9,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.autocomplete/FAutocomplete/clearable.html"
+    }
+  ],
+  "source": "Widget build(BuildContext _) => FAutocomplete(\n  hint: 'Type to search fruits',\n  clearable: (value) => value.text.isNotEmpty,\n  items: fruits,\n);\n"
+}

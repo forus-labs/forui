@@ -1,0 +1,41 @@
+{
+  "highlights": [],
+  "links": [
+    {
+      "offset": 32,
+      "length": 23,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_menu_tile/FSelectMenuTile/FSelectMenuTile.builder.html"
+    },
+    {
+      "offset": 59,
+      "length": 13,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_menu_tile/FSelectMenuTile/selectControl.html"
+    },
+    {
+      "offset": 106,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_menu_tile/FSelectMenuTile/prefix.html"
+    },
+    {
+      "offset": 145,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_menu_tile/FSelectMenuTile/title.html"
+    },
+    {
+      "offset": 187,
+      "length": 9,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_menu_tile/FSelectMenuTile/maxHeight.html"
+    },
+    {
+      "offset": 250,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_tile_group/FSelectTile/title.html"
+    },
+    {
+      "offset": 278,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_tile_group/FSelectTile/value.html"
+    }
+  ],
+  "source": "Widget build(BuildContext _) => FSelectMenuTile.builder(\n  selectControl: const .managed(initial: {1}),\n  prefix: const Icon(FIcons.variable),\n  title: const Text('Applicable values'),\n  maxHeight: 200,\n  menuBuilder: (context, index) =>\n      .tile(title: Text('Tile $index'), value: index),\n);\n"
+}

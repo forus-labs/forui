@@ -1,0 +1,91 @@
+{
+  "highlights": [],
+  "links": [
+    {
+      "offset": 32,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.header/FHeader/FHeader.html"
+    },
+    {
+      "offset": 43,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.header/FHeader/title.html"
+    },
+    {
+      "offset": 94,
+      "length": 18,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.popover_menu/FPopoverMenu/FPopoverMenu.tiles.html"
+    },
+    {
+      "offset": 120,
+      "length": 9,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.popover_menu/FPopoverMenu/autofocus.html"
+    },
+    {
+      "offset": 143,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.popover_menu/FPopoverMenu/menuAnchor.html"
+    },
+    {
+      "offset": 172,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.popover_menu/FPopoverMenu/childAnchor.html"
+    },
+    {
+      "offset": 222,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTileGroupMixin/group.html"
+    },
+    {
+      "offset": 264,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTileMixin/tile.html"
+    },
+    {
+      "offset": 427,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTileMixin/tile.html"
+    },
+    {
+      "offset": 595,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTileMixin/tile.html"
+    },
+    {
+      "offset": 778,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTileGroupMixin/group.html"
+    },
+    {
+      "offset": 820,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTileMixin/tile.html"
+    },
+    {
+      "offset": 977,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTileMixin/tile.html"
+    },
+    {
+      "offset": 1166,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.popover_menu/FPopoverMenu/builder.html"
+    },
+    {
+      "offset": 1197,
+      "length": 13,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.header/FHeaderAction/FHeaderAction.html"
+    },
+    {
+      "offset": 1220,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.header/FHeaderAction/icon.html"
+    },
+    {
+      "offset": 1263,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.header/FHeaderAction/onPress.html"
+    }
+  ],
+  "source": "Widget build(BuildContext _) => FHeader(\n  title: const Text('Edit Notes'),\n  suffixes: [\n    FPopoverMenu.tiles(\n      autofocus: true,\n      menuAnchor: .topRight,\n      childAnchor: .bottomRight,\n      menu: [\n        .group(\n          children: [\n            .tile(\n              prefix: const Icon(FIcons.user),\n              title: const Text('Personalization'),\n              onPress: () {},\n            ),\n            .tile(\n              prefix: const Icon(FIcons.paperclip),\n              title: const Text('Add attachments'),\n              onPress: () {},\n            ),\n            .tile(\n              prefix: const Icon(FIcons.qrCode),\n              title: const Text('Scan Document'),\n              onPress: () {},\n            ),\n          ],\n        ),\n        .group(\n          children: [\n            .tile(\n              prefix: const Icon(FIcons.list),\n              title: const Text('List View'),\n              onPress: () {},\n            ),\n            .tile(\n              prefix: const Icon(FIcons.layoutGrid),\n              title: const Text('Grid View'),\n              onPress: () {},\n            ),\n          ],\n        ),\n      ],\n      builder: (_, controller, _) => FHeaderAction(\n        icon: const Icon(FIcons.ellipsis),\n        onPress: controller.toggle,\n      ),\n    ),\n  ],\n);\n"
+}

@@ -1,0 +1,31 @@
+{
+  "highlights": [],
+  "links": [
+    {
+      "offset": 449,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.divider/FDivider/FDivider.html"
+    },
+    {
+      "offset": 702,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.divider/FDivider/FDivider.html"
+    },
+    {
+      "offset": 711,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.divider/FDivider/axis.html"
+    },
+    {
+      "offset": 824,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.divider/FDivider/FDivider.html"
+    },
+    {
+      "offset": 833,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.divider/FDivider/axis.html"
+    }
+  ],
+  "source": "Widget build(BuildContext _) {\n  final colors = theme.colors;\n  final text = theme.typography;\n\n  return Column(\n    mainAxisAlignment: .center,\n    mainAxisSize: .min,\n    children: [\n      Text(\n        'Flutter Forui',\n        style: text.xl2.copyWith(color: colors.foreground, fontWeight: .w600),\n      ),\n      Text(\n        'An open-source widget library.',\n        style: text.sm.copyWith(color: colors.mutedForeground),\n      ),\n      const FDivider(),\n      SizedBox(\n        height: 30,\n        child: Row(\n          mainAxisAlignment: .center,\n          mainAxisSize: .min,\n          children: [\n            Text('Blog', style: text.sm.copyWith(color: colors.foreground)),\n            const FDivider(axis: .vertical),\n            Text('Docs', style: text.sm.copyWith(color: colors.foreground)),\n            const FDivider(axis: .vertical),\n            Text('Source', style: text.sm.copyWith(color: colors.foreground)),\n          ],\n        ),\n      ),\n    ],\n  );\n}\n"
+}

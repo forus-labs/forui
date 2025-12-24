@@ -1,0 +1,36 @@
+{
+  "highlights": [],
+  "links": [
+    {
+      "offset": 32,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItemGroup/FItemGroup.html"
+    },
+    {
+      "offset": 46,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItemGroup/divider.html"
+    },
+    {
+      "offset": 82,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItem/FItem.html"
+    },
+    {
+      "offset": 225,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItem/onPress.html"
+    },
+    {
+      "offset": 252,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItem/FItem.html"
+    },
+    {
+      "offset": 427,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItem/onPress.html"
+    }
+  ],
+  "source": "Widget build(BuildContext _) => FItemGroup(\n  divider: divider,\n  children: [\n    FItem(\n      prefix: const Icon(FIcons.user),\n      title: const Text('Personalization'),\n      suffix: const Icon(FIcons.chevronRight),\n      onPress: () {},\n    ),\n    FItem(\n      prefix: const Icon(FIcons.wifi),\n      title: const Text('WiFi'),\n      details: const Text('Duobase (5G)'),\n      suffix: const Icon(FIcons.chevronRight),\n      onPress: () {},\n    ),\n  ],\n);\n"
+}

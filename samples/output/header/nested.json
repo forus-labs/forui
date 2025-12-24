@@ -1,0 +1,56 @@
+{
+  "highlights": [],
+  "links": [
+    {
+      "offset": 32,
+      "length": 14,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.header/FHeader/FHeader.nested.html"
+    },
+    {
+      "offset": 50,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.header/FHeader/title.html"
+    },
+    {
+      "offset": 97,
+      "length": 18,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.header/FHeaderAction/FHeaderAction.back.html"
+    },
+    {
+      "offset": 116,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.header/FHeaderAction/onPress.html"
+    },
+    {
+      "offset": 152,
+      "length": 13,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.header/FHeaderAction/FHeaderAction.html"
+    },
+    {
+      "offset": 166,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.header/FHeaderAction/icon.html"
+    },
+    {
+      "offset": 197,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.header/FHeaderAction/onPress.html"
+    },
+    {
+      "offset": 218,
+      "length": 13,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.header/FHeaderAction/FHeaderAction.html"
+    },
+    {
+      "offset": 232,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.header/FHeaderAction/icon.html"
+    },
+    {
+      "offset": 263,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.header/FHeaderAction/onPress.html"
+    }
+  ],
+  "source": "Widget build(BuildContext _) => FHeader.nested(\n  title: const Text('Appointment'),\n  prefixes: [FHeaderAction.back(onPress: () {})],\n  suffixes: [\n    FHeaderAction(icon: const Icon(FIcons.info), onPress: () {}),\n    FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {}),\n  ],\n);\n"
+}

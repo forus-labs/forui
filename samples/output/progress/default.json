@@ -1,0 +1,11 @@
+{
+  "highlights": [],
+  "links": [
+    {
+      "offset": 38,
+      "length": 9,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.progress/FProgress/FProgress.html"
+    }
+  ],
+  "source": "Widget build(BuildContext _) => const FProgress();\n"
+}

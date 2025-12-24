@@ -1,0 +1,31 @@
+{
+  "highlights": [],
+  "links": [
+    {
+      "offset": 38,
+      "length": 20,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelect/FSelect.rich.html"
+    },
+    {
+      "offset": 62,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelect/control.html"
+    },
+    {
+      "offset": 125,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelect/hint.html"
+    },
+    {
+      "offset": 151,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelect/format.html"
+    },
+    {
+      "offset": 216,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/item.html"
+    }
+  ],
+  "source": "Widget build(BuildContext context) => FSelect<String>.rich(\n  control: const .managed(initial: 'Apple', toggleable: true),\n  hint: 'Select a fruit',\n  format: (s) => s,\n  children: [\n    for (final fruit in fruits) .item(title: Text(fruit), value: fruit),\n  ],\n);\n"
+}

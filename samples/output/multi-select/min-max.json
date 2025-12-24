@@ -1,0 +1,31 @@
+{
+  "highlights": [],
+  "links": [
+    {
+      "offset": 38,
+      "length": 25,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FMultiSelect/FMultiSelect.rich.html"
+    },
+    {
+      "offset": 67,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FMultiSelect/control.html"
+    },
+    {
+      "offset": 110,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FMultiSelect/hint.html"
+    },
+    {
+      "offset": 156,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FMultiSelect/format.html"
+    },
+    {
+      "offset": 221,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/item.html"
+    }
+  ],
+  "source": "Widget build(BuildContext context) => FMultiSelect<String>.rich(\n  control: const .managed(min: 1, max: 3),\n  hint: const Text('Select favorite fruits'),\n  format: Text.new,\n  children: [\n    for (final fruit in fruits) .item(title: Text(fruit), value: fruit),\n  ],\n);\n"
+}

@@ -1,0 +1,46 @@
+{
+  "highlights": [],
+  "links": [
+    {
+      "offset": 85,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.breadcrumb/FBreadcrumb/FBreadcrumb.html"
+    },
+    {
+      "offset": 104,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.breadcrumb/FBreadcrumb/children.html"
+    },
+    {
+      "offset": 124,
+      "length": 15,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.html"
+    },
+    {
+      "offset": 193,
+      "length": 25,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.collapsed.html"
+    },
+    {
+      "offset": 301,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItemMixin/item.html"
+    },
+    {
+      "offset": 376,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItemMixin/item.html"
+    },
+    {
+      "offset": 491,
+      "length": 15,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.html"
+    },
+    {
+      "offset": 567,
+      "length": 15,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.html"
+    }
+  ],
+  "source": "Widget build(BuildContext _) => Row(\n  mainAxisAlignment: .center,\n  children: [\n    FBreadcrumb(\n      children: [\n        FBreadcrumbItem(onPress: () {}, child: const Text('Forui')),\n        FBreadcrumbItem.collapsed(\n          menu: [\n            .group(\n              children: [\n                .item(title: const Text('Documentation'), onPress: () {}),\n                .item(title: const Text('Themes'), onPress: () {}),\n              ],\n            ),\n          ],\n        ),\n        FBreadcrumbItem(onPress: () {}, child: const Text('Layout')),\n        const FBreadcrumbItem(current: true, child: Text('Widgets')),\n      ],\n    ),\n  ],\n);\n"
+}

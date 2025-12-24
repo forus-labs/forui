@@ -1,0 +1,26 @@
+{
+  "highlights": [],
+  "links": [
+    {
+      "offset": 32,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.date_field/FDateField/FDateField.html"
+    },
+    {
+      "offset": 46,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.date_field/FDateField/control.html"
+    },
+    {
+      "offset": 84,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.date_field/FDateField/label.html"
+    },
+    {
+      "offset": 125,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.date_field/FDateField/description.html"
+    }
+  ],
+  "source": "Widget build(BuildContext _) => FDateField(\n  control: .managed(initial: .now()),\n  label: const Text('Appointment Date'),\n  description: const Text('Select a date for your appointment'),\n  clearable: true,\n);\n"
+}

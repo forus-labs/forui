@@ -1,0 +1,21 @@
+{
+  "highlights": [],
+  "links": [
+    {
+      "offset": 32,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTile/FTile.html"
+    },
+    {
+      "offset": 41,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTile/enabled.html"
+    },
+    {
+      "offset": 179,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTile/onPress.html"
+    }
+  ],
+  "source": "Widget build(BuildContext _) => FTile(\n  enabled: enabled,\n  prefix: const Icon(FIcons.user),\n  title: const Text('Personalization'),\n  suffix: const Icon(FIcons.chevronRight),\n  onPress: tappable ? () {} : null,\n);\n"
+}

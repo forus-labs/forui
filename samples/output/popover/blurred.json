@@ -1,0 +1,91 @@
+{
+  "highlights": [],
+  "links": [
+    {
+      "offset": 361,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.text_field/FTextField/FTextField.html"
+    },
+    {
+      "offset": 383,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.text_field/FTextField/control.html"
+    },
+    {
+      "offset": 541,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.text_field/FTextField/FTextField.html"
+    },
+    {
+      "offset": 563,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.text_field/FTextField/control.html"
+    },
+    {
+      "offset": 700,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.popover/FPopover/FPopover.html"
+    },
+    {
+      "offset": 716,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.popover/FPopover/style.html"
+    },
+    {
+      "offset": 1146,
+      "length": 13,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.popover/FPopover/popoverAnchor.html"
+    },
+    {
+      "offset": 1179,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.popover/FPopover/childAnchor.html"
+    },
+    {
+      "offset": 1213,
+      "length": 14,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.popover/FPopover/popoverBuilder.html"
+    },
+    {
+      "offset": 2428,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.text_field/FTextField/FTextField.html"
+    },
+    {
+      "offset": 2464,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.text_field/FTextField/control.html"
+    },
+    {
+      "offset": 2600,
+      "length": 9,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.text_field/FTextField/autofocus.html"
+    },
+    {
+      "offset": 2825,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.popover/FPopover/builder.html"
+    },
+    {
+      "offset": 2856,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/FButton.html"
+    },
+    {
+      "offset": 2873,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/style.html"
+    },
+    {
+      "offset": 2940,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/onPress.html"
+    },
+    {
+      "offset": 2976,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/child.html"
+    }
+  ],
+  "source": "Widget build(BuildContext context) => Column(\n  mainAxisAlignment: .center,\n  crossAxisAlignment: .end,\n  children: [\n    Column(\n      crossAxisAlignment: .start,\n      children: [\n        Text(\n          'Layer Properties',\n          style: context.theme.typography.xl.copyWith(fontWeight: .bold),\n        ),\n        const SizedBox(height: 20),\n        const FTextField(\n          control: .managed(\n            initial: TextEditingValue(text: 'Header Component'),\n          ),\n        ),\n        const SizedBox(height: 16),\n        const FTextField(\n          control: .managed(initial: TextEditingValue(text: 'Navigation Bar')),\n        ),\n        const SizedBox(height: 30),\n      ],\n    ),\n    FPopover(\n      style: context.theme.popoverStyle.copyWith(\n        barrierFilter: (animation) => ImageFilter.compose(\n          outer: ImageFilter.blur(sigmaX: animation * 5, sigmaY: animation * 5),\n          inner: ColorFilter.mode(\n            Color.lerp(\n              Colors.transparent,\n              Colors.black.withValues(alpha: 0.2),\n              animation,\n            )!,\n            .srcOver,\n          ),\n        ),\n      ),\n      popoverAnchor: .topCenter,\n      childAnchor: .bottomCenter,\n      popoverBuilder: (context, _) => Padding(\n        padding: const .only(left: 20, top: 14, right: 20, bottom: 10),\n        child: SizedBox(\n          width: 288,\n          child: Column(\n            mainAxisSize: .min,\n            crossAxisAlignment: .start,\n            children: [\n              Text('Dimensions', style: context.theme.typography.base),\n              const SizedBox(height: 7),\n              Text(\n                'Set the dimensions for the layer.',\n                style: context.theme.typography.sm.copyWith(\n                  color: context.theme.colors.mutedForeground,\n                  fontWeight: .w300,\n                ),\n              ),\n              const SizedBox(height: 15),\n              for (final (index, (label, value)) in [\n                ('Width', '100%'),\n                ('Max. Width', '300px'),\n                ('Height', '25px'),\n                ('Max. Height', 'none'),\n              ].indexed) ...[\n                Row(\n                  children: [\n                    Expanded(\n                      child: Text(label, style: context.theme.typography.sm),\n                    ),\n                    Expanded(\n                      flex: 2,\n                      child: FTextField(\n                        control: .managed(\n                          initial: TextEditingValue(text: value),\n                        ),\n                        autofocus: index == 0,\n                      ),\n                    ),\n                  ],\n                ),\n                const SizedBox(height: 7),\n              ],\n            ],\n          ),\n        ),\n      ),\n      builder: (_, controller, _) => FButton(\n        style: FButtonStyle.outline(),\n        mainAxisSize: .min,\n        onPress: controller.toggle,\n        child: const Text('Open popover'),\n      ),\n    ),\n  ],\n);\n"
+}

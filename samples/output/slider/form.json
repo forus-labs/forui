@@ -1,0 +1,106 @@
+{
+  "highlights": [],
+  "links": [
+    {
+      "offset": 445,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSlider/FSlider.html"
+    },
+    {
+      "offset": 464,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSlider/control.html"
+    },
+    {
+      "offset": 501,
+      "length": 12,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSliderValue/FSliderValue.html"
+    },
+    {
+      "offset": 514,
+      "length": 3,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSliderValue/max.html"
+    },
+    {
+      "offset": 537,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSlider/label.html"
+    },
+    {
+      "offset": 580,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSlider/description.html"
+    },
+    {
+      "offset": 647,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSlider/marks.html"
+    },
+    {
+      "offset": 680,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSliderMark/value.html"
+    },
+    {
+      "offset": 690,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSliderMark/label.html"
+    },
+    {
+      "offset": 728,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSliderMark/value.html"
+    },
+    {
+      "offset": 741,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSliderMark/tick.html"
+    },
+    {
+      "offset": 773,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSliderMark/value.html"
+    },
+    {
+      "offset": 785,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSliderMark/label.html"
+    },
+    {
+      "offset": 824,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSliderMark/value.html"
+    },
+    {
+      "offset": 837,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSliderMark/tick.html"
+    },
+    {
+      "offset": 869,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSliderMark/value.html"
+    },
+    {
+      "offset": 879,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSliderMark/label.html"
+    },
+    {
+      "offset": 933,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/FButton.html"
+    },
+    {
+      "offset": 952,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/child.html"
+    },
+    {
+      "offset": 989,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/onPress.html"
+    }
+  ],
+  "source": "class SliderFormExample extends StatefulWidget {\n  @override\n  State<SliderFormExample> createState() => _SliderFormExampleState();\n}\n\nclass _SliderFormExampleState extends State<SliderFormExample> {\n  final _key = GlobalKey<FormState>();\n\n  @override\n  Widget build(BuildContext context) => Form(\n    key: _key,\n    child: Column(\n      mainAxisAlignment: .center,\n      crossAxisAlignment: .start,\n      spacing: 20,\n      children: [\n        FSlider(\n          control: .managedContinuous(initial: FSliderValue(max: 0.35)),\n          label: const Text('Brightness'),\n          description: const Text('Adjust the brightness level.'),\n          marks: const [\n            .mark(value: 0, label: Text('0%')),\n            .mark(value: 0.25, tick: false),\n            .mark(value: 0.5, label: Text('50%')),\n            .mark(value: 0.75, tick: false),\n            .mark(value: 1, label: Text('100%')),\n          ],\n        ),\n        FButton(\n          child: const Text('Save'),\n          onPress: () {\n            if (!_key.currentState!.validate()) {\n              // Handle errors here.\n              return;\n            }\n\n            _key.currentState!.save();\n            // Do something.\n          },\n        ),\n      ],\n    ),\n  );\n}\n"
+}

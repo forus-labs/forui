@@ -1,0 +1,16 @@
+{
+  "highlights": [],
+  "links": [
+    {
+      "offset": 32,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItem/FItem.html"
+    },
+    {
+      "offset": 187,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItem/onPress.html"
+    }
+  ],
+  "source": "Widget build(BuildContext _) => FItem(\n  prefix: const Icon(FIcons.wifi),\n  title: const Text('WiFi'),\n  details: const Text('Duobase (5G)'),\n  suffix: const Icon(FIcons.chevronRight),\n  onPress: () {},\n);\n"
+}

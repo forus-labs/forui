@@ -1,0 +1,26 @@
+{
+  "highlights": [],
+  "links": [
+    {
+      "offset": 32,
+      "length": 34,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FMultiSelect/FMultiSelect.searchBuilder.html"
+    },
+    {
+      "offset": 70,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FMultiSelect/hint.html"
+    },
+    {
+      "offset": 108,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FMultiSelect/format.html"
+    },
+    {
+      "offset": 648,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/item.html"
+    }
+  ],
+  "source": "Widget build(BuildContext _) => FMultiSelect<String>.searchBuilder(\n  hint: const Text('Select a fruit'),\n  format: Text.new,\n  filter: (query) async {\n    await Future.delayed(const Duration(seconds: 1));\n    return query.isEmpty\n        ? fruits\n        : fruits.where(\n            (fruit) => fruit.toLowerCase().startsWith(query.toLowerCase()),\n          );\n  },\n  contentLoadingBuilder: (context, style) => Padding(\n    padding: const .all(8.0),\n    child: Text(\n      'Here be dragons...',\n      style: style.textFieldStyle.contentTextStyle.resolve({}),\n    ),\n  ),\n  contentBuilder: (context, _, fruits) => [\n    for (final fruit in fruits) .item(title: Text(fruit), value: fruit),\n  ],\n);\n"
+}

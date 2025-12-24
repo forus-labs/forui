@@ -1,0 +1,26 @@
+{
+  "highlights": [],
+  "links": [
+    {
+      "offset": 36,
+      "length": 56,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FMultiSelect/FMultiSelect.rich.html"
+    },
+    {
+      "offset": 100,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FMultiSelect/hint.html"
+    },
+    {
+      "offset": 141,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FMultiSelect/format.html"
+    },
+    {
+      "offset": 266,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/item.html"
+    }
+  ],
+  "source": "Widget build(BuildContext _) =>\n    FMultiSelect<({String firstName, String lastName})>.rich(\n      hint: const Text('Select a user'),\n      format: (user) => Text('${user.firstName} ${user.lastName}'),\n      children: [\n        for (final user in users)\n          .item(title: Text(user.firstName), value: user),\n      ],\n    );\n"
+}

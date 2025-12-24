@@ -1,0 +1,26 @@
+{
+  "highlights": [],
+  "links": [
+    {
+      "offset": 275,
+      "length": 9,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.checkbox/FCheckbox/FCheckbox.html"
+    },
+    {
+      "offset": 290,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.checkbox/FCheckbox/value.html"
+    },
+    {
+      "offset": 309,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.checkbox/FCheckbox/onChange.html"
+    },
+    {
+      "offset": 366,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.checkbox/FCheckbox/enabled.html"
+    }
+  ],
+  "source": "class RawCheckboxExample extends StatefulWidget {\n  @override\n  State<RawCheckboxExample> createState() => _RawCheckboxExampleState();\n}\n\nclass _RawCheckboxExampleState extends State<RawCheckboxExample> {\n  bool _state = false;\n\n  @override\n  Widget build(BuildContext _) => FCheckbox(\n    value: _state,\n    onChange: (value) => setState(() => _state = value),\n    enabled: widget.enabled,\n  );\n}\n"
+}

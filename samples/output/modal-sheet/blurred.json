@@ -1,0 +1,21 @@
+{
+  "highlights": [],
+  "links": [
+    {
+      "offset": 38,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/FButton.html"
+    },
+    {
+      "offset": 49,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/child.html"
+    },
+    {
+      "offset": 78,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/onPress.html"
+    }
+  ],
+  "source": "Widget build(BuildContext context) => FButton(\n  child: const Text('Open'),\n  onPress: () => showFSheet(\n    style: context.theme.modalSheetStyle.copyWith(\n      barrierFilter: (animation) => ImageFilter.compose(\n        outer: ImageFilter.blur(sigmaX: animation * 5, sigmaY: animation * 5),\n        inner: ColorFilter.mode(context.theme.colors.barrier, .srcOver),\n      ),\n    ),\n    context: context,\n    side: .ltr,\n    builder: (context) => const Form(side: .ltr),\n  ),\n);\n"
+}

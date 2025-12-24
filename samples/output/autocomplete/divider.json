@@ -1,0 +1,66 @@
+{
+  "highlights": [],
+  "links": [
+    {
+      "offset": 32,
+      "length": 21,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.autocomplete/FAutocomplete/FAutocomplete.builder.html"
+    },
+    {
+      "offset": 57,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.autocomplete/FAutocomplete/hint.html"
+    },
+    {
+      "offset": 90,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.autocomplete/FAutocomplete/filter.html"
+    },
+    {
+      "offset": 242,
+      "length": 14,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.autocomplete/FAutocomplete/contentBuilder.html"
+    },
+    {
+      "offset": 298,
+      "length": 22,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.autocomplete/FAutocompleteItemMixin-class.html"
+    },
+    {
+      "offset": 336,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.autocomplete/FAutocompleteItemMixin/richSection.html"
+    },
+    {
+      "offset": 507,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.autocomplete/FAutocompleteItem/value.html"
+    },
+    {
+      "offset": 575,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.autocomplete/FAutocompleteItem/value.html"
+    },
+    {
+      "offset": 634,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.autocomplete/FAutocompleteItemMixin/section.html"
+    },
+    {
+      "offset": 818,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.autocomplete/FAutocompleteItemMixin/item.html"
+    },
+    {
+      "offset": 880,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.autocomplete/FAutocompleteItemMixin/item.html"
+    },
+    {
+      "offset": 959,
+      "length": 20,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.autocomplete/FAutocompleteSection-class.html"
+    }
+  ],
+  "source": "Widget build(BuildContext _) => FAutocomplete.builder(\n  hint: 'Type to search levels',\n  filter: (query) => const [\n    '1A',\n    '1B',\n    '2A',\n    '2B',\n    '3',\n    '4',\n  ].where((i) => i.toLowerCase().contains(query.toLowerCase())),\n  contentBuilder: (context, query, suggestions) =>\n      <FAutocompleteItemMixin>[\n            .richSection(\n              label: const Text('Level 1'),\n              divider: .indented,\n              children: [\n                if (suggestions.contains('1A')) .item(value: '1A'),\n                if (suggestions.contains('1B')) .item(value: '1B'),\n              ],\n            ),\n            .section(\n              label: const Text('Level 2'),\n              items: ['2A', '2B'].where(suggestions.contains).toList(),\n            ),\n            if (suggestions.contains('3')) .item(value: '3'),\n            if (suggestions.contains('4')) .item(value: '4'),\n          ]\n          .where(\n            (item) => item is! FAutocompleteSection || item.children.isNotEmpty,\n          )\n          .toList(),\n);\n"
+}

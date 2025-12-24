@@ -1,0 +1,86 @@
+{
+  "highlights": [],
+  "links": [
+    {
+      "offset": 61,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/FButton.html"
+    },
+    {
+      "offset": 76,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/style.html"
+    },
+    {
+      "offset": 113,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/child.html"
+    },
+    {
+      "offset": 148,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/onPress.html"
+    },
+    {
+      "offset": 203,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/FButton.html"
+    },
+    {
+      "offset": 218,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/child.html"
+    },
+    {
+      "offset": 255,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/onPress.html"
+    },
+    {
+      "offset": 321,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/FButton.html"
+    },
+    {
+      "offset": 358,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/onPress.html"
+    },
+    {
+      "offset": 456,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FTheme/FTheme.html"
+    },
+    {
+      "offset": 472,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FTheme/data.html"
+    },
+    {
+      "offset": 493,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FTheme/child.html"
+    },
+    {
+      "offset": 500,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.dialog/FDialog/FDialog.html"
+    },
+    {
+      "offset": 519,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.dialog/FDialog/style.html"
+    },
+    {
+      "offset": 543,
+      "length": 9,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.dialog/FDialog/animation.html"
+    },
+    {
+      "offset": 933,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/child.html"
+    }
+  ],
+  "source": "Widget build(BuildContext context) {\n  final actions = [\n    FButton(\n      style: FButtonStyle.outline(),\n      child: const Text('Cancel'),\n      onPress: () => Navigator.of(context).pop(),\n    ),\n    FButton(\n      child: const Text('Continue'),\n      onPress: () => Navigator.of(context).pop(),\n    ),\n  ];\n\n  return FButton(\n    mainAxisSize: .min,\n    onPress: () => showFDialog(\n      context: context,\n      builder: (context, style, animation) => FTheme(\n        data: theme,\n        child: FDialog(\n          style: style,\n          animation: animation,\n          direction: direction,\n          title: const Text('Are you absolutely sure?'),\n          body: const Text(\n            'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',\n          ),\n          actions: direction == .vertical ? actions.reversed.toList() : actions,\n        ),\n      ),\n    ),\n    child: const Text('Show Dialog'),\n  );\n}\n"
+}

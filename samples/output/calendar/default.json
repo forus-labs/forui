@@ -1,0 +1,31 @@
+{
+  "highlights": [],
+  "links": [
+    {
+      "offset": 32,
+      "length": 9,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.calendar/FCalendar/FCalendar.html"
+    },
+    {
+      "offset": 45,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.calendar/FCalendar/control.html"
+    },
+    {
+      "offset": 55,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.calendar/FCalendarControl/managedDate.html"
+    },
+    {
+      "offset": 72,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.calendar/FCalendar/start.html"
+    },
+    {
+      "offset": 97,
+      "length": 3,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.calendar/FCalendar/end.html"
+    }
+  ],
+  "source": "Widget build(BuildContext _) => FCalendar(\n  control: .managedDate(),\n  start: DateTime(2000),\n  end: DateTime(2040),\n);\n"
+}

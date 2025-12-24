@@ -1,0 +1,26 @@
+{
+  "highlights": [],
+  "links": [
+    {
+      "offset": 38,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.picker/FPicker/FPicker.html"
+    },
+    {
+      "offset": 49,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.picker/FPicker/children.html"
+    },
+    {
+      "offset": 84,
+      "length": 20,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.picker/FPickerWheel/FPickerWheel.builder.html"
+    },
+    {
+      "offset": 165,
+      "length": 12,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.picker/FPickerWheel/FPickerWheel.html"
+    }
+  ],
+  "source": "Widget build(BuildContext context) => FPicker(\n  children: [\n    if (builder)\n      FPickerWheel.builder(builder: (context, index) => Text('$index'))\n    else\n      FPickerWheel(\n        loop: loop,\n        children: const [\n          Text('January'),\n          Text('February'),\n          Text('March'),\n          Text('April'),\n          Text('May'),\n          Text('June'),\n          Text('July'),\n          Text('August'),\n          Text('September'),\n          Text('October'),\n          Text('November'),\n          Text('December'),\n        ],\n      ),\n  ],\n);\n"
+}

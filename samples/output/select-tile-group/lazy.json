@@ -1,0 +1,36 @@
+{
+  "highlights": [],
+  "links": [
+    {
+      "offset": 32,
+      "length": 24,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_tile_group/FSelectTileGroup/FSelectTileGroup.builder.html"
+    },
+    {
+      "offset": 60,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_tile_group/FSelectTileGroup/control.html"
+    },
+    {
+      "offset": 101,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_tile_group/FSelectTileGroup/label.html"
+    },
+    {
+      "offset": 143,
+      "length": 9,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_tile_group/FSelectTileGroup/maxHeight.html"
+    },
+    {
+      "offset": 206,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_tile_group/FSelectTile/title.html"
+    },
+    {
+      "offset": 234,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_tile_group/FSelectTile/value.html"
+    }
+  ],
+  "source": "Widget build(BuildContext _) => FSelectTileGroup.builder(\n  control: const .managed(initial: {1}),\n  label: const Text('Applicable values'),\n  maxHeight: 200,\n  tileBuilder: (context, index) =>\n      .tile(title: Text('Tile $index'), value: index),\n);\n"
+}

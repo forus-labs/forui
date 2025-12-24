@@ -1,0 +1,136 @@
+{
+  "highlights": [],
+  "links": [
+    {
+      "offset": 141,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tabs/FTabs/FTabs.html"
+    },
+    {
+      "offset": 156,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tabs/FTabs/children.html"
+    },
+    {
+      "offset": 198,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tabs/FTabEntry/label.html"
+    },
+    {
+      "offset": 240,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tabs/FTabEntry/child.html"
+    },
+    {
+      "offset": 247,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.card/FCard/FCard.html"
+    },
+    {
+      "offset": 449,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.card/FCard/child.html"
+    },
+    {
+      "offset": 516,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.text_field/FTextField/FTextField.html"
+    },
+    {
+      "offset": 527,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.text_field/FTextField/label.html"
+    },
+    {
+      "offset": 548,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.text_field/FTextField/hint.html"
+    },
+    {
+      "offset": 640,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.text_field/FTextField/FTextField.html"
+    },
+    {
+      "offset": 651,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.text_field/FTextField/label.html"
+    },
+    {
+      "offset": 673,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.text_field/FTextField/hint.html"
+    },
+    {
+      "offset": 760,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/FButton.html"
+    },
+    {
+      "offset": 768,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/child.html"
+    },
+    {
+      "offset": 795,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/onPress.html"
+    },
+    {
+      "offset": 906,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tabs/FTabEntry/label.html"
+    },
+    {
+      "offset": 949,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tabs/FTabEntry/child.html"
+    },
+    {
+      "offset": 956,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.card/FCard/FCard.html"
+    },
+    {
+      "offset": 1159,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.card/FCard/child.html"
+    },
+    {
+      "offset": 1226,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.text_field/FTextField/FTextField.html"
+    },
+    {
+      "offset": 1237,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.text_field/FTextField/label.html"
+    },
+    {
+      "offset": 1341,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.text_field/FTextField/FTextField.html"
+    },
+    {
+      "offset": 1352,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.text_field/FTextField/label.html"
+    },
+    {
+      "offset": 1446,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/FButton.html"
+    },
+    {
+      "offset": 1454,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/child.html"
+    },
+    {
+      "offset": 1481,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/onPress.html"
+    }
+  ],
+  "source": "Widget build(BuildContext _) => Column(\n  mainAxisAlignment: .center,\n  children: [\n    Padding(\n      padding: const .all(16),\n      child: FTabs(\n        children: [\n          .entry(\n            label: const Text('Account'),\n            child: FCard(\n              title: const Text('Account'),\n              subtitle: const Text(\n                'Make changes to your account here. Click save when you are done.',\n              ),\n              child: Column(\n                children: [\n                  const FTextField(label: Text('Name'), hint: 'John Renalo'),\n                  const SizedBox(height: 10),\n                  const FTextField(label: Text('Email'), hint: 'john@doe.com'),\n                  const SizedBox(height: 16),\n                  FButton(child: const Text('Save'), onPress: () {}),\n                ],\n              ),\n            ),\n          ),\n          .entry(\n            label: const Text('Password'),\n            child: FCard(\n              title: const Text('Password'),\n              subtitle: const Text(\n                'Change your password here. After saving, you will be logged out.',\n              ),\n              child: Column(\n                children: [\n                  const FTextField(label: Text('Current password')),\n                  const SizedBox(height: 10),\n                  const FTextField(label: Text('New password')),\n                  const SizedBox(height: 16),\n                  FButton(child: const Text('Save'), onPress: () {}),\n                ],\n              ),\n            ),\n          ),\n        ],\n      ),\n    ),\n  ],\n);\n"
+}

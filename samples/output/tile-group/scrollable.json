@@ -1,0 +1,51 @@
+{
+  "highlights": [],
+  "links": [
+    {
+      "offset": 32,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTileGroup/FTileGroup.html"
+    },
+    {
+      "offset": 46,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTileGroup/label.html"
+    },
+    {
+      "offset": 79,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTileGroup/description.html"
+    },
+    {
+      "offset": 137,
+      "length": 9,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTileGroup/maxHeight.html"
+    },
+    {
+      "offset": 172,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTileMixin/tile.html"
+    },
+    {
+      "offset": 342,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTileMixin/tile.html"
+    },
+    {
+      "offset": 501,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTileMixin/tile.html"
+    },
+    {
+      "offset": 703,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTileMixin/tile.html"
+    },
+    {
+      "offset": 875,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTileMixin/tile.html"
+    }
+  ],
+  "source": "Widget build(BuildContext _) => FTileGroup(\n  label: const Text('Settings'),\n  description: const Text('Personalize your experience'),\n  maxHeight: 200,\n  children: [\n    .tile(\n      prefix: const Icon(FIcons.user),\n      title: const Text('Personalization'),\n      suffix: const Icon(FIcons.chevronRight),\n      onPress: () {},\n    ),\n    .tile(\n      prefix: const Icon(FIcons.mail),\n      title: const Text('Mail'),\n      suffix: const Icon(FIcons.chevronRight),\n      onPress: () {},\n    ),\n    .tile(\n      prefix: const Icon(FIcons.wifi),\n      title: const Text('WiFi'),\n      details: const Text('Duobase (5G)'),\n      suffix: const Icon(FIcons.chevronRight),\n      onPress: () {},\n    ),\n    .tile(\n      prefix: const Icon(FIcons.alarmClock),\n      title: const Text('Alarm Clock'),\n      suffix: const Icon(FIcons.chevronRight),\n      onPress: () {},\n    ),\n    .tile(\n      prefix: const Icon(FIcons.qrCode),\n      title: const Text('QR code'),\n      suffix: const Icon(FIcons.chevronRight),\n      onPress: () {},\n    ),\n  ],\n);\n"
+}

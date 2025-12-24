@@ -1,0 +1,46 @@
+{
+  "highlights": [],
+  "links": [
+    {
+      "offset": 38,
+      "length": 20,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelect/FSelect.rich.html"
+    },
+    {
+      "offset": 62,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelect/hint.html"
+    },
+    {
+      "offset": 88,
+      "length": 14,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelect/contentDivider.html"
+    },
+    {
+      "offset": 113,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelect/format.html"
+    },
+    {
+      "offset": 150,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/section.html"
+    },
+    {
+      "offset": 312,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/section.html"
+    },
+    {
+      "offset": 448,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/item.html"
+    },
+    {
+      "offset": 501,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/item.html"
+    }
+  ],
+  "source": "Widget build(BuildContext context) => FSelect<String>.rich(\n  hint: 'Select a level',\n  contentDivider: .full,\n  format: (s) => s,\n  children: [\n    .section(\n      label: const Text('Level 1'),\n      divider: .indented,\n      items: {\n        for (final item in ['A', 'B']) item: '1$item',\n      },\n    ),\n    .section(\n      label: const Text('Level 2'),\n      items: {\n        for (final item in ['A', 'B']) item: '2$item',\n      },\n    ),\n    .item(title: const Text('Level 3'), value: '3'),\n    .item(title: const Text('Level 4'), value: '4'),\n  ],\n);\n"
+}

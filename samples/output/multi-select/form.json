@@ -1,0 +1,56 @@
+{
+  "highlights": [],
+  "links": [
+    {
+      "offset": 436,
+      "length": 25,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FMultiSelect/FMultiSelect.rich.html"
+    },
+    {
+      "offset": 473,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FMultiSelect/label.html"
+    },
+    {
+      "offset": 516,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FMultiSelect/description.html"
+    },
+    {
+      "offset": 586,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FMultiSelect/hint.html"
+    },
+    {
+      "offset": 636,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FMultiSelect/format.html"
+    },
+    {
+      "offset": 664,
+      "length": 9,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FMultiSelect/validator.html"
+    },
+    {
+      "offset": 998,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/item.html"
+    },
+    {
+      "offset": 1080,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/FButton.html"
+    },
+    {
+      "offset": 1099,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/child.html"
+    },
+    {
+      "offset": 1138,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/onPress.html"
+    }
+  ],
+  "source": "class FormMultiSelectExample extends StatefulWidget {\n  @override\n  State<FormMultiSelectExample> createState() => _FormMultiSelectExampleState();\n}\n\nclass _FormMultiSelectExampleState extends State<FormMultiSelectExample> {\n  final _key = GlobalKey<FormState>();\n\n  @override\n  Widget build(BuildContext context) => Form(\n    key: _key,\n    child: Column(\n      crossAxisAlignment: .start,\n      spacing: 25,\n      children: [\n        FMultiSelect<String>.rich(\n          label: const Text('Department'),\n          description: const Text('Choose your dream department(s)'),\n          hint: const Text('Select departments'),\n          format: Text.new,\n          validator: (departments) =>\n              departments.isEmpty ? 'Please select departments' : null,\n          children: [\n            for (final department in const [\n              'Engineering',\n              'Marketing',\n              'Sales',\n              'Human Resources',\n              'Finance',\n            ])\n              .item(title: Text(department), value: department),\n          ],\n        ),\n        FButton(\n          child: const Text('Submit'),\n          onPress: () {\n            if (_key.currentState!.validate()) {\n              // Form is valid, do something with departments\n            }\n          },\n        ),\n      ],\n    ),\n  );\n}\n"
+}

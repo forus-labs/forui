@@ -1,0 +1,61 @@
+{
+  "highlights": [],
+  "links": [
+    {
+      "offset": 181,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.resizable/FResizable/FResizable.html"
+    },
+    {
+      "offset": 197,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.resizable/FResizable/axis.html"
+    },
+    {
+      "offset": 220,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.resizable/FResizable/divider.html"
+    },
+    {
+      "offset": 242,
+      "length": 15,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.resizable/FResizable/crossAxisExtent.html"
+    },
+    {
+      "offset": 268,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.resizable/FResizable/children.html"
+    },
+    {
+      "offset": 303,
+      "length": 13,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.resizable/FResizableRegion/initialExtent.html"
+    },
+    {
+      "offset": 331,
+      "length": 9,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.resizable/FResizableRegion/minExtent.html"
+    },
+    {
+      "offset": 355,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.resizable/FResizableRegion/builder.html"
+    },
+    {
+      "offset": 497,
+      "length": 13,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.resizable/FResizableRegion/initialExtent.html"
+    },
+    {
+      "offset": 525,
+      "length": 9,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.resizable/FResizableRegion/minExtent.html"
+    },
+    {
+      "offset": 549,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.resizable/FResizableRegion/builder.html"
+    }
+  ],
+  "source": "Widget build(BuildContext context) => DecoratedBox(\n  decoration: BoxDecoration(\n    border: .all(color: context.theme.colors.border),\n    borderRadius: .circular(8),\n  ),\n  child: FResizable(\n    axis: .horizontal,\n    divider: divider,\n    crossAxisExtent: 300,\n    children: [\n      .region(\n        initialExtent: 100,\n        minExtent: 100,\n        builder: (context, data, _) =>\n            Align(child: Text('Sidebar', style: context.theme.typography.sm)),\n      ),\n      .region(\n        initialExtent: 300,\n        minExtent: 100,\n        builder: (context, data, _) =>\n            Align(child: Text('Content', style: context.theme.typography.sm)),\n      ),\n    ],\n  ),\n);\n"
+}

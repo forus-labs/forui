@@ -1,0 +1,36 @@
+{
+  "highlights": [],
+  "links": [
+    {
+      "offset": 32,
+      "length": 21,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.autocomplete/FAutocomplete/FAutocomplete.builder.html"
+    },
+    {
+      "offset": 57,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.autocomplete/FAutocomplete/hint.html"
+    },
+    {
+      "offset": 90,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.autocomplete/FAutocomplete/filter.html"
+    },
+    {
+      "offset": 219,
+      "length": 14,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.autocomplete/FAutocomplete/contentBuilder.html"
+    },
+    {
+      "offset": 298,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.autocomplete/FAutocompleteItemMixin/item.html"
+    },
+    {
+      "offset": 325,
+      "length": 19,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.autocomplete/FAutocomplete/contentErrorBuilder.html"
+    }
+  ],
+  "source": "Widget build(BuildContext _) => FAutocomplete.builder(\n  hint: 'Type to search fruits',\n  filter: (query) async {\n    await Future.delayed(const Duration(seconds: 3));\n    throw StateError('Error loading data');\n  },\n  contentBuilder: (context, query, values) => [\n    for (final fruit in values) .item(value: fruit),\n  ],\n  contentErrorBuilder: (context, error, trace) => Padding(\n    padding: const .all(14.0),\n    child: Icon(FIcons.circleX, size: 15, color: context.theme.colors.primary),\n  ),\n);\n"
+}

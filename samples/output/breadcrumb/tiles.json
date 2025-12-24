@@ -1,0 +1,61 @@
+{
+  "highlights": [],
+  "links": [
+    {
+      "offset": 85,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.breadcrumb/FBreadcrumb/FBreadcrumb.html"
+    },
+    {
+      "offset": 104,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.breadcrumb/FBreadcrumb/children.html"
+    },
+    {
+      "offset": 124,
+      "length": 15,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.html"
+    },
+    {
+      "offset": 193,
+      "length": 30,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.collapsedTiles.html"
+    },
+    {
+      "offset": 255,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTileGroup/FTileGroup.html"
+    },
+    {
+      "offset": 309,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTile/FTile.html"
+    },
+    {
+      "offset": 351,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTile/onPress.html"
+    },
+    {
+      "offset": 384,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTile/FTile.html"
+    },
+    {
+      "offset": 419,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTile/onPress.html"
+    },
+    {
+      "offset": 500,
+      "length": 15,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.html"
+    },
+    {
+      "offset": 576,
+      "length": 15,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.html"
+    }
+  ],
+  "source": "Widget build(BuildContext _) => Row(\n  mainAxisAlignment: .center,\n  children: [\n    FBreadcrumb(\n      children: [\n        FBreadcrumbItem(onPress: () {}, child: const Text('Forui')),\n        FBreadcrumbItem.collapsedTiles(\n          menu: [\n            FTileGroup(\n              children: [\n                FTile(title: const Text('Documentation'), onPress: () {}),\n                FTile(title: const Text('Themes'), onPress: () {}),\n              ],\n            ),\n          ],\n        ),\n        FBreadcrumbItem(onPress: () {}, child: const Text('Layout')),\n        const FBreadcrumbItem(current: true, child: Text('Widgets')),\n      ],\n    ),\n  ],\n);\n"
+}

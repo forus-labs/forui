@@ -1,0 +1,31 @@
+{
+  "highlights": [],
+  "links": [
+    {
+      "offset": 32,
+      "length": 21,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.autocomplete/FAutocomplete/FAutocomplete.builder.html"
+    },
+    {
+      "offset": 57,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.autocomplete/FAutocomplete/hint.html"
+    },
+    {
+      "offset": 93,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.autocomplete/FAutocomplete/filter.html"
+    },
+    {
+      "offset": 260,
+      "length": 14,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.autocomplete/FAutocomplete/contentBuilder.html"
+    },
+    {
+      "offset": 495,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.autocomplete/FAutocompleteItemMixin/section.html"
+    }
+  ],
+  "source": "Widget build(BuildContext _) => FAutocomplete.builder(\n  hint: 'Type to search timezones',\n  filter: (query) => timezones.values\n      .expand((list) => list)\n      .where(\n        (timezone) => timezone.toLowerCase().contains(query.toLowerCase()),\n      ),\n  contentBuilder: (context, query, suggestions) => [\n    for (final MapEntry(key: label, value: zones) in timezones.entries)\n      if (zones.where(suggestions.contains).toList() case final zones\n          when zones.isNotEmpty)\n        .section(label: Text(label), items: zones),\n  ],\n);\n"
+}

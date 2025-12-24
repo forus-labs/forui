@@ -1,0 +1,106 @@
+{
+  "highlights": [],
+  "links": [
+    {
+      "offset": 293,
+      "length": 9,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.scaffold/FScaffold/FScaffold.html"
+    },
+    {
+      "offset": 310,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.scaffold/FScaffold/header.html"
+    },
+    {
+      "offset": 341,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.scaffold/FScaffold/footer.html"
+    },
+    {
+      "offset": 349,
+      "length": 20,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.bottom_navigation_bar/FBottomNavigationBar/FBottomNavigationBar.html"
+    },
+    {
+      "offset": 379,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.bottom_navigation_bar/FBottomNavigationBar/index.html"
+    },
+    {
+      "offset": 402,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.bottom_navigation_bar/FBottomNavigationBar/onChange.html"
+    },
+    {
+      "offset": 463,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.bottom_navigation_bar/FBottomNavigationBar/children.html"
+    },
+    {
+      "offset": 491,
+      "length": 24,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.bottom_navigation_bar/FBottomNavigationBarItem/FBottomNavigationBarItem.html"
+    },
+    {
+      "offset": 529,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.bottom_navigation_bar/FBottomNavigationBarItem/icon.html"
+    },
+    {
+      "offset": 567,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.bottom_navigation_bar/FBottomNavigationBarItem/label.html"
+    },
+    {
+      "offset": 611,
+      "length": 24,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.bottom_navigation_bar/FBottomNavigationBarItem/FBottomNavigationBarItem.html"
+    },
+    {
+      "offset": 649,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.bottom_navigation_bar/FBottomNavigationBarItem/icon.html"
+    },
+    {
+      "offset": 692,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.bottom_navigation_bar/FBottomNavigationBarItem/label.html"
+    },
+    {
+      "offset": 742,
+      "length": 24,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.bottom_navigation_bar/FBottomNavigationBarItem/FBottomNavigationBarItem.html"
+    },
+    {
+      "offset": 780,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.bottom_navigation_bar/FBottomNavigationBarItem/icon.html"
+    },
+    {
+      "offset": 819,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.bottom_navigation_bar/FBottomNavigationBarItem/label.html"
+    },
+    {
+      "offset": 865,
+      "length": 24,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.bottom_navigation_bar/FBottomNavigationBarItem/FBottomNavigationBarItem.html"
+    },
+    {
+      "offset": 903,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.bottom_navigation_bar/FBottomNavigationBarItem/icon.html"
+    },
+    {
+      "offset": 944,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.bottom_navigation_bar/FBottomNavigationBarItem/label.html"
+    },
+    {
+      "offset": 1008,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.scaffold/FScaffold/child.html"
+    }
+  ],
+  "source": "class ScaffoldExample extends StatefulWidget {\n  @override\n  State<ScaffoldExample> createState() => _ScaffoldExampleState();\n}\n\nclass _ScaffoldExampleState extends State<ScaffoldExample> {\n  int _index = 3;\n\n  @override\n  Widget build(BuildContext _) => SizedBox(\n    height: 500,\n    child: FScaffold(\n      header: headers[_index],\n      footer: FBottomNavigationBar(\n        index: _index,\n        onChange: (index) => setState(() => _index = index),\n        children: const [\n          FBottomNavigationBarItem(\n            icon: Icon(FIcons.house),\n            label: Text('Home'),\n          ),\n          FBottomNavigationBarItem(\n            icon: Icon(FIcons.layoutGrid),\n            label: Text('Categories'),\n          ),\n          FBottomNavigationBarItem(\n            icon: Icon(FIcons.search),\n            label: Text('Search'),\n          ),\n          FBottomNavigationBarItem(\n            icon: Icon(FIcons.settings),\n            label: Text('Settings'),\n          ),\n        ],\n      ),\n      child: contents[_index],\n    ),\n  );\n}\n"
+}

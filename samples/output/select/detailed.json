@@ -1,0 +1,36 @@
+{
+  "highlights": [],
+  "links": [
+    {
+      "offset": 38,
+      "length": 20,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelect/FSelect.rich.html"
+    },
+    {
+      "offset": 62,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelect/hint.html"
+    },
+    {
+      "offset": 78,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelect/format.html"
+    },
+    {
+      "offset": 115,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/item.html"
+    },
+    {
+      "offset": 288,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/item.html"
+    },
+    {
+      "offset": 475,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/item.html"
+    }
+  ],
+  "source": "Widget build(BuildContext context) => FSelect<String>.rich(\n  hint: 'Type',\n  format: (s) => s,\n  children: [\n    .item(\n      prefix: const Icon(FIcons.bug),\n      title: const Text('Bug'),\n      subtitle: const Text('An unexpected problem or behavior'),\n      value: 'Bug',\n    ),\n    .item(\n      prefix: const Icon(FIcons.filePlusCorner),\n      title: const Text('Feature'),\n      subtitle: const Text('A new feature or enhancement'),\n      value: 'Feature',\n    ),\n    .item(\n      prefix: const Icon(FIcons.messageCircleQuestionMark),\n      title: const Text('Question'),\n      subtitle: const Text('A question or clarification'),\n      value: 'Question',\n    ),\n  ],\n);\n"
+}

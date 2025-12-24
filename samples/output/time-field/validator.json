@@ -1,0 +1,26 @@
+{
+  "highlights": [],
+  "links": [
+    {
+      "offset": 38,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.time_field/FTimeField/FTimeField.html"
+    },
+    {
+      "offset": 52,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.time_field/FTimeField/control.html"
+    },
+    {
+      "offset": 153,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.time_field/FTimeField/label.html"
+    },
+    {
+      "offset": 194,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.time_field/FTimeField/description.html"
+    }
+  ],
+  "source": "Widget build(BuildContext context) => FTimeField(\n  control: .managed(\n    validator: (time) => time?.hour == 12 ? 'Time cannot be noon.' : null,\n  ),\n  label: const Text('Appointment Time'),\n  description: const Text('Select a time for your appointment.'),\n);\n"
+}

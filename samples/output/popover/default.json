@@ -1,0 +1,81 @@
+{
+  "highlights": [
+    {
+      "start": 32,
+      "end": 41
+    }
+  ],
+  "links": [
+    {
+      "offset": 32,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.popover/FPopover/FPopover.html"
+    },
+    {
+      "offset": 44,
+      "length": 13,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.popover/FPopover/popoverAnchor.html"
+    },
+    {
+      "offset": 109,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.popover/FPopover/childAnchor.html"
+    },
+    {
+      "offset": 176,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.popover/FPopover/hideRegion.html"
+    },
+    {
+      "offset": 202,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.popover/FPopover/overflow.html"
+    },
+    {
+      "offset": 224,
+      "length": 14,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.popover/FPopover/popoverBuilder.html"
+    },
+    {
+      "offset": 1315,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.text_field/FTextField/FTextField.html"
+    },
+    {
+      "offset": 1347,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.text_field/FTextField/control.html"
+    },
+    {
+      "offset": 1426,
+      "length": 9,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.text_field/FTextField/autofocus.html"
+    },
+    {
+      "offset": 1607,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.popover/FPopover/builder.html"
+    },
+    {
+      "offset": 1638,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/FButton.html"
+    },
+    {
+      "offset": 1651,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/style.html"
+    },
+    {
+      "offset": 1710,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/onPress.html"
+    },
+    {
+      "offset": 1742,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/child.html"
+    }
+  ],
+  "source": "Widget build(BuildContext _) => FPopover(\n  popoverAnchor: axis == .horizontal ? .bottomLeft : .topCenter,\n  childAnchor: axis == .horizontal ? .bottomRight : .bottomCenter,\n  hideRegion: hideRegion,\n  overflow: overflow,\n  popoverBuilder: (context, _) => Padding(\n    padding: const .only(left: 20, top: 14, right: 20, bottom: 10),\n    child: SizedBox(\n      width: 288,\n      child: Column(\n        mainAxisSize: .min,\n        crossAxisAlignment: .start,\n        children: [\n          Text('Dimensions', style: context.theme.typography.base),\n          const SizedBox(height: 7),\n          Text(\n            'Set the dimensions for the layer.',\n            style: context.theme.typography.sm.copyWith(\n              color: context.theme.colors.mutedForeground,\n              fontWeight: .w300,\n            ),\n          ),\n          const SizedBox(height: 15),\n          for (final (index, (label, value)) in [\n            ('Width', '100%'),\n            ('Max. Width', '300px'),\n            ('Height', '25px'),\n            ('Max. Height', 'none'),\n          ].indexed) ...[\n            Row(\n              children: [\n                Expanded(\n                  child: Text(label, style: context.theme.typography.sm),\n                ),\n                Expanded(\n                  flex: 2,\n                  child: FTextField(\n                    control: .managed(initial: TextEditingValue(text: value)),\n                    autofocus: index == 0,\n                  ),\n                ),\n              ],\n            ),\n            const SizedBox(height: 7),\n          ],\n        ],\n      ),\n    ),\n  ),\n  builder: (_, controller, _) => FButton(\n    style: FButtonStyle.outline(),\n    mainAxisSize: .min,\n    onPress: controller.toggle,\n    child: const Text('Open popover'),\n  ),\n);\n"
+}

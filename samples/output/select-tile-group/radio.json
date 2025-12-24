@@ -1,0 +1,76 @@
+{
+  "highlights": [],
+  "links": [
+    {
+      "offset": 499,
+      "length": 30,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_tile_group/FSelectTileGroup/FSelectTileGroup.html"
+    },
+    {
+      "offset": 541,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_tile_group/FSelectTileGroup/control.html"
+    },
+    {
+      "offset": 583,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_tile_group/FSelectTileGroup/label.html"
+    },
+    {
+      "offset": 629,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_tile_group/FSelectTileGroup/description.html"
+    },
+    {
+      "offset": 693,
+      "length": 9,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_tile_group/FSelectTileGroup/validator.html"
+    },
+    {
+      "offset": 835,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_tile_group/FSelectTile/title.html"
+    },
+    {
+      "offset": 868,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_tile_group/FSelectTile/value.html"
+    },
+    {
+      "offset": 900,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_tile_group/FSelectTile/title.html"
+    },
+    {
+      "offset": 945,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_tile_group/FSelectTile/value.html"
+    },
+    {
+      "offset": 980,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_tile_group/FSelectTile/title.html"
+    },
+    {
+      "offset": 1004,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_tile_group/FSelectTile/value.html"
+    },
+    {
+      "offset": 1054,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/FButton.html"
+    },
+    {
+      "offset": 1073,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/child.html"
+    },
+    {
+      "offset": 1110,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/onPress.html"
+    }
+  ],
+  "source": "class SelectTileGroupRadioExample extends StatefulWidget {\n  @override\n  State<SelectTileGroupRadioExample> createState() =>\n      _SelectTileGroupRadioExampleState();\n}\n\nclass _SelectTileGroupRadioExampleState\n    extends State<SelectTileGroupRadioExample> {\n  final _key = GlobalKey<FormState>();\n\n  @override\n  Widget build(BuildContext _) => Form(\n    key: _key,\n    child: Column(\n      mainAxisAlignment: .center,\n      crossAxisAlignment: .start,\n      spacing: 20,\n      children: [\n        FSelectTileGroup<Notification>(\n          control: const .managedRadio(),\n          label: const Text('Notifications'),\n          description: const Text('Select the notifications.'),\n          validator: (values) =>\n              values?.isEmpty ?? true ? 'Please select a value.' : null,\n          children: const [\n            .tile(title: Text('All new messages'), value: .all),\n            .tile(title: Text('Direct messages and mentions'), value: .direct),\n            .tile(title: Text('Nothing'), value: .nothing),\n          ],\n        ),\n        FButton(\n          child: const Text('Save'),\n          onPress: () {\n            if (!_key.currentState!.validate()) {\n              // Handle errors here.\n              return;\n            }\n\n            _key.currentState!.save();\n            // Do something.\n          },\n        ),\n      ],\n    ),\n  );\n}\n"
+}

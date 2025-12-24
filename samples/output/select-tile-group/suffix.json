@@ -1,0 +1,51 @@
+{
+  "highlights": [],
+  "links": [
+    {
+      "offset": 311,
+      "length": 16,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_tile_group/FSelectTileGroup/FSelectTileGroup.html"
+    },
+    {
+      "offset": 333,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_tile_group/FSelectTileGroup/control.html"
+    },
+    {
+      "offset": 369,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_tile_group/FSelectTileGroup/label.html"
+    },
+    {
+      "offset": 428,
+      "length": 18,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_tile_group/FSelectTile/FSelectTile.suffix.html"
+    },
+    {
+      "offset": 491,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_tile_group/FSelectTile/title.html"
+    },
+    {
+      "offset": 525,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_tile_group/FSelectTile/value.html"
+    },
+    {
+      "offset": 555,
+      "length": 18,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_tile_group/FSelectTile/FSelectTile.suffix.html"
+    },
+    {
+      "offset": 624,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_tile_group/FSelectTile/title.html"
+    },
+    {
+      "offset": 658,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_tile_group/FSelectTile/value.html"
+    }
+  ],
+  "source": "class SelectTileGroupSuffixExample extends StatefulWidget {\n  @override\n  State<SelectTileGroupSuffixExample> createState() =>\n      _SelectTileGroupSuffixExampleState();\n}\n\nclass _SelectTileGroupSuffixExampleState\n    extends State<SelectTileGroupSuffixExample> {\n  @override\n  Widget build(BuildContext _) => FSelectTileGroup(\n    control: const .managedRadio(),\n    label: const Text('Settings'),\n    children: const [\n      FSelectTile.suffix(\n        prefix: Icon(FIcons.list),\n        title: Text('List View'),\n        value: 'List',\n      ),\n      FSelectTile.suffix(\n        prefix: Icon(FIcons.layoutGrid),\n        title: Text('Grid View'),\n        value: 'Grid',\n      ),\n    ],\n  );\n}\n"
+}

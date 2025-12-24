@@ -1,0 +1,41 @@
+{
+  "highlights": [],
+  "links": [
+    {
+      "offset": 32,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.label/FLabel/FLabel.html"
+    },
+    {
+      "offset": 42,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.label/FLabel/axis.html"
+    },
+    {
+      "offset": 63,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.label/FLabel/label.html"
+    },
+    {
+      "offset": 115,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.label/FLabel/description.html"
+    },
+    {
+      "offset": 184,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.label/FLabel/error.html"
+    },
+    {
+      "offset": 233,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.label/FLabel/states.html"
+    },
+    {
+      "offset": 251,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.label/FLabel/child.html"
+    }
+  ],
+  "source": "Widget build(BuildContext _) => FLabel(\n  axis: .horizontal,\n  label: const Text('Accept terms and conditions'),\n  description: const Text('You agree to our terms and conditions.'),\n  error: const Text('Please accept the terms.'),\n  states: states,\n  child: const DecoratedBox(\n    decoration: BoxDecoration(\n      borderRadius: .all(.circular(5)),\n      color: Colors.grey,\n    ),\n    child: SizedBox.square(dimension: 16),\n  ),\n);\n"
+}

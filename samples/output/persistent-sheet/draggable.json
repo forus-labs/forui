@@ -1,0 +1,41 @@
+{
+  "highlights": [],
+  "links": [
+    {
+      "offset": 228,
+      "length": 27,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sheet/FPersistentSheetController-class.html"
+    },
+    {
+      "offset": 405,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/FButton.html"
+    },
+    {
+      "offset": 418,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/child.html"
+    },
+    {
+      "offset": 453,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/onPress.html"
+    },
+    {
+      "offset": 1129,
+      "length": 18,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTileGroup/FTileGroup.builder.html"
+    },
+    {
+      "offset": 1188,
+      "length": 16,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTileGroup/scrollController.html"
+    },
+    {
+      "offset": 1283,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTile/FTile.html"
+    }
+  ],
+  "source": "class DraggablePersistentSheetExample extends StatefulWidget {\n  @override\n  State<DraggablePersistentSheetExample> createState() => _DraggableState();\n}\n\nclass _DraggableState extends State<DraggablePersistentSheetExample> {\n  FPersistentSheetController? controller;\n\n  @override\n  void dispose() {\n    controller?.dispose();\n    super.dispose();\n  }\n\n  @override\n  Widget build(BuildContext context) => FButton(\n    child: const Text('Click me'),\n    onPress: () {\n      if (controller != null) {\n        controller!.toggle();\n        return;\n      }\n\n      controller = showFPersistentSheet(\n        context: context,\n        side: .btt,\n        mainAxisMaxRatio: null,\n        builder: (context, _) => DraggableScrollableSheet(\n          expand: false,\n          builder: (context, controller) => ScrollConfiguration(\n            // This is required to enable dragging on desktop.\n            // See https://github.com/flutter/flutter/issues/101903 for more information.\n            behavior: ScrollConfiguration.of(\n              context,\n            ).copyWith(dragDevices: {.touch, .mouse, .trackpad}),\n            child: FTileGroup.builder(\n              count: 25,\n              scrollController: controller,\n              tileBuilder: (context, index) =>\n                  FTile(title: Text('Tile $index')),\n            ),\n          ),\n        ),\n      );\n    },\n  );\n}\n"
+}
