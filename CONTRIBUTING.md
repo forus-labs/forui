@@ -33,14 +33,23 @@ This helps to:
 
 If you're stuck or unsure about anything, feel free to ask for help in our [discord](https://discord.gg/UEky7WkXd6).
 
+
 ## Configuring the Development Environment
 
-After cloning the repository, and before starting work on a PR, run the following commands in the `forui` project directory:
-```shell
-dart run build_runner build --delete-conflicting-outputs
-````
+This repository uses [Melos](https://melos.invertase.dev/) to manage the monorepo.
 
-This command generates the necessary files for the project to build successfully.
+Install Melos globally (one-time setup):
+```shell
+dart pub global activate melos
+```
+
+Then bootstrap the project:
+```shell
+melos bs
+```
+
+This installs dependencies and generates the required files.
+
 
 ## Conventions
 

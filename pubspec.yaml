@@ -11,3 +11,20 @@ workspace:
 
 dev_dependencies:
   flint: ^2.13.0
+  melos: ^7.3.0
+
+melos:
+  command:
+    bootstrap:
+      hooks:
+        post: melos run generate
+  scripts:
+    generate:
+      description: "Generate code for all packages."
+      run: melos run build_runner && melos run l10n
+    build_runner:
+      description: "Run build_runner for all packages."
+      run: melos exec -c 1 --depends-on build_runner -- dart run build_runner build --delete-conflicting-outputs
+    l10n:
+      description: "Generate localization files."
+      run: melos exec --scope="forui" -- flutter gen-l10n
