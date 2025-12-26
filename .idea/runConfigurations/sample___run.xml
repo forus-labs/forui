@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Flutter Run -&gt; 'forui_samples'" type="FlutterRunConfigurationType" factoryName="Flutter">
+  <configuration default="false" name="sample - run" type="FlutterRunConfigurationType" factoryName="Flutter">
     <option name="filePath" value="$PROJECT_DIR$/samples/lib/main.dart" />
     <method v="2" />
   </configuration>

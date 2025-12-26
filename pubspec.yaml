@@ -14,6 +14,10 @@ dev_dependencies:
   melos: ^7.3.0
 
 melos:
+  ide:
+    intellij:
+      enabled: false
+
   command:
     bootstrap:
       hooks:
@@ -25,6 +29,3 @@ melos:
     build_runner:
       description: "Run build_runner for all packages."
       run: melos exec -c 1 --depends-on build_runner -- dart run build_runner build --delete-conflicting-outputs
-    l10n:
-      description: "Generate localization files."
-      run: melos exec --scope="forui" -- flutter gen-l10n
