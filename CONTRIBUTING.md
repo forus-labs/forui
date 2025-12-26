@@ -36,19 +36,15 @@ If you're stuck or unsure about anything, feel free to ask for help in our [disc
 
 ## Configuring the Development Environment
 
-This repository uses [Melos](https://melos.invertase.dev/) to manage the monorepo.
-
-Install Melos globally (one-time setup):
+Bootstrap the project:
 ```shell
-dart pub global activate melos
-```
-
-Then bootstrap the project:
-```shell
-melos bs
+make bootstrap
+make bs # shorthand
 ```
 
 This installs dependencies and generates the required files.
+
+Run `make help` to see all available commands.
 
 
 ## Conventions
