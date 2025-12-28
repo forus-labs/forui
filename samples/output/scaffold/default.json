@@ -1,124 +1,254 @@
 {
-  "code": "class ScaffoldExample extends StatefulWidget {\n  @override\n  State<ScaffoldExample> createState() => _ScaffoldExampleState();\n}\n\nclass _ScaffoldExampleState extends State<ScaffoldExample> {\n  int _index = 3;\n\n  @override\n  Widget build(BuildContext _) => SizedBox(\n    height: 500,\n    child: FScaffold(\n      header: headers[_index],\n      footer: FBottomNavigationBar(\n        index: _index,\n        onChange: (index) => setState(() => _index = index),\n        children: const [\n          FBottomNavigationBarItem(\n            icon: Icon(FIcons.house),\n            label: Text('Home'),\n          ),\n          FBottomNavigationBarItem(\n            icon: Icon(FIcons.layoutGrid),\n            label: Text('Categories'),\n          ),\n          FBottomNavigationBarItem(\n            icon: Icon(FIcons.search),\n            label: Text('Search'),\n          ),\n          FBottomNavigationBarItem(\n            icon: Icon(FIcons.settings),\n            label: Text('Settings'),\n          ),\n        ],\n      ),\n      child: contents[_index],\n    ),\n  );\n}\n",
+  "code": "class ScaffoldExample extends StatefulWidget {\n  @override\n  State<ScaffoldExample> createState() => _ScaffoldExampleState();\n}\n\nclass _ScaffoldExampleState extends State<ScaffoldExample> {\n  final _headers = [\n    const FHeader(title: Text('Home')),\n    const FHeader(title: Text('Categories')),\n    const FHeader(title: Text('Search')),\n    FHeader(\n      title: const Text('Settings'),\n      suffixes: [\n        FHeaderAction(icon: const Icon(FIcons.ellipsis), onPress: () {}),\n      ],\n    ),\n  ];\n\n  final _contents = [\n    const Column(\n      mainAxisAlignment: .center,\n      children: [Text('Home Placeholder')],\n    ),\n    const Column(\n      mainAxisAlignment: .center,\n      children: [Text('Categories Placeholder')],\n    ),\n    const Column(\n      mainAxisAlignment: .center,\n      children: [Text('Search Placeholder')],\n    ),\n    Column(\n      children: [\n        const SizedBox(height: 5),\n        FCard(\n          title: const Text('Account'),\n          subtitle: const Text(\n            'Make changes to your account here. Click save when you are done.',\n          ),\n          child: Column(\n            children: [\n              const FTextField(label: Text('Name'), hint: 'John Renalo'),\n              const SizedBox(height: 10),\n              const FTextField(label: Text('Email'), hint: 'john@doe.com'),\n              const SizedBox(height: 16),\n              FButton(child: const Text('Save'), onPress: () {}),\n            ],\n          ),\n        ),\n      ],\n    ),\n  ];\n\n  int _index = 3;\n\n  @override\n  Widget build(BuildContext _) => SizedBox(\n    height: 500,\n    child: FScaffold(\n      header: _headers[_index],\n      footer: FBottomNavigationBar(\n        index: _index,\n        onChange: (index) => setState(() => _index = index),\n        children: const [\n          FBottomNavigationBarItem(\n            icon: Icon(FIcons.house),\n            label: Text('Home'),\n          ),\n          FBottomNavigationBarItem(\n            icon: Icon(FIcons.layoutGrid),\n            label: Text('Categories'),\n          ),\n          FBottomNavigationBarItem(\n            icon: Icon(FIcons.search),\n            label: Text('Search'),\n          ),\n          FBottomNavigationBarItem(\n            icon: Icon(FIcons.settings),\n            label: Text('Settings'),\n          ),\n        ],\n      ),\n      child: _contents[_index],\n    ),\n  );\n}\n",
   "highlights": [],
   "links": [
     {
-      "offset": 293,
+      "offset": 221,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.header/FHeader/FHeader.html"
+    },
+    {
+      "offset": 229,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.header/FHeader/title.html"
+    },
+    {
+      "offset": 261,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.header/FHeader/FHeader.html"
+    },
+    {
+      "offset": 269,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.header/FHeader/title.html"
+    },
+    {
+      "offset": 307,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.header/FHeader/FHeader.html"
+    },
+    {
+      "offset": 315,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.header/FHeader/title.html"
+    },
+    {
+      "offset": 343,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.header/FHeader/FHeader.html"
+    },
+    {
+      "offset": 358,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.header/FHeader/title.html"
+    },
+    {
+      "offset": 395,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.header/FHeader/FHeader.html"
+    },
+    {
+      "offset": 415,
+      "length": 13,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.header/FHeaderAction/FHeaderAction.html"
+    },
+    {
+      "offset": 429,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.header/FHeaderAction/icon.html"
+    },
+    {
+      "offset": 446,
+      "length": 15,
+      "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/ellipsis-constant.html"
+    },
+    {
+      "offset": 464,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.header/FHeaderAction/onPress.html"
+    },
+    {
+      "offset": 915,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.card/FCard/FCard.html"
+    },
+    {
+      "offset": 932,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.card/FCard/FCard.html"
+    },
+    {
+      "offset": 972,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.card/FCard/FCard.html"
+    },
+    {
+      "offset": 1097,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.card/FCard/child.html"
+    },
+    {
+      "offset": 1156,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+    },
+    {
+      "offset": 1167,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/label.html"
+    },
+    {
+      "offset": 1188,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/hint.html"
+    },
+    {
+      "offset": 1272,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+    },
+    {
+      "offset": 1283,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/label.html"
+    },
+    {
+      "offset": 1305,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/hint.html"
+    },
+    {
+      "offset": 1384,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+    },
+    {
+      "offset": 1392,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/child.html"
+    },
+    {
+      "offset": 1419,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/onPress.html"
+    },
+    {
+      "offset": 1600,
       "length": 9,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.scaffold/FScaffold/FScaffold.html"
     },
     {
-      "offset": 310,
+      "offset": 1617,
       "length": 6,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.scaffold/FScaffold/header.html"
     },
     {
-      "offset": 341,
+      "offset": 1649,
       "length": 6,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.scaffold/FScaffold/footer.html"
     },
     {
-      "offset": 349,
+      "offset": 1657,
       "length": 20,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.bottom_navigation_bar/FBottomNavigationBar/FBottomNavigationBar.html"
     },
     {
-      "offset": 379,
+      "offset": 1687,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.bottom_navigation_bar/FBottomNavigationBar/index.html"
     },
     {
-      "offset": 402,
+      "offset": 1710,
       "length": 8,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.bottom_navigation_bar/FBottomNavigationBar/onChange.html"
     },
     {
-      "offset": 463,
+      "offset": 1771,
       "length": 8,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.bottom_navigation_bar/FBottomNavigationBar/children.html"
     },
     {
-      "offset": 491,
+      "offset": 1799,
       "length": 24,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.bottom_navigation_bar/FBottomNavigationBarItem/FBottomNavigationBarItem.html"
     },
     {
-      "offset": 529,
+      "offset": 1837,
       "length": 4,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.bottom_navigation_bar/FBottomNavigationBarItem/icon.html"
     },
     {
-      "offset": 540,
+      "offset": 1848,
       "length": 12,
       "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/house-constant.html"
     },
     {
-      "offset": 567,
+      "offset": 1875,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.bottom_navigation_bar/FBottomNavigationBarItem/label.html"
     },
     {
-      "offset": 611,
+      "offset": 1919,
       "length": 24,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.bottom_navigation_bar/FBottomNavigationBarItem/FBottomNavigationBarItem.html"
     },
     {
-      "offset": 649,
+      "offset": 1957,
       "length": 4,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.bottom_navigation_bar/FBottomNavigationBarItem/icon.html"
     },
     {
-      "offset": 660,
+      "offset": 1968,
       "length": 17,
       "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/layoutGrid-constant.html"
     },
     {
-      "offset": 692,
+      "offset": 2000,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.bottom_navigation_bar/FBottomNavigationBarItem/label.html"
     },
     {
-      "offset": 742,
+      "offset": 2050,
       "length": 24,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.bottom_navigation_bar/FBottomNavigationBarItem/FBottomNavigationBarItem.html"
     },
     {
-      "offset": 780,
+      "offset": 2088,
       "length": 4,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.bottom_navigation_bar/FBottomNavigationBarItem/icon.html"
     },
     {
-      "offset": 791,
+      "offset": 2099,
       "length": 13,
       "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/search-constant.html"
     },
     {
-      "offset": 819,
+      "offset": 2127,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.bottom_navigation_bar/FBottomNavigationBarItem/label.html"
     },
     {
-      "offset": 865,
+      "offset": 2173,
       "length": 24,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.bottom_navigation_bar/FBottomNavigationBarItem/FBottomNavigationBarItem.html"
     },
     {
-      "offset": 903,
+      "offset": 2211,
       "length": 4,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.bottom_navigation_bar/FBottomNavigationBarItem/icon.html"
     },
     {
-      "offset": 914,
+      "offset": 2222,
       "length": 15,
       "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/settings-constant.html"
     },
     {
-      "offset": 944,
+      "offset": 2252,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.bottom_navigation_bar/FBottomNavigationBarItem/label.html"
     },
     {
-      "offset": 1008,
+      "offset": 2316,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.scaffold/FScaffold/child.html"
     }

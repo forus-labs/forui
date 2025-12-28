@@ -1,6 +1,11 @@
 {
-  "code": "Widget build(BuildContext context) => FSlider(\n  control: .managedContinuousRange(initial: FSliderValue(min: 0.25, max: 0.75)),\n);\n",
-  "highlights": [],
+  "code": "Widget build(BuildContext context) => FSlider(\n  control: .managedContinuousRange(\n    initial: FSliderValue(min: 0.25, max: 0.75),\n  ),\n);\n",
+  "highlights": [
+    {
+      "start": 2,
+      "end": 3
+    }
+  ],
   "links": [
     {
       "offset": 38,
@@ -18,22 +23,22 @@
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderControl/FSliderControl.managedContinuousRange.html"
     },
     {
-      "offset": 82,
+      "offset": 87,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderControl/FSliderControl.managedContinuousRange.html"
     },
     {
-      "offset": 91,
+      "offset": 96,
       "length": 12,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderValue/FSliderValue.html"
     },
     {
-      "offset": 104,
+      "offset": 109,
       "length": 3,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderValue/min.html"
     },
     {
-      "offset": 115,
+      "offset": 120,
       "length": 3,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderValue/max.html"
     }

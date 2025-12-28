@@ -1,84 +1,84 @@
 {
-  "code": "Widget build(BuildContext context) => Column(\n  mainAxisAlignment: .center,\n  children: [\n    FSelectGroup<Sidebar>(\n      control: const .managed(initial: {.recents}),\n      label: const Text('Sidebar'),\n      description: const Text('These will be shown in the sidebar.'),\n      children: [\n        .checkbox(value: .recents, label: const Text('Recents')),\n        .checkbox(value: .home, label: const Text('Home')),\n        .checkbox(value: .applications, label: const Text('Applications')),\n      ],\n    ),\n  ],\n);\n",
+  "code": "enum Sidebar { recents, home, applications }\n\nclass SelectGroupExample extends StatelessWidget {\n  @override\n  Widget build(BuildContext context) => Column(\n    mainAxisAlignment: .center,\n    children: [\n      FSelectGroup<Sidebar>(\n        control: const .managed(initial: {.recents}),\n        label: const Text('Sidebar'),\n        description: const Text('These will be shown in the sidebar.'),\n        children: [\n          .checkbox(value: .recents, label: const Text('Recents')),\n          .checkbox(value: .home, label: const Text('Home')),\n          .checkbox(value: .applications, label: const Text('Applications')),\n        ],\n      ),\n    ],\n  );\n}\n",
   "highlights": [],
   "links": [
     {
-      "offset": 94,
+      "offset": 211,
       "length": 21,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroup/FSelectGroup.html"
     },
     {
-      "offset": 123,
+      "offset": 242,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroup/control.html"
     },
     {
-      "offset": 139,
+      "offset": 258,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl/FMultiValueControl.managed.html"
     },
     {
-      "offset": 147,
+      "offset": 266,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl/FMultiValueControl.managed.html"
     },
     {
-      "offset": 175,
+      "offset": 296,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroup/label.html"
     },
     {
-      "offset": 211,
+      "offset": 334,
       "length": 11,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroup/description.html"
     },
     {
-      "offset": 281,
+      "offset": 406,
       "length": 8,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroup/children.html"
     },
     {
-      "offset": 302,
+      "offset": 429,
       "length": 8,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroupItemMixin/checkbox.html"
     },
     {
-      "offset": 311,
+      "offset": 438,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroupItemMixin/checkbox.html"
     },
     {
-      "offset": 328,
+      "offset": 455,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroupItemMixin/checkbox.html"
     },
     {
-      "offset": 368,
+      "offset": 497,
       "length": 8,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroupItemMixin/checkbox.html"
     },
     {
-      "offset": 377,
+      "offset": 506,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroupItemMixin/checkbox.html"
     },
     {
-      "offset": 391,
+      "offset": 520,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroupItemMixin/checkbox.html"
     },
     {
-      "offset": 428,
+      "offset": 559,
       "length": 8,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroupItemMixin/checkbox.html"
     },
     {
-      "offset": 437,
+      "offset": 568,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroupItemMixin/checkbox.html"
     },
     {
-      "offset": 459,
+      "offset": 590,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroupItemMixin/checkbox.html"
     }

@@ -1,0 +1,52 @@
+{
+  "code": "Widget build(BuildContext _) => FTile(\n  prefix: const Icon(FIcons.user),\n  title: const Text('Personalization'),\n  suffix: const Icon(FIcons.chevronRight),\n  onPress: () {},\n  enabled: false,\n);\n",
+  "highlights": [
+    {
+      "start": 6,
+      "end": 6
+    }
+  ],
+  "links": [
+    {
+      "offset": 32,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTile/FTile.html"
+    },
+    {
+      "offset": 41,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTile/FTile.html"
+    },
+    {
+      "offset": 60,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/user-constant.html"
+    },
+    {
+      "offset": 76,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTile/FTile.html"
+    },
+    {
+      "offset": 116,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTile/FTile.html"
+    },
+    {
+      "offset": 135,
+      "length": 19,
+      "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/chevronRight-constant.html"
+    },
+    {
+      "offset": 159,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTile/onPress.html"
+    },
+    {
+      "offset": 177,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTile/enabled.html"
+    }
+  ],
+  "tooltips": []
+}

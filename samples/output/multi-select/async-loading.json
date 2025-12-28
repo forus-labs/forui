@@ -1,64 +1,69 @@
 {
-  "code": "Widget build(BuildContext _) => FMultiSelect<String>.searchBuilder(\n  hint: const Text('Select a fruit'),\n  format: Text.new,\n  filter: (query) async {\n    await Future.delayed(const Duration(seconds: 1));\n    return query.isEmpty\n        ? fruits\n        : fruits.where(\n            (fruit) => fruit.toLowerCase().startsWith(query.toLowerCase()),\n          );\n  },\n  contentLoadingBuilder: (context, style) => Padding(\n    padding: const .all(8.0),\n    child: Text(\n      'Here be dragons...',\n      style: style.textFieldStyle.contentTextStyle.resolve({}),\n    ),\n  ),\n  contentBuilder: (context, _, fruits) => [\n    for (final fruit in fruits) .item(title: Text(fruit), value: fruit),\n  ],\n);\n",
-  "highlights": [],
+  "code": "const fruits = [\n  'Apple',\n  'Banana',\n  'Blueberry',\n  'Grapes',\n  'Lemon',\n  'Mango',\n  'Kiwi',\n  'Orange',\n  'Peach',\n  'Pear',\n  'Pineapple',\n  'Plum',\n  'Raspberry',\n  'Strawberry',\n  'Watermelon',\n];\n\nclass AsyncLoadingMultiSelectExample extends StatelessWidget {\n  @override\n  Widget build(BuildContext _) => FMultiSelect<String>.searchBuilder(\n    hint: const Text('Select a fruit'),\n    format: Text.new,\n    filter: (query) async {\n      await Future.delayed(const Duration(seconds: 1));\n      return query.isEmpty\n          ? fruits\n          : fruits.where(\n              (fruit) => fruit.toLowerCase().startsWith(query.toLowerCase()),\n            );\n    },\n    contentLoadingBuilder: (context, style) => Padding(\n      padding: const .all(8.0),\n      child: Text(\n        'Here be dragons...',\n        style: style.textFieldStyle.contentTextStyle.resolve({}),\n      ),\n    ),\n    contentBuilder: (context, _, fruits) => [\n      for (final fruit in fruits) .item(title: Text(fruit), value: fruit),\n    ],\n  );\n}\n",
+  "highlights": [
+    {
+      "start": 32,
+      "end": 38
+    }
+  ],
   "links": [
     {
-      "offset": 32,
+      "offset": 317,
       "length": 34,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FMultiSelect/FMultiSelect.searchBuilder.html"
     },
     {
-      "offset": 70,
+      "offset": 357,
       "length": 4,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FMultiSelect/hint.html"
     },
     {
-      "offset": 108,
+      "offset": 397,
       "length": 6,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FMultiSelect/format.html"
     },
     {
-      "offset": 128,
+      "offset": 419,
       "length": 6,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FMultiSelect/FMultiSelect.searchBuilder.html"
     },
     {
-      "offset": 368,
+      "offset": 675,
       "length": 21,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FMultiSelect/FMultiSelect.searchBuilder.html"
     },
     {
-      "offset": 546,
+      "offset": 861,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStateMap/resolve.html"
     },
     {
-      "offset": 529,
+      "offset": 844,
       "length": 16,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFieldStyle/contentTextStyle.html"
     },
     {
-      "offset": 514,
+      "offset": 829,
       "length": 14,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectSearchStyle/textFieldStyle.html"
     },
     {
-      "offset": 573,
+      "offset": 894,
       "length": 14,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FMultiSelect/FMultiSelect.searchBuilder.html"
     },
     {
-      "offset": 648,
+      "offset": 971,
       "length": 4,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectItemMixin/item.html"
     },
     {
-      "offset": 653,
+      "offset": 976,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectItemMixin/item.html"
     },
     {
-      "offset": 673,
+      "offset": 996,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectItemMixin/item.html"
     }

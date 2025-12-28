@@ -1,0 +1,42 @@
+{
+  "code": "Widget build(BuildContext _) => FButton(\n  style: FButtonStyle.ghost(),\n  mainAxisSize: .min,\n  onPress: () {},\n  child: const Text('Button'),\n);\n",
+  "highlights": [
+    {
+      "start": 2,
+      "end": 2
+    }
+  ],
+  "links": [
+    {
+      "offset": 32,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+    },
+    {
+      "offset": 43,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/style.html"
+    },
+    {
+      "offset": 50,
+      "length": 18,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButtonStyle/ghost.html"
+    },
+    {
+      "offset": 74,
+      "length": 12,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+    },
+    {
+      "offset": 96,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/onPress.html"
+    },
+    {
+      "offset": 114,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/child.html"
+    }
+  ],
+  "tooltips": []
+}

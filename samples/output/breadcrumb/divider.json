@@ -1,6 +1,11 @@
 {
   "code": "Widget build(BuildContext _) => Row(\n  mainAxisAlignment: .center,\n  children: [\n    FBreadcrumb(\n      divider: Transform.rotate(\n        angle: -60,\n        child: const Icon(FIcons.slash, size: 14),\n      ),\n      children: [\n        FBreadcrumbItem(onPress: () {}, child: const Text('Forui')),\n        FBreadcrumbItem.collapsed(\n          menu: [\n            .group(\n              children: [\n                .item(title: const Text('Documentation'), onPress: () {}),\n                .item(title: const Text('Themes'), onPress: () {}),\n              ],\n            ),\n          ],\n        ),\n        FBreadcrumbItem(onPress: () {}, child: const Text('Layout')),\n        const FBreadcrumbItem(current: true, child: Text('Widgets')),\n      ],\n    ),\n  ],\n);\n",
-  "highlights": [],
+  "highlights": [
+    {
+      "start": 5,
+      "end": 8
+    }
+  ],
   "links": [
     {
       "offset": 85,

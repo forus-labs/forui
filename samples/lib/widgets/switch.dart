@@ -7,9 +7,7 @@ import 'package:forui_samples/sample.dart';
 
 @RoutePage()
 class SwitchPage extends StatefulSample {
-  final bool enabled;
-
-  SwitchPage({@queryParam this.enabled = true, @queryParam super.theme}): super(maxWidth: 200);
+  SwitchPage({@queryParam super.theme}) : super(maxWidth: 200);
 
   @override
   State<SwitchPage> createState() => _SwitchPageState();
@@ -20,11 +18,33 @@ class _SwitchPageState extends StatefulSampleState<SwitchPage> {
 
   @override
   Widget sample(BuildContext _) => FSwitch(
-    enabled: widget.enabled,
     label: const Text('Airplane Mode'),
     semanticsLabel: 'Airplane Mode',
     value: _state,
     onChange: (value) => setState(() => _state = value),
+  );
+}
+
+@RoutePage()
+class DisabledSwitchPage extends StatefulSample {
+  DisabledSwitchPage({@queryParam super.theme}) : super(maxWidth: 200);
+
+  @override
+  State<DisabledSwitchPage> createState() => _DisabledSwitchPageState();
+}
+
+class _DisabledSwitchPageState extends StatefulSampleState<DisabledSwitchPage> {
+  bool _state = false;
+
+  @override
+  Widget sample(BuildContext _) => FSwitch(
+    label: const Text('Airplane Mode'),
+    semanticsLabel: 'Airplane Mode',
+    value: _state,
+    onChange: (value) => setState(() => _state = value),
+    // {@highlight}
+    enabled: false,
+    // {@endhighlight}
   );
 }
 

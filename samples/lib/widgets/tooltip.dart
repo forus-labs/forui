@@ -8,22 +8,8 @@ import 'package:forui_samples/sample.dart';
 @RoutePage()
 class TooltipPage extends StatelessWidget {
   final FThemeData theme;
-  final bool hover;
-  final bool longPress;
-  final Axis axis;
 
-  TooltipPage({
-    @queryParam String theme = 'zinc-light',
-    @queryParam String hover = 'true',
-    @queryParam String longPress = 'true',
-    @queryParam String axis = 'vertical',
-  }) : theme = themes[theme]!,
-       hover = bool.tryParse(hover) ?? true,
-       longPress = bool.tryParse(longPress) ?? true,
-       axis = switch (axis) {
-         'horizontal' => .horizontal,
-         _ => .vertical,
-       };
+  TooltipPage({@queryParam String theme = 'zinc-light'}) : theme = themes[theme]!;
 
   @override
   Widget build(BuildContext context) => FTheme(
@@ -38,16 +24,91 @@ class TooltipPage extends StatelessWidget {
               children: [
                 const SizedBox(height: 30),
                 FTooltip(
-                  hover: hover,
-                  longPress: longPress,
-                  tipAnchor: axis == .horizontal ? .topLeft : .bottomCenter,
-                  childAnchor: axis == .horizontal ? .topRight : .topCenter,
                   tipBuilder: (context, _) => const Text('Add to library'),
                   child: FButton(
                     style: FButtonStyle.outline(),
                     mainAxisSize: .min,
                     onPress: () {},
-                    child: Text([if (longPress) 'Long press', if (hover) 'Hover'].join('/')),
+                    child: const Text('Long press/Hover'),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    ),
+  );
+}
+
+@RoutePage()
+class HorizontalTooltipPage extends StatelessWidget {
+  final FThemeData theme;
+
+  HorizontalTooltipPage({@queryParam String theme = 'zinc-light'}) : theme = themes[theme]!;
+
+  @override
+  Widget build(BuildContext context) => FTheme(
+    data: theme,
+    child: FScaffold(
+      child: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 200, maxHeight: 200),
+          child: Builder(
+            builder: (context) => Column(
+              mainAxisAlignment: .center,
+              children: [
+                const SizedBox(height: 30),
+                FTooltip(
+                  // {@highlight}
+                  tipAnchor: .topLeft,
+                  childAnchor: .topRight,
+                  // {@endhighlight}
+                  tipBuilder: (context, _) => const Text('Add to library'),
+                  child: FButton(
+                    style: FButtonStyle.outline(),
+                    mainAxisSize: .min,
+                    onPress: () {},
+                    child: const Text('Long press/Hover'),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    ),
+  );
+}
+
+@RoutePage()
+class LongPressOnlyTooltipPage extends StatelessWidget {
+  final FThemeData theme;
+
+  LongPressOnlyTooltipPage({@queryParam String theme = 'zinc-light'}) : theme = themes[theme]!;
+
+  @override
+  Widget build(BuildContext context) => FTheme(
+    data: theme,
+    child: FScaffold(
+      child: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 200, maxHeight: 200),
+          child: Builder(
+            builder: (context) => Column(
+              mainAxisAlignment: .center,
+              children: [
+                const SizedBox(height: 30),
+                FTooltip(
+                  // {@highlight}
+                  hover: false,
+                  // {@endhighlight}
+                  tipBuilder: (context, _) => const Text('Add to library'),
+                  child: FButton(
+                    style: FButtonStyle.outline(),
+                    mainAxisSize: .min,
+                    onPress: () {},
+                    child: const Text('Long press'),
                   ),
                 ),
               ],

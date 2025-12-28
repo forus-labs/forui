@@ -9,29 +9,42 @@ import 'package:forui_samples/sample.dart';
 
 @RoutePage()
 class TimePickerPage extends Sample {
-  final bool hour24;
+  TimePickerPage({@queryParam super.theme}) : super(maxWidth: 200);
 
-  TimePickerPage({@queryParam this.hour24 = false, @queryParam super.theme}): super(maxWidth: 200);
+  @override
+  Widget sample(BuildContext context) => FTimePicker(control: .managed(initial: .now()));
+}
+
+@RoutePage()
+class Hour24TimePickerPage extends Sample {
+  Hour24TimePickerPage({@queryParam super.theme}) : super(maxWidth: 200);
 
   @override
   Widget sample(BuildContext context) => FTimePicker(
     control: .managed(initial: .now()),
-    hour24: hour24,
+    // {@highlight}
+    hour24: true,
+    // {@endhighlight}
   );
 }
 
 @RoutePage()
 class IntervalTimePickerPage extends Sample {
-  IntervalTimePickerPage({@queryParam super.theme}): super(maxWidth: 200);
+  IntervalTimePickerPage({@queryParam super.theme}) : super(maxWidth: 200);
 
   @override
-  Widget sample(BuildContext context) =>
-      FTimePicker(control: .managed(initial: .now()), hourInterval: 2, minuteInterval: 5);
+  Widget sample(BuildContext context) => FTimePicker(
+    control: .managed(initial: .now()),
+    // {@highlight}
+    hourInterval: 2,
+    minuteInterval: 5,
+    // {@endhighlight}
+  );
 }
 
 @RoutePage()
 class AnimatedTimePickerPage extends StatefulSample {
-  AnimatedTimePickerPage({@queryParam super.theme}): super(maxWidth: 200);
+  AnimatedTimePickerPage({@queryParam super.theme}) : super(maxWidth: 200);
 
   @override
   State<AnimatedTimePickerPage> createState() => _AnimatedTimePickerPageState();

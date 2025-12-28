@@ -1,6 +1,11 @@
 {
-  "code": "Widget build(BuildContext _) => FButton(\n  style: style,\n  mainAxisSize: .min,\n  onPress: () {},\n  child: Text(label),\n);\n",
-  "highlights": [],
+  "code": "Widget build(BuildContext _) => FButton(\n  style: FButtonStyle.destructive(),\n  mainAxisSize: .min,\n  onPress: () {},\n  child: const Text('Button'),\n);\n",
+  "highlights": [
+    {
+      "start": 2,
+      "end": 2
+    }
+  ],
   "links": [
     {
       "offset": 32,
@@ -13,17 +18,22 @@
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/style.html"
     },
     {
-      "offset": 59,
+      "offset": 50,
+      "length": 24,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButtonStyle/destructive.html"
+    },
+    {
+      "offset": 80,
       "length": 12,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
     },
     {
-      "offset": 81,
+      "offset": 102,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/onPress.html"
     },
     {
-      "offset": 99,
+      "offset": 120,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/child.html"
     }

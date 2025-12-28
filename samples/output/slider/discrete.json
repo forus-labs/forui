@@ -1,6 +1,11 @@
 {
   "code": "Widget build(BuildContext context) => FSlider(\n  control: .managedDiscrete(initial: FSliderValue(max: 0.25)),\n  marks: const [\n    .mark(value: 0, label: Text('0%')),\n    .mark(value: 0.25, tick: false),\n    .mark(value: 0.5),\n    .mark(value: 0.75, tick: false),\n    .mark(value: 1, label: Text('100%')),\n  ],\n);\n",
-  "highlights": [],
+  "highlights": [
+    {
+      "start": 2,
+      "end": 2
+    }
+  ],
   "links": [
     {
       "offset": 38,

@@ -1,141 +1,181 @@
 {
-  "code": "class NoCascadingResizableExample extends StatefulWidget {\n  @override\n  State<NoCascadingResizableExample> createState() =>\n      _NoCascadingResizableExampleState();\n}\n\nclass _NoCascadingResizableExampleState\n    extends State<NoCascadingResizableExample> {\n  final _controller = FResizableController();\n\n  @override\n  void dispose() {\n    _controller.dispose();\n    super.dispose();\n  }\n\n  @override\n  Widget build(BuildContext context) => DecoratedBox(\n    decoration: BoxDecoration(\n      border: .all(color: context.theme.colors.border),\n      borderRadius: .circular(8),\n    ),\n    child: FResizable(\n      control: .managed(controller: _controller),\n      axis: .vertical,\n      crossAxisExtent: 300,\n      children: [\n        .region(\n          initialExtent: 200,\n          minExtent: 100,\n          builder: (_, data, _) =>\n              Label(data: data, icon: FIcons.sunrise, label: 'Morning'),\n        ),\n        .region(\n          initialExtent: 200,\n          minExtent: 100,\n          builder: (_, data, _) =>\n              Label(data: data, icon: FIcons.sun, label: 'Afternoon'),\n        ),\n        .region(\n          initialExtent: 200,\n          minExtent: 100,\n          builder: (_, data, _) =>\n              Label(data: data, icon: FIcons.sunset, label: 'Evening'),\n        ),\n      ],\n    ),\n  );\n}\n",
-  "highlights": [],
+  "code": "class NoCascadingResizableExample extends StatelessWidget {\n  @override\n  Widget build(BuildContext context) => DecoratedBox(\n    decoration: BoxDecoration(\n      border: .all(color: context.theme.colors.border),\n      borderRadius: .circular(8),\n    ),\n    child: FResizable(\n      control: const .managed(),\n      axis: .vertical,\n      crossAxisExtent: 300,\n      children: [\n        .region(\n          initialExtent: 200,\n          minExtent: 100,\n          builder: (_, data, _) =>\n              Label(data: data, icon: FIcons.sunrise, label: 'Morning'),\n        ),\n        .region(\n          initialExtent: 200,\n          minExtent: 100,\n          builder: (_, data, _) =>\n              Label(data: data, icon: FIcons.sun, label: 'Afternoon'),\n        ),\n        .region(\n          initialExtent: 200,\n          minExtent: 100,\n          builder: (_, data, _) =>\n              Label(data: data, icon: FIcons.sunset, label: 'Evening'),\n        ),\n      ],\n    ),\n  );\n}\n\nclass Label extends StatelessWidget {\n  static final format = DateFormat.jm();\n  final FResizableRegionData data;\n  final IconData icon;\n  final String label;\n  const Label({\n    required this.data,\n    required this.icon,\n    required this.label,\n    super.key,\n  });\n  @override\n  Widget build(BuildContext context) {\n    final FThemeData(:colors, :typography) = context.theme;\n    final start = DateTime.fromMillisecondsSinceEpoch(\n      (data.offsetPercentage.min * Duration.millisecondsPerDay).round(),\n      isUtc: true,\n    );\n    final end = DateTime.fromMillisecondsSinceEpoch(\n      (data.offsetPercentage.max * Duration.millisecondsPerDay).round(),\n      isUtc: true,\n    );\n    return Align(\n      child: Column(\n        mainAxisAlignment: .center,\n        children: [\n          Row(\n            mainAxisSize: .min,\n            mainAxisAlignment: .center,\n            children: [\n              Icon(icon, size: 15, color: colors.foreground),\n              const SizedBox(width: 3),\n              Text(\n                label,\n                style: typography.sm.copyWith(color: colors.foreground),\n              ),\n            ],\n          ),\n          const SizedBox(height: 5),\n          Text(\n            '${format.format(start)} - ${format.format(end)}',\n            style: typography.sm.copyWith(color: colors.foreground),\n          ),\n        ],\n      ),\n    );\n  }\n}\n",
+  "highlights": [
+    {
+      "start": 9,
+      "end": 9
+    }
+  ],
   "links": [
     {
-      "offset": 282,
-      "length": 20,
-      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableController/FResizableController.html"
-    },
-    {
-      "offset": 354,
-      "length": 7,
-      "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FChangeNotifier/dispose.html"
-    },
-    {
-      "offset": 535,
+      "offset": 204,
       "length": 6,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors/border.html"
     },
     {
-      "offset": 528,
+      "offset": 197,
       "length": 6,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/colors.html"
     },
     {
-      "offset": 522,
+      "offset": 191,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext/theme.html"
     },
     {
-      "offset": 596,
+      "offset": 265,
       "length": 10,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizable/FResizable.html"
     },
     {
-      "offset": 614,
+      "offset": 283,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizable/control.html"
     },
     {
-      "offset": 624,
+      "offset": 299,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableControl/FResizableControl.managed.html"
     },
     {
-      "offset": 632,
-      "length": 10,
-      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableControl/FResizableControl.managed.html"
-    },
-    {
-      "offset": 664,
+      "offset": 316,
       "length": 4,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizable/axis.html"
     },
     {
-      "offset": 687,
+      "offset": 339,
       "length": 15,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizable/crossAxisExtent.html"
     },
     {
-      "offset": 715,
+      "offset": 367,
       "length": 8,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizable/children.html"
     },
     {
-      "offset": 736,
+      "offset": 388,
       "length": 6,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegion/FResizableRegion.region.html"
     },
     {
-      "offset": 754,
+      "offset": 406,
       "length": 13,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegion/initialExtent.html"
     },
     {
-      "offset": 784,
+      "offset": 436,
       "length": 9,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegion/minExtent.html"
     },
     {
-      "offset": 810,
+      "offset": 462,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegion/builder.html"
     },
     {
-      "offset": 873,
+      "offset": 525,
       "length": 14,
       "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/sunrise-constant.html"
     },
     {
-      "offset": 928,
+      "offset": 580,
       "length": 6,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegion/FResizableRegion.region.html"
     },
     {
-      "offset": 946,
+      "offset": 598,
       "length": 13,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegion/initialExtent.html"
     },
     {
-      "offset": 976,
+      "offset": 628,
       "length": 9,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegion/minExtent.html"
     },
     {
-      "offset": 1002,
+      "offset": 654,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegion/builder.html"
     },
     {
-      "offset": 1065,
+      "offset": 717,
       "length": 10,
       "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/sun-constant.html"
     },
     {
-      "offset": 1118,
+      "offset": 770,
       "length": 6,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegion/FResizableRegion.region.html"
     },
     {
-      "offset": 1136,
+      "offset": 788,
       "length": 13,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegion/initialExtent.html"
     },
     {
-      "offset": 1166,
+      "offset": 818,
       "length": 9,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegion/minExtent.html"
     },
     {
-      "offset": 1192,
+      "offset": 844,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegion/builder.html"
     },
     {
-      "offset": 1255,
+      "offset": 907,
       "length": 13,
       "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/sunset-constant.html"
+    },
+    {
+      "offset": 1063,
+      "length": 20,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegionData-class.html"
+    },
+    {
+      "offset": 1306,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+    },
+    {
+      "offset": 1349,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext/theme.html"
+    },
+    {
+      "offset": 1423,
+      "length": 16,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegionData/offsetPercentage.html"
+    },
+    {
+      "offset": 1575,
+      "length": 16,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegionData/offsetPercentage.html"
+    },
+    {
+      "offset": 1917,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors/foreground.html"
+    },
+    {
+      "offset": 2047,
+      "length": 2,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FTypography/sm.html"
+    },
+    {
+      "offset": 2073,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors/foreground.html"
+    },
+    {
+      "offset": 2277,
+      "length": 2,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FTypography/sm.html"
+    },
+    {
+      "offset": 2303,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors/foreground.html"
     }
   ],
   "tooltips": []

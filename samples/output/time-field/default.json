@@ -1,24 +1,19 @@
 {
-  "code": "Widget build(BuildContext _) => FTimeField(\n  hour24: hour24,\n  label: const Text('Appointment Time'),\n  description: const Text('Select a Time for your appointment.'),\n);\n",
+  "code": "Widget build(BuildContext _) => const FTimeField(\n  label: Text('Appointment Time'),\n  description: Text('Select a Time for your appointment.'),\n);\n",
   "highlights": [],
   "links": [
     {
-      "offset": 32,
+      "offset": 38,
       "length": 10,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.html"
     },
     {
-      "offset": 46,
-      "length": 6,
-      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/hour24.html"
-    },
-    {
-      "offset": 64,
+      "offset": 52,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/label.html"
     },
     {
-      "offset": 105,
+      "offset": 87,
       "length": 11,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/description.html"
     }

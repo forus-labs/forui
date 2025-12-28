@@ -1,6 +1,15 @@
 {
   "code": "Widget build(BuildContext context) => FSelect<String>.rich(\n  hint: 'Select a level',\n  contentDivider: .full,\n  format: (s) => s,\n  children: [\n    .section(\n      label: const Text('Level 1'),\n      divider: .indented,\n      items: {\n        for (final item in ['A', 'B']) item: '1$item',\n      },\n    ),\n    .section(\n      label: const Text('Level 2'),\n      items: {\n        for (final item in ['A', 'B']) item: '2$item',\n      },\n    ),\n    .item(title: const Text('Level 3'), value: '3'),\n    .item(title: const Text('Level 4'), value: '4'),\n  ],\n);\n",
-  "highlights": [],
+  "highlights": [
+    {
+      "start": 3,
+      "end": 3
+    },
+    {
+      "start": 8,
+      "end": 8
+    }
+  ],
   "links": [
     {
       "offset": 38,

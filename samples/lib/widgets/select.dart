@@ -2,6 +2,7 @@ import 'package:flutter/widgets.dart';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:forui/forui.dart';
+import 'package:forui_samples/main.dart';
 
 import 'package:forui_samples/sample.dart';
 
@@ -24,6 +25,7 @@ const fruits = [
 ];
 
 @RoutePage()
+@Options(include: [fruits])
 class SelectPage extends Sample {
   SelectPage({@queryParam super.theme}) : super(alignment: .topCenter, top: 20);
 
@@ -153,12 +155,16 @@ class DividerSelectPage extends Sample {
   @override
   Widget sample(BuildContext context) => FSelect<String>.rich(
     hint: 'Select a level',
+    // {@highlight}
     contentDivider: .full,
+    // {@endhighlight}
     format: (s) => s,
     children: [
       .section(
         label: const Text('Level 1'),
+        // {@highlight}
         divider: .indented,
+        // {@endhighlight}
         items: {
           for (final item in ['A', 'B']) item: '1$item',
         },
@@ -176,6 +182,7 @@ class DividerSelectPage extends Sample {
 }
 
 @RoutePage()
+@Options(include: [fruits])
 class SyncSelectPage extends Sample {
   SyncSelectPage({@queryParam super.theme}) : super(alignment: .topCenter, top: 20);
 
@@ -183,12 +190,15 @@ class SyncSelectPage extends Sample {
   Widget sample(BuildContext context) => FSelect<String>.searchBuilder(
     hint: 'Select a fruit',
     format: (s) => s,
+    // {@highlight}
     filter: (query) => query.isEmpty ? fruits : fruits.where((f) => f.toLowerCase().startsWith(query.toLowerCase())),
+    // {@endhighlight}
     contentBuilder: (context, _, fruits) => [for (final fruit in fruits) .item(title: Text(fruit), value: fruit)],
   );
 }
 
 @RoutePage()
+@Options(include: [fruits])
 class AsyncSelectPage extends Sample {
   AsyncSelectPage({@queryParam super.theme}) : super(alignment: .topCenter, top: 20);
 
@@ -196,15 +206,18 @@ class AsyncSelectPage extends Sample {
   Widget sample(BuildContext context) => FSelect<String>.searchBuilder(
     hint: 'Select a fruit',
     format: (s) => s,
+    // {@highlight}
     filter: (query) async {
       await Future.delayed(const Duration(seconds: 1));
       return query.isEmpty ? fruits : fruits.where((fruit) => fruit.toLowerCase().startsWith(query.toLowerCase()));
     },
+    // {@endhighlight}
     contentBuilder: (context, _, fruits) => [for (final fruit in fruits) .item(title: Text(fruit), value: fruit)],
   );
 }
 
 @RoutePage()
+@Options(include: [fruits])
 class AsyncLoadingSelectPage extends Sample {
   AsyncLoadingSelectPage({@queryParam super.theme}) : super(alignment: .topCenter, top: 20);
 
@@ -216,15 +229,18 @@ class AsyncLoadingSelectPage extends Sample {
       await Future.delayed(const Duration(seconds: 1));
       return query.isEmpty ? fruits : fruits.where((fruit) => fruit.toLowerCase().startsWith(query.toLowerCase()));
     },
+    // {@highlight}
     contentLoadingBuilder: (context, style) => Padding(
       padding: const .all(8.0),
       child: Text('Here be dragons...', style: style.textFieldStyle.contentTextStyle.resolve({})),
     ),
+    // {@endhighlight}
     contentBuilder: (context, _, fruits) => [for (final fruit in fruits) .item(title: Text(fruit), value: fruit)],
   );
 }
 
 @RoutePage()
+@Options(include: [fruits])
 class AsyncErrorSelectPage extends Sample {
   AsyncErrorSelectPage({@queryParam super.theme}) : super(alignment: .topCenter, top: 20);
 
@@ -237,6 +253,7 @@ class AsyncErrorSelectPage extends Sample {
       throw StateError('Error loading data');
     },
     contentBuilder: (context, _, fruits) => [for (final fruit in fruits) .item(title: Text(fruit), value: fruit)],
+    // {@highlight}
     contentErrorBuilder: (context, error, trace) {
       final style = context.theme.selectStyle.iconStyle;
       return Padding(
@@ -244,16 +261,20 @@ class AsyncErrorSelectPage extends Sample {
         child: Icon(FIcons.messageCircleX, size: style.size, color: style.color),
       );
     },
+    // {@endhighlight}
   );
 }
 
 @RoutePage()
+@Options(include: [fruits])
 class ToggleableSelectPage extends Sample {
   ToggleableSelectPage({@queryParam super.theme}) : super(alignment: .topCenter, top: 20);
 
   @override
   Widget sample(BuildContext context) => FSelect<String>.rich(
+    // {@highlight}
     control: const .managed(initial: 'Apple', toggleable: true),
+    // {@endhighlight}
     hint: 'Select a fruit',
     format: (s) => s,
     children: [for (final fruit in fruits) .item(title: Text(fruit), value: fruit)],
@@ -261,6 +282,7 @@ class ToggleableSelectPage extends Sample {
 }
 
 @RoutePage()
+@Options(include: [fruits])
 class ClearableSelectPage extends Sample {
   ClearableSelectPage({@queryParam super.theme}) : super(alignment: .topCenter, top: 20);
 
@@ -268,7 +290,9 @@ class ClearableSelectPage extends Sample {
   Widget sample(BuildContext context) => FSelect<String>.rich(
     hint: 'Select a fruit',
     format: (s) => s,
+    // {@highlight}
     clearable: true,
+    // {@endhighlight}
     children: [for (final fruit in fruits) .item(title: Text(fruit), value: fruit)],
   );
 }
@@ -287,7 +311,9 @@ class FormatSelectPage extends Sample {
   @override
   Widget sample(BuildContext context) => FSelect<({String firstName, String lastName})>.rich(
     hint: 'Select a user',
+    // {@highlight}
     format: (user) => '${user.firstName} ${user.lastName}',
+    // {@endhighlight}
     children: [for (final user in users) .item(title: Text(user.firstName), value: user)],
   );
 }

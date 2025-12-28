@@ -1,6 +1,11 @@
 {
   "code": "Widget build(BuildContext context) {\n  final cardStyle = context.theme.cardStyle.copyWith(\n    contentStyle: context.theme.cardStyle.contentStyle.copyWith(\n      titleTextStyle: context.theme.typography.sm.copyWith(\n        color: context.theme.colors.primary,\n        fontWeight: FontWeight.w600,\n      ),\n    ),\n  );\n\n  return FButton(\n    mainAxisSize: .min,\n    onPress: () => showRawFToast(\n      context: context,\n      duration: null,\n      builder: (context, toast) => IntrinsicHeight(\n        child: FCard(\n          style: cardStyle,\n          title: const Text('Event has been created'),\n          subtitle: const Padding(\n            padding: .symmetric(vertical: 5),\n            child: Text(\n              'This is a more detailed description that provides comprehensive context and additional information '\n              'about the notification, explaining what happened and what the user might expect next.',\n            ),\n          ),\n          child: FButton(\n            onPress: () => toast.dismiss(),\n            child: const Text('undo'),\n          ),\n        ),\n      ),\n    ),\n    child: const Text('Show Toast'),\n  );\n}\n",
-  "highlights": [],
+  "highlights": [
+    {
+      "start": 13,
+      "end": 13
+    }
+  ],
   "links": [
     {
       "offset": 81,

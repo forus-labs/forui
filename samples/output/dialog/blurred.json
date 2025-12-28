@@ -1,6 +1,11 @@
 {
   "code": "Widget build(BuildContext context) => FButton(\n  mainAxisSize: .min,\n  onPress: () => showFDialog(\n    context: context,\n    routeStyle: context.theme.dialogRouteStyle.copyWith(\n      barrierFilter: (animation) => ImageFilter.compose(\n        outer: ImageFilter.blur(sigmaX: animation * 5, sigmaY: animation * 5),\n        inner: ColorFilter.mode(context.theme.colors.barrier, .srcOver),\n      ),\n    ),\n    builder: (context, style, animation) => FTheme(\n      data: theme,\n      child: FDialog(\n        style: style,\n        animation: animation,\n        title: const Text('Are you absolutely sure?'),\n        body: const Text(\n          'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',\n        ),\n        actions: [\n          FButton(\n            child: const Text('Continue'),\n            onPress: () => Navigator.of(context).pop(),\n          ),\n          FButton(\n            style: FButtonStyle.outline(),\n            child: const Text('Cancel'),\n            onPress: () => Navigator.of(context).pop(),\n          ),\n        ],\n      ),\n    ),\n  ),\n  child: const Text('Show Dialog'),\n);\n",
-  "highlights": [],
+  "highlights": [
+    {
+      "start": 6,
+      "end": 9
+    }
+  ],
   "links": [
     {
       "offset": 38,

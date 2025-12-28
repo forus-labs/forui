@@ -1,6 +1,11 @@
 {
   "code": "class PaginationCustomIconExample extends StatefulWidget {\n  @override\n  State<PaginationCustomIconExample> createState() =>\n      _PaginationCustomIconExampleState();\n}\n\nclass _PaginationCustomIconExampleState\n    extends State<PaginationCustomIconExample> {\n  late final _controller = FPaginationController(pages: 10, page: 4);\n\n  @override\n  void dispose() {\n    _controller.dispose();\n    super.dispose();\n  }\n\n  @override\n  Widget build(BuildContext context) {\n    final style = context.theme.paginationStyle;\n    return FPagination(\n      control: .managed(controller: _controller),\n      next: Padding(\n        padding: style.itemPadding,\n        child: ConstrainedBox(\n          constraints: style.itemConstraints,\n          child: FButton.icon(\n            style: FButtonStyle.ghost(),\n            onPress: _controller.next,\n            child: IconTheme(\n              data: style.itemIconStyle.resolve({}),\n              child: const Icon(FIcons.bird),\n            ),\n          ),\n        ),\n      ),\n      previous: Padding(\n        padding: style.itemPadding,\n        child: ConstrainedBox(\n          constraints: style.itemConstraints,\n          child: FButton.icon(\n            style: FButtonStyle.ghost(),\n            onPress: _controller.previous,\n            child: IconTheme(\n              data: style.itemIconStyle.resolve({}),\n              child: const Icon(FIcons.anchor),\n            ),\n          ),\n        ),\n      ),\n    );\n  }\n}\n",
-  "highlights": [],
+  "highlights": [
+    {
+      "start": 22,
+      "end": 49
+    }
+  ],
   "links": [
     {
       "offset": 287,

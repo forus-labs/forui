@@ -1,39 +1,24 @@
 {
-  "code": "Widget build(BuildContext context) => FPicker(\n  children: [\n    if (builder)\n      FPickerWheel.builder(builder: (context, index) => Text('$index'))\n    else\n      FPickerWheel(\n        loop: loop,\n        children: const [\n          Text('January'),\n          Text('February'),\n          Text('March'),\n          Text('April'),\n          Text('May'),\n          Text('June'),\n          Text('July'),\n          Text('August'),\n          Text('September'),\n          Text('October'),\n          Text('November'),\n          Text('December'),\n        ],\n      ),\n  ],\n);\n",
+  "code": "Widget build(BuildContext context) => const FPicker(\n  children: [\n    FPickerWheel(\n      children: [\n        Text('January'),\n        Text('February'),\n        Text('March'),\n        Text('April'),\n        Text('May'),\n        Text('June'),\n        Text('July'),\n        Text('August'),\n        Text('September'),\n        Text('October'),\n        Text('November'),\n        Text('December'),\n      ],\n    ),\n  ],\n);\n",
   "highlights": [],
   "links": [
     {
-      "offset": 38,
+      "offset": 44,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.picker/FPicker/FPicker.html"
     },
     {
-      "offset": 49,
+      "offset": 55,
       "length": 8,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.picker/FPicker/children.html"
     },
     {
-      "offset": 84,
-      "length": 20,
-      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.picker/FPickerWheel/FPickerWheel.builder.html"
-    },
-    {
-      "offset": 105,
-      "length": 7,
-      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.picker/FPickerWheel/FPickerWheel.builder.html"
-    },
-    {
-      "offset": 165,
+      "offset": 71,
       "length": 12,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.picker/FPickerWheel/FPickerWheel.html"
     },
     {
-      "offset": 187,
-      "length": 4,
-      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.picker/FPickerWheel/FPickerWheel.html"
-    },
-    {
-      "offset": 207,
+      "offset": 91,
       "length": 8,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.picker/FPickerWheel/FPickerWheel.html"
     }

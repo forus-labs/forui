@@ -1,6 +1,11 @@
 {
   "code": "Widget build(BuildContext _) => FHeader.nested(\n  title: const Text('Climate'),\n  prefixes: [\n    FHeaderAction(icon: const Icon(FIcons.thermometer), onPress: () {}),\n    const FHeaderAction(icon: Icon(FIcons.wind), onPress: null),\n  ],\n  suffixes: [FHeaderAction.x(onPress: () {})],\n);\n",
-  "highlights": [],
+  "highlights": [
+    {
+      "start": 7,
+      "end": 7
+    }
+  ],
   "links": [
     {
       "offset": 32,

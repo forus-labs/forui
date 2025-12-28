@@ -21,7 +21,7 @@ class SidebarPage extends Sample {
             Padding(
               padding: const .fromLTRB(16, 8, 16, 16),
               child: SvgPicture.network(
-                theme.colors.brightness == .light
+                context.theme.colors.brightness == .light
                     ? 'https://forui.dev/light_logo.svg'
                     : 'https://forui.dev/dark_logo.svg',
                 height: 24,
@@ -167,7 +167,7 @@ class SheetSidebarPage extends Sample {
                   Padding(
                     padding: const .fromLTRB(16, 8, 16, 16),
                     child: SvgPicture.network(
-                      theme.colors.brightness == .light
+                      context.theme.colors.brightness == .light
                           ? 'https://forui.dev/light_logo.svg'
                           : 'https://forui.dev/dark_logo.svg',
                       height: 24,
@@ -256,7 +256,9 @@ class CustomWidthSidebarPage extends Sample {
 
   @override
   Widget sample(BuildContext _) => FSidebar(
+    // {@highlight}
     style: (s) => s.copyWith(constraints: s.constraints.copyWith(minWidth: 500, maxWidth: 500)),
+    // {@endhighlight}
     children: [
       FSidebarGroup(
         children: [

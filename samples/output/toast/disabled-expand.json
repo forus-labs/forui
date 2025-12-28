@@ -1,0 +1,122 @@
+{
+  "code": "Widget build(BuildContext context) => FTheme(\n  data: theme,\n  child: FToaster(\n    style: context.theme.toasterStyle.copyWith(\n      expandBehavior: .disabled,\n    ),\n    child: FScaffold(\n      child: Align(\n        child: ConstrainedBox(\n          constraints: const BoxConstraints(maxWidth: 400),\n          child: Builder(\n            builder: (context) => Center(\n              child: FButton(\n                mainAxisSize: .min,\n                onPress: () => showFToast(\n                  context: context,\n                  icon: const Icon(FIcons.info),\n                  title: const Text('Event has been created'),\n                ),\n                child: const Text('Show Toast'),\n              ),\n            ),\n          ),\n        ),\n      ),\n    ),\n  ),\n);\n",
+  "highlights": [
+    {
+      "start": 5,
+      "end": 5
+    }
+  ],
+  "links": [
+    {
+      "offset": 38,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FTheme/FTheme.html"
+    },
+    {
+      "offset": 48,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FTheme/data.html"
+    },
+    {
+      "offset": 63,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FTheme/child.html"
+    },
+    {
+      "offset": 70,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/FToaster/FToaster.html"
+    },
+    {
+      "offset": 84,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/FToaster/style.html"
+    },
+    {
+      "offset": 118,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/$FToasterStyleTransformations/copyWith.html"
+    },
+    {
+      "offset": 105,
+      "length": 12,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/toasterStyle.html"
+    },
+    {
+      "offset": 99,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext/theme.html"
+    },
+    {
+      "offset": 134,
+      "length": 14,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/$FToasterStyleTransformations/copyWith.html"
+    },
+    {
+      "offset": 151,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/FToasterExpandBehavior.html#disabled"
+    },
+    {
+      "offset": 172,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/FToaster/child.html"
+    },
+    {
+      "offset": 179,
+      "length": 9,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.scaffold/FScaffold/FScaffold.html"
+    },
+    {
+      "offset": 196,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.scaffold/FScaffold/child.html"
+    },
+    {
+      "offset": 390,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+    },
+    {
+      "offset": 415,
+      "length": 12,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+    },
+    {
+      "offset": 451,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/onPress.html"
+    },
+    {
+      "offset": 466,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/showFToast.html"
+    },
+    {
+      "offset": 496,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/showFToast.html"
+    },
+    {
+      "offset": 532,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/showFToast.html"
+    },
+    {
+      "offset": 549,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/info-constant.html"
+    },
+    {
+      "offset": 581,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/showFToast.html"
+    },
+    {
+      "offset": 661,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/child.html"
+    }
+  ],
+  "tooltips": []
+}

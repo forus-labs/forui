@@ -1,129 +1,134 @@
 {
-  "code": "Widget build(BuildContext context) {\n  final actions = [\n    FButton(\n      style: FButtonStyle.outline(),\n      child: const Text('Cancel'),\n      onPress: () => Navigator.of(context).pop(),\n    ),\n    FButton(\n      child: const Text('Continue'),\n      onPress: () => Navigator.of(context).pop(),\n    ),\n  ];\n\n  return FButton(\n    mainAxisSize: .min,\n    onPress: () => showFDialog(\n      context: context,\n      builder: (context, style, animation) => FTheme(\n        data: theme,\n        child: FDialog(\n          style: style,\n          animation: animation,\n          direction: direction,\n          title: const Text('Are you absolutely sure?'),\n          body: const Text(\n            'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',\n          ),\n          actions: direction == .vertical ? actions.reversed.toList() : actions,\n        ),\n      ),\n    ),\n    child: const Text('Show Dialog'),\n  );\n}\n",
-  "highlights": [],
+  "code": "Widget build(BuildContext context) => FButton(\n  mainAxisSize: .min,\n  onPress: () => showFDialog(\n    context: context,\n    builder: (context, style, animation) => FTheme(\n      data: theme,\n      child: FDialog(\n        style: style,\n        animation: animation,\n        direction: .horizontal,\n        title: const Text('Are you absolutely sure?'),\n        body: const Text(\n          'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',\n        ),\n        actions: [\n          FButton(\n            style: FButtonStyle.outline(),\n            child: const Text('Cancel'),\n            onPress: () => Navigator.of(context).pop(),\n          ),\n          FButton(\n            child: const Text('Continue'),\n            onPress: () => Navigator.of(context).pop(),\n          ),\n        ],\n      ),\n    ),\n  ),\n  child: const Text('Show Dialog'),\n);\n",
+  "highlights": [
+    {
+      "start": 10,
+      "end": 10
+    }
+  ],
   "links": [
     {
-      "offset": 61,
+      "offset": 38,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
     },
     {
-      "offset": 76,
-      "length": 5,
-      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/style.html"
-    },
-    {
-      "offset": 83,
-      "length": 20,
-      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButtonStyle/outline.html"
-    },
-    {
-      "offset": 113,
-      "length": 5,
-      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/child.html"
-    },
-    {
-      "offset": 148,
-      "length": 7,
-      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/onPress.html"
-    },
-    {
-      "offset": 203,
-      "length": 7,
-      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
-    },
-    {
-      "offset": 218,
-      "length": 5,
-      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/child.html"
-    },
-    {
-      "offset": 255,
-      "length": 7,
-      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/onPress.html"
-    },
-    {
-      "offset": 321,
-      "length": 7,
-      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
-    },
-    {
-      "offset": 334,
+      "offset": 49,
       "length": 12,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
     },
     {
-      "offset": 358,
+      "offset": 71,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/onPress.html"
     },
     {
-      "offset": 373,
+      "offset": 86,
       "length": 11,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.dialog/showFDialog.html"
     },
     {
-      "offset": 392,
+      "offset": 103,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.dialog/showFDialog.html"
     },
     {
-      "offset": 416,
+      "offset": 125,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.dialog/showFDialog.html"
     },
     {
-      "offset": 456,
+      "offset": 165,
       "length": 6,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FTheme/FTheme.html"
     },
     {
-      "offset": 472,
+      "offset": 179,
       "length": 4,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FTheme/data.html"
     },
     {
-      "offset": 493,
+      "offset": 198,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FTheme/child.html"
     },
     {
-      "offset": 500,
+      "offset": 205,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.dialog/FDialog/FDialog.html"
     },
     {
-      "offset": 519,
+      "offset": 222,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.dialog/FDialog/style.html"
     },
     {
-      "offset": 543,
+      "offset": 244,
       "length": 9,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.dialog/FDialog/animation.html"
     },
     {
-      "offset": 575,
+      "offset": 274,
       "length": 9,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.dialog/FDialog/FDialog.html"
     },
     {
-      "offset": 607,
+      "offset": 306,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.dialog/FDialog/FDialog.html"
     },
     {
-      "offset": 664,
+      "offset": 361,
       "length": 4,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.dialog/FDialog/FDialog.html"
     },
     {
-      "offset": 831,
+      "offset": 522,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.dialog/FDialog/FDialog.html"
     },
     {
-      "offset": 933,
+      "offset": 543,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+    },
+    {
+      "offset": 564,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/style.html"
+    },
+    {
+      "offset": 571,
+      "length": 20,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButtonStyle/outline.html"
+    },
+    {
+      "offset": 607,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/child.html"
+    },
+    {
+      "offset": 648,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/onPress.html"
+    },
+    {
+      "offset": 715,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+    },
+    {
+      "offset": 736,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/child.html"
+    },
+    {
+      "offset": 779,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/onPress.html"
+    },
+    {
+      "offset": 870,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/child.html"
     }

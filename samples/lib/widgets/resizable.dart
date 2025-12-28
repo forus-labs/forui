@@ -2,11 +2,13 @@ import 'package:flutter/widgets.dart';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:forui/forui.dart';
+import 'package:forui_samples/main.dart';
 import 'package:intl/intl.dart';
 
 import 'package:forui_samples/sample.dart';
 
 @RoutePage()
+@Options(include: [Label])
 class ResizablePage extends Sample {
   ResizablePage({@queryParam super.theme});
 
@@ -41,21 +43,9 @@ class ResizablePage extends Sample {
 }
 
 @RoutePage()
-class NoCascadingResizablePage extends StatefulSample {
+@Options(include: [Label])
+class NoCascadingResizablePage extends Sample {
   NoCascadingResizablePage({@queryParam super.theme});
-
-  @override
-  State<NoCascadingResizablePage> createState() => _NoCascadingResizablePageState();
-}
-
-class _NoCascadingResizablePageState extends StatefulSampleState<NoCascadingResizablePage> {
-  final _controller = FResizableController();
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
 
   @override
   Widget sample(BuildContext context) => DecoratedBox(
@@ -64,21 +54,23 @@ class _NoCascadingResizablePageState extends StatefulSampleState<NoCascadingResi
       borderRadius: .circular(8),
     ),
     child: FResizable(
-      control: .managed(controller: _controller),
+      // {@highlight}
+      control: const .managed(),
+      // {@endhighlight}
       axis: .vertical,
       crossAxisExtent: 300,
       children: [
-        .region(
+            .region(
           initialExtent: 200,
           minExtent: 100,
           builder: (_, data, _) => Label(data: data, icon: FIcons.sunrise, label: 'Morning'),
         ),
-        .region(
+            .region(
           initialExtent: 200,
           minExtent: 100,
           builder: (_, data, _) => Label(data: data, icon: FIcons.sun, label: 'Afternoon'),
         ),
-        .region(
+            .region(
           initialExtent: 200,
           minExtent: 100,
           builder: (_, data, _) => Label(data: data, icon: FIcons.sunset, label: 'Evening'),
@@ -136,14 +128,38 @@ class Label extends StatelessWidget {
 
 @RoutePage()
 class HorizontalResizablePage extends Sample {
-  final FResizableDivider divider;
+  HorizontalResizablePage({@queryParam super.theme});
 
-  HorizontalResizablePage({@queryParam String divider = 'dividerWithThumb', @queryParam super.theme})
-    : divider = switch (divider) {
-        'dividerWithThumb' => .dividerWithThumb,
-        'divider' => .divider,
-        _ => .none,
-      };
+  @override
+  Widget sample(BuildContext context) => DecoratedBox(
+    decoration: BoxDecoration(
+      border: .all(color: context.theme.colors.border),
+      borderRadius: .circular(8),
+    ),
+    child: FResizable(
+      // {@highlight}
+      axis: .horizontal,
+      // {@endhighlight}
+      crossAxisExtent: 300,
+      children: [
+        .region(
+          initialExtent: 100,
+          minExtent: 100,
+          builder: (context, data, _) => Align(child: Text('Sidebar', style: context.theme.typography.sm)),
+        ),
+        .region(
+          initialExtent: 300,
+          minExtent: 100,
+          builder: (context, data, _) => Align(child: Text('Content', style: context.theme.typography.sm)),
+        ),
+      ],
+    ),
+  );
+}
+
+@RoutePage()
+class DividerResizablePage extends Sample {
+  DividerResizablePage({@queryParam super.theme});
 
   @override
   Widget sample(BuildContext context) => DecoratedBox(
@@ -153,7 +169,41 @@ class HorizontalResizablePage extends Sample {
     ),
     child: FResizable(
       axis: .horizontal,
-      divider: divider,
+      // {@highlight}
+      divider: .divider,
+      // {@endhighlight}
+      crossAxisExtent: 300,
+      children: [
+        .region(
+          initialExtent: 100,
+          minExtent: 100,
+          builder: (context, data, _) => Align(child: Text('Sidebar', style: context.theme.typography.sm)),
+        ),
+        .region(
+          initialExtent: 300,
+          minExtent: 100,
+          builder: (context, data, _) => Align(child: Text('Content', style: context.theme.typography.sm)),
+        ),
+      ],
+    ),
+  );
+}
+
+@RoutePage()
+class NoDividerResizablePage extends Sample {
+  NoDividerResizablePage({@queryParam super.theme});
+
+  @override
+  Widget sample(BuildContext context) => DecoratedBox(
+    decoration: BoxDecoration(
+      border: .all(color: context.theme.colors.border),
+      borderRadius: .circular(8),
+    ),
+    child: FResizable(
+      axis: .horizontal,
+      // {@highlight}
+      divider: .none,
+      // {@endhighlight}
       crossAxisExtent: 300,
       children: [
         .region(

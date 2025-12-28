@@ -1,5 +1,5 @@
 {
-  "code": "Widget build(BuildContext _) => FTheme(\n  data: theme,\n  child: FToaster(\n    child: FScaffold(\n      child: Align(\n        child: ConstrainedBox(\n          constraints: const BoxConstraints(maxWidth: 400),\n          child: Builder(\n            builder: (context) => Center(\n              child: FButton(\n                mainAxisSize: .min,\n                onPress: () => showFToast(\n                  context: context,\n                  swipeToDismiss: directions,\n                  icon: const Icon(FIcons.info),\n                  title: const Text('Event has been created'),\n                ),\n                child: const Text('Show Toast'),\n              ),\n            ),\n          ),\n        ),\n      ),\n    ),\n  ),\n);\n",
+  "code": "Widget build(BuildContext _) => FTheme(\n  data: theme,\n  child: FToaster(\n    child: FScaffold(\n      child: Align(\n        child: ConstrainedBox(\n          constraints: const BoxConstraints(maxWidth: 400),\n          child: Builder(\n            builder: (context) => Center(\n              child: FButton(\n                mainAxisSize: .min,\n                onPress: () => showFToast(\n                  context: context,\n                  icon: const Icon(FIcons.info),\n                  title: const Text('Event has been created'),\n                ),\n                child: const Text('Show Toast'),\n              ),\n            ),\n          ),\n        ),\n      ),\n    ),\n  ),\n);\n",
   "highlights": [],
   "links": [
     {
@@ -64,26 +64,21 @@
     },
     {
       "offset": 438,
-      "length": 14,
-      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/showFToast.html"
-    },
-    {
-      "offset": 484,
       "length": 4,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/showFToast.html"
     },
     {
-      "offset": 501,
+      "offset": 455,
       "length": 11,
       "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/info-constant.html"
     },
     {
-      "offset": 533,
+      "offset": 487,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/showFToast.html"
     },
     {
-      "offset": 613,
+      "offset": 567,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/child.html"
     }

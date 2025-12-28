@@ -7,15 +7,26 @@ import 'package:forui_samples/sample.dart';
 
 @RoutePage()
 class TimeFieldPage extends Sample {
-  final bool hour24;
-
-  TimeFieldPage({@queryParam this.hour24 = false, @queryParam super.theme});
+  TimeFieldPage({@queryParam super.theme});
 
   @override
-  Widget sample(BuildContext _) => FTimeField(
-    hour24: hour24,
-    label: const Text('Appointment Time'),
-    description: const Text('Select a Time for your appointment.'),
+  Widget sample(BuildContext _) => const FTimeField(
+    label: Text('Appointment Time'),
+    description: Text('Select a Time for your appointment.'),
+  );
+}
+
+@RoutePage()
+class Hour24TimeFieldPage extends Sample {
+  Hour24TimeFieldPage({@queryParam super.theme});
+
+  @override
+  Widget sample(BuildContext _) => const FTimeField(
+    label: Text('Appointment Time'),
+    description: Text('Select a Time for your appointment.'),
+    // {@highlight}
+    hour24: true,
+    // {@endhighlight}
   );
 }
 
@@ -36,7 +47,9 @@ class ValidatorTimeFieldPage extends Sample {
 
   @override
   Widget sample(BuildContext context) => FTimeField(
+    // {@highlight}
     control: .managed(validator: (time) => time?.hour == 12 ? 'Time cannot be noon.' : null),
+    // {@endhighlight}
     label: const Text('Appointment Time'),
     description: const Text('Select a time for your appointment.'),
   );

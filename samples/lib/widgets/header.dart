@@ -26,7 +26,9 @@ class NestedHeaderPage extends Sample {
   @override
   Widget sample(BuildContext _) => FHeader.nested(
     title: const Text('Appointment'),
+    // {@highlight}
     prefixes: [FHeaderAction.back(onPress: () {})],
+    // {@endhighlight}
     suffixes: [
       FHeaderAction(icon: const Icon(FIcons.info), onPress: () {}),
       FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {}),
@@ -45,6 +47,8 @@ class XNestedHeaderPage extends Sample {
       FHeaderAction(icon: const Icon(FIcons.thermometer), onPress: () {}),
       const FHeaderAction(icon: Icon(FIcons.wind), onPress: null),
     ],
+    // {@highlight}
     suffixes: [FHeaderAction.x(onPress: () {})],
+    // {@endhighlight}
   );
 }

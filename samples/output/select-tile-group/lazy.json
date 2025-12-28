@@ -1,6 +1,11 @@
 {
   "code": "Widget build(BuildContext _) => FSelectTileGroup.builder(\n  control: const .managed(initial: {1}),\n  label: const Text('Applicable values'),\n  maxHeight: 200,\n  tileBuilder: (context, index) =>\n      .tile(title: Text('Tile $index'), value: index),\n);\n",
-  "highlights": [],
+  "highlights": [
+    {
+      "start": 5,
+      "end": 6
+    }
+  ],
   "links": [
     {
       "offset": 32,

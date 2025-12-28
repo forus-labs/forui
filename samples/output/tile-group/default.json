@@ -1,5 +1,5 @@
 {
-  "code": "Widget build(BuildContext _) => FTileGroup(\n  label: const Text('Settings'),\n  description: const Text('Personalize your experience'),\n  divider: divider,\n  children: [\n    .tile(\n      prefix: const Icon(FIcons.user),\n      title: const Text('Personalization'),\n      suffix: const Icon(FIcons.chevronRight),\n      onPress: () {},\n    ),\n    .tile(\n      prefix: const Icon(FIcons.wifi),\n      title: const Text('WiFi'),\n      details: const Text('Duobase (5G)'),\n      suffix: const Icon(FIcons.chevronRight),\n      onPress: () {},\n    ),\n  ],\n);\n",
+  "code": "Widget build(BuildContext _) => FTileGroup(\n  label: const Text('Settings'),\n  description: const Text('Personalize your experience'),\n  children: [\n    .tile(\n      prefix: const Icon(FIcons.user),\n      title: const Text('Personalization'),\n      suffix: const Icon(FIcons.chevronRight),\n      onPress: () {},\n    ),\n    .tile(\n      prefix: const Icon(FIcons.wifi),\n      title: const Text('WiFi'),\n      details: const Text('Duobase (5G)'),\n      suffix: const Icon(FIcons.chevronRight),\n      onPress: () {},\n    ),\n  ],\n);\n",
   "highlights": [],
   "links": [
     {
@@ -19,86 +19,81 @@
     },
     {
       "offset": 137,
-      "length": 7,
-      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileGroup/divider.html"
-    },
-    {
-      "offset": 157,
       "length": 8,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileGroup/FTileGroup.html"
     },
     {
-      "offset": 174,
+      "offset": 154,
       "length": 4,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileMixin/tile.html"
     },
     {
-      "offset": 186,
+      "offset": 166,
       "length": 6,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileMixin/tile.html"
     },
     {
-      "offset": 205,
+      "offset": 185,
       "length": 11,
       "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/user-constant.html"
     },
     {
-      "offset": 225,
+      "offset": 205,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileMixin/tile.html"
     },
     {
-      "offset": 269,
+      "offset": 249,
       "length": 6,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileMixin/tile.html"
     },
     {
-      "offset": 288,
+      "offset": 268,
       "length": 19,
       "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/chevronRight-constant.html"
     },
     {
-      "offset": 316,
+      "offset": 296,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileMixin/tile.html"
     },
     {
-      "offset": 344,
+      "offset": 324,
       "length": 4,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileMixin/tile.html"
     },
     {
-      "offset": 356,
+      "offset": 336,
       "length": 6,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileMixin/tile.html"
     },
     {
-      "offset": 375,
+      "offset": 355,
       "length": 11,
       "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/wifi-constant.html"
     },
     {
-      "offset": 395,
+      "offset": 375,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileMixin/tile.html"
     },
     {
-      "offset": 428,
+      "offset": 408,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileMixin/tile.html"
     },
     {
-      "offset": 471,
+      "offset": 451,
       "length": 6,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileMixin/tile.html"
     },
     {
-      "offset": 490,
+      "offset": 470,
       "length": 19,
       "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/chevronRight-constant.html"
     },
     {
-      "offset": 518,
+      "offset": 498,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileMixin/tile.html"
     }

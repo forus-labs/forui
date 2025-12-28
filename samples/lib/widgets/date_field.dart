@@ -43,7 +43,9 @@ class ClearableDateFieldPage extends Sample {
     control: .managed(initial: .now()),
     label: const Text('Appointment Date'),
     description: const Text('Select a date for your appointment'),
+    // {@highlight}
     clearable: true,
+    // {@endhighlight}
   );
 }
 
@@ -54,7 +56,9 @@ class ValidatorDateFieldPage extends Sample {
   @override
   Widget sample(BuildContext _) => FDateField(
     control: .managed(
+      // {@highlight}
       validator: (date) => date?.weekday == 6 || date?.weekday == 7 ? 'Date cannot be a weekend.' : null,
+      // {@endhighlight}
     ),
     label: const Text('Appointment Date'),
     description: const Text('Select a date for your appointment'),

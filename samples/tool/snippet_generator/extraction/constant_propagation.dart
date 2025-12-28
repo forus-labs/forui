@@ -106,6 +106,22 @@ class DeadCodeElimination extends RecursiveAstVisitor<void> {
     }
   }
 
+  @override
+  void visitMethodInvocation(MethodInvocation node) {
+    super.visitMethodInvocation(node);
+    if (node.methodName.element case final FunctionTypedElement method) {
+      _eliminate(node.argumentList, method);
+    }
+  }
+
+  @override
+  void visitDotShorthandInvocation(DotShorthandInvocation node) {
+    super.visitDotShorthandInvocation(node);
+    if (node.memberName.element case final FunctionTypedElement method) {
+      _eliminate(node.argumentList, method);
+    }
+  }
+
   void _eliminate(ArgumentList arguments, FunctionTypedElement element) {
     // This normalization isn't technically safe as `const` can affect semantics, However, for code snippets, this is
     // usually acceptable.

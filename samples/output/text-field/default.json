@@ -1,29 +1,24 @@
 {
-  "code": "Widget build(BuildContext _) => FTextField(\n  enabled: enabled,\n  label: const Text('Username'),\n  hint: 'JaneDoe',\n  description: const Text('Please enter your username.'),\n);\n",
+  "code": "Widget build(BuildContext _) => const FTextField(\n  label: Text('Username'),\n  hint: 'JaneDoe',\n  description: Text('Please enter your username.'),\n);\n",
   "highlights": [],
   "links": [
     {
-      "offset": 32,
+      "offset": 38,
       "length": 10,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
     },
     {
-      "offset": 46,
-      "length": 7,
-      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/enabled.html"
-    },
-    {
-      "offset": 66,
+      "offset": 52,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/label.html"
     },
     {
-      "offset": 99,
+      "offset": 79,
       "length": 4,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/hint.html"
     },
     {
-      "offset": 118,
+      "offset": 98,
       "length": 11,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/description.html"
     }

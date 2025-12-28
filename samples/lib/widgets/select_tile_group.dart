@@ -2,6 +2,7 @@ import 'package:flutter/widgets.dart';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:forui/forui.dart';
+import 'package:forui_samples/main.dart';
 
 import 'package:forui_samples/sample.dart';
 
@@ -12,23 +13,15 @@ enum Language { dart, java, rust, python }
 enum Notification { all, direct, nothing }
 
 @RoutePage()
+@Options(include: [Sidebar])
 class SelectTileGroupPage extends Sample {
-  final FItemDivider divider;
-
-  SelectTileGroupPage({@queryParam super.theme, @queryParam String divider = 'indented'})
-    : divider = switch (divider) {
-        'indented' => .indented,
-        'none' => .none,
-        _ => .full,
-      },
-      super(maxWidth: 400);
+  SelectTileGroupPage({@queryParam super.theme}) : super(maxWidth: 400);
 
   @override
   Widget sample(BuildContext _) => FSelectTileGroup<Sidebar>(
     control: const .managed(initial: {.recents}),
     label: const Text('Sidebar'),
     description: const Text('These will be shown in the sidebar.'),
-    divider: divider,
     children: const [
       .tile(title: Text('Recents'), suffix: Icon(FIcons.timer), value: .recents),
       .tile(title: Text('Home'), suffix: Icon(FIcons.house), value: .home),
@@ -38,6 +31,7 @@ class SelectTileGroupPage extends Sample {
 }
 
 @RoutePage()
+@Options(include: [Sidebar])
 class ScrollableSelectTileGroupPage extends Sample {
   ScrollableSelectTileGroupPage({@queryParam super.theme}) : super(maxWidth: 400);
 
@@ -64,11 +58,14 @@ class LazySelectTileGroupPage extends Sample {
     control: const .managed(initial: {1}),
     label: const Text('Applicable values'),
     maxHeight: 200,
+    // {@highlight}
     tileBuilder: (context, index) => .tile(title: Text('Tile $index'), value: index),
+    // {@endhighlight}
   );
 }
 
 @RoutePage()
+@Options(include: [Language])
 class SelectTileGroupMultiValuePage extends StatefulSample {
   SelectTileGroupMultiValuePage({@queryParam super.theme});
 
@@ -116,6 +113,7 @@ class _SelectTileGroupMultiValuePageState extends StatefulSampleState<SelectTile
 }
 
 @RoutePage()
+@Options(include: [Notification])
 class SelectTileGroupRadioPage extends StatefulSample {
   SelectTileGroupRadioPage({@queryParam super.theme});
 
@@ -135,7 +133,9 @@ class _SelectTileGroupRadioPageState extends StatefulSampleState<SelectTileGroup
       spacing: 20,
       children: [
         FSelectTileGroup<Notification>(
+          // {@highlight}
           control: const .managedRadio(),
+          // {@endhighlight}
           label: const Text('Notifications'),
           description: const Text('Select the notifications.'),
           validator: (values) => values?.isEmpty ?? true ? 'Please select a value.' : null,
@@ -172,12 +172,56 @@ class SelectTileGroupSuffixPage extends StatefulSample {
 
 class _SelectTileGroupSuffixPageState extends StatefulSampleState<SelectTileGroupSuffixPage> {
   @override
-  Widget sample(BuildContext _) => FSelectTileGroup(
+  Widget sample(BuildContext _) => FSelectTileGroup<String>(
     control: const .managedRadio(),
     label: const Text('Settings'),
     children: const [
+      // {@highlight}
       FSelectTile.suffix(prefix: Icon(FIcons.list), title: Text('List View'), value: 'List'),
       FSelectTile.suffix(prefix: Icon(FIcons.layoutGrid), title: Text('Grid View'), value: 'Grid'),
+      // {@endhighlight}
+    ],
+  );
+}
+
+@RoutePage()
+@Options(include: [Sidebar])
+class FullDividerSelectTileGroupPage extends Sample {
+  FullDividerSelectTileGroupPage({@queryParam super.theme}) : super(maxWidth: 400);
+
+  @override
+  Widget sample(BuildContext _) => FSelectTileGroup<Sidebar>(
+    control: const .managed(initial: {.recents}),
+    label: const Text('Sidebar'),
+    description: const Text('These will be shown in the sidebar.'),
+    // {@highlight}
+    divider: .full,
+    // {@endhighlight}
+    children: const [
+          .tile(title: Text('Recents'), suffix: Icon(FIcons.timer), value: .recents),
+          .tile(title: Text('Home'), suffix: Icon(FIcons.house), value: .home),
+          .tile(title: Text('Applications'), suffix: Icon(FIcons.appWindowMac), value: .applications),
+    ],
+  );
+}
+
+@RoutePage()
+@Options(include: [Sidebar])
+class NoDividerSelectTileGroupPage extends Sample {
+  NoDividerSelectTileGroupPage({@queryParam super.theme}) : super(maxWidth: 400);
+
+  @override
+  Widget sample(BuildContext _) => FSelectTileGroup<Sidebar>(
+    control: const .managed(initial: {.recents}),
+    label: const Text('Sidebar'),
+    description: const Text('These will be shown in the sidebar.'),
+    // {@highlight}
+    divider: .none,
+    // {@endhighlight}
+    children: const [
+          .tile(title: Text('Recents'), suffix: Icon(FIcons.timer), value: .recents),
+          .tile(title: Text('Home'), suffix: Icon(FIcons.house), value: .home),
+          .tile(title: Text('Applications'), suffix: Icon(FIcons.appWindowMac), value: .applications),
     ],
   );
 }

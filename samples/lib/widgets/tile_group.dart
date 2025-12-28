@@ -7,20 +7,12 @@ import 'package:forui_samples/sample.dart';
 
 @RoutePage()
 class TileGroupPage extends Sample {
-  final FItemDivider divider;
-
-  TileGroupPage({@queryParam super.theme, @queryParam String divider = 'indented'})
-    : divider = switch (divider) {
-        'indented' => .indented,
-        'none' => .none,
-        _ => .full,
-      };
+  TileGroupPage({@queryParam super.theme});
 
   @override
   Widget sample(BuildContext _) => FTileGroup(
     label: const Text('Settings'),
     description: const Text('Personalize your experience'),
-    divider: divider,
     children: [
       .tile(
         prefix: const Icon(FIcons.user),
@@ -135,6 +127,64 @@ class _MergeTileGroupPageState extends StatefulSampleState<MergeTileGroupPage> {
           FSelectTile(title: Text('List View'), value: 'List'),
           FSelectTile(title: Text('Grid View'), value: 'Grid'),
         ],
+      ),
+    ],
+  );
+}
+
+@RoutePage()
+class FullDividerTileGroupPage extends Sample {
+  FullDividerTileGroupPage({@queryParam super.theme});
+
+  @override
+  Widget sample(BuildContext _) => FTileGroup(
+    label: const Text('Settings'),
+    description: const Text('Personalize your experience'),
+    // {@highlight}
+    divider: .full,
+    // {@endhighlight}
+    children: [
+      .tile(
+        prefix: const Icon(FIcons.user),
+        title: const Text('Personalization'),
+        suffix: const Icon(FIcons.chevronRight),
+        onPress: () {},
+      ),
+      .tile(
+        prefix: const Icon(FIcons.wifi),
+        title: const Text('WiFi'),
+        details: const Text('Duobase (5G)'),
+        suffix: const Icon(FIcons.chevronRight),
+        onPress: () {},
+      ),
+    ],
+  );
+}
+
+@RoutePage()
+class NoDividerTileGroupPage extends Sample {
+  NoDividerTileGroupPage({@queryParam super.theme});
+
+  @override
+  Widget sample(BuildContext _) => FTileGroup(
+    label: const Text('Settings'),
+    description: const Text('Personalize your experience'),
+    // {@highlight}
+    divider: .none,
+    // {@endhighlight}
+    children: [
+      .tile(
+        prefix: const Icon(FIcons.user),
+        title: const Text('Personalization'),
+        suffix: const Icon(FIcons.chevronRight),
+        onPress: () {},
+      ),
+      .tile(
+        prefix: const Icon(FIcons.wifi),
+        title: const Text('WiFi'),
+        details: const Text('Duobase (5G)'),
+        suffix: const Icon(FIcons.chevronRight),
+        onPress: () {},
       ),
     ],
   );

@@ -1,114 +1,114 @@
 {
-  "code": "class SelectMenuTileFormExample extends StatefulWidget {\n  @override\n  State<SelectMenuTileFormExample> createState() =>\n      _SelectMenuTileFormExampleState();\n}\n\nclass _SelectMenuTileFormExampleState extends State<SelectMenuTileFormExample> {\n  final _key = GlobalKey<FormState>();\n\n  @override\n  Widget build(BuildContext context) => Form(\n    key: _key,\n    child: Column(\n      mainAxisSize: .min,\n      spacing: 20,\n      children: [\n        FSelectMenuTile<Notification>(\n          selectControl: const .managed(initial: {.all}),\n          validator: (value) => value == null ? 'Select an item' : null,\n          prefix: const Icon(FIcons.bell),\n          title: const Text('Notifications'),\n          detailsBuilder: (_, values, _) => Text(switch (values.firstOrNull) {\n            .all => 'All',\n            .direct => 'Direct Messages',\n            _ => 'None',\n          }),\n          menu: const [\n            .tile(title: Text('All'), value: .all),\n            .tile(title: Text('Direct Messages'), value: .direct),\n            .tile(title: Text('None'), value: .nothing),\n          ],\n        ),\n        FButton(\n          child: const Text('Save'),\n          onPress: () {\n            if (!_key.currentState!.validate()) {\n              // Handle errors here.\n              return;\n            }\n\n            _key.currentState!.save();\n            // Do something.\n          },\n        ),\n      ],\n    ),\n  );\n}\n",
+  "code": "enum Notification {\n  all,\n  direct,\n  nothing,\n  limitedTime,\n  timeSensitive,\n  selectedApps,\n}\n\nclass SelectMenuTileFormExample extends StatefulWidget {\n  @override\n  State<SelectMenuTileFormExample> createState() =>\n      _SelectMenuTileFormExampleState();\n}\n\nclass _SelectMenuTileFormExampleState extends State<SelectMenuTileFormExample> {\n  final _key = GlobalKey<FormState>();\n\n  @override\n  Widget build(BuildContext context) => Form(\n    key: _key,\n    child: Column(\n      mainAxisSize: .min,\n      spacing: 20,\n      children: [\n        FSelectMenuTile<Notification>(\n          selectControl: const .managed(initial: {.all}),\n          validator: (value) => value == null ? 'Select an item' : null,\n          prefix: const Icon(FIcons.bell),\n          title: const Text('Notifications'),\n          detailsBuilder: (_, values, _) => Text(switch (values.firstOrNull) {\n            .all => 'All',\n            .direct => 'Direct Messages',\n            _ => 'None',\n          }),\n          menu: const [\n            .tile(title: Text('All'), value: .all),\n            .tile(title: Text('Direct Messages'), value: .direct),\n            .tile(title: Text('None'), value: .nothing),\n          ],\n        ),\n        FButton(\n          child: const Text('Save'),\n          onPress: () {\n            if (!_key.currentState!.validate()) {\n              // Handle errors here.\n              return;\n            }\n\n            _key.currentState!.save();\n            // Do something.\n          },\n        ),\n      ],\n    ),\n  );\n}\n",
   "highlights": [],
   "links": [
     {
-      "offset": 449,
+      "offset": 548,
       "length": 29,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_menu_tile/FSelectMenuTile/FSelectMenuTile.html"
     },
     {
-      "offset": 490,
+      "offset": 589,
       "length": 13,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_menu_tile/FSelectMenuTile/selectControl.html"
     },
     {
-      "offset": 512,
+      "offset": 611,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl/FMultiValueControl.managed.html"
     },
     {
-      "offset": 520,
+      "offset": 619,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl/FMultiValueControl.managed.html"
     },
     {
-      "offset": 548,
+      "offset": 647,
       "length": 9,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_menu_tile/FSelectMenuTile/validator.html"
     },
     {
-      "offset": 621,
+      "offset": 720,
       "length": 6,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_menu_tile/FSelectMenuTile/prefix.html"
     },
     {
-      "offset": 640,
+      "offset": 739,
       "length": 11,
       "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/bell-constant.html"
     },
     {
-      "offset": 664,
+      "offset": 763,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_menu_tile/FSelectMenuTile/title.html"
     },
     {
-      "offset": 710,
+      "offset": 809,
       "length": 14,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_menu_tile/FSelectMenuTile/detailsBuilder.html"
     },
     {
-      "offset": 897,
+      "offset": 996,
       "length": 4,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_menu_tile/FSelectMenuTile/FSelectMenuTile.html"
     },
     {
-      "offset": 924,
+      "offset": 1023,
       "length": 4,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.tile.html"
     },
     {
-      "offset": 929,
+      "offset": 1028,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/title.html"
-    },
-    {
-      "offset": 949,
-      "length": 5,
-      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/value.html"
-    },
-    {
-      "offset": 976,
-      "length": 4,
-      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.tile.html"
-    },
-    {
-      "offset": 981,
-      "length": 5,
-      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/title.html"
-    },
-    {
-      "offset": 1013,
-      "length": 5,
-      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/value.html"
-    },
-    {
-      "offset": 1043,
-      "length": 4,
-      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.tile.html"
     },
     {
       "offset": 1048,
       "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/value.html"
+    },
+    {
+      "offset": 1075,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.tile.html"
+    },
+    {
+      "offset": 1080,
+      "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/title.html"
     },
     {
-      "offset": 1069,
+      "offset": 1112,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/value.html"
     },
     {
-      "offset": 1119,
+      "offset": 1142,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.tile.html"
+    },
+    {
+      "offset": 1147,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/title.html"
+    },
+    {
+      "offset": 1168,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/value.html"
+    },
+    {
+      "offset": 1218,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
     },
     {
-      "offset": 1138,
+      "offset": 1237,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/child.html"
     },
     {
-      "offset": 1175,
+      "offset": 1274,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/onPress.html"
     }

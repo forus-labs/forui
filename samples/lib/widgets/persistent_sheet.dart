@@ -2,20 +2,38 @@ import 'package:flutter/material.dart';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:forui/forui.dart';
+import 'package:forui_samples/main.dart';
 
 import 'package:forui_samples/sample.dart';
 
 @RoutePage()
-class PersistentSheetPage extends StatefulSample {
-  final bool keepAliveOffstage;
-
-  PersistentSheetPage({@queryParam super.theme, @queryParam this.keepAliveOffstage = false});
+@Options(inline: _Sheet, include: [Form])
+class PersistentSheetPage extends Sample {
+  PersistentSheetPage({@queryParam super.theme});
 
   @override
-  State<PersistentSheetPage> createState() => _SheetsState();
+  Widget sample(BuildContext context) => const _Sheet();
 }
 
-class _SheetsState extends StatefulSampleState<PersistentSheetPage> {
+@RoutePage()
+@Options(inline: _Sheet, include: [Form])
+class KeepAliveOffstagePersistentSheetPage extends Sample {
+  KeepAliveOffstagePersistentSheetPage({@queryParam super.theme});
+
+  @override
+  Widget sample(BuildContext context) => const _Sheet(keepAliveOffstage: true);
+}
+
+class _Sheet extends StatefulWidget {
+  final bool keepAliveOffstage;
+
+  const _Sheet({this.keepAliveOffstage = false});
+
+  @override
+  State<_Sheet> createState() => _SheetState();
+}
+
+class _SheetState extends State<_Sheet> {
   final Map<FLayout, FPersistentSheetController> _controllers = {};
 
   @override
@@ -27,7 +45,7 @@ class _SheetsState extends StatefulSampleState<PersistentSheetPage> {
   }
 
   @override
-  Widget sample(BuildContext context) {
+  Widget build(BuildContext context) {
     VoidCallback onPress(FLayout side) => () {
       for (final MapEntry(:key, :value) in _controllers.entries) {
         if (key != side && value.status.isCompleted) {
@@ -40,7 +58,9 @@ class _SheetsState extends StatefulSampleState<PersistentSheetPage> {
         controller = _controllers[side] ??= showFPersistentSheet(
           context: context,
           side: side,
+          // {@highlight}
           keepAliveOffstage: widget.keepAliveOffstage,
+          // {@endhighlight}
           builder: (context, controller) => Form(side: side, controller: controller),
         );
       } else {

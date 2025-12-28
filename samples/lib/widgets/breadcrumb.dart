@@ -45,6 +45,7 @@ class BreadcrumbTilesPage extends Sample {
       FBreadcrumb(
         children: [
           FBreadcrumbItem(onPress: () {}, child: const Text('Forui')),
+          // {@highlight}
           FBreadcrumbItem.collapsedTiles(
             menu: [
               FTileGroup(
@@ -55,6 +56,7 @@ class BreadcrumbTilesPage extends Sample {
               ),
             ],
           ),
+          // {@endhighlight}
           FBreadcrumbItem(onPress: () {}, child: const Text('Layout')),
           const FBreadcrumbItem(current: true, child: Text('Widgets')),
         ],
@@ -72,7 +74,9 @@ class BreadcrumbDividerPage extends Sample {
     mainAxisAlignment: .center,
     children: [
       FBreadcrumb(
+        // {@highlight}
         divider: Transform.rotate(angle: -60, child: const Icon(FIcons.slash, size: 14)),
+        // {@endhighlight}
         children: [
           FBreadcrumbItem(onPress: () {}, child: const Text('Forui')),
           FBreadcrumbItem.collapsed(

@@ -1,0 +1,37 @@
+{
+  "code": "Widget build(BuildContext context) => const FPicker(\n  children: [\n    FPickerWheel(\n      loop: true,\n      children: [\n        Text('January'),\n        Text('February'),\n        Text('March'),\n        Text('April'),\n        Text('May'),\n        Text('June'),\n        Text('July'),\n        Text('August'),\n        Text('September'),\n        Text('October'),\n        Text('November'),\n        Text('December'),\n      ],\n    ),\n  ],\n);\n",
+  "highlights": [
+    {
+      "start": 4,
+      "end": 4
+    }
+  ],
+  "links": [
+    {
+      "offset": 44,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.picker/FPicker/FPicker.html"
+    },
+    {
+      "offset": 55,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.picker/FPicker/children.html"
+    },
+    {
+      "offset": 71,
+      "length": 12,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.picker/FPickerWheel/FPickerWheel.html"
+    },
+    {
+      "offset": 91,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.picker/FPickerWheel/FPickerWheel.html"
+    },
+    {
+      "offset": 109,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.picker/FPickerWheel/FPickerWheel.html"
+    }
+  ],
+  "tooltips": []
+}

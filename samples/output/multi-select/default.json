@@ -1,39 +1,39 @@
 {
-  "code": "Widget build(BuildContext _) => FMultiSelect<String>.rich(\n  hint: const Text('Select a fruit'),\n  format: Text.new,\n  children: [\n    for (final fruit in fruits) .item(title: Text(fruit), value: fruit),\n  ],\n);\n",
+  "code": "const fruits = [\n  'Apple',\n  'Banana',\n  'Blueberry',\n  'Grapes',\n  'Lemon',\n  'Mango',\n  'Kiwi',\n  'Orange',\n  'Peach',\n  'Pear',\n  'Pineapple',\n  'Plum',\n  'Raspberry',\n  'Strawberry',\n  'Watermelon',\n];\n\nclass MultiSelectExample extends StatelessWidget {\n  @override\n  Widget build(BuildContext _) => FMultiSelect<String>.rich(\n    hint: const Text('Select a fruit'),\n    format: Text.new,\n    children: [\n      for (final fruit in fruits) .item(title: Text(fruit), value: fruit),\n    ],\n  );\n}\n",
   "highlights": [],
   "links": [
     {
-      "offset": 32,
+      "offset": 305,
       "length": 25,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FMultiSelect/FMultiSelect.rich.html"
     },
     {
-      "offset": 61,
+      "offset": 336,
       "length": 4,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FMultiSelect/hint.html"
     },
     {
-      "offset": 99,
+      "offset": 376,
       "length": 6,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FMultiSelect/format.html"
     },
     {
-      "offset": 119,
+      "offset": 398,
       "length": 8,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FMultiSelect/FMultiSelect.rich.html"
     },
     {
-      "offset": 164,
+      "offset": 445,
       "length": 4,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectItemMixin/item.html"
     },
     {
-      "offset": 169,
+      "offset": 450,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectItemMixin/item.html"
     },
     {
-      "offset": 189,
+      "offset": 470,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectItemMixin/item.html"
     }

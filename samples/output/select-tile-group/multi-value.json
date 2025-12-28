@@ -1,104 +1,104 @@
 {
-  "code": "class SelectTileGroupMultiValueExample extends StatefulWidget {\n  @override\n  State<SelectTileGroupMultiValueExample> createState() =>\n      _SelectTileGroupMultiValueExampleState();\n}\n\nclass _SelectTileGroupMultiValueExampleState\n    extends State<SelectTileGroupMultiValueExample> {\n  final _key = GlobalKey<FormState>();\n\n  @override\n  Widget build(BuildContext _) => Form(\n    key: _key,\n    child: Column(\n      mainAxisAlignment: .center,\n      crossAxisAlignment: .start,\n      spacing: 20,\n      children: [\n        FSelectTileGroup<Language>(\n          label: const Text('Favorite Languages'),\n          description: const Text('Your favorite language.'),\n          validator: (values) => (values?.isEmpty ?? true)\n              ? 'Please select at least one language.'\n              : null,\n          children: const [\n            .tile(title: Text('Dart'), value: .dart),\n            .tile(title: Text('Java'), value: .java),\n            .tile(title: Text('Rust'), value: .rust),\n            .tile(title: Text('Python'), value: .python),\n          ],\n        ),\n        FButton(\n          child: const Text('Save'),\n          onPress: () {\n            if (!_key.currentState!.validate()) {\n              // Handle errors here.\n              return;\n            }\n\n            _key.currentState!.save();\n            // Do something.\n          },\n        ),\n      ],\n    ),\n  );\n}\n",
+  "code": "enum Language { dart, java, rust, python }\n\nclass SelectTileGroupMultiValueExample extends StatefulWidget {\n  @override\n  State<SelectTileGroupMultiValueExample> createState() =>\n      _SelectTileGroupMultiValueExampleState();\n}\n\nclass _SelectTileGroupMultiValueExampleState\n    extends State<SelectTileGroupMultiValueExample> {\n  final _key = GlobalKey<FormState>();\n\n  @override\n  Widget build(BuildContext _) => Form(\n    key: _key,\n    child: Column(\n      mainAxisAlignment: .center,\n      crossAxisAlignment: .start,\n      spacing: 20,\n      children: [\n        FSelectTileGroup<Language>(\n          label: const Text('Favorite Languages'),\n          description: const Text('Your favorite language.'),\n          validator: (values) => (values?.isEmpty ?? true)\n              ? 'Please select at least one language.'\n              : null,\n          children: const [\n            .tile(title: Text('Dart'), value: .dart),\n            .tile(title: Text('Java'), value: .java),\n            .tile(title: Text('Rust'), value: .rust),\n            .tile(title: Text('Python'), value: .python),\n          ],\n        ),\n        FButton(\n          child: const Text('Save'),\n          onPress: () {\n            if (!_key.currentState!.validate()) {\n              // Handle errors here.\n              return;\n            }\n\n            _key.currentState!.save();\n            // Do something.\n          },\n        ),\n      ],\n    ),\n  );\n}\n",
   "highlights": [],
   "links": [
     {
-      "offset": 524,
+      "offset": 568,
       "length": 26,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTileGroup/FSelectTileGroup.html"
     },
     {
-      "offset": 562,
+      "offset": 606,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTileGroup/label.html"
     },
     {
-      "offset": 613,
+      "offset": 657,
       "length": 11,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTileGroup/description.html"
     },
     {
-      "offset": 675,
+      "offset": 719,
       "length": 9,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTileGroup/validator.html"
     },
     {
-      "offset": 811,
+      "offset": 855,
       "length": 8,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTileGroup/FSelectTileGroup.html"
     },
     {
-      "offset": 842,
+      "offset": 886,
       "length": 4,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.tile.html"
     },
     {
-      "offset": 847,
+      "offset": 891,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/title.html"
     },
     {
-      "offset": 868,
+      "offset": 912,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/value.html"
     },
     {
-      "offset": 896,
+      "offset": 940,
       "length": 4,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.tile.html"
     },
     {
-      "offset": 901,
+      "offset": 945,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/title.html"
     },
     {
-      "offset": 922,
+      "offset": 966,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/value.html"
     },
     {
-      "offset": 950,
+      "offset": 994,
       "length": 4,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.tile.html"
     },
     {
-      "offset": 955,
+      "offset": 999,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/title.html"
     },
     {
-      "offset": 976,
+      "offset": 1020,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/value.html"
     },
     {
-      "offset": 1004,
+      "offset": 1048,
       "length": 4,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.tile.html"
     },
     {
-      "offset": 1009,
+      "offset": 1053,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/title.html"
     },
     {
-      "offset": 1032,
+      "offset": 1076,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/value.html"
     },
     {
-      "offset": 1081,
+      "offset": 1125,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
     },
     {
-      "offset": 1100,
+      "offset": 1144,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/child.html"
     },
     {
-      "offset": 1137,
+      "offset": 1181,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/onPress.html"
     }

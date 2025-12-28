@@ -1,6 +1,11 @@
 {
   "code": "Widget build(BuildContext _) => FSelectMenuTile.builder(\n  selectControl: const .managed(initial: {1}),\n  prefix: const Icon(FIcons.variable),\n  title: const Text('Applicable values'),\n  maxHeight: 200,\n  menuBuilder: (context, index) =>\n      .tile(title: Text('Tile $index'), value: index),\n);\n",
-  "highlights": [],
+  "highlights": [
+    {
+      "start": 6,
+      "end": 7
+    }
+  ],
   "links": [
     {
       "offset": 32,

@@ -5,37 +5,91 @@ import 'package:forui/forui.dart';
 
 import 'package:forui_samples/sample.dart';
 
-final _styles = {
-  'primary': FButtonStyle.primary(),
-  'secondary': FButtonStyle.secondary(),
-  'destructive': FButtonStyle.destructive(),
-  'ghost': FButtonStyle.ghost(),
-  'outline': FButtonStyle.outline(),
-};
-
 @RoutePage()
-class ButtonTextPage extends Sample {
-  final FBaseButtonStyle Function(FButtonStyle) style;
-  final String label;
-
-  ButtonTextPage({@queryParam super.theme, @queryParam String style = 'primary', @queryParam this.label = 'Button'})
-    : style = _styles[style]!;
+class ButtonPrimaryPage extends Sample {
+  ButtonPrimaryPage({@queryParam super.theme});
 
   @override
-  Widget sample(BuildContext _) => FButton(style: style, mainAxisSize: .min, onPress: () {}, child: Text(label));
+  Widget sample(BuildContext _) => FButton(
+    // {@highlight}
+    style: FButtonStyle.primary(),
+    // {@endhighlight}
+    mainAxisSize: .min,
+    onPress: () {},
+    child: const Text('Button'),
+  );
+}
+
+@RoutePage()
+class ButtonSecondaryPage extends Sample {
+  ButtonSecondaryPage({@queryParam super.theme});
+
+  @override
+  Widget sample(BuildContext _) => FButton(
+    // {@highlight}
+    style: FButtonStyle.secondary(),
+    // {@endhighlight}
+    mainAxisSize: .min,
+    onPress: () {},
+    child: const Text('Button'),
+  );
+}
+
+@RoutePage()
+class ButtonDestructivePage extends Sample {
+  ButtonDestructivePage({@queryParam super.theme});
+
+  @override
+  Widget sample(BuildContext _) => FButton(
+    // {@highlight}
+    style: FButtonStyle.destructive(),
+    // {@endhighlight}
+    mainAxisSize: .min,
+    onPress: () {},
+    child: const Text('Button'),
+  );
+}
+
+@RoutePage()
+class ButtonGhostPage extends Sample {
+  ButtonGhostPage({@queryParam super.theme});
+
+  @override
+  Widget sample(BuildContext _) => FButton(
+    // {@highlight}
+    style: FButtonStyle.ghost(),
+    // {@endhighlight}
+    mainAxisSize: .min,
+    onPress: () {},
+    child: const Text('Button'),
+  );
+}
+
+@RoutePage()
+class ButtonOutlinePage extends Sample {
+  ButtonOutlinePage({@queryParam super.theme});
+
+  @override
+  Widget sample(BuildContext _) => FButton(
+    // {@highlight}
+    style: FButtonStyle.outline(),
+    // {@endhighlight}
+    mainAxisSize: .min,
+    onPress: () {},
+    child: const Text('Button'),
+  );
 }
 
 @RoutePage()
 class ButtonIconPage extends Sample {
-  final FBaseButtonStyle Function(FButtonStyle) style;
-
-  ButtonIconPage({@queryParam super.theme, @queryParam String style = 'primary'}) : style = _styles[style]!;
+  ButtonIconPage({@queryParam super.theme});
 
   @override
   Widget sample(BuildContext _) => FButton(
-    style: style,
     mainAxisSize: .min,
+    // {@highlight}
     prefix: const Icon(FIcons.mail),
+    // {@endhighlight}
     onPress: () {},
     child: const Text('Login with Email'),
   );
@@ -54,6 +108,12 @@ class ButtonCircularProgressPage extends Sample {
   ButtonCircularProgressPage({@queryParam super.theme});
 
   @override
-  Widget sample(BuildContext _) =>
-      FButton(mainAxisSize: .min, prefix: const FCircularProgress(), onPress: null, child: const Text('Please wait'));
+  Widget sample(BuildContext _) => FButton(
+    mainAxisSize: .min,
+    // {@highlight}
+    prefix: const FCircularProgress(),
+    // {@endhighlight}
+    onPress: null,
+    child: const Text('Please wait'),
+  );
 }

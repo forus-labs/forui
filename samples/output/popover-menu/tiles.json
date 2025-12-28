@@ -1,6 +1,11 @@
 {
   "code": "Widget build(BuildContext _) => FHeader(\n  title: const Text('Edit Notes'),\n  suffixes: [\n    FPopoverMenu.tiles(\n      autofocus: true,\n      menuAnchor: .topRight,\n      childAnchor: .bottomRight,\n      menu: [\n        .group(\n          children: [\n            .tile(\n              prefix: const Icon(FIcons.user),\n              title: const Text('Personalization'),\n              onPress: () {},\n            ),\n            .tile(\n              prefix: const Icon(FIcons.paperclip),\n              title: const Text('Add attachments'),\n              onPress: () {},\n            ),\n            .tile(\n              prefix: const Icon(FIcons.qrCode),\n              title: const Text('Scan Document'),\n              onPress: () {},\n            ),\n          ],\n        ),\n        .group(\n          children: [\n            .tile(\n              prefix: const Icon(FIcons.list),\n              title: const Text('List View'),\n              onPress: () {},\n            ),\n            .tile(\n              prefix: const Icon(FIcons.layoutGrid),\n              title: const Text('Grid View'),\n              onPress: () {},\n            ),\n          ],\n        ),\n      ],\n      builder: (_, controller, _) => FHeaderAction(\n        icon: const Icon(FIcons.ellipsis),\n        onPress: controller.toggle,\n      ),\n    ),\n  ],\n);\n",
-  "highlights": [],
+  "highlights": [
+    {
+      "start": 4,
+      "end": 4
+    }
+  ],
   "links": [
     {
       "offset": 32,

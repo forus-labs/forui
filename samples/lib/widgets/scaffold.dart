@@ -14,13 +14,47 @@ class ScaffoldPage extends StatefulSample {
 }
 
 class _ScaffoldPageState extends StatefulSampleState<ScaffoldPage> {
+  final _headers = [
+    const FHeader(title: Text('Home')),
+    const FHeader(title: Text('Categories')),
+    const FHeader(title: Text('Search')),
+    FHeader(
+      title: const Text('Settings'),
+      suffixes: [FHeaderAction(icon: const Icon(FIcons.ellipsis), onPress: () {})],
+    ),
+  ];
+
+  final _contents = [
+    const Column(mainAxisAlignment: .center, children: [Text('Home Placeholder')]),
+    const Column(mainAxisAlignment: .center, children: [Text('Categories Placeholder')]),
+    const Column(mainAxisAlignment: .center, children: [Text('Search Placeholder')]),
+    Column(
+      children: [
+        const SizedBox(height: 5),
+        FCard(
+          title: const Text('Account'),
+          subtitle: const Text('Make changes to your account here. Click save when you are done.'),
+          child: Column(
+            children: [
+              const FTextField(label: Text('Name'), hint: 'John Renalo'),
+              const SizedBox(height: 10),
+              const FTextField(label: Text('Email'), hint: 'john@doe.com'),
+              const SizedBox(height: 16),
+              FButton(child: const Text('Save'), onPress: () {}),
+            ],
+          ),
+        ),
+      ],
+    ),
+  ];
+
   int _index = 3;
 
   @override
   Widget sample(BuildContext _) => SizedBox(
     height: 500,
     child: FScaffold(
-      header: headers[_index],
+      header: _headers[_index],
       footer: FBottomNavigationBar(
         index: _index,
         onChange: (index) => setState(() => _index = index),
@@ -31,41 +65,7 @@ class _ScaffoldPageState extends StatefulSampleState<ScaffoldPage> {
           FBottomNavigationBarItem(icon: Icon(FIcons.settings), label: Text('Settings')),
         ],
       ),
-      child: contents[_index],
+      child: _contents[_index],
     ),
   );
 }
-
-final headers = [
-  const FHeader(title: Text('Home')),
-  const FHeader(title: Text('Categories')),
-  const FHeader(title: Text('Search')),
-  FHeader(
-    title: const Text('Settings'),
-    suffixes: [FHeaderAction(icon: const Icon(FIcons.ellipsis), onPress: () {})],
-  ),
-];
-
-final contents = [
-  const Column(mainAxisAlignment: .center, children: [Text('Home Placeholder')]),
-  const Column(mainAxisAlignment: .center, children: [Text('Categories Placeholder')]),
-  const Column(mainAxisAlignment: .center, children: [Text('Search Placeholder')]),
-  Column(
-    children: [
-      const SizedBox(height: 5),
-      FCard(
-        title: const Text('Account'),
-        subtitle: const Text('Make changes to your account here. Click save when you are done.'),
-        child: Column(
-          children: [
-            const FTextField(label: Text('Name'), hint: 'John Renalo'),
-            const SizedBox(height: 10),
-            const FTextField(label: Text('Email'), hint: 'john@doe.com'),
-            const SizedBox(height: 16),
-            FButton(child: const Text('Save'), onPress: () {}),
-          ],
-        ),
-      ),
-    ],
-  ),
-];

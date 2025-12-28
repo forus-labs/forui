@@ -1,19 +1,19 @@
 {
-  "code": "Widget build(BuildContext _) => FLabel(\n  axis: .horizontal,\n  label: const Text('Accept terms and conditions'),\n  description: const Text('You agree to our terms and conditions.'),\n  error: const Text('Please accept the terms.'),\n  states: states,\n  child: const DecoratedBox(\n    decoration: BoxDecoration(\n      borderRadius: .all(.circular(5)),\n      color: Colors.grey,\n    ),\n    child: SizedBox.square(dimension: 16),\n  ),\n);\n",
+  "code": "Widget build(BuildContext _) => const FLabel(\n  axis: .horizontal,\n  label: Text('Accept terms and conditions'),\n  description: Text('You agree to our terms and conditions.'),\n  error: Text('Please accept the terms.'),\n  child: DecoratedBox(\n    decoration: BoxDecoration(\n      borderRadius: .all(.circular(5)),\n      color: Colors.grey,\n    ),\n    child: SizedBox.square(dimension: 16),\n  ),\n);\n",
   "highlights": [],
   "links": [
     {
-      "offset": 32,
+      "offset": 38,
       "length": 6,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.label/FLabel/FLabel.html"
     },
     {
-      "offset": 42,
+      "offset": 48,
       "length": 4,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.label/FLabel/axis.html"
     },
     {
-      "offset": 63,
+      "offset": 69,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.label/FLabel/label.html"
     },
@@ -23,17 +23,12 @@
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.label/FLabel/description.html"
     },
     {
-      "offset": 184,
+      "offset": 178,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.label/FLabel/error.html"
     },
     {
-      "offset": 233,
-      "length": 6,
-      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.label/FLabel/states.html"
-    },
-    {
-      "offset": 251,
+      "offset": 221,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.label/FLabel/child.html"
     }

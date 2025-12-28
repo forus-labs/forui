@@ -9,39 +9,63 @@ import 'package:forui_samples/sample.dart';
 
 @RoutePage()
 class DialogPage extends Sample {
-  final Axis direction;
-
-  DialogPage({@queryParam super.theme, @queryParam bool vertical = false})
-    : direction = vertical ? .vertical : .horizontal;
+  DialogPage({@queryParam super.theme});
 
   @override
-  Widget sample(BuildContext context) {
-    final actions = [
-      FButton(style: FButtonStyle.outline(), child: const Text('Cancel'), onPress: () => Navigator.of(context).pop()),
-      FButton(child: const Text('Continue'), onPress: () => Navigator.of(context).pop()),
-    ];
-
-    return FButton(
-      mainAxisSize: .min,
-      onPress: () => showFDialog(
-        context: context,
-        builder: (context, style, animation) => FTheme(
-          data: theme,
-          child: FDialog(
-            style: style,
-            animation: animation,
-            direction: direction,
-            title: const Text('Are you absolutely sure?'),
-            body: const Text(
-              'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
-            ),
-            actions: direction == .vertical ? actions.reversed.toList() : actions,
+  Widget sample(BuildContext context) => FButton(
+    mainAxisSize: .min,
+    onPress: () => showFDialog(
+      context: context,
+      builder: (context, style, animation) => FTheme(
+        data: theme,
+        child: FDialog(
+          style: style,
+          animation: animation,
+          // {@highlight}
+          direction: .horizontal,
+          // {@endhighlight}
+          title: const Text('Are you absolutely sure?'),
+          body: const Text(
+            'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
           ),
+          actions: [
+            FButton(style: FButtonStyle.outline(), child: const Text('Cancel'), onPress: () => Navigator.of(context).pop()),
+            FButton(child: const Text('Continue'), onPress: () => Navigator.of(context).pop()),
+          ],
         ),
       ),
-      child: const Text('Show Dialog'),
-    );
-  }
+    ),
+    child: const Text('Show Dialog'),
+  );
+}
+
+@RoutePage()
+class VerticalDialogPage extends Sample {
+  VerticalDialogPage({@queryParam super.theme});
+
+  @override
+  Widget sample(BuildContext context) => FButton(
+    mainAxisSize: .min,
+    onPress: () => showFDialog(
+      context: context,
+      builder: (context, style, animation) => FTheme(
+        data: theme,
+        child: FDialog(
+          style: style,
+          animation: animation,
+          title: const Text('Are you absolutely sure?'),
+          body: const Text(
+            'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
+          ),
+          actions: [
+            FButton(child: const Text('Continue'), onPress: () => Navigator.of(context).pop()),
+            FButton(style: FButtonStyle.outline(), child: const Text('Cancel'), onPress: () => Navigator.of(context).pop()),
+          ],
+        ),
+      ),
+    ),
+    child: const Text('Show Dialog'),
+  );
 }
 
 @RoutePage()
@@ -54,10 +78,12 @@ class BlurredDialogPage extends Sample {
     onPress: () => showFDialog(
       context: context,
       routeStyle: context.theme.dialogRouteStyle.copyWith(
+        // {@highlight}
         barrierFilter: (animation) => ImageFilter.compose(
           outer: ImageFilter.blur(sigmaX: animation * 5, sigmaY: animation * 5),
           inner: ColorFilter.mode(context.theme.colors.barrier, .srcOver),
         ),
+        // {@endhighlight}
       ),
       builder: (context, style, animation) => FTheme(
         data: theme,

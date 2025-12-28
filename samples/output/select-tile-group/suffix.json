@@ -1,79 +1,84 @@
 {
-  "code": "class SelectTileGroupSuffixExample extends StatefulWidget {\n  @override\n  State<SelectTileGroupSuffixExample> createState() =>\n      _SelectTileGroupSuffixExampleState();\n}\n\nclass _SelectTileGroupSuffixExampleState\n    extends State<SelectTileGroupSuffixExample> {\n  @override\n  Widget build(BuildContext _) => FSelectTileGroup(\n    control: const .managedRadio(),\n    label: const Text('Settings'),\n    children: const [\n      FSelectTile.suffix(\n        prefix: Icon(FIcons.list),\n        title: Text('List View'),\n        value: 'List',\n      ),\n      FSelectTile.suffix(\n        prefix: Icon(FIcons.layoutGrid),\n        title: Text('Grid View'),\n        value: 'Grid',\n      ),\n    ],\n  );\n}\n",
-  "highlights": [],
+  "code": "class SelectTileGroupSuffixExample extends StatefulWidget {\n  @override\n  State<SelectTileGroupSuffixExample> createState() =>\n      _SelectTileGroupSuffixExampleState();\n}\n\nclass _SelectTileGroupSuffixExampleState\n    extends State<SelectTileGroupSuffixExample> {\n  @override\n  Widget build(BuildContext _) => FSelectTileGroup<String>(\n    control: const .managedRadio(),\n    label: const Text('Settings'),\n    children: const [\n      FSelectTile.suffix(\n        prefix: Icon(FIcons.list),\n        title: Text('List View'),\n        value: 'List',\n      ),\n      FSelectTile.suffix(\n        prefix: Icon(FIcons.layoutGrid),\n        title: Text('Grid View'),\n        value: 'Grid',\n      ),\n    ],\n  );\n}\n",
+  "highlights": [
+    {
+      "start": 14,
+      "end": 23
+    }
+  ],
   "links": [
     {
       "offset": 311,
-      "length": 16,
+      "length": 24,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTileGroup/FSelectTileGroup.html"
     },
     {
-      "offset": 333,
+      "offset": 341,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTileGroup/control.html"
     },
     {
-      "offset": 349,
+      "offset": 357,
       "length": 12,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl/FMultiValueControl.managedRadio.html"
     },
     {
-      "offset": 369,
+      "offset": 377,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTileGroup/label.html"
     },
     {
-      "offset": 404,
+      "offset": 412,
       "length": 8,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTileGroup/FSelectTileGroup.html"
     },
     {
-      "offset": 428,
+      "offset": 436,
       "length": 18,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.suffix.html"
     },
     {
-      "offset": 456,
+      "offset": 464,
       "length": 6,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.suffix.html"
     },
     {
-      "offset": 469,
+      "offset": 477,
       "length": 11,
       "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/list-constant.html"
     },
     {
-      "offset": 491,
+      "offset": 499,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/title.html"
     },
     {
-      "offset": 525,
+      "offset": 533,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/value.html"
     },
     {
-      "offset": 555,
+      "offset": 563,
       "length": 18,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.suffix.html"
     },
     {
-      "offset": 583,
+      "offset": 591,
       "length": 6,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.suffix.html"
     },
     {
-      "offset": 596,
+      "offset": 604,
       "length": 17,
       "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/layoutGrid-constant.html"
     },
     {
-      "offset": 624,
+      "offset": 632,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/title.html"
     },
     {
-      "offset": 658,
+      "offset": 666,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/value.html"
     }

@@ -1,0 +1,47 @@
+{
+  "code": "class ErrorCheckboxExample extends StatefulWidget {\n  @override\n  State<ErrorCheckboxExample> createState() => _ErrorCheckboxExampleState();\n}\n\nclass _ErrorCheckboxExampleState extends State<ErrorCheckboxExample> {\n  bool _state = false;\n\n  @override\n  Widget build(BuildContext _) => FCheckbox(\n    label: const Text('Accept terms and conditions'),\n    description: const Text('You agree to our terms and conditions.'),\n    error: const Text('Please accept the terms and conditions.'),\n    semanticsLabel: 'Accept terms and conditions',\n    value: _state,\n    onChange: (value) => setState(() => _state = value),\n  );\n}\n",
+  "highlights": [
+    {
+      "start": 13,
+      "end": 13
+    }
+  ],
+  "links": [
+    {
+      "offset": 285,
+      "length": 9,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckbox/FCheckbox.html"
+    },
+    {
+      "offset": 300,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckbox/label.html"
+    },
+    {
+      "offset": 354,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckbox/description.html"
+    },
+    {
+      "offset": 425,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckbox/error.html"
+    },
+    {
+      "offset": 491,
+      "length": 14,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckbox/semanticsLabel.html"
+    },
+    {
+      "offset": 542,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckbox/value.html"
+    },
+    {
+      "offset": 561,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckbox/onChange.html"
+    }
+  ],
+  "tooltips": []
+}

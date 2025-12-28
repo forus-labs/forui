@@ -1,59 +1,64 @@
 {
-  "code": "Widget build(BuildContext context) => FSelect<String>.rich(\n  control: const .managed(initial: 'Apple', toggleable: true),\n  hint: 'Select a fruit',\n  format: (s) => s,\n  children: [\n    for (final fruit in fruits) .item(title: Text(fruit), value: fruit),\n  ],\n);\n",
-  "highlights": [],
+  "code": "const fruits = [\n  'Apple',\n  'Banana',\n  'Blueberry',\n  'Grapes',\n  'Lemon',\n  'Mango',\n  'Kiwi',\n  'Orange',\n  'Peach',\n  'Pear',\n  'Pineapple',\n  'Plum',\n  'Raspberry',\n  'Strawberry',\n  'Watermelon',\n];\n\nclass ToggleableSelectExample extends StatelessWidget {\n  @override\n  Widget build(BuildContext context) => FSelect<String>.rich(\n    control: const .managed(initial: 'Apple', toggleable: true),\n    hint: 'Select a fruit',\n    format: (s) => s,\n    children: [\n      for (final fruit in fruits) .item(title: Text(fruit), value: fruit),\n    ],\n  );\n}\n",
+  "highlights": [
+    {
+      "start": 22,
+      "end": 22
+    }
+  ],
   "links": [
     {
-      "offset": 38,
+      "offset": 316,
       "length": 20,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.rich.html"
     },
     {
-      "offset": 62,
+      "offset": 342,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/control.html"
     },
     {
-      "offset": 78,
+      "offset": 358,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectControl/FSelectControl.managed.html"
     },
     {
-      "offset": 86,
+      "offset": 366,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectControl/FSelectControl.managed.html"
     },
     {
-      "offset": 104,
+      "offset": 384,
       "length": 10,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectControl/FSelectControl.managed.html"
     },
     {
-      "offset": 125,
+      "offset": 407,
       "length": 4,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/hint.html"
     },
     {
-      "offset": 151,
+      "offset": 435,
       "length": 6,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/format.html"
     },
     {
-      "offset": 171,
+      "offset": 457,
       "length": 8,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.rich.html"
     },
     {
-      "offset": 216,
+      "offset": 504,
       "length": 4,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectItemMixin/item.html"
     },
     {
-      "offset": 221,
+      "offset": 509,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectItemMixin/item.html"
     },
     {
-      "offset": 241,
+      "offset": 529,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectItemMixin/item.html"
     }

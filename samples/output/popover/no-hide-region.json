@@ -1,0 +1,167 @@
+{
+  "code": "Widget build(BuildContext _) => FPopover(\n  popoverAnchor: .topCenter,\n  childAnchor: .bottomCenter,\n  hideRegion: .none,\n  popoverBuilder: (context, _) => Padding(\n    padding: const .only(left: 20, top: 14, right: 20, bottom: 10),\n    child: SizedBox(\n      width: 288,\n      child: Column(\n        mainAxisSize: .min,\n        crossAxisAlignment: .start,\n        children: [\n          Text('Dimensions', style: context.theme.typography.base),\n          const SizedBox(height: 7),\n          Text(\n            'Set the dimensions for the layer.',\n            style: context.theme.typography.sm.copyWith(\n              color: context.theme.colors.mutedForeground,\n              fontWeight: .w300,\n            ),\n          ),\n          const SizedBox(height: 15),\n          for (final (index, (label, value)) in [\n            ('Width', '100%'),\n            ('Max. Width', '300px'),\n            ('Height', '25px'),\n            ('Max. Height', 'none'),\n          ].indexed) ...[\n            Row(\n              children: [\n                Expanded(\n                  child: Text(label, style: context.theme.typography.sm),\n                ),\n                Expanded(\n                  flex: 2,\n                  child: FTextField(\n                    control: .managed(initial: TextEditingValue(text: value)),\n                    autofocus: index == 0,\n                  ),\n                ),\n              ],\n            ),\n            const SizedBox(height: 7),\n          ],\n        ],\n      ),\n    ),\n  ),\n  builder: (_, controller, _) => FButton(\n    style: FButtonStyle.outline(),\n    mainAxisSize: .min,\n    onPress: controller.toggle,\n    child: const Text('Open popover'),\n  ),\n);\n",
+  "highlights": [
+    {
+      "start": 4,
+      "end": 4
+    }
+  ],
+  "links": [
+    {
+      "offset": 32,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopover/FPopover.html"
+    },
+    {
+      "offset": 44,
+      "length": 13,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopover/popoverAnchor.html"
+    },
+    {
+      "offset": 73,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopover/childAnchor.html"
+    },
+    {
+      "offset": 103,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopover/hideRegion.html"
+    },
+    {
+      "offset": 116,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverHideRegion.html#none"
+    },
+    {
+      "offset": 124,
+      "length": 14,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopover/popoverBuilder.html"
+    },
+    {
+      "offset": 438,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FTypography/base.html"
+    },
+    {
+      "offset": 427,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/typography.html"
+    },
+    {
+      "offset": 421,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext/theme.html"
+    },
+    {
+      "offset": 591,
+      "length": 2,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FTypography/sm.html"
+    },
+    {
+      "offset": 580,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/typography.html"
+    },
+    {
+      "offset": 574,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext/theme.html"
+    },
+    {
+      "offset": 646,
+      "length": 15,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors/mutedForeground.html"
+    },
+    {
+      "offset": 639,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/colors.html"
+    },
+    {
+      "offset": 633,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext/theme.html"
+    },
+    {
+      "offset": 1113,
+      "length": 2,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FTypography/sm.html"
+    },
+    {
+      "offset": 1102,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/typography.html"
+    },
+    {
+      "offset": 1096,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext/theme.html"
+    },
+    {
+      "offset": 1215,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+    },
+    {
+      "offset": 1247,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/control.html"
+    },
+    {
+      "offset": 1257,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFieldControl/FTextFieldControl.managed.html"
+    },
+    {
+      "offset": 1265,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFieldControl/FTextFieldControl.managed.html"
+    },
+    {
+      "offset": 1326,
+      "length": 9,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/autofocus.html"
+    },
+    {
+      "offset": 1507,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopover/builder.html"
+    },
+    {
+      "offset": 1538,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+    },
+    {
+      "offset": 1551,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/style.html"
+    },
+    {
+      "offset": 1558,
+      "length": 20,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButtonStyle/outline.html"
+    },
+    {
+      "offset": 1586,
+      "length": 12,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+    },
+    {
+      "offset": 1610,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/onPress.html"
+    },
+    {
+      "offset": 1630,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverController/toggle.html"
+    },
+    {
+      "offset": 1642,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/child.html"
+    }
+  ],
+  "tooltips": []
+}

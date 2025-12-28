@@ -1,46 +1,36 @@
 {
-  "code": "class CheckboxExample extends StatefulWidget {\n  @override\n  State<CheckboxExample> createState() => _CheckboxExampleState();\n}\n\nclass _CheckboxExampleState extends State<CheckboxExample> {\n  late bool _state = widget.initialValue;\n\n  @override\n  Widget build(BuildContext _) => FCheckbox(\n    label: const Text('Accept terms and conditions'),\n    description: const Text('You agree to our terms and conditions.'),\n    error: widget.error == null ? null : Text(widget.error!),\n    semanticsLabel: 'Accept terms and conditions',\n    value: _state,\n    onChange: (value) => setState(() => _state = value),\n    enabled: widget.enabled,\n  );\n}\n",
+  "code": "class CheckboxExample extends StatefulWidget {\n  @override\n  State<CheckboxExample> createState() => _CheckboxExampleState();\n}\n\nclass _CheckboxExampleState extends State<CheckboxExample> {\n  bool _state = false;\n\n  @override\n  Widget build(BuildContext _) => FCheckbox(\n    label: const Text('Accept terms and conditions'),\n    description: const Text('You agree to our terms and conditions.'),\n    semanticsLabel: 'Accept terms and conditions',\n    value: _state,\n    onChange: (value) => setState(() => _state = value),\n  );\n}\n",
   "highlights": [],
   "links": [
     {
-      "offset": 279,
+      "offset": 260,
       "length": 9,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckbox/FCheckbox.html"
     },
     {
-      "offset": 294,
+      "offset": 275,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckbox/label.html"
     },
     {
-      "offset": 348,
+      "offset": 329,
       "length": 11,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckbox/description.html"
     },
     {
-      "offset": 419,
-      "length": 5,
-      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckbox/error.html"
-    },
-    {
-      "offset": 481,
+      "offset": 400,
       "length": 14,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckbox/semanticsLabel.html"
     },
     {
-      "offset": 532,
+      "offset": 451,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckbox/value.html"
     },
     {
-      "offset": 551,
+      "offset": 470,
       "length": 8,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckbox/onChange.html"
-    },
-    {
-      "offset": 608,
-      "length": 7,
-      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckbox/enabled.html"
     }
   ],
   "tooltips": []

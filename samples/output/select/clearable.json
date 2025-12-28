@@ -1,44 +1,49 @@
 {
-  "code": "Widget build(BuildContext context) => FSelect<String>.rich(\n  hint: 'Select a fruit',\n  format: (s) => s,\n  clearable: true,\n  children: [\n    for (final fruit in fruits) .item(title: Text(fruit), value: fruit),\n  ],\n);\n",
-  "highlights": [],
+  "code": "const fruits = [\n  'Apple',\n  'Banana',\n  'Blueberry',\n  'Grapes',\n  'Lemon',\n  'Mango',\n  'Kiwi',\n  'Orange',\n  'Peach',\n  'Pear',\n  'Pineapple',\n  'Plum',\n  'Raspberry',\n  'Strawberry',\n  'Watermelon',\n];\n\nclass ClearableSelectExample extends StatelessWidget {\n  @override\n  Widget build(BuildContext context) => FSelect<String>.rich(\n    hint: 'Select a fruit',\n    format: (s) => s,\n    clearable: true,\n    children: [\n      for (final fruit in fruits) .item(title: Text(fruit), value: fruit),\n    ],\n  );\n}\n",
+  "highlights": [
+    {
+      "start": 24,
+      "end": 24
+    }
+  ],
   "links": [
     {
-      "offset": 38,
+      "offset": 315,
       "length": 20,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.rich.html"
     },
     {
-      "offset": 62,
+      "offset": 341,
       "length": 4,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/hint.html"
     },
     {
-      "offset": 88,
+      "offset": 369,
       "length": 6,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/format.html"
     },
     {
-      "offset": 108,
+      "offset": 391,
       "length": 9,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/clearable.html"
     },
     {
-      "offset": 127,
+      "offset": 412,
       "length": 8,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.rich.html"
     },
     {
-      "offset": 172,
+      "offset": 459,
       "length": 4,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectItemMixin/item.html"
     },
     {
-      "offset": 177,
+      "offset": 464,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectItemMixin/item.html"
     },
     {
-      "offset": 197,
+      "offset": 484,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectItemMixin/item.html"
     }

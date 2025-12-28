@@ -1,116 +1,166 @@
 {
-  "code": "Widget build(BuildContext context) => DecoratedBox(\n  decoration: BoxDecoration(\n    border: .all(color: context.theme.colors.border),\n    borderRadius: .circular(8),\n  ),\n  child: FResizable(\n    axis: .vertical,\n    crossAxisExtent: 300,\n    children: [\n      .region(\n        initialExtent: 250,\n        minExtent: 100,\n        builder: (_, data, _) =>\n            Label(data: data, icon: FIcons.sunrise, label: 'Morning'),\n      ),\n      .region(\n        initialExtent: 100,\n        minExtent: 100,\n        builder: (_, data, _) =>\n            Label(data: data, icon: FIcons.sun, label: 'Afternoon'),\n      ),\n      .region(\n        initialExtent: 250,\n        minExtent: 100,\n        builder: (_, data, _) =>\n            Label(data: data, icon: FIcons.sunset, label: 'Evening'),\n      ),\n    ],\n  ),\n);\n",
+  "code": "class ResizableExample extends StatelessWidget {\n  @override\n  Widget build(BuildContext context) => DecoratedBox(\n    decoration: BoxDecoration(\n      border: .all(color: context.theme.colors.border),\n      borderRadius: .circular(8),\n    ),\n    child: FResizable(\n      axis: .vertical,\n      crossAxisExtent: 300,\n      children: [\n        .region(\n          initialExtent: 250,\n          minExtent: 100,\n          builder: (_, data, _) =>\n              Label(data: data, icon: FIcons.sunrise, label: 'Morning'),\n        ),\n        .region(\n          initialExtent: 100,\n          minExtent: 100,\n          builder: (_, data, _) =>\n              Label(data: data, icon: FIcons.sun, label: 'Afternoon'),\n        ),\n        .region(\n          initialExtent: 250,\n          minExtent: 100,\n          builder: (_, data, _) =>\n              Label(data: data, icon: FIcons.sunset, label: 'Evening'),\n        ),\n      ],\n    ),\n  );\n}\n\nclass Label extends StatelessWidget {\n  static final format = DateFormat.jm();\n  final FResizableRegionData data;\n  final IconData icon;\n  final String label;\n  const Label({\n    required this.data,\n    required this.icon,\n    required this.label,\n    super.key,\n  });\n  @override\n  Widget build(BuildContext context) {\n    final FThemeData(:colors, :typography) = context.theme;\n    final start = DateTime.fromMillisecondsSinceEpoch(\n      (data.offsetPercentage.min * Duration.millisecondsPerDay).round(),\n      isUtc: true,\n    );\n    final end = DateTime.fromMillisecondsSinceEpoch(\n      (data.offsetPercentage.max * Duration.millisecondsPerDay).round(),\n      isUtc: true,\n    );\n    return Align(\n      child: Column(\n        mainAxisAlignment: .center,\n        children: [\n          Row(\n            mainAxisSize: .min,\n            mainAxisAlignment: .center,\n            children: [\n              Icon(icon, size: 15, color: colors.foreground),\n              const SizedBox(width: 3),\n              Text(\n                label,\n                style: typography.sm.copyWith(color: colors.foreground),\n              ),\n            ],\n          ),\n          const SizedBox(height: 5),\n          Text(\n            '${format.format(start)} - ${format.format(end)}',\n            style: typography.sm.copyWith(color: colors.foreground),\n          ),\n        ],\n      ),\n    );\n  }\n}\n",
   "highlights": [],
   "links": [
     {
-      "offset": 126,
+      "offset": 193,
       "length": 6,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors/border.html"
     },
     {
-      "offset": 119,
+      "offset": 186,
       "length": 6,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/colors.html"
     },
     {
-      "offset": 113,
+      "offset": 180,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext/theme.html"
     },
     {
-      "offset": 181,
+      "offset": 254,
       "length": 10,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizable/FResizable.html"
     },
     {
-      "offset": 197,
+      "offset": 272,
       "length": 4,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizable/axis.html"
     },
     {
-      "offset": 218,
+      "offset": 295,
       "length": 15,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizable/crossAxisExtent.html"
     },
     {
-      "offset": 244,
+      "offset": 323,
       "length": 8,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizable/children.html"
     },
     {
-      "offset": 263,
+      "offset": 344,
       "length": 6,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegion/FResizableRegion.region.html"
     },
     {
-      "offset": 279,
+      "offset": 362,
       "length": 13,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegion/initialExtent.html"
     },
     {
-      "offset": 307,
+      "offset": 392,
       "length": 9,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegion/minExtent.html"
     },
     {
-      "offset": 331,
+      "offset": 418,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegion/builder.html"
     },
     {
-      "offset": 392,
+      "offset": 481,
       "length": 14,
       "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/sunrise-constant.html"
     },
     {
-      "offset": 443,
+      "offset": 536,
       "length": 6,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegion/FResizableRegion.region.html"
     },
     {
-      "offset": 459,
+      "offset": 554,
       "length": 13,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegion/initialExtent.html"
     },
     {
-      "offset": 487,
+      "offset": 584,
       "length": 9,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegion/minExtent.html"
     },
     {
-      "offset": 511,
+      "offset": 610,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegion/builder.html"
     },
     {
-      "offset": 572,
+      "offset": 673,
       "length": 10,
       "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/sun-constant.html"
     },
     {
-      "offset": 621,
+      "offset": 726,
       "length": 6,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegion/FResizableRegion.region.html"
     },
     {
-      "offset": 637,
+      "offset": 744,
       "length": 13,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegion/initialExtent.html"
     },
     {
-      "offset": 665,
+      "offset": 774,
       "length": 9,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegion/minExtent.html"
     },
     {
-      "offset": 689,
+      "offset": 800,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegion/builder.html"
     },
     {
-      "offset": 750,
+      "offset": 863,
       "length": 13,
       "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/sunset-constant.html"
+    },
+    {
+      "offset": 1019,
+      "length": 20,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegionData-class.html"
+    },
+    {
+      "offset": 1262,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+    },
+    {
+      "offset": 1305,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext/theme.html"
+    },
+    {
+      "offset": 1379,
+      "length": 16,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegionData/offsetPercentage.html"
+    },
+    {
+      "offset": 1531,
+      "length": 16,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegionData/offsetPercentage.html"
+    },
+    {
+      "offset": 1873,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors/foreground.html"
+    },
+    {
+      "offset": 2003,
+      "length": 2,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FTypography/sm.html"
+    },
+    {
+      "offset": 2029,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors/foreground.html"
+    },
+    {
+      "offset": 2233,
+      "length": 2,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FTypography/sm.html"
+    },
+    {
+      "offset": 2259,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors/foreground.html"
     }
   ],
   "tooltips": []

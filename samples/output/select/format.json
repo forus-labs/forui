@@ -1,6 +1,11 @@
 {
   "code": "Widget build(BuildContext context) =>\n    FSelect<({String firstName, String lastName})>.rich(\n      hint: 'Select a user',\n      format: (user) => '${user.firstName} ${user.lastName}',\n      children: [\n        for (final user in users)\n          .item(title: Text(user.firstName), value: user),\n      ],\n    );\n",
-  "highlights": [],
+  "highlights": [
+    {
+      "start": 4,
+      "end": 4
+    }
+  ],
   "links": [
     {
       "offset": 42,

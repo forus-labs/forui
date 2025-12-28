@@ -1,6 +1,11 @@
 {
   "code": "Widget build(BuildContext _) => FButton(\n  mainAxisSize: .min,\n  prefix: const FCircularProgress(),\n  onPress: null,\n  child: const Text('Please wait'),\n);\n",
-  "highlights": [],
+  "highlights": [
+    {
+      "start": 3,
+      "end": 3
+    }
+  ],
   "links": [
     {
       "offset": 32,

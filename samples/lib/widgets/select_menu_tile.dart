@@ -2,22 +2,21 @@ import 'package:flutter/widgets.dart';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:forui/forui.dart';
+import 'package:forui_samples/main.dart';
 
 import 'package:forui_samples/sample.dart';
 
 enum Notification { all, direct, nothing, limitedTime, timeSensitive, selectedApps }
 
 @RoutePage()
+@Options(include: [Notification])
 class SelectMenuTilePage extends Sample {
-  final bool autoHide;
-
-  SelectMenuTilePage({@queryParam super.theme, @queryParam this.autoHide = true});
+  SelectMenuTilePage({@queryParam super.theme});
 
   @override
   Widget sample(BuildContext _) => FSelectMenuTile<Notification>.fromMap(
     const {'All': .all, 'Direct Messages': .direct, 'None': .nothing},
     selectControl: const .managed(initial: {.all}),
-    autoHide: autoHide,
     validator: (value) => value == null ? 'Select an item' : null,
     prefix: const Icon(FIcons.bell),
     title: const Text('Notifications'),
@@ -30,15 +29,36 @@ class SelectMenuTilePage extends Sample {
 }
 
 @RoutePage()
-class ScrollableSelectMenuTilePage extends Sample {
-  final bool autoHide;
+@Options(include: [Notification])
+class NoAutoHideSelectMenuTilePage extends Sample {
+  NoAutoHideSelectMenuTilePage({@queryParam super.theme});
 
-  ScrollableSelectMenuTilePage({@queryParam super.theme, @queryParam this.autoHide = true});
+  @override
+  Widget sample(BuildContext _) => FSelectMenuTile<Notification>.fromMap(
+    const {'All': .all, 'Direct Messages': .direct, 'None': .nothing},
+    selectControl: const .managed(initial: {.all}),
+    // {@highlight}
+    autoHide: false,
+    // {@endhighlight}
+    validator: (value) => value == null ? 'Select an item' : null,
+    prefix: const Icon(FIcons.bell),
+    title: const Text('Notifications'),
+    detailsBuilder: (_, values, _) => Text(switch (values.firstOrNull) {
+      .all => 'All',
+      .direct => 'Direct Messages',
+      _ => 'None',
+    }),
+  );
+}
+
+@RoutePage()
+@Options(include: [Notification])
+class ScrollableSelectMenuTilePage extends Sample {
+  ScrollableSelectMenuTilePage({@queryParam super.theme});
 
   @override
   Widget sample(BuildContext _) => FSelectMenuTile<Notification>(
     selectControl: const .managed(initial: {.all}),
-    autoHide: autoHide,
     maxHeight: 150,
     validator: (value) => value == null ? 'Select an item' : null,
     prefix: const Icon(FIcons.bell),
@@ -72,11 +92,14 @@ class LazySelectMenuTilePage extends Sample {
     prefix: const Icon(FIcons.variable),
     title: const Text('Applicable values'),
     maxHeight: 200,
+    // {@highlight}
     menuBuilder: (context, index) => .tile(title: Text('Tile $index'), value: index),
+    // {@endhighlight}
   );
 }
 
 @RoutePage()
+@Options(include: [Notification])
 class SelectMenuTileFormPage extends StatefulSample {
   SelectMenuTileFormPage({@queryParam super.theme});
 

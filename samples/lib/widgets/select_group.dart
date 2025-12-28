@@ -2,6 +2,7 @@ import 'package:flutter/widgets.dart';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:forui/forui.dart';
+import 'package:forui_samples/main.dart';
 
 import 'package:forui_samples/sample.dart';
 
@@ -12,6 +13,7 @@ enum Language { dart, java, rust, python }
 enum Notification { all, direct, nothing }
 
 @RoutePage()
+@Options(include: [Sidebar])
 class SelectGroupPage extends Sample {
   SelectGroupPage({@queryParam super.theme,}): super(maxWidth: 250);
 
@@ -34,6 +36,7 @@ class SelectGroupPage extends Sample {
 }
 
 @RoutePage()
+@Options(include: [Language])
 class SelectGroupCheckboxFormPage extends StatefulSample {
   SelectGroupCheckboxFormPage({@queryParam super.theme,}): super(maxWidth: 250);
 
@@ -81,6 +84,7 @@ class _SelectGroupCheckboxFormPageState extends StatefulSampleState<SelectGroupC
 }
 
 @RoutePage()
+@Options(include: [Notification])
 class SelectGroupRadioFormPage extends StatefulSample {
   SelectGroupRadioFormPage({@queryParam super.theme}): super(maxWidth: 320);
 
@@ -100,7 +104,9 @@ class _SelectGroupRadioFormPageState extends StatefulSampleState<SelectGroupRadi
       spacing: 20,
       children: [
         FSelectGroup<Notification>(
+          // {@highlight}
           control: const .managedRadio(),
+          // {@endhighlight}
           label: const Text('Notifications'),
           description: const Text('Select the notifications.'),
           validator: (values) => values?.isEmpty ?? true ? 'Please select a value.' : null,

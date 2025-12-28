@@ -1,0 +1,57 @@
+{
+  "code": "Widget build(BuildContext context) => FSlider(\n  control: .managedContinuous(initial: FSliderValue(max: 0.6)),\n  label: const Text('Volume'),\n  description: const Text('Adjust the volume by dragging the slider.'),\n  forceErrorText: 'Volume is too high.',\n);\n",
+  "highlights": [
+    {
+      "start": 5,
+      "end": 5
+    }
+  ],
+  "links": [
+    {
+      "offset": 38,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSlider/FSlider.html"
+    },
+    {
+      "offset": 49,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSlider/control.html"
+    },
+    {
+      "offset": 59,
+      "length": 17,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderControl/FSliderControl.managedContinuous.html"
+    },
+    {
+      "offset": 77,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderControl/FSliderControl.managedContinuous.html"
+    },
+    {
+      "offset": 86,
+      "length": 12,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderValue/FSliderValue.html"
+    },
+    {
+      "offset": 99,
+      "length": 3,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderValue/max.html"
+    },
+    {
+      "offset": 113,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSlider/label.html"
+    },
+    {
+      "offset": 144,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSlider/description.html"
+    },
+    {
+      "offset": 216,
+      "length": 14,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSlider/forceErrorText.html"
+    }
+  ],
+  "tooltips": []
+}

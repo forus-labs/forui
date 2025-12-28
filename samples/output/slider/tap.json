@@ -1,0 +1,52 @@
+{
+  "code": "Widget build(BuildContext context) => FSlider(\n  control: .managedContinuous(\n    initial: FSliderValue(max: 0.6),\n    interaction: .tap,\n  ),\n);\n",
+  "highlights": [
+    {
+      "start": 4,
+      "end": 4
+    }
+  ],
+  "links": [
+    {
+      "offset": 38,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSlider/FSlider.html"
+    },
+    {
+      "offset": 49,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSlider/control.html"
+    },
+    {
+      "offset": 59,
+      "length": 17,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderControl/FSliderControl.managedContinuous.html"
+    },
+    {
+      "offset": 82,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderControl/FSliderControl.managedContinuous.html"
+    },
+    {
+      "offset": 91,
+      "length": 12,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderValue/FSliderValue.html"
+    },
+    {
+      "offset": 104,
+      "length": 3,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderValue/max.html"
+    },
+    {
+      "offset": 119,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderControl/FSliderControl.managedContinuous.html"
+    },
+    {
+      "offset": 133,
+      "length": 3,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderInteraction.html#tap"
+    }
+  ],
+  "tooltips": []
+}

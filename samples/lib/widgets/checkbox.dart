@@ -7,41 +7,76 @@ import 'package:forui_samples/sample.dart';
 
 @RoutePage()
 class CheckboxPage extends StatefulSample {
-  final bool initialValue;
-  final bool enabled;
-  final String? error;
-
-  CheckboxPage({
-    @queryParam super.theme,
-    @queryParam this.initialValue = false,
-    @queryParam this.enabled = true,
-    @queryParam this.error,
-  }): super(maxHeight: 320);
+  CheckboxPage({@queryParam super.theme}) : super(maxHeight: 320);
 
   @override
   State<CheckboxPage> createState() => _CheckboxPageState();
 }
 
 class _CheckboxPageState extends StatefulSampleState<CheckboxPage> {
-  late bool _state = widget.initialValue;
+  bool _state = false;
 
   @override
   Widget sample(BuildContext _) => FCheckbox(
     label: const Text('Accept terms and conditions'),
     description: const Text('You agree to our terms and conditions.'),
-    error: widget.error == null ? null : Text(widget.error!),
     semanticsLabel: 'Accept terms and conditions',
     value: _state,
     onChange: (value) => setState(() => _state = value),
-    enabled: widget.enabled,
+  );
+}
+
+@RoutePage()
+class DisabledCheckboxPage extends StatefulSample {
+  DisabledCheckboxPage({@queryParam super.theme}) : super(maxHeight: 320);
+
+  @override
+  State<DisabledCheckboxPage> createState() => _DisabledCheckboxPageState();
+}
+
+class _DisabledCheckboxPageState extends StatefulSampleState<DisabledCheckboxPage> {
+  bool _state = true;
+
+  @override
+  Widget sample(BuildContext _) => FCheckbox(
+    label: const Text('Accept terms and conditions'),
+    description: const Text('You agree to our terms and conditions.'),
+    semanticsLabel: 'Accept terms and conditions',
+    value: _state,
+    onChange: (value) => setState(() => _state = value),
+    // {@highlight}
+    enabled: false,
+    // {@endhighlight}
+  );
+}
+
+@RoutePage()
+class ErrorCheckboxPage extends StatefulSample {
+  ErrorCheckboxPage({@queryParam super.theme}) : super(maxHeight: 320);
+
+  @override
+  State<ErrorCheckboxPage> createState() => _ErrorCheckboxPageState();
+}
+
+class _ErrorCheckboxPageState extends StatefulSampleState<ErrorCheckboxPage> {
+  bool _state = false;
+
+  @override
+  Widget sample(BuildContext _) => FCheckbox(
+    label: const Text('Accept terms and conditions'),
+    description: const Text('You agree to our terms and conditions.'),
+    // {@highlight}
+    error: const Text('Please accept the terms and conditions.'),
+    // {@endhighlight}
+    semanticsLabel: 'Accept terms and conditions',
+    value: _state,
+    onChange: (value) => setState(() => _state = value),
   );
 }
 
 @RoutePage()
 class RawCheckboxPage extends StatefulSample {
-  final bool enabled;
-
-  RawCheckboxPage({@queryParam super.theme, @queryParam this.enabled = true});
+  RawCheckboxPage({@queryParam super.theme});
 
   @override
   State<RawCheckboxPage> createState() => _RawCheckboxPageState();
@@ -51,8 +86,7 @@ class _RawCheckboxPageState extends StatefulSampleState<RawCheckboxPage> {
   bool _state = false;
 
   @override
-  Widget sample(BuildContext _) =>
-      FCheckbox(value: _state, onChange: (value) => setState(() => _state = value), enabled: widget.enabled);
+  Widget sample(BuildContext _) => FCheckbox(value: _state, onChange: (value) => setState(() => _state = value));
 }
 
 @RoutePage()

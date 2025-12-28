@@ -1,6 +1,11 @@
 {
   "code": "Widget build(BuildContext context) => FSlider(\n  control: .managedContinuous(initial: FSliderValue(max: 0.6)),\n  tooltipBuilder: (style, value) {\n    final hex = (value * 100).round().toRadixString(16).padLeft(2, '0');\n    return Text('0x$hex');\n  },\n);\n",
-  "highlights": [],
+  "highlights": [
+    {
+      "start": 3,
+      "end": 6
+    }
+  ],
   "links": [
     {
       "offset": 38,

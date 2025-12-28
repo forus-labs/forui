@@ -1,0 +1,317 @@
+{
+  "code": "class _Sheet extends StatefulWidget {\n  @override\n  State<_Sheet> createState() => _SheetState();\n}\n\nclass _SheetState extends State<_Sheet> {\n  final Map<FLayout, FPersistentSheetController> _controllers = {};\n\n  @override\n  void dispose() {\n    for (final controller in _controllers.values) {\n      controller.dispose();\n    }\n    super.dispose();\n  }\n\n  @override\n  Widget build(BuildContext context) {\n    VoidCallback onPress(FLayout side) => () {\n      for (final MapEntry(:key, :value) in _controllers.entries) {\n        if (key != side && value.status.isCompleted) {\n          return;\n        }\n      }\n\n      var controller = _controllers[side];\n      if (controller == null) {\n        controller = _controllers[side] ??= showFPersistentSheet(\n          context: context,\n          side: side,\n          keepAliveOffstage: true,\n          builder: (context, controller) =>\n              Form(side: side, controller: controller),\n        );\n      } else {\n        controller.toggle();\n      }\n    };\n\n    return Column(\n      mainAxisAlignment: .center,\n      mainAxisSize: .min,\n      spacing: 5,\n      children: [\n        FButton(onPress: onPress(.ltr), child: const Text('Left')),\n        FButton(onPress: onPress(.ttb), child: const Text('Top')),\n        FButton(onPress: onPress(.rtl), child: const Text('Right')),\n        FButton(onPress: onPress(.btt), child: const Text('Bottom')),\n      ],\n    );\n  }\n}\n\nclass Form extends StatelessWidget {\n  final FLayout side;\n  final FPersistentSheetController controller;\n  const Form({required this.side, required this.controller, super.key});\n  @override\n  Widget build(BuildContext context) => Container(\n    height: .infinity,\n    width: .infinity,\n    decoration: BoxDecoration(\n      color: context.theme.colors.background,\n      border: side.vertical\n          ? .symmetric(\n              horizontal: BorderSide(color: context.theme.colors.border),\n            )\n          : .symmetric(\n              vertical: BorderSide(color: context.theme.colors.border),\n            ),\n    ),\n    child: Padding(\n      padding: const .symmetric(horizontal: 15, vertical: 8.0),\n      child: Column(\n        mainAxisAlignment: .center,\n        mainAxisSize: .min,\n        crossAxisAlignment: .start,\n        children: [\n          Text(\n            'Account',\n            style: context.theme.typography.xl2.copyWith(\n              fontWeight: .w600,\n              color: context.theme.colors.foreground,\n              height: 1.5,\n            ),\n          ),\n          Text(\n            'Make changes to your account here. Click save when you are done.',\n            style: context.theme.typography.sm.copyWith(\n              color: context.theme.colors.mutedForeground,\n            ),\n          ),\n          const SizedBox(height: 8),\n          SizedBox(\n            width: 450,\n            child: Column(\n              children: [\n                const FTextField(label: Text('Name'), hint: 'John Renalo'),\n                const SizedBox(height: 10),\n                const FTextField(label: Text('Email'), hint: 'john@doe.com'),\n                const SizedBox(height: 16),\n                FButton(onPress: controller.toggle, child: const Text('Save')),\n              ],\n            ),\n          ),\n        ],\n      ),\n    ),\n  );\n}\n",
+  "highlights": [
+    {
+      "start": 31,
+      "end": 31
+    }
+  ],
+  "links": [
+    {
+      "offset": 155,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FLayout.html"
+    },
+    {
+      "offset": 164,
+      "length": 26,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/FPersistentSheetController-class.html"
+    },
+    {
+      "offset": 312,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/FPersistentSheetController/dispose.html"
+    },
+    {
+      "offset": 431,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FLayout.html"
+    },
+    {
+      "offset": 553,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/FPersistentSheetController/status.html"
+    },
+    {
+      "offset": 731,
+      "length": 20,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/showFPersistentSheet.html"
+    },
+    {
+      "offset": 763,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/showFPersistentSheet.html"
+    },
+    {
+      "offset": 791,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/showFPersistentSheet.html"
+    },
+    {
+      "offset": 813,
+      "length": 17,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/showFPersistentSheet.html"
+    },
+    {
+      "offset": 848,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/showFPersistentSheet.html"
+    },
+    {
+      "offset": 983,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/FPersistentSheetController/toggle.html"
+    },
+    {
+      "offset": 1132,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+    },
+    {
+      "offset": 1140,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/onPress.html"
+    },
+    {
+      "offset": 1158,
+      "length": 3,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FLayout.html#ltr"
+    },
+    {
+      "offset": 1164,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/child.html"
+    },
+    {
+      "offset": 1200,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+    },
+    {
+      "offset": 1208,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/onPress.html"
+    },
+    {
+      "offset": 1226,
+      "length": 3,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FLayout.html#ttb"
+    },
+    {
+      "offset": 1232,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/child.html"
+    },
+    {
+      "offset": 1267,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+    },
+    {
+      "offset": 1275,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/onPress.html"
+    },
+    {
+      "offset": 1293,
+      "length": 3,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FLayout.html#rtl"
+    },
+    {
+      "offset": 1299,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/child.html"
+    },
+    {
+      "offset": 1336,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+    },
+    {
+      "offset": 1344,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/onPress.html"
+    },
+    {
+      "offset": 1362,
+      "length": 3,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FLayout.html#btt"
+    },
+    {
+      "offset": 1368,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/child.html"
+    },
+    {
+      "offset": 1466,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FLayout.html"
+    },
+    {
+      "offset": 1488,
+      "length": 26,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/FPersistentSheetController-class.html"
+    },
+    {
+      "offset": 1773,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors/background.html"
+    },
+    {
+      "offset": 1766,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/colors.html"
+    },
+    {
+      "offset": 1760,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext/theme.html"
+    },
+    {
+      "offset": 1804,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FLayout/vertical.html"
+    },
+    {
+      "offset": 1902,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors/border.html"
+    },
+    {
+      "offset": 1895,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/colors.html"
+    },
+    {
+      "offset": 1889,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext/theme.html"
+    },
+    {
+      "offset": 2012,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors/border.html"
+    },
+    {
+      "offset": 2005,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/colors.html"
+    },
+    {
+      "offset": 1999,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext/theme.html"
+    },
+    {
+      "offset": 2351,
+      "length": 3,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FTypography/xl2.html"
+    },
+    {
+      "offset": 2340,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/typography.html"
+    },
+    {
+      "offset": 2334,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext/theme.html"
+    },
+    {
+      "offset": 2440,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors/foreground.html"
+    },
+    {
+      "offset": 2433,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/colors.html"
+    },
+    {
+      "offset": 2427,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext/theme.html"
+    },
+    {
+      "offset": 2647,
+      "length": 2,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FTypography/sm.html"
+    },
+    {
+      "offset": 2636,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/typography.html"
+    },
+    {
+      "offset": 2630,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext/theme.html"
+    },
+    {
+      "offset": 2702,
+      "length": 15,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors/mutedForeground.html"
+    },
+    {
+      "offset": 2695,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/colors.html"
+    },
+    {
+      "offset": 2689,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext/theme.html"
+    },
+    {
+      "offset": 2903,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+    },
+    {
+      "offset": 2914,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/label.html"
+    },
+    {
+      "offset": 2935,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/hint.html"
+    },
+    {
+      "offset": 3023,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+    },
+    {
+      "offset": 3034,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/label.html"
+    },
+    {
+      "offset": 3056,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/hint.html"
+    },
+    {
+      "offset": 3139,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+    },
+    {
+      "offset": 3147,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/onPress.html"
+    },
+    {
+      "offset": 3167,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/FPersistentSheetController/toggle.html"
+    },
+    {
+      "offset": 3175,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/child.html"
+    }
+  ],
+  "tooltips": []
+}

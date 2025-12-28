@@ -1,6 +1,15 @@
 {
-  "code": "Widget build(BuildContext context) => FPopover(\n  groupId: _groupId,\n  popoverBuilder: (context, _) => Padding(\n    padding: const .only(left: 20, top: 14, right: 20, bottom: 10),\n    child: SizedBox(\n      width: 288,\n      child: Column(\n        mainAxisSize: .min,\n        crossAxisAlignment: .start,\n        children: [\n          Text('Dimensions', style: context.theme.typography.base),\n          const SizedBox(height: 7),\n          Text(\n            'Set the dimensions for the layer.',\n            style: context.theme.typography.sm.copyWith(\n              color: context.theme.colors.mutedForeground,\n              fontWeight: .w300,\n            ),\n          ),\n          const SizedBox(height: 15),\n          Row(\n            children: [\n              Expanded(\n                child: Text('Width', style: context.theme.typography.sm),\n              ),\n              Expanded(\n                flex: 2,\n                child: FSelect<String>.rich(\n                  contentGroupId: _groupId,\n                  hint: 'Select',\n                  format: (s) => s,\n                  children: [\n                    .item(title: const Text('100%'), value: '100%'),\n                    .item(title: const Text('75%'), value: '75%'),\n                    .item(title: const Text('50%'), value: '50%'),\n                  ],\n                ),\n              ),\n            ],\n          ),\n        ],\n      ),\n    ),\n  ),\n  builder: (_, controller, _) => FButton(\n    style: FButtonStyle.outline(),\n    mainAxisSize: .min,\n    onPress: controller.toggle,\n    child: const Text('Open popover'),\n  ),\n);\n",
-  "highlights": [],
+  "code": "Widget build(BuildContext context) => FPopover(\n  groupId: 'nested-popover',\n  popoverBuilder: (context, _) => Padding(\n    padding: const .only(left: 20, top: 14, right: 20, bottom: 10),\n    child: SizedBox(\n      width: 288,\n      child: Column(\n        mainAxisSize: .min,\n        crossAxisAlignment: .start,\n        children: [\n          Text('Dimensions', style: context.theme.typography.base),\n          const SizedBox(height: 7),\n          Text(\n            'Set the dimensions for the layer.',\n            style: context.theme.typography.sm.copyWith(\n              color: context.theme.colors.mutedForeground,\n              fontWeight: .w300,\n            ),\n          ),\n          const SizedBox(height: 15),\n          Row(\n            children: [\n              Expanded(\n                child: Text('Width', style: context.theme.typography.sm),\n              ),\n              Expanded(\n                flex: 2,\n                child: FSelect<String>.rich(\n                  contentGroupId: 'nested-popover',\n                  hint: 'Select',\n                  format: (s) => s,\n                  children: [\n                    .item(title: const Text('100%'), value: '100%'),\n                    .item(title: const Text('75%'), value: '75%'),\n                    .item(title: const Text('50%'), value: '50%'),\n                  ],\n                ),\n              ),\n            ],\n          ),\n        ],\n      ),\n    ),\n  ),\n  builder: (_, controller, _) => FButton(\n    style: FButtonStyle.outline(),\n    mainAxisSize: .min,\n    onPress: controller.toggle,\n    child: const Text('Open popover'),\n  ),\n);\n",
+  "highlights": [
+    {
+      "start": 2,
+      "end": 2
+    },
+    {
+      "start": 29,
+      "end": 29
+    }
+  ],
   "links": [
     {
       "offset": 38,
@@ -13,177 +22,177 @@
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopover/groupId.html"
     },
     {
-      "offset": 71,
+      "offset": 79,
       "length": 14,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopover/popoverBuilder.html"
     },
     {
-      "offset": 385,
+      "offset": 393,
       "length": 4,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FTypography/base.html"
     },
     {
-      "offset": 374,
+      "offset": 382,
       "length": 10,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/typography.html"
     },
     {
-      "offset": 368,
+      "offset": 376,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext/theme.html"
     },
     {
-      "offset": 538,
+      "offset": 546,
       "length": 2,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FTypography/sm.html"
     },
     {
-      "offset": 527,
+      "offset": 535,
       "length": 10,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/typography.html"
     },
     {
-      "offset": 521,
+      "offset": 529,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext/theme.html"
     },
     {
-      "offset": 593,
+      "offset": 601,
       "length": 15,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors/mutedForeground.html"
     },
     {
-      "offset": 586,
+      "offset": 594,
       "length": 6,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/colors.html"
     },
     {
-      "offset": 580,
+      "offset": 588,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext/theme.html"
     },
     {
-      "offset": 841,
+      "offset": 849,
       "length": 2,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FTypography/sm.html"
     },
     {
-      "offset": 830,
+      "offset": 838,
       "length": 10,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/typography.html"
     },
     {
-      "offset": 824,
+      "offset": 832,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext/theme.html"
     },
     {
-      "offset": 935,
+      "offset": 943,
       "length": 20,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.rich.html"
     },
     {
-      "offset": 975,
+      "offset": 983,
       "length": 14,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/contentGroupId.html"
     },
     {
-      "offset": 1019,
+      "offset": 1035,
       "length": 4,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/hint.html"
     },
     {
-      "offset": 1053,
+      "offset": 1069,
       "length": 6,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/format.html"
     },
     {
-      "offset": 1089,
+      "offset": 1105,
       "length": 8,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.rich.html"
     },
     {
-      "offset": 1122,
+      "offset": 1138,
       "length": 4,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectItemMixin/item.html"
     },
     {
-      "offset": 1127,
+      "offset": 1143,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectItemMixin/item.html"
     },
     {
-      "offset": 1154,
+      "offset": 1170,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectItemMixin/item.html"
     },
     {
-      "offset": 1191,
+      "offset": 1207,
       "length": 4,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectItemMixin/item.html"
     },
     {
-      "offset": 1196,
+      "offset": 1212,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectItemMixin/item.html"
     },
     {
-      "offset": 1222,
+      "offset": 1238,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectItemMixin/item.html"
     },
     {
-      "offset": 1258,
+      "offset": 1274,
       "length": 4,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectItemMixin/item.html"
     },
     {
-      "offset": 1263,
+      "offset": 1279,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectItemMixin/item.html"
     },
     {
-      "offset": 1289,
+      "offset": 1305,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectItemMixin/item.html"
     },
     {
-      "offset": 1423,
+      "offset": 1439,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopover/builder.html"
     },
     {
-      "offset": 1454,
+      "offset": 1470,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
     },
     {
-      "offset": 1467,
+      "offset": 1483,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/style.html"
     },
     {
-      "offset": 1474,
+      "offset": 1490,
       "length": 20,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButtonStyle/outline.html"
     },
     {
-      "offset": 1502,
+      "offset": 1518,
       "length": 12,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
     },
     {
-      "offset": 1526,
+      "offset": 1542,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/onPress.html"
     },
     {
-      "offset": 1546,
+      "offset": 1562,
       "length": 6,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverController/toggle.html"
     },
     {
-      "offset": 1558,
+      "offset": 1574,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/child.html"
     }

@@ -7,16 +7,28 @@ import 'package:forui_samples/sample.dart';
 
 @RoutePage()
 class TextFieldPage extends Sample {
-  final bool enabled;
-
-  TextFieldPage({@queryParam super.theme, @queryParam this.enabled = false});
+  TextFieldPage({@queryParam super.theme});
 
   @override
-  Widget sample(BuildContext _) => FTextField(
-    enabled: enabled,
-    label: const Text('Username'),
+  Widget sample(BuildContext _) => const FTextField(
+    label: Text('Username'),
     hint: 'JaneDoe',
-    description: const Text('Please enter your username.'),
+    description: Text('Please enter your username.'),
+  );
+}
+
+@RoutePage()
+class DisabledTextFieldPage extends Sample {
+  DisabledTextFieldPage({@queryParam super.theme});
+
+  @override
+  Widget sample(BuildContext _) => const FTextField(
+    label: Text('Username'),
+    hint: 'JaneDoe',
+    description: Text('Please enter your username.'),
+    // {@highlight}
+    enabled: false,
+    // {@endhighlight}
   );
 }
 
@@ -30,7 +42,9 @@ class ClearableTextFieldPage extends Sample {
     label: const Text('Username'),
     hint: 'JaneDoe',
     description: const Text('Please enter your username.'),
+    // {@highlight}
     clearable: (value) => value.text.isNotEmpty,
+    // {@endhighlight}
   );
 }
 

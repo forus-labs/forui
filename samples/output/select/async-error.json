@@ -1,69 +1,74 @@
 {
-  "code": "Widget build(BuildContext context) => FSelect<String>.searchBuilder(\n  hint: 'Select a fruit',\n  format: (s) => s,\n  filter: (query) async {\n    await Future.delayed(const Duration(seconds: 1));\n    throw StateError('Error loading data');\n  },\n  contentBuilder: (context, _, fruits) => [\n    for (final fruit in fruits) .item(title: Text(fruit), value: fruit),\n  ],\n  contentErrorBuilder: (context, error, trace) {\n    final style = context.theme.selectStyle.iconStyle;\n    return Padding(\n      padding: const .all(8.0),\n      child: Icon(FIcons.messageCircleX, size: style.size, color: style.color),\n    );\n  },\n);\n",
-  "highlights": [],
+  "code": "const fruits = [\n  'Apple',\n  'Banana',\n  'Blueberry',\n  'Grapes',\n  'Lemon',\n  'Mango',\n  'Kiwi',\n  'Orange',\n  'Peach',\n  'Pear',\n  'Pineapple',\n  'Plum',\n  'Raspberry',\n  'Strawberry',\n  'Watermelon',\n];\n\nclass AsyncErrorSelectExample extends StatelessWidget {\n  @override\n  Widget build(BuildContext context) => FSelect<String>.searchBuilder(\n    hint: 'Select a fruit',\n    format: (s) => s,\n    filter: (query) async {\n      await Future.delayed(const Duration(seconds: 1));\n      throw StateError('Error loading data');\n    },\n    contentBuilder: (context, _, fruits) => [\n      for (final fruit in fruits) .item(title: Text(fruit), value: fruit),\n    ],\n    contentErrorBuilder: (context, error, trace) {\n      final style = context.theme.selectStyle.iconStyle;\n      return Padding(\n        padding: const .all(8.0),\n        child: Icon(\n          FIcons.messageCircleX,\n          size: style.size,\n          color: style.color,\n        ),\n      );\n    },\n  );\n}\n",
+  "highlights": [
+    {
+      "start": 31,
+      "end": 41
+    }
+  ],
   "links": [
     {
-      "offset": 38,
+      "offset": 316,
       "length": 29,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.searchBuilder.html"
     },
     {
-      "offset": 71,
+      "offset": 351,
       "length": 4,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/hint.html"
     },
     {
-      "offset": 97,
+      "offset": 379,
       "length": 6,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/format.html"
     },
     {
-      "offset": 117,
+      "offset": 401,
       "length": 6,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.searchBuilder.html"
     },
     {
-      "offset": 246,
+      "offset": 538,
       "length": 14,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.searchBuilder.html"
     },
     {
-      "offset": 321,
+      "offset": 615,
       "length": 4,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectItemMixin/item.html"
     },
     {
-      "offset": 326,
+      "offset": 620,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectItemMixin/item.html"
     },
     {
-      "offset": 346,
+      "offset": 640,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectItemMixin/item.html"
     },
     {
-      "offset": 368,
+      "offset": 666,
       "length": 19,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.searchBuilder.html"
     },
     {
-      "offset": 459,
+      "offset": 759,
       "length": 9,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectStyle/iconStyle.html"
     },
     {
-      "offset": 447,
+      "offset": 747,
       "length": 11,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/selectStyle.html"
     },
     {
-      "offset": 441,
+      "offset": 741,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext/theme.html"
     },
     {
-      "offset": 540,
+      "offset": 857,
       "length": 21,
       "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/messageCircleX-constant.html"
     }

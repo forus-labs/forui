@@ -1,6 +1,11 @@
 {
   "code": "Widget build(BuildContext _) => FSidebar(\n  style: (s) => s.copyWith(\n    constraints: s.constraints.copyWith(minWidth: 500, maxWidth: 500),\n  ),\n  children: [\n    FSidebarGroup(\n      children: [\n        FSidebarItem(\n          icon: const Icon(FIcons.layoutDashboard),\n          label: const Text('Dashboard'),\n          selected: true,\n          onPress: () {},\n        ),\n        FSidebarItem(\n          icon: const Icon(FIcons.chartLine),\n          label: const Text('Analytics'),\n          onPress: () {},\n        ),\n        FSidebarItem(\n          icon: const Icon(FIcons.chartBar),\n          label: const Text('Reports'),\n          initiallyExpanded: true,\n          children: [\n            FSidebarItem(label: const Text('Daily'), onPress: () {}),\n            FSidebarItem(label: const Text('Weekly'), onPress: () {}),\n            FSidebarItem(label: const Text('Monthly'), onPress: () {}),\n          ],\n        ),\n      ],\n    ),\n  ],\n);\n",
-  "highlights": [],
+  "highlights": [
+    {
+      "start": 2,
+      "end": 4
+    }
+  ],
   "links": [
     {
       "offset": 32,

@@ -1,166 +1,346 @@
 {
-  "code": "Widget build(BuildContext context) => Column(\n  mainAxisAlignment: .center,\n  mainAxisSize: .min,\n  spacing: 5,\n  children: [\n    FButton(\n      child: const Text('Left'),\n      onPress: () => showFSheet(\n        context: context,\n        side: .ltr,\n        builder: (context) => const Form(side: .ltr),\n      ),\n    ),\n    FButton(\n      child: const Text('Top'),\n      onPress: () => showFSheet(\n        context: context,\n        side: .ttb,\n        builder: (context) => const Form(side: .ttb),\n      ),\n    ),\n    FButton(\n      child: const Text('Right'),\n      onPress: () => showFSheet(\n        context: context,\n        side: .rtl,\n        builder: (context) => const Form(side: .rtl),\n      ),\n    ),\n    FButton(\n      child: const Text('Bottom'),\n      onPress: () => showFSheet(\n        context: context,\n        side: .btt,\n        builder: (context) => const Form(side: .btt),\n      ),\n    ),\n  ],\n);\n",
+  "code": "class ModalSheetExample extends StatelessWidget {\n  @override\n  Widget build(BuildContext context) => Column(\n    mainAxisAlignment: .center,\n    mainAxisSize: .min,\n    spacing: 5,\n    children: [\n      FButton(\n        child: const Text('Left'),\n        onPress: () => showFSheet(\n          context: context,\n          side: .ltr,\n          builder: (context) => const Form(side: .ltr),\n        ),\n      ),\n      FButton(\n        child: const Text('Top'),\n        onPress: () => showFSheet(\n          context: context,\n          side: .ttb,\n          builder: (context) => const Form(side: .ttb),\n        ),\n      ),\n      FButton(\n        child: const Text('Right'),\n        onPress: () => showFSheet(\n          context: context,\n          side: .rtl,\n          builder: (context) => const Form(side: .rtl),\n        ),\n      ),\n      FButton(\n        child: const Text('Bottom'),\n        onPress: () => showFSheet(\n          context: context,\n          side: .btt,\n          builder: (context) => const Form(side: .btt),\n        ),\n      ),\n    ],\n  );\n}\n\nclass Form extends StatelessWidget {\n  final FLayout side;\n  const Form({required this.side, super.key});\n  @override\n  Widget build(BuildContext context) => Container(\n    height: .infinity,\n    width: .infinity,\n    decoration: BoxDecoration(\n      color: context.theme.colors.background,\n      border: side.vertical\n          ? .symmetric(\n              horizontal: BorderSide(color: context.theme.colors.border),\n            )\n          : .symmetric(\n              vertical: BorderSide(color: context.theme.colors.border),\n            ),\n    ),\n    child: Padding(\n      padding: const .symmetric(horizontal: 15, vertical: 8.0),\n      child: Center(\n        child: Column(\n          mainAxisSize: .min,\n          crossAxisAlignment: .start,\n          children: [\n            Text(\n              'Account',\n              style: context.theme.typography.xl2.copyWith(\n                fontWeight: .w600,\n                color: context.theme.colors.foreground,\n                height: 1.5,\n              ),\n            ),\n            Text(\n              'Make changes to your account here. Click save when you are done.',\n              style: context.theme.typography.sm.copyWith(\n                color: context.theme.colors.mutedForeground,\n              ),\n            ),\n            const SizedBox(height: 8),\n            SizedBox(\n              width: 450,\n              child: Column(\n                children: [\n                  const FTextField(label: Text('Name'), hint: 'John Renalo'),\n                  const SizedBox(height: 10),\n                  const FTextField(label: Text('Email'), hint: 'john@doe.com'),\n                  const SizedBox(height: 16),\n                  FButton(\n                    child: const Text('Save'),\n                    onPress: () => Navigator.of(context).pop(),\n                  ),\n                ],\n              ),\n            ),\n          ],\n        ),\n      ),\n    ),\n  );\n}\n",
   "highlights": [],
   "links": [
     {
-      "offset": 130,
+      "offset": 204,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
     },
     {
-      "offset": 145,
+      "offset": 221,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/child.html"
     },
     {
-      "offset": 178,
+      "offset": 256,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/onPress.html"
     },
     {
-      "offset": 193,
+      "offset": 271,
       "length": 10,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/showFSheet.html"
     },
     {
-      "offset": 213,
+      "offset": 293,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/showFSheet.html"
     },
     {
-      "offset": 239,
+      "offset": 321,
       "length": 4,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/showFSheet.html"
     },
     {
-      "offset": 246,
+      "offset": 328,
       "length": 3,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FLayout.html#ltr"
     },
     {
-      "offset": 259,
+      "offset": 343,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/showFSheet.html"
     },
     {
-      "offset": 325,
+      "offset": 383,
+      "length": 3,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FLayout.html#ltr"
+    },
+    {
+      "offset": 415,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
     },
     {
-      "offset": 340,
+      "offset": 432,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/child.html"
     },
     {
-      "offset": 372,
+      "offset": 466,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/onPress.html"
     },
     {
-      "offset": 387,
+      "offset": 481,
       "length": 10,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/showFSheet.html"
     },
     {
-      "offset": 407,
+      "offset": 503,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/showFSheet.html"
     },
     {
-      "offset": 433,
+      "offset": 531,
       "length": 4,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/showFSheet.html"
     },
     {
-      "offset": 440,
+      "offset": 538,
       "length": 3,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FLayout.html#ttb"
     },
     {
-      "offset": 453,
+      "offset": 553,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/showFSheet.html"
     },
     {
-      "offset": 519,
+      "offset": 593,
+      "length": 3,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FLayout.html#ttb"
+    },
+    {
+      "offset": 625,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
     },
     {
-      "offset": 534,
+      "offset": 642,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/child.html"
     },
     {
-      "offset": 568,
+      "offset": 678,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/onPress.html"
     },
     {
-      "offset": 583,
+      "offset": 693,
       "length": 10,
-      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/showFSheet.html"
-    },
-    {
-      "offset": 603,
-      "length": 7,
-      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/showFSheet.html"
-    },
-    {
-      "offset": 629,
-      "length": 4,
-      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/showFSheet.html"
-    },
-    {
-      "offset": 636,
-      "length": 3,
-      "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FLayout.html#rtl"
-    },
-    {
-      "offset": 649,
-      "length": 7,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/showFSheet.html"
     },
     {
       "offset": 715,
       "length": 7,
-      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
-    },
-    {
-      "offset": 730,
-      "length": 5,
-      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/child.html"
-    },
-    {
-      "offset": 765,
-      "length": 7,
-      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/onPress.html"
-    },
-    {
-      "offset": 780,
-      "length": 10,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/showFSheet.html"
     },
     {
-      "offset": 800,
-      "length": 7,
-      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/showFSheet.html"
-    },
-    {
-      "offset": 826,
+      "offset": 743,
       "length": 4,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/showFSheet.html"
     },
     {
-      "offset": 833,
+      "offset": 750,
+      "length": 3,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FLayout.html#rtl"
+    },
+    {
+      "offset": 765,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/showFSheet.html"
+    },
+    {
+      "offset": 805,
+      "length": 3,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FLayout.html#rtl"
+    },
+    {
+      "offset": 837,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+    },
+    {
+      "offset": 854,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/child.html"
+    },
+    {
+      "offset": 891,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/onPress.html"
+    },
+    {
+      "offset": 906,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/showFSheet.html"
+    },
+    {
+      "offset": 928,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/showFSheet.html"
+    },
+    {
+      "offset": 956,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/showFSheet.html"
+    },
+    {
+      "offset": 963,
       "length": 3,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FLayout.html#btt"
     },
     {
-      "offset": 846,
+      "offset": 978,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/showFSheet.html"
+    },
+    {
+      "offset": 1018,
+      "length": 3,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FLayout.html#btt"
+    },
+    {
+      "offset": 1104,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FLayout.html"
+    },
+    {
+      "offset": 1338,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors/background.html"
+    },
+    {
+      "offset": 1331,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/colors.html"
+    },
+    {
+      "offset": 1325,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext/theme.html"
+    },
+    {
+      "offset": 1369,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FLayout/vertical.html"
+    },
+    {
+      "offset": 1467,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors/border.html"
+    },
+    {
+      "offset": 1460,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/colors.html"
+    },
+    {
+      "offset": 1454,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext/theme.html"
+    },
+    {
+      "offset": 1577,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors/border.html"
+    },
+    {
+      "offset": 1570,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/colors.html"
+    },
+    {
+      "offset": 1564,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext/theme.html"
+    },
+    {
+      "offset": 1915,
+      "length": 3,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FTypography/xl2.html"
+    },
+    {
+      "offset": 1904,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/typography.html"
+    },
+    {
+      "offset": 1898,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext/theme.html"
+    },
+    {
+      "offset": 2008,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors/foreground.html"
+    },
+    {
+      "offset": 2001,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/colors.html"
+    },
+    {
+      "offset": 1995,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext/theme.html"
+    },
+    {
+      "offset": 2227,
+      "length": 2,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FTypography/sm.html"
+    },
+    {
+      "offset": 2216,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/typography.html"
+    },
+    {
+      "offset": 2210,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext/theme.html"
+    },
+    {
+      "offset": 2284,
+      "length": 15,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors/mutedForeground.html"
+    },
+    {
+      "offset": 2277,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/colors.html"
+    },
+    {
+      "offset": 2271,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext/theme.html"
+    },
+    {
+      "offset": 2501,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+    },
+    {
+      "offset": 2512,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/label.html"
+    },
+    {
+      "offset": 2533,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/hint.html"
+    },
+    {
+      "offset": 2625,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+    },
+    {
+      "offset": 2636,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/label.html"
+    },
+    {
+      "offset": 2658,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/hint.html"
+    },
+    {
+      "offset": 2745,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+    },
+    {
+      "offset": 2774,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/child.html"
+    },
+    {
+      "offset": 2821,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/onPress.html"
     }
   ],
   "tooltips": []

@@ -115,36 +115,6 @@ FDialog.raw(
 
 ## Examples
 
-### Horizontal Layout
-
-<Tabs items={['Preview', 'Code']}>
-  <Tabs.Tab>
-    <Widget name='dialog' query={{vertical: "false"}} height={400}/>
-  </Tabs.Tab>
-  <Tabs.Tab>
-    ```dart {8} copy
-    FButton(
-      mainAxisSize: MainAxisSize.min,
-      onPress: () => showFDialog(
-        context: context,
-        builder: (context, style, animation) => FDialog(
-          style: style,
-          animation: animation,
-          direction: Axis.horizontal,
-          title: const Text('Are you absolutely sure?'),
-          body: const Text('This action cannot be undone. This will permanently delete your account and remove your data from our servers.'),
-          actions: [
-            FButton(style: FButtonStyle.outline(), child: const Text('Cancel'), onPress: () => Navigator.of(context).pop()),
-            FButton(child: const Text('Continue'), onPress: () => Navigator.of(context).pop()),
-          ],
-        ),
-      ),
-      child: const Text('Show Dialog'),
-    );
-    ```
-  </Tabs.Tab>
-</Tabs>
-
 ### Vertical Layout
 
 We recommend using the vertical layout on mobile devices.

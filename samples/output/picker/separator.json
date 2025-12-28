@@ -1,6 +1,11 @@
 {
   "code": "Widget build(BuildContext context) => SizedBox(\n  width: 200,\n  child: FPicker(\n    children: [\n      FPickerWheel.builder(\n        builder: (context, index) =>\n            Text((index % 12).toString().padLeft(2, '0')),\n      ),\n      const Text(':'),\n      FPickerWheel.builder(\n        builder: (context, index) =>\n            Text((index % 60).toString().padLeft(2, '0')),\n      ),\n      const FPickerWheel(children: [Text('AM'), Text('PM')]),\n    ],\n  ),\n);\n",
-  "highlights": [],
+  "highlights": [
+    {
+      "start": 9,
+      "end": 9
+    }
+  ],
   "links": [
     {
       "offset": 71,

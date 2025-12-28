@@ -7,18 +7,44 @@ import 'package:forui_samples/sample.dart';
 
 @RoutePage()
 class TilePage extends Sample {
-  final bool enabled;
-  final bool tappable;
-
-  TilePage({@queryParam super.theme, @queryParam this.enabled = true, @queryParam this.tappable = true});
+  TilePage({@queryParam super.theme});
 
   @override
   Widget sample(BuildContext _) => FTile(
-    enabled: enabled,
     prefix: const Icon(FIcons.user),
     title: const Text('Personalization'),
     suffix: const Icon(FIcons.chevronRight),
-    onPress: tappable ? () {} : null,
+    // {@highlight}
+    onPress: () {},
+    // {@endhighlight}
+  );
+}
+
+@RoutePage()
+class DisabledTilePage extends Sample {
+  DisabledTilePage({@queryParam super.theme});
+
+  @override
+  Widget sample(BuildContext _) => FTile(
+    prefix: const Icon(FIcons.user),
+    title: const Text('Personalization'),
+    suffix: const Icon(FIcons.chevronRight),
+    onPress: () {},
+    // {@highlight}
+    enabled: false,
+    // {@endhighlight}
+  );
+}
+
+@RoutePage()
+class UntappableTilePage extends Sample {
+  UntappableTilePage({@queryParam super.theme});
+
+  @override
+  Widget sample(BuildContext _) => FTile(
+    prefix: const Icon(FIcons.user),
+    title: const Text('Personalization'),
+    suffix: const Icon(FIcons.chevronRight),
   );
 }
 
@@ -30,7 +56,9 @@ class TileSubtitlePage extends Sample {
   Widget sample(BuildContext _) => FTile(
     prefix: const Icon(FIcons.bell),
     title: const Text('Notifications'),
+    // {@highlight}
     subtitle: const Text('Banners, Sounds, Badges'),
+    // {@endhighlight}
     suffix: const Icon(FIcons.chevronRight),
     onPress: () {},
   );
@@ -44,7 +72,9 @@ class TileDetailsPage extends Sample {
   Widget sample(BuildContext _) => FTile(
     prefix: const Icon(FIcons.wifi),
     title: const Text('WiFi'),
+    // {@highlight}
     details: const Text('Duobase (5G)'),
+    // {@endhighlight}
     suffix: const Icon(FIcons.chevronRight),
     onPress: () {},
   );

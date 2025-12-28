@@ -1,6 +1,11 @@
 {
   "code": "Widget build(BuildContext context) => FButton(\n  mainAxisSize: .min,\n  onPress: () => showFToast(\n    context: context,\n    duration: null,\n    icon: const Icon(FIcons.triangleAlert),\n    title: const Text('Event start time cannot be earlier than 8am'),\n  ),\n  child: const Text('Show Toast'),\n);\n",
-  "highlights": [],
+  "highlights": [
+    {
+      "start": 5,
+      "end": 5
+    }
+  ],
   "links": [
     {
       "offset": 38,

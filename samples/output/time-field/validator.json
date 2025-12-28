@@ -1,6 +1,11 @@
 {
   "code": "Widget build(BuildContext context) => FTimeField(\n  control: .managed(\n    validator: (time) => time?.hour == 12 ? 'Time cannot be noon.' : null,\n  ),\n  label: const Text('Appointment Time'),\n  description: const Text('Select a time for your appointment.'),\n);\n",
-  "highlights": [],
+  "highlights": [
+    {
+      "start": 2,
+      "end": 4
+    }
+  ],
   "links": [
     {
       "offset": 38,

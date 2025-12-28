@@ -46,7 +46,9 @@ class TilePopoverMenuPage extends Sample {
   Widget sample(BuildContext _) => FHeader(
     title: const Text('Edit Notes'),
     suffixes: [
+      // {@highlight}
       FPopoverMenu.tiles(
+      // {@endhighlight}
         autofocus: true,
         menuAnchor: .topRight,
         childAnchor: .bottomRight,

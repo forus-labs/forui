@@ -1,6 +1,11 @@
 {
   "code": "Widget build(BuildContext _) => FDateField(\n  control: .managed(\n    validator: (date) => date?.weekday == 6 || date?.weekday == 7\n        ? 'Date cannot be a weekend.'\n        : null,\n  ),\n  label: const Text('Appointment Date'),\n  description: const Text('Select a date for your appointment'),\n);\n",
-  "highlights": [],
+  "highlights": [
+    {
+      "start": 3,
+      "end": 5
+    }
+  ],
   "links": [
     {
       "offset": 32,

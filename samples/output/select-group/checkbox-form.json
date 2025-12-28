@@ -1,104 +1,104 @@
 {
-  "code": "class SelectGroupCheckboxFormExample extends StatefulWidget {\n  @override\n  State<SelectGroupCheckboxFormExample> createState() =>\n      _SelectGroupCheckboxFormExampleState();\n}\n\nclass _SelectGroupCheckboxFormExampleState\n    extends State<SelectGroupCheckboxFormExample> {\n  final _key = GlobalKey<FormState>();\n\n  @override\n  Widget build(BuildContext context) => Form(\n    key: _key,\n    child: Column(\n      mainAxisAlignment: .center,\n      crossAxisAlignment: .start,\n      spacing: 20,\n      children: [\n        FSelectGroup<Language>(\n          label: const Text('Favorite Languages'),\n          description: const Text('Your favorite language.'),\n          validator: (values) => values?.isEmpty ?? true\n              ? 'Please select at least one language.'\n              : null,\n          children: [\n            .checkbox(value: .dart, label: const Text('Dart')),\n            .checkbox(value: .java, label: const Text('Java')),\n            .checkbox(value: .rust, label: const Text('Rust')),\n            .checkbox(value: .python, label: const Text('Python')),\n          ],\n        ),\n        FButton(\n          child: const Text('Submit'),\n          onPress: () {\n            if (!_key.currentState!.validate()) {\n              // Handle errors here.\n              return;\n            }\n\n            _key.currentState!.save();\n            // Do something.\n          },\n        ),\n      ],\n    ),\n  );\n}\n",
+  "code": "enum Language { dart, java, rust, python }\n\nclass SelectGroupCheckboxFormExample extends StatefulWidget {\n  @override\n  State<SelectGroupCheckboxFormExample> createState() =>\n      _SelectGroupCheckboxFormExampleState();\n}\n\nclass _SelectGroupCheckboxFormExampleState\n    extends State<SelectGroupCheckboxFormExample> {\n  final _key = GlobalKey<FormState>();\n\n  @override\n  Widget build(BuildContext context) => Form(\n    key: _key,\n    child: Column(\n      mainAxisAlignment: .center,\n      crossAxisAlignment: .start,\n      spacing: 20,\n      children: [\n        FSelectGroup<Language>(\n          label: const Text('Favorite Languages'),\n          description: const Text('Your favorite language.'),\n          validator: (values) => values?.isEmpty ?? true\n              ? 'Please select at least one language.'\n              : null,\n          children: [\n            .checkbox(value: .dart, label: const Text('Dart')),\n            .checkbox(value: .java, label: const Text('Java')),\n            .checkbox(value: .rust, label: const Text('Rust')),\n            .checkbox(value: .python, label: const Text('Python')),\n          ],\n        ),\n        FButton(\n          child: const Text('Submit'),\n          onPress: () {\n            if (!_key.currentState!.validate()) {\n              // Handle errors here.\n              return;\n            }\n\n            _key.currentState!.save();\n            // Do something.\n          },\n        ),\n      ],\n    ),\n  );\n}\n",
   "highlights": [],
   "links": [
     {
-      "offset": 520,
+      "offset": 564,
       "length": 22,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroup/FSelectGroup.html"
     },
     {
-      "offset": 554,
+      "offset": 598,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroup/label.html"
     },
     {
-      "offset": 605,
+      "offset": 649,
       "length": 11,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroup/description.html"
     },
     {
-      "offset": 667,
+      "offset": 711,
       "length": 9,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroup/validator.html"
     },
     {
-      "offset": 801,
+      "offset": 845,
       "length": 8,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroup/children.html"
     },
     {
-      "offset": 826,
+      "offset": 870,
       "length": 8,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroupItemMixin/checkbox.html"
     },
     {
-      "offset": 835,
+      "offset": 879,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroupItemMixin/checkbox.html"
     },
     {
-      "offset": 849,
+      "offset": 893,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroupItemMixin/checkbox.html"
     },
     {
-      "offset": 890,
+      "offset": 934,
       "length": 8,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroupItemMixin/checkbox.html"
     },
     {
-      "offset": 899,
+      "offset": 943,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroupItemMixin/checkbox.html"
     },
     {
-      "offset": 913,
+      "offset": 957,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroupItemMixin/checkbox.html"
     },
     {
-      "offset": 954,
+      "offset": 998,
       "length": 8,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroupItemMixin/checkbox.html"
     },
     {
-      "offset": 963,
+      "offset": 1007,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroupItemMixin/checkbox.html"
     },
     {
-      "offset": 977,
+      "offset": 1021,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroupItemMixin/checkbox.html"
     },
     {
-      "offset": 1018,
+      "offset": 1062,
       "length": 8,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroupItemMixin/checkbox.html"
     },
     {
-      "offset": 1027,
+      "offset": 1071,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroupItemMixin/checkbox.html"
     },
     {
-      "offset": 1043,
+      "offset": 1087,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroupItemMixin/checkbox.html"
     },
     {
-      "offset": 1105,
+      "offset": 1149,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
     },
     {
-      "offset": 1124,
+      "offset": 1168,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/child.html"
     },
     {
-      "offset": 1163,
+      "offset": 1207,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/onPress.html"
     }

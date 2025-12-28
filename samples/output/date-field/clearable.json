@@ -1,6 +1,11 @@
 {
   "code": "Widget build(BuildContext _) => FDateField(\n  control: .managed(initial: .now()),\n  label: const Text('Appointment Date'),\n  description: const Text('Select a date for your appointment'),\n  clearable: true,\n);\n",
-  "highlights": [],
+  "highlights": [
+    {
+      "start": 5,
+      "end": 5
+    }
+  ],
   "links": [
     {
       "offset": 32,

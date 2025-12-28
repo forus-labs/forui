@@ -1,6 +1,11 @@
 {
   "code": "Widget build(BuildContext _) => FTextField(\n  control: const .managed(initial: TextEditingValue(text: 'MyUsername')),\n  label: const Text('Username'),\n  hint: 'JaneDoe',\n  description: const Text('Please enter your username.'),\n  clearable: (value) => value.text.isNotEmpty,\n);\n",
-  "highlights": [],
+  "highlights": [
+    {
+      "start": 6,
+      "end": 6
+    }
+  ],
   "links": [
     {
       "offset": 32,

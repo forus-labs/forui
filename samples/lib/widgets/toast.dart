@@ -59,7 +59,9 @@ class NoAutoDismissToastPage extends Sample {
     mainAxisSize: .min,
     onPress: () => showFToast(
       context: context,
+      // {@highlight}
       duration: null,
+      // {@endhighlight}
       icon: const Icon(FIcons.triangleAlert),
       title: const Text('Event start time cannot be earlier than 8am'),
     ),
@@ -84,7 +86,9 @@ class RawToastPage extends Sample {
 
     return FButton(
       mainAxisSize: .min,
+      // {@highlight}
       onPress: () => showRawFToast(
+      // {@endhighlight}
         context: context,
         duration: null,
         builder: (context, toast) => IntrinsicHeight(
@@ -108,19 +112,59 @@ class RawToastPage extends Sample {
 }
 
 @RoutePage()
-class BehaviorToastPage extends StatelessWidget {
+class AlwaysExpandToastPage extends StatelessWidget {
   final FThemeData theme;
-  final FToasterExpandBehavior behavior;
 
-  BehaviorToastPage({@queryParam String theme = 'zinc-light', @queryParam String behavior = 'always'})
-    : theme = themes[theme]!,
-      behavior = behavior == 'always' ? .always : .disabled;
+  AlwaysExpandToastPage({@queryParam String theme = 'zinc-light'}) : theme = themes[theme]!;
 
   @override
   Widget build(BuildContext context) => FTheme(
     data: theme,
     child: FToaster(
-      style: context.theme.toasterStyle.copyWith(expandBehavior: behavior),
+      style: context.theme.toasterStyle.copyWith(
+        // {@highlight}
+        expandBehavior: .always,
+        // {@endhighlight}
+      ),
+      child: FScaffold(
+        child: Align(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 400),
+            child: Builder(
+              builder: (context) => Center(
+                child: FButton(
+                  mainAxisSize: .min,
+                  onPress: () => showFToast(
+                    context: context,
+                    icon: const Icon(FIcons.info),
+                    title: const Text('Event has been created'),
+                  ),
+                  child: const Text('Show Toast'),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    ),
+  );
+}
+
+@RoutePage()
+class DisabledExpandToastPage extends StatelessWidget {
+  final FThemeData theme;
+
+  DisabledExpandToastPage({@queryParam String theme = 'zinc-light'}) : theme = themes[theme]!;
+
+  @override
+  Widget build(BuildContext context) => FTheme(
+    data: theme,
+    child: FToaster(
+      style: context.theme.toasterStyle.copyWith(
+        // {@highlight}
+        expandBehavior: .disabled,
+        // {@endhighlight}
+      ),
       child: FScaffold(
         child: Align(
           child: ConstrainedBox(
@@ -148,15 +192,8 @@ class BehaviorToastPage extends StatelessWidget {
 @RoutePage()
 class SwipeToastPage extends StatelessWidget {
   final FThemeData theme;
-  final List<AxisDirection>? directions;
 
-  SwipeToastPage({@queryParam String theme = 'zinc-light', @queryParam bool? down})
-    : theme = themes[theme]!,
-      directions = switch (down) {
-        null => [],
-        true => [.down],
-        false => null,
-      };
+  SwipeToastPage({@queryParam String theme = 'zinc-light'}) : theme = themes[theme]!;
 
   @override
   Widget build(BuildContext _) => FTheme(
@@ -172,7 +209,80 @@ class SwipeToastPage extends StatelessWidget {
                   mainAxisSize: .min,
                   onPress: () => showFToast(
                     context: context,
-                    swipeToDismiss: directions,
+                    icon: const Icon(FIcons.info),
+                    title: const Text('Event has been created'),
+                  ),
+                  child: const Text('Show Toast'),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    ),
+  );
+}
+
+@RoutePage()
+class DownSwipeToastPage extends StatelessWidget {
+  final FThemeData theme;
+
+  DownSwipeToastPage({@queryParam String theme = 'zinc-light'}) : theme = themes[theme]!;
+
+  @override
+  Widget build(BuildContext _) => FTheme(
+    data: theme,
+    child: FToaster(
+      child: FScaffold(
+        child: Align(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 400),
+            child: Builder(
+              builder: (context) => Center(
+                child: FButton(
+                  mainAxisSize: .min,
+                  onPress: () => showFToast(
+                    context: context,
+                    // {@highlight}
+                    swipeToDismiss: [.down],
+                    // {@endhighlight}
+                    icon: const Icon(FIcons.info),
+                    title: const Text('Event has been created'),
+                  ),
+                  child: const Text('Show Toast'),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    ),
+  );
+}
+
+@RoutePage()
+class DisabledSwipeToastPage extends StatelessWidget {
+  final FThemeData theme;
+
+  DisabledSwipeToastPage({@queryParam String theme = 'zinc-light'}) : theme = themes[theme]!;
+
+  @override
+  Widget build(BuildContext _) => FTheme(
+    data: theme,
+    child: FToaster(
+      child: FScaffold(
+        child: Align(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 400),
+            child: Builder(
+              builder: (context) => Center(
+                child: FButton(
+                  mainAxisSize: .min,
+                  onPress: () => showFToast(
+                    context: context,
+                    // {@highlight}
+                    swipeToDismiss: [],
+                    // {@endhighlight}
                     icon: const Icon(FIcons.info),
                     title: const Text('Event has been created'),
                   ),

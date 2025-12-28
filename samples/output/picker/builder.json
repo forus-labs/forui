@@ -1,0 +1,27 @@
+{
+  "code": "Widget build(BuildContext context) => FPicker(\n  children: [FPickerWheel.builder(builder: (context, index) => Text('$index'))],\n);\n",
+  "highlights": [],
+  "links": [
+    {
+      "offset": 38,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.picker/FPicker/FPicker.html"
+    },
+    {
+      "offset": 49,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.picker/FPicker/children.html"
+    },
+    {
+      "offset": 60,
+      "length": 20,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.picker/FPickerWheel/FPickerWheel.builder.html"
+    },
+    {
+      "offset": 81,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.picker/FPickerWheel/FPickerWheel.builder.html"
+    }
+  ],
+  "tooltips": []
+}

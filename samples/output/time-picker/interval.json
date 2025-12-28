@@ -1,6 +1,11 @@
 {
   "code": "Widget build(BuildContext context) => FTimePicker(\n  control: .managed(initial: .now()),\n  hourInterval: 2,\n  minuteInterval: 5,\n);\n",
-  "highlights": [],
+  "highlights": [
+    {
+      "start": 3,
+      "end": 4
+    }
+  ],
   "links": [
     {
       "offset": 38,

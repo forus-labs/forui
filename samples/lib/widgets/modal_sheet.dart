@@ -4,10 +4,12 @@ import 'package:flutter/material.dart';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:forui/forui.dart';
+import 'package:forui_samples/main.dart';
 
 import 'package:forui_samples/sample.dart';
 
 @RoutePage()
+@Options(include: [Form])
 class ModalSheetPage extends Sample {
   ModalSheetPage({@queryParam super.theme});
 
@@ -54,6 +56,7 @@ class ModalSheetPage extends Sample {
 }
 
 @RoutePage()
+@Options(include: [Form])
 class BlurredModalSheetPage extends Sample {
   BlurredModalSheetPage({@queryParam super.theme});
 
@@ -62,10 +65,12 @@ class BlurredModalSheetPage extends Sample {
     child: const Text('Open'),
     onPress: () => showFSheet(
       style: context.theme.modalSheetStyle.copyWith(
+        // {@highlight}
         barrierFilter: (animation) => ImageFilter.compose(
           outer: ImageFilter.blur(sigmaX: animation * 5, sigmaY: animation * 5),
           inner: ColorFilter.mode(context.theme.colors.barrier, .srcOver),
         ),
+        // {@endhighlight}
       ),
       context: context,
       side: .ltr,

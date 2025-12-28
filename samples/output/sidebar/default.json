@@ -1,5 +1,5 @@
 {
-  "code": "Widget build(BuildContext context) => FScaffold(\n  sidebar: FSidebar(\n    header: Padding(\n      padding: const .symmetric(horizontal: 16),\n      child: Column(\n        crossAxisAlignment: .start,\n        children: [\n          Padding(\n            padding: const .fromLTRB(16, 8, 16, 16),\n            child: SvgPicture.network(\n              theme.colors.brightness == .light\n                  ? 'https://forui.dev/light_logo.svg'\n                  : 'https://forui.dev/dark_logo.svg',\n              height: 24,\n              colorFilter: ColorFilter.mode(\n                context.theme.colors.foreground,\n                .srcIn,\n              ),\n            ),\n          ),\n          FDivider(\n            style: context.theme.dividerStyles.horizontalStyle.copyWith(\n              padding: .zero,\n            ),\n          ),\n        ],\n      ),\n    ),\n    footer: Padding(\n      padding: const .symmetric(horizontal: 16),\n      child: FCard.raw(\n        child: Padding(\n          padding: const .symmetric(vertical: 12, horizontal: 16),\n          child: Row(\n            spacing: 10,\n            children: [\n              FAvatar.raw(\n                child: Icon(\n                  FIcons.userRound,\n                  size: 18,\n                  color: context.theme.colors.mutedForeground,\n                ),\n              ),\n              Expanded(\n                child: Column(\n                  crossAxisAlignment: .start,\n                  spacing: 2,\n                  children: [\n                    Text(\n                      'Dash',\n                      style: context.theme.typography.sm.copyWith(\n                        fontWeight: .bold,\n                        color: context.theme.colors.foreground,\n                      ),\n                      overflow: .ellipsis,\n                    ),\n                    Text(\n                      'dash@forui.dev',\n                      style: context.theme.typography.xs.copyWith(\n                        color: context.theme.colors.mutedForeground,\n                      ),\n                      overflow: .ellipsis,\n                    ),\n                  ],\n                ),\n              ),\n            ],\n          ),\n        ),\n      ),\n    ),\n    children: [\n      FSidebarGroup(\n        label: const Text('Overview'),\n        children: [\n          FSidebarItem(\n            icon: const Icon(FIcons.school),\n            label: const Text('Getting Started'),\n            initiallyExpanded: true,\n            onPress: () {},\n            children: [\n              FSidebarItem(\n                label: const Text('Installation'),\n                selected: true,\n                onPress: () {},\n              ),\n              FSidebarItem(label: const Text('Themes'), onPress: () {}),\n              FSidebarItem(label: const Text('Typography'), onPress: () {}),\n            ],\n          ),\n          FSidebarItem(\n            icon: const Icon(FIcons.code),\n            label: const Text('API Reference'),\n            onPress: () {},\n          ),\n          FSidebarItem(\n            icon: const Icon(FIcons.box),\n            label: const Text('Pub Dev'),\n            onPress: () {},\n          ),\n        ],\n      ),\n      FSidebarGroup(\n        action: const Icon(FIcons.plus),\n        onActionPress: () {},\n        label: const Text('Widgets'),\n        children: [\n          FSidebarItem(\n            icon: const Icon(FIcons.circleSlash),\n            label: const Text('Divider'),\n            onPress: () {},\n          ),\n          FSidebarItem(\n            icon: const Icon(FIcons.scaling),\n            label: const Text('Resizable'),\n            onPress: () {},\n          ),\n          FSidebarItem(\n            icon: const Icon(FIcons.layoutDashboard),\n            label: const Text('Scaffold'),\n            onPress: () {},\n          ),\n        ],\n      ),\n    ],\n  ),\n  child: Padding(\n    padding: const .symmetric(vertical: 14),\n    child: Column(\n      crossAxisAlignment: .start,\n      spacing: 12,\n      children: [\n        FBreadcrumb(\n          children: [\n            FBreadcrumbItem(onPress: () {}, child: const Text('Forui')),\n            FBreadcrumbItem.collapsed(\n              menu: [\n                FItemGroup(\n                  children: [\n                    FItem(title: const Text('Documentation'), onPress: () {}),\n                    FItem(title: const Text('Themes'), onPress: () {}),\n                  ],\n                ),\n              ],\n            ),\n            FBreadcrumbItem(onPress: () {}, child: const Text('Overview')),\n            const FBreadcrumbItem(current: true, child: Text('Installation')),\n          ],\n        ),\n        Expanded(\n          child: Container(\n            decoration: BoxDecoration(\n              color: context.theme.colors.muted,\n              borderRadius: context.theme.style.borderRadius,\n            ),\n          ),\n        ),\n        Expanded(\n          flex: 3,\n          child: Container(\n            decoration: BoxDecoration(\n              color: context.theme.colors.muted,\n              borderRadius: context.theme.style.borderRadius,\n            ),\n          ),\n        ),\n      ],\n    ),\n  ),\n);\n",
+  "code": "Widget build(BuildContext context) => FScaffold(\n  sidebar: FSidebar(\n    header: Padding(\n      padding: const .symmetric(horizontal: 16),\n      child: Column(\n        crossAxisAlignment: .start,\n        children: [\n          Padding(\n            padding: const .fromLTRB(16, 8, 16, 16),\n            child: SvgPicture.network(\n              context.theme.colors.brightness == .light\n                  ? 'https://forui.dev/light_logo.svg'\n                  : 'https://forui.dev/dark_logo.svg',\n              height: 24,\n              colorFilter: ColorFilter.mode(\n                context.theme.colors.foreground,\n                .srcIn,\n              ),\n            ),\n          ),\n          FDivider(\n            style: context.theme.dividerStyles.horizontalStyle.copyWith(\n              padding: .zero,\n            ),\n          ),\n        ],\n      ),\n    ),\n    footer: Padding(\n      padding: const .symmetric(horizontal: 16),\n      child: FCard.raw(\n        child: Padding(\n          padding: const .symmetric(vertical: 12, horizontal: 16),\n          child: Row(\n            spacing: 10,\n            children: [\n              FAvatar.raw(\n                child: Icon(\n                  FIcons.userRound,\n                  size: 18,\n                  color: context.theme.colors.mutedForeground,\n                ),\n              ),\n              Expanded(\n                child: Column(\n                  crossAxisAlignment: .start,\n                  spacing: 2,\n                  children: [\n                    Text(\n                      'Dash',\n                      style: context.theme.typography.sm.copyWith(\n                        fontWeight: .bold,\n                        color: context.theme.colors.foreground,\n                      ),\n                      overflow: .ellipsis,\n                    ),\n                    Text(\n                      'dash@forui.dev',\n                      style: context.theme.typography.xs.copyWith(\n                        color: context.theme.colors.mutedForeground,\n                      ),\n                      overflow: .ellipsis,\n                    ),\n                  ],\n                ),\n              ),\n            ],\n          ),\n        ),\n      ),\n    ),\n    children: [\n      FSidebarGroup(\n        label: const Text('Overview'),\n        children: [\n          FSidebarItem(\n            icon: const Icon(FIcons.school),\n            label: const Text('Getting Started'),\n            initiallyExpanded: true,\n            onPress: () {},\n            children: [\n              FSidebarItem(\n                label: const Text('Installation'),\n                selected: true,\n                onPress: () {},\n              ),\n              FSidebarItem(label: const Text('Themes'), onPress: () {}),\n              FSidebarItem(label: const Text('Typography'), onPress: () {}),\n            ],\n          ),\n          FSidebarItem(\n            icon: const Icon(FIcons.code),\n            label: const Text('API Reference'),\n            onPress: () {},\n          ),\n          FSidebarItem(\n            icon: const Icon(FIcons.box),\n            label: const Text('Pub Dev'),\n            onPress: () {},\n          ),\n        ],\n      ),\n      FSidebarGroup(\n        action: const Icon(FIcons.plus),\n        onActionPress: () {},\n        label: const Text('Widgets'),\n        children: [\n          FSidebarItem(\n            icon: const Icon(FIcons.circleSlash),\n            label: const Text('Divider'),\n            onPress: () {},\n          ),\n          FSidebarItem(\n            icon: const Icon(FIcons.scaling),\n            label: const Text('Resizable'),\n            onPress: () {},\n          ),\n          FSidebarItem(\n            icon: const Icon(FIcons.layoutDashboard),\n            label: const Text('Scaffold'),\n            onPress: () {},\n          ),\n        ],\n      ),\n    ],\n  ),\n  child: Padding(\n    padding: const .symmetric(vertical: 14),\n    child: Column(\n      crossAxisAlignment: .start,\n      spacing: 12,\n      children: [\n        FBreadcrumb(\n          children: [\n            FBreadcrumbItem(onPress: () {}, child: const Text('Forui')),\n            FBreadcrumbItem.collapsed(\n              menu: [\n                FItemGroup(\n                  children: [\n                    FItem(title: const Text('Documentation'), onPress: () {}),\n                    FItem(title: const Text('Themes'), onPress: () {}),\n                  ],\n                ),\n              ],\n            ),\n            FBreadcrumbItem(onPress: () {}, child: const Text('Overview')),\n            const FBreadcrumbItem(current: true, child: Text('Installation')),\n          ],\n        ),\n        Expanded(\n          child: Container(\n            decoration: BoxDecoration(\n              color: context.theme.colors.muted,\n              borderRadius: context.theme.style.borderRadius,\n            ),\n          ),\n        ),\n        Expanded(\n          flex: 3,\n          child: Container(\n            decoration: BoxDecoration(\n              color: context.theme.colors.muted,\n              borderRadius: context.theme.style.borderRadius,\n            ),\n          ),\n        ),\n      ],\n    ),\n  ),\n);\n",
   "highlights": [],
   "links": [
     {
@@ -23,587 +23,602 @@
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sidebar/FSidebar/header.html"
     },
     {
-      "offset": 594,
+      "offset": 363,
       "length": 10,
-      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors/foreground.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors/brightness.html"
     },
     {
-      "offset": 587,
+      "offset": 356,
       "length": 6,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/colors.html"
     },
     {
-      "offset": 581,
+      "offset": 350,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext/theme.html"
     },
     {
-      "offset": 685,
+      "offset": 602,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors/foreground.html"
+    },
+    {
+      "offset": 595,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/colors.html"
+    },
+    {
+      "offset": 589,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext/theme.html"
+    },
+    {
+      "offset": 693,
       "length": 8,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.divider/FDivider/FDivider.html"
     },
     {
-      "offset": 707,
+      "offset": 715,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.divider/FDivider/style.html"
     },
     {
-      "offset": 758,
+      "offset": 766,
       "length": 8,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.divider/$FDividerStyleTransformations/copyWith.html"
     },
     {
-      "offset": 742,
+      "offset": 750,
       "length": 15,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.divider/FDividerStyles/horizontalStyle.html"
     },
     {
-      "offset": 728,
+      "offset": 736,
       "length": 13,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/dividerStyles.html"
     },
     {
-      "offset": 722,
+      "offset": 730,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext/theme.html"
     },
     {
-      "offset": 782,
+      "offset": 790,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.divider/$FDividerStyleTransformations/copyWith.html"
     },
     {
-      "offset": 857,
+      "offset": 865,
       "length": 6,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sidebar/FSidebar/footer.html"
     },
     {
-      "offset": 936,
+      "offset": 944,
       "length": 9,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.card/FCard/FCard.raw.html"
     },
     {
-      "offset": 955,
+      "offset": 963,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.card/FCard/child.html"
     },
     {
-      "offset": 1123,
+      "offset": 1131,
       "length": 11,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.avatar/FAvatar/FAvatar.raw.html"
     },
     {
-      "offset": 1152,
+      "offset": 1160,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.avatar/FAvatar/child.html"
     },
     {
-      "offset": 1183,
+      "offset": 1191,
       "length": 16,
       "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/userRound-constant.html"
     },
     {
-      "offset": 1275,
+      "offset": 1283,
       "length": 15,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors/mutedForeground.html"
     },
     {
-      "offset": 1268,
+      "offset": 1276,
       "length": 6,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/colors.html"
     },
     {
-      "offset": 1262,
+      "offset": 1270,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext/theme.html"
     },
     {
-      "offset": 1599,
+      "offset": 1607,
       "length": 2,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FTypography/sm.html"
     },
     {
-      "offset": 1588,
+      "offset": 1596,
       "length": 10,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/typography.html"
     },
     {
-      "offset": 1582,
+      "offset": 1590,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext/theme.html"
     },
     {
-      "offset": 1707,
+      "offset": 1715,
       "length": 10,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors/foreground.html"
     },
     {
-      "offset": 1700,
+      "offset": 1708,
       "length": 6,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/colors.html"
     },
     {
-      "offset": 1694,
+      "offset": 1702,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext/theme.html"
     },
     {
-      "offset": 1930,
+      "offset": 1938,
       "length": 2,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FTypography/xs.html"
     },
     {
-      "offset": 1919,
+      "offset": 1927,
       "length": 10,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/typography.html"
     },
     {
-      "offset": 1913,
+      "offset": 1921,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext/theme.html"
     },
     {
-      "offset": 1995,
+      "offset": 2003,
       "length": 15,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors/mutedForeground.html"
     },
     {
-      "offset": 1988,
+      "offset": 1996,
       "length": 6,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/colors.html"
     },
     {
-      "offset": 1982,
+      "offset": 1990,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext/theme.html"
     },
     {
-      "offset": 2219,
+      "offset": 2227,
       "length": 8,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sidebar/FSidebar/FSidebar.html"
     },
     {
-      "offset": 2237,
+      "offset": 2245,
       "length": 13,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sidebar/FSidebarGroup/FSidebarGroup.html"
     },
     {
-      "offset": 2260,
+      "offset": 2268,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sidebar/FSidebarGroup/label.html"
     },
     {
-      "offset": 2299,
+      "offset": 2307,
       "length": 8,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sidebar/FSidebarGroup/children.html"
     },
     {
-      "offset": 2321,
+      "offset": 2329,
       "length": 12,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sidebar/FSidebarItem/FSidebarItem.html"
     },
     {
-      "offset": 2347,
+      "offset": 2355,
       "length": 4,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sidebar/FSidebarItem/icon.html"
     },
     {
-      "offset": 2364,
+      "offset": 2372,
       "length": 13,
       "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/school-constant.html"
     },
     {
-      "offset": 2392,
+      "offset": 2400,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sidebar/FSidebarItem/label.html"
     },
     {
-      "offset": 2442,
+      "offset": 2450,
       "length": 17,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sidebar/FSidebarItem/initiallyExpanded.html"
     },
     {
-      "offset": 2479,
+      "offset": 2487,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sidebar/FSidebarItem/onPress.html"
     },
     {
-      "offset": 2507,
+      "offset": 2515,
       "length": 8,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sidebar/FSidebarItem/children.html"
     },
     {
-      "offset": 2533,
+      "offset": 2541,
       "length": 12,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sidebar/FSidebarItem/FSidebarItem.html"
     },
     {
-      "offset": 2563,
+      "offset": 2571,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sidebar/FSidebarItem/label.html"
     },
     {
-      "offset": 2614,
+      "offset": 2622,
       "length": 8,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sidebar/FSidebarItem/selected.html"
     },
     {
-      "offset": 2646,
+      "offset": 2654,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sidebar/FSidebarItem/onPress.html"
     },
     {
-      "offset": 2693,
+      "offset": 2701,
       "length": 12,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sidebar/FSidebarItem/FSidebarItem.html"
     },
     {
-      "offset": 2706,
+      "offset": 2714,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sidebar/FSidebarItem/label.html"
     },
     {
-      "offset": 2735,
+      "offset": 2743,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sidebar/FSidebarItem/onPress.html"
     },
     {
-      "offset": 2766,
+      "offset": 2774,
       "length": 12,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sidebar/FSidebarItem/FSidebarItem.html"
     },
     {
-      "offset": 2779,
+      "offset": 2787,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sidebar/FSidebarItem/label.html"
     },
     {
-      "offset": 2812,
+      "offset": 2820,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sidebar/FSidebarItem/onPress.html"
     },
     {
-      "offset": 2867,
+      "offset": 2875,
       "length": 12,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sidebar/FSidebarItem/FSidebarItem.html"
     },
     {
-      "offset": 2893,
+      "offset": 2901,
       "length": 4,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sidebar/FSidebarItem/icon.html"
     },
     {
-      "offset": 2910,
+      "offset": 2918,
       "length": 11,
       "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/code-constant.html"
     },
     {
-      "offset": 2936,
+      "offset": 2944,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sidebar/FSidebarItem/label.html"
     },
     {
-      "offset": 2984,
+      "offset": 2992,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sidebar/FSidebarItem/onPress.html"
     },
     {
-      "offset": 3023,
+      "offset": 3031,
       "length": 12,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sidebar/FSidebarItem/FSidebarItem.html"
     },
     {
-      "offset": 3049,
+      "offset": 3057,
       "length": 4,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sidebar/FSidebarItem/icon.html"
     },
     {
-      "offset": 3066,
+      "offset": 3074,
       "length": 10,
       "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/box-constant.html"
     },
     {
-      "offset": 3091,
+      "offset": 3099,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sidebar/FSidebarItem/label.html"
     },
     {
-      "offset": 3133,
+      "offset": 3141,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sidebar/FSidebarItem/onPress.html"
     },
     {
-      "offset": 3188,
+      "offset": 3196,
       "length": 13,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sidebar/FSidebarGroup/FSidebarGroup.html"
     },
     {
-      "offset": 3211,
+      "offset": 3219,
       "length": 6,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sidebar/FSidebarGroup/action.html"
     },
     {
-      "offset": 3230,
+      "offset": 3238,
       "length": 11,
       "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/plus-constant.html"
     },
     {
-      "offset": 3252,
+      "offset": 3260,
       "length": 13,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sidebar/FSidebarGroup/onActionPress.html"
     },
     {
-      "offset": 3282,
+      "offset": 3290,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sidebar/FSidebarGroup/label.html"
     },
     {
-      "offset": 3320,
+      "offset": 3328,
       "length": 8,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sidebar/FSidebarGroup/children.html"
     },
     {
-      "offset": 3342,
+      "offset": 3350,
       "length": 12,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sidebar/FSidebarItem/FSidebarItem.html"
     },
     {
-      "offset": 3368,
+      "offset": 3376,
       "length": 4,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sidebar/FSidebarItem/icon.html"
     },
     {
-      "offset": 3385,
+      "offset": 3393,
       "length": 18,
       "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/circleSlash-constant.html"
     },
     {
-      "offset": 3418,
+      "offset": 3426,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sidebar/FSidebarItem/label.html"
     },
     {
-      "offset": 3460,
+      "offset": 3468,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sidebar/FSidebarItem/onPress.html"
     },
     {
-      "offset": 3499,
+      "offset": 3507,
       "length": 12,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sidebar/FSidebarItem/FSidebarItem.html"
     },
     {
-      "offset": 3525,
+      "offset": 3533,
       "length": 4,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sidebar/FSidebarItem/icon.html"
     },
     {
-      "offset": 3542,
+      "offset": 3550,
       "length": 14,
       "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/scaling-constant.html"
     },
     {
-      "offset": 3571,
+      "offset": 3579,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sidebar/FSidebarItem/label.html"
     },
     {
-      "offset": 3615,
+      "offset": 3623,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sidebar/FSidebarItem/onPress.html"
     },
     {
-      "offset": 3654,
+      "offset": 3662,
       "length": 12,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sidebar/FSidebarItem/FSidebarItem.html"
     },
     {
-      "offset": 3680,
+      "offset": 3688,
       "length": 4,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sidebar/FSidebarItem/icon.html"
     },
     {
-      "offset": 3697,
+      "offset": 3705,
       "length": 22,
       "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/layoutDashboard-constant.html"
     },
     {
-      "offset": 3734,
+      "offset": 3742,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sidebar/FSidebarItem/label.html"
     },
     {
-      "offset": 3777,
+      "offset": 3785,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sidebar/FSidebarItem/onPress.html"
     },
     {
-      "offset": 3840,
+      "offset": 3848,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.scaffold/FScaffold/child.html"
     },
     {
-      "offset": 3999,
+      "offset": 4007,
       "length": 11,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumb/FBreadcrumb.html"
     },
     {
-      "offset": 4022,
+      "offset": 4030,
       "length": 8,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumb/children.html"
     },
     {
-      "offset": 4046,
+      "offset": 4054,
       "length": 15,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.html"
     },
     {
-      "offset": 4062,
+      "offset": 4070,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.html"
     },
     {
-      "offset": 4078,
+      "offset": 4086,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.html"
     },
     {
-      "offset": 4119,
+      "offset": 4127,
       "length": 25,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.collapsed.html"
     },
     {
-      "offset": 4160,
+      "offset": 4168,
       "length": 4,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.collapsed.html"
     },
     {
-      "offset": 4184,
+      "offset": 4192,
       "length": 10,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroup/FItemGroup.html"
     },
     {
-      "offset": 4214,
+      "offset": 4222,
       "length": 8,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroup/FItemGroup.html"
     },
     {
-      "offset": 4246,
+      "offset": 4254,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem/FItem.html"
     },
     {
-      "offset": 4252,
+      "offset": 4260,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem/FItem.html"
     },
     {
-      "offset": 4288,
+      "offset": 4296,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem/onPress.html"
     },
     {
-      "offset": 4325,
+      "offset": 4333,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem/FItem.html"
     },
     {
-      "offset": 4331,
+      "offset": 4339,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem/FItem.html"
     },
     {
-      "offset": 4360,
+      "offset": 4368,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem/onPress.html"
     },
     {
-      "offset": 4461,
+      "offset": 4469,
       "length": 15,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.html"
     },
     {
-      "offset": 4477,
+      "offset": 4485,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.html"
     },
     {
-      "offset": 4493,
+      "offset": 4501,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.html"
     },
     {
-      "offset": 4543,
+      "offset": 4551,
       "length": 15,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.html"
     },
     {
-      "offset": 4559,
+      "offset": 4567,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.html"
     },
     {
-      "offset": 4574,
+      "offset": 4582,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.html"
     },
     {
-      "offset": 4755,
+      "offset": 4763,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors/muted.html"
     },
     {
-      "offset": 4748,
+      "offset": 4756,
       "length": 6,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/colors.html"
     },
     {
-      "offset": 4742,
+      "offset": 4750,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext/theme.html"
     },
     {
-      "offset": 4810,
+      "offset": 4818,
       "length": 12,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FStyle/borderRadius.html"
     },
     {
-      "offset": 4804,
+      "offset": 4812,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/style.html"
     },
     {
-      "offset": 4798,
+      "offset": 4806,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext/theme.html"
     },
     {
-      "offset": 5009,
+      "offset": 5017,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors/muted.html"
     },
     {
-      "offset": 5002,
+      "offset": 5010,
       "length": 6,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/colors.html"
     },
     {
-      "offset": 4996,
+      "offset": 5004,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext/theme.html"
     },
     {
-      "offset": 5064,
+      "offset": 5072,
       "length": 12,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FStyle/borderRadius.html"
     },
     {
-      "offset": 5058,
+      "offset": 5066,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/style.html"
     },
     {
-      "offset": 5052,
+      "offset": 5060,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext/theme.html"
     }

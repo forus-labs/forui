@@ -1,0 +1,127 @@
+{
+  "code": "Widget build(BuildContext context) => DecoratedBox(\n  decoration: BoxDecoration(\n    border: .all(color: context.theme.colors.border),\n    borderRadius: .circular(8),\n  ),\n  child: FResizable(\n    axis: .horizontal,\n    divider: .divider,\n    crossAxisExtent: 300,\n    children: [\n      .region(\n        initialExtent: 100,\n        minExtent: 100,\n        builder: (context, data, _) =>\n            Align(child: Text('Sidebar', style: context.theme.typography.sm)),\n      ),\n      .region(\n        initialExtent: 300,\n        minExtent: 100,\n        builder: (context, data, _) =>\n            Align(child: Text('Content', style: context.theme.typography.sm)),\n      ),\n    ],\n  ),\n);\n",
+  "highlights": [
+    {
+      "start": 8,
+      "end": 8
+    }
+  ],
+  "links": [
+    {
+      "offset": 126,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors/border.html"
+    },
+    {
+      "offset": 119,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/colors.html"
+    },
+    {
+      "offset": 113,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext/theme.html"
+    },
+    {
+      "offset": 181,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizable/FResizable.html"
+    },
+    {
+      "offset": 197,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizable/axis.html"
+    },
+    {
+      "offset": 220,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizable/divider.html"
+    },
+    {
+      "offset": 230,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableDivider.html#divider"
+    },
+    {
+      "offset": 243,
+      "length": 15,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizable/crossAxisExtent.html"
+    },
+    {
+      "offset": 269,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizable/children.html"
+    },
+    {
+      "offset": 288,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegion/FResizableRegion.region.html"
+    },
+    {
+      "offset": 304,
+      "length": 13,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegion/initialExtent.html"
+    },
+    {
+      "offset": 332,
+      "length": 9,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegion/minExtent.html"
+    },
+    {
+      "offset": 356,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegion/builder.html"
+    },
+    {
+      "offset": 460,
+      "length": 2,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FTypography/sm.html"
+    },
+    {
+      "offset": 449,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/typography.html"
+    },
+    {
+      "offset": 443,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext/theme.html"
+    },
+    {
+      "offset": 482,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegion/FResizableRegion.region.html"
+    },
+    {
+      "offset": 498,
+      "length": 13,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegion/initialExtent.html"
+    },
+    {
+      "offset": 526,
+      "length": 9,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegion/minExtent.html"
+    },
+    {
+      "offset": 550,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegion/builder.html"
+    },
+    {
+      "offset": 654,
+      "length": 2,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FTypography/sm.html"
+    },
+    {
+      "offset": 643,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/typography.html"
+    },
+    {
+      "offset": 637,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext/theme.html"
+    }
+  ],
+  "tooltips": []
+}

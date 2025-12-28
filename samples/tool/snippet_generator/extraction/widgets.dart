@@ -49,8 +49,18 @@ class Widgets extends RecursiveAstVisitor<void> {
   Widgets._(String code, this.substitutions) : transformations = Transformations(code);
 
   @override
+  void visitPrefixedIdentifier(PrefixedIdentifier node) {
+    /// Replaces properties where both parts are compile-time identifiers, e.g. `widget.property`.
+    if (node.prefix.name == 'widget') {
+      if (substitutions[node.identifier.name] case final replacement?) {
+        transformations.replace(node, replacement);
+      }
+    }
+  }
+
+  @override
   void visitPropertyAccess(PropertyAccess node) {
-    // Replaces `widget.property` or `this.property`.
+    // Replaces properties where the target is an expression.
     if (node.target case SimpleIdentifier(name: 'widget') || ThisExpression()) {
       if (substitutions[node.propertyName.name] case final replacement?) {
         transformations.replace(node, replacement);

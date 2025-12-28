@@ -1,6 +1,11 @@
 {
   "code": "Widget build(BuildContext context) => FSlider(\n  control: .managedContinuous(initial: FSliderValue(max: 0.35)),\n  label: const Text('Volume'),\n  description: const Text('Adjust the volume by dragging the slider.'),\n  layout: .btt,\n  trackMainAxisExtent: 350,\n  marks: const [\n    .mark(value: 0, label: Text('0%')),\n    .mark(value: 0.25, tick: false),\n    .mark(value: 0.5, label: Text('50%')),\n    .mark(value: 0.75, tick: false),\n    .mark(value: 1, label: Text('100%')),\n  ],\n);\n",
-  "highlights": [],
+  "highlights": [
+    {
+      "start": 5,
+      "end": 5
+    }
+  ],
   "links": [
     {
       "offset": 38,

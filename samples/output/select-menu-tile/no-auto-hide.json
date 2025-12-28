@@ -1,0 +1,62 @@
+{
+  "code": "enum Notification {\n  all,\n  direct,\n  nothing,\n  limitedTime,\n  timeSensitive,\n  selectedApps,\n}\n\nclass NoAutoHideSelectMenuTileExample extends StatelessWidget {\n  @override\n  Widget build(BuildContext _) => FSelectMenuTile<Notification>.fromMap(\n    const {'All': .all, 'Direct Messages': .direct, 'None': .nothing},\n    selectControl: const .managed(initial: {.all}),\n    autoHide: false,\n    validator: (value) => value == null ? 'Select an item' : null,\n    prefix: const Icon(FIcons.bell),\n    title: const Text('Notifications'),\n    detailsBuilder: (_, values, _) => Text(switch (values.firstOrNull) {\n      .all => 'All',\n      .direct => 'Direct Messages',\n      _ => 'None',\n    }),\n  );\n}\n",
+  "highlights": [
+    {
+      "start": 15,
+      "end": 15
+    }
+  ],
+  "links": [
+    {
+      "offset": 209,
+      "length": 37,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_menu_tile/FSelectMenuTile/FSelectMenuTile.fromMap.html"
+    },
+    {
+      "offset": 323,
+      "length": 13,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_menu_tile/FSelectMenuTile/selectControl.html"
+    },
+    {
+      "offset": 345,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl/FMultiValueControl.managed.html"
+    },
+    {
+      "offset": 353,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl/FMultiValueControl.managed.html"
+    },
+    {
+      "offset": 375,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_menu_tile/FSelectMenuTile/autoHide.html"
+    },
+    {
+      "offset": 396,
+      "length": 9,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_menu_tile/FSelectMenuTile/validator.html"
+    },
+    {
+      "offset": 463,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_menu_tile/FSelectMenuTile/prefix.html"
+    },
+    {
+      "offset": 482,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/bell-constant.html"
+    },
+    {
+      "offset": 500,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_menu_tile/FSelectMenuTile/title.html"
+    },
+    {
+      "offset": 540,
+      "length": 14,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_menu_tile/FSelectMenuTile/detailsBuilder.html"
+    }
+  ],
+  "tooltips": []
+}

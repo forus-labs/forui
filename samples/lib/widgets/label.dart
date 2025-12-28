@@ -7,20 +7,17 @@ import 'package:forui_samples/sample.dart';
 
 @RoutePage()
 class VerticalLabelPage extends Sample {
-  final Set<WidgetState> states;
-
-  VerticalLabelPage({@queryParam super.theme, @queryParam bool enabled = true})
-    : states = {if (!enabled) .disabled},
-      super(maxWidth: 320);
+  VerticalLabelPage({@queryParam super.theme}) : super(maxWidth: 320);
 
   @override
-  Widget sample(BuildContext _) => FLabel(
+  Widget sample(BuildContext _) => const FLabel(
+    // {@highlight}
     axis: .vertical,
-    label: const Text('Email'),
-    description: const Text('Enter your email address.'),
-    error: const Text('Please enter a valid email address.'),
-    states: states,
-    child: const DecoratedBox(
+    // {@endhighlight}
+    label: Text('Email'),
+    description: Text('Enter your email address.'),
+    error: Text('Please enter a valid email address.'),
+    child: DecoratedBox(
       decoration: BoxDecoration(borderRadius: .all(.circular(5)), color: Colors.grey),
       child: SizedBox(width: 250, height: 30),
     ),
@@ -29,20 +26,55 @@ class VerticalLabelPage extends Sample {
 
 @RoutePage()
 class HorizontalLabelPage extends Sample {
-  final Set<WidgetState> states;
-
-  HorizontalLabelPage({@queryParam super.theme, @queryParam bool enabled = true})
-    : states = {if (!enabled) .disabled},
-      super(maxWidth: 320);
+  HorizontalLabelPage({@queryParam super.theme}) : super(maxWidth: 320);
 
   @override
-  Widget sample(BuildContext _) => FLabel(
+  Widget sample(BuildContext _) => const FLabel(
     axis: .horizontal,
-    label: const Text('Accept terms and conditions'),
-    description: const Text('You agree to our terms and conditions.'),
-    error: const Text('Please accept the terms.'),
-    states: states,
-    child: const DecoratedBox(
+    label: Text('Accept terms and conditions'),
+    description: Text('You agree to our terms and conditions.'),
+    error: Text('Please accept the terms.'),
+    child: DecoratedBox(
+      decoration: BoxDecoration(borderRadius: .all(.circular(5)), color: Colors.grey),
+      child: SizedBox.square(dimension: 16),
+    ),
+  );
+}
+
+@RoutePage()
+class DisabledHorizontalLabelPage extends Sample {
+  DisabledHorizontalLabelPage({@queryParam super.theme}) : super(maxWidth: 320);
+
+  @override
+  Widget sample(BuildContext _) => const FLabel(
+    axis: .horizontal,
+    label: Text('Accept terms and conditions'),
+    description: Text('You agree to our terms and conditions.'),
+    error: Text('Please accept the terms.'),
+    // {@highlight}
+    states: {WidgetState.disabled},
+    // {@endhighlight}
+    child: DecoratedBox(
+      decoration: BoxDecoration(borderRadius: .all(.circular(5)), color: Colors.grey),
+      child: SizedBox.square(dimension: 16),
+    ),
+  );
+}
+
+@RoutePage()
+class ErrorHorizontalLabelPage extends Sample {
+  ErrorHorizontalLabelPage({@queryParam super.theme}) : super(maxWidth: 320);
+
+  @override
+  Widget sample(BuildContext _) => const FLabel(
+    axis: .horizontal,
+    label: Text('Accept terms and conditions'),
+    description: Text('You agree to our terms and conditions.'),
+    error: Text('Please accept the terms.'),
+    // {@highlight}
+    states: {WidgetState.error},
+    // {@endhighlight}
+    child: DecoratedBox(
       decoration: BoxDecoration(borderRadius: .all(.circular(5)), color: Colors.grey),
       child: SizedBox.square(dimension: 16),
     ),

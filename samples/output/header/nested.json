@@ -1,6 +1,11 @@
 {
   "code": "Widget build(BuildContext _) => FHeader.nested(\n  title: const Text('Appointment'),\n  prefixes: [FHeaderAction.back(onPress: () {})],\n  suffixes: [\n    FHeaderAction(icon: const Icon(FIcons.info), onPress: () {}),\n    FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {}),\n  ],\n);\n",
-  "highlights": [],
+  "highlights": [
+    {
+      "start": 3,
+      "end": 3
+    }
+  ],
   "links": [
     {
       "offset": 32,

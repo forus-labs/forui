@@ -1,6 +1,11 @@
 {
-  "code": "Widget build(BuildContext _) => FButton(\n  style: style,\n  mainAxisSize: .min,\n  prefix: const Icon(FIcons.mail),\n  onPress: () {},\n  child: const Text('Login with Email'),\n);\n",
-  "highlights": [],
+  "code": "Widget build(BuildContext _) => FButton(\n  mainAxisSize: .min,\n  prefix: const Icon(FIcons.mail),\n  onPress: () {},\n  child: const Text('Login with Email'),\n);\n",
+  "highlights": [
+    {
+      "start": 3,
+      "end": 3
+    }
+  ],
   "links": [
     {
       "offset": 32,
@@ -9,31 +14,26 @@
     },
     {
       "offset": 43,
-      "length": 5,
-      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/style.html"
-    },
-    {
-      "offset": 59,
       "length": 12,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
     },
     {
-      "offset": 81,
+      "offset": 65,
       "length": 6,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
     },
     {
-      "offset": 100,
+      "offset": 84,
       "length": 11,
       "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/mail-constant.html"
     },
     {
-      "offset": 116,
+      "offset": 100,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/onPress.html"
     },
     {
-      "offset": 134,
+      "offset": 118,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/child.html"
     }

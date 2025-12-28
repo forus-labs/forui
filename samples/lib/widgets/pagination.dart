@@ -7,17 +7,40 @@ import 'package:forui_samples/sample.dart';
 
 @RoutePage()
 class PaginationPage extends Sample {
-  final String controller;
-
-  PaginationPage({@queryParam super.theme, @queryParam this.controller = 'default'}) : super(maxWidth: 600);
+  PaginationPage({@queryParam super.theme}) : super(maxWidth: 600);
 
   @override
-  Widget sample(BuildContext context) => FPagination(
-    control: switch (controller) {
-      'siblings' => const .managed(pages: 20, siblings: 2, initial: 9),
-      'hide-edges' => const .managed(pages: 8, showEdges: false),
-      _ => const .managed(pages: 10),
-    },
+  Widget sample(BuildContext context) => const FPagination(control: .managed(pages: 10));
+}
+
+@RoutePage()
+class SiblingsPaginationPage extends Sample {
+  SiblingsPaginationPage({@queryParam super.theme}) : super(maxWidth: 600);
+
+  @override
+  Widget sample(BuildContext context) => const FPagination(
+    control: .managed(
+      pages: 20,
+      // {@highlight}
+      siblings: 2,
+      // {@endhighlight}
+      initial: 9,
+    ),
+  );
+}
+
+@RoutePage()
+class HideEdgesPaginationPage extends Sample {
+  HideEdgesPaginationPage({@queryParam super.theme}) : super(maxWidth: 600);
+
+  @override
+  Widget sample(BuildContext context) => const FPagination(
+    control: .managed(
+      pages: 8,
+      // {@highlight}
+      showEdges: false,
+      // {@endhighlight}
+    ),
   );
 }
 
@@ -43,6 +66,7 @@ class _PaginationCustomIconPageState extends StatefulSampleState<PaginationCusto
     final style = context.theme.paginationStyle;
     return FPagination(
       control: .managed(controller: _controller),
+      // {@highlight}
       next: Padding(
         padding: style.itemPadding,
         child: ConstrainedBox(
@@ -65,6 +89,7 @@ class _PaginationCustomIconPageState extends StatefulSampleState<PaginationCusto
           ),
         ),
       ),
+      // {@endhighlight}
     );
   }
 }

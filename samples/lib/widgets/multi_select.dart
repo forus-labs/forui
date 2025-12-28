@@ -2,6 +2,7 @@ import 'package:flutter/widgets.dart';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:forui/forui.dart';
+import 'package:forui_samples/main.dart';
 
 import 'package:forui_samples/sample.dart';
 
@@ -24,6 +25,7 @@ const fruits = [
 ];
 
 @RoutePage()
+@Options(include: [fruits])
 class MultiSelectPage extends Sample {
   MultiSelectPage({@queryParam super.theme}): super(alignment: .topCenter, top: 15);
 
@@ -153,12 +155,16 @@ class DividerMultiSelectPage extends Sample {
   @override
   Widget sample(BuildContext _) => FMultiSelect<String>.rich(
     hint: const Text('Select a level'),
+    // {@highlight}
     contentDivider: .full,
+    // {@endhighlight}
     format: Text.new,
     children: [
       .section(
         label: const Text('Level 1'),
+        // {@highlight}
         divider: .indented,
+        // {@endhighlight}
         items: {
           for (final item in ['A', 'B']) item: '1$item',
         },
@@ -176,6 +182,7 @@ class DividerMultiSelectPage extends Sample {
 }
 
 @RoutePage()
+@Options(include: [fruits])
 class SyncMultiSelectPage extends Sample {
   SyncMultiSelectPage({@queryParam super.theme}): super(alignment: .topCenter, top: 15);
 
@@ -183,12 +190,15 @@ class SyncMultiSelectPage extends Sample {
   Widget sample(BuildContext _) => FMultiSelect<String>.searchBuilder(
     hint: const Text('Select a fruit'),
     format: Text.new,
+    // {@highlight}
     filter: (query) => query.isEmpty ? fruits : fruits.where((f) => f.toLowerCase().startsWith(query.toLowerCase())),
+    // {@endhighlight}
     contentBuilder: (context, _, fruits) => [for (final fruit in fruits) .item(title: Text(fruit), value: fruit)],
   );
 }
 
 @RoutePage()
+@Options(include: [fruits])
 class AsyncMultiSelectPage extends Sample {
   AsyncMultiSelectPage({@queryParam super.theme}): super(alignment: .topCenter, top: 15);
 
@@ -196,15 +206,18 @@ class AsyncMultiSelectPage extends Sample {
   Widget sample(BuildContext _) => FMultiSelect<String>.searchBuilder(
     hint: const Text('Select a fruit'),
     format: Text.new,
+    // {@highlight}
     filter: (query) async {
       await Future.delayed(const Duration(seconds: 1));
       return query.isEmpty ? fruits : fruits.where((fruit) => fruit.toLowerCase().startsWith(query.toLowerCase()));
     },
+    // {@endhighlight}
     contentBuilder: (context, _, fruits) => [for (final fruit in fruits) .item(title: Text(fruit), value: fruit)],
   );
 }
 
 @RoutePage()
+@Options(include: [fruits])
 class AsyncLoadingMultiSelectPage extends Sample {
   AsyncLoadingMultiSelectPage({@queryParam super.theme}): super(alignment: .topCenter, top: 15);
 
@@ -216,15 +229,18 @@ class AsyncLoadingMultiSelectPage extends Sample {
       await Future.delayed(const Duration(seconds: 1));
       return query.isEmpty ? fruits : fruits.where((fruit) => fruit.toLowerCase().startsWith(query.toLowerCase()));
     },
+    // {@highlight}
     contentLoadingBuilder: (context, style) => Padding(
       padding: const .all(8.0),
       child: Text('Here be dragons...', style: style.textFieldStyle.contentTextStyle.resolve({})),
     ),
+    // {@endhighlight}
     contentBuilder: (context, _, fruits) => [for (final fruit in fruits) .item(title: Text(fruit), value: fruit)],
   );
 }
 
 @RoutePage()
+@Options(include: [fruits])
 class AsyncErrorMultiSelectPage extends Sample {
   AsyncErrorMultiSelectPage({@queryParam super.theme}): super(alignment: .topCenter, top: 15);
 
@@ -237,6 +253,7 @@ class AsyncErrorMultiSelectPage extends Sample {
       throw StateError('Error loading data');
     },
     contentBuilder: (context, _, fruits) => [for (final fruit in fruits) .item(title: Text(fruit), value: fruit)],
+    // {@highlight}
     contentErrorBuilder: (context, error, trace) {
       final style = context.theme.selectStyle.iconStyle;
       return Padding(
@@ -244,10 +261,12 @@ class AsyncErrorMultiSelectPage extends Sample {
         child: Icon(FIcons.messageCircleX, size: style.size, color: style.color),
       );
     },
+    // {@endhighlight}
   );
 }
 
 @RoutePage()
+@Options(include: [fruits])
 class ClearableMultiSelectPage extends Sample {
   ClearableMultiSelectPage({@queryParam super.theme}): super(alignment: .topCenter, top: 15);
 
@@ -255,7 +274,9 @@ class ClearableMultiSelectPage extends Sample {
   Widget sample(BuildContext _) => FMultiSelect<String>.rich(
     hint: const Text('Select a fruit'),
     format: Text.new,
+    // {@highlight}
     clearable: true,
+    // {@endhighlight}
     children: [for (final fruit in fruits) .item(title: Text(fruit), value: fruit)],
   );
 }
@@ -274,18 +295,23 @@ class FormatMultiSelectPage extends Sample {
   @override
   Widget sample(BuildContext _) => FMultiSelect<({String firstName, String lastName})>.rich(
     hint: const Text('Select a user'),
+    // {@highlight}
     format: (user) => Text('${user.firstName} ${user.lastName}'),
+    // {@endhighlight}
     children: [for (final user in users) .item(title: Text(user.firstName), value: user)],
   );
 }
 
 @RoutePage()
+@Options(include: [fruits])
 class MinMaxMultiSelectPage extends Sample {
   MinMaxMultiSelectPage({@queryParam super.theme}): super(alignment: .topCenter, top: 15);
 
   @override
   Widget sample(BuildContext context) => FMultiSelect<String>.rich(
+    // {@highlight}
     control: const .managed(min: 1, max: 3),
+    // {@endhighlight}
     hint: const Text('Select favorite fruits'),
     format: Text.new,
     children: [for (final fruit in fruits) .item(title: Text(fruit), value: fruit)],
@@ -293,19 +319,7 @@ class MinMaxMultiSelectPage extends Sample {
 }
 
 @RoutePage()
-class ScrollHandlesMultiSelectPage extends Sample {
-  ScrollHandlesMultiSelectPage({@queryParam super.theme}): super(alignment: .topCenter, top: 15);
-
-  @override
-  Widget sample(BuildContext _) => FMultiSelect<String>.rich(
-    hint: const Text('Select a fruit'),
-    format: Text.new,
-    contentScrollHandles: true,
-    children: [for (final fruit in fruits) .item(title: Text(fruit), value: fruit)],
-  );
-}
-
-@RoutePage()
+@Options(include: [fruits])
 class SortedMultiSelectPage extends Sample {
   SortedMultiSelectPage({@queryParam super.theme}): super(alignment: .topCenter, top: 15);
 
@@ -313,7 +327,9 @@ class SortedMultiSelectPage extends Sample {
   Widget sample(BuildContext _) => FMultiSelect<String>.rich(
     hint: const Text('Select favorite fruits'),
     format: Text.new,
+    // {@highlight}
     sort: (a, b) => a.compareTo(b),
+    // {@endhighlight}
     children: [for (final fruit in fruits) .item(title: Text(fruit), value: fruit)],
   );
 }

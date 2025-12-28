@@ -1,0 +1,47 @@
+{
+  "code": "Widget build(BuildContext _) => const FLabel(\n  axis: .horizontal,\n  label: Text('Accept terms and conditions'),\n  description: Text('You agree to our terms and conditions.'),\n  error: Text('Please accept the terms.'),\n  states: {WidgetState.disabled},\n  child: DecoratedBox(\n    decoration: BoxDecoration(\n      borderRadius: .all(.circular(5)),\n      color: Colors.grey,\n    ),\n    child: SizedBox.square(dimension: 16),\n  ),\n);\n",
+  "highlights": [
+    {
+      "start": 6,
+      "end": 6
+    }
+  ],
+  "links": [
+    {
+      "offset": 38,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.label/FLabel/FLabel.html"
+    },
+    {
+      "offset": 48,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.label/FLabel/axis.html"
+    },
+    {
+      "offset": 69,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.label/FLabel/label.html"
+    },
+    {
+      "offset": 115,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.label/FLabel/description.html"
+    },
+    {
+      "offset": 178,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.label/FLabel/error.html"
+    },
+    {
+      "offset": 221,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.label/FLabel/states.html"
+    },
+    {
+      "offset": 255,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.label/FLabel/child.html"
+    }
+  ],
+  "tooltips": []
+}

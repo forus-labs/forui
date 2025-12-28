@@ -1,0 +1,132 @@
+{
+  "code": "enum Sidebar { recents, home, applications }\n\nclass FullDividerSelectTileGroupExample extends StatelessWidget {\n  @override\n  Widget build(BuildContext _) => FSelectTileGroup<Sidebar>(\n    control: const .managed(initial: {.recents}),\n    label: const Text('Sidebar'),\n    description: const Text('These will be shown in the sidebar.'),\n    divider: .full,\n    children: const [\n      .tile(\n        title: Text('Recents'),\n        suffix: Icon(FIcons.timer),\n        value: .recents,\n      ),\n      .tile(title: Text('Home'), suffix: Icon(FIcons.house), value: .home),\n      .tile(\n        title: Text('Applications'),\n        suffix: Icon(FIcons.appWindowMac),\n        value: .applications,\n      ),\n    ],\n  );\n}\n",
+  "highlights": [
+    {
+      "start": 9,
+      "end": 9
+    }
+  ],
+  "links": [
+    {
+      "offset": 158,
+      "length": 25,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTileGroup/FSelectTileGroup.html"
+    },
+    {
+      "offset": 189,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTileGroup/control.html"
+    },
+    {
+      "offset": 205,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl/FMultiValueControl.managed.html"
+    },
+    {
+      "offset": 213,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl/FMultiValueControl.managed.html"
+    },
+    {
+      "offset": 239,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTileGroup/label.html"
+    },
+    {
+      "offset": 273,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTileGroup/description.html"
+    },
+    {
+      "offset": 341,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTileGroup/divider.html"
+    },
+    {
+      "offset": 351,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemDivider.html#full"
+    },
+    {
+      "offset": 361,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTileGroup/FSelectTileGroup.html"
+    },
+    {
+      "offset": 386,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.tile.html"
+    },
+    {
+      "offset": 400,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/title.html"
+    },
+    {
+      "offset": 432,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.tile.html"
+    },
+    {
+      "offset": 445,
+      "length": 12,
+      "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/timer-constant.html"
+    },
+    {
+      "offset": 468,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/value.html"
+    },
+    {
+      "offset": 501,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.tile.html"
+    },
+    {
+      "offset": 506,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/title.html"
+    },
+    {
+      "offset": 527,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.tile.html"
+    },
+    {
+      "offset": 540,
+      "length": 12,
+      "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/house-constant.html"
+    },
+    {
+      "offset": 555,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/value.html"
+    },
+    {
+      "offset": 577,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.tile.html"
+    },
+    {
+      "offset": 591,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/title.html"
+    },
+    {
+      "offset": 628,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.tile.html"
+    },
+    {
+      "offset": 641,
+      "length": 19,
+      "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/appWindowMac-constant.html"
+    },
+    {
+      "offset": 671,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/value.html"
+    }
+  ],
+  "tooltips": []
+}

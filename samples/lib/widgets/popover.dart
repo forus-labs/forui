@@ -9,45 +9,12 @@ import 'package:forui_samples/sample.dart';
 
 @RoutePage()
 class PopoverPage extends Sample {
-  final Axis axis;
-  final FPopoverHideRegion hideRegion;
-  final FPortalOverflow overflow;
-
-  PopoverPage({
-    @queryParam String alignment = 'center',
-    @queryParam String axis = 'vertical',
-    @queryParam String hideRegion = 'excludeChild',
-    @queryParam String overflow = 'flip',
-    @queryParam super.theme,
-  }) : axis = switch (axis) {
-         'horizontal' => .horizontal,
-         _ => .vertical,
-       },
-       hideRegion = switch (hideRegion) {
-         'excludeChild' => .excludeChild,
-         _ => .none,
-       },
-       overflow = switch (overflow) {
-         'flip' => .flip,
-         'slide' => .slide,
-         _ => .allow,
-       },
-       super(
-         alignment: switch (alignment) {
-           'topCenter' => .topCenter,
-           'bottomCenter' => .bottomCenter,
-           _ => .center,
-         },
-         maxHeight: 200,
-         top: 30,
-       );
+  PopoverPage({@queryParam super.theme}) : super(alignment: .topCenter, maxHeight: 200, top: 30);
 
   @override
   Widget sample(BuildContext _) => FPopover(
-    popoverAnchor: axis == .horizontal ? .bottomLeft : .topCenter,
-    childAnchor: axis == .horizontal ? .bottomRight : .bottomCenter,
-    hideRegion: hideRegion,
-    overflow: overflow,
+    popoverAnchor: .topCenter,
+    childAnchor: .bottomCenter,
     popoverBuilder: (context, _) => Padding(
       padding: const .only(left: 20, top: 14, right: 20, bottom: 10),
       child: SizedBox(
@@ -74,7 +41,6 @@ class PopoverPage extends Sample {
             ].indexed) ...[
               Row(
                 children: [
-                  // {@highlight}
                   Expanded(child: Text(label, style: context.theme.typography.sm)),
                   Expanded(
                     flex: 2,
@@ -83,7 +49,129 @@ class PopoverPage extends Sample {
                       autofocus: index == 0,
                     ),
                   ),
-                  // {@endhighlight}
+                ],
+              ),
+              const SizedBox(height: 7),
+            ],
+          ],
+        ),
+      ),
+    ),
+    builder: (_, controller, _) => FButton(
+      style: FButtonStyle.outline(),
+      mainAxisSize: .min,
+      onPress: controller.toggle,
+      child: const Text('Open popover'),
+    ),
+  );
+}
+
+@RoutePage()
+class HorizontalPopoverPage extends Sample {
+  HorizontalPopoverPage({@queryParam super.theme}) : super(alignment: .topCenter, maxHeight: 200, top: 30);
+
+  @override
+  Widget sample(BuildContext _) => FPopover(
+    // {@highlight}
+    popoverAnchor: .bottomLeft,
+    childAnchor: .bottomRight,
+    // {@endhighlight}
+    popoverBuilder: (context, _) => Padding(
+      padding: const .only(left: 20, top: 14, right: 20, bottom: 10),
+      child: SizedBox(
+        width: 288,
+        child: Column(
+          mainAxisSize: .min,
+          crossAxisAlignment: .start,
+          children: [
+            Text('Dimensions', style: context.theme.typography.base),
+            const SizedBox(height: 7),
+            Text(
+              'Set the dimensions for the layer.',
+              style: context.theme.typography.sm.copyWith(
+                color: context.theme.colors.mutedForeground,
+                fontWeight: .w300,
+              ),
+            ),
+            const SizedBox(height: 15),
+            for (final (index, (label, value)) in [
+              ('Width', '100%'),
+              ('Max. Width', '300px'),
+              ('Height', '25px'),
+              ('Max. Height', 'none'),
+            ].indexed) ...[
+              Row(
+                children: [
+                  Expanded(child: Text(label, style: context.theme.typography.sm)),
+                  Expanded(
+                    flex: 2,
+                    child: FTextField(
+                      control: .managed(initial: TextEditingValue(text: value)),
+                      autofocus: index == 0,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 7),
+            ],
+          ],
+        ),
+      ),
+    ),
+    builder: (_, controller, _) => FButton(
+      style: FButtonStyle.outline(),
+      mainAxisSize: .min,
+      onPress: controller.toggle,
+      child: const Text('Open popover'),
+    ),
+  );
+}
+
+@RoutePage()
+class NoHideRegionPopoverPage extends Sample {
+  NoHideRegionPopoverPage({@queryParam super.theme}) : super(maxHeight: 200, top: 30);
+
+  @override
+  Widget sample(BuildContext _) => FPopover(
+    popoverAnchor: .topCenter,
+    childAnchor: .bottomCenter,
+    // {@highlight}
+    hideRegion: .none,
+    // {@endhighlight}
+    popoverBuilder: (context, _) => Padding(
+      padding: const .only(left: 20, top: 14, right: 20, bottom: 10),
+      child: SizedBox(
+        width: 288,
+        child: Column(
+          mainAxisSize: .min,
+          crossAxisAlignment: .start,
+          children: [
+            Text('Dimensions', style: context.theme.typography.base),
+            const SizedBox(height: 7),
+            Text(
+              'Set the dimensions for the layer.',
+              style: context.theme.typography.sm.copyWith(
+                color: context.theme.colors.mutedForeground,
+                fontWeight: .w300,
+              ),
+            ),
+            const SizedBox(height: 15),
+            for (final (index, (label, value)) in [
+              ('Width', '100%'),
+              ('Max. Width', '300px'),
+              ('Height', '25px'),
+              ('Max. Height', 'none'),
+            ].indexed) ...[
+              Row(
+                children: [
+                  Expanded(child: Text(label, style: context.theme.typography.sm)),
+                  Expanded(
+                    flex: 2,
+                    child: FTextField(
+                      control: .managed(initial: TextEditingValue(text: value)),
+                      autofocus: index == 0,
+                    ),
+                  ),
                 ],
               ),
               const SizedBox(height: 7),
@@ -103,13 +191,13 @@ class PopoverPage extends Sample {
 
 @RoutePage()
 class NestedPopoverPage extends Sample {
-  static const _groupId = 'nested-popover';
-
-  NestedPopoverPage({@queryParam super.theme}) : super(maxHeight: 200, alignment: .topCenter, top: 30);
+  NestedPopoverPage({@queryParam super.theme}) : super(alignment: .topCenter, maxHeight: 200, top: 30);
 
   @override
   Widget sample(BuildContext context) => FPopover(
-    groupId: _groupId,
+    // {@highlight}
+    groupId: 'nested-popover',
+    // {@endhighlight}
     popoverBuilder: (context, _) => Padding(
       padding: const .only(left: 20, top: 14, right: 20, bottom: 10),
       child: SizedBox(
@@ -134,7 +222,9 @@ class NestedPopoverPage extends Sample {
                 Expanded(
                   flex: 2,
                   child: FSelect<String>.rich(
-                    contentGroupId: _groupId,
+                    // {@highlight}
+                    contentGroupId: 'nested-popover',
+                    // {@endhighlight}
                     hint: 'Select',
                     format: (s) => s,
                     children: [
@@ -185,6 +275,7 @@ class BlurredPopoverPage extends Sample {
       ),
       FPopover(
         style: context.theme.popoverStyle.copyWith(
+          // {@highlight}
           barrierFilter: (animation) => ImageFilter.compose(
             outer: ImageFilter.blur(sigmaX: animation * 5, sigmaY: animation * 5),
             inner: ColorFilter.mode(
@@ -192,6 +283,7 @@ class BlurredPopoverPage extends Sample {
               .srcOver,
             ),
           ),
+          // {@endhighlight}
         ),
         popoverAnchor: .topCenter,
         childAnchor: .bottomCenter,
@@ -245,5 +337,188 @@ class BlurredPopoverPage extends Sample {
         ),
       ),
     ],
+  );
+}
+
+@RoutePage()
+class FlipPopoverPage extends Sample {
+  FlipPopoverPage({@queryParam super.theme}) : super(alignment: .bottomCenter, maxHeight: 200, top: 30);
+
+  @override
+  Widget sample(BuildContext _) => FPopover(
+    popoverAnchor: .topCenter,
+    childAnchor: .bottomCenter,
+    popoverBuilder: (context, _) => Padding(
+      padding: const .only(left: 20, top: 14, right: 20, bottom: 10),
+      child: SizedBox(
+        width: 288,
+        child: Column(
+          mainAxisSize: .min,
+          crossAxisAlignment: .start,
+          children: [
+            Text('Dimensions', style: context.theme.typography.base),
+            const SizedBox(height: 7),
+            Text(
+              'Set the dimensions for the layer.',
+              style: context.theme.typography.sm.copyWith(
+                color: context.theme.colors.mutedForeground,
+                fontWeight: .w300,
+              ),
+            ),
+            const SizedBox(height: 15),
+            for (final (index, (label, value)) in [
+              ('Width', '100%'),
+              ('Max. Width', '300px'),
+              ('Height', '25px'),
+              ('Max. Height', 'none'),
+            ].indexed) ...[
+              Row(
+                children: [
+                  Expanded(child: Text(label, style: context.theme.typography.sm)),
+                  Expanded(
+                    flex: 2,
+                    child: FTextField(
+                      control: .managed(initial: TextEditingValue(text: value)),
+                      autofocus: index == 0,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 7),
+            ],
+          ],
+        ),
+      ),
+    ),
+    builder: (_, controller, _) => FButton(
+      style: FButtonStyle.outline(),
+      mainAxisSize: .min,
+      onPress: controller.toggle,
+      child: const Text('Open popover'),
+    ),
+  );
+}
+
+@RoutePage()
+class SlidePopoverPage extends Sample {
+  SlidePopoverPage({@queryParam super.theme}) : super(maxHeight: 200, top: 30);
+
+  @override
+  Widget sample(BuildContext _) => FPopover(
+    popoverAnchor: .topCenter,
+    childAnchor: .bottomCenter,
+    // {@highlight}
+    overflow: .slide,
+    // {@endhighlight}
+    popoverBuilder: (context, _) => Padding(
+      padding: const .only(left: 20, top: 14, right: 20, bottom: 10),
+      child: SizedBox(
+        width: 288,
+        child: Column(
+          mainAxisSize: .min,
+          crossAxisAlignment: .start,
+          children: [
+            Text('Dimensions', style: context.theme.typography.base),
+            const SizedBox(height: 7),
+            Text(
+              'Set the dimensions for the layer.',
+              style: context.theme.typography.sm.copyWith(
+                color: context.theme.colors.mutedForeground,
+                fontWeight: .w300,
+              ),
+            ),
+            const SizedBox(height: 15),
+            for (final (index, (label, value)) in [
+              ('Width', '100%'),
+              ('Max. Width', '300px'),
+              ('Height', '25px'),
+              ('Max. Height', 'none'),
+            ].indexed) ...[
+              Row(
+                children: [
+                  Expanded(child: Text(label, style: context.theme.typography.sm)),
+                  Expanded(
+                    flex: 2,
+                    child: FTextField(
+                      control: .managed(initial: TextEditingValue(text: value)),
+                      autofocus: index == 0,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 7),
+            ],
+          ],
+        ),
+      ),
+    ),
+    builder: (_, controller, _) => FButton(
+      style: FButtonStyle.outline(),
+      mainAxisSize: .min,
+      onPress: controller.toggle,
+      child: const Text('Open popover'),
+    ),
+  );
+}
+
+@RoutePage()
+class AllowOverflowPopoverPage extends Sample {
+  AllowOverflowPopoverPage({@queryParam super.theme}) : super(maxHeight: 200, top: 30);
+
+  @override
+  Widget sample(BuildContext _) => FPopover(
+    popoverAnchor: .topCenter,
+    childAnchor: .bottomCenter,
+    // {@highlight}
+    overflow: .allow,
+    // {@endhighlight}
+    popoverBuilder: (context, _) => Padding(
+      padding: const .only(left: 20, top: 14, right: 20, bottom: 10),
+      child: SizedBox(
+        width: 288,
+        child: Column(
+          mainAxisSize: .min,
+          crossAxisAlignment: .start,
+          children: [
+            Text('Dimensions', style: context.theme.typography.base),
+            const SizedBox(height: 7),
+            Text(
+              'Set the dimensions for the layer.',
+              style: context.theme.typography.sm.copyWith(
+                color: context.theme.colors.mutedForeground,
+                fontWeight: .w300,
+              ),
+            ),
+            const SizedBox(height: 15),
+            for (final (index, (label, value)) in [
+              ('Width', '100%'),
+              ('Max. Width', '300px'),
+              ('Height', '25px'),
+              ('Max. Height', 'none'),
+            ].indexed) ...[
+              Row(
+                children: [
+                  Expanded(child: Text(label, style: context.theme.typography.sm)),
+                  Expanded(
+                    flex: 2,
+                    child: FTextField(
+                      control: .managed(initial: TextEditingValue(text: value)),
+                      autofocus: index == 0,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 7),
+            ],
+          ],
+        ),
+      ),
+    ),
+    builder: (_, controller, _) => FButton(
+      style: FButtonStyle.outline(),
+      mainAxisSize: .min,
+      onPress: controller.toggle,
+      child: const Text('Open popover'),
+    ),
   );
 }

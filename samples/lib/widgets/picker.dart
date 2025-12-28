@@ -7,36 +7,68 @@ import 'package:forui_samples/sample.dart';
 
 @RoutePage()
 class PickerPage extends Sample {
-  final bool loop;
-  final bool builder;
-
-  PickerPage({@queryParam this.loop = false, @queryParam this.builder = false, @queryParam super.theme});
+  PickerPage({@queryParam super.theme});
 
   @override
-  Widget sample(BuildContext context) => FPicker(
+  Widget sample(BuildContext context) => const FPicker(
     children: [
-      if (builder)
-        FPickerWheel.builder(builder: (context, index) => Text('$index'))
-      else
-        FPickerWheel(
-          loop: loop,
-          children: const [
-            Text('January'),
-            Text('February'),
-            Text('March'),
-            Text('April'),
-            Text('May'),
-            Text('June'),
-            Text('July'),
-            Text('August'),
-            Text('September'),
-            Text('October'),
-            Text('November'),
-            Text('December'),
-          ],
-        ),
+      FPickerWheel(
+        children: [
+          Text('January'),
+          Text('February'),
+          Text('March'),
+          Text('April'),
+          Text('May'),
+          Text('June'),
+          Text('July'),
+          Text('August'),
+          Text('September'),
+          Text('October'),
+          Text('November'),
+          Text('December'),
+        ],
+      ),
     ],
   );
+}
+
+@RoutePage()
+class LoopPickerPage extends Sample {
+  LoopPickerPage({@queryParam super.theme});
+
+  @override
+  Widget sample(BuildContext context) => const FPicker(
+    children: [
+      FPickerWheel(
+        // {@highlight}
+        loop: true,
+        // {@endhighlight}
+        children: [
+          Text('January'),
+          Text('February'),
+          Text('March'),
+          Text('April'),
+          Text('May'),
+          Text('June'),
+          Text('July'),
+          Text('August'),
+          Text('September'),
+          Text('October'),
+          Text('November'),
+          Text('December'),
+        ],
+      ),
+    ],
+  );
+}
+
+@RoutePage()
+class BuilderPickerPage extends Sample {
+  BuilderPickerPage({@queryParam super.theme});
+
+  @override
+  Widget sample(BuildContext context) =>
+      FPicker(children: [FPickerWheel.builder(builder: (context, index) => Text('$index'))]);
 }
 
 @RoutePage()
@@ -79,7 +111,9 @@ class SeparatedPickerPage extends Sample {
     child: FPicker(
       children: [
         FPickerWheel.builder(builder: (context, index) => Text((index % 12).toString().padLeft(2, '0'))),
+        // {@highlight}
         const Text(':'),
+        // {@endhighlight}
         FPickerWheel.builder(builder: (context, index) => Text((index % 60).toString().padLeft(2, '0'))),
         const FPickerWheel(children: [Text('AM'), Text('PM')]),
       ],

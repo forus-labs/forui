@@ -1,36 +1,31 @@
 {
-  "code": "Widget build(BuildContext context) => FTimePicker(\n  control: .managed(initial: .now()),\n  hour24: hour24,\n);\n",
+  "code": "Widget build(BuildContext context) =>\n    FTimePicker(control: .managed(initial: .now()));\n",
   "highlights": [],
   "links": [
     {
-      "offset": 38,
+      "offset": 42,
       "length": 11,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_picker/FTimePicker/FTimePicker.html"
     },
     {
-      "offset": 53,
+      "offset": 54,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_picker/FTimePicker/control.html"
     },
     {
-      "offset": 63,
+      "offset": 64,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_picker/FTimePickerControl/FTimePickerControl.managed.html"
     },
     {
-      "offset": 71,
+      "offset": 72,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_picker/FTimePickerControl/FTimePickerControl.managed.html"
     },
     {
-      "offset": 81,
+      "offset": 82,
       "length": 3,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTime/FTime.now.html"
-    },
-    {
-      "offset": 91,
-      "length": 6,
-      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_picker/FTimePicker/hour24.html"
     }
   ],
   "tooltips": []

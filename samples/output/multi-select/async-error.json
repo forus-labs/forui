@@ -1,69 +1,74 @@
 {
-  "code": "Widget build(BuildContext _) => FMultiSelect<String>.searchBuilder(\n  hint: const Text('Select a fruit'),\n  format: Text.new,\n  filter: (query) async {\n    await Future.delayed(const Duration(seconds: 1));\n    throw StateError('Error loading data');\n  },\n  contentBuilder: (context, _, fruits) => [\n    for (final fruit in fruits) .item(title: Text(fruit), value: fruit),\n  ],\n  contentErrorBuilder: (context, error, trace) {\n    final style = context.theme.selectStyle.iconStyle;\n    return Padding(\n      padding: const .all(8.0),\n      child: Icon(FIcons.messageCircleX, size: style.size, color: style.color),\n    );\n  },\n);\n",
-  "highlights": [],
+  "code": "const fruits = [\n  'Apple',\n  'Banana',\n  'Blueberry',\n  'Grapes',\n  'Lemon',\n  'Mango',\n  'Kiwi',\n  'Orange',\n  'Peach',\n  'Pear',\n  'Pineapple',\n  'Plum',\n  'Raspberry',\n  'Strawberry',\n  'Watermelon',\n];\n\nclass AsyncErrorMultiSelectExample extends StatelessWidget {\n  @override\n  Widget build(BuildContext _) => FMultiSelect<String>.searchBuilder(\n    hint: const Text('Select a fruit'),\n    format: Text.new,\n    filter: (query) async {\n      await Future.delayed(const Duration(seconds: 1));\n      throw StateError('Error loading data');\n    },\n    contentBuilder: (context, _, fruits) => [\n      for (final fruit in fruits) .item(title: Text(fruit), value: fruit),\n    ],\n    contentErrorBuilder: (context, error, trace) {\n      final style = context.theme.selectStyle.iconStyle;\n      return Padding(\n        padding: const .all(8.0),\n        child: Icon(\n          FIcons.messageCircleX,\n          size: style.size,\n          color: style.color,\n        ),\n      );\n    },\n  );\n}\n",
+  "highlights": [
+    {
+      "start": 31,
+      "end": 41
+    }
+  ],
   "links": [
     {
-      "offset": 32,
+      "offset": 315,
       "length": 34,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FMultiSelect/FMultiSelect.searchBuilder.html"
     },
     {
-      "offset": 70,
+      "offset": 355,
       "length": 4,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FMultiSelect/hint.html"
     },
     {
-      "offset": 108,
+      "offset": 395,
       "length": 6,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FMultiSelect/format.html"
     },
     {
-      "offset": 128,
+      "offset": 417,
       "length": 6,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FMultiSelect/FMultiSelect.searchBuilder.html"
     },
     {
-      "offset": 257,
+      "offset": 554,
       "length": 14,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FMultiSelect/FMultiSelect.searchBuilder.html"
     },
     {
-      "offset": 332,
+      "offset": 631,
       "length": 4,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectItemMixin/item.html"
     },
     {
-      "offset": 337,
+      "offset": 636,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectItemMixin/item.html"
     },
     {
-      "offset": 357,
+      "offset": 656,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectItemMixin/item.html"
     },
     {
-      "offset": 379,
+      "offset": 682,
       "length": 19,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FMultiSelect/FMultiSelect.searchBuilder.html"
     },
     {
-      "offset": 470,
+      "offset": 775,
       "length": 9,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectStyle/iconStyle.html"
     },
     {
-      "offset": 458,
+      "offset": 763,
       "length": 11,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/selectStyle.html"
     },
     {
-      "offset": 452,
+      "offset": 757,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext/theme.html"
     },
     {
-      "offset": 551,
+      "offset": 873,
       "length": 21,
       "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/messageCircleX-constant.html"
     }
