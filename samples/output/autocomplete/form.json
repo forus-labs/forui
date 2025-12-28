@@ -5,47 +5,47 @@
     {
       "offset": 422,
       "length": 13,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.autocomplete/FAutocomplete/FAutocomplete.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/FAutocomplete.html"
     },
     {
       "offset": 447,
       "length": 5,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.autocomplete/FAutocomplete/label.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/label.html"
     },
     {
       "offset": 490,
       "length": 11,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.autocomplete/FAutocomplete/description.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/description.html"
     },
     {
       "offset": 565,
       "length": 4,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.autocomplete/FAutocomplete/hint.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/hint.html"
     },
     {
       "offset": 603,
       "length": 9,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.autocomplete/FAutocomplete/validator.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/validator.html"
     },
     {
       "offset": 748,
       "length": 5,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.autocomplete/FAutocomplete/FAutocomplete.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/FAutocomplete.html"
     },
     {
       "offset": 958,
       "length": 7,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/FButton.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
     },
     {
       "offset": 977,
       "length": 5,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/child.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/child.html"
     },
     {
       "offset": 1016,
       "length": 7,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/onPress.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/onPress.html"
     }
   ],
   "tooltips": []

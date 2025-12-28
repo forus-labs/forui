@@ -5,107 +5,107 @@
     {
       "offset": 286,
       "length": 20,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.time_field/FTimeFieldController/FTimeFieldController.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeFieldController/FTimeFieldController.html"
     },
     {
       "offset": 312,
       "length": 9,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.time_field/FTimeFieldController/validator.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeFieldController/validator.html"
     },
     {
       "offset": 415,
       "length": 3,
-      "url": "https://pub.dev/documentation/forui/latest/forui.foundation/FTime/FTime.now.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTime/FTime.now.html"
     },
     {
       "offset": 543,
       "length": 7,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.time_field/FTimeFieldController/dispose.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeFieldController/dispose.html"
     },
     {
       "offset": 692,
       "length": 10,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.time_field/FTimeField/FTimeField.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.html"
     },
     {
       "offset": 714,
       "length": 7,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.time_field/FTimeField/control.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/control.html"
     },
     {
       "offset": 724,
       "length": 7,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.time_field/FTimeFieldControl/FTimeFieldControl.managed.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeFieldControl/FTimeFieldControl.managed.html"
     },
     {
       "offset": 732,
       "length": 10,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.time_field/FTimeFieldControl/FTimeFieldControl.managed.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeFieldControl/FTimeFieldControl.managed.html"
     },
     {
       "offset": 773,
       "length": 5,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.time_field/FTimeField/label.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/label.html"
     },
     {
       "offset": 816,
       "length": 11,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.time_field/FTimeField/description.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/description.html"
     },
     {
       "offset": 875,
       "length": 16,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.time_field/FTimeField/autovalidateMode.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/autovalidateMode.html"
     },
     {
       "offset": 959,
       "length": 10,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.time_field/FTimeField/FTimeField.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.html"
     },
     {
       "offset": 981,
       "length": 7,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.time_field/FTimeField/control.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/control.html"
     },
     {
       "offset": 991,
       "length": 7,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.time_field/FTimeFieldControl/FTimeFieldControl.managed.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeFieldControl/FTimeFieldControl.managed.html"
     },
     {
       "offset": 1012,
       "length": 9,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.time_field/FTimeFieldControl/FTimeFieldControl.managed.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeFieldControl/FTimeFieldControl.managed.html"
     },
     {
       "offset": 1347,
       "length": 5,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.time_field/FTimeField/label.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/label.html"
     },
     {
       "offset": 1388,
       "length": 11,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.time_field/FTimeField/description.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/description.html"
     },
     {
       "offset": 1446,
       "length": 16,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.time_field/FTimeField/autovalidateMode.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/autovalidateMode.html"
     },
     {
       "offset": 1530,
       "length": 7,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/FButton.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
     },
     {
       "offset": 1549,
       "length": 5,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/child.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/child.html"
     },
     {
       "offset": 1588,
       "length": 7,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/onPress.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/onPress.html"
     }
   ],
   "tooltips": []

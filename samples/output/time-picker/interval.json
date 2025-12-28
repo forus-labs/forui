@@ -5,37 +5,37 @@
     {
       "offset": 38,
       "length": 11,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.time_picker/FTimePicker/FTimePicker.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_picker/FTimePicker/FTimePicker.html"
     },
     {
       "offset": 53,
       "length": 7,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.time_picker/FTimePicker/control.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_picker/FTimePicker/control.html"
     },
     {
       "offset": 63,
       "length": 7,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.time_picker/FTimePickerControl/FTimePickerControl.managed.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_picker/FTimePickerControl/FTimePickerControl.managed.html"
     },
     {
       "offset": 71,
       "length": 7,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.time_picker/FTimePickerControl/FTimePickerControl.managed.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_picker/FTimePickerControl/FTimePickerControl.managed.html"
     },
     {
       "offset": 81,
       "length": 3,
-      "url": "https://pub.dev/documentation/forui/latest/forui.foundation/FTime/FTime.now.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTime/FTime.now.html"
     },
     {
       "offset": 91,
       "length": 12,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.time_picker/FTimePicker/hourInterval.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_picker/FTimePicker/hourInterval.html"
     },
     {
       "offset": 110,
       "length": 14,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.time_picker/FTimePicker/minuteInterval.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_picker/FTimePicker/minuteInterval.html"
     }
   ],
   "tooltips": []

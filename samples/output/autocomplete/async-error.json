@@ -5,57 +5,57 @@
     {
       "offset": 32,
       "length": 21,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.autocomplete/FAutocomplete/FAutocomplete.builder.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/FAutocomplete.builder.html"
     },
     {
       "offset": 57,
       "length": 4,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.autocomplete/FAutocomplete/hint.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/hint.html"
     },
     {
       "offset": 90,
       "length": 6,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.autocomplete/FAutocomplete/filter.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/filter.html"
     },
     {
       "offset": 219,
       "length": 14,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.autocomplete/FAutocomplete/contentBuilder.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/contentBuilder.html"
     },
     {
       "offset": 298,
       "length": 4,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.autocomplete/FAutocompleteItemMixin/item.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocompleteItemMixin/item.html"
     },
     {
       "offset": 303,
       "length": 5,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.autocomplete/FAutocompleteItemMixin/item.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocompleteItemMixin/item.html"
     },
     {
       "offset": 325,
       "length": 19,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.autocomplete/FAutocomplete/contentErrorBuilder.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/contentErrorBuilder.html"
     },
     {
       "offset": 429,
       "length": 14,
-      "url": "https://pub.dev/documentation/forui_assets/latest/forui_assets/FIcons/circleX-constant.html"
+      "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/circleX-constant.html"
     },
     {
       "offset": 483,
       "length": 7,
-      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FColors/primary.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors/primary.html"
     },
     {
       "offset": 476,
       "length": 6,
-      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FThemeData/colors.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/colors.html"
     },
     {
       "offset": 470,
       "length": 5,
-      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FThemeBuildContext/theme.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext/theme.html"
     }
   ],
   "tooltips": []

@@ -5,37 +5,37 @@
     {
       "offset": 32,
       "length": 21,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.autocomplete/FAutocomplete/FAutocomplete.builder.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/FAutocomplete.builder.html"
     },
     {
       "offset": 57,
       "length": 4,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.autocomplete/FAutocomplete/hint.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/hint.html"
     },
     {
       "offset": 93,
       "length": 6,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.autocomplete/FAutocomplete/filter.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/filter.html"
     },
     {
       "offset": 260,
       "length": 14,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.autocomplete/FAutocomplete/contentBuilder.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/contentBuilder.html"
     },
     {
       "offset": 495,
       "length": 7,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.autocomplete/FAutocompleteItemMixin/section.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocompleteItemMixin/section.html"
     },
     {
       "offset": 503,
       "length": 5,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.autocomplete/FAutocompleteItemMixin/section.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocompleteItemMixin/section.html"
     },
     {
       "offset": 523,
       "length": 5,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.autocomplete/FAutocompleteItemMixin/section.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocompleteItemMixin/section.html"
     }
   ],
   "tooltips": []

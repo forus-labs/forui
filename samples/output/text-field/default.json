@@ -5,27 +5,27 @@
     {
       "offset": 32,
       "length": 10,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.text_field/FTextField/FTextField.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
     },
     {
       "offset": 46,
       "length": 7,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.text_field/FTextField/enabled.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/enabled.html"
     },
     {
       "offset": 66,
       "length": 5,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.text_field/FTextField/label.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/label.html"
     },
     {
       "offset": 99,
       "length": 4,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.text_field/FTextField/hint.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/hint.html"
     },
     {
       "offset": 118,
       "length": 11,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.text_field/FTextField/description.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/description.html"
     }
   ],
   "tooltips": []

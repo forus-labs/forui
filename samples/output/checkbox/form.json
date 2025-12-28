@@ -5,72 +5,72 @@
     {
       "offset": 430,
       "length": 20,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.text_field/FTextFormField/FTextFormField.email.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFormField/FTextFormField.email.html"
     },
     {
       "offset": 462,
       "length": 4,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.text_field/FTextFormField/hint.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFormField/hint.html"
     },
     {
       "offset": 503,
       "length": 9,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.text_field/FTextFormField/validator.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFormField/validator.html"
     },
     {
       "offset": 680,
       "length": 23,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.text_field/FTextFormField/password.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFormField/password.html"
     },
     {
       "offset": 715,
       "length": 9,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.text_field/FTextFormField/password.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFormField/password.html"
     },
     {
       "offset": 1184,
       "length": 9,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.checkbox/FCheckbox/FCheckbox.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckbox/FCheckbox.html"
     },
     {
       "offset": 1207,
       "length": 5,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.checkbox/FCheckbox/label.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckbox/label.html"
     },
     {
       "offset": 1269,
       "length": 11,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.checkbox/FCheckbox/description.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckbox/description.html"
     },
     {
       "offset": 1348,
       "length": 5,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.checkbox/FCheckbox/error.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckbox/error.html"
     },
     {
       "offset": 1424,
       "length": 5,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.checkbox/FCheckbox/value.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckbox/value.html"
     },
     {
       "offset": 1465,
       "length": 8,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.checkbox/FCheckbox/onChange.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckbox/onChange.html"
     },
     {
       "offset": 1578,
       "length": 7,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/FButton.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
     },
     {
       "offset": 1597,
       "length": 5,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/child.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/child.html"
     },
     {
       "offset": 1638,
       "length": 7,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/onPress.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/onPress.html"
     }
   ],
   "tooltips": []

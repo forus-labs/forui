@@ -5,22 +5,22 @@
     {
       "offset": 32,
       "length": 6,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.alert/FAlert/FAlert.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.alert/FAlert/FAlert.html"
     },
     {
       "offset": 42,
       "length": 5,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.alert/FAlert/title.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.alert/FAlert/title.html"
     },
     {
       "offset": 76,
       "length": 8,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.alert/FAlert/subtitle.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.alert/FAlert/subtitle.html"
     },
     {
       "offset": 153,
       "length": 5,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.alert/FAlert/style.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.alert/FAlert/style.html"
     }
   ],
   "tooltips": []

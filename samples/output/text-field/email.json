@@ -5,22 +5,22 @@
     {
       "offset": 38,
       "length": 16,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.text_field/FTextField/FTextField.email.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.email.html"
     },
     {
       "offset": 58,
       "length": 7,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.text_field/FTextField/control.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/control.html"
     },
     {
       "offset": 68,
       "length": 7,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.text_field/FTextFieldControl/FTextFieldControl.managed.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFieldControl/FTextFieldControl.managed.html"
     },
     {
       "offset": 76,
       "length": 7,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.text_field/FTextFieldControl/FTextFieldControl.managed.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFieldControl/FTextFieldControl.managed.html"
     }
   ],
   "tooltips": []

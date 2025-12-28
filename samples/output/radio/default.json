@@ -5,27 +5,27 @@
     {
       "offset": 244,
       "length": 6,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.radio/FRadio/FRadio.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.radio/FRadio/FRadio.html"
     },
     {
       "offset": 256,
       "length": 5,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.radio/FRadio/label.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.radio/FRadio/label.html"
     },
     {
       "offset": 290,
       "length": 11,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.radio/FRadio/description.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.radio/FRadio/description.html"
     },
     {
       "offset": 361,
       "length": 5,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.radio/FRadio/value.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.radio/FRadio/value.html"
     },
     {
       "offset": 380,
       "length": 8,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.radio/FRadio/onChange.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.radio/FRadio/onChange.html"
     }
   ],
   "tooltips": []

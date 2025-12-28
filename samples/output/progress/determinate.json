@@ -5,27 +5,27 @@
     {
       "offset": 588,
       "length": 20,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.progress/FDeterminateProgress/FDeterminateProgress.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.progress/FDeterminateProgress/FDeterminateProgress.html"
     },
     {
       "offset": 609,
       "length": 5,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.progress/FDeterminateProgress/value.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.progress/FDeterminateProgress/value.html"
     },
     {
       "offset": 631,
       "length": 7,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/FButton.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
     },
     {
       "offset": 648,
       "length": 5,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/child.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/child.html"
     },
     {
       "offset": 684,
       "length": 7,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/onPress.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/onPress.html"
     }
   ],
   "tooltips": []

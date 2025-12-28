@@ -5,22 +5,22 @@
     {
       "offset": 275,
       "length": 9,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.checkbox/FCheckbox/FCheckbox.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckbox/FCheckbox.html"
     },
     {
       "offset": 290,
       "length": 5,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.checkbox/FCheckbox/value.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckbox/value.html"
     },
     {
       "offset": 309,
       "length": 8,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.checkbox/FCheckbox/onChange.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckbox/onChange.html"
     },
     {
       "offset": 366,
       "length": 7,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.checkbox/FCheckbox/enabled.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckbox/enabled.html"
     }
   ],
   "tooltips": []

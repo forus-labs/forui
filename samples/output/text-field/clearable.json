@@ -5,42 +5,42 @@
     {
       "offset": 32,
       "length": 10,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.text_field/FTextField/FTextField.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
     },
     {
       "offset": 46,
       "length": 7,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.text_field/FTextField/control.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/control.html"
     },
     {
       "offset": 62,
       "length": 7,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.text_field/FTextFieldControl/FTextFieldControl.managed.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFieldControl/FTextFieldControl.managed.html"
     },
     {
       "offset": 70,
       "length": 7,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.text_field/FTextFieldControl/FTextFieldControl.managed.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFieldControl/FTextFieldControl.managed.html"
     },
     {
       "offset": 120,
       "length": 5,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.text_field/FTextField/label.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/label.html"
     },
     {
       "offset": 153,
       "length": 4,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.text_field/FTextField/hint.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/hint.html"
     },
     {
       "offset": 172,
       "length": 11,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.text_field/FTextField/description.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/description.html"
     },
     {
       "offset": 230,
       "length": 9,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.text_field/FTextField/clearable.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/clearable.html"
     }
   ],
   "tooltips": []

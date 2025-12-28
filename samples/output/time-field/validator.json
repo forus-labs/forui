@@ -5,37 +5,37 @@
     {
       "offset": 38,
       "length": 10,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.time_field/FTimeField/FTimeField.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.html"
     },
     {
       "offset": 52,
       "length": 7,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.time_field/FTimeField/control.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/control.html"
     },
     {
       "offset": 62,
       "length": 7,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.time_field/FTimeFieldControl/FTimeFieldControl.managed.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeFieldControl/FTimeFieldControl.managed.html"
     },
     {
       "offset": 75,
       "length": 9,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.time_field/FTimeFieldControl/FTimeFieldControl.managed.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeFieldControl/FTimeFieldControl.managed.html"
     },
     {
       "offset": 102,
       "length": 4,
-      "url": "https://pub.dev/documentation/forui/latest/forui.foundation/FTime/hour.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTime/hour.html"
     },
     {
       "offset": 153,
       "length": 5,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.time_field/FTimeField/label.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/label.html"
     },
     {
       "offset": 194,
       "length": 11,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.time_field/FTimeField/description.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/description.html"
     }
   ],
   "tooltips": []

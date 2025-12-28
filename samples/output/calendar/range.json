@@ -5,37 +5,37 @@
     {
       "offset": 32,
       "length": 9,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.calendar/FCalendar/FCalendar.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendar/FCalendar.html"
     },
     {
       "offset": 45,
       "length": 7,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.calendar/FCalendar/control.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendar/control.html"
     },
     {
       "offset": 55,
       "length": 12,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.calendar/FCalendarControl/managedRange.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarControl/managedRange.html"
     },
     {
       "offset": 73,
       "length": 7,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.calendar/FCalendarControl/managedRange.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarControl/managedRange.html"
     },
     {
       "offset": 137,
       "length": 5,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.calendar/FCalendar/start.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendar/start.html"
     },
     {
       "offset": 162,
       "length": 5,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.calendar/FCalendar/today.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendar/today.html"
     },
     {
       "offset": 194,
       "length": 3,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.calendar/FCalendar/end.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendar/end.html"
     }
   ],
   "tooltips": []

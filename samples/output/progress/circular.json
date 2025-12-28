@@ -5,17 +5,17 @@
     {
       "offset": 106,
       "length": 17,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.progress/FCircularProgress/FCircularProgress.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.progress/FCircularProgress/FCircularProgress.html"
     },
     {
       "offset": 131,
       "length": 24,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.progress/FCircularProgress/FCircularProgress.loader.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.progress/FCircularProgress/FCircularProgress.loader.html"
     },
     {
       "offset": 163,
       "length": 26,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.progress/FCircularProgress/FCircularProgress.pinwheel.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.progress/FCircularProgress/FCircularProgress.pinwheel.html"
     }
   ],
   "tooltips": []

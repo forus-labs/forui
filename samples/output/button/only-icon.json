@@ -5,22 +5,22 @@
     {
       "offset": 36,
       "length": 12,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/FButton.icon.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.icon.html"
     },
     {
       "offset": 49,
       "length": 5,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/child.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/child.html"
     },
     {
       "offset": 67,
       "length": 19,
-      "url": "https://pub.dev/documentation/forui_assets/latest/forui_assets/FIcons/chevronRight-constant.html"
+      "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/chevronRight-constant.html"
     },
     {
       "offset": 89,
       "length": 7,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/onPress.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/onPress.html"
     }
   ],
   "tooltips": []

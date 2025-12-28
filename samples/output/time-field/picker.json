@@ -5,17 +5,17 @@
     {
       "offset": 38,
       "length": 17,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.time_field/FTimeField/FTimeField.picker.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.picker.html"
     },
     {
       "offset": 59,
       "length": 5,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.time_field/FTimeField/label.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/label.html"
     },
     {
       "offset": 94,
       "length": 11,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.time_field/FTimeField/description.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/description.html"
     }
   ],
   "tooltips": []

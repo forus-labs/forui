@@ -4,35 +4,40 @@ import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/dart/ast/visitor.dart';
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/file_system/overlay_file_system.dart';
+import 'package:collection/collection.dart';
 import 'package:path/path.dart' as p;
 
 import '../main.dart';
 import '../snippet.dart';
 
-const _packages = {'forui', 'forui_assets', 'forui_hooks'};
-
 /// Links DartDoc URLs in [Snippet]s.
 class DartDocLinker extends RecursiveAstVisitor<void> {
   static int _monotonic = 0;
 
-  static Future<void> link(Snippet snippet, AnalysisSession session, OverlayResourceProvider overlay) async {
+  static Future<void> link(
+    Snippet snippet,
+    List<Package> packages,
+    AnalysisSession session,
+    OverlayResourceProvider overlay,
+  ) async {
     final syntheticPath = p.join(samples, 'snippet_${_monotonic++}.dart');
     overlay.setOverlay(syntheticPath, content: snippet.code, modificationStamp: DateTime.now().millisecondsSinceEpoch);
 
     if (await session.getResolvedUnit(syntheticPath) case final ResolvedUnitResult result) {
       result.unit.visitChildren(
-        DartDocLinker._(snippet, [
-          for (final package in _packages)
-            (await session.getLibraryByUri('package:$package/$package.dart') as LibraryElementResult).element,
+        DartDocLinker._(snippet, packages, [
+          for (final Package(:name) in packages)
+            (await session.getLibraryByUri('package:$name/$name.dart') as LibraryElementResult).element,
         ]),
       );
     }
   }
 
   final Snippet _snippet;
+  final List<Package> _packages;
   final List<LibraryElement> _libraries;
 
-  DartDocLinker._(this._snippet, this._libraries);
+  DartDocLinker._(this._snippet, this._packages, this._libraries);
 
   /// Links type annotations to their class/enum/mixin documentation.
   ///
@@ -202,7 +207,8 @@ class DartDocLinker extends RecursiveAstVisitor<void> {
 
   /// Returns the URL for [element], or null if it shouldn't be linked.
   String? _url(Element element) {
-    if (element.library?.uri.pathSegments.first case final package? when _packages.contains(package)) {
+    final n = element.library?.uri.pathSegments.first;
+    if (_packages.firstWhereOrNull((p) => p.name == n) case Package(name: final package, :final version)) {
       final type = switch (element) {
         FieldElement(:final enclosingElement) => enclosingElement.name,
         PropertyAccessorElement(:final enclosingElement) => enclosingElement.name,
@@ -222,23 +228,23 @@ class DartDocLinker extends RecursiveAstVisitor<void> {
       assert(library.isNotEmpty, 'Could not find barrel library for type "$type" in package "$package".');
 
       return switch (element) {
-        TopLevelFunctionElement(:final name) => 'https://pub.dev/documentation/$package/latest/$library/$name.html',
-        EnumElement(:final name) => 'https://pub.dev/documentation/$package/latest/$library/$name.html',
-        MixinElement(:final name) => 'https://pub.dev/documentation/$package/latest/$library/$name-mixin.html',
+        TopLevelFunctionElement(:final name) => 'https://pub.dev/documentation/$package/$version/$library/$name.html',
+        EnumElement(:final name) => 'https://pub.dev/documentation/$package/$version/$library/$name.html',
+        MixinElement(:final name) => 'https://pub.dev/documentation/$package/$version/$library/$name-mixin.html',
         ClassElement(:final name) ||
-        InterfaceElement(:final name) => 'https://pub.dev/documentation/$package/latest/$library/$name-class.html',
+        InterfaceElement(:final name) => 'https://pub.dev/documentation/$package/$version/$library/$name-class.html',
         FieldElement(:final enclosingElement, :final name, :final isEnumConstant) when isEnumConstant =>
-          'https://pub.dev/documentation/$package/latest/$library/${enclosingElement.name}.html#$name',
+          'https://pub.dev/documentation/$package/$version/$library/${enclosingElement.name}.html#$name',
         FieldElement(:final enclosingElement, :final name, :final isConst) when isConst =>
-          'https://pub.dev/documentation/$package/latest/$library/${enclosingElement.name}/$name-constant.html',
+          'https://pub.dev/documentation/$package/$version/$library/${enclosingElement.name}/$name-constant.html',
         FieldElement(:final enclosingElement, :final name) =>
-          'https://pub.dev/documentation/$package/latest/$library/${enclosingElement.name}/$name.html',
+          'https://pub.dev/documentation/$package/$version/$library/${enclosingElement.name}/$name.html',
         PropertyAccessorElement(:final enclosingElement, :final name) =>
-          'https://pub.dev/documentation/$package/latest/$library/${enclosingElement.name}/$name.html',
+          'https://pub.dev/documentation/$package/$version/$library/${enclosingElement.name}/$name.html',
         ConstructorElement(:final enclosingElement, :final name) =>
-          'https://pub.dev/documentation/$package/latest/$library/${enclosingElement.name}/${enclosingElement.name}${name == null || name == 'new' ? '' : '.$name'}.html',
+          'https://pub.dev/documentation/$package/$version/$library/${enclosingElement.name}/${enclosingElement.name}${name == null || name == 'new' ? '' : '.$name'}.html',
         MethodElement(:final enclosingElement?, :final name) =>
-          'https://pub.dev/documentation/$package/latest/$library/${enclosingElement.name}/$name.html',
+          'https://pub.dev/documentation/$package/$version/$library/${enclosingElement.name}/$name.html',
         _ => null,
       };
     }

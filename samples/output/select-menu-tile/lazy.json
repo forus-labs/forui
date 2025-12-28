@@ -5,62 +5,62 @@
     {
       "offset": 32,
       "length": 23,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_menu_tile/FSelectMenuTile/FSelectMenuTile.builder.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_menu_tile/FSelectMenuTile/FSelectMenuTile.builder.html"
     },
     {
       "offset": 59,
       "length": 13,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_menu_tile/FSelectMenuTile/selectControl.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_menu_tile/FSelectMenuTile/selectControl.html"
     },
     {
       "offset": 81,
       "length": 7,
-      "url": "https://pub.dev/documentation/forui/latest/forui.foundation/FMultiValueControl/FMultiValueControl.managed.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl/FMultiValueControl.managed.html"
     },
     {
       "offset": 89,
       "length": 7,
-      "url": "https://pub.dev/documentation/forui/latest/forui.foundation/FMultiValueControl/FMultiValueControl.managed.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl/FMultiValueControl.managed.html"
     },
     {
       "offset": 106,
       "length": 6,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_menu_tile/FSelectMenuTile/prefix.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_menu_tile/FSelectMenuTile/prefix.html"
     },
     {
       "offset": 125,
       "length": 15,
-      "url": "https://pub.dev/documentation/forui_assets/latest/forui_assets/FIcons/variable-constant.html"
+      "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/variable-constant.html"
     },
     {
       "offset": 145,
       "length": 5,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_menu_tile/FSelectMenuTile/title.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_menu_tile/FSelectMenuTile/title.html"
     },
     {
       "offset": 187,
       "length": 9,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_menu_tile/FSelectMenuTile/maxHeight.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_menu_tile/FSelectMenuTile/maxHeight.html"
     },
     {
       "offset": 205,
       "length": 11,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_menu_tile/FSelectMenuTile/FSelectMenuTile.builder.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_menu_tile/FSelectMenuTile/FSelectMenuTile.builder.html"
     },
     {
       "offset": 245,
       "length": 4,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_tile_group/FSelectTile/FSelectTile.tile.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.tile.html"
     },
     {
       "offset": 250,
       "length": 5,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_tile_group/FSelectTile/title.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/title.html"
     },
     {
       "offset": 278,
       "length": 5,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_tile_group/FSelectTile/value.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/value.html"
     }
   ],
   "tooltips": []

@@ -5,67 +5,67 @@
     {
       "offset": 451,
       "length": 20,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelect/FSelect.rich.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.rich.html"
     },
     {
       "offset": 483,
       "length": 5,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelect/label.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/label.html"
     },
     {
       "offset": 526,
       "length": 11,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelect/description.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/description.html"
     },
     {
       "offset": 593,
       "length": 4,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelect/hint.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/hint.html"
     },
     {
       "offset": 632,
       "length": 6,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelect/format.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/format.html"
     },
     {
       "offset": 660,
       "length": 9,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelect/validator.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/validator.html"
     },
     {
       "offset": 769,
       "length": 8,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelect/FSelect.rich.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.rich.html"
     },
     {
       "offset": 993,
       "length": 4,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/item.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectItemMixin/item.html"
     },
     {
       "offset": 998,
       "length": 5,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/item.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectItemMixin/item.html"
     },
     {
       "offset": 1023,
       "length": 5,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/item.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectItemMixin/item.html"
     },
     {
       "offset": 1075,
       "length": 7,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/FButton.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
     },
     {
       "offset": 1094,
       "length": 5,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/child.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/child.html"
     },
     {
       "offset": 1133,
       "length": 7,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/onPress.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/onPress.html"
     }
   ],
   "tooltips": []

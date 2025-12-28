@@ -5,92 +5,92 @@
     {
       "offset": 32,
       "length": 10,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItemGroup/FItemGroup.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroup/FItemGroup.html"
     },
     {
       "offset": 46,
       "length": 7,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItemGroup/divider.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroup/divider.html"
     },
     {
       "offset": 66,
       "length": 8,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItemGroup/FItemGroup.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroup/FItemGroup.html"
     },
     {
       "offset": 82,
       "length": 5,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItem/FItem.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem/FItem.html"
     },
     {
       "offset": 95,
       "length": 6,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItem/FItem.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem/FItem.html"
     },
     {
       "offset": 114,
       "length": 11,
-      "url": "https://pub.dev/documentation/forui_assets/latest/forui_assets/FIcons/user-constant.html"
+      "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/user-constant.html"
     },
     {
       "offset": 134,
       "length": 5,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItem/FItem.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem/FItem.html"
     },
     {
       "offset": 178,
       "length": 6,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItem/FItem.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem/FItem.html"
     },
     {
       "offset": 197,
       "length": 19,
-      "url": "https://pub.dev/documentation/forui_assets/latest/forui_assets/FIcons/chevronRight-constant.html"
+      "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/chevronRight-constant.html"
     },
     {
       "offset": 225,
       "length": 7,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItem/onPress.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem/onPress.html"
     },
     {
       "offset": 252,
       "length": 5,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItem/FItem.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem/FItem.html"
     },
     {
       "offset": 265,
       "length": 6,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItem/FItem.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem/FItem.html"
     },
     {
       "offset": 284,
       "length": 11,
-      "url": "https://pub.dev/documentation/forui_assets/latest/forui_assets/FIcons/wifi-constant.html"
+      "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/wifi-constant.html"
     },
     {
       "offset": 304,
       "length": 5,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItem/FItem.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem/FItem.html"
     },
     {
       "offset": 337,
       "length": 7,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItem/FItem.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem/FItem.html"
     },
     {
       "offset": 380,
       "length": 6,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItem/FItem.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem/FItem.html"
     },
     {
       "offset": 399,
       "length": 19,
-      "url": "https://pub.dev/documentation/forui_assets/latest/forui_assets/FIcons/chevronRight-constant.html"
+      "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/chevronRight-constant.html"
     },
     {
       "offset": 427,
       "length": 7,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItem/onPress.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem/onPress.html"
     }
   ],
   "tooltips": []

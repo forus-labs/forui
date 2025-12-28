@@ -5,32 +5,32 @@
     {
       "offset": 250,
       "length": 7,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.switch_/FSwitch/FSwitch.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.switch_/FSwitch/FSwitch.html"
     },
     {
       "offset": 263,
       "length": 7,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.switch_/FSwitch/enabled.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.switch_/FSwitch/enabled.html"
     },
     {
       "offset": 292,
       "length": 5,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.switch_/FSwitch/label.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.switch_/FSwitch/label.html"
     },
     {
       "offset": 332,
       "length": 14,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.switch_/FSwitch/semanticsLabel.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.switch_/FSwitch/semanticsLabel.html"
     },
     {
       "offset": 369,
       "length": 5,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.switch_/FSwitch/value.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.switch_/FSwitch/value.html"
     },
     {
       "offset": 388,
       "length": 8,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.switch_/FSwitch/onChange.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.switch_/FSwitch/onChange.html"
     }
   ],
   "tooltips": []

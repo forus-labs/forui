@@ -5,47 +5,47 @@
     {
       "offset": 752,
       "length": 7,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/FButton.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
     },
     {
       "offset": 769,
       "length": 7,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/onPress.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/onPress.html"
     },
     {
       "offset": 884,
       "length": 5,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/child.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/child.html"
     },
     {
       "offset": 1032,
       "length": 12,
-      "url": "https://pub.dev/documentation/forui/latest/forui.foundation/FCollapsible/FCollapsible.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FCollapsible/FCollapsible.html"
     },
     {
       "offset": 1056,
       "length": 5,
-      "url": "https://pub.dev/documentation/forui/latest/forui.foundation/FCollapsible/value.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FCollapsible/value.html"
     },
     {
       "offset": 1091,
       "length": 5,
-      "url": "https://pub.dev/documentation/forui/latest/forui.foundation/FCollapsible/child.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FCollapsible/child.html"
     },
     {
       "offset": 1098,
       "length": 5,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.card/FCard/FCard.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.card/FCard/FCard.html"
     },
     {
       "offset": 1117,
       "length": 5,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.card/FCard/FCard.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.card/FCard/FCard.html"
     },
     {
       "offset": 1163,
       "length": 5,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.card/FCard/child.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.card/FCard/child.html"
     }
   ],
   "tooltips": []

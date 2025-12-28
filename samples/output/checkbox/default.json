@@ -5,42 +5,42 @@
     {
       "offset": 279,
       "length": 9,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.checkbox/FCheckbox/FCheckbox.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckbox/FCheckbox.html"
     },
     {
       "offset": 294,
       "length": 5,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.checkbox/FCheckbox/label.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckbox/label.html"
     },
     {
       "offset": 348,
       "length": 11,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.checkbox/FCheckbox/description.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckbox/description.html"
     },
     {
       "offset": 419,
       "length": 5,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.checkbox/FCheckbox/error.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckbox/error.html"
     },
     {
       "offset": 481,
       "length": 14,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.checkbox/FCheckbox/semanticsLabel.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckbox/semanticsLabel.html"
     },
     {
       "offset": 532,
       "length": 5,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.checkbox/FCheckbox/value.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckbox/value.html"
     },
     {
       "offset": 551,
       "length": 8,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.checkbox/FCheckbox/onChange.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckbox/onChange.html"
     },
     {
       "offset": 608,
       "length": 7,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.checkbox/FCheckbox/enabled.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckbox/enabled.html"
     }
   ],
   "tooltips": []

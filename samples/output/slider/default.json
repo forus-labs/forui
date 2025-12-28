@@ -5,62 +5,62 @@
     {
       "offset": 38,
       "length": 7,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSlider/FSlider.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSlider/FSlider.html"
     },
     {
       "offset": 49,
       "length": 7,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSlider/control.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSlider/control.html"
     },
     {
       "offset": 59,
       "length": 17,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSliderControl/FSliderControl.managedContinuous.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderControl/FSliderControl.managedContinuous.html"
     },
     {
       "offset": 82,
       "length": 7,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSliderControl/FSliderControl.managedContinuous.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderControl/FSliderControl.managedContinuous.html"
     },
     {
       "offset": 91,
       "length": 12,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSliderValue/FSliderValue.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderValue/FSliderValue.html"
     },
     {
       "offset": 104,
       "length": 3,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSliderValue/max.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderValue/max.html"
     },
     {
       "offset": 114,
       "length": 11,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSliderValue/constraints.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderValue/constraints.html"
     },
     {
       "offset": 140,
       "length": 11,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSliderControl/FSliderControl.managedContinuous.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderControl/FSliderControl.managedContinuous.html"
     },
     {
       "offset": 173,
       "length": 5,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSlider/label.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSlider/label.html"
     },
     {
       "offset": 219,
       "length": 11,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSlider/description.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSlider/description.html"
     },
     {
       "offset": 283,
       "length": 14,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSlider/forceErrorText.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSlider/forceErrorText.html"
     },
     {
       "offset": 308,
       "length": 7,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSlider/enabled.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSlider/enabled.html"
     }
   ],
   "tooltips": []

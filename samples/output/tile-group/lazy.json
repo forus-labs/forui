@@ -5,57 +5,57 @@
     {
       "offset": 32,
       "length": 18,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTileGroup/FTileGroup.builder.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileGroup/FTileGroup.builder.html"
     },
     {
       "offset": 54,
       "length": 5,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTileGroup/label.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileGroup/label.html"
     },
     {
       "offset": 87,
       "length": 11,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTileGroup/description.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileGroup/description.html"
     },
     {
       "offset": 145,
       "length": 9,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTileGroup/maxHeight.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileGroup/maxHeight.html"
     },
     {
       "offset": 163,
       "length": 5,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTileGroup/FTileGroup.builder.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileGroup/FTileGroup.builder.html"
     },
     {
       "offset": 177,
       "length": 11,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTileGroup/FTileGroup.builder.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileGroup/FTileGroup.builder.html"
     },
     {
       "offset": 210,
       "length": 5,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTile/FTile.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTile/FTile.html"
     },
     {
       "offset": 221,
       "length": 5,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTile/FTile.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTile/FTile.html"
     },
     {
       "offset": 253,
       "length": 6,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTile/FTile.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTile/FTile.html"
     },
     {
       "offset": 272,
       "length": 19,
-      "url": "https://pub.dev/documentation/forui_assets/latest/forui_assets/FIcons/chevronRight-constant.html"
+      "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/chevronRight-constant.html"
     },
     {
       "offset": 298,
       "length": 7,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTile/onPress.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTile/onPress.html"
     }
   ],
   "tooltips": []

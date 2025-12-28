@@ -5,202 +5,202 @@
     {
       "offset": 142,
       "length": 15,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.toast/FToastAlignment.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/FToastAlignment.html"
     },
     {
       "offset": 195,
       "length": 7,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.toast/FToastAlignment.html#topLeft"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/FToastAlignment.html#topLeft"
     },
     {
       "offset": 225,
       "length": 9,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.toast/FToastAlignment.html#topCenter"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/FToastAlignment.html#topCenter"
     },
     {
       "offset": 259,
       "length": 8,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.toast/FToastAlignment.html#topRight"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/FToastAlignment.html#topRight"
     },
     {
       "offset": 291,
       "length": 10,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.toast/FToastAlignment.html#bottomLeft"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/FToastAlignment.html#bottomLeft"
     },
     {
       "offset": 327,
       "length": 12,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.toast/FToastAlignment.html#bottomCenter"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/FToastAlignment.html#bottomCenter"
     },
     {
       "offset": 367,
       "length": 11,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.toast/FToastAlignment.html#bottomRight"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/FToastAlignment.html#bottomRight"
     },
     {
       "offset": 410,
       "length": 7,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/FButton.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
     },
     {
       "offset": 427,
       "length": 7,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/onPress.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/onPress.html"
     },
     {
       "offset": 442,
       "length": 10,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.toast/showFToast.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/showFToast.html"
     },
     {
       "offset": 464,
       "length": 7,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.toast/showFToast.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/showFToast.html"
     },
     {
       "offset": 492,
       "length": 9,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.toast/showFToast.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/showFToast.html"
     },
     {
       "offset": 524,
       "length": 5,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.toast/showFToast.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/showFToast.html"
     },
     {
       "offset": 579,
       "length": 11,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.toast/showFToast.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/showFToast.html"
     },
     {
       "offset": 649,
       "length": 13,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.toast/showFToast.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/showFToast.html"
     },
     {
       "offset": 720,
       "length": 7,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/FButton.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
     },
     {
       "offset": 743,
       "length": 5,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/style.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/style.html"
     },
     {
       "offset": 785,
       "length": 8,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/$FButtonStyleTransformations/copyWith.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/$FButtonStyleTransformations/copyWith.html"
     },
     {
       "offset": 777,
       "length": 7,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButtonStyles/primary.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButtonStyles/primary.html"
     },
     {
       "offset": 764,
       "length": 12,
-      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FThemeData/buttonStyles.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/buttonStyles.html"
     },
     {
       "offset": 758,
       "length": 5,
-      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FThemeBuildContext/theme.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext/theme.html"
     },
     {
       "offset": 811,
       "length": 12,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/$FButtonStyleTransformations/copyWith.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/$FButtonStyleTransformations/copyWith.html"
     },
     {
       "offset": 894,
       "length": 8,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/$FButtonContentStyleTransformations/copyWith.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/$FButtonContentStyleTransformations/copyWith.html"
     },
     {
       "offset": 860,
       "length": 12,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButtonStyle/contentStyle.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButtonStyle/contentStyle.html"
     },
     {
       "offset": 852,
       "length": 7,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButtonStyles/primary.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButtonStyles/primary.html"
     },
     {
       "offset": 839,
       "length": 12,
-      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FThemeData/buttonStyles.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/buttonStyles.html"
     },
     {
       "offset": 833,
       "length": 5,
-      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FThemeBuildContext/theme.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext/theme.html"
     },
     {
       "offset": 926,
       "length": 7,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/$FButtonContentStyleTransformations/copyWith.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/$FButtonContentStyleTransformations/copyWith.html"
     },
     {
       "offset": 1006,
       "length": 9,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/$FButtonContentStyleTransformations/copyWith.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/$FButtonContentStyleTransformations/copyWith.html"
     },
     {
       "offset": 1018,
       "length": 3,
-      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FWidgetStateMap/FWidgetStateMap.all.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStateMap/FWidgetStateMap.all.html"
     },
     {
       "offset": 1072,
       "length": 2,
-      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FTypography/xs.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FTypography/xs.html"
     },
     {
       "offset": 1061,
       "length": 10,
-      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FThemeData/typography.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/typography.html"
     },
     {
       "offset": 1055,
       "length": 5,
-      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FThemeBuildContext/theme.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext/theme.html"
     },
     {
       "offset": 1139,
       "length": 17,
-      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FColors/primaryForeground.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors/primaryForeground.html"
     },
     {
       "offset": 1132,
       "length": 6,
-      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FThemeData/colors.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/colors.html"
     },
     {
       "offset": 1126,
       "length": 5,
-      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FThemeBuildContext/theme.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext/theme.html"
     },
     {
       "offset": 1264,
       "length": 7,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/onPress.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/onPress.html"
     },
     {
       "offset": 1279,
       "length": 7,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.toast/FToasterEntry/dismiss.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/FToasterEntry/dismiss.html"
     },
     {
       "offset": 1302,
       "length": 5,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/child.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/child.html"
     },
     {
       "offset": 1376,
       "length": 5,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/child.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/child.html"
     }
   ],
   "tooltips": []

@@ -5,17 +5,17 @@
     {
       "offset": 38,
       "length": 19,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.date_field/FDateField/FDateField.calendar.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateField/FDateField.calendar.html"
     },
     {
       "offset": 61,
       "length": 5,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.date_field/FDateField/label.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateField/label.html"
     },
     {
       "offset": 96,
       "length": 11,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.date_field/FDateField/description.html"
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateField/description.html"
     }
   ],
   "tooltips": []
