@@ -1,24 +1,29 @@
 {
-  "code": "Widget build(BuildContext _) => FAutocomplete(\n  hint: 'Type to search fruits',\n  clearable: (value) => value.text.isNotEmpty,\n  items: fruits,\n);\n",
-  "highlights": [],
+  "code": "const fruits = [\n  'Apple',\n  'Banana',\n  'Orange',\n  'Grape',\n  'Strawberry',\n  'Pineapple',\n];\n\nclass ClearableAutocompleteExample extends StatelessWidget {\n  @override\n  Widget build(BuildContext _) => FAutocomplete(\n    hint: 'Type to search fruits',\n    clearable: (value) => value.text.isNotEmpty,\n    items: fruits,\n  );\n}\n",
+  "highlights": [
+    {
+      "start": 14,
+      "end": 14
+    }
+  ],
   "links": [
     {
-      "offset": 32,
+      "offset": 205,
       "length": 13,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/FAutocomplete.html"
     },
     {
-      "offset": 49,
+      "offset": 224,
       "length": 4,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/hint.html"
     },
     {
-      "offset": 82,
+      "offset": 259,
       "length": 9,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/clearable.html"
     },
     {
-      "offset": 129,
+      "offset": 308,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/FAutocomplete.html"
     }

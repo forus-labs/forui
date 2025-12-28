@@ -7,7 +7,6 @@ import 'package:analyzer/dart/analysis/session.dart';
 import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/dart/ast/visitor.dart';
 import 'package:analyzer/dart/element/element.dart';
-import 'package:analyzer/dart/element/type.dart';
 import 'package:analyzer/file_system/overlay_file_system.dart';
 import 'package:collection/collection.dart';
 import 'package:path/path.dart' as p;
@@ -95,7 +94,7 @@ class Samples extends RecursiveAstVisitor<void> {
 
   Future<String> _merge(
     ResolvedUnitResult result,
-    List<DartType> include,
+    List<Element> include,
     ClassDeclaration declaration,
     String widget,
   ) async {
@@ -103,8 +102,8 @@ class Samples extends RecursiveAstVisitor<void> {
       ..[0] = result.unit.directives.whereType<ImportDirective>().map((d) => d.toSource()).join('\n')
       ..[declaration.offset] = widget;
 
-    for (final type in include) {
-      final (result, declaration) = (await _session.declaration(type.element!))!;
+    for (final element in include) {
+      final (result, declaration) = (await _session.declaration(element))!;
       fragments[declaration.offset] = declaration.toSource();
     }
 
@@ -117,12 +116,23 @@ extension Sessions on AnalysisSession {
     final path = switch (element) {
       InterfaceElement(:final firstFragment) => firstFragment.libraryFragment.source.fullName,
       TopLevelFunctionElement(:final firstFragment) => firstFragment.libraryFragment.source.fullName,
+      TopLevelVariableElement(:final firstFragment) => firstFragment.libraryFragment.source.fullName,
       _ => throw ArgumentError('Unsupported element type: ${element.runtimeType}'),
     };
 
     if (await getResolvedUnit(path) case final ResolvedUnitResult result) {
-      final declaration = result.unit.declarations.firstWhereOrNull((d) => d.declaredFragment?.element == element);
-      return declaration == null ? null : (result, declaration);
+      for (final declaration in result.unit.declarations) {
+        // TopLevelVariableDeclaration contains a list of variables, check each one.
+        if (declaration case TopLevelVariableDeclaration(variables: VariableDeclarationList(:final variables))) {
+          for (final variable in variables) {
+            if (variable.declaredFragment?.element == element) {
+              return (result, declaration);
+            }
+          }
+        } else if (declaration.declaredFragment?.element == element) {
+          return (result, declaration);
+        }
+      }
     }
 
     return null;

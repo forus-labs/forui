@@ -1,6 +1,11 @@
 {
   "code": "Widget build(BuildContext _) => FCalendar(\n  control: .managedRange(\n    initial: (DateTime(2024, 7, 17), DateTime(2024, 7, 20)),\n  ),\n  start: DateTime(2000),\n  today: DateTime(2024, 7, 15),\n  end: DateTime(2030),\n);\n",
-  "highlights": [],
+  "highlights": [
+    {
+      "start": 2,
+      "end": 4
+    }
+  ],
   "links": [
     {
       "offset": 32,

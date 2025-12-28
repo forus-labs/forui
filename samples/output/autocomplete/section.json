@@ -1,39 +1,39 @@
 {
-  "code": "Widget build(BuildContext _) => FAutocomplete.builder(\n  hint: 'Type to search timezones',\n  filter: (query) => timezones.values\n      .expand((list) => list)\n      .where(\n        (timezone) => timezone.toLowerCase().contains(query.toLowerCase()),\n      ),\n  contentBuilder: (context, query, suggestions) => [\n    for (final MapEntry(key: label, value: zones) in timezones.entries)\n      if (zones.where(suggestions.contains).toList() case final zones\n          when zones.isNotEmpty)\n        .section(label: Text(label), items: zones),\n  ],\n);\n",
+  "code": "const timezones = {\n  'North America': [\n    'Eastern Standard Time (EST)',\n    'Central Standard Time (CST)',\n    'Mountain Standard Time (MST)',\n    'Pacific Standard Time (PST)',\n    'Alaska Standard Time (AKST)',\n    'Hawaii Standard Time (HST)',\n  ],\n  'South America': [\n    'Argentina Time (ART)',\n    'Bolivia Time (BOT)',\n    'Brasilia Time (BRT)',\n    'Chile Standard Time (CLT)',\n  ],\n  'Europe & Africa': [\n    'Greenwich Mean Time (GMT)',\n    'Central European Time (CET)',\n    'Eastern European Time (EET)',\n    'Western European Summer Time (WEST)',\n    'Central Africa Time (CAT)',\n    'Eastern Africa Time (EAT)',\n  ],\n  'Asia': [\n    'Moscow Time (MSK)',\n    'India Standard Time (IST)',\n    'China Standard Time (CST)',\n    'Japan Standard Time (JST)',\n    'Korea Standard Time (KST)',\n    'Indonesia Standard Time (IST)',\n  ],\n  'Australia & Pacific': [\n    'Australian Western Standard Time (AWST)',\n    'Australian Central Standard Time (ACST)',\n    'Australian Eastern Standard Time (AEST)',\n    'New Zealand Standard Time (NZST)',\n    'Fiji Time (FJT)',\n  ],\n};\n\nclass SectionAutocompleteExample extends StatelessWidget {\n  @override\n  Widget build(BuildContext _) => FAutocomplete.builder(\n    hint: 'Type to search timezones',\n    filter: (query) => timezones.values\n        .expand((list) => list)\n        .where(\n          (timezone) => timezone.toLowerCase().contains(query.toLowerCase()),\n        ),\n    contentBuilder: (context, query, suggestions) => [\n      for (final MapEntry(key: label, value: zones) in timezones.entries)\n        if (zones.where(suggestions.contains).toList() case final zones\n            when zones.isNotEmpty)\n          .section(label: Text(label), items: zones),\n    ],\n  );\n}\n",
   "highlights": [],
   "links": [
     {
-      "offset": 32,
+      "offset": 1192,
       "length": 21,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/FAutocomplete.builder.html"
     },
     {
-      "offset": 57,
+      "offset": 1219,
       "length": 4,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/hint.html"
     },
     {
-      "offset": 93,
+      "offset": 1257,
       "length": 6,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/filter.html"
     },
     {
-      "offset": 260,
+      "offset": 1434,
       "length": 14,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/contentBuilder.html"
     },
     {
-      "offset": 495,
+      "offset": 1677,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocompleteItemMixin/section.html"
     },
     {
-      "offset": 503,
+      "offset": 1685,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocompleteItemMixin/section.html"
     },
     {
-      "offset": 523,
+      "offset": 1705,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocompleteItemMixin/section.html"
     }

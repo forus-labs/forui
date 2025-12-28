@@ -1,34 +1,34 @@
 {
-  "code": "Widget build(BuildContext _) => FAutocomplete.builder(\n  hint: 'Type to search fruits',\n  filter: (query) async {\n    await Future.delayed(const Duration(seconds: 3));\n    return query.isEmpty\n        ? fruits\n        : fruits.where(\n            (fruit) => fruit.toLowerCase().startsWith(query.toLowerCase()),\n          );\n  },\n  contentBuilder: (context, query, values) => [\n    for (final fruit in values) .item(value: fruit),\n  ],\n);\n",
+  "code": "const fruits = [\n  'Apple',\n  'Banana',\n  'Orange',\n  'Grape',\n  'Strawberry',\n  'Pineapple',\n];\n\nclass AsyncAutocompleteExample extends StatelessWidget {\n  @override\n  Widget build(BuildContext _) => FAutocomplete.builder(\n    hint: 'Type to search fruits',\n    filter: (query) async {\n      await Future.delayed(const Duration(seconds: 3));\n      return query.isEmpty\n          ? fruits\n          : fruits.where(\n              (fruit) => fruit.toLowerCase().startsWith(query.toLowerCase()),\n            );\n    },\n    contentBuilder: (context, query, values) => [\n      for (final fruit in values) .item(value: fruit),\n    ],\n  );\n}\n",
   "highlights": [],
   "links": [
     {
-      "offset": 32,
+      "offset": 201,
       "length": 21,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/FAutocomplete.builder.html"
     },
     {
-      "offset": 57,
+      "offset": 228,
       "length": 4,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/hint.html"
     },
     {
-      "offset": 90,
+      "offset": 263,
       "length": 6,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/filter.html"
     },
     {
-      "offset": 330,
+      "offset": 519,
       "length": 14,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/contentBuilder.html"
     },
     {
-      "offset": 409,
+      "offset": 600,
       "length": 4,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocompleteItemMixin/item.html"
     },
     {
-      "offset": 414,
+      "offset": 605,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocompleteItemMixin/item.html"
     }

@@ -5,19 +5,54 @@ import 'package:forui/forui.dart';
 
 import 'package:forui_samples/sample.dart';
 
-final _styles = {
-  'primary': FBadgeStyle.primary(),
-  'secondary': FBadgeStyle.secondary(),
-  'destructive': FBadgeStyle.destructive(),
-  'outline': FBadgeStyle.outline(),
-};
-
 @RoutePage()
-class BadgePage extends Sample {
-  final FBaseBadgeStyle Function(FBadgeStyle) style;
-
-  BadgePage({@queryParam String style = 'primary', @queryParam super.theme}) : style = _styles[style]!;
+class BadgePrimaryPage extends Sample {
+  BadgePrimaryPage({@queryParam super.theme});
 
   @override
-  Widget sample(BuildContext _) => FBadge(style: style, child: const Text('Badge'));
+  Widget sample(BuildContext _) => FBadge(
+    // {@highlight}
+    style: FBadgeStyle.primary(),
+    // {@endhighlight}
+    child: const Text('Badge'),
+  );
+}
+
+@RoutePage()
+class BadgeSecondaryPage extends Sample {
+  BadgeSecondaryPage({@queryParam super.theme});
+
+  @override
+  Widget sample(BuildContext _) => FBadge(
+    // {@highlight}
+    style: FBadgeStyle.secondary(),
+    // {@endhighlight}
+    child: const Text('Badge'),
+  );
+}
+
+@RoutePage()
+class BadgeDestructivePage extends Sample {
+  BadgeDestructivePage({@queryParam super.theme});
+
+  @override
+  Widget sample(BuildContext _) => FBadge(
+    // {@highlight}
+    style: FBadgeStyle.destructive(),
+    // {@endhighlight}
+    child: const Text('Badge'),
+  );
+}
+
+@RoutePage()
+class BadgeOutlinePage extends Sample {
+  BadgeOutlinePage({@queryParam super.theme});
+
+  @override
+  Widget sample(BuildContext _) => FBadge(
+    // {@highlight}
+    style: FBadgeStyle.outline(),
+    // {@endhighlight}
+    child: const Text('Badge'),
+  );
 }

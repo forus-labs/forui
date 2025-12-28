@@ -8,11 +8,15 @@ import 'package:forui/forui.dart';
 import 'package:forui_samples/sample.dart';
 
 @RoutePage()
-class ProgressPage extends Sample {
-  ProgressPage({@queryParam super.theme});
+class CircularProgressPage extends Sample {
+  CircularProgressPage({@queryParam super.theme});
 
   @override
-  Widget sample(BuildContext _) => const FProgress();
+  Widget sample(BuildContext _) => const Row(
+    mainAxisAlignment: .center,
+    spacing: 25,
+    children: [FCircularProgress(), FCircularProgress.loader(), FCircularProgress.pinwheel()],
+  );
 }
 
 @RoutePage()
@@ -52,13 +56,9 @@ class _DeterminateProgressPageState extends StatefulSampleState<DeterminateProgr
 }
 
 @RoutePage()
-class CircularProgressPage extends Sample {
-  CircularProgressPage({@queryParam super.theme});
+class ProgressPage extends Sample {
+  ProgressPage({@queryParam super.theme});
 
   @override
-  Widget sample(BuildContext _) => const Row(
-    mainAxisAlignment: .center,
-    spacing: 25,
-    children: [FCircularProgress(), FCircularProgress.loader(), FCircularProgress.pinwheel()],
-  );
+  Widget sample(BuildContext _) => const FProgress();
 }

@@ -5,18 +5,30 @@ import 'package:forui/forui.dart';
 
 import 'package:forui_samples/sample.dart';
 
-final _styles = {'primary': FAlertStyle.primary(), 'destructive': FAlertStyle.destructive()};
-
 @RoutePage()
-class AlertPage extends Sample {
-  final FBaseAlertStyle Function(FAlertStyle) style;
-
-  AlertPage({@queryParam super.theme, @queryParam String style = 'primary'}) : style = _styles[style]!;
+class AlertPrimaryPage extends Sample {
+  AlertPrimaryPage({@queryParam super.theme});
 
   @override
   Widget sample(BuildContext _) => FAlert(
+    // {@highlight}
+    style: FAlertStyle.primary(),
+    // {@endhighlight}
     title: const Text('Heads Up!'),
     subtitle: const Text('You can add components to your app using the cli.'),
-    style: style,
+  );
+}
+
+@RoutePage()
+class AlertDestructivePage extends Sample {
+  AlertDestructivePage({@queryParam super.theme});
+
+  @override
+  Widget sample(BuildContext _) => FAlert(
+    // {@highlight}
+    style: FAlertStyle.destructive(),
+    // {@endhighlight}
+    title: const Text('Heads Up!'),
+    subtitle: const Text('You can add components to your app using the cli.'),
   );
 }

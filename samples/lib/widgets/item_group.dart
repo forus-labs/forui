@@ -7,18 +7,64 @@ import 'package:forui_samples/sample.dart';
 
 @RoutePage()
 class ItemGroupPage extends Sample {
-  final FItemDivider divider;
-
-  ItemGroupPage({@queryParam super.theme, @queryParam String divider = 'none'})
-    : divider = switch (divider) {
-        'indented' => .indented,
-        'none' => .none,
-        _ => .full,
-      };
+  ItemGroupPage({@queryParam super.theme});
 
   @override
   Widget sample(BuildContext _) => FItemGroup(
-    divider: divider,
+    children: [
+      FItem(
+        prefix: const Icon(FIcons.user),
+        title: const Text('Personalization'),
+        suffix: const Icon(FIcons.chevronRight),
+        onPress: () {},
+      ),
+      FItem(
+        prefix: const Icon(FIcons.wifi),
+        title: const Text('WiFi'),
+        details: const Text('Duobase (5G)'),
+        suffix: const Icon(FIcons.chevronRight),
+        onPress: () {},
+      ),
+    ],
+  );
+}
+
+@RoutePage()
+class ItemGroupIndentedPage extends Sample {
+  ItemGroupIndentedPage({@queryParam super.theme});
+
+  @override
+  Widget sample(BuildContext _) => FItemGroup(
+    // {@highlight}
+    divider: .indented,
+    // {@endhighlight}
+    children: [
+      FItem(
+        prefix: const Icon(FIcons.user),
+        title: const Text('Personalization'),
+        suffix: const Icon(FIcons.chevronRight),
+        onPress: () {},
+      ),
+      FItem(
+        prefix: const Icon(FIcons.wifi),
+        title: const Text('WiFi'),
+        details: const Text('Duobase (5G)'),
+        suffix: const Icon(FIcons.chevronRight),
+        onPress: () {},
+      ),
+    ],
+  );
+}
+
+@RoutePage()
+class ItemGroupFullPage extends Sample {
+  ItemGroupFullPage({@queryParam super.theme});
+
+  @override
+  Widget sample(BuildContext _) => FItemGroup(
+    // {@highlight}
+    divider: .full,
+    // {@endhighlight}
     children: [
       FItem(
         prefix: const Icon(FIcons.user),

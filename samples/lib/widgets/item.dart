@@ -7,18 +7,44 @@ import 'package:forui_samples/sample.dart';
 
 @RoutePage()
 class ItemPage extends Sample {
-  final bool enabled;
-  final bool tappable;
-
-  ItemPage({@queryParam super.theme, @queryParam this.enabled = true, @queryParam this.tappable = true});
+  ItemPage({@queryParam super.theme});
 
   @override
   Widget sample(BuildContext _) => FItem(
-    enabled: enabled,
     prefix: const Icon(FIcons.user),
     title: const Text('Personalization'),
     suffix: const Icon(FIcons.chevronRight),
-    onPress: tappable ? () {} : null,
+    // {@highlight}
+    onPress: () {},
+    // {@endhighlight}
+  );
+}
+
+@RoutePage()
+class ItemDisabledPage extends Sample {
+  ItemDisabledPage({@queryParam super.theme});
+
+  @override
+  Widget sample(BuildContext _) => FItem(
+    // {@highlight}
+    enabled: false,
+    // {@endhighlight}
+    prefix: const Icon(FIcons.user),
+    title: const Text('Personalization'),
+    suffix: const Icon(FIcons.chevronRight),
+    onPress: () {},
+  );
+}
+
+@RoutePage()
+class ItemUntappablePage extends Sample {
+  ItemUntappablePage({@queryParam super.theme});
+
+  @override
+  Widget sample(BuildContext _) => FItem(
+    prefix: const Icon(FIcons.user),
+    title: const Text('Personalization'),
+    suffix: const Icon(FIcons.chevronRight),
   );
 }
 
@@ -30,7 +56,9 @@ class ItemSubtitlePage extends Sample {
   Widget sample(BuildContext _) => FItem(
     prefix: const Icon(FIcons.bell),
     title: const Text('Notifications'),
+    // {@highlight}
     subtitle: const Text('Banners, Sounds, Badges'),
+    // {@endhighlight}
     suffix: const Icon(FIcons.chevronRight),
     onPress: () {},
   );
@@ -44,7 +72,9 @@ class ItemDetailsPage extends Sample {
   Widget sample(BuildContext _) => FItem(
     prefix: const Icon(FIcons.wifi),
     title: const Text('WiFi'),
+    // {@highlight}
     details: const Text('Duobase (5G)'),
+    // {@endhighlight}
     suffix: const Icon(FIcons.chevronRight),
     onPress: () {},
   );

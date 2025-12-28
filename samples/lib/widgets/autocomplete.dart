@@ -2,6 +2,7 @@ import 'package:flutter/widgets.dart';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:forui/forui.dart';
+import 'package:forui_samples/main.dart';
 
 import 'package:forui_samples/sample.dart';
 
@@ -55,7 +56,7 @@ class AutocompletePage extends Sample {
 
 @RoutePage()
 class DetailedAutocompletePage extends Sample {
-  DetailedAutocompletePage({@queryParam super.theme}): super(alignment: .topCenter, top: 20);
+  DetailedAutocompletePage({@queryParam super.theme}) : super(alignment: .topCenter, top: 20);
 
   @override
   Widget sample(BuildContext _) => FAutocomplete.builder(
@@ -89,8 +90,9 @@ class DetailedAutocompletePage extends Sample {
 }
 
 @RoutePage()
+@Options(include: [timezones])
 class SectionAutocompletePage extends Sample {
-  SectionAutocompletePage({@queryParam super.theme}): super(alignment: .topCenter, top: 20);
+  SectionAutocompletePage({@queryParam super.theme}) : super(alignment: .topCenter, top: 20);
 
   @override
   Widget sample(BuildContext _) => FAutocomplete.builder(
@@ -108,7 +110,7 @@ class SectionAutocompletePage extends Sample {
 
 @RoutePage()
 class DividerAutocompletePage extends Sample {
-  DividerAutocompletePage({@queryParam super.theme}): super(alignment: .topCenter, top: 20);
+  DividerAutocompletePage({@queryParam super.theme}) : super(alignment: .topCenter, top: 20);
 
   @override
   Widget sample(BuildContext _) => FAutocomplete.builder(
@@ -132,8 +134,9 @@ class DividerAutocompletePage extends Sample {
 }
 
 @RoutePage()
+@Options(include: [fruits])
 class AsyncAutocompletePage extends Sample {
-  AsyncAutocompletePage({@queryParam super.theme}): super(alignment: .topCenter, top: 20);
+  AsyncAutocompletePage({@queryParam super.theme}) : super(alignment: .topCenter, top: 20);
 
   @override
   Widget sample(BuildContext _) => FAutocomplete.builder(
@@ -147,8 +150,9 @@ class AsyncAutocompletePage extends Sample {
 }
 
 @RoutePage()
+@Options(include: [fruits])
 class AsyncLoadingAutocompletePage extends Sample {
-  AsyncLoadingAutocompletePage({@queryParam super.theme}): super(alignment: .topCenter, top: 20);
+  AsyncLoadingAutocompletePage({@queryParam super.theme}) : super(alignment: .topCenter, top: 20);
 
   @override
   Widget sample(BuildContext _) => FAutocomplete.builder(
@@ -157,17 +161,20 @@ class AsyncLoadingAutocompletePage extends Sample {
       await Future.delayed(const Duration(seconds: 3));
       return query.isEmpty ? fruits : fruits.where((fruit) => fruit.toLowerCase().startsWith(query.toLowerCase()));
     },
+    // {@highlight}
     contentLoadingBuilder: (context, style) => Padding(
       padding: const .all(14.0),
       child: Text('Here be dragons...', style: style.emptyTextStyle),
     ),
+    // {@endhighlight}
     contentBuilder: (context, query, suggestions) => [for (final suggestion in suggestions) .item(value: suggestion)],
   );
 }
 
 @RoutePage()
+@Options(include: [fruits])
 class AsyncErrorAutocompletePage extends Sample {
-  AsyncErrorAutocompletePage({@queryParam super.theme}): super(alignment: .topCenter, top: 20);
+  AsyncErrorAutocompletePage({@queryParam super.theme}) : super(alignment: .topCenter, top: 20);
 
   @override
   Widget sample(BuildContext _) => FAutocomplete.builder(
@@ -177,25 +184,33 @@ class AsyncErrorAutocompletePage extends Sample {
       throw StateError('Error loading data');
     },
     contentBuilder: (context, query, values) => [for (final fruit in values) .item(value: fruit)],
+    // {@highlight}
     contentErrorBuilder: (context, error, trace) => Padding(
       padding: const .all(14.0),
       child: Icon(FIcons.circleX, size: 15, color: context.theme.colors.primary),
     ),
+    // {@endhighlight}
   );
 }
 
 @RoutePage()
+@Options(include: [fruits])
 class ClearableAutocompletePage extends Sample {
-  ClearableAutocompletePage({@queryParam super.theme}): super(alignment: .topCenter, top: 20);
+  ClearableAutocompletePage({@queryParam super.theme}) : super(alignment: .topCenter, top: 20);
 
   @override
-  Widget sample(BuildContext _) =>
-      FAutocomplete(hint: 'Type to search fruits', clearable: (value) => value.text.isNotEmpty, items: fruits);
+  Widget sample(BuildContext _) => FAutocomplete(
+    hint: 'Type to search fruits',
+    // {@highlight}
+    clearable: (value) => value.text.isNotEmpty,
+    // {@endhighlight}
+    items: fruits,
+  );
 }
 
 @RoutePage()
 class FormAutocompletePage extends StatefulSample {
-  FormAutocompletePage({@queryParam super.theme}): super(alignment: .topCenter, top: 20);
+  FormAutocompletePage({@queryParam super.theme}) : super(alignment: .topCenter, top: 20);
 
   @override
   State<FormAutocompletePage> createState() => _FormAutocompletePageState();

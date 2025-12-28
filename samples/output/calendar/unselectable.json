@@ -1,6 +1,11 @@
 {
   "code": "Widget build(BuildContext _) => FCalendar(\n  control: .managedDates(\n    initial: {DateTime(2024, 7, 17), DateTime(2024, 7, 20)},\n    selectable: (date) =>\n        !{DateTime.utc(2024, 7, 18), DateTime.utc(2024, 7, 19)}.contains(date),\n  ),\n  start: DateTime(2000),\n  today: DateTime(2024, 7, 15),\n  end: DateTime(2030),\n);\n",
-  "highlights": [],
+  "highlights": [
+    {
+      "start": 4,
+      "end": 5
+    }
+  ],
   "links": [
     {
       "offset": 32,

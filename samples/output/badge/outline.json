@@ -1,0 +1,32 @@
+{
+  "code": "Widget build(BuildContext _) => FBadge(\n  style: FBadgeStyle.outline(),\n  child: const Text('Badge'),\n);\n",
+  "highlights": [
+    {
+      "start": 2,
+      "end": 2
+    }
+  ],
+  "links": [
+    {
+      "offset": 32,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.badge/FBadge/FBadge.html"
+    },
+    {
+      "offset": 42,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.badge/FBadge/style.html"
+    },
+    {
+      "offset": 49,
+      "length": 19,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.badge/FBadgeStyle/outline.html"
+    },
+    {
+      "offset": 74,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.badge/FBadge/FBadge.html"
+    }
+  ],
+  "tooltips": []
+}

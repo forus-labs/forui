@@ -8,7 +8,7 @@ import 'package:forui_samples/main.gr.dart';
 import 'package:forui_samples/sample.dart';
 
 class Options {
-  final List<Type> include;
+  final List<Object> include;
   final Type? inline;
 
   const Options({this.include = const [], this.inline});
@@ -45,7 +45,8 @@ class _AppRouter extends RootStackRouter {
     AutoRoute(page: EmptyRoute.page, initial: true),
     AutoRoute(path: '/accordion/default', page: AccordionRoute.page),
     AutoRoute(path: '/accordion/max', page: MaxAccordionRoute.page),
-    AutoRoute(path: '/alert/default', page: AlertRoute.page),
+    AutoRoute(path: '/alert/primary', page: AlertPrimaryRoute.page),
+    AutoRoute(path: '/alert/destructive', page: AlertDestructiveRoute.page),
     AutoRoute(path: '/autocomplete/default', page: AutocompleteRoute.page),
     AutoRoute(path: '/autocomplete/detailed', page: DetailedAutocompleteRoute.page),
     AutoRoute(path: '/autocomplete/section', page: SectionAutocompleteRoute.page),
@@ -58,7 +59,10 @@ class _AppRouter extends RootStackRouter {
     AutoRoute(path: '/avatar/default', page: AvatarRoute.page),
     AutoRoute(path: '/avatar/raw', page: AvatarRawRoute.page),
     AutoRoute(path: '/avatar/invalid', page: AvatarInvalidRoute.page),
-    AutoRoute(path: '/badge/default', page: BadgeRoute.page),
+    AutoRoute(path: '/badge/primary', page: BadgePrimaryRoute.page),
+    AutoRoute(path: '/badge/secondary', page: BadgeSecondaryRoute.page),
+    AutoRoute(path: '/badge/destructive', page: BadgeDestructiveRoute.page),
+    AutoRoute(path: '/badge/outline', page: BadgeOutlineRoute.page),
     AutoRoute(path: '/bottom-navigation-bar/default', page: BottomNavigationBarRoute.page),
     AutoRoute(path: '/breadcrumb/default', page: BreadcrumbRoute.page),
     AutoRoute(path: '/breadcrumb/tiles', page: BreadcrumbTilesRoute.page),
@@ -90,9 +94,13 @@ class _AppRouter extends RootStackRouter {
     AutoRoute(path: '/header/nested', page: NestedHeaderRoute.page),
     AutoRoute(path: '/header/nested-x', page: XNestedHeaderRoute.page),
     AutoRoute(path: '/item/default', page: ItemRoute.page),
+    AutoRoute(path: '/item/disabled', page: ItemDisabledRoute.page),
+    AutoRoute(path: '/item/untappable', page: ItemUntappableRoute.page),
     AutoRoute(path: '/item/subtitle', page: ItemSubtitleRoute.page),
     AutoRoute(path: '/item/details', page: ItemDetailsRoute.page),
     AutoRoute(path: '/item-group/default', page: ItemGroupRoute.page),
+    AutoRoute(path: '/item-group/indented', page: ItemGroupIndentedRoute.page),
+    AutoRoute(path: '/item-group/full', page: ItemGroupFullRoute.page),
     AutoRoute(path: '/item-group/scrollable', page: ScrollableItemGroupRoute.page),
     AutoRoute(path: '/item-group/lazy', page: LazyItemGroupRoute.page),
     AutoRoute(path: '/item-group/merge', page: MergeItemGroupRoute.page),

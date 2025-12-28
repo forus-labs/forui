@@ -1,9 +1,9 @@
 {
-  "code": "Widget build(BuildContext _) => FItem(\n  prefix: const Icon(FIcons.wifi),\n  title: const Text('WiFi'),\n  details: const Text('Duobase (5G)'),\n  suffix: const Icon(FIcons.chevronRight),\n  onPress: () {},\n);\n",
+  "code": "Widget build(BuildContext _) => FItem(\n  enabled: false,\n  prefix: const Icon(FIcons.user),\n  title: const Text('Personalization'),\n  suffix: const Icon(FIcons.chevronRight),\n  onPress: () {},\n);\n",
   "highlights": [
     {
-      "start": 4,
-      "end": 4
+      "start": 2,
+      "end": 2
     }
   ],
   "links": [
@@ -14,36 +14,36 @@
     },
     {
       "offset": 41,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem/enabled.html"
+    },
+    {
+      "offset": 59,
       "length": 6,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem/FItem.html"
     },
     {
-      "offset": 60,
+      "offset": 78,
       "length": 11,
-      "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/wifi-constant.html"
+      "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/user-constant.html"
     },
     {
-      "offset": 76,
+      "offset": 94,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem/FItem.html"
     },
     {
-      "offset": 105,
-      "length": 7,
-      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem/FItem.html"
-    },
-    {
-      "offset": 144,
+      "offset": 134,
       "length": 6,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem/FItem.html"
     },
     {
-      "offset": 163,
+      "offset": 153,
       "length": 19,
       "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/chevronRight-constant.html"
     },
     {
-      "offset": 187,
+      "offset": 177,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem/onPress.html"
     }

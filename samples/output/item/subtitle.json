@@ -1,6 +1,11 @@
 {
   "code": "Widget build(BuildContext _) => FItem(\n  prefix: const Icon(FIcons.bell),\n  title: const Text('Notifications'),\n  subtitle: const Text('Banners, Sounds, Badges'),\n  suffix: const Icon(FIcons.chevronRight),\n  onPress: () {},\n);\n",
-  "highlights": [],
+  "highlights": [
+    {
+      "start": 4,
+      "end": 4
+    }
+  ],
   "links": [
     {
       "offset": 32,

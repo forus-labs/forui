@@ -1,6 +1,11 @@
 {
-  "code": "Widget build(BuildContext _) => FItemGroup(\n  children: [\n    FItem(\n      prefix: const Icon(FIcons.user),\n      title: const Text('Personalization'),\n      suffix: const Icon(FIcons.chevronRight),\n      onPress: () {},\n    ),\n    FItem(\n      prefix: const Icon(FIcons.wifi),\n      title: const Text('WiFi'),\n      details: const Text('Duobase (5G)'),\n      suffix: const Icon(FIcons.chevronRight),\n      onPress: () {},\n    ),\n  ],\n);\n",
-  "highlights": [],
+  "code": "Widget build(BuildContext _) => FItemGroup(\n  divider: .full,\n  children: [\n    FItem(\n      prefix: const Icon(FIcons.user),\n      title: const Text('Personalization'),\n      suffix: const Icon(FIcons.chevronRight),\n      onPress: () {},\n    ),\n    FItem(\n      prefix: const Icon(FIcons.wifi),\n      title: const Text('WiFi'),\n      details: const Text('Duobase (5G)'),\n      suffix: const Icon(FIcons.chevronRight),\n      onPress: () {},\n    ),\n  ],\n);\n",
+  "highlights": [
+    {
+      "start": 2,
+      "end": 2
+    }
+  ],
   "links": [
     {
       "offset": 32,
@@ -9,81 +14,91 @@
     },
     {
       "offset": 46,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroup/divider.html"
+    },
+    {
+      "offset": 56,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemDivider.html#full"
+    },
+    {
+      "offset": 64,
       "length": 8,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroup/FItemGroup.html"
     },
     {
-      "offset": 62,
+      "offset": 80,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem/FItem.html"
     },
     {
-      "offset": 75,
+      "offset": 93,
       "length": 6,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem/FItem.html"
     },
     {
-      "offset": 94,
+      "offset": 112,
       "length": 11,
       "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/user-constant.html"
     },
     {
-      "offset": 114,
+      "offset": 132,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem/FItem.html"
     },
     {
-      "offset": 158,
+      "offset": 176,
       "length": 6,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem/FItem.html"
     },
     {
-      "offset": 177,
+      "offset": 195,
       "length": 19,
       "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/chevronRight-constant.html"
     },
     {
-      "offset": 205,
+      "offset": 223,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem/onPress.html"
     },
     {
-      "offset": 232,
+      "offset": 250,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem/FItem.html"
     },
     {
-      "offset": 245,
+      "offset": 263,
       "length": 6,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem/FItem.html"
     },
     {
-      "offset": 264,
+      "offset": 282,
       "length": 11,
       "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/wifi-constant.html"
     },
     {
-      "offset": 284,
+      "offset": 302,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem/FItem.html"
     },
     {
-      "offset": 317,
+      "offset": 335,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem/FItem.html"
     },
     {
-      "offset": 360,
+      "offset": 378,
       "length": 6,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem/FItem.html"
     },
     {
-      "offset": 379,
+      "offset": 397,
       "length": 19,
       "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/chevronRight-constant.html"
     },
     {
-      "offset": 407,
+      "offset": 425,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem/onPress.html"
     }

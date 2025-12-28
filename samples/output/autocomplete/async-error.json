@@ -1,59 +1,64 @@
 {
-  "code": "Widget build(BuildContext _) => FAutocomplete.builder(\n  hint: 'Type to search fruits',\n  filter: (query) async {\n    await Future.delayed(const Duration(seconds: 3));\n    throw StateError('Error loading data');\n  },\n  contentBuilder: (context, query, values) => [\n    for (final fruit in values) .item(value: fruit),\n  ],\n  contentErrorBuilder: (context, error, trace) => Padding(\n    padding: const .all(14.0),\n    child: Icon(FIcons.circleX, size: 15, color: context.theme.colors.primary),\n  ),\n);\n",
-  "highlights": [],
+  "code": "const fruits = [\n  'Apple',\n  'Banana',\n  'Orange',\n  'Grape',\n  'Strawberry',\n  'Pineapple',\n];\n\nclass AsyncErrorAutocompleteExample extends StatelessWidget {\n  @override\n  Widget build(BuildContext _) => FAutocomplete.builder(\n    hint: 'Type to search fruits',\n    filter: (query) async {\n      await Future.delayed(const Duration(seconds: 3));\n      throw StateError('Error loading data');\n    },\n    contentBuilder: (context, query, values) => [\n      for (final fruit in values) .item(value: fruit),\n    ],\n    contentErrorBuilder: (context, error, trace) => Padding(\n      padding: const .all(14.0),\n      child: Icon(\n        FIcons.circleX,\n        size: 15,\n        color: context.theme.colors.primary,\n      ),\n    ),\n  );\n}\n",
+  "highlights": [
+    {
+      "start": 21,
+      "end": 28
+    }
+  ],
   "links": [
     {
-      "offset": 32,
+      "offset": 206,
       "length": 21,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/FAutocomplete.builder.html"
     },
     {
-      "offset": 57,
+      "offset": 233,
       "length": 4,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/hint.html"
     },
     {
-      "offset": 90,
+      "offset": 268,
       "length": 6,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/filter.html"
     },
     {
-      "offset": 219,
+      "offset": 405,
       "length": 14,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/contentBuilder.html"
     },
     {
-      "offset": 298,
+      "offset": 486,
       "length": 4,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocompleteItemMixin/item.html"
     },
     {
-      "offset": 303,
+      "offset": 491,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocompleteItemMixin/item.html"
     },
     {
-      "offset": 325,
+      "offset": 517,
       "length": 19,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/contentErrorBuilder.html"
     },
     {
-      "offset": 429,
+      "offset": 634,
       "length": 14,
       "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/circleX-constant.html"
     },
     {
-      "offset": 483,
+      "offset": 704,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors/primary.html"
     },
     {
-      "offset": 476,
+      "offset": 697,
       "length": 6,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/colors.html"
     },
     {
-      "offset": 470,
+      "offset": 691,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext/theme.html"
     }

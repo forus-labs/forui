@@ -1,11 +1,6 @@
 {
-  "code": "Widget build(BuildContext _) => FItem(\n  prefix: const Icon(FIcons.wifi),\n  title: const Text('WiFi'),\n  details: const Text('Duobase (5G)'),\n  suffix: const Icon(FIcons.chevronRight),\n  onPress: () {},\n);\n",
-  "highlights": [
-    {
-      "start": 4,
-      "end": 4
-    }
-  ],
+  "code": "Widget build(BuildContext _) => FItem(\n  prefix: const Icon(FIcons.user),\n  title: const Text('Personalization'),\n  suffix: const Icon(FIcons.chevronRight),\n);\n",
+  "highlights": [],
   "links": [
     {
       "offset": 32,
@@ -20,7 +15,7 @@
     {
       "offset": 60,
       "length": 11,
-      "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/wifi-constant.html"
+      "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/user-constant.html"
     },
     {
       "offset": 76,
@@ -28,24 +23,14 @@
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem/FItem.html"
     },
     {
-      "offset": 105,
-      "length": 7,
-      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem/FItem.html"
-    },
-    {
-      "offset": 144,
+      "offset": 116,
       "length": 6,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem/FItem.html"
     },
     {
-      "offset": 163,
+      "offset": 135,
       "length": 19,
       "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/chevronRight-constant.html"
-    },
-    {
-      "offset": 187,
-      "length": 7,
-      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem/onPress.html"
     }
   ],
   "tooltips": []
