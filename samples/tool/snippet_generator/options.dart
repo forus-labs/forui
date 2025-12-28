@@ -16,8 +16,6 @@ class Options {
 
   Options({this.include = const [], this.inline})
     : assert(inline == null || inline is InterfaceType, 'inline must be a class type: ${inline.getDisplayString()}');
-
-  bool get full => include.isNotEmpty || inline != null;
 }
 
 /// A visitor that parses the `@Options` annotation from class metadata.

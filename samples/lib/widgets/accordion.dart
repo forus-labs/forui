@@ -2,18 +2,37 @@ import 'package:flutter/material.dart';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:forui/forui.dart';
+import 'package:forui_samples/main.dart';
 
 import 'package:forui_samples/sample.dart';
 
 @RoutePage()
+@Options(inline: _Accordion)
 class AccordionPage extends Sample {
-  final int? max;
-
-  AccordionPage({@queryParam this.max, @queryParam super.theme}): super(top: 20);
+  AccordionPage({@queryParam super.theme}) : super(top: 20);
 
   @override
-  Widget sample(BuildContext _) => FAccordion(
+  Widget sample(BuildContext _) => const _Accordion();
+}
+
+@RoutePage()
+@Options(inline: _Accordion)
+class MaxAccordionPage extends Sample {
+  MaxAccordionPage({@queryParam super.theme}) : super(top: 20);
+
+  @override
+  Widget sample(BuildContext _) => const _Accordion(max: 2);
+}
+
+class _Accordion extends StatelessWidget {
+  final int? max;
+
+  const _Accordion({this.max});
+  @override
+  Widget build(BuildContext _) => FAccordion(
+    // {@highlight}
     control: .managed(max: max),
+    // {@endhighlight}
     children: const [
       FAccordionItem(
         title: Text('Production Information'),

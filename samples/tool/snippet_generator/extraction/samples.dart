@@ -16,6 +16,7 @@ import '../annotation/doc_linker.dart';
 import '../main.dart';
 import '../options.dart';
 import '../snippet.dart';
+import 'constant_propagation.dart';
 import 'routes.dart';
 import 'widgets.dart';
 
@@ -78,12 +79,12 @@ class Samples extends RecursiveAstVisitor<void> {
     // * inline is always a class declaration.
     // * both the main and inlined widgets are in the same file.
     if (options.inline case final inline?) {
-      final visitor = _InlineCallSiteVisitor(inline)..visitClassDeclaration(node);
+      final propagation = ConstantPropagation(inline)..visitClassDeclaration(node);
       final (result, declaration as ClassDeclaration) = (await _session.declaration(inline.element!))!;
-      final widget = WidgetVisitor.extract(result, declaration, visitor.inlines, full: options.full);
+      final widget = Widgets.extract(result, declaration, propagation.substitutions, full: options.include.isNotEmpty);
       snippet.code = await _merge(_result, options.include, node, widget);
     } else {
-      final widget = WidgetVisitor.extract(_result, node, const {}, full: options.full);
+      final widget = Widgets.extract(_result, node, const {}, full: options.include.isNotEmpty);
       snippet.code = await _merge(_result, options.include, node, widget);
     }
 
@@ -107,32 +108,7 @@ class Samples extends RecursiveAstVisitor<void> {
       fragments[declaration.offset] = declaration.toSource();
     }
 
-    return formatter.format(fragments.values.join('\n\n'));
-  }
-}
-
-class _InlineCallSiteVisitor extends RecursiveAstVisitor<void> {
-  final Map<String, String> inlines = {};
-  final DartType _type;
-
-  _InlineCallSiteVisitor(this._type);
-
-  @override
-  void visitInstanceCreationExpression(InstanceCreationExpression node) {
-    if (_type.element != node.staticType?.element) {
-      super.visitInstanceCreationExpression(node);
-      return;
-    }
-
-    // We don't support many to one inlines, i.e. many different constructor invocations, each with different arguments.
-    final constructor = node.constructorName.element!;
-    for (final (i, argument) in node.argumentList.arguments.indexed) {
-      if (argument case NamedExpression(:final name, :final expression)) {
-        inlines[name.label.name] = expression.toSource();
-      } else {
-        inlines[constructor.formalParameters[i].name!] = argument.toSource();
-      }
-    }
+    return formatter.format(await DeadCodeElimination.eliminate(fragments.values.join('\n\n'), _session, _overlay));
   }
 }
 

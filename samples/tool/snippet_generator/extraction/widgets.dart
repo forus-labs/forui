@@ -5,20 +5,20 @@ import 'package:analyzer/dart/element/element.dart';
 
 import '../transformations.dart';
 
-class WidgetVisitor extends RecursiveAstVisitor<void> {
+class Widgets extends RecursiveAstVisitor<void> {
   static String extract(
     ResolvedUnitResult result,
     ClassDeclaration declaration,
-    Map<String, String> inlines, {
+    Map<String, String> substitutions, {
     required bool full,
   }) {
     switch (declaration.extendsClause?.superclass.name.lexeme) {
       case 'Sample' || 'StatelessWidget' when full:
-        final visitor = _StatelessWidgetClassVisitor(result.content, inlines)..visitClassDeclaration(declaration);
+        final visitor = _StatelessWidgetClassVisitor(result.content, substitutions)..visitClassDeclaration(declaration);
         return visitor.transformations.apply();
 
       case 'Sample' || 'StatelessWidget':
-        final visitor = _StatelessWidgetMethodVisitor(result.content, inlines)..visitClassDeclaration(declaration);
+        final visitor = _StatelessWidgetMethodVisitor(result.content, substitutions)..visitClassDeclaration(declaration);
         return visitor.transformations.apply();
 
       case 'StatefulSample' || 'StatefulWidget':
@@ -33,8 +33,8 @@ class WidgetVisitor extends RecursiveAstVisitor<void> {
           return false;
         });
 
-        final widgetVisitor = _StatefulWidgetVisitor(result.content, inlines)..visitClassDeclaration(declaration);
-        final stateVisitor = _StateVisitor(result.content, inlines)..visitClassDeclaration(state);
+        final widgetVisitor = _StatefulWidgetVisitor(result.content, substitutions)..visitClassDeclaration(declaration);
+        final stateVisitor = _StateVisitor(result.content, substitutions)..visitClassDeclaration(state);
 
         return '${widgetVisitor.transformations.apply()}\n\n${stateVisitor.transformations.apply()}';
 
@@ -43,16 +43,16 @@ class WidgetVisitor extends RecursiveAstVisitor<void> {
     }
   }
 
-  final Map<String, String> inlines;
+  final Map<String, String> substitutions;
   final Transformations transformations;
 
-  WidgetVisitor._(String code, this.inlines) : transformations = Transformations(code);
+  Widgets._(String code, this.substitutions) : transformations = Transformations(code);
 
   @override
   void visitPropertyAccess(PropertyAccess node) {
     // Replaces `widget.property` or `this.property`.
     if (node.target case SimpleIdentifier(name: 'widget') || ThisExpression()) {
-      if (inlines[node.propertyName.name] case final replacement?) {
+      if (substitutions[node.propertyName.name] case final replacement?) {
         transformations.replace(node, replacement);
       }
     }
@@ -62,7 +62,7 @@ class WidgetVisitor extends RecursiveAstVisitor<void> {
   void visitSimpleIdentifier(SimpleIdentifier node) {
     // Replaces `property` without a target.
     if (node.element case FieldElement() || PropertyAccessorElement()) {
-      if (inlines[node.name] case final replacement?) {
+      if (substitutions[node.name] case final replacement?) {
         transformations.replace(node, replacement);
       }
     }
@@ -70,8 +70,8 @@ class WidgetVisitor extends RecursiveAstVisitor<void> {
 }
 
 /// A visitor for stateless widgets that transforms the entire class.
-class _StatelessWidgetClassVisitor extends WidgetVisitor {
-  _StatelessWidgetClassVisitor(super.code, super.inlines) : super._();
+class _StatelessWidgetClassVisitor extends Widgets {
+  _StatelessWidgetClassVisitor(super.code, super.substitutions) : super._();
 
   @override
   void visitClassDeclaration(ClassDeclaration node) {
@@ -110,8 +110,8 @@ class _StatelessWidgetClassVisitor extends WidgetVisitor {
 }
 
 // A visitor for stateless widgets that transforms only the build/sample method.
-class _StatelessWidgetMethodVisitor extends WidgetVisitor {
-  _StatelessWidgetMethodVisitor(super.code, super.inlines) : super._();
+class _StatelessWidgetMethodVisitor extends Widgets {
+  _StatelessWidgetMethodVisitor(super.code, super.substitutions) : super._();
 
   // We don't bother checking whether the class extends Sample. We assume the class will never have both a build and
   // sample method. That's just silly.
@@ -134,8 +134,8 @@ class _StatelessWidgetMethodVisitor extends WidgetVisitor {
 }
 
 /// A visitor for stateful widgets that transforms the entire class.
-class _StatefulWidgetVisitor extends WidgetVisitor {
-  _StatefulWidgetVisitor(super.code, super.inlines) : super._();
+class _StatefulWidgetVisitor extends Widgets {
+  _StatefulWidgetVisitor(super.code, super.substitutions) : super._();
 
   @override
   void visitClassDeclaration(ClassDeclaration node) {
@@ -184,8 +184,8 @@ class _StatefulWidgetVisitor extends WidgetVisitor {
 }
 
 // A visitor for the State class of stateful widgets.
-class _StateVisitor extends WidgetVisitor {
-  _StateVisitor(super.code, super.inlines) : super._();
+class _StateVisitor extends Widgets {
+  _StateVisitor(super.code, super.substitutions) : super._();
 
   @override
   void visitClassDeclaration(ClassDeclaration node) {

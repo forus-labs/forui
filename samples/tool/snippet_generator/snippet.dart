@@ -39,7 +39,10 @@ class Snippet {
     int? start;
     int lineNumber = 0;
 
-    for (final line in code.split('\n')) {
+    // Fix artifacts caused by formatting after dead code elimination removes an entire line.
+    _code = _code.replaceAll('// {@highlight}\n\n', '// {@highlight}\n');
+
+    for (final line in _code.split('\n')) {
       final trimmed = line.trim();
 
       if (trimmed == '// {@highlight}') {
@@ -48,8 +51,11 @@ class Snippet {
       }
 
       if (trimmed == '// {@endhighlight}') {
-        assert(start != null, 'Found {@endhighlight} without matching {@highlight} in $code.');
-        highlights.add((start! - _importsLines, lineNumber - _importsLines));
+        assert(start != null, 'Found {@endhighlight} without matching {@highlight} in $_code.');
+        if (start! <= lineNumber) {
+          highlights.add((start - _importsLines, lineNumber - _importsLines));
+        }
+
         start = null;
         continue;
       }

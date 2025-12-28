@@ -44,6 +44,7 @@ class _AppRouter extends RootStackRouter {
   List<AutoRoute> get routes => [
     AutoRoute(page: EmptyRoute.page, initial: true),
     AutoRoute(path: '/accordion/default', page: AccordionRoute.page),
+    AutoRoute(path: '/accordion/max', page: MaxAccordionRoute.page),
     AutoRoute(path: '/alert/default', page: AlertRoute.page),
     AutoRoute(path: '/autocomplete/default', page: AutocompleteRoute.page),
     AutoRoute(path: '/autocomplete/detailed', page: DetailedAutocompleteRoute.page),
