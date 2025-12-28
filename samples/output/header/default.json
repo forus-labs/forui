@@ -1,4 +1,5 @@
 {
+  "code": "Widget build(BuildContext _) => FHeader(\n  title: const Text('Edit Alarm'),\n  suffixes: [\n    FHeaderAction(icon: const Icon(FIcons.alarmClock), onPress: () {}),\n    FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {}),\n  ],\n);\n",
   "highlights": [],
   "links": [
     {
@@ -12,6 +13,11 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.header/FHeader/title.html"
     },
     {
+      "offset": 78,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.header/FHeader/FHeader.html"
+    },
+    {
       "offset": 94,
       "length": 13,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.header/FHeaderAction/FHeaderAction.html"
@@ -20,6 +26,11 @@
       "offset": 108,
       "length": 4,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.header/FHeaderAction/icon.html"
+    },
+    {
+      "offset": 125,
+      "length": 17,
+      "url": "https://pub.dev/documentation/forui_assets/latest/forui_assets/FIcons/alarmClock-constant.html"
     },
     {
       "offset": 145,
@@ -37,10 +48,15 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.header/FHeaderAction/icon.html"
     },
     {
+      "offset": 197,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui_assets/latest/forui_assets/FIcons/plus-constant.html"
+    },
+    {
       "offset": 211,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.header/FHeaderAction/onPress.html"
     }
   ],
-  "source": "Widget build(BuildContext _) => FHeader(\n  title: const Text('Edit Alarm'),\n  suffixes: [\n    FHeaderAction(icon: const Icon(FIcons.alarmClock), onPress: () {}),\n    FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {}),\n  ],\n);\n"
+  "tooltips": []
 }

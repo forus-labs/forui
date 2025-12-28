@@ -1,4 +1,5 @@
 {
+  "code": "Widget build(BuildContext _) => FTimeField(\n  hour24: hour24,\n  label: const Text('Appointment Time'),\n  description: const Text('Select a Time for your appointment.'),\n);\n",
   "highlights": [],
   "links": [
     {
@@ -22,5 +23,5 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.time_field/FTimeField/description.html"
     }
   ],
-  "source": "Widget build(BuildContext _) => FTimeField(\n  hour24: hour24,\n  label: const Text('Appointment Time'),\n  description: const Text('Select a Time for your appointment.'),\n);\n"
+  "tooltips": []
 }

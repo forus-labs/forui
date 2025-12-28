@@ -1,10 +1,31 @@
 {
+  "code": "class NoCascadingResizableExample extends StatefulWidget {\n  @override\n  State<NoCascadingResizableExample> createState() =>\n      _NoCascadingResizableExampleState();\n}\n\nclass _NoCascadingResizableExampleState\n    extends State<NoCascadingResizableExample> {\n  final _controller = FResizableController();\n\n  @override\n  void dispose() {\n    _controller.dispose();\n    super.dispose();\n  }\n\n  @override\n  Widget build(BuildContext context) => DecoratedBox(\n    decoration: BoxDecoration(\n      border: .all(color: context.theme.colors.border),\n      borderRadius: .circular(8),\n    ),\n    child: FResizable(\n      control: .managed(controller: _controller),\n      axis: .vertical,\n      crossAxisExtent: 300,\n      children: [\n        .region(\n          initialExtent: 200,\n          minExtent: 100,\n          builder: (_, data, _) =>\n              Label(data: data, icon: FIcons.sunrise, label: 'Morning'),\n        ),\n        .region(\n          initialExtent: 200,\n          minExtent: 100,\n          builder: (_, data, _) =>\n              Label(data: data, icon: FIcons.sun, label: 'Afternoon'),\n        ),\n        .region(\n          initialExtent: 200,\n          minExtent: 100,\n          builder: (_, data, _) =>\n              Label(data: data, icon: FIcons.sunset, label: 'Evening'),\n        ),\n      ],\n    ),\n  );\n}\n",
   "highlights": [],
   "links": [
     {
       "offset": 282,
       "length": 20,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.resizable/FResizableController/FResizableController.html"
+    },
+    {
+      "offset": 354,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.foundation/FChangeNotifier/dispose.html"
+    },
+    {
+      "offset": 535,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FColors/border.html"
+    },
+    {
+      "offset": 528,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FThemeData/colors.html"
+    },
+    {
+      "offset": 522,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FThemeBuildContext/theme.html"
     },
     {
       "offset": 596,
@@ -15,6 +36,16 @@
       "offset": 614,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.resizable/FResizable/control.html"
+    },
+    {
+      "offset": 624,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.resizable/FResizableControl/FResizableControl.managed.html"
+    },
+    {
+      "offset": 632,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.resizable/FResizableControl/FResizableControl.managed.html"
     },
     {
       "offset": 664,
@@ -32,6 +63,11 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.resizable/FResizable/children.html"
     },
     {
+      "offset": 736,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.resizable/FResizableRegion/FResizableRegion.region.html"
+    },
+    {
       "offset": 754,
       "length": 13,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.resizable/FResizableRegion/initialExtent.html"
@@ -45,6 +81,16 @@
       "offset": 810,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.resizable/FResizableRegion/builder.html"
+    },
+    {
+      "offset": 873,
+      "length": 14,
+      "url": "https://pub.dev/documentation/forui_assets/latest/forui_assets/FIcons/sunrise-constant.html"
+    },
+    {
+      "offset": 928,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.resizable/FResizableRegion/FResizableRegion.region.html"
     },
     {
       "offset": 946,
@@ -62,6 +108,16 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.resizable/FResizableRegion/builder.html"
     },
     {
+      "offset": 1065,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui_assets/latest/forui_assets/FIcons/sun-constant.html"
+    },
+    {
+      "offset": 1118,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.resizable/FResizableRegion/FResizableRegion.region.html"
+    },
+    {
       "offset": 1136,
       "length": 13,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.resizable/FResizableRegion/initialExtent.html"
@@ -75,7 +131,12 @@
       "offset": 1192,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.resizable/FResizableRegion/builder.html"
+    },
+    {
+      "offset": 1255,
+      "length": 13,
+      "url": "https://pub.dev/documentation/forui_assets/latest/forui_assets/FIcons/sunset-constant.html"
     }
   ],
-  "source": "class NoCascadingResizableExample extends StatefulWidget {\n  @override\n  State<NoCascadingResizableExample> createState() =>\n      _NoCascadingResizableExampleState();\n}\n\nclass _NoCascadingResizableExampleState\n    extends State<NoCascadingResizableExample> {\n  final _controller = FResizableController();\n\n  @override\n  void dispose() {\n    _controller.dispose();\n    super.dispose();\n  }\n\n  @override\n  Widget build(BuildContext context) => DecoratedBox(\n    decoration: BoxDecoration(\n      border: .all(color: context.theme.colors.border),\n      borderRadius: .circular(8),\n    ),\n    child: FResizable(\n      control: .managed(controller: _controller),\n      axis: .vertical,\n      crossAxisExtent: 300,\n      children: [\n        .region(\n          initialExtent: 200,\n          minExtent: 100,\n          builder: (_, data, _) =>\n              Label(data: data, icon: FIcons.sunrise, label: 'Morning'),\n        ),\n        .region(\n          initialExtent: 200,\n          minExtent: 100,\n          builder: (_, data, _) =>\n              Label(data: data, icon: FIcons.sun, label: 'Afternoon'),\n        ),\n        .region(\n          initialExtent: 200,\n          minExtent: 100,\n          builder: (_, data, _) =>\n              Label(data: data, icon: FIcons.sunset, label: 'Evening'),\n        ),\n      ],\n    ),\n  );\n}\n"
+  "tooltips": []
 }

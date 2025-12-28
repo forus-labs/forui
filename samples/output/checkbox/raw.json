@@ -1,4 +1,5 @@
 {
+  "code": "class RawCheckboxExample extends StatefulWidget {\n  @override\n  State<RawCheckboxExample> createState() => _RawCheckboxExampleState();\n}\n\nclass _RawCheckboxExampleState extends State<RawCheckboxExample> {\n  bool _state = false;\n\n  @override\n  Widget build(BuildContext _) => FCheckbox(\n    value: _state,\n    onChange: (value) => setState(() => _state = value),\n    enabled: widget.enabled,\n  );\n}\n",
   "highlights": [],
   "links": [
     {
@@ -22,5 +23,5 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.checkbox/FCheckbox/enabled.html"
     }
   ],
-  "source": "class RawCheckboxExample extends StatefulWidget {\n  @override\n  State<RawCheckboxExample> createState() => _RawCheckboxExampleState();\n}\n\nclass _RawCheckboxExampleState extends State<RawCheckboxExample> {\n  bool _state = false;\n\n  @override\n  Widget build(BuildContext _) => FCheckbox(\n    value: _state,\n    onChange: (value) => setState(() => _state = value),\n    enabled: widget.enabled,\n  );\n}\n"
+  "tooltips": []
 }

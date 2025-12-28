@@ -1,4 +1,5 @@
 {
+  "code": "Widget build(BuildContext _) => FHeader.nested(\n  title: const Text('Appointment'),\n  prefixes: [FHeaderAction.back(onPress: () {})],\n  suffixes: [\n    FHeaderAction(icon: const Icon(FIcons.info), onPress: () {}),\n    FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {}),\n  ],\n);\n",
   "highlights": [],
   "links": [
     {
@@ -12,6 +13,11 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.header/FHeader/title.html"
     },
     {
+      "offset": 86,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.header/FHeader/FHeader.nested.html"
+    },
+    {
       "offset": 97,
       "length": 18,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.header/FHeaderAction/FHeaderAction.back.html"
@@ -22,6 +28,11 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.header/FHeaderAction/onPress.html"
     },
     {
+      "offset": 136,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.header/FHeader/FHeader.nested.html"
+    },
+    {
       "offset": 152,
       "length": 13,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.header/FHeaderAction/FHeaderAction.html"
@@ -30,6 +41,11 @@
       "offset": 166,
       "length": 4,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.header/FHeaderAction/icon.html"
+    },
+    {
+      "offset": 183,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui_assets/latest/forui_assets/FIcons/info-constant.html"
     },
     {
       "offset": 197,
@@ -47,10 +63,15 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.header/FHeaderAction/icon.html"
     },
     {
+      "offset": 249,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui_assets/latest/forui_assets/FIcons/plus-constant.html"
+    },
+    {
       "offset": 263,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.header/FHeaderAction/onPress.html"
     }
   ],
-  "source": "Widget build(BuildContext _) => FHeader.nested(\n  title: const Text('Appointment'),\n  prefixes: [FHeaderAction.back(onPress: () {})],\n  suffixes: [\n    FHeaderAction(icon: const Icon(FIcons.info), onPress: () {}),\n    FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {}),\n  ],\n);\n"
+  "tooltips": []
 }

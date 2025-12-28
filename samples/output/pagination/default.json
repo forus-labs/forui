@@ -1,4 +1,5 @@
 {
+  "code": "Widget build(BuildContext context) => FPagination(\n  control: switch (controller) {\n    'siblings' => const .managed(pages: 20, siblings: 2, initial: 9),\n    'hide-edges' => const .managed(pages: 8, showEdges: false),\n    _ => const .managed(pages: 10),\n  },\n);\n",
   "highlights": [],
   "links": [
     {
@@ -10,7 +11,52 @@
       "offset": 53,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.pagination/FPagination/control.html"
+    },
+    {
+      "offset": 109,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.pagination/FPaginationControl/FPaginationControl.managed.html"
+    },
+    {
+      "offset": 117,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.pagination/FPaginationControl/FPaginationControl.managed.html"
+    },
+    {
+      "offset": 128,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.pagination/FPaginationControl/FPaginationControl.managed.html"
+    },
+    {
+      "offset": 141,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.pagination/FPaginationControl/FPaginationControl.managed.html"
+    },
+    {
+      "offset": 181,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.pagination/FPaginationControl/FPaginationControl.managed.html"
+    },
+    {
+      "offset": 189,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.pagination/FPaginationControl/FPaginationControl.managed.html"
+    },
+    {
+      "offset": 199,
+      "length": 9,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.pagination/FPaginationControl/FPaginationControl.managed.html"
+    },
+    {
+      "offset": 234,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.pagination/FPaginationControl/FPaginationControl.managed.html"
+    },
+    {
+      "offset": 242,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.pagination/FPaginationControl/FPaginationControl.managed.html"
     }
   ],
-  "source": "Widget build(BuildContext context) => FPagination(\n  control: switch (controller) {\n    'siblings' => const .managed(pages: 20, siblings: 2, initial: 9),\n    'hide-edges' => const .managed(pages: 8, showEdges: false),\n    _ => const .managed(pages: 10),\n  },\n);\n"
+  "tooltips": []
 }

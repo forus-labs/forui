@@ -1,4 +1,5 @@
 {
+  "code": "Widget build(BuildContext _) => FAutocomplete(\n  label: const Text('Autocomplete'),\n  hint: 'What can it do?',\n  items: features,\n);\n",
   "highlights": [],
   "links": [
     {
@@ -15,7 +16,12 @@
       "offset": 86,
       "length": 4,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.autocomplete/FAutocomplete/hint.html"
+    },
+    {
+      "offset": 113,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.autocomplete/FAutocomplete/FAutocomplete.html"
     }
   ],
-  "source": "Widget build(BuildContext _) => FAutocomplete(\n  label: const Text('Autocomplete'),\n  hint: 'What can it do?',\n  items: features,\n);\n"
+  "tooltips": []
 }

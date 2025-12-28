@@ -1,4 +1,5 @@
 {
+  "code": "Widget build(BuildContext context) => FMultiSelect<String>.rich(\n  control: const .managed(min: 1, max: 3),\n  hint: const Text('Select favorite fruits'),\n  format: Text.new,\n  children: [\n    for (final fruit in fruits) .item(title: Text(fruit), value: fruit),\n  ],\n);\n",
   "highlights": [],
   "links": [
     {
@@ -12,6 +13,21 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FMultiSelect/control.html"
     },
     {
+      "offset": 83,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.foundation/FMultiValueControl/FMultiValueControl.managed.html"
+    },
+    {
+      "offset": 91,
+      "length": 3,
+      "url": "https://pub.dev/documentation/forui/latest/forui.foundation/FMultiValueControl/FMultiValueControl.managed.html"
+    },
+    {
+      "offset": 99,
+      "length": 3,
+      "url": "https://pub.dev/documentation/forui/latest/forui.foundation/FMultiValueControl/FMultiValueControl.managed.html"
+    },
+    {
       "offset": 110,
       "length": 4,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FMultiSelect/hint.html"
@@ -22,10 +38,25 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FMultiSelect/format.html"
     },
     {
+      "offset": 176,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FMultiSelect/FMultiSelect.rich.html"
+    },
+    {
       "offset": 221,
       "length": 4,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/item.html"
+    },
+    {
+      "offset": 226,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/item.html"
+    },
+    {
+      "offset": 246,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/item.html"
     }
   ],
-  "source": "Widget build(BuildContext context) => FMultiSelect<String>.rich(\n  control: const .managed(min: 1, max: 3),\n  hint: const Text('Select favorite fruits'),\n  format: Text.new,\n  children: [\n    for (final fruit in fruits) .item(title: Text(fruit), value: fruit),\n  ],\n);\n"
+  "tooltips": []
 }

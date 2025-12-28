@@ -1,4 +1,5 @@
 {
+  "code": "Widget build(BuildContext _) => Row(\n  mainAxisAlignment: .center,\n  spacing: 10,\n  children: [\n    FAvatar(image: const AssetImage(''), fallback: const Text('MN')),\n    FAvatar(image: const AssetImage('')),\n  ],\n);\n",
   "highlights": [],
   "links": [
     {
@@ -7,10 +8,25 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.avatar/FAvatar/FAvatar.html"
     },
     {
+      "offset": 108,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.avatar/FAvatar/FAvatar.html"
+    },
+    {
+      "offset": 137,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.avatar/FAvatar/FAvatar.html"
+    },
+    {
       "offset": 170,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.avatar/FAvatar/FAvatar.html"
+    },
+    {
+      "offset": 178,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.avatar/FAvatar/FAvatar.html"
     }
   ],
-  "source": "Widget build(BuildContext _) => Row(\n  mainAxisAlignment: .center,\n  spacing: 10,\n  children: [\n    FAvatar(image: const AssetImage(''), fallback: const Text('MN')),\n    FAvatar(image: const AssetImage('')),\n  ],\n);\n"
+  "tooltips": []
 }

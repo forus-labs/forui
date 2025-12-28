@@ -1,4 +1,5 @@
 {
+  "code": "Widget build(BuildContext _) => FMultiSelect<String>.searchBuilder(\n  hint: const Text('Select a fruit'),\n  format: Text.new,\n  filter: (query) async {\n    await Future.delayed(const Duration(seconds: 1));\n    return query.isEmpty\n        ? fruits\n        : fruits.where(\n            (fruit) => fruit.toLowerCase().startsWith(query.toLowerCase()),\n          );\n  },\n  contentBuilder: (context, _, fruits) => [\n    for (final fruit in fruits) .item(title: Text(fruit), value: fruit),\n  ],\n);\n",
   "highlights": [],
   "links": [
     {
@@ -17,10 +18,30 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FMultiSelect/format.html"
     },
     {
+      "offset": 128,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FMultiSelect/FMultiSelect.searchBuilder.html"
+    },
+    {
+      "offset": 368,
+      "length": 14,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FMultiSelect/FMultiSelect.searchBuilder.html"
+    },
+    {
       "offset": 443,
       "length": 4,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/item.html"
+    },
+    {
+      "offset": 448,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/item.html"
+    },
+    {
+      "offset": 468,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/item.html"
     }
   ],
-  "source": "Widget build(BuildContext _) => FMultiSelect<String>.searchBuilder(\n  hint: const Text('Select a fruit'),\n  format: Text.new,\n  filter: (query) async {\n    await Future.delayed(const Duration(seconds: 1));\n    return query.isEmpty\n        ? fruits\n        : fruits.where(\n            (fruit) => fruit.toLowerCase().startsWith(query.toLowerCase()),\n          );\n  },\n  contentBuilder: (context, _, fruits) => [\n    for (final fruit in fruits) .item(title: Text(fruit), value: fruit),\n  ],\n);\n"
+  "tooltips": []
 }

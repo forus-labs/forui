@@ -1,4 +1,5 @@
 {
+  "code": "class TextFormFieldExample extends StatefulWidget {\n  @override\n  State<TextFormFieldExample> createState() => _TextFormFieldExampleState();\n}\n\nclass _TextFormFieldExampleState extends State<TextFormFieldExample> {\n  final _key = GlobalKey<FormState>();\n\n  @override\n  Widget build(BuildContext _) => Form(\n    key: _key,\n    child: Column(\n      mainAxisAlignment: .center,\n      children: [\n        FTextFormField.email(\n          hint: 'janedoe@foruslabs.com',\n          autovalidateMode: .onUserInteraction,\n          validator: (value) => (value?.contains('@') ?? false)\n              ? null\n              : 'Please enter a valid email.',\n        ),\n        const SizedBox(height: 10),\n        FTextFormField.password(\n          autovalidateMode: .onUserInteraction,\n          validator: (value) => 8 <= (value?.length ?? 0)\n              ? null\n              : 'Password must be at least 8 characters long.',\n        ),\n        const SizedBox(height: 20),\n        FButton(\n          child: const Text('Login'),\n          onPress: () {\n            if (!_key.currentState!.validate()) {\n              return; // Form is invalid.\n            }\n\n            // Form is valid, do something.\n          },\n        ),\n      ],\n    ),\n  );\n}\n",
   "highlights": [],
   "links": [
     {
@@ -22,6 +23,21 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.text_field/FTextFormField/validator.html"
     },
     {
+      "offset": 699,
+      "length": 23,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.text_field/FTextFormField/password.html"
+    },
+    {
+      "offset": 734,
+      "length": 16,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.text_field/FTextFormField/password.html"
+    },
+    {
+      "offset": 782,
+      "length": 9,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.text_field/FTextFormField/password.html"
+    },
+    {
       "offset": 970,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/FButton.html"
@@ -37,5 +53,5 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/onPress.html"
     }
   ],
-  "source": "class TextFormFieldExample extends StatefulWidget {\n  @override\n  State<TextFormFieldExample> createState() => _TextFormFieldExampleState();\n}\n\nclass _TextFormFieldExampleState extends State<TextFormFieldExample> {\n  final _key = GlobalKey<FormState>();\n\n  @override\n  Widget build(BuildContext _) => Form(\n    key: _key,\n    child: Column(\n      mainAxisAlignment: .center,\n      children: [\n        FTextFormField.email(\n          hint: 'janedoe@foruslabs.com',\n          autovalidateMode: .onUserInteraction,\n          validator: (value) => (value?.contains('@') ?? false)\n              ? null\n              : 'Please enter a valid email.',\n        ),\n        const SizedBox(height: 10),\n        FTextFormField.password(\n          autovalidateMode: .onUserInteraction,\n          validator: (value) => 8 <= (value?.length ?? 0)\n              ? null\n              : 'Password must be at least 8 characters long.',\n        ),\n        const SizedBox(height: 20),\n        FButton(\n          child: const Text('Login'),\n          onPress: () {\n            if (!_key.currentState!.validate()) {\n              return; // Form is invalid.\n            }\n\n            // Form is valid, do something.\n          },\n        ),\n      ],\n    ),\n  );\n}\n"
+  "tooltips": []
 }

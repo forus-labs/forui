@@ -1,10 +1,26 @@
 {
+  "code": "class AnimatedTimePickerExample extends StatefulWidget {\n  @override\n  State<AnimatedTimePickerExample> createState() =>\n      _AnimatedTimePickerExampleState();\n}\n\nclass _AnimatedTimePickerExampleState extends State<AnimatedTimePickerExample> {\n  static final _random = Random();\n  final _controller = FTimePickerController(time: .now());\n\n  @override\n  void dispose() {\n    _controller.dispose();\n    super.dispose();\n  }\n\n  @override\n  Widget build(BuildContext context) => Column(\n    mainAxisSize: .min,\n    children: [\n      SizedBox(\n        height: 300,\n        child: FTimePicker(control: .managed(controller: _controller)),\n      ),\n      FButton(\n        child: const Text('Funny button'),\n        onPress: () => _controller.animateTo(\n          FTime(_random.nextInt(24), _random.nextInt(60)),\n        ),\n      ),\n    ],\n  );\n}\n",
   "highlights": [],
   "links": [
     {
       "offset": 303,
       "length": 21,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.time_picker/FTimePickerController/FTimePickerController.html"
+    },
+    {
+      "offset": 325,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.time_picker/FTimePickerController/FTimePickerController.html"
+    },
+    {
+      "offset": 332,
+      "length": 3,
+      "url": "https://pub.dev/documentation/forui/latest/forui.foundation/FTime/FTime.now.html"
+    },
+    {
+      "offset": 388,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.time_picker/FTimePickerController/dispose.html"
     },
     {
       "offset": 577,
@@ -15,6 +31,16 @@
       "offset": 589,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.time_picker/FTimePicker/control.html"
+    },
+    {
+      "offset": 599,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.time_picker/FTimePickerControl/FTimePickerControl.managed.html"
+    },
+    {
+      "offset": 607,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.time_picker/FTimePickerControl/FTimePickerControl.managed.html"
     },
     {
       "offset": 649,
@@ -32,10 +58,15 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/onPress.html"
     },
     {
+      "offset": 736,
+      "length": 9,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.time_picker/FTimePickerController/animateTo.html"
+    },
+    {
       "offset": 757,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/latest/forui.foundation/FTime/FTime.html"
     }
   ],
-  "source": "class AnimatedTimePickerExample extends StatefulWidget {\n  @override\n  State<AnimatedTimePickerExample> createState() =>\n      _AnimatedTimePickerExampleState();\n}\n\nclass _AnimatedTimePickerExampleState extends State<AnimatedTimePickerExample> {\n  static final _random = Random();\n  final _controller = FTimePickerController(time: .now());\n\n  @override\n  void dispose() {\n    _controller.dispose();\n    super.dispose();\n  }\n\n  @override\n  Widget build(BuildContext context) => Column(\n    mainAxisSize: .min,\n    children: [\n      SizedBox(\n        height: 300,\n        child: FTimePicker(control: .managed(controller: _controller)),\n      ),\n      FButton(\n        child: const Text('Funny button'),\n        onPress: () => _controller.animateTo(\n          FTime(_random.nextInt(24), _random.nextInt(60)),\n        ),\n      ),\n    ],\n  );\n}\n"
+  "tooltips": []
 }

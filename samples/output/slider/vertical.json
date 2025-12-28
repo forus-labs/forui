@@ -1,4 +1,5 @@
 {
+  "code": "Widget build(BuildContext context) => FSlider(\n  control: .managedContinuous(initial: FSliderValue(max: 0.35)),\n  label: const Text('Volume'),\n  description: const Text('Adjust the volume by dragging the slider.'),\n  layout: .btt,\n  trackMainAxisExtent: 350,\n  marks: const [\n    .mark(value: 0, label: Text('0%')),\n    .mark(value: 0.25, tick: false),\n    .mark(value: 0.5, label: Text('50%')),\n    .mark(value: 0.75, tick: false),\n    .mark(value: 1, label: Text('100%')),\n  ],\n);\n",
   "highlights": [],
   "links": [
     {
@@ -10,6 +11,16 @@
       "offset": 49,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSlider/control.html"
+    },
+    {
+      "offset": 59,
+      "length": 17,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSliderControl/FSliderControl.managedContinuous.html"
+    },
+    {
+      "offset": 77,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSliderControl/FSliderControl.managedContinuous.html"
     },
     {
       "offset": 86,
@@ -37,6 +48,11 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSlider/layout.html"
     },
     {
+      "offset": 226,
+      "length": 3,
+      "url": "https://pub.dev/documentation/forui/latest/forui.foundation/FLayout.html#btt"
+    },
+    {
       "offset": 233,
       "length": 19,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSlider/trackMainAxisExtent.html"
@@ -45,6 +61,11 @@
       "offset": 261,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSlider/marks.html"
+    },
+    {
+      "offset": 281,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSliderMark/FSliderMark.mark.html"
     },
     {
       "offset": 286,
@@ -57,6 +78,11 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSliderMark/label.html"
     },
     {
+      "offset": 321,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSliderMark/FSliderMark.mark.html"
+    },
+    {
       "offset": 326,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSliderMark/value.html"
@@ -65,6 +91,11 @@
       "offset": 339,
       "length": 4,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSliderMark/tick.html"
+    },
+    {
+      "offset": 358,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSliderMark/FSliderMark.mark.html"
     },
     {
       "offset": 363,
@@ -77,6 +108,11 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSliderMark/label.html"
     },
     {
+      "offset": 401,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSliderMark/FSliderMark.mark.html"
+    },
+    {
       "offset": 406,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSliderMark/value.html"
@@ -85,6 +121,11 @@
       "offset": 419,
       "length": 4,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSliderMark/tick.html"
+    },
+    {
+      "offset": 438,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSliderMark/FSliderMark.mark.html"
     },
     {
       "offset": 443,
@@ -97,5 +138,5 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSliderMark/label.html"
     }
   ],
-  "source": "Widget build(BuildContext context) => FSlider(\n  control: .managedContinuous(initial: FSliderValue(max: 0.35)),\n  label: const Text('Volume'),\n  description: const Text('Adjust the volume by dragging the slider.'),\n  layout: .btt,\n  trackMainAxisExtent: 350,\n  marks: const [\n    .mark(value: 0, label: Text('0%')),\n    .mark(value: 0.25, tick: false),\n    .mark(value: 0.5, label: Text('50%')),\n    .mark(value: 0.75, tick: false),\n    .mark(value: 1, label: Text('100%')),\n  ],\n);\n"
+  "tooltips": []
 }

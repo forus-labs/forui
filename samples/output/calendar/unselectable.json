@@ -1,4 +1,5 @@
 {
+  "code": "Widget build(BuildContext _) => FCalendar(\n  control: .managedDates(\n    initial: {DateTime(2024, 7, 17), DateTime(2024, 7, 20)},\n    selectable: (date) =>\n        !{DateTime.utc(2024, 7, 18), DateTime.utc(2024, 7, 19)}.contains(date),\n  ),\n  start: DateTime(2000),\n  today: DateTime(2024, 7, 15),\n  end: DateTime(2030),\n);\n",
   "highlights": [],
   "links": [
     {
@@ -17,6 +18,16 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.calendar/FCalendarControl/managedDates.html"
     },
     {
+      "offset": 73,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.calendar/FCalendarControl/managedDates.html"
+    },
+    {
+      "offset": 134,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.calendar/FCalendarControl/managedDates.html"
+    },
+    {
       "offset": 243,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.calendar/FCalendar/start.html"
@@ -32,5 +43,5 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.calendar/FCalendar/end.html"
     }
   ],
-  "source": "Widget build(BuildContext _) => FCalendar(\n  control: .managedDates(\n    initial: {DateTime(2024, 7, 17), DateTime(2024, 7, 20)},\n    selectable: (date) =>\n        !{DateTime.utc(2024, 7, 18), DateTime.utc(2024, 7, 19)}.contains(date),\n  ),\n  start: DateTime(2000),\n  today: DateTime(2024, 7, 15),\n  end: DateTime(2030),\n);\n"
+  "tooltips": []
 }

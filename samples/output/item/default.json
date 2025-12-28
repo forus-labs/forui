@@ -1,4 +1,5 @@
 {
+  "code": "Widget build(BuildContext _) => FItem(\n  enabled: enabled,\n  prefix: const Icon(FIcons.user),\n  title: const Text('Personalization'),\n  suffix: const Icon(FIcons.chevronRight),\n  onPress: tappable ? () {} : null,\n);\n",
   "highlights": [],
   "links": [
     {
@@ -12,10 +13,35 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItem/enabled.html"
     },
     {
+      "offset": 61,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItem/FItem.html"
+    },
+    {
+      "offset": 80,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui_assets/latest/forui_assets/FIcons/user-constant.html"
+    },
+    {
+      "offset": 96,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItem/FItem.html"
+    },
+    {
+      "offset": 136,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItem/FItem.html"
+    },
+    {
+      "offset": 155,
+      "length": 19,
+      "url": "https://pub.dev/documentation/forui_assets/latest/forui_assets/FIcons/chevronRight-constant.html"
+    },
+    {
       "offset": 179,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItem/onPress.html"
     }
   ],
-  "source": "Widget build(BuildContext _) => FItem(\n  enabled: enabled,\n  prefix: const Icon(FIcons.user),\n  title: const Text('Personalization'),\n  suffix: const Icon(FIcons.chevronRight),\n  onPress: tappable ? () {} : null,\n);\n"
+  "tooltips": []
 }

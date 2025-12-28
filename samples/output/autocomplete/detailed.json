@@ -1,4 +1,5 @@
 {
+  "code": "Widget build(BuildContext _) => FAutocomplete.builder(\n  hint: 'Type to search',\n  filter: (query) => const [\n    'Bug',\n    'Feature',\n    'Question',\n  ].where((i) => i.toLowerCase().contains(query.toLowerCase())),\n  contentBuilder: (context, query, suggestions) => [\n    for (final suggestion in suggestions)\n      switch (suggestion) {\n        'Bug' => .item(\n          value: 'Bug',\n          prefix: const Icon(FIcons.bug),\n          title: const Text('Bug'),\n          subtitle: const Text('An unexpected problem or behavior'),\n        ),\n        'Feature' => .item(\n          value: 'Feature',\n          prefix: const Icon(FIcons.filePlusCorner),\n          title: const Text('Feature'),\n          subtitle: const Text('A new feature or enhancement'),\n        ),\n        'Question' => .item(\n          value: 'Question',\n          prefix: const Icon(FIcons.messageCircleQuestionMark),\n          title: const Text('Question'),\n          subtitle: const Text('A question or clarification'),\n        ),\n        _ => .item(value: suggestion),\n      },\n  ],\n);\n",
   "highlights": [],
   "links": [
     {
@@ -27,8 +28,58 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.autocomplete/FAutocompleteItemMixin/item.html"
     },
     {
+      "offset": 374,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.autocomplete/FAutocompleteItemMixin/item.html"
+    },
+    {
+      "offset": 398,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.autocomplete/FAutocompleteItemMixin/item.html"
+    },
+    {
+      "offset": 417,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui_assets/latest/forui_assets/FIcons/bug-constant.html"
+    },
+    {
+      "offset": 440,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.autocomplete/FAutocompleteItemMixin/item.html"
+    },
+    {
+      "offset": 476,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.autocomplete/FAutocompleteItemMixin/item.html"
+    },
+    {
       "offset": 568,
       "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.autocomplete/FAutocompleteItemMixin/item.html"
+    },
+    {
+      "offset": 584,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.autocomplete/FAutocompleteItemMixin/item.html"
+    },
+    {
+      "offset": 612,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.autocomplete/FAutocompleteItemMixin/item.html"
+    },
+    {
+      "offset": 631,
+      "length": 21,
+      "url": "https://pub.dev/documentation/forui_assets/latest/forui_assets/FIcons/filePlusCorner-constant.html"
+    },
+    {
+      "offset": 665,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.autocomplete/FAutocompleteItemMixin/item.html"
+    },
+    {
+      "offset": 705,
+      "length": 8,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.autocomplete/FAutocompleteItemMixin/item.html"
     },
     {
@@ -37,10 +88,40 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.autocomplete/FAutocompleteItemMixin/item.html"
     },
     {
+      "offset": 809,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.autocomplete/FAutocompleteItemMixin/item.html"
+    },
+    {
+      "offset": 838,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.autocomplete/FAutocompleteItemMixin/item.html"
+    },
+    {
+      "offset": 857,
+      "length": 32,
+      "url": "https://pub.dev/documentation/forui_assets/latest/forui_assets/FIcons/messageCircleQuestionMark-constant.html"
+    },
+    {
+      "offset": 902,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.autocomplete/FAutocompleteItemMixin/item.html"
+    },
+    {
+      "offset": 943,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.autocomplete/FAutocompleteItemMixin/item.html"
+    },
+    {
       "offset": 1021,
       "length": 4,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.autocomplete/FAutocompleteItemMixin/item.html"
+    },
+    {
+      "offset": 1026,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.autocomplete/FAutocompleteItemMixin/item.html"
     }
   ],
-  "source": "Widget build(BuildContext _) => FAutocomplete.builder(\n  hint: 'Type to search',\n  filter: (query) => const [\n    'Bug',\n    'Feature',\n    'Question',\n  ].where((i) => i.toLowerCase().contains(query.toLowerCase())),\n  contentBuilder: (context, query, suggestions) => [\n    for (final suggestion in suggestions)\n      switch (suggestion) {\n        'Bug' => .item(\n          value: 'Bug',\n          prefix: const Icon(FIcons.bug),\n          title: const Text('Bug'),\n          subtitle: const Text('An unexpected problem or behavior'),\n        ),\n        'Feature' => .item(\n          value: 'Feature',\n          prefix: const Icon(FIcons.filePlusCorner),\n          title: const Text('Feature'),\n          subtitle: const Text('A new feature or enhancement'),\n        ),\n        'Question' => .item(\n          value: 'Question',\n          prefix: const Icon(FIcons.messageCircleQuestionMark),\n          title: const Text('Question'),\n          subtitle: const Text('A question or clarification'),\n        ),\n        _ => .item(value: suggestion),\n      },\n  ],\n);\n"
+  "tooltips": []
 }

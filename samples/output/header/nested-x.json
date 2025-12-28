@@ -1,4 +1,5 @@
 {
+  "code": "Widget build(BuildContext _) => FHeader.nested(\n  title: const Text('Climate'),\n  prefixes: [\n    FHeaderAction(icon: const Icon(FIcons.thermometer), onPress: () {}),\n    const FHeaderAction(icon: Icon(FIcons.wind), onPress: null),\n  ],\n  suffixes: [FHeaderAction.x(onPress: () {})],\n);\n",
   "highlights": [],
   "links": [
     {
@@ -12,6 +13,11 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.header/FHeader/title.html"
     },
     {
+      "offset": 82,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.header/FHeader/FHeader.nested.html"
+    },
+    {
       "offset": 98,
       "length": 13,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.header/FHeaderAction/FHeaderAction.html"
@@ -20,6 +26,11 @@
       "offset": 112,
       "length": 4,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.header/FHeaderAction/icon.html"
+    },
+    {
+      "offset": 129,
+      "length": 18,
+      "url": "https://pub.dev/documentation/forui_assets/latest/forui_assets/FIcons/thermometer-constant.html"
     },
     {
       "offset": 150,
@@ -37,9 +48,19 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.header/FHeaderAction/icon.html"
     },
     {
+      "offset": 202,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui_assets/latest/forui_assets/FIcons/wind-constant.html"
+    },
+    {
       "offset": 216,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.header/FHeaderAction/onPress.html"
+    },
+    {
+      "offset": 239,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.header/FHeader/FHeader.nested.html"
     },
     {
       "offset": 250,
@@ -52,5 +73,5 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.header/FHeaderAction/onPress.html"
     }
   ],
-  "source": "Widget build(BuildContext _) => FHeader.nested(\n  title: const Text('Climate'),\n  prefixes: [\n    FHeaderAction(icon: const Icon(FIcons.thermometer), onPress: () {}),\n    const FHeaderAction(icon: Icon(FIcons.wind), onPress: null),\n  ],\n  suffixes: [FHeaderAction.x(onPress: () {})],\n);\n"
+  "tooltips": []
 }

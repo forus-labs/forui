@@ -1,4 +1,5 @@
 {
+  "code": "class SelectGroupCheckboxFormExample extends StatefulWidget {\n  @override\n  State<SelectGroupCheckboxFormExample> createState() =>\n      _SelectGroupCheckboxFormExampleState();\n}\n\nclass _SelectGroupCheckboxFormExampleState\n    extends State<SelectGroupCheckboxFormExample> {\n  final _key = GlobalKey<FormState>();\n\n  @override\n  Widget build(BuildContext context) => Form(\n    key: _key,\n    child: Column(\n      mainAxisAlignment: .center,\n      crossAxisAlignment: .start,\n      spacing: 20,\n      children: [\n        FSelectGroup<Language>(\n          label: const Text('Favorite Languages'),\n          description: const Text('Your favorite language.'),\n          validator: (values) => values?.isEmpty ?? true\n              ? 'Please select at least one language.'\n              : null,\n          children: [\n            .checkbox(value: .dart, label: const Text('Dart')),\n            .checkbox(value: .java, label: const Text('Java')),\n            .checkbox(value: .rust, label: const Text('Rust')),\n            .checkbox(value: .python, label: const Text('Python')),\n          ],\n        ),\n        FButton(\n          child: const Text('Submit'),\n          onPress: () {\n            if (!_key.currentState!.validate()) {\n              // Handle errors here.\n              return;\n            }\n\n            _key.currentState!.save();\n            // Do something.\n          },\n        ),\n      ],\n    ),\n  );\n}\n",
   "highlights": [],
   "links": [
     {
@@ -32,8 +33,28 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_group/FSelectGroupItemMixin/checkbox.html"
     },
     {
+      "offset": 835,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_group/FSelectGroupItemMixin/checkbox.html"
+    },
+    {
+      "offset": 849,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_group/FSelectGroupItemMixin/checkbox.html"
+    },
+    {
       "offset": 890,
       "length": 8,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_group/FSelectGroupItemMixin/checkbox.html"
+    },
+    {
+      "offset": 899,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_group/FSelectGroupItemMixin/checkbox.html"
+    },
+    {
+      "offset": 913,
+      "length": 5,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_group/FSelectGroupItemMixin/checkbox.html"
     },
     {
@@ -42,8 +63,28 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_group/FSelectGroupItemMixin/checkbox.html"
     },
     {
+      "offset": 963,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_group/FSelectGroupItemMixin/checkbox.html"
+    },
+    {
+      "offset": 977,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_group/FSelectGroupItemMixin/checkbox.html"
+    },
+    {
       "offset": 1018,
       "length": 8,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_group/FSelectGroupItemMixin/checkbox.html"
+    },
+    {
+      "offset": 1027,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_group/FSelectGroupItemMixin/checkbox.html"
+    },
+    {
+      "offset": 1043,
+      "length": 5,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_group/FSelectGroupItemMixin/checkbox.html"
     },
     {
@@ -62,5 +103,5 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/onPress.html"
     }
   ],
-  "source": "class SelectGroupCheckboxFormExample extends StatefulWidget {\n  @override\n  State<SelectGroupCheckboxFormExample> createState() =>\n      _SelectGroupCheckboxFormExampleState();\n}\n\nclass _SelectGroupCheckboxFormExampleState\n    extends State<SelectGroupCheckboxFormExample> {\n  final _key = GlobalKey<FormState>();\n\n  @override\n  Widget build(BuildContext context) => Form(\n    key: _key,\n    child: Column(\n      mainAxisAlignment: .center,\n      crossAxisAlignment: .start,\n      spacing: 20,\n      children: [\n        FSelectGroup<Language>(\n          label: const Text('Favorite Languages'),\n          description: const Text('Your favorite language.'),\n          validator: (values) => values?.isEmpty ?? true\n              ? 'Please select at least one language.'\n              : null,\n          children: [\n            .checkbox(value: .dart, label: const Text('Dart')),\n            .checkbox(value: .java, label: const Text('Java')),\n            .checkbox(value: .rust, label: const Text('Rust')),\n            .checkbox(value: .python, label: const Text('Python')),\n          ],\n        ),\n        FButton(\n          child: const Text('Submit'),\n          onPress: () {\n            if (!_key.currentState!.validate()) {\n              // Handle errors here.\n              return;\n            }\n\n            _key.currentState!.save();\n            // Do something.\n          },\n        ),\n      ],\n    ),\n  );\n}\n"
+  "tooltips": []
 }

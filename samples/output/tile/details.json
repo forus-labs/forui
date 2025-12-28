@@ -1,4 +1,5 @@
 {
+  "code": "Widget build(BuildContext _) => FTile(\n  prefix: const Icon(FIcons.wifi),\n  title: const Text('WiFi'),\n  details: const Text('Duobase (5G)'),\n  suffix: const Icon(FIcons.chevronRight),\n  onPress: () {},\n);\n",
   "highlights": [],
   "links": [
     {
@@ -7,10 +8,40 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTile/FTile.html"
     },
     {
+      "offset": 41,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTile/FTile.html"
+    },
+    {
+      "offset": 60,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui_assets/latest/forui_assets/FIcons/wifi-constant.html"
+    },
+    {
+      "offset": 76,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTile/FTile.html"
+    },
+    {
+      "offset": 105,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTile/FTile.html"
+    },
+    {
+      "offset": 144,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTile/FTile.html"
+    },
+    {
+      "offset": 163,
+      "length": 19,
+      "url": "https://pub.dev/documentation/forui_assets/latest/forui_assets/FIcons/chevronRight-constant.html"
+    },
+    {
       "offset": 187,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTile/onPress.html"
     }
   ],
-  "source": "Widget build(BuildContext _) => FTile(\n  prefix: const Icon(FIcons.wifi),\n  title: const Text('WiFi'),\n  details: const Text('Duobase (5G)'),\n  suffix: const Icon(FIcons.chevronRight),\n  onPress: () {},\n);\n"
+  "tooltips": []
 }

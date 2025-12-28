@@ -1,4 +1,5 @@
 {
+  "code": "Widget build(BuildContext _) => FHeader(\n  title: const Text('Edit Notes'),\n  suffixes: [\n    FPopoverMenu.tiles(\n      autofocus: true,\n      menuAnchor: .topRight,\n      childAnchor: .bottomRight,\n      menu: [\n        .group(\n          children: [\n            .tile(\n              prefix: const Icon(FIcons.user),\n              title: const Text('Personalization'),\n              onPress: () {},\n            ),\n            .tile(\n              prefix: const Icon(FIcons.paperclip),\n              title: const Text('Add attachments'),\n              onPress: () {},\n            ),\n            .tile(\n              prefix: const Icon(FIcons.qrCode),\n              title: const Text('Scan Document'),\n              onPress: () {},\n            ),\n          ],\n        ),\n        .group(\n          children: [\n            .tile(\n              prefix: const Icon(FIcons.list),\n              title: const Text('List View'),\n              onPress: () {},\n            ),\n            .tile(\n              prefix: const Icon(FIcons.layoutGrid),\n              title: const Text('Grid View'),\n              onPress: () {},\n            ),\n          ],\n        ),\n      ],\n      builder: (_, controller, _) => FHeaderAction(\n        icon: const Icon(FIcons.ellipsis),\n        onPress: controller.toggle,\n      ),\n    ),\n  ],\n);\n",
   "highlights": [],
   "links": [
     {
@@ -10,6 +11,11 @@
       "offset": 43,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.header/FHeader/title.html"
+    },
+    {
+      "offset": 78,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.header/FHeader/FHeader.html"
     },
     {
       "offset": 94,
@@ -32,8 +38,18 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.popover_menu/FPopoverMenu/childAnchor.html"
     },
     {
+      "offset": 205,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.popover_menu/FPopoverMenu/FPopoverMenu.tiles.html"
+    },
+    {
       "offset": 222,
       "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTileGroupMixin/group.html"
+    },
+    {
+      "offset": 239,
+      "length": 8,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTileGroupMixin/group.html"
     },
     {
@@ -42,8 +58,48 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTileMixin/tile.html"
     },
     {
+      "offset": 284,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTileMixin/tile.html"
+    },
+    {
+      "offset": 303,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui_assets/latest/forui_assets/FIcons/user-constant.html"
+    },
+    {
+      "offset": 331,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTileMixin/tile.html"
+    },
+    {
+      "offset": 383,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTileMixin/tile.html"
+    },
+    {
       "offset": 427,
       "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTileMixin/tile.html"
+    },
+    {
+      "offset": 447,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTileMixin/tile.html"
+    },
+    {
+      "offset": 466,
+      "length": 16,
+      "url": "https://pub.dev/documentation/forui_assets/latest/forui_assets/FIcons/paperclip-constant.html"
+    },
+    {
+      "offset": 499,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTileMixin/tile.html"
+    },
+    {
+      "offset": 551,
+      "length": 7,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTileMixin/tile.html"
     },
     {
@@ -52,8 +108,33 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTileMixin/tile.html"
     },
     {
+      "offset": 615,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTileMixin/tile.html"
+    },
+    {
+      "offset": 634,
+      "length": 13,
+      "url": "https://pub.dev/documentation/forui_assets/latest/forui_assets/FIcons/qrCode-constant.html"
+    },
+    {
+      "offset": 664,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTileMixin/tile.html"
+    },
+    {
+      "offset": 714,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTileMixin/tile.html"
+    },
+    {
       "offset": 778,
       "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTileGroupMixin/group.html"
+    },
+    {
+      "offset": 795,
+      "length": 8,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTileGroupMixin/group.html"
     },
     {
@@ -62,8 +143,48 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTileMixin/tile.html"
     },
     {
+      "offset": 840,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTileMixin/tile.html"
+    },
+    {
+      "offset": 859,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui_assets/latest/forui_assets/FIcons/list-constant.html"
+    },
+    {
+      "offset": 887,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTileMixin/tile.html"
+    },
+    {
+      "offset": 933,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTileMixin/tile.html"
+    },
+    {
       "offset": 977,
       "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTileMixin/tile.html"
+    },
+    {
+      "offset": 997,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTileMixin/tile.html"
+    },
+    {
+      "offset": 1016,
+      "length": 17,
+      "url": "https://pub.dev/documentation/forui_assets/latest/forui_assets/FIcons/layoutGrid-constant.html"
+    },
+    {
+      "offset": 1050,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTileMixin/tile.html"
+    },
+    {
+      "offset": 1096,
+      "length": 7,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTileMixin/tile.html"
     },
     {
@@ -82,10 +203,20 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.header/FHeaderAction/icon.html"
     },
     {
+      "offset": 1237,
+      "length": 15,
+      "url": "https://pub.dev/documentation/forui_assets/latest/forui_assets/FIcons/ellipsis-constant.html"
+    },
+    {
       "offset": 1263,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.header/FHeaderAction/onPress.html"
+    },
+    {
+      "offset": 1283,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.popover/FPopoverController/toggle.html"
     }
   ],
-  "source": "Widget build(BuildContext _) => FHeader(\n  title: const Text('Edit Notes'),\n  suffixes: [\n    FPopoverMenu.tiles(\n      autofocus: true,\n      menuAnchor: .topRight,\n      childAnchor: .bottomRight,\n      menu: [\n        .group(\n          children: [\n            .tile(\n              prefix: const Icon(FIcons.user),\n              title: const Text('Personalization'),\n              onPress: () {},\n            ),\n            .tile(\n              prefix: const Icon(FIcons.paperclip),\n              title: const Text('Add attachments'),\n              onPress: () {},\n            ),\n            .tile(\n              prefix: const Icon(FIcons.qrCode),\n              title: const Text('Scan Document'),\n              onPress: () {},\n            ),\n          ],\n        ),\n        .group(\n          children: [\n            .tile(\n              prefix: const Icon(FIcons.list),\n              title: const Text('List View'),\n              onPress: () {},\n            ),\n            .tile(\n              prefix: const Icon(FIcons.layoutGrid),\n              title: const Text('Grid View'),\n              onPress: () {},\n            ),\n          ],\n        ),\n      ],\n      builder: (_, controller, _) => FHeaderAction(\n        icon: const Icon(FIcons.ellipsis),\n        onPress: controller.toggle,\n      ),\n    ),\n  ],\n);\n"
+  "tooltips": []
 }

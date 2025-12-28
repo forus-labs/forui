@@ -1,4 +1,5 @@
 {
+  "code": "Widget build(BuildContext _) => FMultiSelect<String>.rich(\n  hint: const Text('Select favorite fruits'),\n  format: Text.new,\n  sort: (a, b) => a.compareTo(b),\n  children: [\n    for (final fruit in fruits) .item(title: Text(fruit), value: fruit),\n  ],\n);\n",
   "highlights": [],
   "links": [
     {
@@ -22,10 +23,25 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FMultiSelect/sort.html"
     },
     {
+      "offset": 161,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FMultiSelect/FMultiSelect.rich.html"
+    },
+    {
       "offset": 206,
       "length": 4,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/item.html"
+    },
+    {
+      "offset": 211,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/item.html"
+    },
+    {
+      "offset": 231,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/item.html"
     }
   ],
-  "source": "Widget build(BuildContext _) => FMultiSelect<String>.rich(\n  hint: const Text('Select favorite fruits'),\n  format: Text.new,\n  sort: (a, b) => a.compareTo(b),\n  children: [\n    for (final fruit in fruits) .item(title: Text(fruit), value: fruit),\n  ],\n);\n"
+  "tooltips": []
 }

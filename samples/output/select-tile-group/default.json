@@ -1,4 +1,5 @@
 {
+  "code": "Widget build(BuildContext _) => FSelectTileGroup<Sidebar>(\n  control: const .managed(initial: {.recents}),\n  label: const Text('Sidebar'),\n  description: const Text('These will be shown in the sidebar.'),\n  divider: divider,\n  children: const [\n    .tile(title: Text('Recents'), suffix: Icon(FIcons.timer), value: .recents),\n    .tile(title: Text('Home'), suffix: Icon(FIcons.house), value: .home),\n    .tile(\n      title: Text('Applications'),\n      suffix: Icon(FIcons.appWindowMac),\n      value: .applications,\n    ),\n  ],\n);\n",
   "highlights": [],
   "links": [
     {
@@ -10,6 +11,16 @@
       "offset": 61,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_tile_group/FSelectTileGroup/control.html"
+    },
+    {
+      "offset": 77,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.foundation/FMultiValueControl/FMultiValueControl.managed.html"
+    },
+    {
+      "offset": 85,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.foundation/FMultiValueControl/FMultiValueControl.managed.html"
     },
     {
       "offset": 109,
@@ -27,9 +38,29 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_tile_group/FSelectTileGroup/divider.html"
     },
     {
+      "offset": 227,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_tile_group/FSelectTileGroup/FSelectTileGroup.html"
+    },
+    {
+      "offset": 250,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_tile_group/FSelectTile/FSelectTile.tile.html"
+    },
+    {
       "offset": 255,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_tile_group/FSelectTile/title.html"
+    },
+    {
+      "offset": 279,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_tile_group/FSelectTile/FSelectTile.tile.html"
+    },
+    {
+      "offset": 292,
+      "length": 12,
+      "url": "https://pub.dev/documentation/forui_assets/latest/forui_assets/FIcons/timer-constant.html"
     },
     {
       "offset": 307,
@@ -37,9 +68,24 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_tile_group/FSelectTile/value.html"
     },
     {
+      "offset": 330,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_tile_group/FSelectTile/FSelectTile.tile.html"
+    },
+    {
       "offset": 335,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_tile_group/FSelectTile/title.html"
+    },
+    {
+      "offset": 356,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_tile_group/FSelectTile/FSelectTile.tile.html"
+    },
+    {
+      "offset": 369,
+      "length": 12,
+      "url": "https://pub.dev/documentation/forui_assets/latest/forui_assets/FIcons/house-constant.html"
     },
     {
       "offset": 384,
@@ -47,9 +93,24 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_tile_group/FSelectTile/value.html"
     },
     {
+      "offset": 404,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_tile_group/FSelectTile/FSelectTile.tile.html"
+    },
+    {
       "offset": 416,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_tile_group/FSelectTile/title.html"
+    },
+    {
+      "offset": 451,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_tile_group/FSelectTile/FSelectTile.tile.html"
+    },
+    {
+      "offset": 464,
+      "length": 19,
+      "url": "https://pub.dev/documentation/forui_assets/latest/forui_assets/FIcons/appWindowMac-constant.html"
     },
     {
       "offset": 492,
@@ -57,5 +118,5 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_tile_group/FSelectTile/value.html"
     }
   ],
-  "source": "Widget build(BuildContext _) => FSelectTileGroup<Sidebar>(\n  control: const .managed(initial: {.recents}),\n  label: const Text('Sidebar'),\n  description: const Text('These will be shown in the sidebar.'),\n  divider: divider,\n  children: const [\n    .tile(title: Text('Recents'), suffix: Icon(FIcons.timer), value: .recents),\n    .tile(title: Text('Home'), suffix: Icon(FIcons.house), value: .home),\n    .tile(\n      title: Text('Applications'),\n      suffix: Icon(FIcons.appWindowMac),\n      value: .applications,\n    ),\n  ],\n);\n"
+  "tooltips": []
 }

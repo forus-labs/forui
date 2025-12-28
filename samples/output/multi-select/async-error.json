@@ -1,4 +1,5 @@
 {
+  "code": "Widget build(BuildContext _) => FMultiSelect<String>.searchBuilder(\n  hint: const Text('Select a fruit'),\n  format: Text.new,\n  filter: (query) async {\n    await Future.delayed(const Duration(seconds: 1));\n    throw StateError('Error loading data');\n  },\n  contentBuilder: (context, _, fruits) => [\n    for (final fruit in fruits) .item(title: Text(fruit), value: fruit),\n  ],\n  contentErrorBuilder: (context, error, trace) {\n    final style = context.theme.selectStyle.iconStyle;\n    return Padding(\n      padding: const .all(8.0),\n      child: Icon(FIcons.messageCircleX, size: style.size, color: style.color),\n    );\n  },\n);\n",
   "highlights": [],
   "links": [
     {
@@ -17,10 +18,55 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FMultiSelect/format.html"
     },
     {
+      "offset": 128,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FMultiSelect/FMultiSelect.searchBuilder.html"
+    },
+    {
+      "offset": 257,
+      "length": 14,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FMultiSelect/FMultiSelect.searchBuilder.html"
+    },
+    {
       "offset": 332,
       "length": 4,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/item.html"
+    },
+    {
+      "offset": 337,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/item.html"
+    },
+    {
+      "offset": 357,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/item.html"
+    },
+    {
+      "offset": 379,
+      "length": 19,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FMultiSelect/FMultiSelect.searchBuilder.html"
+    },
+    {
+      "offset": 470,
+      "length": 9,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectStyle/iconStyle.html"
+    },
+    {
+      "offset": 458,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FThemeData/selectStyle.html"
+    },
+    {
+      "offset": 452,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FThemeBuildContext/theme.html"
+    },
+    {
+      "offset": 551,
+      "length": 21,
+      "url": "https://pub.dev/documentation/forui_assets/latest/forui_assets/FIcons/messageCircleX-constant.html"
     }
   ],
-  "source": "Widget build(BuildContext _) => FMultiSelect<String>.searchBuilder(\n  hint: const Text('Select a fruit'),\n  format: Text.new,\n  filter: (query) async {\n    await Future.delayed(const Duration(seconds: 1));\n    throw StateError('Error loading data');\n  },\n  contentBuilder: (context, _, fruits) => [\n    for (final fruit in fruits) .item(title: Text(fruit), value: fruit),\n  ],\n  contentErrorBuilder: (context, error, trace) {\n    final style = context.theme.selectStyle.iconStyle;\n    return Padding(\n      padding: const .all(8.0),\n      child: Icon(FIcons.messageCircleX, size: style.size, color: style.color),\n    );\n  },\n);\n"
+  "tooltips": []
 }

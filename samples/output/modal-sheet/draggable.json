@@ -1,4 +1,5 @@
 {
+  "code": "Widget build(BuildContext context) => FButton(\n  child: const Text('Click me'),\n  onPress: () => showFSheet(\n    context: context,\n    side: .btt,\n    mainAxisMaxRatio: null,\n    builder: (context) => DraggableScrollableSheet(\n      expand: false,\n      builder: (context, controller) => ScrollConfiguration(\n        // This is required to enable dragging on desktop.\n        // See https://github.com/flutter/flutter/issues/101903 for more information.\n        behavior: ScrollConfiguration.of(\n          context,\n        ).copyWith(dragDevices: {.touch, .mouse, .trackpad}),\n        child: FTileGroup.builder(\n          count: 25,\n          scrollController: controller,\n          tileBuilder: (context, index) => FTile(title: Text('Tile $index')),\n        ),\n      ),\n    ),\n  ),\n);\n",
   "highlights": [],
   "links": [
     {
@@ -17,8 +18,43 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/onPress.html"
     },
     {
+      "offset": 97,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sheet/showFSheet.html"
+    },
+    {
+      "offset": 113,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sheet/showFSheet.html"
+    },
+    {
+      "offset": 135,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sheet/showFSheet.html"
+    },
+    {
+      "offset": 142,
+      "length": 3,
+      "url": "https://pub.dev/documentation/forui/latest/forui.foundation/FLayout.html#btt"
+    },
+    {
+      "offset": 151,
+      "length": 16,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sheet/showFSheet.html"
+    },
+    {
+      "offset": 179,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sheet/showFSheet.html"
+    },
+    {
       "offset": 592,
       "length": 18,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTileGroup/FTileGroup.builder.html"
+    },
+    {
+      "offset": 622,
+      "length": 5,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTileGroup/FTileGroup.builder.html"
     },
     {
@@ -27,10 +63,20 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTileGroup/scrollController.html"
     },
     {
+      "offset": 683,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTileGroup/FTileGroup.builder.html"
+    },
+    {
       "offset": 716,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTile/FTile.html"
+    },
+    {
+      "offset": 722,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTile/FTile.html"
     }
   ],
-  "source": "Widget build(BuildContext context) => FButton(\n  child: const Text('Click me'),\n  onPress: () => showFSheet(\n    context: context,\n    side: .btt,\n    mainAxisMaxRatio: null,\n    builder: (context) => DraggableScrollableSheet(\n      expand: false,\n      builder: (context, controller) => ScrollConfiguration(\n        // This is required to enable dragging on desktop.\n        // See https://github.com/flutter/flutter/issues/101903 for more information.\n        behavior: ScrollConfiguration.of(\n          context,\n        ).copyWith(dragDevices: {.touch, .mouse, .trackpad}),\n        child: FTileGroup.builder(\n          count: 25,\n          scrollController: controller,\n          tileBuilder: (context, index) => FTile(title: Text('Tile $index')),\n        ),\n      ),\n    ),\n  ),\n);\n"
+  "tooltips": []
 }

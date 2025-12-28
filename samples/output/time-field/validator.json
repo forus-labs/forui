@@ -1,4 +1,5 @@
 {
+  "code": "Widget build(BuildContext context) => FTimeField(\n  control: .managed(\n    validator: (time) => time?.hour == 12 ? 'Time cannot be noon.' : null,\n  ),\n  label: const Text('Appointment Time'),\n  description: const Text('Select a time for your appointment.'),\n);\n",
   "highlights": [],
   "links": [
     {
@@ -12,6 +13,21 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.time_field/FTimeField/control.html"
     },
     {
+      "offset": 62,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.time_field/FTimeFieldControl/FTimeFieldControl.managed.html"
+    },
+    {
+      "offset": 75,
+      "length": 9,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.time_field/FTimeFieldControl/FTimeFieldControl.managed.html"
+    },
+    {
+      "offset": 102,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.foundation/FTime/hour.html"
+    },
+    {
       "offset": 153,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.time_field/FTimeField/label.html"
@@ -22,5 +38,5 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.time_field/FTimeField/description.html"
     }
   ],
-  "source": "Widget build(BuildContext context) => FTimeField(\n  control: .managed(\n    validator: (time) => time?.hour == 12 ? 'Time cannot be noon.' : null,\n  ),\n  label: const Text('Appointment Time'),\n  description: const Text('Select a time for your appointment.'),\n);\n"
+  "tooltips": []
 }

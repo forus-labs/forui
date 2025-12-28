@@ -1,4 +1,5 @@
 {
+  "code": "Widget build(BuildContext _) => FItemGroup.builder(\n  maxHeight: 200,\n  count: 200,\n  itemBuilder: (context, index) => FItem(\n    title: Text('Item $index'),\n    suffix: const Icon(FIcons.chevronRight),\n    onPress: () {},\n  ),\n);\n",
   "highlights": [],
   "links": [
     {
@@ -12,9 +13,34 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItemGroup/maxHeight.html"
     },
     {
+      "offset": 72,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItemGroup/FItemGroup.builder.html"
+    },
+    {
+      "offset": 86,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItemGroup/FItemGroup.builder.html"
+    },
+    {
       "offset": 119,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItem/FItem.html"
+    },
+    {
+      "offset": 130,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItem/FItem.html"
+    },
+    {
+      "offset": 162,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItem/FItem.html"
+    },
+    {
+      "offset": 181,
+      "length": 19,
+      "url": "https://pub.dev/documentation/forui_assets/latest/forui_assets/FIcons/chevronRight-constant.html"
     },
     {
       "offset": 207,
@@ -22,5 +48,5 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItem/onPress.html"
     }
   ],
-  "source": "Widget build(BuildContext _) => FItemGroup.builder(\n  maxHeight: 200,\n  count: 200,\n  itemBuilder: (context, index) => FItem(\n    title: Text('Item $index'),\n    suffix: const Icon(FIcons.chevronRight),\n    onPress: () {},\n  ),\n);\n"
+  "tooltips": []
 }

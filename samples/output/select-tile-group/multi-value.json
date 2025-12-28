@@ -1,4 +1,5 @@
 {
+  "code": "class SelectTileGroupMultiValueExample extends StatefulWidget {\n  @override\n  State<SelectTileGroupMultiValueExample> createState() =>\n      _SelectTileGroupMultiValueExampleState();\n}\n\nclass _SelectTileGroupMultiValueExampleState\n    extends State<SelectTileGroupMultiValueExample> {\n  final _key = GlobalKey<FormState>();\n\n  @override\n  Widget build(BuildContext _) => Form(\n    key: _key,\n    child: Column(\n      mainAxisAlignment: .center,\n      crossAxisAlignment: .start,\n      spacing: 20,\n      children: [\n        FSelectTileGroup<Language>(\n          label: const Text('Favorite Languages'),\n          description: const Text('Your favorite language.'),\n          validator: (values) => (values?.isEmpty ?? true)\n              ? 'Please select at least one language.'\n              : null,\n          children: const [\n            .tile(title: Text('Dart'), value: .dart),\n            .tile(title: Text('Java'), value: .java),\n            .tile(title: Text('Rust'), value: .rust),\n            .tile(title: Text('Python'), value: .python),\n          ],\n        ),\n        FButton(\n          child: const Text('Save'),\n          onPress: () {\n            if (!_key.currentState!.validate()) {\n              // Handle errors here.\n              return;\n            }\n\n            _key.currentState!.save();\n            // Do something.\n          },\n        ),\n      ],\n    ),\n  );\n}\n",
   "highlights": [],
   "links": [
     {
@@ -22,6 +23,16 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_tile_group/FSelectTileGroup/validator.html"
     },
     {
+      "offset": 811,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_tile_group/FSelectTileGroup/FSelectTileGroup.html"
+    },
+    {
+      "offset": 842,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_tile_group/FSelectTile/FSelectTile.tile.html"
+    },
+    {
       "offset": 847,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_tile_group/FSelectTile/title.html"
@@ -30,6 +41,11 @@
       "offset": 868,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_tile_group/FSelectTile/value.html"
+    },
+    {
+      "offset": 896,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_tile_group/FSelectTile/FSelectTile.tile.html"
     },
     {
       "offset": 901,
@@ -42,6 +58,11 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_tile_group/FSelectTile/value.html"
     },
     {
+      "offset": 950,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_tile_group/FSelectTile/FSelectTile.tile.html"
+    },
+    {
       "offset": 955,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_tile_group/FSelectTile/title.html"
@@ -50,6 +71,11 @@
       "offset": 976,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_tile_group/FSelectTile/value.html"
+    },
+    {
+      "offset": 1004,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_tile_group/FSelectTile/FSelectTile.tile.html"
     },
     {
       "offset": 1009,
@@ -77,5 +103,5 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/onPress.html"
     }
   ],
-  "source": "class SelectTileGroupMultiValueExample extends StatefulWidget {\n  @override\n  State<SelectTileGroupMultiValueExample> createState() =>\n      _SelectTileGroupMultiValueExampleState();\n}\n\nclass _SelectTileGroupMultiValueExampleState\n    extends State<SelectTileGroupMultiValueExample> {\n  final _key = GlobalKey<FormState>();\n\n  @override\n  Widget build(BuildContext _) => Form(\n    key: _key,\n    child: Column(\n      mainAxisAlignment: .center,\n      crossAxisAlignment: .start,\n      spacing: 20,\n      children: [\n        FSelectTileGroup<Language>(\n          label: const Text('Favorite Languages'),\n          description: const Text('Your favorite language.'),\n          validator: (values) => (values?.isEmpty ?? true)\n              ? 'Please select at least one language.'\n              : null,\n          children: const [\n            .tile(title: Text('Dart'), value: .dart),\n            .tile(title: Text('Java'), value: .java),\n            .tile(title: Text('Rust'), value: .rust),\n            .tile(title: Text('Python'), value: .python),\n          ],\n        ),\n        FButton(\n          child: const Text('Save'),\n          onPress: () {\n            if (!_key.currentState!.validate()) {\n              // Handle errors here.\n              return;\n            }\n\n            _key.currentState!.save();\n            // Do something.\n          },\n        ),\n      ],\n    ),\n  );\n}\n"
+  "tooltips": []
 }

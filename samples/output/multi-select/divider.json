@@ -1,4 +1,5 @@
 {
+  "code": "Widget build(BuildContext _) => FMultiSelect<String>.rich(\n  hint: const Text('Select a level'),\n  contentDivider: .full,\n  format: Text.new,\n  children: [\n    .section(\n      label: const Text('Level 1'),\n      divider: .indented,\n      items: {\n        for (final item in ['A', 'B']) item: '1$item',\n      },\n    ),\n    .section(\n      label: const Text('Level 2'),\n      items: {\n        for (final item in ['A', 'B']) item: '2$item',\n      },\n    ),\n    .item(title: const Text('Level 3'), value: '3'),\n    .item(title: const Text('Level 4'), value: '4'),\n  ],\n);\n",
   "highlights": [],
   "links": [
     {
@@ -17,13 +18,43 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FMultiSelect/contentDivider.html"
     },
     {
+      "offset": 116,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItemDivider.html#full"
+    },
+    {
       "offset": 124,
       "length": 6,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FMultiSelect/format.html"
     },
     {
+      "offset": 144,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FMultiSelect/FMultiSelect.rich.html"
+    },
+    {
       "offset": 161,
       "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/section.html"
+    },
+    {
+      "offset": 176,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/section.html"
+    },
+    {
+      "offset": 212,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/section.html"
+    },
+    {
+      "offset": 222,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItemDivider.html#indented"
+    },
+    {
+      "offset": 238,
+      "length": 5,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/section.html"
     },
     {
@@ -32,15 +63,45 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/section.html"
     },
     {
+      "offset": 338,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/section.html"
+    },
+    {
+      "offset": 374,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/section.html"
+    },
+    {
       "offset": 459,
       "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/item.html"
+    },
+    {
+      "offset": 464,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/item.html"
+    },
+    {
+      "offset": 494,
+      "length": 5,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/item.html"
     },
     {
       "offset": 512,
       "length": 4,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/item.html"
+    },
+    {
+      "offset": 517,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/item.html"
+    },
+    {
+      "offset": 547,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/item.html"
     }
   ],
-  "source": "Widget build(BuildContext _) => FMultiSelect<String>.rich(\n  hint: const Text('Select a level'),\n  contentDivider: .full,\n  format: Text.new,\n  children: [\n    .section(\n      label: const Text('Level 1'),\n      divider: .indented,\n      items: {\n        for (final item in ['A', 'B']) item: '1$item',\n      },\n    ),\n    .section(\n      label: const Text('Level 2'),\n      items: {\n        for (final item in ['A', 'B']) item: '2$item',\n      },\n    ),\n    .item(title: const Text('Level 3'), value: '3'),\n    .item(title: const Text('Level 4'), value: '4'),\n  ],\n);\n"
+  "tooltips": []
 }

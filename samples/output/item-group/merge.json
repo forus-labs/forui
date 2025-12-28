@@ -1,4 +1,5 @@
 {
+  "code": "Widget build(BuildContext _) => FItemGroup.merge(\n  children: [\n    .group(\n      children: [\n        .item(\n          prefix: const Icon(FIcons.user),\n          title: const Text('Personalization'),\n          suffix: const Icon(FIcons.chevronRight),\n          onPress: () {},\n        ),\n        .item(\n          prefix: const Icon(FIcons.wifi),\n          title: const Text('WiFi'),\n          details: const Text('Duobase (5G)'),\n          suffix: const Icon(FIcons.chevronRight),\n          onPress: () {},\n        ),\n      ],\n    ),\n    .group(\n      children: [\n        .item(\n          prefix: const Icon(FIcons.list),\n          title: const Text('List View'),\n          suffix: const Icon(FIcons.chevronRight),\n          onPress: () {},\n        ),\n        .item(\n          prefix: const Icon(FIcons.grid2x2),\n          title: const Text('Grid View'),\n          suffix: const Icon(FIcons.chevronRight),\n          onPress: () {},\n        ),\n      ],\n    ),\n  ],\n);\n",
   "highlights": [],
   "links": [
     {
@@ -7,8 +8,18 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItemGroup/FItemGroup.merge.html"
     },
     {
+      "offset": 52,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItemGroup/FItemGroup.merge.html"
+    },
+    {
       "offset": 69,
       "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItemGroupMixin/group.html"
+    },
+    {
+      "offset": 82,
+      "length": 8,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItemGroupMixin/group.html"
     },
     {
@@ -17,8 +28,73 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItemMixin/item.html"
     },
     {
+      "offset": 119,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItemMixin/item.html"
+    },
+    {
+      "offset": 138,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui_assets/latest/forui_assets/FIcons/user-constant.html"
+    },
+    {
+      "offset": 162,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItemMixin/item.html"
+    },
+    {
+      "offset": 210,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItemMixin/item.html"
+    },
+    {
+      "offset": 229,
+      "length": 19,
+      "url": "https://pub.dev/documentation/forui_assets/latest/forui_assets/FIcons/chevronRight-constant.html"
+    },
+    {
+      "offset": 261,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItemMixin/item.html"
+    },
+    {
       "offset": 297,
       "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItemMixin/item.html"
+    },
+    {
+      "offset": 313,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItemMixin/item.html"
+    },
+    {
+      "offset": 332,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui_assets/latest/forui_assets/FIcons/wifi-constant.html"
+    },
+    {
+      "offset": 356,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItemMixin/item.html"
+    },
+    {
+      "offset": 393,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItemMixin/item.html"
+    },
+    {
+      "offset": 440,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItemMixin/item.html"
+    },
+    {
+      "offset": 459,
+      "length": 19,
+      "url": "https://pub.dev/documentation/forui_assets/latest/forui_assets/FIcons/chevronRight-constant.html"
+    },
+    {
+      "offset": 491,
+      "length": 7,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItemMixin/item.html"
     },
     {
@@ -27,15 +103,80 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItemGroupMixin/group.html"
     },
     {
+      "offset": 552,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItemGroupMixin/group.html"
+    },
+    {
       "offset": 573,
       "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItemMixin/item.html"
+    },
+    {
+      "offset": 589,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItemMixin/item.html"
+    },
+    {
+      "offset": 608,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui_assets/latest/forui_assets/FIcons/list-constant.html"
+    },
+    {
+      "offset": 632,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItemMixin/item.html"
+    },
+    {
+      "offset": 674,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItemMixin/item.html"
+    },
+    {
+      "offset": 693,
+      "length": 19,
+      "url": "https://pub.dev/documentation/forui_assets/latest/forui_assets/FIcons/chevronRight-constant.html"
+    },
+    {
+      "offset": 725,
+      "length": 7,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItemMixin/item.html"
     },
     {
       "offset": 761,
       "length": 4,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItemMixin/item.html"
+    },
+    {
+      "offset": 777,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItemMixin/item.html"
+    },
+    {
+      "offset": 796,
+      "length": 14,
+      "url": "https://pub.dev/documentation/forui_assets/latest/forui_assets/FIcons/grid2x2-constant.html"
+    },
+    {
+      "offset": 823,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItemMixin/item.html"
+    },
+    {
+      "offset": 865,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItemMixin/item.html"
+    },
+    {
+      "offset": 884,
+      "length": 19,
+      "url": "https://pub.dev/documentation/forui_assets/latest/forui_assets/FIcons/chevronRight-constant.html"
+    },
+    {
+      "offset": 916,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItemMixin/item.html"
     }
   ],
-  "source": "Widget build(BuildContext _) => FItemGroup.merge(\n  children: [\n    .group(\n      children: [\n        .item(\n          prefix: const Icon(FIcons.user),\n          title: const Text('Personalization'),\n          suffix: const Icon(FIcons.chevronRight),\n          onPress: () {},\n        ),\n        .item(\n          prefix: const Icon(FIcons.wifi),\n          title: const Text('WiFi'),\n          details: const Text('Duobase (5G)'),\n          suffix: const Icon(FIcons.chevronRight),\n          onPress: () {},\n        ),\n      ],\n    ),\n    .group(\n      children: [\n        .item(\n          prefix: const Icon(FIcons.list),\n          title: const Text('List View'),\n          suffix: const Icon(FIcons.chevronRight),\n          onPress: () {},\n        ),\n        .item(\n          prefix: const Icon(FIcons.grid2x2),\n          title: const Text('Grid View'),\n          suffix: const Icon(FIcons.chevronRight),\n          onPress: () {},\n        ),\n      ],\n    ),\n  ],\n);\n"
+  "tooltips": []
 }

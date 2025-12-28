@@ -1,4 +1,5 @@
 {
+  "code": "Widget build(BuildContext _) => FTileGroup.builder(\n  label: const Text('Settings'),\n  description: const Text('Personalize your experience'),\n  maxHeight: 200,\n  count: 200,\n  tileBuilder: (context, index) => FTile(\n    title: Text('Tile $index'),\n    suffix: const Icon(FIcons.chevronRight),\n    onPress: () {},\n  ),\n);\n",
   "highlights": [],
   "links": [
     {
@@ -22,9 +23,34 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTileGroup/maxHeight.html"
     },
     {
+      "offset": 163,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTileGroup/FTileGroup.builder.html"
+    },
+    {
+      "offset": 177,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTileGroup/FTileGroup.builder.html"
+    },
+    {
       "offset": 210,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTile/FTile.html"
+    },
+    {
+      "offset": 221,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTile/FTile.html"
+    },
+    {
+      "offset": 253,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTile/FTile.html"
+    },
+    {
+      "offset": 272,
+      "length": 19,
+      "url": "https://pub.dev/documentation/forui_assets/latest/forui_assets/FIcons/chevronRight-constant.html"
     },
     {
       "offset": 298,
@@ -32,5 +58,5 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTile/onPress.html"
     }
   ],
-  "source": "Widget build(BuildContext _) => FTileGroup.builder(\n  label: const Text('Settings'),\n  description: const Text('Personalize your experience'),\n  maxHeight: 200,\n  count: 200,\n  tileBuilder: (context, index) => FTile(\n    title: Text('Tile $index'),\n    suffix: const Icon(FIcons.chevronRight),\n    onPress: () {},\n  ),\n);\n"
+  "tooltips": []
 }

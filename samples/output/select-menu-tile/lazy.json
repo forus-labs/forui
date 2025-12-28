@@ -1,4 +1,5 @@
 {
+  "code": "Widget build(BuildContext _) => FSelectMenuTile.builder(\n  selectControl: const .managed(initial: {1}),\n  prefix: const Icon(FIcons.variable),\n  title: const Text('Applicable values'),\n  maxHeight: 200,\n  menuBuilder: (context, index) =>\n      .tile(title: Text('Tile $index'), value: index),\n);\n",
   "highlights": [],
   "links": [
     {
@@ -12,9 +13,24 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_menu_tile/FSelectMenuTile/selectControl.html"
     },
     {
+      "offset": 81,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.foundation/FMultiValueControl/FMultiValueControl.managed.html"
+    },
+    {
+      "offset": 89,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.foundation/FMultiValueControl/FMultiValueControl.managed.html"
+    },
+    {
       "offset": 106,
       "length": 6,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_menu_tile/FSelectMenuTile/prefix.html"
+    },
+    {
+      "offset": 125,
+      "length": 15,
+      "url": "https://pub.dev/documentation/forui_assets/latest/forui_assets/FIcons/variable-constant.html"
     },
     {
       "offset": 145,
@@ -27,6 +43,16 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_menu_tile/FSelectMenuTile/maxHeight.html"
     },
     {
+      "offset": 205,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_menu_tile/FSelectMenuTile/FSelectMenuTile.builder.html"
+    },
+    {
+      "offset": 245,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_tile_group/FSelectTile/FSelectTile.tile.html"
+    },
+    {
       "offset": 250,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_tile_group/FSelectTile/title.html"
@@ -37,5 +63,5 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_tile_group/FSelectTile/value.html"
     }
   ],
-  "source": "Widget build(BuildContext _) => FSelectMenuTile.builder(\n  selectControl: const .managed(initial: {1}),\n  prefix: const Icon(FIcons.variable),\n  title: const Text('Applicable values'),\n  maxHeight: 200,\n  menuBuilder: (context, index) =>\n      .tile(title: Text('Tile $index'), value: index),\n);\n"
+  "tooltips": []
 }

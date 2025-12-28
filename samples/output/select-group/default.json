@@ -1,4 +1,5 @@
 {
+  "code": "Widget build(BuildContext context) => Column(\n  mainAxisAlignment: .center,\n  children: [\n    FSelectGroup<Sidebar>(\n      control: const .managed(initial: {.recents}),\n      label: const Text('Sidebar'),\n      description: const Text('These will be shown in the sidebar.'),\n      children: [\n        .checkbox(value: .recents, label: const Text('Recents')),\n        .checkbox(value: .home, label: const Text('Home')),\n        .checkbox(value: .applications, label: const Text('Applications')),\n      ],\n    ),\n  ],\n);\n",
   "highlights": [],
   "links": [
     {
@@ -10,6 +11,16 @@
       "offset": 123,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_group/FSelectGroup/control.html"
+    },
+    {
+      "offset": 139,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.foundation/FMultiValueControl/FMultiValueControl.managed.html"
+    },
+    {
+      "offset": 147,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.foundation/FMultiValueControl/FMultiValueControl.managed.html"
     },
     {
       "offset": 175,
@@ -32,15 +43,45 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_group/FSelectGroupItemMixin/checkbox.html"
     },
     {
+      "offset": 311,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_group/FSelectGroupItemMixin/checkbox.html"
+    },
+    {
+      "offset": 328,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_group/FSelectGroupItemMixin/checkbox.html"
+    },
+    {
       "offset": 368,
       "length": 8,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_group/FSelectGroupItemMixin/checkbox.html"
+    },
+    {
+      "offset": 377,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_group/FSelectGroupItemMixin/checkbox.html"
+    },
+    {
+      "offset": 391,
+      "length": 5,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_group/FSelectGroupItemMixin/checkbox.html"
     },
     {
       "offset": 428,
       "length": 8,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_group/FSelectGroupItemMixin/checkbox.html"
+    },
+    {
+      "offset": 437,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_group/FSelectGroupItemMixin/checkbox.html"
+    },
+    {
+      "offset": 459,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_group/FSelectGroupItemMixin/checkbox.html"
     }
   ],
-  "source": "Widget build(BuildContext context) => Column(\n  mainAxisAlignment: .center,\n  children: [\n    FSelectGroup<Sidebar>(\n      control: const .managed(initial: {.recents}),\n      label: const Text('Sidebar'),\n      description: const Text('These will be shown in the sidebar.'),\n      children: [\n        .checkbox(value: .recents, label: const Text('Recents')),\n        .checkbox(value: .home, label: const Text('Home')),\n        .checkbox(value: .applications, label: const Text('Applications')),\n      ],\n    ),\n  ],\n);\n"
+  "tooltips": []
 }

@@ -1,4 +1,5 @@
 {
+  "code": "Widget build(BuildContext _) => FCalendar(\n  control: .managedRange(\n    initial: (DateTime(2024, 7, 17), DateTime(2024, 7, 20)),\n  ),\n  start: DateTime(2000),\n  today: DateTime(2024, 7, 15),\n  end: DateTime(2030),\n);\n",
   "highlights": [],
   "links": [
     {
@@ -17,6 +18,11 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.calendar/FCalendarControl/managedRange.html"
     },
     {
+      "offset": 73,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.calendar/FCalendarControl/managedRange.html"
+    },
+    {
       "offset": 137,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.calendar/FCalendar/start.html"
@@ -32,5 +38,5 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.calendar/FCalendar/end.html"
     }
   ],
-  "source": "Widget build(BuildContext _) => FCalendar(\n  control: .managedRange(\n    initial: (DateTime(2024, 7, 17), DateTime(2024, 7, 20)),\n  ),\n  start: DateTime(2000),\n  today: DateTime(2024, 7, 15),\n  end: DateTime(2030),\n);\n"
+  "tooltips": []
 }

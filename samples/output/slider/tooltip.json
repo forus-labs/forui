@@ -1,4 +1,5 @@
 {
+  "code": "Widget build(BuildContext context) => FSlider(\n  control: .managedContinuous(initial: FSliderValue(max: 0.6)),\n  tooltipBuilder: (style, value) {\n    final hex = (value * 100).round().toRadixString(16).padLeft(2, '0');\n    return Text('0x$hex');\n  },\n);\n",
   "highlights": [],
   "links": [
     {
@@ -10,6 +11,16 @@
       "offset": 49,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSlider/control.html"
+    },
+    {
+      "offset": 59,
+      "length": 17,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSliderControl/FSliderControl.managedContinuous.html"
+    },
+    {
+      "offset": 77,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSliderControl/FSliderControl.managedContinuous.html"
     },
     {
       "offset": 86,
@@ -27,5 +38,5 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSlider/tooltipBuilder.html"
     }
   ],
-  "source": "Widget build(BuildContext context) => FSlider(\n  control: .managedContinuous(initial: FSliderValue(max: 0.6)),\n  tooltipBuilder: (style, value) {\n    final hex = (value * 100).round().toRadixString(16).padLeft(2, '0');\n    return Text('0x$hex');\n  },\n);\n"
+  "tooltips": []
 }

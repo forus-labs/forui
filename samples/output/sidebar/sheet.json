@@ -1,4 +1,5 @@
 {
+  "code": "Widget build(BuildContext context) => Center(\n  child: FButton(\n    child: const Text('Open Sidebar'),\n    onPress: () => showFSheet(\n      context: context,\n      side: .ltr,\n      builder: (context) => DecoratedBox(\n        decoration: BoxDecoration(color: context.theme.colors.background),\n        child: FSidebar(\n          style: (s) => s.copyWith(\n            constraints: s.constraints.copyWith(minWidth: 300, maxWidth: 300),\n          ),\n          header: Padding(\n            padding: const .symmetric(horizontal: 16),\n            child: Column(\n              crossAxisAlignment: .start,\n              children: [\n                Padding(\n                  padding: const .fromLTRB(16, 8, 16, 16),\n                  child: SvgPicture.network(\n                    theme.colors.brightness == .light\n                        ? 'https://forui.dev/light_logo.svg'\n                        : 'https://forui.dev/dark_logo.svg',\n                    height: 24,\n                    colorFilter: ColorFilter.mode(\n                      context.theme.colors.foreground,\n                      .srcIn,\n                    ),\n                  ),\n                ),\n                FDivider(\n                  style: context.theme.dividerStyles.horizontalStyle.copyWith(\n                    padding: EdgeInsets.zero,\n                  ),\n                ),\n              ],\n            ),\n          ),\n          footer: Padding(\n            padding: const .symmetric(horizontal: 16),\n            child: FCard.raw(\n              child: Padding(\n                padding: const .symmetric(vertical: 12, horizontal: 16),\n                child: Row(\n                  spacing: 10,\n                  children: [\n                    FAvatar.raw(\n                      child: Icon(\n                        FIcons.userRound,\n                        size: 18,\n                        color: context.theme.colors.mutedForeground,\n                      ),\n                    ),\n                    Expanded(\n                      child: Column(\n                        crossAxisAlignment: .start,\n                        spacing: 2,\n                        children: [\n                          Text(\n                            'Dash',\n                            style: context.theme.typography.sm.copyWith(\n                              fontWeight: .bold,\n                              color: context.theme.colors.foreground,\n                            ),\n                            overflow: .ellipsis,\n                          ),\n                          Text(\n                            'dash@forui.dev',\n                            style: context.theme.typography.xs.copyWith(\n                              color: context.theme.colors.mutedForeground,\n                            ),\n                            overflow: .ellipsis,\n                          ),\n                        ],\n                      ),\n                    ),\n                  ],\n                ),\n              ),\n            ),\n          ),\n          children: [\n            FSidebarGroup(\n              label: const Text('Overview'),\n              children: [\n                FSidebarItem(\n                  icon: const Icon(FIcons.school),\n                  label: const Text('Getting Started'),\n                  initiallyExpanded: true,\n                  onPress: () {},\n                  children: [\n                    FSidebarItem(\n                      label: const Text('Installation'),\n                      selected: true,\n                      onPress: () {},\n                    ),\n                    FSidebarItem(label: const Text('Themes'), onPress: () {}),\n                    FSidebarItem(\n                      label: const Text('Typography'),\n                      onPress: () {},\n                    ),\n                  ],\n                ),\n                FSidebarItem(\n                  icon: const Icon(FIcons.code),\n                  label: const Text('API Reference'),\n                  onPress: () {},\n                ),\n                FSidebarItem(\n                  icon: const Icon(FIcons.box),\n                  label: const Text('Pub Dev'),\n                  onPress: () {},\n                ),\n              ],\n            ),\n            FSidebarGroup(\n              action: const Icon(FIcons.plus),\n              onActionPress: () {},\n              label: const Text('Widgets'),\n              children: [\n                FSidebarItem(\n                  icon: const Icon(FIcons.circleSlash),\n                  label: const Text('Divider'),\n                  onPress: () {},\n                ),\n                FSidebarItem(\n                  icon: const Icon(FIcons.scaling),\n                  label: const Text('Resizable'),\n                  onPress: () {},\n                ),\n                FSidebarItem(\n                  icon: const Icon(FIcons.layoutDashboard),\n                  label: const Text('Scaffold'),\n                  onPress: () {},\n                ),\n              ],\n            ),\n          ],\n        ),\n      ),\n    ),\n  ),\n);\n",
   "highlights": [],
   "links": [
     {
@@ -17,6 +18,46 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/onPress.html"
     },
     {
+      "offset": 122,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sheet/showFSheet.html"
+    },
+    {
+      "offset": 140,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sheet/showFSheet.html"
+    },
+    {
+      "offset": 164,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sheet/showFSheet.html"
+    },
+    {
+      "offset": 171,
+      "length": 3,
+      "url": "https://pub.dev/documentation/forui/latest/forui.foundation/FLayout.html#ltr"
+    },
+    {
+      "offset": 182,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sheet/showFSheet.html"
+    },
+    {
+      "offset": 280,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FColors/background.html"
+    },
+    {
+      "offset": 273,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FThemeData/colors.html"
+    },
+    {
+      "offset": 267,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FThemeBuildContext/theme.html"
+    },
+    {
       "offset": 308,
       "length": 8,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sidebar/FSidebar/FSidebar.html"
@@ -27,9 +68,39 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sidebar/FSidebar/style.html"
     },
     {
+      "offset": 344,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sidebar/$FSidebarStyleTransformations/copyWith.html"
+    },
+    {
+      "offset": 366,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sidebar/$FSidebarStyleTransformations/copyWith.html"
+    },
+    {
+      "offset": 381,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sidebar/FSidebarStyle/constraints.html"
+    },
+    {
       "offset": 456,
       "length": 6,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sidebar/FSidebar/header.html"
+    },
+    {
+      "offset": 1054,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FColors/foreground.html"
+    },
+    {
+      "offset": 1047,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FThemeData/colors.html"
+    },
+    {
+      "offset": 1041,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FThemeBuildContext/theme.html"
     },
     {
       "offset": 1175,
@@ -40,6 +111,31 @@
       "offset": 1203,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.divider/FDivider/style.html"
+    },
+    {
+      "offset": 1254,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.divider/$FDividerStyleTransformations/copyWith.html"
+    },
+    {
+      "offset": 1238,
+      "length": 15,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.divider/FDividerStyles/horizontalStyle.html"
+    },
+    {
+      "offset": 1224,
+      "length": 13,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FThemeData/dividerStyles.html"
+    },
+    {
+      "offset": 1218,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FThemeBuildContext/theme.html"
+    },
+    {
+      "offset": 1284,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.divider/$FDividerStyleTransformations/copyWith.html"
     },
     {
       "offset": 1405,
@@ -67,6 +163,91 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.avatar/FAvatar/child.html"
     },
     {
+      "offset": 1791,
+      "length": 16,
+      "url": "https://pub.dev/documentation/forui_assets/latest/forui_assets/FIcons/userRound-constant.html"
+    },
+    {
+      "offset": 1895,
+      "length": 15,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FColors/mutedForeground.html"
+    },
+    {
+      "offset": 1888,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FThemeData/colors.html"
+    },
+    {
+      "offset": 1882,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FThemeBuildContext/theme.html"
+    },
+    {
+      "offset": 2279,
+      "length": 2,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FTypography/sm.html"
+    },
+    {
+      "offset": 2268,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FThemeData/typography.html"
+    },
+    {
+      "offset": 2262,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FThemeBuildContext/theme.html"
+    },
+    {
+      "offset": 2399,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FColors/foreground.html"
+    },
+    {
+      "offset": 2392,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FThemeData/colors.html"
+    },
+    {
+      "offset": 2386,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FThemeBuildContext/theme.html"
+    },
+    {
+      "offset": 2658,
+      "length": 2,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FTypography/xs.html"
+    },
+    {
+      "offset": 2647,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FThemeData/typography.html"
+    },
+    {
+      "offset": 2641,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FThemeBuildContext/theme.html"
+    },
+    {
+      "offset": 2729,
+      "length": 15,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FColors/mutedForeground.html"
+    },
+    {
+      "offset": 2722,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FThemeData/colors.html"
+    },
+    {
+      "offset": 2716,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FThemeBuildContext/theme.html"
+    },
+    {
+      "offset": 3025,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sidebar/FSidebar/FSidebar.html"
+    },
+    {
       "offset": 3049,
       "length": 13,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sidebar/FSidebarGroup/FSidebarGroup.html"
@@ -90,6 +271,11 @@
       "offset": 3183,
       "length": 4,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sidebar/FSidebarItem/icon.html"
+    },
+    {
+      "offset": 3200,
+      "length": 13,
+      "url": "https://pub.dev/documentation/forui_assets/latest/forui_assets/FIcons/school-constant.html"
     },
     {
       "offset": 3234,
@@ -172,6 +358,11 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sidebar/FSidebarItem/icon.html"
     },
     {
+      "offset": 3903,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui_assets/latest/forui_assets/FIcons/code-constant.html"
+    },
+    {
       "offset": 3935,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sidebar/FSidebarItem/label.html"
@@ -192,6 +383,11 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sidebar/FSidebarItem/icon.html"
     },
     {
+      "offset": 4089,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui_assets/latest/forui_assets/FIcons/box-constant.html"
+    },
+    {
       "offset": 4120,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sidebar/FSidebarItem/label.html"
@@ -210,6 +406,11 @@
       "offset": 4276,
       "length": 6,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sidebar/FSidebarGroup/action.html"
+    },
+    {
+      "offset": 4295,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui_assets/latest/forui_assets/FIcons/plus-constant.html"
     },
     {
       "offset": 4323,
@@ -237,6 +438,11 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sidebar/FSidebarItem/icon.html"
     },
     {
+      "offset": 4480,
+      "length": 18,
+      "url": "https://pub.dev/documentation/forui_assets/latest/forui_assets/FIcons/circleSlash-constant.html"
+    },
+    {
       "offset": 4519,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sidebar/FSidebarItem/label.html"
@@ -255,6 +461,11 @@
       "offset": 4650,
       "length": 4,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sidebar/FSidebarItem/icon.html"
+    },
+    {
+      "offset": 4667,
+      "length": 14,
+      "url": "https://pub.dev/documentation/forui_assets/latest/forui_assets/FIcons/scaling-constant.html"
     },
     {
       "offset": 4702,
@@ -277,6 +488,11 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sidebar/FSidebarItem/icon.html"
     },
     {
+      "offset": 4852,
+      "length": 22,
+      "url": "https://pub.dev/documentation/forui_assets/latest/forui_assets/FIcons/layoutDashboard-constant.html"
+    },
+    {
       "offset": 4895,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sidebar/FSidebarItem/label.html"
@@ -287,5 +503,5 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sidebar/FSidebarItem/onPress.html"
     }
   ],
-  "source": "Widget build(BuildContext context) => Center(\n  child: FButton(\n    child: const Text('Open Sidebar'),\n    onPress: () => showFSheet(\n      context: context,\n      side: .ltr,\n      builder: (context) => DecoratedBox(\n        decoration: BoxDecoration(color: context.theme.colors.background),\n        child: FSidebar(\n          style: (s) => s.copyWith(\n            constraints: s.constraints.copyWith(minWidth: 300, maxWidth: 300),\n          ),\n          header: Padding(\n            padding: const .symmetric(horizontal: 16),\n            child: Column(\n              crossAxisAlignment: .start,\n              children: [\n                Padding(\n                  padding: const .fromLTRB(16, 8, 16, 16),\n                  child: SvgPicture.network(\n                    theme.colors.brightness == .light\n                        ? 'https://forui.dev/light_logo.svg'\n                        : 'https://forui.dev/dark_logo.svg',\n                    height: 24,\n                    colorFilter: ColorFilter.mode(\n                      context.theme.colors.foreground,\n                      .srcIn,\n                    ),\n                  ),\n                ),\n                FDivider(\n                  style: context.theme.dividerStyles.horizontalStyle.copyWith(\n                    padding: EdgeInsets.zero,\n                  ),\n                ),\n              ],\n            ),\n          ),\n          footer: Padding(\n            padding: const .symmetric(horizontal: 16),\n            child: FCard.raw(\n              child: Padding(\n                padding: const .symmetric(vertical: 12, horizontal: 16),\n                child: Row(\n                  spacing: 10,\n                  children: [\n                    FAvatar.raw(\n                      child: Icon(\n                        FIcons.userRound,\n                        size: 18,\n                        color: context.theme.colors.mutedForeground,\n                      ),\n                    ),\n                    Expanded(\n                      child: Column(\n                        crossAxisAlignment: .start,\n                        spacing: 2,\n                        children: [\n                          Text(\n                            'Dash',\n                            style: context.theme.typography.sm.copyWith(\n                              fontWeight: .bold,\n                              color: context.theme.colors.foreground,\n                            ),\n                            overflow: .ellipsis,\n                          ),\n                          Text(\n                            'dash@forui.dev',\n                            style: context.theme.typography.xs.copyWith(\n                              color: context.theme.colors.mutedForeground,\n                            ),\n                            overflow: .ellipsis,\n                          ),\n                        ],\n                      ),\n                    ),\n                  ],\n                ),\n              ),\n            ),\n          ),\n          children: [\n            FSidebarGroup(\n              label: const Text('Overview'),\n              children: [\n                FSidebarItem(\n                  icon: const Icon(FIcons.school),\n                  label: const Text('Getting Started'),\n                  initiallyExpanded: true,\n                  onPress: () {},\n                  children: [\n                    FSidebarItem(\n                      label: const Text('Installation'),\n                      selected: true,\n                      onPress: () {},\n                    ),\n                    FSidebarItem(label: const Text('Themes'), onPress: () {}),\n                    FSidebarItem(\n                      label: const Text('Typography'),\n                      onPress: () {},\n                    ),\n                  ],\n                ),\n                FSidebarItem(\n                  icon: const Icon(FIcons.code),\n                  label: const Text('API Reference'),\n                  onPress: () {},\n                ),\n                FSidebarItem(\n                  icon: const Icon(FIcons.box),\n                  label: const Text('Pub Dev'),\n                  onPress: () {},\n                ),\n              ],\n            ),\n            FSidebarGroup(\n              action: const Icon(FIcons.plus),\n              onActionPress: () {},\n              label: const Text('Widgets'),\n              children: [\n                FSidebarItem(\n                  icon: const Icon(FIcons.circleSlash),\n                  label: const Text('Divider'),\n                  onPress: () {},\n                ),\n                FSidebarItem(\n                  icon: const Icon(FIcons.scaling),\n                  label: const Text('Resizable'),\n                  onPress: () {},\n                ),\n                FSidebarItem(\n                  icon: const Icon(FIcons.layoutDashboard),\n                  label: const Text('Scaffold'),\n                  onPress: () {},\n                ),\n              ],\n            ),\n          ],\n        ),\n      ),\n    ),\n  ),\n);\n"
+  "tooltips": []
 }

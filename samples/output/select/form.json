@@ -1,4 +1,5 @@
 {
+  "code": "class FormSelectExample extends StatefulWidget {\n  @override\n  State<FormSelectExample> createState() => _FormSelectExampleState();\n}\n\nclass _FormSelectExampleState extends State<FormSelectExample>\n    with SingleTickerProviderStateMixin {\n  final _key = GlobalKey<FormState>();\n\n  @override\n  Widget build(BuildContext context) => Form(\n    key: _key,\n    child: Column(\n      crossAxisAlignment: .start,\n      spacing: 25,\n      children: [\n        FSelect<String>.rich(\n          label: const Text('Department'),\n          description: const Text('Choose your dream department'),\n          hint: 'Select a department',\n          format: (s) => s,\n          validator: (department) =>\n              department == null ? 'Please select a department' : null,\n          children: [\n            for (final department in const [\n              'Engineering',\n              'Marketing',\n              'Sales',\n              'Human Resources',\n              'Finance',\n            ])\n              .item(title: Text(department), value: department),\n          ],\n        ),\n        FButton(\n          child: const Text('Submit'),\n          onPress: () {\n            if (_key.currentState!.validate()) {\n              // Form is valid, do something with department.\n            }\n          },\n        ),\n      ],\n    ),\n  );\n}\n",
   "highlights": [],
   "links": [
     {
@@ -32,8 +33,23 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelect/validator.html"
     },
     {
+      "offset": 769,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelect/FSelect.rich.html"
+    },
+    {
       "offset": 993,
       "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/item.html"
+    },
+    {
+      "offset": 998,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/item.html"
+    },
+    {
+      "offset": 1023,
+      "length": 5,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/item.html"
     },
     {
@@ -52,5 +68,5 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/onPress.html"
     }
   ],
-  "source": "class FormSelectExample extends StatefulWidget {\n  @override\n  State<FormSelectExample> createState() => _FormSelectExampleState();\n}\n\nclass _FormSelectExampleState extends State<FormSelectExample>\n    with SingleTickerProviderStateMixin {\n  final _key = GlobalKey<FormState>();\n\n  @override\n  Widget build(BuildContext context) => Form(\n    key: _key,\n    child: Column(\n      crossAxisAlignment: .start,\n      spacing: 25,\n      children: [\n        FSelect<String>.rich(\n          label: const Text('Department'),\n          description: const Text('Choose your dream department'),\n          hint: 'Select a department',\n          format: (s) => s,\n          validator: (department) =>\n              department == null ? 'Please select a department' : null,\n          children: [\n            for (final department in const [\n              'Engineering',\n              'Marketing',\n              'Sales',\n              'Human Resources',\n              'Finance',\n            ])\n              .item(title: Text(department), value: department),\n          ],\n        ),\n        FButton(\n          child: const Text('Submit'),\n          onPress: () {\n            if (_key.currentState!.validate()) {\n              // Form is valid, do something with department.\n            }\n          },\n        ),\n      ],\n    ),\n  );\n}\n"
+  "tooltips": []
 }

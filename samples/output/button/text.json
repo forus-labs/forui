@@ -1,4 +1,5 @@
 {
+  "code": "Widget build(BuildContext _) => FButton(\n  style: style,\n  mainAxisSize: .min,\n  onPress: () {},\n  child: Text(label),\n);\n",
   "highlights": [],
   "links": [
     {
@@ -12,6 +13,11 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/style.html"
     },
     {
+      "offset": 59,
+      "length": 12,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/FButton.html"
+    },
+    {
       "offset": 81,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/onPress.html"
@@ -22,5 +28,5 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/child.html"
     }
   ],
-  "source": "Widget build(BuildContext _) => FButton(\n  style: style,\n  mainAxisSize: .min,\n  onPress: () {},\n  child: Text(label),\n);\n"
+  "tooltips": []
 }

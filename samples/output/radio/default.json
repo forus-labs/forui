@@ -1,4 +1,5 @@
 {
+  "code": "class RadioExample extends StatefulWidget {\n  @override\n  State<RadioExample> createState() => _RadioExampleState();\n}\n\nclass _RadioExampleState extends State<RadioExample> {\n  bool _value = true;\n\n  @override\n  Widget build(BuildContext _) => FRadio(\n    label: const Text('Default'),\n    description: const Text('The description of the default option.'),\n    value: _value,\n    onChange: (value) => setState(() => _value = value),\n  );\n}\n",
   "highlights": [],
   "links": [
     {
@@ -27,5 +28,5 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.radio/FRadio/onChange.html"
     }
   ],
-  "source": "class RadioExample extends StatefulWidget {\n  @override\n  State<RadioExample> createState() => _RadioExampleState();\n}\n\nclass _RadioExampleState extends State<RadioExample> {\n  bool _value = true;\n\n  @override\n  Widget build(BuildContext _) => FRadio(\n    label: const Text('Default'),\n    description: const Text('The description of the default option.'),\n    value: _value,\n    onChange: (value) => setState(() => _value = value),\n  );\n}\n"
+  "tooltips": []
 }

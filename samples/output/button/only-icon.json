@@ -1,4 +1,5 @@
 {
+  "code": "Widget build(BuildContext _) =>\n    FButton.icon(child: const Icon(FIcons.chevronRight), onPress: () {});\n",
   "highlights": [],
   "links": [
     {
@@ -12,10 +13,15 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/child.html"
     },
     {
+      "offset": 67,
+      "length": 19,
+      "url": "https://pub.dev/documentation/forui_assets/latest/forui_assets/FIcons/chevronRight-constant.html"
+    },
+    {
       "offset": 89,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/onPress.html"
     }
   ],
-  "source": "Widget build(BuildContext _) =>\n    FButton.icon(child: const Icon(FIcons.chevronRight), onPress: () {});\n"
+  "tooltips": []
 }

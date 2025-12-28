@@ -1,4 +1,5 @@
 {
+  "code": "Widget build(BuildContext context) => FSelect<String>.rich(\n  hint: 'Type',\n  format: (s) => s,\n  children: [\n    .item(\n      prefix: const Icon(FIcons.bug),\n      title: const Text('Bug'),\n      subtitle: const Text('An unexpected problem or behavior'),\n      value: 'Bug',\n    ),\n    .item(\n      prefix: const Icon(FIcons.filePlusCorner),\n      title: const Text('Feature'),\n      subtitle: const Text('A new feature or enhancement'),\n      value: 'Feature',\n    ),\n    .item(\n      prefix: const Icon(FIcons.messageCircleQuestionMark),\n      title: const Text('Question'),\n      subtitle: const Text('A question or clarification'),\n      value: 'Question',\n    ),\n  ],\n);\n",
   "highlights": [],
   "links": [
     {
@@ -17,8 +18,38 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelect/format.html"
     },
     {
+      "offset": 98,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelect/FSelect.rich.html"
+    },
+    {
       "offset": 115,
       "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/item.html"
+    },
+    {
+      "offset": 127,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/item.html"
+    },
+    {
+      "offset": 146,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui_assets/latest/forui_assets/FIcons/bug-constant.html"
+    },
+    {
+      "offset": 165,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/item.html"
+    },
+    {
+      "offset": 197,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/item.html"
+    },
+    {
+      "offset": 262,
+      "length": 5,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/item.html"
     },
     {
@@ -27,10 +58,60 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/item.html"
     },
     {
+      "offset": 300,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/item.html"
+    },
+    {
+      "offset": 319,
+      "length": 21,
+      "url": "https://pub.dev/documentation/forui_assets/latest/forui_assets/FIcons/filePlusCorner-constant.html"
+    },
+    {
+      "offset": 349,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/item.html"
+    },
+    {
+      "offset": 385,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/item.html"
+    },
+    {
+      "offset": 445,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/item.html"
+    },
+    {
       "offset": 475,
       "length": 4,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/item.html"
+    },
+    {
+      "offset": 487,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/item.html"
+    },
+    {
+      "offset": 506,
+      "length": 32,
+      "url": "https://pub.dev/documentation/forui_assets/latest/forui_assets/FIcons/messageCircleQuestionMark-constant.html"
+    },
+    {
+      "offset": 547,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/item.html"
+    },
+    {
+      "offset": 584,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/item.html"
+    },
+    {
+      "offset": 643,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/item.html"
     }
   ],
-  "source": "Widget build(BuildContext context) => FSelect<String>.rich(\n  hint: 'Type',\n  format: (s) => s,\n  children: [\n    .item(\n      prefix: const Icon(FIcons.bug),\n      title: const Text('Bug'),\n      subtitle: const Text('An unexpected problem or behavior'),\n      value: 'Bug',\n    ),\n    .item(\n      prefix: const Icon(FIcons.filePlusCorner),\n      title: const Text('Feature'),\n      subtitle: const Text('A new feature or enhancement'),\n      value: 'Feature',\n    ),\n    .item(\n      prefix: const Icon(FIcons.messageCircleQuestionMark),\n      title: const Text('Question'),\n      subtitle: const Text('A question or clarification'),\n      value: 'Question',\n    ),\n  ],\n);\n"
+  "tooltips": []
 }

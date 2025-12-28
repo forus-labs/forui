@@ -1,4 +1,5 @@
 {
+  "code": "class FormTimeFieldExample extends StatefulWidget {\n  @override\n  State<FormTimeFieldExample> createState() => _FormTimeFieldExampleState();\n}\n\nclass _FormTimeFieldExampleState extends State<FormTimeFieldExample> {\n  final _key = GlobalKey<FormState>();\n  late final _startController = FTimeFieldController(\n    validator: (time) => switch (time) {\n      null => 'Please select a start time.',\n      _ when time < .now() => 'Start Time must be in the future.',\n      _ => null,\n    },\n  );\n\n  @override\n  void dispose() {\n    _startController.dispose();\n    super.dispose();\n  }\n\n  @override\n  Widget build(BuildContext _) => Form(\n    key: _key,\n    child: Column(\n      children: [\n        FTimeField(\n          control: .managed(controller: _startController),\n          label: const Text('Start Time'),\n          description: const Text('Select a start time.'),\n          autovalidateMode: .disabled,\n        ),\n        const SizedBox(height: 20),\n        FTimeField(\n          control: .managed(\n            validator: (time) => switch (time) {\n              null => 'Please select an end time.',\n              _\n                  when _startController.value != null &&\n                      time < _startController.value! =>\n                'End Time must be after start time.',\n              _ => null,\n            },\n          ),\n          label: const Text('End Time'),\n          description: const Text('Select an end time.'),\n          autovalidateMode: .disabled,\n        ),\n        const SizedBox(height: 25),\n        FButton(\n          child: const Text('Submit'),\n          onPress: () {\n            if (_key.currentState!.validate()) {\n              // Form is valid, process the dates\n            }\n          },\n        ),\n      ],\n    ),\n  );\n}\n",
   "highlights": [],
   "links": [
     {
@@ -12,6 +13,16 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.time_field/FTimeFieldController/validator.html"
     },
     {
+      "offset": 415,
+      "length": 3,
+      "url": "https://pub.dev/documentation/forui/latest/forui.foundation/FTime/FTime.now.html"
+    },
+    {
+      "offset": 543,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.time_field/FTimeFieldController/dispose.html"
+    },
+    {
       "offset": 692,
       "length": 10,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.time_field/FTimeField/FTimeField.html"
@@ -20,6 +31,16 @@
       "offset": 714,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.time_field/FTimeField/control.html"
+    },
+    {
+      "offset": 724,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.time_field/FTimeFieldControl/FTimeFieldControl.managed.html"
+    },
+    {
+      "offset": 732,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.time_field/FTimeFieldControl/FTimeFieldControl.managed.html"
     },
     {
       "offset": 773,
@@ -45,6 +66,16 @@
       "offset": 981,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.time_field/FTimeField/control.html"
+    },
+    {
+      "offset": 991,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.time_field/FTimeFieldControl/FTimeFieldControl.managed.html"
+    },
+    {
+      "offset": 1012,
+      "length": 9,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.time_field/FTimeFieldControl/FTimeFieldControl.managed.html"
     },
     {
       "offset": 1347,
@@ -77,5 +108,5 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/onPress.html"
     }
   ],
-  "source": "class FormTimeFieldExample extends StatefulWidget {\n  @override\n  State<FormTimeFieldExample> createState() => _FormTimeFieldExampleState();\n}\n\nclass _FormTimeFieldExampleState extends State<FormTimeFieldExample> {\n  final _key = GlobalKey<FormState>();\n  late final _startController = FTimeFieldController(\n    validator: (time) => switch (time) {\n      null => 'Please select a start time.',\n      _ when time < .now() => 'Start Time must be in the future.',\n      _ => null,\n    },\n  );\n\n  @override\n  void dispose() {\n    _startController.dispose();\n    super.dispose();\n  }\n\n  @override\n  Widget build(BuildContext _) => Form(\n    key: _key,\n    child: Column(\n      children: [\n        FTimeField(\n          control: .managed(controller: _startController),\n          label: const Text('Start Time'),\n          description: const Text('Select a start time.'),\n          autovalidateMode: .disabled,\n        ),\n        const SizedBox(height: 20),\n        FTimeField(\n          control: .managed(\n            validator: (time) => switch (time) {\n              null => 'Please select an end time.',\n              _\n                  when _startController.value != null &&\n                      time < _startController.value! =>\n                'End Time must be after start time.',\n              _ => null,\n            },\n          ),\n          label: const Text('End Time'),\n          description: const Text('Select an end time.'),\n          autovalidateMode: .disabled,\n        ),\n        const SizedBox(height: 25),\n        FButton(\n          child: const Text('Submit'),\n          onPress: () {\n            if (_key.currentState!.validate()) {\n              // Form is valid, process the dates\n            }\n          },\n        ),\n      ],\n    ),\n  );\n}\n"
+  "tooltips": []
 }

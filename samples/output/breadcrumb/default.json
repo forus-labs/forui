@@ -1,4 +1,5 @@
 {
+  "code": "Widget build(BuildContext _) => Row(\n  mainAxisAlignment: .center,\n  children: [\n    FBreadcrumb(\n      children: [\n        FBreadcrumbItem(onPress: () {}, child: const Text('Forui')),\n        FBreadcrumbItem.collapsed(\n          menu: [\n            .group(\n              children: [\n                .item(title: const Text('Documentation'), onPress: () {}),\n                .item(title: const Text('Themes'), onPress: () {}),\n              ],\n            ),\n          ],\n        ),\n        FBreadcrumbItem(onPress: () {}, child: const Text('Layout')),\n        const FBreadcrumbItem(current: true, child: Text('Widgets')),\n      ],\n    ),\n  ],\n);\n",
   "highlights": [],
   "links": [
     {
@@ -17,13 +18,48 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.html"
     },
     {
+      "offset": 140,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.html"
+    },
+    {
+      "offset": 156,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.html"
+    },
+    {
       "offset": 193,
       "length": 25,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.collapsed.html"
     },
     {
+      "offset": 230,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.collapsed.html"
+    },
+    {
+      "offset": 251,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItemGroup/FItemGroup.group.html"
+    },
+    {
+      "offset": 272,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItemGroup/FItemGroup.group.html"
+    },
+    {
       "offset": 301,
       "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItemMixin/item.html"
+    },
+    {
+      "offset": 306,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItemMixin/item.html"
+    },
+    {
+      "offset": 342,
+      "length": 7,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItemMixin/item.html"
     },
     {
@@ -32,15 +68,45 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItemMixin/item.html"
     },
     {
+      "offset": 381,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItemMixin/item.html"
+    },
+    {
+      "offset": 410,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.item/FItemMixin/item.html"
+    },
+    {
       "offset": 491,
       "length": 15,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.html"
+    },
+    {
+      "offset": 507,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.html"
+    },
+    {
+      "offset": 523,
+      "length": 5,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.html"
     },
     {
       "offset": 567,
       "length": 15,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.html"
+    },
+    {
+      "offset": 583,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.html"
+    },
+    {
+      "offset": 598,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.html"
     }
   ],
-  "source": "Widget build(BuildContext _) => Row(\n  mainAxisAlignment: .center,\n  children: [\n    FBreadcrumb(\n      children: [\n        FBreadcrumbItem(onPress: () {}, child: const Text('Forui')),\n        FBreadcrumbItem.collapsed(\n          menu: [\n            .group(\n              children: [\n                .item(title: const Text('Documentation'), onPress: () {}),\n                .item(title: const Text('Themes'), onPress: () {}),\n              ],\n            ),\n          ],\n        ),\n        FBreadcrumbItem(onPress: () {}, child: const Text('Layout')),\n        const FBreadcrumbItem(current: true, child: Text('Widgets')),\n      ],\n    ),\n  ],\n);\n"
+  "tooltips": []
 }

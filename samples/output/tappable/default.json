@@ -1,4 +1,5 @@
 {
+  "code": "Widget build(BuildContext context) => FTappable(\n  builder: (context, states, child) => Container(\n    decoration: BoxDecoration(\n      color:\n          (states.contains(WidgetState.hovered) ||\n              states.contains(WidgetState.pressed))\n          ? context.theme.colors.secondary\n          : context.theme.colors.background,\n      borderRadius: .circular(8),\n      border: .all(color: context.theme.colors.border),\n    ),\n    padding: const .symmetric(vertical: 8.0, horizontal: 12),\n    child: child!,\n  ),\n  child: const Text('Tappable'),\n  onPress: () {},\n);\n",
   "highlights": [],
   "links": [
     {
@@ -12,6 +13,51 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.foundation/FTappable/builder.html"
     },
     {
+      "offset": 279,
+      "length": 9,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FColors/secondary.html"
+    },
+    {
+      "offset": 272,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FThemeData/colors.html"
+    },
+    {
+      "offset": 266,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FThemeBuildContext/theme.html"
+    },
+    {
+      "offset": 322,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FColors/background.html"
+    },
+    {
+      "offset": 315,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FThemeData/colors.html"
+    },
+    {
+      "offset": 309,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FThemeBuildContext/theme.html"
+    },
+    {
+      "offset": 415,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FColors/border.html"
+    },
+    {
+      "offset": 408,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FThemeData/colors.html"
+    },
+    {
+      "offset": 402,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FThemeBuildContext/theme.html"
+    },
+    {
       "offset": 519,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/latest/forui.foundation/FTappable/child.html"
@@ -22,5 +68,5 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.foundation/FTappable/onPress.html"
     }
   ],
-  "source": "Widget build(BuildContext context) => FTappable(\n  builder: (context, states, child) => Container(\n    decoration: BoxDecoration(\n      color:\n          (states.contains(WidgetState.hovered) ||\n              states.contains(WidgetState.pressed))\n          ? context.theme.colors.secondary\n          : context.theme.colors.background,\n      borderRadius: .circular(8),\n      border: .all(color: context.theme.colors.border),\n    ),\n    padding: const .symmetric(vertical: 8.0, horizontal: 12),\n    child: child!,\n  ),\n  child: const Text('Tappable'),\n  onPress: () {},\n);\n"
+  "tooltips": []
 }

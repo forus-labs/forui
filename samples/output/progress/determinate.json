@@ -1,4 +1,5 @@
 {
+  "code": "class DeterminateProgressExample extends StatefulWidget {\n  @override\n  State<DeterminateProgressExample> createState() =>\n      _DeterminateProgressExampleState();\n}\n\nclass _DeterminateProgressExampleState\n    extends State<DeterminateProgressExample> {\n  late Timer _timer = Timer(\n    const Duration(seconds: 1),\n    () => setState(() => _value = 0.7),\n  );\n  double _value = 0.2;\n\n  @override\n  void dispose() {\n    _timer.cancel();\n    super.dispose();\n  }\n\n  @override\n  Widget build(BuildContext _) => Column(\n    mainAxisAlignment: .center,\n    spacing: 20,\n    children: [\n      FDeterminateProgress(value: _value),\n      FButton(\n        child: const Text('Reset'),\n        onPress: () => setState(() {\n          _value = 0.2;\n          _timer.cancel();\n          _timer = Timer(\n            const Duration(seconds: 1),\n            () => setState(() => _value = 0.7),\n          );\n        }),\n      ),\n    ],\n  );\n}\n",
   "highlights": [],
   "links": [
     {
@@ -27,5 +28,5 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/onPress.html"
     }
   ],
-  "source": "class DeterminateProgressExample extends StatefulWidget {\n  @override\n  State<DeterminateProgressExample> createState() =>\n      _DeterminateProgressExampleState();\n}\n\nclass _DeterminateProgressExampleState\n    extends State<DeterminateProgressExample> {\n  late Timer _timer = Timer(\n    const Duration(seconds: 1),\n    () => setState(() => _value = 0.7),\n  );\n  double _value = 0.2;\n\n  @override\n  void dispose() {\n    _timer.cancel();\n    super.dispose();\n  }\n\n  @override\n  Widget build(BuildContext _) => Column(\n    mainAxisAlignment: .center,\n    spacing: 20,\n    children: [\n      FDeterminateProgress(value: _value),\n      FButton(\n        child: const Text('Reset'),\n        onPress: () => setState(() {\n          _value = 0.2;\n          _timer.cancel();\n          _timer = Timer(\n            const Duration(seconds: 1),\n            () => setState(() => _value = 0.7),\n          );\n        }),\n      ),\n    ],\n  );\n}\n"
+  "tooltips": []
 }

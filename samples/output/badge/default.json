@@ -1,4 +1,5 @@
 {
+  "code": "Widget build(BuildContext _) =>\n    FBadge(style: style, child: const Text('Badge'));\n",
   "highlights": [],
   "links": [
     {
@@ -10,7 +11,12 @@
       "offset": 43,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.badge/FBadge/style.html"
+    },
+    {
+      "offset": 57,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.badge/FBadge/FBadge.html"
     }
   ],
-  "source": "Widget build(BuildContext _) =>\n    FBadge(style: style, child: const Text('Badge'));\n"
+  "tooltips": []
 }

@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JSON Code Viewer</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      display: flex;
+      height: 100vh;
+      background: #1e1e1e;
+      color: #d4d4d4;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 280px;
+      background: #252526;
+      border-right: 1px solid #3c3c3c;
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+    }
+
+    .sidebar-header {
+      padding: 16px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #ccc;
+      border-bottom: 1px solid #3c3c3c;
+    }
+
+    .search-box {
+      padding: 12px 16px;
+      border-bottom: 1px solid #3c3c3c;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 8px 12px;
+      background: #3c3c3c;
+      border: 1px solid #555;
+      border-radius: 4px;
+      color: #fff;
+      font-size: 13px;
+    }
+
+    .search-box input::placeholder { color: #888; }
+    .search-box input:focus { outline: none; border-color: #0e639c; }
+
+    .nav-container {
+      flex: 1;
+      overflow-y: auto;
+    }
+
+    .group { border-bottom: 1px solid #3c3c3c; }
+
+    .group-header {
+      padding: 10px 16px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 500;
+      color: #e0e0e0;
+      user-select: none;
+    }
+
+    .group-header:hover { background: #2a2d2e; }
+    .group-header::before { content: '\25b6'; font-size: 10px; transition: transform 0.2s; }
+    .group.open .group-header::before { transform: rotate(90deg); }
+
+    .group-items { display: none; background: #1e1e1e; }
+    .group.open .group-items { display: block; }
+
+    .nav-item {
+      padding: 8px 16px 8px 32px;
+      cursor: pointer;
+      font-size: 13px;
+      color: #9cdcfe;
+      text-decoration: none;
+      display: block;
+    }
+
+    .nav-item:hover { background: #2a2d2e; }
+    .nav-item.active { background: #094771; color: #fff; }
+
+    .nav-hint {
+      padding: 12px 16px;
+      font-size: 11px;
+      color: #666;
+      border-top: 1px solid #3c3c3c;
+    }
+
+    .nav-hint kbd {
+      background: #3c3c3c;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-family: inherit;
+    }
+
+    /* Main content */
+    .main {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px;
+    }
+
+    .empty-state {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      color: #666;
+      font-size: 14px;
+    }
+
+    .code-section {
+      scroll-margin-top: 20px;
+    }
+
+    .code-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #3c3c3c;
+      flex-wrap: wrap;
+    }
+
+    .code-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #4fc3f7;
+    }
+
+    .code-path {
+      font-size: 12px;
+      color: #888;
+      flex: 1;
+    }
+
+    .btn {
+      padding: 4px 12px;
+      background: #3c3c3c;
+      color: #ccc;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 12px;
+    }
+
+    .btn:hover { background: #505050; }
+    .btn.copied { background: #2e7d32; color: #fff; }
+
+    /* Code block with line numbers */
+    .code-block {
+      background: #1e1e1e;
+      border: 1px solid #3c3c3c;
+      border-radius: 6px;
+      overflow: hidden;
+      font-family: 'Fira Code', 'Consolas', 'Monaco', monospace;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .code-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .line {
+      transition: background-color 0.15s;
+    }
+
+    .line:hover {
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .line.highlighted {
+      background: rgba(255, 213, 79, 0.15);
+    }
+
+    .line.highlighted:hover {
+      background: rgba(255, 213, 79, 0.2);
+    }
+
+    .line-number {
+      width: 1%;
+      min-width: 50px;
+      padding: 0 12px;
+      text-align: right;
+      color: #5a5a5a;
+      user-select: none;
+      cursor: pointer;
+      vertical-align: top;
+      border-right: 1px solid #3c3c3c;
+    }
+
+    .line-number:hover {
+      color: #888;
+    }
+
+    .line.highlighted .line-number {
+      color: #ffd54f;
+    }
+
+    .line-content {
+      padding: 0 16px;
+      white-space: pre;
+      overflow-x: auto;
+    }
+
+    .line-content a {
+      color: #4ec9b0;
+      text-decoration: underline;
+      text-decoration-style: dotted;
+    }
+
+    .line-content a:hover {
+      color: #9cdcfe;
+    }
+
+    .loading {
+      color: #888;
+      padding: 20px;
+    }
+
+    /* Tooltips */
+    .tooltip-trigger {
+      text-decoration: underline;
+      text-decoration-style: dotted;
+      text-decoration-color: #888;
+      cursor: help;
+    }
+
+    .tooltip-popup {
+      position: fixed;
+      max-width: 500px;
+      max-height: 400px;
+      overflow-y: auto;
+      background: #2d2d2d;
+      border: 1px solid #555;
+      border-radius: 6px;
+      padding: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+      z-index: 1000;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .tooltip-popup .tooltip-code {
+      font-family: 'Fira Code', 'Consolas', monospace;
+      background: #1e1e1e;
+      padding: 8px 12px;
+      border-radius: 4px;
+      margin-bottom: 8px;
+      white-space: pre-wrap;
+      color: #9cdcfe;
+    }
+
+    .tooltip-popup .tooltip-container {
+      font-size: 11px;
+      color: #888;
+      margin-bottom: 8px;
+    }
+
+    .tooltip-popup .tooltip-container a {
+      color: #4ec9b0;
+    }
+
+    .tooltip-popup .tooltip-docs {
+      color: #ccc;
+    }
+
+    .tooltip-popup .tooltip-docs code {
+      background: #3c3c3c;
+      padding: 1px 4px;
+      border-radius: 3px;
+      font-family: 'Fira Code', 'Consolas', monospace;
+    }
+  </style>
+</head>
+<body>
+  <nav class="sidebar">
+    <div class="sidebar-header">JSON Viewer</div>
+    <div class="search-box">
+      <input type="text" id="search" placeholder="Filter... (/)">
+    </div>
+    <div class="nav-container" id="nav">
+      <div class="loading">Loading...</div>
+    </div>
+    <div class="nav-hint">
+      <kbd>&uarr;</kbd><kbd>&darr;</kbd> nav
+      <kbd>Enter</kbd> go
+      <kbd>/</kbd> search
+    </div>
+  </nav>
+
+  <main class="main" id="main">
+    <div class="empty-state">Select a file from the sidebar</div>
+  </main>
+
+  <script>
+    const BASE = '/samples';
+    let allFiles = [];
+    let currentFile = null;
+    let currentData = null;
+    let lastClickedLine = null;
+
+    // Fetch file list from server
+    async function loadFileList() {
+      const res = await fetch('/api/files');
+      return res.json();
+    }
+
+    // Fetch individual JSON file
+    async function loadFile(path) {
+      const res = await fetch(`${BASE}/${path}`);
+      return res.json();
+    }
+
+    // Escape HTML entities
+    function escapeHtml(s) {
+      return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    // Render source code with links and tooltips applied to a single line
+    function renderLineWithAnnotations(lineText, links, tooltips, lineStartOffset) {
+      const lineEndOffset = lineStartOffset + lineText.length;
+
+      // Collect all annotations (links and tooltips) that overlap this line
+      const annotations = [];
+
+      for (const link of (links || [])) {
+        if (link.offset < lineEndOffset && (link.offset + link.length) > lineStartOffset) {
+          annotations.push({ ...link, type: 'link' });
+        }
+      }
+
+      for (let i = 0; i < (tooltips || []).length; i++) {
+        const tip = tooltips[i];
+        if (tip.offset < lineEndOffset && (tip.offset + tip.length) > lineStartOffset) {
+          annotations.push({ ...tip, type: 'tooltip', index: i });
+        }
+      }
+
+      if (!annotations.length) return escapeHtml(lineText);
+
+      // Sort by offset
+      annotations.sort((a, b) => a.offset - b.offset);
+
+      let result = '';
+      let pos = 0;
+
+      for (const ann of annotations) {
+        const start = Math.max(0, ann.offset - lineStartOffset);
+        const end = Math.min(lineText.length, ann.offset + ann.length - lineStartOffset);
+
+        if (start > pos) {
+          result += escapeHtml(lineText.slice(pos, start));
+        }
+
+        const text = lineText.slice(start, end);
+        if (ann.type === 'link') {
+          result += `<a href="${escapeHtml(ann.url)}" target="_blank" title="${escapeHtml(ann.url)}">${escapeHtml(text)}</a>`;
+        } else {
+          result += `<span class="tooltip-trigger" data-tooltip="${ann.index}">${escapeHtml(text)}</span>`;
+        }
+        pos = end;
+      }
+
+      if (pos < lineText.length) {
+        result += escapeHtml(lineText.slice(pos));
+      }
+
+      return result;
+    }
+
+    // Render code block with line numbers
+    function renderCode(code, links, highlights, tooltips) {
+      const lines = code.split('\n');
+      let offset = 0;
+
+      // Build set of highlighted line numbers
+      const highlightedLines = new Set();
+      for (const h of (highlights || [])) {
+        for (let i = h.start; i <= h.end; i++) {
+          highlightedLines.add(i);
+        }
+      }
+
+      const rows = lines.map((line, i) => {
+        const lineNum = i + 1;
+        const content = renderLineWithAnnotations(line, links, tooltips, offset);
+        offset += line.length + 1; // +1 for newline
+        const isHighlighted = highlightedLines.has(lineNum);
+
+        return `<tr class="line${isHighlighted ? ' highlighted' : ''}" data-line="${lineNum}">
+          <td class="line-number" data-line="${lineNum}">${lineNum}</td>
+          <td class="line-content">${content || ' '}</td>
+        </tr>`;
+      });
+
+      return `<div class="code-block"><table class="code-table"><tbody>${rows.join('')}</tbody></table></div>`;
+    }
+
+    // Group files by directory
+    function groupFiles(files) {
+      const groups = {};
+      for (const f of files) {
+        const [group] = f.split('/');
+        (groups[group] ??= []).push(f);
+      }
+      return groups;
+    }
+
+    // Build sidebar navigation
+    function buildNav(files, filter = '') {
+      const nav = document.getElementById('nav');
+      const filtered = files.filter(f => !filter || f.toLowerCase().includes(filter.toLowerCase()));
+      const groups = groupFiles(filtered);
+
+      if (Object.keys(groups).length === 0) {
+        nav.innerHTML = '<div class="loading">No matches</div>';
+        return;
+      }
+
+      const { filePath } = parseHash();
+
+      nav.innerHTML = Object.entries(groups).map(([group, items]) => {
+        const isOpen = items.some(f => f === filePath) || filter;
+        return `
+          <div class="group${isOpen ? ' open' : ''}">
+            <div class="group-header">${group} (${items.length})</div>
+            <div class="group-items">
+              ${items.map(f => {
+                const name = f.split('/')[1].replace('.json', '');
+                const isActive = f === filePath;
+                return `<a class="nav-item${isActive ? ' active' : ''}" href="#${f}" data-path="${f}">${name}</a>`;
+              }).join('')}
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      // Add click handlers for group headers
+      nav.querySelectorAll('.group-header').forEach(header => {
+        header.addEventListener('click', () => {
+          header.parentElement.classList.toggle('open');
+        });
+      });
+    }
+
+    // Parse URL hash for file path and line range
+    function parseHash() {
+      const hash = decodeURIComponent(location.hash.slice(1));
+      const match = hash.match(/^(.+?\.json)(?::L(\d+)(?:-L?(\d+))?)?$/);
+
+      if (!match) return { filePath: hash, startLine: null, endLine: null };
+
+      return {
+        filePath: match[1],
+        startLine: match[2] ? parseInt(match[2]) : null,
+        endLine: match[3] ? parseInt(match[3]) : (match[2] ? parseInt(match[2]) : null)
+      };
+    }
+
+    // Build hash from file path and line range
+    function buildHash(filePath, startLine, endLine) {
+      if (!startLine) return filePath;
+      if (startLine === endLine) return `${filePath}:L${startLine}`;
+      return `${filePath}:L${startLine}-L${endLine}`;
+    }
+
+    // Show content for a file
+    async function showFile(filePath) {
+      if (!filePath || !allFiles.includes(filePath)) return;
+
+      currentFile = filePath;
+      const main = document.getElementById('main');
+
+      try {
+        currentData = await loadFile(filePath);
+        const [group, file] = filePath.split('/');
+        const name = file.replace('.json', '');
+
+        main.innerHTML = `
+          <section class="code-section" id="${filePath}">
+            <div class="code-header">
+              <span class="code-title">${group}/${name}</span>
+              <span class="code-path">${BASE}/${filePath}</span>
+              <button class="btn" id="copyLinkBtn">Copy Link</button>
+              <button class="btn" id="copyCodeBtn">Copy Code</button>
+            </div>
+            ${renderCode(currentData.code || '', currentData.links, currentData.highlights, currentData.tooltips)}
+          </section>
+        `;
+
+        // Add button handlers
+        document.getElementById('copyLinkBtn').addEventListener('click', copyLink);
+        document.getElementById('copyCodeBtn').addEventListener('click', copyCode);
+
+        // Add line click handlers
+        main.querySelectorAll('.line-number').forEach(ln => {
+          ln.addEventListener('click', handleLineClick);
+        });
+
+        // Add tooltip handlers
+        setupTooltips(currentData.tooltips || []);
+
+        // Apply highlighting from hash
+        applyHighlightFromHash();
+
+      } catch (e) {
+        main.innerHTML = `<div class="empty-state">Error loading ${filePath}: ${e.message}</div>`;
+      }
+    }
+
+    // Simple markdown to HTML conversion
+    function renderMarkdown(md) {
+      if (!md) return '';
+      return md
+        .replace(/`([^`]+)`/g, '<code>$1</code>')
+        .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+        .replace(/\*([^*]+)\*/g, '<em>$1</em>')
+        .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank">$1</a>')
+        .replace(/\n\n/g, '<br><br>')
+        .replace(/\n/g, ' ');
+    }
+
+    // Setup tooltip handlers
+    let activeTooltip = null;
+
+    function setupTooltips(tooltips) {
+      document.querySelectorAll('.tooltip-trigger').forEach(el => {
+        const index = parseInt(el.dataset.tooltip);
+        const tip = tooltips[index];
+        if (!tip) return;
+
+        el.addEventListener('mouseenter', (e) => showTooltip(e, tip));
+        el.addEventListener('mouseleave', hideTooltip);
+      });
+    }
+
+    function showTooltip(e, tip) {
+      hideTooltip();
+
+      const popup = document.createElement('div');
+      popup.className = 'tooltip-popup';
+
+      let html = `<div class="tooltip-code">${escapeHtml(tip.code)}</div>`;
+
+      if (tip.container) {
+        html += `<div class="tooltip-container">in <a href="${escapeHtml(tip.container.url)}" target="_blank">${escapeHtml(tip.container.name)}</a></div>`;
+      }
+
+      if (tip.documentation) {
+        html += `<div class="tooltip-docs">${renderMarkdown(tip.documentation)}</div>`;
+      }
+
+      popup.innerHTML = html;
+      document.body.appendChild(popup);
+
+      // Position the tooltip
+      const rect = e.target.getBoundingClientRect();
+      const popupRect = popup.getBoundingClientRect();
+
+      let left = rect.left;
+      let top = rect.bottom + 8;
+
+      // Keep within viewport
+      if (left + popupRect.width > window.innerWidth - 20) {
+        left = window.innerWidth - popupRect.width - 20;
+      }
+      if (top + popupRect.height > window.innerHeight - 20) {
+        top = rect.top - popupRect.height - 8;
+      }
+
+      popup.style.left = `${Math.max(10, left)}px`;
+      popup.style.top = `${top}px`;
+
+      activeTooltip = popup;
+    }
+
+    function hideTooltip() {
+      if (activeTooltip) {
+        activeTooltip.remove();
+        activeTooltip = null;
+      }
+    }
+
+    // Handle line number click
+    function handleLineClick(e) {
+      const lineNum = parseInt(e.target.dataset.line);
+
+      if (e.shiftKey && lastClickedLine !== null) {
+        // Range selection
+        const start = Math.min(lastClickedLine, lineNum);
+        const end = Math.max(lastClickedLine, lineNum);
+        location.hash = buildHash(currentFile, start, end);
+      } else {
+        // Single line selection
+        lastClickedLine = lineNum;
+        location.hash = buildHash(currentFile, lineNum, lineNum);
+      }
+    }
+
+    // Apply highlighting based on URL hash
+    function applyHighlightFromHash() {
+      const { startLine, endLine } = parseHash();
+
+      // Clear existing highlights
+      document.querySelectorAll('.line.highlighted').forEach(el => {
+        el.classList.remove('highlighted');
+      });
+
+      if (startLine === null) return;
+
+      // Apply new highlights
+      for (let i = startLine; i <= endLine; i++) {
+        const line = document.querySelector(`.line[data-line="${i}"]`);
+        if (line) {
+          line.classList.add('highlighted');
+          if (i === startLine) {
+            line.scrollIntoView({ block: 'center', behavior: 'smooth' });
+          }
+        }
+      }
+    }
+
+    // Copy link to clipboard
+    function copyLink() {
+      const btn = document.getElementById('copyLinkBtn');
+      navigator.clipboard.writeText(location.href);
+      btn.textContent = 'Copied!';
+      btn.classList.add('copied');
+      setTimeout(() => {
+        btn.textContent = 'Copy Link';
+        btn.classList.remove('copied');
+      }, 1500);
+    }
+
+    // Copy code to clipboard
+    function copyCode() {
+      const btn = document.getElementById('copyCodeBtn');
+      navigator.clipboard.writeText(currentData?.code || '');
+      btn.textContent = 'Copied!';
+      btn.classList.add('copied');
+      setTimeout(() => {
+        btn.textContent = 'Copy Code';
+        btn.classList.remove('copied');
+      }, 1500);
+    }
+
+    // Update active nav item
+    function updateActiveNav() {
+      const { filePath } = parseHash();
+      document.querySelectorAll('.nav-item').forEach(el => {
+        el.classList.toggle('active', el.dataset.path === filePath);
+        if (el.dataset.path === filePath) {
+          el.closest('.group')?.classList.add('open');
+        }
+      });
+    }
+
+    // Handle hash change
+    async function handleHashChange() {
+      const { filePath } = parseHash();
+
+      if (filePath !== currentFile) {
+        await showFile(filePath);
+      } else {
+        applyHighlightFromHash();
+      }
+
+      updateActiveNav();
+    }
+
+    // Keyboard navigation
+    document.addEventListener('keydown', e => {
+      const searchInput = document.getElementById('search');
+
+      // Focus search on /
+      if (e.key === '/' && document.activeElement !== searchInput) {
+        e.preventDefault();
+        searchInput.focus();
+        return;
+      }
+
+      // Clear search on Escape
+      if (e.key === 'Escape') {
+        searchInput.blur();
+        searchInput.value = '';
+        buildNav(allFiles);
+        return;
+      }
+
+      // Arrow navigation
+      if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+        e.preventDefault();
+        const items = [...document.querySelectorAll('.group.open .nav-item')];
+        if (!items.length) return;
+
+        const current = items.findIndex(el => el.classList.contains('active'));
+        let next;
+
+        if (e.key === 'ArrowDown') {
+          next = current === -1 ? 0 : Math.min(current + 1, items.length - 1);
+        } else {
+          next = current === -1 ? 0 : Math.max(current - 1, 0);
+        }
+
+        items.forEach((el, i) => el.classList.toggle('active', i === next));
+        items[next]?.scrollIntoView({ block: 'nearest' });
+      }
+
+      // Enter to navigate
+      if (e.key === 'Enter' && document.activeElement !== searchInput) {
+        const active = document.querySelector('.nav-item.active');
+        if (active) {
+          location.hash = active.dataset.path;
+        }
+      }
+    });
+
+    // Search input handler
+    document.getElementById('search').addEventListener('input', e => {
+      buildNav(allFiles, e.target.value);
+    });
+
+    // Hash change handler
+    window.addEventListener('hashchange', handleHashChange);
+
+    // Initialize
+    (async () => {
+      try {
+        allFiles = await loadFileList();
+        buildNav(allFiles);
+
+        if (location.hash) {
+          await handleHashChange();
+        }
+      } catch (e) {
+        document.getElementById('nav').innerHTML = `<div class="loading">Error: ${e.message}</div>`;
+      }
+    })();
+  </script>
+</body>
+</html>

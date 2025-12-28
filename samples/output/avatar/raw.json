@@ -1,31 +1,52 @@
 {
+  "code": "Widget build(BuildContext context) => Row(\n  mainAxisAlignment: .center,\n  spacing: 10,\n  children: [\n    FAvatar.raw(),\n    FAvatar.raw(\n      child: Icon(FIcons.baby, color: context.theme.colors.mutedForeground),\n    ),\n    FAvatar.raw(child: const Text('MN')),\n  ],\n);\n",
   "highlights": [],
   "links": [
     {
-      "offset": 100,
+      "offset": 106,
       "length": 11,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.avatar/FAvatar/FAvatar.raw.html"
     },
     {
-      "offset": 119,
+      "offset": 125,
       "length": 11,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.avatar/FAvatar/FAvatar.raw.html"
     },
     {
-      "offset": 131,
+      "offset": 144,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.avatar/FAvatar/child.html"
     },
     {
-      "offset": 199,
+      "offset": 156,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui_assets/latest/forui_assets/FIcons/baby-constant.html"
+    },
+    {
+      "offset": 197,
+      "length": 15,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FColors/mutedForeground.html"
+    },
+    {
+      "offset": 190,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FThemeData/colors.html"
+    },
+    {
+      "offset": 184,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FThemeBuildContext/theme.html"
+    },
+    {
+      "offset": 226,
       "length": 11,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.avatar/FAvatar/FAvatar.raw.html"
     },
     {
-      "offset": 211,
+      "offset": 238,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.avatar/FAvatar/child.html"
     }
   ],
-  "source": "Widget build(BuildContext _) => Row(\n  mainAxisAlignment: .center,\n  spacing: 10,\n  children: [\n    FAvatar.raw(),\n    FAvatar.raw(child: Icon(FIcons.baby, color: theme.colors.mutedForeground)),\n    FAvatar.raw(child: const Text('MN')),\n  ],\n);\n"
+  "tooltips": []
 }

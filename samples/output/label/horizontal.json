@@ -1,4 +1,5 @@
 {
+  "code": "Widget build(BuildContext _) => FLabel(\n  axis: .horizontal,\n  label: const Text('Accept terms and conditions'),\n  description: const Text('You agree to our terms and conditions.'),\n  error: const Text('Please accept the terms.'),\n  states: states,\n  child: const DecoratedBox(\n    decoration: BoxDecoration(\n      borderRadius: .all(.circular(5)),\n      color: Colors.grey,\n    ),\n    child: SizedBox.square(dimension: 16),\n  ),\n);\n",
   "highlights": [],
   "links": [
     {
@@ -37,5 +38,5 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.label/FLabel/child.html"
     }
   ],
-  "source": "Widget build(BuildContext _) => FLabel(\n  axis: .horizontal,\n  label: const Text('Accept terms and conditions'),\n  description: const Text('You agree to our terms and conditions.'),\n  error: const Text('Please accept the terms.'),\n  states: states,\n  child: const DecoratedBox(\n    decoration: BoxDecoration(\n      borderRadius: .all(.circular(5)),\n      color: Colors.grey,\n    ),\n    child: SizedBox.square(dimension: 16),\n  ),\n);\n"
+  "tooltips": []
 }

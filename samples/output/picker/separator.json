@@ -1,4 +1,5 @@
 {
+  "code": "Widget build(BuildContext context) => SizedBox(\n  width: 200,\n  child: FPicker(\n    children: [\n      FPickerWheel.builder(\n        builder: (context, index) =>\n            Text((index % 12).toString().padLeft(2, '0')),\n      ),\n      const Text(':'),\n      FPickerWheel.builder(\n        builder: (context, index) =>\n            Text((index % 60).toString().padLeft(2, '0')),\n      ),\n      const FPickerWheel(children: [Text('AM'), Text('PM')]),\n    ],\n  ),\n);\n",
   "highlights": [],
   "links": [
     {
@@ -17,15 +18,30 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.picker/FPickerWheel/FPickerWheel.builder.html"
     },
     {
+      "offset": 132,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.picker/FPickerWheel/FPickerWheel.builder.html"
+    },
+    {
       "offset": 258,
       "length": 20,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.picker/FPickerWheel/FPickerWheel.builder.html"
+    },
+    {
+      "offset": 288,
+      "length": 7,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.picker/FPickerWheel/FPickerWheel.builder.html"
     },
     {
       "offset": 397,
       "length": 12,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.picker/FPickerWheel/FPickerWheel.html"
+    },
+    {
+      "offset": 410,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.picker/FPickerWheel/FPickerWheel.html"
     }
   ],
-  "source": "Widget build(BuildContext context) => SizedBox(\n  width: 200,\n  child: FPicker(\n    children: [\n      FPickerWheel.builder(\n        builder: (context, index) =>\n            Text((index % 12).toString().padLeft(2, '0')),\n      ),\n      const Text(':'),\n      FPickerWheel.builder(\n        builder: (context, index) =>\n            Text((index % 60).toString().padLeft(2, '0')),\n      ),\n      const FPickerWheel(children: [Text('AM'), Text('PM')]),\n    ],\n  ),\n);\n"
+  "tooltips": []
 }

@@ -1,4 +1,5 @@
 {
+  "code": "Widget build(BuildContext context) => FButton(\n  mainAxisSize: .min,\n  onPress: () => showFToast(\n    context: context,\n    duration: null,\n    icon: const Icon(FIcons.triangleAlert),\n    title: const Text('Event start time cannot be earlier than 8am'),\n  ),\n  child: const Text('Show Toast'),\n);\n",
   "highlights": [],
   "links": [
     {
@@ -7,9 +8,44 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/FButton.html"
     },
     {
+      "offset": 49,
+      "length": 12,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/FButton.html"
+    },
+    {
       "offset": 71,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/onPress.html"
+    },
+    {
+      "offset": 86,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.toast/showFToast.html"
+    },
+    {
+      "offset": 102,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.toast/showFToast.html"
+    },
+    {
+      "offset": 124,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.toast/showFToast.html"
+    },
+    {
+      "offset": 144,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.toast/showFToast.html"
+    },
+    {
+      "offset": 161,
+      "length": 20,
+      "url": "https://pub.dev/documentation/forui_assets/latest/forui_assets/FIcons/triangleAlert-constant.html"
+    },
+    {
+      "offset": 188,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.toast/showFToast.html"
     },
     {
       "offset": 261,
@@ -17,5 +53,5 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/child.html"
     }
   ],
-  "source": "Widget build(BuildContext context) => FButton(\n  mainAxisSize: .min,\n  onPress: () => showFToast(\n    context: context,\n    duration: null,\n    icon: const Icon(FIcons.triangleAlert),\n    title: const Text('Event start time cannot be earlier than 8am'),\n  ),\n  child: const Text('Show Toast'),\n);\n"
+  "tooltips": []
 }

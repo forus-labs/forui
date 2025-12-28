@@ -1,4 +1,5 @@
 {
+  "code": "Widget build(BuildContext _) => FAutocomplete(\n  hint: 'Type to search fruits',\n  clearable: (value) => value.text.isNotEmpty,\n  items: fruits,\n);\n",
   "highlights": [],
   "links": [
     {
@@ -15,7 +16,12 @@
       "offset": 82,
       "length": 9,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.autocomplete/FAutocomplete/clearable.html"
+    },
+    {
+      "offset": 129,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.autocomplete/FAutocomplete/FAutocomplete.html"
     }
   ],
-  "source": "Widget build(BuildContext _) => FAutocomplete(\n  hint: 'Type to search fruits',\n  clearable: (value) => value.text.isNotEmpty,\n  items: fruits,\n);\n"
+  "tooltips": []
 }

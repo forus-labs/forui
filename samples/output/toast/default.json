@@ -1,10 +1,41 @@
 {
+  "code": "Widget build(BuildContext context) => Column(\n  mainAxisSize: .min,\n  mainAxisAlignment: .center,\n  spacing: 5,\n  children: [\n    for (final (FToastAlignment alignment, description) in [\n      (.topLeft, 'Top Left'),\n      (.topCenter, 'Top Center'),\n      (.topRight, 'Top Right'),\n      (.bottomLeft, 'Bottom Left'),\n      (.bottomCenter, 'Bottom Center'),\n      (.bottomRight, 'Bottom Right'),\n    ])\n      FButton(\n        onPress: () => showFToast(\n          context: context,\n          alignment: alignment,\n          title: const Text('Event has been created'),\n          description: const Text('Friday, May 23, 2025 at 9:00 AM'),\n          suffixBuilder: (context, entry) => IntrinsicHeight(\n            child: FButton(\n              style: context.theme.buttonStyles.primary.copyWith(\n                contentStyle: context.theme.buttonStyles.primary.contentStyle\n                    .copyWith(\n                      padding: const .symmetric(horizontal: 12, vertical: 7.5),\n                      textStyle: .all(\n                        context.theme.typography.xs.copyWith(\n                          color: context.theme.colors.primaryForeground,\n                        ),\n                      ),\n                    ),\n              ),\n              onPress: entry.dismiss,\n              child: const Text('Undo'),\n            ),\n          ),\n        ),\n        child: Text('Show $description Toast'),\n      ),\n  ],\n);\n",
   "highlights": [],
   "links": [
     {
       "offset": 142,
       "length": 15,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.toast/FToastAlignment-class.html"
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.toast/FToastAlignment.html"
+    },
+    {
+      "offset": 195,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.toast/FToastAlignment.html#topLeft"
+    },
+    {
+      "offset": 225,
+      "length": 9,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.toast/FToastAlignment.html#topCenter"
+    },
+    {
+      "offset": 259,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.toast/FToastAlignment.html#topRight"
+    },
+    {
+      "offset": 291,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.toast/FToastAlignment.html#bottomLeft"
+    },
+    {
+      "offset": 327,
+      "length": 12,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.toast/FToastAlignment.html#bottomCenter"
+    },
+    {
+      "offset": 367,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.toast/FToastAlignment.html#bottomRight"
     },
     {
       "offset": 410,
@@ -17,6 +48,36 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/onPress.html"
     },
     {
+      "offset": 442,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.toast/showFToast.html"
+    },
+    {
+      "offset": 464,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.toast/showFToast.html"
+    },
+    {
+      "offset": 492,
+      "length": 9,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.toast/showFToast.html"
+    },
+    {
+      "offset": 524,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.toast/showFToast.html"
+    },
+    {
+      "offset": 579,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.toast/showFToast.html"
+    },
+    {
+      "offset": 649,
+      "length": 13,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.toast/showFToast.html"
+    },
+    {
       "offset": 720,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/FButton.html"
@@ -27,9 +88,109 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/style.html"
     },
     {
+      "offset": 785,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/$FButtonStyleTransformations/copyWith.html"
+    },
+    {
+      "offset": 777,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButtonStyles/primary.html"
+    },
+    {
+      "offset": 764,
+      "length": 12,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FThemeData/buttonStyles.html"
+    },
+    {
+      "offset": 758,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FThemeBuildContext/theme.html"
+    },
+    {
+      "offset": 811,
+      "length": 12,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/$FButtonStyleTransformations/copyWith.html"
+    },
+    {
+      "offset": 894,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/$FButtonContentStyleTransformations/copyWith.html"
+    },
+    {
+      "offset": 860,
+      "length": 12,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButtonStyle/contentStyle.html"
+    },
+    {
+      "offset": 852,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButtonStyles/primary.html"
+    },
+    {
+      "offset": 839,
+      "length": 12,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FThemeData/buttonStyles.html"
+    },
+    {
+      "offset": 833,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FThemeBuildContext/theme.html"
+    },
+    {
+      "offset": 926,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/$FButtonContentStyleTransformations/copyWith.html"
+    },
+    {
+      "offset": 1006,
+      "length": 9,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/$FButtonContentStyleTransformations/copyWith.html"
+    },
+    {
+      "offset": 1018,
+      "length": 3,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FWidgetStateMap/FWidgetStateMap.all.html"
+    },
+    {
+      "offset": 1072,
+      "length": 2,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FTypography/xs.html"
+    },
+    {
+      "offset": 1061,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FThemeData/typography.html"
+    },
+    {
+      "offset": 1055,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FThemeBuildContext/theme.html"
+    },
+    {
+      "offset": 1139,
+      "length": 17,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FColors/primaryForeground.html"
+    },
+    {
+      "offset": 1132,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FThemeData/colors.html"
+    },
+    {
+      "offset": 1126,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FThemeBuildContext/theme.html"
+    },
+    {
       "offset": 1264,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/onPress.html"
+    },
+    {
+      "offset": 1279,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.toast/FToasterEntry/dismiss.html"
     },
     {
       "offset": 1302,
@@ -42,5 +203,5 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/child.html"
     }
   ],
-  "source": "Widget build(BuildContext context) => Column(\n  mainAxisSize: .min,\n  mainAxisAlignment: .center,\n  spacing: 5,\n  children: [\n    for (final (FToastAlignment alignment, description) in [\n      (.topLeft, 'Top Left'),\n      (.topCenter, 'Top Center'),\n      (.topRight, 'Top Right'),\n      (.bottomLeft, 'Bottom Left'),\n      (.bottomCenter, 'Bottom Center'),\n      (.bottomRight, 'Bottom Right'),\n    ])\n      FButton(\n        onPress: () => showFToast(\n          context: context,\n          alignment: alignment,\n          title: const Text('Event has been created'),\n          description: const Text('Friday, May 23, 2025 at 9:00 AM'),\n          suffixBuilder: (context, entry) => IntrinsicHeight(\n            child: FButton(\n              style: context.theme.buttonStyles.primary.copyWith(\n                contentStyle: context.theme.buttonStyles.primary.contentStyle\n                    .copyWith(\n                      padding: const .symmetric(horizontal: 12, vertical: 7.5),\n                      textStyle: .all(\n                        context.theme.typography.xs.copyWith(\n                          color: context.theme.colors.primaryForeground,\n                        ),\n                      ),\n                    ),\n              ),\n              onPress: entry.dismiss,\n              child: const Text('Undo'),\n            ),\n          ),\n        ),\n        child: Text('Show $description Toast'),\n      ),\n  ],\n);\n"
+  "tooltips": []
 }

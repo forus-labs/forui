@@ -1,4 +1,5 @@
 {
+  "code": "Widget build(BuildContext context) => FTheme(\n  data: theme,\n  child: FScaffold(\n    child: Center(\n      child: ConstrainedBox(\n        constraints: const BoxConstraints(maxWidth: 200, maxHeight: 200),\n        child: Builder(\n          builder: (context) => Column(\n            mainAxisAlignment: .center,\n            children: [\n              const SizedBox(height: 30),\n              FTooltip(\n                hover: hover,\n                longPress: longPress,\n                tipAnchor: axis == .horizontal ? .topLeft : .bottomCenter,\n                childAnchor: axis == .horizontal ? .topRight : .topCenter,\n                tipBuilder: (context, _) => const Text('Add to library'),\n                child: FButton(\n                  style: FButtonStyle.outline(),\n                  mainAxisSize: .min,\n                  onPress: () {},\n                  child: Text(\n                    [if (longPress) 'Long press', if (hover) 'Hover'].join('/'),\n                  ),\n                ),\n              ),\n            ],\n          ),\n        ),\n      ),\n    ),\n  ),\n);\n",
   "highlights": [],
   "links": [
     {
@@ -72,6 +73,16 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/style.html"
     },
     {
+      "offset": 746,
+      "length": 20,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButtonStyle/outline.html"
+    },
+    {
+      "offset": 788,
+      "length": 12,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/FButton.html"
+    },
+    {
       "offset": 826,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/onPress.html"
@@ -82,5 +93,5 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/child.html"
     }
   ],
-  "source": "Widget build(BuildContext context) => FTheme(\n  data: theme,\n  child: FScaffold(\n    child: Center(\n      child: ConstrainedBox(\n        constraints: const BoxConstraints(maxWidth: 200, maxHeight: 200),\n        child: Builder(\n          builder: (context) => Column(\n            mainAxisAlignment: .center,\n            children: [\n              const SizedBox(height: 30),\n              FTooltip(\n                hover: hover,\n                longPress: longPress,\n                tipAnchor: axis == .horizontal ? .topLeft : .bottomCenter,\n                childAnchor: axis == .horizontal ? .topRight : .topCenter,\n                tipBuilder: (context, _) => const Text('Add to library'),\n                child: FButton(\n                  style: FButtonStyle.outline(),\n                  mainAxisSize: .min,\n                  onPress: () {},\n                  child: Text(\n                    [if (longPress) 'Long press', if (hover) 'Hover'].join('/'),\n                  ),\n                ),\n              ),\n            ],\n          ),\n        ),\n      ),\n    ),\n  ),\n);\n"
+  "tooltips": []
 }

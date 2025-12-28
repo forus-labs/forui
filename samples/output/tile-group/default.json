@@ -1,4 +1,5 @@
 {
+  "code": "Widget build(BuildContext _) => FTileGroup(\n  label: const Text('Settings'),\n  description: const Text('Personalize your experience'),\n  divider: divider,\n  children: [\n    .tile(\n      prefix: const Icon(FIcons.user),\n      title: const Text('Personalization'),\n      suffix: const Icon(FIcons.chevronRight),\n      onPress: () {},\n    ),\n    .tile(\n      prefix: const Icon(FIcons.wifi),\n      title: const Text('WiFi'),\n      details: const Text('Duobase (5G)'),\n      suffix: const Icon(FIcons.chevronRight),\n      onPress: () {},\n    ),\n  ],\n);\n",
   "highlights": [],
   "links": [
     {
@@ -22,15 +23,85 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTileGroup/divider.html"
     },
     {
+      "offset": 157,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTileGroup/FTileGroup.html"
+    },
+    {
       "offset": 174,
       "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTileMixin/tile.html"
+    },
+    {
+      "offset": 186,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTileMixin/tile.html"
+    },
+    {
+      "offset": 205,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui_assets/latest/forui_assets/FIcons/user-constant.html"
+    },
+    {
+      "offset": 225,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTileMixin/tile.html"
+    },
+    {
+      "offset": 269,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTileMixin/tile.html"
+    },
+    {
+      "offset": 288,
+      "length": 19,
+      "url": "https://pub.dev/documentation/forui_assets/latest/forui_assets/FIcons/chevronRight-constant.html"
+    },
+    {
+      "offset": 316,
+      "length": 7,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTileMixin/tile.html"
     },
     {
       "offset": 344,
       "length": 4,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTileMixin/tile.html"
+    },
+    {
+      "offset": 356,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTileMixin/tile.html"
+    },
+    {
+      "offset": 375,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui_assets/latest/forui_assets/FIcons/wifi-constant.html"
+    },
+    {
+      "offset": 395,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTileMixin/tile.html"
+    },
+    {
+      "offset": 428,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTileMixin/tile.html"
+    },
+    {
+      "offset": 471,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTileMixin/tile.html"
+    },
+    {
+      "offset": 490,
+      "length": 19,
+      "url": "https://pub.dev/documentation/forui_assets/latest/forui_assets/FIcons/chevronRight-constant.html"
+    },
+    {
+      "offset": 518,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tile/FTileMixin/tile.html"
     }
   ],
-  "source": "Widget build(BuildContext _) => FTileGroup(\n  label: const Text('Settings'),\n  description: const Text('Personalize your experience'),\n  divider: divider,\n  children: [\n    .tile(\n      prefix: const Icon(FIcons.user),\n      title: const Text('Personalization'),\n      suffix: const Icon(FIcons.chevronRight),\n      onPress: () {},\n    ),\n    .tile(\n      prefix: const Icon(FIcons.wifi),\n      title: const Text('WiFi'),\n      details: const Text('Duobase (5G)'),\n      suffix: const Icon(FIcons.chevronRight),\n      onPress: () {},\n    ),\n  ],\n);\n"
+  "tooltips": []
 }

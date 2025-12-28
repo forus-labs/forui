@@ -1,4 +1,5 @@
 {
+  "code": "Widget build(BuildContext _) => FDateField(\n  control: .managed(\n    validator: (date) => date?.weekday == 6 || date?.weekday == 7\n        ? 'Date cannot be a weekend.'\n        : null,\n  ),\n  label: const Text('Appointment Date'),\n  description: const Text('Select a date for your appointment'),\n);\n",
   "highlights": [],
   "links": [
     {
@@ -12,6 +13,16 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.date_field/FDateField/control.html"
     },
     {
+      "offset": 56,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.date_field/FDateFieldControl/FDateFieldControl.managed.html"
+    },
+    {
+      "offset": 69,
+      "length": 9,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.date_field/FDateFieldControl/FDateFieldControl.managed.html"
+    },
+    {
       "offset": 192,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.date_field/FDateField/label.html"
@@ -22,5 +33,5 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.date_field/FDateField/description.html"
     }
   ],
-  "source": "Widget build(BuildContext _) => FDateField(\n  control: .managed(\n    validator: (date) => date?.weekday == 6 || date?.weekday == 7\n        ? 'Date cannot be a weekend.'\n        : null,\n  ),\n  label: const Text('Appointment Date'),\n  description: const Text('Select a date for your appointment'),\n);\n"
+  "tooltips": []
 }

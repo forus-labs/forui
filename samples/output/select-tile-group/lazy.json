@@ -1,4 +1,5 @@
 {
+  "code": "Widget build(BuildContext _) => FSelectTileGroup.builder(\n  control: const .managed(initial: {1}),\n  label: const Text('Applicable values'),\n  maxHeight: 200,\n  tileBuilder: (context, index) =>\n      .tile(title: Text('Tile $index'), value: index),\n);\n",
   "highlights": [],
   "links": [
     {
@@ -12,6 +13,16 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_tile_group/FSelectTileGroup/control.html"
     },
     {
+      "offset": 76,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.foundation/FMultiValueControl/FMultiValueControl.managed.html"
+    },
+    {
+      "offset": 84,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.foundation/FMultiValueControl/FMultiValueControl.managed.html"
+    },
+    {
       "offset": 101,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_tile_group/FSelectTileGroup/label.html"
@@ -20,6 +31,16 @@
       "offset": 143,
       "length": 9,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_tile_group/FSelectTileGroup/maxHeight.html"
+    },
+    {
+      "offset": 161,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_tile_group/FSelectTileGroup/FSelectTileGroup.builder.html"
+    },
+    {
+      "offset": 201,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_tile_group/FSelectTile/FSelectTile.tile.html"
     },
     {
       "offset": 206,
@@ -32,5 +53,5 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select_tile_group/FSelectTile/value.html"
     }
   ],
-  "source": "Widget build(BuildContext _) => FSelectTileGroup.builder(\n  control: const .managed(initial: {1}),\n  label: const Text('Applicable values'),\n  maxHeight: 200,\n  tileBuilder: (context, index) =>\n      .tile(title: Text('Tile $index'), value: index),\n);\n"
+  "tooltips": []
 }

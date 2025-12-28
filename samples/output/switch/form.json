@@ -1,6 +1,32 @@
 {
+  "code": "class FormSwitchExample extends StatefulWidget {\n  @override\n  State<FormSwitchExample> createState() => _FormSwitchExampleState();\n}\n\nclass _FormSwitchExampleState extends State<FormSwitchExample> {\n  final GlobalKey<FormState> _key = GlobalKey<FormState>();\n\n  @override\n  Widget build(BuildContext context) {\n    final theme = context.theme;\n    return Form(\n      key: _key,\n      child: Column(\n        mainAxisAlignment: .center,\n        crossAxisAlignment: .start,\n        children: [\n          Text(\n            'Email Notifications',\n            style: theme.typography.xl2.copyWith(\n              fontWeight: FontWeight.w600,\n              color: theme.colors.foreground,\n              height: 1.5,\n            ),\n          ),\n          const SizedBox(height: 15),\n          FCard.raw(\n            child: Padding(\n              padding: const .fromLTRB(16, 12, 16, 16),\n              child: Row(\n                mainAxisAlignment: .spaceBetween,\n                children: [\n                  Flexible(\n                    child: Column(\n                      crossAxisAlignment: .start,\n                      children: [\n                        Text(\n                          'Marketing Emails',\n                          style: theme.typography.base.copyWith(\n                            fontWeight: .w500,\n                            color: theme.colors.foreground,\n                            height: 1.5,\n                          ),\n                        ),\n                        Text(\n                          'Receive emails about new products, features, and more.',\n                          style: theme.typography.sm.copyWith(\n                            color: theme.colors.mutedForeground,\n                          ),\n                        ),\n                      ],\n                    ),\n                  ),\n                  FormField(\n                    initialValue: false,\n                    onSaved: (value) {\n                      // Save values somewhere.\n                    },\n                    validator: (value) => null, // No validation required.\n                    builder: (state) => FSwitch(\n                      value: state.value ?? false,\n                      onChange: (value) => state.didChange(value),\n                    ),\n                  ),\n                ],\n              ),\n            ),\n          ),\n          const SizedBox(height: 12),\n          FCard.raw(\n            child: Padding(\n              padding: const .fromLTRB(16, 12, 16, 16),\n              child: Row(\n                mainAxisAlignment: .spaceBetween,\n                children: [\n                  Flexible(\n                    child: Column(\n                      crossAxisAlignment: .start,\n                      children: [\n                        Text(\n                          'Security emails',\n                          style: theme.typography.base.copyWith(\n                            fontWeight: .w500,\n                            color: theme.colors.foreground,\n                            height: 1.5,\n                          ),\n                        ),\n                        Text(\n                          'Receive emails about your account security.',\n                          style: theme.typography.sm.copyWith(\n                            color: theme.colors.mutedForeground,\n                          ),\n                        ),\n                      ],\n                    ),\n                  ),\n                  FormField(\n                    initialValue: true,\n                    onSaved: (value) {\n                      // Save values somewhere.\n                    },\n                    validator: (value) => null, // No validation required.\n                    builder: (state) => FSwitch(\n                      value: state.value ?? false,\n                      onChange: (value) => state.didChange(value),\n                    ),\n                  ),\n                ],\n              ),\n            ),\n          ),\n          const SizedBox(height: 30),\n          FButton(\n            child: const Text('Submit'),\n            onPress: () {\n              if (!_key.currentState!.validate()) {\n                // Handle errors here.\n                return;\n              }\n\n              _key.currentState!.save();\n              // Do something.\n            },\n          ),\n        ],\n      ),\n    );\n  }\n}\n",
   "highlights": [],
   "links": [
+    {
+      "offset": 338,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FThemeBuildContext/theme.html"
+    },
+    {
+      "offset": 579,
+      "length": 3,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FTypography/xl2.html"
+    },
+    {
+      "offset": 568,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FThemeData/typography.html"
+    },
+    {
+      "offset": 670,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FColors/foreground.html"
+    },
+    {
+      "offset": 663,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FThemeData/colors.html"
+    },
     {
       "offset": 785,
       "length": 9,
@@ -12,19 +38,59 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.card/FCard/child.html"
     },
     {
+      "offset": 1257,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FTypography/base.html"
+    },
+    {
+      "offset": 1246,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FThemeData/typography.html"
+    },
+    {
+      "offset": 1367,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FColors/foreground.html"
+    },
+    {
+      "offset": 1360,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FThemeData/colors.html"
+    },
+    {
+      "offset": 1640,
+      "length": 2,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FTypography/sm.html"
+    },
+    {
+      "offset": 1629,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FThemeData/typography.html"
+    },
+    {
+      "offset": 1701,
+      "length": 15,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FColors/mutedForeground.html"
+    },
+    {
+      "offset": 1694,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FThemeData/colors.html"
+    },
+    {
       "offset": 2138,
       "length": 7,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.switch/FSwitch/FSwitch.html"
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.switch_/FSwitch/FSwitch.html"
     },
     {
       "offset": 2169,
       "length": 5,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.switch/FSwitch/value.html"
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.switch_/FSwitch/value.html"
     },
     {
       "offset": 2220,
       "length": 8,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.switch/FSwitch/onChange.html"
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.switch_/FSwitch/onChange.html"
     },
     {
       "offset": 2421,
@@ -37,19 +103,59 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.card/FCard/child.html"
     },
     {
+      "offset": 2892,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FTypography/base.html"
+    },
+    {
+      "offset": 2881,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FThemeData/typography.html"
+    },
+    {
+      "offset": 3002,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FColors/foreground.html"
+    },
+    {
+      "offset": 2995,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FThemeData/colors.html"
+    },
+    {
+      "offset": 3264,
+      "length": 2,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FTypography/sm.html"
+    },
+    {
+      "offset": 3253,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FThemeData/typography.html"
+    },
+    {
+      "offset": 3325,
+      "length": 15,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FColors/mutedForeground.html"
+    },
+    {
+      "offset": 3318,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FThemeData/colors.html"
+    },
+    {
       "offset": 3761,
       "length": 7,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.switch/FSwitch/FSwitch.html"
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.switch_/FSwitch/FSwitch.html"
     },
     {
       "offset": 3792,
       "length": 5,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.switch/FSwitch/value.html"
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.switch_/FSwitch/value.html"
     },
     {
       "offset": 3843,
       "length": 8,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.switch/FSwitch/onChange.html"
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.switch_/FSwitch/onChange.html"
     },
     {
       "offset": 4044,
@@ -67,5 +173,5 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/onPress.html"
     }
   ],
-  "source": "class FormSwitchExample extends StatefulWidget {\n  @override\n  State<FormSwitchExample> createState() => _FormSwitchExampleState();\n}\n\nclass _FormSwitchExampleState extends State<FormSwitchExample> {\n  final GlobalKey<FormState> _key = GlobalKey<FormState>();\n\n  @override\n  Widget build(BuildContext context) {\n    final theme = context.theme;\n    return Form(\n      key: _key,\n      child: Column(\n        mainAxisAlignment: .center,\n        crossAxisAlignment: .start,\n        children: [\n          Text(\n            'Email Notifications',\n            style: theme.typography.xl2.copyWith(\n              fontWeight: FontWeight.w600,\n              color: theme.colors.foreground,\n              height: 1.5,\n            ),\n          ),\n          const SizedBox(height: 15),\n          FCard.raw(\n            child: Padding(\n              padding: const .fromLTRB(16, 12, 16, 16),\n              child: Row(\n                mainAxisAlignment: .spaceBetween,\n                children: [\n                  Flexible(\n                    child: Column(\n                      crossAxisAlignment: .start,\n                      children: [\n                        Text(\n                          'Marketing Emails',\n                          style: theme.typography.base.copyWith(\n                            fontWeight: .w500,\n                            color: theme.colors.foreground,\n                            height: 1.5,\n                          ),\n                        ),\n                        Text(\n                          'Receive emails about new products, features, and more.',\n                          style: theme.typography.sm.copyWith(\n                            color: theme.colors.mutedForeground,\n                          ),\n                        ),\n                      ],\n                    ),\n                  ),\n                  FormField(\n                    initialValue: false,\n                    onSaved: (value) {\n                      // Save values somewhere.\n                    },\n                    validator: (value) => null, // No validation required.\n                    builder: (state) => FSwitch(\n                      value: state.value ?? false,\n                      onChange: (value) => state.didChange(value),\n                    ),\n                  ),\n                ],\n              ),\n            ),\n          ),\n          const SizedBox(height: 12),\n          FCard.raw(\n            child: Padding(\n              padding: const .fromLTRB(16, 12, 16, 16),\n              child: Row(\n                mainAxisAlignment: .spaceBetween,\n                children: [\n                  Flexible(\n                    child: Column(\n                      crossAxisAlignment: .start,\n                      children: [\n                        Text(\n                          'Security emails',\n                          style: theme.typography.base.copyWith(\n                            fontWeight: .w500,\n                            color: theme.colors.foreground,\n                            height: 1.5,\n                          ),\n                        ),\n                        Text(\n                          'Receive emails about your account security.',\n                          style: theme.typography.sm.copyWith(\n                            color: theme.colors.mutedForeground,\n                          ),\n                        ),\n                      ],\n                    ),\n                  ),\n                  FormField(\n                    initialValue: true,\n                    onSaved: (value) {\n                      // Save values somewhere.\n                    },\n                    validator: (value) => null, // No validation required.\n                    builder: (state) => FSwitch(\n                      value: state.value ?? false,\n                      onChange: (value) => state.didChange(value),\n                    ),\n                  ),\n                ],\n              ),\n            ),\n          ),\n          const SizedBox(height: 30),\n          FButton(\n            child: const Text('Submit'),\n            onPress: () {\n              if (!_key.currentState!.validate()) {\n                // Handle errors here.\n                return;\n              }\n\n              _key.currentState!.save();\n              // Do something.\n            },\n          ),\n        ],\n      ),\n    );\n  }\n}\n"
+  "tooltips": []
 }

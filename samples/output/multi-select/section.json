@@ -1,4 +1,5 @@
 {
+  "code": "Widget build(BuildContext _) => FMultiSelect<String>.rich(\n  hint: const Text('Select a timezone'),\n  format: Text.new,\n  children: [\n    .section(\n      label: const Text('North America'),\n      items: {\n        for (final item in [\n          'Eastern Standard Time (EST)',\n          'Central Standard Time (CST)',\n          'Mountain Standard Time (MST)',\n          'Pacific Standard Time (PST)',\n          'Alaska Standard Time (AKST)',\n          'Hawaii Standard Time (HST)',\n        ])\n          item: item,\n      },\n    ),\n    .section(\n      label: const Text('South America'),\n      items: {\n        for (final item in [\n          'Argentina Time (ART)',\n          'Bolivia Time (BOT)',\n          'Brasilia Time (BRT)',\n          'Chile Standard Time (CLT)',\n        ])\n          item: item,\n      },\n    ),\n    .section(\n      label: const Text('Europe & Africa'),\n      items: {\n        for (final item in [\n          'Greenwich Mean Time (GMT)',\n          'Central European Time (CET)',\n          'Eastern European Time (EET)',\n          'Western European Summer Time (WEST)',\n          'Central Africa Time (CAT)',\n          'Eastern Africa Time (EAT)',\n        ])\n          item: item,\n      },\n    ),\n    .section(\n      label: const Text('Asia'),\n      items: {\n        for (final item in [\n          'Moscow Time (MSK)',\n          'India Standard Time (IST)',\n          'China Standard Time (CST)',\n          'Japan Standard Time (JST)',\n          'Korea Standard Time (KST)',\n          'Indonesia Standard Time (IST)',\n        ])\n          item: item,\n      },\n    ),\n    .section(\n      label: const Text('Australia & Pacific'),\n      items: {\n        for (final item in [\n          'Australian Western Standard Time (AWST)',\n          'Australian Central Standard Time (ACST)',\n          'Australian Eastern Standard Time (AEST)',\n          'New Zealand Standard Time (NZST)',\n          'Fiji Time (FJT)',\n        ])\n          item: item,\n      },\n    ),\n  ],\n);\n",
   "highlights": [],
   "links": [
     {
@@ -17,8 +18,23 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FMultiSelect/format.html"
     },
     {
+      "offset": 122,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FMultiSelect/FMultiSelect.rich.html"
+    },
+    {
       "offset": 139,
       "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/section.html"
+    },
+    {
+      "offset": 154,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/section.html"
+    },
+    {
+      "offset": 196,
+      "length": 5,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/section.html"
     },
     {
@@ -27,8 +43,28 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/section.html"
     },
     {
+      "offset": 549,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/section.html"
+    },
+    {
+      "offset": 591,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/section.html"
+    },
+    {
       "offset": 821,
       "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/section.html"
+    },
+    {
+      "offset": 836,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/section.html"
+    },
+    {
+      "offset": 880,
+      "length": 5,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/section.html"
     },
     {
@@ -37,10 +73,30 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/section.html"
     },
     {
+      "offset": 1235,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/section.html"
+    },
+    {
+      "offset": 1268,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/section.html"
+    },
+    {
       "offset": 1590,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/section.html"
+    },
+    {
+      "offset": 1605,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/section.html"
+    },
+    {
+      "offset": 1653,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/section.html"
     }
   ],
-  "source": "Widget build(BuildContext _) => FMultiSelect<String>.rich(\n  hint: const Text('Select a timezone'),\n  format: Text.new,\n  children: [\n    .section(\n      label: const Text('North America'),\n      items: {\n        for (final item in [\n          'Eastern Standard Time (EST)',\n          'Central Standard Time (CST)',\n          'Mountain Standard Time (MST)',\n          'Pacific Standard Time (PST)',\n          'Alaska Standard Time (AKST)',\n          'Hawaii Standard Time (HST)',\n        ])\n          item: item,\n      },\n    ),\n    .section(\n      label: const Text('South America'),\n      items: {\n        for (final item in [\n          'Argentina Time (ART)',\n          'Bolivia Time (BOT)',\n          'Brasilia Time (BRT)',\n          'Chile Standard Time (CLT)',\n        ])\n          item: item,\n      },\n    ),\n    .section(\n      label: const Text('Europe & Africa'),\n      items: {\n        for (final item in [\n          'Greenwich Mean Time (GMT)',\n          'Central European Time (CET)',\n          'Eastern European Time (EET)',\n          'Western European Summer Time (WEST)',\n          'Central Africa Time (CAT)',\n          'Eastern Africa Time (EAT)',\n        ])\n          item: item,\n      },\n    ),\n    .section(\n      label: const Text('Asia'),\n      items: {\n        for (final item in [\n          'Moscow Time (MSK)',\n          'India Standard Time (IST)',\n          'China Standard Time (CST)',\n          'Japan Standard Time (JST)',\n          'Korea Standard Time (KST)',\n          'Indonesia Standard Time (IST)',\n        ])\n          item: item,\n      },\n    ),\n    .section(\n      label: const Text('Australia & Pacific'),\n      items: {\n        for (final item in [\n          'Australian Western Standard Time (AWST)',\n          'Australian Central Standard Time (ACST)',\n          'Australian Eastern Standard Time (AEST)',\n          'New Zealand Standard Time (NZST)',\n          'Fiji Time (FJT)',\n        ])\n          item: item,\n      },\n    ),\n  ],\n);\n"
+  "tooltips": []
 }

@@ -1,4 +1,5 @@
 {
+  "code": "Widget build(BuildContext _) => FMultiSelect<String>.rich(\n  hint: const Text('Type'),\n  format: Text.new,\n  children: [\n    .item(\n      prefix: const Icon(FIcons.bug),\n      title: const Text('Bug'),\n      subtitle: const Text('An unexpected problem or behavior'),\n      value: 'Bug',\n    ),\n    .item(\n      prefix: const Icon(FIcons.filePlusCorner),\n      title: const Text('Feature'),\n      subtitle: const Text('A new feature or enhancement'),\n      value: 'Feature',\n    ),\n    .item(\n      prefix: const Icon(FIcons.messageCircleQuestionMark),\n      title: const Text('Question'),\n      subtitle: const Text('A question or clarification'),\n      value: 'Question',\n    ),\n  ],\n);\n",
   "highlights": [],
   "links": [
     {
@@ -17,8 +18,38 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FMultiSelect/format.html"
     },
     {
+      "offset": 109,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FMultiSelect/FMultiSelect.rich.html"
+    },
+    {
       "offset": 126,
       "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/item.html"
+    },
+    {
+      "offset": 138,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/item.html"
+    },
+    {
+      "offset": 157,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui_assets/latest/forui_assets/FIcons/bug-constant.html"
+    },
+    {
+      "offset": 176,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/item.html"
+    },
+    {
+      "offset": 208,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/item.html"
+    },
+    {
+      "offset": 273,
+      "length": 5,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/item.html"
     },
     {
@@ -27,10 +58,60 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/item.html"
     },
     {
+      "offset": 311,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/item.html"
+    },
+    {
+      "offset": 330,
+      "length": 21,
+      "url": "https://pub.dev/documentation/forui_assets/latest/forui_assets/FIcons/filePlusCorner-constant.html"
+    },
+    {
+      "offset": 360,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/item.html"
+    },
+    {
+      "offset": 396,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/item.html"
+    },
+    {
+      "offset": 456,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/item.html"
+    },
+    {
       "offset": 486,
       "length": 4,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/item.html"
+    },
+    {
+      "offset": 498,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/item.html"
+    },
+    {
+      "offset": 517,
+      "length": 32,
+      "url": "https://pub.dev/documentation/forui_assets/latest/forui_assets/FIcons/messageCircleQuestionMark-constant.html"
+    },
+    {
+      "offset": 558,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/item.html"
+    },
+    {
+      "offset": 595,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/item.html"
+    },
+    {
+      "offset": 654,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/item.html"
     }
   ],
-  "source": "Widget build(BuildContext _) => FMultiSelect<String>.rich(\n  hint: const Text('Type'),\n  format: Text.new,\n  children: [\n    .item(\n      prefix: const Icon(FIcons.bug),\n      title: const Text('Bug'),\n      subtitle: const Text('An unexpected problem or behavior'),\n      value: 'Bug',\n    ),\n    .item(\n      prefix: const Icon(FIcons.filePlusCorner),\n      title: const Text('Feature'),\n      subtitle: const Text('A new feature or enhancement'),\n      value: 'Feature',\n    ),\n    .item(\n      prefix: const Icon(FIcons.messageCircleQuestionMark),\n      title: const Text('Question'),\n      subtitle: const Text('A question or clarification'),\n      value: 'Question',\n    ),\n  ],\n);\n"
+  "tooltips": []
 }

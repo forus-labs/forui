@@ -1,4 +1,5 @@
 {
+  "code": "Widget build(BuildContext _) => const Row(\n  mainAxisAlignment: .center,\n  spacing: 25,\n  children: [\n    FCircularProgress(),\n    FCircularProgress.loader(),\n    FCircularProgress.pinwheel(),\n  ],\n);\n",
   "highlights": [],
   "links": [
     {
@@ -17,5 +18,5 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.progress/FCircularProgress/FCircularProgress.pinwheel.html"
     }
   ],
-  "source": "Widget build(BuildContext _) => const Row(\n  mainAxisAlignment: .center,\n  spacing: 25,\n  children: [\n    FCircularProgress(),\n    FCircularProgress.loader(),\n    FCircularProgress.pinwheel(),\n  ],\n);\n"
+  "tooltips": []
 }

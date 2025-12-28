@@ -1,4 +1,5 @@
 {
+  "code": "Widget build(BuildContext context) =>\n    FSelect<({String firstName, String lastName})>.rich(\n      hint: 'Select a user',\n      format: (user) => '${user.firstName} ${user.lastName}',\n      children: [\n        for (final user in users)\n          .item(title: Text(user.firstName), value: user),\n      ],\n    );\n",
   "highlights": [],
   "links": [
     {
@@ -17,10 +18,25 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelect/format.html"
     },
     {
+      "offset": 192,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelect/FSelect.rich.html"
+    },
+    {
       "offset": 249,
       "length": 4,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/item.html"
+    },
+    {
+      "offset": 254,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/item.html"
+    },
+    {
+      "offset": 283,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/item.html"
     }
   ],
-  "source": "Widget build(BuildContext context) =>\n    FSelect<({String firstName, String lastName})>.rich(\n      hint: 'Select a user',\n      format: (user) => '${user.firstName} ${user.lastName}',\n      children: [\n        for (final user in users)\n          .item(title: Text(user.firstName), value: user),\n      ],\n    );\n"
+  "tooltips": []
 }

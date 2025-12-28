@@ -1,36 +1,37 @@
 {
+  "code": "class SwitchExample extends StatefulWidget {\n  @override\n  State<SwitchExample> createState() => _SwitchExampleState();\n}\n\nclass _SwitchExampleState extends State<SwitchExample> {\n  bool _state = false;\n\n  @override\n  Widget build(BuildContext _) => FSwitch(\n    enabled: widget.enabled,\n    label: const Text('Airplane Mode'),\n    semanticsLabel: 'Airplane Mode',\n    value: _state,\n    onChange: (value) => setState(() => _state = value),\n  );\n}\n",
   "highlights": [],
   "links": [
     {
       "offset": 250,
       "length": 7,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.switch/FSwitch/FSwitch.html"
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.switch_/FSwitch/FSwitch.html"
     },
     {
       "offset": 263,
       "length": 7,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.switch/FSwitch/enabled.html"
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.switch_/FSwitch/enabled.html"
     },
     {
       "offset": 292,
       "length": 5,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.switch/FSwitch/label.html"
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.switch_/FSwitch/label.html"
     },
     {
       "offset": 332,
       "length": 14,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.switch/FSwitch/semanticsLabel.html"
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.switch_/FSwitch/semanticsLabel.html"
     },
     {
       "offset": 369,
       "length": 5,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.switch/FSwitch/value.html"
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.switch_/FSwitch/value.html"
     },
     {
       "offset": 388,
       "length": 8,
-      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.switch/FSwitch/onChange.html"
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.switch_/FSwitch/onChange.html"
     }
   ],
-  "source": "class SwitchExample extends StatefulWidget {\n  @override\n  State<SwitchExample> createState() => _SwitchExampleState();\n}\n\nclass _SwitchExampleState extends State<SwitchExample> {\n  bool _state = false;\n\n  @override\n  Widget build(BuildContext _) => FSwitch(\n    enabled: widget.enabled,\n    label: const Text('Airplane Mode'),\n    semanticsLabel: 'Airplane Mode',\n    value: _state,\n    onChange: (value) => setState(() => _state = value),\n  );\n}\n"
+  "tooltips": []
 }

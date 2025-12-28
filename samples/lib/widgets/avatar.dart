@@ -29,12 +29,12 @@ class AvatarRawPage extends Sample {
   AvatarRawPage({@queryParam super.theme});
 
   @override
-  Widget sample(BuildContext _) => Row(
+  Widget sample(BuildContext context) => Row(
     mainAxisAlignment: .center,
     spacing: 10,
     children: [
       FAvatar.raw(),
-      FAvatar.raw(child: Icon(FIcons.baby, color: theme.colors.mutedForeground)),
+      FAvatar.raw(child: Icon(FIcons.baby, color: context.theme.colors.mutedForeground)),
       FAvatar.raw(child: const Text('MN')),
     ],
   );

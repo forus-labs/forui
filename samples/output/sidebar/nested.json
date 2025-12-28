@@ -1,4 +1,5 @@
 {
+  "code": "Widget build(BuildContext _) => FSidebar(\n  style: (s) => s.copyWith(\n    constraints: s.constraints.copyWith(minWidth: 300, maxWidth: 300),\n  ),\n  children: [\n    FSidebarGroup(\n      children: [\n        FSidebarItem(\n          icon: const Icon(FIcons.userRound),\n          label: const Text('Account'),\n          initiallyExpanded: true,\n          children: [\n            FSidebarItem(\n              label: const Text('Profile'),\n              children: [\n                FSidebarItem(\n                  label: const Text('Personal Info'),\n                  onPress: () {},\n                ),\n                FSidebarItem(label: const Text('Preferences'), onPress: () {}),\n              ],\n            ),\n            FSidebarItem(\n              label: const Text('Security'),\n              initiallyExpanded: true,\n              children: [\n                FSidebarItem(\n                  label: const Text('Password'),\n                  initiallyExpanded: true,\n                  children: [\n                    FSidebarItem(\n                      label: const Text('Change Password'),\n                      onPress: () {},\n                    ),\n                    FSidebarItem(\n                      label: const Text('Password History'),\n                      onPress: () {},\n                    ),\n                  ],\n                ),\n                FSidebarItem(\n                  label: const Text('Two-Factor Authentication'),\n                  onPress: () {},\n                ),\n                FSidebarItem(\n                  label: const Text('Device History'),\n                  onPress: () {},\n                ),\n              ],\n            ),\n            FSidebarItem(label: const Text('Notifications'), onPress: () {}),\n          ],\n        ),\n        FSidebarItem(\n          icon: const Icon(FIcons.palette),\n          label: const Text('Appearance'),\n          onPress: () {},\n        ),\n        FSidebarItem(\n          icon: const Icon(FIcons.settings),\n          label: const Text('System'),\n          onPress: () {},\n        ),\n      ],\n    ),\n  ],\n);\n",
   "highlights": [],
   "links": [
     {
@@ -10,6 +11,26 @@
       "offset": 44,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sidebar/FSidebar/style.html"
+    },
+    {
+      "offset": 60,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sidebar/$FSidebarStyleTransformations/copyWith.html"
+    },
+    {
+      "offset": 74,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sidebar/$FSidebarStyleTransformations/copyWith.html"
+    },
+    {
+      "offset": 89,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sidebar/FSidebarStyle/constraints.html"
+    },
+    {
+      "offset": 148,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sidebar/FSidebar/FSidebar.html"
     },
     {
       "offset": 164,
@@ -30,6 +51,11 @@
       "offset": 229,
       "length": 4,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sidebar/FSidebarItem/icon.html"
+    },
+    {
+      "offset": 246,
+      "length": 16,
+      "url": "https://pub.dev/documentation/forui_assets/latest/forui_assets/FIcons/userRound-constant.html"
     },
     {
       "offset": 275,
@@ -217,6 +243,11 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sidebar/FSidebarItem/icon.html"
     },
     {
+      "offset": 1816,
+      "length": 14,
+      "url": "https://pub.dev/documentation/forui_assets/latest/forui_assets/FIcons/palette-constant.html"
+    },
+    {
       "offset": 1843,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sidebar/FSidebarItem/label.html"
@@ -237,6 +268,11 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sidebar/FSidebarItem/icon.html"
     },
     {
+      "offset": 1962,
+      "length": 15,
+      "url": "https://pub.dev/documentation/forui_assets/latest/forui_assets/FIcons/settings-constant.html"
+    },
+    {
       "offset": 1990,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sidebar/FSidebarItem/label.html"
@@ -247,5 +283,5 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.sidebar/FSidebarItem/onPress.html"
     }
   ],
-  "source": "Widget build(BuildContext _) => FSidebar(\n  style: (s) => s.copyWith(\n    constraints: s.constraints.copyWith(minWidth: 300, maxWidth: 300),\n  ),\n  children: [\n    FSidebarGroup(\n      children: [\n        FSidebarItem(\n          icon: const Icon(FIcons.userRound),\n          label: const Text('Account'),\n          initiallyExpanded: true,\n          children: [\n            FSidebarItem(\n              label: const Text('Profile'),\n              children: [\n                FSidebarItem(\n                  label: const Text('Personal Info'),\n                  onPress: () {},\n                ),\n                FSidebarItem(label: const Text('Preferences'), onPress: () {}),\n              ],\n            ),\n            FSidebarItem(\n              label: const Text('Security'),\n              initiallyExpanded: true,\n              children: [\n                FSidebarItem(\n                  label: const Text('Password'),\n                  initiallyExpanded: true,\n                  children: [\n                    FSidebarItem(\n                      label: const Text('Change Password'),\n                      onPress: () {},\n                    ),\n                    FSidebarItem(\n                      label: const Text('Password History'),\n                      onPress: () {},\n                    ),\n                  ],\n                ),\n                FSidebarItem(\n                  label: const Text('Two-Factor Authentication'),\n                  onPress: () {},\n                ),\n                FSidebarItem(\n                  label: const Text('Device History'),\n                  onPress: () {},\n                ),\n              ],\n            ),\n            FSidebarItem(label: const Text('Notifications'), onPress: () {}),\n          ],\n        ),\n        FSidebarItem(\n          icon: const Icon(FIcons.palette),\n          label: const Text('Appearance'),\n          onPress: () {},\n        ),\n        FSidebarItem(\n          icon: const Icon(FIcons.settings),\n          label: const Text('System'),\n          onPress: () {},\n        ),\n      ],\n    ),\n  ],\n);\n"
+  "tooltips": []
 }

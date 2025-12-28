@@ -1,4 +1,5 @@
 {
+  "code": "Widget build(BuildContext context) => FSelect<String>.rich(\n  hint: 'Select a fruit',\n  format: (s) => s,\n  clearable: true,\n  children: [\n    for (final fruit in fruits) .item(title: Text(fruit), value: fruit),\n  ],\n);\n",
   "highlights": [],
   "links": [
     {
@@ -22,10 +23,25 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelect/clearable.html"
     },
     {
+      "offset": 127,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelect/FSelect.rich.html"
+    },
+    {
       "offset": 172,
       "length": 4,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/item.html"
+    },
+    {
+      "offset": 177,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/item.html"
+    },
+    {
+      "offset": 197,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.select/FSelectItemMixin/item.html"
     }
   ],
-  "source": "Widget build(BuildContext context) => FSelect<String>.rich(\n  hint: 'Select a fruit',\n  format: (s) => s,\n  clearable: true,\n  children: [\n    for (final fruit in fruits) .item(title: Text(fruit), value: fruit),\n  ],\n);\n"
+  "tooltips": []
 }

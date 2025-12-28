@@ -1,4 +1,5 @@
 {
+  "code": "class CheckboxExample extends StatefulWidget {\n  @override\n  State<CheckboxExample> createState() => _CheckboxExampleState();\n}\n\nclass _CheckboxExampleState extends State<CheckboxExample> {\n  late bool _state = widget.initialValue;\n\n  @override\n  Widget build(BuildContext _) => FCheckbox(\n    label: const Text('Accept terms and conditions'),\n    description: const Text('You agree to our terms and conditions.'),\n    error: widget.error == null ? null : Text(widget.error!),\n    semanticsLabel: 'Accept terms and conditions',\n    value: _state,\n    onChange: (value) => setState(() => _state = value),\n    enabled: widget.enabled,\n  );\n}\n",
   "highlights": [],
   "links": [
     {
@@ -42,5 +43,5 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.checkbox/FCheckbox/enabled.html"
     }
   ],
-  "source": "class CheckboxExample extends StatefulWidget {\n  @override\n  State<CheckboxExample> createState() => _CheckboxExampleState();\n}\n\nclass _CheckboxExampleState extends State<CheckboxExample> {\n  late bool _state = widget.initialValue;\n\n  @override\n  Widget build(BuildContext _) => FCheckbox(\n    label: const Text('Accept terms and conditions'),\n    description: const Text('You agree to our terms and conditions.'),\n    error: widget.error == null ? null : Text(widget.error!),\n    semanticsLabel: 'Accept terms and conditions',\n    value: _state,\n    onChange: (value) => setState(() => _state = value),\n    enabled: widget.enabled,\n  );\n}\n"
+  "tooltips": []
 }

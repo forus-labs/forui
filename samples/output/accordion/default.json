@@ -1,4 +1,5 @@
 {
+  "code": "Widget build(BuildContext _) => FAccordion(\n  control: .managed(max: max),\n  children: const [\n    FAccordionItem(\n      title: Text('Production Information'),\n      child: Text('''\nOur flagship product combines cutting-edge technology with sleek design. Built with premium materials, it offers unparalleled performance and reliability.\n\nKey features include advanced processing capabilities, and an intuitive user interface designed for both beginners and experts.\n            '''),\n    ),\n    FAccordionItem(\n      initiallyExpanded: true,\n      title: Text('Shipping Details'),\n      child: Text('''\nWe offer worldwide shipping through trusted courier partners. Standard delivery takes 3-5 business days, while express shipping ensures delivery within 1-2 business days.\n\nAll orders are carefully packaged and fully insured. Track your shipment in real-time through our dedicated tracking portal.\n            '''),\n    ),\n    FAccordionItem(\n      title: Text('Return Policy'),\n      child: Text('''\nWe stand behind our products with a comprehensive 30-day return policy. If you're not completely satisfied, simply return the item in its original condition.\n\nOur hassle-free return process includes free return shipping and full refunds processed within 48 hours of receiving the returned item.\n            '''),\n    ),\n  ],\n);\n",
   "highlights": [],
   "links": [
     {
@@ -10,6 +11,16 @@
       "offset": 46,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.accordion/FAccordion/control.html"
+    },
+    {
+      "offset": 56,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.accordion/FAccordionControl/FAccordionControl.managed.html"
+    },
+    {
+      "offset": 64,
+      "length": 3,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.accordion/FAccordionControl/FAccordionControl.managed.html"
     },
     {
       "offset": 77,
@@ -67,5 +78,5 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.accordion/FAccordionItem/child.html"
     }
   ],
-  "source": "Widget build(BuildContext _) => FAccordion(\n  control: .managed(max: max),\n  children: const [\n    FAccordionItem(\n      title: Text('Production Information'),\n      child: Text('''\nOur flagship product combines cutting-edge technology with sleek design. Built with premium materials, it offers unparalleled performance and reliability.\n\nKey features include advanced processing capabilities, and an intuitive user interface designed for both beginners and experts.\n            '''),\n    ),\n    FAccordionItem(\n      initiallyExpanded: true,\n      title: Text('Shipping Details'),\n      child: Text('''\nWe offer worldwide shipping through trusted courier partners. Standard delivery takes 3-5 business days, while express shipping ensures delivery within 1-2 business days.\n\nAll orders are carefully packaged and fully insured. Track your shipment in real-time through our dedicated tracking portal.\n            '''),\n    ),\n    FAccordionItem(\n      title: Text('Return Policy'),\n      child: Text('''\nWe stand behind our products with a comprehensive 30-day return policy. If you're not completely satisfied, simply return the item in its original condition.\n\nOur hassle-free return process includes free return shipping and full refunds processed within 48 hours of receiving the returned item.\n            '''),\n    ),\n  ],\n);\n"
+  "tooltips": []
 }

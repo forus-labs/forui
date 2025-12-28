@@ -1,4 +1,5 @@
 {
+  "code": "Widget build(BuildContext _) => FAlert(\n  title: const Text('Heads Up!'),\n  subtitle: const Text('You can add components to your app using the cli.'),\n  style: style,\n);\n",
   "highlights": [],
   "links": [
     {
@@ -22,5 +23,5 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.alert/FAlert/style.html"
     }
   ],
-  "source": "Widget build(BuildContext _) => FAlert(\n  title: const Text('Heads Up!'),\n  subtitle: const Text('You can add components to your app using the cli.'),\n  style: style,\n);\n"
+  "tooltips": []
 }

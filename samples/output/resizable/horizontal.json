@@ -1,6 +1,22 @@
 {
+  "code": "Widget build(BuildContext context) => DecoratedBox(\n  decoration: BoxDecoration(\n    border: .all(color: context.theme.colors.border),\n    borderRadius: .circular(8),\n  ),\n  child: FResizable(\n    axis: .horizontal,\n    divider: divider,\n    crossAxisExtent: 300,\n    children: [\n      .region(\n        initialExtent: 100,\n        minExtent: 100,\n        builder: (context, data, _) =>\n            Align(child: Text('Sidebar', style: context.theme.typography.sm)),\n      ),\n      .region(\n        initialExtent: 300,\n        minExtent: 100,\n        builder: (context, data, _) =>\n            Align(child: Text('Content', style: context.theme.typography.sm)),\n      ),\n    ],\n  ),\n);\n",
   "highlights": [],
   "links": [
+    {
+      "offset": 126,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FColors/border.html"
+    },
+    {
+      "offset": 119,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FThemeData/colors.html"
+    },
+    {
+      "offset": 113,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FThemeBuildContext/theme.html"
+    },
     {
       "offset": 181,
       "length": 10,
@@ -27,6 +43,11 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.resizable/FResizable/children.html"
     },
     {
+      "offset": 287,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.resizable/FResizableRegion/FResizableRegion.region.html"
+    },
+    {
       "offset": 303,
       "length": 13,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.resizable/FResizableRegion/initialExtent.html"
@@ -42,6 +63,26 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.resizable/FResizableRegion/builder.html"
     },
     {
+      "offset": 459,
+      "length": 2,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FTypography/sm.html"
+    },
+    {
+      "offset": 448,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FThemeData/typography.html"
+    },
+    {
+      "offset": 442,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FThemeBuildContext/theme.html"
+    },
+    {
+      "offset": 481,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.resizable/FResizableRegion/FResizableRegion.region.html"
+    },
+    {
       "offset": 497,
       "length": 13,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.resizable/FResizableRegion/initialExtent.html"
@@ -55,7 +96,22 @@
       "offset": 549,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.resizable/FResizableRegion/builder.html"
+    },
+    {
+      "offset": 653,
+      "length": 2,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FTypography/sm.html"
+    },
+    {
+      "offset": 642,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FThemeData/typography.html"
+    },
+    {
+      "offset": 636,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FThemeBuildContext/theme.html"
     }
   ],
-  "source": "Widget build(BuildContext context) => DecoratedBox(\n  decoration: BoxDecoration(\n    border: .all(color: context.theme.colors.border),\n    borderRadius: .circular(8),\n  ),\n  child: FResizable(\n    axis: .horizontal,\n    divider: divider,\n    crossAxisExtent: 300,\n    children: [\n      .region(\n        initialExtent: 100,\n        minExtent: 100,\n        builder: (context, data, _) =>\n            Align(child: Text('Sidebar', style: context.theme.typography.sm)),\n      ),\n      .region(\n        initialExtent: 300,\n        minExtent: 100,\n        builder: (context, data, _) =>\n            Align(child: Text('Content', style: context.theme.typography.sm)),\n      ),\n    ],\n  ),\n);\n"
+  "tooltips": []
 }

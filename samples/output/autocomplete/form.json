@@ -1,4 +1,5 @@
 {
+  "code": "class FormAutocompleteExample extends StatefulWidget {\n  @override\n  State<FormAutocompleteExample> createState() =>\n      _FormAutocompleteExampleState();\n}\n\nclass _FormAutocompleteExampleState extends State<FormAutocompleteExample> {\n  final _key = GlobalKey<FormState>();\n\n  @override\n  Widget build(BuildContext _) => Form(\n    key: _key,\n    child: Column(\n      crossAxisAlignment: .start,\n      children: [\n        FAutocomplete(\n          label: const Text('Department'),\n          description: const Text('Type to search your dream department'),\n          hint: 'Search departments',\n          validator: (department) => department == null || department.isEmpty\n              ? 'Please select a department'\n              : null,\n          items: const [\n            'Engineering',\n            'Marketing',\n            'Sales',\n            'Human Resources',\n            'Finance',\n          ],\n        ),\n        const SizedBox(height: 25),\n        FButton(\n          child: const Text('Submit'),\n          onPress: () {\n            if (_key.currentState!.validate()) {\n              // Form is valid, do something with department.\n            }\n          },\n        ),\n      ],\n    ),\n  );\n}\n",
   "highlights": [],
   "links": [
     {
@@ -27,6 +28,11 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.autocomplete/FAutocomplete/validator.html"
     },
     {
+      "offset": 748,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.autocomplete/FAutocomplete/FAutocomplete.html"
+    },
+    {
       "offset": 958,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/FButton.html"
@@ -42,5 +48,5 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/onPress.html"
     }
   ],
-  "source": "class FormAutocompleteExample extends StatefulWidget {\n  @override\n  State<FormAutocompleteExample> createState() =>\n      _FormAutocompleteExampleState();\n}\n\nclass _FormAutocompleteExampleState extends State<FormAutocompleteExample> {\n  final _key = GlobalKey<FormState>();\n\n  @override\n  Widget build(BuildContext _) => Form(\n    key: _key,\n    child: Column(\n      crossAxisAlignment: .start,\n      children: [\n        FAutocomplete(\n          label: const Text('Department'),\n          description: const Text('Type to search your dream department'),\n          hint: 'Search departments',\n          validator: (department) => department == null || department.isEmpty\n              ? 'Please select a department'\n              : null,\n          items: const [\n            'Engineering',\n            'Marketing',\n            'Sales',\n            'Human Resources',\n            'Finance',\n          ],\n        ),\n        const SizedBox(height: 25),\n        FButton(\n          child: const Text('Submit'),\n          onPress: () {\n            if (_key.currentState!.validate()) {\n              // Form is valid, do something with department.\n            }\n          },\n        ),\n      ],\n    ),\n  );\n}\n"
+  "tooltips": []
 }

@@ -1,4 +1,5 @@
 {
+  "code": "Widget build(BuildContext _) => Column(\n  mainAxisAlignment: .center,\n  children: [\n    Padding(\n      padding: const .all(16),\n      child: FTabs(\n        children: [\n          .entry(\n            label: const Text('Account'),\n            child: FCard(\n              title: const Text('Account'),\n              subtitle: const Text(\n                'Make changes to your account here. Click save when you are done.',\n              ),\n              child: Column(\n                children: [\n                  const FTextField(label: Text('Name'), hint: 'John Renalo'),\n                  const SizedBox(height: 10),\n                  const FTextField(label: Text('Email'), hint: 'john@doe.com'),\n                  const SizedBox(height: 16),\n                  FButton(child: const Text('Save'), onPress: () {}),\n                ],\n              ),\n            ),\n          ),\n          .entry(\n            label: const Text('Password'),\n            child: FCard(\n              title: const Text('Password'),\n              subtitle: const Text(\n                'Change your password here. After saving, you will be logged out.',\n              ),\n              child: Column(\n                children: [\n                  const FTextField(label: Text('Current password')),\n                  const SizedBox(height: 10),\n                  const FTextField(label: Text('New password')),\n                  const SizedBox(height: 16),\n                  FButton(child: const Text('Save'), onPress: () {}),\n                ],\n              ),\n            ),\n          ),\n        ],\n      ),\n    ),\n  ],\n);\n",
   "highlights": [],
   "links": [
     {
@@ -10,6 +11,11 @@
       "offset": 156,
       "length": 8,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tabs/FTabs/children.html"
+    },
+    {
+      "offset": 179,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tabs/FTabEntry/FTabEntry.entry.html"
     },
     {
       "offset": 198,
@@ -24,6 +30,16 @@
     {
       "offset": 247,
       "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.card/FCard/FCard.html"
+    },
+    {
+      "offset": 268,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.card/FCard/FCard.html"
+    },
+    {
+      "offset": 312,
+      "length": 8,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.card/FCard/FCard.html"
     },
     {
@@ -77,6 +93,11 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/onPress.html"
     },
     {
+      "offset": 887,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tabs/FTabEntry/FTabEntry.entry.html"
+    },
+    {
       "offset": 906,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.tabs/FTabEntry/label.html"
@@ -89,6 +110,16 @@
     {
       "offset": 956,
       "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.card/FCard/FCard.html"
+    },
+    {
+      "offset": 977,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.card/FCard/FCard.html"
+    },
+    {
+      "offset": 1022,
+      "length": 8,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.card/FCard/FCard.html"
     },
     {
@@ -132,5 +163,5 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/onPress.html"
     }
   ],
-  "source": "Widget build(BuildContext _) => Column(\n  mainAxisAlignment: .center,\n  children: [\n    Padding(\n      padding: const .all(16),\n      child: FTabs(\n        children: [\n          .entry(\n            label: const Text('Account'),\n            child: FCard(\n              title: const Text('Account'),\n              subtitle: const Text(\n                'Make changes to your account here. Click save when you are done.',\n              ),\n              child: Column(\n                children: [\n                  const FTextField(label: Text('Name'), hint: 'John Renalo'),\n                  const SizedBox(height: 10),\n                  const FTextField(label: Text('Email'), hint: 'john@doe.com'),\n                  const SizedBox(height: 16),\n                  FButton(child: const Text('Save'), onPress: () {}),\n                ],\n              ),\n            ),\n          ),\n          .entry(\n            label: const Text('Password'),\n            child: FCard(\n              title: const Text('Password'),\n              subtitle: const Text(\n                'Change your password here. After saving, you will be logged out.',\n              ),\n              child: Column(\n                children: [\n                  const FTextField(label: Text('Current password')),\n                  const SizedBox(height: 10),\n                  const FTextField(label: Text('New password')),\n                  const SizedBox(height: 16),\n                  FButton(child: const Text('Save'), onPress: () {}),\n                ],\n              ),\n            ),\n          ),\n        ],\n      ),\n    ),\n  ],\n);\n"
+  "tooltips": []
 }

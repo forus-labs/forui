@@ -1,4 +1,5 @@
 {
+  "code": "class PaginationCustomIconExample extends StatefulWidget {\n  @override\n  State<PaginationCustomIconExample> createState() =>\n      _PaginationCustomIconExampleState();\n}\n\nclass _PaginationCustomIconExampleState\n    extends State<PaginationCustomIconExample> {\n  late final _controller = FPaginationController(pages: 10, page: 4);\n\n  @override\n  void dispose() {\n    _controller.dispose();\n    super.dispose();\n  }\n\n  @override\n  Widget build(BuildContext context) {\n    final style = context.theme.paginationStyle;\n    return FPagination(\n      control: .managed(controller: _controller),\n      next: Padding(\n        padding: style.itemPadding,\n        child: ConstrainedBox(\n          constraints: style.itemConstraints,\n          child: FButton.icon(\n            style: FButtonStyle.ghost(),\n            onPress: _controller.next,\n            child: IconTheme(\n              data: style.itemIconStyle.resolve({}),\n              child: const Icon(FIcons.bird),\n            ),\n          ),\n        ),\n      ),\n      previous: Padding(\n        padding: style.itemPadding,\n        child: ConstrainedBox(\n          constraints: style.itemConstraints,\n          child: FButton.icon(\n            style: FButtonStyle.ghost(),\n            onPress: _controller.previous,\n            child: IconTheme(\n              data: style.itemIconStyle.resolve({}),\n              child: const Icon(FIcons.anchor),\n            ),\n          ),\n        ),\n      ),\n    );\n  }\n}\n",
   "highlights": [],
   "links": [
     {
@@ -12,6 +13,21 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.pagination/FPaginationController/pages.html"
     },
     {
+      "offset": 320,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.pagination/FPaginationController/FPaginationController.html"
+    },
+    {
+      "offset": 498,
+      "length": 15,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FThemeData/paginationStyle.html"
+    },
+    {
+      "offset": 492,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FThemeBuildContext/theme.html"
+    },
+    {
       "offset": 526,
       "length": 11,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.pagination/FPagination/FPagination.html"
@@ -22,9 +38,29 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.pagination/FPagination/control.html"
     },
     {
+      "offset": 555,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.pagination/FPaginationControl/FPaginationControl.managed.html"
+    },
+    {
+      "offset": 563,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.pagination/FPaginationControl/FPaginationControl.managed.html"
+    },
+    {
       "offset": 595,
       "length": 4,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.pagination/FPagination/next.html"
+    },
+    {
+      "offset": 633,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.pagination/FPaginationStyle/itemPadding.html"
+    },
+    {
+      "offset": 706,
+      "length": 15,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.pagination/FPaginationStyle/itemConstraints.html"
     },
     {
       "offset": 740,
@@ -37,9 +73,19 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/style.html"
     },
     {
+      "offset": 773,
+      "length": 18,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButtonStyle/ghost.html"
+    },
+    {
       "offset": 807,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/onPress.html"
+    },
+    {
+      "offset": 828,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.pagination/FPaginationController/next.html"
     },
     {
       "offset": 846,
@@ -47,9 +93,34 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/child.html"
     },
     {
+      "offset": 904,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FWidgetStateMap/resolve.html"
+    },
+    {
+      "offset": 890,
+      "length": 13,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.pagination/FPaginationStyle/itemIconStyle.html"
+    },
+    {
+      "offset": 949,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui_assets/latest/forui_assets/FIcons/bird-constant.html"
+    },
+    {
       "offset": 1017,
       "length": 8,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.pagination/FPagination/previous.html"
+    },
+    {
+      "offset": 1059,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.pagination/FPaginationStyle/itemPadding.html"
+    },
+    {
+      "offset": 1132,
+      "length": 15,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.pagination/FPaginationStyle/itemConstraints.html"
     },
     {
       "offset": 1166,
@@ -62,15 +133,40 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/style.html"
     },
     {
+      "offset": 1199,
+      "length": 18,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButtonStyle/ghost.html"
+    },
+    {
       "offset": 1233,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/onPress.html"
     },
     {
+      "offset": 1254,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.pagination/FPaginationController/previous.html"
+    },
+    {
       "offset": 1276,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.button/FButton/child.html"
+    },
+    {
+      "offset": 1334,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.theme/FWidgetStateMap/resolve.html"
+    },
+    {
+      "offset": 1320,
+      "length": 13,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.pagination/FPaginationStyle/itemIconStyle.html"
+    },
+    {
+      "offset": 1379,
+      "length": 13,
+      "url": "https://pub.dev/documentation/forui_assets/latest/forui_assets/FIcons/anchor-constant.html"
     }
   ],
-  "source": "class PaginationCustomIconExample extends StatefulWidget {\n  @override\n  State<PaginationCustomIconExample> createState() =>\n      _PaginationCustomIconExampleState();\n}\n\nclass _PaginationCustomIconExampleState\n    extends State<PaginationCustomIconExample> {\n  late final _controller = FPaginationController(pages: 10, page: 4);\n\n  @override\n  void dispose() {\n    _controller.dispose();\n    super.dispose();\n  }\n\n  @override\n  Widget build(BuildContext context) {\n    final style = context.theme.paginationStyle;\n    return FPagination(\n      control: .managed(controller: _controller),\n      next: Padding(\n        padding: style.itemPadding,\n        child: ConstrainedBox(\n          constraints: style.itemConstraints,\n          child: FButton.icon(\n            style: FButtonStyle.ghost(),\n            onPress: _controller.next,\n            child: IconTheme(\n              data: style.itemIconStyle.resolve({}),\n              child: const Icon(FIcons.bird),\n            ),\n          ),\n        ),\n      ),\n      previous: Padding(\n        padding: style.itemPadding,\n        child: ConstrainedBox(\n          constraints: style.itemConstraints,\n          child: FButton.icon(\n            style: FButtonStyle.ghost(),\n            onPress: _controller.previous,\n            child: IconTheme(\n              data: style.itemIconStyle.resolve({}),\n              child: const Icon(FIcons.anchor),\n            ),\n          ),\n        ),\n      ),\n    );\n  }\n}\n"
+  "tooltips": []
 }

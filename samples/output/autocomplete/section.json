@@ -1,4 +1,5 @@
 {
+  "code": "Widget build(BuildContext _) => FAutocomplete.builder(\n  hint: 'Type to search timezones',\n  filter: (query) => timezones.values\n      .expand((list) => list)\n      .where(\n        (timezone) => timezone.toLowerCase().contains(query.toLowerCase()),\n      ),\n  contentBuilder: (context, query, suggestions) => [\n    for (final MapEntry(key: label, value: zones) in timezones.entries)\n      if (zones.where(suggestions.contains).toList() case final zones\n          when zones.isNotEmpty)\n        .section(label: Text(label), items: zones),\n  ],\n);\n",
   "highlights": [],
   "links": [
     {
@@ -25,7 +26,17 @@
       "offset": 495,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.autocomplete/FAutocompleteItemMixin/section.html"
+    },
+    {
+      "offset": 503,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.autocomplete/FAutocompleteItemMixin/section.html"
+    },
+    {
+      "offset": 523,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.autocomplete/FAutocompleteItemMixin/section.html"
     }
   ],
-  "source": "Widget build(BuildContext _) => FAutocomplete.builder(\n  hint: 'Type to search timezones',\n  filter: (query) => timezones.values\n      .expand((list) => list)\n      .where(\n        (timezone) => timezone.toLowerCase().contains(query.toLowerCase()),\n      ),\n  contentBuilder: (context, query, suggestions) => [\n    for (final MapEntry(key: label, value: zones) in timezones.entries)\n      if (zones.where(suggestions.contains).toList() case final zones\n          when zones.isNotEmpty)\n        .section(label: Text(label), items: zones),\n  ],\n);\n"
+  "tooltips": []
 }

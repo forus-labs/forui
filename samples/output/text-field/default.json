@@ -1,4 +1,5 @@
 {
+  "code": "Widget build(BuildContext _) => FTextField(\n  enabled: enabled,\n  label: const Text('Username'),\n  hint: 'JaneDoe',\n  description: const Text('Please enter your username.'),\n);\n",
   "highlights": [],
   "links": [
     {
@@ -27,5 +28,5 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.text_field/FTextField/description.html"
     }
   ],
-  "source": "Widget build(BuildContext _) => FTextField(\n  enabled: enabled,\n  label: const Text('Username'),\n  hint: 'JaneDoe',\n  description: const Text('Please enter your username.'),\n);\n"
+  "tooltips": []
 }

@@ -1,4 +1,5 @@
 {
+  "code": "Widget build(BuildContext context) => FSlider(\n  control: .managedContinuous(\n    initial: FSliderValue(max: 0.6, constraints: extent),\n    interaction: interaction,\n  ),\n  label: label == null ? null : Text(label!),\n  description: description == null ? null : Text(description!),\n  forceErrorText: error,\n  enabled: enabled,\n);\n",
   "highlights": [],
   "links": [
     {
@@ -10,6 +11,16 @@
       "offset": 49,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSlider/control.html"
+    },
+    {
+      "offset": 59,
+      "length": 17,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSliderControl/FSliderControl.managedContinuous.html"
+    },
+    {
+      "offset": 82,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSliderControl/FSliderControl.managedContinuous.html"
     },
     {
       "offset": 91,
@@ -25,6 +36,11 @@
       "offset": 114,
       "length": 11,
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSliderValue/constraints.html"
+    },
+    {
+      "offset": 140,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSliderControl/FSliderControl.managedContinuous.html"
     },
     {
       "offset": 173,
@@ -47,5 +63,5 @@
       "url": "https://pub.dev/documentation/forui/latest/forui.widgets.slider/FSlider/enabled.html"
     }
   ],
-  "source": "Widget build(BuildContext context) => FSlider(\n  control: .managedContinuous(\n    initial: FSliderValue(max: 0.6, constraints: extent),\n    interaction: interaction,\n  ),\n  label: label == null ? null : Text(label!),\n  description: description == null ? null : Text(description!),\n  forceErrorText: error,\n  enabled: enabled,\n);\n"
+  "tooltips": []
 }

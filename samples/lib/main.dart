@@ -10,9 +10,8 @@ import 'package:forui_samples/sample.dart';
 class Options {
   final List<Type> include;
   final Type? inline;
-  final bool full;
 
-  const Options({this.include = const [], this.inline, this.full = false});
+  const Options({this.include = const [], this.inline});
 }
 
 void main() {
