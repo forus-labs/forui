@@ -21,6 +21,7 @@ class Snippet {
   final List<Tooltip> tooltips = [];
 
   String _code = '';
+  int _importsLines = 0;
   int _importsLength = 0;
 
   /// Highlight the snippet based on special comments, and remove those comments.
@@ -48,7 +49,7 @@ class Snippet {
 
       if (trimmed == '// {@endhighlight}') {
         assert(start != null, 'Found {@endhighlight} without matching {@highlight} in $code.');
-        highlights.add((start!, lineNumber));
+        highlights.add((start! - _importsLines, lineNumber - _importsLines));
         start = null;
         continue;
       }
@@ -56,22 +57,24 @@ class Snippet {
       lines.add(line);
       lineNumber++;
     }
+
+    _code = lines.join('\n');
   }
 
   String get code => _code;
 
   set code(String value) {
+    final importLines = value.split('\n').takeWhile((l) => l.startsWith('import ') || l.trim().isEmpty).toList();
+    _importsLines = importLines.length;
+    _importsLength = importLines.fold(0, (sum, line) => sum + line.length + 1);
     _code = value;
-    _importsLength = _code
-        .split('\n')
-        .takeWhile((l) => l.startsWith('import ') || l.trim().isEmpty)
-        .fold(0, (sum, line) => sum + line.length + 1);
   }
 
   int get importsLength => _importsLength;
 
   /// Remove import statements from the snippet, resetting the base offset.
   void removeImports() {
+    _importsLines = 0;
     _importsLength = 0;
     _code = _code.split('\n').skipWhile((l) => l.startsWith('import ') || l.trim().isEmpty).join('\n');
   }

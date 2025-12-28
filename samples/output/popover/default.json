@@ -1,9 +1,9 @@
 {
-  "code": "Widget build(BuildContext _) => FPopover(\n  popoverAnchor: axis == .horizontal ? .bottomLeft : .topCenter,\n  childAnchor: axis == .horizontal ? .bottomRight : .bottomCenter,\n  hideRegion: hideRegion,\n  overflow: overflow,\n  popoverBuilder: (context, _) => Padding(\n    padding: const .only(left: 20, top: 14, right: 20, bottom: 10),\n    child: SizedBox(\n      width: 288,\n      child: Column(\n        mainAxisSize: .min,\n        crossAxisAlignment: .start,\n        children: [\n          Text('Dimensions', style: context.theme.typography.base),\n          const SizedBox(height: 7),\n          Text(\n            'Set the dimensions for the layer.',\n            style: context.theme.typography.sm.copyWith(\n              color: context.theme.colors.mutedForeground,\n              fontWeight: .w300,\n            ),\n          ),\n          const SizedBox(height: 15),\n          for (final (index, (label, value)) in [\n            ('Width', '100%'),\n            ('Max. Width', '300px'),\n            ('Height', '25px'),\n            ('Max. Height', 'none'),\n          ].indexed) ...[\n            Row(\n              children: [\n                // {@highlight}\n                Expanded(\n                  child: Text(label, style: context.theme.typography.sm),\n                ),\n                Expanded(\n                  flex: 2,\n                  child: FTextField(\n                    control: .managed(initial: TextEditingValue(text: value)),\n                    autofocus: index == 0,\n                  ),\n                ),\n                // {@endhighlight}\n              ],\n            ),\n            const SizedBox(height: 7),\n          ],\n        ],\n      ),\n    ),\n  ),\n  builder: (_, controller, _) => FButton(\n    style: FButtonStyle.outline(),\n    mainAxisSize: .min,\n    onPress: controller.toggle,\n    child: const Text('Open popover'),\n  ),\n);\n",
+  "code": "Widget build(BuildContext _) => FPopover(\n  popoverAnchor: axis == .horizontal ? .bottomLeft : .topCenter,\n  childAnchor: axis == .horizontal ? .bottomRight : .bottomCenter,\n  hideRegion: hideRegion,\n  overflow: overflow,\n  popoverBuilder: (context, _) => Padding(\n    padding: const .only(left: 20, top: 14, right: 20, bottom: 10),\n    child: SizedBox(\n      width: 288,\n      child: Column(\n        mainAxisSize: .min,\n        crossAxisAlignment: .start,\n        children: [\n          Text('Dimensions', style: context.theme.typography.base),\n          const SizedBox(height: 7),\n          Text(\n            'Set the dimensions for the layer.',\n            style: context.theme.typography.sm.copyWith(\n              color: context.theme.colors.mutedForeground,\n              fontWeight: .w300,\n            ),\n          ),\n          const SizedBox(height: 15),\n          for (final (index, (label, value)) in [\n            ('Width', '100%'),\n            ('Max. Width', '300px'),\n            ('Height', '25px'),\n            ('Max. Height', 'none'),\n          ].indexed) ...[\n            Row(\n              children: [\n                Expanded(\n                  child: Text(label, style: context.theme.typography.sm),\n                ),\n                Expanded(\n                  flex: 2,\n                  child: FTextField(\n                    control: .managed(initial: TextEditingValue(text: value)),\n                    autofocus: index == 0,\n                  ),\n                ),\n              ],\n            ),\n            const SizedBox(height: 7),\n          ],\n        ],\n      ),\n    ),\n  ),\n  builder: (_, controller, _) => FButton(\n    style: FButtonStyle.outline(),\n    mainAxisSize: .min,\n    onPress: controller.toggle,\n    child: const Text('Open popover'),\n  ),\n);\n",
   "highlights": [
     {
-      "start": 38,
-      "end": 47
+      "start": 32,
+      "end": 41
     }
   ],
   "links": [
@@ -83,82 +83,82 @@
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext/theme.html"
     },
     {
-      "offset": 1245,
+      "offset": 1213,
       "length": 2,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FTypography/sm.html"
     },
     {
-      "offset": 1234,
+      "offset": 1202,
       "length": 10,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/typography.html"
     },
     {
-      "offset": 1228,
+      "offset": 1196,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext/theme.html"
     },
     {
-      "offset": 1347,
+      "offset": 1315,
       "length": 10,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
     },
     {
-      "offset": 1379,
+      "offset": 1347,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/control.html"
     },
     {
-      "offset": 1389,
+      "offset": 1357,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFieldControl/FTextFieldControl.managed.html"
     },
     {
-      "offset": 1397,
+      "offset": 1365,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFieldControl/FTextFieldControl.managed.html"
     },
     {
-      "offset": 1458,
+      "offset": 1426,
       "length": 9,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/autofocus.html"
     },
     {
-      "offset": 1674,
+      "offset": 1607,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopover/builder.html"
     },
     {
-      "offset": 1705,
+      "offset": 1638,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
     },
     {
-      "offset": 1718,
+      "offset": 1651,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/style.html"
     },
     {
-      "offset": 1725,
+      "offset": 1658,
       "length": 20,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButtonStyle/outline.html"
     },
     {
-      "offset": 1753,
+      "offset": 1686,
       "length": 12,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
     },
     {
-      "offset": 1777,
+      "offset": 1710,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/onPress.html"
     },
     {
-      "offset": 1797,
+      "offset": 1730,
       "length": 6,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverController/toggle.html"
     },
     {
-      "offset": 1809,
+      "offset": 1742,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/child.html"
     }

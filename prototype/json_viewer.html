@@ -182,10 +182,18 @@
     }
 
     .line.highlighted {
-      background: rgba(255, 213, 79, 0.15);
+      background: rgba(78, 201, 176, 0.15);
     }
 
     .line.highlighted:hover {
+      background: rgba(78, 201, 176, 0.2);
+    }
+
+    .line.selected {
+      background: rgba(255, 213, 79, 0.15);
+    }
+
+    .line.selected:hover {
       background: rgba(255, 213, 79, 0.2);
     }
 
@@ -206,6 +214,10 @@
     }
 
     .line.highlighted .line-number {
+      color: #4ec9b0;
+    }
+
+    .line.selected .line-number {
       color: #ffd54f;
     }
 
@@ -610,22 +622,22 @@
       }
     }
 
-    // Apply highlighting based on URL hash
+    // Apply selection highlighting based on URL hash
     function applyHighlightFromHash() {
       const { startLine, endLine } = parseHash();
 
-      // Clear existing highlights
-      document.querySelectorAll('.line.highlighted').forEach(el => {
-        el.classList.remove('highlighted');
+      // Clear existing selection
+      document.querySelectorAll('.line.selected').forEach(el => {
+        el.classList.remove('selected');
       });
 
       if (startLine === null) return;
 
-      // Apply new highlights
+      // Apply new selection
       for (let i = startLine; i <= endLine; i++) {
         const line = document.querySelector(`.line[data-line="${i}"]`);
         if (line) {
-          line.classList.add('highlighted');
+          line.classList.add('selected');
           if (i === startLine) {
             line.scrollIntoView({ block: 'center', behavior: 'smooth' });
           }
