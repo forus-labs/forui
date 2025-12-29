@@ -10,6 +10,64 @@ import 'package:path/path.dart' as p;
 import '../main.dart';
 import '../snippet.dart';
 
+/// Returns the URL for [element], or null if it shouldn't be linked.
+String? url(List<Package> packages, Element element) {
+  final n = element.library?.uri.pathSegments.first;
+  if (packages.firstWhereOrNull((p) => p.name == n) case Package(name: final package, :final version)) {
+    final type = switch (element) {
+      FieldElement(:final enclosingElement) => enclosingElement.name,
+      PropertyAccessorElement(:final enclosingElement) => enclosingElement.name,
+      ConstructorElement(:final enclosingElement) => enclosingElement.name,
+      MethodElement(:final enclosingElement?) => enclosingElement.name,
+      _ => element.name,
+    };
+
+    var baseUrl = '';
+    for (final Package(:library) in packages) {
+      if (_barrel(library, type!)?.name case final name?) {
+        baseUrl = 'https://pub.dev/documentation/$package/$version/${name.isEmpty ? package : name}';
+        break;
+      }
+    }
+
+    assert(baseUrl.isNotEmpty, 'Could not find barrel library for type "$type" in package "$package".');
+
+    return switch (element) {
+      TopLevelFunctionElement(:final name) => '$baseUrl/$name.html',
+      EnumElement(:final name) => '$baseUrl/$name.html',
+      MixinElement(:final name) => '$baseUrl/$name-mixin.html',
+      ClassElement(:final name) || InterfaceElement(:final name) => '$baseUrl/$name-class.html',
+      FieldElement(:final enclosingElement, :final name, :final isEnumConstant) when isEnumConstant =>
+      '$baseUrl/${enclosingElement.name}.html#$name',
+      FieldElement(:final enclosingElement, :final name, :final isConst) when isConst =>
+      '$baseUrl/${enclosingElement.name}/$name-constant.html',
+      FieldElement(:final enclosingElement, :final name) => '$baseUrl/${enclosingElement.name}/$name.html',
+      PropertyAccessorElement(:final enclosingElement, :final name) => '$baseUrl/${enclosingElement.name}/$name.html',
+      ConstructorElement(:final enclosingElement, :final name?) =>
+      '$baseUrl/${enclosingElement.name}/${enclosingElement.name}${name == 'new' ? '' : '.$name'}.html',
+      MethodElement(:final enclosingElement?, :final name) => '$baseUrl/${enclosingElement.name}/$name.html',
+      _ => null,
+    };
+  }
+
+  return null;
+}
+
+/// Returns the deepest barrel library that exports [type].
+LibraryElement? _barrel(LibraryElement library, String type) {
+  if (library.exportNamespace.get2(type) == null) {
+    return null;
+  }
+
+  for (final lib in library.exportedLibraries.where((l) => !l.uri.pathSegments.contains('src'))) {
+    if (lib.exportNamespace.get2(type) != null) {
+      return _barrel(lib, type);
+    }
+  }
+
+  return library;
+}
+
 /// Links DartDoc URLs in [Snippet]s.
 class DartDocLinker extends RecursiveAstVisitor<void> {
   static int _monotonic = 0;
@@ -198,66 +256,8 @@ class DartDocLinker extends RecursiveAstVisitor<void> {
 
   /// Adds a link for [element] at the given [offset] and [length].
   void _link(int offset, int length, Element element) {
-    if (_url(element) case final url?) {
+    if (url(_packages, element) case final url?) {
       links.add(DartDocLink(offset: offset, baseOffset: _baseOffset, length: length, url: url));
     }
-  }
-
-  /// Returns the URL for [element], or null if it shouldn't be linked.
-  String? _url(Element element) {
-    final n = element.library?.uri.pathSegments.first;
-    if (_packages.firstWhereOrNull((p) => p.name == n) case Package(name: final package, :final version)) {
-      final type = switch (element) {
-        FieldElement(:final enclosingElement) => enclosingElement.name,
-        PropertyAccessorElement(:final enclosingElement) => enclosingElement.name,
-        ConstructorElement(:final enclosingElement) => enclosingElement.name,
-        MethodElement(:final enclosingElement?) => enclosingElement.name,
-        _ => element.name,
-      };
-
-      var baseUrl = '';
-      for (final Package(:library) in _packages) {
-        if (_barrel(library, type!)?.name case final name?) {
-          baseUrl = 'https://pub.dev/documentation/$package/$version/${name.isEmpty ? package : name}';
-          break;
-        }
-      }
-
-      assert(baseUrl.isNotEmpty, 'Could not find barrel library for type "$type" in package "$package".');
-
-      return switch (element) {
-        TopLevelFunctionElement(:final name) => '$baseUrl/$name.html',
-        EnumElement(:final name) => '$baseUrl/$name.html',
-        MixinElement(:final name) => '$baseUrl/$name-mixin.html',
-        ClassElement(:final name) || InterfaceElement(:final name) => '$baseUrl/$name-class.html',
-        FieldElement(:final enclosingElement, :final name, :final isEnumConstant) when isEnumConstant =>
-          '$baseUrl/${enclosingElement.name}.html#$name',
-        FieldElement(:final enclosingElement, :final name, :final isConst) when isConst =>
-          '$baseUrl/${enclosingElement.name}/$name-constant.html',
-        FieldElement(:final enclosingElement, :final name) => '$baseUrl/${enclosingElement.name}/$name.html',
-        PropertyAccessorElement(:final enclosingElement, :final name) => '$baseUrl/${enclosingElement.name}/$name.html',
-        ConstructorElement(:final enclosingElement, :final name?) =>
-          '$baseUrl/${enclosingElement.name}/${enclosingElement.name}${name == 'new' ? '' : '.$name'}.html',
-        MethodElement(:final enclosingElement?, :final name) => '$baseUrl/${enclosingElement.name}/$name.html',
-        _ => null,
-      };
-    }
-
-    return null;
-  }
-
-  /// Returns the deepest barrel library that exports [type].
-  LibraryElement? _barrel(LibraryElement library, String type) {
-    if (library.exportNamespace.get2(type) == null) {
-      return null;
-    }
-
-    for (final lib in library.exportedLibraries.where((l) => !l.uri.pathSegments.contains('src'))) {
-      if (lib.exportNamespace.get2(type) != null) {
-        return _barrel(lib, type);
-      }
-    }
-
-    return library;
   }
 }
