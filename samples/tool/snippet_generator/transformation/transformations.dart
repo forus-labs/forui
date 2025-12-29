@@ -50,21 +50,27 @@ class Transformations {
   }
 }
 
-extension Sessions on AnalysisSession {
-  /// Merges the [declaration] with the [elements] into a single Dart code string.
-  Future<String> merge(ResolvedUnitResult result, List<Element> elements, Declaration declaration, String code) async {
-    final fragments = SplayTreeMap<int, String>()
-      ..[0] = result.unit.directives.whereType<ImportDirective>().map((d) => d.toSource()).join('\n')
-      ..[declaration.offset] = code;
+/// Merges the [declaration] with the [elements] into a single Dart code string.
+Future<String> merge(
+  AnalysisSession session,
+  ResolvedUnitResult result,
+  List<Element> elements,
+  Declaration declaration,
+  String code,
+) async {
+  final fragments = SplayTreeMap<int, String>()
+    ..[0] = result.unit.directives.whereType<ImportDirective>().map((d) => d.toSource()).join('\n')
+    ..[declaration.offset] = code;
 
-    for (final element in elements) {
-      final declaration = (await this.declaration(element))!.$2;
-      fragments[declaration.offset] = declaration.toSource();
-    }
-
-    return fragments.values.join('\n\n');
+  for (final element in elements) {
+    final declaration = (await session.declaration(element))!.$2;
+    fragments[declaration.offset] = declaration.toSource();
   }
 
+  return fragments.values.join('\n\n');
+}
+
+extension Sessions on AnalysisSession {
   Future<(ResolvedUnitResult, Declaration)?> declaration(Element element) async {
     final path = switch (element) {
       InterfaceElement(:final firstFragment) => firstFragment.libraryFragment.source.fullName,

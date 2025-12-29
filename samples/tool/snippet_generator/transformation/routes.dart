@@ -5,7 +5,7 @@ import '../snippet.dart';
 
 class RoutesVisitor extends RecursiveAstVisitor<void> {
   /// Extracts page to snippet mappings from a `AutoRouterConfig` in the [unit].
-  static Map<String, Snippet> extract(CompilationUnit unit) {
+  static Map<String, Snippet> transform(CompilationUnit unit) {
     final visitor = RoutesVisitor();
     unit.visitChildren(visitor);
 

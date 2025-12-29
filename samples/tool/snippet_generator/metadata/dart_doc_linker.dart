@@ -17,29 +17,29 @@ class DartDocLinker extends RecursiveAstVisitor<void> {
   /// Generates DartDoc links for identifiers in [code] that belong to [packages].
   ///
   /// Creates a synthetic file from [code], resolves it using [session], and visits the AST to find linkable identifiers.
-  /// The [baseOffset] is subtracted from offsets to account for any prefix removed from the original code.
+  /// The [importsLength] is subtracted from offsets to account for any prefix removed from the original code.
   static Future<List<DartDocLink>> link(
     AnalysisSession session,
     OverlayResourceProvider overlay,
     List<Package> packages,
     String code,
-    int baseOffset,
+    int importsLength,
   ) async {
-    final syntheticPath = p.join(samples, 'snippet_${_monotonic++}.dart');
+    final syntheticPath = p.join(samples, 'dart_doc_linker_${_monotonic++}.dart');
     overlay.setOverlay(syntheticPath, content: code, modificationStamp: DateTime.now().millisecondsSinceEpoch);
 
     final result = (await session.getResolvedUnit(syntheticPath)) as ResolvedUnitResult;
-    final linker = DartDocLinker(packages, baseOffset);
+    final linker = DartDocLinker(packages, importsLength);
     result.unit.visitChildren(linker);
 
     return linker.links;
   }
 
   final List<DartDocLink> links = [];
-  final int baseOffset;
+  final int importsLength;
   final List<Package> packages;
 
-  DartDocLinker(this.packages, this.baseOffset);
+  DartDocLinker(this.packages, this.importsLength);
 
   /// Links type annotations to their class/enum/mixin documentation.
   ///
@@ -216,7 +216,7 @@ class DartDocLinker extends RecursiveAstVisitor<void> {
   /// Adds a link for [element] at the given [offset] and [length].
   void _link(int offset, int length, Element element) {
     if (dartDocUrl(packages, element) case final url?) {
-      links.add(DartDocLink(offset: offset, baseOffset: baseOffset, length: length, url: url));
+      links.add(DartDocLink(offset: offset, baseOffset: importsLength, length: length, url: url));
     }
   }
 }

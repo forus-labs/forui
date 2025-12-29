@@ -29,14 +29,16 @@ class TooltipDartDocLinker extends DartDocLinker {
     OverlayResourceProvider overlay,
     List<Package> packages,
     String code,
-    int baseOffset,
+    int importsLength,
   ) async {
-    final syntheticPath = p.join(samples, 'tooltip_${_monotonic++}.dart');
+    final syntheticPath = p.join(samples, 'tooltip_dart_doc_linker_${_monotonic++}.dart');
     overlay.setOverlay(syntheticPath, content: code, modificationStamp: DateTime.now().millisecondsSinceEpoch);
 
     final result = (await session.getResolvedUnit(syntheticPath)) as ResolvedUnitResult;
-    final linker = TooltipDartDocLinker(packages, baseOffset);
+    final linker = TooltipDartDocLinker(packages, importsLength);
     result.unit.visitChildren(linker);
+
+
 
     return (linker.links, linker.tooltips);
   }
@@ -56,8 +58,9 @@ class TooltipDartDocLinker extends DartDocLinker {
       case final PropertyAccessorElement element when element.isStatic && _tooltip(element):
         tooltips.add(Tooltip(
           offset: node.offset,
-          baseOffset: baseOffset,
+          baseOffset: importsLength,
           length: node.length,
+          target: element.nonSynthetic is FieldElement ? TooltipTarget.field : TooltipTarget.getter,
           code: element.nonSynthetic.toString(),
           container: _containerFromElement(element),
         ));
@@ -66,8 +69,9 @@ class TooltipDartDocLinker extends DartDocLinker {
       case final PropertyAccessorElement element when _tooltip(element):
         tooltips.add(Tooltip(
           offset: node.identifier.offset,
-          baseOffset: baseOffset,
+          baseOffset: importsLength,
           length: node.identifier.length,
+          target: element.nonSynthetic is FieldElement ? TooltipTarget.field : TooltipTarget.getter,
           code: element.nonSynthetic.toString(),
           container: _containerFromElement(element),
         ));
@@ -76,8 +80,9 @@ class TooltipDartDocLinker extends DartDocLinker {
       case final MethodElement element when element.isStatic && _tooltip(element):
         tooltips.add(Tooltip(
           offset: node.offset,
-          baseOffset: baseOffset,
+          baseOffset: importsLength,
           length: node.length,
+          target: TooltipTarget.method,
           code: element.nonSynthetic.toString(),
           container: _containerFromElement(element),
         ));
@@ -86,8 +91,9 @@ class TooltipDartDocLinker extends DartDocLinker {
       case final MethodElement element when _tooltip(element):
         tooltips.add(Tooltip(
           offset: node.identifier.offset,
-          baseOffset: baseOffset,
+          baseOffset: importsLength,
           length: node.identifier.length,
+          target: TooltipTarget.method,
           code: element.nonSynthetic.toString(),
           container: _containerFromElement(element),
         ));
@@ -103,8 +109,9 @@ class TooltipDartDocLinker extends DartDocLinker {
     if (node.propertyName.element case final element? when _tooltip(element)) {
       tooltips.add(Tooltip(
         offset: node.propertyName.offset,
-        baseOffset: baseOffset,
+        baseOffset: importsLength,
         length: node.propertyName.length,
+        target: element.nonSynthetic is FieldElement ? TooltipTarget.field : TooltipTarget.getter,
         code: element.nonSynthetic.toString(),
         container: _containerFromElement(element),
       ));
@@ -126,8 +133,9 @@ class TooltipDartDocLinker extends DartDocLinker {
       tooltips.add(
         Tooltip(
           offset: offset,
-          baseOffset: baseOffset,
+          baseOffset: importsLength,
           length: length,
+          target: TooltipTarget.constructor,
           code: element.toString(),
           container: _containerFromType(node.staticType),
         ),
@@ -150,8 +158,9 @@ class TooltipDartDocLinker extends DartDocLinker {
       tooltips.add(
         Tooltip(
           offset: offset,
-          baseOffset: baseOffset,
+          baseOffset: importsLength,
           length: length,
+          target: TooltipTarget.method,
           code: element.toString(),
           container: _containerFromType(node.staticType),
         ),
@@ -168,8 +177,9 @@ class TooltipDartDocLinker extends DartDocLinker {
     if (node.propertyName.element case final element? when _tooltip(element)) {
       tooltips.add(Tooltip(
         offset: node.propertyName.offset,
-        baseOffset: baseOffset,
+        baseOffset: importsLength,
         length: node.propertyName.length,
+        target: element.nonSynthetic is FieldElement ? TooltipTarget.field : TooltipTarget.getter,
         code: element.nonSynthetic.toString(),
         container: _containerFromElement(element),
       ));
@@ -185,8 +195,9 @@ class TooltipDartDocLinker extends DartDocLinker {
     if (node.memberName.element case final element? when _tooltip(element)) {
       tooltips.add(Tooltip(
         offset: node.memberName.offset,
-        baseOffset: baseOffset,
+        baseOffset: importsLength,
         length: node.memberName.length,
+        target: TooltipTarget.method,
         code: element.nonSynthetic.toString(),
         container: _containerFromElement(element),
       ));
@@ -202,8 +213,9 @@ class TooltipDartDocLinker extends DartDocLinker {
     if (node.constructorName.element case final element? when _tooltip(element)) {
       tooltips.add(Tooltip(
         offset: node.constructorName.offset,
-        baseOffset: baseOffset,
+        baseOffset: importsLength,
         length: node.constructorName.length,
+        target: TooltipTarget.constructor,
         code: element.toString(),
         container: _containerFromElement(element),
       ));
@@ -217,7 +229,13 @@ class TooltipDartDocLinker extends DartDocLinker {
   @override
   void visitNamedExpression(NamedExpression node) {
     if (node case NamedExpression(:final name, :final FormalParameterElement element) when _tooltip(element)) {
-      tooltips.add(Tooltip(offset: name.offset, baseOffset: baseOffset, length: name.length, code: element.toString()));
+      tooltips.add(Tooltip(
+        offset: name.offset,
+        baseOffset: importsLength,
+        length: name.length,
+        target: TooltipTarget.formalParameter,
+        code: element.toString(),
+      ));
     }
     super.visitNamedExpression(node);
   }
@@ -236,8 +254,9 @@ class TooltipDartDocLinker extends DartDocLinker {
     if (node.declaredFragment?.element case final element?) {
       tooltips.add(Tooltip(
         offset: node.offset,
-        baseOffset: baseOffset,
+        baseOffset: importsLength,
         length: node.length,
+        target: TooltipTarget.formalParameter,
         code: element.toString(),
       ));
     }

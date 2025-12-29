@@ -95,11 +95,14 @@ class Snippet {
   };
 }
 
-// enum TooltipTarget {
-//   field,
-//   method,
-//   constructor,
-// }
+/// The kind of identifier that a tooltip describes.
+enum TooltipTarget {
+  field,
+  getter,
+  method,
+  constructor,
+  formalParameter,
+}
 
 /// A tooltip for an identifier.
 class Tooltip {
@@ -108,6 +111,9 @@ class Tooltip {
 
   /// The length of the linked identifier.
   final int length;
+
+  /// The kind of identifier that this tooltip describes.
+  final TooltipTarget target;
 
   /// The source code.
   final String code;
@@ -127,6 +133,7 @@ class Tooltip {
     required int offset,
     required int baseOffset,
     required this.length,
+    required this.target,
     required this.code,
     this.container,
     this.documentation = '',

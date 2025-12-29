@@ -8,7 +8,7 @@ import 'package:analyzer/file_system/overlay_file_system.dart';
 import 'package:path/path.dart' as p;
 
 import '../main.dart';
-import '../transformations.dart';
+import 'transformations.dart';
 
 /// Extracts argument values from constructor invocations for constant propagation.
 ///

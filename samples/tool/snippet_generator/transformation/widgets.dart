@@ -3,7 +3,7 @@ import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/dart/ast/visitor.dart';
 import 'package:analyzer/dart/element/element.dart';
 
-import '../transformations.dart';
+import 'transformations.dart';
 
 class Widgets extends RecursiveAstVisitor<void> {
   static String extract(

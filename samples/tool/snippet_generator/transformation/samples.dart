@@ -12,13 +12,13 @@ import '../metadata/tooltip_dart_doc_linker.dart';
 import '../main.dart';
 import '../options.dart';
 import '../snippet.dart';
-import '../transformations.dart';
+import 'transformations.dart';
 import 'argument_elision.dart';
 import 'routes.dart';
 import 'widgets.dart';
 
 class Samples extends RecursiveAstVisitor<void> {
-  static Future<Map<String, Snippet>> extract(
+  static Future<Map<String, Snippet>> transform(
     AnalysisSession session,
     OverlayResourceProvider overlay,
     List<Package> packages,
@@ -28,7 +28,7 @@ class Samples extends RecursiveAstVisitor<void> {
 
     var snippets = <String, Snippet>{};
     if (await session.getResolvedUnit(main) case final ResolvedUnitResult result) {
-      snippets = RoutesVisitor.extract(result.unit);
+      snippets = RoutesVisitor.transform(result.unit);
     }
 
     for (final path in paths) {
@@ -77,11 +77,11 @@ class Samples extends RecursiveAstVisitor<void> {
       final propagation = ConstantPropagation(inline)..visitClassDeclaration(node);
       final (result, declaration as ClassDeclaration) = (await _session.declaration(inline.element!))!;
       final widget = Widgets.extract(result, declaration, propagation.substitutions, full: options.include.isNotEmpty);
-      final code = await _session.merge(_result, options.include, node, widget);
+      final code = await merge(_session, _result, options.include, node, widget);
       snippet.code = formatter.format(await ArgumentElision.elide(code, _session, _overlay));
     } else {
       final widget = Widgets.extract(_result, node, const {}, full: options.include.isNotEmpty);
-      snippet.code = formatter.format(await _session.merge(_result, options.include, node, widget));
+      snippet.code = formatter.format(await merge(_session, _result, options.include, node, widget));
     }
 
     snippet.highlight();

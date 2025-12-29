@@ -10,7 +10,7 @@ import 'package:dart_style/dart_style.dart';
 import 'package:path/path.dart' as p;
 import 'package:yaml/yaml.dart';
 
-import 'extraction/samples.dart';
+import 'transformation/samples.dart';
 import 'snippet.dart';
 
 /// The formatter used to format the generated code snippets.
@@ -57,7 +57,7 @@ Future<void> main() async {
   }
 
   // Extract & annotate sample snippets.
-  for (final snippet in (await Samples.extract(session, provider, packages, [_foundation, _widgets])).values) {
+  for (final snippet in (await Samples.transform(session, provider, packages, [_foundation, _widgets])).values) {
     final json = const JsonEncoder.withIndent('  ').convert(snippet.toJson());
     for (final route in snippet.routes) {
       var normalized = route;
