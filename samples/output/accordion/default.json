@@ -63,5 +63,106 @@
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionItem/child.html"
     }
   ],
-  "tooltips": []
+  "tooltips": [
+    {
+      "offset": 32,
+      "length": 10,
+      "code": "FAccordion({required List<Widget> children, FAccordionControl control = const .managed(), FAccordionStyle Function(FAccordionStyle)? style, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FAccordion",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordion-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 46,
+      "length": 9,
+      "code": "{required List<Widget> children}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 68,
+      "length": 14,
+      "code": "FAccordionItem({required Widget title, required Widget child, FAccordionStyle? style, Widget icon = const Icon(FIcons.chevronDown), bool? initiallyExpanded, bool autofocus = false, FocusNode? focusNode, void Function(bool)? onFocusChange, void Function(bool)? onHoverChange, void Function(FWidgetStatesDelta)? onStateChange, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FAccordionItem",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionItem-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 90,
+      "length": 6,
+      "code": "{required Widget title}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 135,
+      "length": 6,
+      "code": "{required Widget child}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 464,
+      "length": 14,
+      "code": "FAccordionItem({required Widget title, required Widget child, FAccordionStyle? style, Widget icon = const Icon(FIcons.chevronDown), bool? initiallyExpanded, bool autofocus = false, FocusNode? focusNode, void Function(bool)? onFocusChange, void Function(bool)? onHoverChange, void Function(FWidgetStatesDelta)? onStateChange, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FAccordionItem",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionItem-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 486,
+      "length": 18,
+      "code": "{bool? initiallyExpanded}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 517,
+      "length": 6,
+      "code": "{required Widget title}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 556,
+      "length": 6,
+      "code": "{required Widget child}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 898,
+      "length": 14,
+      "code": "FAccordionItem({required Widget title, required Widget child, FAccordionStyle? style, Widget icon = const Icon(FIcons.chevronDown), bool? initiallyExpanded, bool autofocus = false, FocusNode? focusNode, void Function(bool)? onFocusChange, void Function(bool)? onHoverChange, void Function(FWidgetStatesDelta)? onStateChange, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FAccordionItem",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionItem-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 920,
+      "length": 6,
+      "code": "{required Widget title}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 956,
+      "length": 6,
+      "code": "{required Widget child}",
+      "links": [],
+      "documentation": ""
+    }
+  ]
 }

@@ -33,5 +33,45 @@
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.alert/FAlert/subtitle.html"
     }
   ],
-  "tooltips": []
+  "tooltips": [
+    {
+      "offset": 32,
+      "length": 6,
+      "code": "FAlert({required Widget title, Widget icon = const Icon(FIcons.circleAlert), Widget? subtitle, FBaseAlertStyle Function(FAlertStyle) style = _primary, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FAlert",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.alert/FAlert-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 42,
+      "length": 6,
+      "code": "{FBaseAlertStyle Function(FAlertStyle) style = _primary}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 61,
+      "length": 7,
+      "code": "FBaseAlertStyle Function(FAlertStyle) primary([FAlertStyle Function(FAlertStyle)? style])",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 74,
+      "length": 6,
+      "code": "{required Widget title}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 108,
+      "length": 9,
+      "code": "{Widget? subtitle}",
+      "links": [],
+      "documentation": ""
+    }
+  ]
 }

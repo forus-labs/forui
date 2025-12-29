@@ -168,5 +168,274 @@
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/child.html"
     }
   ],
-  "tooltips": []
+  "tooltips": [
+    {
+      "offset": 38,
+      "length": 7,
+      "code": "FButton({required void Function()? onPress, required Widget child, FBaseButtonStyle Function(FButtonStyle) style = _primary, void Function()? onLongPress, void Function()? onSecondaryPress, void Function()? onSecondaryLongPress, bool autofocus = false, FocusNode? focusNode, void Function(bool)? onFocusChange, void Function(bool)? onHoverChange, void Function(FWidgetStatesDelta)? onStateChange, bool selected = false, Map<ShortcutActivator, Intent>? shortcuts, Map<Type, Action<Intent>>? actions, MainAxisSize mainAxisSize = .max, MainAxisAlignment mainAxisAlignment = .center, CrossAxisAlignment crossAxisAlignment = .center, TextBaseline? textBaseline, Widget? prefix, Widget? suffix, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FButton",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 49,
+      "length": 13,
+      "code": "{MainAxisSize mainAxisSize = .max}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 71,
+      "length": 8,
+      "code": "{required void Function()? onPress}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 86,
+      "length": 11,
+      "code": "Future<T?> showFDialog<T>({required BuildContext context, required Widget Function(BuildContext, FDialogStyle, Animation<double>) builder, bool useRootNavigator = false, FDialogRouteStyle Function(FDialogRouteStyle)? routeStyle, FDialogStyle Function(FDialogStyle)? style, String? barrierLabel, bool barrierDismissible = true, RouteSettings? routeSettings, AnimationController? transitionAnimationController, Offset? anchorPoint, bool useSafeArea = false})",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 103,
+      "length": 8,
+      "code": "{required BuildContext context}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 125,
+      "length": 11,
+      "code": "{FDialogRouteStyle Function(FDialogRouteStyle)? routeStyle}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 168,
+      "length": 8,
+      "code": "FDialogRouteStyle copyWith({ImageFilter Function(double)? barrierFilter, FDialogRouteMotion Function(FDialogRouteMotion)? motion})",
+      "links": [],
+      "container": {
+        "name": "FDialogRouteStyle",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.dialog/FDialogRouteStyle-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 151,
+      "length": 16,
+      "code": "FDialogRouteStyle dialogRouteStyle",
+      "links": [],
+      "container": {
+        "name": "FThemeData",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 145,
+      "length": 5,
+      "code": "FThemeData get theme",
+      "links": [],
+      "container": {
+        "name": "FThemeBuildContext",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 184,
+      "length": 14,
+      "code": "{ImageFilter Function(double)? barrierFilter}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 367,
+      "length": 7,
+      "code": "Color barrier",
+      "links": [],
+      "container": {
+        "name": "FColors",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 360,
+      "length": 6,
+      "code": "FColors colors",
+      "links": [],
+      "container": {
+        "name": "FThemeData",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 354,
+      "length": 5,
+      "code": "FThemeData get theme",
+      "links": [],
+      "container": {
+        "name": "FThemeBuildContext",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 407,
+      "length": 8,
+      "code": "{required Widget Function(BuildContext, FDialogStyle, Animation<double>) builder}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 447,
+      "length": 6,
+      "code": "FTheme({required FThemeData data, required Widget child, TextDirection? textDirection, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FTheme",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FTheme-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 461,
+      "length": 5,
+      "code": "{required FThemeData data}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 480,
+      "length": 6,
+      "code": "{required Widget child}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 487,
+      "length": 7,
+      "code": "FDialog({required List<Widget> actions, FDialogStyle Function(FDialogStyle)? style, Animation<double>? animation, String? semanticsLabel, BoxConstraints constraints = const BoxConstraints(minWidth: 280, maxWidth: 560), Widget? title, Widget? body, Axis direction = .vertical, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FDialog",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.dialog/FDialog-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 504,
+      "length": 6,
+      "code": "{FDialogStyle Function(FDialogStyle)? style}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 526,
+      "length": 10,
+      "code": "{Animation<double>? animation}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 556,
+      "length": 6,
+      "code": "{Widget? title}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 611,
+      "length": 5,
+      "code": "{Widget? body}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 772,
+      "length": 8,
+      "code": "{required List<Widget> actions}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 793,
+      "length": 7,
+      "code": "FButton({required void Function()? onPress, required Widget child, FBaseButtonStyle Function(FButtonStyle) style = _primary, void Function()? onLongPress, void Function()? onSecondaryPress, void Function()? onSecondaryLongPress, bool autofocus = false, FocusNode? focusNode, void Function(bool)? onFocusChange, void Function(bool)? onHoverChange, void Function(FWidgetStatesDelta)? onStateChange, bool selected = false, Map<ShortcutActivator, Intent>? shortcuts, Map<Type, Action<Intent>>? actions, MainAxisSize mainAxisSize = .max, MainAxisAlignment mainAxisAlignment = .center, CrossAxisAlignment crossAxisAlignment = .center, TextBaseline? textBaseline, Widget? prefix, Widget? suffix, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FButton",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 814,
+      "length": 6,
+      "code": "{required Widget child}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 857,
+      "length": 8,
+      "code": "{required void Function()? onPress}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 924,
+      "length": 7,
+      "code": "FButton({required void Function()? onPress, required Widget child, FBaseButtonStyle Function(FButtonStyle) style = _primary, void Function()? onLongPress, void Function()? onSecondaryPress, void Function()? onSecondaryLongPress, bool autofocus = false, FocusNode? focusNode, void Function(bool)? onFocusChange, void Function(bool)? onHoverChange, void Function(FWidgetStatesDelta)? onStateChange, bool selected = false, Map<ShortcutActivator, Intent>? shortcuts, Map<Type, Action<Intent>>? actions, MainAxisSize mainAxisSize = .max, MainAxisAlignment mainAxisAlignment = .center, CrossAxisAlignment crossAxisAlignment = .center, TextBaseline? textBaseline, Widget? prefix, Widget? suffix, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FButton",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 945,
+      "length": 6,
+      "code": "{FBaseButtonStyle Function(FButtonStyle) style = _primary}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 965,
+      "length": 7,
+      "code": "FBaseButtonStyle Function(FButtonStyle) outline([FButtonStyle Function(FButtonStyle)? style])",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 988,
+      "length": 6,
+      "code": "{required Widget child}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 1029,
+      "length": 8,
+      "code": "{required void Function()? onPress}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 1120,
+      "length": 6,
+      "code": "{required Widget child}",
+      "links": [],
+      "documentation": ""
+    }
+  ]
 }

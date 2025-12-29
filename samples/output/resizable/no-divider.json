@@ -123,5 +123,219 @@
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext/theme.html"
     }
   ],
-  "tooltips": []
+  "tooltips": [
+    {
+      "offset": 126,
+      "length": 6,
+      "code": "Color border",
+      "links": [],
+      "container": {
+        "name": "FColors",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 119,
+      "length": 6,
+      "code": "FColors colors",
+      "links": [],
+      "container": {
+        "name": "FThemeData",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 113,
+      "length": 5,
+      "code": "FThemeData get theme",
+      "links": [],
+      "container": {
+        "name": "FThemeBuildContext",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 181,
+      "length": 10,
+      "code": "FResizable({required Axis axis, required List<FResizableRegion> children, FResizableControl control = const .managedCascade(), FResizableStyle Function(FResizableStyle)? style, FResizableDivider divider = .dividerWithThumb, double? crossAxisExtent, double resizePercentage = 0.005, String Function(FResizableRegionData, FResizableRegionData) semanticFormatterCallback = _label, double? hitRegionExtent, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FResizable",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizable-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 197,
+      "length": 5,
+      "code": "{required Axis axis}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 220,
+      "length": 8,
+      "code": "{FResizableDivider divider = .dividerWithThumb}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 230,
+      "length": 4,
+      "code": "FResizableDivider none",
+      "links": [],
+      "container": {
+        "name": "FResizableDivider",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableDivider.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 240,
+      "length": 16,
+      "code": "{double? crossAxisExtent}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 266,
+      "length": 9,
+      "code": "{required List<FResizableRegion> children}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 285,
+      "length": 6,
+      "code": "FResizableRegion.region({required double initialExtent, required Widget Function(BuildContext, FResizableRegionData, Widget?) builder, double? minExtent, Widget? child, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FResizableRegion",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegion-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 301,
+      "length": 14,
+      "code": "{required double initialExtent}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 329,
+      "length": 10,
+      "code": "{double? minExtent}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 353,
+      "length": 8,
+      "code": "{required Widget Function(BuildContext, FResizableRegionData, Widget?) builder}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 457,
+      "length": 2,
+      "code": "TextStyle sm",
+      "links": [],
+      "container": {
+        "name": "FTypography",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FTypography-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 446,
+      "length": 10,
+      "code": "FTypography typography",
+      "links": [],
+      "container": {
+        "name": "FThemeData",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 440,
+      "length": 5,
+      "code": "FThemeData get theme",
+      "links": [],
+      "container": {
+        "name": "FThemeBuildContext",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 479,
+      "length": 6,
+      "code": "FResizableRegion.region({required double initialExtent, required Widget Function(BuildContext, FResizableRegionData, Widget?) builder, double? minExtent, Widget? child, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FResizableRegion",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegion-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 495,
+      "length": 14,
+      "code": "{required double initialExtent}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 523,
+      "length": 10,
+      "code": "{double? minExtent}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 547,
+      "length": 8,
+      "code": "{required Widget Function(BuildContext, FResizableRegionData, Widget?) builder}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 651,
+      "length": 2,
+      "code": "TextStyle sm",
+      "links": [],
+      "container": {
+        "name": "FTypography",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FTypography-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 640,
+      "length": 10,
+      "code": "FTypography typography",
+      "links": [],
+      "container": {
+        "name": "FThemeData",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 634,
+      "length": 5,
+      "code": "FThemeData get theme",
+      "links": [],
+      "container": {
+        "name": "FThemeBuildContext",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext.html"
+      },
+      "documentation": ""
+    }
+  ]
 }

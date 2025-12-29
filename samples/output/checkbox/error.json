@@ -43,5 +43,59 @@
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckbox/onChange.html"
     }
   ],
-  "tooltips": []
+  "tooltips": [
+    {
+      "offset": 285,
+      "length": 9,
+      "code": "FCheckbox({FCheckboxStyle Function(FCheckboxStyle)? style, Widget? label, Widget? description, Widget? error, String? semanticsLabel, bool value = false, void Function(bool)? onChange, bool enabled = true, bool autofocus = false, FocusNode? focusNode, void Function(bool)? onFocusChange, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FCheckbox",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckbox-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 300,
+      "length": 6,
+      "code": "{Widget? label}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 354,
+      "length": 12,
+      "code": "{Widget? description}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 425,
+      "length": 6,
+      "code": "{Widget? error}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 491,
+      "length": 15,
+      "code": "{String? semanticsLabel}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 542,
+      "length": 6,
+      "code": "{bool value = false}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 561,
+      "length": 9,
+      "code": "{void Function(bool)? onChange}",
+      "links": [],
+      "documentation": ""
+    }
+  ]
 }

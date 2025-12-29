@@ -88,5 +88,153 @@
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem/onPress.html"
     }
   ],
-  "tooltips": []
+  "tooltips": [
+    {
+      "offset": 32,
+      "length": 10,
+      "code": "FItemGroup({required List<FItemMixin> children, FItemGroupStyle Function(FItemGroupStyle)? style, ScrollController? scrollController, double? cacheExtent, double maxHeight = .infinity, DragStartBehavior dragStartBehavior = .start, ScrollPhysics physics = const ClampingScrollPhysics(), bool? enabled, FItemDivider divider = .none, String? semanticsLabel, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FItemGroup",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroup-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 46,
+      "length": 9,
+      "code": "{required List<FItemMixin> children}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 62,
+      "length": 5,
+      "code": "FItem({required Widget title, FItemStyle Function(FItemStyle)? style, bool? enabled, bool selected = false, String? semanticsLabel, bool autofocus = false, FocusNode? focusNode, void Function(bool)? onFocusChange, void Function(bool)? onHoverChange, void Function(FWidgetStatesDelta)? onStateChange, void Function()? onPress, void Function()? onLongPress, void Function()? onSecondaryPress, void Function()? onSecondaryLongPress, Map<ShortcutActivator, Intent>? shortcuts, Map<Type, Action<Intent>>? actions, Widget? prefix, Widget? subtitle, Widget? details, Widget? suffix, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FItem",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 75,
+      "length": 7,
+      "code": "{Widget? prefix}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 94,
+      "length": 11,
+      "code": "IconData user",
+      "links": [],
+      "container": {
+        "name": "FIcons",
+        "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 114,
+      "length": 6,
+      "code": "{required Widget title}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 158,
+      "length": 7,
+      "code": "{Widget? suffix}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 177,
+      "length": 19,
+      "code": "IconData chevronRight",
+      "links": [],
+      "container": {
+        "name": "FIcons",
+        "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 205,
+      "length": 8,
+      "code": "{void Function()? onPress}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 232,
+      "length": 5,
+      "code": "FItem({required Widget title, FItemStyle Function(FItemStyle)? style, bool? enabled, bool selected = false, String? semanticsLabel, bool autofocus = false, FocusNode? focusNode, void Function(bool)? onFocusChange, void Function(bool)? onHoverChange, void Function(FWidgetStatesDelta)? onStateChange, void Function()? onPress, void Function()? onLongPress, void Function()? onSecondaryPress, void Function()? onSecondaryLongPress, Map<ShortcutActivator, Intent>? shortcuts, Map<Type, Action<Intent>>? actions, Widget? prefix, Widget? subtitle, Widget? details, Widget? suffix, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FItem",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 245,
+      "length": 7,
+      "code": "{Widget? prefix}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 264,
+      "length": 11,
+      "code": "IconData wifi",
+      "links": [],
+      "container": {
+        "name": "FIcons",
+        "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 284,
+      "length": 6,
+      "code": "{required Widget title}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 317,
+      "length": 8,
+      "code": "{Widget? details}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 360,
+      "length": 7,
+      "code": "{Widget? suffix}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 379,
+      "length": 19,
+      "code": "IconData chevronRight",
+      "links": [],
+      "container": {
+        "name": "FIcons",
+        "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 407,
+      "length": 8,
+      "code": "{void Function()? onPress}",
+      "links": [],
+      "documentation": ""
+    }
+  ]
 }

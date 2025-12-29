@@ -68,5 +68,106 @@
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectItemMixin/item.html"
     }
   ],
-  "tooltips": []
+  "tooltips": [
+    {
+      "offset": 317,
+      "length": 34,
+      "code": "FMultiSelect<String>.searchBuilder({required Widget Function(String) format, required FutureOr<Iterable<String>> Function(String) filter, required List<FSelectItemMixin> Function(BuildContext, String, Iterable<String>) contentBuilder, FSelectSearchFieldProperties searchFieldProperties, Widget Function(BuildContext, FSelectSearchStyle) contentLoadingBuilder, Widget Function(BuildContext, Object?, StackTrace)? contentErrorBuilder, FMultiValueControl<String>? control, FPopoverControl popoverControl, FMultiSelectStyle Function(FMultiSelectStyle)? style, bool autofocus, FocusNode? focusNode, Widget Function(BuildContext, FMultiSelectStyle, Set<WidgetState>)? prefixBuilder, Widget Function(BuildContext, FMultiSelectStyle, Set<WidgetState>)? suffixBuilder, Widget? label, Widget? description, bool enabled, void Function(Set<String>)? onSaved, void Function()? onReset, AutovalidateMode autovalidateMode, String? forceErrorText, String? Function(Set<String>) validator, Widget Function(BuildContext, String) errorBuilder, Widget? hint, bool keepHint, int Function(String, String)? sort, Widget Function(BuildContext, FMultiValueNotifier<String>, FMultiSelectStyle, String, Widget)? tagBuilder, TextAlign textAlign, TextDirection? textDirection, bool clearable, AlignmentGeometry contentAnchor, AlignmentGeometry fieldAnchor, FPortalConstraints contentConstraints, FPortalSpacing contentSpacing, FPortalOverflow contentOverflow, Offset contentOffset, FPopoverHideRegion contentHideRegion, Object? contentGroupId, Widget Function(BuildContext, FMultiSelectStyle) contentEmptyBuilder, ScrollController? contentScrollController, bool contentScrollHandles, ScrollPhysics contentPhysics, FItemDivider contentDivider, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FMultiSelect<String>",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FMultiSelect-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 357,
+      "length": 5,
+      "code": "{Widget? hint}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 397,
+      "length": 7,
+      "code": "{required Widget Function(String) format}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 419,
+      "length": 7,
+      "code": "{required FutureOr<Iterable<String>> Function(String) filter}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 675,
+      "length": 22,
+      "code": "{Widget Function(BuildContext, FSelectSearchStyle) contentLoadingBuilder}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 861,
+      "length": 7,
+      "code": "TextStyle resolve(Set<WidgetState> states)",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 844,
+      "length": 16,
+      "code": "FWidgetStateMap<TextStyle> contentTextStyle",
+      "links": [],
+      "container": {
+        "name": "FTextFieldStyle",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFieldStyle-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 829,
+      "length": 14,
+      "code": "FTextFieldStyle textFieldStyle",
+      "links": [],
+      "container": {
+        "name": "FSelectSearchStyle",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectSearchStyle-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 894,
+      "length": 15,
+      "code": "{required List<FSelectItemMixin> Function(BuildContext, String, Iterable<String>) contentBuilder}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 971,
+      "length": 4,
+      "code": "FSelectItem<T> item<T>({required Widget title, required T value, FItemStyle Function(FItemStyle)? style, bool? enabled, Widget? prefix, Widget? subtitle, Widget? Function(BuildContext, bool) suffixBuilder = _defaultSuffixBuilder, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FSelectItemMixin",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectItemMixin-mixin.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 976,
+      "length": 6,
+      "code": "{required Widget title}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 996,
+      "length": 6,
+      "code": "{required String value}",
+      "links": [],
+      "documentation": ""
+    }
+  ]
 }

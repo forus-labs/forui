@@ -23,5 +23,42 @@
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.line_calendar/FLineCalendarControl/FLineCalendarControl.managed.html"
     }
   ],
-  "tooltips": []
+  "tooltips": [
+    {
+      "offset": 32,
+      "length": 13,
+      "code": "FLineCalendar({FLineCalendarControl control = const .managed(), FLineCalendarStyle Function(FLineCalendarStyle)? style, AlignmentDirectional initialScrollAlignment = .center, ScrollPhysics? physics, double? cacheExtent, ScrollViewKeyboardDismissBehavior keyboardDismissBehavior = .manual, Widget Function(BuildContext, ({DateTime date, Set<WidgetState> states, FLineCalendarStyle style, bool today}), Widget?) builder = _builder, DateTime? start, DateTime? end, DateTime? initialScroll, DateTime? today, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FLineCalendar",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.line_calendar/FLineCalendar-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 49,
+      "length": 8,
+      "code": "{FLineCalendarControl control = const .managed()}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 59,
+      "length": 7,
+      "code": "FLineCalendarControl.managed({FCalendarController<DateTime?>? controller, DateTime? initial, bool? toggleable, bool Function(DateTime)? selectable, void Function(DateTime?)? onChange})",
+      "links": [],
+      "container": {
+        "name": "FLineCalendarControl",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.line_calendar/FLineCalendarControl-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 67,
+      "length": 8,
+      "code": "{DateTime? initial}",
+      "links": [],
+      "documentation": ""
+    }
+  ]
 }

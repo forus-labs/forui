@@ -43,5 +43,63 @@
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectItemMixin/item.html"
     }
   ],
-  "tooltips": []
+  "tooltips": [
+    {
+      "offset": 42,
+      "length": 51,
+      "code": "FSelect<({String firstName, String lastName})>.rich({required String Function(({String firstName, String lastName})) format, required List<FSelectItemMixin> children, FSelectControl<({String firstName, String lastName})>? control, FPopoverControl popoverControl, FSelectStyle Function(FSelectStyle)? style, bool autofocus, FocusNode? focusNode, Widget Function(BuildContext, FSelectStyle, Set<WidgetState>, Widget) builder, Widget Function(BuildContext, FSelectStyle, Set<WidgetState>)? prefixBuilder, Widget Function(BuildContext, FSelectStyle, Set<WidgetState>)? suffixBuilder, Widget? label, Widget? description, bool enabled, void Function(({String firstName, String lastName})?)? onSaved, void Function()? onReset, AutovalidateMode autovalidateMode, String? forceErrorText, String? Function(({String firstName, String lastName})?) validator, Widget Function(BuildContext, String) errorBuilder, String? hint, TextAlign textAlign, TextAlignVertical? textAlignVertical, TextDirection? textDirection, bool expands, MouseCursor mouseCursor, bool canRequestFocus, bool clearable, AlignmentGeometry contentAnchor, AlignmentGeometry fieldAnchor, FPortalConstraints contentConstraints, FPortalSpacing contentSpacing, FPortalOverflow contentOverflow, Offset contentOffset, FPopoverHideRegion contentHideRegion, Object? contentGroupId, bool autoHide, Widget Function(BuildContext, FSelectStyle) contentEmptyBuilder, ScrollController? contentScrollController, bool contentScrollHandles, ScrollPhysics contentPhysics, FItemDivider contentDivider, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FSelect<({String firstName, String lastName})>",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 101,
+      "length": 5,
+      "code": "{String? hint}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 130,
+      "length": 7,
+      "code": "{required String Function(({String firstName, String lastName})) format}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 192,
+      "length": 9,
+      "code": "{required List<FSelectItemMixin> children}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 249,
+      "length": 4,
+      "code": "FSelectItem<T> item<T>({required Widget title, required T value, FItemStyle Function(FItemStyle)? style, bool? enabled, Widget? prefix, Widget? subtitle, Widget? Function(BuildContext, bool) suffixBuilder = _defaultSuffixBuilder, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FSelectItemMixin",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectItemMixin-mixin.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 254,
+      "length": 6,
+      "code": "{required Widget title}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 283,
+      "length": 6,
+      "code": "{required InvalidType value}",
+      "links": [],
+      "documentation": ""
+    }
+  ]
 }

@@ -38,5 +38,56 @@
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateField/description.html"
     }
   ],
-  "tooltips": []
+  "tooltips": [
+    {
+      "offset": 32,
+      "length": 10,
+      "code": "FDateField({FDateFieldControl control, FPopoverControl popoverControl, FDateFieldStyle Function(FDateFieldStyle)? style, FocusNode? focusNode, TextInputAction? textInputAction, TextAlign textAlign, TextAlignVertical? textAlignVertical, TextDirection? textDirection, bool autofocus, bool expands, void Function()? onEditingComplete, void Function(DateTime)? onSubmit, MouseCursor? mouseCursor, bool canRequestFocus, bool clearable, int baselineInputYear, Widget Function(BuildContext, FDateFieldStyle, Set<WidgetState>, Widget) builder, Widget Function(BuildContext, FDateFieldStyle, Set<WidgetState>)? prefixBuilder, Widget Function(BuildContext, FDateFieldStyle, Set<WidgetState>)? suffixBuilder, FDateFieldCalendarProperties calendar, Widget? label, Widget? description, bool enabled, void Function(DateTime?)? onSaved, void Function()? onReset, AutovalidateMode autovalidateMode, String? forceErrorText, Widget Function(BuildContext, String) errorBuilder, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FDateField",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateField-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 46,
+      "length": 8,
+      "code": "{FDateFieldControl control}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 56,
+      "length": 7,
+      "code": "FDateFieldControl.managed({FDateFieldController? controller, DateTime? initial, String? Function(DateTime?)? validator, void Function(DateTime?)? onChange})",
+      "links": [],
+      "container": {
+        "name": "FDateFieldControl",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateFieldControl-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 69,
+      "length": 10,
+      "code": "{String? Function(DateTime?)? validator}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 192,
+      "length": 6,
+      "code": "{Widget? label}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 233,
+      "length": 12,
+      "code": "{Widget? description}",
+      "links": [],
+      "documentation": ""
+    }
+  ]
 }

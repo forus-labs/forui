@@ -28,5 +28,38 @@
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.badge/FBadge/FBadge.html"
     }
   ],
-  "tooltips": []
+  "tooltips": [
+    {
+      "offset": 32,
+      "length": 6,
+      "code": "FBadge({required Widget child, FBaseBadgeStyle Function(FBadgeStyle) style = _primary, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FBadge",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.badge/FBadge-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 42,
+      "length": 6,
+      "code": "{FBaseBadgeStyle Function(FBadgeStyle) style = _primary}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 61,
+      "length": 7,
+      "code": "FBaseBadgeStyle Function(FBadgeStyle) primary([FBadgeStyle Function(FBadgeStyle)? style])",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 74,
+      "length": 6,
+      "code": "{required Widget child}",
+      "links": [],
+      "documentation": ""
+    }
+  ]
 }

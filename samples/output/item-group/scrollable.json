@@ -198,5 +198,343 @@
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemMixin/item.html"
     }
   ],
-  "tooltips": []
+  "tooltips": [
+    {
+      "offset": 32,
+      "length": 10,
+      "code": "FItemGroup({required List<FItemMixin> children, FItemGroupStyle Function(FItemGroupStyle)? style, ScrollController? scrollController, double? cacheExtent, double maxHeight = .infinity, DragStartBehavior dragStartBehavior = .start, ScrollPhysics physics = const ClampingScrollPhysics(), bool? enabled, FItemDivider divider = .none, String? semanticsLabel, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FItemGroup",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroup-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 46,
+      "length": 10,
+      "code": "{double maxHeight = .infinity}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 64,
+      "length": 9,
+      "code": "{required List<FItemMixin> children}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 81,
+      "length": 4,
+      "code": "FItem item({required Widget title, FItemStyle Function(FItemStyle)? style, bool? enabled, bool selected = false, String? semanticsLabel, bool autofocus = false, FocusNode? focusNode, void Function(bool)? onFocusChange, void Function(bool)? onHoverChange, void Function(FWidgetStatesDelta)? onStateChange, void Function()? onPress, void Function()? onLongPress, void Function()? onSecondaryPress, void Function()? onSecondaryLongPress, Map<ShortcutActivator, Intent>? shortcuts, Map<Type, Action<Intent>>? actions, Widget? prefix, Widget? subtitle, Widget? details, Widget? suffix, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FItemMixin",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemMixin-mixin.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 93,
+      "length": 7,
+      "code": "{Widget? prefix}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 112,
+      "length": 11,
+      "code": "IconData user",
+      "links": [],
+      "container": {
+        "name": "FIcons",
+        "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 132,
+      "length": 6,
+      "code": "{required Widget title}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 176,
+      "length": 7,
+      "code": "{Widget? suffix}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 195,
+      "length": 19,
+      "code": "IconData chevronRight",
+      "links": [],
+      "container": {
+        "name": "FIcons",
+        "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 223,
+      "length": 8,
+      "code": "{void Function()? onPress}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 251,
+      "length": 4,
+      "code": "FItem item({required Widget title, FItemStyle Function(FItemStyle)? style, bool? enabled, bool selected = false, String? semanticsLabel, bool autofocus = false, FocusNode? focusNode, void Function(bool)? onFocusChange, void Function(bool)? onHoverChange, void Function(FWidgetStatesDelta)? onStateChange, void Function()? onPress, void Function()? onLongPress, void Function()? onSecondaryPress, void Function()? onSecondaryLongPress, Map<ShortcutActivator, Intent>? shortcuts, Map<Type, Action<Intent>>? actions, Widget? prefix, Widget? subtitle, Widget? details, Widget? suffix, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FItemMixin",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemMixin-mixin.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 263,
+      "length": 7,
+      "code": "{Widget? prefix}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 282,
+      "length": 11,
+      "code": "IconData mail",
+      "links": [],
+      "container": {
+        "name": "FIcons",
+        "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 302,
+      "length": 6,
+      "code": "{required Widget title}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 335,
+      "length": 7,
+      "code": "{Widget? suffix}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 354,
+      "length": 19,
+      "code": "IconData chevronRight",
+      "links": [],
+      "container": {
+        "name": "FIcons",
+        "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 382,
+      "length": 8,
+      "code": "{void Function()? onPress}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 410,
+      "length": 4,
+      "code": "FItem item({required Widget title, FItemStyle Function(FItemStyle)? style, bool? enabled, bool selected = false, String? semanticsLabel, bool autofocus = false, FocusNode? focusNode, void Function(bool)? onFocusChange, void Function(bool)? onHoverChange, void Function(FWidgetStatesDelta)? onStateChange, void Function()? onPress, void Function()? onLongPress, void Function()? onSecondaryPress, void Function()? onSecondaryLongPress, Map<ShortcutActivator, Intent>? shortcuts, Map<Type, Action<Intent>>? actions, Widget? prefix, Widget? subtitle, Widget? details, Widget? suffix, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FItemMixin",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemMixin-mixin.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 422,
+      "length": 7,
+      "code": "{Widget? prefix}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 441,
+      "length": 11,
+      "code": "IconData wifi",
+      "links": [],
+      "container": {
+        "name": "FIcons",
+        "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 461,
+      "length": 6,
+      "code": "{required Widget title}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 494,
+      "length": 8,
+      "code": "{Widget? details}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 537,
+      "length": 7,
+      "code": "{Widget? suffix}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 556,
+      "length": 19,
+      "code": "IconData chevronRight",
+      "links": [],
+      "container": {
+        "name": "FIcons",
+        "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 584,
+      "length": 8,
+      "code": "{void Function()? onPress}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 612,
+      "length": 4,
+      "code": "FItem item({required Widget title, FItemStyle Function(FItemStyle)? style, bool? enabled, bool selected = false, String? semanticsLabel, bool autofocus = false, FocusNode? focusNode, void Function(bool)? onFocusChange, void Function(bool)? onHoverChange, void Function(FWidgetStatesDelta)? onStateChange, void Function()? onPress, void Function()? onLongPress, void Function()? onSecondaryPress, void Function()? onSecondaryLongPress, Map<ShortcutActivator, Intent>? shortcuts, Map<Type, Action<Intent>>? actions, Widget? prefix, Widget? subtitle, Widget? details, Widget? suffix, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FItemMixin",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemMixin-mixin.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 624,
+      "length": 7,
+      "code": "{Widget? prefix}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 643,
+      "length": 17,
+      "code": "IconData alarmClock",
+      "links": [],
+      "container": {
+        "name": "FIcons",
+        "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 669,
+      "length": 6,
+      "code": "{required Widget title}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 709,
+      "length": 7,
+      "code": "{Widget? suffix}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 728,
+      "length": 19,
+      "code": "IconData chevronRight",
+      "links": [],
+      "container": {
+        "name": "FIcons",
+        "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 756,
+      "length": 8,
+      "code": "{void Function()? onPress}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 784,
+      "length": 4,
+      "code": "FItem item({required Widget title, FItemStyle Function(FItemStyle)? style, bool? enabled, bool selected = false, String? semanticsLabel, bool autofocus = false, FocusNode? focusNode, void Function(bool)? onFocusChange, void Function(bool)? onHoverChange, void Function(FWidgetStatesDelta)? onStateChange, void Function()? onPress, void Function()? onLongPress, void Function()? onSecondaryPress, void Function()? onSecondaryLongPress, Map<ShortcutActivator, Intent>? shortcuts, Map<Type, Action<Intent>>? actions, Widget? prefix, Widget? subtitle, Widget? details, Widget? suffix, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FItemMixin",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemMixin-mixin.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 796,
+      "length": 7,
+      "code": "{Widget? prefix}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 815,
+      "length": 13,
+      "code": "IconData qrCode",
+      "links": [],
+      "container": {
+        "name": "FIcons",
+        "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 837,
+      "length": 6,
+      "code": "{required Widget title}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 873,
+      "length": 7,
+      "code": "{Widget? suffix}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 892,
+      "length": 19,
+      "code": "IconData chevronRight",
+      "links": [],
+      "container": {
+        "name": "FIcons",
+        "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 920,
+      "length": 8,
+      "code": "{void Function()? onPress}",
+      "links": [],
+      "documentation": ""
+    }
+  ]
 }

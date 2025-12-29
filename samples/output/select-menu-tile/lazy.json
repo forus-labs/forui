@@ -68,5 +68,106 @@
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/value.html"
     }
   ],
-  "tooltips": []
+  "tooltips": [
+    {
+      "offset": 32,
+      "length": 23,
+      "code": "FSelectMenuTile<int>.builder({required Widget title, required FSelectTile<int>? Function(BuildContext, int) menuBuilder, int? count, FMultiValueControl<int>? selectControl, FPopoverControl popoverControl = const .managed(), ScrollController? scrollController, FSelectMenuTileStyle Function(FSelectMenuTileStyle)? style, double? cacheExtent, double maxHeight = .infinity, DragStartBehavior dragStartBehavior = .start, ScrollPhysics physics = const ClampingScrollPhysics(), FItemDivider divider = .full, AlignmentGeometry menuAnchor = .topRight, AlignmentGeometry tileAnchor = .bottomRight, FPortalSpacing menuSpacing = const .spacing(4), FPortalOverflow menuOverflow = .flip, Offset menuOffset = .zero, FPopoverHideRegion menuHideRegion = .excludeChild, void Function()? menuOnTapHide, Object? menuGroupId, bool autoHide = true, Widget? label, Widget? description, bool autofocus = false, FocusScopeNode? menuFocusNode, void Function(bool)? menuOnFocusChange, TraversalEdgeBehavior? menuTraversalEdgeBehavior, String? menuBarrierSemanticsLabel, bool menuBarrierSemanticsDismissible = true, String? semanticsLabel, Widget? prefix, Widget? subtitle, Widget Function(BuildContext, Set<int>, Widget?) detailsBuilder = defaultSelectMenuTileBuilder, Widget? details, Widget? suffix, Map<ShortcutActivator, Intent>? shortcuts, Map<Type, Action<Intent>>? actions, Widget Function(BuildContext, String) errorBuilder = FFormFieldProperties.defaultErrorBuilder, void Function(Set<int>?)? onSaved, void Function()? onReset, String? Function(Set<int>?)? validator, String? forceErrorText, bool enabled = true, AutovalidateMode autovalidateMode = .disabled, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FSelectMenuTile<int>",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_menu_tile/FSelectMenuTile-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 59,
+      "length": 14,
+      "code": "{FMultiValueControl<int>? selectControl}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 81,
+      "length": 7,
+      "code": "FMultiValueControl<int>.managed({FMultiValueNotifier<int>? controller, Set<int>? initial, int min, int? max, void Function(Set<int>)? onChange})",
+      "links": [],
+      "container": {
+        "name": "FMultiValueControl",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 89,
+      "length": 8,
+      "code": "{Set<int>? initial}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 106,
+      "length": 7,
+      "code": "{Widget? prefix}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 125,
+      "length": 15,
+      "code": "IconData variable",
+      "links": [],
+      "container": {
+        "name": "FIcons",
+        "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 145,
+      "length": 6,
+      "code": "{required Widget title}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 187,
+      "length": 10,
+      "code": "{double maxHeight = .infinity}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 205,
+      "length": 12,
+      "code": "{required FSelectTile<int>? Function(BuildContext, int) menuBuilder}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 245,
+      "length": 4,
+      "code": "FSelectTile<int>.tile({required Widget title, required int value, FItemStyle Function(FItemStyle)? style, Widget checkedIcon, Widget uncheckedIcon, Widget? subtitle, Widget? details, String? semanticsLabel, bool? enabled, bool autofocus, FocusNode? focusNode, void Function(bool)? onFocusChange, void Function(bool)? onHoverChange, void Function(FWidgetStatesDelta)? onStatesChange, Map<ShortcutActivator, Intent>? shortcuts, Map<Type, Action<Intent>>? actions, Widget? suffix, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FSelectTile",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 250,
+      "length": 6,
+      "code": "{required Widget title}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 278,
+      "length": 6,
+      "code": "{required int value}",
+      "links": [],
+      "documentation": ""
+    }
+  ]
 }

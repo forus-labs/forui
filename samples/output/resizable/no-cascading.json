@@ -178,5 +178,306 @@
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors/foreground.html"
     }
   ],
-  "tooltips": []
+  "tooltips": [
+    {
+      "offset": 204,
+      "length": 6,
+      "code": "Color border",
+      "links": [],
+      "container": {
+        "name": "FColors",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 197,
+      "length": 6,
+      "code": "FColors colors",
+      "links": [],
+      "container": {
+        "name": "FThemeData",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 191,
+      "length": 5,
+      "code": "FThemeData get theme",
+      "links": [],
+      "container": {
+        "name": "FThemeBuildContext",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 265,
+      "length": 10,
+      "code": "FResizable({required Axis axis, required List<FResizableRegion> children, FResizableControl control = const .managedCascade(), FResizableStyle Function(FResizableStyle)? style, FResizableDivider divider = .dividerWithThumb, double? crossAxisExtent, double resizePercentage = 0.005, String Function(FResizableRegionData, FResizableRegionData) semanticFormatterCallback = _label, double? hitRegionExtent, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FResizable",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizable-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 283,
+      "length": 8,
+      "code": "{FResizableControl control = const .managedCascade()}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 299,
+      "length": 7,
+      "code": "FResizableControl.managed({FResizableController? controller, void Function(List<FResizableRegionData>)? onResizeUpdate, void Function(List<FResizableRegionData>)? onResizeEnd})",
+      "links": [],
+      "container": {
+        "name": "FResizableControl",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableControl-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 316,
+      "length": 5,
+      "code": "{required Axis axis}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 339,
+      "length": 16,
+      "code": "{double? crossAxisExtent}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 367,
+      "length": 9,
+      "code": "{required List<FResizableRegion> children}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 388,
+      "length": 6,
+      "code": "FResizableRegion.region({required double initialExtent, required Widget Function(BuildContext, FResizableRegionData, Widget?) builder, double? minExtent, Widget? child, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FResizableRegion",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegion-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 406,
+      "length": 14,
+      "code": "{required double initialExtent}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 436,
+      "length": 10,
+      "code": "{double? minExtent}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 462,
+      "length": 8,
+      "code": "{required Widget Function(BuildContext, FResizableRegionData, Widget?) builder}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 525,
+      "length": 14,
+      "code": "IconData sunrise",
+      "links": [],
+      "container": {
+        "name": "FIcons",
+        "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 580,
+      "length": 6,
+      "code": "FResizableRegion.region({required double initialExtent, required Widget Function(BuildContext, FResizableRegionData, Widget?) builder, double? minExtent, Widget? child, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FResizableRegion",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegion-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 598,
+      "length": 14,
+      "code": "{required double initialExtent}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 628,
+      "length": 10,
+      "code": "{double? minExtent}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 654,
+      "length": 8,
+      "code": "{required Widget Function(BuildContext, FResizableRegionData, Widget?) builder}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 717,
+      "length": 10,
+      "code": "IconData sun",
+      "links": [],
+      "container": {
+        "name": "FIcons",
+        "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 770,
+      "length": 6,
+      "code": "FResizableRegion.region({required double initialExtent, required Widget Function(BuildContext, FResizableRegionData, Widget?) builder, double? minExtent, Widget? child, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FResizableRegion",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegion-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 788,
+      "length": 14,
+      "code": "{required double initialExtent}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 818,
+      "length": 10,
+      "code": "{double? minExtent}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 844,
+      "length": 8,
+      "code": "{required Widget Function(BuildContext, FResizableRegionData, Widget?) builder}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 907,
+      "length": 13,
+      "code": "IconData sunset",
+      "links": [],
+      "container": {
+        "name": "FIcons",
+        "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 1349,
+      "length": 5,
+      "code": "FThemeData get theme",
+      "links": [],
+      "container": {
+        "name": "FThemeBuildContext",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 1423,
+      "length": 16,
+      "code": "({double max, double min}) get offsetPercentage",
+      "links": [],
+      "container": {
+        "name": "FResizableRegionData",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegionData-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 1575,
+      "length": 16,
+      "code": "({double max, double min}) get offsetPercentage",
+      "links": [],
+      "container": {
+        "name": "FResizableRegionData",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegionData-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 1917,
+      "length": 10,
+      "code": "Color foreground",
+      "links": [],
+      "container": {
+        "name": "FColors",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 2047,
+      "length": 2,
+      "code": "TextStyle sm",
+      "links": [],
+      "container": {
+        "name": "FTypography",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FTypography-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 2073,
+      "length": 10,
+      "code": "Color foreground",
+      "links": [],
+      "container": {
+        "name": "FColors",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 2277,
+      "length": 2,
+      "code": "TextStyle sm",
+      "links": [],
+      "container": {
+        "name": "FTypography",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FTypography-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 2303,
+      "length": 10,
+      "code": "Color foreground",
+      "links": [],
+      "container": {
+        "name": "FColors",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors-class.html"
+      },
+      "documentation": ""
+    }
+  ]
 }

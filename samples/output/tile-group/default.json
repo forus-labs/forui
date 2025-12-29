@@ -98,5 +98,167 @@
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileMixin/tile.html"
     }
   ],
-  "tooltips": []
+  "tooltips": [
+    {
+      "offset": 32,
+      "length": 10,
+      "code": "FTileGroup({required List<FTileMixin> children, FTileGroupStyle Function(FTileGroupStyle)? style, ScrollController? scrollController, double? cacheExtent, double maxHeight = .infinity, DragStartBehavior dragStartBehavior = .start, ScrollPhysics physics = const ClampingScrollPhysics(), bool? enabled, FItemDivider divider = .indented, String? semanticsLabel, Widget? label, Widget? description, Widget? error, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FTileGroup",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileGroup-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 46,
+      "length": 6,
+      "code": "{Widget? label}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 79,
+      "length": 12,
+      "code": "{Widget? description}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 137,
+      "length": 9,
+      "code": "{required List<FTileMixin> children}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 154,
+      "length": 4,
+      "code": "FTile tile({required Widget title, FItemStyle Function(FItemStyle)? style, bool? enabled, bool selected = false, String? semanticsLabel, bool autofocus = false, FocusNode? focusNode, void Function(bool)? onFocusChange, void Function(bool)? onHoverChange, void Function(FWidgetStatesDelta)? onStateChange, void Function()? onPress, void Function()? onLongPress, void Function()? onSecondaryPress, void Function()? onSecondaryLongPress, Map<ShortcutActivator, Intent>? shortcuts, Map<Type, Action<Intent>>? actions, Widget? prefix, Widget? subtitle, Widget? details, Widget? suffix, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FTileMixin",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileMixin-mixin.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 166,
+      "length": 7,
+      "code": "{Widget? prefix}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 185,
+      "length": 11,
+      "code": "IconData user",
+      "links": [],
+      "container": {
+        "name": "FIcons",
+        "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 205,
+      "length": 6,
+      "code": "{required Widget title}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 249,
+      "length": 7,
+      "code": "{Widget? suffix}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 268,
+      "length": 19,
+      "code": "IconData chevronRight",
+      "links": [],
+      "container": {
+        "name": "FIcons",
+        "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 296,
+      "length": 8,
+      "code": "{void Function()? onPress}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 324,
+      "length": 4,
+      "code": "FTile tile({required Widget title, FItemStyle Function(FItemStyle)? style, bool? enabled, bool selected = false, String? semanticsLabel, bool autofocus = false, FocusNode? focusNode, void Function(bool)? onFocusChange, void Function(bool)? onHoverChange, void Function(FWidgetStatesDelta)? onStateChange, void Function()? onPress, void Function()? onLongPress, void Function()? onSecondaryPress, void Function()? onSecondaryLongPress, Map<ShortcutActivator, Intent>? shortcuts, Map<Type, Action<Intent>>? actions, Widget? prefix, Widget? subtitle, Widget? details, Widget? suffix, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FTileMixin",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileMixin-mixin.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 336,
+      "length": 7,
+      "code": "{Widget? prefix}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 355,
+      "length": 11,
+      "code": "IconData wifi",
+      "links": [],
+      "container": {
+        "name": "FIcons",
+        "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 375,
+      "length": 6,
+      "code": "{required Widget title}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 408,
+      "length": 8,
+      "code": "{Widget? details}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 451,
+      "length": 7,
+      "code": "{Widget? suffix}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 470,
+      "length": 19,
+      "code": "IconData chevronRight",
+      "links": [],
+      "container": {
+        "name": "FIcons",
+        "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 498,
+      "length": 8,
+      "code": "{void Function()? onPress}",
+      "links": [],
+      "documentation": ""
+    }
+  ]
 }

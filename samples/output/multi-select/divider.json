@@ -112,5 +112,174 @@
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectItemMixin/item.html"
     }
   ],
-  "tooltips": []
+  "tooltips": [
+    {
+      "offset": 32,
+      "length": 25,
+      "code": "FMultiSelect<String>.rich({required Widget Function(String) format, required List<FSelectItemMixin> children, FMultiValueControl<String>? control, FPopoverControl popoverControl, FMultiSelectStyle Function(FMultiSelectStyle)? style, bool autofocus, FocusNode? focusNode, Widget Function(BuildContext, FMultiSelectStyle, Set<WidgetState>)? prefixBuilder, Widget Function(BuildContext, FMultiSelectStyle, Set<WidgetState>)? suffixBuilder, Widget? label, Widget? description, bool enabled, void Function(Set<String>)? onSaved, void Function()? onReset, AutovalidateMode autovalidateMode, String? forceErrorText, String? Function(Set<String>) validator, Widget Function(BuildContext, String) errorBuilder, Widget? hint, bool keepHint, int Function(String, String)? sort, Widget Function(BuildContext, FMultiValueNotifier<String>, FMultiSelectStyle, String, Widget)? tagBuilder, TextAlign textAlign, TextDirection? textDirection, bool clearable, AlignmentGeometry contentAnchor, AlignmentGeometry fieldAnchor, FPortalConstraints contentConstraints, FPortalSpacing contentSpacing, FPortalOverflow contentOverflow, Offset contentOffset, FPopoverHideRegion contentHideRegion, Object? contentGroupId, Widget Function(BuildContext, FMultiSelectStyle) contentEmptyBuilder, ScrollController? contentScrollController, bool contentScrollHandles, ScrollPhysics contentPhysics, FItemDivider contentDivider, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FMultiSelect<String>",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FMultiSelect-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 61,
+      "length": 5,
+      "code": "{Widget? hint}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 99,
+      "length": 15,
+      "code": "{FItemDivider contentDivider}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 116,
+      "length": 4,
+      "code": "FItemDivider full",
+      "links": [],
+      "container": {
+        "name": "FItemDivider",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemDivider.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 124,
+      "length": 7,
+      "code": "{required Widget Function(String) format}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 144,
+      "length": 9,
+      "code": "{required List<FSelectItemMixin> children}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 161,
+      "length": 7,
+      "code": "FSelectSection<T> section<T>({required Widget label, required Map<String, T> items, FSelectSectionStyle Function(FSelectSectionStyle)? style, bool? enabled, FItemDivider divider = .none, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FSelectItemMixin",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectItemMixin-mixin.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 176,
+      "length": 6,
+      "code": "{required Widget label}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 212,
+      "length": 8,
+      "code": "{FItemDivider divider = .none}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 222,
+      "length": 8,
+      "code": "FItemDivider indented",
+      "links": [],
+      "container": {
+        "name": "FItemDivider",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemDivider.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 238,
+      "length": 6,
+      "code": "{required Map<String, String> items}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 323,
+      "length": 7,
+      "code": "FSelectSection<T> section<T>({required Widget label, required Map<String, T> items, FSelectSectionStyle Function(FSelectSectionStyle)? style, bool? enabled, FItemDivider divider = .none, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FSelectItemMixin",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectItemMixin-mixin.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 338,
+      "length": 6,
+      "code": "{required Widget label}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 374,
+      "length": 6,
+      "code": "{required Map<String, String> items}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 459,
+      "length": 4,
+      "code": "FSelectItem<T> item<T>({required Widget title, required T value, FItemStyle Function(FItemStyle)? style, bool? enabled, Widget? prefix, Widget? subtitle, Widget? Function(BuildContext, bool) suffixBuilder = _defaultSuffixBuilder, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FSelectItemMixin",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectItemMixin-mixin.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 464,
+      "length": 6,
+      "code": "{required Widget title}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 494,
+      "length": 6,
+      "code": "{required String value}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 512,
+      "length": 4,
+      "code": "FSelectItem<T> item<T>({required Widget title, required T value, FItemStyle Function(FItemStyle)? style, bool? enabled, Widget? prefix, Widget? subtitle, Widget? Function(BuildContext, bool) suffixBuilder = _defaultSuffixBuilder, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FSelectItemMixin",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectItemMixin-mixin.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 517,
+      "length": 6,
+      "code": "{required Widget title}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 547,
+      "length": 6,
+      "code": "{required String value}",
+      "links": [],
+      "documentation": ""
+    }
+  ]
 }

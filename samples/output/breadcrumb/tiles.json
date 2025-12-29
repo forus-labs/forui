@@ -113,5 +113,185 @@
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.html"
     }
   ],
-  "tooltips": []
+  "tooltips": [
+    {
+      "offset": 85,
+      "length": 11,
+      "code": "FBreadcrumb({required List<Widget> children, FBreadcrumbStyle Function(FBreadcrumbStyle)? style, Widget? divider, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FBreadcrumb",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumb-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 104,
+      "length": 9,
+      "code": "{required List<Widget> children}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 124,
+      "length": 15,
+      "code": "FBreadcrumbItem({required Widget child, bool current, bool autofocus, FocusNode? focusNode, void Function(bool)? onFocusChange, void Function(bool)? onHoverChange, void Function(Set<WidgetState>)? onStateChange, void Function()? onPress, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FBreadcrumbItem",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 140,
+      "length": 8,
+      "code": "{void Function()? onPress}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 156,
+      "length": 6,
+      "code": "{required Widget child}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 193,
+      "length": 30,
+      "code": "FBreadcrumbItem.collapsedTiles({required List<FTileGroup> menu, FPopoverMenuStyle Function(FPopoverMenuStyle)? popoverMenuStyle, FPopoverControl popoverControl, ScrollController? scrollController, double? cacheExtent, double maxHeight, DragStartBehavior dragStartBehavior, FItemDivider divider, AlignmentGeometry menuAnchor, AlignmentGeometry childAnchor, FPortalSpacing spacing, FPortalOverflow overflow, Offset offset, FPopoverHideRegion hideRegion, bool autofocus, FocusScopeNode? focusNode, void Function(bool)? onFocusChange, void Function(bool)? onHoverChange, void Function(Set<WidgetState>)? onStateChange, TraversalEdgeBehavior traversalEdgeBehavior, String? semanticsLabel, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FBreadcrumbItem",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 235,
+      "length": 5,
+      "code": "{required List<FTileGroup> menu}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 255,
+      "length": 10,
+      "code": "FTileGroup({required List<FTileMixin> children, FTileGroupStyle Function(FTileGroupStyle)? style, ScrollController? scrollController, double? cacheExtent, double maxHeight = .infinity, DragStartBehavior dragStartBehavior = .start, ScrollPhysics physics = const ClampingScrollPhysics(), bool? enabled, FItemDivider divider = .indented, String? semanticsLabel, Widget? label, Widget? description, Widget? error, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FTileGroup",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileGroup-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 281,
+      "length": 9,
+      "code": "{required List<FTileMixin> children}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 309,
+      "length": 5,
+      "code": "FTile({required Widget title, FItemStyle Function(FItemStyle)? style, bool? enabled, bool selected = false, String? semanticsLabel, bool autofocus = false, FocusNode? focusNode, void Function(bool)? onFocusChange, void Function(bool)? onHoverChange, void Function(FWidgetStatesDelta)? onStateChange, void Function()? onPress, void Function()? onLongPress, void Function()? onSecondaryPress, void Function()? onSecondaryLongPress, Map<ShortcutActivator, Intent>? shortcuts, Map<Type, Action<Intent>>? actions, Widget? prefix, Widget? subtitle, Widget? details, Widget? suffix, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FTile",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTile-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 315,
+      "length": 6,
+      "code": "{required Widget title}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 351,
+      "length": 8,
+      "code": "{void Function()? onPress}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 384,
+      "length": 5,
+      "code": "FTile({required Widget title, FItemStyle Function(FItemStyle)? style, bool? enabled, bool selected = false, String? semanticsLabel, bool autofocus = false, FocusNode? focusNode, void Function(bool)? onFocusChange, void Function(bool)? onHoverChange, void Function(FWidgetStatesDelta)? onStateChange, void Function()? onPress, void Function()? onLongPress, void Function()? onSecondaryPress, void Function()? onSecondaryLongPress, Map<ShortcutActivator, Intent>? shortcuts, Map<Type, Action<Intent>>? actions, Widget? prefix, Widget? subtitle, Widget? details, Widget? suffix, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FTile",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTile-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 390,
+      "length": 6,
+      "code": "{required Widget title}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 419,
+      "length": 8,
+      "code": "{void Function()? onPress}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 500,
+      "length": 15,
+      "code": "FBreadcrumbItem({required Widget child, bool current, bool autofocus, FocusNode? focusNode, void Function(bool)? onFocusChange, void Function(bool)? onHoverChange, void Function(Set<WidgetState>)? onStateChange, void Function()? onPress, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FBreadcrumbItem",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 516,
+      "length": 8,
+      "code": "{void Function()? onPress}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 532,
+      "length": 6,
+      "code": "{required Widget child}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 576,
+      "length": 15,
+      "code": "FBreadcrumbItem({required Widget child, bool current, bool autofocus, FocusNode? focusNode, void Function(bool)? onFocusChange, void Function(bool)? onHoverChange, void Function(Set<WidgetState>)? onStateChange, void Function()? onPress, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FBreadcrumbItem",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 592,
+      "length": 8,
+      "code": "{bool current}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 607,
+      "length": 6,
+      "code": "{required Widget child}",
+      "links": [],
+      "documentation": ""
+    }
+  ]
 }

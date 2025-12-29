@@ -98,5 +98,163 @@
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectItemMixin/section.html"
     }
   ],
-  "tooltips": []
+  "tooltips": [
+    {
+      "offset": 38,
+      "length": 20,
+      "code": "FSelect<String>.rich({required String Function(String) format, required List<FSelectItemMixin> children, FSelectControl<String>? control, FPopoverControl popoverControl, FSelectStyle Function(FSelectStyle)? style, bool autofocus, FocusNode? focusNode, Widget Function(BuildContext, FSelectStyle, Set<WidgetState>, Widget) builder, Widget Function(BuildContext, FSelectStyle, Set<WidgetState>)? prefixBuilder, Widget Function(BuildContext, FSelectStyle, Set<WidgetState>)? suffixBuilder, Widget? label, Widget? description, bool enabled, void Function(String?)? onSaved, void Function()? onReset, AutovalidateMode autovalidateMode, String? forceErrorText, String? Function(String?) validator, Widget Function(BuildContext, String) errorBuilder, String? hint, TextAlign textAlign, TextAlignVertical? textAlignVertical, TextDirection? textDirection, bool expands, MouseCursor mouseCursor, bool canRequestFocus, bool clearable, AlignmentGeometry contentAnchor, AlignmentGeometry fieldAnchor, FPortalConstraints contentConstraints, FPortalSpacing contentSpacing, FPortalOverflow contentOverflow, Offset contentOffset, FPopoverHideRegion contentHideRegion, Object? contentGroupId, bool autoHide, Widget Function(BuildContext, FSelectStyle) contentEmptyBuilder, ScrollController? contentScrollController, bool contentScrollHandles, ScrollPhysics contentPhysics, FItemDivider contentDivider, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FSelect<String>",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 62,
+      "length": 5,
+      "code": "{String? hint}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 91,
+      "length": 7,
+      "code": "{required String Function(String) format}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 111,
+      "length": 9,
+      "code": "{required List<FSelectItemMixin> children}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 128,
+      "length": 7,
+      "code": "FSelectSection<T> section<T>({required Widget label, required Map<String, T> items, FSelectSectionStyle Function(FSelectSectionStyle)? style, bool? enabled, FItemDivider divider = .none, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FSelectItemMixin",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectItemMixin-mixin.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 143,
+      "length": 6,
+      "code": "{required Widget label}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 185,
+      "length": 6,
+      "code": "{required Map<String, String> items}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 523,
+      "length": 7,
+      "code": "FSelectSection<T> section<T>({required Widget label, required Map<String, T> items, FSelectSectionStyle Function(FSelectSectionStyle)? style, bool? enabled, FItemDivider divider = .none, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FSelectItemMixin",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectItemMixin-mixin.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 538,
+      "length": 6,
+      "code": "{required Widget label}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 580,
+      "length": 6,
+      "code": "{required Map<String, String> items}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 810,
+      "length": 7,
+      "code": "FSelectSection<T> section<T>({required Widget label, required Map<String, T> items, FSelectSectionStyle Function(FSelectSectionStyle)? style, bool? enabled, FItemDivider divider = .none, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FSelectItemMixin",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectItemMixin-mixin.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 825,
+      "length": 6,
+      "code": "{required Widget label}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 869,
+      "length": 6,
+      "code": "{required Map<String, String> items}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 1209,
+      "length": 7,
+      "code": "FSelectSection<T> section<T>({required Widget label, required Map<String, T> items, FSelectSectionStyle Function(FSelectSectionStyle)? style, bool? enabled, FItemDivider divider = .none, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FSelectItemMixin",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectItemMixin-mixin.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 1224,
+      "length": 6,
+      "code": "{required Widget label}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 1257,
+      "length": 6,
+      "code": "{required Map<String, String> items}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 1579,
+      "length": 7,
+      "code": "FSelectSection<T> section<T>({required Widget label, required Map<String, T> items, FSelectSectionStyle Function(FSelectSectionStyle)? style, bool? enabled, FItemDivider divider = .none, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FSelectItemMixin",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectItemMixin-mixin.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 1594,
+      "length": 6,
+      "code": "{required Widget label}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 1642,
+      "length": 6,
+      "code": "{required Map<String, String> items}",
+      "links": [],
+      "documentation": ""
+    }
+  ]
 }

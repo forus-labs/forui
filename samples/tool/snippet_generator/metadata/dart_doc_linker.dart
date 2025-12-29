@@ -4,74 +4,20 @@ import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/dart/ast/visitor.dart';
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/file_system/overlay_file_system.dart';
-import 'package:collection/collection.dart';
 import 'package:path/path.dart' as p;
 
 import '../main.dart';
 import '../snippet.dart';
+import 'link.dart';
 
-/// Returns the URL for [element], or null if it shouldn't be linked.
-String? url(List<Package> packages, Element element) {
-  final n = element.library?.uri.pathSegments.first;
-  if (packages.firstWhereOrNull((p) => p.name == n) case Package(name: final package, :final version)) {
-    final type = switch (element) {
-      FieldElement(:final enclosingElement) => enclosingElement.name,
-      PropertyAccessorElement(:final enclosingElement) => enclosingElement.name,
-      ConstructorElement(:final enclosingElement) => enclosingElement.name,
-      MethodElement(:final enclosingElement?) => enclosingElement.name,
-      _ => element.name,
-    };
-
-    var baseUrl = '';
-    for (final Package(:library) in packages) {
-      if (_barrel(library, type!)?.name case final name?) {
-        baseUrl = 'https://pub.dev/documentation/$package/$version/${name.isEmpty ? package : name}';
-        break;
-      }
-    }
-
-    assert(baseUrl.isNotEmpty, 'Could not find barrel library for type "$type" in package "$package".');
-
-    return switch (element) {
-      TopLevelFunctionElement(:final name) => '$baseUrl/$name.html',
-      EnumElement(:final name) => '$baseUrl/$name.html',
-      MixinElement(:final name) => '$baseUrl/$name-mixin.html',
-      ClassElement(:final name) || InterfaceElement(:final name) => '$baseUrl/$name-class.html',
-      FieldElement(:final enclosingElement, :final name, :final isEnumConstant) when isEnumConstant =>
-      '$baseUrl/${enclosingElement.name}.html#$name',
-      FieldElement(:final enclosingElement, :final name, :final isConst) when isConst =>
-      '$baseUrl/${enclosingElement.name}/$name-constant.html',
-      FieldElement(:final enclosingElement, :final name) => '$baseUrl/${enclosingElement.name}/$name.html',
-      PropertyAccessorElement(:final enclosingElement, :final name) => '$baseUrl/${enclosingElement.name}/$name.html',
-      ConstructorElement(:final enclosingElement, :final name?) =>
-      '$baseUrl/${enclosingElement.name}/${enclosingElement.name}${name == 'new' ? '' : '.$name'}.html',
-      MethodElement(:final enclosingElement?, :final name) => '$baseUrl/${enclosingElement.name}/$name.html',
-      _ => null,
-    };
-  }
-
-  return null;
-}
-
-/// Returns the deepest barrel library that exports [type].
-LibraryElement? _barrel(LibraryElement library, String type) {
-  if (library.exportNamespace.get2(type) == null) {
-    return null;
-  }
-
-  for (final lib in library.exportedLibraries.where((l) => !l.uri.pathSegments.contains('src'))) {
-    if (lib.exportNamespace.get2(type) != null) {
-      return _barrel(lib, type);
-    }
-  }
-
-  return library;
-}
-
-/// Links DartDoc URLs in [Snippet]s.
+/// A visitor that adds Dartdoc links to AST nodes.
 class DartDocLinker extends RecursiveAstVisitor<void> {
   static int _monotonic = 0;
 
+  /// Generates DartDoc links for identifiers in [code] that belong to [packages].
+  ///
+  /// Creates a synthetic file from [code], resolves it using [session], and visits the AST to find linkable identifiers.
+  /// The [baseOffset] is subtracted from offsets to account for any prefix removed from the original code.
   static Future<List<DartDocLink>> link(
     AnalysisSession session,
     OverlayResourceProvider overlay,
@@ -83,25 +29,38 @@ class DartDocLinker extends RecursiveAstVisitor<void> {
     overlay.setOverlay(syntheticPath, content: code, modificationStamp: DateTime.now().millisecondsSinceEpoch);
 
     final result = (await session.getResolvedUnit(syntheticPath)) as ResolvedUnitResult;
-    final linker = DartDocLinker._(packages, baseOffset);
+    final linker = DartDocLinker(packages, baseOffset);
     result.unit.visitChildren(linker);
 
     return linker.links;
   }
 
   final List<DartDocLink> links = [];
-  final int _baseOffset;
-  final List<Package> _packages;
+  final int baseOffset;
+  final List<Package> packages;
 
-  DartDocLinker._(this._packages, this._baseOffset);
+  DartDocLinker(this.packages, this.baseOffset);
 
   /// Links type annotations to their class/enum/mixin documentation.
   ///
   /// Handles standalone type references like `FButton`, `String`, or `List<int>`. Skips types that are part of
   /// constructor calls (e.g., `FButton` in `FButton()`) since those are handled by [visitInstanceCreationExpression].
+  /// Also skips types in TypeLiterals used as targets for static method/property access.
   @override
   void visitNamedType(NamedType node) {
-    if (node.parent is! ConstructorName && node.element != null) {
+    // Skip types in constructor names (handled by visitInstanceCreationExpression).
+    if (node.parent is ConstructorName) {
+      super.visitNamedType(node);
+      return;
+    }
+
+    // Skip types in TypeLiterals used as targets for static access (handled by visitMethodInvocation/visitPrefixedIdentifier).
+    if (node.parent case TypeLiteral(parent: MethodInvocation() || PrefixedIdentifier())) {
+      super.visitNamedType(node);
+      return;
+    }
+
+    if (node.element != null) {
       _link(node.offset, node.length, node.element!);
     }
     super.visitNamedType(node);
@@ -187,6 +146,19 @@ class DartDocLinker extends RecursiveAstVisitor<void> {
     super.visitInstanceCreationExpression(node);
   }
 
+  /// Links dot shorthand **property** access to the property's field documentation.
+  ///
+  /// Handles dot shorthand syntax like `.zero` or `.infinity`.
+  @override
+  void visitDotShorthandPropertyAccess(DotShorthandPropertyAccess node) {
+    if (node.propertyName.element case final element?) {
+      // Dot shorthand property access are synthetic and treated as property accesses, e.g. FItemDivider get full.
+      // We need to link to the non-synthetic element instead.
+      _link(node.propertyName.offset, node.propertyName.length, element.nonSynthetic);
+    }
+    super.visitDotShorthandPropertyAccess(node);
+  }
+
   /// Links dot shorthand **method** invocations to their method documentation.
   ///
   /// Handles dot shorthand syntax like `.method()`.
@@ -207,19 +179,6 @@ class DartDocLinker extends RecursiveAstVisitor<void> {
       _link(node.constructorName.offset, node.constructorName.length, element);
     }
     super.visitDotShorthandConstructorInvocation(node);
-  }
-
-  /// Links dot shorthand **property** access to the property's field documentation.
-  ///
-  /// Handles dot shorthand syntax like `.zero` or `.infinity`.
-  @override
-  void visitDotShorthandPropertyAccess(DotShorthandPropertyAccess node) {
-    if (node.propertyName.element case final element?) {
-      // Dot shorthand property access are synthetic and treated as property accesses, e.g. FItemDivider get full.
-      // We need to link to the non-synthetic element instead.
-      _link(node.propertyName.offset, node.propertyName.length, element.nonSynthetic);
-    }
-    super.visitDotShorthandPropertyAccess(node);
   }
 
   /// Links named parameters in top level function/constructor/method invocations to:
@@ -256,8 +215,8 @@ class DartDocLinker extends RecursiveAstVisitor<void> {
 
   /// Adds a link for [element] at the given [offset] and [length].
   void _link(int offset, int length, Element element) {
-    if (url(_packages, element) case final url?) {
-      links.add(DartDocLink(offset: offset, baseOffset: _baseOffset, length: length, url: url));
+    if (dartDocUrl(packages, element) case final url?) {
+      links.add(DartDocLink(offset: offset, baseOffset: baseOffset, length: length, url: url));
     }
   }
 }

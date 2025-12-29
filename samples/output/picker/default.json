@@ -23,5 +23,42 @@
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.picker/FPickerWheel/FPickerWheel.html"
     }
   ],
-  "tooltips": []
+  "tooltips": [
+    {
+      "offset": 44,
+      "length": 7,
+      "code": "FPicker({required List<Widget> children, FPickerControl control = const .managed(), FPickerStyle Function(FPickerStyle)? style, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FPicker",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.picker/FPicker-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 55,
+      "length": 9,
+      "code": "{required List<Widget> children}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 71,
+      "length": 12,
+      "code": "FPickerWheel({required List<Widget> children, bool loop, int flex, double? itemExtent, bool autofocus, FocusNode? focusNode, void Function(bool)? onFocusChange, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FPickerWheel",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.picker/FPickerWheel-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 91,
+      "length": 9,
+      "code": "{required List<Widget> children}",
+      "links": [],
+      "documentation": ""
+    }
+  ]
 }

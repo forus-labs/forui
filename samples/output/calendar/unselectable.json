@@ -48,5 +48,70 @@
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendar/end.html"
     }
   ],
-  "tooltips": []
+  "tooltips": [
+    {
+      "offset": 32,
+      "length": 9,
+      "code": "FCalendar({required FCalendarControl<Object?> control, FCalendarStyle Function(FCalendarStyle)? style, Widget Function(BuildContext, ({bool current, DateTime date, bool selectable, bool selected, FCalendarDayPickerStyle style, bool today}), Widget?) dayBuilder = defaultDayBuilder, void Function(DateTime)? onMonthChange, void Function(DateTime)? onPress, void Function(DateTime)? onLongPress, FCalendarPickerType initialType = .day, DateTime? start, DateTime? end, DateTime? today, DateTime? initialMonth, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FCalendar",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendar-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 45,
+      "length": 8,
+      "code": "{required FCalendarControl<Object?> control}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 55,
+      "length": 12,
+      "code": "FCalendarControl<Set<DateTime>> managedDates({FCalendarController<Set<DateTime>>? controller, Set<DateTime>? initial, bool Function(DateTime)? selectable, bool truncateAndStripTimezone = true, void Function(Set<DateTime>)? onChange})",
+      "links": [],
+      "container": {
+        "name": "FCalendarControl",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarControl-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 73,
+      "length": 8,
+      "code": "{Set<DateTime>? initial}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 134,
+      "length": 11,
+      "code": "{bool Function(DateTime)? selectable}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 243,
+      "length": 6,
+      "code": "{DateTime? start}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 268,
+      "length": 6,
+      "code": "{DateTime? today}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 300,
+      "length": 4,
+      "code": "{DateTime? end}",
+      "links": [],
+      "documentation": ""
+    }
+  ]
 }

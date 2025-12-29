@@ -58,5 +58,88 @@
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/value.html"
     }
   ],
-  "tooltips": []
+  "tooltips": [
+    {
+      "offset": 32,
+      "length": 24,
+      "code": "FSelectTileGroup<int>.builder({required FSelectTile<int>? Function(BuildContext, int) tileBuilder, int? count, FMultiValueControl<int>? control, ScrollController? scrollController, FTileGroupStyle? style, double? cacheExtent, double maxHeight = .infinity, DragStartBehavior dragStartBehavior = .start, ScrollPhysics physics = const ClampingScrollPhysics(), FItemDivider divider = .indented, Widget? label, Widget? description, String? semanticsLabel, Widget Function(BuildContext, String) errorBuilder = FFormFieldProperties.defaultErrorBuilder, void Function(Set<int>?)? onSaved, void Function()? onReset, String? Function(Set<int>?)? validator, String? forceErrorText, bool enabled = true, AutovalidateMode autovalidateMode = .disabled, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FSelectTileGroup<int>",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTileGroup-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 60,
+      "length": 8,
+      "code": "{FMultiValueControl<int>? control}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 76,
+      "length": 7,
+      "code": "FMultiValueControl<int>.managed({FMultiValueNotifier<int>? controller, Set<int>? initial, int min, int? max, void Function(Set<int>)? onChange})",
+      "links": [],
+      "container": {
+        "name": "FMultiValueControl",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 84,
+      "length": 8,
+      "code": "{Set<int>? initial}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 101,
+      "length": 6,
+      "code": "{Widget? label}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 143,
+      "length": 10,
+      "code": "{double maxHeight = .infinity}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 161,
+      "length": 12,
+      "code": "{required FSelectTile<int>? Function(BuildContext, int) tileBuilder}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 201,
+      "length": 4,
+      "code": "FSelectTile<int>.tile({required Widget title, required int value, FItemStyle Function(FItemStyle)? style, Widget checkedIcon, Widget uncheckedIcon, Widget? subtitle, Widget? details, String? semanticsLabel, bool? enabled, bool autofocus, FocusNode? focusNode, void Function(bool)? onFocusChange, void Function(bool)? onHoverChange, void Function(FWidgetStatesDelta)? onStatesChange, Map<ShortcutActivator, Intent>? shortcuts, Map<Type, Action<Intent>>? actions, Widget? suffix, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FSelectTile",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 206,
+      "length": 6,
+      "code": "{required Widget title}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 234,
+      "length": 6,
+      "code": "{required int value}",
+      "links": [],
+      "documentation": ""
+    }
+  ]
 }

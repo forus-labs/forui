@@ -223,5 +223,375 @@
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverController/toggle.html"
     }
   ],
-  "tooltips": []
+  "tooltips": [
+    {
+      "offset": 32,
+      "length": 7,
+      "code": "FHeader({Widget title, FHeaderStyle Function(FHeaderStyle)? style, List<Widget> suffixes, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FHeader",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.header/FHeader-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 43,
+      "length": 6,
+      "code": "{Widget title}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 78,
+      "length": 9,
+      "code": "{List<Widget> suffixes}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 94,
+      "length": 18,
+      "code": "FPopoverMenu.tiles({FPopoverControl control = const .managed(), ScrollController? scrollController, FPopoverMenuStyle Function(FPopoverMenuStyle)? style, double? cacheExtent, double maxHeight = .infinity, DragStartBehavior dragStartBehavior = .start, FItemDivider divider = .full, AlignmentGeometry menuAnchor = .topCenter, AlignmentGeometry childAnchor = .bottomCenter, FPortalSpacing spacing = const .spacing(4), FPortalOverflow overflow = .flip, Offset offset = .zero, Object? groupId, FPopoverHideRegion hideRegion = .excludeChild, void Function()? onTapHide, String? barrierSemanticsLabel, bool barrierSemanticsDismissible = true, String? semanticsLabel, bool? autofocus, FocusScopeNode? focusNode, void Function(bool)? onFocusChange, TraversalEdgeBehavior? traversalEdgeBehavior, List<FTileGroupMixin> Function(BuildContext, FPopoverController, List<FTileGroupMixin>?) menuBuilder = _defaultTileBuilder, List<FTileGroupMixin>? menu, Widget Function(BuildContext, FPopoverController, Widget?) builder = _builder, Widget? child, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FPopoverMenu",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover_menu/FPopoverMenu-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 120,
+      "length": 10,
+      "code": "{bool? autofocus}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 143,
+      "length": 11,
+      "code": "{AlignmentGeometry menuAnchor = .topCenter}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 172,
+      "length": 12,
+      "code": "{AlignmentGeometry childAnchor = .bottomCenter}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 205,
+      "length": 5,
+      "code": "{List<FTileGroupMixin>? menu}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 222,
+      "length": 5,
+      "code": "FTileGroup group({required List<FTileMixin> children, FTileGroupStyle Function(FTileGroupStyle)? style, ScrollController? scrollController, double? cacheExtent, double maxHeight = .infinity, DragStartBehavior dragStartBehavior = .start, ScrollPhysics physics = const ClampingScrollPhysics(), bool? enabled, FItemDivider divider = .indented, String? semanticsLabel, Widget? label, Widget? description, Widget? error, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FTileGroupMixin",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileGroupMixin-mixin.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 239,
+      "length": 9,
+      "code": "{required List<FTileMixin> children}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 264,
+      "length": 4,
+      "code": "FTile tile({required Widget title, FItemStyle Function(FItemStyle)? style, bool? enabled, bool selected = false, String? semanticsLabel, bool autofocus = false, FocusNode? focusNode, void Function(bool)? onFocusChange, void Function(bool)? onHoverChange, void Function(FWidgetStatesDelta)? onStateChange, void Function()? onPress, void Function()? onLongPress, void Function()? onSecondaryPress, void Function()? onSecondaryLongPress, Map<ShortcutActivator, Intent>? shortcuts, Map<Type, Action<Intent>>? actions, Widget? prefix, Widget? subtitle, Widget? details, Widget? suffix, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FTileMixin",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileMixin-mixin.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 284,
+      "length": 7,
+      "code": "{Widget? prefix}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 303,
+      "length": 11,
+      "code": "IconData user",
+      "links": [],
+      "container": {
+        "name": "FIcons",
+        "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 331,
+      "length": 6,
+      "code": "{required Widget title}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 383,
+      "length": 8,
+      "code": "{void Function()? onPress}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 427,
+      "length": 4,
+      "code": "FTile tile({required Widget title, FItemStyle Function(FItemStyle)? style, bool? enabled, bool selected = false, String? semanticsLabel, bool autofocus = false, FocusNode? focusNode, void Function(bool)? onFocusChange, void Function(bool)? onHoverChange, void Function(FWidgetStatesDelta)? onStateChange, void Function()? onPress, void Function()? onLongPress, void Function()? onSecondaryPress, void Function()? onSecondaryLongPress, Map<ShortcutActivator, Intent>? shortcuts, Map<Type, Action<Intent>>? actions, Widget? prefix, Widget? subtitle, Widget? details, Widget? suffix, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FTileMixin",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileMixin-mixin.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 447,
+      "length": 7,
+      "code": "{Widget? prefix}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 466,
+      "length": 16,
+      "code": "IconData paperclip",
+      "links": [],
+      "container": {
+        "name": "FIcons",
+        "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 499,
+      "length": 6,
+      "code": "{required Widget title}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 551,
+      "length": 8,
+      "code": "{void Function()? onPress}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 595,
+      "length": 4,
+      "code": "FTile tile({required Widget title, FItemStyle Function(FItemStyle)? style, bool? enabled, bool selected = false, String? semanticsLabel, bool autofocus = false, FocusNode? focusNode, void Function(bool)? onFocusChange, void Function(bool)? onHoverChange, void Function(FWidgetStatesDelta)? onStateChange, void Function()? onPress, void Function()? onLongPress, void Function()? onSecondaryPress, void Function()? onSecondaryLongPress, Map<ShortcutActivator, Intent>? shortcuts, Map<Type, Action<Intent>>? actions, Widget? prefix, Widget? subtitle, Widget? details, Widget? suffix, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FTileMixin",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileMixin-mixin.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 615,
+      "length": 7,
+      "code": "{Widget? prefix}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 634,
+      "length": 13,
+      "code": "IconData qrCode",
+      "links": [],
+      "container": {
+        "name": "FIcons",
+        "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 664,
+      "length": 6,
+      "code": "{required Widget title}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 714,
+      "length": 8,
+      "code": "{void Function()? onPress}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 778,
+      "length": 5,
+      "code": "FTileGroup group({required List<FTileMixin> children, FTileGroupStyle Function(FTileGroupStyle)? style, ScrollController? scrollController, double? cacheExtent, double maxHeight = .infinity, DragStartBehavior dragStartBehavior = .start, ScrollPhysics physics = const ClampingScrollPhysics(), bool? enabled, FItemDivider divider = .indented, String? semanticsLabel, Widget? label, Widget? description, Widget? error, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FTileGroupMixin",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileGroupMixin-mixin.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 795,
+      "length": 9,
+      "code": "{required List<FTileMixin> children}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 820,
+      "length": 4,
+      "code": "FTile tile({required Widget title, FItemStyle Function(FItemStyle)? style, bool? enabled, bool selected = false, String? semanticsLabel, bool autofocus = false, FocusNode? focusNode, void Function(bool)? onFocusChange, void Function(bool)? onHoverChange, void Function(FWidgetStatesDelta)? onStateChange, void Function()? onPress, void Function()? onLongPress, void Function()? onSecondaryPress, void Function()? onSecondaryLongPress, Map<ShortcutActivator, Intent>? shortcuts, Map<Type, Action<Intent>>? actions, Widget? prefix, Widget? subtitle, Widget? details, Widget? suffix, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FTileMixin",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileMixin-mixin.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 840,
+      "length": 7,
+      "code": "{Widget? prefix}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 859,
+      "length": 11,
+      "code": "IconData list",
+      "links": [],
+      "container": {
+        "name": "FIcons",
+        "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 887,
+      "length": 6,
+      "code": "{required Widget title}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 933,
+      "length": 8,
+      "code": "{void Function()? onPress}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 977,
+      "length": 4,
+      "code": "FTile tile({required Widget title, FItemStyle Function(FItemStyle)? style, bool? enabled, bool selected = false, String? semanticsLabel, bool autofocus = false, FocusNode? focusNode, void Function(bool)? onFocusChange, void Function(bool)? onHoverChange, void Function(FWidgetStatesDelta)? onStateChange, void Function()? onPress, void Function()? onLongPress, void Function()? onSecondaryPress, void Function()? onSecondaryLongPress, Map<ShortcutActivator, Intent>? shortcuts, Map<Type, Action<Intent>>? actions, Widget? prefix, Widget? subtitle, Widget? details, Widget? suffix, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FTileMixin",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileMixin-mixin.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 997,
+      "length": 7,
+      "code": "{Widget? prefix}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 1016,
+      "length": 17,
+      "code": "IconData layoutGrid",
+      "links": [],
+      "container": {
+        "name": "FIcons",
+        "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 1050,
+      "length": 6,
+      "code": "{required Widget title}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 1096,
+      "length": 8,
+      "code": "{void Function()? onPress}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 1166,
+      "length": 8,
+      "code": "{Widget Function(BuildContext, FPopoverController, Widget?) builder = _builder}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 1197,
+      "length": 13,
+      "code": "FHeaderAction({required Widget icon, required void Function()? onPress, FHeaderActionStyle? style, String? semanticsLabel, bool selected = false, bool autofocus = false, FocusNode? focusNode, void Function(bool)? onFocusChange, void Function(bool)? onHoverChange, void Function(FWidgetStatesDelta)? onStateChange, void Function()? onLongPress, void Function()? onSecondaryPress, void Function()? onSecondaryLongPress, Map<ShortcutActivator, Intent>? shortcuts, Map<Type, Action<Intent>>? actions, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FHeaderAction",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.header/FHeaderAction-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 1220,
+      "length": 5,
+      "code": "{required Widget icon}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 1237,
+      "length": 15,
+      "code": "IconData ellipsis",
+      "links": [],
+      "container": {
+        "name": "FIcons",
+        "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 1263,
+      "length": 8,
+      "code": "{required void Function()? onPress}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 1283,
+      "length": 6,
+      "code": "Future<void> toggle()",
+      "links": [],
+      "container": {
+        "name": "FPopoverController",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverController-class.html"
+      },
+      "documentation": ""
+    }
+  ]
 }

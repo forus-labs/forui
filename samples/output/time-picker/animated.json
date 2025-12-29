@@ -68,5 +68,121 @@
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTime/FTime.html"
     }
   ],
-  "tooltips": []
+  "tooltips": [
+    {
+      "offset": 303,
+      "length": 21,
+      "code": "FTimePickerController({FTime time = const FTime()})",
+      "links": [],
+      "container": {
+        "name": "FTimePickerController",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_picker/FTimePickerController-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 325,
+      "length": 5,
+      "code": "{FTime time = const FTime()}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 332,
+      "length": 3,
+      "code": "FTime.now()",
+      "links": [],
+      "container": {
+        "name": "FTime",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTime-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 388,
+      "length": 7,
+      "code": "void dispose()",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 577,
+      "length": 11,
+      "code": "FTimePicker({FTimePickerControl control = const .managed(), FTimePickerStyle Function(FTimePickerStyle)? style, bool hour24 = false, int hourInterval = 1, int minuteInterval = 1, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FTimePicker",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_picker/FTimePicker-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 589,
+      "length": 8,
+      "code": "{FTimePickerControl control = const .managed()}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 599,
+      "length": 7,
+      "code": "FTimePickerControl.managed({FTimePickerController? controller, FTime? initial, void Function(FTime)? onChange})",
+      "links": [],
+      "container": {
+        "name": "FTimePickerControl",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_picker/FTimePickerControl-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 607,
+      "length": 11,
+      "code": "{FTimePickerController? controller}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 649,
+      "length": 7,
+      "code": "FButton({required void Function()? onPress, required Widget child, FBaseButtonStyle Function(FButtonStyle) style = _primary, void Function()? onLongPress, void Function()? onSecondaryPress, void Function()? onSecondaryLongPress, bool autofocus = false, FocusNode? focusNode, void Function(bool)? onFocusChange, void Function(bool)? onHoverChange, void Function(FWidgetStatesDelta)? onStateChange, bool selected = false, Map<ShortcutActivator, Intent>? shortcuts, Map<Type, Action<Intent>>? actions, MainAxisSize mainAxisSize = .max, MainAxisAlignment mainAxisAlignment = .center, CrossAxisAlignment crossAxisAlignment = .center, TextBaseline? textBaseline, Widget? prefix, Widget? suffix, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FButton",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 666,
+      "length": 6,
+      "code": "{required Widget child}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 709,
+      "length": 8,
+      "code": "{required void Function()? onPress}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 736,
+      "length": 9,
+      "code": "Future<void> animateTo(FTime value, {Duration duration = const Duration(milliseconds: 300), Curve curve = Curves.easeOutCubic})",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 757,
+      "length": 5,
+      "code": "FTime([int hour = 0, int minute = 0])",
+      "links": [],
+      "container": {
+        "name": "FTime",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTime-class.html"
+      },
+      "documentation": ""
+    }
+  ]
 }

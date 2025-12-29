@@ -18,5 +18,31 @@
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateField/description.html"
     }
   ],
-  "tooltips": []
+  "tooltips": [
+    {
+      "offset": 38,
+      "length": 16,
+      "code": "FDateField.input({FDateFieldControl control, FDateFieldStyle Function(FDateFieldStyle)? style, bool autofocus, FocusNode? focusNode, Widget Function(BuildContext, FDateFieldStyle, Set<WidgetState>, Widget) builder, Widget Function(BuildContext, FDateFieldStyle, Set<WidgetState>)? prefixBuilder, Widget Function(BuildContext, FDateFieldStyle, Set<WidgetState>)? suffixBuilder, TextInputAction? textInputAction, TextAlign textAlign, TextAlignVertical? textAlignVertical, TextDirection? textDirection, bool expands, void Function()? onEditingComplete, void Function(DateTime)? onSubmit, MouseCursor? mouseCursor, bool canRequestFocus, bool clearable, int baselineInputYear, Widget? label, Widget? description, bool enabled, void Function(DateTime?)? onSaved, void Function()? onReset, AutovalidateMode autovalidateMode, String? forceErrorText, Widget Function(BuildContext, String) errorBuilder, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FDateField",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateField-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 58,
+      "length": 6,
+      "code": "{Widget? label}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 93,
+      "length": 12,
+      "code": "{Widget? description}",
+      "links": [],
+      "documentation": ""
+    }
+  ]
 }

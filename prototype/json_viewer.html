@@ -247,13 +247,12 @@
       text-decoration: underline;
       text-decoration-style: dotted;
       text-decoration-color: #888;
-      cursor: help;
     }
 
     .tooltip-popup {
       position: fixed;
-      max-width: 500px;
-      max-height: 400px;
+      max-width: 700px;
+      max-height: 500px;
       overflow-y: auto;
       background: #2d2d2d;
       border: 1px solid #555;
@@ -341,53 +340,106 @@
       return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
     }
 
-    // Render source code with links and tooltips applied to a single line
-    function renderLineWithAnnotations(lineText, links, tooltips, lineStartOffset) {
-      const lineEndOffset = lineStartOffset + lineText.length;
+    // Render text with links applied (helper for renderLineWithAnnotations)
+    // insideTooltip: if true, don't add title attribute (avoid double tooltip)
+    function renderWithLinks(text, links, baseOffset, insideTooltip = false) {
+      const relevantLinks = links.filter(link =>
+        link.start < baseOffset + text.length && link.end > baseOffset
+      );
 
-      // Collect all annotations (links and tooltips) that overlap this line
-      const annotations = [];
+      if (!relevantLinks.length) return escapeHtml(text);
 
-      for (const link of (links || [])) {
-        if (link.offset < lineEndOffset && (link.offset + link.length) > lineStartOffset) {
-          annotations.push({ ...link, type: 'link' });
-        }
-      }
-
-      for (let i = 0; i < (tooltips || []).length; i++) {
-        const tip = tooltips[i];
-        if (tip.offset < lineEndOffset && (tip.offset + tip.length) > lineStartOffset) {
-          annotations.push({ ...tip, type: 'tooltip', index: i });
-        }
-      }
-
-      if (!annotations.length) return escapeHtml(lineText);
-
-      // Sort by offset
-      annotations.sort((a, b) => a.offset - b.offset);
+      relevantLinks.sort((a, b) => a.start - b.start);
 
       let result = '';
       let pos = 0;
 
-      for (const ann of annotations) {
-        const start = Math.max(0, ann.offset - lineStartOffset);
-        const end = Math.min(lineText.length, ann.offset + ann.length - lineStartOffset);
+      for (const link of relevantLinks) {
+        const start = Math.max(0, link.start - baseOffset);
+        const end = Math.min(text.length, link.end - baseOffset);
+
+        if (start < pos) continue; // Skip overlapping links
 
         if (start > pos) {
-          result += escapeHtml(lineText.slice(pos, start));
+          result += escapeHtml(text.slice(pos, start));
         }
 
-        const text = lineText.slice(start, end);
-        if (ann.type === 'link') {
-          result += `<a href="${escapeHtml(ann.url)}" target="_blank" title="${escapeHtml(ann.url)}">${escapeHtml(text)}</a>`;
-        } else {
-          result += `<span class="tooltip-trigger" data-tooltip="${ann.index}">${escapeHtml(text)}</span>`;
-        }
+        const titleAttr = insideTooltip ? '' : ` title="${escapeHtml(link.data.url)}"`;
+        result += `<a href="${escapeHtml(link.data.url)}" target="_blank"${titleAttr}>${escapeHtml(text.slice(start, end))}</a>`;
         pos = end;
       }
 
+      if (pos < text.length) {
+        result += escapeHtml(text.slice(pos));
+      }
+
+      return result;
+    }
+
+    // Render source code with links and tooltips applied to a single line
+    // Tooltips are outer spans, links can be nested inside them
+    function renderLineWithAnnotations(lineText, links, tooltips, lineStartOffset) {
+      const lineEndOffset = lineStartOffset + lineText.length;
+
+      // Convert links to line-relative coordinates
+      const lineLinks = [];
+      for (const link of (links || [])) {
+        if (link.offset < lineEndOffset && (link.offset + link.length) > lineStartOffset) {
+          lineLinks.push({
+            start: Math.max(0, link.offset - lineStartOffset),
+            end: Math.min(lineText.length, link.offset + link.length - lineStartOffset),
+            data: link
+          });
+        }
+      }
+
+      // Convert tooltips to line-relative coordinates
+      const lineTooltips = [];
+      for (let i = 0; i < (tooltips || []).length; i++) {
+        const tip = tooltips[i];
+        if (tip.offset < lineEndOffset && (tip.offset + tip.length) > lineStartOffset) {
+          lineTooltips.push({
+            start: Math.max(0, tip.offset - lineStartOffset),
+            end: Math.min(lineText.length, tip.offset + tip.length - lineStartOffset),
+            data: tip,
+            index: i
+          });
+        }
+      }
+
+      if (!lineTooltips.length && !lineLinks.length) return escapeHtml(lineText);
+
+      // If no tooltips, just render with links
+      if (!lineTooltips.length) {
+        return renderWithLinks(lineText, lineLinks, 0);
+      }
+
+      // Sort tooltips by start position
+      lineTooltips.sort((a, b) => a.start - b.start);
+
+      let result = '';
+      let pos = 0;
+
+      for (const tooltip of lineTooltips) {
+        // Skip overlapping tooltips
+        if (tooltip.start < pos) continue;
+
+        // Add text before this tooltip (with links)
+        if (tooltip.start > pos) {
+          result += renderWithLinks(lineText.slice(pos, tooltip.start), lineLinks, pos);
+        }
+
+        // Render tooltip content with contained links (no title attr to avoid double tooltip)
+        const tooltipText = lineText.slice(tooltip.start, tooltip.end);
+        const tooltipContent = renderWithLinks(tooltipText, lineLinks, tooltip.start, true);
+        result += `<span class="tooltip-trigger" data-tooltip="${tooltip.index}">${tooltipContent}</span>`;
+
+        pos = tooltip.end;
+      }
+
+      // Add remaining text (with links)
       if (pos < lineText.length) {
-        result += escapeHtml(lineText.slice(pos));
+        result += renderWithLinks(lineText.slice(pos), lineLinks, pos);
       }
 
       return result;
@@ -547,6 +599,8 @@
 
     // Setup tooltip handlers
     let activeTooltip = null;
+    let tooltipHideTimeout = null;
+    const TOOLTIP_DURATION = 100; // 100ms
 
     function setupTooltips(tooltips) {
       document.querySelectorAll('.tooltip-trigger').forEach(el => {
@@ -555,12 +609,22 @@
         if (!tip) return;
 
         el.addEventListener('mouseenter', (e) => showTooltip(e, tip));
-        el.addEventListener('mouseleave', hideTooltip);
+        el.addEventListener('mouseleave', scheduleHideTooltip);
       });
     }
 
     function showTooltip(e, tip) {
-      hideTooltip();
+      // Cancel any pending hide
+      if (tooltipHideTimeout) {
+        clearTimeout(tooltipHideTimeout);
+        tooltipHideTimeout = null;
+      }
+
+      // Remove existing tooltip
+      if (activeTooltip) {
+        activeTooltip.remove();
+        activeTooltip = null;
+      }
 
       const popup = document.createElement('div');
       popup.className = 'tooltip-popup';
@@ -577,6 +641,16 @@
 
       popup.innerHTML = html;
       document.body.appendChild(popup);
+
+      // Keep tooltip visible when cursor is inside it
+      popup.addEventListener('mouseenter', () => {
+        if (tooltipHideTimeout) {
+          clearTimeout(tooltipHideTimeout);
+          tooltipHideTimeout = null;
+        }
+      });
+      // Immediately hide when leaving the popup
+      popup.addEventListener('mouseleave', hideTooltip);
 
       // Position the tooltip
       const rect = e.target.getBoundingClientRect();
@@ -599,7 +673,18 @@
       activeTooltip = popup;
     }
 
+    function scheduleHideTooltip() {
+      if (tooltipHideTimeout) {
+        clearTimeout(tooltipHideTimeout);
+      }
+      tooltipHideTimeout = setTimeout(hideTooltip, TOOLTIP_DURATION);
+    }
+
     function hideTooltip() {
+      if (tooltipHideTimeout) {
+        clearTimeout(tooltipHideTimeout);
+        tooltipHideTimeout = null;
+      }
       if (activeTooltip) {
         activeTooltip.remove();
         activeTooltip = null;

@@ -18,5 +18,31 @@
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FPortalSpacing/FPortalSpacing.html"
     }
   ],
-  "tooltips": []
+  "tooltips": [
+    {
+      "offset": 773,
+      "length": 4,
+      "code": "Offset call(Alignment child, Alignment portal)",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 674,
+      "length": 14,
+      "code": "FPortalSpacing(double spacing, {bool diagonal})",
+      "links": [],
+      "container": {
+        "name": "FPortalSpacing",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FPortalSpacing-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 733,
+      "length": 9,
+      "code": "{bool diagonal}",
+      "links": [],
+      "documentation": ""
+    }
+  ]
 }

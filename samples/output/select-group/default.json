@@ -83,5 +83,138 @@
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroupItemMixin/checkbox.html"
     }
   ],
-  "tooltips": []
+  "tooltips": [
+    {
+      "offset": 211,
+      "length": 21,
+      "code": "FSelectGroup<Sidebar>({required List<FSelectGroupItemMixin<Sidebar>> children, FMultiValueControl<Sidebar>? control, FSelectGroupStyle Function(FSelectGroupStyle)? style, Widget? label, Widget? description, Widget Function(BuildContext, String) errorBuilder = FFormFieldProperties.defaultErrorBuilder, void Function(Set<Sidebar>?)? onSaved, void Function()? onReset, String? Function(Set<Sidebar>?)? validator, String? forceErrorText, bool enabled = true, AutovalidateMode autovalidateMode = .disabled, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FSelectGroup<Sidebar>",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroup-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 242,
+      "length": 8,
+      "code": "{FMultiValueControl<Sidebar>? control}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 258,
+      "length": 7,
+      "code": "FMultiValueControl<Sidebar>.managed({FMultiValueNotifier<Sidebar>? controller, Set<Sidebar>? initial, int min, int? max, void Function(Set<Sidebar>)? onChange})",
+      "links": [],
+      "container": {
+        "name": "FMultiValueControl",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 266,
+      "length": 8,
+      "code": "{Set<Sidebar>? initial}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 296,
+      "length": 6,
+      "code": "{Widget? label}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 334,
+      "length": 12,
+      "code": "{Widget? description}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 406,
+      "length": 9,
+      "code": "{required List<FSelectGroupItemMixin<Sidebar>> children}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 429,
+      "length": 8,
+      "code": "FSelectGroupItemMixin<T> checkbox<T>({required T value, FCheckboxStyle? style, Widget? label, Widget? description, Widget? error, String? semanticsLabel, bool enabled = true, bool autofocus = false, FocusNode? focusNode, void Function(bool)? onFocusChange})",
+      "links": [],
+      "container": {
+        "name": "FSelectGroupItemMixin",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroupItemMixin-mixin.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 438,
+      "length": 6,
+      "code": "{required Sidebar value}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 455,
+      "length": 6,
+      "code": "{Widget? label}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 497,
+      "length": 8,
+      "code": "FSelectGroupItemMixin<T> checkbox<T>({required T value, FCheckboxStyle? style, Widget? label, Widget? description, Widget? error, String? semanticsLabel, bool enabled = true, bool autofocus = false, FocusNode? focusNode, void Function(bool)? onFocusChange})",
+      "links": [],
+      "container": {
+        "name": "FSelectGroupItemMixin",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroupItemMixin-mixin.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 506,
+      "length": 6,
+      "code": "{required Sidebar value}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 520,
+      "length": 6,
+      "code": "{Widget? label}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 559,
+      "length": 8,
+      "code": "FSelectGroupItemMixin<T> checkbox<T>({required T value, FCheckboxStyle? style, Widget? label, Widget? description, Widget? error, String? semanticsLabel, bool enabled = true, bool autofocus = false, FocusNode? focusNode, void Function(bool)? onFocusChange})",
+      "links": [],
+      "container": {
+        "name": "FSelectGroupItemMixin",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroupItemMixin-mixin.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 568,
+      "length": 6,
+      "code": "{required Sidebar value}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 590,
+      "length": 6,
+      "code": "{Widget? label}",
+      "links": [],
+      "documentation": ""
+    }
+  ]
 }

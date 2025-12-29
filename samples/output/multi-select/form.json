@@ -68,5 +68,109 @@
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/onPress.html"
     }
   ],
-  "tooltips": []
+  "tooltips": [
+    {
+      "offset": 436,
+      "length": 25,
+      "code": "FMultiSelect<String>.rich({required Widget Function(String) format, required List<FSelectItemMixin> children, FMultiValueControl<String>? control, FPopoverControl popoverControl, FMultiSelectStyle Function(FMultiSelectStyle)? style, bool autofocus, FocusNode? focusNode, Widget Function(BuildContext, FMultiSelectStyle, Set<WidgetState>)? prefixBuilder, Widget Function(BuildContext, FMultiSelectStyle, Set<WidgetState>)? suffixBuilder, Widget? label, Widget? description, bool enabled, void Function(Set<String>)? onSaved, void Function()? onReset, AutovalidateMode autovalidateMode, String? forceErrorText, String? Function(Set<String>) validator, Widget Function(BuildContext, String) errorBuilder, Widget? hint, bool keepHint, int Function(String, String)? sort, Widget Function(BuildContext, FMultiValueNotifier<String>, FMultiSelectStyle, String, Widget)? tagBuilder, TextAlign textAlign, TextDirection? textDirection, bool clearable, AlignmentGeometry contentAnchor, AlignmentGeometry fieldAnchor, FPortalConstraints contentConstraints, FPortalSpacing contentSpacing, FPortalOverflow contentOverflow, Offset contentOffset, FPopoverHideRegion contentHideRegion, Object? contentGroupId, Widget Function(BuildContext, FMultiSelectStyle) contentEmptyBuilder, ScrollController? contentScrollController, bool contentScrollHandles, ScrollPhysics contentPhysics, FItemDivider contentDivider, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FMultiSelect<String>",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FMultiSelect-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 473,
+      "length": 6,
+      "code": "{Widget? label}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 516,
+      "length": 12,
+      "code": "{Widget? description}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 586,
+      "length": 5,
+      "code": "{Widget? hint}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 636,
+      "length": 7,
+      "code": "{required Widget Function(String) format}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 664,
+      "length": 10,
+      "code": "{String? Function(Set<String>) validator}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 774,
+      "length": 9,
+      "code": "{required List<FSelectItemMixin> children}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 998,
+      "length": 4,
+      "code": "FSelectItem<T> item<T>({required Widget title, required T value, FItemStyle Function(FItemStyle)? style, bool? enabled, Widget? prefix, Widget? subtitle, Widget? Function(BuildContext, bool) suffixBuilder = _defaultSuffixBuilder, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FSelectItemMixin",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectItemMixin-mixin.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 1003,
+      "length": 6,
+      "code": "{required Widget title}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 1028,
+      "length": 6,
+      "code": "{required String value}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 1080,
+      "length": 7,
+      "code": "FButton({required void Function()? onPress, required Widget child, FBaseButtonStyle Function(FButtonStyle) style = _primary, void Function()? onLongPress, void Function()? onSecondaryPress, void Function()? onSecondaryLongPress, bool autofocus = false, FocusNode? focusNode, void Function(bool)? onFocusChange, void Function(bool)? onHoverChange, void Function(FWidgetStatesDelta)? onStateChange, bool selected = false, Map<ShortcutActivator, Intent>? shortcuts, Map<Type, Action<Intent>>? actions, MainAxisSize mainAxisSize = .max, MainAxisAlignment mainAxisAlignment = .center, CrossAxisAlignment crossAxisAlignment = .center, TextBaseline? textBaseline, Widget? prefix, Widget? suffix, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FButton",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 1099,
+      "length": 6,
+      "code": "{required Widget child}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 1138,
+      "length": 8,
+      "code": "{required void Function()? onPress}",
+      "links": [],
+      "documentation": ""
+    }
+  ]
 }

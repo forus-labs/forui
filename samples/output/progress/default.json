@@ -8,5 +8,17 @@
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.progress/FProgress/FProgress.html"
     }
   ],
-  "tooltips": []
+  "tooltips": [
+    {
+      "offset": 38,
+      "length": 9,
+      "code": "FProgress({FProgressStyle Function(FProgressStyle)? style, String? semanticsLabel, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FProgress",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.progress/FProgress-class.html"
+      },
+      "documentation": ""
+    }
+  ]
 }

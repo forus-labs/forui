@@ -23,5 +23,38 @@
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.card/FCard/FCard.html"
     }
   ],
-  "tooltips": []
+  "tooltips": [
+    {
+      "offset": 32,
+      "length": 5,
+      "code": "FCard({Widget? image, Widget? title, Widget? subtitle, Widget? child, MainAxisSize mainAxisSize = .min, FCardStyle Function(FCardStyle)? style, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FCard",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.card/FCard-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 41,
+      "length": 6,
+      "code": "{Widget? image}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 228,
+      "length": 6,
+      "code": "{Widget? title}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 262,
+      "length": 9,
+      "code": "{Widget? subtitle}",
+      "links": [],
+      "documentation": ""
+    }
+  ]
 }

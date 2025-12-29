@@ -73,5 +73,121 @@
       "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/messageCircleX-constant.html"
     }
   ],
-  "tooltips": []
+  "tooltips": [
+    {
+      "offset": 315,
+      "length": 34,
+      "code": "FMultiSelect<String>.searchBuilder({required Widget Function(String) format, required FutureOr<Iterable<String>> Function(String) filter, required List<FSelectItemMixin> Function(BuildContext, String, Iterable<String>) contentBuilder, FSelectSearchFieldProperties searchFieldProperties, Widget Function(BuildContext, FSelectSearchStyle) contentLoadingBuilder, Widget Function(BuildContext, Object?, StackTrace)? contentErrorBuilder, FMultiValueControl<String>? control, FPopoverControl popoverControl, FMultiSelectStyle Function(FMultiSelectStyle)? style, bool autofocus, FocusNode? focusNode, Widget Function(BuildContext, FMultiSelectStyle, Set<WidgetState>)? prefixBuilder, Widget Function(BuildContext, FMultiSelectStyle, Set<WidgetState>)? suffixBuilder, Widget? label, Widget? description, bool enabled, void Function(Set<String>)? onSaved, void Function()? onReset, AutovalidateMode autovalidateMode, String? forceErrorText, String? Function(Set<String>) validator, Widget Function(BuildContext, String) errorBuilder, Widget? hint, bool keepHint, int Function(String, String)? sort, Widget Function(BuildContext, FMultiValueNotifier<String>, FMultiSelectStyle, String, Widget)? tagBuilder, TextAlign textAlign, TextDirection? textDirection, bool clearable, AlignmentGeometry contentAnchor, AlignmentGeometry fieldAnchor, FPortalConstraints contentConstraints, FPortalSpacing contentSpacing, FPortalOverflow contentOverflow, Offset contentOffset, FPopoverHideRegion contentHideRegion, Object? contentGroupId, Widget Function(BuildContext, FMultiSelectStyle) contentEmptyBuilder, ScrollController? contentScrollController, bool contentScrollHandles, ScrollPhysics contentPhysics, FItemDivider contentDivider, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FMultiSelect<String>",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FMultiSelect-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 355,
+      "length": 5,
+      "code": "{Widget? hint}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 395,
+      "length": 7,
+      "code": "{required Widget Function(String) format}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 417,
+      "length": 7,
+      "code": "{required FutureOr<Iterable<String>> Function(String) filter}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 554,
+      "length": 15,
+      "code": "{required List<FSelectItemMixin> Function(BuildContext, String, Iterable<String>) contentBuilder}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 631,
+      "length": 4,
+      "code": "FSelectItem<T> item<T>({required Widget title, required T value, FItemStyle Function(FItemStyle)? style, bool? enabled, Widget? prefix, Widget? subtitle, Widget? Function(BuildContext, bool) suffixBuilder = _defaultSuffixBuilder, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FSelectItemMixin",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectItemMixin-mixin.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 636,
+      "length": 6,
+      "code": "{required Widget title}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 656,
+      "length": 6,
+      "code": "{required String value}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 682,
+      "length": 20,
+      "code": "{Widget Function(BuildContext, Object?, StackTrace)? contentErrorBuilder}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 775,
+      "length": 9,
+      "code": "IconThemeData iconStyle",
+      "links": [],
+      "container": {
+        "name": "FSelectStyle",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectStyle-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 763,
+      "length": 11,
+      "code": "FSelectStyle selectStyle",
+      "links": [],
+      "container": {
+        "name": "FThemeData",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 757,
+      "length": 5,
+      "code": "FThemeData get theme",
+      "links": [],
+      "container": {
+        "name": "FThemeBuildContext",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 873,
+      "length": 21,
+      "code": "IconData messageCircleX",
+      "links": [],
+      "container": {
+        "name": "FIcons",
+        "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons-class.html"
+      },
+      "documentation": ""
+    }
+  ]
 }

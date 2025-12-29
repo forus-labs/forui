@@ -178,5 +178,296 @@
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sidebar/FSidebarItem/onPress.html"
     }
   ],
-  "tooltips": []
+  "tooltips": [
+    {
+      "offset": 32,
+      "length": 8,
+      "code": "FSidebar({required List<Widget> children, Widget? header, Widget? footer, FSidebarStyle Function(FSidebarStyle)? style, bool autofocus = false, FocusScopeNode? focusNode, TraversalEdgeBehavior? traversalEdgeBehavior, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FSidebar",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sidebar/FSidebar-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 44,
+      "length": 6,
+      "code": "{FSidebarStyle Function(FSidebarStyle)? style}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 60,
+      "length": 8,
+      "code": "FSidebarStyle copyWith({BoxDecoration? decoration, ImageFilter? backgroundFilter, BoxConstraints? constraints, FSidebarGroupStyle Function(FSidebarGroupStyle)? groupStyle, EdgeInsetsGeometry? headerPadding, EdgeInsetsGeometry? contentPadding, EdgeInsetsGeometry? footerPadding})",
+      "links": [],
+      "container": {
+        "name": "FSidebarStyle",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sidebar/FSidebarStyle-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 74,
+      "length": 12,
+      "code": "{BoxConstraints? constraints}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 89,
+      "length": 11,
+      "code": "BoxConstraints constraints",
+      "links": [],
+      "container": {
+        "name": "FSidebarStyle",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sidebar/FSidebarStyle-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 148,
+      "length": 9,
+      "code": "{required List<Widget> children}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 164,
+      "length": 13,
+      "code": "FSidebarGroup({required List<Widget> children, FSidebarGroupStyle Function(FSidebarGroupStyle)? style, Widget? label, Widget? action, void Function(bool)? onActionHoverChange, void Function(FWidgetStatesDelta)? onActionStateChange, void Function()? onActionPress, void Function()? onActionLongPress, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FSidebarGroup",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sidebar/FSidebarGroup-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 185,
+      "length": 9,
+      "code": "{required List<Widget> children}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 205,
+      "length": 12,
+      "code": "FSidebarItem({FSidebarItemStyle Function(FSidebarItemStyle)? style, Widget? icon, Widget? label, bool selected = false, bool initiallyExpanded = false, bool autofocus = false, FocusNode? focusNode, void Function()? onPress, void Function()? onLongPress, void Function(bool)? onHoverChange, void Function(FWidgetStatesDelta)? onStateChange, List<Widget> children = const [], Key? key})",
+      "links": [],
+      "container": {
+        "name": "FSidebarItem",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sidebar/FSidebarItem-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 229,
+      "length": 5,
+      "code": "{Widget? icon}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 246,
+      "length": 22,
+      "code": "IconData layoutDashboard",
+      "links": [],
+      "container": {
+        "name": "FIcons",
+        "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 281,
+      "length": 6,
+      "code": "{Widget? label}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 323,
+      "length": 9,
+      "code": "{bool selected = false}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 349,
+      "length": 8,
+      "code": "{void Function()? onPress}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 384,
+      "length": 12,
+      "code": "FSidebarItem({FSidebarItemStyle Function(FSidebarItemStyle)? style, Widget? icon, Widget? label, bool selected = false, bool initiallyExpanded = false, bool autofocus = false, FocusNode? focusNode, void Function()? onPress, void Function()? onLongPress, void Function(bool)? onHoverChange, void Function(FWidgetStatesDelta)? onStateChange, List<Widget> children = const [], Key? key})",
+      "links": [],
+      "container": {
+        "name": "FSidebarItem",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sidebar/FSidebarItem-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 408,
+      "length": 5,
+      "code": "{Widget? icon}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 425,
+      "length": 16,
+      "code": "IconData chartLine",
+      "links": [],
+      "container": {
+        "name": "FIcons",
+        "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 454,
+      "length": 6,
+      "code": "{Widget? label}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 496,
+      "length": 8,
+      "code": "{void Function()? onPress}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 531,
+      "length": 12,
+      "code": "FSidebarItem({FSidebarItemStyle Function(FSidebarItemStyle)? style, Widget? icon, Widget? label, bool selected = false, bool initiallyExpanded = false, bool autofocus = false, FocusNode? focusNode, void Function()? onPress, void Function()? onLongPress, void Function(bool)? onHoverChange, void Function(FWidgetStatesDelta)? onStateChange, List<Widget> children = const [], Key? key})",
+      "links": [],
+      "container": {
+        "name": "FSidebarItem",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sidebar/FSidebarItem-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 555,
+      "length": 5,
+      "code": "{Widget? icon}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 572,
+      "length": 15,
+      "code": "IconData chartBar",
+      "links": [],
+      "container": {
+        "name": "FIcons",
+        "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 600,
+      "length": 6,
+      "code": "{Widget? label}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 640,
+      "length": 18,
+      "code": "{bool initiallyExpanded = false}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 675,
+      "length": 9,
+      "code": "{List<Widget> children = const []}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 699,
+      "length": 12,
+      "code": "FSidebarItem({FSidebarItemStyle Function(FSidebarItemStyle)? style, Widget? icon, Widget? label, bool selected = false, bool initiallyExpanded = false, bool autofocus = false, FocusNode? focusNode, void Function()? onPress, void Function()? onLongPress, void Function(bool)? onHoverChange, void Function(FWidgetStatesDelta)? onStateChange, List<Widget> children = const [], Key? key})",
+      "links": [],
+      "container": {
+        "name": "FSidebarItem",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sidebar/FSidebarItem-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 712,
+      "length": 6,
+      "code": "{Widget? label}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 740,
+      "length": 8,
+      "code": "{void Function()? onPress}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 769,
+      "length": 12,
+      "code": "FSidebarItem({FSidebarItemStyle Function(FSidebarItemStyle)? style, Widget? icon, Widget? label, bool selected = false, bool initiallyExpanded = false, bool autofocus = false, FocusNode? focusNode, void Function()? onPress, void Function()? onLongPress, void Function(bool)? onHoverChange, void Function(FWidgetStatesDelta)? onStateChange, List<Widget> children = const [], Key? key})",
+      "links": [],
+      "container": {
+        "name": "FSidebarItem",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sidebar/FSidebarItem-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 782,
+      "length": 6,
+      "code": "{Widget? label}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 811,
+      "length": 8,
+      "code": "{void Function()? onPress}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 840,
+      "length": 12,
+      "code": "FSidebarItem({FSidebarItemStyle Function(FSidebarItemStyle)? style, Widget? icon, Widget? label, bool selected = false, bool initiallyExpanded = false, bool autofocus = false, FocusNode? focusNode, void Function()? onPress, void Function()? onLongPress, void Function(bool)? onHoverChange, void Function(FWidgetStatesDelta)? onStateChange, List<Widget> children = const [], Key? key})",
+      "links": [],
+      "container": {
+        "name": "FSidebarItem",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sidebar/FSidebarItem-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 853,
+      "length": 6,
+      "code": "{Widget? label}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 883,
+      "length": 8,
+      "code": "{void Function()? onPress}",
+      "links": [],
+      "documentation": ""
+    }
+  ]
 }

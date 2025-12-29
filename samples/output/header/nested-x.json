@@ -78,5 +78,128 @@
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.header/FHeaderAction/onPress.html"
     }
   ],
-  "tooltips": []
+  "tooltips": [
+    {
+      "offset": 32,
+      "length": 14,
+      "code": "FHeader.nested({Widget title, AlignmentGeometry titleAlignment, FHeaderStyle Function(FHeaderStyle)? style, List<Widget> prefixes, List<Widget> suffixes, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FHeader",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.header/FHeader-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 50,
+      "length": 6,
+      "code": "{Widget title}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 82,
+      "length": 9,
+      "code": "{List<Widget> prefixes}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 98,
+      "length": 13,
+      "code": "FHeaderAction({required Widget icon, required void Function()? onPress, FHeaderActionStyle? style, String? semanticsLabel, bool selected = false, bool autofocus = false, FocusNode? focusNode, void Function(bool)? onFocusChange, void Function(bool)? onHoverChange, void Function(FWidgetStatesDelta)? onStateChange, void Function()? onLongPress, void Function()? onSecondaryPress, void Function()? onSecondaryLongPress, Map<ShortcutActivator, Intent>? shortcuts, Map<Type, Action<Intent>>? actions, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FHeaderAction",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.header/FHeaderAction-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 112,
+      "length": 5,
+      "code": "{required Widget icon}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 129,
+      "length": 18,
+      "code": "IconData thermometer",
+      "links": [],
+      "container": {
+        "name": "FIcons",
+        "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 150,
+      "length": 8,
+      "code": "{required void Function()? onPress}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 177,
+      "length": 13,
+      "code": "FHeaderAction({required Widget icon, required void Function()? onPress, FHeaderActionStyle? style, String? semanticsLabel, bool selected = false, bool autofocus = false, FocusNode? focusNode, void Function(bool)? onFocusChange, void Function(bool)? onHoverChange, void Function(FWidgetStatesDelta)? onStateChange, void Function()? onLongPress, void Function()? onSecondaryPress, void Function()? onSecondaryLongPress, Map<ShortcutActivator, Intent>? shortcuts, Map<Type, Action<Intent>>? actions, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FHeaderAction",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.header/FHeaderAction-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 191,
+      "length": 5,
+      "code": "{required Widget icon}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 202,
+      "length": 11,
+      "code": "IconData wind",
+      "links": [],
+      "container": {
+        "name": "FIcons",
+        "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 216,
+      "length": 8,
+      "code": "{required void Function()? onPress}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 239,
+      "length": 9,
+      "code": "{List<Widget> suffixes}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 250,
+      "length": 15,
+      "code": "FHeaderAction.x({required void Function()? onPress, FHeaderActionStyle? style, bool autofocus = false, FocusNode? focusNode, void Function(bool)? onFocusChange, void Function(bool)? onHoverChange, void Function(FWidgetStatesDelta)? onStateChange, void Function()? onLongPress, void Function()? onSecondaryPress, void Function()? onSecondaryLongPress, Map<ShortcutActivator, Intent>? shortcuts, Map<Type, Action<Intent>>? actions, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FHeaderAction",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.header/FHeaderAction-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 266,
+      "length": 8,
+      "code": "{required void Function()? onPress}",
+      "links": [],
+      "documentation": ""
+    }
+  ]
 }

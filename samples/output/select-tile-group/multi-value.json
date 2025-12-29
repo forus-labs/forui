@@ -103,5 +103,170 @@
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/onPress.html"
     }
   ],
-  "tooltips": []
+  "tooltips": [
+    {
+      "offset": 568,
+      "length": 26,
+      "code": "FSelectTileGroup<Language>({required List<FSelectTile<Language>> children, FMultiValueControl<Language>? control, ScrollController? scrollController, FTileGroupStyle? style, double? cacheExtent, double maxHeight = .infinity, DragStartBehavior dragStartBehavior = .start, ScrollPhysics physics = const ClampingScrollPhysics(), FItemDivider divider = .indented, Widget? label, Widget? description, String? semanticsLabel, Widget Function(BuildContext, String) errorBuilder = FFormFieldProperties.defaultErrorBuilder, void Function(Set<Language>?)? onSaved, void Function()? onReset, String? Function(Set<Language>?)? validator, String? forceErrorText, bool enabled = true, AutovalidateMode autovalidateMode = .disabled, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FSelectTileGroup<Language>",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTileGroup-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 606,
+      "length": 6,
+      "code": "{Widget? label}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 657,
+      "length": 12,
+      "code": "{Widget? description}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 719,
+      "length": 10,
+      "code": "{String? Function(Set<Language>?)? validator}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 855,
+      "length": 9,
+      "code": "{required List<FSelectTile<Language>> children}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 886,
+      "length": 4,
+      "code": "FSelectTile<Language>.tile({required Widget title, required Language value, FItemStyle Function(FItemStyle)? style, Widget checkedIcon, Widget uncheckedIcon, Widget? subtitle, Widget? details, String? semanticsLabel, bool? enabled, bool autofocus, FocusNode? focusNode, void Function(bool)? onFocusChange, void Function(bool)? onHoverChange, void Function(FWidgetStatesDelta)? onStatesChange, Map<ShortcutActivator, Intent>? shortcuts, Map<Type, Action<Intent>>? actions, Widget? suffix, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FSelectTile",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 891,
+      "length": 6,
+      "code": "{required Widget title}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 912,
+      "length": 6,
+      "code": "{required Language value}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 940,
+      "length": 4,
+      "code": "FSelectTile<Language>.tile({required Widget title, required Language value, FItemStyle Function(FItemStyle)? style, Widget checkedIcon, Widget uncheckedIcon, Widget? subtitle, Widget? details, String? semanticsLabel, bool? enabled, bool autofocus, FocusNode? focusNode, void Function(bool)? onFocusChange, void Function(bool)? onHoverChange, void Function(FWidgetStatesDelta)? onStatesChange, Map<ShortcutActivator, Intent>? shortcuts, Map<Type, Action<Intent>>? actions, Widget? suffix, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FSelectTile",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 945,
+      "length": 6,
+      "code": "{required Widget title}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 966,
+      "length": 6,
+      "code": "{required Language value}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 994,
+      "length": 4,
+      "code": "FSelectTile<Language>.tile({required Widget title, required Language value, FItemStyle Function(FItemStyle)? style, Widget checkedIcon, Widget uncheckedIcon, Widget? subtitle, Widget? details, String? semanticsLabel, bool? enabled, bool autofocus, FocusNode? focusNode, void Function(bool)? onFocusChange, void Function(bool)? onHoverChange, void Function(FWidgetStatesDelta)? onStatesChange, Map<ShortcutActivator, Intent>? shortcuts, Map<Type, Action<Intent>>? actions, Widget? suffix, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FSelectTile",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 999,
+      "length": 6,
+      "code": "{required Widget title}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 1020,
+      "length": 6,
+      "code": "{required Language value}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 1048,
+      "length": 4,
+      "code": "FSelectTile<Language>.tile({required Widget title, required Language value, FItemStyle Function(FItemStyle)? style, Widget checkedIcon, Widget uncheckedIcon, Widget? subtitle, Widget? details, String? semanticsLabel, bool? enabled, bool autofocus, FocusNode? focusNode, void Function(bool)? onFocusChange, void Function(bool)? onHoverChange, void Function(FWidgetStatesDelta)? onStatesChange, Map<ShortcutActivator, Intent>? shortcuts, Map<Type, Action<Intent>>? actions, Widget? suffix, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FSelectTile",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 1053,
+      "length": 6,
+      "code": "{required Widget title}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 1076,
+      "length": 6,
+      "code": "{required Language value}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 1125,
+      "length": 7,
+      "code": "FButton({required void Function()? onPress, required Widget child, FBaseButtonStyle Function(FButtonStyle) style = _primary, void Function()? onLongPress, void Function()? onSecondaryPress, void Function()? onSecondaryLongPress, bool autofocus = false, FocusNode? focusNode, void Function(bool)? onFocusChange, void Function(bool)? onHoverChange, void Function(FWidgetStatesDelta)? onStateChange, bool selected = false, Map<ShortcutActivator, Intent>? shortcuts, Map<Type, Action<Intent>>? actions, MainAxisSize mainAxisSize = .max, MainAxisAlignment mainAxisAlignment = .center, CrossAxisAlignment crossAxisAlignment = .center, TextBaseline? textBaseline, Widget? prefix, Widget? suffix, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FButton",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 1144,
+      "length": 6,
+      "code": "{required Widget child}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 1181,
+      "length": 8,
+      "code": "{required void Function()? onPress}",
+      "links": [],
+      "documentation": ""
+    }
+  ]
 }

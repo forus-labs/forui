@@ -113,5 +113,192 @@
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/value.html"
     }
   ],
-  "tooltips": []
+  "tooltips": [
+    {
+      "offset": 147,
+      "length": 25,
+      "code": "FSelectTileGroup<Sidebar>({required List<FSelectTile<Sidebar>> children, FMultiValueControl<Sidebar>? control, ScrollController? scrollController, FTileGroupStyle? style, double? cacheExtent, double maxHeight = .infinity, DragStartBehavior dragStartBehavior = .start, ScrollPhysics physics = const ClampingScrollPhysics(), FItemDivider divider = .indented, Widget? label, Widget? description, String? semanticsLabel, Widget Function(BuildContext, String) errorBuilder = FFormFieldProperties.defaultErrorBuilder, void Function(Set<Sidebar>?)? onSaved, void Function()? onReset, String? Function(Set<Sidebar>?)? validator, String? forceErrorText, bool enabled = true, AutovalidateMode autovalidateMode = .disabled, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FSelectTileGroup<Sidebar>",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTileGroup-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 178,
+      "length": 8,
+      "code": "{FMultiValueControl<Sidebar>? control}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 194,
+      "length": 7,
+      "code": "FMultiValueControl<Sidebar>.managed({FMultiValueNotifier<Sidebar>? controller, Set<Sidebar>? initial, int min, int? max, void Function(Set<Sidebar>)? onChange})",
+      "links": [],
+      "container": {
+        "name": "FMultiValueControl",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 202,
+      "length": 8,
+      "code": "{Set<Sidebar>? initial}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 228,
+      "length": 6,
+      "code": "{Widget? label}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 262,
+      "length": 12,
+      "code": "{Widget? description}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 330,
+      "length": 9,
+      "code": "{required List<FSelectTile<Sidebar>> children}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 355,
+      "length": 4,
+      "code": "FSelectTile<Sidebar>.tile({required Widget title, required Sidebar value, FItemStyle Function(FItemStyle)? style, Widget checkedIcon, Widget uncheckedIcon, Widget? subtitle, Widget? details, String? semanticsLabel, bool? enabled, bool autofocus, FocusNode? focusNode, void Function(bool)? onFocusChange, void Function(bool)? onHoverChange, void Function(FWidgetStatesDelta)? onStatesChange, Map<ShortcutActivator, Intent>? shortcuts, Map<Type, Action<Intent>>? actions, Widget? suffix, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FSelectTile",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 369,
+      "length": 6,
+      "code": "{required Widget title}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 401,
+      "length": 7,
+      "code": "{Widget? suffix}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 414,
+      "length": 12,
+      "code": "IconData timer",
+      "links": [],
+      "container": {
+        "name": "FIcons",
+        "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 437,
+      "length": 6,
+      "code": "{required Sidebar value}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 470,
+      "length": 4,
+      "code": "FSelectTile<Sidebar>.tile({required Widget title, required Sidebar value, FItemStyle Function(FItemStyle)? style, Widget checkedIcon, Widget uncheckedIcon, Widget? subtitle, Widget? details, String? semanticsLabel, bool? enabled, bool autofocus, FocusNode? focusNode, void Function(bool)? onFocusChange, void Function(bool)? onHoverChange, void Function(FWidgetStatesDelta)? onStatesChange, Map<ShortcutActivator, Intent>? shortcuts, Map<Type, Action<Intent>>? actions, Widget? suffix, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FSelectTile",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 475,
+      "length": 6,
+      "code": "{required Widget title}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 496,
+      "length": 7,
+      "code": "{Widget? suffix}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 509,
+      "length": 12,
+      "code": "IconData house",
+      "links": [],
+      "container": {
+        "name": "FIcons",
+        "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 524,
+      "length": 6,
+      "code": "{required Sidebar value}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 546,
+      "length": 4,
+      "code": "FSelectTile<Sidebar>.tile({required Widget title, required Sidebar value, FItemStyle Function(FItemStyle)? style, Widget checkedIcon, Widget uncheckedIcon, Widget? subtitle, Widget? details, String? semanticsLabel, bool? enabled, bool autofocus, FocusNode? focusNode, void Function(bool)? onFocusChange, void Function(bool)? onHoverChange, void Function(FWidgetStatesDelta)? onStatesChange, Map<ShortcutActivator, Intent>? shortcuts, Map<Type, Action<Intent>>? actions, Widget? suffix, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FSelectTile",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 560,
+      "length": 6,
+      "code": "{required Widget title}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 597,
+      "length": 7,
+      "code": "{Widget? suffix}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 610,
+      "length": 19,
+      "code": "IconData appWindowMac",
+      "links": [],
+      "container": {
+        "name": "FIcons",
+        "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 640,
+      "length": 6,
+      "code": "{required Sidebar value}",
+      "links": [],
+      "documentation": ""
+    }
+  ]
 }

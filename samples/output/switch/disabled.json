@@ -38,5 +38,52 @@
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.switch_/FSwitch/enabled.html"
     }
   ],
-  "tooltips": []
+  "tooltips": [
+    {
+      "offset": 290,
+      "length": 7,
+      "code": "FSwitch({FSwitchStyle Function(FSwitchStyle)? style, Widget? label, Widget? description, Widget? error, String? semanticsLabel, bool value = false, void Function(bool)? onChange, bool enabled = true, bool autofocus = false, FocusNode? focusNode, void Function(bool)? onFocusChange, DragStartBehavior dragStartBehavior = .start, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FSwitch",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.switch_/FSwitch-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 303,
+      "length": 6,
+      "code": "{Widget? label}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 343,
+      "length": 15,
+      "code": "{String? semanticsLabel}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 380,
+      "length": 6,
+      "code": "{bool value = false}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 399,
+      "length": 9,
+      "code": "{void Function(bool)? onChange}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 456,
+      "length": 8,
+      "code": "{bool enabled = true}",
+      "links": [],
+      "documentation": ""
+    }
+  ]
 }

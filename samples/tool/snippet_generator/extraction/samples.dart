@@ -8,7 +8,7 @@ import 'package:analyzer/file_system/overlay_file_system.dart';
 import 'package:collection/collection.dart';
 import 'package:path/path.dart' as p;
 
-import '../metadata/doc_linker.dart';
+import '../metadata/tooltip_dart_doc_linker.dart';
 import '../main.dart';
 import '../options.dart';
 import '../snippet.dart';
@@ -84,9 +84,17 @@ class Samples extends RecursiveAstVisitor<void> {
       snippet.code = formatter.format(await _session.merge(_result, options.include, node, widget));
     }
 
+    snippet.highlight();
+    final (links, tooltips) = await TooltipDartDocLinker.link(
+      _session,
+      _overlay,
+      _packages,
+      snippet.code,
+      snippet.importsLength,
+    );
     snippet
-      ..highlight()
-      ..links.addAll(await DartDocLinker.link(_session, _overlay, _packages, snippet.code, snippet.importsLength))
+      ..links.addAll(links)
+      ..tooltips.addAll(tooltips)
       ..removeImports();
   }
 }

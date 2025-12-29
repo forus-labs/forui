@@ -58,5 +58,88 @@
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_menu_tile/FSelectMenuTile/detailsBuilder.html"
     }
   ],
-  "tooltips": []
+  "tooltips": [
+    {
+      "offset": 209,
+      "length": 37,
+      "code": "FSelectMenuTile<Notification>.fromMap(Map<String, Notification> menu, {required Text title, FMultiValueControl<Notification>? selectControl, FPopoverControl popoverControl = const .managed(), ScrollController? scrollController, FSelectMenuTileStyle Function(FSelectMenuTileStyle)? style, double? cacheExtent, double maxHeight = .infinity, DragStartBehavior dragStartBehavior = .start, ScrollPhysics physics = const ClampingScrollPhysics(), FItemDivider divider = .full, AlignmentGeometry menuAnchor = .topRight, AlignmentGeometry tileAnchor = .bottomRight, FPortalSpacing menuSpacing = const .spacing(4), FPortalOverflow menuOverflow = .flip, Offset menuOffset = .zero, FPopoverHideRegion menuHideRegion = .excludeChild, void Function()? menuOnTapHide, Object? menuGroupId, bool autoHide = true, Widget? label, Widget? description, bool autofocus = false, FocusScopeNode? menuFocusNode, void Function(bool)? menuOnFocusChange, TraversalEdgeBehavior? menuTraversalEdgeBehavior, String? menuBarrierSemanticsLabel, bool menuBarrierSemanticsDismissible = true, String? semanticsLabel, Widget? prefix, Widget? subtitle, Widget Function(BuildContext, Set<Notification>, Widget?) detailsBuilder = defaultSelectMenuTileBuilder, Widget? details, Widget? suffix, Map<ShortcutActivator, Intent>? shortcuts, Map<Type, Action<Intent>>? actions, Widget Function(BuildContext, String) errorBuilder = FFormFieldProperties.defaultErrorBuilder, void Function(Set<Notification>?)? onSaved, void Function()? onReset, String? Function(Set<Notification>?)? validator, String? forceErrorText, bool enabled = true, AutovalidateMode autovalidateMode = .disabled, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FSelectMenuTile<Notification>",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_menu_tile/FSelectMenuTile-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 323,
+      "length": 14,
+      "code": "{FMultiValueControl<Notification>? selectControl}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 345,
+      "length": 7,
+      "code": "FMultiValueControl<Notification>.managed({FMultiValueNotifier<Notification>? controller, Set<Notification>? initial, int min, int? max, void Function(Set<Notification>)? onChange})",
+      "links": [],
+      "container": {
+        "name": "FMultiValueControl",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 353,
+      "length": 8,
+      "code": "{Set<Notification>? initial}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 375,
+      "length": 9,
+      "code": "{bool autoHide = true}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 396,
+      "length": 10,
+      "code": "{String? Function(Set<Notification>?)? validator}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 463,
+      "length": 7,
+      "code": "{Widget? prefix}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 482,
+      "length": 11,
+      "code": "IconData bell",
+      "links": [],
+      "container": {
+        "name": "FIcons",
+        "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 500,
+      "length": 6,
+      "code": "{required Text title}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 540,
+      "length": 15,
+      "code": "{Widget Function(BuildContext, Set<Notification>, Widget?) detailsBuilder = defaultSelectMenuTileBuilder}",
+      "links": [],
+      "documentation": ""
+    }
+  ]
 }

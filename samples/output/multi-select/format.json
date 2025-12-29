@@ -43,5 +43,63 @@
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectItemMixin/item.html"
     }
   ],
-  "tooltips": []
+  "tooltips": [
+    {
+      "offset": 36,
+      "length": 56,
+      "code": "FMultiSelect<({String firstName, String lastName})>.rich({required Widget Function(({String firstName, String lastName})) format, required List<FSelectItemMixin> children, FMultiValueControl<({String firstName, String lastName})>? control, FPopoverControl popoverControl, FMultiSelectStyle Function(FMultiSelectStyle)? style, bool autofocus, FocusNode? focusNode, Widget Function(BuildContext, FMultiSelectStyle, Set<WidgetState>)? prefixBuilder, Widget Function(BuildContext, FMultiSelectStyle, Set<WidgetState>)? suffixBuilder, Widget? label, Widget? description, bool enabled, void Function(Set<({String firstName, String lastName})>)? onSaved, void Function()? onReset, AutovalidateMode autovalidateMode, String? forceErrorText, String? Function(Set<({String firstName, String lastName})>) validator, Widget Function(BuildContext, String) errorBuilder, Widget? hint, bool keepHint, int Function(({String firstName, String lastName}), ({String firstName, String lastName}))? sort, Widget Function(BuildContext, FMultiValueNotifier<({String firstName, String lastName})>, FMultiSelectStyle, ({String firstName, String lastName}), Widget)? tagBuilder, TextAlign textAlign, TextDirection? textDirection, bool clearable, AlignmentGeometry contentAnchor, AlignmentGeometry fieldAnchor, FPortalConstraints contentConstraints, FPortalSpacing contentSpacing, FPortalOverflow contentOverflow, Offset contentOffset, FPopoverHideRegion contentHideRegion, Object? contentGroupId, Widget Function(BuildContext, FMultiSelectStyle) contentEmptyBuilder, ScrollController? contentScrollController, bool contentScrollHandles, ScrollPhysics contentPhysics, FItemDivider contentDivider, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FMultiSelect<({String firstName, String lastName})>",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FMultiSelect-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 100,
+      "length": 5,
+      "code": "{Widget? hint}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 141,
+      "length": 7,
+      "code": "{required Widget Function(({String firstName, String lastName})) format}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 209,
+      "length": 9,
+      "code": "{required List<FSelectItemMixin> children}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 266,
+      "length": 4,
+      "code": "FSelectItem<T> item<T>({required Widget title, required T value, FItemStyle Function(FItemStyle)? style, bool? enabled, Widget? prefix, Widget? subtitle, Widget? Function(BuildContext, bool) suffixBuilder = _defaultSuffixBuilder, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FSelectItemMixin",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectItemMixin-mixin.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 271,
+      "length": 6,
+      "code": "{required Widget title}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 300,
+      "length": 6,
+      "code": "{required InvalidType value}",
+      "links": [],
+      "documentation": ""
+    }
+  ]
 }

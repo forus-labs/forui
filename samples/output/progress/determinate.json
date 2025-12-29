@@ -28,5 +28,49 @@
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/onPress.html"
     }
   ],
-  "tooltips": []
+  "tooltips": [
+    {
+      "offset": 588,
+      "length": 20,
+      "code": "FDeterminateProgress({required double value, FDeterminateProgressStyle Function(FDeterminateProgressStyle)? style, String? semanticsLabel, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FDeterminateProgress",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.progress/FDeterminateProgress-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 609,
+      "length": 6,
+      "code": "{required double value}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 631,
+      "length": 7,
+      "code": "FButton({required void Function()? onPress, required Widget child, FBaseButtonStyle Function(FButtonStyle) style = _primary, void Function()? onLongPress, void Function()? onSecondaryPress, void Function()? onSecondaryLongPress, bool autofocus = false, FocusNode? focusNode, void Function(bool)? onFocusChange, void Function(bool)? onHoverChange, void Function(FWidgetStatesDelta)? onStateChange, bool selected = false, Map<ShortcutActivator, Intent>? shortcuts, Map<Type, Action<Intent>>? actions, MainAxisSize mainAxisSize = .max, MainAxisAlignment mainAxisAlignment = .center, CrossAxisAlignment crossAxisAlignment = .center, TextBaseline? textBaseline, Widget? prefix, Widget? suffix, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FButton",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 648,
+      "length": 6,
+      "code": "{required Widget child}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 684,
+      "length": 8,
+      "code": "{required void Function()? onPress}",
+      "links": [],
+      "documentation": ""
+    }
+  ]
 }

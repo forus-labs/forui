@@ -28,5 +28,53 @@
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.divider/FDivider/axis.html"
     }
   ],
-  "tooltips": []
+  "tooltips": [
+    {
+      "offset": 449,
+      "length": 8,
+      "code": "FDivider({FDividerStyle Function(FDividerStyle)? style, Axis axis = .horizontal, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FDivider",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.divider/FDivider-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 702,
+      "length": 8,
+      "code": "FDivider({FDividerStyle Function(FDividerStyle)? style, Axis axis = .horizontal, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FDivider",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.divider/FDivider-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 711,
+      "length": 5,
+      "code": "{Axis axis = .horizontal}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 824,
+      "length": 8,
+      "code": "FDivider({FDividerStyle Function(FDividerStyle)? style, Axis axis = .horizontal, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FDivider",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.divider/FDivider-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 833,
+      "length": 5,
+      "code": "{Axis axis = .horizontal}",
+      "links": [],
+      "documentation": ""
+    }
+  ]
 }

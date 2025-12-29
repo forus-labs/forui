@@ -43,5 +43,67 @@
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderValue/max.html"
     }
   ],
-  "tooltips": []
+  "tooltips": [
+    {
+      "offset": 38,
+      "length": 7,
+      "code": "FSlider({FSliderControl control = const .managedContinuous(), FSliderStyle Function(FSliderStyle)? style, FLayout? layout, Widget? label, Widget? description, Widget Function(BuildContext, String) errorBuilder = FFormFieldProperties.defaultErrorBuilder, List<FSliderMark> marks = const [], double? trackMainAxisExtent, double? trackHitRegionCrossExtent, FSliderTooltipControls tooltipControls = const .new(), Widget Function(FTooltipController, double) tooltipBuilder = _tooltipBuilder, String Function(double) semanticValueFormatterCallback = _semanticValueFormatter, String Function(FSliderValue)? semanticFormatterCallback, void Function(FSliderValue)? onEnd, void Function(FSliderValue?)? onSaved, void Function()? onReset, String? Function(FSliderValue?)? validator, String? forceErrorText, bool enabled = true, AutovalidateMode autovalidateMode = .disabled, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FSlider",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSlider-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 49,
+      "length": 8,
+      "code": "{FSliderControl control = const .managedContinuous()}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 59,
+      "length": 22,
+      "code": "FSliderControl.managedContinuousRange({FContinuousSliderController? controller, FSliderValue? initial, double? stepPercentage, void Function(FSliderValue)? onChange})",
+      "links": [],
+      "container": {
+        "name": "FSliderControl",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderControl-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 87,
+      "length": 8,
+      "code": "{FSliderValue? initial}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 96,
+      "length": 12,
+      "code": "FSliderValue({required double max, double min, ({double max, double min}) constraints})",
+      "links": [],
+      "container": {
+        "name": "FSliderValue",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderValue-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 109,
+      "length": 4,
+      "code": "{double min}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 120,
+      "length": 4,
+      "code": "{required double max}",
+      "links": [],
+      "documentation": ""
+    }
+  ]
 }

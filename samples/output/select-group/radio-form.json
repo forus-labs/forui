@@ -103,5 +103,163 @@
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/onPress.html"
     }
   ],
-  "tooltips": []
+  "tooltips": [
+    {
+      "offset": 549,
+      "length": 26,
+      "code": "FSelectGroup<Notification>({required List<FSelectGroupItemMixin<Notification>> children, FMultiValueControl<Notification>? control, FSelectGroupStyle Function(FSelectGroupStyle)? style, Widget? label, Widget? description, Widget Function(BuildContext, String) errorBuilder = FFormFieldProperties.defaultErrorBuilder, void Function(Set<Notification>?)? onSaved, void Function()? onReset, String? Function(Set<Notification>?)? validator, String? forceErrorText, bool enabled = true, AutovalidateMode autovalidateMode = .disabled, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FSelectGroup<Notification>",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroup-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 587,
+      "length": 8,
+      "code": "{FMultiValueControl<Notification>? control}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 603,
+      "length": 12,
+      "code": "FMultiValueControl<Notification>.managedRadio({FMultiValueNotifier<Notification>? controller, Notification? initial, void Function(Set<Notification>)? onChange})",
+      "links": [],
+      "container": {
+        "name": "FMultiValueControl",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 629,
+      "length": 6,
+      "code": "{Widget? label}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 675,
+      "length": 12,
+      "code": "{Widget? description}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 739,
+      "length": 10,
+      "code": "{String? Function(Set<Notification>?)? validator}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 845,
+      "length": 9,
+      "code": "{required List<FSelectGroupItemMixin<Notification>> children}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 870,
+      "length": 5,
+      "code": "FSelectGroupItemMixin<T> radio<T>({required T value, Widget? label, Widget? description, Widget? error, String? semanticsLabel, FRadioStyle? style, bool enabled = true, bool autofocus = false, FocusNode? focusNode, void Function(bool)? onFocusChange})",
+      "links": [],
+      "container": {
+        "name": "FSelectGroupItemMixin",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroupItemMixin-mixin.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 876,
+      "length": 6,
+      "code": "{required Notification value}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 889,
+      "length": 6,
+      "code": "{Widget? label}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 942,
+      "length": 5,
+      "code": "FSelectGroupItemMixin<T> radio<T>({required T value, Widget? label, Widget? description, Widget? error, String? semanticsLabel, FRadioStyle? style, bool enabled = true, bool autofocus = false, FocusNode? focusNode, void Function(bool)? onFocusChange})",
+      "links": [],
+      "container": {
+        "name": "FSelectGroupItemMixin",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroupItemMixin-mixin.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 963,
+      "length": 6,
+      "code": "{required Notification value}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 993,
+      "length": 6,
+      "code": "{Widget? label}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 1072,
+      "length": 5,
+      "code": "FSelectGroupItemMixin<T> radio<T>({required T value, Widget? label, Widget? description, Widget? error, String? semanticsLabel, FRadioStyle? style, bool enabled = true, bool autofocus = false, FocusNode? focusNode, void Function(bool)? onFocusChange})",
+      "links": [],
+      "container": {
+        "name": "FSelectGroupItemMixin",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroupItemMixin-mixin.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 1078,
+      "length": 6,
+      "code": "{required Notification value}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 1095,
+      "length": 6,
+      "code": "{Widget? label}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 1158,
+      "length": 7,
+      "code": "FButton({required void Function()? onPress, required Widget child, FBaseButtonStyle Function(FButtonStyle) style = _primary, void Function()? onLongPress, void Function()? onSecondaryPress, void Function()? onSecondaryLongPress, bool autofocus = false, FocusNode? focusNode, void Function(bool)? onFocusChange, void Function(bool)? onHoverChange, void Function(FWidgetStatesDelta)? onStateChange, bool selected = false, Map<ShortcutActivator, Intent>? shortcuts, Map<Type, Action<Intent>>? actions, MainAxisSize mainAxisSize = .max, MainAxisAlignment mainAxisAlignment = .center, CrossAxisAlignment crossAxisAlignment = .center, TextBaseline? textBaseline, Widget? prefix, Widget? suffix, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FButton",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 1177,
+      "length": 6,
+      "code": "{required Widget child}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 1214,
+      "length": 8,
+      "code": "{required void Function()? onPress}",
+      "links": [],
+      "documentation": ""
+    }
+  ]
 }

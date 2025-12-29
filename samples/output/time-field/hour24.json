@@ -28,5 +28,38 @@
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/hour24.html"
     }
   ],
-  "tooltips": []
+  "tooltips": [
+    {
+      "offset": 38,
+      "length": 10,
+      "code": "FTimeField({FTimeFieldControl control, FPopoverControl popoverControl, FTimeFieldStyle Function(FTimeFieldStyle)? style, bool hour24, bool autofocus, FocusNode? focusNode, Widget Function(BuildContext, FTimeFieldStyle, Set<WidgetState>, Widget) builder, Widget Function(BuildContext, FTimeFieldStyle, Set<WidgetState>)? prefixBuilder, Widget Function(BuildContext, FTimeFieldStyle, Set<WidgetState>)? suffixBuilder, TextInputAction? textInputAction, TextAlign textAlign, TextAlignVertical? textAlignVertical, TextDirection? textDirection, bool expands, void Function()? onEditingComplete, void Function(FTime)? onSubmit, MouseCursor? mouseCursor, bool canRequestFocus, Widget? label, Widget? description, bool enabled, void Function(FTime?)? onSaved, void Function()? onReset, AutovalidateMode autovalidateMode, String? forceErrorText, Widget Function(BuildContext, String) errorBuilder, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FTimeField",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 52,
+      "length": 6,
+      "code": "{Widget? label}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 87,
+      "length": 12,
+      "code": "{Widget? description}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 147,
+      "length": 7,
+      "code": "{bool hour24}",
+      "links": [],
+      "documentation": ""
+    }
+  ]
 }

@@ -106,6 +106,9 @@ class Tooltip {
   /// The source code.
   final String code;
 
+  /// The links within the tooltip code (for types, etc.).
+  final List<DartDocLink> links = [];
+
   /// The identifier's containing class.
   ///
   /// For constructors, fields and methods: `containing class <class>`.
@@ -119,14 +122,15 @@ class Tooltip {
     required int baseOffset,
     required this.length,
     required this.code,
-    required this.container,
-    required this.documentation,
+    this.container,
+    this.documentation = '',
   }) : offset = offset - baseOffset;
 
   Map<String, dynamic> toJson() => {
     'offset': offset,
     'length': length,
     'code': code,
+    'links': [for (final l in links) l.toJson()],
     if (container != null) 'container': {'name': container!.$1, 'url': container!.$2},
     'documentation': documentation,
   };

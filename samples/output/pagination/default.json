@@ -23,5 +23,42 @@
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPaginationControl/FPaginationControl.managed.html"
     }
   ],
-  "tooltips": []
+  "tooltips": [
+    {
+      "offset": 48,
+      "length": 11,
+      "code": "FPagination({FPaginationControl control = const .managed(), FPaginationStyle Function(FPaginationStyle)? style, Widget? previous, Widget? next, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FPagination",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPagination-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 60,
+      "length": 8,
+      "code": "{FPaginationControl control = const .managed()}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 70,
+      "length": 7,
+      "code": "FPaginationControl.managed({FPaginationController? controller, int? initial, int? pages, int? siblings, bool showEdges, void Function(int)? onChange})",
+      "links": [],
+      "container": {
+        "name": "FPaginationControl",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPaginationControl-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 78,
+      "length": 6,
+      "code": "{int? pages}",
+      "links": [],
+      "documentation": ""
+    }
+  ]
 }

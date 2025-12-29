@@ -18,5 +18,39 @@
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.progress/FCircularProgress/FCircularProgress.pinwheel.html"
     }
   ],
-  "tooltips": []
+  "tooltips": [
+    {
+      "offset": 106,
+      "length": 17,
+      "code": "FCircularProgress({FCircularProgressStyle Function(FCircularProgressStyle)? style, String? semanticsLabel, IconData icon = FIcons.loaderCircle, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FCircularProgress",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.progress/FCircularProgress-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 131,
+      "length": 24,
+      "code": "FCircularProgress.loader({FCircularProgressStyle Function(FCircularProgressStyle)? style, String? semanticsLabel, IconData icon = FIcons.loader, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FCircularProgress",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.progress/FCircularProgress-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 163,
+      "length": 26,
+      "code": "FCircularProgress.pinwheel({FCircularProgressStyle Function(FCircularProgressStyle)? style, String? semanticsLabel, IconData icon = FIcons.loaderPinwheel, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FCircularProgress",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.progress/FCircularProgress-class.html"
+      },
+      "documentation": ""
+    }
+  ]
 }

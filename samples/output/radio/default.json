@@ -28,5 +28,45 @@
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.radio/FRadio/onChange.html"
     }
   ],
-  "tooltips": []
+  "tooltips": [
+    {
+      "offset": 244,
+      "length": 6,
+      "code": "FRadio({FRadioStyle Function(FRadioStyle)? style, Widget? label, Widget? description, Widget? error, String? semanticsLabel, bool value = false, void Function(bool)? onChange, bool enabled = true, bool autofocus = false, FocusNode? focusNode, void Function(bool)? onFocusChange, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FRadio",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.radio/FRadio-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 256,
+      "length": 6,
+      "code": "{Widget? label}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 290,
+      "length": 12,
+      "code": "{Widget? description}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 361,
+      "length": 6,
+      "code": "{bool value = false}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 380,
+      "length": 9,
+      "code": "{void Function(bool)? onChange}",
+      "links": [],
+      "documentation": ""
+    }
+  ]
 }

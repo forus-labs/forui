@@ -108,5 +108,185 @@
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderMark/label.html"
     }
   ],
-  "tooltips": []
+  "tooltips": [
+    {
+      "offset": 38,
+      "length": 7,
+      "code": "FSlider({FSliderControl control = const .managedContinuous(), FSliderStyle Function(FSliderStyle)? style, FLayout? layout, Widget? label, Widget? description, Widget Function(BuildContext, String) errorBuilder = FFormFieldProperties.defaultErrorBuilder, List<FSliderMark> marks = const [], double? trackMainAxisExtent, double? trackHitRegionCrossExtent, FSliderTooltipControls tooltipControls = const .new(), Widget Function(FTooltipController, double) tooltipBuilder = _tooltipBuilder, String Function(double) semanticValueFormatterCallback = _semanticValueFormatter, String Function(FSliderValue)? semanticFormatterCallback, void Function(FSliderValue)? onEnd, void Function(FSliderValue?)? onSaved, void Function()? onReset, String? Function(FSliderValue?)? validator, String? forceErrorText, bool enabled = true, AutovalidateMode autovalidateMode = .disabled, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FSlider",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSlider-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 49,
+      "length": 8,
+      "code": "{FSliderControl control = const .managedContinuous()}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 59,
+      "length": 17,
+      "code": "FSliderControl.managedContinuous({FContinuousSliderController? controller, FSliderValue? initial, double? stepPercentage, FSliderInteraction? interaction, FSliderActiveThumb? thumb, void Function(FSliderValue)? onChange})",
+      "links": [],
+      "container": {
+        "name": "FSliderControl",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderControl-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 77,
+      "length": 8,
+      "code": "{FSliderValue? initial}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 86,
+      "length": 12,
+      "code": "FSliderValue({required double max, double min, ({double max, double min}) constraints})",
+      "links": [],
+      "container": {
+        "name": "FSliderValue",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderValue-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 99,
+      "length": 4,
+      "code": "{required double max}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 114,
+      "length": 6,
+      "code": "{List<FSliderMark> marks = const []}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 134,
+      "length": 4,
+      "code": "FSliderMark.mark({required double value, FSliderMarkStyle? style, bool tick, Widget? label})",
+      "links": [],
+      "container": {
+        "name": "FSliderMark",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderMark-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 139,
+      "length": 6,
+      "code": "{required double value}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 149,
+      "length": 6,
+      "code": "{Widget? label}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 174,
+      "length": 4,
+      "code": "FSliderMark.mark({required double value, FSliderMarkStyle? style, bool tick, Widget? label})",
+      "links": [],
+      "container": {
+        "name": "FSliderMark",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderMark-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 179,
+      "length": 6,
+      "code": "{required double value}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 192,
+      "length": 5,
+      "code": "{bool tick}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 211,
+      "length": 4,
+      "code": "FSliderMark.mark({required double value, FSliderMarkStyle? style, bool tick, Widget? label})",
+      "links": [],
+      "container": {
+        "name": "FSliderMark",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderMark-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 216,
+      "length": 6,
+      "code": "{required double value}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 234,
+      "length": 4,
+      "code": "FSliderMark.mark({required double value, FSliderMarkStyle? style, bool tick, Widget? label})",
+      "links": [],
+      "container": {
+        "name": "FSliderMark",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderMark-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 239,
+      "length": 6,
+      "code": "{required double value}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 252,
+      "length": 5,
+      "code": "{bool tick}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 271,
+      "length": 4,
+      "code": "FSliderMark.mark({required double value, FSliderMarkStyle? style, bool tick, Widget? label})",
+      "links": [],
+      "container": {
+        "name": "FSliderMark",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderMark-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 276,
+      "length": 6,
+      "code": "{required double value}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 286,
+      "length": 6,
+      "code": "{Widget? label}",
+      "links": [],
+      "documentation": ""
+    }
+  ]
 }

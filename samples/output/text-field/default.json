@@ -23,5 +23,38 @@
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/description.html"
     }
   ],
-  "tooltips": []
+  "tooltips": [
+    {
+      "offset": 38,
+      "length": 10,
+      "code": "FTextField({FTextFieldControl control = const .managed(), FTextFieldStyle Function(FTextFieldStyle)? style, Widget Function(BuildContext, FTextFieldStyle, Set<WidgetState>, Widget) builder = Input.defaultBuilder, Widget? label, String? hint, Widget? description, Widget? error, TextMagnifierConfiguration? magnifierConfiguration, Object groupId = EditableText, FocusNode? focusNode, TextInputType? keyboardType, TextInputAction? textInputAction, TextCapitalization textCapitalization = .none, TextAlign textAlign = .start, TextAlignVertical? textAlignVertical, TextDirection? textDirection, bool autofocus = false, WidgetStatesController? statesController, String obscuringCharacter = '•', bool obscureText = false, bool autocorrect = true, SmartDashesType? smartDashesType, SmartQuotesType? smartQuotesType, bool enableSuggestions = true, int? minLines, int? maxLines = 1, bool expands = false, bool readOnly = false, bool? showCursor, int? maxLength, MaxLengthEnforcement? maxLengthEnforcement, void Function()? onTap, void Function(PointerDownEvent)? onTapOutside, bool onTapAlwaysCalled = false, void Function()? onEditingComplete, void Function(String)? onSubmit, void Function(String, Map<String, dynamic>)? onAppPrivateCommand, List<TextInputFormatter>? inputFormatters, bool enabled = true, bool? ignorePointers, bool enableInteractiveSelection = true, bool? selectAllOnFocus, TextSelectionControls? selectionControls, DragStartBehavior dragStartBehavior = .start, MouseCursor? mouseCursor, Widget? Function(BuildContext, int, int?, bool)? counterBuilder, ScrollPhysics? scrollPhysics, ScrollController? scrollController, Iterable<String>? autofillHints, String? restorationId, bool stylusHandwritingEnabled = true, bool enableIMEPersonalizedLearning = true, ContentInsertionConfiguration? contentInsertionConfiguration, Widget Function(BuildContext, EditableTextState)? contextMenuBuilder = Input.defaultContextMenuBuilder, bool canRequestFocus = true, UndoHistoryController? undoController, SpellCheckConfiguration? spellCheckConfiguration, Widget Function(BuildContext, FTextFieldStyle, Set<WidgetState>)? prefixBuilder, Widget Function(BuildContext, FTextFieldStyle, Set<WidgetState>)? suffixBuilder, bool Function(TextEditingValue) clearable = Input.defaultClearable, Widget Function(BuildContext, FTextFieldStyle, void Function()) clearIconBuilder = Input.defaultClearIconBuilder, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FTextField",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 52,
+      "length": 6,
+      "code": "{Widget? label}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 79,
+      "length": 5,
+      "code": "{String? hint}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 98,
+      "length": 12,
+      "code": "{Widget? description}",
+      "links": [],
+      "documentation": ""
+    }
+  ]
 }

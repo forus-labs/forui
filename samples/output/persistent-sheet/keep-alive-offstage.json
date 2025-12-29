@@ -313,5 +313,542 @@
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/child.html"
     }
   ],
-  "tooltips": []
+  "tooltips": [
+    {
+      "offset": 312,
+      "length": 7,
+      "code": "void dispose()",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 553,
+      "length": 6,
+      "code": "AnimationStatus get status",
+      "links": [],
+      "container": {
+        "name": "FPersistentSheetController",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/FPersistentSheetController-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 731,
+      "length": 20,
+      "code": "FPersistentSheetController showFPersistentSheet({required BuildContext context, required FLayout side, required Widget Function(BuildContext, FPersistentSheetController) builder, FPersistentSheetStyle Function(FPersistentSheetStyle)? style, double? mainAxisMaxRatio = 9 / 16, BoxConstraints constraints = const BoxConstraints(), bool draggable = true, Offset? anchorPoint, bool useSafeArea = false, bool resizeToAvoidBottomInset = true, bool keepAliveOffstage = false, void Function()? onClosing, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FPersistentSheetController",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/FPersistentSheetController-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 763,
+      "length": 8,
+      "code": "{required BuildContext context}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 791,
+      "length": 5,
+      "code": "{required FLayout side}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 813,
+      "length": 18,
+      "code": "{bool keepAliveOffstage = false}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 848,
+      "length": 8,
+      "code": "{required Widget Function(BuildContext, FPersistentSheetController) builder}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 983,
+      "length": 6,
+      "code": "TickerFuture toggle()",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 1132,
+      "length": 7,
+      "code": "FButton({required void Function()? onPress, required Widget child, FBaseButtonStyle Function(FButtonStyle) style = _primary, void Function()? onLongPress, void Function()? onSecondaryPress, void Function()? onSecondaryLongPress, bool autofocus = false, FocusNode? focusNode, void Function(bool)? onFocusChange, void Function(bool)? onHoverChange, void Function(FWidgetStatesDelta)? onStateChange, bool selected = false, Map<ShortcutActivator, Intent>? shortcuts, Map<Type, Action<Intent>>? actions, MainAxisSize mainAxisSize = .max, MainAxisAlignment mainAxisAlignment = .center, CrossAxisAlignment crossAxisAlignment = .center, TextBaseline? textBaseline, Widget? prefix, Widget? suffix, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FButton",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 1140,
+      "length": 8,
+      "code": "{required void Function()? onPress}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 1158,
+      "length": 3,
+      "code": "FLayout ltr",
+      "links": [],
+      "container": {
+        "name": "FLayout",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FLayout.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 1164,
+      "length": 6,
+      "code": "{required Widget child}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 1200,
+      "length": 7,
+      "code": "FButton({required void Function()? onPress, required Widget child, FBaseButtonStyle Function(FButtonStyle) style = _primary, void Function()? onLongPress, void Function()? onSecondaryPress, void Function()? onSecondaryLongPress, bool autofocus = false, FocusNode? focusNode, void Function(bool)? onFocusChange, void Function(bool)? onHoverChange, void Function(FWidgetStatesDelta)? onStateChange, bool selected = false, Map<ShortcutActivator, Intent>? shortcuts, Map<Type, Action<Intent>>? actions, MainAxisSize mainAxisSize = .max, MainAxisAlignment mainAxisAlignment = .center, CrossAxisAlignment crossAxisAlignment = .center, TextBaseline? textBaseline, Widget? prefix, Widget? suffix, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FButton",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 1208,
+      "length": 8,
+      "code": "{required void Function()? onPress}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 1226,
+      "length": 3,
+      "code": "FLayout ttb",
+      "links": [],
+      "container": {
+        "name": "FLayout",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FLayout.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 1232,
+      "length": 6,
+      "code": "{required Widget child}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 1267,
+      "length": 7,
+      "code": "FButton({required void Function()? onPress, required Widget child, FBaseButtonStyle Function(FButtonStyle) style = _primary, void Function()? onLongPress, void Function()? onSecondaryPress, void Function()? onSecondaryLongPress, bool autofocus = false, FocusNode? focusNode, void Function(bool)? onFocusChange, void Function(bool)? onHoverChange, void Function(FWidgetStatesDelta)? onStateChange, bool selected = false, Map<ShortcutActivator, Intent>? shortcuts, Map<Type, Action<Intent>>? actions, MainAxisSize mainAxisSize = .max, MainAxisAlignment mainAxisAlignment = .center, CrossAxisAlignment crossAxisAlignment = .center, TextBaseline? textBaseline, Widget? prefix, Widget? suffix, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FButton",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 1275,
+      "length": 8,
+      "code": "{required void Function()? onPress}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 1293,
+      "length": 3,
+      "code": "FLayout rtl",
+      "links": [],
+      "container": {
+        "name": "FLayout",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FLayout.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 1299,
+      "length": 6,
+      "code": "{required Widget child}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 1336,
+      "length": 7,
+      "code": "FButton({required void Function()? onPress, required Widget child, FBaseButtonStyle Function(FButtonStyle) style = _primary, void Function()? onLongPress, void Function()? onSecondaryPress, void Function()? onSecondaryLongPress, bool autofocus = false, FocusNode? focusNode, void Function(bool)? onFocusChange, void Function(bool)? onHoverChange, void Function(FWidgetStatesDelta)? onStateChange, bool selected = false, Map<ShortcutActivator, Intent>? shortcuts, Map<Type, Action<Intent>>? actions, MainAxisSize mainAxisSize = .max, MainAxisAlignment mainAxisAlignment = .center, CrossAxisAlignment crossAxisAlignment = .center, TextBaseline? textBaseline, Widget? prefix, Widget? suffix, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FButton",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 1344,
+      "length": 8,
+      "code": "{required void Function()? onPress}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 1362,
+      "length": 3,
+      "code": "FLayout btt",
+      "links": [],
+      "container": {
+        "name": "FLayout",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FLayout.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 1368,
+      "length": 6,
+      "code": "{required Widget child}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 1773,
+      "length": 10,
+      "code": "Color background",
+      "links": [],
+      "container": {
+        "name": "FColors",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 1766,
+      "length": 6,
+      "code": "FColors colors",
+      "links": [],
+      "container": {
+        "name": "FThemeData",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 1760,
+      "length": 5,
+      "code": "FThemeData get theme",
+      "links": [],
+      "container": {
+        "name": "FThemeBuildContext",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 1804,
+      "length": 8,
+      "code": "bool vertical",
+      "links": [],
+      "container": {
+        "name": "FLayout",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FLayout.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 1902,
+      "length": 6,
+      "code": "Color border",
+      "links": [],
+      "container": {
+        "name": "FColors",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 1895,
+      "length": 6,
+      "code": "FColors colors",
+      "links": [],
+      "container": {
+        "name": "FThemeData",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 1889,
+      "length": 5,
+      "code": "FThemeData get theme",
+      "links": [],
+      "container": {
+        "name": "FThemeBuildContext",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 2012,
+      "length": 6,
+      "code": "Color border",
+      "links": [],
+      "container": {
+        "name": "FColors",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 2005,
+      "length": 6,
+      "code": "FColors colors",
+      "links": [],
+      "container": {
+        "name": "FThemeData",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 1999,
+      "length": 5,
+      "code": "FThemeData get theme",
+      "links": [],
+      "container": {
+        "name": "FThemeBuildContext",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 2351,
+      "length": 3,
+      "code": "TextStyle xl2",
+      "links": [],
+      "container": {
+        "name": "FTypography",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FTypography-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 2340,
+      "length": 10,
+      "code": "FTypography typography",
+      "links": [],
+      "container": {
+        "name": "FThemeData",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 2334,
+      "length": 5,
+      "code": "FThemeData get theme",
+      "links": [],
+      "container": {
+        "name": "FThemeBuildContext",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 2440,
+      "length": 10,
+      "code": "Color foreground",
+      "links": [],
+      "container": {
+        "name": "FColors",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 2433,
+      "length": 6,
+      "code": "FColors colors",
+      "links": [],
+      "container": {
+        "name": "FThemeData",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 2427,
+      "length": 5,
+      "code": "FThemeData get theme",
+      "links": [],
+      "container": {
+        "name": "FThemeBuildContext",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 2647,
+      "length": 2,
+      "code": "TextStyle sm",
+      "links": [],
+      "container": {
+        "name": "FTypography",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FTypography-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 2636,
+      "length": 10,
+      "code": "FTypography typography",
+      "links": [],
+      "container": {
+        "name": "FThemeData",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 2630,
+      "length": 5,
+      "code": "FThemeData get theme",
+      "links": [],
+      "container": {
+        "name": "FThemeBuildContext",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 2702,
+      "length": 15,
+      "code": "Color mutedForeground",
+      "links": [],
+      "container": {
+        "name": "FColors",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 2695,
+      "length": 6,
+      "code": "FColors colors",
+      "links": [],
+      "container": {
+        "name": "FThemeData",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 2689,
+      "length": 5,
+      "code": "FThemeData get theme",
+      "links": [],
+      "container": {
+        "name": "FThemeBuildContext",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 2903,
+      "length": 10,
+      "code": "FTextField({FTextFieldControl control = const .managed(), FTextFieldStyle Function(FTextFieldStyle)? style, Widget Function(BuildContext, FTextFieldStyle, Set<WidgetState>, Widget) builder = Input.defaultBuilder, Widget? label, String? hint, Widget? description, Widget? error, TextMagnifierConfiguration? magnifierConfiguration, Object groupId = EditableText, FocusNode? focusNode, TextInputType? keyboardType, TextInputAction? textInputAction, TextCapitalization textCapitalization = .none, TextAlign textAlign = .start, TextAlignVertical? textAlignVertical, TextDirection? textDirection, bool autofocus = false, WidgetStatesController? statesController, String obscuringCharacter = '•', bool obscureText = false, bool autocorrect = true, SmartDashesType? smartDashesType, SmartQuotesType? smartQuotesType, bool enableSuggestions = true, int? minLines, int? maxLines = 1, bool expands = false, bool readOnly = false, bool? showCursor, int? maxLength, MaxLengthEnforcement? maxLengthEnforcement, void Function()? onTap, void Function(PointerDownEvent)? onTapOutside, bool onTapAlwaysCalled = false, void Function()? onEditingComplete, void Function(String)? onSubmit, void Function(String, Map<String, dynamic>)? onAppPrivateCommand, List<TextInputFormatter>? inputFormatters, bool enabled = true, bool? ignorePointers, bool enableInteractiveSelection = true, bool? selectAllOnFocus, TextSelectionControls? selectionControls, DragStartBehavior dragStartBehavior = .start, MouseCursor? mouseCursor, Widget? Function(BuildContext, int, int?, bool)? counterBuilder, ScrollPhysics? scrollPhysics, ScrollController? scrollController, Iterable<String>? autofillHints, String? restorationId, bool stylusHandwritingEnabled = true, bool enableIMEPersonalizedLearning = true, ContentInsertionConfiguration? contentInsertionConfiguration, Widget Function(BuildContext, EditableTextState)? contextMenuBuilder = Input.defaultContextMenuBuilder, bool canRequestFocus = true, UndoHistoryController? undoController, SpellCheckConfiguration? spellCheckConfiguration, Widget Function(BuildContext, FTextFieldStyle, Set<WidgetState>)? prefixBuilder, Widget Function(BuildContext, FTextFieldStyle, Set<WidgetState>)? suffixBuilder, bool Function(TextEditingValue) clearable = Input.defaultClearable, Widget Function(BuildContext, FTextFieldStyle, void Function()) clearIconBuilder = Input.defaultClearIconBuilder, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FTextField",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 2914,
+      "length": 6,
+      "code": "{Widget? label}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 2935,
+      "length": 5,
+      "code": "{String? hint}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 3023,
+      "length": 10,
+      "code": "FTextField({FTextFieldControl control = const .managed(), FTextFieldStyle Function(FTextFieldStyle)? style, Widget Function(BuildContext, FTextFieldStyle, Set<WidgetState>, Widget) builder = Input.defaultBuilder, Widget? label, String? hint, Widget? description, Widget? error, TextMagnifierConfiguration? magnifierConfiguration, Object groupId = EditableText, FocusNode? focusNode, TextInputType? keyboardType, TextInputAction? textInputAction, TextCapitalization textCapitalization = .none, TextAlign textAlign = .start, TextAlignVertical? textAlignVertical, TextDirection? textDirection, bool autofocus = false, WidgetStatesController? statesController, String obscuringCharacter = '•', bool obscureText = false, bool autocorrect = true, SmartDashesType? smartDashesType, SmartQuotesType? smartQuotesType, bool enableSuggestions = true, int? minLines, int? maxLines = 1, bool expands = false, bool readOnly = false, bool? showCursor, int? maxLength, MaxLengthEnforcement? maxLengthEnforcement, void Function()? onTap, void Function(PointerDownEvent)? onTapOutside, bool onTapAlwaysCalled = false, void Function()? onEditingComplete, void Function(String)? onSubmit, void Function(String, Map<String, dynamic>)? onAppPrivateCommand, List<TextInputFormatter>? inputFormatters, bool enabled = true, bool? ignorePointers, bool enableInteractiveSelection = true, bool? selectAllOnFocus, TextSelectionControls? selectionControls, DragStartBehavior dragStartBehavior = .start, MouseCursor? mouseCursor, Widget? Function(BuildContext, int, int?, bool)? counterBuilder, ScrollPhysics? scrollPhysics, ScrollController? scrollController, Iterable<String>? autofillHints, String? restorationId, bool stylusHandwritingEnabled = true, bool enableIMEPersonalizedLearning = true, ContentInsertionConfiguration? contentInsertionConfiguration, Widget Function(BuildContext, EditableTextState)? contextMenuBuilder = Input.defaultContextMenuBuilder, bool canRequestFocus = true, UndoHistoryController? undoController, SpellCheckConfiguration? spellCheckConfiguration, Widget Function(BuildContext, FTextFieldStyle, Set<WidgetState>)? prefixBuilder, Widget Function(BuildContext, FTextFieldStyle, Set<WidgetState>)? suffixBuilder, bool Function(TextEditingValue) clearable = Input.defaultClearable, Widget Function(BuildContext, FTextFieldStyle, void Function()) clearIconBuilder = Input.defaultClearIconBuilder, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FTextField",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 3034,
+      "length": 6,
+      "code": "{Widget? label}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 3056,
+      "length": 5,
+      "code": "{String? hint}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 3139,
+      "length": 7,
+      "code": "FButton({required void Function()? onPress, required Widget child, FBaseButtonStyle Function(FButtonStyle) style = _primary, void Function()? onLongPress, void Function()? onSecondaryPress, void Function()? onSecondaryLongPress, bool autofocus = false, FocusNode? focusNode, void Function(bool)? onFocusChange, void Function(bool)? onHoverChange, void Function(FWidgetStatesDelta)? onStateChange, bool selected = false, Map<ShortcutActivator, Intent>? shortcuts, Map<Type, Action<Intent>>? actions, MainAxisSize mainAxisSize = .max, MainAxisAlignment mainAxisAlignment = .center, CrossAxisAlignment crossAxisAlignment = .center, TextBaseline? textBaseline, Widget? prefix, Widget? suffix, Key? key})",
+      "links": [],
+      "container": {
+        "name": "FButton",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 3147,
+      "length": 8,
+      "code": "{required void Function()? onPress}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 3167,
+      "length": 6,
+      "code": "TickerFuture toggle()",
+      "links": [],
+      "container": {
+        "name": "FPersistentSheetController",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/FPersistentSheetController-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 3175,
+      "length": 6,
+      "code": "{required Widget child}",
+      "links": [],
+      "documentation": ""
+    }
+  ]
 }
