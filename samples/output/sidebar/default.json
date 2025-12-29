@@ -625,6 +625,13 @@
   ],
   "tooltips": [
     {
+      "offset": 13,
+      "length": 20,
+      "code": "BuildContext context",
+      "links": [],
+      "documentation": ""
+    },
+    {
       "offset": 38,
       "length": 9,
       "code": "FScaffold({required Widget child, FScaffoldStyle Function(FScaffoldStyle)? scaffoldStyle, Widget? header, Widget? sidebar, Widget? footer, bool childPad = true, bool resizeToAvoidBottomInset = true, Key? key})",

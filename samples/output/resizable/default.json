@@ -262,6 +262,27 @@
       "documentation": ""
     },
     {
+      "offset": 428,
+      "length": 1,
+      "code": "BuildContext _",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 431,
+      "length": 4,
+      "code": "FResizableRegionData data",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 437,
+      "length": 1,
+      "code": "Widget? _",
+      "links": [],
+      "documentation": ""
+    },
+    {
       "offset": 481,
       "length": 14,
       "code": "IconData sunrise",
@@ -305,6 +326,27 @@
       "documentation": ""
     },
     {
+      "offset": 620,
+      "length": 1,
+      "code": "BuildContext _",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 623,
+      "length": 4,
+      "code": "FResizableRegionData data",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 629,
+      "length": 1,
+      "code": "Widget? _",
+      "links": [],
+      "documentation": ""
+    },
+    {
       "offset": 673,
       "length": 10,
       "code": "IconData sun",
@@ -344,6 +386,27 @@
       "offset": 800,
       "length": 8,
       "code": "{required Widget Function(BuildContext, FResizableRegionData, Widget?) builder}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 810,
+      "length": 1,
+      "code": "BuildContext _",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 813,
+      "length": 4,
+      "code": "FResizableRegionData data",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 819,
+      "length": 1,
+      "code": "Widget? _",
       "links": [],
       "documentation": ""
     },

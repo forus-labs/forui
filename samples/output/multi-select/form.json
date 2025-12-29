@@ -116,6 +116,13 @@
       "documentation": ""
     },
     {
+      "offset": 676,
+      "length": 11,
+      "code": "Set<String> departments",
+      "links": [],
+      "documentation": ""
+    },
+    {
       "offset": 774,
       "length": 9,
       "code": "{required List<FSelectItemMixin> children}",

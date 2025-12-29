@@ -336,6 +336,27 @@
       "documentation": ""
     },
     {
+      "offset": 1943,
+      "length": 5,
+      "code": "bool? value",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 2055,
+      "length": 5,
+      "code": "bool? value",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 2128,
+      "length": 5,
+      "code": "FormFieldState<bool> state",
+      "links": [],
+      "documentation": ""
+    },
+    {
       "offset": 2138,
       "length": 7,
       "code": "FSwitch({FSwitchStyle Function(FSwitchStyle)? style, Widget? label, Widget? description, Widget? error, String? semanticsLabel, bool value = false, void Function(bool)? onChange, bool enabled = true, bool autofocus = false, FocusNode? focusNode, void Function(bool)? onFocusChange, DragStartBehavior dragStartBehavior = .start, Key? key})",
@@ -357,6 +378,13 @@
       "offset": 2220,
       "length": 9,
       "code": "{void Function(bool)? onChange}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 2231,
+      "length": 5,
+      "code": "bool value",
       "links": [],
       "documentation": ""
     },
@@ -467,6 +495,27 @@
       "documentation": ""
     },
     {
+      "offset": 3566,
+      "length": 5,
+      "code": "bool? value",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 3678,
+      "length": 5,
+      "code": "bool? value",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 3751,
+      "length": 5,
+      "code": "FormFieldState<bool> state",
+      "links": [],
+      "documentation": ""
+    },
+    {
       "offset": 3761,
       "length": 7,
       "code": "FSwitch({FSwitchStyle Function(FSwitchStyle)? style, Widget? label, Widget? description, Widget? error, String? semanticsLabel, bool value = false, void Function(bool)? onChange, bool enabled = true, bool autofocus = false, FocusNode? focusNode, void Function(bool)? onFocusChange, DragStartBehavior dragStartBehavior = .start, Key? key})",
@@ -488,6 +537,13 @@
       "offset": 3843,
       "length": 9,
       "code": "{void Function(bool)? onChange}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 3854,
+      "length": 5,
+      "code": "bool value",
       "links": [],
       "documentation": ""
     },

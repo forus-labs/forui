@@ -75,6 +75,20 @@
       "documentation": ""
     },
     {
+      "offset": 1013,
+      "length": 7,
+      "code": "BuildContext context",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 1022,
+      "length": 5,
+      "code": "Widget? child",
+      "links": [],
+      "documentation": ""
+    },
+    {
       "offset": 1032,
       "length": 12,
       "code": "FCollapsible({required double value, required Widget child, Key? key})",

@@ -25,6 +25,13 @@
   ],
   "tooltips": [
     {
+      "offset": 13,
+      "length": 14,
+      "code": "BuildContext _",
+      "links": [],
+      "documentation": ""
+    },
+    {
       "offset": 32,
       "length": 5,
       "code": "FCard({Widget? image, Widget? title, Widget? subtitle, Widget? child, MainAxisSize mainAxisSize = .min, FCardStyle Function(FCardStyle)? style, Key? key})",

@@ -75,6 +75,13 @@
       "documentation": ""
     },
     {
+      "offset": 383,
+      "length": 1,
+      "code": "String s",
+      "links": [],
+      "documentation": ""
+    },
+    {
       "offset": 396,
       "length": 7,
       "code": "{required FutureOr<Iterable<String>> Function(String) filter}",
@@ -82,9 +89,44 @@
       "documentation": ""
     },
     {
+      "offset": 405,
+      "length": 5,
+      "code": "String query",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 563,
+      "length": 5,
+      "code": "String fruit",
+      "links": [],
+      "documentation": ""
+    },
+    {
       "offset": 652,
       "length": 15,
       "code": "{required List<FSelectItemMixin> Function(BuildContext, String, Iterable<String>) contentBuilder}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 669,
+      "length": 7,
+      "code": "BuildContext context",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 678,
+      "length": 1,
+      "code": "String _",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 681,
+      "length": 6,
+      "code": "Iterable<String> fruits",
       "links": [],
       "documentation": ""
     },

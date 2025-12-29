@@ -25,6 +25,13 @@
   ],
   "tooltips": [
     {
+      "offset": 13,
+      "length": 14,
+      "code": "BuildContext _",
+      "links": [],
+      "documentation": ""
+    },
+    {
       "offset": 32,
       "length": 13,
       "code": "FLineCalendar({FLineCalendarControl control = const .managed(), FLineCalendarStyle Function(FLineCalendarStyle)? style, AlignmentDirectional initialScrollAlignment = .center, ScrollPhysics? physics, double? cacheExtent, ScrollViewKeyboardDismissBehavior keyboardDismissBehavior = .manual, Widget Function(BuildContext, ({DateTime date, Set<WidgetState> states, FLineCalendarStyle style, bool today}), Widget?) builder = _builder, DateTime? start, DateTime? end, DateTime? initialScroll, DateTime? today, Key? key})",

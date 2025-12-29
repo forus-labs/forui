@@ -65,9 +65,51 @@
       "documentation": ""
     },
     {
+      "offset": 1266,
+      "length": 5,
+      "code": "String query",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 1310,
+      "length": 4,
+      "code": "List<String> list",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 1352,
+      "length": 8,
+      "code": "String timezone",
+      "links": [],
+      "documentation": ""
+    },
+    {
       "offset": 1434,
       "length": 15,
       "code": "{required List<FAutocompleteItemMixin> Function(BuildContext, String, Iterable<String>) contentBuilder}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 1451,
+      "length": 7,
+      "code": "BuildContext context",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 1460,
+      "length": 5,
+      "code": "String query",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 1467,
+      "length": 11,
+      "code": "Iterable<String> suggestions",
       "links": [],
       "documentation": ""
     },

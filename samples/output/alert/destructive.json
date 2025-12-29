@@ -35,6 +35,13 @@
   ],
   "tooltips": [
     {
+      "offset": 13,
+      "length": 14,
+      "code": "BuildContext _",
+      "links": [],
+      "documentation": ""
+    },
+    {
       "offset": 32,
       "length": 6,
       "code": "FAlert({required Widget title, Widget icon = const Icon(FIcons.circleAlert), Widget? subtitle, FBaseAlertStyle Function(FAlertStyle) style = _primary, Key? key})",

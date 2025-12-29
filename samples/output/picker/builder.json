@@ -25,6 +25,13 @@
   ],
   "tooltips": [
     {
+      "offset": 13,
+      "length": 20,
+      "code": "BuildContext context",
+      "links": [],
+      "documentation": ""
+    },
+    {
       "offset": 38,
       "length": 7,
       "code": "FPicker({required List<Widget> children, FPickerControl control = const .managed(), FPickerStyle Function(FPickerStyle)? style, Key? key})",
@@ -57,6 +64,20 @@
       "offset": 81,
       "length": 8,
       "code": "{required Widget Function(BuildContext, int) builder}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 91,
+      "length": 7,
+      "code": "BuildContext context",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 100,
+      "length": 5,
+      "code": "int index",
       "links": [],
       "documentation": ""
     }

@@ -65,6 +65,13 @@
   ],
   "tooltips": [
     {
+      "offset": 13,
+      "length": 20,
+      "code": "BuildContext context",
+      "links": [],
+      "documentation": ""
+    },
+    {
       "offset": 38,
       "length": 15,
       "code": "FFocusedOutline({required bool focused, required Widget? child, FFocusedOutlineStyle Function(FFocusedOutlineStyle)? style, Key? key})",

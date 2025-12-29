@@ -205,6 +205,13 @@
   ],
   "tooltips": [
     {
+      "offset": 13,
+      "length": 20,
+      "code": "BuildContext context",
+      "links": [],
+      "documentation": ""
+    },
+    {
       "offset": 195,
       "length": 7,
       "code": "FToastAlignment topLeft",
@@ -331,6 +338,20 @@
       "offset": 649,
       "length": 14,
       "code": "{Widget Function(BuildContext, FToasterEntry)? suffixBuilder}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 665,
+      "length": 7,
+      "code": "BuildContext context",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 674,
+      "length": 5,
+      "code": "FToasterEntry entry",
       "links": [],
       "documentation": ""
     },

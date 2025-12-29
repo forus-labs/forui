@@ -222,6 +222,28 @@ class TooltipDartDocLinker extends DartDocLinker {
     super.visitNamedExpression(node);
   }
 
+  /// Adds tooltips for ALL function expression parameters.
+  ///
+  /// Handles parameters like `controller` in `(_, controller, _) => ...`.
+  @override
+  void visitSimpleFormalParameter(SimpleFormalParameter node) {
+    // Only handle parameters in function expressions (lambdas), not in method/function declarations.
+    if (node.parent?.parent is! FunctionExpression) {
+      super.visitSimpleFormalParameter(node);
+      return;
+    }
+
+    if (node.declaredFragment?.element case final element?) {
+      tooltips.add(Tooltip(
+        offset: node.offset,
+        baseOffset: baseOffset,
+        length: node.length,
+        code: element.toString(),
+      ));
+    }
+    super.visitSimpleFormalParameter(node);
+  }
+
   bool _tooltip(Element element) => packages.any((p) => p.name == element.library?.uri.pathSegments.first);
 
   (String, String)? _containerFromElement(Element element) {

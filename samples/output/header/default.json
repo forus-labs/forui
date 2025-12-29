@@ -60,6 +60,13 @@
   ],
   "tooltips": [
     {
+      "offset": 13,
+      "length": 14,
+      "code": "BuildContext _",
+      "links": [],
+      "documentation": ""
+    },
+    {
       "offset": 32,
       "length": 7,
       "code": "FHeader({Widget title, FHeaderStyle Function(FHeaderStyle)? style, List<Widget> suffixes, Key? key})",

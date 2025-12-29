@@ -82,6 +82,20 @@
       "documentation": ""
     },
     {
+      "offset": 419,
+      "length": 1,
+      "code": "String a",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 422,
+      "length": 1,
+      "code": "String b",
+      "links": [],
+      "documentation": ""
+    },
+    {
       "offset": 448,
       "length": 9,
       "code": "{required List<FSelectItemMixin> children}",

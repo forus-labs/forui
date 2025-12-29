@@ -50,6 +50,13 @@
   ],
   "tooltips": [
     {
+      "offset": 13,
+      "length": 14,
+      "code": "BuildContext _",
+      "links": [],
+      "documentation": ""
+    },
+    {
       "offset": 32,
       "length": 18,
       "code": "FItemGroup.builder({required Widget? Function(BuildContext, int) itemBuilder, int? count, FItemGroupStyle Function(FItemGroupStyle)? style, ScrollController? scrollController, double? cacheExtent, double maxHeight = .infinity, DragStartBehavior dragStartBehavior = .start, ScrollPhysics physics = const ClampingScrollPhysics(), bool? enabled, FItemDivider divider = .none, String? semanticsLabel, Key? key})",
@@ -78,6 +85,20 @@
       "offset": 86,
       "length": 12,
       "code": "{required Widget? Function(BuildContext, int) itemBuilder}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 100,
+      "length": 7,
+      "code": "BuildContext context",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 109,
+      "length": 5,
+      "code": "int index",
       "links": [],
       "documentation": ""
     },

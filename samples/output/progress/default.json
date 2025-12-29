@@ -10,6 +10,13 @@
   ],
   "tooltips": [
     {
+      "offset": 13,
+      "length": 14,
+      "code": "BuildContext _",
+      "links": [],
+      "documentation": ""
+    },
+    {
       "offset": 38,
       "length": 9,
       "code": "FProgress({FProgressStyle Function(FProgressStyle)? style, String? semanticsLabel, Key? key})",

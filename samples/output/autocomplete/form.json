@@ -89,6 +89,13 @@
       "documentation": ""
     },
     {
+      "offset": 615,
+      "length": 10,
+      "code": "String? department",
+      "links": [],
+      "documentation": ""
+    },
+    {
       "offset": 748,
       "length": 6,
       "code": "{required List<String> items}",

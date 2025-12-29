@@ -50,6 +50,13 @@
   ],
   "tooltips": [
     {
+      "offset": 13,
+      "length": 20,
+      "code": "BuildContext context",
+      "links": [],
+      "documentation": ""
+    },
+    {
       "offset": 38,
       "length": 7,
       "code": "FSlider({FSliderControl control = const .managedContinuous(), FSliderStyle Function(FSliderStyle)? style, FLayout? layout, Widget? label, Widget? description, Widget Function(BuildContext, String) errorBuilder = FFormFieldProperties.defaultErrorBuilder, List<FSliderMark> marks = const [], double? trackMainAxisExtent, double? trackHitRegionCrossExtent, FSliderTooltipControls tooltipControls = const .new(), Widget Function(FTooltipController, double) tooltipBuilder = _tooltipBuilder, String Function(double) semanticValueFormatterCallback = _semanticValueFormatter, String Function(FSliderValue)? semanticFormatterCallback, void Function(FSliderValue)? onEnd, void Function(FSliderValue?)? onSaved, void Function()? onReset, String? Function(FSliderValue?)? validator, String? forceErrorText, bool enabled = true, AutovalidateMode autovalidateMode = .disabled, Key? key})",

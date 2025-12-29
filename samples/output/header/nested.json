@@ -80,6 +80,13 @@
   ],
   "tooltips": [
     {
+      "offset": 13,
+      "length": 14,
+      "code": "BuildContext _",
+      "links": [],
+      "documentation": ""
+    },
+    {
       "offset": 32,
       "length": 14,
       "code": "FHeader.nested({Widget title, AlignmentGeometry titleAlignment, FHeaderStyle Function(FHeaderStyle)? style, List<Widget> prefixes, List<Widget> suffixes, Key? key})",

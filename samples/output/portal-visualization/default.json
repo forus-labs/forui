@@ -20,6 +20,20 @@
   ],
   "tooltips": [
     {
+      "offset": 464,
+      "length": 7,
+      "code": "BuildContext context",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 473,
+      "length": 1,
+      "code": "Widget? _",
+      "links": [],
+      "documentation": ""
+    },
+    {
       "offset": 773,
       "length": 4,
       "code": "Offset call(Alignment child, Alignment portal)",

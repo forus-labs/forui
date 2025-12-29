@@ -312,6 +312,13 @@
       "documentation": ""
     },
     {
+      "offset": 431,
+      "length": 12,
+      "code": "FLayout side",
+      "links": [],
+      "documentation": ""
+    },
+    {
       "offset": 553,
       "length": 6,
       "code": "AnimationStatus get status",
@@ -351,6 +358,20 @@
       "offset": 813,
       "length": 8,
       "code": "{required Widget Function(BuildContext, FPersistentSheetController) builder}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 823,
+      "length": 7,
+      "code": "BuildContext context",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 832,
+      "length": 10,
+      "code": "FPersistentSheetController controller",
       "links": [],
       "documentation": ""
     },

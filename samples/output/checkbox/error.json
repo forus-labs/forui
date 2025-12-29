@@ -96,6 +96,13 @@
       "code": "{void Function(bool)? onChange}",
       "links": [],
       "documentation": ""
+    },
+    {
+      "offset": 572,
+      "length": 5,
+      "code": "bool value",
+      "links": [],
+      "documentation": ""
     }
   ]
 }

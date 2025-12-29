@@ -95,6 +95,12 @@ class Snippet {
   };
 }
 
+// enum TooltipTarget {
+//   field,
+//   method,
+//   constructor,
+// }
+
 /// A tooltip for an identifier.
 class Tooltip {
   /// The character offset where the linked identifier starts.

@@ -50,6 +50,13 @@
   ],
   "tooltips": [
     {
+      "offset": 13,
+      "length": 20,
+      "code": "BuildContext context",
+      "links": [],
+      "documentation": ""
+    },
+    {
       "offset": 71,
       "length": 7,
       "code": "FPicker({required List<Widget> children, FPickerControl control = const .managed(), FPickerStyle Function(FPickerStyle)? style, Key? key})",
@@ -86,6 +93,20 @@
       "documentation": ""
     },
     {
+      "offset": 142,
+      "length": 7,
+      "code": "BuildContext context",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 151,
+      "length": 5,
+      "code": "int index",
+      "links": [],
+      "documentation": ""
+    },
+    {
       "offset": 258,
       "length": 20,
       "code": "FPickerWheel.builder({required Widget Function(BuildContext, int) builder, int flex, double? itemExtent, bool autofocus, FocusNode? focusNode, void Function(bool)? onFocusChange, Key? key})",
@@ -100,6 +121,20 @@
       "offset": 288,
       "length": 8,
       "code": "{required Widget Function(BuildContext, int) builder}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 298,
+      "length": 7,
+      "code": "BuildContext context",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 307,
+      "length": 5,
+      "code": "int index",
       "links": [],
       "documentation": ""
     },

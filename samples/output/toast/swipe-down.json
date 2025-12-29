@@ -95,6 +95,13 @@
   ],
   "tooltips": [
     {
+      "offset": 13,
+      "length": 14,
+      "code": "BuildContext _",
+      "links": [],
+      "documentation": ""
+    },
+    {
       "offset": 32,
       "length": 6,
       "code": "FTheme({required FThemeData data, required Widget child, TextDirection? textDirection, Key? key})",
@@ -152,6 +159,13 @@
       "offset": 102,
       "length": 6,
       "code": "{required Widget child}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 255,
+      "length": 7,
+      "code": "BuildContext context",
       "links": [],
       "documentation": ""
     },

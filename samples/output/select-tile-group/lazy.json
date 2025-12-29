@@ -60,6 +60,13 @@
   ],
   "tooltips": [
     {
+      "offset": 13,
+      "length": 14,
+      "code": "BuildContext _",
+      "links": [],
+      "documentation": ""
+    },
+    {
       "offset": 32,
       "length": 24,
       "code": "FSelectTileGroup<int>.builder({required FSelectTile<int>? Function(BuildContext, int) tileBuilder, int? count, FMultiValueControl<int>? control, ScrollController? scrollController, FTileGroupStyle? style, double? cacheExtent, double maxHeight = .infinity, DragStartBehavior dragStartBehavior = .start, ScrollPhysics physics = const ClampingScrollPhysics(), FItemDivider divider = .indented, Widget? label, Widget? description, String? semanticsLabel, Widget Function(BuildContext, String) errorBuilder = FFormFieldProperties.defaultErrorBuilder, void Function(Set<int>?)? onSaved, void Function()? onReset, String? Function(Set<int>?)? validator, String? forceErrorText, bool enabled = true, AutovalidateMode autovalidateMode = .disabled, Key? key})",
@@ -113,6 +120,20 @@
       "offset": 161,
       "length": 12,
       "code": "{required FSelectTile<int>? Function(BuildContext, int) tileBuilder}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 175,
+      "length": 7,
+      "code": "BuildContext context",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 184,
+      "length": 5,
+      "code": "int index",
       "links": [],
       "documentation": ""
     },

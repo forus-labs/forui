@@ -235,6 +235,13 @@
   ],
   "tooltips": [
     {
+      "offset": 13,
+      "length": 20,
+      "code": "BuildContext context",
+      "links": [],
+      "documentation": ""
+    },
+    {
       "offset": 268,
       "length": 2,
       "code": "TextStyle xl",
@@ -398,6 +405,13 @@
       "documentation": ""
     },
     {
+      "offset": 784,
+      "length": 9,
+      "code": "double animation",
+      "links": [],
+      "documentation": ""
+    },
+    {
       "offset": 1146,
       "length": 14,
       "code": "{AlignmentGeometry? popoverAnchor}",
@@ -415,6 +429,20 @@
       "offset": 1213,
       "length": 15,
       "code": "{required Widget Function(BuildContext, FPopoverController) popoverBuilder}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 1230,
+      "length": 7,
+      "code": "BuildContext context",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 1239,
+      "length": 1,
+      "code": "FPopoverController _",
       "links": [],
       "documentation": ""
     },
@@ -597,6 +625,27 @@
       "offset": 2825,
       "length": 8,
       "code": "{Widget Function(BuildContext, FPopoverController, Widget?) builder = _builder}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 2835,
+      "length": 1,
+      "code": "BuildContext _",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 2838,
+      "length": 10,
+      "code": "FPopoverController controller",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 2850,
+      "length": 1,
+      "code": "Widget? _",
       "links": [],
       "documentation": ""
     },

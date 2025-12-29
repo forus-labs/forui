@@ -45,6 +45,13 @@
   ],
   "tooltips": [
     {
+      "offset": 13,
+      "length": 20,
+      "code": "BuildContext context",
+      "links": [],
+      "documentation": ""
+    },
+    {
       "offset": 42,
       "length": 51,
       "code": "FSelect<({String firstName, String lastName})>.rich({required String Function(({String firstName, String lastName})) format, required List<FSelectItemMixin> children, FSelectControl<({String firstName, String lastName})>? control, FPopoverControl popoverControl, FSelectStyle Function(FSelectStyle)? style, bool autofocus, FocusNode? focusNode, Widget Function(BuildContext, FSelectStyle, Set<WidgetState>, Widget) builder, Widget Function(BuildContext, FSelectStyle, Set<WidgetState>)? prefixBuilder, Widget Function(BuildContext, FSelectStyle, Set<WidgetState>)? suffixBuilder, Widget? label, Widget? description, bool enabled, void Function(({String firstName, String lastName})?)? onSaved, void Function()? onReset, AutovalidateMode autovalidateMode, String? forceErrorText, String? Function(({String firstName, String lastName})?) validator, Widget Function(BuildContext, String) errorBuilder, String? hint, TextAlign textAlign, TextAlignVertical? textAlignVertical, TextDirection? textDirection, bool expands, MouseCursor mouseCursor, bool canRequestFocus, bool clearable, AlignmentGeometry contentAnchor, AlignmentGeometry fieldAnchor, FPortalConstraints contentConstraints, FPortalSpacing contentSpacing, FPortalOverflow contentOverflow, Offset contentOffset, FPopoverHideRegion contentHideRegion, Object? contentGroupId, bool autoHide, Widget Function(BuildContext, FSelectStyle) contentEmptyBuilder, ScrollController? contentScrollController, bool contentScrollHandles, ScrollPhysics contentPhysics, FItemDivider contentDivider, Key? key})",
@@ -66,6 +73,13 @@
       "offset": 130,
       "length": 7,
       "code": "{required String Function(({String firstName, String lastName})) format}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 139,
+      "length": 4,
+      "code": "({String firstName, String lastName}) user",
       "links": [],
       "documentation": ""
     },

@@ -107,9 +107,37 @@
       "documentation": ""
     },
     {
+      "offset": 426,
+      "length": 5,
+      "code": "String query",
+      "links": [],
+      "documentation": ""
+    },
+    {
       "offset": 554,
       "length": 15,
       "code": "{required List<FSelectItemMixin> Function(BuildContext, String, Iterable<String>) contentBuilder}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 571,
+      "length": 7,
+      "code": "BuildContext context",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 580,
+      "length": 1,
+      "code": "String _",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 583,
+      "length": 6,
+      "code": "Iterable<String> fruits",
       "links": [],
       "documentation": ""
     },
@@ -142,6 +170,27 @@
       "offset": 682,
       "length": 20,
       "code": "{Widget Function(BuildContext, Object?, StackTrace)? contentErrorBuilder}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 704,
+      "length": 7,
+      "code": "BuildContext context",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 713,
+      "length": 5,
+      "code": "Object? error",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 720,
+      "length": 5,
+      "code": "StackTrace trace",
       "links": [],
       "documentation": ""
     },

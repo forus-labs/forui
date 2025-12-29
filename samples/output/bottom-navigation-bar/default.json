@@ -150,6 +150,13 @@
       "documentation": ""
     },
     {
+      "offset": 376,
+      "length": 5,
+      "code": "int index",
+      "links": [],
+      "documentation": ""
+    },
+    {
       "offset": 422,
       "length": 9,
       "code": "{required List<Widget> children}",

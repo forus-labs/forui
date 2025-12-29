@@ -70,6 +70,13 @@
   ],
   "tooltips": [
     {
+      "offset": 13,
+      "length": 14,
+      "code": "BuildContext _",
+      "links": [],
+      "documentation": ""
+    },
+    {
       "offset": 32,
       "length": 23,
       "code": "FSelectMenuTile<int>.builder({required Widget title, required FSelectTile<int>? Function(BuildContext, int) menuBuilder, int? count, FMultiValueControl<int>? selectControl, FPopoverControl popoverControl = const .managed(), ScrollController? scrollController, FSelectMenuTileStyle Function(FSelectMenuTileStyle)? style, double? cacheExtent, double maxHeight = .infinity, DragStartBehavior dragStartBehavior = .start, ScrollPhysics physics = const ClampingScrollPhysics(), FItemDivider divider = .full, AlignmentGeometry menuAnchor = .topRight, AlignmentGeometry tileAnchor = .bottomRight, FPortalSpacing menuSpacing = const .spacing(4), FPortalOverflow menuOverflow = .flip, Offset menuOffset = .zero, FPopoverHideRegion menuHideRegion = .excludeChild, void Function()? menuOnTapHide, Object? menuGroupId, bool autoHide = true, Widget? label, Widget? description, bool autofocus = false, FocusScopeNode? menuFocusNode, void Function(bool)? menuOnFocusChange, TraversalEdgeBehavior? menuTraversalEdgeBehavior, String? menuBarrierSemanticsLabel, bool menuBarrierSemanticsDismissible = true, String? semanticsLabel, Widget? prefix, Widget? subtitle, Widget Function(BuildContext, Set<int>, Widget?) detailsBuilder = defaultSelectMenuTileBuilder, Widget? details, Widget? suffix, Map<ShortcutActivator, Intent>? shortcuts, Map<Type, Action<Intent>>? actions, Widget Function(BuildContext, String) errorBuilder = FFormFieldProperties.defaultErrorBuilder, void Function(Set<int>?)? onSaved, void Function()? onReset, String? Function(Set<int>?)? validator, String? forceErrorText, bool enabled = true, AutovalidateMode autovalidateMode = .disabled, Key? key})",
@@ -141,6 +148,20 @@
       "offset": 205,
       "length": 12,
       "code": "{required FSelectTile<int>? Function(BuildContext, int) menuBuilder}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 219,
+      "length": 7,
+      "code": "BuildContext context",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 228,
+      "length": 5,
+      "code": "int index",
       "links": [],
       "documentation": ""
     },

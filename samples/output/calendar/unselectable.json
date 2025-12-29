@@ -50,6 +50,13 @@
   ],
   "tooltips": [
     {
+      "offset": 13,
+      "length": 14,
+      "code": "BuildContext _",
+      "links": [],
+      "documentation": ""
+    },
+    {
       "offset": 32,
       "length": 9,
       "code": "FCalendar({required FCalendarControl<Object?> control, FCalendarStyle Function(FCalendarStyle)? style, Widget Function(BuildContext, ({bool current, DateTime date, bool selectable, bool selected, FCalendarDayPickerStyle style, bool today}), Widget?) dayBuilder = defaultDayBuilder, void Function(DateTime)? onMonthChange, void Function(DateTime)? onPress, void Function(DateTime)? onLongPress, FCalendarPickerType initialType = .day, DateTime? start, DateTime? end, DateTime? today, DateTime? initialMonth, Key? key})",
@@ -89,6 +96,13 @@
       "offset": 134,
       "length": 11,
       "code": "{bool Function(DateTime)? selectable}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 147,
+      "length": 4,
+      "code": "DateTime date",
       "links": [],
       "documentation": ""
     },

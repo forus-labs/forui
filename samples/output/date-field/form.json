@@ -133,6 +133,13 @@
       "documentation": ""
     },
     {
+      "offset": 324,
+      "length": 4,
+      "code": "DateTime? date",
+      "links": [],
+      "documentation": ""
+    },
+    {
       "offset": 566,
       "length": 7,
       "code": "void dispose()",
@@ -229,6 +236,13 @@
       "offset": 1034,
       "length": 10,
       "code": "{String? Function(DateTime?)? validator}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 1046,
+      "length": 4,
+      "code": "DateTime? date",
       "links": [],
       "documentation": ""
     },

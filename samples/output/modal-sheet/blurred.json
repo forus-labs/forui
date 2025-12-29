@@ -334,6 +334,13 @@
       "documentation": ""
     },
     {
+      "offset": 257,
+      "length": 9,
+      "code": "double animation",
+      "links": [],
+      "documentation": ""
+    },
+    {
       "offset": 428,
       "length": 7,
       "code": "Color barrier",
@@ -395,6 +402,13 @@
       "offset": 516,
       "length": 8,
       "code": "{required Widget Function(BuildContext) builder}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 526,
+      "length": 7,
+      "code": "BuildContext context",
       "links": [],
       "documentation": ""
     },

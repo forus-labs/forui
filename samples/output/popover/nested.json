@@ -199,6 +199,13 @@
   ],
   "tooltips": [
     {
+      "offset": 13,
+      "length": 20,
+      "code": "BuildContext context",
+      "links": [],
+      "documentation": ""
+    },
+    {
       "offset": 38,
       "length": 8,
       "code": "FPopover({required Widget Function(BuildContext, FPopoverController) popoverBuilder, FPopoverControl control = const .managed(), FPopoverStyle Function(FPopoverStyle)? style, FPortalConstraints constraints = const FPortalConstraints(), FPortalSpacing spacing = const .spacing(4), FPortalOverflow overflow = .flip, Offset offset = .zero, Object? groupId, FPopoverHideRegion hideRegion = .excludeChild, void Function()? onTapHide, bool? autofocus, FocusScopeNode? focusNode, void Function(bool)? onFocusChange, TraversalEdgeBehavior? traversalEdgeBehavior, String? barrierSemanticsLabel, bool barrierSemanticsDismissible = true, String? semanticsLabel, Map<ShortcutActivator, void Function()>? shortcuts, Widget Function(BuildContext, FPopoverController, Widget?) builder = _builder, Widget? child, AlignmentGeometry? popoverAnchor, AlignmentGeometry? childAnchor, Key? key})",
@@ -220,6 +227,20 @@
       "offset": 79,
       "length": 15,
       "code": "{required Widget Function(BuildContext, FPopoverController) popoverBuilder}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 96,
+      "length": 7,
+      "code": "BuildContext context",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 105,
+      "length": 1,
+      "code": "FPopoverController _",
       "links": [],
       "documentation": ""
     },
@@ -388,6 +409,13 @@
       "documentation": ""
     },
     {
+      "offset": 1078,
+      "length": 1,
+      "code": "String s",
+      "links": [],
+      "documentation": ""
+    },
+    {
       "offset": 1105,
       "length": 9,
       "code": "{required List<FSelectItemMixin> children}",
@@ -473,6 +501,27 @@
       "offset": 1439,
       "length": 8,
       "code": "{Widget Function(BuildContext, FPopoverController, Widget?) builder = _builder}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 1449,
+      "length": 1,
+      "code": "BuildContext _",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 1452,
+      "length": 10,
+      "code": "FPopoverController controller",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 1464,
+      "length": 1,
+      "code": "Widget? _",
       "links": [],
       "documentation": ""
     },

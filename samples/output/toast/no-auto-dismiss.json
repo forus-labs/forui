@@ -60,6 +60,13 @@
   ],
   "tooltips": [
     {
+      "offset": 13,
+      "length": 20,
+      "code": "BuildContext context",
+      "links": [],
+      "documentation": ""
+    },
+    {
       "offset": 38,
       "length": 7,
       "code": "FButton({required void Function()? onPress, required Widget child, FBaseButtonStyle Function(FButtonStyle) style = _primary, void Function()? onLongPress, void Function()? onSecondaryPress, void Function()? onSecondaryLongPress, bool autofocus = false, FocusNode? focusNode, void Function(bool)? onFocusChange, void Function(bool)? onHoverChange, void Function(FWidgetStatesDelta)? onStateChange, bool selected = false, Map<ShortcutActivator, Intent>? shortcuts, Map<Type, Action<Intent>>? actions, MainAxisSize mainAxisSize = .max, MainAxisAlignment mainAxisAlignment = .center, CrossAxisAlignment crossAxisAlignment = .center, TextBaseline? textBaseline, Widget? prefix, Widget? suffix, Key? key})",

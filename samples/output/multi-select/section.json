@@ -100,6 +100,13 @@
   ],
   "tooltips": [
     {
+      "offset": 13,
+      "length": 14,
+      "code": "BuildContext _",
+      "links": [],
+      "documentation": ""
+    },
+    {
       "offset": 32,
       "length": 25,
       "code": "FMultiSelect<String>.rich({required Widget Function(String) format, required List<FSelectItemMixin> children, FMultiValueControl<String>? control, FPopoverControl popoverControl, FMultiSelectStyle Function(FMultiSelectStyle)? style, bool autofocus, FocusNode? focusNode, Widget Function(BuildContext, FMultiSelectStyle, Set<WidgetState>)? prefixBuilder, Widget Function(BuildContext, FMultiSelectStyle, Set<WidgetState>)? suffixBuilder, Widget? label, Widget? description, bool enabled, void Function(Set<String>)? onSaved, void Function()? onReset, AutovalidateMode autovalidateMode, String? forceErrorText, String? Function(Set<String>) validator, Widget Function(BuildContext, String) errorBuilder, Widget? hint, bool keepHint, int Function(String, String)? sort, Widget Function(BuildContext, FMultiValueNotifier<String>, FMultiSelectStyle, String, Widget)? tagBuilder, TextAlign textAlign, TextDirection? textDirection, bool clearable, AlignmentGeometry contentAnchor, AlignmentGeometry fieldAnchor, FPortalConstraints contentConstraints, FPortalSpacing contentSpacing, FPortalOverflow contentOverflow, Offset contentOffset, FPopoverHideRegion contentHideRegion, Object? contentGroupId, Widget Function(BuildContext, FMultiSelectStyle) contentEmptyBuilder, ScrollController? contentScrollController, bool contentScrollHandles, ScrollPhysics contentPhysics, FItemDivider contentDivider, Key? key})",

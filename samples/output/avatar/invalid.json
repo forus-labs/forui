@@ -30,6 +30,13 @@
   ],
   "tooltips": [
     {
+      "offset": 13,
+      "length": 14,
+      "code": "BuildContext _",
+      "links": [],
+      "documentation": ""
+    },
+    {
       "offset": 100,
       "length": 7,
       "code": "FAvatar({required ImageProvider<Object> image, FAvatarStyle Function(FAvatarStyle)? style, double size = 40.0, String? semanticsLabel, Widget? fallback, Key? key})",

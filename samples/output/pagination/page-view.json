@@ -110,6 +110,27 @@
       "documentation": ""
     },
     {
+      "offset": 1498,
+      "length": 12,
+      "code": "ScrollEndNotification notification",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 1853,
+      "length": 7,
+      "code": "BuildContext context",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 1862,
+      "length": 5,
+      "code": "int index",
+      "links": [],
+      "documentation": ""
+    },
+    {
       "offset": 1949,
       "length": 5,
       "code": "Color hover(Color color)",

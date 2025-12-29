@@ -125,6 +125,13 @@
   ],
   "tooltips": [
     {
+      "offset": 13,
+      "length": 20,
+      "code": "BuildContext context",
+      "links": [],
+      "documentation": ""
+    },
+    {
       "offset": 126,
       "length": 6,
       "code": "Color border",
@@ -240,6 +247,27 @@
       "documentation": ""
     },
     {
+      "offset": 363,
+      "length": 7,
+      "code": "BuildContext context",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 372,
+      "length": 4,
+      "code": "FResizableRegionData data",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 378,
+      "length": 1,
+      "code": "Widget? _",
+      "links": [],
+      "documentation": ""
+    },
+    {
       "offset": 457,
       "length": 2,
       "code": "TextStyle sm",
@@ -301,6 +329,27 @@
       "offset": 547,
       "length": 8,
       "code": "{required Widget Function(BuildContext, FResizableRegionData, Widget?) builder}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 557,
+      "length": 7,
+      "code": "BuildContext context",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 566,
+      "length": 4,
+      "code": "FResizableRegionData data",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 572,
+      "length": 1,
+      "code": "Widget? _",
       "links": [],
       "documentation": ""
     },

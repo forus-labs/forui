@@ -95,6 +95,13 @@
       "documentation": ""
     },
     {
+      "offset": 390,
+      "length": 1,
+      "code": "String s",
+      "links": [],
+      "documentation": ""
+    },
+    {
       "offset": 403,
       "length": 7,
       "code": "{required FutureOr<Iterable<String>> Function(String) filter}",
@@ -102,9 +109,37 @@
       "documentation": ""
     },
     {
+      "offset": 412,
+      "length": 5,
+      "code": "String query",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 570,
+      "length": 5,
+      "code": "String fruit",
+      "links": [],
+      "documentation": ""
+    },
+    {
       "offset": 659,
       "length": 22,
       "code": "{Widget Function(BuildContext, FSelectSearchStyle) contentLoadingBuilder}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 683,
+      "length": 7,
+      "code": "BuildContext context",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 692,
+      "length": 5,
+      "code": "FSelectSearchStyle style",
       "links": [],
       "documentation": ""
     },
@@ -141,6 +176,27 @@
       "offset": 878,
       "length": 15,
       "code": "{required List<FSelectItemMixin> Function(BuildContext, String, Iterable<String>) contentBuilder}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 895,
+      "length": 7,
+      "code": "BuildContext context",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 904,
+      "length": 1,
+      "code": "String _",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 907,
+      "length": 6,
+      "code": "Iterable<String> fruits",
       "links": [],
       "documentation": ""
     },

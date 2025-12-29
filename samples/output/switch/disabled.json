@@ -79,6 +79,13 @@
       "documentation": ""
     },
     {
+      "offset": 410,
+      "length": 5,
+      "code": "bool value",
+      "links": [],
+      "documentation": ""
+    },
+    {
       "offset": 456,
       "length": 8,
       "code": "{bool enabled = true}",

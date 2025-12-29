@@ -100,6 +100,13 @@
   ],
   "tooltips": [
     {
+      "offset": 13,
+      "length": 20,
+      "code": "BuildContext context",
+      "links": [],
+      "documentation": ""
+    },
+    {
       "offset": 38,
       "length": 20,
       "code": "FSelect<String>.rich({required String Function(String) format, required List<FSelectItemMixin> children, FSelectControl<String>? control, FPopoverControl popoverControl, FSelectStyle Function(FSelectStyle)? style, bool autofocus, FocusNode? focusNode, Widget Function(BuildContext, FSelectStyle, Set<WidgetState>, Widget) builder, Widget Function(BuildContext, FSelectStyle, Set<WidgetState>)? prefixBuilder, Widget Function(BuildContext, FSelectStyle, Set<WidgetState>)? suffixBuilder, Widget? label, Widget? description, bool enabled, void Function(String?)? onSaved, void Function()? onReset, AutovalidateMode autovalidateMode, String? forceErrorText, String? Function(String?) validator, Widget Function(BuildContext, String) errorBuilder, String? hint, TextAlign textAlign, TextAlignVertical? textAlignVertical, TextDirection? textDirection, bool expands, MouseCursor mouseCursor, bool canRequestFocus, bool clearable, AlignmentGeometry contentAnchor, AlignmentGeometry fieldAnchor, FPortalConstraints contentConstraints, FPortalSpacing contentSpacing, FPortalOverflow contentOverflow, Offset contentOffset, FPopoverHideRegion contentHideRegion, Object? contentGroupId, bool autoHide, Widget Function(BuildContext, FSelectStyle) contentEmptyBuilder, ScrollController? contentScrollController, bool contentScrollHandles, ScrollPhysics contentPhysics, FItemDivider contentDivider, Key? key})",
@@ -121,6 +128,13 @@
       "offset": 91,
       "length": 7,
       "code": "{required String Function(String) format}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 100,
+      "length": 1,
+      "code": "String s",
       "links": [],
       "documentation": ""
     },

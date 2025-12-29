@@ -70,6 +70,13 @@
   ],
   "tooltips": [
     {
+      "offset": 13,
+      "length": 20,
+      "code": "BuildContext context",
+      "links": [],
+      "documentation": ""
+    },
+    {
       "offset": 38,
       "length": 9,
       "code": "FTappable({FTappableStyle Function(FTappableStyle)? style, FFocusedOutlineStyle Function(FFocusedOutlineStyle)? focusedOutlineStyle, String? semanticsLabel, bool excludeSemantics, bool autofocus, FocusNode? focusNode, void Function(bool)? onFocusChange, void Function(bool)? onHoverChange, void Function(FWidgetStatesDelta)? onStateChange, bool selected, HitTestBehavior behavior, void Function()? onPress, void Function()? onLongPress, void Function()? onSecondaryPress, void Function()? onSecondaryLongPress, Map<ShortcutActivator, Intent>? shortcuts, Map<Type, Action<Intent>>? actions, Widget Function(BuildContext, Set<WidgetState>, Widget?) builder, Widget? child, Key? key})",
@@ -84,6 +91,27 @@
       "offset": 51,
       "length": 8,
       "code": "{Widget Function(BuildContext, Set<WidgetState>, Widget?) builder}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 61,
+      "length": 7,
+      "code": "BuildContext context",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 70,
+      "length": 6,
+      "code": "Set<WidgetState> states",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 78,
+      "length": 5,
+      "code": "Widget? child",
       "links": [],
       "documentation": ""
     },

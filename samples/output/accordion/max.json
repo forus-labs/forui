@@ -85,6 +85,13 @@
   ],
   "tooltips": [
     {
+      "offset": 13,
+      "length": 14,
+      "code": "BuildContext _",
+      "links": [],
+      "documentation": ""
+    },
+    {
       "offset": 32,
       "length": 10,
       "code": "FAccordion({required List<Widget> children, FAccordionControl control = const .managed(), FAccordionStyle Function(FAccordionStyle)? style, Key? key})",

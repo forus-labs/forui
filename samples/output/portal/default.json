@@ -160,6 +160,13 @@
   ],
   "tooltips": [
     {
+      "offset": 13,
+      "length": 14,
+      "code": "BuildContext _",
+      "links": [],
+      "documentation": ""
+    },
+    {
       "offset": 32,
       "length": 7,
       "code": "FPortal({required Widget Function(BuildContext, OverlayPortalController) portalBuilder, OverlayPortalController? controller, FPortalConstraints constraints = const FPortalConstraints(), AlignmentGeometry portalAnchor = .topCenter, AlignmentGeometry childAnchor = .bottomCenter, FPortalSpacing spacing = .zero, FPortalOverflow overflow = .flip, Offset offset = .zero, EdgeInsetsGeometry? viewInsets, Widget? barrier, Widget Function(BuildContext, OverlayPortalController, Widget?) builder = _builder, Widget? child, Key? key})",
@@ -199,6 +206,20 @@
       "offset": 102,
       "length": 14,
       "code": "{required Widget Function(BuildContext, OverlayPortalController) portalBuilder}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 118,
+      "length": 7,
+      "code": "BuildContext context",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 127,
+      "length": 1,
+      "code": "OverlayPortalController _",
       "links": [],
       "documentation": ""
     },
@@ -440,6 +461,27 @@
       "offset": 1541,
       "length": 8,
       "code": "{Widget Function(BuildContext, OverlayPortalController, Widget?) builder = _builder}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 1551,
+      "length": 7,
+      "code": "BuildContext context",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 1560,
+      "length": 10,
+      "code": "OverlayPortalController controller",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 1572,
+      "length": 1,
+      "code": "Widget? _",
       "links": [],
       "documentation": ""
     },

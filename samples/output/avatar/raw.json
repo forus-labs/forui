@@ -50,6 +50,13 @@
   ],
   "tooltips": [
     {
+      "offset": 13,
+      "length": 20,
+      "code": "BuildContext context",
+      "links": [],
+      "documentation": ""
+    },
+    {
       "offset": 106,
       "length": 11,
       "code": "FAvatar.raw({Widget? child, FAvatarStyle Function(FAvatarStyle)? style, double size = 40.0, Key? key})",

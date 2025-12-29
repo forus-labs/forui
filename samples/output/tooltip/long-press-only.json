@@ -85,6 +85,13 @@
   ],
   "tooltips": [
     {
+      "offset": 13,
+      "length": 20,
+      "code": "BuildContext context",
+      "links": [],
+      "documentation": ""
+    },
+    {
       "offset": 38,
       "length": 6,
       "code": "FTheme({required FThemeData data, required Widget child, TextDirection? textDirection, Key? key})",
@@ -128,6 +135,13 @@
       "documentation": ""
     },
     {
+      "offset": 247,
+      "length": 7,
+      "code": "BuildContext context",
+      "links": [],
+      "documentation": ""
+    },
+    {
       "offset": 387,
       "length": 8,
       "code": "FTooltip({required Widget Function(BuildContext, FTooltipController) tipBuilder, FTooltipControl control = const .managed(), FTooltipStyle Function(FTooltipStyle)? style, AlignmentGeometry tipAnchor = .bottomCenter, AlignmentGeometry childAnchor = .topCenter, FPortalSpacing spacing = const .spacing(4), FPortalOverflow overflow = .flip, bool hover = true, Duration hoverEnterDuration = const Duration(milliseconds: 500), Duration hoverExitDuration = .zero, bool longPress = true, Duration longPressExitDuration = const Duration(milliseconds: 1500), Widget Function(BuildContext, FTooltipController, Widget?) builder = _builder, Widget? child, Key? key})",
@@ -149,6 +163,20 @@
       "offset": 443,
       "length": 11,
       "code": "{required Widget Function(BuildContext, FTooltipController) tipBuilder}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 456,
+      "length": 7,
+      "code": "BuildContext context",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 465,
+      "length": 1,
+      "code": "FTooltipController _",
       "links": [],
       "documentation": ""
     },

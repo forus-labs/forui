@@ -75,9 +75,37 @@
       "documentation": ""
     },
     {
+      "offset": 279,
+      "length": 5,
+      "code": "String query",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 437,
+      "length": 5,
+      "code": "String fruit",
+      "links": [],
+      "documentation": ""
+    },
+    {
       "offset": 526,
       "length": 22,
       "code": "{Widget Function(BuildContext, FAutocompleteContentStyle) contentLoadingBuilder = defaultContentLoadingBuilder}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 550,
+      "length": 7,
+      "code": "BuildContext context",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 559,
+      "length": 5,
+      "code": "FAutocompleteContentStyle style",
       "links": [],
       "documentation": ""
     },
@@ -96,6 +124,27 @@
       "offset": 692,
       "length": 15,
       "code": "{required List<FAutocompleteItemMixin> Function(BuildContext, String, Iterable<String>) contentBuilder}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 709,
+      "length": 7,
+      "code": "BuildContext context",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 718,
+      "length": 5,
+      "code": "String query",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 725,
+      "length": 11,
+      "code": "Iterable<String> suggestions",
       "links": [],
       "documentation": ""
     },

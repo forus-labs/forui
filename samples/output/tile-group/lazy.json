@@ -60,6 +60,13 @@
   ],
   "tooltips": [
     {
+      "offset": 13,
+      "length": 14,
+      "code": "BuildContext _",
+      "links": [],
+      "documentation": ""
+    },
+    {
       "offset": 32,
       "length": 18,
       "code": "FTileGroup.builder({required Widget? Function(BuildContext, int) tileBuilder, int? count, FTileGroupStyle Function(FTileGroupStyle)? style, ScrollController? scrollController, double? cacheExtent, double maxHeight = .infinity, DragStartBehavior dragStartBehavior = .start, ScrollPhysics physics = const ClampingScrollPhysics(), bool? enabled, FItemDivider divider = .indented, String? semanticsLabel, Widget? label, Widget? description, Widget? error, Key? key})",
@@ -102,6 +109,20 @@
       "offset": 177,
       "length": 12,
       "code": "{required Widget? Function(BuildContext, int) tileBuilder}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 191,
+      "length": 7,
+      "code": "BuildContext context",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 200,
+      "length": 5,
+      "code": "int index",
       "links": [],
       "documentation": ""
     },

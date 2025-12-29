@@ -180,6 +180,13 @@
   ],
   "tooltips": [
     {
+      "offset": 13,
+      "length": 14,
+      "code": "BuildContext _",
+      "links": [],
+      "documentation": ""
+    },
+    {
       "offset": 32,
       "length": 8,
       "code": "FSidebar({required List<Widget> children, Widget? header, Widget? footer, FSidebarStyle Function(FSidebarStyle)? style, bool autofocus = false, FocusScopeNode? focusNode, TraversalEdgeBehavior? traversalEdgeBehavior, Key? key})",
@@ -194,6 +201,13 @@
       "offset": 44,
       "length": 6,
       "code": "{FSidebarStyle Function(FSidebarStyle)? style}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 52,
+      "length": 1,
+      "code": "FSidebarStyle s",
       "links": [],
       "documentation": ""
     },

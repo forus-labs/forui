@@ -155,6 +155,13 @@
   ],
   "tooltips": [
     {
+      "offset": 13,
+      "length": 14,
+      "code": "BuildContext _",
+      "links": [],
+      "documentation": ""
+    },
+    {
       "offset": 32,
       "length": 8,
       "code": "FPopover({required Widget Function(BuildContext, FPopoverController) popoverBuilder, FPopoverControl control = const .managed(), FPopoverStyle Function(FPopoverStyle)? style, FPortalConstraints constraints = const FPortalConstraints(), FPortalSpacing spacing = const .spacing(4), FPortalOverflow overflow = .flip, Offset offset = .zero, Object? groupId, FPopoverHideRegion hideRegion = .excludeChild, void Function()? onTapHide, bool? autofocus, FocusScopeNode? focusNode, void Function(bool)? onFocusChange, TraversalEdgeBehavior? traversalEdgeBehavior, String? barrierSemanticsLabel, bool barrierSemanticsDismissible = true, String? semanticsLabel, Map<ShortcutActivator, void Function()>? shortcuts, Widget Function(BuildContext, FPopoverController, Widget?) builder = _builder, Widget? child, AlignmentGeometry? popoverAnchor, AlignmentGeometry? childAnchor, Key? key})",
@@ -183,6 +190,20 @@
       "offset": 103,
       "length": 15,
       "code": "{required Widget Function(BuildContext, FPopoverController) popoverBuilder}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 120,
+      "length": 7,
+      "code": "BuildContext context",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 129,
+      "length": 1,
+      "code": "FPopoverController _",
       "links": [],
       "documentation": ""
     },
@@ -365,6 +386,27 @@
       "offset": 1486,
       "length": 8,
       "code": "{Widget Function(BuildContext, FPopoverController, Widget?) builder = _builder}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 1496,
+      "length": 1,
+      "code": "BuildContext _",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 1499,
+      "length": 10,
+      "code": "FPopoverController controller",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 1511,
+      "length": 1,
+      "code": "Widget? _",
       "links": [],
       "documentation": ""
     },

@@ -93,6 +93,13 @@
       "documentation": ""
     },
     {
+      "offset": 377,
+      "length": 5,
+      "code": "Set<Notification>? value",
+      "links": [],
+      "documentation": ""
+    },
+    {
       "offset": 432,
       "length": 7,
       "code": "{Widget? prefix}",
@@ -121,6 +128,27 @@
       "offset": 509,
       "length": 15,
       "code": "{Widget Function(BuildContext, Set<Notification>, Widget?) detailsBuilder = defaultSelectMenuTileBuilder}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 526,
+      "length": 1,
+      "code": "BuildContext _",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 529,
+      "length": 6,
+      "code": "Set<Notification> values",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 537,
+      "length": 1,
+      "code": "Widget? _",
       "links": [],
       "documentation": ""
     }

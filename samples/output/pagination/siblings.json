@@ -40,6 +40,13 @@
   ],
   "tooltips": [
     {
+      "offset": 13,
+      "length": 20,
+      "code": "BuildContext context",
+      "links": [],
+      "documentation": ""
+    },
+    {
       "offset": 44,
       "length": 11,
       "code": "FPagination({FPaginationControl control = const .managed(), FPaginationStyle Function(FPaginationStyle)? style, Widget? previous, Widget? next, Key? key})",

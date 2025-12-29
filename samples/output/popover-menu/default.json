@@ -220,6 +220,13 @@
   ],
   "tooltips": [
     {
+      "offset": 13,
+      "length": 14,
+      "code": "BuildContext _",
+      "links": [],
+      "documentation": ""
+    },
+    {
       "offset": 32,
       "length": 7,
       "code": "FHeader({Widget title, FHeaderStyle Function(FHeaderStyle)? style, List<Widget> suffixes, Key? key})",
@@ -538,6 +545,27 @@
       "offset": 1160,
       "length": 8,
       "code": "{Widget Function(BuildContext, FPopoverController, Widget?) builder = _builder}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 1170,
+      "length": 1,
+      "code": "BuildContext _",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 1173,
+      "length": 10,
+      "code": "FPopoverController controller",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 1185,
+      "length": 1,
+      "code": "Widget? _",
       "links": [],
       "documentation": ""
     },

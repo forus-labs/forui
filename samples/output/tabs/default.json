@@ -165,6 +165,13 @@
   ],
   "tooltips": [
     {
+      "offset": 13,
+      "length": 14,
+      "code": "BuildContext _",
+      "links": [],
+      "documentation": ""
+    },
+    {
       "offset": 141,
       "length": 5,
       "code": "FTabs({required List<FTabEntry> children, FTabControl control = const .managed(), bool scrollable = false, ScrollPhysics? physics, FTabsStyle Function(FTabsStyle)? style, void Function(int)? onPress, MouseCursor mouseCursor = .defer, Key? key})",

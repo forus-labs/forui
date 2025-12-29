@@ -82,9 +82,44 @@
       "documentation": ""
     },
     {
+      "offset": 421,
+      "length": 5,
+      "code": "String query",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 579,
+      "length": 5,
+      "code": "String fruit",
+      "links": [],
+      "documentation": ""
+    },
+    {
       "offset": 668,
       "length": 15,
       "code": "{required List<FSelectItemMixin> Function(BuildContext, String, Iterable<String>) contentBuilder}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 685,
+      "length": 7,
+      "code": "BuildContext context",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 694,
+      "length": 1,
+      "code": "String _",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 697,
+      "length": 6,
+      "code": "Iterable<String> fruits",
       "links": [],
       "documentation": ""
     },

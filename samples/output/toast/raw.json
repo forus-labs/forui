@@ -170,6 +170,13 @@
   ],
   "tooltips": [
     {
+      "offset": 13,
+      "length": 20,
+      "code": "BuildContext context",
+      "links": [],
+      "documentation": ""
+    },
+    {
       "offset": 81,
       "length": 8,
       "code": "FCardStyle copyWith({BoxDecoration? decoration, FCardContentStyle Function(FCardContentStyle)? contentStyle})",
@@ -380,6 +387,20 @@
       "offset": 448,
       "length": 8,
       "code": "{required Widget Function(BuildContext, FToasterEntry) builder}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 458,
+      "length": 7,
+      "code": "BuildContext context",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 467,
+      "length": 5,
+      "code": "FToasterEntry toast",
       "links": [],
       "documentation": ""
     },

@@ -30,6 +30,13 @@
   ],
   "tooltips": [
     {
+      "offset": 13,
+      "length": 14,
+      "code": "BuildContext _",
+      "links": [],
+      "documentation": ""
+    },
+    {
       "offset": 32,
       "length": 6,
       "code": "FBadge({required Widget child, FBaseBadgeStyle Function(FBadgeStyle) style = _primary, Key? key})",
