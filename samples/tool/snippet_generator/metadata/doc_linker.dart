@@ -14,30 +14,28 @@ import '../snippet.dart';
 class DartDocLinker extends RecursiveAstVisitor<void> {
   static int _monotonic = 0;
 
-  static Future<void> link(
-    Snippet snippet,
-    List<Package> packages,
+  static Future<List<DartDocLink>> link(
     AnalysisSession session,
     OverlayResourceProvider overlay,
+    List<Package> packages,
+    String code,
+    int baseOffset,
   ) async {
     final syntheticPath = p.join(samples, 'snippet_${_monotonic++}.dart');
-    overlay.setOverlay(syntheticPath, content: snippet.code, modificationStamp: DateTime.now().millisecondsSinceEpoch);
+    overlay.setOverlay(syntheticPath, content: code, modificationStamp: DateTime.now().millisecondsSinceEpoch);
 
-    if (await session.getResolvedUnit(syntheticPath) case final ResolvedUnitResult result) {
-      result.unit.visitChildren(
-        DartDocLinker._(snippet, packages, [
-          for (final Package(:name) in packages)
-            (await session.getLibraryByUri('package:$name/$name.dart') as LibraryElementResult).element,
-        ]),
-      );
-    }
+    final result = (await session.getResolvedUnit(syntheticPath)) as ResolvedUnitResult;
+    final linker = DartDocLinker._(packages, baseOffset);
+    result.unit.visitChildren(linker);
+
+    return linker.links;
   }
 
-  final Snippet _snippet;
+  final List<DartDocLink> links = [];
+  final int _baseOffset;
   final List<Package> _packages;
-  final List<LibraryElement> _libraries;
 
-  DartDocLinker._(this._snippet, this._packages, this._libraries);
+  DartDocLinker._(this._packages, this._baseOffset);
 
   /// Links type annotations to their class/enum/mixin documentation.
   ///
@@ -201,7 +199,7 @@ class DartDocLinker extends RecursiveAstVisitor<void> {
   /// Adds a link for [element] at the given [offset] and [length].
   void _link(int offset, int length, Element element) {
     if (_url(element) case final url?) {
-      _snippet.links.add(DartDocLink(offset: offset, baseOffset: _snippet.importsLength, length: length, url: url));
+      links.add(DartDocLink(offset: offset, baseOffset: _baseOffset, length: length, url: url));
     }
   }
 
@@ -217,34 +215,30 @@ class DartDocLinker extends RecursiveAstVisitor<void> {
         _ => element.name,
       };
 
-      var library = '';
-      for (final lib in _libraries) {
-        if (_barrel(lib, type!)?.name case final name?) {
-          library = name.isEmpty ? package : name;
+      var baseUrl = '';
+      for (final Package(:library) in _packages) {
+        if (_barrel(library, type!)?.name case final name?) {
+          baseUrl = 'https://pub.dev/documentation/$package/$version/${name.isEmpty ? package : name}';
           break;
         }
       }
 
-      assert(library.isNotEmpty, 'Could not find barrel library for type "$type" in package "$package".');
+      assert(baseUrl.isNotEmpty, 'Could not find barrel library for type "$type" in package "$package".');
 
       return switch (element) {
-        TopLevelFunctionElement(:final name) => 'https://pub.dev/documentation/$package/$version/$library/$name.html',
-        EnumElement(:final name) => 'https://pub.dev/documentation/$package/$version/$library/$name.html',
-        MixinElement(:final name) => 'https://pub.dev/documentation/$package/$version/$library/$name-mixin.html',
-        ClassElement(:final name) ||
-        InterfaceElement(:final name) => 'https://pub.dev/documentation/$package/$version/$library/$name-class.html',
+        TopLevelFunctionElement(:final name) => '$baseUrl/$name.html',
+        EnumElement(:final name) => '$baseUrl/$name.html',
+        MixinElement(:final name) => '$baseUrl/$name-mixin.html',
+        ClassElement(:final name) || InterfaceElement(:final name) => '$baseUrl/$name-class.html',
         FieldElement(:final enclosingElement, :final name, :final isEnumConstant) when isEnumConstant =>
-          'https://pub.dev/documentation/$package/$version/$library/${enclosingElement.name}.html#$name',
+          '$baseUrl/${enclosingElement.name}.html#$name',
         FieldElement(:final enclosingElement, :final name, :final isConst) when isConst =>
-          'https://pub.dev/documentation/$package/$version/$library/${enclosingElement.name}/$name-constant.html',
-        FieldElement(:final enclosingElement, :final name) =>
-          'https://pub.dev/documentation/$package/$version/$library/${enclosingElement.name}/$name.html',
-        PropertyAccessorElement(:final enclosingElement, :final name) =>
-          'https://pub.dev/documentation/$package/$version/$library/${enclosingElement.name}/$name.html',
-        ConstructorElement(:final enclosingElement, :final name) =>
-          'https://pub.dev/documentation/$package/$version/$library/${enclosingElement.name}/${enclosingElement.name}${name == null || name == 'new' ? '' : '.$name'}.html',
-        MethodElement(:final enclosingElement?, :final name) =>
-          'https://pub.dev/documentation/$package/$version/$library/${enclosingElement.name}/$name.html',
+          '$baseUrl/${enclosingElement.name}/$name-constant.html',
+        FieldElement(:final enclosingElement, :final name) => '$baseUrl/${enclosingElement.name}/$name.html',
+        PropertyAccessorElement(:final enclosingElement, :final name) => '$baseUrl/${enclosingElement.name}/$name.html',
+        ConstructorElement(:final enclosingElement, :final name?) =>
+          '$baseUrl/${enclosingElement.name}/${enclosingElement.name}${name == 'new' ? '' : '.$name'}.html',
+        MethodElement(:final enclosingElement?, :final name) => '$baseUrl/${enclosingElement.name}/$name.html',
         _ => null,
       };
     }
@@ -266,10 +260,4 @@ class DartDocLinker extends RecursiveAstVisitor<void> {
 
     return library;
   }
-}
-
-enum A {
-  a;
-
-  static const hello = '';
 }

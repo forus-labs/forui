@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:analyzer/dart/analysis/analysis_context_collection.dart';
+import 'package:analyzer/dart/analysis/results.dart';
+import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/file_system/overlay_file_system.dart';
 import 'package:analyzer/file_system/physical_file_system.dart';
 import 'package:dart_style/dart_style.dart';
@@ -20,46 +22,42 @@ final _widgets = p.join(samples, 'widgets');
 
 /// Information about a Dart package.
 class Package {
-  static List<Package> find() {
-    const names = ['forui', 'forui_assets', 'forui_hooks'];
-    final root = Directory.current.parent.path;
-    final packages = <Package>[];
-
-    for (final name in names) {
-      final pubspecPath = p.join(root, name, 'pubspec.yaml');
-      final content = File(pubspecPath).readAsStringSync();
-      final yaml = loadYaml(content) as Map;
-      packages.add(Package(name: name, version: yaml['version'] as String, path: p.join(root, name, 'lib')));
-    }
-
-    return packages;
-  }
-
   /// The name.
   final String name;
 
   /// The version.
   final String version;
 
-  /// The path, relative to the repository root.
-  final String path;
+  /// The library element.
+  final LibraryElement library;
 
-  Package({required this.name, required this.version, required this.path});
+  Package({required this.name, required this.version, required this.library});
 }
 
 Future<void> main() async {
-  final packages = Package.find();
+  const paths = ['forui', 'forui_assets', 'forui_hooks'];
   final provider = OverlayResourceProvider(PhysicalResourceProvider.INSTANCE);
   final collection = AnalysisContextCollection(
-    includedPaths: [
-      ...[for (final p in packages) p.path],
-      samples,
-    ],
+    includedPaths: [for (final path in paths) p.join(Directory.current.parent.path, path, 'lib'), samples],
     resourceProvider: provider,
   );
+  final session = collection.contextFor(samples).currentSession;
+
+  final packages = <Package>[];
+  for (final path in paths) {
+    final pubspec = loadYaml(File(p.join(Directory.current.parent.path, path, 'pubspec.yaml')).readAsStringSync());
+    final {'name': String name, 'version': String version} = (pubspec as Map);
+    packages.add(
+      Package(
+        name: name,
+        version: version,
+        library: (await session.getLibraryByUri('package:$name/$name.dart') as LibraryElementResult).element,
+      ),
+    );
+  }
 
   // Extract & annotate sample snippets.
-  for (final snippet in (await Samples.extract(collection, packages, [_foundation, _widgets], provider)).values) {
+  for (final snippet in (await Samples.extract(session, provider, packages, [_foundation, _widgets])).values) {
     final json = const JsonEncoder.withIndent('  ').convert(snippet.toJson());
     for (final route in snippet.routes) {
       var normalized = route;

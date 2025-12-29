@@ -1,7 +1,6 @@
 import 'dart:collection';
 import 'dart:io';
 
-import 'package:analyzer/dart/analysis/analysis_context_collection.dart';
 import 'package:analyzer/dart/analysis/results.dart';
 import 'package:analyzer/dart/analysis/session.dart';
 import 'package:analyzer/dart/ast/ast.dart';
@@ -21,29 +20,33 @@ import 'widgets.dart';
 
 class Samples extends RecursiveAstVisitor<void> {
   static Future<Map<String, Snippet>> extract(
-    AnalysisContextCollection collection,
+    AnalysisSession session,
+    OverlayResourceProvider overlay,
     List<Package> packages,
     List<String> paths,
-    OverlayResourceProvider overlay,
   ) async {
     final main = p.join(samples, 'main.dart');
+
     var snippets = <String, Snippet>{};
-    if (await collection.contextFor(main).currentSession.getResolvedUnit(main) case final ResolvedUnitResult result) {
+    if (await session.getResolvedUnit(main) case final ResolvedUnitResult result) {
       snippets = RoutesVisitor.extract(result.unit);
     }
 
-    for (final file
-        in paths
-            .map(Directory.new)
-            .expand((d) => d.listSync(recursive: true))
-            .whereType<File>()
-            .where((f) => f.path.endsWith('.dart'))) {
-      final session = collection.contextFor(file.path).currentSession;
-      if (await session.getResolvedUnit(file.path) case final ResolvedUnitResult result) {
-        final visitor = Samples._(snippets, packages, result, session, overlay);
-        result.unit.visitChildren(visitor);
+    for (final path in paths) {
+      final dir = Directory(path);
+      for (final file in dir.listSync(recursive: true).whereType<File>().where((f) => f.path.endsWith('.dart'))) {
+        if (await session.getResolvedUnit(file.path) case final ResolvedUnitResult result) {
+          final visitor = Samples._(
+            session,
+            overlay,
+            result,
+            snippets,
+            packages,
+          );
+          result.unit.visitChildren(visitor);
 
-        await Future.wait(visitor.tasks);
+          await Future.wait(visitor.tasks);
+        }
       }
     }
 
@@ -51,13 +54,13 @@ class Samples extends RecursiveAstVisitor<void> {
   }
 
   final List<Future<void>> tasks = [];
-  final Map<String, Snippet> _snippets;
-  final List<Package> _packages;
-  final ResolvedUnitResult _result;
   final AnalysisSession _session;
   final OverlayResourceProvider _overlay;
+  final ResolvedUnitResult _result;
+  final Map<String, Snippet> _snippets;
+  final List<Package> _packages;
 
-  Samples._(this._snippets, this._packages, this._result, this._session, this._overlay);
+  Samples._(this._session, this._overlay, this._result, this._snippets, this._packages);
 
   @override
   void visitClassDeclaration(ClassDeclaration node) {
@@ -88,7 +91,7 @@ class Samples extends RecursiveAstVisitor<void> {
     }
 
     snippet.highlight();
-    await DartDocLinker.link(snippet, _packages, _session, _overlay);
+    snippet.links.addAll(await DartDocLinker.link( _session, _overlay, _packages, snippet.code, snippet.importsLength));
     snippet.removeImports();
   }
 
