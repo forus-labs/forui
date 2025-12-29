@@ -251,7 +251,7 @@
 
     .tooltip-popup {
       position: fixed;
-      max-width: 700px;
+      max-width: 750px;
       max-height: 500px;
       overflow-y: auto;
       background: #2d2d2d;
@@ -271,6 +271,16 @@
       border-radius: 4px;
       margin-bottom: 8px;
       white-space: pre-wrap;
+      color: #d4d4d4;
+    }
+
+    .tooltip-popup .tooltip-code a {
+      color: #4ec9b0;
+      text-decoration: underline;
+      text-decoration-style: dotted;
+    }
+
+    .tooltip-popup .tooltip-code a:hover {
       color: #9cdcfe;
     }
 
@@ -613,6 +623,37 @@
       });
     }
 
+    // Render tooltip code with links
+    function renderTooltipCode(code, links) {
+      if (!links || !links.length) return escapeHtml(code);
+
+      // Sort links by offset
+      const sorted = [...links].sort((a, b) => a.offset - b.offset);
+
+      let result = '';
+      let pos = 0;
+
+      for (const link of sorted) {
+        const start = link.offset;
+        const end = link.offset + link.length;
+
+        if (start < pos) continue; // Skip overlapping
+
+        if (start > pos) {
+          result += escapeHtml(code.slice(pos, start));
+        }
+
+        result += `<a href="${escapeHtml(link.url)}" target="_blank">${escapeHtml(code.slice(start, end))}</a>`;
+        pos = end;
+      }
+
+      if (pos < code.length) {
+        result += escapeHtml(code.slice(pos));
+      }
+
+      return result;
+    }
+
     function showTooltip(e, tip) {
       // Cancel any pending hide
       if (tooltipHideTimeout) {
@@ -629,7 +670,7 @@
       const popup = document.createElement('div');
       popup.className = 'tooltip-popup';
 
-      let html = `<div class="tooltip-code">${escapeHtml(tip.code)}</div>`;
+      let html = `<div class="tooltip-code">${renderTooltipCode(tip.code, tip.links)}</div>`;
 
       if (tip.container) {
         html += `<div class="tooltip-container">in <a href="${escapeHtml(tip.container.url)}" target="_blank">${escapeHtml(tip.container.name)}</a></div>`;

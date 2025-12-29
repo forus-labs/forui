@@ -72,8 +72,19 @@
     {
       "offset": 303,
       "length": 21,
-      "code": "FTimePickerController({FTime time = const FTime()})",
-      "links": [],
+      "code": "FTimePickerController({FTime time = const FTime()})\n",
+      "links": [
+        {
+          "offset": 23,
+          "length": 5,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTime-class.html"
+        },
+        {
+          "offset": 42,
+          "length": 5,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTime/FTime.html"
+        }
+      ],
       "container": {
         "name": "FTimePickerController",
         "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_picker/FTimePickerController-class.html"
@@ -84,13 +95,24 @@
       "offset": 325,
       "length": 5,
       "code": "{FTime time = const FTime()}",
-      "links": [],
+      "links": [
+        {
+          "offset": 1,
+          "length": 5,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTime-class.html"
+        },
+        {
+          "offset": 20,
+          "length": 5,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTime/FTime.html"
+        }
+      ],
       "documentation": ""
     },
     {
       "offset": 332,
       "length": 3,
-      "code": "FTime.now()",
+      "code": "FTime.now()\n",
       "links": [],
       "container": {
         "name": "FTime",
@@ -108,8 +130,29 @@
     {
       "offset": 577,
       "length": 11,
-      "code": "FTimePicker({FTimePickerControl control = const .managed(), FTimePickerStyle Function(FTimePickerStyle)? style, bool hour24 = false, int hourInterval = 1, int minuteInterval = 1, Key? key})",
-      "links": [],
+      "code": "FTimePicker({\n  FTimePickerControl control = const .managed(),\n  FTimePickerStyle Function(FTimePickerStyle)? style,\n  bool hour24 = false,\n  int hourInterval = 1,\n  int minuteInterval = 1,\n  Key? key,\n})\n",
+      "links": [
+        {
+          "offset": 16,
+          "length": 18,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_picker/FTimePickerControl-class.html"
+        },
+        {
+          "offset": 52,
+          "length": 7,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_picker/FTimePickerControl/FTimePickerControl.managed.html"
+        },
+        {
+          "offset": 65,
+          "length": 16,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_picker/FTimePickerStyle-class.html"
+        },
+        {
+          "offset": 91,
+          "length": 16,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_picker/FTimePickerStyle-class.html"
+        }
+      ],
       "container": {
         "name": "FTimePicker",
         "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_picker/FTimePicker-class.html"
@@ -120,14 +163,41 @@
       "offset": 589,
       "length": 8,
       "code": "{FTimePickerControl control = const .managed()}",
-      "links": [],
+      "links": [
+        {
+          "offset": 1,
+          "length": 18,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_picker/FTimePickerControl-class.html"
+        },
+        {
+          "offset": 37,
+          "length": 7,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_picker/FTimePickerControl/FTimePickerControl.managed.html"
+        }
+      ],
       "documentation": ""
     },
     {
       "offset": 599,
       "length": 7,
-      "code": "FTimePickerControl.managed({FTimePickerController? controller, FTime? initial, void Function(FTime)? onChange})",
-      "links": [],
+      "code": "FTimePickerControl.managed({\n  FTimePickerController? controller,\n  FTime? initial,\n  void Function(FTime)? onChange,\n})\n",
+      "links": [
+        {
+          "offset": 31,
+          "length": 22,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_picker/FTimePickerController-class.html"
+        },
+        {
+          "offset": 68,
+          "length": 6,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTime-class.html"
+        },
+        {
+          "offset": 100,
+          "length": 5,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTime-class.html"
+        }
+      ],
       "container": {
         "name": "FTimePickerControl",
         "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_picker/FTimePickerControl-class.html"
@@ -138,14 +208,36 @@
       "offset": 607,
       "length": 11,
       "code": "{FTimePickerController? controller}",
-      "links": [],
+      "links": [
+        {
+          "offset": 1,
+          "length": 22,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_picker/FTimePickerController-class.html"
+        }
+      ],
       "documentation": ""
     },
     {
       "offset": 649,
       "length": 7,
-      "code": "FButton({required void Function()? onPress, required Widget child, FBaseButtonStyle Function(FButtonStyle) style = _primary, void Function()? onLongPress, void Function()? onSecondaryPress, void Function()? onSecondaryLongPress, bool autofocus = false, FocusNode? focusNode, void Function(bool)? onFocusChange, void Function(bool)? onHoverChange, void Function(FWidgetStatesDelta)? onStateChange, bool selected = false, Map<ShortcutActivator, Intent>? shortcuts, Map<Type, Action<Intent>>? actions, MainAxisSize mainAxisSize = .max, MainAxisAlignment mainAxisAlignment = .center, CrossAxisAlignment crossAxisAlignment = .center, TextBaseline? textBaseline, Widget? prefix, Widget? suffix, Key? key})",
-      "links": [],
+      "code": "FButton({\n  required void Function()? onPress,\n  required Widget child,\n  FBaseButtonStyle Function(FButtonStyle) style = _primary,\n  void Function()? onLongPress,\n  void Function()? onSecondaryPress,\n  void Function()? onSecondaryLongPress,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  void Function(bool)? onHoverChange,\n  void Function(FWidgetStatesDelta)? onStateChange,\n  bool selected = false,\n  Map<ShortcutActivator, Intent>? shortcuts,\n  Map<Type, Action<Intent>>? actions,\n  MainAxisSize mainAxisSize = .max,\n  MainAxisAlignment mainAxisAlignment = .center,\n  CrossAxisAlignment crossAxisAlignment = .center,\n  TextBaseline? textBaseline,\n  Widget? prefix,\n  Widget? suffix,\n  Key? key,\n})\n",
+      "links": [
+        {
+          "offset": 74,
+          "length": 16,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FBaseButtonStyle-class.html"
+        },
+        {
+          "offset": 100,
+          "length": 12,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButtonStyle-class.html"
+        },
+        {
+          "offset": 384,
+          "length": 18,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStatesDelta-class.html"
+        }
+      ],
       "container": {
         "name": "FButton",
         "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton-class.html"
@@ -169,14 +261,20 @@
     {
       "offset": 736,
       "length": 9,
-      "code": "Future<void> animateTo(FTime value, {Duration duration = const Duration(milliseconds: 300), Curve curve = Curves.easeOutCubic})",
-      "links": [],
+      "code": "Future<void> animateTo(\n  FTime value, {\n  Duration duration = const Duration(milliseconds: 300),\n  Curve curve = Curves.easeOutCubic,\n})",
+      "links": [
+        {
+          "offset": 26,
+          "length": 5,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTime-class.html"
+        }
+      ],
       "documentation": ""
     },
     {
       "offset": 757,
       "length": 5,
-      "code": "FTime([int hour = 0, int minute = 0])",
+      "code": "FTime([int hour = 0, int minute = 0])\n",
       "links": [],
       "container": {
         "name": "FTime",

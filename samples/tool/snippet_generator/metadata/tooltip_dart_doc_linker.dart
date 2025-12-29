@@ -8,6 +8,7 @@ import 'package:path/path.dart' as p;
 
 import '../main.dart';
 import '../snippet.dart';
+import '../transformation/tooltip_stubs.dart';
 import 'dart_doc_linker.dart';
 import 'link.dart';
 
@@ -38,14 +39,19 @@ class TooltipDartDocLinker extends DartDocLinker {
     final linker = TooltipDartDocLinker(packages, importsLength);
     result.unit.visitChildren(linker);
 
-
+    // Transform each tooltip: format code and extract dartdoc links
+    final imports = code.substring(0, importsLength);
+    await Future.wait([
+      for (final tooltip in linker.tooltips)
+        TooltipStub.transform(session, overlay, packages, imports, tooltip),
+    ]);
 
     return (linker.links, linker.tooltips);
   }
 
   final List<Tooltip> tooltips = [];
 
-  TooltipDartDocLinker(super.packages, super.baseOffset);
+  TooltipDartDocLinker(super.packages, super.importsLength);
 
   /// Adds tooltips for property access and method tear-offs where both parts are compile-time identifiers.
   ///
@@ -60,7 +66,7 @@ class TooltipDartDocLinker extends DartDocLinker {
           offset: node.offset,
           baseOffset: importsLength,
           length: node.length,
-          target: element.nonSynthetic is FieldElement ? TooltipTarget.field : TooltipTarget.getter,
+          target: element.nonSynthetic is FieldElement ? .field : .getter,
           code: element.nonSynthetic.toString(),
           container: _containerFromElement(element),
         ));
@@ -71,7 +77,7 @@ class TooltipDartDocLinker extends DartDocLinker {
           offset: node.identifier.offset,
           baseOffset: importsLength,
           length: node.identifier.length,
-          target: element.nonSynthetic is FieldElement ? TooltipTarget.field : TooltipTarget.getter,
+          target: element.nonSynthetic is FieldElement ? .field : .getter,
           code: element.nonSynthetic.toString(),
           container: _containerFromElement(element),
         ));
@@ -82,7 +88,7 @@ class TooltipDartDocLinker extends DartDocLinker {
           offset: node.offset,
           baseOffset: importsLength,
           length: node.length,
-          target: TooltipTarget.method,
+          target: .method,
           code: element.nonSynthetic.toString(),
           container: _containerFromElement(element),
         ));
@@ -93,7 +99,7 @@ class TooltipDartDocLinker extends DartDocLinker {
           offset: node.identifier.offset,
           baseOffset: importsLength,
           length: node.identifier.length,
-          target: TooltipTarget.method,
+          target: .method,
           code: element.nonSynthetic.toString(),
           container: _containerFromElement(element),
         ));
@@ -111,7 +117,7 @@ class TooltipDartDocLinker extends DartDocLinker {
         offset: node.propertyName.offset,
         baseOffset: importsLength,
         length: node.propertyName.length,
-        target: element.nonSynthetic is FieldElement ? TooltipTarget.field : TooltipTarget.getter,
+        target: element.nonSynthetic is FieldElement ? .field : .getter,
         code: element.nonSynthetic.toString(),
         container: _containerFromElement(element),
       ));
@@ -130,13 +136,17 @@ class TooltipDartDocLinker extends DartDocLinker {
       :final length,
       :final element?,
     ) when _tooltip(element)) {
+      // Replace parameterized type with non-parameterized type in constructor declaration.
+      final parameterizedType = node.staticType?.getDisplayString() ?? '';
+      final type = element.enclosingElement.name ?? '';
+
       tooltips.add(
         Tooltip(
           offset: offset,
           baseOffset: importsLength,
           length: length,
-          target: TooltipTarget.constructor,
-          code: element.toString(),
+          target: .constructor,
+          code: element.toString().replaceFirst(parameterizedType, type),
           container: _containerFromType(node.staticType),
         ),
       );
@@ -160,7 +170,7 @@ class TooltipDartDocLinker extends DartDocLinker {
           offset: offset,
           baseOffset: importsLength,
           length: length,
-          target: TooltipTarget.method,
+          target: .method,
           code: element.toString(),
           container: _containerFromType(node.staticType),
         ),
@@ -179,12 +189,34 @@ class TooltipDartDocLinker extends DartDocLinker {
         offset: node.propertyName.offset,
         baseOffset: importsLength,
         length: node.propertyName.length,
-        target: element.nonSynthetic is FieldElement ? TooltipTarget.field : TooltipTarget.getter,
+        target: element.nonSynthetic is FieldElement ? .field : .getter,
         code: element.nonSynthetic.toString(),
         container: _containerFromElement(element),
       ));
     }
     super.visitDotShorthandPropertyAccess(node);
+  }
+
+  /// Adds tooltips for dot shorthand constructor invocations.
+  ///
+  /// Handles dot shorthand syntax like `.new()` or `.named()`.
+  @override
+  void visitDotShorthandConstructorInvocation(DotShorthandConstructorInvocation node) {
+    if (node.constructorName.element case final element? when _tooltip(element)) {
+      // Replace parameterized type with non-parameterized type in constructor declaration.
+      final parameterizedType = node.staticType?.getDisplayString() ?? '';
+      final type = element.enclosingElement?.name ?? '';
+
+      tooltips.add(Tooltip(
+        offset: node.constructorName.offset,
+        baseOffset: importsLength,
+        length: node.constructorName.length,
+        target: .constructor,
+        code: element.toString().replaceFirst(parameterizedType, type),
+        container: _containerFromType(node.staticType),
+      ));
+    }
+    super.visitDotShorthandConstructorInvocation(node);
   }
 
   /// Adds tooltips for dot shorthand method invocations.
@@ -197,30 +229,12 @@ class TooltipDartDocLinker extends DartDocLinker {
         offset: node.memberName.offset,
         baseOffset: importsLength,
         length: node.memberName.length,
-        target: TooltipTarget.method,
+        target: .method,
         code: element.nonSynthetic.toString(),
-        container: _containerFromElement(element),
+        container: _containerFromType(node.staticType),
       ));
     }
     super.visitDotShorthandInvocation(node);
-  }
-
-  /// Adds tooltips for dot shorthand constructor invocations.
-  ///
-  /// Handles dot shorthand syntax like `.new()` or `.named()`.
-  @override
-  void visitDotShorthandConstructorInvocation(DotShorthandConstructorInvocation node) {
-    if (node.constructorName.element case final element? when _tooltip(element)) {
-      tooltips.add(Tooltip(
-        offset: node.constructorName.offset,
-        baseOffset: importsLength,
-        length: node.constructorName.length,
-        target: TooltipTarget.constructor,
-        code: element.toString(),
-        container: _containerFromElement(element),
-      ));
-    }
-    super.visitDotShorthandConstructorInvocation(node);
   }
 
   /// Adds tooltips for named arguments showing the parameter declaration.
@@ -233,7 +247,7 @@ class TooltipDartDocLinker extends DartDocLinker {
         offset: name.offset,
         baseOffset: importsLength,
         length: name.length,
-        target: TooltipTarget.formalParameter,
+        target: .formalParameter,
         code: element.toString(),
       ));
     }
@@ -256,7 +270,7 @@ class TooltipDartDocLinker extends DartDocLinker {
         offset: node.offset,
         baseOffset: importsLength,
         length: node.length,
-        target: TooltipTarget.formalParameter,
+        target: .formalParameter,
         code: element.toString(),
       ));
     }
@@ -278,7 +292,7 @@ class TooltipDartDocLinker extends DartDocLinker {
   (String, String)? _containerFromType(DartType? type) {
     if (type?.element case final element?) {
       if (dartDocUrl(packages, element) case final url?) {
-        return (type?.getDisplayString() ?? '', url);
+        return (element.name ?? '', url);
       }
     }
 

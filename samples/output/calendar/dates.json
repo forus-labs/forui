@@ -54,8 +54,39 @@
     {
       "offset": 32,
       "length": 9,
-      "code": "FCalendar({required FCalendarControl<Object?> control, FCalendarStyle Function(FCalendarStyle)? style, Widget Function(BuildContext, ({bool current, DateTime date, bool selectable, bool selected, FCalendarDayPickerStyle style, bool today}), Widget?) dayBuilder = defaultDayBuilder, void Function(DateTime)? onMonthChange, void Function(DateTime)? onPress, void Function(DateTime)? onLongPress, FCalendarPickerType initialType = .day, DateTime? start, DateTime? end, DateTime? today, DateTime? initialMonth, Key? key})",
-      "links": [],
+      "code": "FCalendar({\n  required FCalendarControl<Object?> control,\n  FCalendarStyle Function(FCalendarStyle)? style,\n  Widget Function(\n        BuildContext,\n        ({\n          bool current,\n          DateTime date,\n          bool selectable,\n          bool selected,\n          FCalendarDayPickerStyle style,\n          bool today,\n        }),\n        Widget?,\n      )\n      dayBuilder =\n      defaultDayBuilder,\n  void Function(DateTime)? onMonthChange,\n  void Function(DateTime)? onPress,\n  void Function(DateTime)? onLongPress,\n  FCalendarPickerType initialType = .day,\n  DateTime? start,\n  DateTime? end,\n  DateTime? today,\n  DateTime? initialMonth,\n  Key? key,\n})\n",
+      "links": [
+        {
+          "offset": 23,
+          "length": 25,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarControl-class.html"
+        },
+        {
+          "offset": 60,
+          "length": 14,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarStyle-class.html"
+        },
+        {
+          "offset": 84,
+          "length": 14,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarStyle-class.html"
+        },
+        {
+          "offset": 271,
+          "length": 23,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarDayPickerStyle-class.html"
+        },
+        {
+          "offset": 525,
+          "length": 19,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarPickerType.html"
+        },
+        {
+          "offset": 560,
+          "length": 3,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarPickerType.html#day"
+        }
+      ],
       "container": {
         "name": "FCalendar",
         "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendar-class.html"
@@ -66,14 +97,31 @@
       "offset": 45,
       "length": 8,
       "code": "{required FCalendarControl<Object?> control}",
-      "links": [],
+      "links": [
+        {
+          "offset": 10,
+          "length": 25,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarControl-class.html"
+        }
+      ],
       "documentation": ""
     },
     {
       "offset": 55,
       "length": 12,
-      "code": "FCalendarControl<Set<DateTime>> managedDates({FCalendarController<Set<DateTime>>? controller, Set<DateTime>? initial, bool Function(DateTime)? selectable, bool truncateAndStripTimezone = true, void Function(Set<DateTime>)? onChange})",
-      "links": [],
+      "code": "FCalendarControl<Set<DateTime>> managedDates({\n  FCalendarController<Set<DateTime>>? controller,\n  Set<DateTime>? initial,\n  bool Function(DateTime)? selectable,\n  bool truncateAndStripTimezone = true,\n  void Function(Set<DateTime>)? onChange,\n})",
+      "links": [
+        {
+          "offset": 0,
+          "length": 31,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarControl-class.html"
+        },
+        {
+          "offset": 49,
+          "length": 35,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarController-class.html"
+        }
+      ],
       "container": {
         "name": "FCalendarControl",
         "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarControl-class.html"

@@ -29,8 +29,69 @@
     {
       "offset": 38,
       "length": 17,
-      "code": "FTimeField.picker({FTimeFieldControl control, FPopoverControl popoverControl, FTimeFieldStyle Function(FTimeFieldStyle)? style, bool hour24, DateFormat? format, TextAlign textAlign, TextAlignVertical? textAlignVertical, TextDirection? textDirection, bool expands, MouseCursor mouseCursor, bool canRequestFocus, String? hint, bool autofocus, FocusNode? focusNode, Alignment anchor, Alignment fieldAnchor, FPortalConstraints constraints, FPortalSpacing spacing, FPortalOverflow overflow, Offset offset, FPopoverHideRegion hideRegion, Object? groupId, void Function()? onTapHide, int hourInterval, int minuteInterval, Widget Function(BuildContext, FTimeFieldStyle, Set<WidgetState>, Widget) builder, Widget Function(BuildContext, FTimeFieldStyle, Set<WidgetState>)? prefixBuilder, Widget Function(BuildContext, FTimeFieldStyle, Set<WidgetState>)? suffixBuilder, Widget? label, Widget? description, bool enabled, void Function(FTime?)? onSaved, void Function()? onReset, AutovalidateMode autovalidateMode, String? forceErrorText, Widget Function(BuildContext, String) errorBuilder, Key? key})",
-      "links": [],
+      "code": "FTimeField.picker({\n  FTimeFieldControl control,\n  FPopoverControl popoverControl,\n  FTimeFieldStyle Function(FTimeFieldStyle)? style,\n  bool hour24,\n  DateFormat? format,\n  TextAlign textAlign,\n  TextAlignVertical? textAlignVertical,\n  TextDirection? textDirection,\n  bool expands,\n  MouseCursor mouseCursor,\n  bool canRequestFocus,\n  String? hint,\n  bool autofocus,\n  FocusNode? focusNode,\n  Alignment anchor,\n  Alignment fieldAnchor,\n  FPortalConstraints constraints,\n  FPortalSpacing spacing,\n  FPortalOverflow overflow,\n  Offset offset,\n  FPopoverHideRegion hideRegion,\n  Object? groupId,\n  void Function()? onTapHide,\n  int hourInterval,\n  int minuteInterval,\n  Widget Function(BuildContext, FTimeFieldStyle, Set<WidgetState>, Widget)\n  builder,\n  Widget Function(BuildContext, FTimeFieldStyle, Set<WidgetState>)?\n  prefixBuilder,\n  Widget Function(BuildContext, FTimeFieldStyle, Set<WidgetState>)?\n  suffixBuilder,\n  Widget? label,\n  Widget? description,\n  bool enabled,\n  void Function(FTime?)? onSaved,\n  void Function()? onReset,\n  AutovalidateMode autovalidateMode,\n  String? forceErrorText,\n  Widget Function(BuildContext, String) errorBuilder,\n  Key? key,\n})\n",
+      "links": [
+        {
+          "offset": 22,
+          "length": 17,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeFieldControl-class.html"
+        },
+        {
+          "offset": 51,
+          "length": 15,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverControl-class.html"
+        },
+        {
+          "offset": 85,
+          "length": 15,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeFieldStyle-class.html"
+        },
+        {
+          "offset": 110,
+          "length": 15,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeFieldStyle-class.html"
+        },
+        {
+          "offset": 439,
+          "length": 18,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FPortalConstraints-class.html"
+        },
+        {
+          "offset": 473,
+          "length": 14,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FPortalSpacing-class.html"
+        },
+        {
+          "offset": 499,
+          "length": 15,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FPortalOverflow-class.html"
+        },
+        {
+          "offset": 544,
+          "length": 18,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverHideRegion.html"
+        },
+        {
+          "offset": 698,
+          "length": 15,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeFieldStyle-class.html"
+        },
+        {
+          "offset": 784,
+          "length": 15,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeFieldStyle-class.html"
+        },
+        {
+          "offset": 869,
+          "length": 15,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeFieldStyle-class.html"
+        },
+        {
+          "offset": 994,
+          "length": 6,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTime-class.html"
+        }
+      ],
       "container": {
         "name": "FTimeField",
         "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField-class.html"

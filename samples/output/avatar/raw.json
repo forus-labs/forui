@@ -59,8 +59,19 @@
     {
       "offset": 106,
       "length": 11,
-      "code": "FAvatar.raw({Widget? child, FAvatarStyle Function(FAvatarStyle)? style, double size = 40.0, Key? key})",
-      "links": [],
+      "code": "FAvatar.raw({\n  Widget? child,\n  FAvatarStyle Function(FAvatarStyle)? style,\n  double size = 40.0,\n  Key? key,\n})\n",
+      "links": [
+        {
+          "offset": 33,
+          "length": 12,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.avatar/FAvatarStyle-class.html"
+        },
+        {
+          "offset": 55,
+          "length": 12,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.avatar/FAvatarStyle-class.html"
+        }
+      ],
       "container": {
         "name": "FAvatar",
         "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.avatar/FAvatar-class.html"
@@ -70,8 +81,19 @@
     {
       "offset": 125,
       "length": 11,
-      "code": "FAvatar.raw({Widget? child, FAvatarStyle Function(FAvatarStyle)? style, double size = 40.0, Key? key})",
-      "links": [],
+      "code": "FAvatar.raw({\n  Widget? child,\n  FAvatarStyle Function(FAvatarStyle)? style,\n  double size = 40.0,\n  Key? key,\n})\n",
+      "links": [
+        {
+          "offset": 33,
+          "length": 12,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.avatar/FAvatarStyle-class.html"
+        },
+        {
+          "offset": 55,
+          "length": 12,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.avatar/FAvatarStyle-class.html"
+        }
+      ],
       "container": {
         "name": "FAvatar",
         "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.avatar/FAvatar-class.html"
@@ -111,7 +133,13 @@
       "offset": 190,
       "length": 6,
       "code": "FColors colors",
-      "links": [],
+      "links": [
+        {
+          "offset": 0,
+          "length": 7,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors-class.html"
+        }
+      ],
       "container": {
         "name": "FThemeData",
         "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
@@ -122,7 +150,13 @@
       "offset": 184,
       "length": 5,
       "code": "FThemeData get theme",
-      "links": [],
+      "links": [
+        {
+          "offset": 0,
+          "length": 10,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+        }
+      ],
       "container": {
         "name": "FThemeBuildContext",
         "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext.html"
@@ -132,8 +166,19 @@
     {
       "offset": 226,
       "length": 11,
-      "code": "FAvatar.raw({Widget? child, FAvatarStyle Function(FAvatarStyle)? style, double size = 40.0, Key? key})",
-      "links": [],
+      "code": "FAvatar.raw({\n  Widget? child,\n  FAvatarStyle Function(FAvatarStyle)? style,\n  double size = 40.0,\n  Key? key,\n})\n",
+      "links": [
+        {
+          "offset": 33,
+          "length": 12,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.avatar/FAvatarStyle-class.html"
+        },
+        {
+          "offset": 55,
+          "length": 12,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.avatar/FAvatarStyle-class.html"
+        }
+      ],
       "container": {
         "name": "FAvatar",
         "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.avatar/FAvatar-class.html"

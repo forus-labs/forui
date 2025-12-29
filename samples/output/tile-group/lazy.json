@@ -69,8 +69,29 @@
     {
       "offset": 32,
       "length": 18,
-      "code": "FTileGroup.builder({required Widget? Function(BuildContext, int) tileBuilder, int? count, FTileGroupStyle Function(FTileGroupStyle)? style, ScrollController? scrollController, double? cacheExtent, double maxHeight = .infinity, DragStartBehavior dragStartBehavior = .start, ScrollPhysics physics = const ClampingScrollPhysics(), bool? enabled, FItemDivider divider = .indented, String? semanticsLabel, Widget? label, Widget? description, Widget? error, Key? key})",
-      "links": [],
+      "code": "FTileGroup.builder({\n  required Widget? Function(BuildContext, int) tileBuilder,\n  int? count,\n  FTileGroupStyle Function(FTileGroupStyle)? style,\n  ScrollController? scrollController,\n  double? cacheExtent,\n  double maxHeight = .infinity,\n  DragStartBehavior dragStartBehavior = .start,\n  ScrollPhysics physics = const ClampingScrollPhysics(),\n  bool? enabled,\n  FItemDivider divider = .indented,\n  String? semanticsLabel,\n  Widget? label,\n  Widget? description,\n  Widget? error,\n  Key? key,\n})\n",
+      "links": [
+        {
+          "offset": 97,
+          "length": 15,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileGroupStyle-class.html"
+        },
+        {
+          "offset": 122,
+          "length": 15,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileGroupStyle-class.html"
+        },
+        {
+          "offset": 364,
+          "length": 12,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemDivider.html"
+        },
+        {
+          "offset": 388,
+          "length": 8,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemDivider.html#indented"
+        }
+      ],
       "container": {
         "name": "FTileGroup",
         "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileGroup-class.html"
@@ -129,8 +150,24 @@
     {
       "offset": 210,
       "length": 5,
-      "code": "FTile({required Widget title, FItemStyle Function(FItemStyle)? style, bool? enabled, bool selected = false, String? semanticsLabel, bool autofocus = false, FocusNode? focusNode, void Function(bool)? onFocusChange, void Function(bool)? onHoverChange, void Function(FWidgetStatesDelta)? onStateChange, void Function()? onPress, void Function()? onLongPress, void Function()? onSecondaryPress, void Function()? onSecondaryLongPress, Map<ShortcutActivator, Intent>? shortcuts, Map<Type, Action<Intent>>? actions, Widget? prefix, Widget? subtitle, Widget? details, Widget? suffix, Key? key})",
-      "links": [],
+      "code": "FTile({\n  required Widget title,\n  FItemStyle Function(FItemStyle)? style,\n  bool? enabled,\n  bool selected = false,\n  String? semanticsLabel,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  void Function(bool)? onHoverChange,\n  void Function(FWidgetStatesDelta)? onStateChange,\n  void Function()? onPress,\n  void Function()? onLongPress,\n  void Function()? onSecondaryPress,\n  void Function()? onSecondaryLongPress,\n  Map<ShortcutActivator, Intent>? shortcuts,\n  Map<Type, Action<Intent>>? actions,\n  Widget? prefix,\n  Widget? subtitle,\n  Widget? details,\n  Widget? suffix,\n  Key? key,\n})\n",
+      "links": [
+        {
+          "offset": 35,
+          "length": 10,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemStyle-class.html"
+        },
+        {
+          "offset": 55,
+          "length": 10,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemStyle-class.html"
+        },
+        {
+          "offset": 285,
+          "length": 18,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStatesDelta-class.html"
+        }
+      ],
       "container": {
         "name": "FTile",
         "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTile-class.html"

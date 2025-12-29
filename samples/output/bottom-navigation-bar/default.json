@@ -127,8 +127,19 @@
     {
       "offset": 320,
       "length": 20,
-      "code": "FBottomNavigationBar({required List<Widget> children, FBottomNavigationBarStyle Function(FBottomNavigationBarStyle)? style, void Function(int)? onChange, int index = -1, bool safeAreaTop = false, bool safeAreaBottom = false, Key? key})",
-      "links": [],
+      "code": "FBottomNavigationBar({\n  required List<Widget> children,\n  FBottomNavigationBarStyle Function(FBottomNavigationBarStyle)? style,\n  void Function(int)? onChange,\n  int index = -1,\n  bool safeAreaTop = false,\n  bool safeAreaBottom = false,\n  Key? key,\n})\n",
+      "links": [
+        {
+          "offset": 59,
+          "length": 25,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.bottom_navigation_bar/FBottomNavigationBarStyle-class.html"
+        },
+        {
+          "offset": 94,
+          "length": 25,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.bottom_navigation_bar/FBottomNavigationBarStyle-class.html"
+        }
+      ],
       "container": {
         "name": "FBottomNavigationBar",
         "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.bottom_navigation_bar/FBottomNavigationBar-class.html"
@@ -166,8 +177,24 @@
     {
       "offset": 446,
       "length": 24,
-      "code": "FBottomNavigationBarItem({required Widget icon, Widget? label, FBottomNavigationBarItemStyle Function(FBottomNavigationBarItemStyle)? style, bool autofocus = false, FocusNode? focusNode, void Function(bool)? onFocusChange, void Function(bool)? onHoverChange, void Function(FWidgetStatesDelta)? onStateChange, Key? key})",
-      "links": [],
+      "code": "FBottomNavigationBarItem({\n  required Widget icon,\n  Widget? label,\n  FBottomNavigationBarItemStyle Function(FBottomNavigationBarItemStyle)?\n  style,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  void Function(bool)? onHoverChange,\n  void Function(FWidgetStatesDelta)? onStateChange,\n  Key? key,\n})\n",
+      "links": [
+        {
+          "offset": 70,
+          "length": 29,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.bottom_navigation_bar/FBottomNavigationBarItemStyle-class.html"
+        },
+        {
+          "offset": 109,
+          "length": 29,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.bottom_navigation_bar/FBottomNavigationBarItemStyle-class.html"
+        },
+        {
+          "offset": 292,
+          "length": 18,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStatesDelta-class.html"
+        }
+      ],
       "container": {
         "name": "FBottomNavigationBarItem",
         "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.bottom_navigation_bar/FBottomNavigationBarItem-class.html"
@@ -202,8 +229,24 @@
     {
       "offset": 525,
       "length": 24,
-      "code": "FBottomNavigationBarItem({required Widget icon, Widget? label, FBottomNavigationBarItemStyle Function(FBottomNavigationBarItemStyle)? style, bool autofocus = false, FocusNode? focusNode, void Function(bool)? onFocusChange, void Function(bool)? onHoverChange, void Function(FWidgetStatesDelta)? onStateChange, Key? key})",
-      "links": [],
+      "code": "FBottomNavigationBarItem({\n  required Widget icon,\n  Widget? label,\n  FBottomNavigationBarItemStyle Function(FBottomNavigationBarItemStyle)?\n  style,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  void Function(bool)? onHoverChange,\n  void Function(FWidgetStatesDelta)? onStateChange,\n  Key? key,\n})\n",
+      "links": [
+        {
+          "offset": 70,
+          "length": 29,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.bottom_navigation_bar/FBottomNavigationBarItemStyle-class.html"
+        },
+        {
+          "offset": 109,
+          "length": 29,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.bottom_navigation_bar/FBottomNavigationBarItemStyle-class.html"
+        },
+        {
+          "offset": 292,
+          "length": 18,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStatesDelta-class.html"
+        }
+      ],
       "container": {
         "name": "FBottomNavigationBarItem",
         "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.bottom_navigation_bar/FBottomNavigationBarItem-class.html"
@@ -238,8 +281,24 @@
     {
       "offset": 636,
       "length": 24,
-      "code": "FBottomNavigationBarItem({required Widget icon, Widget? label, FBottomNavigationBarItemStyle Function(FBottomNavigationBarItemStyle)? style, bool autofocus = false, FocusNode? focusNode, void Function(bool)? onFocusChange, void Function(bool)? onHoverChange, void Function(FWidgetStatesDelta)? onStateChange, Key? key})",
-      "links": [],
+      "code": "FBottomNavigationBarItem({\n  required Widget icon,\n  Widget? label,\n  FBottomNavigationBarItemStyle Function(FBottomNavigationBarItemStyle)?\n  style,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  void Function(bool)? onHoverChange,\n  void Function(FWidgetStatesDelta)? onStateChange,\n  Key? key,\n})\n",
+      "links": [
+        {
+          "offset": 70,
+          "length": 29,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.bottom_navigation_bar/FBottomNavigationBarItemStyle-class.html"
+        },
+        {
+          "offset": 109,
+          "length": 29,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.bottom_navigation_bar/FBottomNavigationBarItemStyle-class.html"
+        },
+        {
+          "offset": 292,
+          "length": 18,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStatesDelta-class.html"
+        }
+      ],
       "container": {
         "name": "FBottomNavigationBarItem",
         "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.bottom_navigation_bar/FBottomNavigationBarItem-class.html"
@@ -274,8 +333,24 @@
     {
       "offset": 716,
       "length": 24,
-      "code": "FBottomNavigationBarItem({required Widget icon, Widget? label, FBottomNavigationBarItemStyle Function(FBottomNavigationBarItemStyle)? style, bool autofocus = false, FocusNode? focusNode, void Function(bool)? onFocusChange, void Function(bool)? onHoverChange, void Function(FWidgetStatesDelta)? onStateChange, Key? key})",
-      "links": [],
+      "code": "FBottomNavigationBarItem({\n  required Widget icon,\n  Widget? label,\n  FBottomNavigationBarItemStyle Function(FBottomNavigationBarItemStyle)?\n  style,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  void Function(bool)? onHoverChange,\n  void Function(FWidgetStatesDelta)? onStateChange,\n  Key? key,\n})\n",
+      "links": [
+        {
+          "offset": 70,
+          "length": 29,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.bottom_navigation_bar/FBottomNavigationBarItemStyle-class.html"
+        },
+        {
+          "offset": 109,
+          "length": 29,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.bottom_navigation_bar/FBottomNavigationBarItemStyle-class.html"
+        },
+        {
+          "offset": 292,
+          "length": 18,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStatesDelta-class.html"
+        }
+      ],
       "container": {
         "name": "FBottomNavigationBarItem",
         "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.bottom_navigation_bar/FBottomNavigationBarItem-class.html"
@@ -310,8 +385,24 @@
     {
       "offset": 828,
       "length": 24,
-      "code": "FBottomNavigationBarItem({required Widget icon, Widget? label, FBottomNavigationBarItemStyle Function(FBottomNavigationBarItemStyle)? style, bool autofocus = false, FocusNode? focusNode, void Function(bool)? onFocusChange, void Function(bool)? onHoverChange, void Function(FWidgetStatesDelta)? onStateChange, Key? key})",
-      "links": [],
+      "code": "FBottomNavigationBarItem({\n  required Widget icon,\n  Widget? label,\n  FBottomNavigationBarItemStyle Function(FBottomNavigationBarItemStyle)?\n  style,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  void Function(bool)? onHoverChange,\n  void Function(FWidgetStatesDelta)? onStateChange,\n  Key? key,\n})\n",
+      "links": [
+        {
+          "offset": 70,
+          "length": 29,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.bottom_navigation_bar/FBottomNavigationBarItemStyle-class.html"
+        },
+        {
+          "offset": 109,
+          "length": 29,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.bottom_navigation_bar/FBottomNavigationBarItemStyle-class.html"
+        },
+        {
+          "offset": 292,
+          "length": 18,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStatesDelta-class.html"
+        }
+      ],
       "container": {
         "name": "FBottomNavigationBarItem",
         "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.bottom_navigation_bar/FBottomNavigationBarItem-class.html"

@@ -189,8 +189,34 @@
     {
       "offset": 32,
       "length": 16,
-      "code": "FItemGroup.merge({required List<FItemGroupMixin> children, FItemGroupStyle Function(FItemGroupStyle)? style, ScrollController? scrollController, double? cacheExtent, double maxHeight = .infinity, DragStartBehavior dragStartBehavior = .start, ScrollPhysics physics = const ClampingScrollPhysics(), bool? enabled, FItemDivider divider = .full, String? semanticsLabel, Key? key})",
-      "links": [],
+      "code": "FItemGroup.merge({\n  required List<FItemGroupMixin> children,\n  FItemGroupStyle Function(FItemGroupStyle)? style,\n  ScrollController? scrollController,\n  double? cacheExtent,\n  double maxHeight = .infinity,\n  DragStartBehavior dragStartBehavior = .start,\n  ScrollPhysics physics = const ClampingScrollPhysics(),\n  bool? enabled,\n  FItemDivider divider = .full,\n  String? semanticsLabel,\n  Key? key,\n})\n",
+      "links": [
+        {
+          "offset": 35,
+          "length": 15,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroupMixin-mixin.html"
+        },
+        {
+          "offset": 64,
+          "length": 15,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroupStyle-class.html"
+        },
+        {
+          "offset": 89,
+          "length": 15,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroupStyle-class.html"
+        },
+        {
+          "offset": 331,
+          "length": 12,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemDivider.html"
+        },
+        {
+          "offset": 355,
+          "length": 4,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemDivider.html#full"
+        }
+      ],
       "container": {
         "name": "FItemGroup",
         "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroup-class.html"
@@ -201,17 +227,54 @@
       "offset": 52,
       "length": 9,
       "code": "{required List<FItemGroupMixin> children}",
-      "links": [],
+      "links": [
+        {
+          "offset": 15,
+          "length": 15,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroupMixin-mixin.html"
+        }
+      ],
       "documentation": ""
     },
     {
       "offset": 69,
       "length": 5,
-      "code": "FItemGroup group({required List<FItemMixin> children, FItemGroupStyle Function(FItemGroupStyle)? style, ScrollController? scrollController, double? cacheExtent, double maxHeight = .infinity, DragStartBehavior dragStartBehavior = .start, ScrollPhysics physics = const ClampingScrollPhysics(), bool? enabled, FItemDivider divider = .none, String? semanticsLabel, Key? key})",
-      "links": [],
+      "code": "FItemGroup group({\n  required List<FItemMixin> children,\n  FItemGroupStyle Function(FItemGroupStyle)? style,\n  ScrollController? scrollController,\n  double? cacheExtent,\n  double maxHeight = .infinity,\n  DragStartBehavior dragStartBehavior = .start,\n  ScrollPhysics physics = const ClampingScrollPhysics(),\n  bool? enabled,\n  FItemDivider divider = .none,\n  String? semanticsLabel,\n  Key? key,\n})",
+      "links": [
+        {
+          "offset": 0,
+          "length": 10,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroup-class.html"
+        },
+        {
+          "offset": 35,
+          "length": 10,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemMixin-mixin.html"
+        },
+        {
+          "offset": 59,
+          "length": 15,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroupStyle-class.html"
+        },
+        {
+          "offset": 84,
+          "length": 15,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroupStyle-class.html"
+        },
+        {
+          "offset": 326,
+          "length": 12,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemDivider.html"
+        },
+        {
+          "offset": 350,
+          "length": 4,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemDivider.html#none"
+        }
+      ],
       "container": {
-        "name": "FItemGroupMixin",
-        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroupMixin-mixin.html"
+        "name": "FItemGroup",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroup-class.html"
       },
       "documentation": ""
     },
@@ -219,17 +282,44 @@
       "offset": 82,
       "length": 9,
       "code": "{required List<FItemMixin> children}",
-      "links": [],
+      "links": [
+        {
+          "offset": 15,
+          "length": 10,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemMixin-mixin.html"
+        }
+      ],
       "documentation": ""
     },
     {
       "offset": 103,
       "length": 4,
-      "code": "FItem item({required Widget title, FItemStyle Function(FItemStyle)? style, bool? enabled, bool selected = false, String? semanticsLabel, bool autofocus = false, FocusNode? focusNode, void Function(bool)? onFocusChange, void Function(bool)? onHoverChange, void Function(FWidgetStatesDelta)? onStateChange, void Function()? onPress, void Function()? onLongPress, void Function()? onSecondaryPress, void Function()? onSecondaryLongPress, Map<ShortcutActivator, Intent>? shortcuts, Map<Type, Action<Intent>>? actions, Widget? prefix, Widget? subtitle, Widget? details, Widget? suffix, Key? key})",
-      "links": [],
+      "code": "FItem item({\n  required Widget title,\n  FItemStyle Function(FItemStyle)? style,\n  bool? enabled,\n  bool selected = false,\n  String? semanticsLabel,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  void Function(bool)? onHoverChange,\n  void Function(FWidgetStatesDelta)? onStateChange,\n  void Function()? onPress,\n  void Function()? onLongPress,\n  void Function()? onSecondaryPress,\n  void Function()? onSecondaryLongPress,\n  Map<ShortcutActivator, Intent>? shortcuts,\n  Map<Type, Action<Intent>>? actions,\n  Widget? prefix,\n  Widget? subtitle,\n  Widget? details,\n  Widget? suffix,\n  Key? key,\n})",
+      "links": [
+        {
+          "offset": 0,
+          "length": 5,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem-class.html"
+        },
+        {
+          "offset": 40,
+          "length": 10,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemStyle-class.html"
+        },
+        {
+          "offset": 60,
+          "length": 10,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemStyle-class.html"
+        },
+        {
+          "offset": 290,
+          "length": 18,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStatesDelta-class.html"
+        }
+      ],
       "container": {
-        "name": "FItemMixin",
-        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemMixin-mixin.html"
+        "name": "FItem",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem-class.html"
       },
       "documentation": ""
     },
@@ -286,11 +376,32 @@
     {
       "offset": 297,
       "length": 4,
-      "code": "FItem item({required Widget title, FItemStyle Function(FItemStyle)? style, bool? enabled, bool selected = false, String? semanticsLabel, bool autofocus = false, FocusNode? focusNode, void Function(bool)? onFocusChange, void Function(bool)? onHoverChange, void Function(FWidgetStatesDelta)? onStateChange, void Function()? onPress, void Function()? onLongPress, void Function()? onSecondaryPress, void Function()? onSecondaryLongPress, Map<ShortcutActivator, Intent>? shortcuts, Map<Type, Action<Intent>>? actions, Widget? prefix, Widget? subtitle, Widget? details, Widget? suffix, Key? key})",
-      "links": [],
+      "code": "FItem item({\n  required Widget title,\n  FItemStyle Function(FItemStyle)? style,\n  bool? enabled,\n  bool selected = false,\n  String? semanticsLabel,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  void Function(bool)? onHoverChange,\n  void Function(FWidgetStatesDelta)? onStateChange,\n  void Function()? onPress,\n  void Function()? onLongPress,\n  void Function()? onSecondaryPress,\n  void Function()? onSecondaryLongPress,\n  Map<ShortcutActivator, Intent>? shortcuts,\n  Map<Type, Action<Intent>>? actions,\n  Widget? prefix,\n  Widget? subtitle,\n  Widget? details,\n  Widget? suffix,\n  Key? key,\n})",
+      "links": [
+        {
+          "offset": 0,
+          "length": 5,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem-class.html"
+        },
+        {
+          "offset": 40,
+          "length": 10,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemStyle-class.html"
+        },
+        {
+          "offset": 60,
+          "length": 10,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemStyle-class.html"
+        },
+        {
+          "offset": 290,
+          "length": 18,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStatesDelta-class.html"
+        }
+      ],
       "container": {
-        "name": "FItemMixin",
-        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemMixin-mixin.html"
+        "name": "FItem",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem-class.html"
       },
       "documentation": ""
     },
@@ -354,11 +465,42 @@
     {
       "offset": 539,
       "length": 5,
-      "code": "FItemGroup group({required List<FItemMixin> children, FItemGroupStyle Function(FItemGroupStyle)? style, ScrollController? scrollController, double? cacheExtent, double maxHeight = .infinity, DragStartBehavior dragStartBehavior = .start, ScrollPhysics physics = const ClampingScrollPhysics(), bool? enabled, FItemDivider divider = .none, String? semanticsLabel, Key? key})",
-      "links": [],
+      "code": "FItemGroup group({\n  required List<FItemMixin> children,\n  FItemGroupStyle Function(FItemGroupStyle)? style,\n  ScrollController? scrollController,\n  double? cacheExtent,\n  double maxHeight = .infinity,\n  DragStartBehavior dragStartBehavior = .start,\n  ScrollPhysics physics = const ClampingScrollPhysics(),\n  bool? enabled,\n  FItemDivider divider = .none,\n  String? semanticsLabel,\n  Key? key,\n})",
+      "links": [
+        {
+          "offset": 0,
+          "length": 10,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroup-class.html"
+        },
+        {
+          "offset": 35,
+          "length": 10,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemMixin-mixin.html"
+        },
+        {
+          "offset": 59,
+          "length": 15,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroupStyle-class.html"
+        },
+        {
+          "offset": 84,
+          "length": 15,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroupStyle-class.html"
+        },
+        {
+          "offset": 326,
+          "length": 12,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemDivider.html"
+        },
+        {
+          "offset": 350,
+          "length": 4,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemDivider.html#none"
+        }
+      ],
       "container": {
-        "name": "FItemGroupMixin",
-        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroupMixin-mixin.html"
+        "name": "FItemGroup",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroup-class.html"
       },
       "documentation": ""
     },
@@ -366,17 +508,44 @@
       "offset": 552,
       "length": 9,
       "code": "{required List<FItemMixin> children}",
-      "links": [],
+      "links": [
+        {
+          "offset": 15,
+          "length": 10,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemMixin-mixin.html"
+        }
+      ],
       "documentation": ""
     },
     {
       "offset": 573,
       "length": 4,
-      "code": "FItem item({required Widget title, FItemStyle Function(FItemStyle)? style, bool? enabled, bool selected = false, String? semanticsLabel, bool autofocus = false, FocusNode? focusNode, void Function(bool)? onFocusChange, void Function(bool)? onHoverChange, void Function(FWidgetStatesDelta)? onStateChange, void Function()? onPress, void Function()? onLongPress, void Function()? onSecondaryPress, void Function()? onSecondaryLongPress, Map<ShortcutActivator, Intent>? shortcuts, Map<Type, Action<Intent>>? actions, Widget? prefix, Widget? subtitle, Widget? details, Widget? suffix, Key? key})",
-      "links": [],
+      "code": "FItem item({\n  required Widget title,\n  FItemStyle Function(FItemStyle)? style,\n  bool? enabled,\n  bool selected = false,\n  String? semanticsLabel,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  void Function(bool)? onHoverChange,\n  void Function(FWidgetStatesDelta)? onStateChange,\n  void Function()? onPress,\n  void Function()? onLongPress,\n  void Function()? onSecondaryPress,\n  void Function()? onSecondaryLongPress,\n  Map<ShortcutActivator, Intent>? shortcuts,\n  Map<Type, Action<Intent>>? actions,\n  Widget? prefix,\n  Widget? subtitle,\n  Widget? details,\n  Widget? suffix,\n  Key? key,\n})",
+      "links": [
+        {
+          "offset": 0,
+          "length": 5,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem-class.html"
+        },
+        {
+          "offset": 40,
+          "length": 10,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemStyle-class.html"
+        },
+        {
+          "offset": 60,
+          "length": 10,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemStyle-class.html"
+        },
+        {
+          "offset": 290,
+          "length": 18,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStatesDelta-class.html"
+        }
+      ],
       "container": {
-        "name": "FItemMixin",
-        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemMixin-mixin.html"
+        "name": "FItem",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem-class.html"
       },
       "documentation": ""
     },
@@ -433,11 +602,32 @@
     {
       "offset": 761,
       "length": 4,
-      "code": "FItem item({required Widget title, FItemStyle Function(FItemStyle)? style, bool? enabled, bool selected = false, String? semanticsLabel, bool autofocus = false, FocusNode? focusNode, void Function(bool)? onFocusChange, void Function(bool)? onHoverChange, void Function(FWidgetStatesDelta)? onStateChange, void Function()? onPress, void Function()? onLongPress, void Function()? onSecondaryPress, void Function()? onSecondaryLongPress, Map<ShortcutActivator, Intent>? shortcuts, Map<Type, Action<Intent>>? actions, Widget? prefix, Widget? subtitle, Widget? details, Widget? suffix, Key? key})",
-      "links": [],
+      "code": "FItem item({\n  required Widget title,\n  FItemStyle Function(FItemStyle)? style,\n  bool? enabled,\n  bool selected = false,\n  String? semanticsLabel,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  void Function(bool)? onHoverChange,\n  void Function(FWidgetStatesDelta)? onStateChange,\n  void Function()? onPress,\n  void Function()? onLongPress,\n  void Function()? onSecondaryPress,\n  void Function()? onSecondaryLongPress,\n  Map<ShortcutActivator, Intent>? shortcuts,\n  Map<Type, Action<Intent>>? actions,\n  Widget? prefix,\n  Widget? subtitle,\n  Widget? details,\n  Widget? suffix,\n  Key? key,\n})",
+      "links": [
+        {
+          "offset": 0,
+          "length": 5,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem-class.html"
+        },
+        {
+          "offset": 40,
+          "length": 10,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemStyle-class.html"
+        },
+        {
+          "offset": 60,
+          "length": 10,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemStyle-class.html"
+        },
+        {
+          "offset": 290,
+          "length": 18,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStatesDelta-class.html"
+        }
+      ],
       "container": {
-        "name": "FItemMixin",
-        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemMixin-mixin.html"
+        "name": "FItem",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem-class.html"
       },
       "documentation": ""
     },

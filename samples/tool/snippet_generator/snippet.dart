@@ -116,7 +116,7 @@ class Tooltip {
   final TooltipTarget target;
 
   /// The source code.
-  final String code;
+  String code;
 
   /// The links within the tooltip code (for types, etc.).
   final List<DartDocLink> links = [];
@@ -152,7 +152,7 @@ class Tooltip {
 /// A link to a Dart API documentation page.
 class DartDocLink {
   /// The character offset where the linked identifier starts.
-  final int offset;
+  int offset;
 
   /// The length of the linked identifier.
   final int length;

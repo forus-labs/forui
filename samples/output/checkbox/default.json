@@ -37,8 +37,19 @@
     {
       "offset": 260,
       "length": 9,
-      "code": "FCheckbox({FCheckboxStyle Function(FCheckboxStyle)? style, Widget? label, Widget? description, Widget? error, String? semanticsLabel, bool value = false, void Function(bool)? onChange, bool enabled = true, bool autofocus = false, FocusNode? focusNode, void Function(bool)? onFocusChange, Key? key})",
-      "links": [],
+      "code": "FCheckbox({\n  FCheckboxStyle Function(FCheckboxStyle)? style,\n  Widget? label,\n  Widget? description,\n  Widget? error,\n  String? semanticsLabel,\n  bool value = false,\n  void Function(bool)? onChange,\n  bool enabled = true,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  Key? key,\n})\n",
+      "links": [
+        {
+          "offset": 14,
+          "length": 14,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckboxStyle-class.html"
+        },
+        {
+          "offset": 38,
+          "length": 14,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckboxStyle-class.html"
+        }
+      ],
       "container": {
         "name": "FCheckbox",
         "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckbox-class.html"

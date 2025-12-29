@@ -54,8 +54,19 @@
     {
       "offset": 100,
       "length": 7,
-      "code": "FAvatar({required ImageProvider<Object> image, FAvatarStyle Function(FAvatarStyle)? style, double size = 40.0, String? semanticsLabel, Widget? fallback, Key? key})",
-      "links": [],
+      "code": "FAvatar({\n  required ImageProvider<Object> image,\n  FAvatarStyle Function(FAvatarStyle)? style,\n  double size = 40.0,\n  String? semanticsLabel,\n  Widget? fallback,\n  Key? key,\n})\n",
+      "links": [
+        {
+          "offset": 52,
+          "length": 12,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.avatar/FAvatarStyle-class.html"
+        },
+        {
+          "offset": 74,
+          "length": 12,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.avatar/FAvatarStyle-class.html"
+        }
+      ],
       "container": {
         "name": "FAvatar",
         "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.avatar/FAvatar-class.html"
@@ -79,8 +90,19 @@
     {
       "offset": 180,
       "length": 7,
-      "code": "FAvatar({required ImageProvider<Object> image, FAvatarStyle Function(FAvatarStyle)? style, double size = 40.0, String? semanticsLabel, Widget? fallback, Key? key})",
-      "links": [],
+      "code": "FAvatar({\n  required ImageProvider<Object> image,\n  FAvatarStyle Function(FAvatarStyle)? style,\n  double size = 40.0,\n  String? semanticsLabel,\n  Widget? fallback,\n  Key? key,\n})\n",
+      "links": [
+        {
+          "offset": 52,
+          "length": 12,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.avatar/FAvatarStyle-class.html"
+        },
+        {
+          "offset": 74,
+          "length": 12,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.avatar/FAvatarStyle-class.html"
+        }
+      ],
       "container": {
         "name": "FAvatar",
         "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.avatar/FAvatar-class.html"
@@ -104,8 +126,19 @@
     {
       "offset": 250,
       "length": 7,
-      "code": "FAvatar({required ImageProvider<Object> image, FAvatarStyle Function(FAvatarStyle)? style, double size = 40.0, String? semanticsLabel, Widget? fallback, Key? key})",
-      "links": [],
+      "code": "FAvatar({\n  required ImageProvider<Object> image,\n  FAvatarStyle Function(FAvatarStyle)? style,\n  double size = 40.0,\n  String? semanticsLabel,\n  Widget? fallback,\n  Key? key,\n})\n",
+      "links": [
+        {
+          "offset": 52,
+          "length": 12,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.avatar/FAvatarStyle-class.html"
+        },
+        {
+          "offset": 74,
+          "length": 12,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.avatar/FAvatarStyle-class.html"
+        }
+      ],
       "container": {
         "name": "FAvatar",
         "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.avatar/FAvatar-class.html"

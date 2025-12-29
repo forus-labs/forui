@@ -29,8 +29,39 @@
     {
       "offset": 38,
       "length": 16,
-      "code": "FDateField.input({FDateFieldControl control, FDateFieldStyle Function(FDateFieldStyle)? style, bool autofocus, FocusNode? focusNode, Widget Function(BuildContext, FDateFieldStyle, Set<WidgetState>, Widget) builder, Widget Function(BuildContext, FDateFieldStyle, Set<WidgetState>)? prefixBuilder, Widget Function(BuildContext, FDateFieldStyle, Set<WidgetState>)? suffixBuilder, TextInputAction? textInputAction, TextAlign textAlign, TextAlignVertical? textAlignVertical, TextDirection? textDirection, bool expands, void Function()? onEditingComplete, void Function(DateTime)? onSubmit, MouseCursor? mouseCursor, bool canRequestFocus, bool clearable, int baselineInputYear, Widget? label, Widget? description, bool enabled, void Function(DateTime?)? onSaved, void Function()? onReset, AutovalidateMode autovalidateMode, String? forceErrorText, Widget Function(BuildContext, String) errorBuilder, Key? key})",
-      "links": [],
+      "code": "FDateField.input({\n  FDateFieldControl control,\n  FDateFieldStyle Function(FDateFieldStyle)? style,\n  bool autofocus,\n  FocusNode? focusNode,\n  Widget Function(BuildContext, FDateFieldStyle, Set<WidgetState>, Widget)\n  builder,\n  Widget Function(BuildContext, FDateFieldStyle, Set<WidgetState>)?\n  prefixBuilder,\n  Widget Function(BuildContext, FDateFieldStyle, Set<WidgetState>)?\n  suffixBuilder,\n  TextInputAction? textInputAction,\n  TextAlign textAlign,\n  TextAlignVertical? textAlignVertical,\n  TextDirection? textDirection,\n  bool expands,\n  void Function()? onEditingComplete,\n  void Function(DateTime)? onSubmit,\n  MouseCursor? mouseCursor,\n  bool canRequestFocus,\n  bool clearable,\n  int baselineInputYear,\n  Widget? label,\n  Widget? description,\n  bool enabled,\n  void Function(DateTime?)? onSaved,\n  void Function()? onReset,\n  AutovalidateMode autovalidateMode,\n  String? forceErrorText,\n  Widget Function(BuildContext, String) errorBuilder,\n  Key? key,\n})\n",
+      "links": [
+        {
+          "offset": 21,
+          "length": 17,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateFieldControl-class.html"
+        },
+        {
+          "offset": 50,
+          "length": 15,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateFieldStyle-class.html"
+        },
+        {
+          "offset": 75,
+          "length": 15,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateFieldStyle-class.html"
+        },
+        {
+          "offset": 174,
+          "length": 15,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateFieldStyle-class.html"
+        },
+        {
+          "offset": 260,
+          "length": 15,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateFieldStyle-class.html"
+        },
+        {
+          "offset": 345,
+          "length": 15,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateFieldStyle-class.html"
+        }
+      ],
       "container": {
         "name": "FDateField",
         "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateField-class.html"

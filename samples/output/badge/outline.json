@@ -39,8 +39,19 @@
     {
       "offset": 32,
       "length": 6,
-      "code": "FBadge({required Widget child, FBaseBadgeStyle Function(FBadgeStyle) style = _primary, Key? key})",
-      "links": [],
+      "code": "FBadge({\n  required Widget child,\n  FBaseBadgeStyle Function(FBadgeStyle) style = _primary,\n  Key? key,\n})\n",
+      "links": [
+        {
+          "offset": 36,
+          "length": 15,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.badge/FBaseBadgeStyle-class.html"
+        },
+        {
+          "offset": 61,
+          "length": 11,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.badge/FBadgeStyle-class.html"
+        }
+      ],
       "container": {
         "name": "FBadge",
         "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.badge/FBadge-class.html"
@@ -51,14 +62,46 @@
       "offset": 42,
       "length": 6,
       "code": "{FBaseBadgeStyle Function(FBadgeStyle) style = _primary}",
-      "links": [],
+      "links": [
+        {
+          "offset": 1,
+          "length": 15,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.badge/FBaseBadgeStyle-class.html"
+        },
+        {
+          "offset": 26,
+          "length": 11,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.badge/FBadgeStyle-class.html"
+        }
+      ],
       "documentation": ""
     },
     {
       "offset": 61,
       "length": 7,
-      "code": "FBaseBadgeStyle Function(FBadgeStyle) outline([FBadgeStyle Function(FBadgeStyle)? style])",
-      "links": [],
+      "code": "FBaseBadgeStyle Function(FBadgeStyle) outline([\n  FBadgeStyle Function(FBadgeStyle)? style,\n])",
+      "links": [
+        {
+          "offset": 0,
+          "length": 15,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.badge/FBaseBadgeStyle-class.html"
+        },
+        {
+          "offset": 25,
+          "length": 11,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.badge/FBadgeStyle-class.html"
+        },
+        {
+          "offset": 50,
+          "length": 11,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.badge/FBadgeStyle-class.html"
+        },
+        {
+          "offset": 71,
+          "length": 11,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.badge/FBadgeStyle-class.html"
+        }
+      ],
       "documentation": ""
     },
     {

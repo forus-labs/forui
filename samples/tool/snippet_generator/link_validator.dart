@@ -18,6 +18,13 @@ Future<void> main() async {
         urls.add(url);
       }
     }
+    for (final tooltip in content['tooltips'] as List<dynamic>? ?? []) {
+      for (final link in tooltip['links'] as List<dynamic>? ?? []) {
+        if (link['url'] case final String url) {
+          urls.add(url);
+        }
+      }
+    }
   }
 
   print('Found ${urls.length} unique URLs to validate...\n');

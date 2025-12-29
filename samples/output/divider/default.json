@@ -39,8 +39,19 @@
     {
       "offset": 449,
       "length": 8,
-      "code": "FDivider({FDividerStyle Function(FDividerStyle)? style, Axis axis = .horizontal, Key? key})",
-      "links": [],
+      "code": "FDivider({\n  FDividerStyle Function(FDividerStyle)? style,\n  Axis axis = .horizontal,\n  Key? key,\n})\n",
+      "links": [
+        {
+          "offset": 13,
+          "length": 13,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.divider/FDividerStyle-class.html"
+        },
+        {
+          "offset": 36,
+          "length": 13,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.divider/FDividerStyle-class.html"
+        }
+      ],
       "container": {
         "name": "FDivider",
         "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.divider/FDivider-class.html"
@@ -50,8 +61,19 @@
     {
       "offset": 702,
       "length": 8,
-      "code": "FDivider({FDividerStyle Function(FDividerStyle)? style, Axis axis = .horizontal, Key? key})",
-      "links": [],
+      "code": "FDivider({\n  FDividerStyle Function(FDividerStyle)? style,\n  Axis axis = .horizontal,\n  Key? key,\n})\n",
+      "links": [
+        {
+          "offset": 13,
+          "length": 13,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.divider/FDividerStyle-class.html"
+        },
+        {
+          "offset": 36,
+          "length": 13,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.divider/FDividerStyle-class.html"
+        }
+      ],
       "container": {
         "name": "FDivider",
         "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.divider/FDivider-class.html"
@@ -68,8 +90,19 @@
     {
       "offset": 824,
       "length": 8,
-      "code": "FDivider({FDividerStyle Function(FDividerStyle)? style, Axis axis = .horizontal, Key? key})",
-      "links": [],
+      "code": "FDivider({\n  FDividerStyle Function(FDividerStyle)? style,\n  Axis axis = .horizontal,\n  Key? key,\n})\n",
+      "links": [
+        {
+          "offset": 13,
+          "length": 13,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.divider/FDividerStyle-class.html"
+        },
+        {
+          "offset": 36,
+          "length": 13,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.divider/FDividerStyle-class.html"
+        }
+      ],
       "container": {
         "name": "FDivider",
         "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.divider/FDivider-class.html"

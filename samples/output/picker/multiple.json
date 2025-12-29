@@ -59,8 +59,29 @@
     {
       "offset": 38,
       "length": 7,
-      "code": "FPicker({required List<Widget> children, FPickerControl control = const .managed(), FPickerStyle Function(FPickerStyle)? style, Key? key})",
-      "links": [],
+      "code": "FPicker({\n  required List<Widget> children,\n  FPickerControl control = const .managed(),\n  FPickerStyle Function(FPickerStyle)? style,\n  Key? key,\n})\n",
+      "links": [
+        {
+          "offset": 46,
+          "length": 14,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.picker/FPickerControl-class.html"
+        },
+        {
+          "offset": 78,
+          "length": 7,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.picker/FPickerControl/FPickerControl.managed.html"
+        },
+        {
+          "offset": 91,
+          "length": 12,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.picker/FPickerStyle-class.html"
+        },
+        {
+          "offset": 113,
+          "length": 12,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.picker/FPickerStyle-class.html"
+        }
+      ],
       "container": {
         "name": "FPicker",
         "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.picker/FPicker-class.html"
@@ -77,7 +98,7 @@
     {
       "offset": 71,
       "length": 12,
-      "code": "FPickerWheel({required List<Widget> children, bool loop, int flex, double? itemExtent, bool autofocus, FocusNode? focusNode, void Function(bool)? onFocusChange, Key? key})",
+      "code": "FPickerWheel({\n  required List<Widget> children,\n  bool loop,\n  int flex,\n  double? itemExtent,\n  bool autofocus,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  Key? key,\n})\n",
       "links": [],
       "container": {
         "name": "FPickerWheel",
@@ -109,7 +130,7 @@
     {
       "offset": 446,
       "length": 20,
-      "code": "FPickerWheel.builder({required Widget Function(BuildContext, int) builder, int flex, double? itemExtent, bool autofocus, FocusNode? focusNode, void Function(bool)? onFocusChange, Key? key})",
+      "code": "FPickerWheel.builder({\n  required Widget Function(BuildContext, int) builder,\n  int flex,\n  double? itemExtent,\n  bool autofocus,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  Key? key,\n})\n",
       "links": [],
       "container": {
         "name": "FPickerWheel",

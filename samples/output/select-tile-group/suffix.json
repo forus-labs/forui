@@ -87,10 +87,41 @@
     {
       "offset": 311,
       "length": 24,
-      "code": "FSelectTileGroup<String>({required List<FSelectTile<String>> children, FMultiValueControl<String>? control, ScrollController? scrollController, FTileGroupStyle? style, double? cacheExtent, double maxHeight = .infinity, DragStartBehavior dragStartBehavior = .start, ScrollPhysics physics = const ClampingScrollPhysics(), FItemDivider divider = .indented, Widget? label, Widget? description, String? semanticsLabel, Widget Function(BuildContext, String) errorBuilder = FFormFieldProperties.defaultErrorBuilder, void Function(Set<String>?)? onSaved, void Function()? onReset, String? Function(Set<String>?)? validator, String? forceErrorText, bool enabled = true, AutovalidateMode autovalidateMode = .disabled, Key? key})",
-      "links": [],
+      "code": "FSelectTileGroup({\n  required List<FSelectTile<String>> children,\n  FMultiValueControl<String>? control,\n  ScrollController? scrollController,\n  FTileGroupStyle? style,\n  double? cacheExtent,\n  double maxHeight = .infinity,\n  DragStartBehavior dragStartBehavior = .start,\n  ScrollPhysics physics = const ClampingScrollPhysics(),\n  FItemDivider divider = .indented,\n  Widget? label,\n  Widget? description,\n  String? semanticsLabel,\n  Widget Function(BuildContext, String) errorBuilder =\n      FFormFieldProperties.defaultErrorBuilder,\n  void Function(Set<String>?)? onSaved,\n  void Function()? onReset,\n  String? Function(Set<String>?)? validator,\n  String? forceErrorText,\n  bool enabled = true,\n  AutovalidateMode autovalidateMode = .disabled,\n  Key? key,\n})\n",
+      "links": [
+        {
+          "offset": 35,
+          "length": 19,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile-class.html"
+        },
+        {
+          "offset": 68,
+          "length": 27,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl-class.html"
+        },
+        {
+          "offset": 145,
+          "length": 16,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileGroupStyle-class.html"
+        },
+        {
+          "offset": 331,
+          "length": 12,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemDivider.html"
+        },
+        {
+          "offset": 355,
+          "length": 8,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemDivider.html#indented"
+        },
+        {
+          "offset": 492,
+          "length": 40,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FFormFieldProperties/defaultErrorBuilder.html"
+        }
+      ],
       "container": {
-        "name": "FSelectTileGroup<String>",
+        "name": "FSelectTileGroup",
         "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTileGroup-class.html"
       },
       "documentation": ""
@@ -99,14 +130,26 @@
       "offset": 341,
       "length": 8,
       "code": "{FMultiValueControl<String>? control}",
-      "links": [],
+      "links": [
+        {
+          "offset": 1,
+          "length": 27,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl-class.html"
+        }
+      ],
       "documentation": ""
     },
     {
       "offset": 357,
       "length": 12,
-      "code": "FMultiValueControl<String>.managedRadio({FMultiValueNotifier<String>? controller, String? initial, void Function(Set<String>)? onChange})",
-      "links": [],
+      "code": "FMultiValueControl.managedRadio({\n  FMultiValueNotifier<String>? controller,\n  String? initial,\n  void Function(Set<String>)? onChange,\n})\n",
+      "links": [
+        {
+          "offset": 36,
+          "length": 28,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueNotifier-class.html"
+        }
+      ],
       "container": {
         "name": "FMultiValueControl",
         "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl-class.html"
@@ -124,16 +167,48 @@
       "offset": 412,
       "length": 9,
       "code": "{required List<FSelectTile<String>> children}",
-      "links": [],
+      "links": [
+        {
+          "offset": 15,
+          "length": 19,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile-class.html"
+        }
+      ],
       "documentation": ""
     },
     {
       "offset": 436,
       "length": 18,
-      "code": "FSelectTile<String>.suffix({required Widget title, required String value, FItemStyle Function(FItemStyle)? style, Widget? checkedIcon = const Icon(FIcons.check), Widget? uncheckedIcon = const Icon(FIcons.check, color: Colors.transparent), Widget? subtitle, Widget? details, String? semanticsLabel, bool? enabled, bool autofocus = false, FocusNode? focusNode, void Function(bool)? onFocusChange, void Function(bool)? onHoverChange, void Function(FWidgetStatesDelta)? onStatesChange, Map<ShortcutActivator, Intent>? shortcuts, Map<Type, Action<Intent>>? actions, Widget? prefix, Key? key})",
-      "links": [],
+      "code": "FSelectTile.suffix({\n  required Widget title,\n  required String value,\n  FItemStyle Function(FItemStyle)? style,\n  Widget? checkedIcon = const Icon(FIcons.check),\n  Widget? uncheckedIcon = const Icon(FIcons.check, color: Colors.transparent),\n  Widget? subtitle,\n  Widget? details,\n  String? semanticsLabel,\n  bool? enabled,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  void Function(bool)? onHoverChange,\n  void Function(FWidgetStatesDelta)? onStatesChange,\n  Map<ShortcutActivator, Intent>? shortcuts,\n  Map<Type, Action<Intent>>? actions,\n  Widget? prefix,\n  Key? key,\n})\n",
+      "links": [
+        {
+          "offset": 73,
+          "length": 10,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemStyle-class.html"
+        },
+        {
+          "offset": 93,
+          "length": 10,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemStyle-class.html"
+        },
+        {
+          "offset": 148,
+          "length": 12,
+          "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/check-constant.html"
+        },
+        {
+          "offset": 200,
+          "length": 12,
+          "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/check-constant.html"
+        },
+        {
+          "offset": 466,
+          "length": 18,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStatesDelta-class.html"
+        }
+      ],
       "container": {
-        "name": "FSelectTile<String>",
+        "name": "FSelectTile",
         "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile-class.html"
       },
       "documentation": ""
@@ -173,10 +248,36 @@
     {
       "offset": 563,
       "length": 18,
-      "code": "FSelectTile<String>.suffix({required Widget title, required String value, FItemStyle Function(FItemStyle)? style, Widget? checkedIcon = const Icon(FIcons.check), Widget? uncheckedIcon = const Icon(FIcons.check, color: Colors.transparent), Widget? subtitle, Widget? details, String? semanticsLabel, bool? enabled, bool autofocus = false, FocusNode? focusNode, void Function(bool)? onFocusChange, void Function(bool)? onHoverChange, void Function(FWidgetStatesDelta)? onStatesChange, Map<ShortcutActivator, Intent>? shortcuts, Map<Type, Action<Intent>>? actions, Widget? prefix, Key? key})",
-      "links": [],
+      "code": "FSelectTile.suffix({\n  required Widget title,\n  required String value,\n  FItemStyle Function(FItemStyle)? style,\n  Widget? checkedIcon = const Icon(FIcons.check),\n  Widget? uncheckedIcon = const Icon(FIcons.check, color: Colors.transparent),\n  Widget? subtitle,\n  Widget? details,\n  String? semanticsLabel,\n  bool? enabled,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  void Function(bool)? onHoverChange,\n  void Function(FWidgetStatesDelta)? onStatesChange,\n  Map<ShortcutActivator, Intent>? shortcuts,\n  Map<Type, Action<Intent>>? actions,\n  Widget? prefix,\n  Key? key,\n})\n",
+      "links": [
+        {
+          "offset": 73,
+          "length": 10,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemStyle-class.html"
+        },
+        {
+          "offset": 93,
+          "length": 10,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemStyle-class.html"
+        },
+        {
+          "offset": 148,
+          "length": 12,
+          "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/check-constant.html"
+        },
+        {
+          "offset": 200,
+          "length": 12,
+          "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/check-constant.html"
+        },
+        {
+          "offset": 466,
+          "length": 18,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStatesDelta-class.html"
+        }
+      ],
       "container": {
-        "name": "FSelectTile<String>",
+        "name": "FSelectTile",
         "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile-class.html"
       },
       "documentation": ""

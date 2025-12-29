@@ -34,8 +34,19 @@
     {
       "offset": 32,
       "length": 5,
-      "code": "FCard({Widget? image, Widget? title, Widget? subtitle, Widget? child, MainAxisSize mainAxisSize = .min, FCardStyle Function(FCardStyle)? style, Key? key})",
-      "links": [],
+      "code": "FCard({\n  Widget? image,\n  Widget? title,\n  Widget? subtitle,\n  Widget? child,\n  MainAxisSize mainAxisSize = .min,\n  FCardStyle Function(FCardStyle)? style,\n  Key? key,\n})\n",
+      "links": [
+        {
+          "offset": 117,
+          "length": 10,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.card/FCardStyle-class.html"
+        },
+        {
+          "offset": 137,
+          "length": 10,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.card/FCardStyle-class.html"
+        }
+      ],
       "container": {
         "name": "FCard",
         "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.card/FCard-class.html"

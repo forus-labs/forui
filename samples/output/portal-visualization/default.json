@@ -43,7 +43,7 @@
     {
       "offset": 674,
       "length": 14,
-      "code": "FPortalSpacing(double spacing, {bool diagonal})",
+      "code": "FPortalSpacing(double spacing, {bool diagonal})\n",
       "links": [],
       "container": {
         "name": "FPortalSpacing",

@@ -134,8 +134,129 @@
     {
       "offset": 32,
       "length": 21,
-      "code": "FAutocomplete.builder({required FutureOr<Iterable<String>> Function(String) filter, required List<FAutocompleteItemMixin> Function(BuildContext, String, Iterable<String>) contentBuilder, FAutocompleteControl control = const .managed(), FPopoverControl popoverControl = const .managed(), FAutocompleteStyle Function(FAutocompleteStyle)? style, Widget? label, String? hint, Widget? description, TextMagnifierConfiguration? magnifierConfiguration, Object groupId = EditableText, FocusNode? focusNode, TextInputType? keyboardType, TextInputAction? textInputAction, TextCapitalization textCapitalization = .none, TextAlign textAlign = .start, TextAlignVertical? textAlignVertical, TextDirection? textDirection, void Function()? contentOnTapHide, bool autofocus = false, WidgetStatesController? statesController, String obscuringCharacter = '•', bool obscureText = false, bool autocorrect = true, SmartDashesType? smartDashesType, SmartQuotesType? smartQuotesType, bool enableSuggestions = true, int? minLines, int? maxLines = 1, bool expands = false, bool readOnly = false, bool? showCursor, int? maxLength, MaxLengthEnforcement? maxLengthEnforcement, bool onTapAlwaysCalled = false, void Function()? onEditingComplete, void Function(String)? onSubmit, void Function(String, Map<String, dynamic>)? onAppPrivateCommand, List<TextInputFormatter>? inputFormatters, bool enabled = true, bool? ignorePointers, bool enableInteractiveSelection = true, TextSelectionControls? selectionControls, DragStartBehavior dragStartBehavior = .start, MouseCursor? mouseCursor, Widget? Function(BuildContext, int, int?, bool)? counterBuilder, ScrollPhysics? scrollPhysics, ScrollController? scrollController, Iterable<String>? autofillHints, String? restorationId, bool stylusHandwritingEnabled = true, bool enableIMEPersonalizedLearning = true, ContentInsertionConfiguration? contentInsertionConfiguration, Widget Function(BuildContext, EditableTextState)? contextMenuBuilder, bool canRequestFocus = true, UndoHistoryController? undoController, SpellCheckConfiguration? spellCheckConfiguration, Widget Function(BuildContext, FAutocompleteStyle, Set<WidgetState>)? prefixBuilder, Widget Function(BuildContext, FAutocompleteStyle, Set<WidgetState>)? suffixBuilder, bool Function(TextEditingValue) clearable = _clearable, void Function(String?)? onSaved, void Function()? onReset, String? Function(String?)? validator, AutovalidateMode autovalidateMode = .disabled, String? forceErrorText, Widget Function(BuildContext, String) errorBuilder = FFormFieldProperties.defaultErrorBuilder, AlignmentGeometry contentAnchor = AlignmentDirectional.topStart, AlignmentGeometry fieldAnchor = AlignmentDirectional.bottomStart, FPortalConstraints contentConstraints = const FAutoWidthPortalConstraints(maxHeight: 300), FPortalSpacing contentSpacing = const .spacing(4), FPortalOverflow contentOverflow = .flip, Offset contentOffset = .zero, FPopoverHideRegion contentHideRegion = .excludeChild, Object? contentGroupId, bool autoHide = true, Widget Function(BuildContext, FAutocompleteStyle, Set<WidgetState>, Widget) builder = _builder, bool rightArrowToComplete = false, ScrollController? contentScrollController, ScrollPhysics contentPhysics = const ClampingScrollPhysics(), FItemDivider contentDivider = .none, Widget Function(BuildContext, FAutocompleteContentStyle) contentEmptyBuilder = defaultContentEmptyBuilder, Widget Function(BuildContext, FAutocompleteContentStyle) contentLoadingBuilder = defaultContentLoadingBuilder, Widget Function(BuildContext, Object?, StackTrace)? contentErrorBuilder, Key? key})",
-      "links": [],
+      "code": "FAutocomplete.builder({\n  required FutureOr<Iterable<String>> Function(String) filter,\n  required List<FAutocompleteItemMixin> Function(\n    BuildContext,\n    String,\n    Iterable<String>,\n  )\n  contentBuilder,\n  FAutocompleteControl control = const .managed(),\n  FPopoverControl popoverControl = const .managed(),\n  FAutocompleteStyle Function(FAutocompleteStyle)? style,\n  Widget? label,\n  String? hint,\n  Widget? description,\n  TextMagnifierConfiguration? magnifierConfiguration,\n  Object groupId = EditableText,\n  FocusNode? focusNode,\n  TextInputType? keyboardType,\n  TextInputAction? textInputAction,\n  TextCapitalization textCapitalization = .none,\n  TextAlign textAlign = .start,\n  TextAlignVertical? textAlignVertical,\n  TextDirection? textDirection,\n  void Function()? contentOnTapHide,\n  bool autofocus = false,\n  WidgetStatesController? statesController,\n  String obscuringCharacter = '•',\n  bool obscureText = false,\n  bool autocorrect = true,\n  SmartDashesType? smartDashesType,\n  SmartQuotesType? smartQuotesType,\n  bool enableSuggestions = true,\n  int? minLines,\n  int? maxLines = 1,\n  bool expands = false,\n  bool readOnly = false,\n  bool? showCursor,\n  int? maxLength,\n  MaxLengthEnforcement? maxLengthEnforcement,\n  bool onTapAlwaysCalled = false,\n  void Function()? onEditingComplete,\n  void Function(String)? onSubmit,\n  void Function(String, Map<String, dynamic>)? onAppPrivateCommand,\n  List<TextInputFormatter>? inputFormatters,\n  bool enabled = true,\n  bool? ignorePointers,\n  bool enableInteractiveSelection = true,\n  TextSelectionControls? selectionControls,\n  DragStartBehavior dragStartBehavior = .start,\n  MouseCursor? mouseCursor,\n  Widget? Function(BuildContext, int, int?, bool)? counterBuilder,\n  ScrollPhysics? scrollPhysics,\n  ScrollController? scrollController,\n  Iterable<String>? autofillHints,\n  String? restorationId,\n  bool stylusHandwritingEnabled = true,\n  bool enableIMEPersonalizedLearning = true,\n  ContentInsertionConfiguration? contentInsertionConfiguration,\n  Widget Function(BuildContext, EditableTextState)? contextMenuBuilder,\n  bool canRequestFocus = true,\n  UndoHistoryController? undoController,\n  SpellCheckConfiguration? spellCheckConfiguration,\n  Widget Function(BuildContext, FAutocompleteStyle, Set<WidgetState>)?\n  prefixBuilder,\n  Widget Function(BuildContext, FAutocompleteStyle, Set<WidgetState>)?\n  suffixBuilder,\n  bool Function(TextEditingValue) clearable = _clearable,\n  void Function(String?)? onSaved,\n  void Function()? onReset,\n  String? Function(String?)? validator,\n  AutovalidateMode autovalidateMode = .disabled,\n  String? forceErrorText,\n  Widget Function(BuildContext, String) errorBuilder =\n      FFormFieldProperties.defaultErrorBuilder,\n  AlignmentGeometry contentAnchor = AlignmentDirectional.topStart,\n  AlignmentGeometry fieldAnchor = AlignmentDirectional.bottomStart,\n  FPortalConstraints contentConstraints = const FAutoWidthPortalConstraints(\n    maxHeight: 300,\n  ),\n  FPortalSpacing contentSpacing = const .spacing(4),\n  FPortalOverflow contentOverflow = .flip,\n  Offset contentOffset = .zero,\n  FPopoverHideRegion contentHideRegion = .excludeChild,\n  Object? contentGroupId,\n  bool autoHide = true,\n  Widget Function(BuildContext, FAutocompleteStyle, Set<WidgetState>, Widget)\n      builder =\n      _builder,\n  bool rightArrowToComplete = false,\n  ScrollController? contentScrollController,\n  ScrollPhysics contentPhysics = const ClampingScrollPhysics(),\n  FItemDivider contentDivider = .none,\n  Widget Function(BuildContext, FAutocompleteContentStyle)\n      contentEmptyBuilder =\n      defaultContentEmptyBuilder,\n  Widget Function(BuildContext, FAutocompleteContentStyle)\n      contentLoadingBuilder =\n      defaultContentLoadingBuilder,\n  Widget Function(BuildContext, Object?, StackTrace)? contentErrorBuilder,\n  Key? key,\n})\n",
+      "links": [
+        {
+          "offset": 103,
+          "length": 22,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocompleteItemMixin-mixin.html"
+        },
+        {
+          "offset": 213,
+          "length": 20,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocompleteControl-class.html"
+        },
+        {
+          "offset": 251,
+          "length": 7,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocompleteControl/FAutocompleteControl.managed.html"
+        },
+        {
+          "offset": 264,
+          "length": 15,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverControl-class.html"
+        },
+        {
+          "offset": 304,
+          "length": 7,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverControl/FPopoverControl.managed.html"
+        },
+        {
+          "offset": 317,
+          "length": 18,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocompleteStyle-class.html"
+        },
+        {
+          "offset": 345,
+          "length": 18,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocompleteStyle-class.html"
+        },
+        {
+          "offset": 2236,
+          "length": 18,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocompleteStyle-class.html"
+        },
+        {
+          "offset": 2324,
+          "length": 18,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocompleteStyle-class.html"
+        },
+        {
+          "offset": 2677,
+          "length": 40,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FFormFieldProperties/defaultErrorBuilder.html"
+        },
+        {
+          "offset": 2856,
+          "length": 18,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FPortalConstraints-class.html"
+        },
+        {
+          "offset": 2902,
+          "length": 27,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FAutoWidthPortalConstraints/FAutoWidthPortalConstraints.html"
+        },
+        {
+          "offset": 2935,
+          "length": 9,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FAutoWidthPortalConstraints/maxHeight.html"
+        },
+        {
+          "offset": 2958,
+          "length": 14,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FPortalSpacing-class.html"
+        },
+        {
+          "offset": 2997,
+          "length": 7,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FPortalSpacing/FPortalSpacing.spacing.html"
+        },
+        {
+          "offset": 3011,
+          "length": 15,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FPortalOverflow-class.html"
+        },
+        {
+          "offset": 3046,
+          "length": 4,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FPortalOverflow/flip-constant.html"
+        },
+        {
+          "offset": 3086,
+          "length": 18,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverHideRegion.html"
+        },
+        {
+          "offset": 3126,
+          "length": 12,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverHideRegion.html#excludeChild"
+        },
+        {
+          "offset": 3222,
+          "length": 18,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocompleteStyle-class.html"
+        },
+        {
+          "offset": 3448,
+          "length": 12,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemDivider.html"
+        },
+        {
+          "offset": 3479,
+          "length": 4,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemDivider.html#none"
+        },
+        {
+          "offset": 3517,
+          "length": 25,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocompleteContentStyle-class.html"
+        },
+        {
+          "offset": 3638,
+          "length": 25,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocompleteContentStyle-class.html"
+        }
+      ],
       "container": {
         "name": "FAutocomplete",
         "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete-class.html"
@@ -173,8 +294,14 @@
     {
       "offset": 219,
       "length": 15,
-      "code": "{required List<FAutocompleteItemMixin> Function(BuildContext, String, Iterable<String>) contentBuilder}",
-      "links": [],
+      "code": "{\n  required List<FAutocompleteItemMixin> Function(\n    BuildContext,\n    String,\n    Iterable<String>,\n  )\n  contentBuilder,\n}",
+      "links": [
+        {
+          "offset": 18,
+          "length": 22,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocompleteItemMixin-mixin.html"
+        }
+      ],
       "documentation": ""
     },
     {
@@ -201,11 +328,27 @@
     {
       "offset": 358,
       "length": 4,
-      "code": "FAutocompleteItem item({required String value, FItemStyle Function(FItemStyle)? style, bool? enabled, Widget? prefix, Widget? title, Widget? subtitle, Widget? suffix, Key? key})",
-      "links": [],
+      "code": "FAutocompleteItem item({\n  required String value,\n  FItemStyle Function(FItemStyle)? style,\n  bool? enabled,\n  Widget? prefix,\n  Widget? title,\n  Widget? subtitle,\n  Widget? suffix,\n  Key? key,\n})",
+      "links": [
+        {
+          "offset": 0,
+          "length": 17,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocompleteItem-class.html"
+        },
+        {
+          "offset": 52,
+          "length": 10,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemStyle-class.html"
+        },
+        {
+          "offset": 72,
+          "length": 10,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemStyle-class.html"
+        }
+      ],
       "container": {
-        "name": "FAutocompleteItemMixin",
-        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocompleteItemMixin-mixin.html"
+        "name": "FAutocompleteItem",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocompleteItem-class.html"
       },
       "documentation": ""
     },
@@ -251,11 +394,27 @@
     {
       "offset": 568,
       "length": 4,
-      "code": "FAutocompleteItem item({required String value, FItemStyle Function(FItemStyle)? style, bool? enabled, Widget? prefix, Widget? title, Widget? subtitle, Widget? suffix, Key? key})",
-      "links": [],
+      "code": "FAutocompleteItem item({\n  required String value,\n  FItemStyle Function(FItemStyle)? style,\n  bool? enabled,\n  Widget? prefix,\n  Widget? title,\n  Widget? subtitle,\n  Widget? suffix,\n  Key? key,\n})",
+      "links": [
+        {
+          "offset": 0,
+          "length": 17,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocompleteItem-class.html"
+        },
+        {
+          "offset": 52,
+          "length": 10,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemStyle-class.html"
+        },
+        {
+          "offset": 72,
+          "length": 10,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemStyle-class.html"
+        }
+      ],
       "container": {
-        "name": "FAutocompleteItemMixin",
-        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocompleteItemMixin-mixin.html"
+        "name": "FAutocompleteItem",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocompleteItem-class.html"
       },
       "documentation": ""
     },
@@ -301,11 +460,27 @@
     {
       "offset": 793,
       "length": 4,
-      "code": "FAutocompleteItem item({required String value, FItemStyle Function(FItemStyle)? style, bool? enabled, Widget? prefix, Widget? title, Widget? subtitle, Widget? suffix, Key? key})",
-      "links": [],
+      "code": "FAutocompleteItem item({\n  required String value,\n  FItemStyle Function(FItemStyle)? style,\n  bool? enabled,\n  Widget? prefix,\n  Widget? title,\n  Widget? subtitle,\n  Widget? suffix,\n  Key? key,\n})",
+      "links": [
+        {
+          "offset": 0,
+          "length": 17,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocompleteItem-class.html"
+        },
+        {
+          "offset": 52,
+          "length": 10,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemStyle-class.html"
+        },
+        {
+          "offset": 72,
+          "length": 10,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemStyle-class.html"
+        }
+      ],
       "container": {
-        "name": "FAutocompleteItemMixin",
-        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocompleteItemMixin-mixin.html"
+        "name": "FAutocompleteItem",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocompleteItem-class.html"
       },
       "documentation": ""
     },
@@ -351,11 +526,27 @@
     {
       "offset": 1021,
       "length": 4,
-      "code": "FAutocompleteItem item({required String value, FItemStyle Function(FItemStyle)? style, bool? enabled, Widget? prefix, Widget? title, Widget? subtitle, Widget? suffix, Key? key})",
-      "links": [],
+      "code": "FAutocompleteItem item({\n  required String value,\n  FItemStyle Function(FItemStyle)? style,\n  bool? enabled,\n  Widget? prefix,\n  Widget? title,\n  Widget? subtitle,\n  Widget? suffix,\n  Key? key,\n})",
+      "links": [
+        {
+          "offset": 0,
+          "length": 17,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocompleteItem-class.html"
+        },
+        {
+          "offset": 52,
+          "length": 10,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemStyle-class.html"
+        },
+        {
+          "offset": 72,
+          "length": 10,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemStyle-class.html"
+        }
+      ],
       "container": {
-        "name": "FAutocompleteItemMixin",
-        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocompleteItemMixin-mixin.html"
+        "name": "FAutocompleteItem",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocompleteItem-class.html"
       },
       "documentation": ""
     },

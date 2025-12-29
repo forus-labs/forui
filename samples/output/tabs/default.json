@@ -174,8 +174,34 @@
     {
       "offset": 141,
       "length": 5,
-      "code": "FTabs({required List<FTabEntry> children, FTabControl control = const .managed(), bool scrollable = false, ScrollPhysics? physics, FTabsStyle Function(FTabsStyle)? style, void Function(int)? onPress, MouseCursor mouseCursor = .defer, Key? key})",
-      "links": [],
+      "code": "FTabs({\n  required List<FTabEntry> children,\n  FTabControl control = const .managed(),\n  bool scrollable = false,\n  ScrollPhysics? physics,\n  FTabsStyle Function(FTabsStyle)? style,\n  void Function(int)? onPress,\n  MouseCursor mouseCursor = .defer,\n  Key? key,\n})\n",
+      "links": [
+        {
+          "offset": 24,
+          "length": 9,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tabs/FTabEntry-class.html"
+        },
+        {
+          "offset": 47,
+          "length": 11,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tabs/FTabControl-class.html"
+        },
+        {
+          "offset": 76,
+          "length": 7,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tabs/FTabControl/FTabControl.managed.html"
+        },
+        {
+          "offset": 142,
+          "length": 10,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tabs/FTabsStyle-class.html"
+        },
+        {
+          "offset": 162,
+          "length": 10,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tabs/FTabsStyle-class.html"
+        }
+      ],
       "container": {
         "name": "FTabs",
         "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tabs/FTabs-class.html"
@@ -186,13 +212,19 @@
       "offset": 156,
       "length": 9,
       "code": "{required List<FTabEntry> children}",
-      "links": [],
+      "links": [
+        {
+          "offset": 15,
+          "length": 9,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tabs/FTabEntry-class.html"
+        }
+      ],
       "documentation": ""
     },
     {
       "offset": 179,
       "length": 5,
-      "code": "FTabEntry.entry({required Widget label, required Widget child})",
+      "code": "FTabEntry.entry({required Widget label, required Widget child})\n",
       "links": [],
       "container": {
         "name": "FTabEntry",
@@ -217,8 +249,19 @@
     {
       "offset": 247,
       "length": 5,
-      "code": "FCard({Widget? image, Widget? title, Widget? subtitle, Widget? child, MainAxisSize mainAxisSize = .min, FCardStyle Function(FCardStyle)? style, Key? key})",
-      "links": [],
+      "code": "FCard({\n  Widget? image,\n  Widget? title,\n  Widget? subtitle,\n  Widget? child,\n  MainAxisSize mainAxisSize = .min,\n  FCardStyle Function(FCardStyle)? style,\n  Key? key,\n})\n",
+      "links": [
+        {
+          "offset": 117,
+          "length": 10,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.card/FCardStyle-class.html"
+        },
+        {
+          "offset": 137,
+          "length": 10,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.card/FCardStyle-class.html"
+        }
+      ],
       "container": {
         "name": "FCard",
         "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.card/FCard-class.html"
@@ -249,8 +292,49 @@
     {
       "offset": 516,
       "length": 10,
-      "code": "FTextField({FTextFieldControl control = const .managed(), FTextFieldStyle Function(FTextFieldStyle)? style, Widget Function(BuildContext, FTextFieldStyle, Set<WidgetState>, Widget) builder = Input.defaultBuilder, Widget? label, String? hint, Widget? description, Widget? error, TextMagnifierConfiguration? magnifierConfiguration, Object groupId = EditableText, FocusNode? focusNode, TextInputType? keyboardType, TextInputAction? textInputAction, TextCapitalization textCapitalization = .none, TextAlign textAlign = .start, TextAlignVertical? textAlignVertical, TextDirection? textDirection, bool autofocus = false, WidgetStatesController? statesController, String obscuringCharacter = '•', bool obscureText = false, bool autocorrect = true, SmartDashesType? smartDashesType, SmartQuotesType? smartQuotesType, bool enableSuggestions = true, int? minLines, int? maxLines = 1, bool expands = false, bool readOnly = false, bool? showCursor, int? maxLength, MaxLengthEnforcement? maxLengthEnforcement, void Function()? onTap, void Function(PointerDownEvent)? onTapOutside, bool onTapAlwaysCalled = false, void Function()? onEditingComplete, void Function(String)? onSubmit, void Function(String, Map<String, dynamic>)? onAppPrivateCommand, List<TextInputFormatter>? inputFormatters, bool enabled = true, bool? ignorePointers, bool enableInteractiveSelection = true, bool? selectAllOnFocus, TextSelectionControls? selectionControls, DragStartBehavior dragStartBehavior = .start, MouseCursor? mouseCursor, Widget? Function(BuildContext, int, int?, bool)? counterBuilder, ScrollPhysics? scrollPhysics, ScrollController? scrollController, Iterable<String>? autofillHints, String? restorationId, bool stylusHandwritingEnabled = true, bool enableIMEPersonalizedLearning = true, ContentInsertionConfiguration? contentInsertionConfiguration, Widget Function(BuildContext, EditableTextState)? contextMenuBuilder = Input.defaultContextMenuBuilder, bool canRequestFocus = true, UndoHistoryController? undoController, SpellCheckConfiguration? spellCheckConfiguration, Widget Function(BuildContext, FTextFieldStyle, Set<WidgetState>)? prefixBuilder, Widget Function(BuildContext, FTextFieldStyle, Set<WidgetState>)? suffixBuilder, bool Function(TextEditingValue) clearable = Input.defaultClearable, Widget Function(BuildContext, FTextFieldStyle, void Function()) clearIconBuilder = Input.defaultClearIconBuilder, Key? key})",
-      "links": [],
+      "code": "FTextField({\n  FTextFieldControl control = const .managed(),\n  FTextFieldStyle Function(FTextFieldStyle)? style,\n  Widget Function(BuildContext, FTextFieldStyle, Set<WidgetState>, Widget)\n      builder =\n      Input.defaultBuilder,\n  Widget? label,\n  String? hint,\n  Widget? description,\n  Widget? error,\n  TextMagnifierConfiguration? magnifierConfiguration,\n  Object groupId = EditableText,\n  FocusNode? focusNode,\n  TextInputType? keyboardType,\n  TextInputAction? textInputAction,\n  TextCapitalization textCapitalization = .none,\n  TextAlign textAlign = .start,\n  TextAlignVertical? textAlignVertical,\n  TextDirection? textDirection,\n  bool autofocus = false,\n  WidgetStatesController? statesController,\n  String obscuringCharacter = '•',\n  bool obscureText = false,\n  bool autocorrect = true,\n  SmartDashesType? smartDashesType,\n  SmartQuotesType? smartQuotesType,\n  bool enableSuggestions = true,\n  int? minLines,\n  int? maxLines = 1,\n  bool expands = false,\n  bool readOnly = false,\n  bool? showCursor,\n  int? maxLength,\n  MaxLengthEnforcement? maxLengthEnforcement,\n  void Function()? onTap,\n  void Function(PointerDownEvent)? onTapOutside,\n  bool onTapAlwaysCalled = false,\n  void Function()? onEditingComplete,\n  void Function(String)? onSubmit,\n  void Function(String, Map<String, dynamic>)? onAppPrivateCommand,\n  List<TextInputFormatter>? inputFormatters,\n  bool enabled = true,\n  bool? ignorePointers,\n  bool enableInteractiveSelection = true,\n  bool? selectAllOnFocus,\n  TextSelectionControls? selectionControls,\n  DragStartBehavior dragStartBehavior = .start,\n  MouseCursor? mouseCursor,\n  Widget? Function(BuildContext, int, int?, bool)? counterBuilder,\n  ScrollPhysics? scrollPhysics,\n  ScrollController? scrollController,\n  Iterable<String>? autofillHints,\n  String? restorationId,\n  bool stylusHandwritingEnabled = true,\n  bool enableIMEPersonalizedLearning = true,\n  ContentInsertionConfiguration? contentInsertionConfiguration,\n  Widget Function(BuildContext, EditableTextState)? contextMenuBuilder =\n      Input.defaultContextMenuBuilder,\n  bool canRequestFocus = true,\n  UndoHistoryController? undoController,\n  SpellCheckConfiguration? spellCheckConfiguration,\n  Widget Function(BuildContext, FTextFieldStyle, Set<WidgetState>)?\n  prefixBuilder,\n  Widget Function(BuildContext, FTextFieldStyle, Set<WidgetState>)?\n  suffixBuilder,\n  bool Function(TextEditingValue) clearable = Input.defaultClearable,\n  Widget Function(BuildContext, FTextFieldStyle, void Function())\n      clearIconBuilder =\n      Input.defaultClearIconBuilder,\n  Key? key,\n})\n",
+      "links": [
+        {
+          "offset": 15,
+          "length": 17,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFieldControl-class.html"
+        },
+        {
+          "offset": 50,
+          "length": 7,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFieldControl/FTextFieldControl.managed.html"
+        },
+        {
+          "offset": 63,
+          "length": 15,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFieldStyle-class.html"
+        },
+        {
+          "offset": 88,
+          "length": 15,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFieldStyle-class.html"
+        },
+        {
+          "offset": 145,
+          "length": 15,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFieldStyle-class.html"
+        },
+        {
+          "offset": 2216,
+          "length": 15,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFieldStyle-class.html"
+        },
+        {
+          "offset": 2301,
+          "length": 15,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFieldStyle-class.html"
+        },
+        {
+          "offset": 2456,
+          "length": 15,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFieldStyle-class.html"
+        }
+      ],
       "container": {
         "name": "FTextField",
         "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField-class.html"
@@ -274,8 +358,49 @@
     {
       "offset": 640,
       "length": 10,
-      "code": "FTextField({FTextFieldControl control = const .managed(), FTextFieldStyle Function(FTextFieldStyle)? style, Widget Function(BuildContext, FTextFieldStyle, Set<WidgetState>, Widget) builder = Input.defaultBuilder, Widget? label, String? hint, Widget? description, Widget? error, TextMagnifierConfiguration? magnifierConfiguration, Object groupId = EditableText, FocusNode? focusNode, TextInputType? keyboardType, TextInputAction? textInputAction, TextCapitalization textCapitalization = .none, TextAlign textAlign = .start, TextAlignVertical? textAlignVertical, TextDirection? textDirection, bool autofocus = false, WidgetStatesController? statesController, String obscuringCharacter = '•', bool obscureText = false, bool autocorrect = true, SmartDashesType? smartDashesType, SmartQuotesType? smartQuotesType, bool enableSuggestions = true, int? minLines, int? maxLines = 1, bool expands = false, bool readOnly = false, bool? showCursor, int? maxLength, MaxLengthEnforcement? maxLengthEnforcement, void Function()? onTap, void Function(PointerDownEvent)? onTapOutside, bool onTapAlwaysCalled = false, void Function()? onEditingComplete, void Function(String)? onSubmit, void Function(String, Map<String, dynamic>)? onAppPrivateCommand, List<TextInputFormatter>? inputFormatters, bool enabled = true, bool? ignorePointers, bool enableInteractiveSelection = true, bool? selectAllOnFocus, TextSelectionControls? selectionControls, DragStartBehavior dragStartBehavior = .start, MouseCursor? mouseCursor, Widget? Function(BuildContext, int, int?, bool)? counterBuilder, ScrollPhysics? scrollPhysics, ScrollController? scrollController, Iterable<String>? autofillHints, String? restorationId, bool stylusHandwritingEnabled = true, bool enableIMEPersonalizedLearning = true, ContentInsertionConfiguration? contentInsertionConfiguration, Widget Function(BuildContext, EditableTextState)? contextMenuBuilder = Input.defaultContextMenuBuilder, bool canRequestFocus = true, UndoHistoryController? undoController, SpellCheckConfiguration? spellCheckConfiguration, Widget Function(BuildContext, FTextFieldStyle, Set<WidgetState>)? prefixBuilder, Widget Function(BuildContext, FTextFieldStyle, Set<WidgetState>)? suffixBuilder, bool Function(TextEditingValue) clearable = Input.defaultClearable, Widget Function(BuildContext, FTextFieldStyle, void Function()) clearIconBuilder = Input.defaultClearIconBuilder, Key? key})",
-      "links": [],
+      "code": "FTextField({\n  FTextFieldControl control = const .managed(),\n  FTextFieldStyle Function(FTextFieldStyle)? style,\n  Widget Function(BuildContext, FTextFieldStyle, Set<WidgetState>, Widget)\n      builder =\n      Input.defaultBuilder,\n  Widget? label,\n  String? hint,\n  Widget? description,\n  Widget? error,\n  TextMagnifierConfiguration? magnifierConfiguration,\n  Object groupId = EditableText,\n  FocusNode? focusNode,\n  TextInputType? keyboardType,\n  TextInputAction? textInputAction,\n  TextCapitalization textCapitalization = .none,\n  TextAlign textAlign = .start,\n  TextAlignVertical? textAlignVertical,\n  TextDirection? textDirection,\n  bool autofocus = false,\n  WidgetStatesController? statesController,\n  String obscuringCharacter = '•',\n  bool obscureText = false,\n  bool autocorrect = true,\n  SmartDashesType? smartDashesType,\n  SmartQuotesType? smartQuotesType,\n  bool enableSuggestions = true,\n  int? minLines,\n  int? maxLines = 1,\n  bool expands = false,\n  bool readOnly = false,\n  bool? showCursor,\n  int? maxLength,\n  MaxLengthEnforcement? maxLengthEnforcement,\n  void Function()? onTap,\n  void Function(PointerDownEvent)? onTapOutside,\n  bool onTapAlwaysCalled = false,\n  void Function()? onEditingComplete,\n  void Function(String)? onSubmit,\n  void Function(String, Map<String, dynamic>)? onAppPrivateCommand,\n  List<TextInputFormatter>? inputFormatters,\n  bool enabled = true,\n  bool? ignorePointers,\n  bool enableInteractiveSelection = true,\n  bool? selectAllOnFocus,\n  TextSelectionControls? selectionControls,\n  DragStartBehavior dragStartBehavior = .start,\n  MouseCursor? mouseCursor,\n  Widget? Function(BuildContext, int, int?, bool)? counterBuilder,\n  ScrollPhysics? scrollPhysics,\n  ScrollController? scrollController,\n  Iterable<String>? autofillHints,\n  String? restorationId,\n  bool stylusHandwritingEnabled = true,\n  bool enableIMEPersonalizedLearning = true,\n  ContentInsertionConfiguration? contentInsertionConfiguration,\n  Widget Function(BuildContext, EditableTextState)? contextMenuBuilder =\n      Input.defaultContextMenuBuilder,\n  bool canRequestFocus = true,\n  UndoHistoryController? undoController,\n  SpellCheckConfiguration? spellCheckConfiguration,\n  Widget Function(BuildContext, FTextFieldStyle, Set<WidgetState>)?\n  prefixBuilder,\n  Widget Function(BuildContext, FTextFieldStyle, Set<WidgetState>)?\n  suffixBuilder,\n  bool Function(TextEditingValue) clearable = Input.defaultClearable,\n  Widget Function(BuildContext, FTextFieldStyle, void Function())\n      clearIconBuilder =\n      Input.defaultClearIconBuilder,\n  Key? key,\n})\n",
+      "links": [
+        {
+          "offset": 15,
+          "length": 17,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFieldControl-class.html"
+        },
+        {
+          "offset": 50,
+          "length": 7,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFieldControl/FTextFieldControl.managed.html"
+        },
+        {
+          "offset": 63,
+          "length": 15,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFieldStyle-class.html"
+        },
+        {
+          "offset": 88,
+          "length": 15,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFieldStyle-class.html"
+        },
+        {
+          "offset": 145,
+          "length": 15,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFieldStyle-class.html"
+        },
+        {
+          "offset": 2216,
+          "length": 15,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFieldStyle-class.html"
+        },
+        {
+          "offset": 2301,
+          "length": 15,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFieldStyle-class.html"
+        },
+        {
+          "offset": 2456,
+          "length": 15,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFieldStyle-class.html"
+        }
+      ],
       "container": {
         "name": "FTextField",
         "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField-class.html"
@@ -299,8 +424,24 @@
     {
       "offset": 760,
       "length": 7,
-      "code": "FButton({required void Function()? onPress, required Widget child, FBaseButtonStyle Function(FButtonStyle) style = _primary, void Function()? onLongPress, void Function()? onSecondaryPress, void Function()? onSecondaryLongPress, bool autofocus = false, FocusNode? focusNode, void Function(bool)? onFocusChange, void Function(bool)? onHoverChange, void Function(FWidgetStatesDelta)? onStateChange, bool selected = false, Map<ShortcutActivator, Intent>? shortcuts, Map<Type, Action<Intent>>? actions, MainAxisSize mainAxisSize = .max, MainAxisAlignment mainAxisAlignment = .center, CrossAxisAlignment crossAxisAlignment = .center, TextBaseline? textBaseline, Widget? prefix, Widget? suffix, Key? key})",
-      "links": [],
+      "code": "FButton({\n  required void Function()? onPress,\n  required Widget child,\n  FBaseButtonStyle Function(FButtonStyle) style = _primary,\n  void Function()? onLongPress,\n  void Function()? onSecondaryPress,\n  void Function()? onSecondaryLongPress,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  void Function(bool)? onHoverChange,\n  void Function(FWidgetStatesDelta)? onStateChange,\n  bool selected = false,\n  Map<ShortcutActivator, Intent>? shortcuts,\n  Map<Type, Action<Intent>>? actions,\n  MainAxisSize mainAxisSize = .max,\n  MainAxisAlignment mainAxisAlignment = .center,\n  CrossAxisAlignment crossAxisAlignment = .center,\n  TextBaseline? textBaseline,\n  Widget? prefix,\n  Widget? suffix,\n  Key? key,\n})\n",
+      "links": [
+        {
+          "offset": 74,
+          "length": 16,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FBaseButtonStyle-class.html"
+        },
+        {
+          "offset": 100,
+          "length": 12,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButtonStyle-class.html"
+        },
+        {
+          "offset": 384,
+          "length": 18,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStatesDelta-class.html"
+        }
+      ],
       "container": {
         "name": "FButton",
         "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton-class.html"
@@ -324,7 +465,7 @@
     {
       "offset": 887,
       "length": 5,
-      "code": "FTabEntry.entry({required Widget label, required Widget child})",
+      "code": "FTabEntry.entry({required Widget label, required Widget child})\n",
       "links": [],
       "container": {
         "name": "FTabEntry",
@@ -349,8 +490,19 @@
     {
       "offset": 956,
       "length": 5,
-      "code": "FCard({Widget? image, Widget? title, Widget? subtitle, Widget? child, MainAxisSize mainAxisSize = .min, FCardStyle Function(FCardStyle)? style, Key? key})",
-      "links": [],
+      "code": "FCard({\n  Widget? image,\n  Widget? title,\n  Widget? subtitle,\n  Widget? child,\n  MainAxisSize mainAxisSize = .min,\n  FCardStyle Function(FCardStyle)? style,\n  Key? key,\n})\n",
+      "links": [
+        {
+          "offset": 117,
+          "length": 10,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.card/FCardStyle-class.html"
+        },
+        {
+          "offset": 137,
+          "length": 10,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.card/FCardStyle-class.html"
+        }
+      ],
       "container": {
         "name": "FCard",
         "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.card/FCard-class.html"
@@ -381,8 +533,49 @@
     {
       "offset": 1226,
       "length": 10,
-      "code": "FTextField({FTextFieldControl control = const .managed(), FTextFieldStyle Function(FTextFieldStyle)? style, Widget Function(BuildContext, FTextFieldStyle, Set<WidgetState>, Widget) builder = Input.defaultBuilder, Widget? label, String? hint, Widget? description, Widget? error, TextMagnifierConfiguration? magnifierConfiguration, Object groupId = EditableText, FocusNode? focusNode, TextInputType? keyboardType, TextInputAction? textInputAction, TextCapitalization textCapitalization = .none, TextAlign textAlign = .start, TextAlignVertical? textAlignVertical, TextDirection? textDirection, bool autofocus = false, WidgetStatesController? statesController, String obscuringCharacter = '•', bool obscureText = false, bool autocorrect = true, SmartDashesType? smartDashesType, SmartQuotesType? smartQuotesType, bool enableSuggestions = true, int? minLines, int? maxLines = 1, bool expands = false, bool readOnly = false, bool? showCursor, int? maxLength, MaxLengthEnforcement? maxLengthEnforcement, void Function()? onTap, void Function(PointerDownEvent)? onTapOutside, bool onTapAlwaysCalled = false, void Function()? onEditingComplete, void Function(String)? onSubmit, void Function(String, Map<String, dynamic>)? onAppPrivateCommand, List<TextInputFormatter>? inputFormatters, bool enabled = true, bool? ignorePointers, bool enableInteractiveSelection = true, bool? selectAllOnFocus, TextSelectionControls? selectionControls, DragStartBehavior dragStartBehavior = .start, MouseCursor? mouseCursor, Widget? Function(BuildContext, int, int?, bool)? counterBuilder, ScrollPhysics? scrollPhysics, ScrollController? scrollController, Iterable<String>? autofillHints, String? restorationId, bool stylusHandwritingEnabled = true, bool enableIMEPersonalizedLearning = true, ContentInsertionConfiguration? contentInsertionConfiguration, Widget Function(BuildContext, EditableTextState)? contextMenuBuilder = Input.defaultContextMenuBuilder, bool canRequestFocus = true, UndoHistoryController? undoController, SpellCheckConfiguration? spellCheckConfiguration, Widget Function(BuildContext, FTextFieldStyle, Set<WidgetState>)? prefixBuilder, Widget Function(BuildContext, FTextFieldStyle, Set<WidgetState>)? suffixBuilder, bool Function(TextEditingValue) clearable = Input.defaultClearable, Widget Function(BuildContext, FTextFieldStyle, void Function()) clearIconBuilder = Input.defaultClearIconBuilder, Key? key})",
-      "links": [],
+      "code": "FTextField({\n  FTextFieldControl control = const .managed(),\n  FTextFieldStyle Function(FTextFieldStyle)? style,\n  Widget Function(BuildContext, FTextFieldStyle, Set<WidgetState>, Widget)\n      builder =\n      Input.defaultBuilder,\n  Widget? label,\n  String? hint,\n  Widget? description,\n  Widget? error,\n  TextMagnifierConfiguration? magnifierConfiguration,\n  Object groupId = EditableText,\n  FocusNode? focusNode,\n  TextInputType? keyboardType,\n  TextInputAction? textInputAction,\n  TextCapitalization textCapitalization = .none,\n  TextAlign textAlign = .start,\n  TextAlignVertical? textAlignVertical,\n  TextDirection? textDirection,\n  bool autofocus = false,\n  WidgetStatesController? statesController,\n  String obscuringCharacter = '•',\n  bool obscureText = false,\n  bool autocorrect = true,\n  SmartDashesType? smartDashesType,\n  SmartQuotesType? smartQuotesType,\n  bool enableSuggestions = true,\n  int? minLines,\n  int? maxLines = 1,\n  bool expands = false,\n  bool readOnly = false,\n  bool? showCursor,\n  int? maxLength,\n  MaxLengthEnforcement? maxLengthEnforcement,\n  void Function()? onTap,\n  void Function(PointerDownEvent)? onTapOutside,\n  bool onTapAlwaysCalled = false,\n  void Function()? onEditingComplete,\n  void Function(String)? onSubmit,\n  void Function(String, Map<String, dynamic>)? onAppPrivateCommand,\n  List<TextInputFormatter>? inputFormatters,\n  bool enabled = true,\n  bool? ignorePointers,\n  bool enableInteractiveSelection = true,\n  bool? selectAllOnFocus,\n  TextSelectionControls? selectionControls,\n  DragStartBehavior dragStartBehavior = .start,\n  MouseCursor? mouseCursor,\n  Widget? Function(BuildContext, int, int?, bool)? counterBuilder,\n  ScrollPhysics? scrollPhysics,\n  ScrollController? scrollController,\n  Iterable<String>? autofillHints,\n  String? restorationId,\n  bool stylusHandwritingEnabled = true,\n  bool enableIMEPersonalizedLearning = true,\n  ContentInsertionConfiguration? contentInsertionConfiguration,\n  Widget Function(BuildContext, EditableTextState)? contextMenuBuilder =\n      Input.defaultContextMenuBuilder,\n  bool canRequestFocus = true,\n  UndoHistoryController? undoController,\n  SpellCheckConfiguration? spellCheckConfiguration,\n  Widget Function(BuildContext, FTextFieldStyle, Set<WidgetState>)?\n  prefixBuilder,\n  Widget Function(BuildContext, FTextFieldStyle, Set<WidgetState>)?\n  suffixBuilder,\n  bool Function(TextEditingValue) clearable = Input.defaultClearable,\n  Widget Function(BuildContext, FTextFieldStyle, void Function())\n      clearIconBuilder =\n      Input.defaultClearIconBuilder,\n  Key? key,\n})\n",
+      "links": [
+        {
+          "offset": 15,
+          "length": 17,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFieldControl-class.html"
+        },
+        {
+          "offset": 50,
+          "length": 7,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFieldControl/FTextFieldControl.managed.html"
+        },
+        {
+          "offset": 63,
+          "length": 15,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFieldStyle-class.html"
+        },
+        {
+          "offset": 88,
+          "length": 15,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFieldStyle-class.html"
+        },
+        {
+          "offset": 145,
+          "length": 15,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFieldStyle-class.html"
+        },
+        {
+          "offset": 2216,
+          "length": 15,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFieldStyle-class.html"
+        },
+        {
+          "offset": 2301,
+          "length": 15,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFieldStyle-class.html"
+        },
+        {
+          "offset": 2456,
+          "length": 15,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFieldStyle-class.html"
+        }
+      ],
       "container": {
         "name": "FTextField",
         "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField-class.html"
@@ -399,8 +592,49 @@
     {
       "offset": 1341,
       "length": 10,
-      "code": "FTextField({FTextFieldControl control = const .managed(), FTextFieldStyle Function(FTextFieldStyle)? style, Widget Function(BuildContext, FTextFieldStyle, Set<WidgetState>, Widget) builder = Input.defaultBuilder, Widget? label, String? hint, Widget? description, Widget? error, TextMagnifierConfiguration? magnifierConfiguration, Object groupId = EditableText, FocusNode? focusNode, TextInputType? keyboardType, TextInputAction? textInputAction, TextCapitalization textCapitalization = .none, TextAlign textAlign = .start, TextAlignVertical? textAlignVertical, TextDirection? textDirection, bool autofocus = false, WidgetStatesController? statesController, String obscuringCharacter = '•', bool obscureText = false, bool autocorrect = true, SmartDashesType? smartDashesType, SmartQuotesType? smartQuotesType, bool enableSuggestions = true, int? minLines, int? maxLines = 1, bool expands = false, bool readOnly = false, bool? showCursor, int? maxLength, MaxLengthEnforcement? maxLengthEnforcement, void Function()? onTap, void Function(PointerDownEvent)? onTapOutside, bool onTapAlwaysCalled = false, void Function()? onEditingComplete, void Function(String)? onSubmit, void Function(String, Map<String, dynamic>)? onAppPrivateCommand, List<TextInputFormatter>? inputFormatters, bool enabled = true, bool? ignorePointers, bool enableInteractiveSelection = true, bool? selectAllOnFocus, TextSelectionControls? selectionControls, DragStartBehavior dragStartBehavior = .start, MouseCursor? mouseCursor, Widget? Function(BuildContext, int, int?, bool)? counterBuilder, ScrollPhysics? scrollPhysics, ScrollController? scrollController, Iterable<String>? autofillHints, String? restorationId, bool stylusHandwritingEnabled = true, bool enableIMEPersonalizedLearning = true, ContentInsertionConfiguration? contentInsertionConfiguration, Widget Function(BuildContext, EditableTextState)? contextMenuBuilder = Input.defaultContextMenuBuilder, bool canRequestFocus = true, UndoHistoryController? undoController, SpellCheckConfiguration? spellCheckConfiguration, Widget Function(BuildContext, FTextFieldStyle, Set<WidgetState>)? prefixBuilder, Widget Function(BuildContext, FTextFieldStyle, Set<WidgetState>)? suffixBuilder, bool Function(TextEditingValue) clearable = Input.defaultClearable, Widget Function(BuildContext, FTextFieldStyle, void Function()) clearIconBuilder = Input.defaultClearIconBuilder, Key? key})",
-      "links": [],
+      "code": "FTextField({\n  FTextFieldControl control = const .managed(),\n  FTextFieldStyle Function(FTextFieldStyle)? style,\n  Widget Function(BuildContext, FTextFieldStyle, Set<WidgetState>, Widget)\n      builder =\n      Input.defaultBuilder,\n  Widget? label,\n  String? hint,\n  Widget? description,\n  Widget? error,\n  TextMagnifierConfiguration? magnifierConfiguration,\n  Object groupId = EditableText,\n  FocusNode? focusNode,\n  TextInputType? keyboardType,\n  TextInputAction? textInputAction,\n  TextCapitalization textCapitalization = .none,\n  TextAlign textAlign = .start,\n  TextAlignVertical? textAlignVertical,\n  TextDirection? textDirection,\n  bool autofocus = false,\n  WidgetStatesController? statesController,\n  String obscuringCharacter = '•',\n  bool obscureText = false,\n  bool autocorrect = true,\n  SmartDashesType? smartDashesType,\n  SmartQuotesType? smartQuotesType,\n  bool enableSuggestions = true,\n  int? minLines,\n  int? maxLines = 1,\n  bool expands = false,\n  bool readOnly = false,\n  bool? showCursor,\n  int? maxLength,\n  MaxLengthEnforcement? maxLengthEnforcement,\n  void Function()? onTap,\n  void Function(PointerDownEvent)? onTapOutside,\n  bool onTapAlwaysCalled = false,\n  void Function()? onEditingComplete,\n  void Function(String)? onSubmit,\n  void Function(String, Map<String, dynamic>)? onAppPrivateCommand,\n  List<TextInputFormatter>? inputFormatters,\n  bool enabled = true,\n  bool? ignorePointers,\n  bool enableInteractiveSelection = true,\n  bool? selectAllOnFocus,\n  TextSelectionControls? selectionControls,\n  DragStartBehavior dragStartBehavior = .start,\n  MouseCursor? mouseCursor,\n  Widget? Function(BuildContext, int, int?, bool)? counterBuilder,\n  ScrollPhysics? scrollPhysics,\n  ScrollController? scrollController,\n  Iterable<String>? autofillHints,\n  String? restorationId,\n  bool stylusHandwritingEnabled = true,\n  bool enableIMEPersonalizedLearning = true,\n  ContentInsertionConfiguration? contentInsertionConfiguration,\n  Widget Function(BuildContext, EditableTextState)? contextMenuBuilder =\n      Input.defaultContextMenuBuilder,\n  bool canRequestFocus = true,\n  UndoHistoryController? undoController,\n  SpellCheckConfiguration? spellCheckConfiguration,\n  Widget Function(BuildContext, FTextFieldStyle, Set<WidgetState>)?\n  prefixBuilder,\n  Widget Function(BuildContext, FTextFieldStyle, Set<WidgetState>)?\n  suffixBuilder,\n  bool Function(TextEditingValue) clearable = Input.defaultClearable,\n  Widget Function(BuildContext, FTextFieldStyle, void Function())\n      clearIconBuilder =\n      Input.defaultClearIconBuilder,\n  Key? key,\n})\n",
+      "links": [
+        {
+          "offset": 15,
+          "length": 17,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFieldControl-class.html"
+        },
+        {
+          "offset": 50,
+          "length": 7,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFieldControl/FTextFieldControl.managed.html"
+        },
+        {
+          "offset": 63,
+          "length": 15,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFieldStyle-class.html"
+        },
+        {
+          "offset": 88,
+          "length": 15,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFieldStyle-class.html"
+        },
+        {
+          "offset": 145,
+          "length": 15,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFieldStyle-class.html"
+        },
+        {
+          "offset": 2216,
+          "length": 15,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFieldStyle-class.html"
+        },
+        {
+          "offset": 2301,
+          "length": 15,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFieldStyle-class.html"
+        },
+        {
+          "offset": 2456,
+          "length": 15,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFieldStyle-class.html"
+        }
+      ],
       "container": {
         "name": "FTextField",
         "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField-class.html"
@@ -417,8 +651,24 @@
     {
       "offset": 1446,
       "length": 7,
-      "code": "FButton({required void Function()? onPress, required Widget child, FBaseButtonStyle Function(FButtonStyle) style = _primary, void Function()? onLongPress, void Function()? onSecondaryPress, void Function()? onSecondaryLongPress, bool autofocus = false, FocusNode? focusNode, void Function(bool)? onFocusChange, void Function(bool)? onHoverChange, void Function(FWidgetStatesDelta)? onStateChange, bool selected = false, Map<ShortcutActivator, Intent>? shortcuts, Map<Type, Action<Intent>>? actions, MainAxisSize mainAxisSize = .max, MainAxisAlignment mainAxisAlignment = .center, CrossAxisAlignment crossAxisAlignment = .center, TextBaseline? textBaseline, Widget? prefix, Widget? suffix, Key? key})",
-      "links": [],
+      "code": "FButton({\n  required void Function()? onPress,\n  required Widget child,\n  FBaseButtonStyle Function(FButtonStyle) style = _primary,\n  void Function()? onLongPress,\n  void Function()? onSecondaryPress,\n  void Function()? onSecondaryLongPress,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  void Function(bool)? onHoverChange,\n  void Function(FWidgetStatesDelta)? onStateChange,\n  bool selected = false,\n  Map<ShortcutActivator, Intent>? shortcuts,\n  Map<Type, Action<Intent>>? actions,\n  MainAxisSize mainAxisSize = .max,\n  MainAxisAlignment mainAxisAlignment = .center,\n  CrossAxisAlignment crossAxisAlignment = .center,\n  TextBaseline? textBaseline,\n  Widget? prefix,\n  Widget? suffix,\n  Key? key,\n})\n",
+      "links": [
+        {
+          "offset": 74,
+          "length": 16,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FBaseButtonStyle-class.html"
+        },
+        {
+          "offset": 100,
+          "length": 12,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButtonStyle-class.html"
+        },
+        {
+          "offset": 384,
+          "length": 18,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStatesDelta-class.html"
+        }
+      ],
       "container": {
         "name": "FButton",
         "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton-class.html"

@@ -74,8 +74,29 @@
     {
       "offset": 32,
       "length": 10,
-      "code": "FAccordion({required List<Widget> children, FAccordionControl control = const .managed(), FAccordionStyle Function(FAccordionStyle)? style, Key? key})",
-      "links": [],
+      "code": "FAccordion({\n  required List<Widget> children,\n  FAccordionControl control = const .managed(),\n  FAccordionStyle Function(FAccordionStyle)? style,\n  Key? key,\n})\n",
+      "links": [
+        {
+          "offset": 49,
+          "length": 17,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionControl-class.html"
+        },
+        {
+          "offset": 84,
+          "length": 7,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionControl/FAccordionControl.managed.html"
+        },
+        {
+          "offset": 97,
+          "length": 15,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionStyle-class.html"
+        },
+        {
+          "offset": 122,
+          "length": 15,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionStyle-class.html"
+        }
+      ],
       "container": {
         "name": "FAccordion",
         "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordion-class.html"
@@ -92,8 +113,24 @@
     {
       "offset": 68,
       "length": 14,
-      "code": "FAccordionItem({required Widget title, required Widget child, FAccordionStyle? style, Widget icon = const Icon(FIcons.chevronDown), bool? initiallyExpanded, bool autofocus = false, FocusNode? focusNode, void Function(bool)? onFocusChange, void Function(bool)? onHoverChange, void Function(FWidgetStatesDelta)? onStateChange, Key? key})",
-      "links": [],
+      "code": "FAccordionItem({\n  required Widget title,\n  required Widget child,\n  FAccordionStyle? style,\n  Widget icon = const Icon(FIcons.chevronDown),\n  bool? initiallyExpanded,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  void Function(bool)? onHoverChange,\n  void Function(FWidgetStatesDelta)? onStateChange,\n  Key? key,\n})\n",
+      "links": [
+        {
+          "offset": 69,
+          "length": 16,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionStyle-class.html"
+        },
+        {
+          "offset": 120,
+          "length": 18,
+          "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/chevronDown-constant.html"
+        },
+        {
+          "offset": 310,
+          "length": 18,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStatesDelta-class.html"
+        }
+      ],
       "container": {
         "name": "FAccordionItem",
         "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionItem-class.html"
@@ -117,8 +154,24 @@
     {
       "offset": 464,
       "length": 14,
-      "code": "FAccordionItem({required Widget title, required Widget child, FAccordionStyle? style, Widget icon = const Icon(FIcons.chevronDown), bool? initiallyExpanded, bool autofocus = false, FocusNode? focusNode, void Function(bool)? onFocusChange, void Function(bool)? onHoverChange, void Function(FWidgetStatesDelta)? onStateChange, Key? key})",
-      "links": [],
+      "code": "FAccordionItem({\n  required Widget title,\n  required Widget child,\n  FAccordionStyle? style,\n  Widget icon = const Icon(FIcons.chevronDown),\n  bool? initiallyExpanded,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  void Function(bool)? onHoverChange,\n  void Function(FWidgetStatesDelta)? onStateChange,\n  Key? key,\n})\n",
+      "links": [
+        {
+          "offset": 69,
+          "length": 16,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionStyle-class.html"
+        },
+        {
+          "offset": 120,
+          "length": 18,
+          "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/chevronDown-constant.html"
+        },
+        {
+          "offset": 310,
+          "length": 18,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStatesDelta-class.html"
+        }
+      ],
       "container": {
         "name": "FAccordionItem",
         "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionItem-class.html"
@@ -149,8 +202,24 @@
     {
       "offset": 898,
       "length": 14,
-      "code": "FAccordionItem({required Widget title, required Widget child, FAccordionStyle? style, Widget icon = const Icon(FIcons.chevronDown), bool? initiallyExpanded, bool autofocus = false, FocusNode? focusNode, void Function(bool)? onFocusChange, void Function(bool)? onHoverChange, void Function(FWidgetStatesDelta)? onStateChange, Key? key})",
-      "links": [],
+      "code": "FAccordionItem({\n  required Widget title,\n  required Widget child,\n  FAccordionStyle? style,\n  Widget icon = const Icon(FIcons.chevronDown),\n  bool? initiallyExpanded,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  void Function(bool)? onHoverChange,\n  void Function(FWidgetStatesDelta)? onStateChange,\n  Key? key,\n})\n",
+      "links": [
+        {
+          "offset": 69,
+          "length": 16,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionStyle-class.html"
+        },
+        {
+          "offset": 120,
+          "length": 18,
+          "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/chevronDown-constant.html"
+        },
+        {
+          "offset": 310,
+          "length": 18,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStatesDelta-class.html"
+        }
+      ],
       "container": {
         "name": "FAccordionItem",
         "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionItem-class.html"

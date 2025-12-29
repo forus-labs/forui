@@ -52,10 +52,91 @@
     {
       "offset": 310,
       "length": 29,
-      "code": "FSelect<String>.searchBuilder({required String Function(String) format, required FutureOr<Iterable<String>> Function(String) filter, required List<FSelectItemMixin> Function(BuildContext, String, Iterable<String>) contentBuilder, FSelectSearchFieldProperties searchFieldProperties, Widget Function(BuildContext, FSelectSearchStyle) contentLoadingBuilder, Widget Function(BuildContext, Object?, StackTrace)? contentErrorBuilder, FSelectControl<String>? control, FPopoverControl popoverControl, FSelectStyle Function(FSelectStyle)? style, bool autofocus, FocusNode? focusNode, Widget Function(BuildContext, FSelectStyle, Set<WidgetState>, Widget) builder, Widget Function(BuildContext, FSelectStyle, Set<WidgetState>)? prefixBuilder, Widget Function(BuildContext, FSelectStyle, Set<WidgetState>)? suffixBuilder, Widget? label, Widget? description, bool enabled, void Function(String?)? onSaved, void Function()? onReset, AutovalidateMode autovalidateMode, String? forceErrorText, String? Function(String?) validator, Widget Function(BuildContext, String) errorBuilder, String? hint, TextAlign textAlign, TextAlignVertical? textAlignVertical, TextDirection? textDirection, bool expands, MouseCursor mouseCursor, bool canRequestFocus, bool clearable, AlignmentGeometry contentAnchor, AlignmentGeometry fieldAnchor, FPortalConstraints contentConstraints, FPortalSpacing contentSpacing, FPortalOverflow contentOverflow, Offset contentOffset, FPopoverHideRegion contentHideRegion, Object? contentGroupId, bool autoHide, Widget Function(BuildContext, FSelectStyle) contentEmptyBuilder, ScrollController? contentScrollController, bool contentScrollHandles, ScrollPhysics contentPhysics, FItemDivider contentDivider, Key? key})",
-      "links": [],
+      "code": "FSelect.searchBuilder({\n  required String Function(String) format,\n  required FutureOr<Iterable<String>> Function(String) filter,\n  required List<FSelectItemMixin> Function(\n    BuildContext,\n    String,\n    Iterable<String>,\n  )\n  contentBuilder,\n  FSelectSearchFieldProperties searchFieldProperties,\n  Widget Function(BuildContext, FSelectSearchStyle) contentLoadingBuilder,\n  Widget Function(BuildContext, Object?, StackTrace)? contentErrorBuilder,\n  FSelectControl<String>? control,\n  FPopoverControl popoverControl,\n  FSelectStyle Function(FSelectStyle)? style,\n  bool autofocus,\n  FocusNode? focusNode,\n  Widget Function(BuildContext, FSelectStyle, Set<WidgetState>, Widget)\n  builder,\n  Widget Function(BuildContext, FSelectStyle, Set<WidgetState>)?\n  prefixBuilder,\n  Widget Function(BuildContext, FSelectStyle, Set<WidgetState>)?\n  suffixBuilder,\n  Widget? label,\n  Widget? description,\n  bool enabled,\n  void Function(String?)? onSaved,\n  void Function()? onReset,\n  AutovalidateMode autovalidateMode,\n  String? forceErrorText,\n  String? Function(String?) validator,\n  Widget Function(BuildContext, String) errorBuilder,\n  String? hint,\n  TextAlign textAlign,\n  TextAlignVertical? textAlignVertical,\n  TextDirection? textDirection,\n  bool expands,\n  MouseCursor mouseCursor,\n  bool canRequestFocus,\n  bool clearable,\n  AlignmentGeometry contentAnchor,\n  AlignmentGeometry fieldAnchor,\n  FPortalConstraints contentConstraints,\n  FPortalSpacing contentSpacing,\n  FPortalOverflow contentOverflow,\n  Offset contentOffset,\n  FPopoverHideRegion contentHideRegion,\n  Object? contentGroupId,\n  bool autoHide,\n  Widget Function(BuildContext, FSelectStyle) contentEmptyBuilder,\n  ScrollController? contentScrollController,\n  bool contentScrollHandles,\n  ScrollPhysics contentPhysics,\n  FItemDivider contentDivider,\n  Key? key,\n})\n",
+      "links": [
+        {
+          "offset": 146,
+          "length": 16,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectItemMixin-mixin.html"
+        },
+        {
+          "offset": 250,
+          "length": 28,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectSearchFieldProperties-class.html"
+        },
+        {
+          "offset": 334,
+          "length": 18,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectSearchStyle-class.html"
+        },
+        {
+          "offset": 454,
+          "length": 23,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectControl-class.html"
+        },
+        {
+          "offset": 489,
+          "length": 15,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverControl-class.html"
+        },
+        {
+          "offset": 523,
+          "length": 12,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectStyle-class.html"
+        },
+        {
+          "offset": 545,
+          "length": 12,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectStyle-class.html"
+        },
+        {
+          "offset": 641,
+          "length": 12,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectStyle-class.html"
+        },
+        {
+          "offset": 724,
+          "length": 12,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectStyle-class.html"
+        },
+        {
+          "offset": 806,
+          "length": 12,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectStyle-class.html"
+        },
+        {
+          "offset": 1397,
+          "length": 18,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FPortalConstraints-class.html"
+        },
+        {
+          "offset": 1438,
+          "length": 14,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FPortalSpacing-class.html"
+        },
+        {
+          "offset": 1471,
+          "length": 15,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FPortalOverflow-class.html"
+        },
+        {
+          "offset": 1530,
+          "length": 18,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverHideRegion.html"
+        },
+        {
+          "offset": 1643,
+          "length": 12,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectStyle-class.html"
+        },
+        {
+          "offset": 1786,
+          "length": 12,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemDivider.html"
+        }
+      ],
       "container": {
-        "name": "FSelect<String>",
+        "name": "FSelect",
         "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect-class.html"
       },
       "documentation": ""
@@ -105,8 +186,14 @@
     {
       "offset": 529,
       "length": 15,
-      "code": "{required List<FSelectItemMixin> Function(BuildContext, String, Iterable<String>) contentBuilder}",
-      "links": [],
+      "code": "{\n  required List<FSelectItemMixin> Function(\n    BuildContext,\n    String,\n    Iterable<String>,\n  )\n  contentBuilder,\n}",
+      "links": [
+        {
+          "offset": 18,
+          "length": 16,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectItemMixin-mixin.html"
+        }
+      ],
       "documentation": ""
     },
     {
@@ -133,11 +220,27 @@
     {
       "offset": 606,
       "length": 4,
-      "code": "FSelectItem<T> item<T>({required Widget title, required T value, FItemStyle Function(FItemStyle)? style, bool? enabled, Widget? prefix, Widget? subtitle, Widget? Function(BuildContext, bool) suffixBuilder = _defaultSuffixBuilder, Key? key})",
-      "links": [],
+      "code": "FSelectItem<T> item<T>({\n  required Widget title,\n  required T value,\n  FItemStyle Function(FItemStyle)? style,\n  bool? enabled,\n  Widget? prefix,\n  Widget? subtitle,\n  Widget? Function(BuildContext, bool) suffixBuilder = _defaultSuffixBuilder,\n  Key? key,\n})",
+      "links": [
+        {
+          "offset": 0,
+          "length": 14,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectItem-class.html"
+        },
+        {
+          "offset": 72,
+          "length": 10,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemStyle-class.html"
+        },
+        {
+          "offset": 92,
+          "length": 10,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemStyle-class.html"
+        }
+      ],
       "container": {
-        "name": "FSelectItemMixin",
-        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectItemMixin-mixin.html"
+        "name": "FSelectItem",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectItem-class.html"
       },
       "documentation": ""
     },

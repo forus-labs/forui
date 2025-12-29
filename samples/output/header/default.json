@@ -69,8 +69,19 @@
     {
       "offset": 32,
       "length": 7,
-      "code": "FHeader({Widget title, FHeaderStyle Function(FHeaderStyle)? style, List<Widget> suffixes, Key? key})",
-      "links": [],
+      "code": "FHeader({\n  Widget title,\n  FHeaderStyle Function(FHeaderStyle)? style,\n  List<Widget> suffixes,\n  Key? key,\n})\n",
+      "links": [
+        {
+          "offset": 28,
+          "length": 12,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.header/FHeaderStyle-class.html"
+        },
+        {
+          "offset": 50,
+          "length": 12,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.header/FHeaderStyle-class.html"
+        }
+      ],
       "container": {
         "name": "FHeader",
         "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.header/FHeader-class.html"
@@ -94,8 +105,19 @@
     {
       "offset": 94,
       "length": 13,
-      "code": "FHeaderAction({required Widget icon, required void Function()? onPress, FHeaderActionStyle? style, String? semanticsLabel, bool selected = false, bool autofocus = false, FocusNode? focusNode, void Function(bool)? onFocusChange, void Function(bool)? onHoverChange, void Function(FWidgetStatesDelta)? onStateChange, void Function()? onLongPress, void Function()? onSecondaryPress, void Function()? onSecondaryLongPress, Map<ShortcutActivator, Intent>? shortcuts, Map<Type, Action<Intent>>? actions, Key? key})",
-      "links": [],
+      "code": "FHeaderAction({\n  required Widget icon,\n  required void Function()? onPress,\n  FHeaderActionStyle? style,\n  String? semanticsLabel,\n  bool selected = false,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  void Function(bool)? onHoverChange,\n  void Function(FWidgetStatesDelta)? onStateChange,\n  void Function()? onLongPress,\n  void Function()? onSecondaryPress,\n  void Function()? onSecondaryLongPress,\n  Map<ShortcutActivator, Intent>? shortcuts,\n  Map<Type, Action<Intent>>? actions,\n  Key? key,\n})\n",
+      "links": [
+        {
+          "offset": 79,
+          "length": 19,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.header/FHeaderActionStyle-class.html"
+        },
+        {
+          "offset": 299,
+          "length": 18,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStatesDelta-class.html"
+        }
+      ],
       "container": {
         "name": "FHeaderAction",
         "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.header/FHeaderAction-class.html"
@@ -130,8 +152,19 @@
     {
       "offset": 166,
       "length": 13,
-      "code": "FHeaderAction({required Widget icon, required void Function()? onPress, FHeaderActionStyle? style, String? semanticsLabel, bool selected = false, bool autofocus = false, FocusNode? focusNode, void Function(bool)? onFocusChange, void Function(bool)? onHoverChange, void Function(FWidgetStatesDelta)? onStateChange, void Function()? onLongPress, void Function()? onSecondaryPress, void Function()? onSecondaryLongPress, Map<ShortcutActivator, Intent>? shortcuts, Map<Type, Action<Intent>>? actions, Key? key})",
-      "links": [],
+      "code": "FHeaderAction({\n  required Widget icon,\n  required void Function()? onPress,\n  FHeaderActionStyle? style,\n  String? semanticsLabel,\n  bool selected = false,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  void Function(bool)? onHoverChange,\n  void Function(FWidgetStatesDelta)? onStateChange,\n  void Function()? onLongPress,\n  void Function()? onSecondaryPress,\n  void Function()? onSecondaryLongPress,\n  Map<ShortcutActivator, Intent>? shortcuts,\n  Map<Type, Action<Intent>>? actions,\n  Key? key,\n})\n",
+      "links": [
+        {
+          "offset": 79,
+          "length": 19,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.header/FHeaderActionStyle-class.html"
+        },
+        {
+          "offset": 299,
+          "length": 18,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStatesDelta-class.html"
+        }
+      ],
       "container": {
         "name": "FHeaderAction",
         "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.header/FHeaderAction-class.html"
