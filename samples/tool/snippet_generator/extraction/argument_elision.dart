@@ -59,14 +59,14 @@ class ConstantPropagation extends RecursiveAstVisitor<void> {
 }
 
 /// Eliminates arguments that match their default values.
-class DeadCodeElimination extends RecursiveAstVisitor<void> {
+class ArgumentElision extends RecursiveAstVisitor<void> {
   static int _monotonic = 0;
 
-  /// Eliminates arguments matching defaults in the given code.
+  /// Elides arguments matching defaults in the given code.
   ///
   /// Applies elision repeatedly until no more changes occur, handling nested constructor invocations where inner
   /// elisions may enable outer ones.
-  static Future<String> eliminate(String code, AnalysisSession session, OverlayResourceProvider overlay) async {
+  static Future<String> elide(String code, AnalysisSession session, OverlayResourceProvider overlay) async {
     var current = code;
 
     while (true) {
@@ -74,7 +74,7 @@ class DeadCodeElimination extends RecursiveAstVisitor<void> {
       overlay.setOverlay(syntheticPath, content: current, modificationStamp: DateTime.now().millisecondsSinceEpoch);
 
       final result = await session.getResolvedUnit(syntheticPath) as ResolvedUnitResult;
-      final visitor = DeadCodeElimination._(result.content);
+      final visitor = ArgumentElision._(result.content);
       result.unit.visitChildren(visitor);
 
       final next = visitor._transformations.apply();
@@ -88,7 +88,7 @@ class DeadCodeElimination extends RecursiveAstVisitor<void> {
 
   final Transformations _transformations;
 
-  DeadCodeElimination._(String code) : _transformations = Transformations(code);
+  ArgumentElision._(String code) : _transformations = Transformations(code);
 
   @override
   void visitInstanceCreationExpression(InstanceCreationExpression node) {

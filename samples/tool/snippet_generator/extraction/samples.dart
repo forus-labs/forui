@@ -11,11 +11,11 @@ import 'package:analyzer/file_system/overlay_file_system.dart';
 import 'package:collection/collection.dart';
 import 'package:path/path.dart' as p;
 
-import '../annotation/doc_linker.dart';
+import '../metadata/doc_linker.dart';
 import '../main.dart';
 import '../options.dart';
 import '../snippet.dart';
-import 'constant_propagation.dart';
+import 'argument_elision.dart';
 import 'routes.dart';
 import 'widgets.dart';
 
@@ -107,7 +107,7 @@ class Samples extends RecursiveAstVisitor<void> {
       fragments[declaration.offset] = declaration.toSource();
     }
 
-    return formatter.format(await DeadCodeElimination.eliminate(fragments.values.join('\n\n'), _session, _overlay));
+    return formatter.format(await ArgumentElision.elide(fragments.values.join('\n\n'), _session, _overlay));
   }
 }
 
