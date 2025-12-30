@@ -4,13 +4,7 @@ import stylistic from '@stylistic/eslint-plugin';
 
 const eslintConfig = defineConfig([
   ...nextVitals,
-  globalIgnores([
-    '.next/**',
-    'out/**',
-    'build/**',
-    'next-env.d.ts',
-    '.source/**',
-  ]),
+  globalIgnores(['.next/**', 'out/**', 'build/**', 'next-env.d.ts', '.source/**']),
   {
     plugins: {
       '@stylistic': stylistic,
