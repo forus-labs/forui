@@ -1,0 +1,71 @@
+name: Docs Snippets Presubmit Commit
+
+on:
+  workflow_run:
+    workflows: ["Docs Snippets Presubmit Format"]
+    types: [completed]
+
+jobs:
+  commit:
+    name: Commit Changes
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    steps:
+      - uses: actions/download-artifact@v7
+        with:
+          name: pr-metadata
+          path: ./pr-metadata
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          run-id: ${{ github.event.workflow_run.id }}
+
+      - id: pr-metadata
+        run: |
+          echo "pr_number=$(cat ./pr-metadata/pr-number.txt)" >> $GITHUB_OUTPUT
+          echo "pr_head_ref=$(cat ./pr-metadata/pr-head-ref.txt)" >> $GITHUB_OUTPUT
+          echo "pr_head_sha=$(cat ./pr-metadata/pr-head-sha.txt)" >> $GITHUB_OUTPUT
+          echo "pr_head_repo=$(cat ./pr-metadata/pr-head-repo.txt)" >> $GITHUB_OUTPUT
+
+      - id: download-patch
+        continue-on-error: true
+        uses: actions/download-artifact@v7
+        with:
+          name: format-changes
+          path: ./
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          run-id: ${{ github.event.workflow_run.id }}
+
+      - id: check-changes
+        run: |
+          if [ -f "changes.patch" ] && [ -s "changes.patch" ]; then
+            echo "changes=true" >> $GITHUB_OUTPUT
+            mv changes.patch ${{ runner.temp }}/changes.patch
+          else
+            echo "changes=false" >> $GITHUB_OUTPUT
+          fi
+
+      - if: steps.check-changes.outputs.changes == 'true'
+        uses: actions/create-github-app-token@v2
+        id: generate-token
+        with:
+          app-id: ${{ secrets.AUTO_MAID_APP_ID }}
+          private-key: ${{ secrets.AUTO_MAID_PRIVATE_KEY }}
+
+      - if: steps.check-changes.outputs.changes == 'true'
+        uses: actions/checkout@v6
+        with:
+          token: ${{ steps.generate-token.outputs.token }}
+          repository: ${{ steps.pr-metadata.outputs.pr_head_repo }}
+          ref: ${{ steps.pr-metadata.outputs.pr_head_ref }}
+
+      - if: steps.check-changes.outputs.changes == 'true'
+        run: |
+          mv ${{ runner.temp }}/changes.patch .
+          git apply changes.patch
+          rm changes.patch
+
+      - if: steps.check-changes.outputs.changes == 'true'
+        uses: EndBug/add-and-commit@v9
+        with:
+          pull: '--rebase --autostash'
+          message: 'Prepare Docs Snippets for review'
+          add: '.'

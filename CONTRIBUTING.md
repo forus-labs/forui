@@ -417,7 +417,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/button/button.dart';
 
-import 'package:forui_samples/sample.dart';
+import 'package:docs_snippets/example.dart';
 
 final variants = {
   for (final value in Variant.values) value.name: value,

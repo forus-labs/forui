@@ -1,0 +1,37 @@
+name: Docs Snippets Build
+
+on:
+  workflow_dispatch: {}
+  push:
+    paths:
+      - docs_snippets_build.yaml
+      - forui/**
+      - docs_snippets/**
+  pull_request:
+    paths:
+      - forui/**
+      - docs_snippets/**
+
+jobs:
+  test:
+    name: Build & test
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        working-directory: docs_snippets
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        flutter-version: [ 3.x ]
+    steps:
+      - uses: actions/checkout@v6
+      - uses: subosito/flutter-action@v2.21.0
+        with:
+          flutter-version: ${{ matrix.flutter-version }}
+      - working-directory: forui
+        run: |
+          flutter pub get
+          dart run build_runner build --delete-conflicting-outputs
+      - run: flutter pub get
+      - run: dart run build_runner build --delete-conflicting-outputs
+      - run: flutter analyze

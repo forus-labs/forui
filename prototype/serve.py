@@ -8,7 +8,7 @@ from pathlib import Path
 
 PORT = 8000
 PROTOTYPE_DIR = Path(__file__).parent
-SAMPLES_DIR = PROTOTYPE_DIR / ".." / "samples" / "output"
+SAMPLES_DIR = PROTOTYPE_DIR / ".." / "docs_snippets" / "output"
 
 
 class Handler(http.server.SimpleHTTPRequestHandler):
@@ -24,7 +24,7 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             super().do_GET()
 
     def serve_sample_file(self):
-        # Serve files from ../samples/output
+        # Serve files from ../docs_snippets/output
         rel_path = self.path[len("/samples/"):]  # Remove /samples/ prefix
         file_path = SAMPLES_DIR / rel_path
 

@@ -8,7 +8,7 @@ on:
     paths: 
        - '.github/workflows/docs_deploy.yaml'
        - 'docs/**'
-       - 'samples/**'
+       - 'docs_snippets/**'
   workflow_dispatch:
     inputs:
       target:
@@ -58,13 +58,13 @@ jobs:
           accountId: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
           command: pages deploy ./docs/out --project-name=${{ vars.CLOUDFLARE_DOCS_PROJECT_NAME }} --branch=main
 
-  samples:
-    name: Deploy Samples
+  docs_snippets:
+    name: Deploy Doc Snippets
     runs-on: ubuntu-latest
     environment: ${{ (startsWith(github.ref, 'refs/tags/forui') || inputs.target == 'production') && 'docs-production' || 'docs-development' }}
     defaults:
       run:
-        working-directory: ./samples
+        working-directory: ./docs_snippets
     steps:
       - uses: actions/checkout@v6
       - uses: subosito/flutter-action@v2.21.0
@@ -82,7 +82,7 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy ./samples/build/web --project-name=${{ vars.CLOUDFLARE_DEMO_PROJECT_NAME }} --branch=main
+          command: pages deploy ./docs_snippets/build/web --project-name=${{ vars.CLOUDFLARE_DEMO_PROJECT_NAME }} --branch=main
 
       # Check that all relative URLs are working. We don't check GitHub links due to rate limiting.
       - uses: actions/setup-go@v6
