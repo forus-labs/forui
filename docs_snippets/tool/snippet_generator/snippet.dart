@@ -1,6 +1,9 @@
 import 'dart:io';
 import 'package:path/path.dart' as p;
 
+import 'dart_doc_linker.dart';
+import 'tooltip/generator.dart';
+
 /// The output directory for generated snippet JSON files.
 ///
 /// Change this to your liking Joe.
@@ -93,75 +96,4 @@ class Snippet {
     'links': [for (final l in links) l.toJson()],
     'tooltips': [for (final t in tooltips) t.toJson()],
   };
-}
-
-/// The kind of identifier that a tooltip describes.
-enum TooltipTarget {
-  field,
-  getter,
-  method,
-  constructor,
-  formalParameter,
-}
-
-/// A tooltip for an identifier.
-class Tooltip {
-  /// The character offset where the linked identifier starts.
-  final int offset;
-
-  /// The length of the linked identifier.
-  final int length;
-
-  /// The kind of identifier that this tooltip describes.
-  final TooltipTarget target;
-
-  /// The source code.
-  String code;
-
-  /// The links within the tooltip code (for types, etc.).
-  final List<DartDocLink> links = [];
-
-  /// The identifier's containing class.
-  ///
-  /// For constructors, fields and methods: `containing class <class>`.
-  final (String name, String url)? container;
-
-  /// The markdown documentation.
-  final String documentation;
-
-  Tooltip({
-    required int offset,
-    required int baseOffset,
-    required this.length,
-    required this.target,
-    required this.code,
-    this.container,
-    this.documentation = '',
-  }) : offset = offset - baseOffset;
-
-  Map<String, dynamic> toJson() => {
-    'offset': offset,
-    'length': length,
-    'code': code,
-    'links': [for (final l in links) l.toJson()],
-    if (container != null) 'container': {'name': container!.$1, 'url': container!.$2},
-    'documentation': documentation,
-  };
-}
-
-/// A link to a Dart API documentation page.
-class DartDocLink {
-  /// The character offset where the linked identifier starts.
-  int offset;
-
-  /// The length of the linked identifier.
-  final int length;
-
-  /// The URL to the API documentation.
-  final String url;
-
-  DartDocLink({required int offset, required int baseOffset, required this.length, required this.url})
-    : offset = offset - baseOffset;
-
-  Map<String, dynamic> toJson() => {'offset': offset, 'length': length, 'url': url};
 }

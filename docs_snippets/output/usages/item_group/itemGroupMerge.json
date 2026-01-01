@@ -1,0 +1,330 @@
+{
+  "code": "FItemGroup.merge(\n  children: [\n    FItemGroup(children: []),\n  ],\n  style: (style) => style.copyWith(),\n  scrollController: ScrollController(),\n  cacheExtent: 100,\n  maxHeight: 200,\n  dragStartBehavior: DragStartBehavior.start,\n  physics: const ClampingScrollPhysics(),\n  enabled: true,\n  divider: FItemDivider.full,\n  semanticsLabel: 'Settings',\n)",
+  "highlights": [],
+  "links": [
+    {
+      "offset": 0,
+      "length": 16,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroup/FItemGroup.merge.html"
+    },
+    {
+      "offset": 20,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroup/FItemGroup.merge.html"
+    },
+    {
+      "offset": 36,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroup/FItemGroup.html"
+    },
+    {
+      "offset": 47,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroup/FItemGroup.html"
+    },
+    {
+      "offset": 69,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroup/style.html"
+    },
+    {
+      "offset": 93,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/$FItemGroupStyleTransformations/copyWith.html"
+    },
+    {
+      "offset": 107,
+      "length": 16,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroup/scrollController.html"
+    },
+    {
+      "offset": 147,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroup/cacheExtent.html"
+    },
+    {
+      "offset": 167,
+      "length": 9,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroup/maxHeight.html"
+    },
+    {
+      "offset": 185,
+      "length": 17,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroup/dragStartBehavior.html"
+    },
+    {
+      "offset": 231,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroup/physics.html"
+    },
+    {
+      "offset": 273,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroup/enabled.html"
+    },
+    {
+      "offset": 290,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroup/divider.html"
+    },
+    {
+      "offset": 299,
+      "length": 17,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemDivider.html#full"
+    },
+    {
+      "offset": 320,
+      "length": 14,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroup/semanticsLabel.html"
+    }
+  ],
+  "tooltips": [
+    {
+      "offset": 0,
+      "length": 16,
+      "code": "FItemGroup.merge({\n  required List<FItemGroupMixin> children,\n  FItemGroupStyle Function(FItemGroupStyle)? style,\n  ScrollController? scrollController,\n  double? cacheExtent,\n  double maxHeight = .infinity,\n  DragStartBehavior dragStartBehavior = .start,\n  ScrollPhysics physics = const ClampingScrollPhysics(),\n  bool? enabled,\n  FItemDivider divider = .full,\n  String? semanticsLabel,\n  Key? key,\n})\n",
+      "links": [
+        {
+          "offset": 35,
+          "length": 15,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroupMixin-mixin.html"
+        },
+        {
+          "offset": 64,
+          "length": 15,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroupStyle-class.html"
+        },
+        {
+          "offset": 89,
+          "length": 15,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroupStyle-class.html"
+        },
+        {
+          "offset": 331,
+          "length": 12,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemDivider.html"
+        },
+        {
+          "offset": 355,
+          "length": 4,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemDivider.html#full"
+        }
+      ],
+      "container": {
+        "name": "FItemGroup",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroup-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 20,
+      "length": 9,
+      "code": "{required List<FItemGroupMixin> children}",
+      "links": [
+        {
+          "offset": 15,
+          "length": 15,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroupMixin-mixin.html"
+        }
+      ],
+      "documentation": ""
+    },
+    {
+      "offset": 36,
+      "length": 10,
+      "code": "FItemGroup({\n  required List<FItemMixin> children,\n  FItemGroupStyle Function(FItemGroupStyle)? style,\n  ScrollController? scrollController,\n  double? cacheExtent,\n  double maxHeight = .infinity,\n  DragStartBehavior dragStartBehavior = .start,\n  ScrollPhysics physics = const ClampingScrollPhysics(),\n  bool? enabled,\n  FItemDivider divider = .none,\n  String? semanticsLabel,\n  Key? key,\n})\n",
+      "links": [
+        {
+          "offset": 29,
+          "length": 10,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemMixin-mixin.html"
+        },
+        {
+          "offset": 53,
+          "length": 15,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroupStyle-class.html"
+        },
+        {
+          "offset": 78,
+          "length": 15,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroupStyle-class.html"
+        },
+        {
+          "offset": 320,
+          "length": 12,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemDivider.html"
+        },
+        {
+          "offset": 344,
+          "length": 4,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemDivider.html#none"
+        }
+      ],
+      "container": {
+        "name": "FItemGroup",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroup-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 47,
+      "length": 9,
+      "code": "{required List<FItemMixin> children}",
+      "links": [
+        {
+          "offset": 15,
+          "length": 10,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemMixin-mixin.html"
+        }
+      ],
+      "documentation": ""
+    },
+    {
+      "offset": 69,
+      "length": 6,
+      "code": "{FItemGroupStyle Function(FItemGroupStyle)? style}",
+      "links": [
+        {
+          "offset": 1,
+          "length": 15,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroupStyle-class.html"
+        },
+        {
+          "offset": 26,
+          "length": 15,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroupStyle-class.html"
+        }
+      ],
+      "documentation": ""
+    },
+    {
+      "offset": 77,
+      "length": 5,
+      "code": "FItemGroupStyle style",
+      "links": [
+        {
+          "offset": 0,
+          "length": 15,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroupStyle-class.html"
+        }
+      ],
+      "documentation": ""
+    },
+    {
+      "offset": 93,
+      "length": 8,
+      "code": "FItemGroupStyle copyWith({\n  BoxDecoration? decoration,\n  double? spacing,\n  FWidgetStateMap<Color>? dividerColor,\n  double? dividerWidth,\n  FItemStyle Function(FItemStyle)? itemStyle,\n})",
+      "links": [
+        {
+          "offset": 0,
+          "length": 15,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroupStyle-class.html"
+        },
+        {
+          "offset": 77,
+          "length": 23,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStateMap-class.html"
+        },
+        {
+          "offset": 141,
+          "length": 10,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemStyle-class.html"
+        },
+        {
+          "offset": 161,
+          "length": 10,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemStyle-class.html"
+        }
+      ],
+      "container": {
+        "name": "FItemGroupStyle",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroupStyle-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 107,
+      "length": 17,
+      "code": "{ScrollController? scrollController}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 147,
+      "length": 12,
+      "code": "{double? cacheExtent}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 167,
+      "length": 10,
+      "code": "{double maxHeight = .infinity}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 185,
+      "length": 18,
+      "code": "{DragStartBehavior dragStartBehavior = .start}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 231,
+      "length": 8,
+      "code": "{ScrollPhysics physics = const ClampingScrollPhysics()}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 273,
+      "length": 8,
+      "code": "{bool? enabled}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 290,
+      "length": 8,
+      "code": "{FItemDivider divider = .full}",
+      "links": [
+        {
+          "offset": 1,
+          "length": 12,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemDivider.html"
+        },
+        {
+          "offset": 25,
+          "length": 4,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemDivider.html#full"
+        }
+      ],
+      "documentation": ""
+    },
+    {
+      "offset": 299,
+      "length": 17,
+      "code": "FItemDivider full",
+      "links": [
+        {
+          "offset": 0,
+          "length": 12,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemDivider.html"
+        }
+      ],
+      "container": {
+        "name": "FItemDivider",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemDivider.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 320,
+      "length": 15,
+      "code": "{String? semanticsLabel}",
+      "links": [],
+      "documentation": ""
+    }
+  ]
+}

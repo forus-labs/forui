@@ -483,11 +483,12 @@
       return `<div class="code-block"><table class="code-table"><tbody>${rows.join('')}</tbody></table></div>`;
     }
 
-    // Group files by directory
+    // Group files by directory (all path segments except filename)
     function groupFiles(files) {
       const groups = {};
       for (const f of files) {
-        const [group] = f.split('/');
+        const parts = f.split('/');
+        const group = parts.slice(0, -1).join('/');
         (groups[group] ??= []).push(f);
       }
       return groups;
@@ -513,7 +514,7 @@
             <div class="group-header">${group} (${items.length})</div>
             <div class="group-items">
               ${items.map(f => {
-                const name = f.split('/')[1].replace('.json', '');
+                const name = f.split('/').pop().replace('.json', '');
                 const isActive = f === filePath;
                 return `<a class="nav-item${isActive ? ' active' : ''}" href="#${f}" data-path="${f}">${name}</a>`;
               }).join('')}
@@ -560,8 +561,9 @@
 
       try {
         currentData = await loadFile(filePath);
-        const [group, file] = filePath.split('/');
-        const name = file.replace('.json', '');
+        const parts = filePath.split('/');
+        const name = parts.pop().replace('.json', '');
+        const group = parts.join('/');
 
         main.innerHTML = `
           <section class="code-section" id="${filePath}">

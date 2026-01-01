@@ -1,0 +1,557 @@
+{
+  "code": "FCalendar(\n  control: FCalendarControl.managedDate(\n    controller: FCalendarController.date(),\n    initial: DateTime(2024, 9, 13),\n    selectable: (date) => true,\n    toggleable: true,\n    truncateAndStripTimezone: true,\n    onChange: (date) {},\n  ),\n  style: (style) => style.copyWith(),\n  dayBuilder: (context, data, child) => child!,\n  start: DateTime(2024),\n  end: DateTime(2030),\n  today: DateTime(2024, 7, 14),\n  initialType: FCalendarPickerType.yearMonth,\n  initialMonth: DateTime(2024, 9),\n  onMonthChange: (date) {},\n  onPress: (date) {},\n  onLongPress: (date) {},\n)",
+  "highlights": [],
+  "links": [
+    {
+      "offset": 0,
+      "length": 9,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendar/FCalendar.html"
+    },
+    {
+      "offset": 13,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendar/control.html"
+    },
+    {
+      "offset": 22,
+      "length": 28,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarControl/managedDate.html"
+    },
+    {
+      "offset": 56,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarControl/managedDate.html"
+    },
+    {
+      "offset": 68,
+      "length": 24,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarController/date.html"
+    },
+    {
+      "offset": 100,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarControl/managedDate.html"
+    },
+    {
+      "offset": 136,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarControl/managedDate.html"
+    },
+    {
+      "offset": 168,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarControl/managedDate.html"
+    },
+    {
+      "offset": 190,
+      "length": 24,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarControl/managedDate.html"
+    },
+    {
+      "offset": 226,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarControl/managedDate.html"
+    },
+    {
+      "offset": 254,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendar/style.html"
+    },
+    {
+      "offset": 278,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/$FCalendarStyleTransformations/copyWith.html"
+    },
+    {
+      "offset": 292,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendar/dayBuilder.html"
+    },
+    {
+      "offset": 340,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendar/start.html"
+    },
+    {
+      "offset": 365,
+      "length": 3,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendar/end.html"
+    },
+    {
+      "offset": 388,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendar/today.html"
+    },
+    {
+      "offset": 420,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendar/FCalendar.html"
+    },
+    {
+      "offset": 433,
+      "length": 29,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarPickerType/yearMonth.html"
+    },
+    {
+      "offset": 466,
+      "length": 12,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendar/FCalendar.html"
+    },
+    {
+      "offset": 501,
+      "length": 13,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendar/onMonthChange.html"
+    },
+    {
+      "offset": 529,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendar/onPress.html"
+    },
+    {
+      "offset": 551,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendar/onLongPress.html"
+    }
+  ],
+  "tooltips": [
+    {
+      "offset": 0,
+      "length": 9,
+      "code": "FCalendar({\n  required FCalendarControl<Object?> control,\n  FCalendarStyle Function(FCalendarStyle)? style,\n  Widget Function(\n        BuildContext,\n        ({\n          bool current,\n          DateTime date,\n          bool selectable,\n          bool selected,\n          FCalendarDayPickerStyle style,\n          bool today,\n        }),\n        Widget?,\n      )\n      dayBuilder =\n      defaultDayBuilder,\n  void Function(DateTime)? onMonthChange,\n  void Function(DateTime)? onPress,\n  void Function(DateTime)? onLongPress,\n  FCalendarPickerType initialType = .day,\n  DateTime? start,\n  DateTime? end,\n  DateTime? today,\n  DateTime? initialMonth,\n  Key? key,\n})\n",
+      "links": [
+        {
+          "offset": 49,
+          "length": 7,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendar/FCalendar.html"
+        },
+        {
+          "offset": 23,
+          "length": 25,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarControl-class.html"
+        },
+        {
+          "offset": 101,
+          "length": 5,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendar/FCalendar.html"
+        },
+        {
+          "offset": 60,
+          "length": 14,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarStyle-class.html"
+        },
+        {
+          "offset": 84,
+          "length": 14,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarStyle-class.html"
+        },
+        {
+          "offset": 367,
+          "length": 10,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendar/FCalendar.html"
+        },
+        {
+          "offset": 271,
+          "length": 23,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarDayPickerStyle-class.html"
+        },
+        {
+          "offset": 432,
+          "length": 13,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendar/FCalendar.html"
+        },
+        {
+          "offset": 474,
+          "length": 7,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendar/FCalendar.html"
+        },
+        {
+          "offset": 510,
+          "length": 11,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendar/FCalendar.html"
+        },
+        {
+          "offset": 545,
+          "length": 11,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendar/FCalendar.html"
+        },
+        {
+          "offset": 525,
+          "length": 19,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarPickerType.html"
+        },
+        {
+          "offset": 560,
+          "length": 3,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarPickerType.html#day"
+        },
+        {
+          "offset": 577,
+          "length": 5,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendar/FCalendar.html"
+        },
+        {
+          "offset": 596,
+          "length": 3,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendar/FCalendar.html"
+        },
+        {
+          "offset": 613,
+          "length": 5,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendar/FCalendar.html"
+        },
+        {
+          "offset": 632,
+          "length": 12,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendar/FCalendar.html"
+        },
+        {
+          "offset": 653,
+          "length": 3,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendar/FCalendar.html"
+        }
+      ],
+      "container": {
+        "name": "FCalendar",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendar-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 13,
+      "length": 8,
+      "code": "{required FCalendarControl<Object?> control}",
+      "links": [
+        {
+          "offset": 10,
+          "length": 25,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarControl-class.html"
+        }
+      ],
+      "documentation": ""
+    },
+    {
+      "offset": 39,
+      "length": 11,
+      "code": "FCalendarControl<DateTime?> managedDate({\n  FCalendarController<DateTime?>? controller,\n  DateTime? initial,\n  bool Function(DateTime)? selectable,\n  bool toggleable = true,\n  bool truncateAndStripTimezone = true,\n  void Function(DateTime?)? onChange,\n})",
+      "links": [
+        {
+          "offset": 0,
+          "length": 27,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarControl-class.html"
+        },
+        {
+          "offset": 44,
+          "length": 31,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarController-class.html"
+        }
+      ],
+      "container": {
+        "name": "FCalendarControl",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarControl-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 56,
+      "length": 11,
+      "code": "{FCalendarController<DateTime?>? controller}",
+      "links": [
+        {
+          "offset": 1,
+          "length": 31,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarController-class.html"
+        }
+      ],
+      "documentation": ""
+    },
+    {
+      "offset": 88,
+      "length": 4,
+      "code": "FCalendarController<DateTime?> date({\n  DateTime? initial,\n  bool Function(DateTime)? selectable,\n  bool toggleable = true,\n  bool truncateAndStripTimezone = true,\n})",
+      "links": [
+        {
+          "offset": 0,
+          "length": 30,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarController-class.html"
+        }
+      ],
+      "container": {
+        "name": "FCalendarController",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarController-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 100,
+      "length": 8,
+      "code": "{DateTime? initial}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 136,
+      "length": 11,
+      "code": "{bool Function(DateTime)? selectable}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 149,
+      "length": 4,
+      "code": "DateTime date",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 168,
+      "length": 11,
+      "code": "{bool toggleable = true}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 190,
+      "length": 25,
+      "code": "{bool truncateAndStripTimezone = true}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 226,
+      "length": 9,
+      "code": "{void Function(DateTime?)? onChange}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 237,
+      "length": 4,
+      "code": "DateTime? date",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 254,
+      "length": 6,
+      "code": "{FCalendarStyle Function(FCalendarStyle)? style}",
+      "links": [
+        {
+          "offset": 1,
+          "length": 14,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarStyle-class.html"
+        },
+        {
+          "offset": 25,
+          "length": 14,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarStyle-class.html"
+        }
+      ],
+      "documentation": ""
+    },
+    {
+      "offset": 262,
+      "length": 5,
+      "code": "FCalendarStyle style",
+      "links": [
+        {
+          "offset": 0,
+          "length": 14,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarStyle-class.html"
+        }
+      ],
+      "documentation": ""
+    },
+    {
+      "offset": 278,
+      "length": 8,
+      "code": "FCalendarStyle copyWith({\n  FCalendarHeaderStyle Function(FCalendarHeaderStyle)? headerStyle,\n  FCalendarDayPickerStyle Function(FCalendarDayPickerStyle)? dayPickerStyle,\n  FCalendarEntryStyle Function(FCalendarEntryStyle)? yearMonthPickerStyle,\n  BoxDecoration? decoration,\n  EdgeInsetsGeometry? padding,\n  Duration? pageAnimationDuration,\n})",
+      "links": [
+        {
+          "offset": 0,
+          "length": 14,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarStyle-class.html"
+        },
+        {
+          "offset": 28,
+          "length": 20,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarHeaderStyle-class.html"
+        },
+        {
+          "offset": 58,
+          "length": 20,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarHeaderStyle-class.html"
+        },
+        {
+          "offset": 96,
+          "length": 23,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarDayPickerStyle-class.html"
+        },
+        {
+          "offset": 129,
+          "length": 23,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarDayPickerStyle-class.html"
+        },
+        {
+          "offset": 173,
+          "length": 19,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarEntryStyle-class.html"
+        },
+        {
+          "offset": 202,
+          "length": 19,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarEntryStyle-class.html"
+        }
+      ],
+      "container": {
+        "name": "FCalendarStyle",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarStyle-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 292,
+      "length": 11,
+      "code": "{\n  Widget Function(\n        BuildContext,\n        ({\n          bool current,\n          DateTime date,\n          bool selectable,\n          bool selected,\n          FCalendarDayPickerStyle style,\n          bool today,\n        }),\n        Widget?,\n      )\n      dayBuilder =\n      defaultDayBuilder,\n}",
+      "links": [
+        {
+          "offset": 165,
+          "length": 23,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarDayPickerStyle-class.html"
+        }
+      ],
+      "documentation": ""
+    },
+    {
+      "offset": 305,
+      "length": 7,
+      "code": "BuildContext context",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 314,
+      "length": 4,
+      "code": "({\n    bool current,\n    DateTime date,\n    bool selectable,\n    bool selected,\n    FCalendarDayPickerStyle style,\n    bool today,\n  })\n  data,",
+      "links": [
+        {
+          "offset": 84,
+          "length": 23,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarDayPickerStyle-class.html"
+        }
+      ],
+      "documentation": ""
+    },
+    {
+      "offset": 320,
+      "length": 5,
+      "code": "Widget? child",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 340,
+      "length": 6,
+      "code": "{DateTime? start}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 365,
+      "length": 4,
+      "code": "{DateTime? end}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 388,
+      "length": 6,
+      "code": "{DateTime? today}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 420,
+      "length": 12,
+      "code": "{FCalendarPickerType initialType = .day}",
+      "links": [
+        {
+          "offset": 1,
+          "length": 19,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarPickerType.html"
+        },
+        {
+          "offset": 36,
+          "length": 3,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarPickerType.html#day"
+        }
+      ],
+      "documentation": ""
+    },
+    {
+      "offset": 433,
+      "length": 29,
+      "code": "FCalendarPickerType yearMonth",
+      "links": [
+        {
+          "offset": 0,
+          "length": 19,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarPickerType.html"
+        }
+      ],
+      "container": {
+        "name": "FCalendarPickerType",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarPickerType.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 466,
+      "length": 13,
+      "code": "{DateTime? initialMonth}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 501,
+      "length": 14,
+      "code": "{void Function(DateTime)? onMonthChange}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 517,
+      "length": 4,
+      "code": "DateTime date",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 529,
+      "length": 8,
+      "code": "{void Function(DateTime)? onPress}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 539,
+      "length": 4,
+      "code": "DateTime date",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 551,
+      "length": 12,
+      "code": "{void Function(DateTime)? onLongPress}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 565,
+      "length": 4,
+      "code": "DateTime date",
+      "links": [],
+      "documentation": ""
+    }
+  ]
+}

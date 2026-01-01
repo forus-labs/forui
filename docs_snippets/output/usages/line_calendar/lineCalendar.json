@@ -1,0 +1,426 @@
+{
+  "code": "FLineCalendar(\n  control: FLineCalendarControl.managed(\n    controller: FCalendarController.date(),\n    initial: DateTime.now(),\n    toggleable: false,\n    selectable: (date) => true,\n    onChange: (date) {},\n  ),\n  style: (style) => style.copyWith(),\n  initialScrollAlignment: AlignmentDirectional.center,\n  physics: const AlwaysScrollableScrollPhysics(),\n  cacheExtent: 100,\n  keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.manual,\n  builder: (context, data, child) => child!,\n  start: DateTime(1900),\n  end: DateTime(2050),\n  initialScroll: DateTime.now(),\n  today: DateTime.now(),\n)",
+  "highlights": [],
+  "links": [
+    {
+      "offset": 0,
+      "length": 13,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.line_calendar/FLineCalendar/FLineCalendar.html"
+    },
+    {
+      "offset": 17,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.line_calendar/FLineCalendar/control.html"
+    },
+    {
+      "offset": 26,
+      "length": 28,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.line_calendar/FLineCalendarControl/FLineCalendarControl.managed.html"
+    },
+    {
+      "offset": 60,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.line_calendar/FLineCalendarControl/FLineCalendarControl.managed.html"
+    },
+    {
+      "offset": 72,
+      "length": 24,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarController/date.html"
+    },
+    {
+      "offset": 104,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.line_calendar/FLineCalendarControl/FLineCalendarControl.managed.html"
+    },
+    {
+      "offset": 133,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.line_calendar/FLineCalendarControl/FLineCalendarControl.managed.html"
+    },
+    {
+      "offset": 156,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.line_calendar/FLineCalendarControl/FLineCalendarControl.managed.html"
+    },
+    {
+      "offset": 188,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.line_calendar/FLineCalendarControl/FLineCalendarControl.managed.html"
+    },
+    {
+      "offset": 216,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.line_calendar/FLineCalendar/style.html"
+    },
+    {
+      "offset": 240,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.line_calendar/$FLineCalendarStyleTransformations/copyWith.html"
+    },
+    {
+      "offset": 254,
+      "length": 22,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.line_calendar/FLineCalendar/initialScrollAlignment.html"
+    },
+    {
+      "offset": 309,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.line_calendar/FLineCalendar/physics.html"
+    },
+    {
+      "offset": 359,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.line_calendar/FLineCalendar/cacheExtent.html"
+    },
+    {
+      "offset": 379,
+      "length": 23,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.line_calendar/FLineCalendar/keyboardDismissBehavior.html"
+    },
+    {
+      "offset": 448,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.line_calendar/FLineCalendar/builder.html"
+    },
+    {
+      "offset": 493,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.line_calendar/FLineCalendar/FLineCalendar.html"
+    },
+    {
+      "offset": 518,
+      "length": 3,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.line_calendar/FLineCalendar/FLineCalendar.html"
+    },
+    {
+      "offset": 541,
+      "length": 13,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.line_calendar/FLineCalendar/FLineCalendar.html"
+    },
+    {
+      "offset": 574,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.line_calendar/FLineCalendar/FLineCalendar.html"
+    }
+  ],
+  "tooltips": [
+    {
+      "offset": 0,
+      "length": 13,
+      "code": "FLineCalendar({\n  FLineCalendarControl control = const .managed(),\n  FLineCalendarStyle Function(FLineCalendarStyle)? style,\n  AlignmentDirectional initialScrollAlignment = .center,\n  ScrollPhysics? physics,\n  double? cacheExtent,\n  ScrollViewKeyboardDismissBehavior keyboardDismissBehavior = .manual,\n  Widget Function(\n        BuildContext,\n        ({\n          DateTime date,\n          Set<WidgetState> states,\n          FLineCalendarStyle style,\n          bool today,\n        }),\n        Widget?,\n      )\n      builder =\n      _builder,\n  DateTime? start,\n  DateTime? end,\n  DateTime? initialScroll,\n  DateTime? today,\n  Key? key,\n})\n",
+      "links": [
+        {
+          "offset": 18,
+          "length": 20,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.line_calendar/FLineCalendarControl-class.html"
+        },
+        {
+          "offset": 56,
+          "length": 7,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.line_calendar/FLineCalendarControl/FLineCalendarControl.managed.html"
+        },
+        {
+          "offset": 69,
+          "length": 18,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.line_calendar/FLineCalendarStyle-class.html"
+        },
+        {
+          "offset": 97,
+          "length": 18,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.line_calendar/FLineCalendarStyle-class.html"
+        },
+        {
+          "offset": 424,
+          "length": 18,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.line_calendar/FLineCalendarStyle-class.html"
+        }
+      ],
+      "container": {
+        "name": "FLineCalendar",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.line_calendar/FLineCalendar-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 17,
+      "length": 8,
+      "code": "{FLineCalendarControl control = const .managed()}",
+      "links": [
+        {
+          "offset": 1,
+          "length": 20,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.line_calendar/FLineCalendarControl-class.html"
+        },
+        {
+          "offset": 39,
+          "length": 7,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.line_calendar/FLineCalendarControl/FLineCalendarControl.managed.html"
+        }
+      ],
+      "documentation": ""
+    },
+    {
+      "offset": 26,
+      "length": 28,
+      "code": "FLineCalendarControl.managed({\n  FCalendarController<DateTime?>? controller,\n  DateTime? initial,\n  bool? toggleable,\n  bool Function(DateTime)? selectable,\n  void Function(DateTime?)? onChange,\n})\n",
+      "links": [
+        {
+          "offset": 33,
+          "length": 31,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarController-class.html"
+        }
+      ],
+      "container": {
+        "name": "FLineCalendarControl",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.line_calendar/FLineCalendarControl-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 60,
+      "length": 11,
+      "code": "{FCalendarController<DateTime?>? controller}",
+      "links": [
+        {
+          "offset": 1,
+          "length": 31,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarController-class.html"
+        }
+      ],
+      "documentation": ""
+    },
+    {
+      "offset": 92,
+      "length": 4,
+      "code": "FCalendarController<DateTime?> date({\n  DateTime? initial,\n  bool Function(DateTime)? selectable,\n  bool toggleable = true,\n  bool truncateAndStripTimezone = true,\n})",
+      "links": [
+        {
+          "offset": 0,
+          "length": 30,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarController-class.html"
+        }
+      ],
+      "container": {
+        "name": "FCalendarController",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarController-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 104,
+      "length": 8,
+      "code": "{DateTime? initial}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 133,
+      "length": 11,
+      "code": "{bool? toggleable}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 156,
+      "length": 11,
+      "code": "{bool Function(DateTime)? selectable}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 169,
+      "length": 4,
+      "code": "DateTime date",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 188,
+      "length": 9,
+      "code": "{void Function(DateTime?)? onChange}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 199,
+      "length": 4,
+      "code": "DateTime? date",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 216,
+      "length": 6,
+      "code": "{FLineCalendarStyle Function(FLineCalendarStyle)? style}",
+      "links": [
+        {
+          "offset": 1,
+          "length": 18,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.line_calendar/FLineCalendarStyle-class.html"
+        },
+        {
+          "offset": 29,
+          "length": 18,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.line_calendar/FLineCalendarStyle-class.html"
+        }
+      ],
+      "documentation": ""
+    },
+    {
+      "offset": 224,
+      "length": 5,
+      "code": "FLineCalendarStyle style",
+      "links": [
+        {
+          "offset": 0,
+          "length": 18,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.line_calendar/FLineCalendarStyle-class.html"
+        }
+      ],
+      "documentation": ""
+    },
+    {
+      "offset": 240,
+      "length": 8,
+      "code": "FLineCalendarStyle copyWith({\n  EdgeInsetsGeometry? padding,\n  double? contentEdgeSpacing,\n  double? contentSpacing,\n  FWidgetStateMap<BoxDecoration>? decoration,\n  FWidgetStateMap<Color>? todayIndicatorColor,\n  FWidgetStateMap<TextStyle>? dateTextStyle,\n  FWidgetStateMap<TextStyle>? weekdayTextStyle,\n  FTappableStyle Function(FTappableStyle)? tappableStyle,\n})",
+      "links": [
+        {
+          "offset": 0,
+          "length": 18,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.line_calendar/FLineCalendarStyle-class.html"
+        },
+        {
+          "offset": 119,
+          "length": 31,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStateMap-class.html"
+        },
+        {
+          "offset": 165,
+          "length": 23,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStateMap-class.html"
+        },
+        {
+          "offset": 212,
+          "length": 27,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStateMap-class.html"
+        },
+        {
+          "offset": 257,
+          "length": 27,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStateMap-class.html"
+        },
+        {
+          "offset": 305,
+          "length": 14,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappableStyle-class.html"
+        },
+        {
+          "offset": 329,
+          "length": 14,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappableStyle-class.html"
+        }
+      ],
+      "container": {
+        "name": "FLineCalendarStyle",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.line_calendar/FLineCalendarStyle-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 254,
+      "length": 23,
+      "code": "{AlignmentDirectional initialScrollAlignment = .center}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 309,
+      "length": 8,
+      "code": "{ScrollPhysics? physics}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 359,
+      "length": 12,
+      "code": "{double? cacheExtent}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 379,
+      "length": 24,
+      "code": "{ScrollViewKeyboardDismissBehavior keyboardDismissBehavior = .manual}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 448,
+      "length": 8,
+      "code": "{\n  Widget Function(\n        BuildContext,\n        ({\n          DateTime date,\n          Set<WidgetState> states,\n          FLineCalendarStyle style,\n          bool today,\n        }),\n        Widget?,\n      )\n      builder =\n      _builder,\n}",
+      "links": [
+        {
+          "offset": 124,
+          "length": 18,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.line_calendar/FLineCalendarStyle-class.html"
+        }
+      ],
+      "documentation": ""
+    },
+    {
+      "offset": 458,
+      "length": 7,
+      "code": "BuildContext context",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 467,
+      "length": 4,
+      "code": "({\n    DateTime date,\n    Set<WidgetState> states,\n    FLineCalendarStyle style,\n    bool today,\n  })\n  data,",
+      "links": [
+        {
+          "offset": 55,
+          "length": 18,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.line_calendar/FLineCalendarStyle-class.html"
+        }
+      ],
+      "documentation": ""
+    },
+    {
+      "offset": 473,
+      "length": 5,
+      "code": "Widget? child",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 493,
+      "length": 6,
+      "code": "{DateTime? start}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 518,
+      "length": 4,
+      "code": "{DateTime? end}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 541,
+      "length": 14,
+      "code": "{DateTime? initialScroll}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 574,
+      "length": 6,
+      "code": "{DateTime? today}",
+      "links": [],
+      "documentation": ""
+    }
+  ]
+}

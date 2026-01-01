@@ -1,0 +1,170 @@
+{
+  "code": "@override\nWidget build(BuildContext context) => const FPicker(\n  children: [\n    FPickerWheel(\n      loop: true,\n      children: [\n        Text('January'),\n        Text('February'),\n        Text('March'),\n        Text('April'),\n        Text('May'),\n        Text('June'),\n        Text('July'),\n        Text('August'),\n        Text('September'),\n        Text('October'),\n        Text('November'),\n        Text('December'),\n      ],\n    ),\n  ],\n);\n",
+  "highlights": [
+    {
+      "start": 5,
+      "end": 5
+    }
+  ],
+  "links": [
+    {
+      "offset": 54,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.picker/FPicker/FPicker.html"
+    },
+    {
+      "offset": 65,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.picker/FPicker/children.html"
+    },
+    {
+      "offset": 81,
+      "length": 12,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.picker/FPickerWheel/FPickerWheel.html"
+    },
+    {
+      "offset": 101,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.picker/FPickerWheel/FPickerWheel.html"
+    },
+    {
+      "offset": 119,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.picker/FPickerWheel/FPickerWheel.html"
+    }
+  ],
+  "tooltips": [
+    {
+      "offset": 23,
+      "length": 20,
+      "code": "BuildContext context",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 54,
+      "length": 7,
+      "code": "FPicker({\n  required List<Widget> children,\n  FPickerControl control = const .managed(),\n  FPickerStyle Function(FPickerStyle)? style,\n  Key? key,\n})\n",
+      "links": [
+        {
+          "offset": 34,
+          "length": 8,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.picker/FPicker/FPicker.html"
+        },
+        {
+          "offset": 61,
+          "length": 7,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.picker/FPicker/FPicker.html"
+        },
+        {
+          "offset": 46,
+          "length": 14,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.picker/FPickerControl-class.html"
+        },
+        {
+          "offset": 78,
+          "length": 7,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.picker/FPickerControl/FPickerControl.managed.html"
+        },
+        {
+          "offset": 128,
+          "length": 5,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.picker/FPicker/FPicker.html"
+        },
+        {
+          "offset": 91,
+          "length": 12,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.picker/FPickerStyle-class.html"
+        },
+        {
+          "offset": 113,
+          "length": 12,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.picker/FPickerStyle-class.html"
+        },
+        {
+          "offset": 142,
+          "length": 3,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.picker/FPicker/FPicker.html"
+        }
+      ],
+      "container": {
+        "name": "FPicker",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.picker/FPicker-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 65,
+      "length": 9,
+      "code": "{required List<Widget> children}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 81,
+      "length": 12,
+      "code": "FPickerWheel({\n  required List<Widget> children,\n  bool loop,\n  int flex,\n  double? itemExtent,\n  bool autofocus,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  Key? key,\n})\n",
+      "links": [
+        {
+          "offset": 39,
+          "length": 8,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.picker/FPickerWheel/FPickerWheel.html"
+        },
+        {
+          "offset": 56,
+          "length": 4,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.picker/FPickerWheel/FPickerWheel.html"
+        },
+        {
+          "offset": 68,
+          "length": 4,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.picker/FPickerWheel/FPickerWheel.html"
+        },
+        {
+          "offset": 84,
+          "length": 10,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.picker/FPickerWheel/FPickerWheel.html"
+        },
+        {
+          "offset": 103,
+          "length": 9,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.picker/FPickerWheel/FPickerWheel.html"
+        },
+        {
+          "offset": 127,
+          "length": 9,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.picker/FPickerWheel/FPickerWheel.html"
+        },
+        {
+          "offset": 161,
+          "length": 13,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.picker/FPickerWheel/FPickerWheel.html"
+        },
+        {
+          "offset": 183,
+          "length": 3,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.picker/FPickerWheel/FPickerWheel.html"
+        }
+      ],
+      "container": {
+        "name": "FPickerWheel",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.picker/FPickerWheel-class.html"
+      },
+      "documentation": ""
+    },
+    {
+      "offset": 101,
+      "length": 5,
+      "code": "{bool loop}",
+      "links": [],
+      "documentation": ""
+    },
+    {
+      "offset": 119,
+      "length": 9,
+      "code": "{required List<Widget> children}",
+      "links": [],
+      "documentation": ""
+    }
+  ]
+}

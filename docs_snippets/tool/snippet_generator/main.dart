@@ -10,7 +10,8 @@ import 'package:dart_style/dart_style.dart';
 import 'package:path/path.dart' as p;
 import 'package:yaml/yaml.dart';
 
-import 'transformations/examples/examples.dart';
+import 'usages/usages.dart';
+import 'examples/examples.dart';
 import 'snippet.dart';
 
 /// The formatter used to format the generated code snippets.
@@ -55,7 +56,7 @@ Future<void> main() async {
     );
   }
 
-  // Extract & annotate sample snippets.
+  // Process examples.
   for (final snippet in (await Examples.transform(session, provider, packages, [_examples])).values) {
     final json = const JsonEncoder.withIndent('  ').convert(snippet.toJson());
     for (final route in snippet.routes) {
@@ -67,7 +68,18 @@ Future<void> main() async {
         normalized = normalized.substring(0, normalized.length - 1);
       }
 
-      final file = File(p.join(output, '$normalized.json'));
+      final file = File(p.join(output, 'examples', '$normalized.json'));
+      file.parent.createSync(recursive: true);
+      file.writeAsStringSync(json);
+    }
+  }
+
+  // Process usages
+  final usages = await Usages.transform(session, provider, packages, p.join(docsSnippets, 'usages'));
+  for (final MapEntry(key: fileName, value: fileSnippets) in usages.entries) {
+    for (final MapEntry(key: varName, value: snippet) in fileSnippets.entries) {
+      final json = const JsonEncoder.withIndent('  ').convert(snippet.toJson());
+      final file = File(p.join(output, 'usages', fileName, '$varName.json'));
       file.parent.createSync(recursive: true);
       file.writeAsStringSync(json);
     }
