@@ -2,17 +2,18 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { Button } from '@/components/ui/button';
+import { Footer } from '@/components/footer';
 import { ImageZoom } from 'fumadocs-ui/components/image-zoom';
 
 export default function HomePage() {
   return (
     <main className="flex flex-col">
-      <section className="flex flex-col items-center px-6 pt-20 pb-8 text-center gap-16">
+      <section className="flex flex-col items-center px-6 pt-10 sm:pt-20 pb-8 text-center gap-10 sm:gap-16">
         <div className="flex flex-col items-center justify-center max-w-3xl mx-auto">
-          <h1 className="text-4xl font-bold tracking-tight sm:text-5xl mb-4">
+          <h1 className="text-3xl sm:text-5xl font-bold tracking-tight mb-4">
             Beautifully designed minimalistic Flutter widgets
           </h1>
-          <p className="text-lg text-muted-foreground max-w-2xl mb-6">
+          <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mb-6">
             A flutter platform-agnostic UI library for developers seeking consistent and elegant UIs across all devices.
             Fully customizable, free, and open source.
           </p>
@@ -30,7 +31,7 @@ export default function HomePage() {
         </div>
 
         <ImageZoom
-          src="/banner-311225.png"
+          src="/banners/banner-311225.png"
           className="w-full border rounded-lg p-4 bg-white"
           alt="Forui Demo"
           width={2400}
@@ -39,9 +40,7 @@ export default function HomePage() {
         />
       </section>
 
-      <footer className="py-6 text-center text-sm text-muted-foreground">
-        Built by <a href="https://duobase.io" target="_blank" rel="noopener noreferrer" className="underline hover:text-foreground">Duobase</a> from Singapore.
-      </footer>
+      <Footer />
     </main>
   );
 }

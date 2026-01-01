@@ -5,6 +5,13 @@ import { Logo } from '@/components/logo';
 const iconLinks = [
   {
     type: 'icon' as const,
+    label: 'GitHub',
+    icon: <Image src="/brands/github.svg" alt="" width={20} height={20} className="dark:invert" />,
+    text: 'GitHub',
+    url: 'https://github.com/duobaseio/forui',
+  },
+  {
+    type: 'icon' as const,
     label: 'X',
     icon: <Image src="/brands/x.svg" alt="" width={16} height={16} className="dark:invert" />,
     text: 'X',
@@ -12,10 +19,10 @@ const iconLinks = [
   },
   {
     type: 'icon' as const,
-    label: 'GitHub',
-    icon: <Image src="/brands/github.svg" alt="" width={20} height={20} className="dark:invert" />,
-    text: 'GitHub',
-    url: 'https://github.com/duobaseio/forui',
+    label: 'Discord',
+    icon: <Image src="/brands/discord.svg" alt="" width={22} height={22} className="dark:invert" />,
+    text: 'Discord',
+    url: 'https://discord.gg/jrw3qHksjE',
   },
 ];
 
