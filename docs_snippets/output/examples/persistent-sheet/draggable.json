@@ -99,6 +99,10 @@
       "length": 7,
       "code": "void dispose()",
       "links": [],
+      "container": {
+        "name": "FPersistentSheetController",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/FPersistentSheetController-class.html"
+      },
       "documentation": ""
     },
     {
@@ -257,6 +261,10 @@
       "length": 6,
       "code": "TickerFuture toggle()",
       "links": [],
+      "container": {
+        "name": "FPersistentSheetController",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/FPersistentSheetController-class.html"
+      },
       "documentation": ""
     },
     {
@@ -295,10 +303,6 @@
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/FPersistentSheetStyle-class.html"
         }
       ],
-      "container": {
-        "name": "FPersistentSheetController",
-        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/FPersistentSheetController-class.html"
-      },
       "documentation": ""
     },
     {

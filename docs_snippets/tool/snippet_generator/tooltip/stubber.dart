@@ -29,9 +29,9 @@ class TooltipStubber extends RecursiveAstVisitor<void> {
       // `Type name(params) => throw UnimplementedError();`
       .getter || .method => '${tooltip.code} => throw UnimplementedError();',
       // Transform `Type.ctr(params)` to `class Type { Type.ctr(params); }`
-      TooltipTarget.constructor => 'class ${tooltip.container!.$1} { ${tooltip.code}; }',
+      .constructor => 'class ${tooltip.container!.$1} { ${tooltip.code}; }',
       // Transform `Type param` to `void a(Type param) {}`
-      TooltipTarget.formalParameter => 'void a(${tooltip.code}) {}',
+      .formalParameter => 'void a(${tooltip.code}) {}',
     };
     final code = formatter.format(imports + stubbed);
 

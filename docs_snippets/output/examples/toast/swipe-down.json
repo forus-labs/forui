@@ -480,10 +480,6 @@
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/FToastAlignment.html"
         }
       ],
-      "container": {
-        "name": "FToasterEntry",
-        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/FToasterEntry-mixin.html"
-      },
       "documentation": ""
     },
     {

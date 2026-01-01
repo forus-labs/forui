@@ -543,6 +543,10 @@
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFieldStyle-class.html"
         }
       ],
+      "container": {
+        "name": "FTextFormField",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFormField-class.html"
+      },
       "documentation": ""
     },
     {

@@ -194,6 +194,10 @@
       "length": 7,
       "code": "void dispose()",
       "links": [],
+      "container": {
+        "name": "FTimeFieldController",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeFieldController-class.html"
+      },
       "documentation": ""
     },
     {

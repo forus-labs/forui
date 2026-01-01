@@ -142,6 +142,10 @@
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.alert/FAlertStyle-class.html"
         }
       ],
+      "container": {
+        "name": "FAlertStyle",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.alert/FAlertStyle-class.html"
+      },
       "documentation": ""
     },
     {

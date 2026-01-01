@@ -941,8 +941,8 @@
         }
       ],
       "container": {
-        "name": "FDividerStyle",
-        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.divider/FDividerStyle-class.html"
+        "name": "$FDividerStyleTransformations",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.divider/$FDividerStyleTransformations.html"
       },
       "documentation": ""
     },

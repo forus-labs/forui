@@ -412,8 +412,8 @@
         }
       ],
       "container": {
-        "name": "FDialogRouteStyle",
-        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.dialog/FDialogRouteStyle-class.html"
+        "name": "$FDialogRouteStyleTransformations",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.dialog/$FDialogRouteStyleTransformations.html"
       },
       "documentation": ""
     },
@@ -1062,6 +1062,10 @@
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButtonStyle-class.html"
         }
       ],
+      "container": {
+        "name": "FButtonStyle",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButtonStyle-class.html"
+      },
       "documentation": ""
     },
     {

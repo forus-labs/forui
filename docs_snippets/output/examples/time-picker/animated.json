@@ -141,6 +141,10 @@
       "length": 7,
       "code": "void dispose()",
       "links": [],
+      "container": {
+        "name": "FTimePickerController",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_picker/FTimePickerController-class.html"
+      },
       "documentation": ""
     },
     {
@@ -450,6 +454,10 @@
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTime-class.html"
         }
       ],
+      "container": {
+        "name": "FTimePickerController",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_picker/FTimePickerController-class.html"
+      },
       "documentation": ""
     },
     {

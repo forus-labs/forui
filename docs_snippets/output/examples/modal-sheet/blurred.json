@@ -473,8 +473,8 @@
         }
       ],
       "container": {
-        "name": "FModalSheetStyle",
-        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/FModalSheetStyle-class.html"
+        "name": "$FModalSheetStyleTransformations",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/$FModalSheetStyleTransformations.html"
       },
       "documentation": ""
     },

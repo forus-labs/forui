@@ -306,8 +306,8 @@
         }
       ],
       "container": {
-        "name": "FSidebarStyle",
-        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sidebar/FSidebarStyle-class.html"
+        "name": "$FSidebarStyleTransformations",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sidebar/$FSidebarStyleTransformations.html"
       },
       "documentation": ""
     },

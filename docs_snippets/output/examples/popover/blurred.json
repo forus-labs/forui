@@ -1366,8 +1366,8 @@
         }
       ],
       "container": {
-        "name": "FPopoverStyle",
-        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverStyle-class.html"
+        "name": "$FPopoverStyleTransformations",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/$FPopoverStyleTransformations.html"
       },
       "documentation": ""
     },
@@ -2298,6 +2298,10 @@
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButtonStyle-class.html"
         }
       ],
+      "container": {
+        "name": "FButtonStyle",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButtonStyle-class.html"
+      },
       "documentation": ""
     },
     {

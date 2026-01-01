@@ -408,8 +408,8 @@
         }
       ],
       "container": {
-        "name": "FCalendarStyle",
-        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarStyle-class.html"
+        "name": "$FCalendarStyleTransformations",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/$FCalendarStyleTransformations.html"
       },
       "documentation": ""
     },

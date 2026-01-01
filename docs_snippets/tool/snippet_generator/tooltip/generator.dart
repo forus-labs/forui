@@ -153,8 +153,12 @@ class TooltipGenerator extends DartDocLinker {
   /// shorthand methods.
   @override
   void visitMethodInvocation(MethodInvocation node) {
-    if (node.methodName case SimpleIdentifier(:final element?) when _forui(element)) {
-      tooltip(node.methodName, .method, element.toString(), node.staticType?.element);
+    switch (node.methodName.element) {
+      case final TopLevelFunctionElement element when _forui(element):
+        tooltip(node.methodName, .method, element.toString());
+
+      case final MethodElement element when _forui(element):
+        tooltip(node.methodName, .method, element.toString(), element.enclosingElement);
     }
     super.visitMethodInvocation(node);
   }

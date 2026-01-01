@@ -122,6 +122,10 @@
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.badge/FBadgeStyle-class.html"
         }
       ],
+      "container": {
+        "name": "FBadgeStyle",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.badge/FBadgeStyle-class.html"
+      },
       "documentation": ""
     },
     {

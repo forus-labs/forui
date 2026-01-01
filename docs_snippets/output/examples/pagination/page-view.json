@@ -173,6 +173,10 @@
       "length": 5,
       "code": "Color hover(Color color)",
       "links": [],
+      "container": {
+        "name": "FColors",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors-class.html"
+      },
       "documentation": ""
     },
     {

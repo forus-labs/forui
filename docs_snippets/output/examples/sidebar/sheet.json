@@ -921,8 +921,8 @@
         }
       ],
       "container": {
-        "name": "FSidebarStyle",
-        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sidebar/FSidebarStyle-class.html"
+        "name": "$FSidebarStyleTransformations",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sidebar/$FSidebarStyleTransformations.html"
       },
       "documentation": ""
     },
@@ -1113,8 +1113,8 @@
         }
       ],
       "container": {
-        "name": "FDividerStyle",
-        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.divider/FDividerStyle-class.html"
+        "name": "$FDividerStyleTransformations",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.divider/$FDividerStyleTransformations.html"
       },
       "documentation": ""
     },

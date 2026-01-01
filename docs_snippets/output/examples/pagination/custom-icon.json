@@ -584,6 +584,10 @@
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButtonStyle-class.html"
         }
       ],
+      "container": {
+        "name": "FButtonStyle",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButtonStyle-class.html"
+      },
       "documentation": ""
     },
     {
@@ -616,6 +620,10 @@
       "length": 7,
       "code": "IconThemeData resolve(Set<WidgetState> states)",
       "links": [],
+      "container": {
+        "name": "FWidgetStateMap",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStateMap-class.html"
+      },
       "documentation": ""
     },
     {
@@ -826,6 +834,10 @@
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButtonStyle-class.html"
         }
       ],
+      "container": {
+        "name": "FButtonStyle",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButtonStyle-class.html"
+      },
       "documentation": ""
     },
     {
@@ -858,6 +870,10 @@
       "length": 7,
       "code": "IconThemeData resolve(Set<WidgetState> states)",
       "links": [],
+      "container": {
+        "name": "FWidgetStateMap",
+        "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStateMap-class.html"
+      },
       "documentation": ""
     },
     {
