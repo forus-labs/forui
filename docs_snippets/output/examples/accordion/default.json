@@ -77,6 +77,11 @@
       "code": "FAccordion({\n  required List<Widget> children,\n  FAccordionControl control = const .managed(),\n  FAccordionStyle Function(FAccordionStyle)? style,\n  Key? key,\n})\n",
       "links": [
         {
+          "offset": 0,
+          "length": 10,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordion/FAccordion.html"
+        },
+        {
           "offset": 37,
           "length": 8,
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordion/FAccordion.html"
@@ -135,6 +140,11 @@
       "length": 14,
       "code": "FAccordionItem({\n  required Widget title,\n  required Widget child,\n  FAccordionStyle? style,\n  Widget icon = const Icon(FIcons.chevronDown),\n  bool? initiallyExpanded,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  void Function(bool)? onHoverChange,\n  void Function(FWidgetStatesDelta)? onStateChange,\n  Key? key,\n})\n",
       "links": [
+        {
+          "offset": 0,
+          "length": 14,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionItem/FAccordionItem.html"
+        },
         {
           "offset": 35,
           "length": 5,
@@ -231,6 +241,11 @@
       "length": 14,
       "code": "FAccordionItem({\n  required Widget title,\n  required Widget child,\n  FAccordionStyle? style,\n  Widget icon = const Icon(FIcons.chevronDown),\n  bool? initiallyExpanded,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  void Function(bool)? onHoverChange,\n  void Function(FWidgetStatesDelta)? onStateChange,\n  Key? key,\n})\n",
       "links": [
+        {
+          "offset": 0,
+          "length": 14,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionItem/FAccordionItem.html"
+        },
         {
           "offset": 35,
           "length": 5,
@@ -334,6 +349,11 @@
       "length": 14,
       "code": "FAccordionItem({\n  required Widget title,\n  required Widget child,\n  FAccordionStyle? style,\n  Widget icon = const Icon(FIcons.chevronDown),\n  bool? initiallyExpanded,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  void Function(bool)? onHoverChange,\n  void Function(FWidgetStatesDelta)? onStateChange,\n  Key? key,\n})\n",
       "links": [
+        {
+          "offset": 0,
+          "length": 14,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionItem/FAccordionItem.html"
+        },
         {
           "offset": 35,
           "length": 5,

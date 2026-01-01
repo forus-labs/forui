@@ -42,6 +42,11 @@
       "code": "FAvatar({\n  required ImageProvider<Object> image,\n  FAvatarStyle Function(FAvatarStyle)? style,\n  double size = 40.0,\n  String? semanticsLabel,\n  Widget? fallback,\n  Key? key,\n})\n",
       "links": [
         {
+          "offset": 0,
+          "length": 7,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.avatar/FAvatar/FAvatar.html"
+        },
+        {
           "offset": 43,
           "length": 5,
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.avatar/FAvatar/FAvatar.html"
@@ -107,6 +112,11 @@
       "length": 7,
       "code": "FAvatar({\n  required ImageProvider<Object> image,\n  FAvatarStyle Function(FAvatarStyle)? style,\n  double size = 40.0,\n  String? semanticsLabel,\n  Widget? fallback,\n  Key? key,\n})\n",
       "links": [
+        {
+          "offset": 0,
+          "length": 7,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.avatar/FAvatar/FAvatar.html"
+        },
         {
           "offset": 43,
           "length": 5,

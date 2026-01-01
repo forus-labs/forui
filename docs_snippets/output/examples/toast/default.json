@@ -319,6 +319,11 @@
       "code": "FButton({\n  required void Function()? onPress,\n  required Widget child,\n  FBaseButtonStyle Function(FButtonStyle) style = _primary,\n  void Function()? onLongPress,\n  void Function()? onSecondaryPress,\n  void Function()? onSecondaryLongPress,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  void Function(bool)? onHoverChange,\n  void Function(FWidgetStatesDelta)? onStateChange,\n  bool selected = false,\n  Map<ShortcutActivator, Intent>? shortcuts,\n  Map<Type, Action<Intent>>? actions,\n  MainAxisSize mainAxisSize = .max,\n  MainAxisAlignment mainAxisAlignment = .center,\n  CrossAxisAlignment crossAxisAlignment = .center,\n  TextBaseline? textBaseline,\n  Widget? prefix,\n  Widget? suffix,\n  Key? key,\n})\n",
       "links": [
         {
+          "offset": 0,
+          "length": 7,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+        },
+        {
           "offset": 38,
           "length": 7,
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
@@ -458,6 +463,11 @@
       "code": "FToasterEntry showFToast({\n  required BuildContext context,\n  required Widget title,\n  FToastStyle Function(FToastStyle)? style,\n  Widget? icon,\n  Widget? description,\n  Widget Function(BuildContext, FToasterEntry)? suffixBuilder,\n  FToastAlignment? alignment,\n  List<AxisDirection>? swipeToDismiss,\n  Duration? duration = const Duration(seconds: 5),\n  void Function()? onDismiss,\n})",
       "links": [
         {
+          "offset": 14,
+          "length": 10,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/showFToast.html"
+        },
+        {
           "offset": 0,
           "length": 13,
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/FToasterEntry-mixin.html"
@@ -561,6 +571,11 @@
       "length": 7,
       "code": "FButton({\n  required void Function()? onPress,\n  required Widget child,\n  FBaseButtonStyle Function(FButtonStyle) style = _primary,\n  void Function()? onLongPress,\n  void Function()? onSecondaryPress,\n  void Function()? onSecondaryLongPress,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  void Function(bool)? onHoverChange,\n  void Function(FWidgetStatesDelta)? onStateChange,\n  bool selected = false,\n  Map<ShortcutActivator, Intent>? shortcuts,\n  Map<Type, Action<Intent>>? actions,\n  MainAxisSize mainAxisSize = .max,\n  MainAxisAlignment mainAxisAlignment = .center,\n  CrossAxisAlignment crossAxisAlignment = .center,\n  TextBaseline? textBaseline,\n  Widget? prefix,\n  Widget? suffix,\n  Key? key,\n})\n",
       "links": [
+        {
+          "offset": 0,
+          "length": 7,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+        },
         {
           "offset": 38,
           "length": 7,
@@ -966,7 +981,13 @@
       "offset": 1028,
       "length": 3,
       "code": "FWidgetStateMap.all(TextStyle value)\n",
-      "links": [],
+      "links": [
+        {
+          "offset": 0,
+          "length": 19,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStateMap/FWidgetStateMap.all.html"
+        }
+      ],
       "container": {
         "name": "FWidgetStateMap",
         "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStateMap-class.html"

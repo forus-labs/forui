@@ -182,6 +182,11 @@
       "code": "FButton({\n  required void Function()? onPress,\n  required Widget child,\n  FBaseButtonStyle Function(FButtonStyle) style = _primary,\n  void Function()? onLongPress,\n  void Function()? onSecondaryPress,\n  void Function()? onSecondaryLongPress,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  void Function(bool)? onHoverChange,\n  void Function(FWidgetStatesDelta)? onStateChange,\n  bool selected = false,\n  Map<ShortcutActivator, Intent>? shortcuts,\n  Map<Type, Action<Intent>>? actions,\n  MainAxisSize mainAxisSize = .max,\n  MainAxisAlignment mainAxisAlignment = .center,\n  CrossAxisAlignment crossAxisAlignment = .center,\n  TextBaseline? textBaseline,\n  Widget? prefix,\n  Widget? suffix,\n  Key? key,\n})\n",
       "links": [
         {
+          "offset": 0,
+          "length": 7,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+        },
+        {
           "offset": 38,
           "length": 7,
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
@@ -327,6 +332,11 @@
       "length": 11,
       "code": "Future<T?> showFDialog<T>({\n  required BuildContext context,\n  required Widget Function(BuildContext, FDialogStyle, Animation<double>)\n  builder,\n  bool useRootNavigator = false,\n  FDialogRouteStyle Function(FDialogRouteStyle)? routeStyle,\n  FDialogStyle Function(FDialogStyle)? style,\n  String? barrierLabel,\n  bool barrierDismissible = true,\n  RouteSettings? routeSettings,\n  AnimationController? transitionAnimationController,\n  Offset? anchorPoint,\n  bool useSafeArea = false,\n})",
       "links": [
+        {
+          "offset": 11,
+          "length": 11,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.dialog/showFDialog.html"
+        },
         {
           "offset": 102,
           "length": 12,
@@ -546,6 +556,11 @@
       "code": "FTheme({\n  required FThemeData data,\n  required Widget child,\n  TextDirection? textDirection,\n  Key? key,\n})\n",
       "links": [
         {
+          "offset": 0,
+          "length": 6,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FTheme/FTheme.html"
+        },
+        {
           "offset": 31,
           "length": 4,
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FTheme/FTheme.html"
@@ -602,6 +617,11 @@
       "length": 7,
       "code": "FDialog({\n  required List<Widget> actions,\n  FDialogStyle Function(FDialogStyle)? style,\n  Animation<double>? animation,\n  String? semanticsLabel,\n  BoxConstraints constraints = const BoxConstraints(\n    minWidth: 280,\n    maxWidth: 560,\n  ),\n  Widget? title,\n  Widget? body,\n  Axis direction = .vertical,\n  Key? key,\n})\n",
       "links": [
+        {
+          "offset": 0,
+          "length": 7,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.dialog/FDialog/FDialog.html"
+        },
         {
           "offset": 34,
           "length": 7,
@@ -715,6 +735,11 @@
       "length": 7,
       "code": "FButton({\n  required void Function()? onPress,\n  required Widget child,\n  FBaseButtonStyle Function(FButtonStyle) style = _primary,\n  void Function()? onLongPress,\n  void Function()? onSecondaryPress,\n  void Function()? onSecondaryLongPress,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  void Function(bool)? onHoverChange,\n  void Function(FWidgetStatesDelta)? onStateChange,\n  bool selected = false,\n  Map<ShortcutActivator, Intent>? shortcuts,\n  Map<Type, Action<Intent>>? actions,\n  MainAxisSize mainAxisSize = .max,\n  MainAxisAlignment mainAxisAlignment = .center,\n  CrossAxisAlignment crossAxisAlignment = .center,\n  TextBaseline? textBaseline,\n  Widget? prefix,\n  Widget? suffix,\n  Key? key,\n})\n",
       "links": [
+        {
+          "offset": 0,
+          "length": 7,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+        },
         {
           "offset": 38,
           "length": 7,
@@ -861,6 +886,11 @@
       "length": 7,
       "code": "FButton({\n  required void Function()? onPress,\n  required Widget child,\n  FBaseButtonStyle Function(FButtonStyle) style = _primary,\n  void Function()? onLongPress,\n  void Function()? onSecondaryPress,\n  void Function()? onSecondaryLongPress,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  void Function(bool)? onHoverChange,\n  void Function(FWidgetStatesDelta)? onStateChange,\n  bool selected = false,\n  Map<ShortcutActivator, Intent>? shortcuts,\n  Map<Type, Action<Intent>>? actions,\n  MainAxisSize mainAxisSize = .max,\n  MainAxisAlignment mainAxisAlignment = .center,\n  CrossAxisAlignment crossAxisAlignment = .center,\n  TextBaseline? textBaseline,\n  Widget? prefix,\n  Widget? suffix,\n  Key? key,\n})\n",
       "links": [
+        {
+          "offset": 0,
+          "length": 7,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+        },
         {
           "offset": 38,
           "length": 7,

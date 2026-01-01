@@ -134,7 +134,7 @@ class DartDocLinker extends RecursiveAstVisitor<void> {
       case final MethodElement element:
         link(
           element.isStatic
-              ? _Entity(node.target!.offset, node.methodName.offset + node.methodName.length)
+              ? Entity(node.target!.offset, node.methodName.offset + node.methodName.length)
               : node.methodName,
           element,
         );
@@ -292,13 +292,13 @@ class DartDocLinker extends RecursiveAstVisitor<void> {
   }
 }
 
-class _Entity implements SyntacticEntity {
+class Entity implements SyntacticEntity {
   @override
   final int offset;
   @override
   final int end;
 
-  _Entity(this.offset, this.end);
+  Entity(this.offset, this.end);
 
   @override
   int get length => end - offset;

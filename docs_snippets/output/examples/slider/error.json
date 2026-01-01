@@ -67,6 +67,11 @@
       "code": "FSlider({\n  FSliderControl control = const .managedContinuous(),\n  FSliderStyle Function(FSliderStyle)? style,\n  FLayout? layout,\n  Widget? label,\n  Widget? description,\n  Widget Function(BuildContext, String) errorBuilder =\n      FFormFieldProperties.defaultErrorBuilder,\n  List<FSliderMark> marks = const [],\n  double? trackMainAxisExtent,\n  double? trackHitRegionCrossExtent,\n  FSliderTooltipControls tooltipControls = const .new(),\n  Widget Function(FTooltipController, double) tooltipBuilder =\n      _tooltipBuilder,\n  String Function(double) semanticValueFormatterCallback =\n      _semanticValueFormatter,\n  String Function(FSliderValue)? semanticFormatterCallback,\n  void Function(FSliderValue)? onEnd,\n  void Function(FSliderValue?)? onSaved,\n  void Function()? onReset,\n  String? Function(FSliderValue?)? validator,\n  String? forceErrorText,\n  bool enabled = true,\n  AutovalidateMode autovalidateMode = .disabled,\n  Key? key,\n})\n",
       "links": [
         {
+          "offset": 0,
+          "length": 7,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSlider/FSlider.html"
+        },
+        {
           "offset": 27,
           "length": 7,
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSlider/FSlider.html"
@@ -272,6 +277,11 @@
       "code": "FSliderControl.managedContinuous({\n  FContinuousSliderController? controller,\n  FSliderValue? initial,\n  double? stepPercentage,\n  FSliderInteraction? interaction,\n  FSliderActiveThumb? thumb,\n  void Function(FSliderValue)? onChange,\n})\n",
       "links": [
         {
+          "offset": 0,
+          "length": 32,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderControl/FSliderControl.managedContinuous.html"
+        },
+        {
           "offset": 66,
           "length": 10,
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderControl/FSliderControl.managedContinuous.html"
@@ -351,6 +361,11 @@
       "length": 12,
       "code": "FSliderValue({\n  required double max,\n  double min,\n  ({double max, double min}) constraints,\n})\n",
       "links": [
+        {
+          "offset": 0,
+          "length": 12,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderValue/FSliderValue.html"
+        },
         {
           "offset": 33,
           "length": 3,

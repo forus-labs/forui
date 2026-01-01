@@ -82,6 +82,11 @@
       "code": "FTappable({\n  FTappableStyle Function(FTappableStyle)? style,\n  FFocusedOutlineStyle Function(FFocusedOutlineStyle)? focusedOutlineStyle,\n  String? semanticsLabel,\n  bool excludeSemantics,\n  bool autofocus,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  void Function(bool)? onHoverChange,\n  void Function(FWidgetStatesDelta)? onStateChange,\n  bool selected,\n  HitTestBehavior behavior,\n  void Function()? onPress,\n  void Function()? onLongPress,\n  void Function()? onSecondaryPress,\n  void Function()? onSecondaryLongPress,\n  Map<ShortcutActivator, Intent>? shortcuts,\n  Map<Type, Action<Intent>>? actions,\n  Widget Function(BuildContext, Set<WidgetState>, Widget?) builder,\n  Widget? child,\n  Key? key,\n})\n",
       "links": [
         {
+          "offset": 0,
+          "length": 9,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappable/FTappable.html"
+        },
+        {
           "offset": 55,
           "length": 5,
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappable/FTappable.html"

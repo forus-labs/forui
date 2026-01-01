@@ -39,7 +39,7 @@ class TooltipStubber extends RecursiveAstVisitor<void> {
     overlay.setOverlay(syntheticPath, content: code, modificationStamp: DateTime.now().millisecondsSinceEpoch);
 
     final result = (await session.getResolvedUnit(syntheticPath)) as ResolvedUnitResult;
-    final linker = StubLinker(packages, imports.length);
+    final linker = StubLinker(packages, imports.length, container: tooltip.container?.$1);
     result.unit.visitChildren(linker);
 
     // Find the original declaration position in the formatted stub

@@ -42,6 +42,11 @@
       "code": "FDivider({\n  FDividerStyle Function(FDividerStyle)? style,\n  Axis axis = .horizontal,\n  Key? key,\n})\n",
       "links": [
         {
+          "offset": 0,
+          "length": 8,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.divider/FDivider/FDivider.html"
+        },
+        {
           "offset": 52,
           "length": 5,
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.divider/FDivider/FDivider.html"
@@ -78,6 +83,11 @@
       "length": 8,
       "code": "FDivider({\n  FDividerStyle Function(FDividerStyle)? style,\n  Axis axis = .horizontal,\n  Key? key,\n})\n",
       "links": [
+        {
+          "offset": 0,
+          "length": 8,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.divider/FDivider/FDivider.html"
+        },
         {
           "offset": 52,
           "length": 5,
@@ -122,6 +132,11 @@
       "length": 8,
       "code": "FDivider({\n  FDividerStyle Function(FDividerStyle)? style,\n  Axis axis = .horizontal,\n  Key? key,\n})\n",
       "links": [
+        {
+          "offset": 0,
+          "length": 8,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.divider/FDivider/FDivider.html"
+        },
         {
           "offset": 52,
           "length": 5,

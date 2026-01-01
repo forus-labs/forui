@@ -92,6 +92,11 @@
       "code": "FHeader.nested({\n  Widget title,\n  AlignmentGeometry titleAlignment,\n  FHeaderStyle Function(FHeaderStyle)? style,\n  List<Widget> prefixes,\n  List<Widget> suffixes,\n  Key? key,\n})\n",
       "links": [
         {
+          "offset": 0,
+          "length": 14,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.header/FHeader/FHeader.nested.html"
+        },
+        {
           "offset": 26,
           "length": 5,
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.header/FHeader/FHeader.nested.html"
@@ -157,6 +162,11 @@
       "length": 13,
       "code": "FHeaderAction({\n  required Widget icon,\n  required void Function()? onPress,\n  FHeaderActionStyle? style,\n  String? semanticsLabel,\n  bool selected = false,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  void Function(bool)? onHoverChange,\n  void Function(FWidgetStatesDelta)? onStateChange,\n  void Function()? onLongPress,\n  void Function()? onSecondaryPress,\n  void Function()? onSecondaryLongPress,\n  Map<ShortcutActivator, Intent>? shortcuts,\n  Map<Type, Action<Intent>>? actions,\n  Key? key,\n})\n",
       "links": [
+        {
+          "offset": 0,
+          "length": 13,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.header/FHeaderAction/FHeaderAction.html"
+        },
         {
           "offset": 34,
           "length": 4,
@@ -284,6 +294,11 @@
       "length": 13,
       "code": "FHeaderAction({\n  required Widget icon,\n  required void Function()? onPress,\n  FHeaderActionStyle? style,\n  String? semanticsLabel,\n  bool selected = false,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  void Function(bool)? onHoverChange,\n  void Function(FWidgetStatesDelta)? onStateChange,\n  void Function()? onLongPress,\n  void Function()? onSecondaryPress,\n  void Function()? onSecondaryLongPress,\n  Map<ShortcutActivator, Intent>? shortcuts,\n  Map<Type, Action<Intent>>? actions,\n  Key? key,\n})\n",
       "links": [
+        {
+          "offset": 0,
+          "length": 13,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.header/FHeaderAction/FHeaderAction.html"
+        },
         {
           "offset": 34,
           "length": 4,
@@ -418,6 +433,11 @@
       "length": 15,
       "code": "FHeaderAction.x({\n  required void Function()? onPress,\n  FHeaderActionStyle? style,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  void Function(bool)? onHoverChange,\n  void Function(FWidgetStatesDelta)? onStateChange,\n  void Function()? onLongPress,\n  void Function()? onSecondaryPress,\n  void Function()? onSecondaryLongPress,\n  Map<ShortcutActivator, Intent>? shortcuts,\n  Map<Type, Action<Intent>>? actions,\n  Key? key,\n})\n",
       "links": [
+        {
+          "offset": 0,
+          "length": 15,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.header/FHeaderAction/FHeaderAction.x.html"
+        },
         {
           "offset": 46,
           "length": 7,

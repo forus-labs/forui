@@ -47,6 +47,11 @@
       "code": "FLabel({\n  required Axis axis,\n  required Widget child,\n  FLabelStyle Function(FLabelStyle)? style,\n  Widget? label,\n  Widget? description,\n  Widget? error,\n  bool expands = false,\n  Set<WidgetState> states = const {},\n  Key? key,\n})\n",
       "links": [
         {
+          "offset": 0,
+          "length": 6,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.label/FLabel/FLabel.html"
+        },
+        {
           "offset": 25,
           "length": 4,
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.label/FLabel/FLabel.html"

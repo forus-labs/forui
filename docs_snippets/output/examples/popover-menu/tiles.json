@@ -237,6 +237,11 @@
       "code": "FHeader({\n  Widget title,\n  FHeaderStyle Function(FHeaderStyle)? style,\n  List<Widget> suffixes,\n  Key? key,\n})\n",
       "links": [
         {
+          "offset": 0,
+          "length": 7,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.header/FHeader/FHeader.html"
+        },
+        {
           "offset": 19,
           "length": 5,
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.header/FHeader/FHeader.html"
@@ -292,6 +297,11 @@
       "length": 18,
       "code": "FPopoverMenu.tiles({\n  FPopoverControl control = const .managed(),\n  ScrollController? scrollController,\n  FPopoverMenuStyle Function(FPopoverMenuStyle)? style,\n  double? cacheExtent,\n  double maxHeight = .infinity,\n  DragStartBehavior dragStartBehavior = .start,\n  FItemDivider divider = .full,\n  AlignmentGeometry menuAnchor = .topCenter,\n  AlignmentGeometry childAnchor = .bottomCenter,\n  FPortalSpacing spacing = const .spacing(4),\n  FPortalOverflow overflow = .flip,\n  Offset offset = .zero,\n  Object? groupId,\n  FPopoverHideRegion hideRegion = .excludeChild,\n  void Function()? onTapHide,\n  String? barrierSemanticsLabel,\n  bool barrierSemanticsDismissible = true,\n  String? semanticsLabel,\n  bool? autofocus,\n  FocusScopeNode? focusNode,\n  void Function(bool)? onFocusChange,\n  TraversalEdgeBehavior? traversalEdgeBehavior,\n  List<FTileGroupMixin> Function(\n        BuildContext,\n        FPopoverController,\n        List<FTileGroupMixin>?,\n      )\n      menuBuilder =\n      _defaultTileBuilder,\n  List<FTileGroupMixin>? menu,\n  Widget Function(BuildContext, FPopoverController, Widget?) builder =\n      _builder,\n  Widget? child,\n  Key? key,\n})\n",
       "links": [
+        {
+          "offset": 0,
+          "length": 18,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover_menu/FPopoverMenu/FPopoverMenu.tiles.html"
+        },
         {
           "offset": 39,
           "length": 7,
@@ -1028,6 +1038,11 @@
       "length": 13,
       "code": "FHeaderAction({\n  required Widget icon,\n  required void Function()? onPress,\n  FHeaderActionStyle? style,\n  String? semanticsLabel,\n  bool selected = false,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  void Function(bool)? onHoverChange,\n  void Function(FWidgetStatesDelta)? onStateChange,\n  void Function()? onLongPress,\n  void Function()? onSecondaryPress,\n  void Function()? onSecondaryLongPress,\n  Map<ShortcutActivator, Intent>? shortcuts,\n  Map<Type, Action<Intent>>? actions,\n  Key? key,\n})\n",
       "links": [
+        {
+          "offset": 0,
+          "length": 13,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.header/FHeaderAction/FHeaderAction.html"
+        },
         {
           "offset": 34,
           "length": 4,

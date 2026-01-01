@@ -77,6 +77,11 @@
       "code": "FFocusedOutline({\n  required bool focused,\n  required Widget? child,\n  FFocusedOutlineStyle Function(FFocusedOutlineStyle)? style,\n  Key? key,\n})\n",
       "links": [
         {
+          "offset": 0,
+          "length": 15,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FFocusedOutline/FFocusedOutline.html"
+        },
+        {
           "offset": 34,
           "length": 7,
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FFocusedOutline/FFocusedOutline.html"

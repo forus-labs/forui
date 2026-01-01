@@ -65,6 +65,11 @@
       "code": "FSelectMenuTile.fromMap(\n  Map<String, Notification> menu, {\n  required Text title,\n  FMultiValueControl<Notification>? selectControl,\n  FPopoverControl popoverControl = const .managed(),\n  ScrollController? scrollController,\n  FSelectMenuTileStyle Function(FSelectMenuTileStyle)? style,\n  double? cacheExtent,\n  double maxHeight = .infinity,\n  DragStartBehavior dragStartBehavior = .start,\n  ScrollPhysics physics = const ClampingScrollPhysics(),\n  FItemDivider divider = .full,\n  AlignmentGeometry menuAnchor = .topRight,\n  AlignmentGeometry tileAnchor = .bottomRight,\n  FPortalSpacing menuSpacing = const .spacing(4),\n  FPortalOverflow menuOverflow = .flip,\n  Offset menuOffset = .zero,\n  FPopoverHideRegion menuHideRegion = .excludeChild,\n  void Function()? menuOnTapHide,\n  Object? menuGroupId,\n  bool autoHide = true,\n  Widget? label,\n  Widget? description,\n  bool autofocus = false,\n  FocusScopeNode? menuFocusNode,\n  void Function(bool)? menuOnFocusChange,\n  TraversalEdgeBehavior? menuTraversalEdgeBehavior,\n  String? menuBarrierSemanticsLabel,\n  bool menuBarrierSemanticsDismissible = true,\n  String? semanticsLabel,\n  Widget? prefix,\n  Widget? subtitle,\n  Widget Function(BuildContext, Set<Notification>, Widget?) detailsBuilder =\n      defaultSelectMenuTileBuilder,\n  Widget? details,\n  Widget? suffix,\n  Map<ShortcutActivator, Intent>? shortcuts,\n  Map<Type, Action<Intent>>? actions,\n  Widget Function(BuildContext, String) errorBuilder =\n      FFormFieldProperties.defaultErrorBuilder,\n  void Function(Set<Notification>?)? onSaved,\n  void Function()? onReset,\n  String? Function(Set<Notification>?)? validator,\n  String? forceErrorText,\n  bool enabled = true,\n  AutovalidateMode autovalidateMode = .disabled,\n  Key? key,\n})\n",
       "links": [
         {
+          "offset": 0,
+          "length": 23,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_menu_tile/FSelectMenuTile/FSelectMenuTile.fromMap.html"
+        },
+        {
           "offset": 77,
           "length": 5,
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_menu_tile/FSelectMenuTile/FSelectMenuTile.fromMap.html"
@@ -374,6 +379,11 @@
       "length": 7,
       "code": "FMultiValueControl.managed({\n  FMultiValueNotifier<Notification>? controller,\n  Set<Notification>? initial,\n  int min,\n  int? max,\n  void Function(Set<Notification>)? onChange,\n})\n",
       "links": [
+        {
+          "offset": 0,
+          "length": 26,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl/FMultiValueControl.managed.html"
+        },
         {
           "offset": 66,
           "length": 10,

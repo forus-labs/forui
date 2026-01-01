@@ -47,6 +47,11 @@
       "code": "FAlert({\n  required Widget title,\n  Widget icon = const Icon(FIcons.circleAlert),\n  Widget? subtitle,\n  FBaseAlertStyle Function(FAlertStyle) style = _primary,\n  Key? key,\n})\n",
       "links": [
         {
+          "offset": 0,
+          "length": 6,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.alert/FAlert/FAlert.html"
+        },
+        {
           "offset": 27,
           "length": 5,
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.alert/FAlert/FAlert.html"

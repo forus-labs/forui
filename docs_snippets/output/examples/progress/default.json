@@ -22,6 +22,11 @@
       "code": "FProgress({\n  FProgressStyle Function(FProgressStyle)? style,\n  String? semanticsLabel,\n  Key? key,\n})\n",
       "links": [
         {
+          "offset": 0,
+          "length": 9,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.progress/FProgress/FProgress.html"
+        },
+        {
           "offset": 55,
           "length": 5,
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.progress/FProgress/FProgress.html"

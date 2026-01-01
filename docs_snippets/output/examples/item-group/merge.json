@@ -192,6 +192,11 @@
       "code": "FItemGroup.merge({\n  required List<FItemGroupMixin> children,\n  FItemGroupStyle Function(FItemGroupStyle)? style,\n  ScrollController? scrollController,\n  double? cacheExtent,\n  double maxHeight = .infinity,\n  DragStartBehavior dragStartBehavior = .start,\n  ScrollPhysics physics = const ClampingScrollPhysics(),\n  bool? enabled,\n  FItemDivider divider = .full,\n  String? semanticsLabel,\n  Key? key,\n})\n",
       "links": [
         {
+          "offset": 0,
+          "length": 16,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroup/FItemGroup.merge.html"
+        },
+        {
           "offset": 52,
           "length": 8,
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroup/FItemGroup.merge.html"

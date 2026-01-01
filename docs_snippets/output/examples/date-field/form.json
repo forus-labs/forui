@@ -120,6 +120,11 @@
       "code": "FDateFieldController({\n  DateTime? date,\n  String? Function(DateTime?) validator = _defaultValidator,\n})\n",
       "links": [
         {
+          "offset": 0,
+          "length": 20,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateFieldController/FDateFieldController.html"
+        },
+        {
           "offset": 35,
           "length": 4,
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateFieldController/FDateFieldController.html"
@@ -162,6 +167,11 @@
       "length": 10,
       "code": "FDateField({\n  FDateFieldControl control,\n  FPopoverControl popoverControl,\n  FDateFieldStyle Function(FDateFieldStyle)? style,\n  FocusNode? focusNode,\n  TextInputAction? textInputAction,\n  TextAlign textAlign,\n  TextAlignVertical? textAlignVertical,\n  TextDirection? textDirection,\n  bool autofocus,\n  bool expands,\n  void Function()? onEditingComplete,\n  void Function(DateTime)? onSubmit,\n  MouseCursor? mouseCursor,\n  bool canRequestFocus,\n  bool clearable,\n  int baselineInputYear,\n  Widget Function(BuildContext, FDateFieldStyle, Set<WidgetState>, Widget)\n  builder,\n  Widget Function(BuildContext, FDateFieldStyle, Set<WidgetState>)?\n  prefixBuilder,\n  Widget Function(BuildContext, FDateFieldStyle, Set<WidgetState>)?\n  suffixBuilder,\n  FDateFieldCalendarProperties calendar,\n  Widget? label,\n  Widget? description,\n  bool enabled,\n  void Function(DateTime?)? onSaved,\n  void Function()? onReset,\n  AutovalidateMode autovalidateMode,\n  String? forceErrorText,\n  Widget Function(BuildContext, String) errorBuilder,\n  Key? key,\n})\n",
       "links": [
+        {
+          "offset": 0,
+          "length": 10,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateField/FDateField.html"
+        },
         {
           "offset": 33,
           "length": 7,
@@ -373,6 +383,11 @@
       "code": "FDateFieldControl.managed({\n  FDateFieldController? controller,\n  DateTime? initial,\n  String? Function(DateTime?)? validator,\n  void Function(DateTime?)? onChange,\n})\n",
       "links": [
         {
+          "offset": 0,
+          "length": 25,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateFieldControl/FDateFieldControl.managed.html"
+        },
+        {
           "offset": 52,
           "length": 10,
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateFieldControl/FDateFieldControl.managed.html"
@@ -443,6 +458,11 @@
       "length": 10,
       "code": "FDateField({\n  FDateFieldControl control,\n  FPopoverControl popoverControl,\n  FDateFieldStyle Function(FDateFieldStyle)? style,\n  FocusNode? focusNode,\n  TextInputAction? textInputAction,\n  TextAlign textAlign,\n  TextAlignVertical? textAlignVertical,\n  TextDirection? textDirection,\n  bool autofocus,\n  bool expands,\n  void Function()? onEditingComplete,\n  void Function(DateTime)? onSubmit,\n  MouseCursor? mouseCursor,\n  bool canRequestFocus,\n  bool clearable,\n  int baselineInputYear,\n  Widget Function(BuildContext, FDateFieldStyle, Set<WidgetState>, Widget)\n  builder,\n  Widget Function(BuildContext, FDateFieldStyle, Set<WidgetState>)?\n  prefixBuilder,\n  Widget Function(BuildContext, FDateFieldStyle, Set<WidgetState>)?\n  suffixBuilder,\n  FDateFieldCalendarProperties calendar,\n  Widget? label,\n  Widget? description,\n  bool enabled,\n  void Function(DateTime?)? onSaved,\n  void Function()? onReset,\n  AutovalidateMode autovalidateMode,\n  String? forceErrorText,\n  Widget Function(BuildContext, String) errorBuilder,\n  Key? key,\n})\n",
       "links": [
+        {
+          "offset": 0,
+          "length": 10,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateField/FDateField.html"
+        },
         {
           "offset": 33,
           "length": 7,
@@ -654,6 +674,11 @@
       "code": "FDateFieldControl.managed({\n  FDateFieldController? controller,\n  DateTime? initial,\n  String? Function(DateTime?)? validator,\n  void Function(DateTime?)? onChange,\n})\n",
       "links": [
         {
+          "offset": 0,
+          "length": 25,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateFieldControl/FDateFieldControl.managed.html"
+        },
+        {
           "offset": 52,
           "length": 10,
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateFieldControl/FDateFieldControl.managed.html"
@@ -747,6 +772,11 @@
       "length": 7,
       "code": "FButton({\n  required void Function()? onPress,\n  required Widget child,\n  FBaseButtonStyle Function(FButtonStyle) style = _primary,\n  void Function()? onLongPress,\n  void Function()? onSecondaryPress,\n  void Function()? onSecondaryLongPress,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  void Function(bool)? onHoverChange,\n  void Function(FWidgetStatesDelta)? onStateChange,\n  bool selected = false,\n  Map<ShortcutActivator, Intent>? shortcuts,\n  Map<Type, Action<Intent>>? actions,\n  MainAxisSize mainAxisSize = .max,\n  MainAxisAlignment mainAxisAlignment = .center,\n  CrossAxisAlignment crossAxisAlignment = .center,\n  TextBaseline? textBaseline,\n  Widget? prefix,\n  Widget? suffix,\n  Key? key,\n})\n",
       "links": [
+        {
+          "offset": 0,
+          "length": 7,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+        },
         {
           "offset": 38,
           "length": 7,

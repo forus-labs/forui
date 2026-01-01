@@ -25,6 +25,11 @@
       "code": "FCheckbox({\n  FCheckboxStyle Function(FCheckboxStyle)? style,\n  Widget? label,\n  Widget? description,\n  Widget? error,\n  String? semanticsLabel,\n  bool value = false,\n  void Function(bool)? onChange,\n  bool enabled = true,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  Key? key,\n})\n",
       "links": [
         {
+          "offset": 0,
+          "length": 9,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckbox/FCheckbox.html"
+        },
+        {
           "offset": 55,
           "length": 5,
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckbox/FCheckbox.html"

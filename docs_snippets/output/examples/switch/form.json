@@ -253,6 +253,11 @@
       "code": "FCard.raw({\n  required Widget child,\n  FCardStyle Function(FCardStyle)? style,\n  Key? key,\n})\n",
       "links": [
         {
+          "offset": 0,
+          "length": 9,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.card/FCard/FCard.raw.html"
+        },
+        {
           "offset": 30,
           "length": 5,
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.card/FCard/FCard.raw.html"
@@ -430,6 +435,11 @@
       "code": "FSwitch({\n  FSwitchStyle Function(FSwitchStyle)? style,\n  Widget? label,\n  Widget? description,\n  Widget? error,\n  String? semanticsLabel,\n  bool value = false,\n  void Function(bool)? onChange,\n  bool enabled = true,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  DragStartBehavior dragStartBehavior = .start,\n  Key? key,\n})\n",
       "links": [
         {
+          "offset": 0,
+          "length": 7,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.switch_/FSwitch/FSwitch.html"
+        },
+        {
           "offset": 49,
           "length": 5,
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.switch_/FSwitch/FSwitch.html"
@@ -537,6 +547,11 @@
       "length": 9,
       "code": "FCard.raw({\n  required Widget child,\n  FCardStyle Function(FCardStyle)? style,\n  Key? key,\n})\n",
       "links": [
+        {
+          "offset": 0,
+          "length": 9,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.card/FCard/FCard.raw.html"
+        },
         {
           "offset": 30,
           "length": 5,
@@ -715,6 +730,11 @@
       "code": "FSwitch({\n  FSwitchStyle Function(FSwitchStyle)? style,\n  Widget? label,\n  Widget? description,\n  Widget? error,\n  String? semanticsLabel,\n  bool value = false,\n  void Function(bool)? onChange,\n  bool enabled = true,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  DragStartBehavior dragStartBehavior = .start,\n  Key? key,\n})\n",
       "links": [
         {
+          "offset": 0,
+          "length": 7,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.switch_/FSwitch/FSwitch.html"
+        },
+        {
           "offset": 49,
           "length": 5,
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.switch_/FSwitch/FSwitch.html"
@@ -822,6 +842,11 @@
       "length": 7,
       "code": "FButton({\n  required void Function()? onPress,\n  required Widget child,\n  FBaseButtonStyle Function(FButtonStyle) style = _primary,\n  void Function()? onLongPress,\n  void Function()? onSecondaryPress,\n  void Function()? onSecondaryLongPress,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  void Function(bool)? onHoverChange,\n  void Function(FWidgetStatesDelta)? onStateChange,\n  bool selected = false,\n  Map<ShortcutActivator, Intent>? shortcuts,\n  Map<Type, Action<Intent>>? actions,\n  MainAxisSize mainAxisSize = .max,\n  MainAxisAlignment mainAxisAlignment = .center,\n  CrossAxisAlignment crossAxisAlignment = .center,\n  TextBaseline? textBaseline,\n  Widget? prefix,\n  Widget? suffix,\n  Key? key,\n})\n",
       "links": [
+        {
+          "offset": 0,
+          "length": 7,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+        },
         {
           "offset": 38,
           "length": 7,

@@ -32,6 +32,11 @@
       "code": "FTimeField.picker({\n  FTimeFieldControl control,\n  FPopoverControl popoverControl,\n  FTimeFieldStyle Function(FTimeFieldStyle)? style,\n  bool hour24,\n  DateFormat? format,\n  TextAlign textAlign,\n  TextAlignVertical? textAlignVertical,\n  TextDirection? textDirection,\n  bool expands,\n  MouseCursor mouseCursor,\n  bool canRequestFocus,\n  String? hint,\n  bool autofocus,\n  FocusNode? focusNode,\n  Alignment anchor,\n  Alignment fieldAnchor,\n  FPortalConstraints constraints,\n  FPortalSpacing spacing,\n  FPortalOverflow overflow,\n  Offset offset,\n  FPopoverHideRegion hideRegion,\n  Object? groupId,\n  void Function()? onTapHide,\n  int hourInterval,\n  int minuteInterval,\n  Widget Function(BuildContext, FTimeFieldStyle, Set<WidgetState>, Widget)\n  builder,\n  Widget Function(BuildContext, FTimeFieldStyle, Set<WidgetState>)?\n  prefixBuilder,\n  Widget Function(BuildContext, FTimeFieldStyle, Set<WidgetState>)?\n  suffixBuilder,\n  Widget? label,\n  Widget? description,\n  bool enabled,\n  void Function(FTime?)? onSaved,\n  void Function()? onReset,\n  AutovalidateMode autovalidateMode,\n  String? forceErrorText,\n  Widget Function(BuildContext, String) errorBuilder,\n  Key? key,\n})\n",
       "links": [
         {
+          "offset": 0,
+          "length": 17,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.picker.html"
+        },
+        {
           "offset": 40,
           "length": 7,
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.picker.html"

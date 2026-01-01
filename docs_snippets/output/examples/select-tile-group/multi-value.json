@@ -110,6 +110,11 @@
       "code": "FSelectTileGroup({\n  required List<FSelectTile<Language>> children,\n  FMultiValueControl<Language>? control,\n  ScrollController? scrollController,\n  FTileGroupStyle? style,\n  double? cacheExtent,\n  double maxHeight = .infinity,\n  DragStartBehavior dragStartBehavior = .start,\n  ScrollPhysics physics = const ClampingScrollPhysics(),\n  FItemDivider divider = .indented,\n  Widget? label,\n  Widget? description,\n  String? semanticsLabel,\n  Widget Function(BuildContext, String) errorBuilder =\n      FFormFieldProperties.defaultErrorBuilder,\n  void Function(Set<Language>?)? onSaved,\n  void Function()? onReset,\n  String? Function(Set<Language>?)? validator,\n  String? forceErrorText,\n  bool enabled = true,\n  AutovalidateMode autovalidateMode = .disabled,\n  Key? key,\n})\n",
       "links": [
         {
+          "offset": 0,
+          "length": 16,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTileGroup/FSelectTileGroup.html"
+        },
+        {
           "offset": 58,
           "length": 8,
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTileGroup/FSelectTileGroup.html"
@@ -293,6 +298,11 @@
       "code": "FSelectTile.tile({\n  required Widget title,\n  required Language value,\n  FItemStyle Function(FItemStyle)? style,\n  Widget checkedIcon,\n  Widget uncheckedIcon,\n  Widget? subtitle,\n  Widget? details,\n  String? semanticsLabel,\n  bool? enabled,\n  bool autofocus,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  void Function(bool)? onHoverChange,\n  void Function(FWidgetStatesDelta)? onStatesChange,\n  Map<ShortcutActivator, Intent>? shortcuts,\n  Map<Type, Action<Intent>>? actions,\n  Widget? suffix,\n  Key? key,\n})\n",
       "links": [
         {
+          "offset": 0,
+          "length": 16,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.tile.html"
+        },
+        {
           "offset": 37,
           "length": 5,
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.tile.html"
@@ -423,6 +433,11 @@
       "length": 4,
       "code": "FSelectTile.tile({\n  required Widget title,\n  required Language value,\n  FItemStyle Function(FItemStyle)? style,\n  Widget checkedIcon,\n  Widget uncheckedIcon,\n  Widget? subtitle,\n  Widget? details,\n  String? semanticsLabel,\n  bool? enabled,\n  bool autofocus,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  void Function(bool)? onHoverChange,\n  void Function(FWidgetStatesDelta)? onStatesChange,\n  Map<ShortcutActivator, Intent>? shortcuts,\n  Map<Type, Action<Intent>>? actions,\n  Widget? suffix,\n  Key? key,\n})\n",
       "links": [
+        {
+          "offset": 0,
+          "length": 16,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.tile.html"
+        },
         {
           "offset": 37,
           "length": 5,
@@ -555,6 +570,11 @@
       "code": "FSelectTile.tile({\n  required Widget title,\n  required Language value,\n  FItemStyle Function(FItemStyle)? style,\n  Widget checkedIcon,\n  Widget uncheckedIcon,\n  Widget? subtitle,\n  Widget? details,\n  String? semanticsLabel,\n  bool? enabled,\n  bool autofocus,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  void Function(bool)? onHoverChange,\n  void Function(FWidgetStatesDelta)? onStatesChange,\n  Map<ShortcutActivator, Intent>? shortcuts,\n  Map<Type, Action<Intent>>? actions,\n  Widget? suffix,\n  Key? key,\n})\n",
       "links": [
         {
+          "offset": 0,
+          "length": 16,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.tile.html"
+        },
+        {
           "offset": 37,
           "length": 5,
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.tile.html"
@@ -686,6 +706,11 @@
       "code": "FSelectTile.tile({\n  required Widget title,\n  required Language value,\n  FItemStyle Function(FItemStyle)? style,\n  Widget checkedIcon,\n  Widget uncheckedIcon,\n  Widget? subtitle,\n  Widget? details,\n  String? semanticsLabel,\n  bool? enabled,\n  bool autofocus,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  void Function(bool)? onHoverChange,\n  void Function(FWidgetStatesDelta)? onStatesChange,\n  Map<ShortcutActivator, Intent>? shortcuts,\n  Map<Type, Action<Intent>>? actions,\n  Widget? suffix,\n  Key? key,\n})\n",
       "links": [
         {
+          "offset": 0,
+          "length": 16,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.tile.html"
+        },
+        {
           "offset": 37,
           "length": 5,
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.tile.html"
@@ -816,6 +841,11 @@
       "length": 7,
       "code": "FButton({\n  required void Function()? onPress,\n  required Widget child,\n  FBaseButtonStyle Function(FButtonStyle) style = _primary,\n  void Function()? onLongPress,\n  void Function()? onSecondaryPress,\n  void Function()? onSecondaryLongPress,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  void Function(bool)? onHoverChange,\n  void Function(FWidgetStatesDelta)? onStateChange,\n  bool selected = false,\n  Map<ShortcutActivator, Intent>? shortcuts,\n  Map<Type, Action<Intent>>? actions,\n  MainAxisSize mainAxisSize = .max,\n  MainAxisAlignment mainAxisAlignment = .center,\n  CrossAxisAlignment crossAxisAlignment = .center,\n  TextBaseline? textBaseline,\n  Widget? prefix,\n  Widget? suffix,\n  Key? key,\n})\n",
       "links": [
+        {
+          "offset": 0,
+          "length": 7,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+        },
         {
           "offset": 38,
           "length": 7,

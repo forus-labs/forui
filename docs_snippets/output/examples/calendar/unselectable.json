@@ -62,6 +62,11 @@
       "code": "FCalendar({\n  required FCalendarControl<Object?> control,\n  FCalendarStyle Function(FCalendarStyle)? style,\n  Widget Function(\n        BuildContext,\n        ({\n          bool current,\n          DateTime date,\n          bool selectable,\n          bool selected,\n          FCalendarDayPickerStyle style,\n          bool today,\n        }),\n        Widget?,\n      )\n      dayBuilder =\n      defaultDayBuilder,\n  void Function(DateTime)? onMonthChange,\n  void Function(DateTime)? onPress,\n  void Function(DateTime)? onLongPress,\n  FCalendarPickerType initialType = .day,\n  DateTime? start,\n  DateTime? end,\n  DateTime? today,\n  DateTime? initialMonth,\n  Key? key,\n})\n",
       "links": [
         {
+          "offset": 0,
+          "length": 9,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendar/FCalendar.html"
+        },
+        {
           "offset": 49,
           "length": 7,
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendar/FCalendar.html"

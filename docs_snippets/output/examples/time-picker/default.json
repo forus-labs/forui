@@ -42,6 +42,11 @@
       "code": "FTimePicker({\n  FTimePickerControl control = const .managed(),\n  FTimePickerStyle Function(FTimePickerStyle)? style,\n  bool hour24 = false,\n  int hourInterval = 1,\n  int minuteInterval = 1,\n  Key? key,\n})\n",
       "links": [
         {
+          "offset": 0,
+          "length": 11,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_picker/FTimePicker/FTimePicker.html"
+        },
+        {
           "offset": 35,
           "length": 7,
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_picker/FTimePicker/FTimePicker.html"
@@ -122,6 +127,11 @@
       "code": "FTimePickerControl.managed({\n  FTimePickerController? controller,\n  FTime? initial,\n  void Function(FTime)? onChange,\n})\n",
       "links": [
         {
+          "offset": 0,
+          "length": 26,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_picker/FTimePickerControl/FTimePickerControl.managed.html"
+        },
+        {
           "offset": 54,
           "length": 10,
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_picker/FTimePickerControl/FTimePickerControl.managed.html"
@@ -175,7 +185,13 @@
       "offset": 92,
       "length": 3,
       "code": "FTime.now()\n",
-      "links": [],
+      "links": [
+        {
+          "offset": 0,
+          "length": 9,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTime/FTime.now.html"
+        }
+      ],
       "container": {
         "name": "FTime",
         "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTime-class.html"

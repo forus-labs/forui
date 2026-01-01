@@ -90,6 +90,11 @@
       "code": "FSelectGroup({\n  required List<FSelectGroupItemMixin<Sidebar>> children,\n  FMultiValueControl<Sidebar>? control,\n  FSelectGroupStyle Function(FSelectGroupStyle)? style,\n  Widget? label,\n  Widget? description,\n  Widget Function(BuildContext, String) errorBuilder =\n      FFormFieldProperties.defaultErrorBuilder,\n  void Function(Set<Sidebar>?)? onSaved,\n  void Function()? onReset,\n  String? Function(Set<Sidebar>?)? validator,\n  String? forceErrorText,\n  bool enabled = true,\n  AutovalidateMode autovalidateMode = .disabled,\n  Key? key,\n})\n",
       "links": [
         {
+          "offset": 0,
+          "length": 12,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroup/FSelectGroup.html"
+        },
+        {
           "offset": 63,
           "length": 8,
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroup/FSelectGroup.html"
@@ -204,6 +209,11 @@
       "length": 7,
       "code": "FMultiValueControl.managed({\n  FMultiValueNotifier<Sidebar>? controller,\n  Set<Sidebar>? initial,\n  int min,\n  int? max,\n  void Function(Set<Sidebar>)? onChange,\n})\n",
       "links": [
+        {
+          "offset": 0,
+          "length": 26,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl/FMultiValueControl.managed.html"
+        },
         {
           "offset": 61,
           "length": 10,

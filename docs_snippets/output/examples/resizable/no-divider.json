@@ -182,6 +182,11 @@
       "code": "FResizable({\n  required Axis axis,\n  required List<FResizableRegion> children,\n  FResizableControl control = const .managedCascade(),\n  FResizableStyle Function(FResizableStyle)? style,\n  FResizableDivider divider = .dividerWithThumb,\n  double? crossAxisExtent,\n  double resizePercentage = 0.005,\n  String Function(FResizableRegionData, FResizableRegionData)\n      semanticFormatterCallback =\n      _label,\n  double? hitRegionExtent,\n  Key? key,\n})\n",
       "links": [
         {
+          "offset": 0,
+          "length": 10,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizable/FResizable.html"
+        },
+        {
           "offset": 29,
           "length": 4,
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizable/FResizable.html"
@@ -351,6 +356,11 @@
       "code": "FResizableRegion.region({\n  required double initialExtent,\n  required Widget Function(BuildContext, FResizableRegionData, Widget?)\n  builder,\n  double? minExtent,\n  Widget? child,\n  Key? key,\n})\n",
       "links": [
         {
+          "offset": 0,
+          "length": 23,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegion/FResizableRegion.region.html"
+        },
+        {
           "offset": 44,
           "length": 13,
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegion/FResizableRegion.region.html"
@@ -491,6 +501,11 @@
       "length": 6,
       "code": "FResizableRegion.region({\n  required double initialExtent,\n  required Widget Function(BuildContext, FResizableRegionData, Widget?)\n  builder,\n  double? minExtent,\n  Widget? child,\n  Key? key,\n})\n",
       "links": [
+        {
+          "offset": 0,
+          "length": 23,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegion/FResizableRegion.region.html"
+        },
         {
           "offset": 44,
           "length": 13,

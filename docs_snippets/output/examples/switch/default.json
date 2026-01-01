@@ -35,6 +35,11 @@
       "code": "FSwitch({\n  FSwitchStyle Function(FSwitchStyle)? style,\n  Widget? label,\n  Widget? description,\n  Widget? error,\n  String? semanticsLabel,\n  bool value = false,\n  void Function(bool)? onChange,\n  bool enabled = true,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  DragStartBehavior dragStartBehavior = .start,\n  Key? key,\n})\n",
       "links": [
         {
+          "offset": 0,
+          "length": 7,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.switch_/FSwitch/FSwitch.html"
+        },
+        {
           "offset": 49,
           "length": 5,
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.switch_/FSwitch/FSwitch.html"

@@ -62,6 +62,11 @@
       "code": "FAvatar.raw({\n  Widget? child,\n  FAvatarStyle Function(FAvatarStyle)? style,\n  double size = 40.0,\n  Key? key,\n})\n",
       "links": [
         {
+          "offset": 0,
+          "length": 11,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.avatar/FAvatar/FAvatar.raw.html"
+        },
+        {
           "offset": 24,
           "length": 5,
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.avatar/FAvatar/FAvatar.raw.html"
@@ -103,6 +108,11 @@
       "length": 11,
       "code": "FAvatar.raw({\n  Widget? child,\n  FAvatarStyle Function(FAvatarStyle)? style,\n  double size = 40.0,\n  Key? key,\n})\n",
       "links": [
+        {
+          "offset": 0,
+          "length": 11,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.avatar/FAvatar/FAvatar.raw.html"
+        },
         {
           "offset": 24,
           "length": 5,
@@ -208,6 +218,11 @@
       "length": 11,
       "code": "FAvatar.raw({\n  Widget? child,\n  FAvatarStyle Function(FAvatarStyle)? style,\n  double size = 40.0,\n  Key? key,\n})\n",
       "links": [
+        {
+          "offset": 0,
+          "length": 11,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.avatar/FAvatar/FAvatar.raw.html"
+        },
         {
           "offset": 24,
           "length": 5,

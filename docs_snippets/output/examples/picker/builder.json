@@ -37,6 +37,11 @@
       "code": "FPicker({\n  required List<Widget> children,\n  FPickerControl control = const .managed(),\n  FPickerStyle Function(FPickerStyle)? style,\n  Key? key,\n})\n",
       "links": [
         {
+          "offset": 0,
+          "length": 7,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.picker/FPicker/FPicker.html"
+        },
+        {
           "offset": 34,
           "length": 8,
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.picker/FPicker/FPicker.html"
@@ -95,6 +100,11 @@
       "length": 20,
       "code": "FPickerWheel.builder({\n  required Widget Function(BuildContext, int) builder,\n  int flex,\n  double? itemExtent,\n  bool autofocus,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  Key? key,\n})\n",
       "links": [
+        {
+          "offset": 0,
+          "length": 20,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.picker/FPickerWheel/FPickerWheel.builder.html"
+        },
         {
           "offset": 69,
           "length": 7,

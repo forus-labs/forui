@@ -532,6 +532,11 @@
       "code": "FButton({\n  required void Function()? onPress,\n  required Widget child,\n  FBaseButtonStyle Function(FButtonStyle) style = _primary,\n  void Function()? onLongPress,\n  void Function()? onSecondaryPress,\n  void Function()? onSecondaryLongPress,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  void Function(bool)? onHoverChange,\n  void Function(FWidgetStatesDelta)? onStateChange,\n  bool selected = false,\n  Map<ShortcutActivator, Intent>? shortcuts,\n  Map<Type, Action<Intent>>? actions,\n  MainAxisSize mainAxisSize = .max,\n  MainAxisAlignment mainAxisAlignment = .center,\n  CrossAxisAlignment crossAxisAlignment = .center,\n  TextBaseline? textBaseline,\n  Widget? prefix,\n  Widget? suffix,\n  Key? key,\n})\n",
       "links": [
         {
+          "offset": 0,
+          "length": 7,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+        },
+        {
           "offset": 38,
           "length": 7,
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
@@ -678,6 +683,11 @@
       "code": "Future<T?> showFSheet<T>({\n  required BuildContext context,\n  required Widget Function(BuildContext) builder,\n  required FLayout side,\n  bool useRootNavigator = false,\n  FModalSheetStyle Function(FModalSheetStyle)? style,\n  double? mainAxisMaxRatio = 9 / 16,\n  bool useSafeArea = false,\n  bool resizeToAvoidBottomInset = true,\n  String? barrierLabel,\n  bool barrierDismissible = true,\n  BoxConstraints constraints = const BoxConstraints(),\n  bool draggable = true,\n  RouteSettings? routeSettings,\n  AnimationController? transitionAnimationController,\n  Offset? anchorPoint,\n  void Function()? onClosing,\n})",
       "links": [
         {
+          "offset": 11,
+          "length": 10,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/showFSheet.html"
+        },
+        {
           "offset": 121,
           "length": 7,
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FLayout.html"
@@ -796,6 +806,11 @@
       "length": 8,
       "code": "FSidebar({\n  required List<Widget> children,\n  Widget? header,\n  Widget? footer,\n  FSidebarStyle Function(FSidebarStyle)? style,\n  bool autofocus = false,\n  FocusScopeNode? focusNode,\n  TraversalEdgeBehavior? traversalEdgeBehavior,\n  Key? key,\n})\n",
       "links": [
+        {
+          "offset": 0,
+          "length": 8,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sidebar/FSidebar/FSidebar.html"
+        },
         {
           "offset": 35,
           "length": 8,
@@ -1032,6 +1047,11 @@
       "code": "FDivider({\n  FDividerStyle Function(FDividerStyle)? style,\n  Axis axis = .horizontal,\n  Key? key,\n})\n",
       "links": [
         {
+          "offset": 0,
+          "length": 8,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.divider/FDivider/FDivider.html"
+        },
+        {
           "offset": 52,
           "length": 5,
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.divider/FDivider/FDivider.html"
@@ -1169,6 +1189,11 @@
       "code": "FCard.raw({\n  required Widget child,\n  FCardStyle Function(FCardStyle)? style,\n  Key? key,\n})\n",
       "links": [
         {
+          "offset": 0,
+          "length": 9,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.card/FCard/FCard.raw.html"
+        },
+        {
           "offset": 30,
           "length": 5,
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.card/FCard/FCard.raw.html"
@@ -1212,6 +1237,11 @@
       "length": 11,
       "code": "FAvatar.raw({\n  Widget? child,\n  FAvatarStyle Function(FAvatarStyle)? style,\n  double size = 40.0,\n  Key? key,\n})\n",
       "links": [
+        {
+          "offset": 0,
+          "length": 11,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.avatar/FAvatar/FAvatar.raw.html"
+        },
         {
           "offset": 24,
           "length": 5,
@@ -1505,6 +1535,11 @@
       "code": "FSidebarGroup({\n  required List<Widget> children,\n  FSidebarGroupStyle Function(FSidebarGroupStyle)? style,\n  Widget? label,\n  Widget? action,\n  void Function(bool)? onActionHoverChange,\n  void Function(FWidgetStatesDelta)? onActionStateChange,\n  void Function()? onActionPress,\n  void Function()? onActionLongPress,\n  Key? key,\n})\n",
       "links": [
         {
+          "offset": 0,
+          "length": 13,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sidebar/FSidebarGroup/FSidebarGroup.html"
+        },
+        {
           "offset": 40,
           "length": 8,
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sidebar/FSidebarGroup/FSidebarGroup.html"
@@ -1590,6 +1625,11 @@
       "length": 12,
       "code": "FSidebarItem({\n  FSidebarItemStyle Function(FSidebarItemStyle)? style,\n  Widget? icon,\n  Widget? label,\n  bool selected = false,\n  bool initiallyExpanded = false,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function()? onPress,\n  void Function()? onLongPress,\n  void Function(bool)? onHoverChange,\n  void Function(FWidgetStatesDelta)? onStateChange,\n  List<Widget> children = const [],\n  Key? key,\n})\n",
       "links": [
+        {
+          "offset": 0,
+          "length": 12,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sidebar/FSidebarItem/FSidebarItem.html"
+        },
         {
           "offset": 64,
           "length": 5,
@@ -1729,6 +1769,11 @@
       "code": "FSidebarItem({\n  FSidebarItemStyle Function(FSidebarItemStyle)? style,\n  Widget? icon,\n  Widget? label,\n  bool selected = false,\n  bool initiallyExpanded = false,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function()? onPress,\n  void Function()? onLongPress,\n  void Function(bool)? onHoverChange,\n  void Function(FWidgetStatesDelta)? onStateChange,\n  List<Widget> children = const [],\n  Key? key,\n})\n",
       "links": [
         {
+          "offset": 0,
+          "length": 12,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sidebar/FSidebarItem/FSidebarItem.html"
+        },
+        {
           "offset": 64,
           "length": 5,
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sidebar/FSidebarItem/FSidebarItem.html"
@@ -1842,6 +1887,11 @@
       "code": "FSidebarItem({\n  FSidebarItemStyle Function(FSidebarItemStyle)? style,\n  Widget? icon,\n  Widget? label,\n  bool selected = false,\n  bool initiallyExpanded = false,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function()? onPress,\n  void Function()? onLongPress,\n  void Function(bool)? onHoverChange,\n  void Function(FWidgetStatesDelta)? onStateChange,\n  List<Widget> children = const [],\n  Key? key,\n})\n",
       "links": [
         {
+          "offset": 0,
+          "length": 12,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sidebar/FSidebarItem/FSidebarItem.html"
+        },
+        {
           "offset": 64,
           "length": 5,
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sidebar/FSidebarItem/FSidebarItem.html"
@@ -1948,6 +1998,11 @@
       "code": "FSidebarItem({\n  FSidebarItemStyle Function(FSidebarItemStyle)? style,\n  Widget? icon,\n  Widget? label,\n  bool selected = false,\n  bool initiallyExpanded = false,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function()? onPress,\n  void Function()? onLongPress,\n  void Function(bool)? onHoverChange,\n  void Function(FWidgetStatesDelta)? onStateChange,\n  List<Widget> children = const [],\n  Key? key,\n})\n",
       "links": [
         {
+          "offset": 0,
+          "length": 12,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sidebar/FSidebarItem/FSidebarItem.html"
+        },
+        {
           "offset": 64,
           "length": 5,
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sidebar/FSidebarItem/FSidebarItem.html"
@@ -2053,6 +2108,11 @@
       "length": 12,
       "code": "FSidebarItem({\n  FSidebarItemStyle Function(FSidebarItemStyle)? style,\n  Widget? icon,\n  Widget? label,\n  bool selected = false,\n  bool initiallyExpanded = false,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function()? onPress,\n  void Function()? onLongPress,\n  void Function(bool)? onHoverChange,\n  void Function(FWidgetStatesDelta)? onStateChange,\n  List<Widget> children = const [],\n  Key? key,\n})\n",
       "links": [
+        {
+          "offset": 0,
+          "length": 12,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sidebar/FSidebarItem/FSidebarItem.html"
+        },
         {
           "offset": 64,
           "length": 5,
@@ -2178,6 +2238,11 @@
       "code": "FSidebarItem({\n  FSidebarItemStyle Function(FSidebarItemStyle)? style,\n  Widget? icon,\n  Widget? label,\n  bool selected = false,\n  bool initiallyExpanded = false,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function()? onPress,\n  void Function()? onLongPress,\n  void Function(bool)? onHoverChange,\n  void Function(FWidgetStatesDelta)? onStateChange,\n  List<Widget> children = const [],\n  Key? key,\n})\n",
       "links": [
         {
+          "offset": 0,
+          "length": 12,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sidebar/FSidebarItem/FSidebarItem.html"
+        },
+        {
           "offset": 64,
           "length": 5,
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sidebar/FSidebarItem/FSidebarItem.html"
@@ -2302,6 +2367,11 @@
       "code": "FSidebarGroup({\n  required List<Widget> children,\n  FSidebarGroupStyle Function(FSidebarGroupStyle)? style,\n  Widget? label,\n  Widget? action,\n  void Function(bool)? onActionHoverChange,\n  void Function(FWidgetStatesDelta)? onActionStateChange,\n  void Function()? onActionPress,\n  void Function()? onActionLongPress,\n  Key? key,\n})\n",
       "links": [
         {
+          "offset": 0,
+          "length": 13,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sidebar/FSidebarGroup/FSidebarGroup.html"
+        },
+        {
           "offset": 40,
           "length": 8,
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sidebar/FSidebarGroup/FSidebarGroup.html"
@@ -2412,6 +2482,11 @@
       "length": 12,
       "code": "FSidebarItem({\n  FSidebarItemStyle Function(FSidebarItemStyle)? style,\n  Widget? icon,\n  Widget? label,\n  bool selected = false,\n  bool initiallyExpanded = false,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function()? onPress,\n  void Function()? onLongPress,\n  void Function(bool)? onHoverChange,\n  void Function(FWidgetStatesDelta)? onStateChange,\n  List<Widget> children = const [],\n  Key? key,\n})\n",
       "links": [
+        {
+          "offset": 0,
+          "length": 12,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sidebar/FSidebarItem/FSidebarItem.html"
+        },
         {
           "offset": 64,
           "length": 5,
@@ -2537,6 +2612,11 @@
       "code": "FSidebarItem({\n  FSidebarItemStyle Function(FSidebarItemStyle)? style,\n  Widget? icon,\n  Widget? label,\n  bool selected = false,\n  bool initiallyExpanded = false,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function()? onPress,\n  void Function()? onLongPress,\n  void Function(bool)? onHoverChange,\n  void Function(FWidgetStatesDelta)? onStateChange,\n  List<Widget> children = const [],\n  Key? key,\n})\n",
       "links": [
         {
+          "offset": 0,
+          "length": 12,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sidebar/FSidebarItem/FSidebarItem.html"
+        },
+        {
           "offset": 64,
           "length": 5,
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sidebar/FSidebarItem/FSidebarItem.html"
@@ -2660,6 +2740,11 @@
       "length": 12,
       "code": "FSidebarItem({\n  FSidebarItemStyle Function(FSidebarItemStyle)? style,\n  Widget? icon,\n  Widget? label,\n  bool selected = false,\n  bool initiallyExpanded = false,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function()? onPress,\n  void Function()? onLongPress,\n  void Function(bool)? onHoverChange,\n  void Function(FWidgetStatesDelta)? onStateChange,\n  List<Widget> children = const [],\n  Key? key,\n})\n",
       "links": [
+        {
+          "offset": 0,
+          "length": 12,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sidebar/FSidebarItem/FSidebarItem.html"
+        },
         {
           "offset": 64,
           "length": 5,

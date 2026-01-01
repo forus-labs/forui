@@ -57,6 +57,11 @@
       "code": "FItem({\n  required Widget title,\n  FItemStyle Function(FItemStyle)? style,\n  bool? enabled,\n  bool selected = false,\n  String? semanticsLabel,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  void Function(bool)? onHoverChange,\n  void Function(FWidgetStatesDelta)? onStateChange,\n  void Function()? onPress,\n  void Function()? onLongPress,\n  void Function()? onSecondaryPress,\n  void Function()? onSecondaryLongPress,\n  Map<ShortcutActivator, Intent>? shortcuts,\n  Map<Type, Action<Intent>>? actions,\n  Widget? prefix,\n  Widget? subtitle,\n  Widget? details,\n  Widget? suffix,\n  Key? key,\n})\n",
       "links": [
         {
+          "offset": 0,
+          "length": 5,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem/FItem.html"
+        },
+        {
           "offset": 26,
           "length": 5,
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem/FItem.html"

@@ -137,6 +137,11 @@
       "code": "FBreadcrumb({\n  required List<Widget> children,\n  FBreadcrumbStyle Function(FBreadcrumbStyle)? style,\n  Widget? divider,\n  Key? key,\n})\n",
       "links": [
         {
+          "offset": 0,
+          "length": 11,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumb/FBreadcrumb.html"
+        },
+        {
           "offset": 38,
           "length": 8,
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumb/FBreadcrumb.html"
@@ -203,6 +208,11 @@
       "length": 15,
       "code": "FBreadcrumbItem({\n  required Widget child,\n  bool current,\n  bool autofocus,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  void Function(bool)? onHoverChange,\n  void Function(Set<WidgetState>)? onStateChange,\n  void Function()? onPress,\n  Key? key,\n})\n",
       "links": [
+        {
+          "offset": 0,
+          "length": 15,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.html"
+        },
         {
           "offset": 36,
           "length": 5,
@@ -274,6 +284,11 @@
       "length": 25,
       "code": "FBreadcrumbItem.collapsed({\n  required List<FItemGroup> menu,\n  FPopoverMenuStyle Function(FPopoverMenuStyle)? popoverMenuStyle,\n  FPopoverControl popoverControl,\n  ScrollController? scrollController,\n  double? cacheExtent,\n  double maxHeight,\n  DragStartBehavior dragStartBehavior,\n  FItemDivider divider,\n  AlignmentGeometry menuAnchor,\n  AlignmentGeometry childAnchor,\n  FPortalSpacing spacing,\n  FPortalOverflow overflow,\n  Offset offset,\n  FPopoverHideRegion hideRegion,\n  void Function()? onTapHide,\n  bool autofocus,\n  FocusScopeNode? focusNode,\n  void Function(bool)? onFocusChange,\n  void Function(bool)? onHoverChange,\n  void Function(Set<WidgetState>)? onStateChange,\n  TraversalEdgeBehavior traversalEdgeBehavior,\n  String? semanticsLabel,\n  Key? key,\n})\n",
       "links": [
+        {
+          "offset": 0,
+          "length": 25,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.collapsed.html"
+        },
         {
           "offset": 56,
           "length": 4,
@@ -454,6 +469,11 @@
       "length": 5,
       "code": "FItemGroup.group({\n  required List<FItemMixin> children,\n  FItemGroupStyle Function(FItemGroupStyle)? style,\n  ScrollController? scrollController,\n  double? cacheExtent,\n  double maxHeight = .infinity,\n  DragStartBehavior dragStartBehavior = .start,\n  ScrollPhysics physics = const ClampingScrollPhysics(),\n  bool? enabled,\n  FItemDivider divider = .none,\n  String? semanticsLabel,\n  Key? key,\n})\n",
       "links": [
+        {
+          "offset": 0,
+          "length": 16,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroup/FItemGroup.group.html"
+        },
         {
           "offset": 47,
           "length": 8,
@@ -652,6 +672,11 @@
       "code": "FBreadcrumbItem({\n  required Widget child,\n  bool current,\n  bool autofocus,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  void Function(bool)? onHoverChange,\n  void Function(Set<WidgetState>)? onStateChange,\n  void Function()? onPress,\n  Key? key,\n})\n",
       "links": [
         {
+          "offset": 0,
+          "length": 15,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.html"
+        },
+        {
           "offset": 36,
           "length": 5,
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.html"
@@ -722,6 +747,11 @@
       "length": 15,
       "code": "FBreadcrumbItem({\n  required Widget child,\n  bool current,\n  bool autofocus,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  void Function(bool)? onHoverChange,\n  void Function(Set<WidgetState>)? onStateChange,\n  void Function()? onPress,\n  Key? key,\n})\n",
       "links": [
+        {
+          "offset": 0,
+          "length": 15,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.html"
+        },
         {
           "offset": 36,
           "length": 5,

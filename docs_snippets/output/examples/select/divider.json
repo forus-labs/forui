@@ -126,6 +126,11 @@
       "code": "FSelect.rich({\n  required String Function(String) format,\n  required List<FSelectItemMixin> children,\n  FSelectControl<String>? control,\n  FPopoverControl popoverControl,\n  FSelectStyle Function(FSelectStyle)? style,\n  bool autofocus,\n  FocusNode? focusNode,\n  Widget Function(BuildContext, FSelectStyle, Set<WidgetState>, Widget)\n  builder,\n  Widget Function(BuildContext, FSelectStyle, Set<WidgetState>)?\n  prefixBuilder,\n  Widget Function(BuildContext, FSelectStyle, Set<WidgetState>)?\n  suffixBuilder,\n  Widget? label,\n  Widget? description,\n  bool enabled,\n  void Function(String?)? onSaved,\n  void Function()? onReset,\n  AutovalidateMode autovalidateMode,\n  String? forceErrorText,\n  String? Function(String?) validator,\n  Widget Function(BuildContext, String) errorBuilder,\n  String? hint,\n  TextAlign textAlign,\n  TextAlignVertical? textAlignVertical,\n  TextDirection? textDirection,\n  bool expands,\n  MouseCursor mouseCursor,\n  bool canRequestFocus,\n  bool clearable,\n  AlignmentGeometry contentAnchor,\n  AlignmentGeometry fieldAnchor,\n  FPortalConstraints contentConstraints,\n  FPortalSpacing contentSpacing,\n  FPortalOverflow contentOverflow,\n  Offset contentOffset,\n  FPopoverHideRegion contentHideRegion,\n  Object? contentGroupId,\n  bool autoHide,\n  Widget Function(BuildContext, FSelectStyle) contentEmptyBuilder,\n  ScrollController? contentScrollController,\n  bool contentScrollHandles,\n  ScrollPhysics contentPhysics,\n  FItemDivider contentDivider,\n  Key? key,\n})\n",
       "links": [
         {
+          "offset": 0,
+          "length": 12,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.rich.html"
+        },
+        {
           "offset": 50,
           "length": 6,
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.rich.html"

@@ -47,6 +47,11 @@
       "code": "FPagination({\n  FPaginationControl control = const .managed(),\n  FPaginationStyle Function(FPaginationStyle)? style,\n  Widget? previous,\n  Widget? next,\n  Key? key,\n})\n",
       "links": [
         {
+          "offset": 0,
+          "length": 11,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPagination/FPagination.html"
+        },
+        {
           "offset": 35,
           "length": 7,
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPagination/FPagination.html"
@@ -121,6 +126,11 @@
       "length": 7,
       "code": "FPaginationControl.managed({\n  FPaginationController? controller,\n  int? initial,\n  int? pages,\n  int? siblings,\n  bool showEdges,\n  void Function(int)? onChange,\n})\n",
       "links": [
+        {
+          "offset": 0,
+          "length": 26,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPaginationControl/FPaginationControl.managed.html"
+        },
         {
           "offset": 54,
           "length": 10,

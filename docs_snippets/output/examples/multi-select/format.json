@@ -57,6 +57,11 @@
       "code": "FMultiSelect.rich({\n  required Widget Function(({String firstName, String lastName})) format,\n  required List<FSelectItemMixin> children,\n  FMultiValueControl<({String firstName, String lastName})>? control,\n  FPopoverControl popoverControl,\n  FMultiSelectStyle Function(FMultiSelectStyle)? style,\n  bool autofocus,\n  FocusNode? focusNode,\n  Widget Function(BuildContext, FMultiSelectStyle, Set<WidgetState>)?\n  prefixBuilder,\n  Widget Function(BuildContext, FMultiSelectStyle, Set<WidgetState>)?\n  suffixBuilder,\n  Widget? label,\n  Widget? description,\n  bool enabled,\n  void Function(Set<({String firstName, String lastName})>)? onSaved,\n  void Function()? onReset,\n  AutovalidateMode autovalidateMode,\n  String? forceErrorText,\n  String? Function(Set<({String firstName, String lastName})>) validator,\n  Widget Function(BuildContext, String) errorBuilder,\n  Widget? hint,\n  bool keepHint,\n  int Function(\n    ({String firstName, String lastName}),\n    ({String firstName, String lastName}),\n  )?\n  sort,\n  Widget Function(\n    BuildContext,\n    FMultiValueNotifier<({String firstName, String lastName})>,\n    FMultiSelectStyle,\n    ({String firstName, String lastName}),\n    Widget,\n  )?\n  tagBuilder,\n  TextAlign textAlign,\n  TextDirection? textDirection,\n  bool clearable,\n  AlignmentGeometry contentAnchor,\n  AlignmentGeometry fieldAnchor,\n  FPortalConstraints contentConstraints,\n  FPortalSpacing contentSpacing,\n  FPortalOverflow contentOverflow,\n  Offset contentOffset,\n  FPopoverHideRegion contentHideRegion,\n  Object? contentGroupId,\n  Widget Function(BuildContext, FMultiSelectStyle) contentEmptyBuilder,\n  ScrollController? contentScrollController,\n  bool contentScrollHandles,\n  ScrollPhysics contentPhysics,\n  FItemDivider contentDivider,\n  Key? key,\n})\n",
       "links": [
         {
+          "offset": 0,
+          "length": 17,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FMultiSelect/FMultiSelect.rich.html"
+        },
+        {
           "offset": 86,
           "length": 6,
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FMultiSelect/FMultiSelect.rich.html"

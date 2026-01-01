@@ -145,6 +145,11 @@
       "code": "FSlider({\n  FSliderControl control = const .managedContinuous(),\n  FSliderStyle Function(FSliderStyle)? style,\n  FLayout? layout,\n  Widget? label,\n  Widget? description,\n  Widget Function(BuildContext, String) errorBuilder =\n      FFormFieldProperties.defaultErrorBuilder,\n  List<FSliderMark> marks = const [],\n  double? trackMainAxisExtent,\n  double? trackHitRegionCrossExtent,\n  FSliderTooltipControls tooltipControls = const .new(),\n  Widget Function(FTooltipController, double) tooltipBuilder =\n      _tooltipBuilder,\n  String Function(double) semanticValueFormatterCallback =\n      _semanticValueFormatter,\n  String Function(FSliderValue)? semanticFormatterCallback,\n  void Function(FSliderValue)? onEnd,\n  void Function(FSliderValue?)? onSaved,\n  void Function()? onReset,\n  String? Function(FSliderValue?)? validator,\n  String? forceErrorText,\n  bool enabled = true,\n  AutovalidateMode autovalidateMode = .disabled,\n  Key? key,\n})\n",
       "links": [
         {
+          "offset": 0,
+          "length": 7,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSlider/FSlider.html"
+        },
+        {
           "offset": 27,
           "length": 7,
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSlider/FSlider.html"
@@ -350,6 +355,11 @@
       "code": "FSliderControl.managedContinuous({\n  FContinuousSliderController? controller,\n  FSliderValue? initial,\n  double? stepPercentage,\n  FSliderInteraction? interaction,\n  FSliderActiveThumb? thumb,\n  void Function(FSliderValue)? onChange,\n})\n",
       "links": [
         {
+          "offset": 0,
+          "length": 32,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderControl/FSliderControl.managedContinuous.html"
+        },
+        {
           "offset": 66,
           "length": 10,
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderControl/FSliderControl.managedContinuous.html"
@@ -430,6 +440,11 @@
       "code": "FSliderValue({\n  required double max,\n  double min,\n  ({double max, double min}) constraints,\n})\n",
       "links": [
         {
+          "offset": 0,
+          "length": 12,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderValue/FSliderValue.html"
+        },
+        {
           "offset": 33,
           "length": 3,
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderValue/FSliderValue.html"
@@ -491,6 +506,11 @@
       "code": "FSliderMark.mark({\n  required double value,\n  FSliderMarkStyle? style,\n  bool tick,\n  Widget? label,\n})\n",
       "links": [
         {
+          "offset": 0,
+          "length": 16,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderMark/FSliderMark.mark.html"
+        },
+        {
           "offset": 37,
           "length": 5,
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderMark/FSliderMark.mark.html"
@@ -541,6 +561,11 @@
       "length": 4,
       "code": "FSliderMark.mark({\n  required double value,\n  FSliderMarkStyle? style,\n  bool tick,\n  Widget? label,\n})\n",
       "links": [
+        {
+          "offset": 0,
+          "length": 16,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderMark/FSliderMark.mark.html"
+        },
         {
           "offset": 37,
           "length": 5,
@@ -593,6 +618,11 @@
       "code": "FSliderMark.mark({\n  required double value,\n  FSliderMarkStyle? style,\n  bool tick,\n  Widget? label,\n})\n",
       "links": [
         {
+          "offset": 0,
+          "length": 16,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderMark/FSliderMark.mark.html"
+        },
+        {
           "offset": 37,
           "length": 5,
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderMark/FSliderMark.mark.html"
@@ -643,6 +673,11 @@
       "length": 4,
       "code": "FSliderMark.mark({\n  required double value,\n  FSliderMarkStyle? style,\n  bool tick,\n  Widget? label,\n})\n",
       "links": [
+        {
+          "offset": 0,
+          "length": 16,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderMark/FSliderMark.mark.html"
+        },
         {
           "offset": 37,
           "length": 5,
@@ -695,6 +730,11 @@
       "code": "FSliderMark.mark({\n  required double value,\n  FSliderMarkStyle? style,\n  bool tick,\n  Widget? label,\n})\n",
       "links": [
         {
+          "offset": 0,
+          "length": 16,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderMark/FSliderMark.mark.html"
+        },
+        {
           "offset": 37,
           "length": 5,
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderMark/FSliderMark.mark.html"
@@ -745,6 +785,11 @@
       "length": 7,
       "code": "FButton({\n  required void Function()? onPress,\n  required Widget child,\n  FBaseButtonStyle Function(FButtonStyle) style = _primary,\n  void Function()? onLongPress,\n  void Function()? onSecondaryPress,\n  void Function()? onSecondaryLongPress,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  void Function(bool)? onHoverChange,\n  void Function(FWidgetStatesDelta)? onStateChange,\n  bool selected = false,\n  Map<ShortcutActivator, Intent>? shortcuts,\n  Map<Type, Action<Intent>>? actions,\n  MainAxisSize mainAxisSize = .max,\n  MainAxisAlignment mainAxisAlignment = .center,\n  CrossAxisAlignment crossAxisAlignment = .center,\n  TextBaseline? textBaseline,\n  Widget? prefix,\n  Widget? suffix,\n  Key? key,\n})\n",
       "links": [
+        {
+          "offset": 0,
+          "length": 7,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+        },
         {
           "offset": 38,
           "length": 7,

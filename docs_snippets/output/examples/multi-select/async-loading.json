@@ -75,6 +75,11 @@
       "code": "FMultiSelect.searchBuilder({\n  required Widget Function(String) format,\n  required FutureOr<Iterable<String>> Function(String) filter,\n  required List<FSelectItemMixin> Function(\n    BuildContext,\n    String,\n    Iterable<String>,\n  )\n  contentBuilder,\n  FSelectSearchFieldProperties searchFieldProperties,\n  Widget Function(BuildContext, FSelectSearchStyle) contentLoadingBuilder,\n  Widget Function(BuildContext, Object?, StackTrace)? contentErrorBuilder,\n  FMultiValueControl<String>? control,\n  FPopoverControl popoverControl,\n  FMultiSelectStyle Function(FMultiSelectStyle)? style,\n  bool autofocus,\n  FocusNode? focusNode,\n  Widget Function(BuildContext, FMultiSelectStyle, Set<WidgetState>)?\n  prefixBuilder,\n  Widget Function(BuildContext, FMultiSelectStyle, Set<WidgetState>)?\n  suffixBuilder,\n  Widget? label,\n  Widget? description,\n  bool enabled,\n  void Function(Set<String>)? onSaved,\n  void Function()? onReset,\n  AutovalidateMode autovalidateMode,\n  String? forceErrorText,\n  String? Function(Set<String>) validator,\n  Widget Function(BuildContext, String) errorBuilder,\n  Widget? hint,\n  bool keepHint,\n  int Function(String, String)? sort,\n  Widget Function(\n    BuildContext,\n    FMultiValueNotifier<String>,\n    FMultiSelectStyle,\n    String,\n    Widget,\n  )?\n  tagBuilder,\n  TextAlign textAlign,\n  TextDirection? textDirection,\n  bool clearable,\n  AlignmentGeometry contentAnchor,\n  AlignmentGeometry fieldAnchor,\n  FPortalConstraints contentConstraints,\n  FPortalSpacing contentSpacing,\n  FPortalOverflow contentOverflow,\n  Offset contentOffset,\n  FPopoverHideRegion contentHideRegion,\n  Object? contentGroupId,\n  Widget Function(BuildContext, FMultiSelectStyle) contentEmptyBuilder,\n  ScrollController? contentScrollController,\n  bool contentScrollHandles,\n  ScrollPhysics contentPhysics,\n  FItemDivider contentDivider,\n  Key? key,\n})\n",
       "links": [
         {
+          "offset": 0,
+          "length": 26,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FMultiSelect/FMultiSelect.searchBuilder.html"
+        },
+        {
           "offset": 64,
           "length": 6,
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FMultiSelect/FMultiSelect.searchBuilder.html"

@@ -37,6 +37,11 @@
       "code": "FCard({\n  Widget? image,\n  Widget? title,\n  Widget? subtitle,\n  Widget? child,\n  MainAxisSize mainAxisSize = .min,\n  FCardStyle Function(FCardStyle)? style,\n  Key? key,\n})\n",
       "links": [
         {
+          "offset": 0,
+          "length": 5,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.card/FCard/FCard.html"
+        },
+        {
           "offset": 18,
           "length": 5,
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.card/FCard/FCard.html"
