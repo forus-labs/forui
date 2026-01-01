@@ -1,7 +1,25 @@
 import type { BaseLayoutProps } from 'fumadocs-ui/layouts/shared';
-import { BookIcon } from 'lucide-react';
-import { Logo } from '../components/logo';
+import Image from 'next/image';
+import { Logo } from '@/components/logo';
 
+const iconLinks = [
+  {
+    type: 'icon' as const,
+    label: 'X',
+    icon: <Image src="/brands/x.svg" alt="" width={16} height={16} className="dark:invert" />,
+    text: 'X',
+    url: 'https://x.com/foruidev',
+  },
+  {
+    type: 'icon' as const,
+    label: 'GitHub',
+    icon: <Image src="/brands/github.svg" alt="" width={20} height={20} className="dark:invert" />,
+    text: 'GitHub',
+    url: 'https://github.com/duobaseio/forui',
+  },
+];
+
+// For home layout.
 export function baseOptions(): BaseLayoutProps {
   return {
     nav: {
@@ -18,13 +36,29 @@ export function baseOptions(): BaseLayoutProps {
         url: '/enterprise',
         secondary: false,
       },
+      ...iconLinks,
+    ],
+  };
+}
+
+// For docs layout.
+export function docsOptions(): BaseLayoutProps {
+  return {
+    nav: {
+      title: <Logo />,
+    },
+    links: [
       {
-        type: 'icon',
-        label: 'Visit Blog', // `aria-label`
-        icon: <BookIcon />,
-        text: 'Blog',
-        url: '/blog',
+        text: 'Home',
+        url: '/',
+        secondary: false,
       },
+      {
+        text: 'Enterprise',
+        url: '/enterprise',
+        secondary: false,
+      },
+      ...iconLinks,
     ],
   };
 }
