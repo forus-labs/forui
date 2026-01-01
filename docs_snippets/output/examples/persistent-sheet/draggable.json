@@ -98,7 +98,13 @@
       "offset": 316,
       "length": 7,
       "code": "void dispose()",
-      "links": [],
+      "links": [
+        {
+          "offset": 5,
+          "length": 7,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/FPersistentSheetController/dispose.html"
+        }
+      ],
       "container": {
         "name": "FPersistentSheetController",
         "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/FPersistentSheetController-class.html"
@@ -260,7 +266,13 @@
       "offset": 519,
       "length": 6,
       "code": "TickerFuture toggle()",
-      "links": [],
+      "links": [
+        {
+          "offset": 13,
+          "length": 6,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/FPersistentSheetController/toggle.html"
+        }
+      ],
       "container": {
         "name": "FPersistentSheetController",
         "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/FPersistentSheetController-class.html"

@@ -30,7 +30,13 @@ class StubLinker extends DartDocLinker {
   @override
   void visitFunctionDeclaration(FunctionDeclaration node) {
     if (_topLevelFunction(node.name.lexeme) case final function?) {
+      // Look up actual top level function and get the function from it. Needed for top level functions like
+      // `showFPersistentSheet`.
       link(node.name, function);
+    } else if (_type(container)?.getMethod(node.name.lexeme) case final method?) {
+      // Look up actual target and get the method from it. Needed for static functions like
+      // `FCalendarControl.managedDates`.
+      link(node.name, method);
     }
     super.visitFunctionDeclaration(node);
   }

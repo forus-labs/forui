@@ -308,6 +308,11 @@
       "code": "FSelectGroupItemMixin<T> radio<T>({\n  required T value,\n  Widget? label,\n  Widget? description,\n  Widget? error,\n  String? semanticsLabel,\n  FRadioStyle? style,\n  bool enabled = true,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n})",
       "links": [
         {
+          "offset": 25,
+          "length": 5,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroupItemMixin/radio.html"
+        },
+        {
           "offset": 0,
           "length": 24,
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroupItemMixin-mixin.html"
@@ -344,6 +349,11 @@
       "code": "FSelectGroupItemMixin<T> radio<T>({\n  required T value,\n  Widget? label,\n  Widget? description,\n  Widget? error,\n  String? semanticsLabel,\n  FRadioStyle? style,\n  bool enabled = true,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n})",
       "links": [
         {
+          "offset": 25,
+          "length": 5,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroupItemMixin/radio.html"
+        },
+        {
           "offset": 0,
           "length": 24,
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroupItemMixin-mixin.html"
@@ -379,6 +389,11 @@
       "length": 5,
       "code": "FSelectGroupItemMixin<T> radio<T>({\n  required T value,\n  Widget? label,\n  Widget? description,\n  Widget? error,\n  String? semanticsLabel,\n  FRadioStyle? style,\n  bool enabled = true,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n})",
       "links": [
+        {
+          "offset": 25,
+          "length": 5,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroupItemMixin/radio.html"
+        },
         {
           "offset": 0,
           "length": 24,

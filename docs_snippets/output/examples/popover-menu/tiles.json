@@ -1169,7 +1169,13 @@
       "offset": 1293,
       "length": 6,
       "code": "Future<void> toggle()",
-      "links": [],
+      "links": [
+        {
+          "offset": 13,
+          "length": 6,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverController/toggle.html"
+        }
+      ],
       "container": {
         "name": "FPopoverController",
         "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverController-class.html"

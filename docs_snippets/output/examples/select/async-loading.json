@@ -475,7 +475,13 @@
       "offset": 845,
       "length": 7,
       "code": "TextStyle resolve(Set<WidgetState> states)",
-      "links": [],
+      "links": [
+        {
+          "offset": 10,
+          "length": 7,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStateMap/resolve.html"
+        }
+      ],
       "container": {
         "name": "FWidgetStateMap",
         "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStateMap-class.html"

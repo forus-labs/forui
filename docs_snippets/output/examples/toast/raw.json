@@ -905,7 +905,13 @@
       "offset": 1021,
       "length": 7,
       "code": "void dismiss()",
-      "links": [],
+      "links": [
+        {
+          "offset": 5,
+          "length": 7,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/FToasterEntry/dismiss.html"
+        }
+      ],
       "container": {
         "name": "FToasterEntry",
         "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/FToasterEntry-mixin.html"

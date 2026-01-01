@@ -122,6 +122,11 @@
       "code": "FBaseAlertStyle Function(FAlertStyle) primary([\n  FAlertStyle Function(FAlertStyle)? style,\n])",
       "links": [
         {
+          "offset": 38,
+          "length": 7,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.alert/FAlertStyle/primary.html"
+        },
+        {
           "offset": 0,
           "length": 15,
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.alert/FBaseAlertStyle-class.html"

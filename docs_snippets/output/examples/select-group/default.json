@@ -291,6 +291,11 @@
       "code": "FSelectGroupItemMixin<T> checkbox<T>({\n  required T value,\n  FCheckboxStyle? style,\n  Widget? label,\n  Widget? description,\n  Widget? error,\n  String? semanticsLabel,\n  bool enabled = true,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n})",
       "links": [
         {
+          "offset": 25,
+          "length": 8,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroupItemMixin/checkbox.html"
+        },
+        {
           "offset": 0,
           "length": 24,
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroupItemMixin-mixin.html"
@@ -327,6 +332,11 @@
       "code": "FSelectGroupItemMixin<T> checkbox<T>({\n  required T value,\n  FCheckboxStyle? style,\n  Widget? label,\n  Widget? description,\n  Widget? error,\n  String? semanticsLabel,\n  bool enabled = true,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n})",
       "links": [
         {
+          "offset": 25,
+          "length": 8,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroupItemMixin/checkbox.html"
+        },
+        {
           "offset": 0,
           "length": 24,
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroupItemMixin-mixin.html"
@@ -362,6 +372,11 @@
       "length": 8,
       "code": "FSelectGroupItemMixin<T> checkbox<T>({\n  required T value,\n  FCheckboxStyle? style,\n  Widget? label,\n  Widget? description,\n  Widget? error,\n  String? semanticsLabel,\n  bool enabled = true,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n})",
       "links": [
+        {
+          "offset": 25,
+          "length": 8,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroupItemMixin/checkbox.html"
+        },
         {
           "offset": 0,
           "length": 24,

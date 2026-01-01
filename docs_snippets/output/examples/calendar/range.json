@@ -177,6 +177,11 @@
       "code": "FCalendarControl<(DateTime, DateTime)?> managedRange({\n  FCalendarController<(DateTime, DateTime)?>? controller,\n  (DateTime, DateTime)? initial,\n  bool Function(DateTime)? selectable,\n  bool truncateAndStripTimezone = true,\n  void Function((DateTime, DateTime)?)? onChange,\n})",
       "links": [
         {
+          "offset": 40,
+          "length": 12,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarControl/managedRange.html"
+        },
+        {
           "offset": 0,
           "length": 39,
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarControl-class.html"

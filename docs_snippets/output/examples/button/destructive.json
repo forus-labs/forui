@@ -207,6 +207,11 @@
       "code": "FBaseButtonStyle Function(FButtonStyle) destructive([\n  FButtonStyle Function(FButtonStyle)? style,\n])",
       "links": [
         {
+          "offset": 40,
+          "length": 11,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButtonStyle/destructive.html"
+        },
+        {
           "offset": 0,
           "length": 16,
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FBaseButtonStyle-class.html"

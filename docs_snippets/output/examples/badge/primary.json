@@ -102,6 +102,11 @@
       "code": "FBaseBadgeStyle Function(FBadgeStyle) primary([\n  FBadgeStyle Function(FBadgeStyle)? style,\n])",
       "links": [
         {
+          "offset": 38,
+          "length": 7,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.badge/FBadgeStyle/primary.html"
+        },
+        {
           "offset": 0,
           "length": 15,
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.badge/FBaseBadgeStyle-class.html"

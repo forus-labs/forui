@@ -240,6 +240,11 @@
       "code": "FCalendarControl<DateTime?> managedDate({\n  FCalendarController<DateTime?>? controller,\n  DateTime? initial,\n  bool Function(DateTime)? selectable,\n  bool toggleable = true,\n  bool truncateAndStripTimezone = true,\n  void Function(DateTime?)? onChange,\n})",
       "links": [
         {
+          "offset": 28,
+          "length": 11,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarControl/managedDate.html"
+        },
+        {
           "offset": 0,
           "length": 27,
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarControl-class.html"
@@ -274,6 +279,11 @@
       "length": 4,
       "code": "FCalendarController<DateTime?> date({\n  DateTime? initial,\n  bool Function(DateTime)? selectable,\n  bool toggleable = true,\n  bool truncateAndStripTimezone = true,\n})",
       "links": [
+        {
+          "offset": 31,
+          "length": 4,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarController/date.html"
+        },
         {
           "offset": 0,
           "length": 30,

@@ -140,7 +140,13 @@
       "offset": 388,
       "length": 7,
       "code": "void dispose()",
-      "links": [],
+      "links": [
+        {
+          "offset": 5,
+          "length": 7,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_picker/FTimePickerController/dispose.html"
+        }
+      ],
       "container": {
         "name": "FTimePickerController",
         "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_picker/FTimePickerController-class.html"
@@ -448,6 +454,11 @@
       "length": 9,
       "code": "Future<void> animateTo(\n  FTime value, {\n  Duration duration = const Duration(milliseconds: 300),\n  Curve curve = Curves.easeOutCubic,\n})",
       "links": [
+        {
+          "offset": 13,
+          "length": 9,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_picker/FTimePickerController/animateTo.html"
+        },
         {
           "offset": 26,
           "length": 5,

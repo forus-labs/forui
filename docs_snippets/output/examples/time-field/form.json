@@ -193,7 +193,13 @@
       "offset": 543,
       "length": 7,
       "code": "void dispose()",
-      "links": [],
+      "links": [
+        {
+          "offset": 5,
+          "length": 7,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeFieldController/dispose.html"
+        }
+      ],
       "container": {
         "name": "FTimeFieldController",
         "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeFieldController-class.html"

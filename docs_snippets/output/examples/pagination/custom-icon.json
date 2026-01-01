@@ -564,6 +564,11 @@
       "code": "FBaseButtonStyle Function(FButtonStyle) ghost([\n  FButtonStyle Function(FButtonStyle)? style,\n])",
       "links": [
         {
+          "offset": 40,
+          "length": 5,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButtonStyle/ghost.html"
+        },
+        {
           "offset": 0,
           "length": 16,
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FBaseButtonStyle-class.html"
@@ -601,7 +606,13 @@
       "offset": 828,
       "length": 4,
       "code": "void next()",
-      "links": [],
+      "links": [
+        {
+          "offset": 5,
+          "length": 4,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPaginationController/next.html"
+        }
+      ],
       "container": {
         "name": "FPaginationController",
         "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPaginationController-class.html"
@@ -619,7 +630,13 @@
       "offset": 904,
       "length": 7,
       "code": "IconThemeData resolve(Set<WidgetState> states)",
-      "links": [],
+      "links": [
+        {
+          "offset": 14,
+          "length": 7,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStateMap/resolve.html"
+        }
+      ],
       "container": {
         "name": "FWidgetStateMap",
         "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStateMap-class.html"
@@ -814,6 +831,11 @@
       "code": "FBaseButtonStyle Function(FButtonStyle) ghost([\n  FButtonStyle Function(FButtonStyle)? style,\n])",
       "links": [
         {
+          "offset": 40,
+          "length": 5,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButtonStyle/ghost.html"
+        },
+        {
           "offset": 0,
           "length": 16,
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FBaseButtonStyle-class.html"
@@ -851,7 +873,13 @@
       "offset": 1254,
       "length": 8,
       "code": "void previous()",
-      "links": [],
+      "links": [
+        {
+          "offset": 5,
+          "length": 8,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPaginationController/previous.html"
+        }
+      ],
       "container": {
         "name": "FPaginationController",
         "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPaginationController-class.html"
@@ -869,7 +897,13 @@
       "offset": 1334,
       "length": 7,
       "code": "IconThemeData resolve(Set<WidgetState> states)",
-      "links": [],
+      "links": [
+        {
+          "offset": 14,
+          "length": 7,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStateMap/resolve.html"
+        }
+      ],
       "container": {
         "name": "FWidgetStateMap",
         "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStateMap-class.html"

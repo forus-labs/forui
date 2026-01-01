@@ -177,6 +177,11 @@
       "code": "FCalendarControl<Set<DateTime>> managedDates({\n  FCalendarController<Set<DateTime>>? controller,\n  Set<DateTime>? initial,\n  bool Function(DateTime)? selectable,\n  bool truncateAndStripTimezone = true,\n  void Function(Set<DateTime>)? onChange,\n})",
       "links": [
         {
+          "offset": 32,
+          "length": 12,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarControl/managedDates.html"
+        },
+        {
           "offset": 0,
           "length": 31,
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarControl-class.html"

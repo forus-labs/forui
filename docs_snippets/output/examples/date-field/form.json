@@ -159,7 +159,13 @@
       "offset": 566,
       "length": 7,
       "code": "void dispose()",
-      "links": [],
+      "links": [
+        {
+          "offset": 5,
+          "length": 7,
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateFieldController/dispose.html"
+        }
+      ],
       "container": {
         "name": "FDateFieldController",
         "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateFieldController-class.html"
