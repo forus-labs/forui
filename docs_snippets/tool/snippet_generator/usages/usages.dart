@@ -14,7 +14,7 @@ import '../tooltip/generator.dart';
 
 class Usages extends RecursiveAstVisitor<void> {
   /// Transforms all usage files in [path] and returns a map of { fileName: { varName: Snippet } }.
-  static Future<Map<String, Map<String, Snippet>>> transform(
+  static Future<Map<String, Map<String, Snippet>>> generate(
     AnalysisSession session,
     OverlayResourceProvider overlay,
     List<Package> packages,

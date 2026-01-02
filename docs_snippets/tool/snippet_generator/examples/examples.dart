@@ -18,7 +18,7 @@ import 'routes.dart';
 import 'widgets.dart';
 
 class Examples extends RecursiveAstVisitor<void> {
-  static Future<Map<String, Snippet>> transform(
+  static Future<Map<String, Snippet>> generate(
     AnalysisSession session,
     OverlayResourceProvider overlay,
     List<Package> packages,
@@ -28,7 +28,7 @@ class Examples extends RecursiveAstVisitor<void> {
 
     var snippets = <String, Snippet>{};
     if (await session.getResolvedUnit(main) case final ResolvedUnitResult result) {
-      snippets = RoutesVisitor.transform(result.unit);
+      snippets = RoutesVisitor.generate(result.unit);
     }
 
     for (final path in paths) {
@@ -76,11 +76,11 @@ class Examples extends RecursiveAstVisitor<void> {
     if (options.inline case final inline?) {
       final propagation = ConstantPropagation(inline)..visitClassDeclaration(node);
       final (result, declaration as ClassDeclaration) = (await _session.declaration(inline.element!))!;
-      final widget = Widgets.extract(result, declaration, propagation.substitutions, full: options.include.isNotEmpty);
+      final widget = Widgets.generate(result, declaration, propagation.substitutions, full: options.include.isNotEmpty);
       final code = await merge(_session, _result, options.include, node, widget);
       snippet.code = formatter.format(await ArgumentElision.elide(code, _session, _overlay));
     } else {
-      final widget = Widgets.extract(_result, node, const {}, full: options.include.isNotEmpty);
+      final widget = Widgets.generate(_result, node, const {}, full: options.include.isNotEmpty);
       snippet.code = formatter.format(await merge(_session, _result, options.include, node, widget));
     }
 

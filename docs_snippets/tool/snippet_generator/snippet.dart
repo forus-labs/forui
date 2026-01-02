@@ -79,6 +79,8 @@ class Snippet {
     _code = value;
   }
 
+  int get importsLines => _importsLines;
+
   int get importsLength => _importsLength;
 
   /// Remove import statements from the snippet, resetting the base offset.

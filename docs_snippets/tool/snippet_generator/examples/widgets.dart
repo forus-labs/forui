@@ -6,7 +6,7 @@ import 'package:analyzer/dart/element/element.dart';
 import '../transformation/transformations.dart';
 
 class Widgets extends RecursiveAstVisitor<void> {
-  static String extract(
+  static String generate(
     ResolvedUnitResult result,
     ClassDeclaration declaration,
     Map<String, String> substitutions, {
@@ -229,3 +229,7 @@ class _StateVisitor extends Widgets {
     super.visitMethodDeclaration(node);
   }
 }
+
+final a =
+    // {@snippet}
+    Object();
