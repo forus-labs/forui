@@ -143,8 +143,18 @@
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext/theme.html"
     },
     {
+      "offset": 1440,
+      "length": 3,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegionData/offsetPercentage.html"
+    },
+    {
       "offset": 1423,
       "length": 16,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegionData/offsetPercentage.html"
+    },
+    {
+      "offset": 1592,
+      "length": 3,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegionData/offsetPercentage.html"
     },
     {
@@ -884,6 +894,16 @@
       }
     },
     {
+      "offset": 1440,
+      "length": 3,
+      "snippet": {
+        "text": "double min",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
       "offset": 1423,
       "length": 16,
       "snippet": {
@@ -895,6 +915,16 @@
           "name": "FResizableRegionData",
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegionData-class.html"
         }
+      }
+    },
+    {
+      "offset": 1592,
+      "length": 3,
+      "snippet": {
+        "text": "double max",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
       }
     },
     {

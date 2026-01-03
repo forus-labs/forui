@@ -22,6 +22,11 @@
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FAnimatedTheme/data.html"
     },
     {
+      "offset": 338,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemes/zinc.html"
+    },
+    {
       "offset": 325,
       "length": 12,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemes/zinc.html"
@@ -113,6 +118,16 @@
       "length": 5,
       "snippet": {
         "text": "{required FThemeData data}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 338,
+      "length": 5,
+      "snippet": {
+        "text": "FThemeData light",
         "highlights": [],
         "links": [],
         "tooltips": []

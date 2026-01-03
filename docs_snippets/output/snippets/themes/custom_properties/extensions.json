@@ -18,6 +18,11 @@
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/colors.html"
     },
     {
+      "offset": 63,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemes/zinc.html"
+    },
+    {
       "offset": 50,
       "length": 12,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemes/zinc.html"
@@ -341,6 +346,16 @@
           "name": "FThemeData",
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
         }
+      }
+    },
+    {
+      "offset": 63,
+      "length": 5,
+      "snippet": {
+        "text": "FThemeData light",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
       }
     },
     {

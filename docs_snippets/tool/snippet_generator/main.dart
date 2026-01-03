@@ -10,6 +10,7 @@ import 'package:dart_style/dart_style.dart';
 import 'package:path/path.dart' as p;
 import 'package:yaml/yaml.dart';
 
+import 'examples/examples.dart';
 import 'snippets/snippets.dart';
 
 /// The formatter used to format the generated code snippets.
@@ -61,21 +62,21 @@ Future<void> main() async {
     );
   }
 
-  // // Process examples.
-  // for (final (route, snippet) in (await Examples.generate(session, provider, packages, [_examples]))) {
-  //   final json = const JsonEncoder.withIndent('  ').convert(snippet.toJson());
-  //   var normalized = route;
-  //   if (normalized.startsWith('/')) {
-  //     normalized = normalized.substring(1);
-  //   }
-  //   if (normalized.endsWith('/')) {
-  //     normalized = normalized.substring(0, normalized.length - 1);
-  //   }
-  //
-  //   final file = File(p.join(output, 'examples', '$normalized.json'));
-  //   file.parent.createSync(recursive: true);
-  //   file.writeAsStringSync(json);
-  // }
+  // Process examples.
+  for (final (route, snippet) in (await Examples.generate(session, provider, packages, [_examples]))) {
+    final json = const JsonEncoder.withIndent('  ').convert(snippet.toJson());
+    var normalized = route;
+    if (normalized.startsWith('/')) {
+      normalized = normalized.substring(1);
+    }
+    if (normalized.endsWith('/')) {
+      normalized = normalized.substring(0, normalized.length - 1);
+    }
+
+    final file = File(p.join(output, 'examples', '$normalized.json'));
+    file.parent.createSync(recursive: true);
+    file.writeAsStringSync(json);
+  }
 
   // Process snippets
   final snippets = await Snippets.generate(session, provider, packages, _snippets);

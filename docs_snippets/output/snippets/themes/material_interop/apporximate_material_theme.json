@@ -13,6 +13,11 @@
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/toApproximateMaterialTheme.html"
     },
     {
+      "offset": 159,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemes/zinc.html"
+    },
+    {
       "offset": 146,
       "length": 12,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemes/zinc.html"
@@ -57,6 +62,22 @@
           "name": "FThemeData",
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
         }
+      }
+    },
+    {
+      "offset": 159,
+      "length": 5,
+      "snippet": {
+        "text": "FThemeData light",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+          }
+        ],
+        "tooltips": []
       }
     },
     {

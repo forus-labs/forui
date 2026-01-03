@@ -4,6 +4,7 @@ import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/dart/ast/syntactic_entity.dart';
 import 'package:analyzer/dart/ast/visitor.dart';
 import 'package:analyzer/dart/element/element.dart';
+import 'package:analyzer/dart/element/type.dart';
 import 'package:analyzer/file_system/overlay_file_system.dart';
 import 'package:collection/collection.dart';
 import 'package:path/path.dart' as p;
@@ -13,7 +14,6 @@ import 'snippet.dart';
 
 /// A visitor that adds Dartdoc links to AST nodes.
 class DartDocLinker extends RecursiveAstVisitor<void> {
-  static final Map<String, LibraryElement?> _cache = {};
   static int _monotonic = 0;
 
   /// Generates DartDoc links for identifiers in [code] that belong to [packages].
@@ -92,13 +92,28 @@ class DartDocLinker extends RecursiveAstVisitor<void> {
   /// Handles expressions like `context.theme.paginationStyle` or `object.nested.method` where the target is an
   /// expression rather than a compile-time identifier. [visitPrefixedIdentifier] handles `prefix.identifier` where
   /// both parts are compile-time identifiers.
+  ///
+  /// Also handles record field access like `FThemes.zinc.light` where the field has no element - links to the parent
+  /// expression's element instead.
   @override
   void visitPropertyAccess(PropertyAccess node) {
     if (node.propertyName.element case final element?) {
       link(node.propertyName, element);
+    } else if (node.target case final target? when target.staticType is RecordType) {
+      // Record field access - link to the parent expression's element.
+      if (recordElement(target) case final element?) {
+        link(node.propertyName, element);
+      }
     }
     super.visitPropertyAccess(node);
   }
+
+  Element? recordElement(Expression expression) => switch (expression) {
+      PrefixedIdentifier(:final element?) => element,
+      PropertyAccess(:final propertyName) => propertyName.element,
+      MethodInvocation(:final methodName) => methodName.element,
+      _ => null,
+    };
 
   /// Links targeted top level function/method invocations to their method documentation.
   ///

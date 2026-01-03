@@ -3,7 +3,9 @@ import 'package:analyzer/dart/analysis/session.dart';
 import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/dart/ast/syntactic_entity.dart';
 import 'package:analyzer/dart/element/element.dart';
+import 'package:analyzer/dart/element/type.dart';
 import 'package:analyzer/file_system/overlay_file_system.dart';
+import 'package:auto_route_generator/utils.dart';
 import 'package:path/path.dart' as p;
 
 import 'stubber.dart';
@@ -78,6 +80,9 @@ class TooltipLinker extends DartDocLinker {
   /// Adds tooltips for property access where the target is an expression.
   ///
   /// Handles expressions like `context.theme.paginationStyle`. See [visitPrefixedIdentifier] for compile-time identifiers.
+  ///
+  /// Also handles record field access like `FThemes.zinc.light` where the field has no element - links to the parent
+  /// expression's element instead.
   @override
   void visitPropertyAccess(PropertyAccess node) {
     if (node.propertyName.element case final element? when _forui(element)) {
@@ -87,6 +92,15 @@ class TooltipLinker extends DartDocLinker {
         element.nonSynthetic.toString(),
         element.enclosingElement,
       );
+    } else if (node.target?.staticType case final RecordType type) {
+      // Record field access - show the field type, link to the parent expression's element.
+      // This is messy because record fields have no elements. We only support named fields.
+      final name = node.propertyName.name;
+      if (type.namedFields.firstWhereOrNull((f) => f.name == name) case final field?) {
+        if (recordElement(node.target!) case final element? when _forui(element)) {
+          tooltip(node.propertyName, .field, '${field.type} $name');
+        }
+      }
     }
     super.visitPropertyAccess(node);
   }

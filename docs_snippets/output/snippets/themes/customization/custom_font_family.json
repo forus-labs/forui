@@ -33,6 +33,11 @@
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/colors.html"
     },
     {
+      "offset": 109,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemes/zinc.html"
+    },
+    {
       "offset": 96,
       "length": 12,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemes/zinc.html"
@@ -56,6 +61,11 @@
       "offset": 158,
       "length": 10,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/typography.html"
+    },
+    {
+      "offset": 152,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemes/zinc.html"
     },
     {
       "offset": 139,
@@ -757,6 +767,22 @@
       }
     },
     {
+      "offset": 109,
+      "length": 5,
+      "snippet": {
+        "text": "FThemeData light",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+          }
+        ],
+        "tooltips": []
+      }
+    },
+    {
       "offset": 96,
       "length": 12,
       "snippet": {
@@ -865,6 +891,22 @@
           "name": "FThemeData",
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
         }
+      }
+    },
+    {
+      "offset": 152,
+      "length": 5,
+      "snippet": {
+        "text": "FThemeData light",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+          }
+        ],
+        "tooltips": []
       }
     },
     {
