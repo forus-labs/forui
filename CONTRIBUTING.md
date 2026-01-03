@@ -399,7 +399,7 @@ In addition to the [API reference](https://dart.dev/tools/dart-doc), you should 
 if necessary.
 
 [forui.dev](https://forui.dev/docs) is split into two parts:
-* The [samples website](./samples), which is a Flutter webapp that provides the example widgets.
+* The [doc snippets website](./docs_snippets), which is a Flutter webapp that provides the example widgets & other code blocks.
 * The [documentation website](./docs), which provides overviews and examples of widgets from the samples website embedded 
   using `<Widget/>` components in MDX files.
 
