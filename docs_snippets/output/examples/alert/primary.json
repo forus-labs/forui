@@ -1,5 +1,5 @@
 {
-  "code": "@override\nWidget build(BuildContext _) => FAlert(\n  style: FAlertStyle.primary(),\n  title: const Text('Heads Up!'),\n  subtitle: const Text('You can add components to your app using the cli.'),\n);\n",
+  "text": "@override\nWidget build(BuildContext _) => FAlert(\n  style: FAlertStyle.primary(),\n  title: const Text('Heads Up!'),\n  subtitle: const Text('You can add components to your app using the cli.'),\n);\n",
   "highlights": [
     {
       "start": 3,
@@ -35,137 +35,145 @@
   ],
   "tooltips": [
     {
-      "offset": 23,
-      "length": 14,
-      "code": "BuildContext _",
-      "links": [],
-      "documentation": ""
-    },
-    {
       "offset": 42,
       "length": 6,
-      "code": "FAlert({\n  required Widget title,\n  Widget icon = const Icon(FIcons.circleAlert),\n  Widget? subtitle,\n  FBaseAlertStyle Function(FAlertStyle) style = _primary,\n  Key? key,\n})\n",
-      "links": [
-        {
-          "offset": 0,
-          "length": 6,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.alert/FAlert/FAlert.html"
-        },
-        {
-          "offset": 27,
-          "length": 5,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.alert/FAlert/FAlert.html"
-        },
-        {
-          "offset": 43,
-          "length": 4,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.alert/FAlert/FAlert.html"
-        },
-        {
-          "offset": 61,
-          "length": 18,
-          "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/circleAlert.html"
-        },
-        {
-          "offset": 92,
-          "length": 8,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.alert/FAlert/FAlert.html"
-        },
-        {
-          "offset": 142,
-          "length": 5,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.alert/FAlert/FAlert.html"
-        },
-        {
-          "offset": 104,
-          "length": 15,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.alert/FBaseAlertStyle-class.html"
-        },
-        {
-          "offset": 129,
-          "length": 11,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.alert/FAlertStyle-class.html"
-        },
-        {
-          "offset": 167,
-          "length": 3,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.alert/FAlert/FAlert.html"
+      "snippet": {
+        "text": "FAlert({\n  required Widget title,\n  Widget icon = const Icon(FIcons.circleAlert),\n  Widget? subtitle,\n  FBaseAlertStyle Function(FAlertStyle) style = _primary,\n  Key? key,\n})\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.alert/FAlert/FAlert.html"
+          },
+          {
+            "offset": 27,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.alert/FAlert/FAlert.html"
+          },
+          {
+            "offset": 43,
+            "length": 4,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.alert/FAlert/FAlert.html"
+          },
+          {
+            "offset": 61,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/circleAlert.html"
+          },
+          {
+            "offset": 92,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.alert/FAlert/FAlert.html"
+          },
+          {
+            "offset": 142,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.alert/FAlert/FAlert.html"
+          },
+          {
+            "offset": 104,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.alert/FBaseAlertStyle-class.html"
+          },
+          {
+            "offset": 129,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.alert/FAlertStyle-class.html"
+          },
+          {
+            "offset": 167,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.alert/FAlert/FAlert.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FAlert",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.alert/FAlert-class.html"
         }
-      ],
-      "container": {
-        "name": "FAlert",
-        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.alert/FAlert-class.html"
-      },
-      "documentation": ""
+      }
     },
     {
       "offset": 52,
       "length": 6,
-      "code": "{FBaseAlertStyle Function(FAlertStyle) style = _primary}",
-      "links": [
-        {
-          "offset": 1,
-          "length": 15,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.alert/FBaseAlertStyle-class.html"
-        },
-        {
-          "offset": 26,
-          "length": 11,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.alert/FAlertStyle-class.html"
-        }
-      ],
-      "documentation": ""
+      "snippet": {
+        "text": "{FBaseAlertStyle Function(FAlertStyle) style = _primary}",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 1,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.alert/FBaseAlertStyle-class.html"
+          },
+          {
+            "offset": 26,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.alert/FAlertStyle-class.html"
+          }
+        ],
+        "tooltips": []
+      }
     },
     {
       "offset": 71,
       "length": 7,
-      "code": "FBaseAlertStyle Function(FAlertStyle) primary([\n  FAlertStyle Function(FAlertStyle)? style,\n])",
-      "links": [
-        {
-          "offset": 38,
-          "length": 7,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.alert/FAlertStyle/primary.html"
-        },
-        {
-          "offset": 0,
-          "length": 15,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.alert/FBaseAlertStyle-class.html"
-        },
-        {
-          "offset": 25,
-          "length": 11,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.alert/FAlertStyle-class.html"
-        },
-        {
-          "offset": 50,
-          "length": 11,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.alert/FAlertStyle-class.html"
-        },
-        {
-          "offset": 71,
-          "length": 11,
+      "snippet": {
+        "text": "FBaseAlertStyle Function(FAlertStyle) primary([\n  FAlertStyle Function(FAlertStyle)? style,\n])",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 38,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.alert/FAlertStyle/primary.html"
+          },
+          {
+            "offset": 0,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.alert/FBaseAlertStyle-class.html"
+          },
+          {
+            "offset": 25,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.alert/FAlertStyle-class.html"
+          },
+          {
+            "offset": 50,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.alert/FAlertStyle-class.html"
+          },
+          {
+            "offset": 71,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.alert/FAlertStyle-class.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FAlertStyle",
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.alert/FAlertStyle-class.html"
         }
-      ],
-      "container": {
-        "name": "FAlertStyle",
-        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.alert/FAlertStyle-class.html"
-      },
-      "documentation": ""
+      }
     },
     {
       "offset": 84,
       "length": 6,
-      "code": "{required Widget title}",
-      "links": [],
-      "documentation": ""
+      "snippet": {
+        "text": "{required Widget title}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
     },
     {
       "offset": 118,
       "length": 9,
-      "code": "{Widget? subtitle}",
-      "links": [],
-      "documentation": ""
+      "snippet": {
+        "text": "{Widget? subtitle}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
     }
   ]
 }

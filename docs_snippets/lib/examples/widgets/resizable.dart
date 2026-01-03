@@ -60,17 +60,17 @@ class NoCascadingResizablePage extends Example {
       axis: .vertical,
       crossAxisExtent: 300,
       children: [
-            .region(
+        .region(
           initialExtent: 200,
           minExtent: 100,
           builder: (_, data, _) => Label(data: data, icon: FIcons.sunrise, label: 'Morning'),
         ),
-            .region(
+        .region(
           initialExtent: 200,
           minExtent: 100,
           builder: (_, data, _) => Label(data: data, icon: FIcons.sun, label: 'Afternoon'),
         ),
-            .region(
+        .region(
           initialExtent: 200,
           minExtent: 100,
           builder: (_, data, _) => Label(data: data, icon: FIcons.sunset, label: 'Evening'),

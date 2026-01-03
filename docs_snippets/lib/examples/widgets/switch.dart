@@ -50,7 +50,7 @@ class _DisabledSwitchPageState extends StatefulExampleState<DisabledSwitchPage> 
 
 @RoutePage()
 class FormSwitchPage extends StatefulExample {
-  FormSwitchPage({@queryParam super.theme}): super(top: 20);
+  FormSwitchPage({@queryParam super.theme}) : super(top: 20);
 
   @override
   State<FormSwitchPage> createState() => _FormSwitchPageState();

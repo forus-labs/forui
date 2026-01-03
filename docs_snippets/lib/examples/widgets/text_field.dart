@@ -10,11 +10,8 @@ class TextFieldPage extends Example {
   TextFieldPage({@queryParam super.theme});
 
   @override
-  Widget example(BuildContext _) => const FTextField(
-    label: Text('Username'),
-    hint: 'JaneDoe',
-    description: Text('Please enter your username.'),
-  );
+  Widget example(BuildContext _) =>
+      const FTextField(label: Text('Username'), hint: 'JaneDoe', description: Text('Please enter your username.'));
 }
 
 @RoutePage()

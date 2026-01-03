@@ -29,7 +29,11 @@ class DialogPage extends Example {
             'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
           ),
           actions: [
-            FButton(style: FButtonStyle.outline(), child: const Text('Cancel'), onPress: () => Navigator.of(context).pop()),
+            FButton(
+              style: FButtonStyle.outline(),
+              child: const Text('Cancel'),
+              onPress: () => Navigator.of(context).pop(),
+            ),
             FButton(child: const Text('Continue'), onPress: () => Navigator.of(context).pop()),
           ],
         ),
@@ -59,7 +63,11 @@ class VerticalDialogPage extends Example {
           ),
           actions: [
             FButton(child: const Text('Continue'), onPress: () => Navigator.of(context).pop()),
-            FButton(style: FButtonStyle.outline(), child: const Text('Cancel'), onPress: () => Navigator.of(context).pop()),
+            FButton(
+              style: FButtonStyle.outline(),
+              child: const Text('Cancel'),
+              onPress: () => Navigator.of(context).pop(),
+            ),
           ],
         ),
       ),
@@ -70,7 +78,7 @@ class VerticalDialogPage extends Example {
 
 @RoutePage()
 class BlurredDialogPage extends Example {
-  BlurredDialogPage({@queryParam super.theme}): super(alignment: .topCenter, top: 10);
+  BlurredDialogPage({@queryParam super.theme}) : super(alignment: .topCenter, top: 10);
 
   @override
   Widget example(BuildContext context) => FButton(

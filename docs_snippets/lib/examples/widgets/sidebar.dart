@@ -8,7 +8,7 @@ import 'package:docs_snippets/example.dart';
 
 @RoutePage()
 class SidebarPage extends Example {
-  SidebarPage({@queryParam super.theme}): super(maxWidth: 1000);
+  SidebarPage({@queryParam super.theme}) : super(maxWidth: 1000);
 
   @override
   Widget example(BuildContext context) => FScaffold(

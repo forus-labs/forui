@@ -8,7 +8,7 @@ import 'package:docs_snippets/example.dart';
 
 @RoutePage()
 class LineCalendarPage extends Example {
-  LineCalendarPage({@queryParam super.theme}): super(maxWidth: 600);
+  LineCalendarPage({@queryParam super.theme}) : super(maxWidth: 600);
 
   @override
   Widget example(BuildContext _) => FLineCalendar(control: .managed(initial: .now().subtract(const Duration(days: 1))));

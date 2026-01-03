@@ -7,7 +7,7 @@ import 'package:docs_snippets/example.dart';
 
 @RoutePage()
 class TextFormFieldPage extends StatefulExample {
-  TextFormFieldPage({@queryParam super.theme}): super(top: 20);
+  TextFormFieldPage({@queryParam super.theme}) : super(top: 20);
 
   @override
   State<TextFormFieldPage> createState() => _TextFormFieldPageState();

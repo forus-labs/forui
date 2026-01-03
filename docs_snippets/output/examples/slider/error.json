@@ -1,5 +1,5 @@
 {
-  "code": "@override\nWidget build(BuildContext context) => FSlider(\n  control: .managedContinuous(initial: FSliderValue(max: 0.6)),\n  label: const Text('Volume'),\n  description: const Text('Adjust the volume by dragging the slider.'),\n  forceErrorText: 'Volume is too high.',\n);\n",
+  "text": "@override\nWidget build(BuildContext context) => FSlider(\n  control: .managedContinuous(initial: FSliderValue(max: 0.6)),\n  label: const Text('Volume'),\n  description: const Text('Adjust the volume by dragging the slider.'),\n  forceErrorText: 'Volume is too high.',\n);\n",
   "highlights": [
     {
       "start": 6,
@@ -55,366 +55,386 @@
   ],
   "tooltips": [
     {
-      "offset": 23,
-      "length": 20,
-      "code": "BuildContext context",
-      "links": [],
-      "documentation": ""
-    },
-    {
       "offset": 48,
       "length": 7,
-      "code": "FSlider({\n  FSliderControl control = const .managedContinuous(),\n  FSliderStyle Function(FSliderStyle)? style,\n  FLayout? layout,\n  Widget? label,\n  Widget? description,\n  Widget Function(BuildContext, String) errorBuilder =\n      FFormFieldProperties.defaultErrorBuilder,\n  List<FSliderMark> marks = const [],\n  double? trackMainAxisExtent,\n  double? trackHitRegionCrossExtent,\n  FSliderTooltipControls tooltipControls = const .new(),\n  Widget Function(FTooltipController, double) tooltipBuilder =\n      _tooltipBuilder,\n  String Function(double) semanticValueFormatterCallback =\n      _semanticValueFormatter,\n  String Function(FSliderValue)? semanticFormatterCallback,\n  void Function(FSliderValue)? onEnd,\n  void Function(FSliderValue?)? onSaved,\n  void Function()? onReset,\n  String? Function(FSliderValue?)? validator,\n  String? forceErrorText,\n  bool enabled = true,\n  AutovalidateMode autovalidateMode = .disabled,\n  Key? key,\n})\n",
-      "links": [
-        {
-          "offset": 0,
-          "length": 7,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSlider/FSlider.html"
-        },
-        {
-          "offset": 27,
-          "length": 7,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSlider/FSlider.html"
-        },
-        {
-          "offset": 12,
-          "length": 14,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderControl-class.html"
-        },
-        {
-          "offset": 44,
-          "length": 17,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderControl/FSliderControl.managedContinuous.html"
-        },
-        {
-          "offset": 104,
-          "length": 5,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSlider/FSlider.html"
-        },
-        {
-          "offset": 67,
-          "length": 12,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderStyle-class.html"
-        },
-        {
-          "offset": 89,
-          "length": 12,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderStyle-class.html"
-        },
-        {
-          "offset": 122,
-          "length": 6,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSlider/FSlider.html"
-        },
-        {
-          "offset": 113,
-          "length": 8,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FLayout.html"
-        },
-        {
-          "offset": 140,
-          "length": 5,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSlider/FSlider.html"
-        },
-        {
-          "offset": 157,
-          "length": 11,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSlider/FSlider.html"
-        },
-        {
-          "offset": 210,
-          "length": 12,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSlider/FSlider.html"
-        },
-        {
-          "offset": 231,
-          "length": 40,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FFormFieldProperties/defaultErrorBuilder.html"
-        },
-        {
-          "offset": 293,
-          "length": 5,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSlider/FSlider.html"
-        },
-        {
-          "offset": 280,
-          "length": 11,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderMark-class.html"
-        },
-        {
-          "offset": 321,
-          "length": 19,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSlider/FSlider.html"
-        },
-        {
-          "offset": 352,
-          "length": 25,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSlider/FSlider.html"
-        },
-        {
-          "offset": 404,
-          "length": 15,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSlider/FSlider.html"
-        },
-        {
-          "offset": 381,
-          "length": 22,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderTooltipControls-class.html"
-        },
-        {
-          "offset": 429,
-          "length": 3,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderTooltipControls/FSliderTooltipControls.html"
-        },
-        {
-          "offset": 482,
-          "length": 14,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSlider/FSlider.html"
-        },
-        {
-          "offset": 454,
-          "length": 18,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tooltip/FTooltipController-class.html"
-        },
-        {
-          "offset": 548,
-          "length": 30,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSlider/FSlider.html"
-        },
-        {
-          "offset": 645,
-          "length": 25,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSlider/FSlider.html"
-        },
-        {
-          "offset": 630,
-          "length": 12,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderValue-class.html"
-        },
-        {
-          "offset": 703,
-          "length": 5,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSlider/FSlider.html"
-        },
-        {
-          "offset": 688,
-          "length": 12,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderValue-class.html"
-        },
-        {
-          "offset": 742,
-          "length": 7,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSlider/FSlider.html"
-        },
-        {
-          "offset": 726,
-          "length": 13,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderValue-class.html"
-        },
-        {
-          "offset": 770,
-          "length": 7,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSlider/FSlider.html"
-        },
-        {
-          "offset": 814,
-          "length": 9,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSlider/FSlider.html"
-        },
-        {
-          "offset": 798,
-          "length": 13,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderValue-class.html"
-        },
-        {
-          "offset": 835,
-          "length": 14,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSlider/FSlider.html"
-        },
-        {
-          "offset": 858,
-          "length": 7,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSlider/FSlider.html"
-        },
-        {
-          "offset": 893,
-          "length": 16,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSlider/FSlider.html"
-        },
-        {
-          "offset": 930,
-          "length": 3,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSlider/FSlider.html"
+      "snippet": {
+        "text": "FSlider({\n  FSliderControl control = const .managedContinuous(),\n  FSliderStyle Function(FSliderStyle)? style,\n  FLayout? layout,\n  Widget? label,\n  Widget? description,\n  Widget Function(BuildContext, String) errorBuilder =\n      FFormFieldProperties.defaultErrorBuilder,\n  List<FSliderMark> marks = const [],\n  double? trackMainAxisExtent,\n  double? trackHitRegionCrossExtent,\n  FSliderTooltipControls tooltipControls = const .new(),\n  Widget Function(FTooltipController, double) tooltipBuilder =\n      _tooltipBuilder,\n  String Function(double) semanticValueFormatterCallback =\n      _semanticValueFormatter,\n  String Function(FSliderValue)? semanticFormatterCallback,\n  void Function(FSliderValue)? onEnd,\n  void Function(FSliderValue?)? onSaved,\n  void Function()? onReset,\n  String? Function(FSliderValue?)? validator,\n  String? forceErrorText,\n  bool enabled = true,\n  AutovalidateMode autovalidateMode = .disabled,\n  Key? key,\n})\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSlider/FSlider.html"
+          },
+          {
+            "offset": 27,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSlider/FSlider.html"
+          },
+          {
+            "offset": 12,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderControl-class.html"
+          },
+          {
+            "offset": 44,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderControl/FSliderControl.managedContinuous.html"
+          },
+          {
+            "offset": 104,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSlider/FSlider.html"
+          },
+          {
+            "offset": 67,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderStyle-class.html"
+          },
+          {
+            "offset": 89,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderStyle-class.html"
+          },
+          {
+            "offset": 122,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSlider/FSlider.html"
+          },
+          {
+            "offset": 113,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FLayout.html"
+          },
+          {
+            "offset": 140,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSlider/FSlider.html"
+          },
+          {
+            "offset": 157,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSlider/FSlider.html"
+          },
+          {
+            "offset": 210,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSlider/FSlider.html"
+          },
+          {
+            "offset": 231,
+            "length": 40,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FFormFieldProperties/defaultErrorBuilder.html"
+          },
+          {
+            "offset": 293,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSlider/FSlider.html"
+          },
+          {
+            "offset": 280,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderMark-class.html"
+          },
+          {
+            "offset": 321,
+            "length": 19,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSlider/FSlider.html"
+          },
+          {
+            "offset": 352,
+            "length": 25,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSlider/FSlider.html"
+          },
+          {
+            "offset": 404,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSlider/FSlider.html"
+          },
+          {
+            "offset": 381,
+            "length": 22,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderTooltipControls-class.html"
+          },
+          {
+            "offset": 429,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderTooltipControls/FSliderTooltipControls.html"
+          },
+          {
+            "offset": 482,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSlider/FSlider.html"
+          },
+          {
+            "offset": 454,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tooltip/FTooltipController-class.html"
+          },
+          {
+            "offset": 548,
+            "length": 30,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSlider/FSlider.html"
+          },
+          {
+            "offset": 645,
+            "length": 25,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSlider/FSlider.html"
+          },
+          {
+            "offset": 630,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderValue-class.html"
+          },
+          {
+            "offset": 703,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSlider/FSlider.html"
+          },
+          {
+            "offset": 688,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderValue-class.html"
+          },
+          {
+            "offset": 742,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSlider/FSlider.html"
+          },
+          {
+            "offset": 726,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderValue-class.html"
+          },
+          {
+            "offset": 770,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSlider/FSlider.html"
+          },
+          {
+            "offset": 814,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSlider/FSlider.html"
+          },
+          {
+            "offset": 798,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderValue-class.html"
+          },
+          {
+            "offset": 835,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSlider/FSlider.html"
+          },
+          {
+            "offset": 858,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSlider/FSlider.html"
+          },
+          {
+            "offset": 893,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSlider/FSlider.html"
+          },
+          {
+            "offset": 930,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSlider/FSlider.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FSlider",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSlider-class.html"
         }
-      ],
-      "container": {
-        "name": "FSlider",
-        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSlider-class.html"
-      },
-      "documentation": ""
+      }
     },
     {
       "offset": 59,
       "length": 8,
-      "code": "{FSliderControl control = const .managedContinuous()}",
-      "links": [
-        {
-          "offset": 1,
-          "length": 14,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderControl-class.html"
-        },
-        {
-          "offset": 33,
-          "length": 17,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderControl/FSliderControl.managedContinuous.html"
-        }
-      ],
-      "documentation": ""
+      "snippet": {
+        "text": "{FSliderControl control = const .managedContinuous()}",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 1,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderControl-class.html"
+          },
+          {
+            "offset": 33,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderControl/FSliderControl.managedContinuous.html"
+          }
+        ],
+        "tooltips": []
+      }
     },
     {
       "offset": 69,
       "length": 17,
-      "code": "FSliderControl.managedContinuous({\n  FContinuousSliderController? controller,\n  FSliderValue? initial,\n  double? stepPercentage,\n  FSliderInteraction? interaction,\n  FSliderActiveThumb? thumb,\n  void Function(FSliderValue)? onChange,\n})\n",
-      "links": [
-        {
-          "offset": 0,
-          "length": 32,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderControl/FSliderControl.managedContinuous.html"
-        },
-        {
-          "offset": 66,
-          "length": 10,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderControl/FSliderControl.managedContinuous.html"
-        },
-        {
-          "offset": 37,
-          "length": 28,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FContinuousSliderController-class.html"
-        },
-        {
-          "offset": 94,
-          "length": 7,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderControl/FSliderControl.managedContinuous.html"
-        },
-        {
-          "offset": 80,
-          "length": 13,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderValue-class.html"
-        },
-        {
-          "offset": 113,
-          "length": 14,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderControl/FSliderControl.managedContinuous.html"
-        },
-        {
-          "offset": 151,
-          "length": 11,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderControl/FSliderControl.managedContinuous.html"
-        },
-        {
-          "offset": 131,
-          "length": 19,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderInteraction.html"
-        },
-        {
-          "offset": 186,
-          "length": 5,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderControl/FSliderControl.managedContinuous.html"
-        },
-        {
-          "offset": 166,
-          "length": 19,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderActiveThumb.html"
-        },
-        {
-          "offset": 224,
-          "length": 8,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderControl/FSliderControl.managedContinuous.html"
-        },
-        {
-          "offset": 209,
-          "length": 12,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderValue-class.html"
+      "snippet": {
+        "text": "FSliderControl.managedContinuous({\n  FContinuousSliderController? controller,\n  FSliderValue? initial,\n  double? stepPercentage,\n  FSliderInteraction? interaction,\n  FSliderActiveThumb? thumb,\n  void Function(FSliderValue)? onChange,\n})\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 32,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderControl/FSliderControl.managedContinuous.html"
+          },
+          {
+            "offset": 66,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderControl/FSliderControl.managedContinuous.html"
+          },
+          {
+            "offset": 37,
+            "length": 28,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FContinuousSliderController-class.html"
+          },
+          {
+            "offset": 94,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderControl/FSliderControl.managedContinuous.html"
+          },
+          {
+            "offset": 80,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderValue-class.html"
+          },
+          {
+            "offset": 113,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderControl/FSliderControl.managedContinuous.html"
+          },
+          {
+            "offset": 151,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderControl/FSliderControl.managedContinuous.html"
+          },
+          {
+            "offset": 131,
+            "length": 19,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderInteraction.html"
+          },
+          {
+            "offset": 186,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderControl/FSliderControl.managedContinuous.html"
+          },
+          {
+            "offset": 166,
+            "length": 19,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderActiveThumb.html"
+          },
+          {
+            "offset": 224,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderControl/FSliderControl.managedContinuous.html"
+          },
+          {
+            "offset": 209,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderValue-class.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FSliderControl",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderControl-class.html"
         }
-      ],
-      "container": {
-        "name": "FSliderControl",
-        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderControl-class.html"
-      },
-      "documentation": ""
+      }
     },
     {
       "offset": 87,
       "length": 8,
-      "code": "{FSliderValue? initial}",
-      "links": [
-        {
-          "offset": 1,
-          "length": 13,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderValue-class.html"
-        }
-      ],
-      "documentation": ""
+      "snippet": {
+        "text": "{FSliderValue? initial}",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 1,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderValue-class.html"
+          }
+        ],
+        "tooltips": []
+      }
     },
     {
       "offset": 96,
       "length": 12,
-      "code": "FSliderValue({\n  required double max,\n  double min,\n  ({double max, double min}) constraints,\n})\n",
-      "links": [
-        {
-          "offset": 0,
-          "length": 12,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderValue/FSliderValue.html"
-        },
-        {
-          "offset": 33,
-          "length": 3,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderValue/FSliderValue.html"
-        },
-        {
-          "offset": 47,
-          "length": 3,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderValue/FSliderValue.html"
-        },
-        {
-          "offset": 81,
-          "length": 11,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderValue/FSliderValue.html"
+      "snippet": {
+        "text": "FSliderValue({\n  required double max,\n  double min,\n  ({double max, double min}) constraints,\n})\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderValue/FSliderValue.html"
+          },
+          {
+            "offset": 33,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderValue/FSliderValue.html"
+          },
+          {
+            "offset": 47,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderValue/FSliderValue.html"
+          },
+          {
+            "offset": 81,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderValue/FSliderValue.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FSliderValue",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderValue-class.html"
         }
-      ],
-      "container": {
-        "name": "FSliderValue",
-        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderValue-class.html"
-      },
-      "documentation": ""
+      }
     },
     {
       "offset": 109,
       "length": 4,
-      "code": "{required double max}",
-      "links": [],
-      "documentation": ""
+      "snippet": {
+        "text": "{required double max}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
     },
     {
       "offset": 123,
       "length": 6,
-      "code": "{Widget? label}",
-      "links": [],
-      "documentation": ""
+      "snippet": {
+        "text": "{Widget? label}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
     },
     {
       "offset": 154,
       "length": 12,
-      "code": "{Widget? description}",
-      "links": [],
-      "documentation": ""
+      "snippet": {
+        "text": "{Widget? description}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
     },
     {
       "offset": 226,
       "length": 15,
-      "code": "{String? forceErrorText}",
-      "links": [],
-      "documentation": ""
+      "snippet": {
+        "text": "{String? forceErrorText}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
     }
   ]
 }

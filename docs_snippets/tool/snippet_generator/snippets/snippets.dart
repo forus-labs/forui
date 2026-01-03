@@ -1,17 +1,14 @@
 import 'dart:io';
 
-import 'package:analyzer/dart/analysis/results.dart';
 import 'package:analyzer/dart/analysis/session.dart';
 import 'package:analyzer/file_system/overlay_file_system.dart';
 import 'package:path/path.dart' as p;
 
-import '../dart_doc_linker.dart';
 import '../main.dart';
 import '../snippet.dart';
-import '../tooltip/generator.dart';
+import '../tooltip_linker.dart';
 
-extension Snippets on Never {
-  /// Processes all snippet files in [path] and returns a map of { fileName: Snippet }.
+class Snippets {
   static Future<Map<String, Snippet>> generate(
     AnalysisSession session,
     OverlayResourceProvider overlay,
@@ -22,10 +19,11 @@ extension Snippets on Never {
     final dir = Directory(path);
 
     for (final file in dir.listSync(recursive: true).whereType<File>().where((f) => f.path.endsWith('.dart'))) {
-      if (await session.getResolvedUnit(file.path) case final ResolvedUnitResult result) {
-        final fileName = p.basenameWithoutExtension(file.path);
-        snippets[fileName] = await _process(session, overlay, packages, result.content);
-      }
+      final content = file.readAsStringSync();
+      final relativePath = p.relative(file.path, from: path);
+      final fileName = p.withoutExtension(relativePath).replaceAll(p.separator, '/');
+
+      snippets[fileName] = await _process(session, overlay, packages, content);
     }
 
     return snippets;
@@ -37,153 +35,78 @@ extension Snippets on Never {
     List<Package> packages,
     String content,
   ) async {
-    final snippet = Snippet()
-      ..code = content
-      ..highlight();
-    final (links, tooltips) = await TooltipGenerator.generate(session, overlay, packages, content, 0);
-    snippet
-      ..links.addAll(links)
-      ..tooltips.addAll(tooltips);
+    final (links, tooltips) = await TooltipLinker.generate(session, overlay, packages, content);
+    final spans = [...links, ...tooltips];
+    final blocks = _findBlocks(content);
 
-    _transform(snippet);
+    if (blocks.isEmpty) {
+      final snippet = Snippet(content);
+      snippet.spans.addAll(spans);
+      snippet.highlight();
+      return snippet;
+    }
 
-    return snippet;
+    final snippets = <Snippet>[];
+    for (final (start, end, constructor) in blocks) {
+      final snippet = Snippet(content)
+        ..spans.addAll(spans)
+        ..between(start, end);
+
+      if (constructor) {
+        snippet.unindent(4);
+      }
+
+      snippets.add(snippet);
+    }
+
+    final merged = Snippet();
+    var offset = 0;
+    for (final snippet in snippets) {
+      for (final span in snippet.spans) {
+        span.adjust(offset);
+      }
+      merged.text += snippet.text;
+      merged.spans.addAll(snippet.spans);
+      offset += snippet.text.length;
+    }
+
+    // `dart format` always cause a trailing newline, combined with the `eol_at_end_of_file` lint, this produces
+    // 2 `\n`s at the end.
+    merged
+      ..highlight()
+      ..text = merged.text.trimRight();
+
+    if (merged.text.isNotEmpty) {
+      merged.text += '\n';
+    }
+
+    return merged;
   }
 
-  static void _transform(Snippet snippet) {
-    int offset = 0;
-    int lineNumber = 0;
-    int start = 0;
-    int startLineNumber = 0;
-    bool constructor = false;
+  /// Finds all snippet blocks in [content].
+  static List<(int start, int end, bool constructor)> _findBlocks(String content) {
+    final blocks = <(int start, int end, bool constructor)>[];
+    final lines = content.split('\n');
+    var offset = 0;
 
-    final blocks = <(String block, int start, int end, int startLineNumber, int endLineNumber, bool constructor)>[];
-    for (final line in snippet.code.split('\n')) {
+    int? start;
+    var constructor = false;
+
+    for (final line in lines) {
       final trimmed = line.trim();
 
       if (trimmed.startsWith('// {@snippet')) {
-        constructor = trimmed.endsWith('constructor}');
         start = offset + line.length + 1;
-        startLineNumber = lineNumber + 1;
-      } else if (trimmed == '// {@endsnippet}') {
-        blocks.add((snippet.code.substring(start, offset), start, offset, startLineNumber, lineNumber, constructor));
+        constructor = trimmed.endsWith('constructor}');
+      } else if (trimmed == '// {@endsnippet}' && start != null) {
+        blocks.add((start, offset, constructor));
+        start = null;
         constructor = false;
-        start = 0;
-        startLineNumber = 0;
       }
 
       offset += line.length + 1;
-      lineNumber++;
     }
 
-    if (blocks.isEmpty) {
-      blocks.add((snippet.code, 0, snippet.code.length, 0, lineNumber, false));
-    }
-
-    final output = StringBuffer();
-    final adjustedLinks = <DartDocLink>[];
-    final adjustedTooltips = <Tooltip>[];
-    final adjustedHighlights = <(int, int)>[];
-    var accumulatedOffset = 0;
-    var accumulatedLine = 0;
-
-    for (final (block, start, end, startLineNumber, endLineNumber, constructor) in blocks) {
-      final blockLineCount = endLineNumber - startLineNumber;
-
-      // Awful code generated by claude REDO
-      // Build per-line adjustment map for constructor blocks
-      final lines = block.split('\n');
-      final adjustments = <int>[]; // Cumulative adjustment per line
-      final lineStarts = <int>[]; // Offset of start of each line within block
-      var previous = lines.first.length;
-
-      String content;
-      if (constructor) {
-        final unindented = StringBuffer();
-        for (final line in lines) {
-          if (line.startsWith('    ')) {
-            unindented.writeln(line.substring(4));
-            adjustments.add(adjustments.last + 4);
-          } else {
-            unindented.writeln(line);
-            adjustments.add(adjustments.last);
-          }
-          lineStarts.add(lineStarts.last + previous + 1);
-          previous = line.length;
-        }
-        content = unindented.toString();
-        if (content.endsWith('\n') && !block.endsWith('\n')) {
-          content = content.substring(0, content.length - 1);
-        }
-      } else {
-        content = block;
-      }
-
-      int adjustForConstructor(int offsetInBlock) {
-        if (!constructor) {
-          return 0;
-        }
-        for (var i = lineStarts.length - 1; i >= 0; i--) {
-          if (lineStarts[i] <= offsetInBlock) {
-            return adjustments[i];
-          }
-        }
-        return 0;
-      }
-
-      // Adjust links within this block
-      for (final link in snippet.links) {
-        if (link.offset >= start && link.offset + link.length <= end) {
-          final offsetInBlock = link.offset - start;
-          adjustedLinks.add(DartDocLink(
-            offset: offsetInBlock - adjustForConstructor(offsetInBlock) + accumulatedOffset,
-            length: link.length,
-            url: link.url,
-          ));
-        }
-      }
-
-      // Adjust tooltips within this block
-      for (final tooltip in snippet.tooltips) {
-        if (tooltip.offset >= start && tooltip.offset + tooltip.length <= end) {
-          final offsetInBlock = tooltip.offset - start;
-          adjustedTooltips.add(
-            Tooltip(
-              offset: offsetInBlock - adjustForConstructor(offsetInBlock) + accumulatedOffset,
-              length: tooltip.length,
-              target: tooltip.target,
-              code: tooltip.code,
-              container: tooltip.container,
-              documentation: tooltip.documentation,
-            )..links.addAll(tooltip.links),
-          );
-        }
-      }
-
-      // Adjust highlights within this block
-      for (final (hStart, hEnd) in snippet.highlights) {
-        if (hStart >= startLineNumber && hEnd <= endLineNumber) {
-          adjustedHighlights.add((
-            hStart - startLineNumber + accumulatedLine,
-            hEnd - startLineNumber + accumulatedLine,
-          ));
-        }
-      }
-
-      output.write(content);
-      accumulatedOffset += content.length;
-      accumulatedLine += blockLineCount;
-    }
-
-    snippet.code = output.toString();
-    snippet.links
-      ..clear()
-      ..addAll(adjustedLinks);
-    snippet.tooltips
-      ..clear()
-      ..addAll(adjustedTooltips);
-    snippet.highlights
-      ..clear()
-      ..addAll(adjustedHighlights);
+    return blocks;
   }
 }

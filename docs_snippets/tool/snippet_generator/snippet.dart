@@ -1,101 +1,234 @@
-import 'dart:io';
-import 'package:path/path.dart' as p;
-
-import 'dart_doc_linker.dart';
-import 'tooltip/generator.dart';
-
-/// The output directory for generated snippet JSON files.
-///
-/// Change this to your liking Joe.
-final output = p.join(Directory.current.path, 'output');
-
 /// The code snippet.
 class Snippet {
-  /// The routes which use this snippet.
-  final List<String> routes = [];
-
-  /// The line ranges to highlight, inclusive.
+  /// The line ranges to highlight, 1-indexed and inclusive.
   final List<(int start, int end)> highlights = [];
 
-  /// The dartdoc links for identifiers.
-  final List<DartDocLink> links = [];
+  // We use a list instead of a SplayTreeMap as spans are mutable, and mutable keys are never a good idea.
+  // The alternative is to make Span immutable but that will incur a greater performance overhead overall.
+  final List<Span> spans = [];
 
-  /// The tooltips for identifiers.
-  final List<Tooltip> tooltips = [];
+  String text;
 
-  String _code = '';
-  int _importsLines = 0;
-  int _importsLength = 0;
+  Snippet([this.text = '']);
 
-  /// Highlight the snippet based on special comments, and remove those comments.
-  ///
-  /// Neither supports nested highlights nor adjusts the offsets of links/tooltips after removing comments.
+  /// Extracts the snippet between [start] and [end], adjusting all span offsets and highlights accordingly.
+  void between(int start, [int? end]) {
+    final endOffset = end ?? text.length;
+    final startLine = text.substring(0, start).split('\n').length - 1;
+    final endLine = text.substring(0, endOffset).split('\n').length - 1;
+
+    text = text.substring(start, endOffset);
+
+    spans.removeWhere((span) {
+      if (start <= span.offset && span.end <= endOffset) {
+        span.adjust(-start);
+        return false;
+      }
+      return true;
+    });
+
+    final adjusted = [
+      for (final (start, end) in highlights)
+        if (startLine <= start && end <= endLine) (start - startLine, end - startLine),
+    ];
+    highlights
+      ..clear()
+      ..addAll(adjusted);
+  }
+
   void highlight() {
-    // We only process links and tooltips after highlights are done since it's super messy to adjust offsets.
-    // Removing imports after processing links and tooltips is fine since they are always at the start rather than
-    // scattered throughout the code.
-    assert(highlights.isEmpty, 'Highlights have already been processed.');
-    assert(links.isEmpty, 'Links must be added after highlighting.');
-    assert(tooltips.isEmpty, 'Tooltips must be added after highlighting.');
-
-    final lines = <String>[];
-    int? start;
-    int lineNumber = 0;
-
     // Fix artifacts caused by formatting after dead code elimination removes an entire line.
-    _code = _code.replaceAll('// {@highlight}\n\n', '// {@highlight}\n');
+    text = text.replaceAll('// {@highlight}\n\n', '// {@highlight}\n');
 
-    for (final line in _code.split('\n')) {
+    final output = <String>[];
+    final adjustments = <int>[]; // Cumulative characters removed per output line.
+    final starts = <int>[]; // Start offset of each output line in original text.
+
+    int? highlightStart;
+    var lineNumber = 0;
+    var offset = 0;
+    var cumulative = 0;
+
+    for (final line in text.split('\n')) {
       final trimmed = line.trim();
+      final lineLength = line.length + 1;
 
       if (trimmed == '// {@highlight}') {
-        start = lineNumber + 1;
-        continue;
-      }
-
-      if (trimmed == '// {@endhighlight}') {
-        assert(start != null, 'Found {@endhighlight} without matching {@highlight} in $_code.');
-        if (start! <= lineNumber) {
-          highlights.add((start - _importsLines, lineNumber - _importsLines));
+        highlightStart = lineNumber;
+        cumulative += lineLength;
+      } else if (trimmed == '// {@endhighlight}') {
+        if (highlightStart != null && highlightStart < lineNumber) {
+          highlights.add((highlightStart + 1, lineNumber));
         }
-
-        start = null;
-        continue;
+        highlightStart = null;
+        cumulative += lineLength;
+      } else {
+        output.add(line);
+        starts.add(offset);
+        adjustments.add(cumulative);
+        lineNumber++;
       }
 
-      lines.add(line);
-      lineNumber++;
+      offset += lineLength;
     }
 
-    _code = lines.join('\n');
+    text = output.join('\n');
+    _adjustSpans(starts, adjustments);
   }
 
-  String get code => _code;
+  /// Unindent the snippet by [spaces] spaces, adjusting all span offsets accordingly.
+  void unindent(int spaces) {
+    final indent = ' ' * spaces;
+    final lines = text.split('\n');
+    final unindented = StringBuffer();
 
-  set code(String value) {
-    final importLines = value.split('\n').takeWhile((l) => l.startsWith('import ') || l.trim().isEmpty).toList();
-    _importsLines = importLines.length;
-    _importsLength = importLines.fold(0, (sum, line) => sum + line.length + 1);
-    _code = value;
+    final adjustments = <int>[]; // Sum of adjustments per line.
+    final starts = <int>[]; // Offset of start of lines in original indented code.
+    var previous = 0;
+
+    for (final line in lines) {
+      if (line.startsWith(indent)) {
+        unindented.writeln(line.substring(spaces));
+        adjustments.add((adjustments.lastOrNull ?? 0) + spaces);
+      } else {
+        unindented.writeln(line);
+        adjustments.add(adjustments.lastOrNull ?? 0);
+      }
+
+      starts.add((starts.lastOrNull ?? 0) + previous);
+      previous = line.length + 1;
+    }
+
+    text = unindented.toString();
+    _adjustSpans(starts, adjustments);
   }
 
-  int get importsLines => _importsLines;
+  /// Remove import statements from the snippet, adjusting spans and highlights.
+  void unimport() {
+    final lines = text.split('\n');
+    final importLines = lines.takeWhile((l) => l.startsWith('import ') || l.trim().isEmpty).toList();
+    final removedChars = importLines.fold(0, (sum, l) => sum + l.length + 1);
+    final removedLines = importLines.length;
 
-  int get importsLength => _importsLength;
+    text = lines.skip(removedLines).join('\n');
 
-  /// Remove import statements from the snippet, resetting the base offset.
-  void removeImports() {
-    _importsLines = 0;
-    _importsLength = 0;
-    _code = _code.split('\n').skipWhile((l) => l.startsWith('import ') || l.trim().isEmpty).join('\n');
+    for (final span in spans) {
+      span.adjust(-removedChars);
+    }
+
+    for (var i = 0; i < highlights.length; i++) {
+      final (start, end) = highlights[i];
+      highlights[i] = (start - removedLines, end - removedLines);
+    }
   }
 
+  void _adjustSpans(List<int> starts, List<int> adjustments) {
+    for (final span in spans) {
+      var line = 0;
+      for (var i = starts.length - 1; i >= 0; i--) {
+        if (starts[i] <= span.offset) {
+          line = i;
+          break;
+        }
+      }
+      span.adjust(-adjustments[line]);
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final links = <DartDocLink>[];
+    final tooltips = <Tooltip>[];
+
+    for (final span in spans) {
+      switch (span) {
+        case DartDocLink():
+          links.add(span);
+        case Tooltip():
+          tooltips.add(span);
+      }
+    }
+
+    return {
+      'text': text,
+      'highlights': [
+        for (final h in highlights) {'start': h.$1, 'end': h.$2},
+      ],
+      'links': [for (final l in links) l.toJson()],
+      'tooltips': [for (final t in tooltips) t.toJson()],
+    };
+  }
+
+  @override
+  String toString() => text;
+}
+
+/// The kind of incomplete code snippet.
+enum FragmentSnippetKind { field, getter, method, constructor, formalParameter }
+
+/// An incomplete code snippet.
+class FragmentSnippet extends Snippet {
+  /// The fragment kind.
+  final FragmentSnippetKind kind;
+
+  /// The identifier's containing class.
+  ///
+  /// For constructors, fields and methods: `containing class <class>`.
+  final (String name, String url)? container;
+
+  /// The incomplete snippet.
+  FragmentSnippet(super.text, this.kind, this.container);
+
+  @override
   Map<String, dynamic> toJson() => {
-    'code': _code,
-    'highlights': [
-      for (final h in highlights) {'start': h.$1, 'end': h.$2},
-    ],
-    'links': [for (final l in links) l.toJson()],
-    'tooltips': [for (final t in tooltips) t.toJson()],
+    ...super.toJson(),
+    if (container case (final name, final url)) 'container': {'name': name, 'url': url},
   };
+}
+
+sealed class Span {
+  /// The start of the span (inclusive).
+  int offset;
+
+  /// The length.
+  int length;
+
+  Span(this.offset, this.length);
+
+  Span copyWith({int? offset});
+
+  Map<String, dynamic> toJson();
+
+  void adjust(int offset) {
+    this.offset += offset;
+  }
+
+  /// The end of the span (exclusive).
+  int get end => offset + length;
+}
+
+/// A link to a Dart API documentation page.
+class DartDocLink extends Span {
+  /// The URL to the API documentation.
+  final String url;
+
+  DartDocLink(super.offset, super.length, this.url);
+
+  @override
+  Span copyWith({int? offset}) => DartDocLink(offset ?? this.offset, length, url);
+
+  @override
+  Map<String, dynamic> toJson() => {'offset': offset, 'length': length, 'url': url};
+}
+
+class Tooltip extends Span {
+  /// The annotated snippet.
+  FragmentSnippet snippet;
+
+  Tooltip(super.offset, super.length, this.snippet);
+
+  @override
+  Span copyWith({int? offset}) => Tooltip(offset ?? this.offset, length, snippet);
+
+  @override
+  Map<String, dynamic> toJson() => {'offset': offset, 'length': length, 'snippet': snippet.toJson()};
 }

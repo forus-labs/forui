@@ -1,11 +1,9 @@
 import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/dart/ast/visitor.dart';
 
-import '../snippet.dart';
-
 class RoutesVisitor extends RecursiveAstVisitor<void> {
-  /// Extracts page to snippet mappings from a `AutoRouterConfig` in the [unit].
-  static Map<String, Snippet> generate(CompilationUnit unit) {
+  /// Extracts page to route from a `AutoRouterConfig` in the [unit].
+  static Map<String, String> generate(CompilationUnit unit) {
     final visitor = RoutesVisitor();
     unit.visitChildren(visitor);
 
@@ -13,7 +11,7 @@ class RoutesVisitor extends RecursiveAstVisitor<void> {
   }
 
   /// The extracted routes as a `Map<Page Name, Snippet>`.
-  final Map<String, Snippet> _snippets = {};
+  final Map<String, String> _snippets = {};
 
   @override
   void visitClassDeclaration(ClassDeclaration node) {
@@ -44,7 +42,7 @@ class RoutesVisitor extends RecursiveAstVisitor<void> {
     }
 
     if (path != null && page != null) {
-      (_snippets[page] ??= Snippet()).routes.add(path);
+      _snippets[page] = path;
     }
   }
 }

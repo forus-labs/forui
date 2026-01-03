@@ -14,10 +14,13 @@ dependencies:
   cupertino_icons: ^1.0.6
   flutter:
     sdk: flutter
+  flutter_hooks: ^0.21.3+1
   flutter_svg: ^2.1.0
   flutter_web_plugins:
     sdk: flutter
   forui:
+  forui_assets:
+  forui_hooks:
   intl: any
   sugar: ^4.0.0
 

@@ -48,7 +48,7 @@ class TilePopoverMenuPage extends Example {
     suffixes: [
       // {@highlight}
       FPopoverMenu.tiles(
-      // {@endhighlight}
+        // {@endhighlight}
         autofocus: true,
         menuAnchor: .topRight,
         childAnchor: .bottomRight,

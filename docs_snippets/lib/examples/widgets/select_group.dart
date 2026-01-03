@@ -15,7 +15,7 @@ enum Notification { all, direct, nothing }
 @RoutePage()
 @Options(include: [Sidebar])
 class SelectGroupPage extends Example {
-  SelectGroupPage({@queryParam super.theme,}): super(maxWidth: 250);
+  SelectGroupPage({@queryParam super.theme}) : super(maxWidth: 250);
 
   @override
   Widget example(BuildContext context) => Column(
@@ -38,7 +38,7 @@ class SelectGroupPage extends Example {
 @RoutePage()
 @Options(include: [Language])
 class SelectGroupCheckboxFormPage extends StatefulExample {
-  SelectGroupCheckboxFormPage({@queryParam super.theme,}): super(maxWidth: 250);
+  SelectGroupCheckboxFormPage({@queryParam super.theme}) : super(maxWidth: 250);
 
   @override
   State<SelectGroupCheckboxFormPage> createState() => _SelectGroupCheckboxFormPageState();
@@ -86,7 +86,7 @@ class _SelectGroupCheckboxFormPageState extends StatefulExampleState<SelectGroup
 @RoutePage()
 @Options(include: [Notification])
 class SelectGroupRadioFormPage extends StatefulExample {
-  SelectGroupRadioFormPage({@queryParam super.theme}): super(maxWidth: 320);
+  SelectGroupRadioFormPage({@queryParam super.theme}) : super(maxWidth: 320);
 
   @override
   State<SelectGroupRadioFormPage> createState() => _SelectGroupRadioFormPageState();

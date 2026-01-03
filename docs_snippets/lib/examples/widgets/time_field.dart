@@ -10,10 +10,8 @@ class TimeFieldPage extends Example {
   TimeFieldPage({@queryParam super.theme});
 
   @override
-  Widget example(BuildContext _) => const FTimeField(
-    label: Text('Appointment Time'),
-    description: Text('Select a Time for your appointment.'),
-  );
+  Widget example(BuildContext _) =>
+      const FTimeField(label: Text('Appointment Time'), description: Text('Select a Time for your appointment.'));
 }
 
 @RoutePage()
@@ -32,7 +30,7 @@ class Hour24TimeFieldPage extends Example {
 
 @RoutePage()
 class PickerTimeFieldPage extends Example {
-  PickerTimeFieldPage({@queryParam super.theme}): super(alignment: .topCenter, top: 30);
+  PickerTimeFieldPage({@queryParam super.theme}) : super(alignment: .topCenter, top: 30);
 
   @override
   Widget example(BuildContext _) => const FTimeField.picker(
@@ -57,7 +55,7 @@ class ValidatorTimeFieldPage extends Example {
 
 @RoutePage()
 class FormTimeFieldPage extends StatefulExample {
-  FormTimeFieldPage({@queryParam super.theme}): super(top: 30);
+  FormTimeFieldPage({@queryParam super.theme}) : super(top: 30);
 
   @override
   State<FormTimeFieldPage> createState() => _FormTimeFieldPageState();

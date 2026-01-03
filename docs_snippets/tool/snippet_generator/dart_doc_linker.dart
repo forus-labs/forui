@@ -9,22 +9,7 @@ import 'package:collection/collection.dart';
 import 'package:path/path.dart' as p;
 
 import 'main.dart';
-
-/// A link to a Dart API documentation page.
-class DartDocLink {
-  /// The character offset where the linked identifier starts.
-  int offset;
-
-  /// The length of the linked identifier.
-  final int length;
-
-  /// The URL to the API documentation.
-  final String url;
-
-  DartDocLink({required this.offset, required this.length, required this.url});
-
-  Map<String, dynamic> toJson() => {'offset': offset, 'length': length, 'url': url};
-}
+import 'snippet.dart';
 
 /// A visitor that adds Dartdoc links to AST nodes.
 class DartDocLinker extends RecursiveAstVisitor<void> {
@@ -37,23 +22,21 @@ class DartDocLinker extends RecursiveAstVisitor<void> {
     OverlayResourceProvider overlay,
     List<Package> packages,
     String code,
-    int importsLength,
   ) async {
-    final path = p.join(docsSnippets, 'dart_doc_linker_${_monotonic++}.dart');
+    final path = p.join(lib, 'dart_doc_linker_${_monotonic++}.dart');
     overlay.setOverlay(path, content: code, modificationStamp: DateTime.now().millisecondsSinceEpoch);
 
     final result = (await session.getResolvedUnit(path)) as ResolvedUnitResult;
-    final linker = DartDocLinker(packages, importsLength);
+    final linker = DartDocLinker(packages);
     result.unit.visitChildren(linker);
 
     return linker.links;
   }
 
   final List<DartDocLink> links = [];
-  final int importsLength;
   final List<Package> packages;
 
-  DartDocLinker(this.packages, this.importsLength);
+  DartDocLinker(this.packages);
 
   /// Links type annotations to their class/enum/mixin documentation.
   ///
@@ -220,7 +203,7 @@ class DartDocLinker extends RecursiveAstVisitor<void> {
   /// Adds a link for [element] at [node].
   void link(SyntacticEntity node, Element element) {
     if (dartDocUrl(element) case final url?) {
-      links.add(DartDocLink(offset: node.offset - importsLength, length: node.length, url: url));
+      links.add(DartDocLink(node.offset, node.length, url));
     }
   }
 
@@ -270,25 +253,17 @@ class DartDocLinker extends RecursiveAstVisitor<void> {
 
   /// Returns the deepest barrel library that exports [type].
   LibraryElement? _barrel(LibraryElement library, String type) {
-    LibraryElement? barrel(LibraryElement library, String type) {
-      if (library.exportNamespace.get2(type) == null) {
-        return null;
-      }
-
-      for (final lib in library.exportedLibraries.where((l) => !l.uri.pathSegments.contains('src'))) {
-        if (lib.exportNamespace.get2(type) != null) {
-          return barrel(lib, type);
-        }
-      }
-
-      return library;
+    if (library.exportNamespace.get2(type) == null) {
+      return null;
     }
 
-    if (_cache.containsKey(type)) {
-      return _cache[type];
+    for (final lib in library.exportedLibraries.where((l) => !l.uri.pathSegments.contains('src'))) {
+      if (lib.exportNamespace.get2(type) != null) {
+        return _barrel(lib, type);
+      }
     }
 
-    return _cache[type] = barrel(library, type);
+    return library;
   }
 }
 

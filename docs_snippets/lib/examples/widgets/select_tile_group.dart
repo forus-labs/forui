@@ -198,9 +198,9 @@ class FullDividerSelectTileGroupPage extends Example {
     divider: .full,
     // {@endhighlight}
     children: const [
-          .tile(title: Text('Recents'), suffix: Icon(FIcons.timer), value: .recents),
-          .tile(title: Text('Home'), suffix: Icon(FIcons.house), value: .home),
-          .tile(title: Text('Applications'), suffix: Icon(FIcons.appWindowMac), value: .applications),
+      .tile(title: Text('Recents'), suffix: Icon(FIcons.timer), value: .recents),
+      .tile(title: Text('Home'), suffix: Icon(FIcons.house), value: .home),
+      .tile(title: Text('Applications'), suffix: Icon(FIcons.appWindowMac), value: .applications),
     ],
   );
 }
@@ -219,9 +219,9 @@ class NoDividerSelectTileGroupPage extends Example {
     divider: .none,
     // {@endhighlight}
     children: const [
-          .tile(title: Text('Recents'), suffix: Icon(FIcons.timer), value: .recents),
-          .tile(title: Text('Home'), suffix: Icon(FIcons.house), value: .home),
-          .tile(title: Text('Applications'), suffix: Icon(FIcons.appWindowMac), value: .applications),
+      .tile(title: Text('Recents'), suffix: Icon(FIcons.timer), value: .recents),
+      .tile(title: Text('Home'), suffix: Icon(FIcons.house), value: .home),
+      .tile(title: Text('Applications'), suffix: Icon(FIcons.appWindowMac), value: .applications),
     ],
   );
 }

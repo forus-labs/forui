@@ -88,7 +88,7 @@ class RawToastPage extends Example {
       mainAxisSize: .min,
       // {@highlight}
       onPress: () => showRawFToast(
-      // {@endhighlight}
+        // {@endhighlight}
         context: context,
         duration: null,
         builder: (context, toast) => IntrinsicHeight(

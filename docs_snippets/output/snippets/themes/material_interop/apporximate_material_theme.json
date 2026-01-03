@@ -1,0 +1,183 @@
+{
+  "text": "import 'package:flutter/material.dart';\nimport 'package:forui/forui.dart';\n\n@override\nWidget build(BuildContext context) => MaterialApp(\n  theme: FThemes.zinc.light.toApproximateMaterialTheme(),\n  home: Scaffold(\n    body: Center(\n      child: FCard(\n        title: const Text('Mixed Widgets'),\n        subtitle: const Text('Using both Forui and Material widgets together'),\n        child: ElevatedButton(onPressed: () {}, child: const Text('Material Button')),\n      ),\n    ),\n  ),\n);\n",
+  "highlights": [
+    {
+      "start": 6,
+      "end": 6
+    }
+  ],
+  "links": [
+    {
+      "offset": 165,
+      "length": 26,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/toApproximateMaterialTheme.html"
+    },
+    {
+      "offset": 146,
+      "length": 12,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemes/zinc.html"
+    },
+    {
+      "offset": 244,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.card/FCard/FCard.html"
+    },
+    {
+      "offset": 259,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.card/FCard/FCard.html"
+    },
+    {
+      "offset": 303,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.card/FCard/FCard.html"
+    },
+    {
+      "offset": 383,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.card/FCard/child.html"
+    }
+  ],
+  "tooltips": [
+    {
+      "offset": 165,
+      "length": 26,
+      "snippet": {
+        "text": "ThemeData toApproximateMaterialTheme()",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 10,
+            "length": 26,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/toApproximateMaterialTheme.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FThemeData",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+        }
+      }
+    },
+    {
+      "offset": 146,
+      "length": 12,
+      "snippet": {
+        "text": "({FThemeData dark, FThemeData light}) zinc",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 2,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+          },
+          {
+            "offset": 19,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FThemes",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemes.html"
+        }
+      }
+    },
+    {
+      "offset": 244,
+      "length": 5,
+      "snippet": {
+        "text": "FCard({\n  Widget? image,\n  Widget? title,\n  Widget? subtitle,\n  Widget? child,\n  MainAxisSize mainAxisSize = .min,\n  FCardStyle Function(FCardStyle)? style,\n  Key? key,\n})\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.card/FCard/FCard.html"
+          },
+          {
+            "offset": 18,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.card/FCard/FCard.html"
+          },
+          {
+            "offset": 35,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.card/FCard/FCard.html"
+          },
+          {
+            "offset": 52,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.card/FCard/FCard.html"
+          },
+          {
+            "offset": 72,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.card/FCard/FCard.html"
+          },
+          {
+            "offset": 94,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.card/FCard/FCard.html"
+          },
+          {
+            "offset": 150,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.card/FCard/FCard.html"
+          },
+          {
+            "offset": 117,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.card/FCardStyle-class.html"
+          },
+          {
+            "offset": 137,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.card/FCardStyle-class.html"
+          },
+          {
+            "offset": 164,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.card/FCard/FCard.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FCard",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.card/FCard-class.html"
+        }
+      }
+    },
+    {
+      "offset": 259,
+      "length": 6,
+      "snippet": {
+        "text": "{Widget? title}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 303,
+      "length": 9,
+      "snippet": {
+        "text": "{Widget? subtitle}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 383,
+      "length": 6,
+      "snippet": {
+        "text": "{Widget? child}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    }
+  ]
+}

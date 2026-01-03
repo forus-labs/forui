@@ -1,5 +1,5 @@
 {
-  "code": "@override\nWidget build(BuildContext context) => const FPagination(\n  control: .managed(\n    pages: 20,\n    siblings: 2,\n    initial: 9,\n  ),\n);\n",
+  "text": "@override\nWidget build(BuildContext context) => const FPagination(\n  control: .managed(\n    pages: 20,\n    siblings: 2,\n    initial: 9,\n  ),\n);\n",
   "highlights": [
     {
       "start": 5,
@@ -40,164 +40,175 @@
   ],
   "tooltips": [
     {
-      "offset": 23,
-      "length": 20,
-      "code": "BuildContext context",
-      "links": [],
-      "documentation": ""
-    },
-    {
       "offset": 54,
       "length": 11,
-      "code": "FPagination({\n  FPaginationControl control = const .managed(),\n  FPaginationStyle Function(FPaginationStyle)? style,\n  Widget? previous,\n  Widget? next,\n  Key? key,\n})\n",
-      "links": [
-        {
-          "offset": 0,
-          "length": 11,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPagination/FPagination.html"
-        },
-        {
-          "offset": 35,
-          "length": 7,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPagination/FPagination.html"
-        },
-        {
-          "offset": 16,
-          "length": 18,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPaginationControl-class.html"
-        },
-        {
-          "offset": 52,
-          "length": 7,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPaginationControl/FPaginationControl.managed.html"
-        },
-        {
-          "offset": 110,
-          "length": 5,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPagination/FPagination.html"
-        },
-        {
-          "offset": 65,
-          "length": 16,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPaginationStyle-class.html"
-        },
-        {
-          "offset": 91,
-          "length": 16,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPaginationStyle-class.html"
-        },
-        {
-          "offset": 127,
-          "length": 8,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPagination/FPagination.html"
-        },
-        {
-          "offset": 147,
-          "length": 4,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPagination/FPagination.html"
-        },
-        {
-          "offset": 160,
-          "length": 3,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPagination/FPagination.html"
+      "snippet": {
+        "text": "FPagination({\n  FPaginationControl control = const .managed(),\n  FPaginationStyle Function(FPaginationStyle)? style,\n  Widget? previous,\n  Widget? next,\n  Key? key,\n})\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPagination/FPagination.html"
+          },
+          {
+            "offset": 35,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPagination/FPagination.html"
+          },
+          {
+            "offset": 16,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPaginationControl-class.html"
+          },
+          {
+            "offset": 52,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPaginationControl/FPaginationControl.managed.html"
+          },
+          {
+            "offset": 110,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPagination/FPagination.html"
+          },
+          {
+            "offset": 65,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPaginationStyle-class.html"
+          },
+          {
+            "offset": 91,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPaginationStyle-class.html"
+          },
+          {
+            "offset": 127,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPagination/FPagination.html"
+          },
+          {
+            "offset": 147,
+            "length": 4,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPagination/FPagination.html"
+          },
+          {
+            "offset": 160,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPagination/FPagination.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FPagination",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPagination-class.html"
         }
-      ],
-      "container": {
-        "name": "FPagination",
-        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPagination-class.html"
-      },
-      "documentation": ""
+      }
     },
     {
       "offset": 69,
       "length": 8,
-      "code": "{FPaginationControl control = const .managed()}",
-      "links": [
-        {
-          "offset": 1,
-          "length": 18,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPaginationControl-class.html"
-        },
-        {
-          "offset": 37,
-          "length": 7,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPaginationControl/FPaginationControl.managed.html"
-        }
-      ],
-      "documentation": ""
+      "snippet": {
+        "text": "{FPaginationControl control = const .managed()}",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 1,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPaginationControl-class.html"
+          },
+          {
+            "offset": 37,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPaginationControl/FPaginationControl.managed.html"
+          }
+        ],
+        "tooltips": []
+      }
     },
     {
       "offset": 79,
       "length": 7,
-      "code": "FPaginationControl.managed({\n  FPaginationController? controller,\n  int? initial,\n  int? pages,\n  int? siblings,\n  bool showEdges,\n  void Function(int)? onChange,\n})\n",
-      "links": [
-        {
-          "offset": 0,
-          "length": 26,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPaginationControl/FPaginationControl.managed.html"
-        },
-        {
-          "offset": 54,
-          "length": 10,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPaginationControl/FPaginationControl.managed.html"
-        },
-        {
-          "offset": 31,
-          "length": 22,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPaginationController-class.html"
-        },
-        {
-          "offset": 73,
-          "length": 7,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPaginationControl/FPaginationControl.managed.html"
-        },
-        {
-          "offset": 89,
-          "length": 5,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPaginationControl/FPaginationControl.managed.html"
-        },
-        {
-          "offset": 103,
-          "length": 8,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPaginationControl/FPaginationControl.managed.html"
-        },
-        {
-          "offset": 120,
-          "length": 9,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPaginationControl/FPaginationControl.managed.html"
-        },
-        {
-          "offset": 153,
-          "length": 8,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPaginationControl/FPaginationControl.managed.html"
+      "snippet": {
+        "text": "FPaginationControl.managed({\n  FPaginationController? controller,\n  int? initial,\n  int? pages,\n  int? siblings,\n  bool showEdges,\n  void Function(int)? onChange,\n})\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 26,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPaginationControl/FPaginationControl.managed.html"
+          },
+          {
+            "offset": 54,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPaginationControl/FPaginationControl.managed.html"
+          },
+          {
+            "offset": 31,
+            "length": 22,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPaginationController-class.html"
+          },
+          {
+            "offset": 73,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPaginationControl/FPaginationControl.managed.html"
+          },
+          {
+            "offset": 89,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPaginationControl/FPaginationControl.managed.html"
+          },
+          {
+            "offset": 103,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPaginationControl/FPaginationControl.managed.html"
+          },
+          {
+            "offset": 120,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPaginationControl/FPaginationControl.managed.html"
+          },
+          {
+            "offset": 153,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPaginationControl/FPaginationControl.managed.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FPaginationControl",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPaginationControl-class.html"
         }
-      ],
-      "container": {
-        "name": "FPaginationControl",
-        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPaginationControl-class.html"
-      },
-      "documentation": ""
+      }
     },
     {
       "offset": 92,
       "length": 6,
-      "code": "{int? pages}",
-      "links": [],
-      "documentation": ""
+      "snippet": {
+        "text": "{int? pages}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
     },
     {
       "offset": 107,
       "length": 9,
-      "code": "{int? siblings}",
-      "links": [],
-      "documentation": ""
+      "snippet": {
+        "text": "{int? siblings}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
     },
     {
       "offset": 124,
       "length": 8,
-      "code": "{int? initial}",
-      "links": [],
-      "documentation": ""
+      "snippet": {
+        "text": "{int? initial}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
     }
   ]
 }

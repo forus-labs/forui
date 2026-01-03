@@ -46,7 +46,7 @@ class HideEdgesPaginationPage extends Example {
 
 @RoutePage()
 class PaginationCustomIconPage extends StatefulExample {
-  PaginationCustomIconPage({@queryParam super.theme}): super(maxWidth: 400);
+  PaginationCustomIconPage({@queryParam super.theme}) : super(maxWidth: 400);
 
   @override
   State<PaginationCustomIconPage> createState() => _PaginationCustomIconPageState();
@@ -96,7 +96,7 @@ class _PaginationCustomIconPageState extends StatefulExampleState<PaginationCust
 
 @RoutePage()
 class PaginationWithViewPage extends StatefulExample {
-  PaginationWithViewPage({@queryParam super.theme}): super(maxWidth: 400);
+  PaginationWithViewPage({@queryParam super.theme}) : super(maxWidth: 400);
 
   @override
   State<PaginationWithViewPage> createState() => _PaginationWithViewPageState();

@@ -1,0 +1,283 @@
+{
+  "text": "MaterialApp(\n  localizationsDelegates: const [\n    FLocalizations.delegate, // Add this line\n  ],\n  supportedLocales: const [\n    // Add locales supported by your application here.\n  ],\n  builder: (context, child) => FAnimatedTheme(data: FThemes.zinc.light, child: child!),\n  home: const FScaffold(child: Placeholder()),\n);\n",
+  "highlights": [
+    {
+      "start": 3,
+      "end": 3
+    },
+    {
+      "start": 6,
+      "end": 6
+    }
+  ],
+  "links": [
+    {
+      "offset": 51,
+      "length": 23,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.localizations/FLocalizations/delegate.html"
+    },
+    {
+      "offset": 217,
+      "length": 14,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FAnimatedTheme/FAnimatedTheme.html"
+    },
+    {
+      "offset": 232,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FAnimatedTheme/data.html"
+    },
+    {
+      "offset": 238,
+      "length": 12,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemes/zinc.html"
+    },
+    {
+      "offset": 258,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FAnimatedTheme/child.html"
+    },
+    {
+      "offset": 288,
+      "length": 9,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.scaffold/FScaffold/FScaffold.html"
+    },
+    {
+      "offset": 298,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.scaffold/FScaffold/child.html"
+    }
+  ],
+  "tooltips": [
+    {
+      "offset": 51,
+      "length": 23,
+      "snippet": {
+        "text": "LocalizationsDelegate<FLocalizations> delegate",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 22,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.localizations/FLocalizations-class.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FLocalizations",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.localizations/FLocalizations-class.html"
+        }
+      }
+    },
+    {
+      "offset": 198,
+      "length": 7,
+      "snippet": {
+        "text": "BuildContext context",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 207,
+      "length": 5,
+      "snippet": {
+        "text": "Widget? child",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 217,
+      "length": 14,
+      "snippet": {
+        "text": "FAnimatedTheme({\n  required FThemeData data,\n  required Widget child,\n  FAnimatedThemeMotion motion = const FAnimatedThemeMotion(),\n  void Function()? onEnd,\n  Key? key,\n})\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FAnimatedTheme/FAnimatedTheme.html"
+          },
+          {
+            "offset": 39,
+            "length": 4,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FAnimatedTheme/FAnimatedTheme.html"
+          },
+          {
+            "offset": 28,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+          },
+          {
+            "offset": 63,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FAnimatedTheme/FAnimatedTheme.html"
+          },
+          {
+            "offset": 93,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FAnimatedTheme/FAnimatedTheme.html"
+          },
+          {
+            "offset": 72,
+            "length": 20,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FAnimatedThemeMotion-class.html"
+          },
+          {
+            "offset": 108,
+            "length": 20,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FAnimatedThemeMotion/FAnimatedThemeMotion.html"
+          },
+          {
+            "offset": 151,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FAnimatedTheme/FAnimatedTheme.html"
+          },
+          {
+            "offset": 165,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FAnimatedTheme/FAnimatedTheme.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FAnimatedTheme",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FAnimatedTheme-class.html"
+        }
+      }
+    },
+    {
+      "offset": 232,
+      "length": 5,
+      "snippet": {
+        "text": "{required FThemeData data}",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 10,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+          }
+        ],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 238,
+      "length": 12,
+      "snippet": {
+        "text": "({FThemeData dark, FThemeData light}) zinc",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 2,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+          },
+          {
+            "offset": 19,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FThemes",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemes.html"
+        }
+      }
+    },
+    {
+      "offset": 258,
+      "length": 6,
+      "snippet": {
+        "text": "{required Widget child}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 288,
+      "length": 9,
+      "snippet": {
+        "text": "FScaffold({\n  required Widget child,\n  FScaffoldStyle Function(FScaffoldStyle)? scaffoldStyle,\n  Widget? header,\n  Widget? sidebar,\n  Widget? footer,\n  bool childPad = true,\n  bool resizeToAvoidBottomInset = true,\n  Key? key,\n})\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.scaffold/FScaffold/FScaffold.html"
+          },
+          {
+            "offset": 30,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.scaffold/FScaffold/FScaffold.html"
+          },
+          {
+            "offset": 80,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.scaffold/FScaffold/FScaffold.html"
+          },
+          {
+            "offset": 39,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.scaffold/FScaffoldStyle-class.html"
+          },
+          {
+            "offset": 63,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.scaffold/FScaffoldStyle-class.html"
+          },
+          {
+            "offset": 105,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.scaffold/FScaffold/FScaffold.html"
+          },
+          {
+            "offset": 123,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.scaffold/FScaffold/FScaffold.html"
+          },
+          {
+            "offset": 142,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.scaffold/FScaffold/FScaffold.html"
+          },
+          {
+            "offset": 157,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.scaffold/FScaffold/FScaffold.html"
+          },
+          {
+            "offset": 181,
+            "length": 24,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.scaffold/FScaffold/FScaffold.html"
+          },
+          {
+            "offset": 221,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.scaffold/FScaffold/FScaffold.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FScaffold",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.scaffold/FScaffold-class.html"
+        }
+      }
+    },
+    {
+      "offset": 298,
+      "length": 6,
+      "snippet": {
+        "text": "{required Widget child}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    }
+  ]
+}

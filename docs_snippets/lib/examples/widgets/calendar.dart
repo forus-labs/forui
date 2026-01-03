@@ -14,7 +14,8 @@ class CalendarPage extends Example {
     // {@highlight}
     control: .managedDate(),
     // {@endhighlight}
-    start: DateTime(2000), end: DateTime(2040),
+    start: DateTime(2000),
+    end: DateTime(2040),
   );
 }
 

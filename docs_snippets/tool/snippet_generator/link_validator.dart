@@ -3,7 +3,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'snippet.dart';
+import 'main.dart';
 
 /// Quicky & dirty script that validates that all URLs in samples/output JSON files don't return 404.
 ///
@@ -11,20 +11,26 @@ import 'snippet.dart';
 Future<void> main() async {
   final out = Directory(output);
   final urls = <String>{};
-  for (final file in out.listSync(recursive: true).whereType<File>().where((f) => f.path.endsWith('.json'))) {
-    final content = jsonDecode(file.readAsStringSync()) as Map<String, dynamic>;
-    for (final link in content['links'] as List<dynamic>? ?? []) {
+
+  void extractUrls(Map<String, dynamic> snippet) {
+    for (final link in snippet['links'] as List<dynamic>? ?? []) {
       if (link['url'] case final String url) {
         urls.add(url);
       }
     }
-    for (final tooltip in content['tooltips'] as List<dynamic>? ?? []) {
-      for (final link in tooltip['links'] as List<dynamic>? ?? []) {
-        if (link['url'] case final String url) {
-          urls.add(url);
-        }
+    if (snippet['container'] case {'url': final String url}) {
+      urls.add(url);
+    }
+    for (final tooltip in snippet['tooltips'] as List<dynamic>? ?? []) {
+      if (tooltip['snippet'] case final Map<String, dynamic> nested) {
+        extractUrls(nested);
       }
     }
+  }
+
+  for (final file in out.listSync(recursive: true).whereType<File>().where((f) => f.path.endsWith('.json'))) {
+    final content = jsonDecode(file.readAsStringSync()) as Map<String, dynamic>;
+    extractUrls(content);
   }
 
   print('Found ${urls.length} unique URLs to validate...\n');

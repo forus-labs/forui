@@ -1,5 +1,5 @@
 {
-  "code": "@override\nWidget build(BuildContext context) => Column(\n  mainAxisSize: .min,\n  mainAxisAlignment: .center,\n  spacing: 5,\n  children: [\n    for (final (FToastAlignment alignment, description) in [\n      (.topLeft, 'Top Left'),\n      (.topCenter, 'Top Center'),\n      (.topRight, 'Top Right'),\n      (.bottomLeft, 'Bottom Left'),\n      (.bottomCenter, 'Bottom Center'),\n      (.bottomRight, 'Bottom Right'),\n    ])\n      FButton(\n        onPress: () => showFToast(\n          context: context,\n          alignment: alignment,\n          title: const Text('Event has been created'),\n          description: const Text('Friday, May 23, 2025 at 9:00 AM'),\n          suffixBuilder: (context, entry) => IntrinsicHeight(\n            child: FButton(\n              style: context.theme.buttonStyles.primary.copyWith(\n                contentStyle: context.theme.buttonStyles.primary.contentStyle\n                    .copyWith(\n                      padding: const .symmetric(horizontal: 12, vertical: 7.5),\n                      textStyle: .all(\n                        context.theme.typography.xs.copyWith(\n                          color: context.theme.colors.primaryForeground,\n                        ),\n                      ),\n                    ),\n              ),\n              onPress: entry.dismiss,\n              child: const Text('Undo'),\n            ),\n          ),\n        ),\n        child: Text('Show $description Toast'),\n      ),\n  ],\n);\n",
+  "text": "@override\nWidget build(BuildContext context) => Column(\n  mainAxisSize: .min,\n  mainAxisAlignment: .center,\n  spacing: 5,\n  children: [\n    for (final (FToastAlignment alignment, description) in [\n      (.topLeft, 'Top Left'),\n      (.topCenter, 'Top Center'),\n      (.topRight, 'Top Right'),\n      (.bottomLeft, 'Bottom Left'),\n      (.bottomCenter, 'Bottom Center'),\n      (.bottomRight, 'Bottom Right'),\n    ])\n      FButton(\n        onPress: () => showFToast(\n          context: context,\n          alignment: alignment,\n          title: const Text('Event has been created'),\n          description: const Text('Friday, May 23, 2025 at 9:00 AM'),\n          suffixBuilder: (context, entry) => IntrinsicHeight(\n            child: FButton(\n              style: context.theme.buttonStyles.primary.copyWith(\n                contentStyle: context.theme.buttonStyles.primary.contentStyle\n                    .copyWith(\n                      padding: const .symmetric(horizontal: 12, vertical: 7.5),\n                      textStyle: .all(\n                        context.theme.typography.xs.copyWith(\n                          color: context.theme.colors.primaryForeground,\n                        ),\n                      ),\n                    ),\n              ),\n              onPress: entry.dismiss,\n              child: const Text('Undo'),\n            ),\n          ),\n        ),\n        child: Text('Show $description Toast'),\n      ),\n  ],\n);\n",
   "highlights": [],
   "links": [
     {
@@ -205,918 +205,1034 @@
   ],
   "tooltips": [
     {
-      "offset": 23,
-      "length": 20,
-      "code": "BuildContext context",
-      "links": [],
-      "documentation": ""
-    },
-    {
       "offset": 205,
       "length": 7,
-      "code": "FToastAlignment topLeft",
-      "links": [
-        {
-          "offset": 0,
-          "length": 15,
+      "snippet": {
+        "text": "FToastAlignment topLeft",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/FToastAlignment.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FToastAlignment",
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/FToastAlignment.html"
         }
-      ],
-      "container": {
-        "name": "FToastAlignment",
-        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/FToastAlignment.html"
-      },
-      "documentation": ""
+      }
     },
     {
       "offset": 235,
       "length": 9,
-      "code": "FToastAlignment topCenter",
-      "links": [
-        {
-          "offset": 0,
-          "length": 15,
+      "snippet": {
+        "text": "FToastAlignment topCenter",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/FToastAlignment.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FToastAlignment",
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/FToastAlignment.html"
         }
-      ],
-      "container": {
-        "name": "FToastAlignment",
-        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/FToastAlignment.html"
-      },
-      "documentation": ""
+      }
     },
     {
       "offset": 269,
       "length": 8,
-      "code": "FToastAlignment topRight",
-      "links": [
-        {
-          "offset": 0,
-          "length": 15,
+      "snippet": {
+        "text": "FToastAlignment topRight",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/FToastAlignment.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FToastAlignment",
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/FToastAlignment.html"
         }
-      ],
-      "container": {
-        "name": "FToastAlignment",
-        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/FToastAlignment.html"
-      },
-      "documentation": ""
+      }
     },
     {
       "offset": 301,
       "length": 10,
-      "code": "FToastAlignment bottomLeft",
-      "links": [
-        {
-          "offset": 0,
-          "length": 15,
+      "snippet": {
+        "text": "FToastAlignment bottomLeft",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/FToastAlignment.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FToastAlignment",
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/FToastAlignment.html"
         }
-      ],
-      "container": {
-        "name": "FToastAlignment",
-        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/FToastAlignment.html"
-      },
-      "documentation": ""
+      }
     },
     {
       "offset": 337,
       "length": 12,
-      "code": "FToastAlignment bottomCenter",
-      "links": [
-        {
-          "offset": 0,
-          "length": 15,
+      "snippet": {
+        "text": "FToastAlignment bottomCenter",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/FToastAlignment.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FToastAlignment",
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/FToastAlignment.html"
         }
-      ],
-      "container": {
-        "name": "FToastAlignment",
-        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/FToastAlignment.html"
-      },
-      "documentation": ""
+      }
     },
     {
       "offset": 377,
       "length": 11,
-      "code": "FToastAlignment bottomRight",
-      "links": [
-        {
-          "offset": 0,
-          "length": 15,
+      "snippet": {
+        "text": "FToastAlignment bottomRight",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/FToastAlignment.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FToastAlignment",
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/FToastAlignment.html"
         }
-      ],
-      "container": {
-        "name": "FToastAlignment",
-        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/FToastAlignment.html"
-      },
-      "documentation": ""
+      }
     },
     {
       "offset": 420,
       "length": 7,
-      "code": "FButton({\n  required void Function()? onPress,\n  required Widget child,\n  FBaseButtonStyle Function(FButtonStyle) style = _primary,\n  void Function()? onLongPress,\n  void Function()? onSecondaryPress,\n  void Function()? onSecondaryLongPress,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  void Function(bool)? onHoverChange,\n  void Function(FWidgetStatesDelta)? onStateChange,\n  bool selected = false,\n  Map<ShortcutActivator, Intent>? shortcuts,\n  Map<Type, Action<Intent>>? actions,\n  MainAxisSize mainAxisSize = .max,\n  MainAxisAlignment mainAxisAlignment = .center,\n  CrossAxisAlignment crossAxisAlignment = .center,\n  TextBaseline? textBaseline,\n  Widget? prefix,\n  Widget? suffix,\n  Key? key,\n})\n",
-      "links": [
-        {
-          "offset": 0,
-          "length": 7,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
-        },
-        {
-          "offset": 38,
-          "length": 7,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
-        },
-        {
-          "offset": 65,
-          "length": 5,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
-        },
-        {
-          "offset": 114,
-          "length": 5,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
-        },
-        {
-          "offset": 74,
-          "length": 16,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FBaseButtonStyle-class.html"
-        },
-        {
-          "offset": 100,
-          "length": 12,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButtonStyle-class.html"
-        },
-        {
-          "offset": 151,
-          "length": 11,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
-        },
-        {
-          "offset": 183,
-          "length": 16,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
-        },
-        {
-          "offset": 220,
-          "length": 20,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
-        },
-        {
-          "offset": 249,
-          "length": 9,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
-        },
-        {
-          "offset": 281,
-          "length": 9,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
-        },
-        {
-          "offset": 315,
-          "length": 13,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
-        },
-        {
-          "offset": 353,
-          "length": 13,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
-        },
-        {
-          "offset": 405,
-          "length": 13,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
-        },
-        {
-          "offset": 384,
-          "length": 18,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStatesDelta-class.html"
-        },
-        {
-          "offset": 427,
-          "length": 8,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
-        },
-        {
-          "offset": 479,
-          "length": 9,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
-        },
-        {
-          "offset": 519,
-          "length": 7,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
-        },
-        {
-          "offset": 543,
-          "length": 12,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
-        },
-        {
-          "offset": 584,
-          "length": 17,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
-        },
-        {
-          "offset": 634,
-          "length": 18,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
-        },
-        {
-          "offset": 680,
-          "length": 12,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
-        },
-        {
-          "offset": 704,
-          "length": 6,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
-        },
-        {
-          "offset": 722,
-          "length": 6,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
-        },
-        {
-          "offset": 737,
-          "length": 3,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+      "snippet": {
+        "text": "FButton({\n  required void Function()? onPress,\n  required Widget child,\n  FBaseButtonStyle Function(FButtonStyle) style = _primary,\n  void Function()? onLongPress,\n  void Function()? onSecondaryPress,\n  void Function()? onSecondaryLongPress,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  void Function(bool)? onHoverChange,\n  void Function(FWidgetStatesDelta)? onStateChange,\n  bool selected = false,\n  Map<ShortcutActivator, Intent>? shortcuts,\n  Map<Type, Action<Intent>>? actions,\n  MainAxisSize mainAxisSize = .max,\n  MainAxisAlignment mainAxisAlignment = .center,\n  CrossAxisAlignment crossAxisAlignment = .center,\n  TextBaseline? textBaseline,\n  Widget? prefix,\n  Widget? suffix,\n  Key? key,\n})\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 38,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 65,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 114,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 74,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FBaseButtonStyle-class.html"
+          },
+          {
+            "offset": 100,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButtonStyle-class.html"
+          },
+          {
+            "offset": 151,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 183,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 220,
+            "length": 20,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 249,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 281,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 315,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 353,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 405,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 384,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStatesDelta-class.html"
+          },
+          {
+            "offset": 427,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 479,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 519,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 543,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 584,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 634,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 680,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 704,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 722,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 737,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FButton",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton-class.html"
         }
-      ],
-      "container": {
-        "name": "FButton",
-        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton-class.html"
-      },
-      "documentation": ""
+      }
     },
     {
       "offset": 437,
       "length": 8,
-      "code": "{required void Function()? onPress}",
-      "links": [],
-      "documentation": ""
+      "snippet": {
+        "text": "{required void Function()? onPress}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
     },
     {
       "offset": 452,
       "length": 10,
-      "code": "FToasterEntry showFToast({\n  required BuildContext context,\n  required Widget title,\n  FToastStyle Function(FToastStyle)? style,\n  Widget? icon,\n  Widget? description,\n  Widget Function(BuildContext, FToasterEntry)? suffixBuilder,\n  FToastAlignment? alignment,\n  List<AxisDirection>? swipeToDismiss,\n  Duration? duration = const Duration(seconds: 5),\n  void Function()? onDismiss,\n})",
-      "links": [
-        {
-          "offset": 14,
-          "length": 10,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/showFToast.html"
-        },
-        {
-          "offset": 0,
-          "length": 13,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/FToasterEntry-mixin.html"
-        },
-        {
-          "offset": 87,
-          "length": 11,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/FToastStyle-class.html"
-        },
-        {
-          "offset": 108,
-          "length": 11,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/FToastStyle-class.html"
-        },
-        {
-          "offset": 200,
-          "length": 13,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/FToasterEntry-mixin.html"
-        },
-        {
-          "offset": 233,
-          "length": 16,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/FToastAlignment.html"
-        }
-      ],
-      "documentation": ""
+      "snippet": {
+        "text": "FToasterEntry showFToast({\n  required BuildContext context,\n  required Widget title,\n  FToastStyle Function(FToastStyle)? style,\n  Widget? icon,\n  Widget? description,\n  Widget Function(BuildContext, FToasterEntry)? suffixBuilder,\n  FToastAlignment? alignment,\n  List<AxisDirection>? swipeToDismiss,\n  Duration? duration = const Duration(seconds: 5),\n  void Function()? onDismiss,\n})",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 14,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/showFToast.html"
+          },
+          {
+            "offset": 0,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/FToasterEntry-mixin.html"
+          },
+          {
+            "offset": 87,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/FToastStyle-class.html"
+          },
+          {
+            "offset": 108,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/FToastStyle-class.html"
+          },
+          {
+            "offset": 200,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/FToasterEntry-mixin.html"
+          },
+          {
+            "offset": 233,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/FToastAlignment.html"
+          }
+        ],
+        "tooltips": []
+      }
     },
     {
       "offset": 474,
       "length": 8,
-      "code": "{required BuildContext context}",
-      "links": [],
-      "documentation": ""
+      "snippet": {
+        "text": "{required BuildContext context}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
     },
     {
       "offset": 502,
       "length": 10,
-      "code": "{FToastAlignment? alignment}",
-      "links": [
-        {
-          "offset": 1,
-          "length": 16,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/FToastAlignment.html"
-        }
-      ],
-      "documentation": ""
+      "snippet": {
+        "text": "{FToastAlignment? alignment}",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 1,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/FToastAlignment.html"
+          }
+        ],
+        "tooltips": []
+      }
     },
     {
       "offset": 534,
       "length": 6,
-      "code": "{required Widget title}",
-      "links": [],
-      "documentation": ""
+      "snippet": {
+        "text": "{required Widget title}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
     },
     {
       "offset": 589,
       "length": 12,
-      "code": "{Widget? description}",
-      "links": [],
-      "documentation": ""
+      "snippet": {
+        "text": "{Widget? description}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
     },
     {
       "offset": 659,
       "length": 14,
-      "code": "{Widget Function(BuildContext, FToasterEntry)? suffixBuilder}",
-      "links": [
-        {
-          "offset": 31,
-          "length": 13,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/FToasterEntry-mixin.html"
-        }
-      ],
-      "documentation": ""
+      "snippet": {
+        "text": "{Widget Function(BuildContext, FToasterEntry)? suffixBuilder}",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 31,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/FToasterEntry-mixin.html"
+          }
+        ],
+        "tooltips": []
+      }
     },
     {
       "offset": 675,
       "length": 7,
-      "code": "BuildContext context",
-      "links": [],
-      "documentation": ""
+      "snippet": {
+        "text": "BuildContext context",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
     },
     {
       "offset": 684,
       "length": 5,
-      "code": "FToasterEntry entry",
-      "links": [
-        {
-          "offset": 0,
-          "length": 13,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/FToasterEntry-mixin.html"
-        }
-      ],
-      "documentation": ""
+      "snippet": {
+        "text": "FToasterEntry entry",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/FToasterEntry-mixin.html"
+          }
+        ],
+        "tooltips": []
+      }
     },
     {
       "offset": 730,
       "length": 7,
-      "code": "FButton({\n  required void Function()? onPress,\n  required Widget child,\n  FBaseButtonStyle Function(FButtonStyle) style = _primary,\n  void Function()? onLongPress,\n  void Function()? onSecondaryPress,\n  void Function()? onSecondaryLongPress,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  void Function(bool)? onHoverChange,\n  void Function(FWidgetStatesDelta)? onStateChange,\n  bool selected = false,\n  Map<ShortcutActivator, Intent>? shortcuts,\n  Map<Type, Action<Intent>>? actions,\n  MainAxisSize mainAxisSize = .max,\n  MainAxisAlignment mainAxisAlignment = .center,\n  CrossAxisAlignment crossAxisAlignment = .center,\n  TextBaseline? textBaseline,\n  Widget? prefix,\n  Widget? suffix,\n  Key? key,\n})\n",
-      "links": [
-        {
-          "offset": 0,
-          "length": 7,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
-        },
-        {
-          "offset": 38,
-          "length": 7,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
-        },
-        {
-          "offset": 65,
-          "length": 5,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
-        },
-        {
-          "offset": 114,
-          "length": 5,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
-        },
-        {
-          "offset": 74,
-          "length": 16,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FBaseButtonStyle-class.html"
-        },
-        {
-          "offset": 100,
-          "length": 12,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButtonStyle-class.html"
-        },
-        {
-          "offset": 151,
-          "length": 11,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
-        },
-        {
-          "offset": 183,
-          "length": 16,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
-        },
-        {
-          "offset": 220,
-          "length": 20,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
-        },
-        {
-          "offset": 249,
-          "length": 9,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
-        },
-        {
-          "offset": 281,
-          "length": 9,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
-        },
-        {
-          "offset": 315,
-          "length": 13,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
-        },
-        {
-          "offset": 353,
-          "length": 13,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
-        },
-        {
-          "offset": 405,
-          "length": 13,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
-        },
-        {
-          "offset": 384,
-          "length": 18,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStatesDelta-class.html"
-        },
-        {
-          "offset": 427,
-          "length": 8,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
-        },
-        {
-          "offset": 479,
-          "length": 9,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
-        },
-        {
-          "offset": 519,
-          "length": 7,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
-        },
-        {
-          "offset": 543,
-          "length": 12,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
-        },
-        {
-          "offset": 584,
-          "length": 17,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
-        },
-        {
-          "offset": 634,
-          "length": 18,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
-        },
-        {
-          "offset": 680,
-          "length": 12,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
-        },
-        {
-          "offset": 704,
-          "length": 6,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
-        },
-        {
-          "offset": 722,
-          "length": 6,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
-        },
-        {
-          "offset": 737,
-          "length": 3,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+      "snippet": {
+        "text": "FButton({\n  required void Function()? onPress,\n  required Widget child,\n  FBaseButtonStyle Function(FButtonStyle) style = _primary,\n  void Function()? onLongPress,\n  void Function()? onSecondaryPress,\n  void Function()? onSecondaryLongPress,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  void Function(bool)? onHoverChange,\n  void Function(FWidgetStatesDelta)? onStateChange,\n  bool selected = false,\n  Map<ShortcutActivator, Intent>? shortcuts,\n  Map<Type, Action<Intent>>? actions,\n  MainAxisSize mainAxisSize = .max,\n  MainAxisAlignment mainAxisAlignment = .center,\n  CrossAxisAlignment crossAxisAlignment = .center,\n  TextBaseline? textBaseline,\n  Widget? prefix,\n  Widget? suffix,\n  Key? key,\n})\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 38,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 65,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 114,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 74,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FBaseButtonStyle-class.html"
+          },
+          {
+            "offset": 100,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButtonStyle-class.html"
+          },
+          {
+            "offset": 151,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 183,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 220,
+            "length": 20,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 249,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 281,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 315,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 353,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 405,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 384,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStatesDelta-class.html"
+          },
+          {
+            "offset": 427,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 479,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 519,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 543,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 584,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 634,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 680,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 704,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 722,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 737,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FButton",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton-class.html"
         }
-      ],
-      "container": {
-        "name": "FButton",
-        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton-class.html"
-      },
-      "documentation": ""
+      }
     },
     {
       "offset": 753,
       "length": 6,
-      "code": "{FBaseButtonStyle Function(FButtonStyle) style = _primary}",
-      "links": [
-        {
-          "offset": 1,
-          "length": 16,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FBaseButtonStyle-class.html"
-        },
-        {
-          "offset": 27,
-          "length": 12,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButtonStyle-class.html"
-        }
-      ],
-      "documentation": ""
+      "snippet": {
+        "text": "{FBaseButtonStyle Function(FButtonStyle) style = _primary}",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 1,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FBaseButtonStyle-class.html"
+          },
+          {
+            "offset": 27,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButtonStyle-class.html"
+          }
+        ],
+        "tooltips": []
+      }
     },
     {
       "offset": 795,
       "length": 8,
-      "code": "FButtonStyle copyWith({\n  FWidgetStateMap<BoxDecoration>? decoration,\n  FButtonContentStyle Function(FButtonContentStyle)? contentStyle,\n  FButtonIconContentStyle Function(FButtonIconContentStyle)? iconContentStyle,\n  FTappableStyle Function(FTappableStyle)? tappableStyle,\n  FFocusedOutlineStyle Function(FFocusedOutlineStyle)? focusedOutlineStyle,\n})",
-      "links": [
-        {
-          "offset": 0,
-          "length": 12,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButtonStyle-class.html"
-        },
-        {
-          "offset": 26,
-          "length": 31,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStateMap-class.html"
-        },
-        {
-          "offset": 72,
-          "length": 19,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButtonContentStyle-class.html"
-        },
-        {
-          "offset": 101,
-          "length": 19,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButtonContentStyle-class.html"
-        },
-        {
-          "offset": 139,
-          "length": 23,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButtonIconContentStyle-class.html"
-        },
-        {
-          "offset": 172,
-          "length": 23,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButtonIconContentStyle-class.html"
-        },
-        {
-          "offset": 218,
-          "length": 14,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappableStyle-class.html"
-        },
-        {
-          "offset": 242,
-          "length": 14,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappableStyle-class.html"
-        },
-        {
-          "offset": 276,
-          "length": 20,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FFocusedOutlineStyle-class.html"
-        },
-        {
-          "offset": 306,
-          "length": 20,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FFocusedOutlineStyle-class.html"
+      "snippet": {
+        "text": "FButtonStyle copyWith({\n  FWidgetStateMap<BoxDecoration>? decoration,\n  FButtonContentStyle Function(FButtonContentStyle)? contentStyle,\n  FButtonIconContentStyle Function(FButtonIconContentStyle)? iconContentStyle,\n  FTappableStyle Function(FTappableStyle)? tappableStyle,\n  FFocusedOutlineStyle Function(FFocusedOutlineStyle)? focusedOutlineStyle,\n})",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButtonStyle-class.html"
+          },
+          {
+            "offset": 26,
+            "length": 31,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStateMap-class.html"
+          },
+          {
+            "offset": 72,
+            "length": 19,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButtonContentStyle-class.html"
+          },
+          {
+            "offset": 101,
+            "length": 19,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButtonContentStyle-class.html"
+          },
+          {
+            "offset": 139,
+            "length": 23,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButtonIconContentStyle-class.html"
+          },
+          {
+            "offset": 172,
+            "length": 23,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButtonIconContentStyle-class.html"
+          },
+          {
+            "offset": 218,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappableStyle-class.html"
+          },
+          {
+            "offset": 242,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappableStyle-class.html"
+          },
+          {
+            "offset": 276,
+            "length": 20,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FFocusedOutlineStyle-class.html"
+          },
+          {
+            "offset": 306,
+            "length": 20,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FFocusedOutlineStyle-class.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "$FButtonStyleTransformations",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/$FButtonStyleTransformations.html"
         }
-      ],
-      "container": {
-        "name": "$FButtonStyleTransformations",
-        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/$FButtonStyleTransformations.html"
-      },
-      "documentation": ""
+      }
     },
     {
       "offset": 787,
       "length": 7,
-      "code": "FButtonStyle primary",
-      "links": [
-        {
-          "offset": 0,
-          "length": 12,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButtonStyle-class.html"
+      "snippet": {
+        "text": "FButtonStyle primary",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButtonStyle-class.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FButtonStyles",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButtonStyles-class.html"
         }
-      ],
-      "container": {
-        "name": "FButtonStyles",
-        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButtonStyles-class.html"
-      },
-      "documentation": ""
+      }
     },
     {
       "offset": 774,
       "length": 12,
-      "code": "FButtonStyles buttonStyles",
-      "links": [
-        {
-          "offset": 0,
-          "length": 13,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButtonStyles-class.html"
+      "snippet": {
+        "text": "FButtonStyles buttonStyles",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButtonStyles-class.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FThemeData",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
         }
-      ],
-      "container": {
-        "name": "FThemeData",
-        "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
-      },
-      "documentation": ""
+      }
     },
     {
       "offset": 768,
       "length": 5,
-      "code": "FThemeData get theme",
-      "links": [
-        {
-          "offset": 0,
-          "length": 10,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+      "snippet": {
+        "text": "FThemeData get theme",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FThemeBuildContext",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext.html"
         }
-      ],
-      "container": {
-        "name": "FThemeBuildContext",
-        "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext.html"
-      },
-      "documentation": ""
+      }
     },
     {
       "offset": 821,
       "length": 13,
-      "code": "{FButtonContentStyle Function(FButtonContentStyle)? contentStyle}",
-      "links": [
-        {
-          "offset": 1,
-          "length": 19,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButtonContentStyle-class.html"
-        },
-        {
-          "offset": 30,
-          "length": 19,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButtonContentStyle-class.html"
-        }
-      ],
-      "documentation": ""
+      "snippet": {
+        "text": "{FButtonContentStyle Function(FButtonContentStyle)? contentStyle}",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 1,
+            "length": 19,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButtonContentStyle-class.html"
+          },
+          {
+            "offset": 30,
+            "length": 19,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButtonContentStyle-class.html"
+          }
+        ],
+        "tooltips": []
+      }
     },
     {
       "offset": 904,
       "length": 8,
-      "code": "FButtonContentStyle copyWith({\n  FWidgetStateMap<TextStyle>? textStyle,\n  FWidgetStateMap<IconThemeData>? iconStyle,\n  FWidgetStateMap<FCircularProgressStyle>? circularProgressStyle,\n  EdgeInsetsGeometry? padding,\n  double? spacing,\n})",
-      "links": [
-        {
-          "offset": 0,
-          "length": 19,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButtonContentStyle-class.html"
-        },
-        {
-          "offset": 33,
-          "length": 27,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStateMap-class.html"
-        },
-        {
-          "offset": 74,
-          "length": 31,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStateMap-class.html"
-        },
-        {
-          "offset": 119,
-          "length": 40,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStateMap-class.html"
-        },
-        {
-          "offset": 135,
-          "length": 22,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.progress/FCircularProgressStyle-class.html"
+      "snippet": {
+        "text": "FButtonContentStyle copyWith({\n  FWidgetStateMap<TextStyle>? textStyle,\n  FWidgetStateMap<IconThemeData>? iconStyle,\n  FWidgetStateMap<FCircularProgressStyle>? circularProgressStyle,\n  EdgeInsetsGeometry? padding,\n  double? spacing,\n})",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 19,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButtonContentStyle-class.html"
+          },
+          {
+            "offset": 33,
+            "length": 27,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStateMap-class.html"
+          },
+          {
+            "offset": 74,
+            "length": 31,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStateMap-class.html"
+          },
+          {
+            "offset": 119,
+            "length": 40,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStateMap-class.html"
+          },
+          {
+            "offset": 135,
+            "length": 22,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.progress/FCircularProgressStyle-class.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "$FButtonContentStyleTransformations",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/$FButtonContentStyleTransformations.html"
         }
-      ],
-      "container": {
-        "name": "$FButtonContentStyleTransformations",
-        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/$FButtonContentStyleTransformations.html"
-      },
-      "documentation": ""
+      }
     },
     {
       "offset": 870,
       "length": 12,
-      "code": "FButtonContentStyle contentStyle",
-      "links": [
-        {
-          "offset": 0,
-          "length": 19,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButtonContentStyle-class.html"
+      "snippet": {
+        "text": "FButtonContentStyle contentStyle",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 19,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButtonContentStyle-class.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FButtonStyle",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButtonStyle-class.html"
         }
-      ],
-      "container": {
-        "name": "FButtonStyle",
-        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButtonStyle-class.html"
-      },
-      "documentation": ""
+      }
     },
     {
       "offset": 862,
       "length": 7,
-      "code": "FButtonStyle primary",
-      "links": [
-        {
-          "offset": 0,
-          "length": 12,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButtonStyle-class.html"
+      "snippet": {
+        "text": "FButtonStyle primary",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButtonStyle-class.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FButtonStyles",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButtonStyles-class.html"
         }
-      ],
-      "container": {
-        "name": "FButtonStyles",
-        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButtonStyles-class.html"
-      },
-      "documentation": ""
+      }
     },
     {
       "offset": 849,
       "length": 12,
-      "code": "FButtonStyles buttonStyles",
-      "links": [
-        {
-          "offset": 0,
-          "length": 13,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButtonStyles-class.html"
+      "snippet": {
+        "text": "FButtonStyles buttonStyles",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButtonStyles-class.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FThemeData",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
         }
-      ],
-      "container": {
-        "name": "FThemeData",
-        "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
-      },
-      "documentation": ""
+      }
     },
     {
       "offset": 843,
       "length": 5,
-      "code": "FThemeData get theme",
-      "links": [
-        {
-          "offset": 0,
-          "length": 10,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+      "snippet": {
+        "text": "FThemeData get theme",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FThemeBuildContext",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext.html"
         }
-      ],
-      "container": {
-        "name": "FThemeBuildContext",
-        "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext.html"
-      },
-      "documentation": ""
+      }
     },
     {
       "offset": 936,
       "length": 8,
-      "code": "{EdgeInsetsGeometry? padding}",
-      "links": [],
-      "documentation": ""
+      "snippet": {
+        "text": "{EdgeInsetsGeometry? padding}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
     },
     {
       "offset": 1016,
       "length": 10,
-      "code": "{FWidgetStateMap<TextStyle>? textStyle}",
-      "links": [
-        {
-          "offset": 1,
-          "length": 27,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStateMap-class.html"
-        }
-      ],
-      "documentation": ""
+      "snippet": {
+        "text": "{FWidgetStateMap<TextStyle>? textStyle}",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 1,
+            "length": 27,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStateMap-class.html"
+          }
+        ],
+        "tooltips": []
+      }
     },
     {
       "offset": 1028,
       "length": 3,
-      "code": "FWidgetStateMap.all(TextStyle value)\n",
-      "links": [
-        {
-          "offset": 0,
-          "length": 19,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStateMap/FWidgetStateMap.all.html"
+      "snippet": {
+        "text": "FWidgetStateMap.all(TextStyle value)\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 19,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStateMap/FWidgetStateMap.all.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FWidgetStateMap",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStateMap-class.html"
         }
-      ],
-      "container": {
-        "name": "FWidgetStateMap",
-        "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStateMap-class.html"
-      },
-      "documentation": ""
+      }
     },
     {
       "offset": 1082,
       "length": 2,
-      "code": "TextStyle xs",
-      "links": [],
-      "container": {
-        "name": "FTypography",
-        "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FTypography-class.html"
-      },
-      "documentation": ""
+      "snippet": {
+        "text": "TextStyle xs",
+        "highlights": [],
+        "links": [],
+        "tooltips": [],
+        "container": {
+          "name": "FTypography",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FTypography-class.html"
+        }
+      }
     },
     {
       "offset": 1071,
       "length": 10,
-      "code": "FTypography typography",
-      "links": [
-        {
-          "offset": 0,
-          "length": 11,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FTypography-class.html"
+      "snippet": {
+        "text": "FTypography typography",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FTypography-class.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FThemeData",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
         }
-      ],
-      "container": {
-        "name": "FThemeData",
-        "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
-      },
-      "documentation": ""
+      }
     },
     {
       "offset": 1065,
       "length": 5,
-      "code": "FThemeData get theme",
-      "links": [
-        {
-          "offset": 0,
-          "length": 10,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+      "snippet": {
+        "text": "FThemeData get theme",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FThemeBuildContext",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext.html"
         }
-      ],
-      "container": {
-        "name": "FThemeBuildContext",
-        "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext.html"
-      },
-      "documentation": ""
+      }
     },
     {
       "offset": 1149,
       "length": 17,
-      "code": "Color primaryForeground",
-      "links": [],
-      "container": {
-        "name": "FColors",
-        "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors-class.html"
-      },
-      "documentation": ""
+      "snippet": {
+        "text": "Color primaryForeground",
+        "highlights": [],
+        "links": [],
+        "tooltips": [],
+        "container": {
+          "name": "FColors",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors-class.html"
+        }
+      }
     },
     {
       "offset": 1142,
       "length": 6,
-      "code": "FColors colors",
-      "links": [
-        {
-          "offset": 0,
-          "length": 7,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors-class.html"
+      "snippet": {
+        "text": "FColors colors",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors-class.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FThemeData",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
         }
-      ],
-      "container": {
-        "name": "FThemeData",
-        "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
-      },
-      "documentation": ""
+      }
     },
     {
       "offset": 1136,
       "length": 5,
-      "code": "FThemeData get theme",
-      "links": [
-        {
-          "offset": 0,
-          "length": 10,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+      "snippet": {
+        "text": "FThemeData get theme",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FThemeBuildContext",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext.html"
         }
-      ],
-      "container": {
-        "name": "FThemeBuildContext",
-        "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext.html"
-      },
-      "documentation": ""
+      }
     },
     {
       "offset": 1274,
       "length": 8,
-      "code": "{required void Function()? onPress}",
-      "links": [],
-      "documentation": ""
+      "snippet": {
+        "text": "{required void Function()? onPress}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
     },
     {
       "offset": 1289,
       "length": 7,
-      "code": "void dismiss()",
-      "links": [
-        {
-          "offset": 5,
-          "length": 7,
-          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/FToasterEntry/dismiss.html"
+      "snippet": {
+        "text": "void dismiss()",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 5,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/FToasterEntry/dismiss.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FToasterEntry",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/FToasterEntry-mixin.html"
         }
-      ],
-      "container": {
-        "name": "FToasterEntry",
-        "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/FToasterEntry-mixin.html"
-      },
-      "documentation": ""
+      }
     },
     {
       "offset": 1312,
       "length": 6,
-      "code": "{required Widget child}",
-      "links": [],
-      "documentation": ""
+      "snippet": {
+        "text": "{required Widget child}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
     },
     {
       "offset": 1386,
       "length": 6,
-      "code": "{required Widget child}",
-      "links": [],
-      "documentation": ""
+      "snippet": {
+        "text": "{required Widget child}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
     }
   ]
 }

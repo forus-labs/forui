@@ -573,7 +573,7 @@
               <button class="btn" id="copyLinkBtn">Copy Link</button>
               <button class="btn" id="copyCodeBtn">Copy Code</button>
             </div>
-            ${renderCode(currentData.code || '', currentData.links, currentData.highlights, currentData.tooltips)}
+            ${renderCode(currentData.text || '', currentData.links, currentData.highlights, currentData.tooltips)}
           </section>
         `;
 
@@ -672,10 +672,11 @@
       const popup = document.createElement('div');
       popup.className = 'tooltip-popup';
 
-      let html = `<div class="tooltip-code">${renderTooltipCode(tip.code, tip.links)}</div>`;
+      const snippet = tip.snippet || {};
+      let html = `<div class="tooltip-code">${renderTooltipCode(snippet.text || '', snippet.links)}</div>`;
 
-      if (tip.container) {
-        html += `<div class="tooltip-container">in <a href="${escapeHtml(tip.container.url)}" target="_blank">${escapeHtml(tip.container.name)}</a></div>`;
+      if (snippet.container) {
+        html += `<div class="tooltip-container">in <a href="${escapeHtml(snippet.container.url)}" target="_blank">${escapeHtml(snippet.container.name)}</a></div>`;
       }
 
       if (tip.documentation) {
@@ -788,7 +789,7 @@
     // Copy code to clipboard
     function copyCode() {
       const btn = document.getElementById('copyCodeBtn');
-      navigator.clipboard.writeText(currentData?.code || '');
+      navigator.clipboard.writeText(currentData?.text || '');
       btn.textContent = 'Copied!';
       btn.classList.add('copied');
       setTimeout(() => {
