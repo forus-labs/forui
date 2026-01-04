@@ -77,7 +77,7 @@ const _golden = r'''
 // ignore_for_file: avoid_positional_boolean_parameters
 // ignore_for_file: unrelated_type_equality_checks
 
-part of 'sample.dart';
+part of 'example.dart';
 
 // **************************************************************************
 // ControlGenerator
@@ -313,7 +313,7 @@ const _typeParametersGolden = r'''
 // ignore_for_file: avoid_positional_boolean_parameters
 // ignore_for_file: unrelated_type_equality_checks
 
-part of 'sample.dart';
+part of 'example.dart';
 
 // **************************************************************************
 // ControlGenerator
@@ -561,7 +561,7 @@ const _managedSubclassesGolden = r'''
 // ignore_for_file: avoid_positional_boolean_parameters
 // ignore_for_file: unrelated_type_equality_checks
 
-part of 'sample.dart';
+part of 'example.dart';
 
 // **************************************************************************
 // ControlGenerator
@@ -753,7 +753,7 @@ void main() {
   test('no type parameters', () async {
     await testBuilder(
       controlBuilder(.empty),
-      {'forui_internal_gen|test/src/sample.dart': _source},
+      {'forui_internal_gen|test/src/example.dart': _source},
       outputs: {'forui_internal_gen|test/src/sample.control.dart': _golden},
       readerWriter: readerWriter,
     );
@@ -762,7 +762,7 @@ void main() {
   test('with type parameters', () async {
     await testBuilder(
       controlBuilder(.empty),
-      {'forui_internal_gen|test/src/sample.dart': _typeParametersSource},
+      {'forui_internal_gen|test/src/example.dart': _typeParametersSource},
       outputs: {'forui_internal_gen|test/src/sample.control.dart': _typeParametersGolden},
       readerWriter: readerWriter,
     );
@@ -771,7 +771,7 @@ void main() {
   test('with managed subclasses', () async {
     await testBuilder(
       controlBuilder(.empty),
-      {'forui_internal_gen|test/src/sample.dart': _managedSubclassesSource},
+      {'forui_internal_gen|test/src/example.dart': _managedSubclassesSource},
       outputs: {'forui_internal_gen|test/src/sample.control.dart': _managedSubclassesGolden},
       readerWriter: readerWriter,
     );

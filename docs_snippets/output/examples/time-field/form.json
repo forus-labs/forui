@@ -1,0 +1,1045 @@
+{
+  "text": "class FormTimeFieldExample extends StatefulWidget {\n  @override\n  State<FormTimeFieldExample> createState() => _FormTimeFieldExampleState();\n}\n\nclass _FormTimeFieldExampleState extends State<FormTimeFieldExample> {\n  final _key = GlobalKey<FormState>();\n  late final _startController = FTimeFieldController(\n    validator: (time) => switch (time) {\n      null => 'Please select a start time.',\n      _ when time < .now() => 'Start Time must be in the future.',\n      _ => null,\n    },\n  );\n\n  @override\n  void dispose() {\n    _startController.dispose();\n    super.dispose();\n  }\n\n  @override\n  Widget build(BuildContext _) => Form(\n    key: _key,\n    child: Column(\n      children: [\n        FTimeField(\n          control: .managed(controller: _startController),\n          label: const Text('Start Time'),\n          description: const Text('Select a start time.'),\n          autovalidateMode: .disabled,\n        ),\n        const SizedBox(height: 20),\n        FTimeField(\n          control: .managed(\n            validator: (time) => switch (time) {\n              null => 'Please select an end time.',\n              _\n                  when _startController.value != null &&\n                      time < _startController.value! =>\n                'End Time must be after start time.',\n              _ => null,\n            },\n          ),\n          label: const Text('End Time'),\n          description: const Text('Select an end time.'),\n          autovalidateMode: .disabled,\n        ),\n        const SizedBox(height: 25),\n        FButton(\n          child: const Text('Submit'),\n          onPress: () {\n            if (_key.currentState!.validate()) {\n              // Form is valid, process the dates\n            }\n          },\n        ),\n      ],\n    ),\n  );\n}\n",
+  "highlights": [],
+  "links": [
+    {
+      "offset": 286,
+      "length": 20,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeFieldController/FTimeFieldController.html"
+    },
+    {
+      "offset": 312,
+      "length": 9,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeFieldController/validator.html"
+    },
+    {
+      "offset": 415,
+      "length": 3,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTime/FTime.now.html"
+    },
+    {
+      "offset": 543,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeFieldController/dispose.html"
+    },
+    {
+      "offset": 692,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.html"
+    },
+    {
+      "offset": 714,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/control.html"
+    },
+    {
+      "offset": 724,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeFieldControl/FTimeFieldControl.managed.html"
+    },
+    {
+      "offset": 732,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeFieldControl/FTimeFieldControl.managed.html"
+    },
+    {
+      "offset": 773,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/label.html"
+    },
+    {
+      "offset": 816,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/description.html"
+    },
+    {
+      "offset": 875,
+      "length": 16,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/autovalidateMode.html"
+    },
+    {
+      "offset": 959,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.html"
+    },
+    {
+      "offset": 981,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/control.html"
+    },
+    {
+      "offset": 991,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeFieldControl/FTimeFieldControl.managed.html"
+    },
+    {
+      "offset": 1012,
+      "length": 9,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeFieldControl/FTimeFieldControl.managed.html"
+    },
+    {
+      "offset": 1347,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/label.html"
+    },
+    {
+      "offset": 1388,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/description.html"
+    },
+    {
+      "offset": 1446,
+      "length": 16,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/autovalidateMode.html"
+    },
+    {
+      "offset": 1530,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+    },
+    {
+      "offset": 1549,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/child.html"
+    },
+    {
+      "offset": 1588,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/onPress.html"
+    }
+  ],
+  "tooltips": [
+    {
+      "offset": 286,
+      "length": 20,
+      "snippet": {
+        "text": "FTimeFieldController({\n  FTime? time,\n  String? Function(FTime?) validator = _defaultValidator,\n})\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 20,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeFieldController/FTimeFieldController.html"
+          },
+          {
+            "offset": 32,
+            "length": 4,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeFieldController/FTimeFieldController.html"
+          },
+          {
+            "offset": 25,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTime-class.html"
+          },
+          {
+            "offset": 65,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeFieldController/FTimeFieldController.html"
+          },
+          {
+            "offset": 57,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTime-class.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FTimeFieldController",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeFieldController-class.html"
+        }
+      }
+    },
+    {
+      "offset": 312,
+      "length": 10,
+      "snippet": {
+        "text": "{String? Function(FTime?) validator = _defaultValidator}",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 18,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTime-class.html"
+          }
+        ],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 324,
+      "length": 4,
+      "snippet": {
+        "text": "FTime? time",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTime-class.html"
+          }
+        ],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 415,
+      "length": 3,
+      "snippet": {
+        "text": "FTime.now()\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTime/FTime.now.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FTime",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTime-class.html"
+        }
+      }
+    },
+    {
+      "offset": 543,
+      "length": 7,
+      "snippet": {
+        "text": "void dispose()",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 5,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeFieldController/dispose.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FTimeFieldController",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeFieldController-class.html"
+        }
+      }
+    },
+    {
+      "offset": 692,
+      "length": 10,
+      "snippet": {
+        "text": "FTimeField({\n  FTimeFieldControl control,\n  FPopoverControl popoverControl,\n  FTimeFieldStyle Function(FTimeFieldStyle)? style,\n  bool hour24,\n  bool autofocus,\n  FocusNode? focusNode,\n  Widget Function(BuildContext, FTimeFieldStyle, Set<WidgetState>, Widget)\n  builder,\n  Widget Function(BuildContext, FTimeFieldStyle, Set<WidgetState>)?\n  prefixBuilder,\n  Widget Function(BuildContext, FTimeFieldStyle, Set<WidgetState>)?\n  suffixBuilder,\n  TextInputAction? textInputAction,\n  TextAlign textAlign,\n  TextAlignVertical? textAlignVertical,\n  TextDirection? textDirection,\n  bool expands,\n  void Function()? onEditingComplete,\n  void Function(FTime)? onSubmit,\n  MouseCursor? mouseCursor,\n  bool canRequestFocus,\n  Widget? label,\n  Widget? description,\n  bool enabled,\n  void Function(FTime?)? onSaved,\n  void Function()? onReset,\n  AutovalidateMode autovalidateMode,\n  String? forceErrorText,\n  Widget Function(BuildContext, String) errorBuilder,\n  Key? key,\n})\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.html"
+          },
+          {
+            "offset": 33,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.html"
+          },
+          {
+            "offset": 15,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeFieldControl-class.html"
+          },
+          {
+            "offset": 60,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.html"
+          },
+          {
+            "offset": 44,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverControl-class.html"
+          },
+          {
+            "offset": 121,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.html"
+          },
+          {
+            "offset": 78,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeFieldStyle-class.html"
+          },
+          {
+            "offset": 103,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeFieldStyle-class.html"
+          },
+          {
+            "offset": 135,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.html"
+          },
+          {
+            "offset": 150,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.html"
+          },
+          {
+            "offset": 174,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.html"
+          },
+          {
+            "offset": 262,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.html"
+          },
+          {
+            "offset": 217,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeFieldStyle-class.html"
+          },
+          {
+            "offset": 341,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.html"
+          },
+          {
+            "offset": 303,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeFieldStyle-class.html"
+          },
+          {
+            "offset": 426,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.html"
+          },
+          {
+            "offset": 388,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeFieldStyle-class.html"
+          },
+          {
+            "offset": 460,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.html"
+          },
+          {
+            "offset": 489,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.html"
+          },
+          {
+            "offset": 521,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.html"
+          },
+          {
+            "offset": 557,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.html"
+          },
+          {
+            "offset": 579,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.html"
+          },
+          {
+            "offset": 607,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.html"
+          },
+          {
+            "offset": 650,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.html"
+          },
+          {
+            "offset": 642,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTime-class.html"
+          },
+          {
+            "offset": 675,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.html"
+          },
+          {
+            "offset": 695,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.html"
+          },
+          {
+            "offset": 722,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.html"
+          },
+          {
+            "offset": 739,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.html"
+          },
+          {
+            "offset": 759,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.html"
+          },
+          {
+            "offset": 793,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.html"
+          },
+          {
+            "offset": 784,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTime-class.html"
+          },
+          {
+            "offset": 821,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.html"
+          },
+          {
+            "offset": 849,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.html"
+          },
+          {
+            "offset": 877,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.html"
+          },
+          {
+            "offset": 933,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.html"
+          },
+          {
+            "offset": 954,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FTimeField",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField-class.html"
+        }
+      }
+    },
+    {
+      "offset": 714,
+      "length": 8,
+      "snippet": {
+        "text": "{FTimeFieldControl control}",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 1,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeFieldControl-class.html"
+          }
+        ],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 724,
+      "length": 7,
+      "snippet": {
+        "text": "FTimeFieldControl.managed({\n  FTimeFieldController? controller,\n  FTime? initial,\n  String? Function(FTime?)? validator,\n  void Function(FTime?)? onChange,\n})\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 25,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeFieldControl/FTimeFieldControl.managed.html"
+          },
+          {
+            "offset": 52,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeFieldControl/FTimeFieldControl.managed.html"
+          },
+          {
+            "offset": 30,
+            "length": 21,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeFieldController-class.html"
+          },
+          {
+            "offset": 73,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeFieldControl/FTimeFieldControl.managed.html"
+          },
+          {
+            "offset": 66,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTime-class.html"
+          },
+          {
+            "offset": 110,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeFieldControl/FTimeFieldControl.managed.html"
+          },
+          {
+            "offset": 101,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTime-class.html"
+          },
+          {
+            "offset": 146,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeFieldControl/FTimeFieldControl.managed.html"
+          },
+          {
+            "offset": 137,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTime-class.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FTimeFieldControl",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeFieldControl-class.html"
+        }
+      }
+    },
+    {
+      "offset": 732,
+      "length": 11,
+      "snippet": {
+        "text": "{FTimeFieldController? controller}",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 1,
+            "length": 21,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeFieldController-class.html"
+          }
+        ],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 773,
+      "length": 6,
+      "snippet": {
+        "text": "{Widget? label}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 816,
+      "length": 12,
+      "snippet": {
+        "text": "{Widget? description}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 875,
+      "length": 17,
+      "snippet": {
+        "text": "{AutovalidateMode autovalidateMode}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 959,
+      "length": 10,
+      "snippet": {
+        "text": "FTimeField({\n  FTimeFieldControl control,\n  FPopoverControl popoverControl,\n  FTimeFieldStyle Function(FTimeFieldStyle)? style,\n  bool hour24,\n  bool autofocus,\n  FocusNode? focusNode,\n  Widget Function(BuildContext, FTimeFieldStyle, Set<WidgetState>, Widget)\n  builder,\n  Widget Function(BuildContext, FTimeFieldStyle, Set<WidgetState>)?\n  prefixBuilder,\n  Widget Function(BuildContext, FTimeFieldStyle, Set<WidgetState>)?\n  suffixBuilder,\n  TextInputAction? textInputAction,\n  TextAlign textAlign,\n  TextAlignVertical? textAlignVertical,\n  TextDirection? textDirection,\n  bool expands,\n  void Function()? onEditingComplete,\n  void Function(FTime)? onSubmit,\n  MouseCursor? mouseCursor,\n  bool canRequestFocus,\n  Widget? label,\n  Widget? description,\n  bool enabled,\n  void Function(FTime?)? onSaved,\n  void Function()? onReset,\n  AutovalidateMode autovalidateMode,\n  String? forceErrorText,\n  Widget Function(BuildContext, String) errorBuilder,\n  Key? key,\n})\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.html"
+          },
+          {
+            "offset": 33,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.html"
+          },
+          {
+            "offset": 15,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeFieldControl-class.html"
+          },
+          {
+            "offset": 60,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.html"
+          },
+          {
+            "offset": 44,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverControl-class.html"
+          },
+          {
+            "offset": 121,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.html"
+          },
+          {
+            "offset": 78,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeFieldStyle-class.html"
+          },
+          {
+            "offset": 103,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeFieldStyle-class.html"
+          },
+          {
+            "offset": 135,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.html"
+          },
+          {
+            "offset": 150,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.html"
+          },
+          {
+            "offset": 174,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.html"
+          },
+          {
+            "offset": 262,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.html"
+          },
+          {
+            "offset": 217,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeFieldStyle-class.html"
+          },
+          {
+            "offset": 341,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.html"
+          },
+          {
+            "offset": 303,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeFieldStyle-class.html"
+          },
+          {
+            "offset": 426,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.html"
+          },
+          {
+            "offset": 388,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeFieldStyle-class.html"
+          },
+          {
+            "offset": 460,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.html"
+          },
+          {
+            "offset": 489,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.html"
+          },
+          {
+            "offset": 521,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.html"
+          },
+          {
+            "offset": 557,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.html"
+          },
+          {
+            "offset": 579,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.html"
+          },
+          {
+            "offset": 607,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.html"
+          },
+          {
+            "offset": 650,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.html"
+          },
+          {
+            "offset": 642,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTime-class.html"
+          },
+          {
+            "offset": 675,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.html"
+          },
+          {
+            "offset": 695,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.html"
+          },
+          {
+            "offset": 722,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.html"
+          },
+          {
+            "offset": 739,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.html"
+          },
+          {
+            "offset": 759,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.html"
+          },
+          {
+            "offset": 793,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.html"
+          },
+          {
+            "offset": 784,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTime-class.html"
+          },
+          {
+            "offset": 821,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.html"
+          },
+          {
+            "offset": 849,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.html"
+          },
+          {
+            "offset": 877,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.html"
+          },
+          {
+            "offset": 933,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.html"
+          },
+          {
+            "offset": 954,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FTimeField",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField-class.html"
+        }
+      }
+    },
+    {
+      "offset": 981,
+      "length": 8,
+      "snippet": {
+        "text": "{FTimeFieldControl control}",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 1,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeFieldControl-class.html"
+          }
+        ],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 991,
+      "length": 7,
+      "snippet": {
+        "text": "FTimeFieldControl.managed({\n  FTimeFieldController? controller,\n  FTime? initial,\n  String? Function(FTime?)? validator,\n  void Function(FTime?)? onChange,\n})\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 25,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeFieldControl/FTimeFieldControl.managed.html"
+          },
+          {
+            "offset": 52,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeFieldControl/FTimeFieldControl.managed.html"
+          },
+          {
+            "offset": 30,
+            "length": 21,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeFieldController-class.html"
+          },
+          {
+            "offset": 73,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeFieldControl/FTimeFieldControl.managed.html"
+          },
+          {
+            "offset": 66,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTime-class.html"
+          },
+          {
+            "offset": 110,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeFieldControl/FTimeFieldControl.managed.html"
+          },
+          {
+            "offset": 101,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTime-class.html"
+          },
+          {
+            "offset": 146,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeFieldControl/FTimeFieldControl.managed.html"
+          },
+          {
+            "offset": 137,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTime-class.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FTimeFieldControl",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeFieldControl-class.html"
+        }
+      }
+    },
+    {
+      "offset": 1012,
+      "length": 10,
+      "snippet": {
+        "text": "{String? Function(FTime?)? validator}",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 18,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTime-class.html"
+          }
+        ],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 1024,
+      "length": 4,
+      "snippet": {
+        "text": "FTime? time",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTime-class.html"
+          }
+        ],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 1347,
+      "length": 6,
+      "snippet": {
+        "text": "{Widget? label}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 1388,
+      "length": 12,
+      "snippet": {
+        "text": "{Widget? description}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 1446,
+      "length": 17,
+      "snippet": {
+        "text": "{AutovalidateMode autovalidateMode}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 1530,
+      "length": 7,
+      "snippet": {
+        "text": "FButton({\n  required void Function()? onPress,\n  required Widget child,\n  FBaseButtonStyle Function(FButtonStyle) style = _primary,\n  void Function()? onLongPress,\n  void Function()? onSecondaryPress,\n  void Function()? onSecondaryLongPress,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  void Function(bool)? onHoverChange,\n  void Function(FWidgetStatesDelta)? onStateChange,\n  bool selected = false,\n  Map<ShortcutActivator, Intent>? shortcuts,\n  Map<Type, Action<Intent>>? actions,\n  MainAxisSize mainAxisSize = .max,\n  MainAxisAlignment mainAxisAlignment = .center,\n  CrossAxisAlignment crossAxisAlignment = .center,\n  TextBaseline? textBaseline,\n  Widget? prefix,\n  Widget? suffix,\n  Key? key,\n})\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 38,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 65,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 114,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 74,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FBaseButtonStyle-class.html"
+          },
+          {
+            "offset": 100,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButtonStyle-class.html"
+          },
+          {
+            "offset": 151,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 183,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 220,
+            "length": 20,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 249,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 281,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 315,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 353,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 405,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 384,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStatesDelta-class.html"
+          },
+          {
+            "offset": 427,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 479,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 519,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 543,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 584,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 634,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 680,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 704,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 722,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 737,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FButton",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton-class.html"
+        }
+      }
+    },
+    {
+      "offset": 1549,
+      "length": 6,
+      "snippet": {
+        "text": "{required Widget child}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 1588,
+      "length": 8,
+      "snippet": {
+        "text": "{required void Function()? onPress}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    }
+  ]
+}

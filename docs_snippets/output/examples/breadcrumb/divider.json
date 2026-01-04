@@ -1,0 +1,884 @@
+{
+  "text": "@override\nWidget build(BuildContext _) => Row(\n  mainAxisAlignment: .center,\n  children: [\n    FBreadcrumb(\n      divider: Transform.rotate(\n        angle: -60,\n        child: const Icon(FIcons.slash, size: 14),\n      ),\n      children: [\n        FBreadcrumbItem(onPress: () {}, child: const Text('Forui')),\n        FBreadcrumbItem.collapsed(\n          menu: [\n            .group(\n              children: [\n                .item(title: const Text('Documentation'), onPress: () {}),\n                .item(title: const Text('Themes'), onPress: () {}),\n              ],\n            ),\n          ],\n        ),\n        FBreadcrumbItem(onPress: () {}, child: const Text('Layout')),\n        const FBreadcrumbItem(current: true, child: Text('Widgets')),\n      ],\n    ),\n  ],\n);\n",
+  "highlights": [
+    {
+      "start": 6,
+      "end": 9
+    }
+  ],
+  "links": [
+    {
+      "offset": 95,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumb/FBreadcrumb.html"
+    },
+    {
+      "offset": 114,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumb/divider.html"
+    },
+    {
+      "offset": 187,
+      "length": 12,
+      "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/slash.html"
+    },
+    {
+      "offset": 227,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumb/children.html"
+    },
+    {
+      "offset": 247,
+      "length": 15,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.html"
+    },
+    {
+      "offset": 263,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.html"
+    },
+    {
+      "offset": 279,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.html"
+    },
+    {
+      "offset": 316,
+      "length": 25,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.collapsed.html"
+    },
+    {
+      "offset": 353,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.collapsed.html"
+    },
+    {
+      "offset": 374,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroup/FItemGroup.group.html"
+    },
+    {
+      "offset": 395,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroup/FItemGroup.group.html"
+    },
+    {
+      "offset": 424,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemMixin/item.html"
+    },
+    {
+      "offset": 429,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemMixin/item.html"
+    },
+    {
+      "offset": 465,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemMixin/item.html"
+    },
+    {
+      "offset": 499,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemMixin/item.html"
+    },
+    {
+      "offset": 504,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemMixin/item.html"
+    },
+    {
+      "offset": 533,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemMixin/item.html"
+    },
+    {
+      "offset": 614,
+      "length": 15,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.html"
+    },
+    {
+      "offset": 630,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.html"
+    },
+    {
+      "offset": 646,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.html"
+    },
+    {
+      "offset": 690,
+      "length": 15,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.html"
+    },
+    {
+      "offset": 706,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.html"
+    },
+    {
+      "offset": 721,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.html"
+    }
+  ],
+  "tooltips": [
+    {
+      "offset": 95,
+      "length": 11,
+      "snippet": {
+        "text": "FBreadcrumb({\n  required List<Widget> children,\n  FBreadcrumbStyle Function(FBreadcrumbStyle)? style,\n  Widget? divider,\n  Key? key,\n})\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumb/FBreadcrumb.html"
+          },
+          {
+            "offset": 38,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumb/FBreadcrumb.html"
+          },
+          {
+            "offset": 95,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumb/FBreadcrumb.html"
+          },
+          {
+            "offset": 50,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbStyle-class.html"
+          },
+          {
+            "offset": 76,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbStyle-class.html"
+          },
+          {
+            "offset": 112,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumb/FBreadcrumb.html"
+          },
+          {
+            "offset": 128,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumb/FBreadcrumb.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FBreadcrumb",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumb-class.html"
+        }
+      }
+    },
+    {
+      "offset": 114,
+      "length": 8,
+      "snippet": {
+        "text": "{Widget? divider}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 187,
+      "length": 12,
+      "snippet": {
+        "text": "IconData slash",
+        "highlights": [],
+        "links": [],
+        "tooltips": [],
+        "container": {
+          "name": "FIcons",
+          "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons-class.html"
+        }
+      }
+    },
+    {
+      "offset": 227,
+      "length": 9,
+      "snippet": {
+        "text": "{required List<Widget> children}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 247,
+      "length": 15,
+      "snippet": {
+        "text": "FBreadcrumbItem({\n  required Widget child,\n  bool current,\n  bool autofocus,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  void Function(bool)? onHoverChange,\n  void Function(Set<WidgetState>)? onStateChange,\n  void Function()? onPress,\n  Key? key,\n})\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.html"
+          },
+          {
+            "offset": 36,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.html"
+          },
+          {
+            "offset": 50,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.html"
+          },
+          {
+            "offset": 66,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.html"
+          },
+          {
+            "offset": 90,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.html"
+          },
+          {
+            "offset": 124,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.html"
+          },
+          {
+            "offset": 162,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.html"
+          },
+          {
+            "offset": 212,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.html"
+          },
+          {
+            "offset": 246,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.html"
+          },
+          {
+            "offset": 262,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FBreadcrumbItem",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem-class.html"
+        }
+      }
+    },
+    {
+      "offset": 263,
+      "length": 8,
+      "snippet": {
+        "text": "{void Function()? onPress}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 279,
+      "length": 6,
+      "snippet": {
+        "text": "{required Widget child}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 316,
+      "length": 25,
+      "snippet": {
+        "text": "FBreadcrumbItem.collapsed({\n  required List<FItemGroup> menu,\n  FPopoverMenuStyle Function(FPopoverMenuStyle)? popoverMenuStyle,\n  FPopoverControl popoverControl,\n  ScrollController? scrollController,\n  double? cacheExtent,\n  double maxHeight,\n  DragStartBehavior dragStartBehavior,\n  FItemDivider divider,\n  AlignmentGeometry menuAnchor,\n  AlignmentGeometry childAnchor,\n  FPortalSpacing spacing,\n  FPortalOverflow overflow,\n  Offset offset,\n  FPopoverHideRegion hideRegion,\n  void Function()? onTapHide,\n  bool autofocus,\n  FocusScopeNode? focusNode,\n  void Function(bool)? onFocusChange,\n  void Function(bool)? onHoverChange,\n  void Function(Set<WidgetState>)? onStateChange,\n  TraversalEdgeBehavior traversalEdgeBehavior,\n  String? semanticsLabel,\n  Key? key,\n})\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 25,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.collapsed.html"
+          },
+          {
+            "offset": 56,
+            "length": 4,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.collapsed.html"
+          },
+          {
+            "offset": 44,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroup-class.html"
+          },
+          {
+            "offset": 111,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.collapsed.html"
+          },
+          {
+            "offset": 64,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover_menu/FPopoverMenuStyle-class.html"
+          },
+          {
+            "offset": 91,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover_menu/FPopoverMenuStyle-class.html"
+          },
+          {
+            "offset": 147,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.collapsed.html"
+          },
+          {
+            "offset": 131,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverControl-class.html"
+          },
+          {
+            "offset": 183,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.collapsed.html"
+          },
+          {
+            "offset": 211,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.collapsed.html"
+          },
+          {
+            "offset": 233,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.collapsed.html"
+          },
+          {
+            "offset": 264,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.collapsed.html"
+          },
+          {
+            "offset": 298,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.collapsed.html"
+          },
+          {
+            "offset": 285,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemDivider.html"
+          },
+          {
+            "offset": 327,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.collapsed.html"
+          },
+          {
+            "offset": 359,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.collapsed.html"
+          },
+          {
+            "offset": 389,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.collapsed.html"
+          },
+          {
+            "offset": 374,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FPortalSpacing-class.html"
+          },
+          {
+            "offset": 416,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.collapsed.html"
+          },
+          {
+            "offset": 400,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FPortalOverflow-class.html"
+          },
+          {
+            "offset": 435,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.collapsed.html"
+          },
+          {
+            "offset": 464,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.collapsed.html"
+          },
+          {
+            "offset": 445,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverHideRegion.html"
+          },
+          {
+            "offset": 495,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.collapsed.html"
+          },
+          {
+            "offset": 513,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.collapsed.html"
+          },
+          {
+            "offset": 542,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.collapsed.html"
+          },
+          {
+            "offset": 576,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.collapsed.html"
+          },
+          {
+            "offset": 614,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.collapsed.html"
+          },
+          {
+            "offset": 664,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.collapsed.html"
+          },
+          {
+            "offset": 703,
+            "length": 21,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.collapsed.html"
+          },
+          {
+            "offset": 736,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.collapsed.html"
+          },
+          {
+            "offset": 759,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.collapsed.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FBreadcrumbItem",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem-class.html"
+        }
+      }
+    },
+    {
+      "offset": 353,
+      "length": 5,
+      "snippet": {
+        "text": "{required List<FItemGroup> menu}",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 15,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroup-class.html"
+          }
+        ],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 374,
+      "length": 5,
+      "snippet": {
+        "text": "FItemGroup.group({\n  required List<FItemMixin> children,\n  FItemGroupStyle Function(FItemGroupStyle)? style,\n  ScrollController? scrollController,\n  double? cacheExtent,\n  double maxHeight = .infinity,\n  DragStartBehavior dragStartBehavior = .start,\n  ScrollPhysics physics = const ClampingScrollPhysics(),\n  bool? enabled,\n  FItemDivider divider = .none,\n  String? semanticsLabel,\n  Key? key,\n})\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroup/FItemGroup.group.html"
+          },
+          {
+            "offset": 47,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroup/FItemGroup.group.html"
+          },
+          {
+            "offset": 35,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemMixin-mixin.html"
+          },
+          {
+            "offset": 102,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroup/FItemGroup.group.html"
+          },
+          {
+            "offset": 59,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroupStyle-class.html"
+          },
+          {
+            "offset": 84,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroupStyle-class.html"
+          },
+          {
+            "offset": 129,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroup/FItemGroup.group.html"
+          },
+          {
+            "offset": 157,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroup/FItemGroup.group.html"
+          },
+          {
+            "offset": 179,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroup/FItemGroup.group.html"
+          },
+          {
+            "offset": 222,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroup/FItemGroup.group.html"
+          },
+          {
+            "offset": 266,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroup/FItemGroup.group.html"
+          },
+          {
+            "offset": 315,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroup/FItemGroup.group.html"
+          },
+          {
+            "offset": 339,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroup/FItemGroup.group.html"
+          },
+          {
+            "offset": 326,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemDivider.html"
+          },
+          {
+            "offset": 350,
+            "length": 4,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemDivider.html#none"
+          },
+          {
+            "offset": 366,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroup/FItemGroup.group.html"
+          },
+          {
+            "offset": 389,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroup/FItemGroup.group.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FItemGroup",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroup-class.html"
+        }
+      }
+    },
+    {
+      "offset": 395,
+      "length": 9,
+      "snippet": {
+        "text": "{required List<FItemMixin> children}",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 15,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemMixin-mixin.html"
+          }
+        ],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 424,
+      "length": 4,
+      "snippet": {
+        "text": "FItem item({\n  required Widget title,\n  FItemStyle Function(FItemStyle)? style,\n  bool? enabled,\n  bool selected = false,\n  String? semanticsLabel,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  void Function(bool)? onHoverChange,\n  void Function(FWidgetStatesDelta)? onStateChange,\n  void Function()? onPress,\n  void Function()? onLongPress,\n  void Function()? onSecondaryPress,\n  void Function()? onSecondaryLongPress,\n  Map<ShortcutActivator, Intent>? shortcuts,\n  Map<Type, Action<Intent>>? actions,\n  Widget? prefix,\n  Widget? subtitle,\n  Widget? details,\n  Widget? suffix,\n  Key? key,\n})",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem-class.html"
+          },
+          {
+            "offset": 40,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemStyle-class.html"
+          },
+          {
+            "offset": 60,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemStyle-class.html"
+          },
+          {
+            "offset": 290,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStatesDelta-class.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FItem",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem-class.html"
+        }
+      }
+    },
+    {
+      "offset": 429,
+      "length": 6,
+      "snippet": {
+        "text": "{required Widget title}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 465,
+      "length": 8,
+      "snippet": {
+        "text": "{void Function()? onPress}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 499,
+      "length": 4,
+      "snippet": {
+        "text": "FItem item({\n  required Widget title,\n  FItemStyle Function(FItemStyle)? style,\n  bool? enabled,\n  bool selected = false,\n  String? semanticsLabel,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  void Function(bool)? onHoverChange,\n  void Function(FWidgetStatesDelta)? onStateChange,\n  void Function()? onPress,\n  void Function()? onLongPress,\n  void Function()? onSecondaryPress,\n  void Function()? onSecondaryLongPress,\n  Map<ShortcutActivator, Intent>? shortcuts,\n  Map<Type, Action<Intent>>? actions,\n  Widget? prefix,\n  Widget? subtitle,\n  Widget? details,\n  Widget? suffix,\n  Key? key,\n})",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem-class.html"
+          },
+          {
+            "offset": 40,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemStyle-class.html"
+          },
+          {
+            "offset": 60,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemStyle-class.html"
+          },
+          {
+            "offset": 290,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStatesDelta-class.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FItem",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem-class.html"
+        }
+      }
+    },
+    {
+      "offset": 504,
+      "length": 6,
+      "snippet": {
+        "text": "{required Widget title}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 533,
+      "length": 8,
+      "snippet": {
+        "text": "{void Function()? onPress}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 614,
+      "length": 15,
+      "snippet": {
+        "text": "FBreadcrumbItem({\n  required Widget child,\n  bool current,\n  bool autofocus,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  void Function(bool)? onHoverChange,\n  void Function(Set<WidgetState>)? onStateChange,\n  void Function()? onPress,\n  Key? key,\n})\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.html"
+          },
+          {
+            "offset": 36,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.html"
+          },
+          {
+            "offset": 50,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.html"
+          },
+          {
+            "offset": 66,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.html"
+          },
+          {
+            "offset": 90,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.html"
+          },
+          {
+            "offset": 124,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.html"
+          },
+          {
+            "offset": 162,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.html"
+          },
+          {
+            "offset": 212,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.html"
+          },
+          {
+            "offset": 246,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.html"
+          },
+          {
+            "offset": 262,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FBreadcrumbItem",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem-class.html"
+        }
+      }
+    },
+    {
+      "offset": 630,
+      "length": 8,
+      "snippet": {
+        "text": "{void Function()? onPress}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 646,
+      "length": 6,
+      "snippet": {
+        "text": "{required Widget child}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 690,
+      "length": 15,
+      "snippet": {
+        "text": "FBreadcrumbItem({\n  required Widget child,\n  bool current,\n  bool autofocus,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  void Function(bool)? onHoverChange,\n  void Function(Set<WidgetState>)? onStateChange,\n  void Function()? onPress,\n  Key? key,\n})\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.html"
+          },
+          {
+            "offset": 36,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.html"
+          },
+          {
+            "offset": 50,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.html"
+          },
+          {
+            "offset": 66,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.html"
+          },
+          {
+            "offset": 90,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.html"
+          },
+          {
+            "offset": 124,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.html"
+          },
+          {
+            "offset": 162,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.html"
+          },
+          {
+            "offset": 212,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.html"
+          },
+          {
+            "offset": 246,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.html"
+          },
+          {
+            "offset": 262,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem/FBreadcrumbItem.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FBreadcrumbItem",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbItem-class.html"
+        }
+      }
+    },
+    {
+      "offset": 706,
+      "length": 8,
+      "snippet": {
+        "text": "{bool current}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 721,
+      "length": 6,
+      "snippet": {
+        "text": "{required Widget child}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    }
+  ]
+}

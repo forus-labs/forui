@@ -1,0 +1,58 @@
+{
+  "text": "@override\nWidget build(BuildContext context) {\n  final brand = context.theme.extension<BrandColor>();\n  return ColoredBox(color: brand.color);\n}\n",
+  "highlights": [],
+  "links": [
+    {
+      "offset": 77,
+      "length": 9,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/extension.html"
+    },
+    {
+      "offset": 71,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext/theme.html"
+    }
+  ],
+  "tooltips": [
+    {
+      "offset": 77,
+      "length": 9,
+      "snippet": {
+        "text": "T extension<T extends Object>()",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 2,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/extension.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FThemeData",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+        }
+      }
+    },
+    {
+      "offset": 71,
+      "length": 5,
+      "snippet": {
+        "text": "FThemeData get theme",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FThemeBuildContext",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext.html"
+        }
+      }
+    }
+  ]
+}

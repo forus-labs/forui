@@ -1,0 +1,12 @@
+{
+  "text": "extension CustomBreakpoints on FBreakpoints {\n  double get custom => 42;\n}\n",
+  "highlights": [],
+  "links": [
+    {
+      "offset": 31,
+      "length": 12,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FBreakpoints-class.html"
+    }
+  ],
+  "tooltips": []
+}

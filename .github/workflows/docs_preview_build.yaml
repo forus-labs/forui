@@ -6,30 +6,30 @@ on:
       - 'docs_preview_build.yaml'
       - 'docs_preview_deploy.yaml'
       - 'docs/**'
-      - 'samples/**'
+      - 'docs_snippets/**'
 
 jobs:
   build:
-    name: Build Docs & Samples
+    name: Build Docs & Snippets
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
       - uses: subosito/flutter-action@v2.21.0
 
-      # Build samples
+      # Build docs_snippets
       - working-directory: forui
         run: |
           flutter pub get
           dart run build_runner build --delete-conflicting-outputs
-      - working-directory: ./samples
+      - working-directory: ./docs_snippets
         run: |
           flutter pub get
           dart run build_runner build --delete-conflicting-outputs
           flutter build web
       - uses: actions/upload-artifact@v6
         with:
-          name: samples-build
-          path: ./samples/build/web
+          name: docs-snippets-build
+          path: ./docs_snippets/build/web
           retention-days: 1
 
       # Prepare branch & sha info

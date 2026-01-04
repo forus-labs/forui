@@ -1,0 +1,264 @@
+{
+  "text": "\nimport 'package:flutter/material.dart';\nimport 'package:forui/forui.dart';\n\nimport 'theme/theme.dart';\n\nvoid main() {\n  runApp(const Application());\n}\n\nclass Application extends StatelessWidget {\n  const Application({super.key});\n\n  @override\n  Widget build(BuildContext context) {\n    // Assign the generated theme to `theme`.\n    final theme = zincLight;\n\n    return MaterialApp(\n      localizationsDelegates: FLocalizations.localizationsDelegates,\n      supportedLocales: FLocalizations.supportedLocales,\n      builder: (_, child) => FAnimatedTheme(data: theme, child: child!),\n      theme: theme.toApproximateMaterialTheme(),\n      home: const FScaffold(\n        // TODO: replace with your widget.\n        child: Placeholder(),\n      ),\n    );\n  }\n}\n",
+  "highlights": [
+    {
+      "start": 5,
+      "end": 5
+    },
+    {
+      "start": 17,
+      "end": 17
+    },
+    {
+      "start": 22,
+      "end": 23
+    }
+  ],
+  "links": [
+    {
+      "offset": 413,
+      "length": 37,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.localizations/FLocalizations/localizationsDelegates.html"
+    },
+    {
+      "offset": 476,
+      "length": 31,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.localizations/FLocalizations/supportedLocales.html"
+    },
+    {
+      "offset": 538,
+      "length": 14,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FAnimatedTheme/FAnimatedTheme.html"
+    },
+    {
+      "offset": 553,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FAnimatedTheme/data.html"
+    },
+    {
+      "offset": 566,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FAnimatedTheme/child.html"
+    },
+    {
+      "offset": 601,
+      "length": 26,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/toApproximateMaterialTheme.html"
+    },
+    {
+      "offset": 649,
+      "length": 9,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.scaffold/FScaffold/FScaffold.html"
+    },
+    {
+      "offset": 711,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.scaffold/FScaffold/child.html"
+    }
+  ],
+  "tooltips": [
+    {
+      "offset": 413,
+      "length": 37,
+      "snippet": {
+        "text": "List<LocalizationsDelegate<dynamic>> localizationsDelegates",
+        "highlights": [],
+        "links": [],
+        "tooltips": [],
+        "container": {
+          "name": "FLocalizations",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.localizations/FLocalizations-class.html"
+        }
+      }
+    },
+    {
+      "offset": 476,
+      "length": 31,
+      "snippet": {
+        "text": "List<Locale> supportedLocales",
+        "highlights": [],
+        "links": [],
+        "tooltips": [],
+        "container": {
+          "name": "FLocalizations",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.localizations/FLocalizations-class.html"
+        }
+      }
+    },
+    {
+      "offset": 525,
+      "length": 1,
+      "snippet": {
+        "text": "BuildContext _",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 528,
+      "length": 5,
+      "snippet": {
+        "text": "Widget? child",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 538,
+      "length": 14,
+      "snippet": {
+        "text": "FAnimatedTheme({\n  required FThemeData data,\n  required Widget child,\n  FAnimatedThemeMotion motion = const FAnimatedThemeMotion(),\n  void Function()? onEnd,\n  Key? key,\n})\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FAnimatedTheme/FAnimatedTheme.html"
+          },
+          {
+            "offset": 39,
+            "length": 4,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FAnimatedTheme/FAnimatedTheme.html"
+          },
+          {
+            "offset": 63,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FAnimatedTheme/FAnimatedTheme.html"
+          },
+          {
+            "offset": 93,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FAnimatedTheme/FAnimatedTheme.html"
+          },
+          {
+            "offset": 151,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FAnimatedTheme/FAnimatedTheme.html"
+          },
+          {
+            "offset": 165,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FAnimatedTheme/FAnimatedTheme.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FAnimatedTheme",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FAnimatedTheme-class.html"
+        }
+      }
+    },
+    {
+      "offset": 553,
+      "length": 5,
+      "snippet": {
+        "text": "{required FThemeData data}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 566,
+      "length": 6,
+      "snippet": {
+        "text": "{required Widget child}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 601,
+      "length": 26,
+      "snippet": {
+        "text": "ThemeData toApproximateMaterialTheme()",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 10,
+            "length": 26,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/toApproximateMaterialTheme.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FThemeData",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+        }
+      }
+    },
+    {
+      "offset": 649,
+      "length": 9,
+      "snippet": {
+        "text": "FScaffold({\n  required Widget child,\n  FScaffoldStyle Function(FScaffoldStyle)? scaffoldStyle,\n  Widget? header,\n  Widget? sidebar,\n  Widget? footer,\n  bool childPad = true,\n  bool resizeToAvoidBottomInset = true,\n  Key? key,\n})\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.scaffold/FScaffold/FScaffold.html"
+          },
+          {
+            "offset": 30,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.scaffold/FScaffold/FScaffold.html"
+          },
+          {
+            "offset": 80,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.scaffold/FScaffold/FScaffold.html"
+          },
+          {
+            "offset": 105,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.scaffold/FScaffold/FScaffold.html"
+          },
+          {
+            "offset": 123,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.scaffold/FScaffold/FScaffold.html"
+          },
+          {
+            "offset": 142,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.scaffold/FScaffold/FScaffold.html"
+          },
+          {
+            "offset": 157,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.scaffold/FScaffold/FScaffold.html"
+          },
+          {
+            "offset": 181,
+            "length": 24,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.scaffold/FScaffold/FScaffold.html"
+          },
+          {
+            "offset": 221,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.scaffold/FScaffold/FScaffold.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FScaffold",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.scaffold/FScaffold-class.html"
+        }
+      }
+    },
+    {
+      "offset": 711,
+      "length": 6,
+      "snippet": {
+        "text": "{required Widget child}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    }
+  ]
+}

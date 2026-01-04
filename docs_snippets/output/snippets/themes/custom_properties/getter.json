@@ -1,0 +1,38 @@
+{
+  "text": "extension BrandColorExtension on FThemeData {\n  BrandColor get brand => extension<BrandColor>();\n}\n",
+  "highlights": [],
+  "links": [
+    {
+      "offset": 33,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+    },
+    {
+      "offset": 72,
+      "length": 9,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/extension.html"
+    }
+  ],
+  "tooltips": [
+    {
+      "offset": 72,
+      "length": 9,
+      "snippet": {
+        "text": "T extension<T extends Object>()",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 2,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/extension.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FThemeData",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+        }
+      }
+    }
+  ]
+}

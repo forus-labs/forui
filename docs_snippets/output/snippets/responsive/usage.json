@@ -1,0 +1,96 @@
+{
+  "text": "@override\nWidget build(BuildContext context) {\n  final breakpoints = context.theme.breakpoints;\n  final width = MediaQuery.sizeOf(context).width;\n\n  return switch (width) {\n    _ when width < breakpoints.sm => const MobileWidget(),\n    _ when width < breakpoints.lg => const TabletWidget(),\n    _ => const DesktopWidget(),\n  };\n}\n",
+  "highlights": [],
+  "links": [
+    {
+      "offset": 83,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/breakpoints.html"
+    },
+    {
+      "offset": 77,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext/theme.html"
+    },
+    {
+      "offset": 204,
+      "length": 2,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FBreakpoints/sm.html"
+    },
+    {
+      "offset": 263,
+      "length": 2,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FBreakpoints/lg.html"
+    }
+  ],
+  "tooltips": [
+    {
+      "offset": 83,
+      "length": 11,
+      "snippet": {
+        "text": "FBreakpoints breakpoints",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FBreakpoints-class.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FThemeData",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+        }
+      }
+    },
+    {
+      "offset": 77,
+      "length": 5,
+      "snippet": {
+        "text": "FThemeData get theme",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FThemeBuildContext",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext.html"
+        }
+      }
+    },
+    {
+      "offset": 204,
+      "length": 2,
+      "snippet": {
+        "text": "double sm",
+        "highlights": [],
+        "links": [],
+        "tooltips": [],
+        "container": {
+          "name": "FBreakpoints",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FBreakpoints-class.html"
+        }
+      }
+    },
+    {
+      "offset": 263,
+      "length": 2,
+      "snippet": {
+        "text": "double lg",
+        "highlights": [],
+        "links": [],
+        "tooltips": [],
+        "container": {
+          "name": "FBreakpoints",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FBreakpoints-class.html"
+        }
+      }
+    }
+  ]
+}

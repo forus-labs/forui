@@ -1,0 +1,440 @@
+{
+  "text": "@override\nWidget build(BuildContext context) => FTappable(\n  builder: (context, states, child) => Container(\n    decoration: BoxDecoration(\n      color:\n          (states.contains(WidgetState.hovered) ||\n              states.contains(WidgetState.pressed))\n          ? context.theme.colors.secondary\n          : context.theme.colors.background,\n      borderRadius: .circular(8),\n      border: .all(color: context.theme.colors.border),\n    ),\n    padding: const .symmetric(vertical: 8.0, horizontal: 12),\n    child: child!,\n  ),\n  child: const Text('Tappable'),\n  onPress: () {},\n);\n",
+  "highlights": [],
+  "links": [
+    {
+      "offset": 48,
+      "length": 9,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappable/FTappable.html"
+    },
+    {
+      "offset": 61,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappable/builder.html"
+    },
+    {
+      "offset": 289,
+      "length": 9,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors/secondary.html"
+    },
+    {
+      "offset": 282,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/colors.html"
+    },
+    {
+      "offset": 276,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext/theme.html"
+    },
+    {
+      "offset": 332,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors/background.html"
+    },
+    {
+      "offset": 325,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/colors.html"
+    },
+    {
+      "offset": 319,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext/theme.html"
+    },
+    {
+      "offset": 425,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors/border.html"
+    },
+    {
+      "offset": 418,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/colors.html"
+    },
+    {
+      "offset": 412,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext/theme.html"
+    },
+    {
+      "offset": 529,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappable/child.html"
+    },
+    {
+      "offset": 562,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappable/onPress.html"
+    }
+  ],
+  "tooltips": [
+    {
+      "offset": 48,
+      "length": 9,
+      "snippet": {
+        "text": "FTappable({\n  FTappableStyle Function(FTappableStyle)? style,\n  FFocusedOutlineStyle Function(FFocusedOutlineStyle)? focusedOutlineStyle,\n  String? semanticsLabel,\n  bool excludeSemantics,\n  bool autofocus,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  void Function(bool)? onHoverChange,\n  void Function(FWidgetStatesDelta)? onStateChange,\n  bool selected,\n  HitTestBehavior behavior,\n  void Function()? onPress,\n  void Function()? onLongPress,\n  void Function()? onSecondaryPress,\n  void Function()? onSecondaryLongPress,\n  Map<ShortcutActivator, Intent>? shortcuts,\n  Map<Type, Action<Intent>>? actions,\n  Widget Function(BuildContext, Set<WidgetState>, Widget?) builder,\n  Widget? child,\n  Key? key,\n})\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappable/FTappable.html"
+          },
+          {
+            "offset": 55,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappable/FTappable.html"
+          },
+          {
+            "offset": 14,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappableStyle-class.html"
+          },
+          {
+            "offset": 38,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappableStyle-class.html"
+          },
+          {
+            "offset": 117,
+            "length": 19,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappable/FTappable.html"
+          },
+          {
+            "offset": 64,
+            "length": 20,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FFocusedOutlineStyle-class.html"
+          },
+          {
+            "offset": 94,
+            "length": 20,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FFocusedOutlineStyle-class.html"
+          },
+          {
+            "offset": 148,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappable/FTappable.html"
+          },
+          {
+            "offset": 171,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappable/FTappable.html"
+          },
+          {
+            "offset": 196,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappable/FTappable.html"
+          },
+          {
+            "offset": 220,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappable/FTappable.html"
+          },
+          {
+            "offset": 254,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappable/FTappable.html"
+          },
+          {
+            "offset": 292,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappable/FTappable.html"
+          },
+          {
+            "offset": 344,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappable/FTappable.html"
+          },
+          {
+            "offset": 323,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStatesDelta-class.html"
+          },
+          {
+            "offset": 366,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappable/FTappable.html"
+          },
+          {
+            "offset": 394,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappable/FTappable.html"
+          },
+          {
+            "offset": 423,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappable/FTappable.html"
+          },
+          {
+            "offset": 451,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappable/FTappable.html"
+          },
+          {
+            "offset": 483,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappable/FTappable.html"
+          },
+          {
+            "offset": 520,
+            "length": 20,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappable/FTappable.html"
+          },
+          {
+            "offset": 576,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappable/FTappable.html"
+          },
+          {
+            "offset": 616,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappable/FTappable.html"
+          },
+          {
+            "offset": 684,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappable/FTappable.html"
+          },
+          {
+            "offset": 703,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappable/FTappable.html"
+          },
+          {
+            "offset": 717,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappable/FTappable.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FTappable",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappable-class.html"
+        }
+      }
+    },
+    {
+      "offset": 61,
+      "length": 8,
+      "snippet": {
+        "text": "{Widget Function(BuildContext, Set<WidgetState>, Widget?) builder}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 71,
+      "length": 7,
+      "snippet": {
+        "text": "BuildContext context",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 80,
+      "length": 6,
+      "snippet": {
+        "text": "Set<WidgetState> states",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 88,
+      "length": 5,
+      "snippet": {
+        "text": "Widget? child",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 289,
+      "length": 9,
+      "snippet": {
+        "text": "Color secondary",
+        "highlights": [],
+        "links": [],
+        "tooltips": [],
+        "container": {
+          "name": "FColors",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors-class.html"
+        }
+      }
+    },
+    {
+      "offset": 282,
+      "length": 6,
+      "snippet": {
+        "text": "FColors colors",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors-class.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FThemeData",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+        }
+      }
+    },
+    {
+      "offset": 276,
+      "length": 5,
+      "snippet": {
+        "text": "FThemeData get theme",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FThemeBuildContext",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext.html"
+        }
+      }
+    },
+    {
+      "offset": 332,
+      "length": 10,
+      "snippet": {
+        "text": "Color background",
+        "highlights": [],
+        "links": [],
+        "tooltips": [],
+        "container": {
+          "name": "FColors",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors-class.html"
+        }
+      }
+    },
+    {
+      "offset": 325,
+      "length": 6,
+      "snippet": {
+        "text": "FColors colors",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors-class.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FThemeData",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+        }
+      }
+    },
+    {
+      "offset": 319,
+      "length": 5,
+      "snippet": {
+        "text": "FThemeData get theme",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FThemeBuildContext",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext.html"
+        }
+      }
+    },
+    {
+      "offset": 425,
+      "length": 6,
+      "snippet": {
+        "text": "Color border",
+        "highlights": [],
+        "links": [],
+        "tooltips": [],
+        "container": {
+          "name": "FColors",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors-class.html"
+        }
+      }
+    },
+    {
+      "offset": 418,
+      "length": 6,
+      "snippet": {
+        "text": "FColors colors",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors-class.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FThemeData",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+        }
+      }
+    },
+    {
+      "offset": 412,
+      "length": 5,
+      "snippet": {
+        "text": "FThemeData get theme",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FThemeBuildContext",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext.html"
+        }
+      }
+    },
+    {
+      "offset": 529,
+      "length": 6,
+      "snippet": {
+        "text": "{Widget? child}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 562,
+      "length": 8,
+      "snippet": {
+        "text": "{void Function()? onPress}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    }
+  ]
+}

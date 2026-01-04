@@ -1,0 +1,256 @@
+{
+  "text": "@override\nWidget build(BuildContext _) => FTile(\n  prefix: const Icon(FIcons.user),\n  title: const Text('Personalization'),\n  suffix: const Icon(FIcons.chevronRight),\n  onPress: () {},\n);\n",
+  "highlights": [
+    {
+      "start": 6,
+      "end": 6
+    }
+  ],
+  "links": [
+    {
+      "offset": 42,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTile/FTile.html"
+    },
+    {
+      "offset": 51,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTile/FTile.html"
+    },
+    {
+      "offset": 70,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/user.html"
+    },
+    {
+      "offset": 86,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTile/FTile.html"
+    },
+    {
+      "offset": 126,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTile/FTile.html"
+    },
+    {
+      "offset": 145,
+      "length": 19,
+      "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/chevronRight.html"
+    },
+    {
+      "offset": 169,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTile/onPress.html"
+    }
+  ],
+  "tooltips": [
+    {
+      "offset": 42,
+      "length": 5,
+      "snippet": {
+        "text": "FTile({\n  required Widget title,\n  FItemStyle Function(FItemStyle)? style,\n  bool? enabled,\n  bool selected = false,\n  String? semanticsLabel,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  void Function(bool)? onHoverChange,\n  void Function(FWidgetStatesDelta)? onStateChange,\n  void Function()? onPress,\n  void Function()? onLongPress,\n  void Function()? onSecondaryPress,\n  void Function()? onSecondaryLongPress,\n  Map<ShortcutActivator, Intent>? shortcuts,\n  Map<Type, Action<Intent>>? actions,\n  Widget? prefix,\n  Widget? subtitle,\n  Widget? details,\n  Widget? suffix,\n  Key? key,\n})\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTile/FTile.html"
+          },
+          {
+            "offset": 26,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTile/FTile.html"
+          },
+          {
+            "offset": 68,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTile/FTile.html"
+          },
+          {
+            "offset": 35,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemStyle-class.html"
+          },
+          {
+            "offset": 55,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemStyle-class.html"
+          },
+          {
+            "offset": 83,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTile/FTile.html"
+          },
+          {
+            "offset": 99,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTile/FTile.html"
+          },
+          {
+            "offset": 127,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTile/FTile.html"
+          },
+          {
+            "offset": 150,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTile/FTile.html"
+          },
+          {
+            "offset": 182,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTile/FTile.html"
+          },
+          {
+            "offset": 216,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTile/FTile.html"
+          },
+          {
+            "offset": 254,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTile/FTile.html"
+          },
+          {
+            "offset": 306,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTile/FTile.html"
+          },
+          {
+            "offset": 285,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStatesDelta-class.html"
+          },
+          {
+            "offset": 340,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTile/FTile.html"
+          },
+          {
+            "offset": 368,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTile/FTile.html"
+          },
+          {
+            "offset": 400,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTile/FTile.html"
+          },
+          {
+            "offset": 437,
+            "length": 20,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTile/FTile.html"
+          },
+          {
+            "offset": 493,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTile/FTile.html"
+          },
+          {
+            "offset": 533,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTile/FTile.html"
+          },
+          {
+            "offset": 552,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTile/FTile.html"
+          },
+          {
+            "offset": 570,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTile/FTile.html"
+          },
+          {
+            "offset": 590,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTile/FTile.html"
+          },
+          {
+            "offset": 609,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTile/FTile.html"
+          },
+          {
+            "offset": 624,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTile/FTile.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FTile",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTile-class.html"
+        }
+      }
+    },
+    {
+      "offset": 51,
+      "length": 7,
+      "snippet": {
+        "text": "{Widget? prefix}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 70,
+      "length": 11,
+      "snippet": {
+        "text": "IconData user",
+        "highlights": [],
+        "links": [],
+        "tooltips": [],
+        "container": {
+          "name": "FIcons",
+          "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons-class.html"
+        }
+      }
+    },
+    {
+      "offset": 86,
+      "length": 6,
+      "snippet": {
+        "text": "{required Widget title}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 126,
+      "length": 7,
+      "snippet": {
+        "text": "{Widget? suffix}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 145,
+      "length": 19,
+      "snippet": {
+        "text": "IconData chevronRight",
+        "highlights": [],
+        "links": [],
+        "tooltips": [],
+        "container": {
+          "name": "FIcons",
+          "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons-class.html"
+        }
+      }
+    },
+    {
+      "offset": 169,
+      "length": 8,
+      "snippet": {
+        "text": "{void Function()? onPress}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    }
+  ]
+}

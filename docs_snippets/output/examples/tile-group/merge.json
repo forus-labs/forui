@@ -1,0 +1,1023 @@
+{
+  "text": "class MergeTileGroupExample extends StatefulWidget {\n  @override\n  State<MergeTileGroupExample> createState() => _MergeTileGroupExampleState();\n}\n\nclass _MergeTileGroupExampleState extends State<MergeTileGroupExample> {\n  @override\n  Widget build(BuildContext context) => FTileGroup.merge(\n    label: const Text('Settings'),\n    children: [\n      .group(\n        children: [\n          .tile(\n            prefix: const Icon(FIcons.user),\n            title: const Text('Personalization'),\n            suffix: const Icon(FIcons.chevronRight),\n            onPress: () {},\n          ),\n          .tile(\n            prefix: const Icon(FIcons.wifi),\n            title: const Text('WiFi'),\n            details: const Text('Duobase (5G)'),\n            suffix: const Icon(FIcons.chevronRight),\n            onPress: () {},\n          ),\n        ],\n      ),\n      .selectGroup(\n        control: const .managedRadio(initial: 'List'),\n        children: const [\n          FSelectTile(title: Text('List View'), value: 'List'),\n          FSelectTile(title: Text('Grid View'), value: 'Grid'),\n        ],\n      ),\n    ],\n  );\n}\n",
+  "highlights": [],
+  "links": [
+    {
+      "offset": 272,
+      "length": 16,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileGroup/FTileGroup.merge.html"
+    },
+    {
+      "offset": 294,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileGroup/label.html"
+    },
+    {
+      "offset": 329,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileGroup/FTileGroup.merge.html"
+    },
+    {
+      "offset": 348,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileGroupMixin/group.html"
+    },
+    {
+      "offset": 363,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileGroupMixin/group.html"
+    },
+    {
+      "offset": 386,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileMixin/tile.html"
+    },
+    {
+      "offset": 404,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileMixin/tile.html"
+    },
+    {
+      "offset": 423,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/user.html"
+    },
+    {
+      "offset": 449,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileMixin/tile.html"
+    },
+    {
+      "offset": 499,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileMixin/tile.html"
+    },
+    {
+      "offset": 518,
+      "length": 19,
+      "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/chevronRight.html"
+    },
+    {
+      "offset": 552,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileMixin/tile.html"
+    },
+    {
+      "offset": 592,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileMixin/tile.html"
+    },
+    {
+      "offset": 610,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileMixin/tile.html"
+    },
+    {
+      "offset": 629,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/wifi.html"
+    },
+    {
+      "offset": 655,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileMixin/tile.html"
+    },
+    {
+      "offset": 694,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileMixin/tile.html"
+    },
+    {
+      "offset": 743,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileMixin/tile.html"
+    },
+    {
+      "offset": 762,
+      "length": 19,
+      "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/chevronRight.html"
+    },
+    {
+      "offset": 796,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileMixin/tile.html"
+    },
+    {
+      "offset": 852,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileGroupMixin/selectGroup.html"
+    },
+    {
+      "offset": 873,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileGroupMixin/selectGroup.html"
+    },
+    {
+      "offset": 889,
+      "length": 12,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl/FMultiValueControl.managedRadio.html"
+    },
+    {
+      "offset": 902,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl/FMultiValueControl.managedRadio.html"
+    },
+    {
+      "offset": 928,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileGroupMixin/selectGroup.html"
+    },
+    {
+      "offset": 956,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.html"
+    },
+    {
+      "offset": 968,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/title.html"
+    },
+    {
+      "offset": 994,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/value.html"
+    },
+    {
+      "offset": 1020,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.html"
+    },
+    {
+      "offset": 1032,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/title.html"
+    },
+    {
+      "offset": 1058,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/value.html"
+    }
+  ],
+  "tooltips": [
+    {
+      "offset": 272,
+      "length": 16,
+      "snippet": {
+        "text": "FTileGroup.merge({\n  required List<FTileGroupMixin> children,\n  FTileGroupStyle Function(FTileGroupStyle)? style,\n  ScrollController? scrollController,\n  double? cacheExtent,\n  double maxHeight = .infinity,\n  DragStartBehavior dragStartBehavior = .start,\n  ScrollPhysics physics = const ClampingScrollPhysics(),\n  bool? enabled,\n  FItemDivider divider = .full,\n  String? semanticsLabel,\n  Widget? label,\n  Widget? description,\n  Widget? error,\n  Key? key,\n})\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileGroup/FTileGroup.merge.html"
+          },
+          {
+            "offset": 52,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileGroup/FTileGroup.merge.html"
+          },
+          {
+            "offset": 35,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileGroupMixin-mixin.html"
+          },
+          {
+            "offset": 107,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileGroup/FTileGroup.merge.html"
+          },
+          {
+            "offset": 64,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileGroupStyle-class.html"
+          },
+          {
+            "offset": 89,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileGroupStyle-class.html"
+          },
+          {
+            "offset": 134,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileGroup/FTileGroup.merge.html"
+          },
+          {
+            "offset": 162,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileGroup/FTileGroup.merge.html"
+          },
+          {
+            "offset": 184,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileGroup/FTileGroup.merge.html"
+          },
+          {
+            "offset": 227,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileGroup/FTileGroup.merge.html"
+          },
+          {
+            "offset": 271,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileGroup/FTileGroup.merge.html"
+          },
+          {
+            "offset": 320,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileGroup/FTileGroup.merge.html"
+          },
+          {
+            "offset": 344,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileGroup/FTileGroup.merge.html"
+          },
+          {
+            "offset": 331,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemDivider.html"
+          },
+          {
+            "offset": 355,
+            "length": 4,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemDivider.html#full"
+          },
+          {
+            "offset": 371,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileGroup/FTileGroup.merge.html"
+          },
+          {
+            "offset": 397,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileGroup/FTileGroup.merge.html"
+          },
+          {
+            "offset": 414,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileGroup/FTileGroup.merge.html"
+          },
+          {
+            "offset": 437,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileGroup/FTileGroup.merge.html"
+          },
+          {
+            "offset": 451,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileGroup/FTileGroup.merge.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FTileGroup",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileGroup-class.html"
+        }
+      }
+    },
+    {
+      "offset": 294,
+      "length": 6,
+      "snippet": {
+        "text": "{Widget? label}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 329,
+      "length": 9,
+      "snippet": {
+        "text": "{required List<FTileGroupMixin> children}",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 15,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileGroupMixin-mixin.html"
+          }
+        ],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 348,
+      "length": 5,
+      "snippet": {
+        "text": "FTileGroup group({\n  required List<FTileMixin> children,\n  FTileGroupStyle Function(FTileGroupStyle)? style,\n  ScrollController? scrollController,\n  double? cacheExtent,\n  double maxHeight = .infinity,\n  DragStartBehavior dragStartBehavior = .start,\n  ScrollPhysics physics = const ClampingScrollPhysics(),\n  bool? enabled,\n  FItemDivider divider = .indented,\n  String? semanticsLabel,\n  Widget? label,\n  Widget? description,\n  Widget? error,\n  Key? key,\n})",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileGroup-class.html"
+          },
+          {
+            "offset": 35,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileMixin-mixin.html"
+          },
+          {
+            "offset": 59,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileGroupStyle-class.html"
+          },
+          {
+            "offset": 84,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileGroupStyle-class.html"
+          },
+          {
+            "offset": 326,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemDivider.html"
+          },
+          {
+            "offset": 350,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemDivider.html#indented"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FTileGroup",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileGroup-class.html"
+        }
+      }
+    },
+    {
+      "offset": 363,
+      "length": 9,
+      "snippet": {
+        "text": "{required List<FTileMixin> children}",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 15,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileMixin-mixin.html"
+          }
+        ],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 386,
+      "length": 4,
+      "snippet": {
+        "text": "FTile tile({\n  required Widget title,\n  FItemStyle Function(FItemStyle)? style,\n  bool? enabled,\n  bool selected = false,\n  String? semanticsLabel,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  void Function(bool)? onHoverChange,\n  void Function(FWidgetStatesDelta)? onStateChange,\n  void Function()? onPress,\n  void Function()? onLongPress,\n  void Function()? onSecondaryPress,\n  void Function()? onSecondaryLongPress,\n  Map<ShortcutActivator, Intent>? shortcuts,\n  Map<Type, Action<Intent>>? actions,\n  Widget? prefix,\n  Widget? subtitle,\n  Widget? details,\n  Widget? suffix,\n  Key? key,\n})",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTile-class.html"
+          },
+          {
+            "offset": 40,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemStyle-class.html"
+          },
+          {
+            "offset": 60,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemStyle-class.html"
+          },
+          {
+            "offset": 290,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStatesDelta-class.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FTile",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTile-class.html"
+        }
+      }
+    },
+    {
+      "offset": 404,
+      "length": 7,
+      "snippet": {
+        "text": "{Widget? prefix}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 423,
+      "length": 11,
+      "snippet": {
+        "text": "IconData user",
+        "highlights": [],
+        "links": [],
+        "tooltips": [],
+        "container": {
+          "name": "FIcons",
+          "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons-class.html"
+        }
+      }
+    },
+    {
+      "offset": 449,
+      "length": 6,
+      "snippet": {
+        "text": "{required Widget title}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 499,
+      "length": 7,
+      "snippet": {
+        "text": "{Widget? suffix}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 518,
+      "length": 19,
+      "snippet": {
+        "text": "IconData chevronRight",
+        "highlights": [],
+        "links": [],
+        "tooltips": [],
+        "container": {
+          "name": "FIcons",
+          "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons-class.html"
+        }
+      }
+    },
+    {
+      "offset": 552,
+      "length": 8,
+      "snippet": {
+        "text": "{void Function()? onPress}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 592,
+      "length": 4,
+      "snippet": {
+        "text": "FTile tile({\n  required Widget title,\n  FItemStyle Function(FItemStyle)? style,\n  bool? enabled,\n  bool selected = false,\n  String? semanticsLabel,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  void Function(bool)? onHoverChange,\n  void Function(FWidgetStatesDelta)? onStateChange,\n  void Function()? onPress,\n  void Function()? onLongPress,\n  void Function()? onSecondaryPress,\n  void Function()? onSecondaryLongPress,\n  Map<ShortcutActivator, Intent>? shortcuts,\n  Map<Type, Action<Intent>>? actions,\n  Widget? prefix,\n  Widget? subtitle,\n  Widget? details,\n  Widget? suffix,\n  Key? key,\n})",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTile-class.html"
+          },
+          {
+            "offset": 40,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemStyle-class.html"
+          },
+          {
+            "offset": 60,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemStyle-class.html"
+          },
+          {
+            "offset": 290,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStatesDelta-class.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FTile",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTile-class.html"
+        }
+      }
+    },
+    {
+      "offset": 610,
+      "length": 7,
+      "snippet": {
+        "text": "{Widget? prefix}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 629,
+      "length": 11,
+      "snippet": {
+        "text": "IconData wifi",
+        "highlights": [],
+        "links": [],
+        "tooltips": [],
+        "container": {
+          "name": "FIcons",
+          "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons-class.html"
+        }
+      }
+    },
+    {
+      "offset": 655,
+      "length": 6,
+      "snippet": {
+        "text": "{required Widget title}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 694,
+      "length": 8,
+      "snippet": {
+        "text": "{Widget? details}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 743,
+      "length": 7,
+      "snippet": {
+        "text": "{Widget? suffix}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 762,
+      "length": 19,
+      "snippet": {
+        "text": "IconData chevronRight",
+        "highlights": [],
+        "links": [],
+        "tooltips": [],
+        "container": {
+          "name": "FIcons",
+          "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons-class.html"
+        }
+      }
+    },
+    {
+      "offset": 796,
+      "length": 8,
+      "snippet": {
+        "text": "{void Function()? onPress}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 852,
+      "length": 11,
+      "snippet": {
+        "text": "FSelectTileGroup<T> selectGroup<T>({\n  required List<FSelectTile<T>> children,\n  FMultiValueControl<T>? control,\n  ScrollController? scrollController,\n  FTileGroupStyle? style,\n  double? cacheExtent,\n  double maxHeight = .infinity,\n  DragStartBehavior dragStartBehavior = .start,\n  ScrollPhysics physics = const ClampingScrollPhysics(),\n  FItemDivider divider = .indented,\n  Widget? label,\n  Widget? description,\n  String? semanticsLabel,\n  Widget Function(BuildContext, String) errorBuilder =\n      FFormFieldProperties.defaultErrorBuilder,\n  void Function(Set<T>?)? onSaved,\n  void Function()? onReset,\n  String? Function(Set<T>?)? validator,\n  String? forceErrorText,\n  bool enabled = true,\n  AutovalidateMode autovalidateMode = .disabled,\n  Key? key,\n})",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 19,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTileGroup-class.html"
+          },
+          {
+            "offset": 53,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile-class.html"
+          },
+          {
+            "offset": 81,
+            "length": 22,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl-class.html"
+          },
+          {
+            "offset": 153,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileGroupStyle-class.html"
+          },
+          {
+            "offset": 339,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemDivider.html"
+          },
+          {
+            "offset": 363,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemDivider.html#indented"
+          },
+          {
+            "offset": 500,
+            "length": 40,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FFormFieldProperties/defaultErrorBuilder.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FSelectTileGroup",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTileGroup-class.html"
+        }
+      }
+    },
+    {
+      "offset": 873,
+      "length": 8,
+      "snippet": {
+        "text": "{FMultiValueControl<String>? control}",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 1,
+            "length": 27,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl-class.html"
+          }
+        ],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 889,
+      "length": 12,
+      "snippet": {
+        "text": "FMultiValueControl.managedRadio({\n  FMultiValueNotifier<String>? controller,\n  String? initial,\n  void Function(Set<String>)? onChange,\n})\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 31,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl/FMultiValueControl.managedRadio.html"
+          },
+          {
+            "offset": 65,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl/FMultiValueControl.managedRadio.html"
+          },
+          {
+            "offset": 36,
+            "length": 28,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueNotifier-class.html"
+          },
+          {
+            "offset": 87,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl/FMultiValueControl.managedRadio.html"
+          },
+          {
+            "offset": 126,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl/FMultiValueControl.managedRadio.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FMultiValueControl",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl-class.html"
+        }
+      }
+    },
+    {
+      "offset": 902,
+      "length": 8,
+      "snippet": {
+        "text": "{String? initial}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 928,
+      "length": 9,
+      "snippet": {
+        "text": "{required List<FSelectTile<String>> children}",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 15,
+            "length": 19,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile-class.html"
+          }
+        ],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 956,
+      "length": 11,
+      "snippet": {
+        "text": "FSelectTile({\n  required Widget title,\n  required String value,\n  FItemStyle Function(FItemStyle)? style,\n  Widget? checkedIcon = const Icon(FIcons.check),\n  Widget? uncheckedIcon = const Icon(FIcons.check, color: Colors.transparent),\n  Widget? subtitle,\n  Widget? details,\n  String? semanticsLabel,\n  bool? enabled,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  void Function(bool)? onHoverChange,\n  void Function(FWidgetStatesDelta)? onStatesChange,\n  Map<ShortcutActivator, Intent>? shortcuts,\n  Map<Type, Action<Intent>>? actions,\n  Widget? suffix,\n  Key? key,\n})\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.html"
+          },
+          {
+            "offset": 32,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.html"
+          },
+          {
+            "offset": 57,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.html"
+          },
+          {
+            "offset": 99,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.html"
+          },
+          {
+            "offset": 66,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemStyle-class.html"
+          },
+          {
+            "offset": 86,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemStyle-class.html"
+          },
+          {
+            "offset": 116,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.html"
+          },
+          {
+            "offset": 141,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/check.html"
+          },
+          {
+            "offset": 166,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.html"
+          },
+          {
+            "offset": 193,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/check.html"
+          },
+          {
+            "offset": 245,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.html"
+          },
+          {
+            "offset": 265,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.html"
+          },
+          {
+            "offset": 284,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.html"
+          },
+          {
+            "offset": 308,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.html"
+          },
+          {
+            "offset": 324,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.html"
+          },
+          {
+            "offset": 356,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.html"
+          },
+          {
+            "offset": 390,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.html"
+          },
+          {
+            "offset": 428,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.html"
+          },
+          {
+            "offset": 480,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.html"
+          },
+          {
+            "offset": 459,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStatesDelta-class.html"
+          },
+          {
+            "offset": 530,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.html"
+          },
+          {
+            "offset": 570,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.html"
+          },
+          {
+            "offset": 589,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.html"
+          },
+          {
+            "offset": 604,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FSelectTile",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile-class.html"
+        }
+      }
+    },
+    {
+      "offset": 968,
+      "length": 6,
+      "snippet": {
+        "text": "{required Widget title}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 994,
+      "length": 6,
+      "snippet": {
+        "text": "{required String value}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 1020,
+      "length": 11,
+      "snippet": {
+        "text": "FSelectTile({\n  required Widget title,\n  required String value,\n  FItemStyle Function(FItemStyle)? style,\n  Widget? checkedIcon = const Icon(FIcons.check),\n  Widget? uncheckedIcon = const Icon(FIcons.check, color: Colors.transparent),\n  Widget? subtitle,\n  Widget? details,\n  String? semanticsLabel,\n  bool? enabled,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  void Function(bool)? onHoverChange,\n  void Function(FWidgetStatesDelta)? onStatesChange,\n  Map<ShortcutActivator, Intent>? shortcuts,\n  Map<Type, Action<Intent>>? actions,\n  Widget? suffix,\n  Key? key,\n})\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.html"
+          },
+          {
+            "offset": 32,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.html"
+          },
+          {
+            "offset": 57,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.html"
+          },
+          {
+            "offset": 99,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.html"
+          },
+          {
+            "offset": 66,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemStyle-class.html"
+          },
+          {
+            "offset": 86,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemStyle-class.html"
+          },
+          {
+            "offset": 116,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.html"
+          },
+          {
+            "offset": 141,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/check.html"
+          },
+          {
+            "offset": 166,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.html"
+          },
+          {
+            "offset": 193,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/check.html"
+          },
+          {
+            "offset": 245,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.html"
+          },
+          {
+            "offset": 265,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.html"
+          },
+          {
+            "offset": 284,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.html"
+          },
+          {
+            "offset": 308,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.html"
+          },
+          {
+            "offset": 324,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.html"
+          },
+          {
+            "offset": 356,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.html"
+          },
+          {
+            "offset": 390,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.html"
+          },
+          {
+            "offset": 428,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.html"
+          },
+          {
+            "offset": 480,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.html"
+          },
+          {
+            "offset": 459,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStatesDelta-class.html"
+          },
+          {
+            "offset": 530,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.html"
+          },
+          {
+            "offset": 570,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.html"
+          },
+          {
+            "offset": 589,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.html"
+          },
+          {
+            "offset": 604,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FSelectTile",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile-class.html"
+        }
+      }
+    },
+    {
+      "offset": 1032,
+      "length": 6,
+      "snippet": {
+        "text": "{required Widget title}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 1058,
+      "length": 6,
+      "snippet": {
+        "text": "{required String value}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    }
+  ]
+}

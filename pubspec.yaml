@@ -3,11 +3,11 @@ environment:
   sdk: ">=3.10.0 <4.0.0"
   flutter: ">=3.38.0"
 workspace:
+  - docs_snippets
   - forui
   - forui_assets
   - forui_hooks
   - forui_internal_gen
-  - samples
 
 dev_dependencies:
   flint: ^2.13.0

@@ -1,0 +1,228 @@
+{
+  "text": "@override\nWidget build(BuildContext _) => const FDateField.input(\n  label: Text('Appointment Date'),\n  description: Text('Select a date for your appointment'),\n);\n",
+  "highlights": [],
+  "links": [
+    {
+      "offset": 48,
+      "length": 16,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateField/FDateField.input.html"
+    },
+    {
+      "offset": 68,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateField/label.html"
+    },
+    {
+      "offset": 103,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateField/description.html"
+    }
+  ],
+  "tooltips": [
+    {
+      "offset": 48,
+      "length": 16,
+      "snippet": {
+        "text": "FDateField.input({\n  FDateFieldControl control,\n  FDateFieldStyle Function(FDateFieldStyle)? style,\n  bool autofocus,\n  FocusNode? focusNode,\n  Widget Function(BuildContext, FDateFieldStyle, Set<WidgetState>, Widget)\n  builder,\n  Widget Function(BuildContext, FDateFieldStyle, Set<WidgetState>)?\n  prefixBuilder,\n  Widget Function(BuildContext, FDateFieldStyle, Set<WidgetState>)?\n  suffixBuilder,\n  TextInputAction? textInputAction,\n  TextAlign textAlign,\n  TextAlignVertical? textAlignVertical,\n  TextDirection? textDirection,\n  bool expands,\n  void Function()? onEditingComplete,\n  void Function(DateTime)? onSubmit,\n  MouseCursor? mouseCursor,\n  bool canRequestFocus,\n  bool clearable,\n  int baselineInputYear,\n  Widget? label,\n  Widget? description,\n  bool enabled,\n  void Function(DateTime?)? onSaved,\n  void Function()? onReset,\n  AutovalidateMode autovalidateMode,\n  String? forceErrorText,\n  Widget Function(BuildContext, String) errorBuilder,\n  Key? key,\n})\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateField/FDateField.input.html"
+          },
+          {
+            "offset": 39,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateField/FDateField.input.html"
+          },
+          {
+            "offset": 21,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateFieldControl-class.html"
+          },
+          {
+            "offset": 93,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateField/FDateField.input.html"
+          },
+          {
+            "offset": 50,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateFieldStyle-class.html"
+          },
+          {
+            "offset": 75,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateFieldStyle-class.html"
+          },
+          {
+            "offset": 107,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateField/FDateField.input.html"
+          },
+          {
+            "offset": 131,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateField/FDateField.input.html"
+          },
+          {
+            "offset": 219,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateField/FDateField.input.html"
+          },
+          {
+            "offset": 174,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateFieldStyle-class.html"
+          },
+          {
+            "offset": 298,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateField/FDateField.input.html"
+          },
+          {
+            "offset": 260,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateFieldStyle-class.html"
+          },
+          {
+            "offset": 383,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateField/FDateField.input.html"
+          },
+          {
+            "offset": 345,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateFieldStyle-class.html"
+          },
+          {
+            "offset": 417,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateField/FDateField.input.html"
+          },
+          {
+            "offset": 446,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateField/FDateField.input.html"
+          },
+          {
+            "offset": 478,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateField/FDateField.input.html"
+          },
+          {
+            "offset": 514,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateField/FDateField.input.html"
+          },
+          {
+            "offset": 536,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateField/FDateField.input.html"
+          },
+          {
+            "offset": 564,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateField/FDateField.input.html"
+          },
+          {
+            "offset": 610,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateField/FDateField.input.html"
+          },
+          {
+            "offset": 635,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateField/FDateField.input.html"
+          },
+          {
+            "offset": 655,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateField/FDateField.input.html"
+          },
+          {
+            "offset": 679,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateField/FDateField.input.html"
+          },
+          {
+            "offset": 696,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateField/FDateField.input.html"
+          },
+          {
+            "offset": 725,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateField/FDateField.input.html"
+          },
+          {
+            "offset": 742,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateField/FDateField.input.html"
+          },
+          {
+            "offset": 762,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateField/FDateField.input.html"
+          },
+          {
+            "offset": 799,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateField/FDateField.input.html"
+          },
+          {
+            "offset": 827,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateField/FDateField.input.html"
+          },
+          {
+            "offset": 855,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateField/FDateField.input.html"
+          },
+          {
+            "offset": 883,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateField/FDateField.input.html"
+          },
+          {
+            "offset": 939,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateField/FDateField.input.html"
+          },
+          {
+            "offset": 960,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateField/FDateField.input.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FDateField",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateField-class.html"
+        }
+      }
+    },
+    {
+      "offset": 68,
+      "length": 6,
+      "snippet": {
+        "text": "{Widget? label}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 103,
+      "length": 12,
+      "snippet": {
+        "text": "{Widget? description}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    }
+  ]
+}

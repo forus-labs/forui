@@ -103,7 +103,7 @@ const _golden = r'''
 // dart format width=120
 // coverage:ignore-file
 
-part of 'sample.dart';
+part of 'example.dart';
 
 // **************************************************************************
 // DesignGenerator
@@ -519,7 +519,7 @@ void main() {
 
     await testBuilder(
       designBuilder(.empty),
-      {'forui_internal_gen|test/src/sample.dart': _source},
+      {'forui_internal_gen|test/src/example.dart': _source},
       outputs: {'forui_internal_gen|test/src/sample.design.dart': _golden},
       readerWriter: readerWriter,
     );

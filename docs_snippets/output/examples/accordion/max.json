@@ -1,0 +1,574 @@
+{
+  "text": "@override\nWidget build(BuildContext _) => FAccordion(\n  control: .managed(max: 2),\n  children: const [\n    FAccordionItem(\n      title: Text('Production Information'),\n      child: Text('''\nOur flagship product combines cutting-edge technology with sleek design. Built with premium materials, it offers unparalleled performance and reliability.\n\nKey features include advanced processing capabilities, and an intuitive user interface designed for both beginners and experts.\n            '''),\n    ),\n    FAccordionItem(\n      initiallyExpanded: true,\n      title: Text('Shipping Details'),\n      child: Text('''\nWe offer worldwide shipping through trusted courier partners. Standard delivery takes 3-5 business days, while express shipping ensures delivery within 1-2 business days.\n\nAll orders are carefully packaged and fully insured. Track your shipment in real-time through our dedicated tracking portal.\n            '''),\n    ),\n    FAccordionItem(\n      title: Text('Return Policy'),\n      child: Text('''\nWe stand behind our products with a comprehensive 30-day return policy. If you're not completely satisfied, simply return the item in its original condition.\n\nOur hassle-free return process includes free return shipping and full refunds processed within 48 hours of receiving the returned item.\n            '''),\n    ),\n  ],\n);\n",
+  "highlights": [
+    {
+      "start": 3,
+      "end": 3
+    }
+  ],
+  "links": [
+    {
+      "offset": 42,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordion/FAccordion.html"
+    },
+    {
+      "offset": 56,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordion/control.html"
+    },
+    {
+      "offset": 66,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionControl/FAccordionControl.managed.html"
+    },
+    {
+      "offset": 74,
+      "length": 3,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionControl/FAccordionControl.managed.html"
+    },
+    {
+      "offset": 85,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordion/children.html"
+    },
+    {
+      "offset": 107,
+      "length": 14,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionItem/FAccordionItem.html"
+    },
+    {
+      "offset": 129,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionItem/title.html"
+    },
+    {
+      "offset": 174,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionItem/child.html"
+    },
+    {
+      "offset": 503,
+      "length": 14,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionItem/FAccordionItem.html"
+    },
+    {
+      "offset": 525,
+      "length": 17,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionItem/initiallyExpanded.html"
+    },
+    {
+      "offset": 556,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionItem/title.html"
+    },
+    {
+      "offset": 595,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionItem/child.html"
+    },
+    {
+      "offset": 937,
+      "length": 14,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionItem/FAccordionItem.html"
+    },
+    {
+      "offset": 959,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionItem/title.html"
+    },
+    {
+      "offset": 995,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionItem/child.html"
+    }
+  ],
+  "tooltips": [
+    {
+      "offset": 42,
+      "length": 10,
+      "snippet": {
+        "text": "FAccordion({\n  required List<Widget> children,\n  FAccordionControl control = const .managed(),\n  FAccordionStyle Function(FAccordionStyle)? style,\n  Key? key,\n})\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordion/FAccordion.html"
+          },
+          {
+            "offset": 37,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordion/FAccordion.html"
+          },
+          {
+            "offset": 67,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordion/FAccordion.html"
+          },
+          {
+            "offset": 49,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionControl-class.html"
+          },
+          {
+            "offset": 84,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionControl/FAccordionControl.managed.html"
+          },
+          {
+            "offset": 140,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordion/FAccordion.html"
+          },
+          {
+            "offset": 97,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionStyle-class.html"
+          },
+          {
+            "offset": 122,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionStyle-class.html"
+          },
+          {
+            "offset": 154,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordion/FAccordion.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FAccordion",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordion-class.html"
+        }
+      }
+    },
+    {
+      "offset": 56,
+      "length": 8,
+      "snippet": {
+        "text": "{FAccordionControl control = const .managed()}",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 1,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionControl-class.html"
+          },
+          {
+            "offset": 36,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionControl/FAccordionControl.managed.html"
+          }
+        ],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 66,
+      "length": 7,
+      "snippet": {
+        "text": "FAccordionControl.managed({\n  FAccordionController? controller,\n  int? min,\n  int? max,\n  void Function(Set<int>)? onChange,\n})\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 25,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionControl/FAccordionControl.managed.html"
+          },
+          {
+            "offset": 52,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionControl/FAccordionControl.managed.html"
+          },
+          {
+            "offset": 30,
+            "length": 21,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionController-class.html"
+          },
+          {
+            "offset": 71,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionControl/FAccordionControl.managed.html"
+          },
+          {
+            "offset": 83,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionControl/FAccordionControl.managed.html"
+          },
+          {
+            "offset": 115,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionControl/FAccordionControl.managed.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FAccordionControl",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionControl-class.html"
+        }
+      }
+    },
+    {
+      "offset": 74,
+      "length": 4,
+      "snippet": {
+        "text": "{int? max}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 85,
+      "length": 9,
+      "snippet": {
+        "text": "{required List<Widget> children}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 107,
+      "length": 14,
+      "snippet": {
+        "text": "FAccordionItem({\n  required Widget title,\n  required Widget child,\n  FAccordionStyle? style,\n  Widget icon = const Icon(FIcons.chevronDown),\n  bool? initiallyExpanded,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  void Function(bool)? onHoverChange,\n  void Function(FWidgetStatesDelta)? onStateChange,\n  Key? key,\n})\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionItem/FAccordionItem.html"
+          },
+          {
+            "offset": 35,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionItem/FAccordionItem.html"
+          },
+          {
+            "offset": 60,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionItem/FAccordionItem.html"
+          },
+          {
+            "offset": 86,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionItem/FAccordionItem.html"
+          },
+          {
+            "offset": 69,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionStyle-class.html"
+          },
+          {
+            "offset": 102,
+            "length": 4,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionItem/FAccordionItem.html"
+          },
+          {
+            "offset": 120,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/chevronDown.html"
+          },
+          {
+            "offset": 149,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionItem/FAccordionItem.html"
+          },
+          {
+            "offset": 175,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionItem/FAccordionItem.html"
+          },
+          {
+            "offset": 207,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionItem/FAccordionItem.html"
+          },
+          {
+            "offset": 241,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionItem/FAccordionItem.html"
+          },
+          {
+            "offset": 279,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionItem/FAccordionItem.html"
+          },
+          {
+            "offset": 331,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionItem/FAccordionItem.html"
+          },
+          {
+            "offset": 310,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStatesDelta-class.html"
+          },
+          {
+            "offset": 353,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionItem/FAccordionItem.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FAccordionItem",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionItem-class.html"
+        }
+      }
+    },
+    {
+      "offset": 129,
+      "length": 6,
+      "snippet": {
+        "text": "{required Widget title}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 174,
+      "length": 6,
+      "snippet": {
+        "text": "{required Widget child}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 503,
+      "length": 14,
+      "snippet": {
+        "text": "FAccordionItem({\n  required Widget title,\n  required Widget child,\n  FAccordionStyle? style,\n  Widget icon = const Icon(FIcons.chevronDown),\n  bool? initiallyExpanded,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  void Function(bool)? onHoverChange,\n  void Function(FWidgetStatesDelta)? onStateChange,\n  Key? key,\n})\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionItem/FAccordionItem.html"
+          },
+          {
+            "offset": 35,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionItem/FAccordionItem.html"
+          },
+          {
+            "offset": 60,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionItem/FAccordionItem.html"
+          },
+          {
+            "offset": 86,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionItem/FAccordionItem.html"
+          },
+          {
+            "offset": 69,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionStyle-class.html"
+          },
+          {
+            "offset": 102,
+            "length": 4,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionItem/FAccordionItem.html"
+          },
+          {
+            "offset": 120,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/chevronDown.html"
+          },
+          {
+            "offset": 149,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionItem/FAccordionItem.html"
+          },
+          {
+            "offset": 175,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionItem/FAccordionItem.html"
+          },
+          {
+            "offset": 207,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionItem/FAccordionItem.html"
+          },
+          {
+            "offset": 241,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionItem/FAccordionItem.html"
+          },
+          {
+            "offset": 279,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionItem/FAccordionItem.html"
+          },
+          {
+            "offset": 331,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionItem/FAccordionItem.html"
+          },
+          {
+            "offset": 310,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStatesDelta-class.html"
+          },
+          {
+            "offset": 353,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionItem/FAccordionItem.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FAccordionItem",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionItem-class.html"
+        }
+      }
+    },
+    {
+      "offset": 525,
+      "length": 18,
+      "snippet": {
+        "text": "{bool? initiallyExpanded}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 556,
+      "length": 6,
+      "snippet": {
+        "text": "{required Widget title}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 595,
+      "length": 6,
+      "snippet": {
+        "text": "{required Widget child}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 937,
+      "length": 14,
+      "snippet": {
+        "text": "FAccordionItem({\n  required Widget title,\n  required Widget child,\n  FAccordionStyle? style,\n  Widget icon = const Icon(FIcons.chevronDown),\n  bool? initiallyExpanded,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  void Function(bool)? onHoverChange,\n  void Function(FWidgetStatesDelta)? onStateChange,\n  Key? key,\n})\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionItem/FAccordionItem.html"
+          },
+          {
+            "offset": 35,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionItem/FAccordionItem.html"
+          },
+          {
+            "offset": 60,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionItem/FAccordionItem.html"
+          },
+          {
+            "offset": 86,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionItem/FAccordionItem.html"
+          },
+          {
+            "offset": 69,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionStyle-class.html"
+          },
+          {
+            "offset": 102,
+            "length": 4,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionItem/FAccordionItem.html"
+          },
+          {
+            "offset": 120,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/chevronDown.html"
+          },
+          {
+            "offset": 149,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionItem/FAccordionItem.html"
+          },
+          {
+            "offset": 175,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionItem/FAccordionItem.html"
+          },
+          {
+            "offset": 207,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionItem/FAccordionItem.html"
+          },
+          {
+            "offset": 241,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionItem/FAccordionItem.html"
+          },
+          {
+            "offset": 279,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionItem/FAccordionItem.html"
+          },
+          {
+            "offset": 331,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionItem/FAccordionItem.html"
+          },
+          {
+            "offset": 310,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStatesDelta-class.html"
+          },
+          {
+            "offset": 353,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionItem/FAccordionItem.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FAccordionItem",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionItem-class.html"
+        }
+      }
+    },
+    {
+      "offset": 959,
+      "length": 6,
+      "snippet": {
+        "text": "{required Widget title}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 995,
+      "length": 6,
+      "snippet": {
+        "text": "{required Widget child}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    }
+  ]
+}
