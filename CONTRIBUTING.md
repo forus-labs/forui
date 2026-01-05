@@ -420,7 +420,7 @@ import 'package:forui/src/widgets/button/button.dart';
 import 'package:docs_snippets/example.dart';
 
 @RoutePage()
-class ButtonTextPage extends Eample { // - (1)
+class ButtonTextPage extends Example { // - (1)
   final Variant variant;
   final String label;
 
@@ -429,7 +429,7 @@ class ButtonTextPage extends Eample { // - (1)
   }) : variant = variants[style] ?? Variant.primary;
 
   @override
-  Widget eample(BuildContext context) => IntrinsicWidth(
+  Widget example(BuildContext context) => IntrinsicWidth(
         child: FButton(
           label: Text(label),
           style: variant,
@@ -439,11 +439,11 @@ class ButtonTextPage extends Eample { // - (1)
 }
 ```
 
-1. Examples should extend `Example`/`StatefulEample` which centers and wraps the widget returned by the overridden 
-  `eample(...)`  method in a `FTheme`.
+1. Examples should extend `Example`/`StatefulExample` which centers and wraps the widget returned by the overridden 
+  `example(...)`  method in a `FTheme`.
 2. The current theme, provided as a URL query parameter.
 
-The docs_snippets website uses `auto_route` to generate a route for each eample. In general, each eample has its own page and
+The docs_snippets website uses `auto_route` to generate a route for each example. In general, each example has its own page and
 URL. Generate the route by running `dart pub run build_runner build --delete-conflicting-outputs`. After which, 
 register the route with [`_AppRouter` in main.dart](https://github.com/forus-labs/forui/blob/bb45cef78459a710824c299a192b5de59b61c9b3/samples/lib/main.dart#L67).
 
@@ -463,7 +463,7 @@ The file should contain the following sections:
 See `FButton`'s [mdx file](https://github.com/forus-labs/forui/blob/bb45cef78459a710824c299a192b5de59b61c9b3/docs/pages/docs/button.mdx?plain=1#L58).
 
 Each example should be wrapped in a `<Tabs/>` component. It contains a `<Widget/>` component and a code block. The 
-`<Widget/>` component is used to display a eample widget hosted on the docs_snippets website, while the code block displays 
+`<Widget/>` component is used to display a example widget hosted on the docs_snippets website, while the code block displays 
 the corresponding Dart code.
 
 ```mdx
