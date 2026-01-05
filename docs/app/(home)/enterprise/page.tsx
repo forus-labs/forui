@@ -46,14 +46,11 @@ export default function EnterprisePage() {
       {/* Hero Section */}
       <section className="flex flex-col items-center px-6 pt-6 pb-16 text-center">
         <div className="flex flex-col items-center justify-center sm:max-w-3xl mx-auto">
-          <video
-            src="/assets/enterprise.webm"
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="w-full max-w-sm px-10 mb-4 rounded-lg"
-          />
+          <video autoPlay loop muted playsInline className="w-full max-w-sm px-10 mb-4 rounded-lg dark:invert">
+            {/* codecs=hvc1 is a workaround as only safari appears to support it. Other browsers should fall back to webm. */}
+            <source src="/assets/enterprise.mp4" type="video/mp4; codecs=hvc1" />
+            <source src="/assets/enterprise.webm" type="video/webm" />
+          </video>
           <h1 className="text-3xl sm:text-5xl font-bold tracking-tight mb-4">Enterprise Support</h1>
           <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mb-6">
             Get hands-on support from the team behind Forui. We work alongside you to solve complex challenges and ship

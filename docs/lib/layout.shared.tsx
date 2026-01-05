@@ -6,7 +6,7 @@ const iconLinks = [
   {
     type: 'icon' as const,
     label: 'GitHub',
-    icon: <Image src="/brands/github.svg" alt="" width={20} height={20} className="dark:invert" />,
+    icon: <Image src="/brands/github.svg" alt="" width={19} height={19} className="dark:invert" />,
     text: 'GitHub',
     url: 'https://github.com/duobaseio/forui',
   },

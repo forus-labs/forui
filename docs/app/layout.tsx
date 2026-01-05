@@ -2,6 +2,15 @@ import { RootProvider } from 'fumadocs-ui/provider/next';
 import './global.css';
 import { Inter } from 'next/font/google';
 
+export const metadata = {
+  title: {
+    template: '%s – Forui',
+  },
+  icons: {
+    icon: '/favicon.ico',
+  },
+};
+
 const inter = Inter({
   subsets: ['latin'],
 });
