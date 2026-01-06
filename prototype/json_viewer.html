@@ -358,6 +358,27 @@
       margin-top: 2px;
       max-width: 300px;
     }
+
+    .variant-toggle {
+      padding: 6px 14px;
+      background: #3c3c3c;
+      border: 1px solid #555;
+      border-radius: 4px;
+      color: #888;
+      font-size: 13px;
+      font-family: 'Fira Code', 'Consolas', monospace;
+      cursor: pointer;
+    }
+
+    .variant-toggle:hover {
+      border-color: #777;
+    }
+
+    .variant-toggle.on {
+      background: #094771;
+      border-color: #0e639c;
+      color: #fff;
+    }
   </style>
 </head>
 <body>
@@ -400,8 +421,8 @@
       }
 
       let text = data.text;
-      let links = [...(data.links || [])];
-      let tooltips = [...(data.tooltips || [])];
+      let links = (data.links || []).map(l => ({...l}));
+      let tooltips = (data.tooltips || []).map(t => ({...t}));
 
       // Find all {{category}} placeholders and their positions
       const placeholderRegex = /\{\{(\w+)\}\}/g;
@@ -424,67 +445,107 @@
         const variants = data.categories[ph.category];
         if (!variants || variants.length === 0) continue;
 
-        const selectedIndex = selections[ph.category] || 0;
-        const variant = variants[selectedIndex];
-        const variantText = variant.text || '';
+        const selectedIndex = selections[ph.category] ?? 0;
+
+        // -1 means "none" - remove placeholder entirely
+        const variant = selectedIndex === -1 ? null : variants[selectedIndex];
+        const variantText = variant?.text || '';
+
+        let start = ph.start;
+        let end = ph.end;
+
+        // If removing (none selected), also remove preceding newline + indentation
+        if (!variantText) {
+          const before = text.substring(0, ph.start);
+          const nlIndex = before.lastIndexOf('\n');
+          if (nlIndex !== -1 && before.substring(nlIndex + 1).trim() === '') {
+            start = nlIndex;
+          }
+        }
 
         // Calculate offset adjustment
-        const adjustment = variantText.length - ph.length;
+        const adjustment = variantText.length - (end - start);
 
         // Substitute in text
-        text = text.substring(0, ph.start) + variantText + text.substring(ph.end);
+        text = text.substring(0, start) + variantText + text.substring(end);
 
         // Adjust links that come after this placeholder
         for (const link of links) {
-          if (link.offset >= ph.end) {
+          if (link.offset >= end) {
             link.offset += adjustment;
           }
         }
         for (const tip of tooltips) {
-          if (tip.offset >= ph.end) {
+          if (tip.offset >= end) {
             tip.offset += adjustment;
           }
         }
 
         // Add variant's links/tooltips (offset adjusted to placeholder position)
-        for (const link of (variant.links || [])) {
-          links.push({ ...link, offset: link.offset + ph.start });
-        }
-        for (const tip of (variant.tooltips || [])) {
-          tooltips.push({ ...tip, offset: tip.offset + ph.start });
+        if (variant) {
+          for (const link of (variant.links || [])) {
+            links.push({ ...link, offset: link.offset + ph.start });
+          }
+          for (const tip of (variant.tooltips || [])) {
+            tooltips.push({ ...tip, offset: tip.offset + ph.start });
+          }
         }
       }
 
       return { text, links, tooltips };
     }
 
-    // Render variant selector dropdowns
+    // Render variant selector dropdowns (or toggle if only 1 option)
     function renderVariantSelectors(categories, selections) {
       const categoryNames = Object.keys(categories);
       if (categoryNames.length === 0) return '';
 
       return `<div class="variant-selectors">${categoryNames.map(name => {
         const variants = categories[name];
-        const selected = selections[name] || 0;
+        const selected = selections[name] ?? 0;
         const selectedVariant = variants[selected];
+        const description = selected === -1 ? '' : (selectedVariant?.description || '');
 
+        // Single variant: render toggle button
+        if (variants.length === 1) {
+          const isOn = selected === 0;
+          return `
+            <div class="variant-selector">
+              <label>${escapeHtml(name)}</label>
+              <button class="variant-toggle${isOn ? ' on' : ''}" data-category="${escapeHtml(name)}">${escapeHtml(variants[0].name)}</button>
+              ${description ? `<div class="variant-description">${escapeHtml(description)}</div>` : ''}
+            </div>
+          `;
+        }
+
+        // Multiple variants: render dropdown with none option
         return `
           <div class="variant-selector">
             <label>${escapeHtml(name)}</label>
             <select data-category="${escapeHtml(name)}">
+              <option value="-1"${selected === -1 ? ' selected' : ''}>none</option>
               ${variants.map((v, i) => `<option value="${i}"${i === selected ? ' selected' : ''}>${escapeHtml(v.name)}</option>`).join('')}
             </select>
-            ${selectedVariant.description ? `<div class="variant-description">${escapeHtml(selectedVariant.description)}</div>` : ''}
+            ${description ? `<div class="variant-description">${escapeHtml(description)}</div>` : ''}
           </div>
         `;
       }).join('')}</div>`;
     }
 
-    // Handle variant selection change
+    // Handle variant selection change (dropdown)
     function onVariantChange(e) {
       const category = e.target.dataset.category;
       const index = parseInt(e.target.value);
       variantSelections[category] = index;
+      rerenderUsagesCode();
+    }
+
+    // Handle toggle button click (single variant)
+    function onToggleClick(e) {
+      const category = e.target.dataset.category;
+      const current = variantSelections[category] ?? 0;
+      variantSelections[category] = current === 0 ? -1 : 0;
+      e.target.classList.toggle('on');
       rerenderUsagesCode();
     }
 
@@ -791,6 +852,9 @@
         if (isUsages) {
           main.querySelectorAll('.variant-selector select').forEach(sel => {
             sel.addEventListener('change', onVariantChange);
+          });
+          main.querySelectorAll('.variant-toggle').forEach(btn => {
+            btn.addEventListener('click', onToggleClick);
           });
         }
 

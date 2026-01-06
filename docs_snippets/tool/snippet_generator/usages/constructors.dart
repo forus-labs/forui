@@ -43,23 +43,25 @@ class Constructors extends RecursiveAstVisitor<void> {
       final start = match.start + '// {@category "$name"}\n'.length + 2;
       final end = start + category.trim().length;
 
-      final String placeholder;
+      final placeholder = '{{$name}}';
       if (usage.categories.containsKey(name)) {
-        // We replace only the value if the category already exists.
         final label = _label.firstMatch(category)!.group(1)!;
-        placeholder = '$label: {{$name}},';
 
-        usage.adjustSpans(start + label.length, end, -(match.end - match.start - placeholder.length));
+        // We don't need to perform a copy since labels always share the same position across variants (at the start),
+        // and we don't perform any mutations after this.
+        final spans = usage.adjustSpans(start, end, -(match.end - match.start - placeholder.length))
+          ..removeWhere((s) => label.length <= s.offset);
 
-        // Adjust the label's spans to the new position.
-        for (final span in usage.spans) {
-          if (start <= span.offset && span.offset < start + label.length) {
-            span.adjust(match.start - start);
+        final prefix = '$label: ';
+        for (final variant in usage.categories[name]!) {
+          variant.text = '$prefix${variant.text},';
+
+          for (final span in variant.spans) {
+            span.adjust(prefix.length);
           }
+          variant.spans.addAll(spans);
         }
       } else {
-        placeholder = '{{$name}}';
-
         final spans = usage.adjustSpans(start, end, -(match.end - match.start - placeholder.length));
         usage.categories[name] = [Variant(name, '', category.trim())..spans.addAll(spans)];
       }

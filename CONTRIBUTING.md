@@ -450,6 +450,8 @@ register the route with [`_AppRouter` in main.dart](https://github.com/forus-lab
 A route's path should follow the format `/<widget-name>/<variant>` in kebab-case. In this case, the button route's path 
 is `/button/text`. `<variant>` should default to `default` and never be empty.
 
+See the snippet generator's [README](./docs_snippets/README.md) for more details.
+
 
 ### Creating a Documentation Page
 
