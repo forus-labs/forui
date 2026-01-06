@@ -1,5 +1,5 @@
 {
-  "text": "import 'theme/accordion_style.dart';\n\n@override\nWidget build(BuildContext context) => FAccordion(\n  // Pass the modified style to the widget.\n  style: accordionStyle(colors: context.theme.colors, typography: context.theme.typography, style: context.theme.style),\n  children: const [\n    FAccordionItem(title: Text('Is it accessible?'), child: Text('Yes. It adheres to the WAI-ARIA design pattern.')),\n  ],\n);\n",
+  "text": "import 'theme/accordion_style.dart';\n\n@override\nWidget build(BuildContext context) => FAccordion(\n  // Pass the modified style to the widget.\n  style: accordionStyle(\n    colors: context.theme.colors,\n    typography: context.theme.typography,\n    style: context.theme.style,\n  ),\n  children: const [\n    FAccordionItem(\n      title: Text('Is it accessible?'),\n      child: Text('Yes. It adheres to the WAI-ARIA design pattern.'),\n    ),\n  ],\n);\n",
   "highlights": [
     {
       "start": 1,
@@ -7,7 +7,7 @@
     },
     {
       "start": 6,
-      "end": 6
+      "end": 10
     }
   ],
   "links": [
@@ -22,52 +22,52 @@
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordion/style.html"
     },
     {
-      "offset": 188,
+      "offset": 193,
       "length": 6,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/colors.html"
     },
     {
-      "offset": 182,
+      "offset": 187,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext/theme.html"
     },
     {
-      "offset": 222,
+      "offset": 231,
       "length": 10,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/typography.html"
     },
     {
-      "offset": 216,
+      "offset": 225,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext/theme.html"
     },
     {
-      "offset": 255,
+      "offset": 268,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/style.html"
     },
     {
-      "offset": 249,
+      "offset": 262,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext/theme.html"
     },
     {
-      "offset": 265,
+      "offset": 282,
       "length": 8,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordion/children.html"
     },
     {
-      "offset": 287,
+      "offset": 304,
       "length": 14,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionItem/FAccordionItem.html"
     },
     {
-      "offset": 302,
+      "offset": 326,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionItem/title.html"
     },
     {
-      "offset": 336,
+      "offset": 366,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionItem/child.html"
     }
@@ -96,9 +96,29 @@
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordion/FAccordion.html"
           },
           {
+            "offset": 49,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionControl-class.html"
+          },
+          {
+            "offset": 84,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionControl/FAccordionControl.managed.html"
+          },
+          {
             "offset": 140,
             "length": 5,
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordion/FAccordion.html"
+          },
+          {
+            "offset": 97,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionStyle-class.html"
+          },
+          {
+            "offset": 122,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionStyle-class.html"
           },
           {
             "offset": 154,
@@ -119,17 +139,34 @@
       "snippet": {
         "text": "{FAccordionStyle Function(FAccordionStyle)? style}",
         "highlights": [],
-        "links": [],
+        "links": [
+          {
+            "offset": 1,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionStyle-class.html"
+          },
+          {
+            "offset": 26,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionStyle-class.html"
+          }
+        ],
         "tooltips": []
       }
     },
     {
-      "offset": 188,
+      "offset": 193,
       "length": 6,
       "snippet": {
         "text": "FColors colors",
         "highlights": [],
-        "links": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors-class.html"
+          }
+        ],
         "tooltips": [],
         "container": {
           "name": "FThemeData",
@@ -138,12 +175,18 @@
       }
     },
     {
-      "offset": 182,
+      "offset": 187,
       "length": 5,
       "snippet": {
         "text": "FThemeData get theme",
         "highlights": [],
-        "links": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+          }
+        ],
         "tooltips": [],
         "container": {
           "name": "FThemeBuildContext",
@@ -152,12 +195,18 @@
       }
     },
     {
-      "offset": 222,
+      "offset": 231,
       "length": 10,
       "snippet": {
         "text": "FTypography typography",
         "highlights": [],
-        "links": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FTypography-class.html"
+          }
+        ],
         "tooltips": [],
         "container": {
           "name": "FThemeData",
@@ -166,12 +215,18 @@
       }
     },
     {
-      "offset": 216,
+      "offset": 225,
       "length": 5,
       "snippet": {
         "text": "FThemeData get theme",
         "highlights": [],
-        "links": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+          }
+        ],
         "tooltips": [],
         "container": {
           "name": "FThemeBuildContext",
@@ -180,12 +235,18 @@
       }
     },
     {
-      "offset": 255,
+      "offset": 268,
       "length": 5,
       "snippet": {
         "text": "FStyle style",
         "highlights": [],
-        "links": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FStyle-class.html"
+          }
+        ],
         "tooltips": [],
         "container": {
           "name": "FThemeData",
@@ -194,12 +255,18 @@
       }
     },
     {
-      "offset": 249,
+      "offset": 262,
       "length": 5,
       "snippet": {
         "text": "FThemeData get theme",
         "highlights": [],
-        "links": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+          }
+        ],
         "tooltips": [],
         "container": {
           "name": "FThemeBuildContext",
@@ -208,7 +275,7 @@
       }
     },
     {
-      "offset": 265,
+      "offset": 282,
       "length": 9,
       "snippet": {
         "text": "{required List<Widget> children}",
@@ -218,7 +285,7 @@
       }
     },
     {
-      "offset": 287,
+      "offset": 304,
       "length": 14,
       "snippet": {
         "text": "FAccordionItem({\n  required Widget title,\n  required Widget child,\n  FAccordionStyle? style,\n  Widget icon = const Icon(FIcons.chevronDown),\n  bool? initiallyExpanded,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  void Function(bool)? onHoverChange,\n  void Function(FWidgetStatesDelta)? onStateChange,\n  Key? key,\n})\n",
@@ -245,9 +312,19 @@
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionItem/FAccordionItem.html"
           },
           {
+            "offset": 69,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionStyle-class.html"
+          },
+          {
             "offset": 102,
             "length": 4,
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionItem/FAccordionItem.html"
+          },
+          {
+            "offset": 120,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/chevronDown.html"
           },
           {
             "offset": 149,
@@ -280,6 +357,11 @@
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionItem/FAccordionItem.html"
           },
           {
+            "offset": 310,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStatesDelta-class.html"
+          },
+          {
             "offset": 353,
             "length": 3,
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionItem/FAccordionItem.html"
@@ -293,7 +375,7 @@
       }
     },
     {
-      "offset": 302,
+      "offset": 326,
       "length": 6,
       "snippet": {
         "text": "{required Widget title}",
@@ -303,7 +385,7 @@
       }
     },
     {
-      "offset": 336,
+      "offset": 366,
       "length": 6,
       "snippet": {
         "text": "{required Widget child}",

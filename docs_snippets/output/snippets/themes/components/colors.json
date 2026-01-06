@@ -1,5 +1,5 @@
 {
-  "text": "@override\nWidget build(BuildContext context) {\n  final colors = context.theme.colors;\n  return ColoredBox(\n    color: colors.primary,\n    child: Text('Hello World!', style: TextStyle(color: colors.primaryForeground)),\n  );\n}\n",
+  "text": "@override\nWidget build(BuildContext context) {\n  final colors = context.theme.colors;\n  return ColoredBox(\n    color: colors.primary,\n    child: Text(\n      'Hello World!',\n      style: TextStyle(color: colors.primaryForeground),\n    ),\n  );\n}\n",
   "highlights": [],
   "links": [
     {
@@ -18,7 +18,7 @@
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors/primary.html"
     },
     {
-      "offset": 197,
+      "offset": 210,
       "length": 17,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors/primaryForeground.html"
     }
@@ -79,7 +79,7 @@
       }
     },
     {
-      "offset": 197,
+      "offset": 210,
       "length": 17,
       "snippet": {
         "text": "Color primaryForeground",

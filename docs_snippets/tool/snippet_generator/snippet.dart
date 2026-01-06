@@ -65,7 +65,7 @@ class Snippet {
       } else {
         output.add(line);
         starts.add(offset);
-        adjustments.add(cumulative);
+        adjustments.add(-cumulative);
         lineNumber++;
       }
 
@@ -73,6 +73,37 @@ class Snippet {
     }
 
     text = output.join('\n');
+    _adjustSpans(starts, adjustments);
+  }
+
+  /// Indent the snippet by [spaces] spaces, adjusting all span offsets accordingly.
+  void indent(int spaces, {bool firstLine = true}) {
+    final indent = ' ' * spaces;
+    final lines = text.split('\n');
+    final indented = StringBuffer();
+
+    final adjustments = <int>[]; // Cumulative adjustments per line.
+    final starts = <int>[]; // Offset of start of lines in original text.
+    var previous = 0;
+
+    for (var i = 0; i < lines.length; i++) {
+      final line = lines[i];
+      final shouldIndent = i > 0 || firstLine;
+
+      if (shouldIndent) {
+        indented.writeln('$indent$line');
+        adjustments.add((adjustments.lastOrNull ?? 0) + spaces);
+      } else {
+        indented.writeln(line);
+        adjustments.add(adjustments.lastOrNull ?? 0);
+      }
+
+      starts.add((starts.lastOrNull ?? 0) + previous);
+      previous = line.length + 1;
+    }
+
+    // Remove trailing newline added by writeln
+    text = indented.toString().substring(0, indented.length - 1);
     _adjustSpans(starts, adjustments);
   }
 
@@ -89,7 +120,7 @@ class Snippet {
     for (final line in lines) {
       if (line.startsWith(indent)) {
         unindented.writeln(line.substring(spaces));
-        adjustments.add((adjustments.lastOrNull ?? 0) + spaces);
+        adjustments.add((adjustments.lastOrNull ?? 0) - spaces);
       } else {
         unindented.writeln(line);
         adjustments.add(adjustments.lastOrNull ?? 0);
@@ -101,6 +132,19 @@ class Snippet {
 
     text = unindented.toString();
     _adjustSpans(starts, adjustments);
+  }
+
+  void _adjustSpans(List<int> starts, List<int> adjustments) {
+    for (final span in spans) {
+      var line = 0;
+      for (var i = starts.length - 1; i >= 0; i--) {
+        if (starts[i] <= span.offset) {
+          line = i;
+          break;
+        }
+      }
+      span.adjust(adjustments[line]);
+    }
   }
 
   /// Remove import statements from the snippet, adjusting spans and highlights.
@@ -119,19 +163,6 @@ class Snippet {
     for (var i = 0; i < highlights.length; i++) {
       final (start, end) = highlights[i];
       highlights[i] = (start - removedLines, end - removedLines);
-    }
-  }
-
-  void _adjustSpans(List<int> starts, List<int> adjustments) {
-    for (final span in spans) {
-      var line = 0;
-      for (var i = starts.length - 1; i >= 0; i--) {
-        if (starts[i] <= span.offset) {
-          line = i;
-          break;
-        }
-      }
-      span.adjust(-adjustments[line]);
     }
   }
 

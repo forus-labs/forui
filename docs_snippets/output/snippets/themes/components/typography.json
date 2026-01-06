@@ -1,9 +1,9 @@
 {
-  "text": "@override\nWidget build(BuildContext context) {\n  final typography = context.theme.typography;\n\n  return Text(\n    'Hello World!',\n    style: typography.xs.copyWith(color: context.theme.colors.primaryForeground, fontWeight: .bold),\n  );\n}\n",
+  "text": "@override\nWidget build(BuildContext context) {\n  final typography = context.theme.typography;\n\n  return Text(\n    'Hello World!',\n    style: typography.xs.copyWith(\n      color: context.theme.colors.primaryForeground,\n      fontWeight: .bold,\n    ),\n  );\n}\n",
   "highlights": [
     {
       "start": 7,
-      "end": 7
+      "end": 10
     }
   ],
   "links": [
@@ -23,17 +23,17 @@
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FTypography/xs.html"
     },
     {
-      "offset": 192,
+      "offset": 199,
       "length": 17,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors/primaryForeground.html"
     },
     {
-      "offset": 185,
+      "offset": 192,
       "length": 6,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/colors.html"
     },
     {
-      "offset": 179,
+      "offset": 186,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext/theme.html"
     }
@@ -94,7 +94,7 @@
       }
     },
     {
-      "offset": 192,
+      "offset": 199,
       "length": 17,
       "snippet": {
         "text": "Color primaryForeground",
@@ -108,7 +108,7 @@
       }
     },
     {
-      "offset": 185,
+      "offset": 192,
       "length": 6,
       "snippet": {
         "text": "FColors colors",
@@ -128,7 +128,7 @@
       }
     },
     {
-      "offset": 179,
+      "offset": 186,
       "length": 5,
       "snippet": {
         "text": "FThemeData get theme",

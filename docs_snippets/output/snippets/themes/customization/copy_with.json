@@ -1,5 +1,5 @@
 {
-  "text": "FAccordion(\n  style: (style) =>\n      style.copyWith(focusedOutlineStyle: (style) => style.copyWith(color: context.theme.colors.background)),\n  children: const [],\n);\n",
+  "text": "FAccordion(\n  style: (style) => style.copyWith(\n    focusedOutlineStyle: (style) =>\n        style.copyWith(color: context.theme.colors.background),\n  ),\n  children: const [],\n);\n",
   "highlights": [],
   "links": [
     {
@@ -13,42 +13,42 @@
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordion/style.html"
     },
     {
-      "offset": 44,
+      "offset": 38,
       "length": 8,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/$FAccordionStyleTransformations/copyWith.html"
     },
     {
-      "offset": 53,
+      "offset": 52,
       "length": 19,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/$FAccordionStyleTransformations/copyWith.html"
     },
     {
-      "offset": 91,
+      "offset": 98,
       "length": 8,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/$FFocusedOutlineStyleTransformations/copyWith.html"
     },
     {
-      "offset": 100,
+      "offset": 107,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/$FFocusedOutlineStyleTransformations/copyWith.html"
     },
     {
-      "offset": 128,
+      "offset": 135,
       "length": 10,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors/background.html"
     },
     {
-      "offset": 121,
+      "offset": 128,
       "length": 6,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/colors.html"
     },
     {
-      "offset": 115,
+      "offset": 122,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext/theme.html"
     },
     {
-      "offset": 144,
+      "offset": 155,
       "length": 8,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordion/children.html"
     }
@@ -152,7 +152,7 @@
       }
     },
     {
-      "offset": 44,
+      "offset": 38,
       "length": 8,
       "snippet": {
         "text": "FAccordionStyle copyWith({\n  FWidgetStateMap<TextStyle>? titleTextStyle,\n  TextStyle? childTextStyle,\n  EdgeInsetsGeometry? titlePadding,\n  EdgeInsetsGeometry? childPadding,\n  FWidgetStateMap<IconThemeData>? iconStyle,\n  FFocusedOutlineStyle Function(FFocusedOutlineStyle)? focusedOutlineStyle,\n  FDividerStyle Function(FDividerStyle)? dividerStyle,\n  FTappableStyle Function(FTappableStyle)? tappableStyle,\n  FAccordionMotion Function(FAccordionMotion)? motion,\n})",
@@ -222,7 +222,7 @@
       }
     },
     {
-      "offset": 53,
+      "offset": 52,
       "length": 20,
       "snippet": {
         "text": "{\n  FFocusedOutlineStyle Function(FFocusedOutlineStyle)? focusedOutlineStyle,\n}",
@@ -243,7 +243,7 @@
       }
     },
     {
-      "offset": 75,
+      "offset": 74,
       "length": 5,
       "snippet": {
         "text": "FFocusedOutlineStyle style",
@@ -259,7 +259,7 @@
       }
     },
     {
-      "offset": 91,
+      "offset": 98,
       "length": 8,
       "snippet": {
         "text": "FFocusedOutlineStyle copyWith({\n  Color? color,\n  BorderRadiusGeometry? borderRadius,\n  double? width,\n  double? spacing,\n})",
@@ -279,7 +279,7 @@
       }
     },
     {
-      "offset": 100,
+      "offset": 107,
       "length": 6,
       "snippet": {
         "text": "{Color? color}",
@@ -289,7 +289,7 @@
       }
     },
     {
-      "offset": 128,
+      "offset": 135,
       "length": 10,
       "snippet": {
         "text": "Color background",
@@ -303,7 +303,7 @@
       }
     },
     {
-      "offset": 121,
+      "offset": 128,
       "length": 6,
       "snippet": {
         "text": "FColors colors",
@@ -323,7 +323,7 @@
       }
     },
     {
-      "offset": 115,
+      "offset": 122,
       "length": 5,
       "snippet": {
         "text": "FThemeData get theme",
@@ -343,7 +343,7 @@
       }
     },
     {
-      "offset": 144,
+      "offset": 155,
       "length": 9,
       "snippet": {
         "text": "{required List<Widget> children}",

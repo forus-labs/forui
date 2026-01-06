@@ -1,5 +1,5 @@
 {
-  "text": "import 'package:flutter/cupertino.dart';\n\nimport 'package:forui/forui.dart';\n\nvoid main() {\n  runApp(const Application());\n}\n\nclass Application extends StatelessWidget {\n  const Application({super.key});\n\n  @override\n  Widget build(BuildContext context) => CupertinoApp(\n    builder: (context, child) => FAnimatedTheme(data: FThemes.zinc.light, child: child!),\n    home: const FScaffold(child: Placeholder()),\n  );\n}\n",
+  "text": "import 'package:flutter/cupertino.dart';\n\nimport 'package:forui/forui.dart';\n\nvoid main() {\n  runApp(const Application());\n}\n\nclass Application extends StatelessWidget {\n  const Application({super.key});\n\n  @override\n  Widget build(BuildContext context) => CupertinoApp(\n    builder: (context, child) =>\n        FAnimatedTheme(data: FThemes.zinc.light, child: child!),\n    home: const FScaffold(child: Placeholder()),\n  );\n}\n",
   "highlights": [
     {
       "start": 3,
@@ -12,37 +12,37 @@
   ],
   "links": [
     {
-      "offset": 304,
+      "offset": 312,
       "length": 14,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FAnimatedTheme/FAnimatedTheme.html"
     },
     {
-      "offset": 319,
+      "offset": 327,
       "length": 4,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FAnimatedTheme/data.html"
     },
     {
-      "offset": 338,
+      "offset": 346,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemes/zinc.html"
     },
     {
-      "offset": 325,
+      "offset": 333,
       "length": 12,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemes/zinc.html"
     },
     {
-      "offset": 345,
+      "offset": 353,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FAnimatedTheme/child.html"
     },
     {
-      "offset": 377,
+      "offset": 385,
       "length": 9,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.scaffold/FScaffold/FScaffold.html"
     },
     {
-      "offset": 387,
+      "offset": 395,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.scaffold/FScaffold/child.html"
     }
@@ -69,7 +69,7 @@
       }
     },
     {
-      "offset": 304,
+      "offset": 312,
       "length": 14,
       "snippet": {
         "text": "FAnimatedTheme({\n  required FThemeData data,\n  required Widget child,\n  FAnimatedThemeMotion motion = const FAnimatedThemeMotion(),\n  void Function()? onEnd,\n  Key? key,\n})\n",
@@ -114,7 +114,7 @@
       }
     },
     {
-      "offset": 319,
+      "offset": 327,
       "length": 5,
       "snippet": {
         "text": "{required FThemeData data}",
@@ -124,7 +124,7 @@
       }
     },
     {
-      "offset": 338,
+      "offset": 346,
       "length": 5,
       "snippet": {
         "text": "FThemeData light",
@@ -134,7 +134,7 @@
       }
     },
     {
-      "offset": 325,
+      "offset": 333,
       "length": 12,
       "snippet": {
         "text": "({FThemeData dark, FThemeData light}) zinc",
@@ -148,7 +148,7 @@
       }
     },
     {
-      "offset": 345,
+      "offset": 353,
       "length": 6,
       "snippet": {
         "text": "{required Widget child}",
@@ -158,7 +158,7 @@
       }
     },
     {
-      "offset": 377,
+      "offset": 385,
       "length": 9,
       "snippet": {
         "text": "FScaffold({\n  required Widget child,\n  FScaffoldStyle Function(FScaffoldStyle)? scaffoldStyle,\n  Widget? header,\n  Widget? sidebar,\n  Widget? footer,\n  bool childPad = true,\n  bool resizeToAvoidBottomInset = true,\n  Key? key,\n})\n",
@@ -218,7 +218,7 @@
       }
     },
     {
-      "offset": 387,
+      "offset": 395,
       "length": 6,
       "snippet": {
         "text": "{required Widget child}",

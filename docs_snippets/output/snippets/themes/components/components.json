@@ -65,7 +65,13 @@
       "snippet": {
         "text": "FThemeData get theme",
         "highlights": [],
-        "links": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+          }
+        ],
         "tooltips": [],
         "container": {
           "name": "FThemeBuildContext",
@@ -79,7 +85,13 @@
       "snippet": {
         "text": "FColors colors",
         "highlights": [],
-        "links": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors-class.html"
+          }
+        ],
         "tooltips": [],
         "container": {
           "name": "FThemeData",
@@ -93,7 +105,13 @@
       "snippet": {
         "text": "FThemeData get theme",
         "highlights": [],
-        "links": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+          }
+        ],
         "tooltips": [],
         "container": {
           "name": "FThemeBuildContext",
@@ -107,7 +125,13 @@
       "snippet": {
         "text": "FTypography typography",
         "highlights": [],
-        "links": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FTypography-class.html"
+          }
+        ],
         "tooltips": [],
         "container": {
           "name": "FThemeData",
@@ -121,7 +145,13 @@
       "snippet": {
         "text": "FThemeData get theme",
         "highlights": [],
-        "links": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+          }
+        ],
         "tooltips": [],
         "container": {
           "name": "FThemeBuildContext",
@@ -135,7 +165,13 @@
       "snippet": {
         "text": "FStyle style",
         "highlights": [],
-        "links": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FStyle-class.html"
+          }
+        ],
         "tooltips": [],
         "container": {
           "name": "FThemeData",
@@ -149,7 +185,13 @@
       "snippet": {
         "text": "FThemeData get theme",
         "highlights": [],
-        "links": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+          }
+        ],
         "tooltips": [],
         "container": {
           "name": "FThemeBuildContext",

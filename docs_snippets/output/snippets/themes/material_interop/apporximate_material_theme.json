@@ -1,5 +1,5 @@
 {
-  "text": "import 'package:flutter/material.dart';\nimport 'package:forui/forui.dart';\n\n@override\nWidget build(BuildContext context) => MaterialApp(\n  theme: FThemes.zinc.light.toApproximateMaterialTheme(),\n  home: Scaffold(\n    body: Center(\n      child: FCard(\n        title: const Text('Mixed Widgets'),\n        subtitle: const Text('Using both Forui and Material widgets together'),\n        child: ElevatedButton(onPressed: () {}, child: const Text('Material Button')),\n      ),\n    ),\n  ),\n);\n",
+  "text": "import 'package:flutter/material.dart';\nimport 'package:forui/forui.dart';\n\n@override\nWidget build(BuildContext context) => MaterialApp(\n  theme: FThemes.zinc.light.toApproximateMaterialTheme(),\n  home: Scaffold(\n    body: Center(\n      child: FCard(\n        title: const Text('Mixed Widgets'),\n        subtitle: const Text('Using both Forui and Material widgets together'),\n        child: ElevatedButton(\n          onPressed: () {},\n          child: const Text('Material Button'),\n        ),\n      ),\n    ),\n  ),\n);\n",
   "highlights": [
     {
       "start": 6,

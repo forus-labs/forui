@@ -12,6 +12,7 @@ import 'package:yaml/yaml.dart';
 
 import 'examples/examples.dart';
 import 'snippets/snippets.dart';
+import 'usages/usages.dart';
 
 /// The formatter used to format the generated code snippets.
 final formatter = DartFormatter(languageVersion: DartFormatter.latestLanguageVersion);
@@ -23,8 +24,8 @@ final output = p.join(Directory.current.path, 'output');
 
 final lib = p.join(Directory.current.parent.path, 'docs_snippets', 'lib');
 final _examples = p.join(lib, 'examples');
-// final _usages = p.join(lib, 'usages');
 final _snippets = p.join(lib, 'snippets');
+final _usages = p.join(lib, 'usages');
 
 /// Information about a Dart package.
 class Package {
@@ -83,6 +84,15 @@ Future<void> main() async {
   for (final MapEntry(key: fileName, value: snippet) in snippets.entries) {
     final json = const JsonEncoder.withIndent('  ').convert(snippet.toJson());
     final file = File(p.join(output, 'snippets', '$fileName.json'));
+    file.parent.createSync(recursive: true);
+    file.writeAsStringSync(json);
+  }
+
+  // Process usages
+  final usages = await Usages.generate(session, provider, packages, _usages);
+  for (final MapEntry(key: fileName, value: snippet) in usages.entries) {
+    final json = const JsonEncoder.withIndent('  ').convert(snippet.toJson());
+    final file = File(p.join(output, 'usages', '$fileName.json'));
     file.parent.createSync(recursive: true);
     file.writeAsStringSync(json);
   }

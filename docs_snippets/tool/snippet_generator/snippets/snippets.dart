@@ -19,7 +19,7 @@ class Snippets {
     final dir = Directory(path);
 
     for (final file in dir.listSync(recursive: true).whereType<File>().where((f) => f.path.endsWith('.dart'))) {
-      final content = file.readAsStringSync();
+      final content = formatter.format(file.readAsStringSync());
       final relativePath = p.relative(file.path, from: path);
       final fileName = p.withoutExtension(relativePath).replaceAll(p.separator, '/');
 

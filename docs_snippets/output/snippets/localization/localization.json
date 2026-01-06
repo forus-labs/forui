@@ -1,5 +1,5 @@
 {
-  "text": "MaterialApp(\n  localizationsDelegates: FLocalizations.localizationsDelegates,\n  supportedLocales: FLocalizations.supportedLocales,\n  builder: (context, child) => FAnimatedTheme(data: FThemes.zinc.light, child: child!),\n  home: const FScaffold(child: Placeholder()),\n);\n",
+  "text": "MaterialApp(\n  localizationsDelegates: FLocalizations.localizationsDelegates,\n  supportedLocales: FLocalizations.supportedLocales,\n  builder: (context, child) =>\n      FAnimatedTheme(data: FThemes.zinc.light, child: child!),\n  home: const FScaffold(child: Placeholder()),\n);\n",
   "highlights": [
     {
       "start": 2,
@@ -18,37 +18,37 @@
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.localizations/FLocalizations/supportedLocales.html"
     },
     {
-      "offset": 162,
+      "offset": 168,
       "length": 14,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FAnimatedTheme/FAnimatedTheme.html"
     },
     {
-      "offset": 177,
+      "offset": 183,
       "length": 4,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FAnimatedTheme/data.html"
     },
     {
-      "offset": 196,
+      "offset": 202,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemes/zinc.html"
     },
     {
-      "offset": 183,
+      "offset": 189,
       "length": 12,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemes/zinc.html"
     },
     {
-      "offset": 203,
+      "offset": 209,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FAnimatedTheme/child.html"
     },
     {
-      "offset": 233,
+      "offset": 239,
       "length": 9,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.scaffold/FScaffold/FScaffold.html"
     },
     {
-      "offset": 243,
+      "offset": 249,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.scaffold/FScaffold/child.html"
     }
@@ -103,7 +103,7 @@
       }
     },
     {
-      "offset": 162,
+      "offset": 168,
       "length": 14,
       "snippet": {
         "text": "FAnimatedTheme({\n  required FThemeData data,\n  required Widget child,\n  FAnimatedThemeMotion motion = const FAnimatedThemeMotion(),\n  void Function()? onEnd,\n  Key? key,\n})\n",
@@ -163,7 +163,7 @@
       }
     },
     {
-      "offset": 177,
+      "offset": 183,
       "length": 5,
       "snippet": {
         "text": "{required FThemeData data}",
@@ -179,7 +179,7 @@
       }
     },
     {
-      "offset": 196,
+      "offset": 202,
       "length": 5,
       "snippet": {
         "text": "FThemeData light",
@@ -195,7 +195,7 @@
       }
     },
     {
-      "offset": 183,
+      "offset": 189,
       "length": 12,
       "snippet": {
         "text": "({FThemeData dark, FThemeData light}) zinc",
@@ -220,7 +220,7 @@
       }
     },
     {
-      "offset": 203,
+      "offset": 209,
       "length": 6,
       "snippet": {
         "text": "{required Widget child}",
@@ -230,7 +230,7 @@
       }
     },
     {
-      "offset": 233,
+      "offset": 239,
       "length": 9,
       "snippet": {
         "text": "FScaffold({\n  required Widget child,\n  FScaffoldStyle Function(FScaffoldStyle)? scaffoldStyle,\n  Widget? header,\n  Widget? sidebar,\n  Widget? footer,\n  bool childPad = true,\n  bool resizeToAvoidBottomInset = true,\n  Key? key,\n})\n",
@@ -300,7 +300,7 @@
       }
     },
     {
-      "offset": 243,
+      "offset": 249,
       "length": 6,
       "snippet": {
         "text": "{required Widget child}",

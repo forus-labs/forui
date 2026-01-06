@@ -1,5 +1,5 @@
 {
-  "text": "import 'package:flutter/widgets.dart';\nimport 'package:flutter_hooks/flutter_hooks.dart';\n\nimport 'package:forui/forui.dart';\nimport 'package:forui_hooks/forui_hooks.dart';\n\nclass Example extends HookWidget {\n  @override\n  Widget build(BuildContext context) {\n    final controller = useFAccordionController();\n    return Column(\n      mainAxisAlignment: .center,\n      children: [\n        FAccordion(\n          control: .managed(controller: controller),\n          children: const [\n            FAccordionItem(\n              title: Text('Is it accessible?'),\n              child: Text('Yes. It adheres to the WAI-ARIA design pattern.'),\n            ),\n            FAccordionItem(\n              initiallyExpanded: true,\n              title: Text('Is it Styled?'),\n              child: Text(\"Yes. It comes with default styles that matches the other components' aesthetics\"),\n            ),\n            FAccordionItem(\n              title: Text('Is it Animated?'),\n              child: Text('Yes. It is animated by default, but you can disable it if you prefer'),\n            ),\n          ],\n        ),\n      ],\n    );\n  }\n}\n",
+  "text": "import 'package:flutter/widgets.dart';\nimport 'package:flutter_hooks/flutter_hooks.dart';\n\nimport 'package:forui/forui.dart';\nimport 'package:forui_hooks/forui_hooks.dart';\n\nclass Example extends HookWidget {\n  @override\n  Widget build(BuildContext context) {\n    final controller = useFAccordionController();\n    return Column(\n      mainAxisAlignment: .center,\n      children: [\n        FAccordion(\n          control: .managed(controller: controller),\n          children: const [\n            FAccordionItem(\n              title: Text('Is it accessible?'),\n              child: Text('Yes. It adheres to the WAI-ARIA design pattern.'),\n            ),\n            FAccordionItem(\n              initiallyExpanded: true,\n              title: Text('Is it Styled?'),\n              child: Text(\n                \"Yes. It comes with default styles that matches the other components' aesthetics\",\n              ),\n            ),\n            FAccordionItem(\n              title: Text('Is it Animated?'),\n              child: Text(\n                'Yes. It is animated by default, but you can disable it if you prefer',\n              ),\n            ),\n          ],\n        ),\n      ],\n    );\n  }\n}\n",
   "highlights": [],
   "links": [
     {
@@ -68,17 +68,17 @@
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionItem/child.html"
     },
     {
-      "offset": 899,
+      "offset": 932,
       "length": 14,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionItem/FAccordionItem.html"
     },
     {
-      "offset": 929,
+      "offset": 962,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionItem/title.html"
     },
     {
-      "offset": 975,
+      "offset": 1008,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionItem/child.html"
     }
@@ -488,7 +488,7 @@
       }
     },
     {
-      "offset": 899,
+      "offset": 932,
       "length": 14,
       "snippet": {
         "text": "FAccordionItem({\n  required Widget title,\n  required Widget child,\n  FAccordionStyle? style,\n  Widget icon = const Icon(FIcons.chevronDown),\n  bool? initiallyExpanded,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  void Function(bool)? onHoverChange,\n  void Function(FWidgetStatesDelta)? onStateChange,\n  Key? key,\n})\n",
@@ -578,7 +578,7 @@
       }
     },
     {
-      "offset": 929,
+      "offset": 962,
       "length": 6,
       "snippet": {
         "text": "{required Widget title}",
@@ -588,7 +588,7 @@
       }
     },
     {
-      "offset": 975,
+      "offset": 1008,
       "length": 6,
       "snippet": {
         "text": "{required Widget child}",

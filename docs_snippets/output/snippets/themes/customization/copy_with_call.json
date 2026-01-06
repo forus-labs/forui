@@ -1,5 +1,5 @@
 {
-  "text": "// Long-form\nFAccordion(\n  style: (s) => FAccordionStyle.inherit(colors: colors, typography: typography, style: style),\n  children: const [],\n);\n\n// Short-form\nFAccordion(\n  style: FAccordionStyle.inherit(colors: colors, typography: typography, style: style),\n  children: const [],\n);\n",
+  "text": "// Long-form\nFAccordion(\n  style: (s) => FAccordionStyle.inherit(\n    colors: colors,\n    typography: typography,\n    style: style,\n  ),\n  children: const [],\n);\n\n// Short-form\nFAccordion(\n  style: FAccordionStyle.inherit(\n    colors: colors,\n    typography: typography,\n    style: style,\n  ),\n  children: const [],\n);\n",
   "highlights": [],
   "links": [
     {
@@ -18,57 +18,57 @@
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionStyle/FAccordionStyle.inherit.html"
     },
     {
-      "offset": 65,
+      "offset": 70,
       "length": 6,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionStyle/FAccordionStyle.inherit.html"
     },
     {
-      "offset": 81,
+      "offset": 90,
       "length": 10,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionStyle/FAccordionStyle.inherit.html"
     },
     {
-      "offset": 105,
+      "offset": 118,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionStyle/FAccordionStyle.inherit.html"
     },
     {
-      "offset": 122,
+      "offset": 139,
       "length": 8,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordion/children.html"
     },
     {
-      "offset": 160,
+      "offset": 177,
       "length": 10,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordion/FAccordion.html"
     },
     {
-      "offset": 174,
+      "offset": 191,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordion/style.html"
     },
     {
-      "offset": 181,
+      "offset": 198,
       "length": 23,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionStyle/FAccordionStyle.inherit.html"
     },
     {
-      "offset": 205,
+      "offset": 227,
       "length": 6,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionStyle/FAccordionStyle.inherit.html"
     },
     {
-      "offset": 221,
+      "offset": 247,
       "length": 10,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionStyle/FAccordionStyle.inherit.html"
     },
     {
-      "offset": 245,
+      "offset": 275,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionStyle/FAccordionStyle.inherit.html"
     },
     {
-      "offset": 262,
+      "offset": 296,
       "length": 8,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordion/children.html"
     }
@@ -222,7 +222,7 @@
       }
     },
     {
-      "offset": 65,
+      "offset": 70,
       "length": 7,
       "snippet": {
         "text": "{required FColors colors}",
@@ -238,7 +238,7 @@
       }
     },
     {
-      "offset": 81,
+      "offset": 90,
       "length": 11,
       "snippet": {
         "text": "{required FTypography typography}",
@@ -254,7 +254,7 @@
       }
     },
     {
-      "offset": 105,
+      "offset": 118,
       "length": 6,
       "snippet": {
         "text": "{required FStyle style}",
@@ -270,7 +270,7 @@
       }
     },
     {
-      "offset": 122,
+      "offset": 139,
       "length": 9,
       "snippet": {
         "text": "{required List<Widget> children}",
@@ -280,7 +280,7 @@
       }
     },
     {
-      "offset": 160,
+      "offset": 177,
       "length": 10,
       "snippet": {
         "text": "FAccordion({\n  required List<Widget> children,\n  FAccordionControl control = const .managed(),\n  FAccordionStyle Function(FAccordionStyle)? style,\n  Key? key,\n})\n",
@@ -340,7 +340,7 @@
       }
     },
     {
-      "offset": 174,
+      "offset": 191,
       "length": 6,
       "snippet": {
         "text": "{FAccordionStyle Function(FAccordionStyle)? style}",
@@ -361,7 +361,7 @@
       }
     },
     {
-      "offset": 181,
+      "offset": 198,
       "length": 23,
       "snippet": {
         "text": "FAccordionStyle.inherit({\n  required FColors colors,\n  required FTypography typography,\n  required FStyle style,\n})\n",
@@ -411,7 +411,7 @@
       }
     },
     {
-      "offset": 205,
+      "offset": 227,
       "length": 7,
       "snippet": {
         "text": "{required FColors colors}",
@@ -427,7 +427,7 @@
       }
     },
     {
-      "offset": 221,
+      "offset": 247,
       "length": 11,
       "snippet": {
         "text": "{required FTypography typography}",
@@ -443,7 +443,7 @@
       }
     },
     {
-      "offset": 245,
+      "offset": 275,
       "length": 6,
       "snippet": {
         "text": "{required FStyle style}",
@@ -459,7 +459,7 @@
       }
     },
     {
-      "offset": 262,
+      "offset": 296,
       "length": 9,
       "snippet": {
         "text": "{required List<Widget> children}",

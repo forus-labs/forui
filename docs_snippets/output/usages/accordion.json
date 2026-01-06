@@ -1,0 +1,623 @@
+{
+  "text": "FAccordion(\n  {{core}}\n  control: {{control}},\n)",
+  "highlights": [],
+  "links": [
+    {
+      "offset": 0,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordion/FAccordion.html"
+    },
+    {
+      "offset": 25,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordion/control.html"
+    }
+  ],
+  "tooltips": [
+    {
+      "offset": 0,
+      "length": 10,
+      "snippet": {
+        "text": "FAccordion({\n  required List<Widget> children,\n  FAccordionControl control = const .managed(),\n  FAccordionStyle Function(FAccordionStyle)? style,\n  Key? key,\n})\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordion/FAccordion.html"
+          },
+          {
+            "offset": 37,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordion/FAccordion.html"
+          },
+          {
+            "offset": 67,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordion/FAccordion.html"
+          },
+          {
+            "offset": 49,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionControl-class.html"
+          },
+          {
+            "offset": 84,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionControl/FAccordionControl.managed.html"
+          },
+          {
+            "offset": 140,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordion/FAccordion.html"
+          },
+          {
+            "offset": 97,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionStyle-class.html"
+          },
+          {
+            "offset": 122,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionStyle-class.html"
+          },
+          {
+            "offset": 154,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordion/FAccordion.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FAccordion",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordion-class.html"
+        }
+      }
+    },
+    {
+      "offset": 25,
+      "length": 8,
+      "snippet": {
+        "text": "{FAccordionControl control = const .managed()}",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 1,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionControl-class.html"
+          },
+          {
+            "offset": 36,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionControl/FAccordionControl.managed.html"
+          }
+        ],
+        "tooltips": []
+      }
+    }
+  ],
+  "categories": {
+    "core": [
+      {
+        "name": "core",
+        "description": "",
+        "text": "style: FThemes.zinc.light.accordionStyle,\n  children: const [],",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordion/style.html"
+          },
+          {
+            "offset": 26,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/accordionStyle.html"
+          },
+          {
+            "offset": 20,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemes/zinc.html"
+          },
+          {
+            "offset": 7,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemes/zinc.html"
+          },
+          {
+            "offset": 44,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordion/children.html"
+          }
+        ],
+        "tooltips": [
+          {
+            "offset": 0,
+            "length": 6,
+            "snippet": {
+              "text": "{FAccordionStyle Function(FAccordionStyle)? style}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 1,
+                  "length": 15,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionStyle-class.html"
+                },
+                {
+                  "offset": 26,
+                  "length": 15,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionStyle-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 26,
+            "length": 14,
+            "snippet": {
+              "text": "FAccordionStyle accordionStyle",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 15,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionStyle-class.html"
+                }
+              ],
+              "tooltips": [],
+              "container": {
+                "name": "FThemeData",
+                "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+              }
+            }
+          },
+          {
+            "offset": 20,
+            "length": 5,
+            "snippet": {
+              "text": "FThemeData light",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 10,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 7,
+            "length": 12,
+            "snippet": {
+              "text": "({FThemeData dark, FThemeData light}) zinc",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 2,
+                  "length": 10,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+                },
+                {
+                  "offset": 19,
+                  "length": 10,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+                }
+              ],
+              "tooltips": [],
+              "container": {
+                "name": "FThemes",
+                "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemes.html"
+              }
+            }
+          },
+          {
+            "offset": 44,
+            "length": 9,
+            "snippet": {
+              "text": "{required List<Widget> children}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          }
+        ]
+      }
+    ],
+    "control": [
+      {
+        "name": ".lifted()",
+        "description": "Externally controls the accordion items' expanded state.",
+        "text": ".lifted(\n    expanded: (index) => true,\n    onChange: (index, expanded) {},\n  )",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 1,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionControl/FAccordionControl.lifted.html"
+          },
+          {
+            "offset": 13,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionControl/FAccordionControl.lifted.html"
+          },
+          {
+            "offset": 44,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionControl/FAccordionControl.lifted.html"
+          }
+        ],
+        "tooltips": [
+          {
+            "offset": 1,
+            "length": 6,
+            "snippet": {
+              "text": "FAccordionControl.lifted({\n  required bool Function(int) expanded,\n  required void Function(int, bool) onChange,\n})\n",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 24,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionControl/FAccordionControl.lifted.html"
+                },
+                {
+                  "offset": 57,
+                  "length": 8,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionControl/FAccordionControl.lifted.html"
+                },
+                {
+                  "offset": 103,
+                  "length": 8,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionControl/FAccordionControl.lifted.html"
+                }
+              ],
+              "tooltips": [],
+              "container": {
+                "name": "FAccordionControl",
+                "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionControl-class.html"
+              }
+            }
+          },
+          {
+            "offset": 13,
+            "length": 9,
+            "snippet": {
+              "text": "{required bool Function(int) expanded}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 24,
+            "length": 5,
+            "snippet": {
+              "text": "int index",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 44,
+            "length": 9,
+            "snippet": {
+              "text": "{required void Function(int, bool) onChange}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 55,
+            "length": 5,
+            "snippet": {
+              "text": "int index",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 62,
+            "length": 8,
+            "snippet": {
+              "text": "bool expanded",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          }
+        ]
+      },
+      {
+        "name": ".managed() with internal controller",
+        "description": "Manages the expanded state of the accordion items internally.",
+        "text": ".managed(\n    min: 1,\n    max: 2,\n    onChange: (items) {},\n  )",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 1,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionControl/FAccordionControl.managed.html"
+          },
+          {
+            "offset": 14,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionControl/FAccordionControl.managed.html"
+          },
+          {
+            "offset": 26,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionControl/FAccordionControl.managed.html"
+          },
+          {
+            "offset": 38,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionControl/FAccordionControl.managed.html"
+          }
+        ],
+        "tooltips": [
+          {
+            "offset": 1,
+            "length": 7,
+            "snippet": {
+              "text": "FAccordionControl.managed({\n  FAccordionController? controller,\n  int? min,\n  int? max,\n  void Function(Set<int>)? onChange,\n})\n",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 25,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionControl/FAccordionControl.managed.html"
+                },
+                {
+                  "offset": 52,
+                  "length": 10,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionControl/FAccordionControl.managed.html"
+                },
+                {
+                  "offset": 30,
+                  "length": 21,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionController-class.html"
+                },
+                {
+                  "offset": 71,
+                  "length": 3,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionControl/FAccordionControl.managed.html"
+                },
+                {
+                  "offset": 83,
+                  "length": 3,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionControl/FAccordionControl.managed.html"
+                },
+                {
+                  "offset": 115,
+                  "length": 8,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionControl/FAccordionControl.managed.html"
+                }
+              ],
+              "tooltips": [],
+              "container": {
+                "name": "FAccordionControl",
+                "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionControl-class.html"
+              }
+            }
+          },
+          {
+            "offset": 14,
+            "length": 4,
+            "snippet": {
+              "text": "{int? min}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 26,
+            "length": 4,
+            "snippet": {
+              "text": "{int? max}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 38,
+            "length": 9,
+            "snippet": {
+              "text": "{void Function(Set<int>)? onChange}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 49,
+            "length": 5,
+            "snippet": {
+              "text": "Set<int> items",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          }
+        ]
+      },
+      {
+        "name": ".managed() with external controller",
+        "description": "Uses an external `FAccordionController` to control the accordion items' expanded state.",
+        "text": ".managed(\n    // For demonstration purposes only. Don't create a controller inline, store in a State instead.\n    controller: FAccordionController(min: 1, max: 2),\n    onChange: (items) {},\n  )",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 1,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionControl/FAccordionControl.managed.html"
+          },
+          {
+            "offset": 114,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionControl/FAccordionControl.managed.html"
+          },
+          {
+            "offset": 126,
+            "length": 20,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionController/FAccordionController.html"
+          },
+          {
+            "offset": 147,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionController/FAccordionController.html"
+          },
+          {
+            "offset": 155,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionController/FAccordionController.html"
+          },
+          {
+            "offset": 168,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionControl/FAccordionControl.managed.html"
+          }
+        ],
+        "tooltips": [
+          {
+            "offset": 1,
+            "length": 7,
+            "snippet": {
+              "text": "FAccordionControl.managed({\n  FAccordionController? controller,\n  int? min,\n  int? max,\n  void Function(Set<int>)? onChange,\n})\n",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 25,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionControl/FAccordionControl.managed.html"
+                },
+                {
+                  "offset": 52,
+                  "length": 10,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionControl/FAccordionControl.managed.html"
+                },
+                {
+                  "offset": 30,
+                  "length": 21,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionController-class.html"
+                },
+                {
+                  "offset": 71,
+                  "length": 3,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionControl/FAccordionControl.managed.html"
+                },
+                {
+                  "offset": 83,
+                  "length": 3,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionControl/FAccordionControl.managed.html"
+                },
+                {
+                  "offset": 115,
+                  "length": 8,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionControl/FAccordionControl.managed.html"
+                }
+              ],
+              "tooltips": [],
+              "container": {
+                "name": "FAccordionControl",
+                "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionControl-class.html"
+              }
+            }
+          },
+          {
+            "offset": 114,
+            "length": 11,
+            "snippet": {
+              "text": "{FAccordionController? controller}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 1,
+                  "length": 21,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionController-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 126,
+            "length": 20,
+            "snippet": {
+              "text": "FAccordionController({int min = 0, int? max})\n",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 20,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionController/FAccordionController.html"
+                },
+                {
+                  "offset": 26,
+                  "length": 3,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionController/FAccordionController.html"
+                },
+                {
+                  "offset": 40,
+                  "length": 3,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionController/FAccordionController.html"
+                }
+              ],
+              "tooltips": [],
+              "container": {
+                "name": "FAccordionController",
+                "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionController-class.html"
+              }
+            }
+          },
+          {
+            "offset": 147,
+            "length": 4,
+            "snippet": {
+              "text": "{int min = 0}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 155,
+            "length": 4,
+            "snippet": {
+              "text": "{int? max}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 168,
+            "length": 9,
+            "snippet": {
+              "text": "{void Function(Set<int>)? onChange}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 179,
+            "length": 5,
+            "snippet": {
+              "text": "Set<int> items",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,5 +1,5 @@
 {
-  "text": "import 'package:flutter/widgets.dart';\nimport 'package:forui/forui.dart';\n\n// Alternatively; if you've only installed forui_assets.\nimport 'package:forui_assets/forui_assets.dart';\n\nconst dogIconWidget = Icon(FIcons.dog);\n\n// White cat icon with a size of 24x24.\nconst catIconWidget = Icon(\n  FIcons.cat,\n  size: 24,\n  color: Color(0xFFFFFFFF),\n);\n",
+  "text": "import 'package:flutter/widgets.dart';\nimport 'package:forui/forui.dart';\n\n// Alternatively; if you've only installed forui_assets.\nimport 'package:forui_assets/forui_assets.dart';\n\nconst dogIconWidget = Icon(FIcons.dog);\n\n// White cat icon with a size of 24x24.\nconst catIconWidget = Icon(FIcons.cat, size: 24, color: Color(0xFFFFFFFF));\n",
   "highlights": [],
   "links": [
     {
@@ -8,7 +8,7 @@
       "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/dog.html"
     },
     {
-      "offset": 293,
+      "offset": 290,
       "length": 10,
       "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/cat.html"
     }
@@ -29,7 +29,7 @@
       }
     },
     {
-      "offset": 293,
+      "offset": 290,
       "length": 10,
       "snippet": {
         "text": "IconData cat",

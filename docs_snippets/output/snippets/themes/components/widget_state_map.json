@@ -1,5 +1,5 @@
 {
-  "text": "FWidgetStateMap({\n  // ❌ Don't declare more general constraints above more specific ones!\n  // 1st constraint: applied when the accordion is hovered.\n  WidgetState.hovered: typography.base.copyWith(\n    fontWeight: .w500,\n    color: colors.foreground,\n    decoration: .underline,\n  ),\n  // 2nd constraint: applied when the accordion is hovered OR pressed.\n  WidgetState.hovered | WidgetState.pressed: typography.base.copyWith(\n    fontWeight: .w500,\n    color: colors.foreground,\n    decoration: .underline,\n  ),\n  // 3rd constraint: This text style is applied when the accordion is NOT hovered OR pressed.\n  WidgetState.any: typography.base.copyWith(fontWeight: .w500, color: colors.foreground),\n});\n",
+  "text": "FWidgetStateMap({\n  // ❌ Don't declare more general constraints above more specific ones!\n  // 1st constraint: applied when the accordion is hovered.\n  WidgetState.hovered: typography.base.copyWith(\n    fontWeight: .w500,\n    color: colors.foreground,\n    decoration: .underline,\n  ),\n  // 2nd constraint: applied when the accordion is hovered OR pressed.\n  WidgetState.hovered | WidgetState.pressed: typography.base.copyWith(\n    fontWeight: .w500,\n    color: colors.foreground,\n    decoration: .underline,\n  ),\n  // 3rd constraint: This text style is applied when the accordion is NOT hovered OR pressed.\n  WidgetState.any: typography.base.copyWith(\n    fontWeight: .w500,\n    color: colors.foreground,\n  ),\n});\n",
   "highlights": [],
   "links": [
     {
@@ -33,7 +33,7 @@
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FTypography/base.html"
     },
     {
-      "offset": 684,
+      "offset": 693,
       "length": 10,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors/foreground.html"
     }
@@ -130,7 +130,7 @@
       }
     },
     {
-      "offset": 684,
+      "offset": 693,
       "length": 10,
       "snippet": {
         "text": "Color foreground",

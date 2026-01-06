@@ -123,6 +123,11 @@
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FAnimatedTheme/FAnimatedTheme.html"
           },
           {
+            "offset": 28,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+          },
+          {
             "offset": 63,
             "length": 5,
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FAnimatedTheme/FAnimatedTheme.html"
@@ -131,6 +136,16 @@
             "offset": 93,
             "length": 6,
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FAnimatedTheme/FAnimatedTheme.html"
+          },
+          {
+            "offset": 72,
+            "length": 20,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FAnimatedThemeMotion-class.html"
+          },
+          {
+            "offset": 108,
+            "length": 20,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FAnimatedThemeMotion/FAnimatedThemeMotion.html"
           },
           {
             "offset": 151,
@@ -156,7 +171,13 @@
       "snippet": {
         "text": "{required FThemeData data}",
         "highlights": [],
-        "links": [],
+        "links": [
+          {
+            "offset": 10,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+          }
+        ],
         "tooltips": []
       }
     },
@@ -211,6 +232,16 @@
             "offset": 80,
             "length": 13,
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.scaffold/FScaffold/FScaffold.html"
+          },
+          {
+            "offset": 39,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.scaffold/FScaffoldStyle-class.html"
+          },
+          {
+            "offset": 63,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.scaffold/FScaffoldStyle-class.html"
           },
           {
             "offset": 105,

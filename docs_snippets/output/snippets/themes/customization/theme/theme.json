@@ -1,5 +1,5 @@
 {
-  "text": "import 'package:flutter/material.dart';\nimport 'package:forui/forui.dart';\n\nimport 'accordion_style.dart';\n\nFThemeData get zincLight {\n  final colors = FThemes.zinc.light.colors;\n\n  final typography = _typography(colors: colors);\n  final style = _style(colors: colors, typography: typography);\n\n  return FThemeData(\n    colors: colors,\n    typography: typography,\n    style: style,\n    // Add your generated styles here.\n    accordionStyle: accordionStyle(colors: colors, typography: typography, style: style),\n  );\n}\n\nFTypography _typography({required FColors colors, String defaultFontFamily = 'packages/forui/Inter'}) => FTypography(\n  xs: TextStyle(color: colors.foreground, fontFamily: defaultFontFamily, fontSize: 12, height: 1),\n  sm: TextStyle(color: colors.foreground, fontFamily: defaultFontFamily, fontSize: 14, height: 1.25),\n);\n\nFStyle _style({required FColors colors, required FTypography typography}) => FStyle(\n  formFieldStyle: .inherit(colors: colors, typography: typography),\n  focusedOutlineStyle: FFocusedOutlineStyle(color: colors.primary, borderRadius: const .all(.circular(8))),\n  iconStyle: IconThemeData(color: colors.primary, size: 20),\n  tappableStyle: FTappableStyle(),\n);\n",
+  "text": "import 'package:flutter/material.dart';\nimport 'package:forui/forui.dart';\n\nimport 'accordion_style.dart';\n\nFThemeData get zincLight {\n  final colors = FThemes.zinc.light.colors;\n\n  final typography = _typography(colors: colors);\n  final style = _style(colors: colors, typography: typography);\n\n  return FThemeData(\n    colors: colors,\n    typography: typography,\n    style: style,\n    // Add your generated styles here.\n    accordionStyle: accordionStyle(\n      colors: colors,\n      typography: typography,\n      style: style,\n    ),\n  );\n}\n\nFTypography _typography({\n  required FColors colors,\n  String defaultFontFamily = 'packages/forui/Inter',\n}) => FTypography(\n  xs: TextStyle(\n    color: colors.foreground,\n    fontFamily: defaultFontFamily,\n    fontSize: 12,\n    height: 1,\n  ),\n  sm: TextStyle(\n    color: colors.foreground,\n    fontFamily: defaultFontFamily,\n    fontSize: 14,\n    height: 1.25,\n  ),\n);\n\nFStyle _style({required FColors colors, required FTypography typography}) =>\n    FStyle(\n      formFieldStyle: .inherit(colors: colors, typography: typography),\n      focusedOutlineStyle: FFocusedOutlineStyle(\n        color: colors.primary,\n        borderRadius: const .all(.circular(8)),\n      ),\n      iconStyle: IconThemeData(color: colors.primary, size: 20),\n      tappableStyle: FTappableStyle(),\n    );\n",
   "highlights": [
     {
       "start": 4,
@@ -7,7 +7,7 @@
     },
     {
       "start": 17,
-      "end": 17
+      "end": 21
     }
   ],
   "links": [
@@ -57,122 +57,122 @@
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/accordionStyle.html"
     },
     {
-      "offset": 519,
+      "offset": 544,
       "length": 11,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FTypography-class.html"
     },
     {
-      "offset": 553,
+      "offset": 581,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors-class.html"
     },
     {
-      "offset": 624,
+      "offset": 656,
       "length": 11,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FTypography/FTypography.html"
     },
     {
-      "offset": 639,
+      "offset": 671,
       "length": 2,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FTypography/xs.html"
     },
     {
-      "offset": 667,
+      "offset": 704,
       "length": 10,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors/foreground.html"
     },
     {
-      "offset": 738,
+      "offset": 791,
       "length": 2,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FTypography/sm.html"
     },
     {
-      "offset": 766,
+      "offset": 824,
       "length": 10,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors/foreground.html"
     },
     {
-      "offset": 842,
+      "offset": 916,
       "length": 6,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FStyle-class.html"
     },
     {
-      "offset": 866,
+      "offset": 940,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors-class.html"
     },
     {
-      "offset": 891,
+      "offset": 965,
       "length": 11,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FTypography-class.html"
     },
     {
-      "offset": 919,
+      "offset": 997,
       "length": 6,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FStyle/FStyle.html"
     },
     {
-      "offset": 929,
+      "offset": 1011,
       "length": 14,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FStyle/formFieldStyle.html"
     },
     {
-      "offset": 946,
+      "offset": 1028,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FFormFieldStyle/FFormFieldStyle.inherit.html"
     },
     {
-      "offset": 954,
+      "offset": 1036,
       "length": 6,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FFormFieldStyle/FFormFieldStyle.inherit.html"
     },
     {
-      "offset": 970,
+      "offset": 1052,
       "length": 10,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FFormFieldStyle/FFormFieldStyle.inherit.html"
     },
     {
-      "offset": 997,
+      "offset": 1083,
       "length": 19,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FStyle/focusedOutlineStyle.html"
     },
     {
-      "offset": 1018,
+      "offset": 1104,
       "length": 20,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FFocusedOutlineStyle/FFocusedOutlineStyle.html"
     },
     {
-      "offset": 1039,
+      "offset": 1134,
       "length": 5,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FFocusedOutlineStyle/color.html"
     },
     {
-      "offset": 1053,
+      "offset": 1148,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors/primary.html"
     },
     {
-      "offset": 1062,
+      "offset": 1165,
       "length": 12,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FFocusedOutlineStyle/borderRadius.html"
     },
     {
-      "offset": 1105,
+      "offset": 1220,
       "length": 9,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FStyle/iconStyle.html"
     },
     {
-      "offset": 1144,
+      "offset": 1259,
       "length": 7,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors/primary.html"
     },
     {
-      "offset": 1166,
+      "offset": 1285,
       "length": 13,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FStyle/tappableStyle.html"
     },
     {
-      "offset": 1181,
+      "offset": 1300,
       "length": 14,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappableStyle/FTappableStyle.html"
     }
@@ -184,7 +184,13 @@
       "snippet": {
         "text": "FColors colors",
         "highlights": [],
-        "links": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors-class.html"
+          }
+        ],
         "tooltips": [],
         "container": {
           "name": "FThemeData",
@@ -198,7 +204,13 @@
       "snippet": {
         "text": "FThemeData light",
         "highlights": [],
-        "links": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+          }
+        ],
         "tooltips": []
       }
     },
@@ -208,7 +220,18 @@
       "snippet": {
         "text": "({FThemeData dark, FThemeData light}) zinc",
         "highlights": [],
-        "links": [],
+        "links": [
+          {
+            "offset": 2,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+          },
+          {
+            "offset": 19,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+          }
+        ],
         "tooltips": [],
         "container": {
           "name": "FThemes",
@@ -234,6 +257,11 @@
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/FThemeData.html"
           },
           {
+            "offset": 24,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors-class.html"
+          },
+          {
             "offset": 50,
             "length": 10,
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/FThemeData.html"
@@ -244,9 +272,24 @@
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/FThemeData.html"
           },
           {
+            "offset": 64,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FBreakpoints-class.html"
+          },
+          {
+            "offset": 97,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FBreakpoints/FBreakpoints.html"
+          },
+          {
             "offset": 128,
             "length": 10,
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/FThemeData.html"
+          },
+          {
+            "offset": 115,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FTypography-class.html"
           },
           {
             "offset": 150,
@@ -254,9 +297,19 @@
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/FThemeData.html"
           },
           {
+            "offset": 142,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FStyle-class.html"
+          },
+          {
             "offset": 176,
             "length": 14,
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/FThemeData.html"
+          },
+          {
+            "offset": 159,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionStyle-class.html"
           },
           {
             "offset": 214,
@@ -264,9 +317,19 @@
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/FThemeData.html"
           },
           {
+            "offset": 194,
+            "length": 19,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocompleteStyle-class.html"
+          },
+          {
             "offset": 249,
             "length": 11,
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/FThemeData.html"
+          },
+          {
+            "offset": 235,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.alert/FAlertStyles-class.html"
           },
           {
             "offset": 278,
@@ -274,9 +337,19 @@
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/FThemeData.html"
           },
           {
+            "offset": 264,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.avatar/FAvatarStyle-class.html"
+          },
+          {
             "offset": 307,
             "length": 11,
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/FThemeData.html"
+          },
+          {
+            "offset": 293,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.badge/FBadgeStyles-class.html"
           },
           {
             "offset": 349,
@@ -284,9 +357,19 @@
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/FThemeData.html"
           },
           {
+            "offset": 322,
+            "length": 26,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.bottom_navigation_bar/FBottomNavigationBarStyle-class.html"
+          },
+          {
             "offset": 395,
             "length": 15,
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/FThemeData.html"
+          },
+          {
+            "offset": 377,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbStyle-class.html"
           },
           {
             "offset": 429,
@@ -294,9 +377,19 @@
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/FThemeData.html"
           },
           {
+            "offset": 414,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButtonStyles-class.html"
+          },
+          {
             "offset": 461,
             "length": 13,
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/FThemeData.html"
+          },
+          {
+            "offset": 445,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarStyle-class.html"
           },
           {
             "offset": 490,
@@ -304,9 +397,19 @@
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/FThemeData.html"
           },
           {
+            "offset": 478,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.card/FCardStyle-class.html"
+          },
+          {
             "offset": 519,
             "length": 13,
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/FThemeData.html"
+          },
+          {
+            "offset": 503,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckboxStyle-class.html"
           },
           {
             "offset": 560,
@@ -314,9 +417,19 @@
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/FThemeData.html"
           },
           {
+            "offset": 536,
+            "length": 23,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.progress/FCircularProgressStyle-class.html"
+          },
+          {
             "offset": 602,
             "length": 14,
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/FThemeData.html"
+          },
+          {
+            "offset": 585,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateFieldStyle-class.html"
           },
           {
             "offset": 647,
@@ -324,9 +437,19 @@
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/FThemeData.html"
           },
           {
+            "offset": 620,
+            "length": 26,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.progress/FDeterminateProgressStyle-class.html"
+          },
+          {
             "offset": 694,
             "length": 16,
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/FThemeData.html"
+          },
+          {
+            "offset": 675,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.dialog/FDialogRouteStyle-class.html"
           },
           {
             "offset": 728,
@@ -334,9 +457,19 @@
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/FThemeData.html"
           },
           {
+            "offset": 714,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.dialog/FDialogStyle-class.html"
+          },
+          {
             "offset": 759,
             "length": 13,
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/FThemeData.html"
+          },
+          {
+            "offset": 743,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.divider/FDividerStyles-class.html"
           },
           {
             "offset": 791,
@@ -344,9 +477,19 @@
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/FThemeData.html"
           },
           {
+            "offset": 776,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.header/FHeaderStyles-class.html"
+          },
+          {
             "offset": 819,
             "length": 9,
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/FThemeData.html"
+          },
+          {
+            "offset": 807,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemStyle-class.html"
           },
           {
             "offset": 849,
@@ -354,9 +497,19 @@
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/FThemeData.html"
           },
           {
+            "offset": 832,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroupStyle-class.html"
+          },
+          {
             "offset": 881,
             "length": 11,
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/FThemeData.html"
+          },
+          {
+            "offset": 867,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.label/FLabelStyles-class.html"
           },
           {
             "offset": 916,
@@ -364,9 +517,19 @@
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/FThemeData.html"
           },
           {
+            "offset": 896,
+            "length": 19,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.line_calendar/FLineCalendarStyle-class.html"
+          },
+          {
             "offset": 956,
             "length": 16,
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/FThemeData.html"
+          },
+          {
+            "offset": 937,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FMultiSelectStyle-class.html"
           },
           {
             "offset": 994,
@@ -374,9 +537,19 @@
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/FThemeData.html"
           },
           {
+            "offset": 976,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/FModalSheetStyle-class.html"
+          },
+          {
             "offset": 1031,
             "length": 15,
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/FThemeData.html"
+          },
+          {
+            "offset": 1013,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPaginationStyle-class.html"
           },
           {
             "offset": 1073,
@@ -384,9 +557,19 @@
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/FThemeData.html"
           },
           {
+            "offset": 1050,
+            "length": 22,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/FPersistentSheetStyle-class.html"
+          },
+          {
             "offset": 1111,
             "length": 11,
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/FThemeData.html"
+          },
+          {
+            "offset": 1097,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.picker/FPickerStyle-class.html"
           },
           {
             "offset": 1141,
@@ -394,9 +577,19 @@
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/FThemeData.html"
           },
           {
+            "offset": 1126,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverStyle-class.html"
+          },
+          {
             "offset": 1176,
             "length": 16,
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/FThemeData.html"
+          },
+          {
+            "offset": 1157,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover_menu/FPopoverMenuStyle-class.html"
           },
           {
             "offset": 1212,
@@ -404,9 +597,19 @@
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/FThemeData.html"
           },
           {
+            "offset": 1196,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.progress/FProgressStyle-class.html"
+          },
+          {
             "offset": 1242,
             "length": 10,
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/FThemeData.html"
+          },
+          {
+            "offset": 1229,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.radio/FRadioStyle-class.html"
           },
           {
             "offset": 1273,
@@ -414,9 +617,19 @@
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/FThemeData.html"
           },
           {
+            "offset": 1256,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableStyle-class.html"
+          },
+          {
             "offset": 1307,
             "length": 13,
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/FThemeData.html"
+          },
+          {
+            "offset": 1291,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.scaffold/FScaffoldStyle-class.html"
           },
           {
             "offset": 1338,
@@ -424,9 +637,19 @@
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/FThemeData.html"
           },
           {
+            "offset": 1324,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectStyle-class.html"
+          },
+          {
             "offset": 1372,
             "length": 16,
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/FThemeData.html"
+          },
+          {
+            "offset": 1353,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroupStyle-class.html"
           },
           {
             "offset": 1414,
@@ -434,9 +657,19 @@
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/FThemeData.html"
           },
           {
+            "offset": 1392,
+            "length": 21,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_menu_tile/FSelectMenuTileStyle-class.html"
+          },
+          {
             "offset": 1452,
             "length": 12,
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/FThemeData.html"
+          },
+          {
+            "offset": 1437,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sidebar/FSidebarStyle-class.html"
           },
           {
             "offset": 1483,
@@ -444,9 +677,19 @@
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/FThemeData.html"
           },
           {
+            "offset": 1468,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderStyles-class.html"
+          },
+          {
             "offset": 1514,
             "length": 12,
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/FThemeData.html"
+          },
+          {
+            "offset": 1499,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/FToasterStyle-class.html"
           },
           {
             "offset": 1544,
@@ -454,9 +697,19 @@
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/FThemeData.html"
           },
           {
+            "offset": 1530,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.switch_/FSwitchStyle-class.html"
+          },
+          {
             "offset": 1571,
             "length": 9,
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/FThemeData.html"
+          },
+          {
+            "offset": 1559,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tabs/FTabsStyle-class.html"
           },
           {
             "offset": 1600,
@@ -464,9 +717,19 @@
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/FThemeData.html"
           },
           {
+            "offset": 1584,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappableStyle-class.html"
+          },
+          {
             "offset": 1634,
             "length": 14,
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/FThemeData.html"
+          },
+          {
+            "offset": 1617,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFieldStyle-class.html"
           },
           {
             "offset": 1664,
@@ -474,9 +737,19 @@
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/FThemeData.html"
           },
           {
+            "offset": 1652,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileStyle-class.html"
+          },
+          {
             "offset": 1694,
             "length": 14,
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/FThemeData.html"
+          },
+          {
+            "offset": 1677,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileGroupStyle-class.html"
           },
           {
             "offset": 1729,
@@ -484,14 +757,29 @@
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/FThemeData.html"
           },
           {
+            "offset": 1712,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeFieldStyle-class.html"
+          },
+          {
             "offset": 1765,
             "length": 15,
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/FThemeData.html"
           },
           {
+            "offset": 1747,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_picker/FTimePickerStyle-class.html"
+          },
+          {
             "offset": 1799,
             "length": 12,
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/FThemeData.html"
+          },
+          {
+            "offset": 1784,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tooltip/FTooltipStyle-class.html"
           },
           {
             "offset": 1849,
@@ -512,7 +800,13 @@
       "snippet": {
         "text": "{required FColors colors}",
         "highlights": [],
-        "links": [],
+        "links": [
+          {
+            "offset": 10,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors-class.html"
+          }
+        ],
         "tooltips": []
       }
     },
@@ -522,7 +816,13 @@
       "snippet": {
         "text": "{FTypography? typography}",
         "highlights": [],
-        "links": [],
+        "links": [
+          {
+            "offset": 1,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FTypography-class.html"
+          }
+        ],
         "tooltips": []
       }
     },
@@ -532,7 +832,13 @@
       "snippet": {
         "text": "{FStyle? style}",
         "highlights": [],
-        "links": [],
+        "links": [
+          {
+            "offset": 1,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FStyle-class.html"
+          }
+        ],
         "tooltips": []
       }
     },
@@ -542,12 +848,18 @@
       "snippet": {
         "text": "{FAccordionStyle? accordionStyle}",
         "highlights": [],
-        "links": [],
+        "links": [
+          {
+            "offset": 1,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionStyle-class.html"
+          }
+        ],
         "tooltips": []
       }
     },
     {
-      "offset": 624,
+      "offset": 656,
       "length": 11,
       "snippet": {
         "text": "FTypography({\n  String defaultFontFamily = 'packages/forui/Inter',\n  TextStyle xs = const TextStyle(fontSize: 12, height: 1),\n  TextStyle sm = const TextStyle(fontSize: 14, height: 1.25),\n  TextStyle base = const TextStyle(fontSize: 16, height: 1.5),\n  TextStyle lg = const TextStyle(fontSize: 18, height: 1.75),\n  TextStyle xl = const TextStyle(fontSize: 20, height: 1.75),\n  TextStyle xl2 = const TextStyle(fontSize: 22, height: 2),\n  TextStyle xl3 = const TextStyle(fontSize: 30, height: 2.25),\n  TextStyle xl4 = const TextStyle(fontSize: 36, height: 2.5),\n  TextStyle xl5 = const TextStyle(fontSize: 48, height: 1),\n  TextStyle xl6 = const TextStyle(fontSize: 60, height: 1),\n  TextStyle xl7 = const TextStyle(fontSize: 72, height: 1),\n  TextStyle xl8 = const TextStyle(fontSize: 96, height: 1),\n})\n",
@@ -632,7 +944,7 @@
       }
     },
     {
-      "offset": 639,
+      "offset": 671,
       "length": 3,
       "snippet": {
         "text": "{TextStyle xs = const TextStyle(fontSize: 12, height: 1)}",
@@ -642,7 +954,7 @@
       }
     },
     {
-      "offset": 667,
+      "offset": 704,
       "length": 10,
       "snippet": {
         "text": "Color foreground",
@@ -656,7 +968,7 @@
       }
     },
     {
-      "offset": 738,
+      "offset": 791,
       "length": 3,
       "snippet": {
         "text": "{TextStyle sm = const TextStyle(fontSize: 14, height: 1.25)}",
@@ -666,7 +978,7 @@
       }
     },
     {
-      "offset": 766,
+      "offset": 824,
       "length": 10,
       "snippet": {
         "text": "Color foreground",
@@ -680,7 +992,7 @@
       }
     },
     {
-      "offset": 919,
+      "offset": 997,
       "length": 6,
       "snippet": {
         "text": "FStyle({\n  required FFormFieldStyle formFieldStyle,\n  required FFocusedOutlineStyle focusedOutlineStyle,\n  required IconThemeData iconStyle,\n  required FTappableStyle tappableStyle,\n  BorderRadius borderRadius = const FLerpBorderRadius.all(\n    .circular(8),\n    min: 24,\n  ),\n  double borderWidth = 1,\n  EdgeInsets pagePadding = const .symmetric(vertical: 8, horizontal: 12),\n  List<BoxShadow> shadow = const [\n    BoxShadow(color: Color(0x0d000000), offset: Offset(0, 1), blurRadius: 2),\n  ],\n})\n",
@@ -697,9 +1009,19 @@
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FStyle/FStyle.html"
           },
           {
+            "offset": 20,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FFormFieldStyle-class.html"
+          },
+          {
             "offset": 84,
             "length": 19,
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FStyle/FStyle.html"
+          },
+          {
+            "offset": 63,
+            "length": 20,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FFocusedOutlineStyle-class.html"
           },
           {
             "offset": 130,
@@ -712,9 +1034,24 @@
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FStyle/FStyle.html"
           },
           {
+            "offset": 152,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappableStyle-class.html"
+          },
+          {
             "offset": 197,
             "length": 12,
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FStyle/FStyle.html"
+          },
+          {
+            "offset": 218,
+            "length": 21,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FLerpBorderRadius/FLerpBorderRadius.all.html"
+          },
+          {
+            "offset": 263,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FLerpBorderRadius/FLerpBorderRadius.all.html"
           },
           {
             "offset": 286,
@@ -740,17 +1077,23 @@
       }
     },
     {
-      "offset": 929,
+      "offset": 1011,
       "length": 15,
       "snippet": {
         "text": "{required FFormFieldStyle formFieldStyle}",
         "highlights": [],
-        "links": [],
+        "links": [
+          {
+            "offset": 10,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FFormFieldStyle-class.html"
+          }
+        ],
         "tooltips": []
       }
     },
     {
-      "offset": 946,
+      "offset": 1028,
       "length": 7,
       "snippet": {
         "text": "FFormFieldStyle.inherit({\n  required FColors colors,\n  required FTypography typography,\n})\n",
@@ -767,9 +1110,19 @@
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FFormFieldStyle/FFormFieldStyle.inherit.html"
           },
           {
+            "offset": 37,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors-class.html"
+          },
+          {
             "offset": 76,
             "length": 10,
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FFormFieldStyle/FFormFieldStyle.inherit.html"
+          },
+          {
+            "offset": 64,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FTypography-class.html"
           }
         ],
         "tooltips": [],
@@ -780,37 +1133,55 @@
       }
     },
     {
-      "offset": 954,
+      "offset": 1036,
       "length": 7,
       "snippet": {
         "text": "{required FColors colors}",
         "highlights": [],
-        "links": [],
+        "links": [
+          {
+            "offset": 10,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors-class.html"
+          }
+        ],
         "tooltips": []
       }
     },
     {
-      "offset": 970,
+      "offset": 1052,
       "length": 11,
       "snippet": {
         "text": "{required FTypography typography}",
         "highlights": [],
-        "links": [],
+        "links": [
+          {
+            "offset": 10,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FTypography-class.html"
+          }
+        ],
         "tooltips": []
       }
     },
     {
-      "offset": 997,
+      "offset": 1083,
       "length": 20,
       "snippet": {
         "text": "{required FFocusedOutlineStyle focusedOutlineStyle}",
         "highlights": [],
-        "links": [],
+        "links": [
+          {
+            "offset": 10,
+            "length": 20,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FFocusedOutlineStyle-class.html"
+          }
+        ],
         "tooltips": []
       }
     },
     {
-      "offset": 1018,
+      "offset": 1104,
       "length": 20,
       "snippet": {
         "text": "FFocusedOutlineStyle({\n  required Color color,\n  required BorderRadiusGeometry borderRadius,\n  double width = 1,\n  double spacing = 3,\n})\n",
@@ -850,7 +1221,7 @@
       }
     },
     {
-      "offset": 1039,
+      "offset": 1134,
       "length": 6,
       "snippet": {
         "text": "{required Color color}",
@@ -860,7 +1231,7 @@
       }
     },
     {
-      "offset": 1053,
+      "offset": 1148,
       "length": 7,
       "snippet": {
         "text": "Color primary",
@@ -874,7 +1245,7 @@
       }
     },
     {
-      "offset": 1062,
+      "offset": 1165,
       "length": 13,
       "snippet": {
         "text": "{required BorderRadiusGeometry borderRadius}",
@@ -884,7 +1255,7 @@
       }
     },
     {
-      "offset": 1105,
+      "offset": 1220,
       "length": 10,
       "snippet": {
         "text": "{required IconThemeData iconStyle}",
@@ -894,7 +1265,7 @@
       }
     },
     {
-      "offset": 1144,
+      "offset": 1259,
       "length": 7,
       "snippet": {
         "text": "Color primary",
@@ -908,17 +1279,23 @@
       }
     },
     {
-      "offset": 1166,
+      "offset": 1285,
       "length": 14,
       "snippet": {
         "text": "{required FTappableStyle tappableStyle}",
         "highlights": [],
-        "links": [],
+        "links": [
+          {
+            "offset": 10,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappableStyle-class.html"
+          }
+        ],
         "tooltips": []
       }
     },
     {
-      "offset": 1181,
+      "offset": 1300,
       "length": 14,
       "snippet": {
         "text": "FTappableStyle({\n  FWidgetStateMap<MouseCursor> cursor = const FWidgetStateMap({\n    WidgetState.any: .defer,\n  }),\n  Duration pressedEnterDuration = const Duration(milliseconds: 200),\n  Duration pressedExitDuration = .zero,\n  FTappableMotion motion = const FTappableMotion(),\n})\n",
@@ -935,6 +1312,16 @@
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappableStyle/FTappableStyle.html"
           },
           {
+            "offset": 19,
+            "length": 28,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStateMap-class.html"
+          },
+          {
+            "offset": 63,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStateMap/FWidgetStateMap.html"
+          },
+          {
             "offset": 127,
             "length": 20,
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappableStyle/FTappableStyle.html"
@@ -948,6 +1335,16 @@
             "offset": 243,
             "length": 6,
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappableStyle/FTappableStyle.html"
+          },
+          {
+            "offset": 227,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappableMotion-class.html"
+          },
+          {
+            "offset": 258,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappableMotion/FTappableMotion.html"
           }
         ],
         "tooltips": [],

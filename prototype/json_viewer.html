@@ -304,6 +304,60 @@
       border-radius: 3px;
       font-family: 'Fira Code', 'Consolas', monospace;
     }
+
+    /* Variant selectors for usages files */
+    .variant-selectors {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 16px;
+      padding: 12px 16px;
+      background: #252526;
+      border: 1px solid #3c3c3c;
+      border-radius: 6px;
+    }
+
+    .variant-selector {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .variant-selector label {
+      font-size: 11px;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .variant-selector select {
+      padding: 6px 28px 6px 10px;
+      background: #3c3c3c url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23888' d='M2 4l4 4 4-4z'/%3E%3C/svg%3E") no-repeat right 8px center;
+      border: 1px solid #555;
+      border-radius: 4px;
+      color: #fff;
+      font-size: 13px;
+      font-family: 'Fira Code', 'Consolas', monospace;
+      cursor: pointer;
+      appearance: none;
+      min-width: 200px;
+    }
+
+    .variant-selector select:hover {
+      border-color: #777;
+    }
+
+    .variant-selector select:focus {
+      outline: none;
+      border-color: #0e639c;
+    }
+
+    .variant-description {
+      font-size: 12px;
+      color: #888;
+      margin-top: 2px;
+      max-width: 300px;
+    }
   </style>
 </head>
 <body>
@@ -332,6 +386,141 @@
     let currentFile = null;
     let currentData = null;
     let lastClickedLine = null;
+    let variantSelections = {}; // Track selected variant index per category
+
+    // Check if data is a usages file (has categories)
+    function isUsagesFile(data) {
+      return data && data.categories && Object.keys(data.categories).length > 0;
+    }
+
+    // Build merged code by substituting {{category}} placeholders with selected variants
+    function buildMergedCode(data, selections) {
+      if (!isUsagesFile(data)) {
+        return { text: data.text, links: data.links || [], tooltips: data.tooltips || [] };
+      }
+
+      let text = data.text;
+      let links = [...(data.links || [])];
+      let tooltips = [...(data.tooltips || [])];
+
+      // Find all {{category}} placeholders and their positions
+      const placeholderRegex = /\{\{(\w+)\}\}/g;
+      const placeholders = [];
+      let match;
+      while ((match = placeholderRegex.exec(data.text)) !== null) {
+        placeholders.push({
+          category: match[1],
+          start: match.index,
+          end: match.index + match[0].length,
+          length: match[0].length
+        });
+      }
+
+      // Sort by position (reverse to handle offset adjustments correctly)
+      placeholders.sort((a, b) => b.start - a.start);
+
+      // Substitute each placeholder
+      for (const ph of placeholders) {
+        const variants = data.categories[ph.category];
+        if (!variants || variants.length === 0) continue;
+
+        const selectedIndex = selections[ph.category] || 0;
+        const variant = variants[selectedIndex];
+        const variantText = variant.text || '';
+
+        // Calculate offset adjustment
+        const adjustment = variantText.length - ph.length;
+
+        // Substitute in text
+        text = text.substring(0, ph.start) + variantText + text.substring(ph.end);
+
+        // Adjust links that come after this placeholder
+        for (const link of links) {
+          if (link.offset >= ph.end) {
+            link.offset += adjustment;
+          }
+        }
+        for (const tip of tooltips) {
+          if (tip.offset >= ph.end) {
+            tip.offset += adjustment;
+          }
+        }
+
+        // Add variant's links/tooltips (offset adjusted to placeholder position)
+        for (const link of (variant.links || [])) {
+          links.push({ ...link, offset: link.offset + ph.start });
+        }
+        for (const tip of (variant.tooltips || [])) {
+          tooltips.push({ ...tip, offset: tip.offset + ph.start });
+        }
+      }
+
+      return { text, links, tooltips };
+    }
+
+    // Render variant selector dropdowns
+    function renderVariantSelectors(categories, selections) {
+      const categoryNames = Object.keys(categories);
+      if (categoryNames.length === 0) return '';
+
+      return `<div class="variant-selectors">${categoryNames.map(name => {
+        const variants = categories[name];
+        const selected = selections[name] || 0;
+        const selectedVariant = variants[selected];
+
+        return `
+          <div class="variant-selector">
+            <label>${escapeHtml(name)}</label>
+            <select data-category="${escapeHtml(name)}">
+              ${variants.map((v, i) => `<option value="${i}"${i === selected ? ' selected' : ''}>${escapeHtml(v.name)}</option>`).join('')}
+            </select>
+            ${selectedVariant.description ? `<div class="variant-description">${escapeHtml(selectedVariant.description)}</div>` : ''}
+          </div>
+        `;
+      }).join('')}</div>`;
+    }
+
+    // Handle variant selection change
+    function onVariantChange(e) {
+      const category = e.target.dataset.category;
+      const index = parseInt(e.target.value);
+      variantSelections[category] = index;
+      rerenderUsagesCode();
+    }
+
+    // Re-render only the code block for usages files
+    function rerenderUsagesCode() {
+      if (!currentData || !isUsagesFile(currentData)) return;
+
+      const merged = buildMergedCode(currentData, variantSelections);
+      const codeContainer = document.querySelector('.code-block');
+      if (codeContainer) {
+        codeContainer.outerHTML = renderCode(merged.text, merged.links, currentData.highlights, merged.tooltips);
+        // Re-setup tooltips and line handlers
+        setupTooltips(merged.tooltips);
+        document.querySelectorAll('.line-number').forEach(ln => {
+          ln.addEventListener('click', handleLineClick);
+        });
+        applyHighlightFromHash();
+      }
+
+      // Update descriptions
+      document.querySelectorAll('.variant-selector').forEach(selector => {
+        const cat = selector.querySelector('select').dataset.category;
+        const idx = variantSelections[cat] || 0;
+        const variant = currentData.categories[cat][idx];
+        const descEl = selector.querySelector('.variant-description');
+        if (variant.description) {
+          if (descEl) {
+            descEl.textContent = variant.description;
+          } else {
+            selector.insertAdjacentHTML('beforeend', `<div class="variant-description">${escapeHtml(variant.description)}</div>`);
+          }
+        } else if (descEl) {
+          descEl.remove();
+        }
+      });
+    }
 
     // Fetch file list from server
     async function loadFileList() {
@@ -557,6 +746,7 @@
       if (!filePath || !allFiles.includes(filePath)) return;
 
       currentFile = filePath;
+      variantSelections = {}; // Reset selections for new file
       const main = document.getElementById('main');
 
       try {
@@ -564,6 +754,21 @@
         const parts = filePath.split('/');
         const name = parts.pop().replace('.json', '');
         const group = parts.join('/');
+
+        // Check if this is a usages file with categories
+        const isUsages = isUsagesFile(currentData);
+        let codeText, codeLinks, codeTooltips;
+
+        if (isUsages) {
+          const merged = buildMergedCode(currentData, variantSelections);
+          codeText = merged.text;
+          codeLinks = merged.links;
+          codeTooltips = merged.tooltips;
+        } else {
+          codeText = currentData.text || '';
+          codeLinks = currentData.links;
+          codeTooltips = currentData.tooltips;
+        }
 
         main.innerHTML = `
           <section class="code-section" id="${filePath}">
@@ -573,7 +778,8 @@
               <button class="btn" id="copyLinkBtn">Copy Link</button>
               <button class="btn" id="copyCodeBtn">Copy Code</button>
             </div>
-            ${renderCode(currentData.text || '', currentData.links, currentData.highlights, currentData.tooltips)}
+            ${isUsages ? renderVariantSelectors(currentData.categories, variantSelections) : ''}
+            ${renderCode(codeText, codeLinks, currentData.highlights, codeTooltips)}
           </section>
         `;
 
@@ -581,13 +787,20 @@
         document.getElementById('copyLinkBtn').addEventListener('click', copyLink);
         document.getElementById('copyCodeBtn').addEventListener('click', copyCode);
 
+        // Add variant selector handlers
+        if (isUsages) {
+          main.querySelectorAll('.variant-selector select').forEach(sel => {
+            sel.addEventListener('change', onVariantChange);
+          });
+        }
+
         // Add line click handlers
         main.querySelectorAll('.line-number').forEach(ln => {
           ln.addEventListener('click', handleLineClick);
         });
 
         // Add tooltip handlers
-        setupTooltips(currentData.tooltips || []);
+        setupTooltips(codeTooltips || []);
 
         // Apply highlighting from hash
         applyHighlightFromHash();

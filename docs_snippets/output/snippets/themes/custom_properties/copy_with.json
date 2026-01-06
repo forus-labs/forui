@@ -1,5 +1,5 @@
 {
-  "text": "final theme = FThemes.zinc.light.copyWith(extensions: [const BrandColor(color: Color(0xFF6366F1))]);\n",
+  "text": "final theme = FThemes.zinc.light.copyWith(\n  extensions: [const BrandColor(color: Color(0xFF6366F1))],\n);\n",
   "highlights": [],
   "links": [
     {
@@ -18,7 +18,7 @@
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemes/zinc.html"
     },
     {
-      "offset": 42,
+      "offset": 45,
       "length": 10,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/copyWith.html"
     }
@@ -596,7 +596,7 @@
       }
     },
     {
-      "offset": 42,
+      "offset": 45,
       "length": 11,
       "snippet": {
         "text": "{Iterable<ThemeExtension<dynamic>>? extensions}",
