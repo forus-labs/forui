@@ -5,13 +5,10 @@ import 'package:forui/forui.dart';
 
 final dialog = FDialog(
   // {@category "Core"}
-  key: const Key('key'),
   style: (style) => style,
   title: const Text('Title'),
   body: const Text('Body'),
-  actions: [
-    FButton(onPress: () {}, child: const Text('Action')),
-  ],
+  actions: [FButton(onPress: () {}, child: const Text('Action'))],
   // {@endcategory}
   // {@category "Layout"}
   direction: .vertical,
@@ -27,13 +24,10 @@ final dialog = FDialog(
 
 final adaptive = FDialog.adaptive(
   // {@category "Core"}
-  key: const Key('key'),
   style: (style) => style,
   title: const Text('Title'),
   body: const Text('Body'),
-  actions: [
-    FButton(onPress: () {}, child: const Text('Action')),
-  ],
+  actions: [FButton(onPress: () {}, child: const Text('Action'))],
   // {@endcategory}
   // {@category "Layout"}
   constraints: const BoxConstraints(minWidth: 280, maxWidth: 560),
@@ -48,7 +42,6 @@ final adaptive = FDialog.adaptive(
 
 final raw = FDialog.raw(
   // {@category "Core"}
-  key: const Key('key'),
   style: (style) => style,
   builder: (context, style) => const Text('Custom content'),
   // {@endcategory}

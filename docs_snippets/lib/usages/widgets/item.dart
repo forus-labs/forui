@@ -5,61 +5,55 @@ import 'package:forui/forui.dart';
 
 final item = FItem(
   // {@category "Core"}
-  key: const Key('key'),
   style: (style) => style,
+  enabled: true,
+  selected: false,
+  onPress: () {},
   title: const Text('Title'),
   prefix: const Icon(FIcons.user),
   subtitle: const Text('Subtitle'),
   details: const Text('Details'),
   suffix: const Icon(FIcons.chevronRight),
   // {@endcategory}
-  // {@category "State"}
-  enabled: true,
-  selected: false,
+  // {@category "Accessibility"}
+  autofocus: false,
+  focusNode: null,
+  onFocusChange: (focused) {},
+  semanticsLabel: 'Item',
+  shortcuts: null,
+  actions: null,
   // {@endcategory}
   // {@category "Callbacks"}
-  onPress: () {},
   onLongPress: () {},
   onSecondaryPress: () {},
   onSecondaryLongPress: () {},
   onHoverChange: (hovered) {},
   onStateChange: (states) {},
-  // {@endcategory}
-  // {@category "Accessibility"}
-  semanticsLabel: 'Item',
-  autofocus: false,
-  focusNode: null,
-  onFocusChange: (focused) {},
-  shortcuts: null,
-  actions: null,
   // {@endcategory}
 );
 
 final raw = FItem.raw(
   // {@category "Core"}
-  key: const Key('key'),
   style: (style) => style,
+  enabled: true,
+  selected: false,
+  onPress: () {},
   child: const Text('Content'),
   prefix: const Icon(FIcons.user),
   // {@endcategory}
-  // {@category "State"}
-  enabled: true,
-  selected: false,
+  // {@category "Accessibility"}
+  autofocus: false,
+  focusNode: null,
+  onFocusChange: (focused) {},
+  semanticsLabel: 'Item',
+  shortcuts: null,
+  actions: null,
   // {@endcategory}
   // {@category "Callbacks"}
-  onPress: () {},
   onLongPress: () {},
   onSecondaryPress: () {},
   onSecondaryLongPress: () {},
   onHoverChange: (hovered) {},
   onStateChange: (states) {},
-  // {@endcategory}
-  // {@category "Accessibility"}
-  semanticsLabel: 'Item',
-  autofocus: false,
-  focusNode: null,
-  onFocusChange: (focused) {},
-  shortcuts: null,
-  actions: null,
   // {@endcategory}
 );

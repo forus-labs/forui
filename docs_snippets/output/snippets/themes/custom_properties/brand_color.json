@@ -1,6 +1,0 @@
-{
-  "text": "import 'package:flutter/material.dart';\n\nclass BrandColor extends ThemeExtension<BrandColor> {\n  final Color color;\n\n  const BrandColor({required this.color});\n\n  @override\n  BrandColor copyWith({Color? color}) => BrandColor(color: color ?? this.color);\n\n  @override\n  BrandColor lerp(BrandColor? other, double t) {\n    if (other is! BrandColor) {\n      return this;\n    }\n\n    return BrandColor(color: Color.lerp(color, other.color, t)!);\n  }\n}\n",
-  "highlights": [],
-  "links": [],
-  "tooltips": []
-}

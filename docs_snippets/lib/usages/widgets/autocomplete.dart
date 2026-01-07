@@ -5,7 +5,6 @@ import 'package:forui/forui.dart';
 
 final autocomplete = FAutocomplete(
   // {@category "Core"}
-  key: const Key('key'),
   style: (style) => style,
   enabled: true,
   hint: 'Hint',
@@ -17,25 +16,15 @@ final autocomplete = FAutocomplete(
   // {@category "Popover Control"}
   popoverControl: const .managed(),
   // {@endcategory}
-  // {@category "Content"}
-  autoHide: true,
-  contentAnchor: AlignmentDirectional.topStart,
-  fieldAnchor: AlignmentDirectional.bottomStart,
-  contentConstraints: const FAutoWidthPortalConstraints(maxHeight: 300),
-  contentSpacing: const .spacing(4),
-  contentOverflow: .flip,
-  contentOffset: .zero,
-  contentHideRegion: .excludeChild,
-  contentGroupId: null,
-  contentOnTapHide: () {},
-  contentScrollController: null,
-  contentPhysics: const ClampingScrollPhysics(),
-  contentDivider: .none,
-  filter: (query) => ['Apple', 'Banana'].where((item) => item.toLowerCase().startsWith(query.toLowerCase())),
-  contentBuilder: (context, query, values) => [for (final value in values) .item(value: value)],
-  contentEmptyBuilder: FAutocomplete.defaultContentEmptyBuilder,
-  contentLoadingBuilder: FAutocomplete.defaultContentLoadingBuilder,
-  contentErrorBuilder: (context, error, stackTrace) => const Text('Error'),
+  // {@category "Form"}
+  label: const Text('Label'),
+  description: const Text('Description'),
+  errorBuilder: FFormFieldProperties.defaultErrorBuilder,
+  forceErrorText: null,
+  onSaved: (value) {},
+  onReset: () {},
+  validator: (value) => null,
+  autovalidateMode: .disabled,
   // {@endcategory}
   // {@category "Field"}
   builder: (context, style, states, child) => child,
@@ -90,21 +79,30 @@ final autocomplete = FAutocomplete(
   clearable: (value) => false,
   rightArrowToComplete: false,
   // {@endcategory}
-  // {@category "Form"}
-  label: const Text('Label'),
-  description: const Text('Description'),
-  errorBuilder: FFormFieldProperties.defaultErrorBuilder,
-  forceErrorText: null,
-  onSaved: (value) {},
-  onReset: () {},
-  validator: (value) => null,
-  autovalidateMode: .disabled,
+  // {@category "Content"}
+  autoHide: true,
+  contentAnchor: AlignmentDirectional.topStart,
+  fieldAnchor: AlignmentDirectional.bottomStart,
+  contentConstraints: const FAutoWidthPortalConstraints(maxHeight: 300),
+  contentSpacing: const .spacing(4),
+  contentOverflow: .flip,
+  contentOffset: .zero,
+  contentHideRegion: .excludeChild,
+  contentGroupId: null,
+  contentOnTapHide: () {},
+  contentScrollController: null,
+  contentPhysics: const ClampingScrollPhysics(),
+  contentDivider: .none,
+  filter: (query) => ['Apple', 'Banana'].where((item) => item.toLowerCase().startsWith(query.toLowerCase())),
+  contentBuilder: (context, query, values) => [for (final value in values) .item(value: value)],
+  contentEmptyBuilder: FAutocomplete.defaultContentEmptyBuilder,
+  contentLoadingBuilder: FAutocomplete.defaultContentLoadingBuilder,
+  contentErrorBuilder: (context, error, stackTrace) => const Text('Error'),
   // {@endcategory}
 );
 
 final builder = FAutocomplete.builder(
   // {@category "Core"}
-  key: const Key('key'),
   style: (style) => style,
   enabled: true,
   filter: (query) => ['Apple', 'Banana'].where((item) => item.toLowerCase().startsWith(query.toLowerCase())),
@@ -116,23 +114,15 @@ final builder = FAutocomplete.builder(
   // {@category "Popover Control"}
   popoverControl: const .managed(),
   // {@endcategory}
-  // {@category "Content"}
-  contentEmptyBuilder: FAutocomplete.defaultContentEmptyBuilder,
-  contentLoadingBuilder: FAutocomplete.defaultContentLoadingBuilder,
-  contentErrorBuilder: (context, error, stackTrace) => const Text('Error'),
-  contentAnchor: AlignmentDirectional.topStart,
-  fieldAnchor: AlignmentDirectional.bottomStart,
-  contentConstraints: const FAutoWidthPortalConstraints(maxHeight: 300),
-  contentSpacing: const .spacing(4),
-  contentOverflow: .flip,
-  contentOffset: .zero,
-  contentHideRegion: .excludeChild,
-  contentGroupId: null,
-  contentOnTapHide: () {},
-  autoHide: true,
-  contentScrollController: null,
-  contentPhysics: const ClampingScrollPhysics(),
-  contentDivider: .none,
+  // {@category "Form"}
+  label: const Text('Label'),
+  description: const Text('Description'),
+  errorBuilder: FFormFieldProperties.defaultErrorBuilder,
+  forceErrorText: null,
+  onSaved: (value) {},
+  onReset: () {},
+  validator: (value) => null,
+  autovalidateMode: .disabled,
   // {@endcategory}
   // {@category "Field"}
   hint: 'Hint',
@@ -188,15 +178,23 @@ final builder = FAutocomplete.builder(
   clearable: (value) => false,
   rightArrowToComplete: false,
   // {@endcategory}
-  // {@category "Form"}
-  label: const Text('Label'),
-  description: const Text('Description'),
-  errorBuilder: FFormFieldProperties.defaultErrorBuilder,
-  forceErrorText: null,
-  onSaved: (value) {},
-  onReset: () {},
-  validator: (value) => null,
-  autovalidateMode: .disabled,
+  // {@category "Content"}
+  autoHide: true,
+  contentEmptyBuilder: FAutocomplete.defaultContentEmptyBuilder,
+  contentLoadingBuilder: FAutocomplete.defaultContentLoadingBuilder,
+  contentErrorBuilder: (context, error, stackTrace) => const Text('Error'),
+  contentAnchor: AlignmentDirectional.topStart,
+  fieldAnchor: AlignmentDirectional.bottomStart,
+  contentConstraints: const FAutoWidthPortalConstraints(maxHeight: 300),
+  contentSpacing: const .spacing(4),
+  contentOverflow: .flip,
+  contentOffset: .zero,
+  contentHideRegion: .excludeChild,
+  contentGroupId: null,
+  contentOnTapHide: () {},
+  contentScrollController: null,
+  contentPhysics: const ClampingScrollPhysics(),
+  contentDivider: .none,
   // {@endcategory}
 );
 

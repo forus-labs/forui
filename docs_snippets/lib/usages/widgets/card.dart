@@ -5,7 +5,6 @@ import 'package:forui/forui.dart';
 
 final card = FCard(
   // {@category "Core"}
-  key: const Key('key'),
   style: (style) => style,
   mainAxisSize: .min,
   image: const Placeholder(),
@@ -17,7 +16,6 @@ final card = FCard(
 
 final raw = FCard.raw(
   // {@category "Core"}
-  key: const Key('key'),
   style: (style) => style,
   child: const Text('Content'),
   // {@endcategory}

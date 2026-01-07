@@ -5,7 +5,6 @@ import 'package:forui/forui.dart';
 
 const toast = FToast(
   // {@category "Core"}
-  key: Key('key'),
   style: null,
   icon: Icon(FIcons.info),
   title: Text('Title'),
@@ -16,7 +15,6 @@ const toast = FToast(
 
 final toaster = FToaster(
   // {@category "Core"}
-  key: const Key('key'),
   style: (style) => style,
   child: const Placeholder(),
   // {@endcategory}
@@ -30,11 +28,9 @@ final showToast = showFToast(
   title: const Text('Title'),
   description: const Text('Description'),
   suffixBuilder: (context, entry) => GestureDetector(onTap: entry.dismiss, child: const Icon(FIcons.x)),
-  // {@category "Layout"}
+  // {@category "Behavior"}
   alignment: .bottomEnd,
   swipeToDismiss: const [.right],
-  // {@endcategory}
-  // {@category "Behavior"}
   duration: const Duration(seconds: 5),
   onDismiss: () {},
   // {@endcategory}
@@ -43,12 +39,12 @@ final showToast = showFToast(
 final showRawToast = showRawFToast(
   // {@category "Core"}
   context: context,
-  builder: (context, entry) => const Text('Custom toast content'),
   style: (style) => style,
-  alignment: .bottomEnd,
-  swipeToDismiss: const [.right],
+  builder: (context, entry) => const Text('Custom toast content'),
   // {@endcategory}
   // {@category "Behavior"}
+  alignment: .bottomEnd,
+  swipeToDismiss: const [.right],
   duration: const Duration(seconds: 5),
   onDismiss: () {},
   // {@endcategory}

@@ -5,7 +5,6 @@ import 'package:forui/forui.dart';
 
 final popover = FPopover(
   // {@category "Core"}
-  key: const Key('key'),
   style: (style) => style,
   popoverBuilder: (context, controller) => const Padding(padding: .all(8), child: Text('Popover content')),
   builder: (context, controller, child) => child!,
@@ -31,13 +30,17 @@ final popover = FPopover(
   autofocus: null,
   focusNode: null,
   onFocusChange: (focused) {},
+  semanticsLabel: 'Popover',
   traversalEdgeBehavior: null,
   barrierSemanticsLabel: null,
   barrierSemanticsDismissible: true,
-  semanticsLabel: 'Popover',
   shortcuts: null,
   // {@endcategory}
 );
+
+// {@category "Control" "`.lifted()`"}
+/// Externally controls the popover's visibility.
+final FPopoverControl lifted = .lifted(shown: false, onChange: (shown) {}, motion: const FPopoverMotion());
 
 // {@category "Control" "`.managed()` with internal controller"}
 /// Manages the popover state internally.
@@ -50,9 +53,5 @@ final FPopoverControl managedExternal = .managed(
   controller: FPopoverController(vsync: vsync, shown: false, motion: const FPopoverMotion()),
   onChange: (shown) {},
 );
-
-// {@category "Control" "`.lifted()`"}
-/// Externally controls the popover's visibility.
-final FPopoverControl lifted = .lifted(shown: false, onChange: (shown) {}, motion: const FPopoverMotion());
 
 TickerProvider get vsync => throw UnimplementedError();

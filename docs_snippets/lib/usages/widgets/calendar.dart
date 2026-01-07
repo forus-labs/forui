@@ -1,24 +1,21 @@
+// dart format width=80
 // ignore_for_file: avoid_redundant_argument_values
 
-import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 
 final calendar = FCalendar(
   // {@category "Core"}
   style: (style) => style,
-  key: const Key('key'),
-  // {@endcategory}
-  // {@category "Control"}
-  control: .managedDate(),
-  // {@endcategory}
-  // {@category "Dates"}
   start: .utc(1900),
   end: .utc(2100),
   today: .now(),
   initialMonth: .now(),
   initialType: .day,
   // {@endcategory}
-  // {@category "Content"}
+  // {@category "Control"}
+  control: .managedDate(),
+  // {@endcategory}
+  // {@category "Appearance"}
   dayBuilder: FCalendar.defaultDayBuilder,
   // {@endcategory}
   // {@category "Callbacks"}
@@ -26,6 +23,14 @@ final calendar = FCalendar(
   onPress: (date) {},
   onLongPress: (date) {},
   // {@endcategory}
+);
+
+// {@category "Control" "`.lifted()`"}
+/// Lifted state control for external state management.
+final FCalendarControl<Object?> lifted = .lifted(
+  selectable: (date) => true,
+  selected: (date) => false,
+  select: (date) {},
 );
 
 // {@category "Control" "`.managedDate()` with internal controller"}
@@ -74,16 +79,18 @@ final FCalendarControl<Set<DateTime>> managedDatesExternal = .managedDates(
 
 // {@category "Control" "`.managedRange()` with internal controller"}
 /// Range selection with internal management.
-final FCalendarControl<(DateTime, DateTime)?> managedRangeInternal = .managedRange(
-  initial: null,
-  selectable: (date) => true,
-  truncateAndStripTimezone: true,
-  onChange: (range) {},
-);
+final FCalendarControl<(DateTime, DateTime)?> managedRangeInternal =
+    .managedRange(
+      initial: null,
+      selectable: (date) => true,
+      truncateAndStripTimezone: true,
+      onChange: (range) {},
+    );
 
 // {@category "Control" "`.managedRange()` with external controller"}
 /// Range selection with external controller.
-final FCalendarControl<(DateTime, DateTime)?> managedRangeExternal = .managedRange(
+final FCalendarControl<(DateTime, DateTime)?>
+managedRangeExternal = .managedRange(
   // For demonstration purposes only. Don't create a controller inline, store it in a State instead.
   controller: .range(
     initial: (.utc(2000), .utc(2001)),
@@ -91,12 +98,4 @@ final FCalendarControl<(DateTime, DateTime)?> managedRangeExternal = .managedRan
     truncateAndStripTimezone: true,
   ),
   onChange: (range) {},
-);
-
-// {@category "Control" "`.lifted()`"}
-/// Lifted state control for external state management.
-final FCalendarControl<Object?> lifted = .lifted(
-  selectable: (date) => true,
-  selected: (date) => false,
-  select: (date) {},
 );

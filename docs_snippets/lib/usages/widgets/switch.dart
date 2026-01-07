@@ -5,22 +5,19 @@ import 'package:forui/forui.dart';
 
 final switchWidget = FSwitch(
   // {@category "Core"}
-  key: const Key('key'),
   style: (style) => style,
   enabled: true,
   value: false,
   onChange: (value) {},
+  dragStartBehavior: .start,
   label: const Text('Enable notifications'),
   description: const Text('Receive push notifications'),
   error: null,
   // {@endcategory}
   // {@category "Accessibility"}
-  semanticsLabel: 'Enable notifications switch',
   autofocus: false,
   focusNode: null,
   onFocusChange: (focused) {},
-  // {@endcategory}
-  // {@category "Others"}
-  dragStartBehavior: .start,
+  semanticsLabel: 'Enable notifications switch',
   // {@endcategory}
 );

@@ -5,7 +5,6 @@ import 'package:forui/forui.dart';
 
 final selectTileGroup = FSelectTileGroup<String>(
   // {@category "Core"}
-  key: const Key('key'),
   style: null,
   enabled: true,
   divider: .indented,
@@ -18,13 +17,6 @@ final selectTileGroup = FSelectTileGroup<String>(
   // {@category "Control"}
   control: const .managed(),
   // {@endcategory}
-  // {@category "Scrollable"}
-  scrollController: null,
-  cacheExtent: null,
-  maxHeight: .infinity,
-  dragStartBehavior: .start,
-  physics: const ClampingScrollPhysics(),
-  // {@endcategory}
   // {@category "Form"}
   label: const Text('Select fruits'),
   description: const Text('Choose your favorite fruits'),
@@ -35,6 +27,13 @@ final selectTileGroup = FSelectTileGroup<String>(
   validator: (values) => null,
   errorBuilder: FFormFieldProperties.defaultErrorBuilder,
   // {@endcategory}
+  // {@category "Scroll"}
+  scrollController: null,
+  cacheExtent: null,
+  maxHeight: .infinity,
+  dragStartBehavior: .start,
+  physics: const ClampingScrollPhysics(),
+  // {@endcategory}
   // {@category "Accessibility"}
   semanticsLabel: 'Fruit selection',
   // {@endcategory}
@@ -42,7 +41,6 @@ final selectTileGroup = FSelectTileGroup<String>(
 
 final selectTileGroupBuilder = FSelectTileGroup<String>.builder(
   // {@category "Core"}
-  key: const Key('key'),
   style: null,
   enabled: true,
   divider: .indented,
@@ -51,13 +49,6 @@ final selectTileGroupBuilder = FSelectTileGroup<String>.builder(
   // {@endcategory}
   // {@category "Control"}
   control: const .managed(),
-  // {@endcategory}
-  // {@category "Scrollable"}
-  scrollController: null,
-  cacheExtent: null,
-  maxHeight: .infinity,
-  dragStartBehavior: .start,
-  physics: const ClampingScrollPhysics(),
   // {@endcategory}
   // {@category "Form"}
   label: const Text('Select items'),
@@ -69,6 +60,13 @@ final selectTileGroupBuilder = FSelectTileGroup<String>.builder(
   validator: (values) => null,
   errorBuilder: FFormFieldProperties.defaultErrorBuilder,
   // {@endcategory}
+  // {@category "Scroll"}
+  scrollController: null,
+  cacheExtent: null,
+  maxHeight: .infinity,
+  dragStartBehavior: .start,
+  physics: const ClampingScrollPhysics(),
+  // {@endcategory}
   // {@category "Accessibility"}
   semanticsLabel: 'Item selection',
   // {@endcategory}
@@ -76,7 +74,6 @@ final selectTileGroupBuilder = FSelectTileGroup<String>.builder(
 
 final selectTile = FSelectTile<String>(
   // {@category "Core"}
-  key: const Key('key'),
   style: (style) => style,
   enabled: true,
   value: 'apple',
@@ -87,23 +84,22 @@ final selectTile = FSelectTile<String>(
   uncheckedIcon: null,
   suffix: null,
   // {@endcategory}
+  // {@category "Accessibility"}
+  autofocus: false,
+  focusNode: null,
+  onFocusChange: (focused) {},
+  semanticsLabel: 'Apple',
+  shortcuts: null,
+  actions: null,
+  // {@endcategory}
   // {@category "Callbacks"}
   onHoverChange: (hovered) {},
   onStatesChange: (states) {},
-  // {@endcategory}
-  // {@category "Accessibility"}
-  semanticsLabel: 'Apple',
-  autofocus: false,
-  focusNode: null,
-  shortcuts: null,
-  actions: null,
-  onFocusChange: (focused) {},
   // {@endcategory}
 );
 
 final selectTileSuffix = FSelectTile<String>.suffix(
   // {@category "Core"}
-  key: const Key('key'),
   style: (style) => style,
   enabled: true,
   value: 'apple',
@@ -114,28 +110,27 @@ final selectTileSuffix = FSelectTile<String>.suffix(
   uncheckedIcon: null,
   prefix: null,
   // {@endcategory}
+  // {@category "Accessibility"}
+  autofocus: false,
+  focusNode: null,
+  onFocusChange: (focused) {},
+  shortcuts: null,
+  actions: null,
+  semanticsLabel: 'Apple',
+  // {@endcategory}
   // {@category "Callbacks"}
   onHoverChange: (hovered) {},
   onStatesChange: (states) {},
   // {@endcategory}
-  // {@category "Accessibility"}
-  semanticsLabel: 'Apple',
-  autofocus: false,
-  focusNode: null,
-  shortcuts: null,
-  actions: null,
-  onFocusChange: (focused) {},
-  // {@endcategory}
 );
+
+// {@category "Control" "`.lifted()`"}
+/// Externally controls the select tile group's values.
+final FMultiValueControl<String> lifted = .lifted(value: {}, onChange: (values) {});
 
 // {@category "Control" "`.managed()` with internal controller"}
 /// Manages the select tile group state internally for multiple selections.
-final FMultiValueControl<String> managedInternal = .managed(
-  initial: {},
-  min: 0,
-  max: null,
-  onChange: (values) {},
-);
+final FMultiValueControl<String> managedInternal = .managed(initial: {}, min: 0, max: null, onChange: (values) {});
 
 // {@category "Control" "`.managed()` with external controller"}
 /// Uses an external controller for multiple selections.
@@ -147,22 +142,12 @@ final FMultiValueControl<String> managedExternal = .managed(
 
 // {@category "Control" "`.managedRadio()` with internal controller"}
 /// Single selection with internal controller (radio behavior).
-final FMultiValueControl<String> managedRadioInternal = .managedRadio(
-  initial: null,
-  onChange: (values) {},
-);
+final FMultiValueControl<String> managedRadioInternal = .managedRadio(initial: null, onChange: (values) {});
 
 // {@category "Control" "`.managedRadio()` with external controller"}
 /// Single selection with external controller (radio behavior).
 final FMultiValueControl<String> managedRadioExternal = .managedRadio(
   // For demonstration purposes only. Don't create a controller inline, store it in a State instead.
-  controller: FMultiValueNotifier<String>.radio(),
-  onChange: (values) {},
-);
-
-// {@category "Control" "`.lifted()`"}
-/// Externally controls the select tile group's values.
-final FMultiValueControl<String> lifted = .lifted(
-  value: {},
+  controller: .radio(),
   onChange: (values) {},
 );

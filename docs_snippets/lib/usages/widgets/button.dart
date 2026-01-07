@@ -8,7 +8,6 @@ final button = FButton(
   style: FButtonStyle.primary(),
   // {@endcategory}
   // {@category "Core"}
-  key: const Key('key'),
   selected: false,
   onPress: () {},
   child: const Text('Button'),
@@ -21,19 +20,19 @@ final button = FButton(
   crossAxisAlignment: .center,
   textBaseline: null,
   // {@endcategory}
+  // {@category "Accessibility"}
+  autofocus: false,
+  focusNode: null,
+  onFocusChange: (focused) {},
+  shortcuts: null,
+  actions: null,
+  // {@endcategory}
   // {@category "Callbacks"}
   onLongPress: null,
   onSecondaryPress: null,
   onSecondaryLongPress: null,
-  onFocusChange: (focused) {},
   onHoverChange: (hovered) {},
   onStateChange: (states) {},
-  // {@endcategory}
-  // {@category "Accessibility"}
-  autofocus: false,
-  focusNode: null,
-  shortcuts: null,
-  actions: null,
   // {@endcategory}
 );
 
@@ -42,24 +41,23 @@ final icon = FButton.icon(
   style: FButtonStyle.outline(),
   // {@endcategory}
   // {@category "Core"}
-  key: const Key('key'),
   selected: false,
   onPress: () {},
   child: const Icon(FIcons.mail),
+  // {@endcategory}
+  // {@category "Accessibility"}
+  autofocus: false,
+  focusNode: null,
+  onFocusChange: (focused) {},
+  shortcuts: null,
+  actions: null,
   // {@endcategory}
   // {@category "Callbacks"}
   onLongPress: null,
   onSecondaryPress: null,
   onSecondaryLongPress: null,
-  onFocusChange: (focused) {},
   onHoverChange: (hovered) {},
   onStateChange: (states) {},
-  // {@endcategory}
-  // {@category "Accessibility"}
-  autofocus: false,
-  focusNode: null,
-  shortcuts: null,
-  actions: null,
   // {@endcategory}
 );
 
@@ -68,24 +66,23 @@ final raw = FButton.raw(
   style: FButtonStyle.primary(),
   // {@endcategory}
   // {@category "Core"}
-  key: const Key('key'),
   selected: false,
   onPress: () {},
   child: const Text('Button'),
+  // {@endcategory}
+  // {@category "Accessibility"}
+  autofocus: false,
+  focusNode: null,
+  onFocusChange: (focused) {},
+  shortcuts: null,
+  actions: null,
   // {@endcategory}
   // {@category "Callbacks"}
   onLongPress: null,
   onSecondaryPress: null,
   onSecondaryLongPress: null,
-  onFocusChange: (focused) {},
   onHoverChange: (hovered) {},
   onStateChange: (states) {},
-  // {@endcategory}
-  // {@category "Accessibility"}
-  autofocus: false,
-  focusNode: null,
-  shortcuts: null,
-  actions: null,
   // {@endcategory}
 );
 
@@ -111,8 +108,4 @@ final ghost = FButtonStyle.ghost();
 
 // {@category "Style" "Custom `FButtonStyle`"}
 /// A custom button style.
-final FButtonStyle Function(FButtonStyle) custom = (style) => style.copyWith(
-  contentStyle: style.contentStyle.copyWith(
-    textStyle: style.contentStyle.textStyle.map((s) => s.copyWith(fontWeight: .w700)),
-  ),
-);
+final FButtonStyle Function(FButtonStyle) custom = (style) => style;

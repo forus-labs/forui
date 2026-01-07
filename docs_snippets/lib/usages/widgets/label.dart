@@ -5,7 +5,6 @@ import 'package:forui/forui.dart';
 
 final label = FLabel(
   // {@category "Core"}
-  key: const Key('key'),
   style: (style) => style,
   axis: .vertical,
   expands: false,

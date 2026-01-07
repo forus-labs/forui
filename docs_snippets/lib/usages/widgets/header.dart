@@ -5,7 +5,6 @@ import 'package:forui/forui.dart';
 
 final header = FHeader(
   // {@category "Core"}
-  key: const Key('key'),
   style: (style) => style,
   title: const Text('Title'),
   suffixes: [FHeaderAction(icon: const Icon(FIcons.settings), onPress: () {})],
@@ -14,7 +13,6 @@ final header = FHeader(
 
 final nested = FHeader.nested(
   // {@category "Core"}
-  key: const Key('key'),
   style: (style) => style,
   title: const Text('Title'),
   titleAlignment: .center,

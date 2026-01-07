@@ -6,19 +6,29 @@ import 'package:forui/forui.dart';
 final bottomNavigationBar = FBottomNavigationBar(
   // {@category "Core"}
   style: (style) => style,
-  children: const [
-    FBottomNavigationBarItem(icon: Icon(FIcons.house), label: Text('Home')),
-    FBottomNavigationBarItem(icon: Icon(FIcons.libraryBig), label: Text('Library')),
-    FBottomNavigationBarItem(icon: Icon(FIcons.search), label: Text('Search')),
-  ],
-  key: const Key('key'),
-  // {@endcategory}
-  // {@category "State"}
   index: 0,
   onChange: (index) {},
+  children: const [FBottomNavigationBarItem(icon: Icon(FIcons.house), label: Text('Home'))],
   // {@endcategory}
   // {@category "Safe Area"}
   safeAreaTop: false,
   safeAreaBottom: false,
+  // {@endcategory}
+);
+
+final bottomNavigationBarItem = FBottomNavigationBarItem(
+  // {@category "Core"}
+  style: (style) => style,
+  icon: const Icon(FIcons.house),
+  label: const Text('Home'),
+  // {@endcategory}
+  // {@category "Accessibility"}
+  autofocus: false,
+  focusNode: null,
+  onFocusChange: (focused) {},
+  // {@endcategory}
+  // {@category "Callbacks"}
+  onHoverChange: (hovered) {},
+  onStateChange: (delta) {},
   // {@endcategory}
 );

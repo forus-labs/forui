@@ -6,7 +6,6 @@ import 'package:intl/intl.dart';
 
 final timeField = FTimeField(
   // {@category "Core"}
-  key: const Key('key'),
   style: (style) => style,
   enabled: true,
   hour24: false,
@@ -16,6 +15,15 @@ final timeField = FTimeField(
   // {@endcategory}
   // {@category "Popover Control"}
   popoverControl: const .managed(),
+  // {@endcategory}
+  // {@category "Form"}
+  label: const Text('Time'),
+  description: const Text('Select a time'),
+  onSaved: (time) {},
+  onReset: () {},
+  autovalidateMode: .onUnfocus,
+  forceErrorText: null,
+  errorBuilder: FFormFieldProperties.defaultErrorBuilder,
   // {@endcategory}
   // {@category "Field"}
   textInputAction: null,
@@ -31,15 +39,6 @@ final timeField = FTimeField(
   prefixBuilder: FTimeField.defaultIconBuilder,
   suffixBuilder: null,
   // {@endcategory}
-  // {@category "Form"}
-  label: const Text('Time'),
-  description: const Text('Select a time'),
-  onSaved: (time) {},
-  onReset: () {},
-  autovalidateMode: .onUnfocus,
-  forceErrorText: null,
-  errorBuilder: FFormFieldProperties.defaultErrorBuilder,
-  // {@endcategory}
   // {@category "Accessibility"}
   autofocus: false,
   focusNode: null,
@@ -48,7 +47,6 @@ final timeField = FTimeField(
 
 final timeFieldPicker = FTimeField.picker(
   // {@category "Core"}
-  key: const Key('key'),
   style: (style) => style,
   enabled: true,
   hour24: false,
@@ -58,6 +56,15 @@ final timeFieldPicker = FTimeField.picker(
   // {@endcategory}
   // {@category "Popover Control"}
   popoverControl: const .managed(),
+  // {@endcategory}
+  // {@category "Form"}
+  label: const Text('Time'),
+  description: const Text('Select a time'),
+  onSaved: (time) {},
+  onReset: () {},
+  autovalidateMode: .onUnfocus,
+  forceErrorText: null,
+  errorBuilder: FFormFieldProperties.defaultErrorBuilder,
   // {@endcategory}
   // {@category "Field"}
   format: DateFormat.jm(),
@@ -85,20 +92,21 @@ final timeFieldPicker = FTimeField.picker(
   groupId: null,
   onTapHide: () {},
   // {@endcategory}
-  // {@category "Form"}
-  label: const Text('Time'),
-  description: const Text('Select a time'),
-  onSaved: (time) {},
-  onReset: () {},
-  autovalidateMode: .onUnfocus,
-  forceErrorText: null,
-  errorBuilder: FFormFieldProperties.defaultErrorBuilder,
-  // {@endcategory}
   // {@category "Accessibility"}
   autofocus: false,
   focusNode: null,
   // {@endcategory}
 );
+
+// {@category "Control" "`.lifted()`"}
+/// Externally controls the time field value.
+final FTimeFieldControl lifted = .lifted(
+  time: const FTime(9, 30),
+  onChange: (time) {},
+  duration: const Duration(milliseconds: 300),
+  curve: Curves.easeOutCubic,
+);
+
 
 // {@category "Control" "`.managed()` with internal controller"}
 /// Manages time field state internally.
@@ -114,15 +122,6 @@ final FTimeFieldControl managedExternal = .managed(
   // For demonstration purposes only. Don't create a controller inline, store it in a State instead.
   controller: FTimeFieldController(time: const FTime(9, 30)),
   onChange: (time) {},
-);
-
-// {@category "Control" "`.lifted()`"}
-/// Externally controls the time field value.
-final FTimeFieldControl lifted = .lifted(
-  time: const FTime(9, 30),
-  onChange: (time) {},
-  duration: const Duration(milliseconds: 300),
-  curve: Curves.easeOutCubic,
 );
 
 // {@category "Popover Control" "`.lifted()`"}

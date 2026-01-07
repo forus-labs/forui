@@ -5,7 +5,6 @@ import 'package:forui/forui.dart';
 
 final multiSelect = FMultiSelect<String>(
   // {@category "Core"}
-  key: const Key('key'),
   style: (style) => style,
   enabled: true,
   items: const {'Apple': 'apple', 'Banana': 'banana', 'Cherry': 'cherry'},
@@ -15,6 +14,16 @@ final multiSelect = FMultiSelect<String>(
   // {@endcategory}
   // {@category "Popover Control"}
   popoverControl: const .managed(),
+  // {@endcategory}
+  // {@category "Form"}
+  label: const Text('Label'),
+  description: const Text('Description'),
+  onSaved: (values) {},
+  onReset: () {},
+  autovalidateMode: .onUnfocus,
+  forceErrorText: null,
+  validator: (values) => null,
+  errorBuilder: FFormFieldProperties.defaultErrorBuilder,
   // {@endcategory}
   // {@category "Field"}
   hint: const Text('Select fruits'),
@@ -42,16 +51,6 @@ final multiSelect = FMultiSelect<String>(
   contentPhysics: const ClampingScrollPhysics(),
   contentDivider: .none,
   // {@endcategory}
-  // {@category "Form"}
-  label: const Text('Label'),
-  description: const Text('Description'),
-  onSaved: (values) {},
-  onReset: () {},
-  autovalidateMode: .onUnfocus,
-  forceErrorText: null,
-  validator: (values) => null,
-  errorBuilder: FFormFieldProperties.defaultErrorBuilder,
-  // {@endcategory}
   // {@category "Accessibility"}
   autofocus: false,
   focusNode: null,
@@ -60,7 +59,6 @@ final multiSelect = FMultiSelect<String>(
 
 final multiSelectRich = FMultiSelect<String>.rich(
   // {@category "Core"}
-  key: const Key('key'),
   style: (style) => style,
   enabled: true,
   format: Text.new,
@@ -76,6 +74,16 @@ final multiSelectRich = FMultiSelect<String>.rich(
   // {@category "Popover Control"}
   popoverControl: const .managed(),
   // {@endcategory}
+  // {@category "Form"}
+  label: const Text('Label'),
+  description: const Text('Description'),
+  onSaved: (values) {},
+  onReset: () {},
+  autovalidateMode: .onUnfocus,
+  forceErrorText: null,
+  validator: (values) => null,
+  errorBuilder: FFormFieldProperties.defaultErrorBuilder,
+  // {@endcategory}
   // {@category "Field"}
   hint: const Text('Select fruits'),
   keepHint: true,
@@ -102,6 +110,25 @@ final multiSelectRich = FMultiSelect<String>.rich(
   contentPhysics: const ClampingScrollPhysics(),
   contentDivider: .none,
   // {@endcategory}
+  // {@category "Accessibility"}
+  autofocus: false,
+  focusNode: null,
+  // {@endcategory}
+);
+
+final multiSelectSearch = FMultiSelect<String>.search(
+  // {@category "Core"}
+  const {'Apple': 'apple', 'Banana': 'banana', 'Cherry': 'cherry'},
+  style: (style) => style,
+  enabled: true,
+  filter: (query) => ['apple', 'banana', 'cherry'].where((e) => e.startsWith(query)),
+  // {@endcategory}
+  // {@category "Control"}
+  control: const .managed(),
+  // {@endcategory}
+  // {@category "Popover Control"}
+  popoverControl: const .managed(),
+  // {@endcategory}
   // {@category "Form"}
   label: const Text('Label'),
   description: const Text('Description'),
@@ -111,26 +138,6 @@ final multiSelectRich = FMultiSelect<String>.rich(
   forceErrorText: null,
   validator: (values) => null,
   errorBuilder: FFormFieldProperties.defaultErrorBuilder,
-  // {@endcategory}
-  // {@category "Accessibility"}
-  autofocus: false,
-  focusNode: null,
-  // {@endcategory}
-);
-
-final multiSelectSearch = FMultiSelect<String>.search(
-  // {@category "Core"}
-  key: const Key('key'),
-  style: (style) => style,
-  enabled: true,
-  const {'Apple': 'apple', 'Banana': 'banana', 'Cherry': 'cherry'},
-  filter: (query) => ['apple', 'banana', 'cherry'].where((e) => e.startsWith(query)),
-  // {@endcategory}
-  // {@category "Control"}
-  control: const .managed(),
-  // {@endcategory}
-  // {@category "Popover Control"}
-  popoverControl: const .managed(),
   // {@endcategory}
   // {@category "Field"}
   hint: const Text('Search fruits'),
@@ -160,16 +167,6 @@ final multiSelectSearch = FMultiSelect<String>.search(
   contentScrollHandles: false,
   contentPhysics: const ClampingScrollPhysics(),
   contentDivider: .none,
-  // {@endcategory}
-  // {@category "Form"}
-  label: const Text('Label'),
-  description: const Text('Description'),
-  onSaved: (values) {},
-  onReset: () {},
-  autovalidateMode: .onUnfocus,
-  forceErrorText: null,
-  validator: (values) => null,
-  errorBuilder: FFormFieldProperties.defaultErrorBuilder,
   // {@endcategory}
   // {@category "Accessibility"}
   autofocus: false,
@@ -179,11 +176,10 @@ final multiSelectSearch = FMultiSelect<String>.search(
 
 final multiSelectSearchBuilder = FMultiSelect<String>.searchBuilder(
   // {@category "Core"}
-  key: const Key('key'),
   style: (style) => style,
   enabled: true,
-  format: Text.new,
   filter: (query) => ['apple', 'banana', 'cherry'].where((e) => e.startsWith(query)),
+  format: Text.new,
   contentBuilder: (context, style, values) => [for (final value in values) .item(title: Text(value), value: value)],
   // {@endcategory}
   // {@category "Control"}
@@ -191,6 +187,16 @@ final multiSelectSearchBuilder = FMultiSelect<String>.searchBuilder(
   // {@endcategory}
   // {@category "Popover Control"}
   popoverControl: const .managed(),
+  // {@endcategory}
+  // {@category "Form"}
+  label: const Text('Label'),
+  description: const Text('Description'),
+  onSaved: (values) {},
+  onReset: () {},
+  autovalidateMode: .onUnfocus,
+  forceErrorText: null,
+  validator: (values) => null,
+  errorBuilder: FFormFieldProperties.defaultErrorBuilder,
   // {@endcategory}
   // {@category "Field"}
   hint: const Text('Search fruits'),
@@ -221,30 +227,19 @@ final multiSelectSearchBuilder = FMultiSelect<String>.searchBuilder(
   contentPhysics: const ClampingScrollPhysics(),
   contentDivider: .none,
   // {@endcategory}
-  // {@category "Form"}
-  label: const Text('Label'),
-  description: const Text('Description'),
-  onSaved: (values) {},
-  onReset: () {},
-  autovalidateMode: .onUnfocus,
-  forceErrorText: null,
-  validator: (values) => null,
-  errorBuilder: FFormFieldProperties.defaultErrorBuilder,
-  // {@endcategory}
   // {@category "Accessibility"}
   autofocus: false,
   focusNode: null,
   // {@endcategory}
 );
 
+// {@category "Control" "`.lifted()`"}
+/// Externally controls the multi-select's values.
+final FMultiValueControl<String> lifted = .lifted(value: {}, onChange: (values) {});
+
 // {@category "Control" "`.managed()` with internal controller"}
 /// Manages the multi-select state internally.
-final FMultiValueControl<String> managedInternal = .managed(
-  initial: {},
-  min: 0,
-  max: null,
-  onChange: (values) {},
-);
+final FMultiValueControl<String> managedInternal = .managed(initial: {}, min: 0, max: null, onChange: (values) {});
 
 // {@category "Control" "`.managed()` with external controller"}
 /// Uses an external controller to control the multi-select's state.
@@ -256,25 +251,19 @@ final FMultiValueControl<String> managedExternal = .managed(
 
 // {@category "Control" "`.managedRadio()` with internal controller"}
 /// Single selection with internal controller.
-final FMultiValueControl<String> managedRadioInternal = .managedRadio(
-  initial: null,
-  onChange: (values) {},
-);
+final FMultiValueControl<String> managedRadioInternal = .managedRadio(initial: null, onChange: (values) {});
 
 // {@category "Control" "`.managedRadio()` with external controller"}
 /// Single selection with external controller.
 final FMultiValueControl<String> managedRadioExternal = .managedRadio(
   // For demonstration purposes only. Don't create a controller inline, store it in a State instead.
-  controller: FMultiValueNotifier<String>.radio(),
+  controller: .radio(),
   onChange: (values) {},
 );
 
-// {@category "Control" "`.lifted()`"}
-/// Externally controls the multi-select's values.
-final FMultiValueControl<String> lifted = .lifted(
-  value: {},
-  onChange: (values) {},
-);
+// {@category "Popover Control" "`.lifted()`"}
+/// Externally controls the popover's visibility.
+final FPopoverControl popoverLifted = .lifted(shown: false, onChange: (shown) {}, motion: const FPopoverMotion());
 
 // {@category "Popover Control" "`.managed()` with internal controller"}
 /// Manages the popover's visibility internally.
@@ -287,9 +276,5 @@ final FPopoverControl popoverExternal = .managed(
   controller: FPopoverController(vsync: vsync, shown: false, motion: const FPopoverMotion()),
   onChange: (shown) {},
 );
-
-// {@category "Popover Control" "`.lifted()`"}
-/// Externally controls the popover's visibility.
-final FPopoverControl popoverLifted = .lifted(shown: false, onChange: (shown) {}, motion: const FPopoverMotion());
 
 TickerProvider get vsync => throw UnimplementedError();

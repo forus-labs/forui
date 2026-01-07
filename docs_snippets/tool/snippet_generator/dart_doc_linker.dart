@@ -109,11 +109,11 @@ class DartDocLinker extends RecursiveAstVisitor<void> {
   }
 
   Element? recordElement(Expression expression) => switch (expression) {
-      PrefixedIdentifier(:final element?) => element,
-      PropertyAccess(:final propertyName) => propertyName.element,
-      MethodInvocation(:final methodName) => methodName.element,
-      _ => null,
-    };
+    PrefixedIdentifier(:final element?) => element,
+    PropertyAccess(:final propertyName) => propertyName.element,
+    MethodInvocation(:final methodName) => methodName.element,
+    _ => null,
+  };
 
   /// Links targeted top level function/method invocations to their method documentation.
   ///

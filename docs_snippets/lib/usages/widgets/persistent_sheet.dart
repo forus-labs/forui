@@ -6,6 +6,8 @@ import 'package:forui/forui.dart';
 final show = showFPersistentSheet(
   // {@category "Core"}
   context: context,
+  style: (style) => style,
+  side: .btt,
   builder: (context, controller) => Padding(
     padding: const .all(16),
     child: Column(
@@ -16,9 +18,6 @@ final show = showFPersistentSheet(
       ],
     ),
   ),
-  side: .btt,
-  style: (style) => style,
-  key: const Key('sheet'),
   // {@endcategory}
   // {@category "Layout"}
   mainAxisMaxRatio: 9 / 16,
@@ -36,7 +35,6 @@ final show = showFPersistentSheet(
 
 const sheets = FSheets(
   // {@category "Core"}
-  key: Key('key'),
   child: Placeholder(),
   // {@endcategory}
 );

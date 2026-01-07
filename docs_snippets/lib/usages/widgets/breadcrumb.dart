@@ -5,55 +5,47 @@ import 'package:forui/forui.dart';
 
 final breadcrumb = FBreadcrumb(
   // {@category "Core"}
-  key: const Key('key'),
   style: (style) => style,
   divider: const Icon(FIcons.chevronRight),
   children: const [
     FBreadcrumbItem(child: Text('Home'), onPress: null),
     FBreadcrumbItem(child: Text('Products'), onPress: null),
-    FBreadcrumbItem(child: Text('Details'), current: true),
   ],
   // {@endcategory}
 );
 
 final breadcrumbItem = FBreadcrumbItem(
   // {@category "Core"}
-  key: const Key('key'),
   current: false,
   onPress: () {},
   child: const Text('Home'),
-  // {@endcategory}
-  // {@category "Callbacks"}
-  onHoverChange: (hovered) {},
-  onStateChange: (states) {},
   // {@endcategory}
   // {@category "Accessibility"}
   autofocus: false,
   focusNode: null,
   onFocusChange: (focused) {},
   // {@endcategory}
+  // {@category "Callbacks"}
+  onHoverChange: (hovered) {},
+  onStateChange: (states) {},
+  // {@endcategory}
 );
 
 final breadcrumbItemCollapsed = FBreadcrumbItem.collapsed(
   // {@category "Core"}
-  key: const Key('key'),
+  divider: .full,
   menu: [
-    FItemGroup(children: [
-      FItem(title: const Text('Page 1'), onPress: () {}),
-      FItem(title: const Text('Page 2'), onPress: () {}),
-    ]),
+    FItemGroup(
+      children: [
+        FItem(title: const Text('Page 1'), onPress: () {}),
+        FItem(title: const Text('Page 2'), onPress: () {}),
+      ],
+    ),
   ],
   popoverMenuStyle: (style) => style,
   // {@endcategory}
   // {@category "Popover Control"}
   popoverControl: const .managed(),
-  // {@endcategory}
-  // {@category "Menu"}
-  scrollController: null,
-  cacheExtent: null,
-  maxHeight: double.infinity,
-  dragStartBehavior: .start,
-  divider: .full,
   // {@endcategory}
   // {@category "Layout"}
   menuAnchor: .topLeft,
@@ -64,39 +56,40 @@ final breadcrumbItemCollapsed = FBreadcrumbItem.collapsed(
   hideRegion: .excludeChild,
   onTapHide: () {},
   // {@endcategory}
-  // {@category "Callbacks"}
-  onFocusChange: (focused) {},
-  onHoverChange: (hovered) {},
-  onStateChange: (states) {},
+  // {@category "Scroll"}
+  scrollController: null,
+  cacheExtent: null,
+  maxHeight: .infinity,
+  dragStartBehavior: .start,
   // {@endcategory}
   // {@category "Accessibility"}
   autofocus: false,
   focusNode: null,
+  onFocusChange: (focused) {},
   traversalEdgeBehavior: .closedLoop,
   semanticsLabel: 'More pages',
+  // {@endcategory}
+  // {@category "Callbacks"}
+  onHoverChange: (hovered) {},
+  onStateChange: (states) {},
   // {@endcategory}
 );
 
 final breadcrumbItemCollapsedTiles = FBreadcrumbItem.collapsedTiles(
   // {@category "Core"}
-  key: const Key('key'),
+  divider: .full,
   menu: [
-    FTileGroup(children: [
-      FTile(title: const Text('Page 1'), onPress: () {}),
-      FTile(title: const Text('Page 2'), onPress: () {}),
-    ]),
+    FTileGroup(
+      children: [
+        FTile(title: const Text('Page 1'), onPress: () {}),
+        FTile(title: const Text('Page 2'), onPress: () {}),
+      ],
+    ),
   ],
   popoverMenuStyle: (style) => style,
   // {@endcategory}
   // {@category "Popover Control"}
   popoverControl: const .managed(),
-  // {@endcategory}
-  // {@category "Menu"}
-  scrollController: null,
-  cacheExtent: null,
-  maxHeight: .infinity,
-  dragStartBehavior: .start,
-  divider: .full,
   // {@endcategory}
   // {@category "Layout"}
   menuAnchor: .topLeft,
@@ -106,16 +99,22 @@ final breadcrumbItemCollapsedTiles = FBreadcrumbItem.collapsedTiles(
   offset: .zero,
   hideRegion: .excludeChild,
   // {@endcategory}
-  // {@category "Callbacks"}
-  onFocusChange: (focused) {},
-  onHoverChange: (hovered) {},
-  onStateChange: (states) {},
+  // {@category "Scroll"}
+  scrollController: null,
+  cacheExtent: null,
+  maxHeight: .infinity,
+  dragStartBehavior: .start,
   // {@endcategory}
   // {@category "Accessibility"}
   autofocus: false,
   focusNode: null,
+  onFocusChange: (focused) {},
   traversalEdgeBehavior: .closedLoop,
   semanticsLabel: 'More pages',
+  // {@endcategory}
+  // {@category "Callbacks"}
+  onHoverChange: (hovered) {},
+  onStateChange: (states) {},
   // {@endcategory}
 );
 

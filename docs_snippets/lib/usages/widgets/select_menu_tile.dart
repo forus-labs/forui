@@ -5,7 +5,6 @@ import 'package:forui/forui.dart';
 
 final selectMenuTile = FSelectMenuTile<String>(
   // {@category "Core"}
-  key: const Key('key'),
   style: (style) => style,
   enabled: true,
   autoHide: true,
@@ -17,8 +16,8 @@ final selectMenuTile = FSelectMenuTile<String>(
   details: null,
   suffix: const Icon(FIcons.chevronsUpDown),
   menu: const [
-    FSelectTile(title: Text('Option 1'), value: 'option1'),
-    FSelectTile(title: Text('Option 2'), value: 'option2'),
+    .tile(title: Text('Option 1'), value: 'option1'),
+    .tile(title: Text('Option 2'), value: 'option2'),
   ],
   // {@endcategory}
   // {@category "Select Control"}
@@ -27,12 +26,15 @@ final selectMenuTile = FSelectMenuTile<String>(
   // {@category "Popover Control"}
   popoverControl: const .managed(),
   // {@endcategory}
-  // {@category "Scroll"}
-  scrollController: null,
-  cacheExtent: null,
-  maxHeight: .infinity,
-  dragStartBehavior: .start,
-  physics: const ClampingScrollPhysics(),
+  // {@category "Form"}
+  label: const Text('Label'),
+  description: const Text('Description'),
+  errorBuilder: FFormFieldProperties.defaultErrorBuilder,
+  onSaved: (values) {},
+  onReset: () {},
+  validator: (values) => null,
+  forceErrorText: null,
+  autovalidateMode: .disabled,
   // {@endcategory}
   // {@category "Layout"}
   menuAnchor: .topRight,
@@ -44,15 +46,12 @@ final selectMenuTile = FSelectMenuTile<String>(
   menuOnTapHide: null,
   menuGroupId: null,
   // {@endcategory}
-  // {@category "Form"}
-  label: const Text('Label'),
-  description: const Text('Description'),
-  errorBuilder: FFormFieldProperties.defaultErrorBuilder,
-  onSaved: (values) {},
-  onReset: () {},
-  validator: (values) => null,
-  forceErrorText: null,
-  autovalidateMode: .disabled,
+  // {@category "Scroll"}
+  scrollController: null,
+  cacheExtent: null,
+  maxHeight: .infinity,
+  dragStartBehavior: .start,
+  physics: const ClampingScrollPhysics(),
   // {@endcategory}
   // {@category "Accessibility"}
   autofocus: false,
@@ -69,10 +68,10 @@ final selectMenuTile = FSelectMenuTile<String>(
 
 final selectMenuTileBuilder = FSelectMenuTile<String>.builder(
   // {@category "Core"}
-  key: const Key('key'),
   style: (style) => style,
   enabled: true,
   autoHide: true,
+  divider: .full,
   title: const Text('Select Option'),
   prefix: const Icon(FIcons.list),
   subtitle: const Text('Choose one'),
@@ -88,13 +87,15 @@ final selectMenuTileBuilder = FSelectMenuTile<String>.builder(
   // {@category "Popover Control"}
   popoverControl: const .managed(),
   // {@endcategory}
-  // {@category "Scroll"}
-  scrollController: null,
-  cacheExtent: null,
-  maxHeight: .infinity,
-  dragStartBehavior: .start,
-  physics: const ClampingScrollPhysics(),
-  divider: .full,
+  // {@category "Form"}
+  label: const Text('Label'),
+  description: const Text('Description'),
+  errorBuilder: FFormFieldProperties.defaultErrorBuilder,
+  onSaved: (values) {},
+  onReset: () {},
+  validator: (values) => null,
+  forceErrorText: null,
+  autovalidateMode: .disabled,
   // {@endcategory}
   // {@category "Layout"}
   menuAnchor: .topRight,
@@ -106,15 +107,12 @@ final selectMenuTileBuilder = FSelectMenuTile<String>.builder(
   menuOnTapHide: null,
   menuGroupId: null,
   // {@endcategory}
-  // {@category "Form"}
-  label: const Text('Label'),
-  description: const Text('Description'),
-  errorBuilder: FFormFieldProperties.defaultErrorBuilder,
-  onSaved: (values) {},
-  onReset: () {},
-  validator: (values) => null,
-  forceErrorText: null,
-  autovalidateMode: .disabled,
+  // {@category "Scroll"}
+  scrollController: null,
+  cacheExtent: null,
+  maxHeight: .infinity,
+  dragStartBehavior: .start,
+  physics: const ClampingScrollPhysics(),
   // {@endcategory}
   // {@category "Accessibility"}
   autofocus: false,
@@ -129,12 +127,13 @@ final selectMenuTileBuilder = FSelectMenuTile<String>.builder(
   // {@endcategory}
 );
 
+// {@category "Select Control" "`.lifted()`"}
+/// Externally controls the selected values.
+final FMultiValueControl<String> lifted = .lifted(value: const {'option1'}, onChange: (values) {});
+
 // {@category "Select Control" "`.managedRadio()` with internal notifier"}
 /// Single selection mode with internal notifier.
-final FMultiValueControl<String> managedRadioInternal = .managedRadio(
-  initial: 'option1',
-  onChange: (values) {},
-);
+final FMultiValueControl<String> managedRadioInternal = .managedRadio(initial: 'option1', onChange: (values) {});
 
 // {@category "Select Control" "`.managedRadio()` with external controller"}
 /// Single selection mode with external controller.
@@ -158,13 +157,6 @@ final FMultiValueControl<String> managedInternal = .managed(
 final FMultiValueControl<String> managedExternal = .managed(
   // For demonstration purposes only. Don't create a controller inline, store it in a State instead.
   controller: FMultiValueNotifier(value: const {'option1', 'option2'}, min: 1, max: 3),
-  onChange: (values) {},
-);
-
-// {@category "Select Control" "`.lifted()`"}
-/// Externally controls the selected values.
-final FMultiValueControl<String> lifted = .lifted(
-  value: const {'option1'},
   onChange: (values) {},
 );
 

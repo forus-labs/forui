@@ -6,9 +6,9 @@ import 'package:forui/forui.dart';
 final show = showFSheet(
   // {@category "Core"}
   context: context,
-  builder: (context) => const Padding(padding: .all(16), child: Text('Sheet content')),
-  side: .btt,
   style: (style) => style,
+  side: .btt,
+  builder: (context) => const Padding(padding: .all(16), child: Text('Sheet content')),
   // {@endcategory}
   // {@category "Layout"}
   mainAxisMaxRatio: 9 / 16,
@@ -35,8 +35,8 @@ final show = showFSheet(
 final route = FModalSheetRoute<void>(
   // {@category "Core"}
   style: const FModalSheetStyle(),
-  builder: (context) => const Padding(padding: .all(16), child: Text('Sheet content')),
   side: .btt,
+  builder: (context) => const Padding(padding: .all(16), child: Text('Sheet content')),
   // {@endcategory}
   // {@category "Layout"}
   mainAxisMaxRatio: 9 / 16,

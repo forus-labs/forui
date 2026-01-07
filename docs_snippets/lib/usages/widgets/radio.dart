@@ -5,7 +5,6 @@ import 'package:forui/forui.dart';
 
 final radio = FRadio(
   // {@category "Core"}
-  key: const Key('key'),
   style: (style) => style,
   enabled: true,
   value: false,
@@ -15,9 +14,9 @@ final radio = FRadio(
   error: null,
   // {@endcategory}
   // {@category "Accessibility"}
-  semanticsLabel: 'Option radio',
   autofocus: false,
   focusNode: null,
   onFocusChange: (focused) {},
+  semanticsLabel: 'Option radio',
   // {@endcategory}
 );

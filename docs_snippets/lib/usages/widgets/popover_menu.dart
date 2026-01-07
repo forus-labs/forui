@@ -5,7 +5,6 @@ import 'package:forui/forui.dart';
 
 final popoverMenu = FPopoverMenu(
   // {@category "Core"}
-  key: const Key('key'),
   style: (style) => style,
   divider: .full,
   menu: [
@@ -23,11 +22,6 @@ final popoverMenu = FPopoverMenu(
   // {@category "Control"}
   control: const .managed(),
   // {@endcategory}
-  // {@category "Scrollable"}
-  scrollController: null,
-  cacheExtent: null,
-  dragStartBehavior: .start,
-  // {@endcategory}
   // {@category "Layout"}
   menuAnchor: .topCenter,
   childAnchor: .bottomCenter,
@@ -41,20 +35,24 @@ final popoverMenu = FPopoverMenu(
   hideRegion: .excludeChild,
   onTapHide: () {},
   // {@endcategory}
+  // {@category "Scroll"}
+  scrollController: null,
+  cacheExtent: null,
+  dragStartBehavior: .start,
+  // {@endcategory}
   // {@category "Accessibility"}
   autofocus: null,
   focusNode: null,
   onFocusChange: (focused) {},
+  semanticsLabel: 'Menu',
   traversalEdgeBehavior: null,
   barrierSemanticsLabel: null,
   barrierSemanticsDismissible: true,
-  semanticsLabel: 'Menu',
   // {@endcategory}
 );
 
 final popoverMenuTiles = FPopoverMenu.tiles(
   // {@category "Core"}
-  key: const Key('key'),
   style: (style) => style,
   divider: .full,
   menu: [
@@ -72,11 +70,6 @@ final popoverMenuTiles = FPopoverMenu.tiles(
   // {@category "Control"}
   control: const .managed(),
   // {@endcategory}
-  // {@category "Scrollable"}
-  scrollController: null,
-  cacheExtent: null,
-  dragStartBehavior: .start,
-  // {@endcategory}
   // {@category "Layout"}
   maxHeight: .infinity,
   menuAnchor: .topCenter,
@@ -90,16 +83,25 @@ final popoverMenuTiles = FPopoverMenu.tiles(
   hideRegion: .excludeChild,
   onTapHide: () {},
   // {@endcategory}
+  // {@category "Scroll"}
+  scrollController: null,
+  cacheExtent: null,
+  dragStartBehavior: .start,
+  // {@endcategory}
   // {@category "Accessibility"}
   autofocus: null,
   focusNode: null,
   onFocusChange: (focused) {},
+  semanticsLabel: 'Menu',
   traversalEdgeBehavior: null,
   barrierSemanticsLabel: null,
   barrierSemanticsDismissible: true,
-  semanticsLabel: 'Menu',
   // {@endcategory}
 );
+
+// {@category "Control" "`.lifted()`"}
+/// Externally controls the popover's visibility.
+final FPopoverControl lifted = .lifted(shown: false, onChange: (shown) {}, motion: const FPopoverMotion());
 
 // {@category "Control" "`.managed()` with internal controller"}
 /// Manages the popover state internally.
@@ -112,9 +114,5 @@ final FPopoverControl managedExternal = .managed(
   controller: FPopoverController(vsync: vsync, shown: false, motion: const FPopoverMotion()),
   onChange: (shown) {},
 );
-
-// {@category "Control" "`.lifted()`"}
-/// Externally controls the popover's visibility.
-final FPopoverControl lifted = .lifted(shown: false, onChange: (shown) {}, motion: const FPopoverMotion());
 
 TickerProvider get vsync => throw UnimplementedError();

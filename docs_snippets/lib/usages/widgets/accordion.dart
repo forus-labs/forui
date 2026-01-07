@@ -1,16 +1,34 @@
-// ignore_for_file: sort_child_properties_last
+// ignore_for_file: avoid_redundant_argument_values, sort_child_properties_last
 
 import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 
 final accordion = FAccordion(
   // {@category "core"}
-  key: const Key('key'),
-  style: FThemes.zinc.light.accordionStyle,
+  style: (style) => style,
   children: const [FAccordionItem(title: Text('Title'), child: SizedBox())],
   // {@endcategory}
   // {@category "Control"}
   control: const .managed(min: 1, max: 2),
+  // {@endcategory}
+);
+
+final accordionItem = FAccordionItem(
+  // {@category "Core"}
+  style: null,
+  title: const Text('Title'),
+  icon: const Icon(FIcons.chevronDown),
+  initiallyExpanded: false,
+  child: const Text('Content'),
+  // {@endcategory}
+  // {@category "Accessibility"}
+  autofocus: false,
+  focusNode: null,
+  onFocusChange: (focused) {},
+  // {@endcategory}
+  // {@category "Callbacks"}
+  onHoverChange: (hovered) {},
+  onStateChange: (delta) {},
   // {@endcategory}
 );
 

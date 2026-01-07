@@ -5,7 +5,6 @@ import 'package:forui/forui.dart';
 
 final tileGroup = FTileGroup(
   // {@category "Core"}
-  key: const Key('key'),
   style: (style) => style,
   enabled: true,
   divider: .indented,
@@ -17,7 +16,7 @@ final tileGroup = FTileGroup(
     .tile(title: const Text('Tile 2'), onPress: () {}),
   ],
   // {@endcategory}
-  // {@category "Scrollable"}
+  // {@category "Scroll"}
   scrollController: null,
   physics: const ClampingScrollPhysics(),
   cacheExtent: null,
@@ -31,7 +30,6 @@ final tileGroup = FTileGroup(
 
 final tileGroupBuilder = FTileGroup.builder(
   // {@category "Core"}
-  key: const Key('key'),
   style: (style) => style,
   enabled: true,
   divider: .indented,
@@ -41,7 +39,7 @@ final tileGroupBuilder = FTileGroup.builder(
   tileBuilder: (context, index) => FTile(title: Text('Tile $index'), onPress: () {}),
   count: 10,
   // {@endcategory}
-  // {@category "Scrollable"}
+  // {@category "Scroll"}
   scrollController: null,
   physics: const ClampingScrollPhysics(),
   cacheExtent: null,
@@ -55,7 +53,6 @@ final tileGroupBuilder = FTileGroup.builder(
 
 final tileGroupMerge = FTileGroup.merge(
   // {@category "Core"}
-  key: const Key('key'),
   style: (style) => style,
   enabled: true,
   divider: .full,
@@ -63,11 +60,15 @@ final tileGroupMerge = FTileGroup.merge(
   description: const Text('Description'),
   error: null,
   children: [
-    FTileGroup(children: [FTile(title: const Text('Group 1 Tile'), onPress: () {})]),
-    FTileGroup(children: [FTile(title: const Text('Group 2 Tile'), onPress: () {})]),
+    .group(
+      children: [.tile(title: const Text('Group 1 Tile'), onPress: () {})],
+    ),
+    .group(
+      children: [.tile(title: const Text('Group 2 Tile'), onPress: () {})],
+    ),
   ],
   // {@endcategory}
-  // {@category "Scrollable"}
+  // {@category "Scroll"}
   scrollController: null,
   physics: const ClampingScrollPhysics(),
   cacheExtent: null,

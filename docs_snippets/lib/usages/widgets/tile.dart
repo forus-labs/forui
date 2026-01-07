@@ -5,57 +5,55 @@ import 'package:forui/forui.dart';
 
 final tile = FTile(
   // {@category "Core"}
-  key: const Key('key'),
   style: (style) => style,
   enabled: true,
   selected: false,
+  onPress: () {},
   title: const Text('Title'),
   subtitle: const Text('Subtitle'),
   details: const Text('Details'),
   prefix: const Icon(FIcons.house),
   suffix: const Icon(FIcons.chevronRight),
   // {@endcategory}
+  // {@category "Accessibility"}
+  autofocus: false,
+  focusNode: null,
+  onFocusChange: (focused) {},
+  semanticsLabel: 'Tile',
+  shortcuts: null,
+  actions: null,
+  // {@endcategory}
   // {@category "Callbacks"}
-  onPress: () {},
   onLongPress: () {},
   onSecondaryPress: () {},
   onSecondaryLongPress: () {},
   onHoverChange: (hovered) {},
   onStateChange: (states) {},
-  // {@endcategory}
-  // {@category "Accessibility"}
-  semanticsLabel: 'Tile',
-  autofocus: false,
-  focusNode: null,
-  onFocusChange: (focused) {},
-  shortcuts: null,
-  actions: null,
   // {@endcategory}
 );
 
 final tileRaw = FTile.raw(
   // {@category "Core"}
-  key: const Key('key'),
   style: (style) => style,
   enabled: true,
   selected: false,
+  onPress: () {},
   prefix: const Icon(FIcons.house),
   child: const Text('Custom Content'),
   // {@endcategory}
+  // {@category "Accessibility"}
+  autofocus: false,
+  focusNode: null,
+  onFocusChange: (focused) {},
+  semanticsLabel: 'Tile',
+  shortcuts: null,
+  actions: null,
+  // {@endcategory}
   // {@category "Callbacks"}
-  onPress: () {},
   onLongPress: () {},
   onSecondaryPress: () {},
   onSecondaryLongPress: () {},
   onHoverChange: (hovered) {},
   onStateChange: (states) {},
-  // {@endcategory}
-  // {@category "Accessibility"}
-  semanticsLabel: 'Tile',
-  autofocus: false,
-  focusNode: null,
-  onFocusChange: (focused) {},
-  shortcuts: null,
-  actions: null,
   // {@endcategory}
 );

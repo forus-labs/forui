@@ -1,11 +1,10 @@
-// ignore_for_file: avoid_redundant_argument_values, eol_at_end_of_file
+// ignore_for_file: avoid_redundant_argument_values
 
 import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 
 final dateField = FDateField(
   // {@category "Core"}
-  key: const Key('key'),
   style: (style) => style,
   enabled: true,
   // {@endcategory}
@@ -14,6 +13,15 @@ final dateField = FDateField(
   // {@endcategory}
   // {@category "Popover Control"}
   popoverControl: const .managed(),
+  // {@endcategory}
+  // {@category "Form"}
+  label: const Text('Label'),
+  description: const Text('Description'),
+  onSaved: (date) {},
+  onReset: () {},
+  autovalidateMode: .onUnfocus,
+  forceErrorText: null,
+  errorBuilder: FFormFieldProperties.defaultErrorBuilder,
   // {@endcategory}
   // {@category "Field"}
   textInputAction: null,
@@ -34,15 +42,6 @@ final dateField = FDateField(
   // {@category "Calendar"}
   calendar: const FDateFieldCalendarProperties(),
   // {@endcategory}
-  // {@category "Form"}
-  label: const Text('Label'),
-  description: const Text('Description'),
-  onSaved: (date) {},
-  onReset: () {},
-  autovalidateMode: .onUnfocus,
-  forceErrorText: null,
-  errorBuilder: FFormFieldProperties.defaultErrorBuilder,
-  // {@endcategory}
   // {@category "Accessibility"}
   autofocus: false,
   focusNode: null,
@@ -51,7 +50,6 @@ final dateField = FDateField(
 
 final calendar = FDateField.calendar(
   // {@category "Core"}
-  key: const Key('key'),
   style: (style) => style,
   enabled: true,
   // {@endcategory}
@@ -60,6 +58,15 @@ final calendar = FDateField.calendar(
   // {@endcategory}
   // {@category "Popover Control"}
   popoverControl: const .managed(),
+  // {@endcategory}
+  // {@category "Form"}
+  label: const Text('Label'),
+  description: const Text('Description'),
+  onSaved: (date) {},
+  onReset: () {},
+  autovalidateMode: .onUnfocus,
+  forceErrorText: null,
+  errorBuilder: FFormFieldProperties.defaultErrorBuilder,
   // {@endcategory}
   // {@category "Field"}
   format: null,
@@ -91,15 +98,6 @@ final calendar = FDateField.calendar(
   hideRegion: .excludeChild,
   onTapHide: null,
   // {@endcategory}
-  // {@category "Form"}
-  label: const Text('Label'),
-  description: const Text('Description'),
-  onSaved: (date) {},
-  onReset: () {},
-  autovalidateMode: .onUnfocus,
-  forceErrorText: null,
-  errorBuilder: FFormFieldProperties.defaultErrorBuilder,
-  // {@endcategory}
   // {@category "Accessibility"}
   autofocus: false,
   focusNode: null,
@@ -108,12 +106,20 @@ final calendar = FDateField.calendar(
 
 final input = FDateField.input(
   // {@category "Core"}
-  key: const Key('key'),
   style: (style) => style,
   enabled: true,
   // {@endcategory}
   // {@category "Control"}
   control: const .managed(),
+  // {@endcategory}
+  // {@category "Form"}
+  label: const Text('Label'),
+  description: const Text('Description'),
+  onSaved: (date) {},
+  onReset: () {},
+  autovalidateMode: .onUnfocus,
+  forceErrorText: null,
+  errorBuilder: FFormFieldProperties.defaultErrorBuilder,
   // {@endcategory}
   // {@category "Field"}
   textInputAction: null,
@@ -131,45 +137,25 @@ final input = FDateField.input(
   prefixBuilder: FDateField.defaultIconBuilder,
   suffixBuilder: null,
   // {@endcategory}
-  // {@category "Form"}
-  label: const Text('Label'),
-  description: const Text('Description'),
-  onSaved: (date) {},
-  onReset: () {},
-  autovalidateMode: .onUnfocus,
-  forceErrorText: null,
-  errorBuilder: FFormFieldProperties.defaultErrorBuilder,
-  // {@endcategory}
   // {@category "Accessibility"}
   autofocus: false,
   focusNode: null,
   // {@endcategory}
 );
 
+// {@category "Control" "`.lifted()`"}
+/// Externally controls the date field's date.
+final FDateFieldControl lifted = .lifted(date: .utc(2026), validator: (date) => null, onChange: (date) {});
+
 // {@category "Control" "`.managed()` with internal controller"}
 /// Manages the date field state internally.
-final FDateFieldControl managedInternal = .managed(
-  initial: .utc(2026),
-  validator: (date) => null,
-  onChange: (date) {},
-);
+final FDateFieldControl managedInternal = .managed(initial: .utc(2026), validator: (date) => null, onChange: (date) {});
 
 // {@category "Control" "`.managed()` with external controller"}
 /// Uses an external `FDateFieldController` to control the date field's state.
 final FDateFieldControl managedExternal = .managed(
   // For demonstration purposes only. Don't create a controller inline, store it in a State instead.
-  controller: FDateFieldController(
-    date: .utc(2026),
-    validator: (date) => null,
-  ),
-  onChange: (date) {},
-);
-
-// {@category "Control" "`.lifted()`"}
-/// Externally controls the date field's date.
-final FDateFieldControl lifted = .lifted(
-  date: .utc(2026),
-  validator: (date) => null,
+  controller: FDateFieldController(date: .utc(2026), validator: (date) => null),
   onChange: (date) {},
 );
 
@@ -190,4 +176,3 @@ final FPopoverControl popoverExternal = .managed(
 );
 
 TickerProvider get vsync => throw UnimplementedError();
-

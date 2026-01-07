@@ -33,9 +33,12 @@ class TooltipLinker extends DartDocLinker {
     result.unit.visitChildren(linker);
 
     // Transform each tooltip: format code and extract dartdoc links
-    final imports = code.split('\n')
+    final imports = code
+        .split('\n')
         .skipWhile((l) => l.trim().isEmpty || l.trimLeft().startsWith('//') || l.trimLeft().startsWith('library'))
-        .takeWhile((l) => l.startsWith('import ') || l.trim().isEmpty).toList().join('\n');
+        .takeWhile((l) => l.startsWith('import ') || l.trim().isEmpty)
+        .toList()
+        .join('\n');
 
     for (final tooltip in linker.tooltips) {
       final snippet = tooltip.snippet;

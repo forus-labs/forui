@@ -5,7 +5,6 @@ import 'package:forui/forui.dart';
 
 final selectGroup = FSelectGroup<String>(
   // {@category "Core"}
-  key: const Key('key'),
   style: (style) => style,
   enabled: true,
   children: [
@@ -31,46 +30,45 @@ final selectGroup = FSelectGroup<String>(
 
 final selectGroupCheckbox = FSelectGroupItemMixin.checkbox<String>(
   // {@category "Core"}
-  value: 'apple',
   style: null,
+  value: 'apple',
   enabled: true,
   label: const Text('Apple'),
   description: const Text('A red fruit'),
   error: null,
   // {@endcategory}
   // {@category "Accessibility"}
-  semanticsLabel: 'Apple checkbox',
   autofocus: false,
   focusNode: null,
   onFocusChange: (focused) {},
+  semanticsLabel: 'Apple checkbox',
   // {@endcategory}
 );
 
 final selectGroupRadio = FSelectGroupItemMixin.radio<String>(
   // {@category "Core"}
-  value: 'apple',
   style: null,
+  value: 'apple',
   enabled: true,
   label: const Text('Apple'),
   description: const Text('A red fruit'),
   error: null,
   // {@endcategory}
   // {@category "Accessibility"}
-  semanticsLabel: 'Apple radio',
   autofocus: false,
   focusNode: null,
   onFocusChange: (focused) {},
+  semanticsLabel: 'Apple radio',
   // {@endcategory}
 );
 
+// {@category "Control" "`.lifted()`"}
+/// Externally controls the select group's values.
+final FMultiValueControl<String> lifted = .lifted(value: {}, onChange: (values) {});
+
 // {@category "Control" "`.managed()` with internal controller"}
 /// Manages the select group state internally for multiple selections.
-final FMultiValueControl<String> managedInternal = .managed(
-  initial: {},
-  min: 0,
-  max: null,
-  onChange: (values) {},
-);
+final FMultiValueControl<String> managedInternal = .managed(initial: {}, min: 0, max: null, onChange: (values) {});
 
 // {@category "Control" "`.managed()` with external controller"}
 /// Uses an external controller for multiple selections.
@@ -82,10 +80,7 @@ final FMultiValueControl<String> managedExternal = .managed(
 
 // {@category "Control" "`.managedRadio()` with internal controller"}
 /// Single selection with internal controller (radio behavior).
-final FMultiValueControl<String> managedRadioInternal = .managedRadio(
-  initial: null,
-  onChange: (values) {},
-);
+final FMultiValueControl<String> managedRadioInternal = .managedRadio(initial: null, onChange: (values) {});
 
 // {@category "Control" "`.managedRadio()` with external controller"}
 /// Single selection with external controller (radio behavior).
@@ -95,9 +90,4 @@ final FMultiValueControl<String> managedRadioExternal = .managedRadio(
   onChange: (values) {},
 );
 
-// {@category "Control" "`.lifted()`"}
-/// Externally controls the select group's values.
-final FMultiValueControl<String> lifted = .lifted(
-  value: {},
-  onChange: (values) {},
-);
+

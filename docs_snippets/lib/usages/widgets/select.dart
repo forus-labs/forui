@@ -5,7 +5,6 @@ import 'package:forui/forui.dart';
 
 final select = FSelect<String>(
   // {@category "Core"}
-  key: const Key('key'),
   style: (style) => style,
   enabled: true,
   items: const {'Apple': 'apple', 'Banana': 'banana', 'Cherry': 'cherry'},
@@ -15,6 +14,16 @@ final select = FSelect<String>(
   // {@endcategory}
   // {@category "Popover Control"}
   popoverControl: const .managed(),
+  // {@endcategory}
+  // {@category "Form"}
+  label: const Text('Label'),
+  description: const Text('Description'),
+  onSaved: (value) {},
+  onReset: () {},
+  autovalidateMode: .onUnfocus,
+  forceErrorText: null,
+  validator: (value) => null,
+  errorBuilder: FFormFieldProperties.defaultErrorBuilder,
   // {@endcategory}
   // {@category "Field"}
   hint: 'Select a fruit',
@@ -44,16 +53,6 @@ final select = FSelect<String>(
   contentPhysics: const ClampingScrollPhysics(),
   contentDivider: .none,
   // {@endcategory}
-  // {@category "Form"}
-  label: const Text('Label'),
-  description: const Text('Description'),
-  onSaved: (value) {},
-  onReset: () {},
-  autovalidateMode: .onUnfocus,
-  forceErrorText: null,
-  validator: (value) => null,
-  errorBuilder: FFormFieldProperties.defaultErrorBuilder,
-  // {@endcategory}
   // {@category "Accessibility"}
   autofocus: false,
   focusNode: null,
@@ -62,7 +61,6 @@ final select = FSelect<String>(
 
 final selectRich = FSelect<String>.rich(
   // {@category "Core"}
-  key: const Key('key'),
   style: (style) => style,
   enabled: true,
   format: (value) => value,
@@ -78,6 +76,16 @@ final selectRich = FSelect<String>.rich(
   // {@category "Popover Control"}
   popoverControl: const .managed(),
   // {@endcategory}
+  // {@category "Form"}
+  label: const Text('Label'),
+  description: const Text('Description'),
+  onSaved: (value) {},
+  onReset: () {},
+  autovalidateMode: .onUnfocus,
+  forceErrorText: null,
+  validator: (value) => null,
+  errorBuilder: FFormFieldProperties.defaultErrorBuilder,
+  // {@endcategory}
   // {@category "Field"}
   hint: 'Select a fruit',
   textAlign: .start,
@@ -106,16 +114,6 @@ final selectRich = FSelect<String>.rich(
   contentPhysics: const ClampingScrollPhysics(),
   contentDivider: .none,
   // {@endcategory}
-  // {@category "Form"}
-  label: const Text('Label'),
-  description: const Text('Description'),
-  onSaved: (value) {},
-  onReset: () {},
-  autovalidateMode: .onUnfocus,
-  forceErrorText: null,
-  validator: (value) => null,
-  errorBuilder: FFormFieldProperties.defaultErrorBuilder,
-  // {@endcategory}
   // {@category "Accessibility"}
   autofocus: false,
   focusNode: null,
@@ -124,7 +122,6 @@ final selectRich = FSelect<String>.rich(
 
 final selectSearch = FSelect<String>.search(
   // {@category "Core"}
-  key: const Key('key'),
   style: (style) => style,
   enabled: true,
   filter: (query) => ['apple', 'banana', 'cherry'].where((e) => e.startsWith(query)),
@@ -136,6 +133,16 @@ final selectSearch = FSelect<String>.search(
   // {@category "Popover Control"}
   popoverControl: const .managed(),
   // {@endcategory}
+  // {@category "Form"}
+  label: const Text('Label'),
+  description: const Text('Description'),
+  onSaved: (value) {},
+  onReset: () {},
+  autovalidateMode: .onUnfocus,
+  forceErrorText: null,
+  validator: (value) => null,
+  errorBuilder: FFormFieldProperties.defaultErrorBuilder,
+  // {@endcategory}
   // {@category "Field"}
   hint: 'Search fruits',
   textAlign: .start,
@@ -167,16 +174,6 @@ final selectSearch = FSelect<String>.search(
   contentPhysics: const ClampingScrollPhysics(),
   contentDivider: .none,
   // {@endcategory}
-  // {@category "Form"}
-  label: const Text('Label'),
-  description: const Text('Description'),
-  onSaved: (value) {},
-  onReset: () {},
-  autovalidateMode: .onUnfocus,
-  forceErrorText: null,
-  validator: (value) => null,
-  errorBuilder: FFormFieldProperties.defaultErrorBuilder,
-  // {@endcategory}
   // {@category "Accessibility"}
   autofocus: false,
   focusNode: null,
@@ -185,8 +182,8 @@ final selectSearch = FSelect<String>.search(
 
 final selectSearchBuilder = FSelect<String>.searchBuilder(
   // {@category "Core"}
-  key: const Key('key'),
   style: (style) => style,
+  enabled: true,
   format: (value) => value,
   filter: (query) => ['apple', 'banana', 'cherry'].where((e) => e.startsWith(query)),
   contentBuilder: (context, style, values) => [for (final value in values) .item(title: Text(value), value: value)],
@@ -197,6 +194,16 @@ final selectSearchBuilder = FSelect<String>.searchBuilder(
   // {@category "Popover Control"}
   popoverControl: const .managed(),
   // {@endcategory}
+  // {@category "Form"}
+  label: const Text('Label'),
+  description: const Text('Description'),
+  onSaved: (value) {},
+  onReset: () {},
+  autovalidateMode: .onUnfocus,
+  forceErrorText: null,
+  validator: (value) => null,
+  errorBuilder: FFormFieldProperties.defaultErrorBuilder,
+  // {@endcategory}
   // {@category "Field"}
   hint: 'Search fruits',
   textAlign: .start,
@@ -228,22 +235,15 @@ final selectSearchBuilder = FSelect<String>.searchBuilder(
   contentPhysics: const ClampingScrollPhysics(),
   contentDivider: .none,
   // {@endcategory}
-  // {@category "Form"}
-  label: const Text('Label'),
-  description: const Text('Description'),
-  enabled: true,
-  onSaved: (value) {},
-  onReset: () {},
-  autovalidateMode: .onUnfocus,
-  forceErrorText: null,
-  validator: (value) => null,
-  errorBuilder: FFormFieldProperties.defaultErrorBuilder,
-  // {@endcategory}
   // {@category "Accessibility"}
   autofocus: false,
   focusNode: null,
   // {@endcategory}
 );
+
+// {@category "Control" "`.lifted()`"}
+/// Externally controls the select's value.
+final FSelectControl<String> lifted = .lifted(value: null, onChange: (value) {});
 
 // {@category "Control" "`.managed()` with internal controller"}
 /// Manages the select state internally.
@@ -257,9 +257,9 @@ final FSelectControl<String> managedExternal = .managed(
   onChange: (value) {},
 );
 
-// {@category "Control" "`.lifted()`"}
-/// Externally controls the select's value.
-final FSelectControl<String> lifted = .lifted(value: null, onChange: (value) {});
+// {@category "Popover Control" "`.lifted()`"}
+/// Externally controls the popover's visibility.
+final FPopoverControl popoverLifted = .lifted(shown: false, onChange: (shown) {}, motion: const FPopoverMotion());
 
 // {@category "Popover Control" "`.managed()` with internal controller"}
 /// Manages the popover's visibility internally.
@@ -272,9 +272,5 @@ final FPopoverControl popoverExternal = .managed(
   controller: FPopoverController(vsync: vsync, shown: false, motion: const FPopoverMotion()),
   onChange: (shown) {},
 );
-
-// {@category "Popover Control" "`.lifted()`"}
-/// Externally controls the popover's visibility.
-final FPopoverControl popoverLifted = .lifted(shown: false, onChange: (shown) {}, motion: const FPopoverMotion());
 
 TickerProvider get vsync => throw UnimplementedError();

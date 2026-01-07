@@ -5,7 +5,6 @@ import 'package:forui/forui.dart';
 
 final sidebar = FSidebar(
   // {@category "Core"}
-  key: const Key('key'),
   style: (style) => style,
   header: const Text('Header'),
   children: [
@@ -28,7 +27,6 @@ final sidebar = FSidebar(
 
 final sidebarBuilder = FSidebar.builder(
   // {@category "Core"}
-  key: const Key('key'),
   style: (style) => style,
   header: const Text('Header'),
   itemBuilder: (context, index) => FSidebarItem(label: Text('Item $index'), onPress: () {}),
@@ -44,13 +42,10 @@ final sidebarBuilder = FSidebar.builder(
 
 final sidebarRaw = FSidebar.raw(
   // {@category "Core"}
-  key: const Key('key'),
   style: (style) => style,
   header: const Text('Header'),
   child: ListView(
-    children: [
-      FSidebarItem(label: const Text('Custom Item'), onPress: () {}),
-    ],
+    children: [FSidebarItem(label: const Text('Custom Item'), onPress: () {})],
   ),
   footer: const Text('Footer'),
   // {@endcategory}
@@ -63,7 +58,6 @@ final sidebarRaw = FSidebar.raw(
 
 final sidebarGroup = FSidebarGroup(
   // {@category "Core"}
-  key: const Key('key'),
   style: (style) => style,
   label: const Text('Navigation'),
   action: const Icon(FIcons.plus),
@@ -82,8 +76,9 @@ final sidebarGroup = FSidebarGroup(
 
 final sidebarItem = FSidebarItem(
   // {@category "Core"}
-  key: const Key('key'),
   style: (style) => style,
+  selected: false,
+  initiallyExpanded: false,
   icon: const Icon(FIcons.house),
   label: const Text('Home'),
   children: [
@@ -91,18 +86,14 @@ final sidebarItem = FSidebarItem(
     FSidebarItem(label: const Text('Nested Item 2'), onPress: () {}),
   ],
   // {@endcategory}
-  // {@category "State"}
-  selected: false,
-  initiallyExpanded: false,
+  // {@category "Accessibility"}
+  autofocus: false,
+  focusNode: null,
   // {@endcategory}
   // {@category "Callbacks"}
   onPress: () {},
   onLongPress: () {},
   onHoverChange: (hovered) {},
   onStateChange: (states) {},
-  // {@endcategory}
-  // {@category "Accessibility"}
-  autofocus: false,
-  focusNode: null,
   // {@endcategory}
 );

@@ -44,7 +44,9 @@ class Verifier extends RecursiveAstVisitor<void> {
     ];
     final providedPositionalCount = arguments.arguments.where((arg) => arg is! NamedExpression).length;
 
-    final missing = [...declaredNamed.difference(providedNamed), ...declaredPositional.skip(providedPositionalCount)];
+    final missing = [...declaredNamed.difference(providedNamed), ...declaredPositional.skip(providedPositionalCount)]
+      ..remove('key');
+
     if (missing.isNotEmpty) {
       // ignore: avoid_print
       print('[WARNING] Usage of $name has the following missing parameter(s):');

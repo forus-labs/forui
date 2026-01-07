@@ -5,7 +5,6 @@ import 'package:forui/forui.dart';
 
 final portal = FPortal(
   // {@category "Core"}
-  key: const Key('key'),
   controller: null,
   portalBuilder: (context, controller) => const Text('Portal content'),
   builder: (context, controller, child) => child!,

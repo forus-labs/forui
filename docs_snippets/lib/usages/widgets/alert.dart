@@ -8,7 +8,6 @@ final alert = FAlert(
   style: FAlertStyle.primary(),
   // {@endcategory}
   // {@category "Core"}
-  key: const Key('key'),
   icon: const Icon(FIcons.circleAlert),
   title: const Text('Alert Title'),
   subtitle: const Text('Alert subtitle with more details'),
@@ -25,6 +24,4 @@ final destructive = FAlertStyle.destructive();
 
 // {@category "Style" "Custom `FAlertStyle`"}
 /// A custom alert style.
-final FBaseAlertStyle Function(FAlertStyle) custom = (style) => style.copyWith(
-  decoration: style.decoration.copyWith(color: const Color(0xFFFEF2F2)),
-);
+final FBaseAlertStyle Function(FAlertStyle) custom = (style) => style;

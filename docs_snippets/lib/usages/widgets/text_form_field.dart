@@ -5,7 +5,6 @@ import 'package:forui/forui.dart';
 
 final textFormField = FTextFormField(
   // {@category "Core"}
-  key: const Key('key'),
   style: (style) => style,
   enabled: true,
   label: const Text('Label'),
@@ -14,6 +13,14 @@ final textFormField = FTextFormField(
   // {@endcategory}
   // {@category "Control"}
   control: const .managed(),
+  // {@endcategory}
+  // {@category "Form"}
+  onSaved: (value) {},
+  onReset: () {},
+  validator: (value) => null,
+  autovalidateMode: .disabled,
+  forceErrorText: null,
+  errorBuilder: (context, message) => Text(message),
   // {@endcategory}
   // {@category "Appearance"}
   expands: false,
@@ -27,14 +34,6 @@ final textFormField = FTextFormField(
   mouseCursor: null,
   obscuringCharacter: '•',
   obscureText: false,
-  // {@endcategory}
-  // {@category "Lines/Length"}
-  scrollPhysics: null,
-  scrollController: null,
-  minLines: null,
-  maxLines: 1,
-  maxLength: null,
-  maxLengthEnforcement: null,
   // {@endcategory}
   // {@category "Text Input"}
   inputFormatters: null,
@@ -67,6 +66,20 @@ final textFormField = FTextFormField(
   statesController: null,
   undoController: null,
   // {@endcategory}
+  // {@category "Lines/Length"}
+  scrollPhysics: null,
+  scrollController: null,
+  minLines: null,
+  maxLines: 1,
+  maxLength: null,
+  maxLengthEnforcement: null,
+  // {@endcategory}
+  // {@category "Accessibility"}
+  autofocus: false,
+  focusNode: null,
+  canRequestFocus: true,
+  magnifierConfiguration: null,
+  // {@endcategory}
   // {@category "Callbacks"}
   onTapAlwaysCalled: false,
   onTap: () {},
@@ -75,25 +88,10 @@ final textFormField = FTextFormField(
   onSubmit: (value) {},
   onAppPrivateCommand: (action, data) {},
   // {@endcategory}
-  // {@category "Form"}
-  onSaved: (value) {},
-  onReset: () {},
-  validator: (value) => null,
-  autovalidateMode: .disabled,
-  forceErrorText: null,
-  errorBuilder: (context, message) => Text(message),
-  // {@endcategory}
-  // {@category "Accessibility"}
-  autofocus: false,
-  focusNode: null,
-  canRequestFocus: true,
-  magnifierConfiguration: null,
-  // {@endcategory}
 );
 
 final textFormFieldEmail = FTextFormField.email(
   // {@category "Core"}
-  key: const Key('key'),
   style: (style) => style,
   enabled: true,
   label: const Text('Email'),
@@ -102,6 +100,14 @@ final textFormFieldEmail = FTextFormField.email(
   // {@endcategory}
   // {@category "Control"}
   control: const .managed(),
+  // {@endcategory}
+  // {@category "Form"}
+  onSaved: (value) {},
+  onReset: () {},
+  validator: (value) => null,
+  autovalidateMode: .disabled,
+  forceErrorText: null,
+  errorBuilder: (context, message) => Text(message),
   // {@endcategory}
   // {@category "Appearance"}
   expands: false,
@@ -115,14 +121,6 @@ final textFormFieldEmail = FTextFormField.email(
   mouseCursor: null,
   obscuringCharacter: '•',
   obscureText: false,
-  // {@endcategory}
-  // {@category "Lines/Length"}
-  scrollPhysics: null,
-  scrollController: null,
-  minLines: null,
-  maxLines: 1,
-  maxLength: null,
-  maxLengthEnforcement: null,
   // {@endcategory}
   // {@category "Text Input"}
   inputFormatters: null,
@@ -155,6 +153,20 @@ final textFormFieldEmail = FTextFormField.email(
   statesController: null,
   undoController: null,
   // {@endcategory}
+  // {@category "Lines/Length"}
+  scrollPhysics: null,
+  scrollController: null,
+  minLines: null,
+  maxLines: 1,
+  maxLength: null,
+  maxLengthEnforcement: null,
+  // {@endcategory}
+  // {@category "Accessibility"}
+  autofocus: false,
+  focusNode: null,
+  canRequestFocus: true,
+  magnifierConfiguration: null,
+  // {@endcategory}
   // {@category "Callbacks"}
   onTapAlwaysCalled: false,
   onTap: () {},
@@ -163,25 +175,10 @@ final textFormFieldEmail = FTextFormField.email(
   onSubmit: (value) {},
   onAppPrivateCommand: (action, data) {},
   // {@endcategory}
-  // {@category "Form"}
-  onSaved: (value) {},
-  onReset: () {},
-  validator: (value) => null,
-  autovalidateMode: .disabled,
-  forceErrorText: null,
-  errorBuilder: (context, message) => Text(message),
-  // {@endcategory}
-  // {@category "Accessibility"}
-  autofocus: false,
-  focusNode: null,
-  canRequestFocus: true,
-  magnifierConfiguration: null,
-  // {@endcategory}
 );
 
 final textFormFieldMultiline = FTextFormField.multiline(
   // {@category "Core"}
-  key: const Key('key'),
   style: (style) => style,
   enabled: true,
   label: const Text('Label'),
@@ -190,6 +187,14 @@ final textFormFieldMultiline = FTextFormField.multiline(
   // {@endcategory}
   // {@category "Control"}
   control: const .managed(),
+  // {@endcategory}
+  // {@category "Form"}
+  onSaved: (value) {},
+  onReset: () {},
+  validator: (value) => null,
+  autovalidateMode: .disabled,
+  forceErrorText: null,
+  errorBuilder: (context, message) => Text(message),
   // {@endcategory}
   // {@category "Appearance"}
   expands: false,
@@ -203,14 +208,6 @@ final textFormFieldMultiline = FTextFormField.multiline(
   mouseCursor: null,
   obscuringCharacter: '•',
   obscureText: false,
-  // {@endcategory}
-  // {@category "Lines/Length"}
-  scrollPhysics: null,
-  scrollController: null,
-  minLines: 4,
-  maxLines: null,
-  maxLength: null,
-  maxLengthEnforcement: null,
   // {@endcategory}
   // {@category "Text Input"}
   inputFormatters: null,
@@ -243,6 +240,20 @@ final textFormFieldMultiline = FTextFormField.multiline(
   statesController: null,
   undoController: null,
   // {@endcategory}
+  // {@category "Lines/Length"}
+  scrollPhysics: null,
+  scrollController: null,
+  minLines: 4,
+  maxLines: null,
+  maxLength: null,
+  maxLengthEnforcement: null,
+  // {@endcategory}
+  // {@category "Accessibility"}
+  autofocus: false,
+  focusNode: null,
+  canRequestFocus: true,
+  magnifierConfiguration: null,
+  // {@endcategory}
   // {@category "Callbacks"}
   onTapAlwaysCalled: false,
   onTap: () {},
@@ -251,25 +262,10 @@ final textFormFieldMultiline = FTextFormField.multiline(
   onSubmit: (value) {},
   onAppPrivateCommand: (action, data) {},
   // {@endcategory}
-  // {@category "Form"}
-  onSaved: (value) {},
-  onReset: () {},
-  validator: (value) => null,
-  autovalidateMode: .disabled,
-  forceErrorText: null,
-  errorBuilder: (context, message) => Text(message),
-  // {@endcategory}
-  // {@category "Accessibility"}
-  autofocus: false,
-  focusNode: null,
-  canRequestFocus: true,
-  magnifierConfiguration: null,
-  // {@endcategory}
 );
 
 final textFormFieldPassword = FTextFormField.password(
   // {@category "Core"}
-  key: const Key('key'),
   style: (style) => style,
   enabled: true,
   label: const Text('Password'),
@@ -283,6 +279,14 @@ final textFormFieldPassword = FTextFormField.password(
   // {@category "Obscure Control"}
   obscureTextControl: const .managed(),
   // {@endcategory}
+  // {@category "Form"}
+  onSaved: (value) {},
+  onReset: () {},
+  validator: (value) => null,
+  autovalidateMode: .disabled,
+  forceErrorText: null,
+  errorBuilder: (context, message) => Text(message),
+  // {@endcategory}
   // {@category "Appearance"}
   expands: false,
   builder: (context, style, states, field) => field,
@@ -294,14 +298,6 @@ final textFormFieldPassword = FTextFormField.password(
   showCursor: null,
   mouseCursor: null,
   obscuringCharacter: '•',
-  // {@endcategory}
-  // {@category "Lines/Length"}
-  scrollPhysics: null,
-  scrollController: null,
-  minLines: null,
-  maxLines: 1,
-  maxLength: null,
-  maxLengthEnforcement: null,
   // {@endcategory}
   // {@category "Text Input"}
   inputFormatters: null,
@@ -334,6 +330,20 @@ final textFormFieldPassword = FTextFormField.password(
   statesController: null,
   undoController: null,
   // {@endcategory}
+  // {@category "Lines/Length"}
+  scrollPhysics: null,
+  scrollController: null,
+  minLines: null,
+  maxLines: 1,
+  maxLength: null,
+  maxLengthEnforcement: null,
+  // {@endcategory}
+  // {@category "Accessibility"}
+  autofocus: false,
+  focusNode: null,
+  canRequestFocus: true,
+  magnifierConfiguration: null,
+  // {@endcategory}
   // {@category "Callbacks"}
   onTapAlwaysCalled: false,
   onTap: () {},
@@ -342,28 +352,15 @@ final textFormFieldPassword = FTextFormField.password(
   onSubmit: (value) {},
   onAppPrivateCommand: (action, data) {},
   // {@endcategory}
-  // {@category "Form"}
-  onSaved: (value) {},
-  onReset: () {},
-  validator: (value) => null,
-  autovalidateMode: .disabled,
-  forceErrorText: null,
-  errorBuilder: (context, message) => Text(message),
-  // {@endcategory}
-  // {@category "Accessibility"}
-  autofocus: false,
-  focusNode: null,
-  canRequestFocus: true,
-  magnifierConfiguration: null,
-  // {@endcategory}
 );
+
+// {@category "Control" "`.lifted()`"}
+/// Externally controls the text field value.
+final FTextFieldControl lifted = .lifted(value: .empty, onChange: (value) {});
 
 // {@category "Control" "`.managed()` with internal controller"}
 /// Manages text field state internally.
-final FTextFieldControl managedInternal = .managed(
-  initial: .empty,
-  onChange: (value) {},
-);
+final FTextFieldControl managedInternal = .managed(initial: .empty, onChange: (value) {});
 
 // {@category "Control" "`.managed()` with external controller"}
 /// Uses an external controller for text field management.
@@ -373,31 +370,18 @@ final FTextFieldControl managedExternal = .managed(
   onChange: (value) {},
 );
 
-// {@category "Control" "`.lifted()`"}
-/// Externally controls the text field value.
-final FTextFieldControl lifted = .lifted(
-  value: .empty,
-  onChange: (value) {},
-);
+// {@category "Obscure Control" "`.lifted()`"}
+/// Externally controls the obscure text state.
+final FObscureTextControl obscureLifted = .lifted(value: true, onChange: (obscured) {});
 
 // {@category "Obscure Control" "`.managed()` with internal controller"}
 /// Manages obscure text state internally.
-final FObscureTextControl obscureManagedInternal = .managed(
-  initial: true,
-  onChange: (obscured) {},
-);
+final FObscureTextControl obscureManagedInternal = .managed(initial: true, onChange: (obscured) {});
 
 // {@category "Obscure Control" "`.managed()` with external controller"}
 /// Uses an external controller for obscure text management.
 final FObscureTextControl obscureManagedExternal = .managed(
   // For demonstration purposes only. Don't create a notifier inline, store it in a State instead.
   controller: ValueNotifier<bool>(true),
-  onChange: (obscured) {},
-);
-
-// {@category "Obscure Control" "`.lifted()`"}
-/// Externally controls the obscure text state.
-final FObscureTextControl obscureLifted = .lifted(
-  value: true,
   onChange: (obscured) {},
 );

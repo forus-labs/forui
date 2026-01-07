@@ -8,7 +8,6 @@ final badge = FBadge(
   style: FBadgeStyle.primary(),
   // {@endcategory}
   // {@category "Core"}
-  key: const Key('key'),
   child: const Text('Badge'),
   // {@endcategory}
 );
@@ -18,7 +17,6 @@ final raw = FBadge.raw(
   style: FBadgeStyle.primary(),
   // {@endcategory}
   // {@category "Core"}
-  key: const Key('key'),
   builder: (context, style) => const Text('Badge'),
   // {@endcategory}
 );
@@ -41,6 +39,4 @@ final destructive = FBadgeStyle.destructive();
 
 // {@category "Style" "Custom `FBadgeStyle`"}
 /// A custom badge style.
-final  FBaseBadgeStyle Function(FBadgeStyle) custom = (style) => style.copyWith(
-  decoration: style.decoration.copyWith(color: const Color(0xFF6366F1)),
-);
+final FBaseBadgeStyle Function(FBadgeStyle) custom = (style) => style;
