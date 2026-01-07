@@ -9,6 +9,7 @@ import '../main.dart';
 import '../snippet.dart';
 import '../tooltip_linker.dart';
 import 'constructors.dart';
+import 'verification.dart';
 
 class Usage extends Snippet {
   final Map<String, List<Variant>> categories;
@@ -39,13 +40,13 @@ class Variant extends Snippet {
 class Usages {
   static int _monotonic = 0;
 
-  static Future<Map<String, Usage>> generate(
+  static Future<Map<String, Map<String, Usage>>> generate(
     AnalysisSession session,
     OverlayResourceProvider overlay,
     List<Package> packages,
     String directory,
   ) async {
-    final usages = <String, Usage>{};
+    final usages = <String, Map<String, Usage>>{};
     final dir = Directory(directory);
 
     for (final file in dir.listSync(recursive: true).whereType<File>().where((f) => f.path.endsWith('.dart'))) {
@@ -65,7 +66,7 @@ class Usages {
     return usages;
   }
 
-  static Future<Usage> _process(
+  static Future<Map<String, Usage>> _process(
     AnalysisSession session,
     OverlayResourceProvider overlay,
     List<Package> packages,
@@ -80,6 +81,8 @@ class Usages {
     final constructors = Constructors(result.content, spans, variants.categories);
     result.unit.visitChildren(constructors);
 
-    return constructors.usages.single;
+    Verifier.verify(result);
+
+    return constructors.usages;
   }
 }

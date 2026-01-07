@@ -1,11 +1,13 @@
 // ignore_for_file: sort_child_properties_last
 
+import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 
-final constructor = FAccordion(
+final accordion = FAccordion(
   // {@category "core"}
   style: FThemes.zinc.light.accordionStyle,
-  children: const [],
+  children: const [FAccordionItem(title: Text('Title'), child: SizedBox())],
+  key: const Key('key'),
   // {@endcategory}
   // {@category "control"}
   control: const .managed(min: 1, max: 2),

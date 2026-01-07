@@ -90,10 +90,12 @@ Future<void> main() async {
 
   // Process usages
   final usages = await Usages.generate(session, provider, packages, _usages);
-  for (final MapEntry(key: fileName, value: snippet) in usages.entries) {
-    final json = const JsonEncoder.withIndent('  ').convert(snippet.toJson());
-    final file = File(p.join(output, 'usages', '$fileName.json'));
-    file.parent.createSync(recursive: true);
-    file.writeAsStringSync(json);
+  for (final MapEntry(key: folder, value: snippets) in usages.entries) {
+    for (final MapEntry(key: name, value: snippet) in snippets.entries) {
+      final json = const JsonEncoder.withIndent('  ').convert(snippet.toJson());
+      final file = File(p.join(output, 'usages', folder, '$name.json'));
+      file.parent.createSync(recursive: true);
+      file.writeAsStringSync(json);
+    }
   }
 }

@@ -11,7 +11,7 @@ final _label = RegExp(r'^\s*(\w+):');
 
 /// Finds top-level variable declarations WITHOUT `// {@control}` and extracts categorized arguments.
 class Constructors extends RecursiveAstVisitor<void> {
-  final List<Usage> usages = [];
+  final Map<String, Usage> usages = {};
   final String _text;
   final List<Span> _spans;
   final Map<String, List<Variant>> _categories;
@@ -26,8 +26,8 @@ class Constructors extends RecursiveAstVisitor<void> {
       return;
     }
 
-    final Expression(:offset, :end) = node.variables.variables.single.initializer!;
-    final usage = Usage(_text.substring(offset, end), {..._categories})
+    final VariableDeclaration(:name, initializer: Expression(:offset, :end)!) = node.variables.variables.single;
+    final usage = Usage(_text.substring(offset, end), {})
       ..spans.addAll([
         for (final span in _spans)
           if (offset <= span.offset && span.end <= end) span.copyWith(offset: span.offset - offset),
@@ -44,23 +44,23 @@ class Constructors extends RecursiveAstVisitor<void> {
       final end = start + category.trim().length;
 
       final placeholder = '{{$name}}';
-      if (usage.categories.containsKey(name)) {
+      // We don't directly initialize usage's categories to preserve insertion ordering.
+      if (_categories.containsKey(name)) {
         final label = _label.firstMatch(category)!.group(1)!;
 
-        // We don't need to perform a copy since labels always share the same position across variants (at the start),
-        // and we don't perform any mutations after this.
         final spans = usage.adjustSpans(start, end, -(match.end - match.start - placeholder.length))
           ..removeWhere((s) => label.length <= s.offset);
 
-        final prefix = '$label: ';
-        for (final variant in usage.categories[name]!) {
-          variant.text = '$prefix${variant.text},';
-
-          for (final span in variant.spans) {
-            span.adjust(prefix.length);
-          }
-          variant.spans.addAll(spans);
-        }
+        // We create a copy of each variant with adjusted spans to prevent multiple constructors in the same file
+        // causing duplicate labels.
+        usage.categories[name] = [
+          for (final variant in _categories[name]!)
+            Variant(variant.name, variant.description, '$label: ${variant.text},')
+              ..spans.addAll([
+                for (final span in variant.spans) span.copyWith(offset: span.offset + label.length + 2),
+                ...spans,
+              ]),
+        ];
       } else {
         final spans = usage.adjustSpans(start, end, -(match.end - match.start - placeholder.length));
         usage.categories[name] = [Variant(name, '', category.trim())..spans.addAll(spans)];
@@ -74,7 +74,7 @@ class Constructors extends RecursiveAstVisitor<void> {
       ..clear()
       ..addAll(sorted);
 
-    usages.add(usage);
+    usages[name.lexeme] = usage;
   }
 }
 

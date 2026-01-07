@@ -1,16 +1,11 @@
 {
-  "text": "FAccordion(\n  {{core}}\n  control: {{control}},\n)",
+  "text": "FAccordion(\n  {{core}}\n  {{control}}\n)",
   "highlights": [],
   "links": [
     {
       "offset": 0,
       "length": 10,
       "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordion/FAccordion.html"
-    },
-    {
-      "offset": 25,
-      "length": 7,
-      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordion/control.html"
     }
   ],
   "tooltips": [
@@ -72,27 +67,6 @@
           "name": "FAccordion",
           "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordion-class.html"
         }
-      }
-    },
-    {
-      "offset": 25,
-      "length": 8,
-      "snippet": {
-        "text": "{FAccordionControl control = const .managed()}",
-        "highlights": [],
-        "links": [
-          {
-            "offset": 1,
-            "length": 17,
-            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionControl-class.html"
-          },
-          {
-            "offset": 36,
-            "length": 7,
-            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionControl/FAccordionControl.managed.html"
-          }
-        ],
-        "tooltips": []
       }
     }
   ],
@@ -230,28 +204,33 @@
       {
         "name": ".lifted()",
         "description": "Externally controls the accordion items' expanded state.",
-        "text": ".lifted(\n    expanded: (index) => true,\n    onChange: (index, expanded) {},\n  )",
+        "text": "control: .lifted(\n    expanded: (index) => true,\n    onChange: (index, expanded) {},\n  ),",
         "highlights": [],
         "links": [
           {
-            "offset": 1,
+            "offset": 10,
             "length": 6,
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionControl/FAccordionControl.lifted.html"
           },
           {
-            "offset": 13,
+            "offset": 22,
             "length": 8,
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionControl/FAccordionControl.lifted.html"
           },
           {
-            "offset": 44,
+            "offset": 53,
             "length": 8,
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionControl/FAccordionControl.lifted.html"
+          },
+          {
+            "offset": 0,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordion/control.html"
           }
         ],
         "tooltips": [
           {
-            "offset": 1,
+            "offset": 10,
             "length": 6,
             "snippet": {
               "text": "FAccordionControl.lifted({\n  required bool Function(int) expanded,\n  required void Function(int, bool) onChange,\n})\n",
@@ -281,7 +260,7 @@
             }
           },
           {
-            "offset": 13,
+            "offset": 22,
             "length": 9,
             "snippet": {
               "text": "{required bool Function(int) expanded}",
@@ -291,7 +270,7 @@
             }
           },
           {
-            "offset": 24,
+            "offset": 33,
             "length": 5,
             "snippet": {
               "text": "int index",
@@ -301,7 +280,7 @@
             }
           },
           {
-            "offset": 44,
+            "offset": 53,
             "length": 9,
             "snippet": {
               "text": "{required void Function(int, bool) onChange}",
@@ -311,7 +290,7 @@
             }
           },
           {
-            "offset": 55,
+            "offset": 64,
             "length": 5,
             "snippet": {
               "text": "int index",
@@ -321,12 +300,33 @@
             }
           },
           {
-            "offset": 62,
+            "offset": 71,
             "length": 8,
             "snippet": {
               "text": "bool expanded",
               "highlights": [],
               "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 0,
+            "length": 8,
+            "snippet": {
+              "text": "{FAccordionControl control = const .managed()}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 1,
+                  "length": 17,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionControl-class.html"
+                },
+                {
+                  "offset": 36,
+                  "length": 7,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionControl/FAccordionControl.managed.html"
+                }
+              ],
               "tooltips": []
             }
           }
@@ -335,33 +335,38 @@
       {
         "name": ".managed() with internal controller",
         "description": "Manages the expanded state of the accordion items internally.",
-        "text": ".managed(\n    min: 1,\n    max: 2,\n    onChange: (items) {},\n  )",
+        "text": "control: .managed(\n    min: 1,\n    max: 2,\n    onChange: (items) {},\n  ),",
         "highlights": [],
         "links": [
           {
-            "offset": 1,
+            "offset": 10,
             "length": 7,
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionControl/FAccordionControl.managed.html"
           },
           {
-            "offset": 14,
+            "offset": 23,
             "length": 3,
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionControl/FAccordionControl.managed.html"
           },
           {
-            "offset": 26,
+            "offset": 35,
             "length": 3,
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionControl/FAccordionControl.managed.html"
           },
           {
-            "offset": 38,
+            "offset": 47,
             "length": 8,
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionControl/FAccordionControl.managed.html"
+          },
+          {
+            "offset": 0,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordion/control.html"
           }
         ],
         "tooltips": [
           {
-            "offset": 1,
+            "offset": 10,
             "length": 7,
             "snippet": {
               "text": "FAccordionControl.managed({\n  FAccordionController? controller,\n  int? min,\n  int? max,\n  void Function(Set<int>)? onChange,\n})\n",
@@ -406,7 +411,7 @@
             }
           },
           {
-            "offset": 14,
+            "offset": 23,
             "length": 4,
             "snippet": {
               "text": "{int? min}",
@@ -416,7 +421,7 @@
             }
           },
           {
-            "offset": 26,
+            "offset": 35,
             "length": 4,
             "snippet": {
               "text": "{int? max}",
@@ -426,7 +431,7 @@
             }
           },
           {
-            "offset": 38,
+            "offset": 47,
             "length": 9,
             "snippet": {
               "text": "{void Function(Set<int>)? onChange}",
@@ -436,12 +441,33 @@
             }
           },
           {
-            "offset": 49,
+            "offset": 58,
             "length": 5,
             "snippet": {
               "text": "Set<int> items",
               "highlights": [],
               "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 0,
+            "length": 8,
+            "snippet": {
+              "text": "{FAccordionControl control = const .managed()}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 1,
+                  "length": 17,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionControl-class.html"
+                },
+                {
+                  "offset": 36,
+                  "length": 7,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionControl/FAccordionControl.managed.html"
+                }
+              ],
               "tooltips": []
             }
           }
@@ -450,43 +476,48 @@
       {
         "name": ".managed() with external controller",
         "description": "Uses an external `FAccordionController` to control the accordion items' expanded state.",
-        "text": ".managed(\n    // For demonstration purposes only. Don't create a controller inline, store in a State instead.\n    controller: FAccordionController(min: 1, max: 2),\n    onChange: (items) {},\n  )",
+        "text": "control: .managed(\n    // For demonstration purposes only. Don't create a controller inline, store in a State instead.\n    controller: FAccordionController(min: 1, max: 2),\n    onChange: (items) {},\n  ),",
         "highlights": [],
         "links": [
           {
-            "offset": 1,
+            "offset": 10,
             "length": 7,
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionControl/FAccordionControl.managed.html"
           },
           {
-            "offset": 114,
+            "offset": 123,
             "length": 10,
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionControl/FAccordionControl.managed.html"
           },
           {
-            "offset": 126,
+            "offset": 135,
             "length": 20,
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionController/FAccordionController.html"
           },
           {
-            "offset": 147,
+            "offset": 156,
             "length": 3,
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionController/FAccordionController.html"
           },
           {
-            "offset": 155,
+            "offset": 164,
             "length": 3,
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionController/FAccordionController.html"
           },
           {
-            "offset": 168,
+            "offset": 177,
             "length": 8,
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionControl/FAccordionControl.managed.html"
+          },
+          {
+            "offset": 0,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordion/control.html"
           }
         ],
         "tooltips": [
           {
-            "offset": 1,
+            "offset": 10,
             "length": 7,
             "snippet": {
               "text": "FAccordionControl.managed({\n  FAccordionController? controller,\n  int? min,\n  int? max,\n  void Function(Set<int>)? onChange,\n})\n",
@@ -531,7 +562,7 @@
             }
           },
           {
-            "offset": 114,
+            "offset": 123,
             "length": 11,
             "snippet": {
               "text": "{FAccordionController? controller}",
@@ -547,7 +578,7 @@
             }
           },
           {
-            "offset": 126,
+            "offset": 135,
             "length": 20,
             "snippet": {
               "text": "FAccordionController({int min = 0, int? max})\n",
@@ -577,7 +608,7 @@
             }
           },
           {
-            "offset": 147,
+            "offset": 156,
             "length": 4,
             "snippet": {
               "text": "{int min = 0}",
@@ -587,7 +618,7 @@
             }
           },
           {
-            "offset": 155,
+            "offset": 164,
             "length": 4,
             "snippet": {
               "text": "{int? max}",
@@ -597,7 +628,7 @@
             }
           },
           {
-            "offset": 168,
+            "offset": 177,
             "length": 9,
             "snippet": {
               "text": "{void Function(Set<int>)? onChange}",
@@ -607,12 +638,33 @@
             }
           },
           {
-            "offset": 179,
+            "offset": 188,
             "length": 5,
             "snippet": {
               "text": "Set<int> items",
               "highlights": [],
               "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 0,
+            "length": 8,
+            "snippet": {
+              "text": "{FAccordionControl control = const .managed()}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 1,
+                  "length": 17,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionControl-class.html"
+                },
+                {
+                  "offset": 36,
+                  "length": 7,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionControl/FAccordionControl.managed.html"
+                }
+              ],
               "tooltips": []
             }
           }

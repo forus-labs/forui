@@ -1,0 +1,84 @@
+{
+  "text": ".lifted(\n  value: .empty,\n  onChange: (value) {},\n)",
+  "highlights": [],
+  "links": [
+    {
+      "offset": 1,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocompleteControl/FAutocompleteControl.lifted.html"
+    },
+    {
+      "offset": 11,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocompleteControl/FAutocompleteControl.lifted.html"
+    },
+    {
+      "offset": 28,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocompleteControl/FAutocompleteControl.lifted.html"
+    }
+  ],
+  "tooltips": [
+    {
+      "offset": 1,
+      "length": 6,
+      "snippet": {
+        "text": "FAutocompleteControl.lifted({\n  required TextEditingValue value,\n  required void Function(TextEditingValue) onChange,\n})\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 27,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocompleteControl/FAutocompleteControl.lifted.html"
+          },
+          {
+            "offset": 58,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocompleteControl/FAutocompleteControl.lifted.html"
+          },
+          {
+            "offset": 108,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocompleteControl/FAutocompleteControl.lifted.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FAutocompleteControl",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocompleteControl-class.html"
+        }
+      }
+    },
+    {
+      "offset": 11,
+      "length": 6,
+      "snippet": {
+        "text": "{required TextEditingValue value}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 28,
+      "length": 9,
+      "snippet": {
+        "text": "{required void Function(TextEditingValue) onChange}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 39,
+      "length": 5,
+      "snippet": {
+        "text": "TextEditingValue value",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    }
+  ],
+  "categories": {}
+}
