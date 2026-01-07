@@ -1,3 +1,10 @@
+## 0.18.0
+
+### `FCircularProgress`
+* **Breaking** Remove `FCircularProgress.loader(icon: ...)`. This shouldn't have been included.
+* **Breaking** Remove `FCircularProgress.pinwheel(icon: ...)`. This shouldn't have been included.
+
+
 ## 0.17.0
 
 This update overhauls the API by introducing [controls](https://forui.dev/docs/controls) to support declarative state

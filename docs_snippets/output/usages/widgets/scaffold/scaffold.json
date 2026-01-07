@@ -1,0 +1,256 @@
+{
+  "text": "FScaffold(\n  {{Core}}\n  {{Layout}}\n)",
+  "highlights": [],
+  "links": [
+    {
+      "offset": 0,
+      "length": 9,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.scaffold/FScaffold/FScaffold.html"
+    }
+  ],
+  "tooltips": [
+    {
+      "offset": 0,
+      "length": 9,
+      "snippet": {
+        "text": "FScaffold({\n  required Widget child,\n  FScaffoldStyle Function(FScaffoldStyle)? scaffoldStyle,\n  Widget? header,\n  Widget? sidebar,\n  Widget? footer,\n  bool childPad = true,\n  bool resizeToAvoidBottomInset = true,\n  Key? key,\n})\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.scaffold/FScaffold/FScaffold.html"
+          },
+          {
+            "offset": 30,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.scaffold/FScaffold/FScaffold.html"
+          },
+          {
+            "offset": 80,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.scaffold/FScaffold/FScaffold.html"
+          },
+          {
+            "offset": 39,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.scaffold/FScaffoldStyle-class.html"
+          },
+          {
+            "offset": 63,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.scaffold/FScaffoldStyle-class.html"
+          },
+          {
+            "offset": 105,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.scaffold/FScaffold/FScaffold.html"
+          },
+          {
+            "offset": 123,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.scaffold/FScaffold/FScaffold.html"
+          },
+          {
+            "offset": 142,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.scaffold/FScaffold/FScaffold.html"
+          },
+          {
+            "offset": 157,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.scaffold/FScaffold/FScaffold.html"
+          },
+          {
+            "offset": 181,
+            "length": 24,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.scaffold/FScaffold/FScaffold.html"
+          },
+          {
+            "offset": 221,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.scaffold/FScaffold/FScaffold.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FScaffold",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.scaffold/FScaffold-class.html"
+        }
+      }
+    }
+  ],
+  "categories": {
+    "Core": [
+      {
+        "name": "Core",
+        "description": "",
+        "text": "key: const Key('key'),\n  scaffoldStyle: (style) => style,\n  header: const Text('Header'),\n  sidebar: const Text('Sidebar'),\n  footer: const Text('Footer'),\n  child: const Text('Content'),",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.scaffold/FScaffold/FScaffold.html"
+          },
+          {
+            "offset": 25,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.scaffold/FScaffold/scaffoldStyle.html"
+          },
+          {
+            "offset": 60,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.scaffold/FScaffold/header.html"
+          },
+          {
+            "offset": 92,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.scaffold/FScaffold/sidebar.html"
+          },
+          {
+            "offset": 126,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.scaffold/FScaffold/footer.html"
+          },
+          {
+            "offset": 158,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.scaffold/FScaffold/child.html"
+          }
+        ],
+        "tooltips": [
+          {
+            "offset": 0,
+            "length": 4,
+            "snippet": {
+              "text": "{Key? key}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 25,
+            "length": 14,
+            "snippet": {
+              "text": "{FScaffoldStyle Function(FScaffoldStyle)? scaffoldStyle}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 1,
+                  "length": 14,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.scaffold/FScaffoldStyle-class.html"
+                },
+                {
+                  "offset": 25,
+                  "length": 14,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.scaffold/FScaffoldStyle-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 41,
+            "length": 5,
+            "snippet": {
+              "text": "FScaffoldStyle style",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 14,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.scaffold/FScaffoldStyle-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 60,
+            "length": 7,
+            "snippet": {
+              "text": "{Widget? header}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 92,
+            "length": 8,
+            "snippet": {
+              "text": "{Widget? sidebar}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 126,
+            "length": 7,
+            "snippet": {
+              "text": "{Widget? footer}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 158,
+            "length": 6,
+            "snippet": {
+              "text": "{required Widget child}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          }
+        ]
+      }
+    ],
+    "Layout": [
+      {
+        "name": "Layout",
+        "description": "",
+        "text": "childPad: true,\n  resizeToAvoidBottomInset: true,",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.scaffold/FScaffold/childPad.html"
+          },
+          {
+            "offset": 18,
+            "length": 24,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.scaffold/FScaffold/resizeToAvoidBottomInset.html"
+          }
+        ],
+        "tooltips": [
+          {
+            "offset": 0,
+            "length": 9,
+            "snippet": {
+              "text": "{bool childPad = true}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 18,
+            "length": 25,
+            "snippet": {
+              "text": "{bool resizeToAvoidBottomInset = true}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

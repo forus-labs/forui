@@ -1,0 +1,527 @@
+{
+  "text": "FModalSheetRoute<void>(\n  {{Core}}\n  {{Layout}}\n  {{Behavior}}\n  {{Barrier}}\n  {{Navigation}}\n)",
+  "highlights": [],
+  "links": [
+    {
+      "offset": 0,
+      "length": 22,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/FModalSheetRoute/FModalSheetRoute.html"
+    }
+  ],
+  "tooltips": [
+    {
+      "offset": 0,
+      "length": 22,
+      "snippet": {
+        "text": "FModalSheetRoute({\n  required FModalSheetStyle style,\n  required FLayout side,\n  required Widget Function(BuildContext) builder,\n  double? mainAxisMaxRatio = 9 / 16,\n  CapturedThemes? capturedThemes,\n  String? barrierOnTapHint,\n  String? barrierLabel,\n  bool barrierDismissible = true,\n  BoxConstraints constraints = const BoxConstraints(),\n  bool draggable = true,\n  AnimationController? transitionAnimationController,\n  Offset? anchorPoint,\n  bool useSafeArea = false,\n  bool resizeToAvoidBottomInset = true,\n  void Function()? onClosing,\n  RouteSettings? settings,\n})\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/FModalSheetRoute/FModalSheetRoute.html"
+          },
+          {
+            "offset": 47,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/FModalSheetRoute/FModalSheetRoute.html"
+          },
+          {
+            "offset": 30,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/FModalSheetStyle-class.html"
+          },
+          {
+            "offset": 73,
+            "length": 4,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/FModalSheetRoute/FModalSheetRoute.html"
+          },
+          {
+            "offset": 65,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FLayout.html"
+          },
+          {
+            "offset": 120,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/FModalSheetRoute/FModalSheetRoute.html"
+          },
+          {
+            "offset": 139,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/FModalSheetRoute/FModalSheetRoute.html"
+          },
+          {
+            "offset": 184,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/FModalSheetRoute/FModalSheetRoute.html"
+          },
+          {
+            "offset": 210,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/FModalSheetRoute/FModalSheetRoute.html"
+          },
+          {
+            "offset": 238,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/FModalSheetRoute/FModalSheetRoute.html"
+          },
+          {
+            "offset": 259,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/FModalSheetRoute/FModalSheetRoute.html"
+          },
+          {
+            "offset": 303,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/FModalSheetRoute/FModalSheetRoute.html"
+          },
+          {
+            "offset": 348,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/FModalSheetRoute/FModalSheetRoute.html"
+          },
+          {
+            "offset": 389,
+            "length": 29,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/FModalSheetRoute/FModalSheetRoute.html"
+          },
+          {
+            "offset": 430,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/FModalSheetRoute/FModalSheetRoute.html"
+          },
+          {
+            "offset": 450,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/FModalSheetRoute/FModalSheetRoute.html"
+          },
+          {
+            "offset": 478,
+            "length": 24,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/FModalSheetRoute/FModalSheetRoute.html"
+          },
+          {
+            "offset": 530,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/FModalSheetRoute/FModalSheetRoute.html"
+          },
+          {
+            "offset": 558,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/FModalSheetRoute/FModalSheetRoute.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FModalSheetRoute",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/FModalSheetRoute-class.html"
+        }
+      }
+    }
+  ],
+  "categories": {
+    "Core": [
+      {
+        "name": "Core",
+        "description": "",
+        "text": "style: const FModalSheetStyle(),\n  builder: (context) =>\n      const Padding(padding: .all(16), child: Text('Sheet content')),\n  side: .btt,",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/FModalSheetRoute/style.html"
+          },
+          {
+            "offset": 13,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/FModalSheetStyle/FModalSheetStyle.html"
+          },
+          {
+            "offset": 35,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/FModalSheetRoute/builder.html"
+          },
+          {
+            "offset": 129,
+            "length": 4,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/FModalSheetRoute/side.html"
+          },
+          {
+            "offset": 136,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FLayout.html#btt"
+          }
+        ],
+        "tooltips": [
+          {
+            "offset": 0,
+            "length": 6,
+            "snippet": {
+              "text": "{required FModalSheetStyle style}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 10,
+                  "length": 16,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/FModalSheetStyle-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 13,
+            "length": 16,
+            "snippet": {
+              "text": "FModalSheetStyle({\n  ImageFilter Function(double)? barrierFilter,\n  FModalSheetMotion motion = const FModalSheetMotion(),\n  double flingVelocity = 700,\n  double closeProgressThreshold = 0.5,\n})\n",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 16,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/FModalSheetStyle/FModalSheetStyle.html"
+                },
+                {
+                  "offset": 51,
+                  "length": 13,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/FModalSheetStyle/FModalSheetStyle.html"
+                },
+                {
+                  "offset": 86,
+                  "length": 6,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/FModalSheetStyle/FModalSheetStyle.html"
+                },
+                {
+                  "offset": 68,
+                  "length": 17,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/FModalSheetMotion-class.html"
+                },
+                {
+                  "offset": 101,
+                  "length": 17,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/FModalSheetMotion/FModalSheetMotion.html"
+                },
+                {
+                  "offset": 131,
+                  "length": 13,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/FModalSheetStyle/FModalSheetStyle.html"
+                },
+                {
+                  "offset": 161,
+                  "length": 22,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/FModalSheetStyle/FModalSheetStyle.html"
+                }
+              ],
+              "tooltips": [],
+              "container": {
+                "name": "FModalSheetStyle",
+                "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/FModalSheetStyle-class.html"
+              }
+            }
+          },
+          {
+            "offset": 35,
+            "length": 8,
+            "snippet": {
+              "text": "{required Widget Function(BuildContext) builder}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 45,
+            "length": 7,
+            "snippet": {
+              "text": "BuildContext context",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 129,
+            "length": 5,
+            "snippet": {
+              "text": "{required FLayout side}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 10,
+                  "length": 7,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FLayout.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 136,
+            "length": 3,
+            "snippet": {
+              "text": "FLayout btt",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 7,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FLayout.html"
+                }
+              ],
+              "tooltips": [],
+              "container": {
+                "name": "FLayout",
+                "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FLayout.html"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "Layout": [
+      {
+        "name": "Layout",
+        "description": "",
+        "text": "mainAxisMaxRatio: 9 / 16,\n  constraints: const BoxConstraints(),\n  useSafeArea: false,\n  resizeToAvoidBottomInset: true,",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/FModalSheetRoute/mainAxisMaxRatio.html"
+          },
+          {
+            "offset": 28,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/FModalSheetRoute/constraints.html"
+          },
+          {
+            "offset": 67,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/FModalSheetRoute/useSafeArea.html"
+          },
+          {
+            "offset": 89,
+            "length": 24,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/FModalSheetRoute/resizeToAvoidBottomInset.html"
+          }
+        ],
+        "tooltips": [
+          {
+            "offset": 0,
+            "length": 17,
+            "snippet": {
+              "text": "{double? mainAxisMaxRatio = 9 / 16}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 28,
+            "length": 12,
+            "snippet": {
+              "text": "{BoxConstraints constraints = const BoxConstraints()}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 67,
+            "length": 12,
+            "snippet": {
+              "text": "{bool useSafeArea = false}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 89,
+            "length": 25,
+            "snippet": {
+              "text": "{bool resizeToAvoidBottomInset = true}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          }
+        ]
+      }
+    ],
+    "Behavior": [
+      {
+        "name": "Behavior",
+        "description": "",
+        "text": "draggable: true,\n  onClosing: () {},",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/FModalSheetRoute/draggable.html"
+          },
+          {
+            "offset": 19,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/FModalSheetRoute/onClosing.html"
+          }
+        ],
+        "tooltips": [
+          {
+            "offset": 0,
+            "length": 10,
+            "snippet": {
+              "text": "{bool draggable = true}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 19,
+            "length": 10,
+            "snippet": {
+              "text": "{void Function()? onClosing}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          }
+        ]
+      }
+    ],
+    "Barrier": [
+      {
+        "name": "Barrier",
+        "description": "",
+        "text": "barrierLabel: 'Dismiss',\n  barrierDismissible: true,\n  barrierOnTapHint: null,",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/FModalSheetRoute/barrierLabel.html"
+          },
+          {
+            "offset": 27,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/FModalSheetRoute/barrierDismissible.html"
+          },
+          {
+            "offset": 55,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/FModalSheetRoute/barrierOnTapHint.html"
+          }
+        ],
+        "tooltips": [
+          {
+            "offset": 0,
+            "length": 13,
+            "snippet": {
+              "text": "{String? barrierLabel}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 27,
+            "length": 19,
+            "snippet": {
+              "text": "{bool barrierDismissible = true}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 55,
+            "length": 17,
+            "snippet": {
+              "text": "{String? barrierOnTapHint}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          }
+        ]
+      }
+    ],
+    "Navigation": [
+      {
+        "name": "Navigation",
+        "description": "",
+        "text": "capturedThemes: null,\n  settings: null,\n  anchorPoint: null,\n  transitionAnimationController: null,",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/FModalSheetRoute/capturedThemes.html"
+          },
+          {
+            "offset": 24,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/FModalSheetRoute/FModalSheetRoute.html"
+          },
+          {
+            "offset": 42,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/FModalSheetRoute/anchorPoint.html"
+          },
+          {
+            "offset": 63,
+            "length": 29,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/FModalSheetRoute/transitionAnimationController.html"
+          }
+        ],
+        "tooltips": [
+          {
+            "offset": 0,
+            "length": 15,
+            "snippet": {
+              "text": "{CapturedThemes? capturedThemes}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 24,
+            "length": 9,
+            "snippet": {
+              "text": "{RouteSettings? settings}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 42,
+            "length": 12,
+            "snippet": {
+              "text": "{Offset? anchorPoint}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 63,
+            "length": 30,
+            "snippet": {
+              "text": "{AnimationController? transitionAnimationController}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

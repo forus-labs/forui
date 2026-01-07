@@ -1,0 +1,229 @@
+{
+  "text": "FPickerWheel.builder(\n  {{Core}}\n  {{Accessibility}}\n)",
+  "highlights": [],
+  "links": [
+    {
+      "offset": 0,
+      "length": 20,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.picker/FPickerWheel/FPickerWheel.builder.html"
+    }
+  ],
+  "tooltips": [
+    {
+      "offset": 0,
+      "length": 20,
+      "snippet": {
+        "text": "FPickerWheel.builder({\n  required Widget Function(BuildContext, int) builder,\n  int flex,\n  double? itemExtent,\n  bool autofocus,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  Key? key,\n})\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 20,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.picker/FPickerWheel/FPickerWheel.builder.html"
+          },
+          {
+            "offset": 69,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.picker/FPickerWheel/FPickerWheel.builder.html"
+          },
+          {
+            "offset": 84,
+            "length": 4,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.picker/FPickerWheel/FPickerWheel.builder.html"
+          },
+          {
+            "offset": 100,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.picker/FPickerWheel/FPickerWheel.builder.html"
+          },
+          {
+            "offset": 119,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.picker/FPickerWheel/FPickerWheel.builder.html"
+          },
+          {
+            "offset": 143,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.picker/FPickerWheel/FPickerWheel.builder.html"
+          },
+          {
+            "offset": 177,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.picker/FPickerWheel/FPickerWheel.builder.html"
+          },
+          {
+            "offset": 199,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.picker/FPickerWheel/FPickerWheel.builder.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FPickerWheel",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.picker/FPickerWheel-class.html"
+        }
+      }
+    }
+  ],
+  "categories": {
+    "Core": [
+      {
+        "name": "Core",
+        "description": "",
+        "text": "key: const Key('key'),\n  builder: (context, index) => Text('$index'),\n  flex: 1,\n  itemExtent: null,",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.picker/FPickerWheel/FPickerWheel.builder.html"
+          },
+          {
+            "offset": 25,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.picker/FPickerWheel/FPickerWheel.builder.html"
+          },
+          {
+            "offset": 72,
+            "length": 4,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.picker/FPickerWheel/flex.html"
+          },
+          {
+            "offset": 83,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.picker/FPickerWheel/itemExtent.html"
+          }
+        ],
+        "tooltips": [
+          {
+            "offset": 0,
+            "length": 4,
+            "snippet": {
+              "text": "{Key? key}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 25,
+            "length": 8,
+            "snippet": {
+              "text": "{required Widget Function(BuildContext, int) builder}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 35,
+            "length": 7,
+            "snippet": {
+              "text": "BuildContext context",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 44,
+            "length": 5,
+            "snippet": {
+              "text": "int index",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 72,
+            "length": 5,
+            "snippet": {
+              "text": "{int flex}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 83,
+            "length": 11,
+            "snippet": {
+              "text": "{double? itemExtent}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          }
+        ]
+      }
+    ],
+    "Accessibility": [
+      {
+        "name": "Accessibility",
+        "description": "",
+        "text": "autofocus: false,\n  focusNode: null,\n  onFocusChange: (focused) {},",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.picker/FPickerWheel/autofocus.html"
+          },
+          {
+            "offset": 20,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.picker/FPickerWheel/focusNode.html"
+          },
+          {
+            "offset": 39,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.picker/FPickerWheel/onFocusChange.html"
+          }
+        ],
+        "tooltips": [
+          {
+            "offset": 0,
+            "length": 10,
+            "snippet": {
+              "text": "{bool autofocus}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 20,
+            "length": 10,
+            "snippet": {
+              "text": "{FocusNode? focusNode}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 39,
+            "length": 14,
+            "snippet": {
+              "text": "{void Function(bool)? onFocusChange}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 55,
+            "length": 7,
+            "snippet": {
+              "text": "bool focused",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,144 @@
+{
+  "text": "FCard.raw(\n  {{Core}}\n)",
+  "highlights": [],
+  "links": [
+    {
+      "offset": 0,
+      "length": 9,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.card/FCard/FCard.raw.html"
+    }
+  ],
+  "tooltips": [
+    {
+      "offset": 0,
+      "length": 9,
+      "snippet": {
+        "text": "FCard.raw({\n  required Widget child,\n  FCardStyle Function(FCardStyle)? style,\n  Key? key,\n})\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.card/FCard/FCard.raw.html"
+          },
+          {
+            "offset": 30,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.card/FCard/FCard.raw.html"
+          },
+          {
+            "offset": 72,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.card/FCard/FCard.raw.html"
+          },
+          {
+            "offset": 39,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.card/FCardStyle-class.html"
+          },
+          {
+            "offset": 59,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.card/FCardStyle-class.html"
+          },
+          {
+            "offset": 86,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.card/FCard/FCard.raw.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FCard",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.card/FCard-class.html"
+        }
+      }
+    }
+  ],
+  "categories": {
+    "Core": [
+      {
+        "name": "Core",
+        "description": "",
+        "text": "key: const Key('key'),\n  style: (style) => style,\n  child: const Text('Content'),",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.card/FCard/FCard.raw.html"
+          },
+          {
+            "offset": 25,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.card/FCard/style.html"
+          },
+          {
+            "offset": 52,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.card/FCard/child.html"
+          }
+        ],
+        "tooltips": [
+          {
+            "offset": 0,
+            "length": 4,
+            "snippet": {
+              "text": "{Key? key}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 25,
+            "length": 6,
+            "snippet": {
+              "text": "{FCardStyle Function(FCardStyle)? style}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 1,
+                  "length": 10,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.card/FCardStyle-class.html"
+                },
+                {
+                  "offset": 21,
+                  "length": 10,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.card/FCardStyle-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 33,
+            "length": 5,
+            "snippet": {
+              "text": "FCardStyle style",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 10,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.card/FCardStyle-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 52,
+            "length": 6,
+            "snippet": {
+              "text": "{required Widget child}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

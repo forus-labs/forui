@@ -1,0 +1,546 @@
+{
+  "text": "FItem.raw(\n  {{Core}}\n  {{State}}\n  {{Callbacks}}\n  {{Accessibility}}\n)",
+  "highlights": [],
+  "links": [
+    {
+      "offset": 0,
+      "length": 9,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem/FItem.raw.html"
+    }
+  ],
+  "tooltips": [
+    {
+      "offset": 0,
+      "length": 9,
+      "snippet": {
+        "text": "FItem.raw({\n  required Widget child,\n  FItemStyle Function(FItemStyle)? style,\n  bool? enabled,\n  bool selected = false,\n  String? semanticsLabel,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  void Function(bool)? onHoverChange,\n  void Function(FWidgetStatesDelta)? onStateChange,\n  void Function()? onPress,\n  void Function()? onLongPress,\n  void Function()? onSecondaryPress,\n  void Function()? onSecondaryLongPress,\n  Map<ShortcutActivator, Intent>? shortcuts,\n  Map<Type, Action<Intent>>? actions,\n  Widget? prefix,\n  Key? key,\n})\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem/FItem.raw.html"
+          },
+          {
+            "offset": 30,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem/FItem.raw.html"
+          },
+          {
+            "offset": 72,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem/FItem.raw.html"
+          },
+          {
+            "offset": 39,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemStyle-class.html"
+          },
+          {
+            "offset": 59,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemStyle-class.html"
+          },
+          {
+            "offset": 87,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem/FItem.raw.html"
+          },
+          {
+            "offset": 103,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem/FItem.raw.html"
+          },
+          {
+            "offset": 131,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem/FItem.raw.html"
+          },
+          {
+            "offset": 154,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem/FItem.raw.html"
+          },
+          {
+            "offset": 186,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem/FItem.raw.html"
+          },
+          {
+            "offset": 220,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem/FItem.raw.html"
+          },
+          {
+            "offset": 258,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem/FItem.raw.html"
+          },
+          {
+            "offset": 310,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem/FItem.raw.html"
+          },
+          {
+            "offset": 289,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStatesDelta-class.html"
+          },
+          {
+            "offset": 344,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem/FItem.raw.html"
+          },
+          {
+            "offset": 372,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem/FItem.raw.html"
+          },
+          {
+            "offset": 404,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem/FItem.raw.html"
+          },
+          {
+            "offset": 441,
+            "length": 20,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem/FItem.raw.html"
+          },
+          {
+            "offset": 497,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem/FItem.raw.html"
+          },
+          {
+            "offset": 537,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem/FItem.raw.html"
+          },
+          {
+            "offset": 556,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem/FItem.raw.html"
+          },
+          {
+            "offset": 571,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem/FItem.raw.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FItem",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem-class.html"
+        }
+      }
+    }
+  ],
+  "categories": {
+    "Core": [
+      {
+        "name": "Core",
+        "description": "",
+        "text": "key: const Key('key'),\n  style: (style) => style,\n  child: const Text('Content'),\n  prefix: const Icon(FIcons.user),",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem/FItem.raw.html"
+          },
+          {
+            "offset": 25,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem/style.html"
+          },
+          {
+            "offset": 52,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem/FItem.raw.html"
+          },
+          {
+            "offset": 84,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem/FItem.raw.html"
+          },
+          {
+            "offset": 103,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/user.html"
+          }
+        ],
+        "tooltips": [
+          {
+            "offset": 0,
+            "length": 4,
+            "snippet": {
+              "text": "{Key? key}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 25,
+            "length": 6,
+            "snippet": {
+              "text": "{FItemStyle Function(FItemStyle)? style}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 1,
+                  "length": 10,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemStyle-class.html"
+                },
+                {
+                  "offset": 21,
+                  "length": 10,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemStyle-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 33,
+            "length": 5,
+            "snippet": {
+              "text": "FItemStyle style",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 10,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemStyle-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 52,
+            "length": 6,
+            "snippet": {
+              "text": "{required Widget child}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 84,
+            "length": 7,
+            "snippet": {
+              "text": "{Widget? prefix}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 103,
+            "length": 11,
+            "snippet": {
+              "text": "IconData user",
+              "highlights": [],
+              "links": [],
+              "tooltips": [],
+              "container": {
+                "name": "FIcons",
+                "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons-class.html"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "State": [
+      {
+        "name": "State",
+        "description": "",
+        "text": "enabled: true,\n  selected: false,",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem/enabled.html"
+          },
+          {
+            "offset": 17,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem/selected.html"
+          }
+        ],
+        "tooltips": [
+          {
+            "offset": 0,
+            "length": 8,
+            "snippet": {
+              "text": "{bool? enabled}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 17,
+            "length": 9,
+            "snippet": {
+              "text": "{bool selected = false}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          }
+        ]
+      }
+    ],
+    "Callbacks": [
+      {
+        "name": "Callbacks",
+        "description": "",
+        "text": "onPress: () {},\n  onLongPress: () {},\n  onSecondaryPress: () {},\n  onSecondaryLongPress: () {},\n  onHoverChange: (hovered) {},\n  onStateChange: (states) {},",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem/onPress.html"
+          },
+          {
+            "offset": 18,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem/onLongPress.html"
+          },
+          {
+            "offset": 40,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem/onSecondaryPress.html"
+          },
+          {
+            "offset": 67,
+            "length": 20,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem/onSecondaryLongPress.html"
+          },
+          {
+            "offset": 98,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem/onHoverChange.html"
+          },
+          {
+            "offset": 129,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem/onStateChange.html"
+          }
+        ],
+        "tooltips": [
+          {
+            "offset": 0,
+            "length": 8,
+            "snippet": {
+              "text": "{void Function()? onPress}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 18,
+            "length": 12,
+            "snippet": {
+              "text": "{void Function()? onLongPress}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 40,
+            "length": 17,
+            "snippet": {
+              "text": "{void Function()? onSecondaryPress}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 67,
+            "length": 21,
+            "snippet": {
+              "text": "{void Function()? onSecondaryLongPress}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 98,
+            "length": 14,
+            "snippet": {
+              "text": "{void Function(bool)? onHoverChange}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 114,
+            "length": 7,
+            "snippet": {
+              "text": "bool hovered",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 129,
+            "length": 14,
+            "snippet": {
+              "text": "{void Function(FWidgetStatesDelta)? onStateChange}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 15,
+                  "length": 18,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStatesDelta-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 145,
+            "length": 6,
+            "snippet": {
+              "text": "FWidgetStatesDelta states",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 18,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStatesDelta-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          }
+        ]
+      }
+    ],
+    "Accessibility": [
+      {
+        "name": "Accessibility",
+        "description": "",
+        "text": "semanticsLabel: 'Item',\n  autofocus: false,\n  focusNode: null,\n  onFocusChange: (focused) {},\n  shortcuts: null,\n  actions: null,",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem/semanticsLabel.html"
+          },
+          {
+            "offset": 26,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem/autofocus.html"
+          },
+          {
+            "offset": 46,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem/focusNode.html"
+          },
+          {
+            "offset": 65,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem/onFocusChange.html"
+          },
+          {
+            "offset": 96,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem/shortcuts.html"
+          },
+          {
+            "offset": 115,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem/actions.html"
+          }
+        ],
+        "tooltips": [
+          {
+            "offset": 0,
+            "length": 15,
+            "snippet": {
+              "text": "{String? semanticsLabel}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 26,
+            "length": 10,
+            "snippet": {
+              "text": "{bool autofocus = false}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 46,
+            "length": 10,
+            "snippet": {
+              "text": "{FocusNode? focusNode}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 65,
+            "length": 14,
+            "snippet": {
+              "text": "{void Function(bool)? onFocusChange}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 81,
+            "length": 7,
+            "snippet": {
+              "text": "bool focused",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 96,
+            "length": 10,
+            "snippet": {
+              "text": "{Map<ShortcutActivator, Intent>? shortcuts}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 115,
+            "length": 8,
+            "snippet": {
+              "text": "{Map<Type, Action<Intent>>? actions}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

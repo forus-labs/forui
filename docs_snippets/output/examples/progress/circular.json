@@ -78,7 +78,7 @@
       "offset": 141,
       "length": 24,
       "snippet": {
-        "text": "FCircularProgress.loader({\n  FCircularProgressStyle Function(FCircularProgressStyle)? style,\n  String? semanticsLabel,\n  IconData icon = FIcons.loader,\n  Key? key,\n})\n",
+        "text": "FCircularProgress.loader({\n  FCircularProgressStyle Function(FCircularProgressStyle)? style,\n  String? semanticsLabel,\n  Key? key,\n})\n",
         "highlights": [],
         "links": [
           {
@@ -107,17 +107,7 @@
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.progress/FCircularProgress/FCircularProgress.loader.html"
           },
           {
-            "offset": 130,
-            "length": 4,
-            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.progress/FCircularProgress/FCircularProgress.loader.html"
-          },
-          {
-            "offset": 137,
-            "length": 13,
-            "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/loader.html"
-          },
-          {
-            "offset": 159,
+            "offset": 126,
             "length": 3,
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.progress/FCircularProgress/FCircularProgress.loader.html"
           }
@@ -133,7 +123,7 @@
       "offset": 173,
       "length": 26,
       "snippet": {
-        "text": "FCircularProgress.pinwheel({\n  FCircularProgressStyle Function(FCircularProgressStyle)? style,\n  String? semanticsLabel,\n  IconData icon = FIcons.loaderPinwheel,\n  Key? key,\n})\n",
+        "text": "FCircularProgress.pinwheel({\n  FCircularProgressStyle Function(FCircularProgressStyle)? style,\n  String? semanticsLabel,\n  Key? key,\n})\n",
         "highlights": [],
         "links": [
           {
@@ -162,17 +152,7 @@
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.progress/FCircularProgress/FCircularProgress.pinwheel.html"
           },
           {
-            "offset": 132,
-            "length": 4,
-            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.progress/FCircularProgress/FCircularProgress.pinwheel.html"
-          },
-          {
-            "offset": 139,
-            "length": 21,
-            "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/loaderPinwheel.html"
-          },
-          {
-            "offset": 169,
+            "offset": 128,
             "length": 3,
             "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.progress/FCircularProgress/FCircularProgress.pinwheel.html"
           }

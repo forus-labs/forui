@@ -1,0 +1,710 @@
+{
+  "text": "showFDialog(\n  {{Core}}\n  {{Barrier}}\n  {{Navigation}}\n)",
+  "highlights": [],
+  "links": [
+    {
+      "offset": 0,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.dialog/showFDialog.html"
+    }
+  ],
+  "tooltips": [
+    {
+      "offset": 0,
+      "length": 11,
+      "snippet": {
+        "text": "Future<T?> showFDialog<T>({\n  required BuildContext context,\n  required Widget Function(BuildContext, FDialogStyle, Animation<double>)\n  builder,\n  bool useRootNavigator = false,\n  FDialogRouteStyle Function(FDialogRouteStyle)? routeStyle,\n  FDialogStyle Function(FDialogStyle)? style,\n  String? barrierLabel,\n  bool barrierDismissible = true,\n  RouteSettings? routeSettings,\n  AnimationController? transitionAnimationController,\n  Offset? anchorPoint,\n  bool useSafeArea = false,\n})",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 11,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.dialog/showFDialog.html"
+          },
+          {
+            "offset": 102,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.dialog/FDialogStyle-class.html"
+          },
+          {
+            "offset": 181,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.dialog/FDialogRouteStyle-class.html"
+          },
+          {
+            "offset": 208,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.dialog/FDialogRouteStyle-class.html"
+          },
+          {
+            "offset": 242,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.dialog/FDialogStyle-class.html"
+          },
+          {
+            "offset": 264,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.dialog/FDialogStyle-class.html"
+          }
+        ],
+        "tooltips": []
+      }
+    }
+  ],
+  "categories": {
+    "Core": [
+      {
+        "name": "Core",
+        "description": "",
+        "text": "context: context,\n  style: (style) => style,\n  routeStyle: (style) => style,\n  builder: (context, style, animation) => FDialog(\n    style: (_) => style,\n    animation: animation,\n    title: const Text('Title'),\n    body: const Text('Body'),\n    actions: [\n      FButton(\n        onPress: () => Navigator.of(context).pop(),\n        child: const Text('Close'),\n      ),\n    ],\n  ),",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.dialog/showFDialog.html"
+          },
+          {
+            "offset": 20,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.dialog/showFDialog.html"
+          },
+          {
+            "offset": 47,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.dialog/showFDialog.html"
+          },
+          {
+            "offset": 79,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.dialog/showFDialog.html"
+          },
+          {
+            "offset": 119,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.dialog/FDialog/FDialog.html"
+          },
+          {
+            "offset": 132,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.dialog/FDialog/style.html"
+          },
+          {
+            "offset": 157,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.dialog/FDialog/animation.html"
+          },
+          {
+            "offset": 183,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.dialog/FDialog/FDialog.html"
+          },
+          {
+            "offset": 215,
+            "length": 4,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.dialog/FDialog/FDialog.html"
+          },
+          {
+            "offset": 245,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.dialog/FDialog/FDialog.html"
+          },
+          {
+            "offset": 262,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 279,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/onPress.html"
+          },
+          {
+            "offset": 331,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/child.html"
+          }
+        ],
+        "tooltips": [
+          {
+            "offset": 0,
+            "length": 8,
+            "snippet": {
+              "text": "{required BuildContext context}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 20,
+            "length": 6,
+            "snippet": {
+              "text": "{FDialogStyle Function(FDialogStyle)? style}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 1,
+                  "length": 12,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.dialog/FDialogStyle-class.html"
+                },
+                {
+                  "offset": 23,
+                  "length": 12,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.dialog/FDialogStyle-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 28,
+            "length": 5,
+            "snippet": {
+              "text": "FDialogStyle style",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 12,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.dialog/FDialogStyle-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 47,
+            "length": 11,
+            "snippet": {
+              "text": "{FDialogRouteStyle Function(FDialogRouteStyle)? routeStyle}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 1,
+                  "length": 17,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.dialog/FDialogRouteStyle-class.html"
+                },
+                {
+                  "offset": 28,
+                  "length": 17,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.dialog/FDialogRouteStyle-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 60,
+            "length": 5,
+            "snippet": {
+              "text": "FDialogRouteStyle style",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 17,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.dialog/FDialogRouteStyle-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 79,
+            "length": 8,
+            "snippet": {
+              "text": "{\n  required Widget Function(BuildContext, FDialogStyle, Animation<double>)\n  builder,\n}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 43,
+                  "length": 12,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.dialog/FDialogStyle-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 89,
+            "length": 7,
+            "snippet": {
+              "text": "BuildContext context",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 98,
+            "length": 5,
+            "snippet": {
+              "text": "FDialogStyle style",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 12,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.dialog/FDialogStyle-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 105,
+            "length": 9,
+            "snippet": {
+              "text": "Animation<double> animation",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 119,
+            "length": 7,
+            "snippet": {
+              "text": "FDialog({\n  required List<Widget> actions,\n  FDialogStyle Function(FDialogStyle)? style,\n  Animation<double>? animation,\n  String? semanticsLabel,\n  BoxConstraints constraints = const BoxConstraints(\n    minWidth: 280,\n    maxWidth: 560,\n  ),\n  Widget? title,\n  Widget? body,\n  Axis direction = .vertical,\n  Key? key,\n})\n",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 7,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.dialog/FDialog/FDialog.html"
+                },
+                {
+                  "offset": 34,
+                  "length": 7,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.dialog/FDialog/FDialog.html"
+                },
+                {
+                  "offset": 82,
+                  "length": 5,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.dialog/FDialog/FDialog.html"
+                },
+                {
+                  "offset": 45,
+                  "length": 12,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.dialog/FDialogStyle-class.html"
+                },
+                {
+                  "offset": 67,
+                  "length": 12,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.dialog/FDialogStyle-class.html"
+                },
+                {
+                  "offset": 110,
+                  "length": 9,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.dialog/FDialog/FDialog.html"
+                },
+                {
+                  "offset": 131,
+                  "length": 14,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.dialog/FDialog/FDialog.html"
+                },
+                {
+                  "offset": 164,
+                  "length": 11,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.dialog/FDialog/FDialog.html"
+                },
+                {
+                  "offset": 253,
+                  "length": 5,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.dialog/FDialog/FDialog.html"
+                },
+                {
+                  "offset": 270,
+                  "length": 4,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.dialog/FDialog/FDialog.html"
+                },
+                {
+                  "offset": 283,
+                  "length": 9,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.dialog/FDialog/FDialog.html"
+                },
+                {
+                  "offset": 313,
+                  "length": 3,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.dialog/FDialog/FDialog.html"
+                }
+              ],
+              "tooltips": [],
+              "container": {
+                "name": "FDialog",
+                "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.dialog/FDialog-class.html"
+              }
+            }
+          },
+          {
+            "offset": 132,
+            "length": 6,
+            "snippet": {
+              "text": "{FDialogStyle Function(FDialogStyle)? style}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 1,
+                  "length": 12,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.dialog/FDialogStyle-class.html"
+                },
+                {
+                  "offset": 23,
+                  "length": 12,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.dialog/FDialogStyle-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 140,
+            "length": 1,
+            "snippet": {
+              "text": "FDialogStyle _",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 12,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.dialog/FDialogStyle-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 157,
+            "length": 10,
+            "snippet": {
+              "text": "{Animation<double>? animation}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 183,
+            "length": 6,
+            "snippet": {
+              "text": "{Widget? title}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 215,
+            "length": 5,
+            "snippet": {
+              "text": "{Widget? body}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 245,
+            "length": 8,
+            "snippet": {
+              "text": "{required List<Widget> actions}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 262,
+            "length": 7,
+            "snippet": {
+              "text": "FButton({\n  required void Function()? onPress,\n  required Widget child,\n  FBaseButtonStyle Function(FButtonStyle) style = _primary,\n  void Function()? onLongPress,\n  void Function()? onSecondaryPress,\n  void Function()? onSecondaryLongPress,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  void Function(bool)? onHoverChange,\n  void Function(FWidgetStatesDelta)? onStateChange,\n  bool selected = false,\n  Map<ShortcutActivator, Intent>? shortcuts,\n  Map<Type, Action<Intent>>? actions,\n  MainAxisSize mainAxisSize = .max,\n  MainAxisAlignment mainAxisAlignment = .center,\n  CrossAxisAlignment crossAxisAlignment = .center,\n  TextBaseline? textBaseline,\n  Widget? prefix,\n  Widget? suffix,\n  Key? key,\n})\n",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 7,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+                },
+                {
+                  "offset": 38,
+                  "length": 7,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+                },
+                {
+                  "offset": 65,
+                  "length": 5,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+                },
+                {
+                  "offset": 114,
+                  "length": 5,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+                },
+                {
+                  "offset": 74,
+                  "length": 16,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FBaseButtonStyle-class.html"
+                },
+                {
+                  "offset": 100,
+                  "length": 12,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButtonStyle-class.html"
+                },
+                {
+                  "offset": 151,
+                  "length": 11,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+                },
+                {
+                  "offset": 183,
+                  "length": 16,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+                },
+                {
+                  "offset": 220,
+                  "length": 20,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+                },
+                {
+                  "offset": 249,
+                  "length": 9,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+                },
+                {
+                  "offset": 281,
+                  "length": 9,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+                },
+                {
+                  "offset": 315,
+                  "length": 13,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+                },
+                {
+                  "offset": 353,
+                  "length": 13,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+                },
+                {
+                  "offset": 405,
+                  "length": 13,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+                },
+                {
+                  "offset": 384,
+                  "length": 18,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStatesDelta-class.html"
+                },
+                {
+                  "offset": 427,
+                  "length": 8,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+                },
+                {
+                  "offset": 479,
+                  "length": 9,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+                },
+                {
+                  "offset": 519,
+                  "length": 7,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+                },
+                {
+                  "offset": 543,
+                  "length": 12,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+                },
+                {
+                  "offset": 584,
+                  "length": 17,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+                },
+                {
+                  "offset": 634,
+                  "length": 18,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+                },
+                {
+                  "offset": 680,
+                  "length": 12,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+                },
+                {
+                  "offset": 704,
+                  "length": 6,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+                },
+                {
+                  "offset": 722,
+                  "length": 6,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+                },
+                {
+                  "offset": 737,
+                  "length": 3,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+                }
+              ],
+              "tooltips": [],
+              "container": {
+                "name": "FButton",
+                "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton-class.html"
+              }
+            }
+          },
+          {
+            "offset": 279,
+            "length": 8,
+            "snippet": {
+              "text": "{required void Function()? onPress}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 331,
+            "length": 6,
+            "snippet": {
+              "text": "{required Widget child}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          }
+        ]
+      }
+    ],
+    "Barrier": [
+      {
+        "name": "Barrier",
+        "description": "",
+        "text": "barrierLabel: 'Dismiss',\n  barrierDismissible: true,",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.dialog/showFDialog.html"
+          },
+          {
+            "offset": 27,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.dialog/showFDialog.html"
+          }
+        ],
+        "tooltips": [
+          {
+            "offset": 0,
+            "length": 13,
+            "snippet": {
+              "text": "{String? barrierLabel}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 27,
+            "length": 19,
+            "snippet": {
+              "text": "{bool barrierDismissible = true}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          }
+        ]
+      }
+    ],
+    "Navigation": [
+      {
+        "name": "Navigation",
+        "description": "",
+        "text": "useRootNavigator: false,\n  useSafeArea: false,\n  routeSettings: null,\n  anchorPoint: null,\n  transitionAnimationController: null,",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.dialog/showFDialog.html"
+          },
+          {
+            "offset": 27,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.dialog/showFDialog.html"
+          },
+          {
+            "offset": 49,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.dialog/showFDialog.html"
+          },
+          {
+            "offset": 72,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.dialog/showFDialog.html"
+          },
+          {
+            "offset": 93,
+            "length": 29,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.dialog/showFDialog.html"
+          }
+        ],
+        "tooltips": [
+          {
+            "offset": 0,
+            "length": 17,
+            "snippet": {
+              "text": "{bool useRootNavigator = false}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 27,
+            "length": 12,
+            "snippet": {
+              "text": "{bool useSafeArea = false}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 49,
+            "length": 14,
+            "snippet": {
+              "text": "{RouteSettings? routeSettings}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 72,
+            "length": 12,
+            "snippet": {
+              "text": "{Offset? anchorPoint}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 93,
+            "length": 30,
+            "snippet": {
+              "text": "{AnimationController? transitionAnimationController}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

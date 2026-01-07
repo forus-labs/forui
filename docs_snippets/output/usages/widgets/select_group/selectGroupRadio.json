@@ -1,0 +1,235 @@
+{
+  "text": "FSelectGroupItemMixin.radio<String>(\n  {{Core}}\n  {{Accessibility}}\n)",
+  "highlights": [],
+  "links": [
+    {
+      "offset": 0,
+      "length": 27,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroupItemMixin/radio.html"
+    }
+  ],
+  "tooltips": [
+    {
+      "offset": 22,
+      "length": 5,
+      "snippet": {
+        "text": "FSelectGroupItemMixin<T> radio<T>({\n  required T value,\n  Widget? label,\n  Widget? description,\n  Widget? error,\n  String? semanticsLabel,\n  FRadioStyle? style,\n  bool enabled = true,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n})",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 25,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroupItemMixin/radio.html"
+          },
+          {
+            "offset": 0,
+            "length": 24,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroupItemMixin-mixin.html"
+          },
+          {
+            "offset": 141,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.radio/FRadioStyle-class.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FSelectGroupItemMixin",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroupItemMixin-mixin.html"
+        }
+      }
+    }
+  ],
+  "categories": {
+    "Core": [
+      {
+        "name": "Core",
+        "description": "",
+        "text": "value: 'apple',\n  style: null,\n  enabled: true,\n  label: const Text('Apple'),\n  description: const Text('A red fruit'),\n  error: null,",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroupItemMixin/radio.html"
+          },
+          {
+            "offset": 18,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroupItemMixin/radio.html"
+          },
+          {
+            "offset": 33,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroupItemMixin/radio.html"
+          },
+          {
+            "offset": 50,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroupItemMixin/radio.html"
+          },
+          {
+            "offset": 80,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroupItemMixin/radio.html"
+          },
+          {
+            "offset": 122,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroupItemMixin/radio.html"
+          }
+        ],
+        "tooltips": [
+          {
+            "offset": 0,
+            "length": 6,
+            "snippet": {
+              "text": "{required String value}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 18,
+            "length": 6,
+            "snippet": {
+              "text": "{FRadioStyle? style}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 1,
+                  "length": 12,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.radio/FRadioStyle-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 33,
+            "length": 8,
+            "snippet": {
+              "text": "{bool enabled = true}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 50,
+            "length": 6,
+            "snippet": {
+              "text": "{Widget? label}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 80,
+            "length": 12,
+            "snippet": {
+              "text": "{Widget? description}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 122,
+            "length": 6,
+            "snippet": {
+              "text": "{Widget? error}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          }
+        ]
+      }
+    ],
+    "Accessibility": [
+      {
+        "name": "Accessibility",
+        "description": "",
+        "text": "semanticsLabel: 'Apple radio',\n  autofocus: false,\n  focusNode: null,\n  onFocusChange: (focused) {},",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroupItemMixin/radio.html"
+          },
+          {
+            "offset": 33,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroupItemMixin/radio.html"
+          },
+          {
+            "offset": 53,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroupItemMixin/radio.html"
+          },
+          {
+            "offset": 72,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroupItemMixin/radio.html"
+          }
+        ],
+        "tooltips": [
+          {
+            "offset": 0,
+            "length": 15,
+            "snippet": {
+              "text": "{String? semanticsLabel}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 33,
+            "length": 10,
+            "snippet": {
+              "text": "{bool autofocus = false}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 53,
+            "length": 10,
+            "snippet": {
+              "text": "{FocusNode? focusNode}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 72,
+            "length": 14,
+            "snippet": {
+              "text": "{void Function(bool)? onFocusChange}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 88,
+            "length": 7,
+            "snippet": {
+              "text": "bool focused",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

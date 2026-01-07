@@ -1,0 +1,383 @@
+{
+  "text": "showFToast(\n  {{Core}}\n  {{Behavior}}\n)",
+  "highlights": [],
+  "links": [
+    {
+      "offset": 0,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/showFToast.html"
+    }
+  ],
+  "tooltips": [
+    {
+      "offset": 0,
+      "length": 10,
+      "snippet": {
+        "text": "FToasterEntry showFToast({\n  required BuildContext context,\n  required Widget title,\n  FToastStyle Function(FToastStyle)? style,\n  Widget? icon,\n  Widget? description,\n  Widget Function(BuildContext, FToasterEntry)? suffixBuilder,\n  FToastAlignment? alignment,\n  List<AxisDirection>? swipeToDismiss,\n  Duration? duration = const Duration(seconds: 5),\n  void Function()? onDismiss,\n})",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 14,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/showFToast.html"
+          },
+          {
+            "offset": 0,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/FToasterEntry-mixin.html"
+          },
+          {
+            "offset": 87,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/FToastStyle-class.html"
+          },
+          {
+            "offset": 108,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/FToastStyle-class.html"
+          },
+          {
+            "offset": 200,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/FToasterEntry-mixin.html"
+          },
+          {
+            "offset": 233,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/FToastAlignment.html"
+          }
+        ],
+        "tooltips": []
+      }
+    }
+  ],
+  "categories": {
+    "Core": [
+      {
+        "name": "Core",
+        "description": "",
+        "text": "context: context,\n  style: (style) => style,\n  icon: const Icon(FIcons.info),\n  title: const Text('Title'),\n  description: const Text('Description'),\n  suffixBuilder: (context, entry) =>\n      GestureDetector(onTap: entry.dismiss, child: const Icon(FIcons.x)),\n  // {@category \"Layout\"}\n  alignment: .bottomEnd,\n  swipeToDismiss: const [.right],",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/showFToast.html"
+          },
+          {
+            "offset": 20,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/showFToast.html"
+          },
+          {
+            "offset": 47,
+            "length": 4,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/showFToast.html"
+          },
+          {
+            "offset": 64,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/info.html"
+          },
+          {
+            "offset": 80,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/showFToast.html"
+          },
+          {
+            "offset": 110,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/showFToast.html"
+          },
+          {
+            "offset": 152,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/showFToast.html"
+          },
+          {
+            "offset": 222,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/FToasterEntry/dismiss.html"
+          },
+          {
+            "offset": 249,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/x.html"
+          },
+          {
+            "offset": 289,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/showFToast.html"
+          },
+          {
+            "offset": 301,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/FToastAlignment.html#bottomEnd"
+          },
+          {
+            "offset": 314,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/showFToast.html"
+          }
+        ],
+        "tooltips": [
+          {
+            "offset": 0,
+            "length": 8,
+            "snippet": {
+              "text": "{required BuildContext context}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 20,
+            "length": 6,
+            "snippet": {
+              "text": "{FToastStyle Function(FToastStyle)? style}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 1,
+                  "length": 11,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/FToastStyle-class.html"
+                },
+                {
+                  "offset": 22,
+                  "length": 11,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/FToastStyle-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 28,
+            "length": 5,
+            "snippet": {
+              "text": "FToastStyle style",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 11,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/FToastStyle-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 47,
+            "length": 5,
+            "snippet": {
+              "text": "{Widget? icon}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 64,
+            "length": 11,
+            "snippet": {
+              "text": "IconData info",
+              "highlights": [],
+              "links": [],
+              "tooltips": [],
+              "container": {
+                "name": "FIcons",
+                "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons-class.html"
+              }
+            }
+          },
+          {
+            "offset": 80,
+            "length": 6,
+            "snippet": {
+              "text": "{required Widget title}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 110,
+            "length": 12,
+            "snippet": {
+              "text": "{Widget? description}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 152,
+            "length": 14,
+            "snippet": {
+              "text": "{Widget Function(BuildContext, FToasterEntry)? suffixBuilder}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 31,
+                  "length": 13,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/FToasterEntry-mixin.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 168,
+            "length": 7,
+            "snippet": {
+              "text": "BuildContext context",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 177,
+            "length": 5,
+            "snippet": {
+              "text": "FToasterEntry entry",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 13,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/FToasterEntry-mixin.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 222,
+            "length": 7,
+            "snippet": {
+              "text": "void dismiss()",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 5,
+                  "length": 7,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/FToasterEntry/dismiss.html"
+                }
+              ],
+              "tooltips": [],
+              "container": {
+                "name": "FToasterEntry",
+                "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/FToasterEntry-mixin.html"
+              }
+            }
+          },
+          {
+            "offset": 249,
+            "length": 8,
+            "snippet": {
+              "text": "IconData x",
+              "highlights": [],
+              "links": [],
+              "tooltips": [],
+              "container": {
+                "name": "FIcons",
+                "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons-class.html"
+              }
+            }
+          },
+          {
+            "offset": 289,
+            "length": 10,
+            "snippet": {
+              "text": "{FToastAlignment? alignment}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 1,
+                  "length": 16,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/FToastAlignment.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 301,
+            "length": 9,
+            "snippet": {
+              "text": "FToastAlignment bottomEnd",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 15,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/FToastAlignment.html"
+                }
+              ],
+              "tooltips": [],
+              "container": {
+                "name": "FToastAlignment",
+                "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/FToastAlignment.html"
+              }
+            }
+          },
+          {
+            "offset": 314,
+            "length": 15,
+            "snippet": {
+              "text": "{List<AxisDirection>? swipeToDismiss}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          }
+        ]
+      }
+    ],
+    "Behavior": [
+      {
+        "name": "Behavior",
+        "description": "",
+        "text": "duration: const Duration(seconds: 5),\n  onDismiss: () {},",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/showFToast.html"
+          },
+          {
+            "offset": 40,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/showFToast.html"
+          }
+        ],
+        "tooltips": [
+          {
+            "offset": 0,
+            "length": 9,
+            "snippet": {
+              "text": "{Duration? duration = const Duration(seconds: 5)}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 40,
+            "length": 10,
+            "snippet": {
+              "text": "{void Function()? onDismiss}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

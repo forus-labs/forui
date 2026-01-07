@@ -1,0 +1,556 @@
+{
+  "text": "FSelectTile<String>.suffix(\n  {{Core}}\n  {{Callbacks}}\n  {{Accessibility}}\n)",
+  "highlights": [],
+  "links": [
+    {
+      "offset": 0,
+      "length": 26,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.suffix.html"
+    }
+  ],
+  "tooltips": [
+    {
+      "offset": 0,
+      "length": 26,
+      "snippet": {
+        "text": "FSelectTile.suffix({\n  required Widget title,\n  required String value,\n  FItemStyle Function(FItemStyle)? style,\n  Widget? checkedIcon = const Icon(FIcons.check),\n  Widget? uncheckedIcon = const Icon(FIcons.check, color: Colors.transparent),\n  Widget? subtitle,\n  Widget? details,\n  String? semanticsLabel,\n  bool? enabled,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  void Function(bool)? onHoverChange,\n  void Function(FWidgetStatesDelta)? onStatesChange,\n  Map<ShortcutActivator, Intent>? shortcuts,\n  Map<Type, Action<Intent>>? actions,\n  Widget? prefix,\n  Key? key,\n})\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.suffix.html"
+          },
+          {
+            "offset": 39,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.suffix.html"
+          },
+          {
+            "offset": 64,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.suffix.html"
+          },
+          {
+            "offset": 106,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.suffix.html"
+          },
+          {
+            "offset": 73,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemStyle-class.html"
+          },
+          {
+            "offset": 93,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemStyle-class.html"
+          },
+          {
+            "offset": 123,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.suffix.html"
+          },
+          {
+            "offset": 148,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/check.html"
+          },
+          {
+            "offset": 173,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.suffix.html"
+          },
+          {
+            "offset": 200,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/check.html"
+          },
+          {
+            "offset": 252,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.suffix.html"
+          },
+          {
+            "offset": 272,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.suffix.html"
+          },
+          {
+            "offset": 291,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.suffix.html"
+          },
+          {
+            "offset": 315,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.suffix.html"
+          },
+          {
+            "offset": 331,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.suffix.html"
+          },
+          {
+            "offset": 363,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.suffix.html"
+          },
+          {
+            "offset": 397,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.suffix.html"
+          },
+          {
+            "offset": 435,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.suffix.html"
+          },
+          {
+            "offset": 487,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.suffix.html"
+          },
+          {
+            "offset": 466,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStatesDelta-class.html"
+          },
+          {
+            "offset": 537,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.suffix.html"
+          },
+          {
+            "offset": 577,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.suffix.html"
+          },
+          {
+            "offset": 596,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.suffix.html"
+          },
+          {
+            "offset": 611,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.suffix.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FSelectTile",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile-class.html"
+        }
+      }
+    }
+  ],
+  "categories": {
+    "Core": [
+      {
+        "name": "Core",
+        "description": "",
+        "text": "key: const Key('key'),\n  style: (style) => style,\n  enabled: true,\n  value: 'apple',\n  title: const Text('Apple'),\n  subtitle: const Text('A red fruit'),\n  details: const Text(r'$1.99'),\n  checkedIcon: const Icon(FIcons.check),\n  uncheckedIcon: null,\n  prefix: null,",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.suffix.html"
+          },
+          {
+            "offset": 25,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/style.html"
+          },
+          {
+            "offset": 52,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/enabled.html"
+          },
+          {
+            "offset": 69,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/value.html"
+          },
+          {
+            "offset": 87,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/title.html"
+          },
+          {
+            "offset": 117,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/subtitle.html"
+          },
+          {
+            "offset": 156,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/details.html"
+          },
+          {
+            "offset": 189,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/checkedIcon.html"
+          },
+          {
+            "offset": 213,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/check.html"
+          },
+          {
+            "offset": 230,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/uncheckedIcon.html"
+          },
+          {
+            "offset": 253,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/FSelectTile.suffix.html"
+          }
+        ],
+        "tooltips": [
+          {
+            "offset": 0,
+            "length": 4,
+            "snippet": {
+              "text": "{Key? key}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 25,
+            "length": 6,
+            "snippet": {
+              "text": "{FItemStyle Function(FItemStyle)? style}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 1,
+                  "length": 10,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemStyle-class.html"
+                },
+                {
+                  "offset": 21,
+                  "length": 10,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemStyle-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 33,
+            "length": 5,
+            "snippet": {
+              "text": "FItemStyle style",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 10,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemStyle-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 52,
+            "length": 8,
+            "snippet": {
+              "text": "{bool? enabled}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 69,
+            "length": 6,
+            "snippet": {
+              "text": "{required String value}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 87,
+            "length": 6,
+            "snippet": {
+              "text": "{required Widget title}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 117,
+            "length": 9,
+            "snippet": {
+              "text": "{Widget? subtitle}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 156,
+            "length": 8,
+            "snippet": {
+              "text": "{Widget? details}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 189,
+            "length": 12,
+            "snippet": {
+              "text": "{Widget? checkedIcon = const Icon(FIcons.check)}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 34,
+                  "length": 12,
+                  "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/check.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 213,
+            "length": 12,
+            "snippet": {
+              "text": "IconData check",
+              "highlights": [],
+              "links": [],
+              "tooltips": [],
+              "container": {
+                "name": "FIcons",
+                "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons-class.html"
+              }
+            }
+          },
+          {
+            "offset": 230,
+            "length": 14,
+            "snippet": {
+              "text": "{\n  Widget? uncheckedIcon = const Icon(FIcons.check, color: Colors.transparent),\n}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 39,
+                  "length": 12,
+                  "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/check.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 253,
+            "length": 7,
+            "snippet": {
+              "text": "{Widget? prefix}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          }
+        ]
+      }
+    ],
+    "Callbacks": [
+      {
+        "name": "Callbacks",
+        "description": "",
+        "text": "onHoverChange: (hovered) {},\n  onStatesChange: (states) {},",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/onHoverChange.html"
+          },
+          {
+            "offset": 31,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/onStatesChange.html"
+          }
+        ],
+        "tooltips": [
+          {
+            "offset": 0,
+            "length": 14,
+            "snippet": {
+              "text": "{void Function(bool)? onHoverChange}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 16,
+            "length": 7,
+            "snippet": {
+              "text": "bool hovered",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 31,
+            "length": 15,
+            "snippet": {
+              "text": "{void Function(FWidgetStatesDelta)? onStatesChange}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 15,
+                  "length": 18,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStatesDelta-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 48,
+            "length": 6,
+            "snippet": {
+              "text": "FWidgetStatesDelta states",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 18,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStatesDelta-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          }
+        ]
+      }
+    ],
+    "Accessibility": [
+      {
+        "name": "Accessibility",
+        "description": "",
+        "text": "semanticsLabel: 'Apple',\n  autofocus: false,\n  focusNode: null,\n  shortcuts: null,\n  actions: null,\n  onFocusChange: (focused) {},",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/semanticsLabel.html"
+          },
+          {
+            "offset": 27,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/autofocus.html"
+          },
+          {
+            "offset": 47,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/focusNode.html"
+          },
+          {
+            "offset": 66,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/shortcuts.html"
+          },
+          {
+            "offset": 85,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/actions.html"
+          },
+          {
+            "offset": 102,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_tile_group/FSelectTile/onFocusChange.html"
+          }
+        ],
+        "tooltips": [
+          {
+            "offset": 0,
+            "length": 15,
+            "snippet": {
+              "text": "{String? semanticsLabel}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 27,
+            "length": 10,
+            "snippet": {
+              "text": "{bool autofocus = false}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 47,
+            "length": 10,
+            "snippet": {
+              "text": "{FocusNode? focusNode}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 66,
+            "length": 10,
+            "snippet": {
+              "text": "{Map<ShortcutActivator, Intent>? shortcuts}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 85,
+            "length": 8,
+            "snippet": {
+              "text": "{Map<Type, Action<Intent>>? actions}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 102,
+            "length": 14,
+            "snippet": {
+              "text": "{void Function(bool)? onFocusChange}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 118,
+            "length": 7,
+            "snippet": {
+              "text": "bool focused",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

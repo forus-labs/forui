@@ -1,0 +1,87 @@
+{
+  "text": "FSheets(\n  {{Core}}\n)",
+  "highlights": [],
+  "links": [
+    {
+      "offset": 0,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/FSheets/FSheets.html"
+    }
+  ],
+  "tooltips": [
+    {
+      "offset": 0,
+      "length": 7,
+      "snippet": {
+        "text": "FSheets({required Widget child, Key? key})\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/FSheets/FSheets.html"
+          },
+          {
+            "offset": 25,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/FSheets/FSheets.html"
+          },
+          {
+            "offset": 37,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/FSheets/FSheets.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FSheets",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/FSheets-class.html"
+        }
+      }
+    }
+  ],
+  "categories": {
+    "Core": [
+      {
+        "name": "Core",
+        "description": "",
+        "text": "key: Key('key'),\n  child: Placeholder(),",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/FSheets/FSheets.html"
+          },
+          {
+            "offset": 19,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/FSheets/child.html"
+          }
+        ],
+        "tooltips": [
+          {
+            "offset": 0,
+            "length": 4,
+            "snippet": {
+              "text": "{Key? key}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 19,
+            "length": 6,
+            "snippet": {
+              "text": "{required Widget child}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -29,20 +29,26 @@ class Verifier extends RecursiveAstVisitor<void> {
   }
 
   void _verify(AstNode name, ExecutableElement element, ArgumentList arguments) {
-    final declared = {
+    final declaredNamed = {
       for (final p in element.formalParameters)
-        if (p.name != null) p.name!,
+        if (p.isNamed && p.name != null) p.name!,
     };
-    final provided = {
+    final providedNamed = {
       for (final arg in arguments.arguments)
         if (arg is NamedExpression) arg.name.label.name,
     };
 
-    final difference = declared.difference(provided).toList()..sort();
-    if (difference.isNotEmpty) {
+    final declaredPositional = [
+      for (final p in element.formalParameters)
+        if (p.isPositional && p.name != null) p.name!,
+    ];
+    final providedPositionalCount = arguments.arguments.where((arg) => arg is! NamedExpression).length;
+
+    final missing = [...declaredNamed.difference(providedNamed), ...declaredPositional.skip(providedPositionalCount)];
+    if (missing.isNotEmpty) {
       // ignore: avoid_print
       print('[WARNING] Usage of $name has the following missing parameter(s):');
-      for (final parameter in difference) {
+      for (final parameter in missing) {
         // ignore: avoid_print
         print('          - $parameter');
       }
