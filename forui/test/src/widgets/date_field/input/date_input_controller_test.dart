@@ -21,7 +21,7 @@ void main() {
     controller = DateInputController.test(
       calendarController,
       FLocalizationsEnSg(),
-      TestScaffold.blueScreen.dateFieldStyle.textFieldStyle,
+      TestScaffold.blueScreen.dateFieldStyle.fieldStyle,
       'DD/MM/YYYY',
       2000,
       null,
@@ -39,7 +39,7 @@ void main() {
         DateInputController(
           .date(initial: initial),
           localizations,
-          TestScaffold.blueScreen.dateFieldStyle.textFieldStyle,
+          TestScaffold.blueScreen.dateFieldStyle.fieldStyle,
           2000,
         ).text,
         expected,
@@ -112,7 +112,7 @@ void main() {
         controller = .test(
           calendarController,
           FLocalizationsEnSg(),
-          TestScaffold.blueScreen.dateFieldStyle.textFieldStyle,
+          TestScaffold.blueScreen.dateFieldStyle.fieldStyle,
           'DD/MM/YYYY',
           2000,
           old,
@@ -173,7 +173,7 @@ void main() {
         controller = .test(
           calendarController,
           FLocalizationsHr(),
-          TestScaffold.blueScreen.dateFieldStyle.textFieldStyle,
+          TestScaffold.blueScreen.dateFieldStyle.fieldStyle,
           'DD. MM. YYYY.',
           2000,
           old,
@@ -206,7 +206,7 @@ void main() {
         controller = .test(
           calendarController,
           FLocalizationsHr(),
-          TestScaffold.blueScreen.dateFieldStyle.textFieldStyle,
+          TestScaffold.blueScreen.dateFieldStyle.fieldStyle,
           '',
           2000,
           value,
@@ -237,7 +237,7 @@ void main() {
         controller = .test(
           calendarController,
           FLocalizationsHr(),
-          TestScaffold.blueScreen.dateFieldStyle.textFieldStyle,
+          TestScaffold.blueScreen.dateFieldStyle.fieldStyle,
           '',
           2000,
           value,
@@ -283,7 +283,7 @@ void main() {
       controller = .test(
         calendarController,
         FLocalizationsHr(),
-        TestScaffold.blueScreen.dateFieldStyle.textFieldStyle,
+        TestScaffold.blueScreen.dateFieldStyle.fieldStyle,
         '',
         2000,
         value,
@@ -341,7 +341,7 @@ void main() {
         controller = .test(
           calendarController,
           FLocalizationsEnSg(),
-          TestScaffold.blueScreen.dateFieldStyle.textFieldStyle,
+          TestScaffold.blueScreen.dateFieldStyle.fieldStyle,
           '',
           2000,
           null,
@@ -398,7 +398,7 @@ void main() {
         controller = .test(
           calendarController,
           FLocalizationsHr(),
-          TestScaffold.blueScreen.dateFieldStyle.textFieldStyle,
+          TestScaffold.blueScreen.dateFieldStyle.fieldStyle,
           '',
           2000,
           null,
@@ -438,7 +438,7 @@ void main() {
         controller = .test(
           calendarController,
           FLocalizationsBg(),
-          TestScaffold.blueScreen.dateFieldStyle.textFieldStyle,
+          TestScaffold.blueScreen.dateFieldStyle.fieldStyle,
           '',
           2000,
           null,
@@ -457,7 +457,7 @@ void main() {
       controller = .test(
         calendarController,
         FLocalizationsEnSg(),
-        TestScaffold.blueScreen.dateFieldStyle.textFieldStyle,
+        TestScaffold.blueScreen.dateFieldStyle.fieldStyle,
         'DD/MM/YYYY',
         2000,
         null,

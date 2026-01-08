@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 
 import 'package:meta/meta.dart';
@@ -11,7 +10,7 @@ part 'time_field_style.design.dart';
 class FTimeFieldStyle with Diagnosticable, _$FTimeFieldStyleFunctions {
   /// The time field's text field style.
   @override
-  final FTextFieldStyle textFieldStyle;
+  final FTextFieldStyle fieldStyle;
 
   /// The time field picker's popover style.
   @override
@@ -21,24 +20,14 @@ class FTimeFieldStyle with Diagnosticable, _$FTimeFieldStyleFunctions {
   @override
   final FTimePickerStyle pickerStyle;
 
-  /// The time field icon's style.
-  @override
-  final IconThemeData iconStyle;
-
   /// Creates a [FTimeFieldStyle].
-  const FTimeFieldStyle({
-    required this.textFieldStyle,
-    required this.popoverStyle,
-    required this.pickerStyle,
-    required this.iconStyle,
-  });
+  const FTimeFieldStyle({required this.fieldStyle, required this.popoverStyle, required this.pickerStyle});
 
   /// Creates a [FTimeFieldStyle] that inherits its properties.
   FTimeFieldStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
-        textFieldStyle: .inherit(colors: colors, typography: typography, style: style),
+        fieldStyle: .inherit(colors: colors, typography: typography, style: style),
         popoverStyle: .inherit(colors: colors, style: style),
         pickerStyle: .inherit(colors: colors, typography: typography, style: style),
-        iconStyle: IconThemeData(color: colors.mutedForeground, size: 18, weight: 100),
       );
 }

@@ -5,6 +5,27 @@
 * **Breaking** Remove `FCircularProgress.pinwheel(icon: ...)`. This shouldn't have been included.
 
 
+### `FDateField`
+* **Breaking** Rename `FDateFieldStyle.selectFieldStyle` to `FDateFieldStyle.fieldStyle`.
+* **Breaking** Remove `FDateFieldStyle.iconStyle`. Use nested `FDateFieldStyle.fieldStyle.iconStyle` instead.
+
+
+### `FSelect` & `FMultiSelect`
+* **Breaking** Rename `FSelectStyle.selectFieldStyle` to `FSelectStyle.fieldStyle`.
+* **Breaking** Rename `FSelectSearchStyle.textFieldStyle` to `FSelectSearchStyle.fieldStyle`.
+* **Breaking** Remove `FSelectStyle.iconStyle`. Use `FSelectStyle.fieldStyle.iconStyle` instead.
+* **Breaking** Remove `FSelectSearchStyle.iconStyle`. Use `FSelectSearchStyle.fieldStyle.iconStyle` instead.
+
+
+### `FTextField`
+* **Breaking** Add `FTextFieldStyle.iconStyle`.
+
+
+### `FTimeField`
+* **Breaking** Rename `FTimeFieldStyle.selectFieldStyle` to `FTimeFieldStyle.fieldStyle`.
+* **Breaking** Remove `FTimeFieldStyle.iconStyle`. Use `FTimeFieldStyle.fieldStyle.iconStyle` instead.
+
+
 ## 0.17.0
 
 This update overhauls the API by introducing [controls](https://forui.dev/docs/controls) to support declarative state

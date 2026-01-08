@@ -55,6 +55,10 @@ class FTextFieldStyle extends FLabelStyle with _$FTextFieldStyleFunctions {
   @override
   final EdgeInsets scrollPadding;
 
+  /// The prefix & suffix icon styles.
+  @override
+  final FWidgetStateMap<IconThemeData> iconStyle;
+
   /// The clear button's style when [FTextField.clearable] is true.
   @override
   final FButtonStyle clearButtonStyle;
@@ -110,6 +114,7 @@ class FTextFieldStyle extends FLabelStyle with _$FTextFieldStyleFunctions {
   /// Creates a [FTextFieldStyle].
   FTextFieldStyle({
     required this.keyboardAppearance,
+    required this.iconStyle,
     required this.clearButtonStyle,
     required this.obscureButtonStyle,
     required this.contentTextStyle,
@@ -137,17 +142,15 @@ class FTextFieldStyle extends FLabelStyle with _$FTextFieldStyleFunctions {
     final label = FLabelStyles.inherit(style: style).verticalStyle;
     final ghost = FButtonStyles.inherit(colors: colors, typography: typography, style: style).ghost;
     final textStyle = typography.sm.copyWith(fontFamily: typography.defaultFontFamily);
-    final buttonStyle = ghost.copyWith(
-      iconContentStyle: ghost.iconContentStyle.copyWith(
-        iconStyle: FWidgetStateMap({
-          WidgetState.disabled: IconThemeData(color: colors.disable(colors.mutedForeground), size: 17),
-          WidgetState.any: IconThemeData(color: colors.mutedForeground, size: 17),
-        }),
-      ),
-    );
+    final iconStyle = FWidgetStateMap({
+      WidgetState.disabled: IconThemeData(color: colors.disable(colors.mutedForeground), size: 17),
+      WidgetState.any: IconThemeData(color: colors.mutedForeground, size: 17),
+    });
+    final buttonStyle = ghost.copyWith(iconContentStyle: ghost.iconContentStyle.copyWith(iconStyle: iconStyle));
 
     return .new(
       keyboardAppearance: colors.brightness,
+      iconStyle: iconStyle,
       clearButtonStyle: buttonStyle,
       obscureButtonStyle: buttonStyle,
       contentTextStyle: FWidgetStateMap({

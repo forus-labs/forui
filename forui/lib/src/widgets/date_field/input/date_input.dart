@@ -99,7 +99,7 @@ class _DateInputState extends InputState<DateInput, DateTime?> {
   @override
   @protected
   InputController createController() =>
-      DateInputController(widget.calendarController, localizations, widget.style.textFieldStyle, widget.baselineYear);
+      DateInputController(widget.calendarController, localizations, widget.style.fieldStyle, widget.baselineYear);
 
   @override
   @protected
@@ -107,7 +107,7 @@ class _DateInputState extends InputState<DateInput, DateTime?> {
 
   @override
   @protected
-  FTextFieldStyle get textFieldStyle => widget.style.textFieldStyle;
+  FTextFieldStyle get textFieldStyle => widget.style.fieldStyle;
 
   @override
   @protected

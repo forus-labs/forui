@@ -37,9 +37,9 @@ part 'input/input_date_field.dart';
 /// * [FDateFieldStyle] for customizing a date field's appearance.
 abstract class FDateField extends StatefulWidget {
   /// The default prefix builder that shows a calendar icon.
-  static Widget defaultIconBuilder(BuildContext _, FDateFieldStyle style, Set<WidgetState> _) => Padding(
+  static Widget defaultIconBuilder(BuildContext _, FDateFieldStyle style, Set<WidgetState> states) => Padding(
     padding: const .directional(start: 14.0, end: 8.0),
-    child: IconTheme(data: style.iconStyle, child: const Icon(FIcons.calendar)),
+    child: IconTheme(data: style.fieldStyle.iconStyle.resolve(states), child: const Icon(FIcons.calendar)),
   );
 
   static Widget _fieldBuilder(BuildContext _, FDateFieldStyle _, Set<WidgetState> _, Widget child) => child;
