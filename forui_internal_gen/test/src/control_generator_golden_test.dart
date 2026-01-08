@@ -6,7 +6,7 @@ const _source = r'''
 import 'package:flutter/foundation.dart';
 import 'package:meta/meta.dart';
 
-part 'sample.control.dart';
+part 'example.control.dart';
 
 class FGoldenController {
   void addListener(void Function() callback) {}
@@ -246,7 +246,7 @@ const _typeParametersSource = r'''
 import 'package:flutter/foundation.dart';
 import 'package:meta/meta.dart';
 
-part 'sample.control.dart';
+part 'example.control.dart';
 
 class FGenericController<T> {
   void addListener(void Function() callback) {}
@@ -476,7 +476,7 @@ const _managedSubclassesSource = r'''
 import 'package:flutter/foundation.dart';
 import 'package:meta/meta.dart';
 
-part 'sample.control.dart';
+part 'example.control.dart';
 
 class FSubclassController {
   void addListener(void Function() callback) {}
@@ -754,7 +754,7 @@ void main() {
     await testBuilder(
       controlBuilder(.empty),
       {'forui_internal_gen|test/src/example.dart': _source},
-      outputs: {'forui_internal_gen|test/src/sample.control.dart': _golden},
+      outputs: {'forui_internal_gen|test/src/example.control.dart': _golden},
       readerWriter: readerWriter,
     );
   }, timeout: const Timeout(Duration(minutes: 1)));
@@ -763,7 +763,7 @@ void main() {
     await testBuilder(
       controlBuilder(.empty),
       {'forui_internal_gen|test/src/example.dart': _typeParametersSource},
-      outputs: {'forui_internal_gen|test/src/sample.control.dart': _typeParametersGolden},
+      outputs: {'forui_internal_gen|test/src/example.control.dart': _typeParametersGolden},
       readerWriter: readerWriter,
     );
   }, timeout: const Timeout(Duration(minutes: 1)));
@@ -772,7 +772,7 @@ void main() {
     await testBuilder(
       controlBuilder(.empty),
       {'forui_internal_gen|test/src/example.dart': _managedSubclassesSource},
-      outputs: {'forui_internal_gen|test/src/sample.control.dart': _managedSubclassesGolden},
+      outputs: {'forui_internal_gen|test/src/example.control.dart': _managedSubclassesGolden},
       readerWriter: readerWriter,
     );
   }, timeout: const Timeout(Duration(minutes: 1)));

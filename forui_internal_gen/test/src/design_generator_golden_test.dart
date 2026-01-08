@@ -9,7 +9,7 @@ import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
 import 'dart:ui';
 
-part 'sample.design.dart';
+part 'example.design.dart';
 
 class FGoldenStyle with Diagnosticable, _$FGoldenStyleFunctions {
   /// This is a field's summary.
@@ -520,7 +520,7 @@ void main() {
     await testBuilder(
       designBuilder(.empty),
       {'forui_internal_gen|test/src/example.dart': _source},
-      outputs: {'forui_internal_gen|test/src/sample.design.dart': _golden},
+      outputs: {'forui_internal_gen|test/src/example.design.dart': _golden},
       readerWriter: readerWriter,
     );
   }, timeout: const Timeout(Duration(minutes: 1)));
