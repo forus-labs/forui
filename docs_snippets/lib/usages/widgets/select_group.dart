@@ -89,5 +89,3 @@ final FMultiValueControl<String> managedRadioExternal = .managedRadio(
   controller: .radio(),
   onChange: (values) {},
 );
-
-
