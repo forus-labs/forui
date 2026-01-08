@@ -1,11 +1,9 @@
 {
   "pages": [
     "index",
-    "themes",
+    "getting-started",
+    "concepts",
     "cli",
-    "controls",
-    "localization",
-    "responsive",
     "icon-library",
     "hooks",
     "external:[API Reference](https://pub.dev/documentation/forui)",
