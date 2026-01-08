@@ -4,6 +4,9 @@ import { notFound } from 'next/navigation';
 import { getMDXComponents } from '@/mdx-components';
 import type { Metadata } from 'next';
 import { createRelativeLink } from 'fumadocs-ui/mdx';
+import { Separator } from '@/components/ui/separator';
+import LinkBadge from '@/components/ui/link-badge/link-badge';
+import LinkBadgeGroup from '@/components/ui/link-badge/link-badge-group';
 
 export default async function Page(props: PageProps<'/docs/[[...slug]]'>) {
   const params = await props.params;
@@ -14,13 +17,20 @@ export default async function Page(props: PageProps<'/docs/[[...slug]]'>) {
 
   return (
     <DocsPage toc={page.data.toc} full={page.data.full}>
-      <DocsTitle>{page.data.title}</DocsTitle>
-      <DocsDescription>{page.data.description}</DocsDescription>
+      <div className="space-y-0.5">
+        <DocsTitle className="">{page.data.title}</DocsTitle>
+        <DocsDescription className="mb-0">{page.data.description}</DocsDescription>
+        {page.data.apiReference && (
+          <LinkBadgeGroup className="pt-2">
+            <LinkBadge label="API Reference" href={page.data.apiReference} />
+          </LinkBadgeGroup>
+        )}
+        <Separator className="mt-2 mb-6" />
+      </div>
       <DocsBody>
         <MDX
           components={getMDXComponents({
-            // this allows you to link to other pages with relative file paths
-            a: createRelativeLink(source, page),
+            a: createRelativeLink(source, page), // this allows you to link to other pages with relative file paths.
           })}
         />
       </DocsBody>

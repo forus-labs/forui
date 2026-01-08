@@ -1,0 +1,17 @@
+{
+  "pages": [
+    "index",
+    "themes",
+    "cli",
+    "controls",
+    "localization",
+    "responsive",
+    "icon-library",
+    "hooks",
+    "external:[API Reference](https://pub.dev/documentation/forui)",
+    "external:[Pub Dev](https://pub.dev/packages/forui)",
+    "...",
+    "---Widgets---",
+    "layout"
+  ]
+}

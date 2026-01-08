@@ -1,0 +1,347 @@
+---
+title: Resizable
+description: A box which children can be resized along either the horizontal or vertical axis.
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.resizable/
+---
+
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Widget } from '@/components/demo/widget';
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='resizable' query={{}} height={700}/>
+  </Tab>
+  <Tab value="Code">
+    ```dart copy
+    DecoratedBox(
+      decoration: BoxDecoration(
+        border: Border.all(color: context.theme.colors.border),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: FResizable(
+        axis: Axis.vertical,
+        crossAxisExtent: 300,
+        children: [
+          FResizableRegion(
+            initialExtent: 250,
+            minExtent: 100,
+            builder: (_, data, _) => Label(data: data, icon: FIcons.sunrise, label: 'Morning'),
+          ),
+          FResizableRegion(
+            initialExtent: 100,
+            minExtent: 100,
+            builder: (_, data, _) => Label(data: data, icon: FIcons.sun, label: 'Afternoon'),
+          ),
+          FResizableRegion(
+            initialExtent: 250,
+            minExtent: 100,
+            builder: (_, data, _) => Label(data: data, icon: FIcons.sunset, label: 'Evening'),
+          ),
+        ],
+      ),
+    );
+
+    class Label extends StatelessWidget {
+      static final format = DateFormat.jm(); // Requires package:intl
+
+      final FResizableRegionData data;
+      final IconData icon;
+      final String label;
+
+      const Label({required this.data, required this.icon, required this.label, super.key});
+
+      @override
+      Widget build(BuildContext context) {
+        final FThemeData(:colors, :typography) = context.theme;
+        final start = DateTime.fromMillisecondsSinceEpoch(
+          (data.offsetPercentage.min * Duration.millisecondsPerDay).round(),
+          isUtc: true,
+        );
+
+        final end = DateTime.fromMillisecondsSinceEpoch(
+          (data.offsetPercentage.max * Duration.millisecondsPerDay).round(),
+          isUtc: true,
+        );
+
+        return Align(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(icon, size: 15, color: colors.foreground),
+                  const SizedBox(width: 3),
+                  Text(label, style: typography.sm.copyWith(color: colors.foreground)),
+                ],
+              ),
+              const SizedBox(height: 5),
+              Text(
+                '${format.format(start)} - ${format.format(end)}',
+                style: typography.sm.copyWith(color: colors.foreground),
+              ),
+            ],
+          ),
+        );
+      }
+    }
+    ```
+  </Tab>
+</Tabs>
+
+## CLI
+
+To generate and customize this style:
+
+```shell copy
+dart run forui style create resizable
+```
+
+## Usage
+
+### `FResizable(...)`
+
+```dart copy
+FResizable(
+  control: FResizableControl.managedCascade(
+    onResizeUpdate: (regions) {},
+    onResizeEnd: (regions) {},
+  ),
+  style: (style) => style.copyWith(...),
+  axis: Axis.vertical,
+  divider: FResizableDivider.dividerWithThumb,
+  crossAxisExtent: 400,
+  hitRegionExtent: 10,
+  resizePercentage: 0.005,
+  semanticFormatterCallback: (left, right) => '${left.extent.current}, ${right.extent.current}',
+  children: [
+    FResizableRegion(
+      initialExtent: 200,
+      minExtent: 100,
+      builder: (context, data, child) => child!,
+      child: const Placeholder(),
+    ),
+  ],
+);
+```
+
+## Examples
+
+### Without Cascading
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='resizable' variant='no-cascading' query={{}} height={700}/>
+  </Tab>
+  <Tab value="Code">
+    ```dart {22} copy
+    class TimeOfDay extends StatefulWidget {
+      @override
+      State<TimeOfDay> createState() => _TimeOfDayState();
+    }
+
+    class _TimeOfDayState extends State<TimeOfDay> {
+      final _controller = FResizableController();
+
+      @override
+      void dispose() {
+        _controller.dispose();
+        super.dispose();
+      }
+
+      @override
+      Widget build(BuildContext context) => DecoratedBox(
+        decoration: BoxDecoration(
+          border: Border.all(color: context.theme.colors.border),
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: FResizable(
+          control: FResizableControl.managed(controller: _controller),
+          axis: Axis.vertical,
+          crossAxisExtent: 300,
+          children: [
+            FResizableRegion(
+              initialExtent: 200,
+              minExtent: 100,
+              builder: (_, data, _) => Label(data: data, icon: FIcons.sunrise, label: 'Morning'),
+            ),
+            FResizableRegion(
+              initialExtent: 200,
+              minExtent: 100,
+              builder: (_, data, _) => Label(data: data, icon: FIcons.sun, label: 'Afternoon'),
+            ),
+            FResizableRegion(
+              initialExtent: 200,
+              minExtent: 100,
+              builder: (_, data, _) => Label(data: data, icon: FIcons.sunset, label: 'Evening'),
+            ),
+          ],
+        ),
+      );
+    }
+
+    class Label extends StatelessWidget {
+      static final format = DateFormat.jm(); // Requires package:intl
+
+      final FResizableRegionData data;
+      final IconData icon;
+      final String label;
+
+      const Label({required this.data, required this.icon, required this.label, super.key});
+
+      @override
+      Widget build(BuildContext context) {
+        final FThemeData(:colors, :typography) = context.theme;
+        final start = DateTime.fromMillisecondsSinceEpoch(
+          (data.offsetPercentage.min * Duration.millisecondsPerDay).round(),
+          isUtc: true,
+        );
+
+        final end = DateTime.fromMillisecondsSinceEpoch(
+          (data.offsetPercentage.max * Duration.millisecondsPerDay).round(),
+          isUtc: true,
+        );
+
+        return Align(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(icon, size: 15, color: colors.foreground),
+                  const SizedBox(width: 3),
+                  Text(label, style: typography.sm.copyWith(color: colors.foreground)),
+                ],
+              ),
+              const SizedBox(height: 5),
+              Text(
+                '${format.format(start)} - ${format.format(end)}',
+                style: typography.sm.copyWith(color: colors.foreground),
+              ),
+            ],
+          ),
+        );
+      }
+    }
+    ```
+  </Tab>
+</Tabs>
+
+### Horizontal
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='resizable' variant='horizontal' query={{}} height={400}/>
+  </Tab>
+  <Tab value="Code">
+    ```dart {7} copy
+    DecoratedBox(
+      decoration: BoxDecoration(
+        border: Border.all(color: context.theme.colors.border),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: FResizable(
+        axis: Axis.horizontal,
+        crossAxisExtent: 300,
+        children: [
+          FResizableRegion(
+            initialExtent: 100,
+            minExtent: 100,
+            builder: (context, data, _) => Align(
+                child: Text('Sidebar', style: context.theme.typography.sm),
+              ),
+          ),
+          FResizableRegion(
+            initialExtent: 300,
+            minExtent: 100,
+            builder: (context, data, _) => Align(
+              child: Text('Content', style: context.theme.typography.sm),
+            ),
+          ),
+        ],
+      ),
+    );
+    ```
+  </Tab>
+</Tabs>
+
+### Divider with No Thumb
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='resizable' variant='horizontal' query={{divider: 'divider'}} height={400}/>
+  </Tab>
+  <Tab value="Code">
+    ```dart {8} copy
+    DecoratedBox(
+      decoration: BoxDecoration(
+        border: Border.all(color: context.theme.colors.border),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: FResizable(
+        axis: Axis.horizontal,
+        divider: FResizableDivider.divider,
+        crossAxisExtent: 300,
+        children: [
+          FResizableRegion(
+            initialExtent: 100,
+            minExtent: 100,
+            builder: (context, data, _) => Align(
+                child: Text('Sidebar', style: context.theme.typography.sm),
+              ),
+          ),
+          FResizableRegion(
+            initialExtent: 300,
+            minExtent: 100,
+            builder: (context, data, _) => Align(
+              child: Text('Content', style: context.theme.typography.sm),
+            ),
+          ),
+        ],
+      ),
+    );
+    ```
+  </Tab>
+</Tabs>
+
+### Without Divider
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='resizable' variant='horizontal' query={{divider: 'none'}} height={400}/>
+  </Tab>
+  <Tab value="Code">
+    ```dart {8} copy
+    DecoratedBox(
+      decoration: BoxDecoration(
+        border: Border.all(color: context.theme.colors.border),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: FResizable(
+        axis: Axis.horizontal,
+        divider: FResizableDivider.none,
+        crossAxisExtent: 300,
+        children: [
+          FResizableRegion(
+            initialExtent: 100,
+            minExtent: 100,
+            builder: (context, data, _) => Align(
+                child: Text('Sidebar', style: context.theme.typography.sm),
+              ),
+          ),
+          FResizableRegion(
+            initialExtent: 300,
+            minExtent: 100,
+            builder: (context, data, _) => Align(
+              child: Text('Content', style: context.theme.typography.sm),
+            ),
+          ),
+        ],
+      ),
+    );
+    ```
+  </Tab>
+</Tabs>

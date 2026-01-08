@@ -23,7 +23,7 @@ export function Logo({ className = 'w-24 h-auto' }: LogoProps) {
 
   return (
     <Image
-      src={resolvedTheme === 'dark' ? 'logos/dark_logo.svg' : 'logos/light_logo.svg'}
+      src={resolvedTheme === 'dark' ? '/logos/dark_logo.svg' : '/logos/light_logo.svg'}
       className={className}
       width={0}
       height={0}

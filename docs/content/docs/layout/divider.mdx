@@ -1,0 +1,69 @@
+---
+title: Divider
+description: Visually or semantically separates content.
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.divider/
+---
+
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Widget } from '@/components/demo/widget';
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='divider' query={{}} height={300}/>
+  </Tab>
+  <Tab value="Code">
+    ```dart copy
+    Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text(
+          'Flutter Forui',
+          style: context.theme.typography.xl2.copyWith(
+            color: context.theme.colors.foreground,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        Text(
+          'An open-source widget library.',
+          style: context.theme.typography.sm.copyWith(color: context.theme.colors.mutedForeground),
+        ),
+        const FDivider(),
+        SizedBox(
+          height: 30,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text('Blog', style: context.theme.typography.sm.copyWith(color: context.theme.colors.foreground)),
+              const FDivider(axis: Axis.vertical),
+              Text('Docs', style: context.theme.typography.sm.copyWith(color: context.theme.colors.foreground)),
+              const FDivider(axis: Axis.vertical),
+              Text('Source', style: context.theme.typography.sm.copyWith(color: context.theme.colors.foreground)),
+            ],
+          ),
+        ),
+      ],
+    );
+    ```
+  </Tab>
+</Tabs>
+
+## CLI
+
+To generate and customize this style:
+
+```shell copy
+dart run forui style create dividers
+```
+
+## Usage
+
+### `FDivider(...)`
+
+```dart copy
+FDivider(
+  style: (style) => style.copyWith(...),
+  axis: Axis.vertical,
+);
+```

@@ -1,5 +1,9 @@
-import {Callout} from "nextra/components";
+---
+title: Themes
+description: Define consistent visual styles across your Flutter application with Forui's theming system.
+---
 
+import {Callout} from "fumadocs-ui/components/callout";
 export function Theme({title, color}) {
     return (
         <div className="flex items-center space-x-2">
@@ -9,14 +13,12 @@ export function Theme({title, color}) {
     );
 }
 
-# Themes
-
 Forui themes allow you to define a consistent visual style across your application & widgets. It relies on the [CLI](cli)
 to generate themes and styles that can be directly modified in your project.
 
 ## Getting Started
 
-<Callout type="info">
+<Callout type="info" title="Theme Brightness">
     Forui does not manage the theme brightness (light or dark) automatically.
     You need to specify the theme explicitly in `FAnimatedTheme(...)`.
 
@@ -27,13 +29,12 @@ to generate themes and styles that can be directly modified in your project.
       child: FScaffold(...),
     );
     ```
-
 </Callout>
 
 Forui includes predefined themes that can be used out of the box. They are heavily inspired by [shadcn/ui](https://ui.shadcn.com/themes).
 
 | Theme                                    | Light Accessor         | Dark Accessor         |
-| :--------------------------------------- | :--------------------- | :-------------------- |
+|:-----------------------------------------|:-----------------------|:----------------------|
 | <Theme title="Zinc" color="#18181b" />   | `FThemes.zinc.light`   | `FThemes.zinc.dark`   |
 | <Theme title="Slate" color="#64748b" />  | `FThemes.slate.light`  | `FThemes.slate.dark`  |
 | <Theme title="Red" color="#dc2626" />    | `FThemes.red.light`    | `FThemes.red.dark`    |
