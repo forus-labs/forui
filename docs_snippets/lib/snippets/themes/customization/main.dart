@@ -31,7 +31,7 @@ class Application extends StatelessWidget {
       localizationsDelegates: FLocalizations.localizationsDelegates,
       supportedLocales: FLocalizations.supportedLocales,
       // {@highlight}
-      builder: (_, child) => FAnimatedTheme(data: theme, child: child!),
+      builder: (_, child) => FTheme(data: theme, child: child!),
       theme: theme.toApproximateMaterialTheme(),
       // {@endhighlight}
       home: const FScaffold(

@@ -11,11 +11,11 @@ class Foo extends StatelessWidget {
   const Foo({required this.child, super.key});
 
   @override
-  Widget build(BuildContext context) => FTheme(data: FThemes.zinc.dark, textDirection: .ltr, child: child);
+  Widget build(BuildContext context) => FBasicTheme(data: FThemes.zinc.dark, textDirection: .ltr, child: child);
 }
 
 void main() {
-  group('FTheme', () {
+  group('FBasicTheme', () {
     testWidgets('ThemeData is visible in child widgets', (tester) async {
       await tester.pumpWidget(Foo(child: Builder(builder: (context) => Text('${context.theme == FThemes.zinc.dark}'))));
 
@@ -26,7 +26,7 @@ void main() {
       const key = ValueKey('dependent');
 
       await tester.pumpWidget(
-        FTheme(
+        FBasicTheme(
           data: FThemes.zinc.light,
           textDirection: .ltr,
           child: Builder(builder: (context) => Text(context.theme.toString(), key: key)),
@@ -35,7 +35,7 @@ void main() {
       final initial = tester.widget<Text>(find.byKey(key)).data;
 
       await tester.pumpWidget(
-        FTheme(
+        FBasicTheme(
           data: FThemes.zinc.dark,
           textDirection: .ltr,
           child: Builder(builder: (context) => Text(context.theme.toString(), key: key)),
@@ -60,7 +60,7 @@ void main() {
     testWidgets('inherit TextDirection from parent', (tester) async {
       await tester.pumpWidget(
         MaterialApp(
-          home: FTheme(data: FThemes.zinc.dark, child: const Text('')),
+          home: FBasicTheme(data: FThemes.zinc.dark, child: const Text('')),
         ),
       );
 
@@ -68,7 +68,7 @@ void main() {
     });
 
     test('debugFillProperties(...)', () {
-      final theme = FTheme(data: FThemes.zinc.dark, child: Container());
+      final theme = FBasicTheme(data: FThemes.zinc.dark, child: Container());
       final builder = DiagnosticPropertiesBuilder();
 
       theme.debugFillProperties(builder);

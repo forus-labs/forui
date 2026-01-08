@@ -1,5 +1,13 @@
 ## 0.18.0
 
+### `FTheme`
+* Add `FTheme.textDirection`.
+
+* **Breaking** Rename `FTheme` to `FBasicTheme`.
+* **Breaking** Rename `FAnimatedTheme` to `FTheme`.
+* **Breaking** Rename `FAnimatedThemeMotion` to `FThemeMotion`.
+
+
 ### `FCircularProgress`
 * **Breaking** Remove `FCircularProgress.loader(icon: ...)`. This shouldn't have been included.
 * **Breaking** Remove `FCircularProgress.pinwheel(icon: ...)`. This shouldn't have been included.

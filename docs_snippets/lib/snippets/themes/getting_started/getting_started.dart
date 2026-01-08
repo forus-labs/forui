@@ -3,7 +3,7 @@ import 'package:forui/forui.dart';
 
 // {@snippet}
 @override
-Widget build(BuildContext context) => FAnimatedTheme(
+Widget build(BuildContext context) => FTheme(
   // {@highlight}
   data: FThemes.zinc.light, // or FThemes.zinc.dark
   // {@endhighlight}

@@ -1,5 +1,33 @@
 version: 1
 transforms:
+  # FTheme/FAnimatedTheme renames - order matters!
+  - title: 'Rename FTheme to FBasicTheme'
+    date: 2026-01-08
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      class: FTheme
+    changes:
+      - kind: rename
+        newName: 'FBasicTheme'
+
+  - title: 'Rename FAnimatedTheme to FTheme'
+    date: 2026-01-08
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      class: FAnimatedTheme
+    changes:
+      - kind: rename
+        newName: 'FTheme'
+
+  - title: 'Rename FAnimatedThemeMotion to FThemeMotion'
+    date: 2026-01-08
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      class: FAnimatedThemeMotion
+    changes:
+      - kind: rename
+        newName: 'FThemeMotion'
+
   # FDateFieldStyle
   - title: 'Remove FDateFieldStyle(iconStyle: ...)'
     date: 2026-01-08
