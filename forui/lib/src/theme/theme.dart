@@ -116,7 +116,8 @@ class FTheme extends ImplicitlyAnimatedWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('motion', motion))
-      ..add(DiagnosticsProperty('data', data));
+      ..add(DiagnosticsProperty('data', data))
+      ..add(EnumProperty('textDirection', textDirection));
   }
 }
 

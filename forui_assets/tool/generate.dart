@@ -36,7 +36,21 @@ const directional = {
   'square-chevrons-right',
 };
 
-void main() => generate(parse());
+const url = 'https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons';
+
+void main() {
+  // ignore: avoid_print
+  print('Remember to update the version in the url constant when updating the font.');
+
+  final file = File('./.dart_tool/lucide-font/lucide.ttf');
+  if (file.existsSync()) {
+    file.copySync('./assets/lucide.ttf');
+  } else {
+    throw StateError('Lucide font not found. Please download and unzip it into .dart_tool/lucide-font/');
+  }
+
+  generate(parse());
+}
 
 // This script assumes that .dart_tool/lucide-font exists. The archive is manually downloaded and unzipped from
 // https://github.com/lucide-icons/lucide/releases/latest.
@@ -62,8 +76,6 @@ const header =
 //
 // ignore_for_file: type=lint
 // ignore_for_file: deprecated_member_use
-
-/// 
 ''';
 
 void generate(List<(String, String, String)> icons) {
@@ -86,7 +98,7 @@ void generate(List<(String, String, String)> icons) {
             ..fields.addAll([
               for (final icon in icons)
                 (FieldBuilder()
-                      ..docs.addAll(['/// A [`${icon.$2}`](https://lucide.dev/icons/${icon.$2}) icon.'])
+                      ..docs.addAll(['/// [![`${icon.$2}`]($url/${icon.$2}.svg)](https://lucide.dev/icons/${icon.$2})'])
                       ..static = true
                       ..modifier = FieldModifier.constant
                       ..type
