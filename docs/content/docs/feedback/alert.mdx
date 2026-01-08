@@ -1,0 +1,80 @@
+---
+title: Alert
+description: Displays a callout for user attention.
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.alert/
+---
+
+import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
+import { Widget } from '@/components/demo/widget';
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='alert' query={{}}/>
+  </Tab>
+  <Tab value="Code">
+    ```dart copy
+    FAlert(
+      title: const Text('Heads Up!'),
+      subtitle: const Text('You can add components to your app using the cli.'),
+      style: FAlertStyle.primary(),
+    );
+    ```
+  </Tab>
+</Tabs>
+
+## CLI
+
+To generate and customize this style:
+
+```shell copy
+dart run forui style create alerts
+```
+
+## Usage
+
+### `FAlert(...)`
+
+```dart copy
+FAlert(
+  title: const Text('Heads Up!'),
+  icon: const Icon(FIcons.circleAlert),
+  subtitle: const Text('You can add components to your app using the cli.'),
+  style: FAlertStyle.primary(),
+);
+```
+
+## Examples
+
+### Primary
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='alert' query={{}}/>
+  </Tab>
+  <Tab value="Code">
+    ```dart copy
+    FAlert(
+      title: const Text('Heads Up!'),
+      subtitle: const Text('You can add components to your app using the cli.'),
+      style: FAlertStyle.primary(),
+    );
+    ```
+  </Tab>
+</Tabs>
+
+### Destructive
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='alert' query={{style: 'destructive'}}/>
+  </Tab>
+  <Tab value="Code">
+    ```dart {4} copy
+    FAlert(
+      title: const Text('Heads Up!'),
+      subtitle: const Text('You can add components to your app using the cli.'),
+      style: FAlertStyle.destructive(),
+    );
+    ```
+  </Tab>
+</Tabs>

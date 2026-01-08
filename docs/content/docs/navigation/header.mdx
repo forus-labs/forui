@@ -1,0 +1,171 @@
+---
+title: Header
+description: A header contains the page's title and navigation actions. It is typically used on pages at the root of the navigation stack.
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.header/
+---
+
+import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Widget } from '@/components/demo/widget';
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='header'/>
+  </Tab>
+  <Tab value="Code">
+    ```dart copy
+    FHeader(
+      title: const Text('Edit Alarm'),
+      suffixes: [
+        FHeaderAction(icon: const Icon(FIcons.alarmClock), onPress: () {}),
+        FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {}),
+      ],
+    );
+    ```
+  </Tab>
+</Tabs>
+
+## Nested Header
+
+It is typically used on nested pages or sheets.
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='header' variant='nested'/>
+  </Tab>
+  <Tab value="Code">
+    ```dart copy
+    FHeader.nested(
+      title: const Text('Appointment'),
+      prefixes: [FHeaderAction.back(onPress: () {})],
+      suffixes: [
+        FHeaderAction(icon: const Icon(FIcons.info), onPress: () {}),
+        FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {}),
+      ],
+    );
+    ```
+  </Tab>
+</Tabs>
+
+## CLI
+
+To generate and customize this style:
+
+```shell copy
+dart run forui style create headers
+```
+
+## Usage
+
+<Callout type="info">
+  A header is typically used with `FScaffold`. A working example can be found [here](/docs/layout/scaffold).
+</Callout>
+
+### `FHeader(...)`
+
+```dart copy
+FHeader(
+  title: const Text('Title'),
+  style: (style) => style.copyWith(...),
+  suffixes: [
+    FHeaderAction(
+      icon: const Icon(FIcons.alarmClock),
+      style: (style) => style.copyWith(...),
+      onPress: () {},
+      onHoverChange: (hovered) {},
+      onStateChange: (delta) {},
+    ),
+    FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {}),
+  ],
+);
+```
+
+### `FHeader.nested(...)`
+
+```dart copy
+FHeader.nested(
+  title: const Text('Title'),
+  style: (style) => style.copyWith(...),
+  titleAlignment: Alignment.center,
+  prefixes: [
+    FHeaderAction.back(
+      onPress: () {},
+      onHoverChange: (hovered) {},
+      onStateChange: (delta) {},
+    ),
+  ],
+  suffixes: [
+    FHeaderAction(
+      icon: const Icon(FIcons.info),
+      style: (style) => style.copyWith(...),
+      onPress: () {},
+    ),
+    FHeaderAction.x(
+      onPress: () {},
+      onHoverChange: (hovered) {},
+      onStateChange: (delta) {},
+    ),
+  ],
+);
+```
+
+## Examples
+
+### Header
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='header'/>
+  </Tab>
+  <Tab value="Code">
+    ```dart copy
+    FHeader(
+      title: const Text('Edit Alarm'),
+      suffixes: [
+        FHeaderAction(icon: const Icon(FIcons.alarmClock), onPress: () {}),
+        FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {}),
+      ],
+    );
+    ```
+  </Tab>
+</Tabs>
+
+### Nested Header with Back Icon
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='header' variant='nested' />
+  </Tab>
+  <Tab value="Code">
+    ```dart {3} copy
+    FHeader.nested(
+      title: const Text('Appointment'),
+      prefixes: [FHeaderAction.back(onPress: () {})],
+      suffixes: [
+        FHeaderAction(icon: const Icon(FIcons.info), onPress: () {}),
+        FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {}),
+      ],
+    );
+    ```
+  </Tab>
+</Tabs>
+
+### Nested Header with X Icon
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='header' variant='nested-x' />
+  </Tab>
+  <Tab value="Code">
+    ```dart {7} copy
+    FHeader.nested(
+      title: const Text('Climate'),
+      prefixes: [
+        FHeaderAction(icon: const Icon(FIcons.thermometer), onPress: () {}),
+        const FHeaderAction(icon: Icon(FIcons.wind), onPress: null),
+      ],
+      suffixes: [FHeaderAction.x(onPress: () {})],
+    );
+    ```
+  </Tab>
+</Tabs>

@@ -1,0 +1,62 @@
+---
+title: Line Calendar
+description: A compact calendar component that displays dates in a horizontally scrollable line, ideal for date selection in limited space.
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.line_calendar/
+---
+
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Widget } from '@/components/demo/widget';
+
+<Callout type="info">
+  Hold `Shift` while scrolling to navigate through dates on desktop and web.
+</Callout>
+
+<Tabs items={['Preview', 'Code']}>
+    <Tab value="Preview">
+        <Widget name='line-calendar' query={{}} height={200}/>
+    </Tab>
+    <Tab value="Code">
+        ```dart copy
+        FLineCalendar(
+          control: FLineCalendarControl.managed(
+            initial: DateTime.now().subtract(const Duration(days: 1)),
+          ),
+        );
+        ```
+    </Tab>
+</Tabs>
+
+## CLI
+
+To generate and customize this style:
+
+```shell copy
+dart run forui style create line-calendar
+```
+
+## Usage
+
+### `FLineCalendar(...)`
+
+```dart copy
+FLineCalendar(
+  control: FLineCalendarControl.managed(
+    controller: FCalendarController.date(...),
+    initial: DateTime.now(),
+    toggleable: false,
+    selectable: (date) => true,
+    onChange: (date) {},
+  ),
+  style: (style) => style.copyWith(...),
+  initialScrollAlignment: AlignmentDirectional.center,
+  physics: const AlwaysScrollableScrollPhysics(),
+  cacheExtent: 100,
+  keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.manual,
+  builder: (context, data, child) => child!,
+  start: DateTime(1900),
+  end: DateTime(2050),
+  initialScroll: DateTime.now(),
+  today: DateTime.now(),
+);
+```

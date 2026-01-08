@@ -1,0 +1,209 @@
+---
+title: Dialog
+description: A modal dialog interrupts the user with important content and expects a response.
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.dialog/
+---
+
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Widget } from '@/components/demo/widget';
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='dialog' query={{vertical: "false"}} height={400}/>
+  </Tab>
+  <Tab value="Code">
+    ```dart copy
+    FButton(
+      mainAxisSize: MainAxisSize.min,
+      onPress: () => showFDialog(
+        context: context,
+        builder: (context, style, animation) => FDialog(
+          style: style,
+          animation: animation,
+          direction: Axis.horizontal,
+          title: const Text('Are you absolutely sure?'),
+          body: const Text('This action cannot be undone. This will permanently delete your account and remove your data from our servers.'),
+          actions: [
+            FButton(style: FButtonStyle.outline(), child: const Text('Cancel'), onPress: () => Navigator.of(context).pop()),
+            FButton(child: const Text('Continue'), onPress: () => Navigator.of(context).pop()),
+          ],
+        ),
+      ),
+      child: const Text('Show Dialog'),
+    );
+    ```
+  </Tab>
+</Tabs>
+
+## CLI
+
+To generate and customize this style:
+
+```shell copy
+dart run forui style create dialog
+```
+
+## Usage
+
+### `showFDialog(...)`
+
+```dart copy
+showFDialog<T>(
+  context: context,
+  builder: (context, style, animation) => FDialog(...),
+  useRootNavigator: false,
+  routeStyle: (style) => style.copyWith(...),
+  style: (style) => style.copyWith(...),
+  barrierLabel: 'Label',
+  barrierDismissible: true,
+  routeSettings: RouteSettings(...),
+  anchorPoint: Offset.zero,
+  useSafeArea: false,
+);
+```
+
+### `FDialog(...)`
+
+```dart copy
+FDialog(
+  style: (style) => style.copyWith(...),
+  animation: animation,
+  semanticsLabel: 'Dialog',
+  constraints: BoxConstraints(minWidth: 280, maxWidth: 560),
+  direction: Axis.horizontal,
+  title: const Text('Title'),
+  body: const Text('Body'),
+  actions: [
+    FButton(style: FButtonStyle.outline(), child: const Text('Cancel'), onPress: () {}),
+    FButton(child: const Text('Continue'), onPress: () {}),
+  ],
+);
+```
+
+### `FDialog.adaptive(...)`
+
+```dart copy
+FDialog.adaptive(
+  style: (style) => style.copyWith(...),
+  animation: animation,
+  semanticsLabel: 'Dialog',
+  constraints: BoxConstraints(minWidth: 280, maxWidth: 560),
+  title: const Text('Title'),
+  body: const Text('Body'),
+  actions: [
+    FButton(style: FButtonStyle.outline(), child: const Text('Cancel'), onPress: () {}),
+    FButton(child: const Text('Continue'), onPress: () {}),
+  ],
+);
+```
+
+### `FDialog.raw(...)`
+
+```dart copy
+FDialog.raw(
+  style: (style) => style.copyWith(...),
+  animation: animation,
+  semanticsLabel: 'Dialog',
+  constraints: BoxConstraints(minWidth: 280, maxWidth: 560),
+  builder: (context, style) => const Placeholder(),
+);
+```
+
+## Examples
+
+### Horizontal Layout
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='dialog' query={{vertical: "false"}} height={400}/>
+  </Tab>
+  <Tab value="Code">
+    ```dart {8} copy
+    FButton(
+      mainAxisSize: MainAxisSize.min,
+      onPress: () => showFDialog(
+        context: context,
+        builder: (context, style, animation) => FDialog(
+          style: style,
+          animation: animation,
+          direction: Axis.horizontal,
+          title: const Text('Are you absolutely sure?'),
+          body: const Text('This action cannot be undone. This will permanently delete your account and remove your data from our servers.'),
+          actions: [
+            FButton(style: FButtonStyle.outline(), child: const Text('Cancel'), onPress: () => Navigator.of(context).pop()),
+            FButton(child: const Text('Continue'), onPress: () => Navigator.of(context).pop()),
+          ],
+        ),
+      ),
+      child: const Text('Show Dialog'),
+    );
+    ```
+  </Tab>
+</Tabs>
+
+### Vertical Layout
+
+We recommend using the vertical layout on mobile devices.
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='dialog' query={{vertical: "true"}} height={400}/>
+  </Tab>
+  <Tab value="Code">
+    ```dart {8} copy
+    FButton(
+      mainAxisSize: MainAxisSize.min,
+      onPress: () => showFDialog(
+        context: context,
+        builder: (context, style, animation) => FDialog(
+          style: style,
+          animation: animation,
+          direction: Axis.vertical,
+          title: const Text('Are you absolutely sure?'),
+          body: const Text('This action cannot be undone. This will permanently delete your account and remove your data from our servers.'),
+          actions: [
+            FButton(child: const Text('Continue'), onPress: () => Navigator.of(context).pop()),
+            FButton(style: FButtonStyle.outline(), child: const Text('Cancel'), onPress: () => Navigator.of(context).pop()),
+          ],
+        ),
+      ),
+      child: const Text('Show Dialog'),
+    );
+    ```
+  </Tab>
+</Tabs>
+
+### Blurred Barrier
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='dialog' variant='blurred' height={400}/>
+  </Tab>
+  <Tab value="Code">
+    ```dart {4-9} copy
+    FButton(
+      mainAxisSize: MainAxisSize.min,
+      onPress: () => showFDialog(
+        routeStyle: (style) => style.copyWith(
+          barrierFilter: (animation) => ImageFilter.compose(
+            outer: ImageFilter.blur(sigmaX: animation * 5, sigmaY: animation * 5),
+            inner: ColorFilter.mode(context.theme.colors.barrier, BlendMode.srcOver),
+          ),
+        ),
+        context: context,
+        builder: (context, style, animation) => FDialog(
+          style: style,
+          animation: animation,
+          title: const Text('Are you absolutely sure?'),
+          body: const Text('This action cannot be undone. This will permanently delete your account and remove your data from our servers.'),
+          actions: [
+            FButton(child: const Text('Continue'), onPress: () => Navigator.of(context).pop()),
+            FButton(style: FButtonStyle.outline(), child: const Text('Cancel'), onPress: () => Navigator.of(context).pop()),
+          ],
+        ),
+      ),
+      child: const Text('Show Dialog'),
+    );
+    ```
+  </Tab>
+</Tabs>

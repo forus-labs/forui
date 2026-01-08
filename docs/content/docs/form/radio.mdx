@@ -1,0 +1,67 @@
+---
+title: Radio
+description: A radio button that typically allows the user to choose only one of a predefined set of options.
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.radio/
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Widget } from '@/components/demo/widget';
+
+<Callout type="info">
+    We recommend using a [select group](/docs/form/select-group#radio-form) to create a group of radio buttons instead of using `FRadio` directly.
+</Callout>
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='radio' variant='default' query={{}}/>
+  </Tab>
+  <Tab value="Code">
+    ```dart copy
+    class RadioPage extends StatefulWidget {
+      @override
+      State<RadioPage> createState() => _RadioPageState();
+    }
+
+    class _RadioPageState extends State<RadioPage> {
+      bool _value = true;
+
+      @override
+      Widget build(BuildContext context) => FRadio(
+        label: const Text('Default'),
+        description: const Text('The description of the default option.'),
+        value: _value,
+        onChange: (value) => setState(() => _value = value),
+      );
+    }
+    ```
+  </Tab>
+</Tabs>
+
+## CLI
+
+To generate and customize this style:
+
+```shell copy
+dart run forui style create radio
+```
+
+## Usage
+
+### `FRadio(...)`
+
+```dart copy
+FRadio(
+  style: (style) => style.copyWith(...),
+  label: const Text('Default'),
+  description: const Text('The description of the default option.'),
+  error: const Text('Please select the default option.'),
+  semanticsLabel: 'Default',
+  value: true,
+  onChange: (value) {},
+  enabled: true,
+  autofocus: true,
+  focusNode: FocusNode(),
+  onFocusChange: (focused) {},
+);
+```

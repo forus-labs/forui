@@ -12,6 +12,13 @@
     "external:[Pub Dev](https://pub.dev/packages/forui)",
     "...",
     "---Widgets---",
-    "layout"
+    "layout",
+    "form",
+    "data",
+    "tile",
+    "navigation",
+    "feedback",
+    "overlay",
+    "foundation"
   ]
 }
