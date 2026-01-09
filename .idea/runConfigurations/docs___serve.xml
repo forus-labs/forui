@@ -1,7 +1,7 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="docs - serve" type="CompoundRunConfigurationType">
-    <toRun name="samples - run" type="FlutterRunConfigurationType" />
-    <toRun name="docs - run" type="js.build_tools.npm" />
+    <toRun name="docs_snippets - run" type="FlutterRunConfigurationType" />
+    <toRun name="dev" type="js.build_tools.npm" />
     <method v="2" />
   </configuration>
 </component>

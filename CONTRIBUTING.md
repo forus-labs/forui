@@ -12,7 +12,7 @@ and enhance existing documentation.
 In general, contributing code involves the adding/updating of:
 * Widgets.
 * Relevant unit/golden tests.
-* Relevant sample under the [samples](./samples) project. 
+* Relevant examples under the [docs_snippets](./docs_snippets) project. 
 * Relevant documentation under the [docs](./docs) project.
 * [CHANGELOG.md](./forui/CHANGELOG.md).
 
@@ -399,14 +399,14 @@ In addition to the [API reference](https://dart.dev/tools/dart-doc), you should 
 if necessary.
 
 [forui.dev](https://forui.dev/docs) is split into two parts:
-* The [samples website](./samples), which is a Flutter webapp that provides the example widgets.
-* The [documentation website](./docs), which provides overviews and examples of widgets from the samples website embedded 
+* The [doc snippets website](./docs_snippets), which is a Flutter webapp that provides the example widgets & other code blocks.
+* The [documentation website](./docs), which provides overviews and examples of widgets from the docs snippets website embedded 
   using `<Widget/>` components in MDX files.
 
 We will use a secondary-styled button as an example in the following sections.
  
 
-### Creating a Sample
+### Creating a Example
 
 The [button's corresponding sample](https://github.com/forus-labs/forui/blob/bb45cef78459a710824c299a192b5de59b61c9b3/samples/lib/widgets/button.dart#L15)
 is:
@@ -417,25 +417,19 @@ import 'package:auto_route/auto_route.dart';
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/button/button.dart';
 
-import 'package:forui_samples/sample.dart';
-
-final variants = {
-  for (final value in Variant.values) value.name: value,
-};
+import 'package:docs_snippets/example.dart';
 
 @RoutePage()
-class ButtonTextPage extends Sample { // - (1)
+class ButtonTextPage extends Example { // - (1)
   final Variant variant;
   final String label;
 
   ButtonTextPage({
     @queryParam super.theme, // - (2)
-    @queryParam String style = 'primary',
-    @queryParam this.label = 'Button',
   }) : variant = variants[style] ?? Variant.primary;
 
   @override
-  Widget sample(BuildContext context) => IntrinsicWidth(
+  Widget example(BuildContext context) => IntrinsicWidth(
         child: FButton(
           label: Text(label),
           style: variant,
@@ -445,16 +439,18 @@ class ButtonTextPage extends Sample { // - (1)
 }
 ```
 
-1. Samples should extend `Sample`/`StatefulSample` which centers and wraps the widget returned by the overridden 
-  `sample(...)`  method in a `FTheme`.
+1. Examples should extend `Example`/`StatefulExample` which centers and wraps the widget returned by the overridden 
+  `example(...)`  method in a `FTheme`.
 2. The current theme, provided as a URL query parameter.
 
-The samples website uses `auto_route` to generate a route for each sample. In general, each sample has its own page and
+The docs_snippets website uses `auto_route` to generate a route for each example. In general, each example has its own page and
 URL. Generate the route by running `dart pub run build_runner build --delete-conflicting-outputs`. After which, 
 register the route with [`_AppRouter` in main.dart](https://github.com/forus-labs/forui/blob/bb45cef78459a710824c299a192b5de59b61c9b3/samples/lib/main.dart#L67).
 
 A route's path should follow the format `/<widget-name>/<variant>` in kebab-case. In this case, the button route's path 
 is `/button/text`. `<variant>` should default to `default` and never be empty.
+
+See the snippet generator's [README](./docs_snippets/README.md) for more details.
 
 
 ### Creating a Documentation Page
@@ -469,7 +465,7 @@ The file should contain the following sections:
 See `FButton`'s [mdx file](https://github.com/forus-labs/forui/blob/bb45cef78459a710824c299a192b5de59b61c9b3/docs/pages/docs/button.mdx?plain=1#L58).
 
 Each example should be wrapped in a `<Tabs/>` component. It contains a `<Widget/>` component and a code block. The 
-`<Widget/>` component is used to display a sample widget hosted on the samples website, while the code block displays 
+`<Widget/>` component is used to display a example widget hosted on the docs_snippets website, while the code block displays 
 the corresponding Dart code.
 
 ```mdx
@@ -494,9 +490,9 @@ the corresponding Dart code.
 </Tabs>
 ```
 
-1. The name corresponds to a `<widget-name>` in the samples website's route paths.
-2. The variant corresponds to a `<variant>` in the samples website's route paths. Defaults to `default` if not specified.
-3. The query parameters to pass to the sample widget.
+1. The name corresponds to a `<widget-name>` in the docs_snippets website's route paths.
+2. The variant corresponds to a `<variant>` in the docs_snippets website's route paths. Defaults to `default` if not specified.
+3. The query parameters to pass to the example widget.
 4. The height of the `<Widget/>` component.
 5. `{}` specifies the lines to highlight.
 

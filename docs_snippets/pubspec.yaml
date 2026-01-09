@@ -1,0 +1,40 @@
+name: docs_snippets
+description: "Samples for the Forui website"
+publish_to: 'none'
+version: 0.0.0
+
+environment:
+  sdk: '>=3.10.0 <4.0.0'
+  flutter: ">=3.38.0"
+resolution: workspace
+
+dependencies:
+  auto_route: ^11.0.0
+  collection: ^1.19.1
+  cupertino_icons: ^1.0.6
+  flutter:
+    sdk: flutter
+  flutter_hooks: ^0.21.3+1
+  flutter_svg: ^2.1.0
+  flutter_web_plugins:
+    sdk: flutter
+  forui:
+  forui_assets:
+  forui_hooks:
+  intl: any
+  sugar: ^4.0.0
+
+dev_dependencies:
+  analyzer: ^8.0.0
+  auto_route_generator: ^10.2.4
+  build_runner: any
+  dart_style: ^3.1.3
+  flutter_test:
+    sdk: flutter
+  path: ^1.9.1
+  yaml: ^3.1.3
+
+flutter:
+  assets:
+    - assets/avatar.png
+    - assets/forus-labs.png

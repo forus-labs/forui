@@ -6,7 +6,7 @@ on:
 
 jobs:
   deploy:
-    name: Deploy Docs & Samples
+    name: Deploy Docs & Snippets
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     environment: docs-development
@@ -35,19 +35,19 @@ jobs:
           SHA="$(cat ./pr-metadata/pr-head-sha.txt)"
           echo "sha=${SHA:0:7}" >> $GITHUB_OUTPUT
 
-      # Deploy samples
+      # Deploy Snippets
       - uses: actions/download-artifact@v7
         with:
-          name: samples-build
-          path: ./samples-build
+          name: docs-snippets-build
+          path: ./docs-snippets--build
           github-token: ${{ secrets.GITHUB_TOKEN }}
           run-id: ${{ github.event.workflow_run.id }}
       - uses: cloudflare/wrangler-action@v3
-        id: publish-samples
+        id: publish-docs-snippets
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy ./samples-build --project-name=${{ vars.CLOUDFLARE_DEMO_PROJECT_NAME }} --branch=${{ steps.escape-branch.outputs.branch }}-${{ steps.short-sha.outputs.sha }}
+          command: pages deploy ./docs-snippets--build --project-name=${{ vars.CLOUDFLARE_DEMO_PROJECT_NAME }} --branch=${{ steps.escape-branch.outputs.branch }}-${{ steps.short-sha.outputs.sha }}
 
       # Deploy docs
       - uses: actions/download-artifact@v7
