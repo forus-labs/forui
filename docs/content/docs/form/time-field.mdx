@@ -1,0 +1,249 @@
+---
+title: Time Field
+description: A time field allows a time to be selected from a picker or input field.
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.time_field/
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Widget } from '@/components/demo/widget';
+
+<Callout type="info">
+    It is recommended to use [FTimeField.picker](#ftimefieldpicker) on touch devices and [FTimeField.new](#ftimefield)
+     on non-primarily touch devices.
+</Callout>
+
+The input field supports both arrow key navigation:
+
+- Up/Down arrows: Increment/decrement values
+- Left/Right arrows: Move between time segments
+
+The input field does not support the following locales that use non-western numerals & scripts that require composing,
+it will default to English:
+
+- Arabic
+- Assamese
+- Bengali
+- Persian/Farsi
+- Marathi
+- Burmese
+- Nepali
+- Pashto
+- Tamil
+- Amharic
+- Kannada
+- Korean
+- Punjabi
+- Thai
+
+The following locales will default to Chinese (zh):
+
+- Chinese (Hong Kong)
+- Chinese (Taiwan)
+
+<Tabs items={['Preview', 'Code']}>
+    <Tab value="Preview">
+        <Widget name='time-field' query={{}}/>
+    </Tab>
+    <Tab value="Code">
+        ```dart copy
+        FTimeField(
+          hour24: false,
+          label: const Text('Appointment Time'),
+          description: const Text('Select a Time for your appointment.'),
+        );
+        ```
+    </Tab>
+</Tabs>
+
+## CLI
+
+To generate and customize this style:
+
+```shell copy
+dart run forui style create time-field
+```
+
+## Usage
+
+### `FTimeField(...)`
+
+```dart copy
+FTimeField(
+  control: FTimeFieldControl.managed(
+    initial: FTime(12, 30),
+    validator: (time) => time != null && time < FTime(14, 30) ? 'Time must be in the future' : null,
+    onChange: (time) {},
+  ),
+  style: (style) => style.copyWith(...),
+  hour24: false,
+  textAlign: TextAlign.start,
+  textAlignVertical: TextAlignVertical.center,
+  autofocus: false,
+  expands: false,
+  onEditingComplete: () {},
+  onSubmit: (time) {},
+  mouseCursor: SystemMouseCursors.text,
+  canRequestFocus: true,
+  builder: (context, styles, child) => child,
+  prefixBuilder: (context, styles, _) => Icon(FIcons.clock4),
+  suffixBuilder: null,
+  label: const Text('Select Time'),
+  description: const Text('Choose a time'),
+  enabled: true,
+  onSaved: (time) {},
+  onReset: () {},
+  autovalidateMode: AutovalidateMode.onUnfocus,
+);
+```
+
+### `FTimeField.picker(...)`
+
+```dart copy
+FTimeField.picker(
+  control: FTimeFieldControl.managed(
+    initial: FTime(12, 30),
+    validator: (time) => time != null && time < FTime(14, 30) ? 'Time must be in the future' : null,
+    onChange: (time) {},
+  ),
+  style: (style) => style.copyWith(...),
+  hour24: false,
+  hint: 'Select a time',
+  hourInterval: 1,
+  minuteInterval: 1,
+  builder: (context, styles, child) => child,
+  prefixBuilder: (context, styles, _) => Icon(FIcons.clock4),
+  suffixBuilder: null,
+  label: const Text('Picker Time'),
+  description: const Text('Select a time'),
+  enabled: true,
+  onSaved: (time) {},
+  onReset: () {},
+  autovalidateMode: AutovalidateMode.onUnfocus,
+);
+```
+
+## Examples
+
+### 24 Hours
+
+<Tabs items={['Preview', 'Code']}>
+    <Tab value="Preview">
+        <Widget name='time-field'  query={{hour24: 'true'}}/>
+    </Tab>
+    <Tab value="Code">
+        ```dart {2} copy
+        FTimeField(
+          hour24: true,
+          label: const Text('Appointment Time'),
+          description: const Text('Select a Time for your appointment.'),
+        );
+        ```
+    </Tab>
+</Tabs>
+
+### Picker Only
+
+<Tabs items={['Preview', 'Code']}>
+    <Tab value="Preview">
+        <Widget name='time-field' variant='picker' query={{}} height={500}/>
+    </Tab>
+    <Tab value="Code">
+        ```dart copy
+        FTimeField.picker(
+          label: const Text('Appointment Time'),
+          description: const Text('Select a time for your appointment.'),
+        );
+        ```
+    </Tab>
+</Tabs>
+
+### Custom Validation
+
+<Tabs items={['Preview', 'Code']}>
+    <Tab value="Preview">
+        <Widget name='time-field' variant='validator' query={{}} height={500}/>
+    </Tab>
+    <Tab value="Code">
+        ```dart {2} copy
+        FTimeField(
+          control: FTimeFieldControl.managed(validator: (time) => time?.hour == 12 ? 'Time cannot be noon.' : null),
+          label: const Text('Appointment Time'),
+          description: const Text('Select a time for your appointment.'),
+        );
+        ```
+    </Tab>
+
+</Tabs>
+
+### Form
+
+<Tabs items={['Preview', 'Code']}>
+    <Tab value="Preview">
+        <Widget name='time-field' variant='form' query={{}} height={600}/>
+    </Tab>
+    <Tab value="Code">
+        ```dart copy
+        class FormTimeFieldPage extends StatefulWidget {
+          @override
+          State<FormTimeFieldPage> createState() => _FormTimeFieldPageState();
+        }
+
+        class _FormTimeFieldPageState extends State<FormTimeFieldPage> {
+          final _key = GlobalKey<FormState>();
+          late final _startController = FTimeFieldController(
+            validator: (time) => switch (time) {
+              null => 'Please select a start time.',
+              _ when time < FTime.now() => 'Start Time must be in the future.',
+              _ => null,
+            },
+          );
+
+          @override
+          void dispose() {
+            _startController.dispose();
+            super.dispose();
+          }
+
+          @override
+          Widget build(BuildContext context) => Form(
+            key: _key,
+            child: Column(
+              children: [
+                FTimeField(
+                  control: FTimeFieldControl.managed(controller: _startController),
+                  label: const Text('Start Time'),
+                  description: const Text('Select a start time.'),
+                  autovalidateMode: AutovalidateMode.disabled,
+                ),
+                const SizedBox(height: 20),
+                FTimeField(
+                  control: FTimeFieldControl.managed(
+                    validator: (time) => switch (time) {
+                      null => 'Please select an end time.',
+                      _ when _startController.value != null && time < _startController.value! =>
+                        'End Time must be after start time.',
+                      _ => null,
+                    },
+                  ),
+                  label: const Text('End Time'),
+                  description: const Text('Select an end time.'),
+                  autovalidateMode: AutovalidateMode.disabled,
+                ),
+                const SizedBox(height: 25),
+                FButton(
+                  child: const Text('Submit'),
+                  onPress: () {
+                    if (_key.currentState!.validate()) {
+                      // Form is valid, process the dates
+                    }
+                  },
+                ),
+              ],
+            ),
+          );
+        }
+        ```
+    </Tab>
+
+</Tabs>

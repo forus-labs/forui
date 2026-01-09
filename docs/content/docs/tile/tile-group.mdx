@@ -1,0 +1,312 @@
+---
+title: Tile Group
+description: A tile group that typically groups related information together.
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.tile/
+---
+
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Widget } from '@/components/demo/widget';
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='tile-group' variant='default' query={{}}/>
+  </Tab>
+  <Tab value="Code">
+    ```dart copy
+    FTileGroup(
+      label: const Text('Settings'),
+      description: const Text('Personalize your experience'),
+      children: [
+        FTile(
+          prefix: const Icon(FIcons.user),
+          title: const Text('Personalization'),
+          suffix: const Icon(FIcons.chevronRight),
+          onPress: () {},
+        ),
+        FTile(
+          prefix: const Icon(FIcons.wifi),
+          title: const Text('WiFi'),
+          details: const Text('Duobase (5G)'),
+          suffix: const Icon(FIcons.chevronRight),
+          onPress: () {},
+        ),
+      ],
+    );
+    ```
+  </Tab>
+</Tabs>
+
+## CLI
+
+To generate and customize this style:
+
+```shell copy
+dart run forui style create tile-group
+```
+
+## Usage
+
+### `FTileGroup(...)`
+
+```dart copy
+FTileGroup(
+  children: [],
+  style: (style) => style.copyWith(...),
+  scrollController: ScrollController(),
+  cacheExtent: 100,
+  maxHeight: 200,
+  dragStartBehavior: DragStartBehavior.start,
+  physics: const ClampingScrollPhysics(),
+  enabled: true,
+  divider: FItemDivider.indented,
+  semanticsLabel: 'Settings',
+  label: const Text('Settings'),
+  description: const Text('Personalize your experience'),
+  error: const Text('Error message'),
+);
+```
+
+### `FTileGroup.builder(...)`
+
+```dart copy
+FTileGroup.builder(
+  tileBuilder: (context, index) => FTile(title: Text('Tile $index')),
+  count: 100,
+  style: (style) => style.copyWith(...),
+  scrollController: ScrollController(),
+  cacheExtent: 100,
+  maxHeight: 200,
+  dragStartBehavior: DragStartBehavior.start,
+  physics: const ClampingScrollPhysics(),
+  enabled: true,
+  divider: FItemDivider.indented,
+  semanticsLabel: 'Settings',
+  label: const Text('Settings'),
+  description: const Text('Personalize your experience'),
+  error: const Text('Error message'),
+);
+```
+
+### `FTileGroup.merge(...)`
+
+```dart copy
+FTileGroup.merge(
+  children: [],
+  style: (style) => style.copyWith(...),
+  scrollController: ScrollController(),
+  cacheExtent: 100,
+  maxHeight: 200,
+  dragStartBehavior: DragStartBehavior.start,
+  physics: const ClampingScrollPhysics(),
+  enabled: true,
+  divider: FItemDivider.full,
+  semanticsLabel: 'Settings',
+  label: const Text('Settings'),
+  description: const Text('Personalize your experience'),
+  error: const Text('Error message'),
+);
+```
+
+## Examples
+
+### Behavior
+
+#### Scrollable
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='tile-group' variant='scrollable' query={{}} height={300}/>
+  </Tab>
+  <Tab value="Code">
+    ```dart copy
+    FTileGroup(
+      label: const Text('Settings'),
+      description: const Text('Personalize your experience'),
+      maxHeight: 200,
+      children: [
+        FTile(
+          prefix: const Icon(FIcons.user),
+          title: const Text('Personalization'),
+          suffix: const Icon(FIcons.chevronRight),
+          onPress: () {},
+        ),
+        FTile(
+          prefix: const Icon(FIcons.mail),
+          title: const Text('Mail'),
+          suffix: const Icon(FIcons.chevronRight),
+          onPress: () {},
+        ),
+        FTile(
+          prefix: const Icon(FIcons.wifi),
+          title: const Text('WiFi'),
+          details: const Text('Duobase (5G)'),
+          suffix: const Icon(FIcons.chevronRight),
+          onPress: () {},
+        ),
+        FTile(
+          prefix: const Icon(FIcons.alarmClock),
+          title: const Text('Alarm Clock'),
+          suffix: const Icon(FIcons.chevronRight),
+          onPress: () {},
+        ),
+        FTile(
+          prefix: const Icon(FIcons.qrCode),
+          title: const Text('QR code'),
+          suffix: const Icon(FIcons.chevronRight),
+          onPress: () {},
+        ),
+      ],
+    );
+    ```
+  </Tab>
+</Tabs>
+
+#### Lazy Scrollable
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='tile-group' variant='lazy' query={{}} height={300}/>
+  </Tab>
+  <Tab value="Code">
+    ```dart copy
+    FTileGroup.builder(
+      label: const Text('Settings'),
+      description: const Text('Personalize your experience'),
+      maxHeight: 200,
+      count: 200,
+      tileBuilder: (context, index) => FTile(
+        title: Text('Tile $index'),
+        suffix: const Icon(FIcons.chevronRight),
+        onPress: () {},
+      ),
+    );
+    ```
+  </Tab>
+</Tabs>
+
+#### Merge Multiple Groups
+
+This function merges multiple `FTileGroupMixin`s into a single group. It is useful for representing a group with
+several sections.
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='tile-group' variant='merge' query={{}} height={300}/>
+  </Tab>
+  <Tab value="Code">
+    ```dart copy
+    class MergeTileGroupExample extends StatefulWidget {
+      const MergeTileGroupExample({super.key});
+
+      @override
+      State<MergeTileGroupExample> createState() => _MergeTileGroupExampleState();
+    }
+
+    class _MergeTileGroupExampleState extends State<MergeTileGroupExample> {
+      final _controller = FMultiValueNotifier.radio('List');
+
+      @override
+      void dispose() {
+        _controller.dispose();
+        super.dispose();
+      }
+
+      @override
+      Widget build(BuildContext context) => FTileGroup.merge(
+        label: const Text('Settings'),
+        children: [
+          FTileGroup(
+            children: [
+              FTile(
+                prefix: const Icon(FIcons.user),
+                title: const Text('Personalization'),
+                suffix: const Icon(FIcons.chevronRight),
+                onPress: () {},
+              ),
+              FTile(
+                prefix: const Icon(FIcons.wifi),
+                title: const Text('WiFi'),
+                details: const Text('Duobase (5G)'),
+                suffix: const Icon(FIcons.chevronRight),
+                onPress: () {},
+              ),
+            ],
+          ),
+          FSelectTileGroup<String>(
+            control: FMultiValueControl.managed(controller: _controller),
+            children: const [
+              FSelectTile(title: Text('List View'), value: 'List'),
+              FSelectTile(title: Text('Grid View'), value: 'Grid'),
+            ],
+          ),
+        ],
+      );
+    }
+    ```
+  </Tab>
+</Tabs>
+
+### Appearance
+
+#### Full Divider
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='tile-group' variant='default' query={{divider: 'full'}}/>
+  </Tab>
+  <Tab value="Code">
+    ```dart {3} copy
+    FTileGroup(
+      label: const Text('Settings'),
+      divider: FItemDivider.full,
+      children: [
+        FTile(
+          prefix: const Icon(FIcons.user),
+          title: const Text('Personalization'),
+          suffix: const Icon(FIcons.chevronRight),
+          onPress: () {},
+        ),
+        FTile(
+          prefix: const Icon(FIcons.wifi),
+          title: const Text('WiFi'),
+          details: const Text('Duobase (5G)'),
+          suffix: const Icon(FIcons.chevronRight),
+          onPress: () {},
+        ),
+      ],
+    );
+    ```
+  </Tab>
+</Tabs>
+
+#### No Divider
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='tile-group' variant='default' query={{divider: 'none'}}/>
+  </Tab>
+  <Tab value="Code">
+    ```dart {3} copy
+    FTileGroup(
+      label: const Text('Settings'),
+      divider: FItemDivider.none,
+      children: [
+        FTile(
+          prefix: const Icon(FIcons.user),
+          title: const Text('Personalization'),
+          suffix: const Icon(FIcons.chevronRight),
+          onPress: () {},
+        ),
+        FTile(
+          prefix: const Icon(FIcons.wifi),
+          title: const Text('WiFi'),
+          details: const Text('Duobase (5G)'),
+          suffix: const Icon(FIcons.chevronRight),
+          onPress: () {},
+        ),
+      ],
+    );
+    ```
+  </Tab>
+</Tabs>

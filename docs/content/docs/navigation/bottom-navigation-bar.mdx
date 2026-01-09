@@ -1,0 +1,78 @@
+---
+title: Bottom Navigation Bar
+description: A bottom navigation bar is usually present at the bottom of root pages. It is used to navigate between a small number of views, typically between three and five.
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.bottom_navigation_bar/
+---
+
+import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Widget } from '@/components/demo/widget';
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='bottom-navigation-bar' query={{}}/>
+  </Tab>
+  <Tab value="Code">
+    ```dart copy
+    class Application extends StatefulWidget {
+      const Application({super.key});
+
+      @override
+      State<Application> createState() => _ApplicationState();
+    }
+
+    class _ApplicationState extends State<Application> {
+      int _index = 1;
+
+      @override
+      Widget build(BuildContext context) => FBottomNavigationBar(
+        index: _index,
+        onChange: (index) => setState(() => _index = index),
+        children: const [
+          FBottomNavigationBarItem(icon: Icon(FIcons.house), label: Text('Home')),
+          FBottomNavigationBarItem(icon: Icon(FIcons.layoutGrid), label: Text('Browse')),
+          FBottomNavigationBarItem(icon: Icon(FIcons.radio), label: Text('Radio')),
+          FBottomNavigationBarItem(icon: Icon(FIcons.libraryBig), label: Text('Library')),
+          FBottomNavigationBarItem(icon: Icon(FIcons.search), label: Text('Search')),
+        ],
+      );
+    }
+    ```
+  </Tab>
+</Tabs>
+
+## CLI
+
+To generate and customize this style:
+
+```shell copy
+dart run forui style create bottom-navigation-bar
+```
+
+## Usage
+
+<Callout type="info">
+  A bottom navigation bar is typically used with `FScaffold`. A working example can be found [here](/docs/layout/scaffold).
+</Callout>
+
+### `FBottomNavigationBar(...)`
+
+```dart copy
+FBottomNavigationBar(
+  index: 0,
+  onChange: (index) {},
+  style: (style) => style.copyWith(...),
+  children: [
+    FBottomNavigationBarItem(
+      icon: const Icon(FIcons.house),
+      label: const Text('Home'),
+      style: (style) => style.copyWith(...),
+      autofocus: false,
+      focusNode: FocusNode(),
+      onFocusChange: (focused) {},
+      onHoverChange: (hovered) {},
+      onStateChange: (delta) {},
+    ),
+  ],
+);
+```

@@ -1,0 +1,60 @@
+---
+title: Card
+description: A flexible container component that displays content with an optional title, subtitle, and child widget. Cards are commonly used to group related information and actions.
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.card/
+---
+
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Widget } from '@/components/demo/widget';
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+      <Widget name='card' query={{}}  height={400}/>
+  </Tab>
+  <Tab value="Code">
+      ```dart copy
+      FCard(
+        image: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(image: AssetImage('avatar.png'), fit: BoxFit.cover),
+          ),
+          height: 200,
+        ),
+        title: const Text('Gratitude'),
+        subtitle: const Text('The quality of being thankful; readiness to show appreciation for and to return kindness.'),
+      );
+      ```
+  </Tab>
+</Tabs>
+
+## CLI
+
+To generate and customize this style:
+
+```shell copy
+dart run forui style create card
+```
+
+## Usage
+
+### `FCard(...)`
+
+```dart copy
+FCard(
+  image: const Placeholder(),
+  title: const Text('Notification'),
+  subtitle: const Text('You have 3 unread messages.'),
+  child: FButton(child: const Text('Read messages'), onPress: () {}),
+  mainAxisSize: MainAxisSize.min,
+  style: (style) => style.copyWith(...),
+);
+```
+
+### `FCard.raw(...)`
+
+```dart copy
+FCard.raw(
+  child: const Placeholder(),
+  style: (style) => style.copyWith(...),
+);
+```

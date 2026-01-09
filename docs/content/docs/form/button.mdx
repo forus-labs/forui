@@ -1,0 +1,183 @@
+---
+title: Button
+description: A button.
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.button/
+---
+
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Widget } from '@/components/demo/widget';
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='button' variant='text' query={{}}/>
+  </Tab>
+  <Tab value="Code">
+    ```dart copy
+    FButton(style: FButtonStyle.primary(), mainAxisSize: MainAxisSize.min, onPress: () {}, child: const Text('Button'));
+    ```
+  </Tab>
+</Tabs>
+
+## CLI
+
+To generate and customize this style:
+
+```shell copy
+dart run forui style create button
+```
+
+## Usage
+
+### `FButton(...)`
+
+```dart copy
+FButton(
+  child: const Text('Button'),
+  style: FButtonStyle.primary(),
+  prefix: const Icon(FIcons.mail),
+  suffix: const Icon(FIcons.chevronRight),
+  mainAxisSize: MainAxisSize.min,
+  onPress: () {},
+  onLongPress: () {},
+  onSecondaryPress: () {},
+  onSecondaryLongPress: () {},
+  shortcuts: {SingleActivator(LogicalKeyboardKey.enter): ActivateIntent()},
+  actions: {ActivateIntent: CallbackAction<ActivateIntent>(onInvoke: (_) {})},
+);
+```
+
+### `FButton.raw(...)`
+
+```dart copy
+FButton.raw(
+  child: const Text('Button'),
+  style: FButtonStyle.primary(),
+  onPress: () {},
+  onLongPress: () {},
+  onSecondaryPress: () {},
+  onSecondaryLongPress: () {},
+  shortcuts: {SingleActivator(LogicalKeyboardKey.enter): ActivateIntent()},
+  actions: {ActivateIntent: CallbackAction<ActivateIntent>(onInvoke: (_) {})},
+);
+```
+
+## Examples
+
+### Appearance
+
+#### Primary
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='button' variant='text' query={{}}/>
+  </Tab>
+  <Tab value="Code">
+    ```dart copy
+    FButton(style: FButtonStyle.primary(), mainAxisSize: MainAxisSize.min, onPress: () {}, child: const Text('Button'));
+    ```
+  </Tab>
+</Tabs>
+
+#### Secondary
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='button' variant='text' query={{style: 'secondary'}}/>
+  </Tab>
+  <Tab value="Code">
+    ```dart copy
+    FButton(style: FButtonStyle.secondary(), mainAxisSize: MainAxisSize.min, onPress: () {}, child: const Text('Button'));
+    ```
+  </Tab>
+</Tabs>
+
+#### Destructive
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='button' variant='text' query={{style: 'destructive'}}/>
+  </Tab>
+  <Tab value="Code">
+    ```dart copy
+    FButton(style: FButtonStyle.destructive(), mainAxisSize: MainAxisSize.min, onPress: () {}, child: const Text('Button'));
+    ```
+  </Tab>
+</Tabs>
+
+#### Outline
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='button' variant='text' query={{style: 'outline'}}/>
+  </Tab>
+  <Tab value="Code">
+    ```dart copy
+    FButton(style: FButtonStyle.outline(), mainAxisSize: MainAxisSize.min, onPress: () {}, child: const Text('Button'));
+    ```
+  </Tab>
+</Tabs>
+
+#### Ghost
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='button' variant='text' query={{style: 'ghost'}}/>
+  </Tab>
+  <Tab value="Code">
+    ```dart copy
+    FButton(style: FButtonStyle.ghost(), mainAxisSize: MainAxisSize.min, onPress: () {}, child: const Text('Button'));
+    ```
+  </Tab>
+</Tabs>
+
+### Content
+
+#### With Text and Icon
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='button' variant='icon' query={{}}/>
+  </Tab>
+  <Tab value="Code">
+    ```dart {4} copy
+    FButton(
+      style: FButtonStyle.primary(),
+      mainAxisSize: MainAxisSize.min,
+      prefix: const Icon(FIcons.mail),
+      onPress: () {},
+      child: const Text('Login with Email'),
+    );
+    ```
+  </Tab>
+</Tabs>
+
+#### With Only Icon
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='button' variant='only-icon' query={{}}/>
+  </Tab>
+  <Tab value="Code">
+    ```dart copy
+    FButton.icon(child: const Icon(FIcons.chevronRight), onPress: () {});
+    ```
+  </Tab>
+</Tabs>
+
+#### With Circular Progress
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='button' variant='circular-progress' query={{}}/>
+  </Tab>
+  <Tab value="Code">
+    ```dart {2} copy
+    FButton(
+      mainAxisSize: MainAxisSize.min,
+      prefix: const FCircularProgress(),
+      onPress: null,
+      child: const Text('Please wait'),
+    );
+    ```
+  </Tab>
+</Tabs>

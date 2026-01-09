@@ -1,0 +1,45 @@
+---
+title: Icons
+description: High-quality Lucide icons bundled with Forui.
+---
+
+import {Callout} from "fumadocs-ui/components/callout";
+
+Forui Assets is flutter library that provides a set of high-quality icons from [Lucide](https://lucide.dev/).
+
+## Installation
+
+<Callout type="info">
+    Forui Assets is bundled with forui package. You don't need to install it separately if you installed `forui`.
+</Callout>
+
+From your Flutter project directory, run the following command to install Forui Assets.
+
+```bash filename="bash" copy
+flutter pub add forui_assets
+```
+
+## Usage
+
+<Callout type="info">
+    The best way to find a list of icons is to visit the [Lucide](https://lucide.dev/icons/) website.
+    We update the icons in the Forui Assets package with each Forui release.
+    If you notice a missing icon in Forui Assets, please [open an issue](https://github.com/duobaseio/forui/issues/new).
+</Callout>
+
+```dart copy
+import 'package:flutter/widgets.dart';
+import 'package:forui/forui.dart';
+
+// alternatively; if you've only installed forui_assets.
+import 'package:forui_assets/forui_assets.dart';
+
+final dogIconWidget = Icon(FIcons.dog);
+
+// White cat icon with a size of 24x24.
+final catIconWidget = Icon(
+  FIcons.cat,
+  size: 24,
+  color: Color(0xFFFFFFFF),
+);
+```

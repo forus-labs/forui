@@ -1,0 +1,110 @@
+---
+title: Tooltip
+description: A tooltip displays information related to a widget when focused, hovered over, or long pressed.
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.tooltip/
+---
+
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Widget } from '@/components/demo/widget';
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='tooltip' height={300}/>
+  </Tab>
+  <Tab value="Code">
+    ```dart copy
+    FTooltip(
+      hover: true,
+      longPress: true,
+      tipBuilder: (context, _) => const Text('Add to library'),
+      child: FButton(
+        style: FButtonStyle.outline(),
+        mainAxisSize: MainAxisSize.min,
+        onPress: () {},
+        child: const Text('Long press/Hover'),
+      ),
+    );
+    ```
+  </Tab>
+</Tabs>
+
+## CLI
+
+To generate and customize this style:
+
+```shell copy
+dart run forui style create tooltip
+```
+
+## Usage
+
+### `FTooltip(...)`
+
+```dart copy
+FTooltip(
+  control: FTooltipControl.managed(),
+  style: (style) => style.copyWith(...),
+  tipAnchor: Alignment.bottomCenter,
+  childAnchor: Alignment.topCenter,
+  spacing: FPortalSpacing.spacing(4),
+  overflow: FPortalOverflow.flip,
+  hover: true,
+  hoverEnterDuration: Duration(milliseconds: 500),
+  hoverExitDuration: Duration.zero,
+  longPress: true,
+  longPressExitDuration: Duration(milliseconds: 1500),
+  tipBuilder: (context, controller) => const Text('Tooltip'),
+  builder: (context, controller, child) => child!,
+  child: const Placeholder(),
+);
+```
+
+## Examples
+
+### Horizontal Alignment
+
+You can change how the tooltip is aligned to the button.
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='tooltip' query={{axis: 'horizontal'}} height={300}/>
+  </Tab>
+  <Tab value="Code">
+    ```dart {2-3} copy
+    FTooltip(
+      tipAnchor: Alignment.topLeft,
+      childAnchor: Alignment.topRight,
+      tipBuilder: (context, _) => const Text('Add to library'),
+      child: FButton(
+        style: FButtonStyle.outline(),
+        mainAxisSize: MainAxisSize.min,
+        onPress: () {},
+        child: const Text('Long press/Hover'),
+      ),
+    );
+    ```
+  </Tab>
+</Tabs>
+
+### Long Press Only
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='tooltip' query={{hover: 'false'}} height={300}/>
+  </Tab>
+  <Tab value="Code">
+    ```dart {2-3} copy
+    FTooltip(
+      hover: false,
+      longPress: true,
+      tipBuilder: (context, _) => const Text('Add to library'),
+      child: FButton(
+        style: FButtonStyle.outline(),
+        mainAxisSize: MainAxisSize.min,
+        onPress: () {},
+        child: const Text('Long press'),
+      ),
+    );
+    ```
+  </Tab>
+</Tabs>

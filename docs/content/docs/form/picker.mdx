@@ -1,0 +1,212 @@
+---
+title: Picker
+description: A generic picker that allows an item to be selected. It is composed of one or more wheels, optionally with separators between those wheels. The picker supports arrow key navigation. Recommended for touch devices.
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.picker/
+---
+
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Widget } from '@/components/demo/widget';
+
+The picker supports arrow key navigation:
+
+- Up/Down arrows: Increment/decrement selected value
+- Left/Right arrows: Move between wheels
+
+Recommended for touch devices.
+
+<Tabs items={['Preview', 'Code']}>
+    <Tab value="Preview">
+        <Widget name='picker' query={{}}/>
+    </Tab>
+    <Tab value="Code">
+        ```dart copy
+        const FPicker(
+          children: [
+            FPickerWheel(
+              children: [
+                Text('January'),
+                Text('February'),
+                Text('March'),
+                Text('April'),
+                Text('May'),
+                Text('June'),
+                Text('July'),
+                Text('August'),
+                Text('September'),
+                Text('October'),
+                Text('November'),
+                Text('December'),
+              ],
+            ),
+          ],
+        );
+        ```
+    </Tab>
+</Tabs>
+
+## CLI
+
+To generate and customize this style:
+
+```shell copy
+dart run forui style create picker
+```
+
+## Usage
+
+### `FPicker(...)`
+
+```dart copy
+const FPicker(
+  controller: FPickerController(initialIndexes: []),
+  style: FPickerStyle(...),
+  onChange: (indexes) {},
+  children: [
+    FPickerWheel(
+      flex: 2,
+      loop: true,
+      autofocus: true,
+      focusNode: FocusNode(),
+      onFocusChange: (focused) {},
+      children: const [
+        Text('1'),
+        Text('2'),
+      ],
+    ),
+    FPickerWheel.builder(
+      flex: 2,
+      autofocus: true,
+      focusNode: FocusNode(),
+      onFocusChange: (focused) {},
+      builder: (context, index) => Text('$index'),
+    ),
+  ],
+);
+```
+
+## Examples
+
+### Loop
+
+<Tabs items={['Preview', 'Code']}>
+    <Tab value="Preview">
+        <Widget name='picker' query={{loop: 'true'}}/>
+    </Tab>
+    <Tab value="Code">
+        ```dart {4} copy
+        const FPicker(
+          children: [
+            FPickerWheel(
+              loop: true,
+              children: [
+                Text('January'),
+                Text('February'),
+                Text('March'),
+                Text('April'),
+                Text('May'),
+                Text('June'),
+                Text('July'),
+                Text('August'),
+                Text('September'),
+                Text('October'),
+                Text('November'),
+                Text('December'),
+              ],
+            ),
+          ],
+        );
+        ```
+    </Tab>
+</Tabs>
+
+### Lazy
+
+<Tabs items={['Preview', 'Code']}>
+    <Tab value="Preview">
+        <Widget name='picker' query={{builder: 'true'}}/>
+    </Tab>
+    <Tab value="Code">
+        ```dart {3-5} copy
+        FPicker(
+          children: [
+            FPickerWheel.builder(
+              builder: (context, index) => Text('$index'),
+            ),
+          ],
+        );
+        ```
+    </Tab>
+</Tabs>
+
+### Multiple Wheels
+
+<Tabs items={['Preview', 'Code']}>
+    <Tab value="Preview">
+        <Widget name='picker' variant='multiple'/>
+    </Tab>
+    <Tab value="Code">
+        ```dart copy
+        SizedBox(
+          width: 200,
+          child: FPicker(
+            children: [
+              const FPickerWheel(
+                flex: 3,
+                loop: true,
+                children: [
+                  Text('January'),
+                  Text('February'),
+                  Text('March'),
+                  Text('April'),
+                  Text('May'),
+                  Text('June'),
+                  Text('July'),
+                  Text('August'),
+                  Text('September'),
+                  Text('October'),
+                  Text('November'),
+                  Text('December'),
+                ],
+              ),
+              FPickerWheel.builder(
+                flex: 2,
+                builder: (context, index) => Text('${(index % 31) + 1}'),
+              ),
+            ],
+          ),
+        );
+        ```
+    </Tab>
+</Tabs>
+
+### With Separators
+
+<Tabs items={['Preview', 'Code']}>
+    <Tab value="Preview">
+        <Widget name='picker' variant='separator'/>
+    </Tab>
+    <Tab value="Code">
+        ```dart {8} copy
+        SizedBox(
+          width: 200,
+          child: FPicker(
+            children: [
+              FPickerWheel.builder(
+                builder: (context, index) => Text((index % 12).toString().padLeft(2, '0')),
+              ),
+              const Text(':'),
+              FPickerWheel.builder(
+                builder: (context, index) => Text((index % 60).toString().padLeft(2, '0')),
+              ),
+              const FPickerWheel(
+                children: [
+                  Text('AM'),
+                  Text('PM'),
+                ],
+              ),
+            ],
+          ),
+        );
+        ```
+    </Tab>
+</Tabs>

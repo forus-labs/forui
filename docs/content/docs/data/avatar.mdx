@@ -1,0 +1,104 @@
+---
+title: Avatar
+description: A circular image component that displays user profile pictures with a fallback option. The Avatar component provides a consistent way to represent users in your application, displaying profile images with fallbacks to initials or icons when images are unavailable.
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.avatar/
+---
+
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Widget } from '@/components/demo/widget';
+
+## Overview
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+      <Widget name='avatar' variant='default' query={{}}/>
+  </Tab>
+  <Tab value="Code">
+      ```dart copy
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        spacing: 10,
+        children: [
+          FAvatar(image: AssetImage('avatar.png'), fallback: const Text('MN')),
+          FAvatar(image: const AssetImage(''), fallback: const Text('MN')),
+          FAvatar(image: const AssetImage('')),
+        ],
+      );
+      ```
+  </Tab>
+</Tabs>
+
+## CLI
+
+To generate and customize this style:
+
+```shell copy
+dart run forui style create avatar
+```
+
+## Usage
+
+### `FAvatar(...)`
+
+```dart copy
+FAvatar(
+  image: const NetworkImage('https://example.com/profile.jpg'),
+  style: (style) => style.copyWith(...),
+  size: 40.0,
+  semanticsLabel: 'User avatar',
+  fallback: const Text('JD'),
+);
+```
+
+### `FAvatar.raw(...)`
+
+```dart copy
+FAvatar.raw(
+  child: const Text('MN'),
+  style: (style) => style.copyWith(...),
+  size: 40.0,
+);
+```
+
+## Examples
+
+### Raw
+
+<Tabs items={['Preview', 'Code']}>
+    <Tab value="Preview">
+        <Widget name='avatar' variant='raw' query={{}}/>
+    </Tab>
+    <Tab value="Code">
+        ```dart copy
+        Row(
+          mainAxisAlignment: .center,
+          spacing: 10,
+          children: [
+            FAvatar.raw(),
+            FAvatar.raw(child: Icon(FIcons.baby, color: context.theme.colors.mutedForeground)),
+            FAvatar.raw(child: const Text('MN')),
+          ],
+        );
+        ```
+    </Tab>
+</Tabs>
+
+### Fallback
+
+<Tabs items={['Preview', 'Code']}>
+    <Tab value="Preview">
+        <Widget name='avatar' variant='invalid' query={{}}/>
+    </Tab>
+    <Tab value="Code">
+        ```dart copy
+        Row(
+          mainAxisAlignment: .center,
+          spacing: 10,
+          children: [
+            FAvatar(image: const AssetImage(''), fallback: const Text('MN')),
+            FAvatar(image: const AssetImage('')),
+          ],
+        );
+        ```
+    </Tab>
+</Tabs>

@@ -1,0 +1,70 @@
+---
+title: Determinate Progress
+description: Displays a determinate linear indicator showing the completion progress of a task.
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.progress/
+---
+
+import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
+import { Widget } from '@/components/demo/widget';
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='progress' variant='determinate'/>
+  </Tab>
+  <Tab value="Code">
+    ```dart copy
+    class Progress extends StatefulWidget {
+      @override
+      State<Progress> createState() => _State();
+    }
+
+    class _State extends State<Progress> {
+      late Timer _timer = Timer(const Duration(seconds: 1), () => setState(() => _value = 0.7));
+      double _value = 0.2;
+
+      @override
+      void dispose() {
+        _timer.cancel();
+        super.dispose();
+      }
+
+      @override
+      Widget build(BuildContext context) => Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        spacing: 20,
+        children: [
+          FDeterminateProgress(value: _value),
+          FButton(
+            child: const Text('Reset'),
+            onPress: () => setState(() {
+              _value = 0.2;
+              _timer.cancel();
+              _timer = Timer(const Duration(seconds: 1), () => setState(() => _value = 0.7));
+            }),
+          ),
+        ],
+      );
+    }
+    ```
+  </Tab>
+</Tabs>
+
+## CLI
+
+To generate and customize this style:
+
+```shell copy
+dart run forui style create determinate-progress
+```
+
+## Usage
+
+### `FDeterminateProgress(...)`
+
+```dart copy
+FDeterminateProgress(
+  value: 0.7,
+  style: (style) => style.copyWith(...),
+  semanticsLabel: 'Label',
+);
+```

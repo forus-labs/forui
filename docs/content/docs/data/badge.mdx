@@ -1,0 +1,103 @@
+---
+title: Badge
+description: A badge draws attention to specific information, such as labels and counts. Use badges to display status, notifications, or small pieces of information that need to stand out.
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.badge/
+---
+
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Widget } from '@/components/demo/widget';
+
+## Overview
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+      <Widget name='badge' query={{}}/>
+  </Tab>
+  <Tab value="Code">
+      ```dart copy
+      FBadge(style: FBadgeStyle.primary(), child: const Text('Badge'));
+      ```
+  </Tab>
+</Tabs>
+
+## CLI
+
+To generate and customize this style:
+
+```shell copy
+dart run forui style create badges
+```
+
+## Usage
+
+### `FBadge(...)`
+
+```dart copy
+FBadge(
+  child: const Text('Badge'),
+  style: FBadgeStyle.primary(),
+);
+```
+
+### `FBadge.raw(...)`
+
+```dart copy
+FBadge.raw(
+  builder: (context, style) => Text('Badge'),
+  style: FBadgeStyle.primary(),
+);
+```
+
+## Examples
+
+### Primary
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+      <Widget name='badge' query={{}}/>
+  </Tab>
+  <Tab value="Code">
+      ```dart copy
+      FBadge(style: FBadgeStyle.primary(), child: const Text('Badge'));
+      ```
+  </Tab>
+</Tabs>
+
+### Secondary
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+      <Widget name='badge' query={{style: 'secondary'}}/>
+  </Tab>
+  <Tab value="Code">
+      ```dart copy
+      FBadge(style: FBadgeStyle.secondary(), child: const Text('Badge'));
+      ```
+  </Tab>
+</Tabs>
+
+### Outline
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+      <Widget name='badge' query={{style: 'outline'}}/>
+  </Tab>
+  <Tab value="Code">
+      ```dart copy
+      FBadge(style: FBadgeStyle.outline(), child: const Text('Badge'));
+      ```
+  </Tab>
+</Tabs>
+
+### Destructive
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+      <Widget name='badge' query={{style: 'destructive'}}/>
+  </Tab>
+  <Tab value="Code">
+      ```dart copy
+      FBadge(style: FBadgeStyle.destructive(), child: const Text('Badge'));
+      ```
+  </Tab>
+</Tabs>

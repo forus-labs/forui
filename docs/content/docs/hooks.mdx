@@ -1,0 +1,58 @@
+---
+title: Hooks
+description: First-class Flutter Hooks integration with Forui controllers.
+---
+
+Forui provides first class integration with [Flutter Hooks](https://pub.dev/packages/flutter_hooks). All controllers
+are exposed as hooks in the companion `forui_hooks` package.
+
+## Installation
+
+From your Flutter project directory, run the following command to install `flutter_hooks` and `forui_hooks`.
+
+```bash filename="bash" copy
+flutter pub add flutter_hooks
+flutter pub add forui_hooks
+```
+
+## Usage
+
+To use Forui hooks in your Flutter app, import the `forui_hooks` package and initialize a hook inside a `HookWidget`.
+
+```dart {5, 7, 10} copy
+import 'package:flutter/widgets.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+
+import 'package:forui/forui.dart';
+import 'package:forui_hooks/forui_hooks.dart';
+
+class Example extends HookWidget {
+  @override
+  Widget build(BuildContext context) {
+    final controller = useFAccordionController();
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        FAccordion(
+          controller: controller,
+          children: [
+            FAccordionItem(
+              title: const Text('Is it accessible?'),
+              child: const Text('Yes. It adheres to the WAI-ARIA design pattern.'),
+            ),
+            FAccordionItem(
+              initiallyExpanded: true,
+              title: const Text('Is it Styled?'),
+              child: const Text("Yes. It comes with default styles that matches the other components' aesthetics"),
+            ),
+            FAccordionItem(
+              title: const Text('Is it Animated?'),
+              child: const Text('Yes. It is animated by default, but you can disable it if you prefer'),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+}
+```

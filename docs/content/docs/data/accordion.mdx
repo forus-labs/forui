@@ -1,0 +1,135 @@
+---
+title: Accordion
+description: A vertically stacked set of interactive headings that reveal associated content sections when clicked. Each section can be expanded or collapsed independently.
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.accordion/
+---
+
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Widget } from '@/components/demo/widget';
+
+<Tabs items={['Preview', 'Code']}>
+    <Tab value="Preview">
+        <Widget name='accordion' query={{}} height={700}/>
+    </Tab>
+    <Tab value="Code">
+        ```dart copy
+        FAccordion(
+          children: const [
+            FAccordionItem(
+              title: Text('Production Information'),
+              child: Text('''
+Our flagship product combines cutting-edge technology with sleek design. Built with premium materials, it offers unparalleled performance and reliability.
+
+Key features include advanced processing capabilities, and an intuitive user interface designed for both beginners and experts.
+'''),
+            ),
+            FAccordionItem(
+              initiallyExpanded: true,
+              title: Text('Shipping Details'),
+              child: Text('''
+We offer worldwide shipping through trusted courier partners. Standard delivery takes 3-5 business days, while express shipping ensures delivery within 1-2 business days.
+
+All orders are carefully packaged and fully insured. Track your shipment in real-time through our dedicated tracking portal.
+'''),
+            ),
+            FAccordionItem(
+              title: Text('Return Policy'),
+              child: Text('''
+We stand behind our products with a comprehensive 30-day return policy. If you're not completely satisfied, simply return the item in its original condition.
+
+Our hassle-free return process includes free return shipping and full refunds processed within 48 hours of receiving the returned item.
+'''),
+            ),
+          ],
+        );
+        ```
+</Tab>
+
+</Tabs>
+
+## CLI
+
+To generate and customize this style:
+
+```shell copy
+dart run forui style create accordion
+````
+
+## Usage
+
+### `FAccordion(...)`
+
+```dart copy
+FAccordion(
+  control: FAccordionControl.managed(
+    controller: FAccordionController(min: 1, max: 2),
+    onChange: (expanded) {},
+  ),
+  style: (style) => style.copyWith(...),
+  children: [
+    FAccordionItem(
+      title: const Text('Is it accessible?'),
+      child: const Text('Yes. It follows WAI-ARIA design patterns.'),
+    ),
+  ],
+);
+```
+
+### `FAccordionItem(...)`
+
+```dart copy
+FAccordionItem(
+  title: const Text('Title'),
+  child: const Text('Content'),
+  style: FAccordionStyle(...),
+  icon: const Icon(FIcons.chevronDown),
+  initiallyExpanded: true,
+  autofocus: false,
+  focusNode: FocusNode(),
+  onFocusChange: (focused) {},
+  onHoverChange: (hovered) {},
+  onStateChange: (states) {},
+);
+```
+
+### With Max Number of Expanded Items
+
+<Tabs items={['Preview', 'Code']}>
+    <Tab value="Preview">
+        <Widget name='accordion' query={{max: 2}} height={600}/>
+    </Tab>
+<Tab value="Code">
+        ```dart {2} copy
+        FAccordion(
+          control: FAccordionControl.managed(max: 2),
+          children: const [
+            FAccordionItem(
+              title: Text('Production Information'),
+              child: Text('''
+Our flagship product combines cutting-edge technology with sleek design. Built with premium materials, it offers unparalleled performance and reliability.
+
+Key features include advanced processing capabilities, and an intuitive user interface designed for both beginners and experts.
+'''),
+            ),
+            FAccordionItem(
+              initiallyExpanded: true,
+              title: Text('Shipping Details'),
+              child: Text('''
+We offer worldwide shipping through trusted courier partners. Standard delivery takes 3-5 business days, while express shipping ensures delivery within 1-2 business days.
+
+All orders are carefully packaged and fully insured. Track your shipment in real-time through our dedicated tracking portal.
+'''),
+            ),
+            FAccordionItem(
+              title: Text('Return Policy'),
+              child: Text('''
+We stand behind our products with a comprehensive 30-day return policy. If you're not completely satisfied, simply return the item in its original condition.
+
+Our hassle-free return process includes free return shipping and full refunds processed within 48 hours of receiving the returned item.
+'''),
+            ),
+          ],
+        );
+        ```
+    </Tab>
+</Tabs>

@@ -1,0 +1,161 @@
+---
+title: Text Field
+description: A text field lets the user enter text, either with a hardware keyboard or with an onscreen keyboard.
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.text_field/
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Widget } from '@/components/demo/widget';
+
+<Callout type="info">
+  See [`FTextFormField`](/docs/form/text-form-field) for using text fields in forms.
+</Callout>
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='text-field' query={{enabled: 'true'}}/>
+  </Tab>
+  <Tab value="Code">
+    ```dart copy
+    FTextField(
+      enabled: true,
+      label: const Text('Username'),
+      hint: 'JaneDoe',
+      description: const Text('Please enter your username.'),
+    );
+    ```
+  </Tab>
+</Tabs>
+
+## CLI
+
+To generate and customize this style:
+
+```shell copy
+dart run forui style create text-field
+```
+
+## Usage
+
+### `FTextField(...)`
+
+```dart copy
+FTextField(
+  control: FTextFieldControl.managed(initial: TextEditingValue(text: '...')),
+  style: (style) => style.copyWith(...),
+  label: const Text('Email'),
+  hint: 'john@doe.com',
+  description: const Text('Enter your email associated with your Forui account.'),
+  error: const Text('Error'),
+  keyboardType: TextInputType.emailAddress,
+  textCapitalization: TextCapitalization.none,
+  enabled: true,
+  clearable: (value) => value.text.isNotEmpty,
+  maxLines: 1,
+);
+```
+
+## Examples
+
+### States
+
+#### Enabled
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='text-field' query={{enabled: 'true'}}/>
+  </Tab>
+  <Tab value="Code">
+    ```dart copy
+    FTextField(
+      enabled: true,
+      label: const Text('Username'),
+      hint: 'JaneDoe',
+      description: const Text('Please enter your username.'),
+    );
+    ```
+  </Tab>
+</Tabs>
+
+#### Disabled
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='text-field' query={{enabled: 'false'}}/>
+  </Tab>
+  <Tab value="Code">
+    ```dart {2} copy
+    FTextField(
+      enabled: false,
+      label: const Text('Username'),
+      hint: 'JaneDoe',
+      description: const Text('Please enter your username.'),
+    );
+    ```
+  </Tab>
+</Tabs>
+
+### Clearable
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='text-field' variant='clearable' query={{}}/>
+  </Tab>
+  <Tab value="Code">
+    ```dart {2, 6} copy
+    FTextField(
+      control: const FTextFieldControl.managed(initial: TextEditingValue(text: 'MyUsername')),
+      label: const Text('Username'),
+      hint: 'JaneDoe',
+      description: const Text('Please enter your username.'),
+      clearable: (value) => value.text.isNotEmpty,
+    );
+    ```
+  </Tab>
+</Tabs>
+
+### Presets
+
+#### Email
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='text-field' variant='email' query={{}}/>
+  </Tab>
+  <Tab value="Code">
+    ```dart copy
+    FTextField.email(
+      control: FTextFieldControl.managed(initial: TextEditingValue(text: 'jane@doe.com')),
+    );
+    ```
+  </Tab>
+</Tabs>
+
+#### Password
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='text-field' variant='password' query={{}}/>
+  </Tab>
+  <Tab value="Code">
+    ```dart copy
+    FTextField.password(
+      control: FTextFieldControl.managed(initial: TextEditingValue(text: 'My password')),
+    );
+    ```
+  </Tab>
+</Tabs>
+
+#### Multiline
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='text-field' variant='multiline' query={{}}/>
+  </Tab>
+  <Tab value="Code">
+    ```dart copy
+    FTextField.multiline(label: const Text('Leave a review'), maxLines: 4);
+    ```
+  </Tab>
+</Tabs>

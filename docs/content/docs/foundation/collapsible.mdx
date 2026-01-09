@@ -1,0 +1,77 @@
+---
+title: Collapsible
+description: A collapsible widget that animates between visible and hidden states.
+apiReference: https://pub.dev/documentation/forui/latest/forui.foundation/FCollapsible-class.html
+---
+
+import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
+import { Widget } from '@/components/demo/widget';
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='collapsible' query={{}} height={400}/>
+  </Tab>
+  <Tab value="Code">
+    ```dart copy
+    class CollapsiblePage extends StatefulWidget {
+      @override
+      State<CollapsiblePage> createState() => _CollapsiblePageState();
+    }
+
+    class _CollapsiblePageState extends State<CollapsiblePage> with SingleTickerProviderStateMixin {
+      late final _controller = AnimationController(duration: const Duration(milliseconds: 300), vsync: this);
+      late final _animation = CurvedAnimation(parent: _controller, curve: Curves.easeInOut);
+      bool _expanded = false;
+
+      @override
+      void dispose() {
+        _animation.dispose();
+        _controller.dispose();
+        super.dispose();
+      }
+
+      @override
+      Widget build(BuildContext context) => Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        spacing: 16,
+        children: [
+          FButton(
+            onPress: () {
+              setState(() => _expanded = !_expanded);
+              _controller.toggle();
+            },
+            child: Text(_expanded ? 'Collapse' : 'Expand'),
+          ),
+          AnimatedBuilder(
+            animation: _animation,
+            builder: (context, child) => FCollapsible(
+              value: _animation.value,
+              child: FCard(
+                title: const Text('Lorem ipsum'),
+                child: const Text(
+                  'Sed ut perspiciatis unde omnis iste natus error sit voluptatem '
+                  'accusantium doloremque laudantium, totam rem aperiam, eaque ipsa '
+                  'quae ab illo inventore veritatis et quasi architecto beatae vitae '
+                  'dicta sunt explicabo.',
+                ),
+              ),
+            ),
+          ),
+        ],
+      );
+    }
+    ```
+  </Tab>
+</Tabs>
+
+## Usage
+
+### `FCollapsible(...)`
+
+```dart copy
+FCollapsible(
+  value: 1.0, // 0.0 for collapsed, 1.0 for expanded.
+  child: const Text('child'),
+);
+```

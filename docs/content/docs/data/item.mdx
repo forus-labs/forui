@@ -1,0 +1,168 @@
+---
+title: Item
+description: An item is typically used to group related information together.
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.item/
+---
+
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Widget } from '@/components/demo/widget';
+
+<Callout type="info">
+    This widget is typically used to create more complex widgets rather than being used directly.
+</Callout>
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='item' variant='default' query={{}}/>
+  </Tab>
+  <Tab value="Code">
+    ```dart copy
+    FItem(
+      enabled: true,
+      prefix: const Icon(FIcons.user),
+      title: const Text('Personalization'),
+      suffix: const Icon(FIcons.chevronRight),
+      onPress: () {},
+    );
+    ```
+  </Tab>
+</Tabs>
+
+## CLI
+
+To generate and customize this style:
+
+```shell copy
+dart run forui style create item
+```
+
+## Usage
+
+### `FItem(...)`
+
+```dart copy
+FItem(
+  title: const Text('Title'),
+  style: (style) => style.copyWith(...),
+  enabled: true,
+  selected: false,
+  semanticsLabel: 'Label',
+  autofocus: false,
+  focusNode: FocusNode(),
+  onFocusChange: (focused) {},
+  onHoverChange: (hovered) {},
+  onStateChange: (delta) {},
+  onPress: () {},
+  onLongPress: () {},
+  onSecondaryPress: () {},
+  onSecondaryLongPress: () {},
+  shortcuts: {SingleActivator(LogicalKeyboardKey.enter): ActivateIntent()},
+  actions: {ActivateIntent: CallbackAction<ActivateIntent>(onInvoke: (_) {})},
+  prefix: Icon(FIcons.user),
+  subtitle: const Text('Subtitle'),
+  details: const Text('Details'),
+  suffix: Icon(FIcons.chevronRight),
+);
+```
+
+### `FItem.raw(...)`
+
+```dart copy
+FItem.raw(
+  child: const Text('Title'),
+  style: (style) => style.copyWith(...),
+  enabled: true,
+  selected: false,
+  semanticsLabel: 'Label',
+  autofocus: false,
+  focusNode: FocusNode(),
+  onFocusChange: (focused) {},
+  onHoverChange: (hovered) {},
+  onStateChange: (delta) {},
+  onPress: () {},
+  onLongPress: () {},
+  onSecondaryPress: () {},
+  onSecondaryLongPress: () {},
+  shortcuts: {SingleActivator(LogicalKeyboardKey.enter): ActivateIntent()},
+  actions: {ActivateIntent: CallbackAction<ActivateIntent>(onInvoke: (_) {})},
+  prefix: Icon(FIcons.user),
+);
+```
+
+## Examples
+
+### Untappable
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='item' variant='default' query={{tappable: false}}/>
+  </Tab>
+  <Tab value="Code">
+    ```dart copy
+    FItem(
+      enabled: true,
+      prefix: const Icon(FIcons.user),
+      title: const Text('Personalization'),
+      suffix: const Icon(FIcons.chevronRight),
+    );
+    ```
+  </Tab>
+</Tabs>
+
+### Disabled
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='item' variant='default' query={{enabled: false}}/>
+  </Tab>
+  <Tab value="Code">
+    ```dart {2} copy
+    FItem(
+      enabled: false,
+      prefix: const Icon(FIcons.user),
+      title: const Text('Personalization'),
+      suffix: const Icon(FIcons.chevronRight),
+      onPress: () {},
+    );
+    ```
+  </Tab>
+</Tabs>
+
+### With Subtitle
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='item' variant='subtitle' query={{}}/>
+  </Tab>
+  <Tab value="Code">
+    ```dart {4} copy
+    FItem(
+      prefix: const Icon(FIcons.bell),
+      title: const Text('Notifications'),
+      subtitle: const Text('Banners, Sounds, Badges'),
+      suffix: const Icon(FIcons.chevronRight),
+      onPress: () {},
+    );
+    ```
+  </Tab>
+</Tabs>
+
+### With Details
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='item' variant='details' query={{}}/>
+  </Tab>
+  <Tab value="Code">
+    ```dart {4} copy
+    FItem(
+      prefix: const Icon(FIcons.wifi),
+      title: const Text('WiFi'),
+      details: const Text('Duobase (5G)'),
+      suffix: const Icon(FIcons.chevronRight),
+      onPress: () {},
+    );
+    ```
+  </Tab>
+</Tabs>

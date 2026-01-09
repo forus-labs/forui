@@ -1,6 +1,6 @@
 'use client';
 
-import { useTheme } from 'nextra-theme-docs';
+import { useTheme } from 'next-themes';
 import dynamic from 'next/dynamic';
 
 interface Props {
@@ -12,7 +12,7 @@ interface Props {
 
 function Component({ name, variant = 'default', height = 200, query = {} }: Props) {
   const { resolvedTheme } = useTheme();
-  query['theme'] = `zinc-${resolvedTheme}`;
+  const params = { ...query, theme: `zinc-${resolvedTheme}` };
 
   const url = process.env['NEXT_PUBLIC_DEMO_URL'];
 
@@ -20,7 +20,7 @@ function Component({ name, variant = 'default', height = 200, query = {} }: Prop
     <iframe
       className="w-full border rounded dark:border-neutral-400/20"
       style={{ height: `${height}px` }}
-      src={`${url}/${name}/${variant}?${new URLSearchParams(query).toString()}`}
+      src={`${url}/${name}/${variant}?${new URLSearchParams(params).toString()}`}
     />
   );
 }

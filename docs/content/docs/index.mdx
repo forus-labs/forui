@@ -1,0 +1,65 @@
+---
+title: About Forui
+description: Beautiful, minimalistic, and platform-agnostic UI library for Flutter.
+---
+
+import { ImageZoom } from 'fumadocs-ui/components/image-zoom';
+import { Cards, Card } from 'fumadocs-ui/components/card';
+import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
+import { Sparkles, MessagesSquare, FolderGit2 } from 'lucide-react';
+
+<ImageZoom
+  src="/banners/banner-160724.png"
+  className="w-full border rounded mt-0"
+  alt="Forui Demo"
+  width={1200}
+  height={0}
+  priority
+/>
+
+**Forui** is a UI library for Flutter that provides a set of minimalistic widgets heavily inspired by [shadcn/ui](https://ui.shadcn.com/).
+
+## Why Choose Forui?
+
+- Over 40+ beautifully crafted widgets.
+- Bundled [CLI](/docs/cli) to generate themes & styling boilerplate.
+- [Well-tested](https://app.codecov.io/gh/duobaseio/forui).
+- I10n support.
+- First-class [Flutter Hooks](https://pub.dev/packages/flutter_hooks) integration via [`forui_hooks`](https://pub.dev/packages/forui_hooks).
+
+## Core Principles
+
+Flutter shines as a powerful multi-platform development tool, but its native Material and Cupertino widgets often fall short of truly universal design.
+Forui strives to be the default platform-agnostic alternative for developers seeking consistent and elegant UIs across all devices.
+
+The library is designed with the following core principles in mind:
+
+- **Platform Agnostic Design:** Our widgets are crafted to seamlessly adapt to various platforms, ensuring a cohesive and polished look across devices.
+- **Touch-First Interaction:** We prioritize touch interactions, providing a natural and responsive feel for mobile and tablet users.
+- **Minimalistic Aesthetics:** Our library embraces simplicity and clean design principles, delivering a visually appealing and uncluttered user interface.
+- **Extensible and Customizable:** We encourage customization and provide flexible options to tailor components to your unique design needs.
+
+## Quick Links
+
+<Cards>
+  <Card icon={<Sparkles />} title="Get Started" href="/docs/getting-started" />
+  <Card icon={<MessagesSquare />} title="Discussion" href="https://github.com/duobaseio/forui/discussions" />
+  <Card icon={<FolderGit2 />} title="Source" href="https://github.com/duobaseio/forui" />
+</Cards>
+
+## FAQ
+
+This section consists of frequently asked questions about Forui.
+If you have any questions that are not answered here, please [open a discussion](https://github.com/duobaseio/forui/discussions).
+
+<Accordions type="multiple">
+  <Accordion title="Can I use X with Forui?">
+    For the most part, *yes*.
+    Forui is designed to be compatible with other Flutter libraries and packages, including Material and Cupertino widgets.
+  </Accordion>
+
+  <Accordion title="Why is Forui not a port of shadcn/ui?">
+    While we admire the minimalistic design of `shadcn/ui`, Forui focuses on delivering an optimal user experience on touch devices.
+    This means we've adapted the designs to be more intuitive for mobile and tablet devices.
+  </Accordion>
+</Accordions>

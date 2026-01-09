@@ -1,0 +1,65 @@
+---
+title: Circular Progress
+description: Displays an indeterminate circular indicator showing the completion progress of a task.
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.progress/
+---
+
+import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
+import { Widget } from '@/components/demo/widget';
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='progress' variant='circular'/>
+  </Tab>
+  <Tab value="Code">
+    ```dart copy
+    Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      spacing: 25,
+      children: [
+        FCircularProgress(),
+        FCircularProgress.loader(),
+        FCircularProgress.pinwheel(),
+      ],
+    );
+    ```
+  </Tab>
+</Tabs>
+
+## CLI
+
+To generate and customize this style:
+
+```shell copy
+dart run forui style create circular-progress
+```
+
+## Usage
+
+### `FCircularProgress(...)`
+
+```dart copy
+FCircularProgress(
+  style: (style) => style.copyWith(...),
+  semanticsLabel: 'Label',
+  icon: FIcons.loaderCircle,
+);
+```
+
+### `FCircularProgress.loader(...)`
+
+```dart copy
+FCircularProgress.loader(
+  style: (style) => style.copyWith(...),
+  semanticsLabel: 'Label',
+);
+```
+
+### `FCircularProgress.pinwheel(...)`
+
+```dart copy
+FCircularProgress.pinwheel(
+  style: (style) => style.copyWith(...),
+  semanticsLabel: 'Label',
+);
+```

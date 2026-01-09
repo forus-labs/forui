@@ -1,0 +1,131 @@
+---
+title: Time Picker
+description: A time picker that allows a time to be selected. The picker supports arrow key navigation. Recommended for touch devices.
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.time_picker/
+---
+
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Widget } from '@/components/demo/widget';
+
+The picker supports arrow key navigation:
+
+- Up/Down arrows: Increment/decrement selected value
+- Left/Right arrows: Move between wheels
+
+Recommended for touch devices.
+
+<Tabs items={['Preview', 'Code']}>
+    <Tab value="Preview">
+        <Widget name='time-picker' query={{}}/>
+    </Tab>
+    <Tab value="Code">
+        ```dart copy
+        FTimePicker(
+          control: FTimePickerControl.managed(initial: FTime.now()),
+          hour24: false,
+        );
+        ```
+    </Tab>
+</Tabs>
+
+## CLI
+
+To generate and customize this style:
+
+```shell copy
+dart run forui style create time-picker
+```
+
+## Usage
+
+### `FTimePicker(...)`
+
+```dart copy
+FTimePicker(
+  control: FTimePickerControl.managed(initial: FTime.now(), onChange: (time) {}),
+  style: (style) => style.copyWith(...),
+  hour24: false,
+  hourInterval: 1,
+  minuteInterval: 1,
+);
+```
+
+## Examples
+
+### 24 Hour Clock
+
+<Tabs items={['Preview', 'Code']}>
+    <Tab value="Preview">
+        <Widget name='time-picker' query={{hour24: 'true'}}/>
+    </Tab>
+    <Tab value="Code">
+        ```dart {3} copy
+        FTimePicker(
+          control: FTimePickerControl.managed(initial: FTime.now()),
+          hour24: true,
+        );
+        ```
+    </Tab>
+
+</Tabs>
+
+### With Custom Intervals
+
+<Tabs items={['Preview', 'Code']}>
+    <Tab value="Preview">
+        <Widget name='time-picker' variant='interval'/>
+    </Tab>
+    <Tab value="Code">
+        ```dart {3-4} copy
+        FTimePicker(
+          control: FTimePickerControl.managed(initial: FTime.now()),
+          hourInterval: 2,
+          minuteInterval: 5,
+        );
+        ```
+    </Tab>
+
+</Tabs>
+
+### Animated
+
+<Tabs items={['Preview', 'Code']}>
+    <Tab value="Preview">
+        <Widget name='time-picker' variant='animated' height={500}/>
+    </Tab>
+    <Tab value="Code">
+        ```dart copy
+        class AnimatedTimePickerPage extends StatefulWidget {
+          @override
+          State<AnimatedTimePickerPage> createState() => _AnimatedTimePickerPageState();
+        }
+
+        class _AnimatedTimePickerPageState extends State<AnimatedTimePickerPage> {
+          static final _random = Random();
+          final _controller = FTimePickerController(time: FTime.now());
+
+          @override
+          void dispose() {
+            _controller.dispose();
+            super.dispose();
+          }
+
+          @override
+          Widget build(BuildContext context) => Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              SizedBox(
+                height: 300,
+                child: FTimePicker(control: FTimePickerControl.managed(controller: _controller)),
+              ),
+              FButton(
+                child: const Text('Funny button'),
+                onPress: () => _controller.animateTo(FTime(_random.nextInt(24), _random.nextInt(60))),
+              ),
+            ],
+          );
+        }
+        ```
+    </Tab>
+
+</Tabs>

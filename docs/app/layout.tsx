@@ -1,10 +1,6 @@
-import { Footer, Layout, Navbar } from 'nextra-theme-docs';
-import { Banner, Head } from 'nextra/components';
-import { getPageMap } from 'nextra/page-map';
-import Logo from '@/components/ui/logo';
-
-import 'nextra-theme-docs/style.css';
-import './globals.css';
+import { RootProvider } from 'fumadocs-ui/provider/next';
+import './global.css';
+import { Inter } from 'next/font/google';
 
 export const metadata = {
   title: {
@@ -15,38 +11,15 @@ export const metadata = {
   },
 };
 
-const banner = <Banner storageKey="some-key">Forui 0.17.0 is released 🎉</Banner>;
-const navbar = (
-  <Navbar logo={<Logo />} projectLink="https://github.com/duobaseio/forui" chatLink="https://discord.gg/jrw3qHksjE" />
-);
-const footer = <Footer>A Duobase IO initiative.</Footer>;
+const inter = Inter({
+  subsets: ['latin'],
+});
 
-export default async function RootLayout({ children }: { children: React.ReactNode }) {
+export default function Layout({ children }: LayoutProps<'/'>) {
   return (
-    <html
-      // Not required, but good for SEO
-      lang="en"
-      // Required to be set
-      dir="ltr"
-      // Suggested by `next-themes` package https://github.com/pacocoursey/next-themes#with-app
-      suppressHydrationWarning
-    >
-      <Head
-      // ... Your additional head options
-      >
-        {/* Your additional tags should be passed as `children` of `<Head>` element */}
-      </Head>
-      <body>
-        <Layout
-          banner={banner}
-          navbar={navbar}
-          pageMap={await getPageMap()}
-          docsRepositoryBase="https://github.com/duobaseio/forui/tree/main/docs"
-          footer={footer}
-          // ... Your additional layout options
-        >
-          {children}
-        </Layout>
+    <html lang="en" className={inter.className} suppressHydrationWarning>
+      <body className="flex flex-col min-h-screen">
+        <RootProvider>{children}</RootProvider>
       </body>
     </html>
   );

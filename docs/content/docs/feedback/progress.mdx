@@ -1,0 +1,38 @@
+---
+title: Progress
+description: Displays an indeterminate linear indicator showing the completion progress of a task.
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.progress/
+---
+
+import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
+import { Widget } from '@/components/demo/widget';
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='progress'/>
+  </Tab>
+  <Tab value="Code">
+    ```dart copy
+    const FProgress();
+    ```
+  </Tab>
+</Tabs>
+
+## CLI
+
+To generate and customize this style:
+
+```shell copy
+dart run forui style create progress
+```
+
+## Usage
+
+### `FProgress(...)`
+
+```dart copy
+FProgress(
+  style: (style) => style.copyWith(...),
+  semanticsLabel: 'Label',
+);
+```

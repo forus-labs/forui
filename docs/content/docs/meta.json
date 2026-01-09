@@ -1,0 +1,22 @@
+{
+  "pages": [
+    "index",
+    "getting-started",
+    "concepts",
+    "cli",
+    "icon-library",
+    "hooks",
+    "external:[API Reference](https://pub.dev/documentation/forui)",
+    "external:[Pub Dev](https://pub.dev/packages/forui)",
+    "...",
+    "---Widgets---",
+    "layout",
+    "form",
+    "data",
+    "tile",
+    "navigation",
+    "feedback",
+    "overlay",
+    "foundation"
+  ]
+}

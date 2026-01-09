@@ -1,0 +1,320 @@
+---
+title: Toast
+description: An opinionated toast that temporarily displays a succinct message.
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.toast/
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Widget } from '@/components/demo/widget';
+
+<Callout type="info">
+    To show a toast, use the `showFToast(...)` or `showRawFToast(...)` functions. The function must be called from a
+    descendant of a `FToaster`.
+
+    We recommend placing `FToaster` in the `builder` method of `MaterialApp`/`WidgetsApp`/`CupertinoApp`:
+    ```dart
+    MaterialApp(
+      builder: (context, child) => FAnimatedTheme(
+        data: FThemes.zinc.light,
+        child: FToaster(child: child!),
+      ),
+      home: HomePage(),
+    );
+    ```
+</Callout>
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='toast' query={{}} height={500}/>
+  </Tab>
+  <Tab value="Code">
+    ```dart copy
+    Column(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.center,
+      spacing: 5,
+      children: [
+        for (final (FToastAlignment alignment, description) in [
+          (FToastAlignment.topLeft, 'Top Left'),
+          (FToastAlignment.topCenter, 'Top Center'),
+          (FToastAlignment.topRight, 'Top Right'),
+          (FToastAlignment.bottomLeft, 'Bottom Left'),
+          (FToastAlignment.bottomCenter, 'Bottom Center'),
+          (FToastAlignment.bottomRight, 'Bottom Right'),
+        ])
+          FButton(
+            onPress: () => showFToast(
+              context: context,
+              alignment: alignment,
+              title: const Text('Event has been created'),
+              description: const Text('Friday, May 23, 2025 at 9:00 AM'),
+              suffixBuilder: (context, entry) => IntrinsicHeight(
+                child: FButton(
+                  style: context.theme.buttonStyles.primary.copyWith(
+                    contentStyle: context.theme.buttonStyles.primary.contentStyle.copyWith(
+                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7.5),
+                      textStyle: FWidgetStateMap.all(
+                        context.theme.typography.xs.copyWith(color: context.theme.colors.primaryForeground),
+                      ),
+                    ),
+                  ),
+                  onPress: entry.dismiss,
+                  child: const Text('Undo'),
+                ),
+              ),
+            ),
+            child: Text('Show $description Toast'),
+          ),
+      ],
+    );
+    ```
+  </Tab>
+</Tabs>
+
+## CLI
+
+To generate and customize this style:
+
+```shell copy
+dart run forui style create toast
+```
+
+## Usage
+
+### `showFToast(...)`
+
+```dart copy
+showFToast(
+  context: context,
+  title: const Text('Download Complete'),
+  style: (style) => style.copyWith(...),
+  icon: const Icon(FIcons.triangleAlert),
+  description: const Text('Your file has been downloaded.'),
+  suffixBuilder: (context, entry) => FButton(child: const Text('Undo'), onPress: entry.dismiss),
+  alignment: FToastAlignment.topRight,
+  swipeToDismiss: [AxisDirection.left, AxisDirection.down],
+  duration: const Duration(seconds: 5),
+  onDismiss: () {},
+);
+```
+
+### `showRawFToast(...)`
+
+```dart copy
+showRawFToast(
+  context: context,
+  style: (style) => style.copyWith(...),
+  alignment: FToastAlignment.topRight,
+  swipeToDismiss: [AxisDirection.left, AxisDirection.down],
+  duration: const Duration(seconds: 5),
+  onDismiss: () {},
+  builder: (context, entry) => FCard(
+    title: const Text('Download Complete'),
+    subtitle: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      spacing: 10,
+      children: [
+        const Text('Your file has been downloaded.'),
+        FButton(child: const Text('Dismiss'), onPress: entry.dismiss),
+      ],
+    ),
+  ),
+);
+```
+
+## Examples
+
+### Appearance
+
+#### No Auto-Dismiss
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='toast' variant='no-auto-dismiss' query={{}} height={300}/>
+  </Tab>
+  <Tab value="Code">
+    ```dart {5} copy
+    FButton(
+      mainAxisSize: MainAxisSize.min,
+      onPress: () => showFToast(
+        context: context,
+        duration: null,
+        icon: const Icon(FIcons.triangleAlert),
+        title: const Text('Event start time cannot be earlier than 8am'),
+      ),
+      child: const Text('Show Toast'),
+    );
+    ```
+  </Tab>
+</Tabs>
+
+#### Raw
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='toast' variant='raw' query={{}} height={620}/>
+  </Tab>
+  <Tab value="Code">
+    ```dart copy
+    final cardStyle = context.theme.cardStyle.copyWith(
+      contentStyle: context.theme.cardStyle.contentStyle.copyWith(
+        titleTextStyle: context.theme.typography.sm.copyWith(
+          color: context.theme.colors.primary,
+          fontWeight: FontWeight.w600,
+        ),
+      ),
+    );
+
+    FButton(
+      mainAxisSize: MainAxisSize.min,
+      onPress: () => showRawFToast(
+        context: context,
+        duration: null,
+        builder: (context, toast) => IntrinsicHeight(
+          child: FCard(
+            style: cardStyle,
+            title: const Text('Event has been created'),
+            subtitle: const Padding(
+              padding: EdgeInsets.symmetric(vertical: 5),
+              child: Text(
+                'This is a more detailed description that provides comprehensive context and additional information '
+                'about the notification, explaining what happened and what the user might expect next.',
+              ),
+            ),
+            child: FButton(child: const Text('undo'), onPress: () => toast.dismiss()),
+          ),
+        ),
+      ),
+      child: const Text('Show Toast'),
+    );
+    ```
+  </Tab>
+</Tabs>
+
+### Behavior
+
+#### Always Expanded
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='toast' variant='behavior' query={{behavior: 'always'}} height={300}/>
+  </Tab>
+  <Tab value="Code">
+    ```dart {2} copy
+    FToaster(
+      style: context.theme.toasterStyle.copyWith(expandBehavior: FToasterExpandBehavior.always),
+      child: Builder(
+        builder: (context) => Center(
+          child: FButton(
+            mainAxisSize: MainAxisSize.min,
+            onPress: () => showFToast(
+              context: context,
+              icon: const Icon(FIcons.info),
+              title: const Text('Event has been created'),
+            ),
+            child: const Text('Show Toast'),
+          ),
+        ),
+      ),
+    );
+    ```
+  </Tab>
+</Tabs>
+
+#### Expansion Disabled
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='toast' variant='behavior' query={{behavior: 'disabled'}}/>
+  </Tab>
+  <Tab value="Code">
+    ```dart {2} copy
+    FToaster(
+      style: context.theme.toasterStyle.copyWith(expandBehavior: FToasterExpandBehavior.disabled),
+      child: Builder(
+        builder: (context) => Center(
+          child: FButton(
+            mainAxisSize: MainAxisSize.min,
+            onPress: () => showFToast(
+              context: context,
+              icon: const Icon(FIcons.info),
+              title: const Text('Event has been created'),
+            ),
+            child: const Text('Show Toast'),
+          ),
+        ),
+      ),
+    );
+    ```
+  </Tab>
+</Tabs>
+
+### Swipe to Dismiss
+
+#### Default
+
+By default, toasts are dismissible by horizontally swiping towards the closest edge of the screen.
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='toast' variant='swipe' query={{down: false}} height={300}/>
+  </Tab>
+  <Tab value="Code">
+    ```dart copy
+    FButton(
+      mainAxisSize: MainAxisSize.min,
+      onPress: () => showFToast(
+        context: context,
+        icon: const Icon(FIcons.info),
+        title: const Text('Event has been created'),
+      ),
+      child: const Text('Show Toast'),
+    );
+    ```
+  </Tab>
+</Tabs>
+
+#### Down
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='toast' variant='swipe' query={{down: true}} height={300}/>
+  </Tab>
+  <Tab value="Code">
+    ```dart {5} copy
+    FButton(
+      mainAxisSize: MainAxisSize.min,
+      onPress: () => showFToast(
+        context: context,
+        swipeToDismiss: [AxisDirection.down],
+        icon: const Icon(FIcons.info),
+        title: const Text('Event has been created'),
+      ),
+      child: const Text('Show Toast'),
+    );
+    ```
+  </Tab>
+</Tabs>
+
+#### Disabled
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='toast' variant='swipe' query={{}} height={300}/>
+  </Tab>
+  <Tab value="Code">
+    ```dart {5} copy
+    FButton(
+      mainAxisSize: MainAxisSize.min,
+      onPress: () => showFToast(
+        context: context,
+        swipeToDismiss: [],
+        icon: const Icon(FIcons.info),
+        title: const Text('Event has been created'),
+      ),
+      child: const Text('Show Toast'),
+    );
+    ```
+  </Tab>
+</Tabs>
