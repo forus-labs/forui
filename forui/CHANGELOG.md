@@ -32,6 +32,9 @@
 ### `FTextField`
 * **Breaking** Add `FTextFieldStyle.iconStyle`.
 
+* Change `FTextFieldStyle.clearButtonStyle` to not bounce by default.
+* Change `FTextFieldStyle.obscureButtonStyle` to not bounce by default.
+
 
 ### `FTimeField`
 * **Breaking** Rename `FTimeFieldStyle.selectFieldStyle` to `FTimeFieldStyle.fieldStyle`.

@@ -146,7 +146,11 @@ class FTextFieldStyle extends FLabelStyle with _$FTextFieldStyleFunctions {
       WidgetState.disabled: IconThemeData(color: colors.disable(colors.mutedForeground), size: 17),
       WidgetState.any: IconThemeData(color: colors.mutedForeground, size: 17),
     });
-    final buttonStyle = ghost.copyWith(iconContentStyle: ghost.iconContentStyle.copyWith(iconStyle: iconStyle));
+    final buttonStyle = ghost.copyWith(
+      iconContentStyle: ghost.iconContentStyle.copyWith(iconStyle: iconStyle),
+      tappableStyle: (style) =>
+          style.copyWith(motion: (motion) => motion.copyWith(bounceTween: FTappableMotion.noBounceTween)),
+    );
 
     return .new(
       keyboardAppearance: colors.brightness,
