@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:forui/forui.dart';
@@ -44,8 +45,20 @@ class FPicker extends StatefulWidget {
   /// separator and cause undefined behavior.
   final List<Widget> children;
 
+  /// The type used in debug messages. Defaults to [FPicker].
+  ///
+  /// This is typically only ever used when creating a custom picker that composes [FPicker]. Most users will never
+  /// need to change this.
+  final Type debugType;
+
   /// Creates a [FPicker] with several wheels, and optionally, separators.
-  const FPicker({required this.children, this.control = const .managed(), this.style, super.key});
+  const FPicker({
+    required this.children,
+    this.control = const .managed(),
+    this.style,
+    this.debugType = FPicker,
+    super.key,
+  });
 
   @override
   State<FPicker> createState() => _FPickerState();
@@ -55,7 +68,8 @@ class FPicker extends StatefulWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('control', control))
-      ..add(DiagnosticsProperty('style', style));
+      ..add(DiagnosticsProperty('style', style))
+      ..add(DiagnosticsProperty('debugType', debugType));
   }
 }
 
@@ -98,7 +112,7 @@ class _FPickerState extends State<FPicker> {
         FPickerWheel.estimateExtent(style, context) * style.magnification + style.selectionHeightAdjustment;
 
     var wheelIndex = 0;
-    return Stack(
+    Widget picker = Stack(
       alignment: .center,
       children: [
         Container(
@@ -151,6 +165,12 @@ class _FPickerState extends State<FPicker> {
         ),
       ],
     );
+
+    if (kDebugMode) {
+      picker = FiniteConstraintsValidator(type: widget.debugType, child: picker);
+    }
+
+    return picker;
   }
 }
 

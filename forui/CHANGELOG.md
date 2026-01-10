@@ -18,6 +18,10 @@
 * **Breaking** Remove `FDateFieldStyle.iconStyle`. Use nested `FDateFieldStyle.fieldStyle.iconStyle` instead.
 
 
+### `FPicker`
+* Change error message when given unbounded constraints to be more descriptive.
+
+
 ### `FSelect` & `FMultiSelect`
 * **Breaking** Rename `FSelectStyle.selectFieldStyle` to `FSelectStyle.fieldStyle`.
 * **Breaking** Rename `FSelectSearchStyle.textFieldStyle` to `FSelectSearchStyle.fieldStyle`.
@@ -32,6 +36,10 @@
 ### `FTimeField`
 * **Breaking** Rename `FTimeFieldStyle.selectFieldStyle` to `FTimeFieldStyle.fieldStyle`.
 * **Breaking** Remove `FTimeFieldStyle.iconStyle`. Use `FTimeFieldStyle.fieldStyle.iconStyle` instead.
+
+
+### `FTimePicker`
+* Change error message when given unbounded constraints to be more descriptive.
 
 
 ## 0.17.0
