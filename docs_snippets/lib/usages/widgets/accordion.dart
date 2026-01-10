@@ -4,7 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 
 final accordion = FAccordion(
-  // {@category "core"}
+  // {@category "Core"}
   style: (style) => style,
   children: const [FAccordionItem(title: Text('Title'), child: SizedBox())],
   // {@endcategory}

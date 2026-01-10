@@ -451,17 +451,8 @@
         const variant = selectedIndex === -1 ? null : variants[selectedIndex];
         const variantText = variant?.text || '';
 
-        let start = ph.start;
-        let end = ph.end;
-
-        // If removing (none selected), also remove preceding newline + indentation
-        if (!variantText) {
-          const before = text.substring(0, ph.start);
-          const nlIndex = before.lastIndexOf('\n');
-          if (nlIndex !== -1 && before.substring(nlIndex + 1).trim() === '') {
-            start = nlIndex;
-          }
-        }
+        const start = ph.start;
+        const end = ph.end;
 
         // Calculate offset adjustment
         const adjustment = variantText.length - (end - start);

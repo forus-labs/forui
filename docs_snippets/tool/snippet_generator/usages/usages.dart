@@ -13,22 +13,9 @@ import '../tooltip_linker.dart';
 import 'verification.dart';
 
 final _prefix = RegExp(r'^///\s*');
-final _category = RegExp(r'// \{@category "([^"]+)"\}\n([\s\S]*?\n)\s*// \{@endcategory\}');
+final _category = RegExp(r'([ \t]*)// \{@category "([^"]+)"\}\n([\s\S]*?\n)[ \t]*// \{@endcategory\}\n');
 final _variant = RegExp(r'^// \{@category "([^"]+)" "([^"]+)"\}$');
 final _label = RegExp(r'^\s*(\w+):');
-
-// FAccordion(
-//   {{core}}
-//   {{Control}}
-// )
-
-// FAccordion({
-//   required List<Widget> children,
-//   FAccordionControl control = const .managed(),
-//   FAccordionStyle Function(FAccordionStyle)? style,
-//   Key? key,
-// })
-
 
 class Usage extends Snippet {
   final Map<String, List<Variant>> categories;
@@ -57,7 +44,7 @@ class Variant extends Snippet {
 }
 
 /// Finds top-level variable declarations WITHOUT `// {@control}` and extracts categorized arguments.
-class Usages extends RecursiveAstVisitor<void>  {
+class Usages extends RecursiveAstVisitor<void> {
   static int _monotonic = 0;
 
   static Future<Map<String, Map<String, Usage>>> generate(
@@ -130,13 +117,13 @@ class Usages extends RecursiveAstVisitor<void>  {
 
     // Process matches in reverse order so adjustments don't affect earlier match positions
     for (final match in _category.allMatches(usage.text).toList().reversed) {
-      final name = match.group(1)!;
-      final category = match.group(2)!;
+      final indent = match.group(1)!;
+      final name = match.group(2)!;
+      final category = match.group(3)!;
 
-      // We add 2 to remove the prefixing indentation, and use trim().length since trimRight().length includes the
-      // leading spaces we already skipped.
-      final start = match.start + '// {@category "$name"}\n'.length + 2;
-      final end = start + category.trim().length;
+      // Calculate content boundaries for span adjustment.
+      final start = match.start + indent.length + '// {@category "$name"}\n'.length;
+      final end = start + category.length;
 
       final placeholder = '{{$name}}';
       // We don't directly initialize usage's categories to preserve insertion ordering.
@@ -150,15 +137,15 @@ class Usages extends RecursiveAstVisitor<void>  {
         // causing duplicate labels.
         usage.categories[name] = [
           for (final variant in _categories[name]!)
-            Variant(variant.name, variant.description, '$label: ${variant.text},')
+            Variant(variant.name, variant.description, '$indent$label: ${variant.text},\n')
               ..spans.addAll([
-                for (final span in variant.spans) span.copyWith(offset: span.offset + label.length + 2),
+                for (final span in variant.spans) span.copyWith(offset: indent.length + span.offset + label.length + 2),
                 ...spans,
               ]),
         ];
       } else {
         final spans = usage.adjustSpans(start, end, -(match.end - match.start - placeholder.length));
-        usage.categories[name] = [Variant(name, '', category.trim())..spans.addAll(spans)];
+        usage.categories[name] = [Variant(name, '', category)..spans.addAll(spans)];
       }
 
       usage.text = usage.text.substring(0, match.start) + placeholder + usage.text.substring(match.end);
