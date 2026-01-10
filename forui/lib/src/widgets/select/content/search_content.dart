@@ -235,11 +235,7 @@ class FSelectSearchStyle with Diagnosticable, _$FSelectSearchStyleFunctions {
   final FCircularProgressStyle progressStyle;
 
   /// Creates a [FSelectSearchStyle].
-  FSelectSearchStyle({
-    required this.fieldStyle,
-    required this.dividerStyle,
-    required this.progressStyle,
-  });
+  FSelectSearchStyle({required this.fieldStyle, required this.dividerStyle, required this.progressStyle});
 
   /// Creates a copy of this [FSelectSearchStyle] but with the given fields replaced with the new values.
   FSelectSearchStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
