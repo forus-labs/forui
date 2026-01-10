@@ -16,6 +16,17 @@ final relativePath = Directory.current.path.contains('forui${Platform.pathSepara
 Future<void> expectBlueScreen([Object? actual]) =>
     expectLater(actual ?? find.byType(TestScaffold), matchesGoldenFile('blue-screen.png'));
 
+List<FlutterErrorDetails> onFlutterError() {
+  final original = FlutterError.onError;
+
+  final errors = <FlutterErrorDetails>[];
+  FlutterError.onError = errors.add;
+
+  addTearDown(() => FlutterError.onError = original);
+
+  return errors;
+}
+
 T autoDispose<T>(T disposable) {
   // We cast this to dynamic as there isn't a standard Disposable interface.
   addTearDown((disposable as dynamic).dispose);

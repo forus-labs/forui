@@ -161,7 +161,7 @@ class _Western12Picker extends TimePicker {
     return FPicker(
       control: .managed(controller: controller.picker),
       style: style,
-      debugType: FTimePicker,
+      debugLabel: 'FTimePicker',
       children: pickers,
     );
   }
@@ -181,7 +181,7 @@ class _Western24Picker extends TimePicker {
   Widget build(BuildContext context) => FPicker(
     control: .managed(controller: controller.picker),
     style: style,
-    debugType: FTimePicker,
+    debugLabel: 'FTimePicker',
     children: [
       FPickerWheel.builder(
         builder: (_, index) =>
@@ -249,7 +249,7 @@ class _Eastern12Picker extends TimePicker {
     return FPicker(
       control: .managed(controller: controller.picker),
       style: style,
-      debugType: FTimePicker,
+      debugLabel: 'FTimePicker',
       children: pickers,
     );
   }
@@ -269,7 +269,7 @@ class _Eastern24Picker extends TimePicker {
   Widget build(BuildContext context) => FPicker(
     control: .managed(controller: controller.picker),
     style: style,
-    debugType: FTimePicker,
+    debugLabel: 'FTimePicker',
     children: [
       FPickerWheel.builder(
         builder: (_, index) {

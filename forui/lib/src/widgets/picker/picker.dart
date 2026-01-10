@@ -45,18 +45,18 @@ class FPicker extends StatefulWidget {
   /// separator and cause undefined behavior.
   final List<Widget> children;
 
-  /// The type used in debug messages. Defaults to [FPicker].
+  /// The label used in debug messages. Defaults to `FPicker`.
   ///
   /// This is typically only ever used when creating a custom picker that composes [FPicker]. Most users will never
   /// need to change this.
-  final Type debugType;
+  final String debugLabel;
 
   /// Creates a [FPicker] with several wheels, and optionally, separators.
   const FPicker({
     required this.children,
     this.control = const .managed(),
     this.style,
-    this.debugType = FPicker,
+    this.debugLabel = 'FPicker',
     super.key,
   });
 
@@ -69,7 +69,7 @@ class FPicker extends StatefulWidget {
     properties
       ..add(DiagnosticsProperty('control', control))
       ..add(DiagnosticsProperty('style', style))
-      ..add(DiagnosticsProperty('debugType', debugType));
+      ..add(DiagnosticsProperty('debugType', debugLabel));
   }
 }
 
@@ -167,7 +167,7 @@ class _FPickerState extends State<FPicker> {
     );
 
     if (kDebugMode) {
-      picker = FiniteConstraintsValidator(type: widget.debugType, child: picker);
+      picker = FiniteConstraintsValidator(type: widget.debugLabel, child: picker);
     }
 
     return picker;

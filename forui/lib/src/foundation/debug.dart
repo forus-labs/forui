@@ -7,7 +7,7 @@ import 'package:flutter/rendering.dart';
 /// This should always be guarded by a [kDebugMode] check at the call-site to prevent unnecessary performance overhead.
 @internal
 class FiniteConstraintsValidator extends SingleChildRenderObjectWidget {
-  final Type type;
+  final String type;
 
   const FiniteConstraintsValidator({required this.type, required super.child, super.key});
 
@@ -27,9 +27,9 @@ class FiniteConstraintsValidator extends SingleChildRenderObjectWidget {
 }
 
 class _RenderFiniteConstraintsValidator extends RenderProxyBox {
-  Type _type;
+  String _type;
 
-  _RenderFiniteConstraintsValidator({required Type type}) : _type = type;
+  _RenderFiniteConstraintsValidator({required String type}) : _type = type;
 
   @override
   void performLayout() {
@@ -87,9 +87,9 @@ class _RenderFiniteConstraintsValidator extends RenderProxyBox {
     super.performLayout();
   }
 
-  Type get type => _type;
+  String get type => _type;
 
-  set type(Type value) {
+  set type(String value) {
     if (_type != value) {
       _type = value;
       markNeedsLayout();
