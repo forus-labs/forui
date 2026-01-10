@@ -2,10 +2,12 @@
 // {@snippet}
 
 import 'package:flutter/material.dart';
+
 import 'package:forui/forui.dart';
 
-// {@highlight}
 import 'theme/theme.dart';
+
+// {@highlight}
 // {@endhighlight}
 
 // {@endsnippet}

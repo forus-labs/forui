@@ -4,8 +4,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'package:forui/forui.dart';
 
-import 'package:docs_snippets/main.gr.dart';
 import 'package:docs_snippets/example.dart';
+import 'package:docs_snippets/main.gr.dart';
 
 class Options {
   final List<Object> include;

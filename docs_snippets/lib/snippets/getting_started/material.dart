@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 
-// {@highlight}
 import 'package:forui/forui.dart';
+
+// {@highlight}
 // {@endhighlight}
 
 void main() {

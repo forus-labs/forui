@@ -1,10 +1,12 @@
 // ignore_for_file: always_use_package_imports
 
 import 'package:flutter/widgets.dart';
+
 import 'package:forui/forui.dart';
 
-// {@snippet}
 import 'brand_color.dart';
+
+// {@snippet}
 
 // {@endsnippet}
 

@@ -2,10 +2,10 @@ import 'package:flutter/widgets.dart';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:forui/forui.dart';
-import 'package:docs_snippets/main.dart';
 import 'package:intl/intl.dart';
 
 import 'package:docs_snippets/example.dart';
+import 'package:docs_snippets/main.dart';
 
 @RoutePage()
 @Options(include: [Label])
