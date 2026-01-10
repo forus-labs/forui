@@ -1,8 +1,9 @@
 import 'package:flutter/widgets.dart';
+
 import 'package:forui/forui.dart';
+import 'package:forui_assets/forui_assets.dart';
 
 // Alternatively; if you've only installed forui_assets.
-import 'package:forui_assets/forui_assets.dart';
 
 const dogIconWidget = Icon(FIcons.dog);
 

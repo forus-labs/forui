@@ -8,7 +8,7 @@ from pathlib import Path
 
 PORT = 8000
 PROTOTYPE_DIR = Path(__file__).parent
-SAMPLES_DIR = PROTOTYPE_DIR / ".." / "docs_snippets" / "output"
+SAMPLES_DIR = PROTOTYPE_DIR / ".." / "output"
 
 
 class Handler(http.server.SimpleHTTPRequestHandler):

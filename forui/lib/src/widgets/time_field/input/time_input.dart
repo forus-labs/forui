@@ -102,12 +102,12 @@ class _TimeFieldState extends InputState<TimeInput, FTime?> {
   @protected
   InputController createController() {
     final format = widget.hour24 ? DateFormat.Hm(localizations.localeName) : DateFormat.jm(localizations.localeName);
-    return TimeInputController(localizations, widget.timeController, format, widget.style.textFieldStyle);
+    return TimeInputController(localizations, widget.timeController, format, widget.style.fieldStyle);
   }
 
   @override
   @protected
-  FTextFieldStyle get textFieldStyle => widget.style.textFieldStyle;
+  FTextFieldStyle get textFieldStyle => widget.style.fieldStyle;
 
   @override
   @protected

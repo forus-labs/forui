@@ -784,12 +784,16 @@ class FTextField extends StatelessWidget {
   /// {@template forui.text_field.prefixBuilder}
   /// The prefix's builder.
   ///
+  /// It is recommended to style the prefix icon using [FTextFieldStyle.iconStyle].
+  ///
   /// See [InputDecoration.prefixIcon] for more information.
   /// {@endtemplate}
   final FFieldIconBuilder<FTextFieldStyle>? prefixBuilder;
 
   /// {@template forui.text_field.suffixBuilder}
   /// The suffix's builder.
+  ///
+  /// It is recommended to style the suffix icon using [FTextFieldStyle.iconStyle].
   ///
   /// See [InputDecoration.suffixIcon] for more information.
   /// {@endtemplate}

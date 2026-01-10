@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+
 import 'package:forui/forui.dart';
 
 // {@snippet}
 @override
-Widget build(BuildContext context) => FAnimatedTheme(
+Widget build(BuildContext context) => FTheme(
   data: FThemeData(
     colors: FThemes.zinc.light.colors,
     // {@highlight}

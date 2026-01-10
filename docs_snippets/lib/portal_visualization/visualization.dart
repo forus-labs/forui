@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:forui/forui.dart';
 
-import 'package:docs_snippets/portal_visualization/settings.dart';
 import 'package:docs_snippets/example.dart';
+import 'package:docs_snippets/portal_visualization/settings.dart';
 
 @RoutePage()
 class PortalVisualizationPage extends StatefulExample {

@@ -38,16 +38,35 @@ class _SandboxState extends State<Sandbox> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) => Center(
     child: Column(
-      spacing: 5,
       mainAxisSize: .min,
       children: [
-        FButton(
-          child: const Text('Left'),
-          onPress: () => showFSheet(
-            context: context,
-            useSafeArea: true,
-            side: .btt,
-            builder: (dialogContext) => const FTextField(autofocus: true),
+        FTimeField(),
+        FDateField(
+          style: (style) => style.copyWith(
+            fieldStyle: (fieldStyle) => fieldStyle.copyWith(
+              contentTextStyle: fieldStyle.contentTextStyle
+                  .replaceFirstWhere({
+                    WidgetState.focused,
+                  }, (style) => style.copyWith(color: Colors.red, fontWeight: FontWeight.bold))
+                  .replaceLastWhere({}, (style) => style.copyWith(color: Colors.blue)),
+              // Modify the border based on widget state
+              border: FWidgetStateMap({
+                WidgetState.focused: fieldStyle.border
+                    .resolve({WidgetState.focused})
+                    .copyWith(borderSide: BorderSide(color: Colors.red, width: 2)),
+                WidgetState.any: fieldStyle.border.resolve({}),
+              }),
+            ),
+          ),
+        ),
+        FAutocomplete(items: fruits),
+        FSelect<String>(items: {for (final fruit in fruits) fruit: fruit}),
+        FMultiSelect<String>(items: {for (final fruit in fruits) fruit: fruit}),
+        FTextField.password(),
+        FTextField(
+          suffixBuilder: (_, style, states) => IconTheme(
+            data: style.clearButtonStyle.iconContentStyle.iconStyle.resolve(states),
+            child: Icon(Icons.search),
           ),
         ),
       ],

@@ -11,7 +11,7 @@ class FSelectSearchFieldProperties with Diagnosticable {
   /// The search field's default prefix builder that displays a search icon.
   static Widget defaultIconBuilder(BuildContext _, FSelectSearchStyle style, Set<WidgetState> states) => Padding(
     padding: const .directional(start: 10.0, end: 4.0),
-    child: IconTheme(data: style.iconStyle, child: const Icon(FIcons.search)),
+    child: IconTheme(data: style.fieldStyle.iconStyle.resolve(states), child: const Icon(FIcons.search)),
   );
 
   static bool _clearable(TextEditingValue _) => false;

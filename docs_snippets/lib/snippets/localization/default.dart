@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:forui/forui.dart';
 
 final app =
@@ -14,7 +15,7 @@ final app =
         // Add locales supported by your application here.
         // {@endhighlight}
       ],
-      builder: (context, child) => FAnimatedTheme(data: FThemes.zinc.light, child: child!),
+      builder: (context, child) => FTheme(data: FThemes.zinc.light, child: child!),
       home: const FScaffold(child: Placeholder()),
     );
 // {@endsnippet}

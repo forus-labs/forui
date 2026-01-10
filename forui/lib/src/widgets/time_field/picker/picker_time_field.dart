@@ -175,7 +175,7 @@ class _PickerTimeFieldState extends _FTimeFieldState<_PickerTimeField> {
       builder: (state) => FTextField(
         control: .managed(controller: _textController),
         focusNode: _focus,
-        style: style.textFieldStyle,
+        style: style.fieldStyle,
         textAlign: widget.textAlign,
         textAlignVertical: widget.textAlignVertical,
         textDirection: widget.textDirection,

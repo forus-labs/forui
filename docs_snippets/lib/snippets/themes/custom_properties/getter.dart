@@ -1,5 +1,6 @@
-import 'package:docs_snippets/snippets/themes/custom_properties/brand_color.dart';
 import 'package:forui/forui.dart';
+
+import 'package:docs_snippets/snippets/themes/custom_properties/brand_color.dart';
 
 // {@snippet}
 extension BrandColorExtension on FThemeData {

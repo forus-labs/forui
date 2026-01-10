@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 
-// {@highlight}
 import 'package:forui/forui.dart';
+
+// {@highlight}
 // {@endhighlight}
 
 void main() {
@@ -15,7 +16,7 @@ class Application extends StatelessWidget {
   // {@highlight}
   Widget build(BuildContext context) => CupertinoApp(
     // {@endhighlight}
-    builder: (context, child) => FAnimatedTheme(data: FThemes.zinc.light, child: child!),
+    builder: (context, child) => FTheme(data: FThemes.zinc.light, child: child!),
     home: const FScaffold(child: Placeholder()),
   );
 }

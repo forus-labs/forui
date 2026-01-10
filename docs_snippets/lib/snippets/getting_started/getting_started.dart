@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:forui/forui.dart';
 
 void main() {
@@ -29,7 +30,7 @@ class Application extends StatelessWidget {
       // There is a known issue with implicitly animated widgets where their transition occurs AFTER the theme's.
       // See https://github.com/duobaseio/forui/issues/670.
       theme: theme.toApproximateMaterialTheme(),
-      builder: (_, child) => FAnimatedTheme(
+      builder: (_, child) => FTheme(
         data: theme,
         child: FToaster(child: child!),
       ),

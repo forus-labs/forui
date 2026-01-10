@@ -1,0 +1,143 @@
+version: 1
+transforms:
+  # FTheme/FAnimatedTheme renames - order matters!
+  - title: 'Rename FTheme to FBasicTheme'
+    date: 2026-01-08
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      class: FTheme
+    changes:
+      - kind: rename
+        newName: 'FBasicTheme'
+
+  - title: 'Rename FAnimatedTheme to FTheme'
+    date: 2026-01-08
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      class: FAnimatedTheme
+    changes:
+      - kind: rename
+        newName: 'FTheme'
+
+  - title: 'Rename FAnimatedThemeMotion to FThemeMotion'
+    date: 2026-01-08
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      class: FAnimatedThemeMotion
+    changes:
+      - kind: rename
+        newName: 'FThemeMotion'
+
+  # FDateFieldStyle
+  - title: 'Remove FDateFieldStyle(iconStyle: ...)'
+    date: 2026-01-08
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FDateFieldStyle
+    changes:
+      - kind: removeParameter
+        name: 'iconStyle'
+
+  - title: 'Rename FDateFieldStyle.selectFieldStyle getter to FDateFieldStyle.fieldStyle'
+    date: 2026-01-08
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      getter: 'selectFieldStyle'
+      inClass: FSelectStyle
+    changes:
+      - kind: rename
+        newName: 'fieldStyle'
+
+  - title: 'Rename FDateFieldStyle.iconStyle to FDateFieldStyle.fieldStyle.iconStyle'
+    date: 2026-01-08
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      getter: 'iconStyle'
+      inClass: FDateFieldStyle
+    changes:
+      - kind: rename
+        newName: 'fieldStyle.iconStyle'
+
+  # FSelectStyle
+  - title: 'Remove FSelectStyle(iconStyle: ...)'
+    date: 2026-01-08
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FSelectStyle
+    changes:
+      - kind: removeParameter
+        name: 'iconStyle'
+
+  - title: 'Rename FSelectStyle.textFieldStyle getter to FDateFieldStyle.fieldStyle'
+    date: 2026-01-08
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      getter: 'textFieldStyle'
+      inClass: FSelectStyle
+    changes:
+      - kind: rename
+        newName: 'fieldStyle'
+
+  - title: 'Rename FSelectStyle.iconStyle to FDateFieldStyle.fieldStyle.iconStyle'
+    date: 2026-01-08
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      getter: 'iconStyle'
+      inClass: FSelectStyle
+    changes:
+      - kind: rename
+        newName: 'fieldStyle.iconStyle'
+
+  # FSelectSearchFieldProperties
+  - title: 'Remove FSelectSearchFieldProperties(iconStyle: ...)'
+    date: 2026-01-08
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FSelectSearchFieldProperties
+    changes:
+      - kind: removeParameter
+        name: 'iconStyle'
+
+  - title: 'Rename FSelectSearchFieldProperties.iconStyle to FSelectSearchFieldProperties.fieldStyle.iconStyle'
+    date: 2026-01-08
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      getter: 'iconStyle'
+      inClass: FSelectSearchFieldProperties
+    changes:
+      - kind: rename
+        newName: 'fieldStyle.iconStyle'
+
+  # FTimeFieldStyle
+  - title: 'Remove FTimeFieldStyle(iconStyle: ...)'
+    date: 2026-01-08
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FTimeFieldStyle
+    changes:
+      - kind: removeParameter
+        name: 'iconStyle'
+
+  - title: 'Rename FTimeFieldStyle.selectFieldStyle getter to FTimeFieldStyle.fieldStyle'
+    date: 2026-01-08
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      getter: 'selectFieldStyle'
+      inClass: FSelectStyle
+    changes:
+      - kind: rename
+        newName: 'fieldStyle'
+
+  - title: 'Rename FTimeFieldStyle.iconStyle to FDateFieldStyle.fieldStyle.iconStyle'
+    date: 2026-01-08
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      getter: 'iconStyle'
+      inClass: FTimeFieldStyle
+    changes:
+      - kind: rename
+        newName: 'fieldStyle.iconStyle'

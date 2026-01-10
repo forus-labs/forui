@@ -1,6 +1,7 @@
 // ignore_for_file: avoid_redundant_argument_values
 
 import 'package:flutter/widgets.dart';
+
 import 'package:forui/forui.dart';
 import 'package:intl/intl.dart';
 
@@ -106,7 +107,6 @@ final FTimeFieldControl lifted = .lifted(
   duration: const Duration(milliseconds: 300),
   curve: Curves.easeOutCubic,
 );
-
 
 // {@category "Control" "`.managed()` with internal controller"}
 /// Manages time field state internally.

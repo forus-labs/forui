@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:forui/forui.dart';
 
 final app =
@@ -8,7 +9,7 @@ final app =
       localizationsDelegates: FLocalizations.localizationsDelegates,
       supportedLocales: FLocalizations.supportedLocales,
       // {@endhighlight}
-      builder: (context, child) => FAnimatedTheme(data: FThemes.zinc.light, child: child!),
+      builder: (context, child) => FTheme(data: FThemes.zinc.light, child: child!),
       home: const FScaffold(child: Placeholder()),
     );
 // {@endsnippet}

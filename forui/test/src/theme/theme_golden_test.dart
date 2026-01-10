@@ -7,7 +7,7 @@ import 'package:forui/forui.dart';
 import '../test_scaffold.dart';
 
 void main() {
-  testWidgets('FAnimatedTheme', (tester) async {
+  testWidgets('FTheme', (tester) async {
     final sheet = autoDispose(AnimationSheetBuilder(frameSize: const Size(200, 200)));
 
     await tester.pumpWidget(sheet.record(Application(data: FThemes.zinc.light, key: const ValueKey('key'))));
@@ -28,7 +28,7 @@ class Application extends StatelessWidget {
   @override
   Widget build(BuildContext context) => MaterialApp(
     locale: const Locale('en', 'US'),
-    builder: (context, child) => FAnimatedTheme(data: data, child: child!),
+    builder: (context, child) => FTheme(data: data, child: child!),
     debugShowCheckedModeBanner: false,
     home: RepaintBoundary(
       child: Builder(

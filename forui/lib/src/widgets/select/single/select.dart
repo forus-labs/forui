@@ -34,9 +34,9 @@ part 'select.design.dart';
 /// * [FSelectStyle] for customizing the appearance of a select.
 abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
   /// The default suffix builder that shows a upward and downward facing chevron icon.
-  static Widget defaultIconBuilder(BuildContext _, FSelectStyle style, Set<WidgetState> _) => Padding(
+  static Widget defaultIconBuilder(BuildContext _, FSelectStyle style, Set<WidgetState> states) => Padding(
     padding: const .directional(end: 8.0),
-    child: IconTheme(data: style.iconStyle, child: const Icon(FIcons.chevronDown)),
+    child: IconTheme(data: style.fieldStyle.iconStyle.resolve(states), child: const Icon(FIcons.chevronDown)),
   );
 
   /// The default content loading builder that shows a spinner when an asynchronous search is pending.
@@ -721,7 +721,7 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with TickerProvi
       builder: (state) => FTextField(
         control: .managed(controller: _textController),
         focusNode: _focus,
-        style: style.selectFieldStyle,
+        style: style.fieldStyle,
         textAlign: widget.textAlign,
         textAlignVertical: widget.textAlignVertical,
         textDirection: widget.textDirection,
@@ -805,11 +805,7 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with TickerProvi
 class FSelectStyle with Diagnosticable, _$FSelectStyleFunctions {
   /// The select field's style.
   @override
-  final FTextFieldStyle selectFieldStyle;
-
-  /// The select field's icon style.
-  @override
-  final IconThemeData iconStyle;
+  final FTextFieldStyle fieldStyle;
 
   /// The search's style.
   @override
@@ -825,8 +821,7 @@ class FSelectStyle with Diagnosticable, _$FSelectStyleFunctions {
 
   /// Creates a [FSelectStyle].
   FSelectStyle({
-    required this.selectFieldStyle,
-    required this.iconStyle,
+    required this.fieldStyle,
     required this.searchStyle,
     required this.contentStyle,
     required this.emptyTextStyle,
@@ -835,8 +830,7 @@ class FSelectStyle with Diagnosticable, _$FSelectStyleFunctions {
   /// Creates a [FSelectStyle] that inherits its properties.
   FSelectStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
-        selectFieldStyle: .inherit(colors: colors, typography: typography, style: style),
-        iconStyle: IconThemeData(color: colors.mutedForeground, size: 18),
+        fieldStyle: .inherit(colors: colors, typography: typography, style: style),
         searchStyle: .inherit(colors: colors, typography: typography, style: style),
         contentStyle: .inherit(colors: colors, typography: typography, style: style),
         emptyTextStyle: typography.sm,

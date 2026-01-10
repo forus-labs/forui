@@ -1,6 +1,8 @@
-import 'package:docs_snippets/snippets/themes/custom_properties/brand_color.dart';
 import 'package:flutter/widgets.dart';
+
 import 'package:forui/forui.dart';
+
+import 'package:docs_snippets/snippets/themes/custom_properties/brand_color.dart';
 
 // {@snippet}
 @override

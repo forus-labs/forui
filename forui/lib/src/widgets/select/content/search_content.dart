@@ -129,7 +129,7 @@ class _SearchContentState<T> extends State<SearchContent<T>> {
           child: FTextField(
             control: .managed(controller: _controller, onChange: widget.properties.onChange),
             focusNode: _focus,
-            style: widget.searchStyle.textFieldStyle,
+            style: widget.searchStyle.fieldStyle,
             hint: widget.properties.hint ?? localizations.selectSearchHint,
             magnifierConfiguration: widget.properties.magnifierConfiguration,
             keyboardType: widget.properties.keyboardType,
@@ -224,11 +224,7 @@ class _SearchContentState<T> extends State<SearchContent<T>> {
 class FSelectSearchStyle with Diagnosticable, _$FSelectSearchStyleFunctions {
   /// The search field's style.
   @override
-  final FTextFieldStyle textFieldStyle;
-
-  /// The search icon's style.
-  @override
-  final IconThemeData iconStyle;
+  final FTextFieldStyle fieldStyle;
 
   /// The style of the divider between the search field and results.
   @override
@@ -239,20 +235,16 @@ class FSelectSearchStyle with Diagnosticable, _$FSelectSearchStyleFunctions {
   final FCircularProgressStyle progressStyle;
 
   /// Creates a [FSelectSearchStyle].
-  FSelectSearchStyle({
-    required this.textFieldStyle,
-    required this.iconStyle,
-    required this.dividerStyle,
-    required this.progressStyle,
-  });
+  FSelectSearchStyle({required this.fieldStyle, required this.dividerStyle, required this.progressStyle});
 
   /// Creates a copy of this [FSelectSearchStyle] but with the given fields replaced with the new values.
   FSelectSearchStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
-        textFieldStyle: .inherit(colors: colors, typography: typography, style: style).copyWith(
+        fieldStyle: .inherit(colors: colors, typography: typography, style: style).copyWith(
           border: .all(const OutlineInputBorder(borderSide: BorderSide(color: Colors.transparent))),
+          iconStyle: .all(IconThemeData(size: 15, color: colors.mutedForeground)),
         ),
-        iconStyle: IconThemeData(size: 15, color: colors.mutedForeground),
+
         dividerStyle: FDividerStyles.inherit(
           colors: colors,
           style: style,

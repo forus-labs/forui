@@ -7,8 +7,6 @@
 // ignore_for_file: type=lint
 // ignore_for_file: deprecated_member_use
 
-///
-
 import 'package:flutter/widgets.dart';
 
 /// The Lucide icons bundled with Forui.
@@ -21,216 +19,216 @@ import 'package:flutter/widgets.dart';
 class FIcons {
   const FIcons._();
 
-  /// A [`a-arrow-down`](https://lucide.dev/icons/a-arrow-down) icon.
+  /// [![`a-arrow-down`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/a-arrow-down.svg)](https://lucide.dev/icons/a-arrow-down)
   static const aArrowDown = IconData(58757, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`a-arrow-up`](https://lucide.dev/icons/a-arrow-up) icon.
+  /// [![`a-arrow-up`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/a-arrow-up.svg)](https://lucide.dev/icons/a-arrow-up)
   static const aArrowUp = IconData(58758, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`a-large-small`](https://lucide.dev/icons/a-large-small) icon.
+  /// [![`a-large-small`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/a-large-small.svg)](https://lucide.dev/icons/a-large-small)
   static const aLargeSmall = IconData(58759, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`accessibility`](https://lucide.dev/icons/accessibility) icon.
+  /// [![`accessibility`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/accessibility.svg)](https://lucide.dev/icons/accessibility)
   static const accessibility = IconData(58007, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`activity`](https://lucide.dev/icons/activity) icon.
+  /// [![`activity`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/activity.svg)](https://lucide.dev/icons/activity)
   static const activity = IconData(57400, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`air-vent`](https://lucide.dev/icons/air-vent) icon.
+  /// [![`air-vent`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/air-vent.svg)](https://lucide.dev/icons/air-vent)
   static const airVent = IconData(58189, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`airplay`](https://lucide.dev/icons/airplay) icon.
+  /// [![`airplay`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/airplay.svg)](https://lucide.dev/icons/airplay)
   static const airplay = IconData(57401, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`alarm-clock-check`](https://lucide.dev/icons/alarm-clock-check) icon.
+  /// [![`alarm-clock-check`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/alarm-clock-check.svg)](https://lucide.dev/icons/alarm-clock-check)
   static const alarmClockCheck = IconData(57836, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`alarm-clock-minus`](https://lucide.dev/icons/alarm-clock-minus) icon.
+  /// [![`alarm-clock-minus`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/alarm-clock-minus.svg)](https://lucide.dev/icons/alarm-clock-minus)
   static const alarmClockMinus = IconData(57837, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`alarm-clock-off`](https://lucide.dev/icons/alarm-clock-off) icon.
+  /// [![`alarm-clock-off`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/alarm-clock-off.svg)](https://lucide.dev/icons/alarm-clock-off)
   static const alarmClockOff = IconData(57915, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`alarm-clock-plus`](https://lucide.dev/icons/alarm-clock-plus) icon.
+  /// [![`alarm-clock-plus`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/alarm-clock-plus.svg)](https://lucide.dev/icons/alarm-clock-plus)
   static const alarmClockPlus = IconData(57838, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`alarm-clock`](https://lucide.dev/icons/alarm-clock) icon.
+  /// [![`alarm-clock`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/alarm-clock.svg)](https://lucide.dev/icons/alarm-clock)
   static const alarmClock = IconData(57402, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`alarm-smoke`](https://lucide.dev/icons/alarm-smoke) icon.
+  /// [![`alarm-smoke`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/alarm-smoke.svg)](https://lucide.dev/icons/alarm-smoke)
   static const alarmSmoke = IconData(58747, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`album`](https://lucide.dev/icons/album) icon.
+  /// [![`album`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/album.svg)](https://lucide.dev/icons/album)
   static const album = IconData(57403, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`align-center-horizontal`](https://lucide.dev/icons/align-center-horizontal) icon.
+  /// [![`align-center-horizontal`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/align-center-horizontal.svg)](https://lucide.dev/icons/align-center-horizontal)
   static const alignCenterHorizontal = IconData(57964, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`align-center-vertical`](https://lucide.dev/icons/align-center-vertical) icon.
+  /// [![`align-center-vertical`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/align-center-vertical.svg)](https://lucide.dev/icons/align-center-vertical)
   static const alignCenterVertical = IconData(57965, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`align-end-horizontal`](https://lucide.dev/icons/align-end-horizontal) icon.
+  /// [![`align-end-horizontal`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/align-end-horizontal.svg)](https://lucide.dev/icons/align-end-horizontal)
   static const alignEndHorizontal = IconData(57966, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`align-end-vertical`](https://lucide.dev/icons/align-end-vertical) icon.
+  /// [![`align-end-vertical`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/align-end-vertical.svg)](https://lucide.dev/icons/align-end-vertical)
   static const alignEndVertical = IconData(57967, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`align-horizontal-distribute-center`](https://lucide.dev/icons/align-horizontal-distribute-center) icon.
+  /// [![`align-horizontal-distribute-center`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/align-horizontal-distribute-center.svg)](https://lucide.dev/icons/align-horizontal-distribute-center)
   static const alignHorizontalDistributeCenter = IconData(
     57404,
     fontFamily: 'ForuiLucideIcons',
     fontPackage: 'forui_assets',
   );
 
-  /// A [`align-horizontal-distribute-end`](https://lucide.dev/icons/align-horizontal-distribute-end) icon.
+  /// [![`align-horizontal-distribute-end`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/align-horizontal-distribute-end.svg)](https://lucide.dev/icons/align-horizontal-distribute-end)
   static const alignHorizontalDistributeEnd = IconData(
     57405,
     fontFamily: 'ForuiLucideIcons',
     fontPackage: 'forui_assets',
   );
 
-  /// A [`align-horizontal-distribute-start`](https://lucide.dev/icons/align-horizontal-distribute-start) icon.
+  /// [![`align-horizontal-distribute-start`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/align-horizontal-distribute-start.svg)](https://lucide.dev/icons/align-horizontal-distribute-start)
   static const alignHorizontalDistributeStart = IconData(
     57406,
     fontFamily: 'ForuiLucideIcons',
     fontPackage: 'forui_assets',
   );
 
-  /// A [`align-horizontal-justify-center`](https://lucide.dev/icons/align-horizontal-justify-center) icon.
+  /// [![`align-horizontal-justify-center`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/align-horizontal-justify-center.svg)](https://lucide.dev/icons/align-horizontal-justify-center)
   static const alignHorizontalJustifyCenter = IconData(
     57970,
     fontFamily: 'ForuiLucideIcons',
     fontPackage: 'forui_assets',
   );
 
-  /// A [`align-horizontal-justify-end`](https://lucide.dev/icons/align-horizontal-justify-end) icon.
+  /// [![`align-horizontal-justify-end`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/align-horizontal-justify-end.svg)](https://lucide.dev/icons/align-horizontal-justify-end)
   static const alignHorizontalJustifyEnd = IconData(57971, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`align-horizontal-justify-start`](https://lucide.dev/icons/align-horizontal-justify-start) icon.
+  /// [![`align-horizontal-justify-start`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/align-horizontal-justify-start.svg)](https://lucide.dev/icons/align-horizontal-justify-start)
   static const alignHorizontalJustifyStart = IconData(
     57972,
     fontFamily: 'ForuiLucideIcons',
     fontPackage: 'forui_assets',
   );
 
-  /// A [`align-horizontal-space-around`](https://lucide.dev/icons/align-horizontal-space-around) icon.
+  /// [![`align-horizontal-space-around`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/align-horizontal-space-around.svg)](https://lucide.dev/icons/align-horizontal-space-around)
   static const alignHorizontalSpaceAround = IconData(
     57973,
     fontFamily: 'ForuiLucideIcons',
     fontPackage: 'forui_assets',
   );
 
-  /// A [`align-horizontal-space-between`](https://lucide.dev/icons/align-horizontal-space-between) icon.
+  /// [![`align-horizontal-space-between`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/align-horizontal-space-between.svg)](https://lucide.dev/icons/align-horizontal-space-between)
   static const alignHorizontalSpaceBetween = IconData(
     57974,
     fontFamily: 'ForuiLucideIcons',
     fontPackage: 'forui_assets',
   );
 
-  /// A [`align-start-horizontal`](https://lucide.dev/icons/align-start-horizontal) icon.
+  /// [![`align-start-horizontal`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/align-start-horizontal.svg)](https://lucide.dev/icons/align-start-horizontal)
   static const alignStartHorizontal = IconData(57968, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`align-start-vertical`](https://lucide.dev/icons/align-start-vertical) icon.
+  /// [![`align-start-vertical`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/align-start-vertical.svg)](https://lucide.dev/icons/align-start-vertical)
   static const alignStartVertical = IconData(57969, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`align-vertical-distribute-center`](https://lucide.dev/icons/align-vertical-distribute-center) icon.
+  /// [![`align-vertical-distribute-center`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/align-vertical-distribute-center.svg)](https://lucide.dev/icons/align-vertical-distribute-center)
   static const alignVerticalDistributeCenter = IconData(
     57982,
     fontFamily: 'ForuiLucideIcons',
     fontPackage: 'forui_assets',
   );
 
-  /// A [`align-vertical-distribute-end`](https://lucide.dev/icons/align-vertical-distribute-end) icon.
+  /// [![`align-vertical-distribute-end`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/align-vertical-distribute-end.svg)](https://lucide.dev/icons/align-vertical-distribute-end)
   static const alignVerticalDistributeEnd = IconData(
     57983,
     fontFamily: 'ForuiLucideIcons',
     fontPackage: 'forui_assets',
   );
 
-  /// A [`align-vertical-distribute-start`](https://lucide.dev/icons/align-vertical-distribute-start) icon.
+  /// [![`align-vertical-distribute-start`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/align-vertical-distribute-start.svg)](https://lucide.dev/icons/align-vertical-distribute-start)
   static const alignVerticalDistributeStart = IconData(
     57984,
     fontFamily: 'ForuiLucideIcons',
     fontPackage: 'forui_assets',
   );
 
-  /// A [`align-vertical-justify-center`](https://lucide.dev/icons/align-vertical-justify-center) icon.
+  /// [![`align-vertical-justify-center`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/align-vertical-justify-center.svg)](https://lucide.dev/icons/align-vertical-justify-center)
   static const alignVerticalJustifyCenter = IconData(
     57975,
     fontFamily: 'ForuiLucideIcons',
     fontPackage: 'forui_assets',
   );
 
-  /// A [`align-vertical-justify-end`](https://lucide.dev/icons/align-vertical-justify-end) icon.
+  /// [![`align-vertical-justify-end`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/align-vertical-justify-end.svg)](https://lucide.dev/icons/align-vertical-justify-end)
   static const alignVerticalJustifyEnd = IconData(57976, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`align-vertical-justify-start`](https://lucide.dev/icons/align-vertical-justify-start) icon.
+  /// [![`align-vertical-justify-start`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/align-vertical-justify-start.svg)](https://lucide.dev/icons/align-vertical-justify-start)
   static const alignVerticalJustifyStart = IconData(57977, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`align-vertical-space-around`](https://lucide.dev/icons/align-vertical-space-around) icon.
+  /// [![`align-vertical-space-around`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/align-vertical-space-around.svg)](https://lucide.dev/icons/align-vertical-space-around)
   static const alignVerticalSpaceAround = IconData(57978, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`align-vertical-space-between`](https://lucide.dev/icons/align-vertical-space-between) icon.
+  /// [![`align-vertical-space-between`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/align-vertical-space-between.svg)](https://lucide.dev/icons/align-vertical-space-between)
   static const alignVerticalSpaceBetween = IconData(57979, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`ambulance`](https://lucide.dev/icons/ambulance) icon.
+  /// [![`ambulance`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/ambulance.svg)](https://lucide.dev/icons/ambulance)
   static const ambulance = IconData(58811, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`ampersand`](https://lucide.dev/icons/ampersand) icon.
+  /// [![`ampersand`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/ampersand.svg)](https://lucide.dev/icons/ampersand)
   static const ampersand = IconData(58524, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`ampersands`](https://lucide.dev/icons/ampersands) icon.
+  /// [![`ampersands`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/ampersands.svg)](https://lucide.dev/icons/ampersands)
   static const ampersands = IconData(58525, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`amphora`](https://lucide.dev/icons/amphora) icon.
+  /// [![`amphora`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/amphora.svg)](https://lucide.dev/icons/amphora)
   static const amphora = IconData(58907, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`anchor`](https://lucide.dev/icons/anchor) icon.
+  /// [![`anchor`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/anchor.svg)](https://lucide.dev/icons/anchor)
   static const anchor = IconData(57407, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`angry`](https://lucide.dev/icons/angry) icon.
+  /// [![`angry`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/angry.svg)](https://lucide.dev/icons/angry)
   static const angry = IconData(58108, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`annoyed`](https://lucide.dev/icons/annoyed) icon.
+  /// [![`annoyed`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/annoyed.svg)](https://lucide.dev/icons/annoyed)
   static const annoyed = IconData(58109, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`antenna`](https://lucide.dev/icons/antenna) icon.
+  /// [![`antenna`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/antenna.svg)](https://lucide.dev/icons/antenna)
   static const antenna = IconData(58594, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`anvil`](https://lucide.dev/icons/anvil) icon.
+  /// [![`anvil`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/anvil.svg)](https://lucide.dev/icons/anvil)
   static const anvil = IconData(58752, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`aperture`](https://lucide.dev/icons/aperture) icon.
+  /// [![`aperture`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/aperture.svg)](https://lucide.dev/icons/aperture)
   static const aperture = IconData(57408, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`app-window-mac`](https://lucide.dev/icons/app-window-mac) icon.
+  /// [![`app-window-mac`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/app-window-mac.svg)](https://lucide.dev/icons/app-window-mac)
   static const appWindowMac = IconData(58834, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`app-window`](https://lucide.dev/icons/app-window) icon.
+  /// [![`app-window`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/app-window.svg)](https://lucide.dev/icons/app-window)
   static const appWindow = IconData(58406, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`apple`](https://lucide.dev/icons/apple) icon.
+  /// [![`apple`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/apple.svg)](https://lucide.dev/icons/apple)
   static const apple = IconData(58190, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`archive-restore`](https://lucide.dev/icons/archive-restore) icon.
+  /// [![`archive-restore`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/archive-restore.svg)](https://lucide.dev/icons/archive-restore)
   static const archiveRestore = IconData(58061, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`archive-x`](https://lucide.dev/icons/archive-x) icon.
+  /// [![`archive-x`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/archive-x.svg)](https://lucide.dev/icons/archive-x)
   static const archiveX = IconData(58636, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`archive`](https://lucide.dev/icons/archive) icon.
+  /// [![`archive`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/archive.svg)](https://lucide.dev/icons/archive)
   static const archive = IconData(57409, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`armchair`](https://lucide.dev/icons/armchair) icon.
+  /// [![`armchair`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/armchair.svg)](https://lucide.dev/icons/armchair)
   static const armchair = IconData(58048, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`arrow-big-down-dash`](https://lucide.dev/icons/arrow-big-down-dash) icon.
+  /// [![`arrow-big-down-dash`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/arrow-big-down-dash.svg)](https://lucide.dev/icons/arrow-big-down-dash)
   static const arrowBigDownDash = IconData(58397, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`arrow-big-down`](https://lucide.dev/icons/arrow-big-down) icon.
+  /// [![`arrow-big-down`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/arrow-big-down.svg)](https://lucide.dev/icons/arrow-big-down)
   static const arrowBigDown = IconData(57825, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`arrow-big-left-dash`](https://lucide.dev/icons/arrow-big-left-dash) icon.
+  /// [![`arrow-big-left-dash`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/arrow-big-left-dash.svg)](https://lucide.dev/icons/arrow-big-left-dash)
   static const arrowBigLeftDash = IconData(
     58398,
     fontFamily: 'ForuiLucideIcons',
@@ -238,7 +236,7 @@ class FIcons {
     matchTextDirection: true,
   );
 
-  /// A [`arrow-big-left`](https://lucide.dev/icons/arrow-big-left) icon.
+  /// [![`arrow-big-left`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/arrow-big-left.svg)](https://lucide.dev/icons/arrow-big-left)
   static const arrowBigLeft = IconData(
     57826,
     fontFamily: 'ForuiLucideIcons',
@@ -246,7 +244,7 @@ class FIcons {
     matchTextDirection: true,
   );
 
-  /// A [`arrow-big-right-dash`](https://lucide.dev/icons/arrow-big-right-dash) icon.
+  /// [![`arrow-big-right-dash`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/arrow-big-right-dash.svg)](https://lucide.dev/icons/arrow-big-right-dash)
   static const arrowBigRightDash = IconData(
     58399,
     fontFamily: 'ForuiLucideIcons',
@@ -254,7 +252,7 @@ class FIcons {
     matchTextDirection: true,
   );
 
-  /// A [`arrow-big-right`](https://lucide.dev/icons/arrow-big-right) icon.
+  /// [![`arrow-big-right`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/arrow-big-right.svg)](https://lucide.dev/icons/arrow-big-right)
   static const arrowBigRight = IconData(
     57827,
     fontFamily: 'ForuiLucideIcons',
@@ -262,52 +260,52 @@ class FIcons {
     matchTextDirection: true,
   );
 
-  /// A [`arrow-big-up-dash`](https://lucide.dev/icons/arrow-big-up-dash) icon.
+  /// [![`arrow-big-up-dash`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/arrow-big-up-dash.svg)](https://lucide.dev/icons/arrow-big-up-dash)
   static const arrowBigUpDash = IconData(58400, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`arrow-big-up`](https://lucide.dev/icons/arrow-big-up) icon.
+  /// [![`arrow-big-up`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/arrow-big-up.svg)](https://lucide.dev/icons/arrow-big-up)
   static const arrowBigUp = IconData(57828, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`arrow-down-0-1`](https://lucide.dev/icons/arrow-down-0-1) icon.
+  /// [![`arrow-down-0-1`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/arrow-down-0-1.svg)](https://lucide.dev/icons/arrow-down-0-1)
   static const arrowDown01 = IconData(58387, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`arrow-down-1-0`](https://lucide.dev/icons/arrow-down-1-0) icon.
+  /// [![`arrow-down-1-0`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/arrow-down-1-0.svg)](https://lucide.dev/icons/arrow-down-1-0)
   static const arrowDown10 = IconData(58388, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`arrow-down-a-z`](https://lucide.dev/icons/arrow-down-a-z) icon.
+  /// [![`arrow-down-a-z`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/arrow-down-a-z.svg)](https://lucide.dev/icons/arrow-down-a-z)
   static const arrowDownAZ = IconData(58389, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`arrow-down-from-line`](https://lucide.dev/icons/arrow-down-from-line) icon.
+  /// [![`arrow-down-from-line`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/arrow-down-from-line.svg)](https://lucide.dev/icons/arrow-down-from-line)
   static const arrowDownFromLine = IconData(58452, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`arrow-down-left`](https://lucide.dev/icons/arrow-down-left) icon.
+  /// [![`arrow-down-left`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/arrow-down-left.svg)](https://lucide.dev/icons/arrow-down-left)
   static const arrowDownLeft = IconData(57411, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`arrow-down-narrow-wide`](https://lucide.dev/icons/arrow-down-narrow-wide) icon.
+  /// [![`arrow-down-narrow-wide`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/arrow-down-narrow-wide.svg)](https://lucide.dev/icons/arrow-down-narrow-wide)
   static const arrowDownNarrowWide = IconData(57412, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`arrow-down-right`](https://lucide.dev/icons/arrow-down-right) icon.
+  /// [![`arrow-down-right`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/arrow-down-right.svg)](https://lucide.dev/icons/arrow-down-right)
   static const arrowDownRight = IconData(57413, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`arrow-down-to-dot`](https://lucide.dev/icons/arrow-down-to-dot) icon.
+  /// [![`arrow-down-to-dot`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/arrow-down-to-dot.svg)](https://lucide.dev/icons/arrow-down-to-dot)
   static const arrowDownToDot = IconData(58445, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`arrow-down-to-line`](https://lucide.dev/icons/arrow-down-to-line) icon.
+  /// [![`arrow-down-to-line`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/arrow-down-to-line.svg)](https://lucide.dev/icons/arrow-down-to-line)
   static const arrowDownToLine = IconData(58453, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`arrow-down-up`](https://lucide.dev/icons/arrow-down-up) icon.
+  /// [![`arrow-down-up`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/arrow-down-up.svg)](https://lucide.dev/icons/arrow-down-up)
   static const arrowDownUp = IconData(57414, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`arrow-down-wide-narrow`](https://lucide.dev/icons/arrow-down-wide-narrow) icon.
+  /// [![`arrow-down-wide-narrow`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/arrow-down-wide-narrow.svg)](https://lucide.dev/icons/arrow-down-wide-narrow)
   static const arrowDownWideNarrow = IconData(57415, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`arrow-down-z-a`](https://lucide.dev/icons/arrow-down-z-a) icon.
+  /// [![`arrow-down-z-a`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/arrow-down-z-a.svg)](https://lucide.dev/icons/arrow-down-z-a)
   static const arrowDownZA = IconData(58390, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`arrow-down`](https://lucide.dev/icons/arrow-down) icon.
+  /// [![`arrow-down`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/arrow-down.svg)](https://lucide.dev/icons/arrow-down)
   static const arrowDown = IconData(57410, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`arrow-left-from-line`](https://lucide.dev/icons/arrow-left-from-line) icon.
+  /// [![`arrow-left-from-line`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/arrow-left-from-line.svg)](https://lucide.dev/icons/arrow-left-from-line)
   static const arrowLeftFromLine = IconData(
     58454,
     fontFamily: 'ForuiLucideIcons',
@@ -315,10 +313,10 @@ class FIcons {
     matchTextDirection: true,
   );
 
-  /// A [`arrow-left-right`](https://lucide.dev/icons/arrow-left-right) icon.
+  /// [![`arrow-left-right`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/arrow-left-right.svg)](https://lucide.dev/icons/arrow-left-right)
   static const arrowLeftRight = IconData(57930, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`arrow-left-to-line`](https://lucide.dev/icons/arrow-left-to-line) icon.
+  /// [![`arrow-left-to-line`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/arrow-left-to-line.svg)](https://lucide.dev/icons/arrow-left-to-line)
   static const arrowLeftToLine = IconData(
     58455,
     fontFamily: 'ForuiLucideIcons',
@@ -326,7 +324,7 @@ class FIcons {
     matchTextDirection: true,
   );
 
-  /// A [`arrow-left`](https://lucide.dev/icons/arrow-left) icon.
+  /// [![`arrow-left`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/arrow-left.svg)](https://lucide.dev/icons/arrow-left)
   static const arrowLeft = IconData(
     57416,
     fontFamily: 'ForuiLucideIcons',
@@ -334,7 +332,7 @@ class FIcons {
     matchTextDirection: true,
   );
 
-  /// A [`arrow-right-from-line`](https://lucide.dev/icons/arrow-right-from-line) icon.
+  /// [![`arrow-right-from-line`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/arrow-right-from-line.svg)](https://lucide.dev/icons/arrow-right-from-line)
   static const arrowRightFromLine = IconData(
     58456,
     fontFamily: 'ForuiLucideIcons',
@@ -342,10 +340,10 @@ class FIcons {
     matchTextDirection: true,
   );
 
-  /// A [`arrow-right-left`](https://lucide.dev/icons/arrow-right-left) icon.
+  /// [![`arrow-right-left`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/arrow-right-left.svg)](https://lucide.dev/icons/arrow-right-left)
   static const arrowRightLeft = IconData(58391, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`arrow-right-to-line`](https://lucide.dev/icons/arrow-right-to-line) icon.
+  /// [![`arrow-right-to-line`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/arrow-right-to-line.svg)](https://lucide.dev/icons/arrow-right-to-line)
   static const arrowRightToLine = IconData(
     58457,
     fontFamily: 'ForuiLucideIcons',
@@ -353,7 +351,7 @@ class FIcons {
     matchTextDirection: true,
   );
 
-  /// A [`arrow-right`](https://lucide.dev/icons/arrow-right) icon.
+  /// [![`arrow-right`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/arrow-right.svg)](https://lucide.dev/icons/arrow-right)
   static const arrowRight = IconData(
     57417,
     fontFamily: 'ForuiLucideIcons',
@@ -361,759 +359,759 @@ class FIcons {
     matchTextDirection: true,
   );
 
-  /// A [`arrow-up-0-1`](https://lucide.dev/icons/arrow-up-0-1) icon.
+  /// [![`arrow-up-0-1`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/arrow-up-0-1.svg)](https://lucide.dev/icons/arrow-up-0-1)
   static const arrowUp01 = IconData(58392, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`arrow-up-1-0`](https://lucide.dev/icons/arrow-up-1-0) icon.
+  /// [![`arrow-up-1-0`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/arrow-up-1-0.svg)](https://lucide.dev/icons/arrow-up-1-0)
   static const arrowUp10 = IconData(58393, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`arrow-up-a-z`](https://lucide.dev/icons/arrow-up-a-z) icon.
+  /// [![`arrow-up-a-z`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/arrow-up-a-z.svg)](https://lucide.dev/icons/arrow-up-a-z)
   static const arrowUpAZ = IconData(58394, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`arrow-up-down`](https://lucide.dev/icons/arrow-up-down) icon.
+  /// [![`arrow-up-down`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/arrow-up-down.svg)](https://lucide.dev/icons/arrow-up-down)
   static const arrowUpDown = IconData(58237, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`arrow-up-from-dot`](https://lucide.dev/icons/arrow-up-from-dot) icon.
+  /// [![`arrow-up-from-dot`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/arrow-up-from-dot.svg)](https://lucide.dev/icons/arrow-up-from-dot)
   static const arrowUpFromDot = IconData(58446, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`arrow-up-from-line`](https://lucide.dev/icons/arrow-up-from-line) icon.
+  /// [![`arrow-up-from-line`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/arrow-up-from-line.svg)](https://lucide.dev/icons/arrow-up-from-line)
   static const arrowUpFromLine = IconData(58458, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`arrow-up-left`](https://lucide.dev/icons/arrow-up-left) icon.
+  /// [![`arrow-up-left`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/arrow-up-left.svg)](https://lucide.dev/icons/arrow-up-left)
   static const arrowUpLeft = IconData(57419, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`arrow-up-narrow-wide`](https://lucide.dev/icons/arrow-up-narrow-wide) icon.
+  /// [![`arrow-up-narrow-wide`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/arrow-up-narrow-wide.svg)](https://lucide.dev/icons/arrow-up-narrow-wide)
   static const arrowUpNarrowWide = IconData(57420, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`arrow-up-right`](https://lucide.dev/icons/arrow-up-right) icon.
+  /// [![`arrow-up-right`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/arrow-up-right.svg)](https://lucide.dev/icons/arrow-up-right)
   static const arrowUpRight = IconData(57421, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`arrow-up-to-line`](https://lucide.dev/icons/arrow-up-to-line) icon.
+  /// [![`arrow-up-to-line`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/arrow-up-to-line.svg)](https://lucide.dev/icons/arrow-up-to-line)
   static const arrowUpToLine = IconData(58459, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`arrow-up-wide-narrow`](https://lucide.dev/icons/arrow-up-wide-narrow) icon.
+  /// [![`arrow-up-wide-narrow`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/arrow-up-wide-narrow.svg)](https://lucide.dev/icons/arrow-up-wide-narrow)
   static const arrowUpWideNarrow = IconData(58395, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`arrow-up-z-a`](https://lucide.dev/icons/arrow-up-z-a) icon.
+  /// [![`arrow-up-z-a`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/arrow-up-z-a.svg)](https://lucide.dev/icons/arrow-up-z-a)
   static const arrowUpZA = IconData(58396, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`arrow-up`](https://lucide.dev/icons/arrow-up) icon.
+  /// [![`arrow-up`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/arrow-up.svg)](https://lucide.dev/icons/arrow-up)
   static const arrowUp = IconData(57418, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`arrows-up-from-line`](https://lucide.dev/icons/arrows-up-from-line) icon.
+  /// [![`arrows-up-from-line`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/arrows-up-from-line.svg)](https://lucide.dev/icons/arrows-up-from-line)
   static const arrowsUpFromLine = IconData(58580, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`asterisk`](https://lucide.dev/icons/asterisk) icon.
+  /// [![`asterisk`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/asterisk.svg)](https://lucide.dev/icons/asterisk)
   static const asterisk = IconData(57839, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`at-sign`](https://lucide.dev/icons/at-sign) icon.
+  /// [![`at-sign`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/at-sign.svg)](https://lucide.dev/icons/at-sign)
   static const atSign = IconData(57422, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`atom`](https://lucide.dev/icons/atom) icon.
+  /// [![`atom`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/atom.svg)](https://lucide.dev/icons/atom)
   static const atom = IconData(58327, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`audio-lines`](https://lucide.dev/icons/audio-lines) icon.
+  /// [![`audio-lines`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/audio-lines.svg)](https://lucide.dev/icons/audio-lines)
   static const audioLines = IconData(58714, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`audio-waveform`](https://lucide.dev/icons/audio-waveform) icon.
+  /// [![`audio-waveform`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/audio-waveform.svg)](https://lucide.dev/icons/audio-waveform)
   static const audioWaveform = IconData(58715, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`award`](https://lucide.dev/icons/award) icon.
+  /// [![`award`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/award.svg)](https://lucide.dev/icons/award)
   static const award = IconData(57423, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`axe`](https://lucide.dev/icons/axe) icon.
+  /// [![`axe`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/axe.svg)](https://lucide.dev/icons/axe)
   static const axe = IconData(57424, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`axis-3d`](https://lucide.dev/icons/axis-3d) icon.
+  /// [![`axis-3d`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/axis-3d.svg)](https://lucide.dev/icons/axis-3d)
   static const axis3d = IconData(58110, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`baby`](https://lucide.dev/icons/baby) icon.
+  /// [![`baby`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/baby.svg)](https://lucide.dev/icons/baby)
   static const baby = IconData(58062, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`backpack`](https://lucide.dev/icons/backpack) icon.
+  /// [![`backpack`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/backpack.svg)](https://lucide.dev/icons/backpack)
   static const backpack = IconData(58056, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`badge-alert`](https://lucide.dev/icons/badge-alert) icon.
+  /// [![`badge-alert`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/badge-alert.svg)](https://lucide.dev/icons/badge-alert)
   static const badgeAlert = IconData(58485, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`badge-cent`](https://lucide.dev/icons/badge-cent) icon.
+  /// [![`badge-cent`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/badge-cent.svg)](https://lucide.dev/icons/badge-cent)
   static const badgeCent = IconData(58639, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`badge-check`](https://lucide.dev/icons/badge-check) icon.
+  /// [![`badge-check`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/badge-check.svg)](https://lucide.dev/icons/badge-check)
   static const badgeCheck = IconData(57921, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`badge-dollar-sign`](https://lucide.dev/icons/badge-dollar-sign) icon.
+  /// [![`badge-dollar-sign`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/badge-dollar-sign.svg)](https://lucide.dev/icons/badge-dollar-sign)
   static const badgeDollarSign = IconData(58486, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`badge-euro`](https://lucide.dev/icons/badge-euro) icon.
+  /// [![`badge-euro`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/badge-euro.svg)](https://lucide.dev/icons/badge-euro)
   static const badgeEuro = IconData(58640, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`badge-indian-rupee`](https://lucide.dev/icons/badge-indian-rupee) icon.
+  /// [![`badge-indian-rupee`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/badge-indian-rupee.svg)](https://lucide.dev/icons/badge-indian-rupee)
   static const badgeIndianRupee = IconData(58641, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`badge-info`](https://lucide.dev/icons/badge-info) icon.
+  /// [![`badge-info`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/badge-info.svg)](https://lucide.dev/icons/badge-info)
   static const badgeInfo = IconData(58487, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`badge-japanese-yen`](https://lucide.dev/icons/badge-japanese-yen) icon.
+  /// [![`badge-japanese-yen`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/badge-japanese-yen.svg)](https://lucide.dev/icons/badge-japanese-yen)
   static const badgeJapaneseYen = IconData(58642, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`badge-minus`](https://lucide.dev/icons/badge-minus) icon.
+  /// [![`badge-minus`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/badge-minus.svg)](https://lucide.dev/icons/badge-minus)
   static const badgeMinus = IconData(58488, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`badge-percent`](https://lucide.dev/icons/badge-percent) icon.
+  /// [![`badge-percent`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/badge-percent.svg)](https://lucide.dev/icons/badge-percent)
   static const badgePercent = IconData(58489, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`badge-plus`](https://lucide.dev/icons/badge-plus) icon.
+  /// [![`badge-plus`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/badge-plus.svg)](https://lucide.dev/icons/badge-plus)
   static const badgePlus = IconData(58490, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`badge-pound-sterling`](https://lucide.dev/icons/badge-pound-sterling) icon.
+  /// [![`badge-pound-sterling`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/badge-pound-sterling.svg)](https://lucide.dev/icons/badge-pound-sterling)
   static const badgePoundSterling = IconData(58643, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`badge-question-mark`](https://lucide.dev/icons/badge-question-mark) icon.
+  /// [![`badge-question-mark`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/badge-question-mark.svg)](https://lucide.dev/icons/badge-question-mark)
   static const badgeQuestionMark = IconData(58491, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`badge-russian-ruble`](https://lucide.dev/icons/badge-russian-ruble) icon.
+  /// [![`badge-russian-ruble`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/badge-russian-ruble.svg)](https://lucide.dev/icons/badge-russian-ruble)
   static const badgeRussianRuble = IconData(58644, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`badge-swiss-franc`](https://lucide.dev/icons/badge-swiss-franc) icon.
+  /// [![`badge-swiss-franc`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/badge-swiss-franc.svg)](https://lucide.dev/icons/badge-swiss-franc)
   static const badgeSwissFranc = IconData(58645, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`badge-turkish-lira`](https://lucide.dev/icons/badge-turkish-lira) icon.
+  /// [![`badge-turkish-lira`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/badge-turkish-lira.svg)](https://lucide.dev/icons/badge-turkish-lira)
   static const badgeTurkishLira = IconData(59006, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`badge-x`](https://lucide.dev/icons/badge-x) icon.
+  /// [![`badge-x`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/badge-x.svg)](https://lucide.dev/icons/badge-x)
   static const badgeX = IconData(58492, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`badge`](https://lucide.dev/icons/badge) icon.
+  /// [![`badge`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/badge.svg)](https://lucide.dev/icons/badge)
   static const badge = IconData(58484, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`baggage-claim`](https://lucide.dev/icons/baggage-claim) icon.
+  /// [![`baggage-claim`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/baggage-claim.svg)](https://lucide.dev/icons/baggage-claim)
   static const baggageClaim = IconData(58057, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`balloon`](https://lucide.dev/icons/balloon) icon.
+  /// [![`balloon`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/balloon.svg)](https://lucide.dev/icons/balloon)
   static const balloon = IconData(59055, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`ban`](https://lucide.dev/icons/ban) icon.
+  /// [![`ban`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/ban.svg)](https://lucide.dev/icons/ban)
   static const ban = IconData(57425, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`banana`](https://lucide.dev/icons/banana) icon.
+  /// [![`banana`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/banana.svg)](https://lucide.dev/icons/banana)
   static const banana = IconData(58191, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`bandage`](https://lucide.dev/icons/bandage) icon.
+  /// [![`bandage`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/bandage.svg)](https://lucide.dev/icons/bandage)
   static const bandage = IconData(58909, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`banknote-arrow-down`](https://lucide.dev/icons/banknote-arrow-down) icon.
+  /// [![`banknote-arrow-down`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/banknote-arrow-down.svg)](https://lucide.dev/icons/banknote-arrow-down)
   static const banknoteArrowDown = IconData(58956, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`banknote-arrow-up`](https://lucide.dev/icons/banknote-arrow-up) icon.
+  /// [![`banknote-arrow-up`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/banknote-arrow-up.svg)](https://lucide.dev/icons/banknote-arrow-up)
   static const banknoteArrowUp = IconData(58957, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`banknote-x`](https://lucide.dev/icons/banknote-x) icon.
+  /// [![`banknote-x`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/banknote-x.svg)](https://lucide.dev/icons/banknote-x)
   static const banknoteX = IconData(58958, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`banknote`](https://lucide.dev/icons/banknote) icon.
+  /// [![`banknote`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/banknote.svg)](https://lucide.dev/icons/banknote)
   static const banknote = IconData(57426, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`barcode`](https://lucide.dev/icons/barcode) icon.
+  /// [![`barcode`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/barcode.svg)](https://lucide.dev/icons/barcode)
   static const barcode = IconData(58675, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`barrel`](https://lucide.dev/icons/barrel) icon.
+  /// [![`barrel`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/barrel.svg)](https://lucide.dev/icons/barrel)
   static const barrel = IconData(58997, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`baseline`](https://lucide.dev/icons/baseline) icon.
+  /// [![`baseline`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/baseline.svg)](https://lucide.dev/icons/baseline)
   static const baseline = IconData(57989, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`bath`](https://lucide.dev/icons/bath) icon.
+  /// [![`bath`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/bath.svg)](https://lucide.dev/icons/bath)
   static const bath = IconData(58027, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`battery-charging`](https://lucide.dev/icons/battery-charging) icon.
+  /// [![`battery-charging`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/battery-charging.svg)](https://lucide.dev/icons/battery-charging)
   static const batteryCharging = IconData(57428, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`battery-full`](https://lucide.dev/icons/battery-full) icon.
+  /// [![`battery-full`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/battery-full.svg)](https://lucide.dev/icons/battery-full)
   static const batteryFull = IconData(57429, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`battery-low`](https://lucide.dev/icons/battery-low) icon.
+  /// [![`battery-low`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/battery-low.svg)](https://lucide.dev/icons/battery-low)
   static const batteryLow = IconData(57430, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`battery-medium`](https://lucide.dev/icons/battery-medium) icon.
+  /// [![`battery-medium`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/battery-medium.svg)](https://lucide.dev/icons/battery-medium)
   static const batteryMedium = IconData(57431, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`battery-plus`](https://lucide.dev/icons/battery-plus) icon.
+  /// [![`battery-plus`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/battery-plus.svg)](https://lucide.dev/icons/battery-plus)
   static const batteryPlus = IconData(58942, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`battery-warning`](https://lucide.dev/icons/battery-warning) icon.
+  /// [![`battery-warning`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/battery-warning.svg)](https://lucide.dev/icons/battery-warning)
   static const batteryWarning = IconData(58284, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`battery`](https://lucide.dev/icons/battery) icon.
+  /// [![`battery`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/battery.svg)](https://lucide.dev/icons/battery)
   static const battery = IconData(57427, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`beaker`](https://lucide.dev/icons/beaker) icon.
+  /// [![`beaker`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/beaker.svg)](https://lucide.dev/icons/beaker)
   static const beaker = IconData(57432, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`bean-off`](https://lucide.dev/icons/bean-off) icon.
+  /// [![`bean-off`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/bean-off.svg)](https://lucide.dev/icons/bean-off)
   static const beanOff = IconData(58256, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`bean`](https://lucide.dev/icons/bean) icon.
+  /// [![`bean`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/bean.svg)](https://lucide.dev/icons/bean)
   static const bean = IconData(58255, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`bed-double`](https://lucide.dev/icons/bed-double) icon.
+  /// [![`bed-double`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/bed-double.svg)](https://lucide.dev/icons/bed-double)
   static const bedDouble = IconData(58050, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`bed-single`](https://lucide.dev/icons/bed-single) icon.
+  /// [![`bed-single`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/bed-single.svg)](https://lucide.dev/icons/bed-single)
   static const bedSingle = IconData(58051, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`bed`](https://lucide.dev/icons/bed) icon.
+  /// [![`bed`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/bed.svg)](https://lucide.dev/icons/bed)
   static const bed = IconData(58049, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`beef`](https://lucide.dev/icons/beef) icon.
+  /// [![`beef`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/beef.svg)](https://lucide.dev/icons/beef)
   static const beef = IconData(58277, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`beer-off`](https://lucide.dev/icons/beer-off) icon.
+  /// [![`beer-off`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/beer-off.svg)](https://lucide.dev/icons/beer-off)
   static const beerOff = IconData(58841, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`beer`](https://lucide.dev/icons/beer) icon.
+  /// [![`beer`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/beer.svg)](https://lucide.dev/icons/beer)
   static const beer = IconData(58063, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`bell-dot`](https://lucide.dev/icons/bell-dot) icon.
+  /// [![`bell-dot`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/bell-dot.svg)](https://lucide.dev/icons/bell-dot)
   static const bellDot = IconData(58411, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`bell-electric`](https://lucide.dev/icons/bell-electric) icon.
+  /// [![`bell-electric`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/bell-electric.svg)](https://lucide.dev/icons/bell-electric)
   static const bellElectric = IconData(58748, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`bell-minus`](https://lucide.dev/icons/bell-minus) icon.
+  /// [![`bell-minus`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/bell-minus.svg)](https://lucide.dev/icons/bell-minus)
   static const bellMinus = IconData(57840, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`bell-off`](https://lucide.dev/icons/bell-off) icon.
+  /// [![`bell-off`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/bell-off.svg)](https://lucide.dev/icons/bell-off)
   static const bellOff = IconData(57434, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`bell-plus`](https://lucide.dev/icons/bell-plus) icon.
+  /// [![`bell-plus`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/bell-plus.svg)](https://lucide.dev/icons/bell-plus)
   static const bellPlus = IconData(57841, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`bell-ring`](https://lucide.dev/icons/bell-ring) icon.
+  /// [![`bell-ring`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/bell-ring.svg)](https://lucide.dev/icons/bell-ring)
   static const bellRing = IconData(57892, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`bell`](https://lucide.dev/icons/bell) icon.
+  /// [![`bell`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/bell.svg)](https://lucide.dev/icons/bell)
   static const bell = IconData(57433, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`between-horizontal-end`](https://lucide.dev/icons/between-horizontal-end) icon.
+  /// [![`between-horizontal-end`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/between-horizontal-end.svg)](https://lucide.dev/icons/between-horizontal-end)
   static const betweenHorizontalEnd = IconData(58769, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`between-horizontal-start`](https://lucide.dev/icons/between-horizontal-start) icon.
+  /// [![`between-horizontal-start`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/between-horizontal-start.svg)](https://lucide.dev/icons/between-horizontal-start)
   static const betweenHorizontalStart = IconData(58770, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`between-vertical-end`](https://lucide.dev/icons/between-vertical-end) icon.
+  /// [![`between-vertical-end`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/between-vertical-end.svg)](https://lucide.dev/icons/between-vertical-end)
   static const betweenVerticalEnd = IconData(58771, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`between-vertical-start`](https://lucide.dev/icons/between-vertical-start) icon.
+  /// [![`between-vertical-start`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/between-vertical-start.svg)](https://lucide.dev/icons/between-vertical-start)
   static const betweenVerticalStart = IconData(58772, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`biceps-flexed`](https://lucide.dev/icons/biceps-flexed) icon.
+  /// [![`biceps-flexed`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/biceps-flexed.svg)](https://lucide.dev/icons/biceps-flexed)
   static const bicepsFlexed = IconData(58859, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`bike`](https://lucide.dev/icons/bike) icon.
+  /// [![`bike`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/bike.svg)](https://lucide.dev/icons/bike)
   static const bike = IconData(57810, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`binary`](https://lucide.dev/icons/binary) icon.
+  /// [![`binary`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/binary.svg)](https://lucide.dev/icons/binary)
   static const binary = IconData(57842, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`binoculars`](https://lucide.dev/icons/binoculars) icon.
+  /// [![`binoculars`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/binoculars.svg)](https://lucide.dev/icons/binoculars)
   static const binoculars = IconData(58913, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`biohazard`](https://lucide.dev/icons/biohazard) icon.
+  /// [![`biohazard`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/biohazard.svg)](https://lucide.dev/icons/biohazard)
   static const biohazard = IconData(58433, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`bird`](https://lucide.dev/icons/bird) icon.
+  /// [![`bird`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/bird.svg)](https://lucide.dev/icons/bird)
   static const bird = IconData(58309, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`birdhouse`](https://lucide.dev/icons/birdhouse) icon.
+  /// [![`birdhouse`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/birdhouse.svg)](https://lucide.dev/icons/birdhouse)
   static const birdhouse = IconData(59034, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`bitcoin`](https://lucide.dev/icons/bitcoin) icon.
+  /// [![`bitcoin`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/bitcoin.svg)](https://lucide.dev/icons/bitcoin)
   static const bitcoin = IconData(57435, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`blend`](https://lucide.dev/icons/blend) icon.
+  /// [![`blend`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/blend.svg)](https://lucide.dev/icons/blend)
   static const blend = IconData(58780, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`blinds`](https://lucide.dev/icons/blinds) icon.
+  /// [![`blinds`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/blinds.svg)](https://lucide.dev/icons/blinds)
   static const blinds = IconData(58304, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`blocks`](https://lucide.dev/icons/blocks) icon.
+  /// [![`blocks`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/blocks.svg)](https://lucide.dev/icons/blocks)
   static const blocks = IconData(58618, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`bluetooth-connected`](https://lucide.dev/icons/bluetooth-connected) icon.
+  /// [![`bluetooth-connected`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/bluetooth-connected.svg)](https://lucide.dev/icons/bluetooth-connected)
   static const bluetoothConnected = IconData(57784, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`bluetooth-off`](https://lucide.dev/icons/bluetooth-off) icon.
+  /// [![`bluetooth-off`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/bluetooth-off.svg)](https://lucide.dev/icons/bluetooth-off)
   static const bluetoothOff = IconData(57785, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`bluetooth-searching`](https://lucide.dev/icons/bluetooth-searching) icon.
+  /// [![`bluetooth-searching`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/bluetooth-searching.svg)](https://lucide.dev/icons/bluetooth-searching)
   static const bluetoothSearching = IconData(57786, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`bluetooth`](https://lucide.dev/icons/bluetooth) icon.
+  /// [![`bluetooth`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/bluetooth.svg)](https://lucide.dev/icons/bluetooth)
   static const bluetooth = IconData(57436, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`bold`](https://lucide.dev/icons/bold) icon.
+  /// [![`bold`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/bold.svg)](https://lucide.dev/icons/bold)
   static const bold = IconData(57437, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`bolt`](https://lucide.dev/icons/bolt) icon.
+  /// [![`bolt`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/bolt.svg)](https://lucide.dev/icons/bolt)
   static const bolt = IconData(58764, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`bomb`](https://lucide.dev/icons/bomb) icon.
+  /// [![`bomb`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/bomb.svg)](https://lucide.dev/icons/bomb)
   static const bomb = IconData(58111, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`bone`](https://lucide.dev/icons/bone) icon.
+  /// [![`bone`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/bone.svg)](https://lucide.dev/icons/bone)
   static const bone = IconData(58200, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`book-a`](https://lucide.dev/icons/book-a) icon.
+  /// [![`book-a`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/book-a.svg)](https://lucide.dev/icons/book-a)
   static const bookA = IconData(58692, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`book-alert`](https://lucide.dev/icons/book-alert) icon.
+  /// [![`book-alert`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/book-alert.svg)](https://lucide.dev/icons/book-alert)
   static const bookAlert = IconData(58994, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`book-audio`](https://lucide.dev/icons/book-audio) icon.
+  /// [![`book-audio`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/book-audio.svg)](https://lucide.dev/icons/book-audio)
   static const bookAudio = IconData(58693, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`book-check`](https://lucide.dev/icons/book-check) icon.
+  /// [![`book-check`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/book-check.svg)](https://lucide.dev/icons/book-check)
   static const bookCheck = IconData(58694, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`book-copy`](https://lucide.dev/icons/book-copy) icon.
+  /// [![`book-copy`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/book-copy.svg)](https://lucide.dev/icons/book-copy)
   static const bookCopy = IconData(58348, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`book-dashed`](https://lucide.dev/icons/book-dashed) icon.
+  /// [![`book-dashed`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/book-dashed.svg)](https://lucide.dev/icons/book-dashed)
   static const bookDashed = IconData(58349, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`book-down`](https://lucide.dev/icons/book-down) icon.
+  /// [![`book-down`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/book-down.svg)](https://lucide.dev/icons/book-down)
   static const bookDown = IconData(58350, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`book-headphones`](https://lucide.dev/icons/book-headphones) icon.
+  /// [![`book-headphones`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/book-headphones.svg)](https://lucide.dev/icons/book-headphones)
   static const bookHeadphones = IconData(58695, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`book-heart`](https://lucide.dev/icons/book-heart) icon.
+  /// [![`book-heart`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/book-heart.svg)](https://lucide.dev/icons/book-heart)
   static const bookHeart = IconData(58696, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`book-image`](https://lucide.dev/icons/book-image) icon.
+  /// [![`book-image`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/book-image.svg)](https://lucide.dev/icons/book-image)
   static const bookImage = IconData(58697, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`book-key`](https://lucide.dev/icons/book-key) icon.
+  /// [![`book-key`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/book-key.svg)](https://lucide.dev/icons/book-key)
   static const bookKey = IconData(58351, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`book-lock`](https://lucide.dev/icons/book-lock) icon.
+  /// [![`book-lock`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/book-lock.svg)](https://lucide.dev/icons/book-lock)
   static const bookLock = IconData(58352, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`book-marked`](https://lucide.dev/icons/book-marked) icon.
+  /// [![`book-marked`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/book-marked.svg)](https://lucide.dev/icons/book-marked)
   static const bookMarked = IconData(58353, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`book-minus`](https://lucide.dev/icons/book-minus) icon.
+  /// [![`book-minus`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/book-minus.svg)](https://lucide.dev/icons/book-minus)
   static const bookMinus = IconData(58354, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`book-open-check`](https://lucide.dev/icons/book-open-check) icon.
+  /// [![`book-open-check`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/book-open-check.svg)](https://lucide.dev/icons/book-open-check)
   static const bookOpenCheck = IconData(58241, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`book-open-text`](https://lucide.dev/icons/book-open-text) icon.
+  /// [![`book-open-text`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/book-open-text.svg)](https://lucide.dev/icons/book-open-text)
   static const bookOpenText = IconData(58698, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`book-open`](https://lucide.dev/icons/book-open) icon.
+  /// [![`book-open`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/book-open.svg)](https://lucide.dev/icons/book-open)
   static const bookOpen = IconData(57439, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`book-plus`](https://lucide.dev/icons/book-plus) icon.
+  /// [![`book-plus`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/book-plus.svg)](https://lucide.dev/icons/book-plus)
   static const bookPlus = IconData(58355, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`book-search`](https://lucide.dev/icons/book-search) icon.
+  /// [![`book-search`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/book-search.svg)](https://lucide.dev/icons/book-search)
   static const bookSearch = IconData(59051, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`book-text`](https://lucide.dev/icons/book-text) icon.
+  /// [![`book-text`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/book-text.svg)](https://lucide.dev/icons/book-text)
   static const bookText = IconData(58699, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`book-type`](https://lucide.dev/icons/book-type) icon.
+  /// [![`book-type`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/book-type.svg)](https://lucide.dev/icons/book-type)
   static const bookType = IconData(58700, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`book-up-2`](https://lucide.dev/icons/book-up-2) icon.
+  /// [![`book-up-2`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/book-up-2.svg)](https://lucide.dev/icons/book-up-2)
   static const bookUp2 = IconData(58534, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`book-up`](https://lucide.dev/icons/book-up) icon.
+  /// [![`book-up`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/book-up.svg)](https://lucide.dev/icons/book-up)
   static const bookUp = IconData(58356, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`book-user`](https://lucide.dev/icons/book-user) icon.
+  /// [![`book-user`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/book-user.svg)](https://lucide.dev/icons/book-user)
   static const bookUser = IconData(58701, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`book-x`](https://lucide.dev/icons/book-x) icon.
+  /// [![`book-x`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/book-x.svg)](https://lucide.dev/icons/book-x)
   static const bookX = IconData(58357, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`book`](https://lucide.dev/icons/book) icon.
+  /// [![`book`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/book.svg)](https://lucide.dev/icons/book)
   static const book = IconData(57438, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`bookmark-check`](https://lucide.dev/icons/bookmark-check) icon.
+  /// [![`bookmark-check`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/bookmark-check.svg)](https://lucide.dev/icons/bookmark-check)
   static const bookmarkCheck = IconData(58655, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`bookmark-minus`](https://lucide.dev/icons/bookmark-minus) icon.
+  /// [![`bookmark-minus`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/bookmark-minus.svg)](https://lucide.dev/icons/bookmark-minus)
   static const bookmarkMinus = IconData(57916, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`bookmark-plus`](https://lucide.dev/icons/bookmark-plus) icon.
+  /// [![`bookmark-plus`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/bookmark-plus.svg)](https://lucide.dev/icons/bookmark-plus)
   static const bookmarkPlus = IconData(57917, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`bookmark-x`](https://lucide.dev/icons/bookmark-x) icon.
+  /// [![`bookmark-x`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/bookmark-x.svg)](https://lucide.dev/icons/bookmark-x)
   static const bookmarkX = IconData(58656, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`bookmark`](https://lucide.dev/icons/bookmark) icon.
+  /// [![`bookmark`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/bookmark.svg)](https://lucide.dev/icons/bookmark)
   static const bookmark = IconData(57440, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`boom-box`](https://lucide.dev/icons/boom-box) icon.
+  /// [![`boom-box`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/boom-box.svg)](https://lucide.dev/icons/boom-box)
   static const boomBox = IconData(58606, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`bot-message-square`](https://lucide.dev/icons/bot-message-square) icon.
+  /// [![`bot-message-square`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/bot-message-square.svg)](https://lucide.dev/icons/bot-message-square)
   static const botMessageSquare = IconData(58830, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`bot-off`](https://lucide.dev/icons/bot-off) icon.
+  /// [![`bot-off`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/bot-off.svg)](https://lucide.dev/icons/bot-off)
   static const botOff = IconData(58848, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`bot`](https://lucide.dev/icons/bot) icon.
+  /// [![`bot`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/bot.svg)](https://lucide.dev/icons/bot)
   static const bot = IconData(57787, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`bottle-wine`](https://lucide.dev/icons/bottle-wine) icon.
+  /// [![`bottle-wine`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/bottle-wine.svg)](https://lucide.dev/icons/bottle-wine)
   static const bottleWine = IconData(59003, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`bow-arrow`](https://lucide.dev/icons/bow-arrow) icon.
+  /// [![`bow-arrow`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/bow-arrow.svg)](https://lucide.dev/icons/bow-arrow)
   static const bowArrow = IconData(58974, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`box`](https://lucide.dev/icons/box) icon.
+  /// [![`box`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/box.svg)](https://lucide.dev/icons/box)
   static const box = IconData(57441, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`boxes`](https://lucide.dev/icons/boxes) icon.
+  /// [![`boxes`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/boxes.svg)](https://lucide.dev/icons/boxes)
   static const boxes = IconData(58064, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`braces`](https://lucide.dev/icons/braces) icon.
+  /// [![`braces`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/braces.svg)](https://lucide.dev/icons/braces)
   static const braces = IconData(58218, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`brackets`](https://lucide.dev/icons/brackets) icon.
+  /// [![`brackets`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/brackets.svg)](https://lucide.dev/icons/brackets)
   static const brackets = IconData(58435, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`brain-circuit`](https://lucide.dev/icons/brain-circuit) icon.
+  /// [![`brain-circuit`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/brain-circuit.svg)](https://lucide.dev/icons/brain-circuit)
   static const brainCircuit = IconData(58311, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`brain-cog`](https://lucide.dev/icons/brain-cog) icon.
+  /// [![`brain-cog`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/brain-cog.svg)](https://lucide.dev/icons/brain-cog)
   static const brainCog = IconData(58312, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`brain`](https://lucide.dev/icons/brain) icon.
+  /// [![`brain`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/brain.svg)](https://lucide.dev/icons/brain)
   static const brain = IconData(58310, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`brick-wall-fire`](https://lucide.dev/icons/brick-wall-fire) icon.
+  /// [![`brick-wall-fire`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/brick-wall-fire.svg)](https://lucide.dev/icons/brick-wall-fire)
   static const brickWallFire = IconData(58963, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`brick-wall-shield`](https://lucide.dev/icons/brick-wall-shield) icon.
+  /// [![`brick-wall-shield`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/brick-wall-shield.svg)](https://lucide.dev/icons/brick-wall-shield)
   static const brickWallShield = IconData(59024, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`brick-wall`](https://lucide.dev/icons/brick-wall) icon.
+  /// [![`brick-wall`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/brick-wall.svg)](https://lucide.dev/icons/brick-wall)
   static const brickWall = IconData(58753, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`briefcase-business`](https://lucide.dev/icons/briefcase-business) icon.
+  /// [![`briefcase-business`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/briefcase-business.svg)](https://lucide.dev/icons/briefcase-business)
   static const briefcaseBusiness = IconData(58837, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`briefcase-conveyor-belt`](https://lucide.dev/icons/briefcase-conveyor-belt) icon.
+  /// [![`briefcase-conveyor-belt`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/briefcase-conveyor-belt.svg)](https://lucide.dev/icons/briefcase-conveyor-belt)
   static const briefcaseConveyorBelt = IconData(58923, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`briefcase-medical`](https://lucide.dev/icons/briefcase-medical) icon.
+  /// [![`briefcase-medical`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/briefcase-medical.svg)](https://lucide.dev/icons/briefcase-medical)
   static const briefcaseMedical = IconData(58838, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`briefcase`](https://lucide.dev/icons/briefcase) icon.
+  /// [![`briefcase`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/briefcase.svg)](https://lucide.dev/icons/briefcase)
   static const briefcase = IconData(57442, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`bring-to-front`](https://lucide.dev/icons/bring-to-front) icon.
+  /// [![`bring-to-front`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/bring-to-front.svg)](https://lucide.dev/icons/bring-to-front)
   static const bringToFront = IconData(58607, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`brush-cleaning`](https://lucide.dev/icons/brush-cleaning) icon.
+  /// [![`brush-cleaning`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/brush-cleaning.svg)](https://lucide.dev/icons/brush-cleaning)
   static const brushCleaning = IconData(58982, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`brush`](https://lucide.dev/icons/brush) icon.
+  /// [![`brush`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/brush.svg)](https://lucide.dev/icons/brush)
   static const brush = IconData(57811, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`bubbles`](https://lucide.dev/icons/bubbles) icon.
+  /// [![`bubbles`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/bubbles.svg)](https://lucide.dev/icons/bubbles)
   static const bubbles = IconData(58964, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`bug-off`](https://lucide.dev/icons/bug-off) icon.
+  /// [![`bug-off`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/bug-off.svg)](https://lucide.dev/icons/bug-off)
   static const bugOff = IconData(58637, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`bug-play`](https://lucide.dev/icons/bug-play) icon.
+  /// [![`bug-play`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/bug-play.svg)](https://lucide.dev/icons/bug-play)
   static const bugPlay = IconData(58638, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`bug`](https://lucide.dev/icons/bug) icon.
+  /// [![`bug`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/bug.svg)](https://lucide.dev/icons/bug)
   static const bug = IconData(57868, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`building-2`](https://lucide.dev/icons/building-2) icon.
+  /// [![`building-2`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/building-2.svg)](https://lucide.dev/icons/building-2)
   static const building2 = IconData(58000, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`building`](https://lucide.dev/icons/building) icon.
+  /// [![`building`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/building.svg)](https://lucide.dev/icons/building)
   static const building = IconData(57804, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`bus-front`](https://lucide.dev/icons/bus-front) icon.
+  /// [![`bus-front`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/bus-front.svg)](https://lucide.dev/icons/bus-front)
   static const busFront = IconData(58619, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`bus`](https://lucide.dev/icons/bus) icon.
+  /// [![`bus`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/bus.svg)](https://lucide.dev/icons/bus)
   static const bus = IconData(57812, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`cable-car`](https://lucide.dev/icons/cable-car) icon.
+  /// [![`cable-car`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/cable-car.svg)](https://lucide.dev/icons/cable-car)
   static const cableCar = IconData(58620, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`cable`](https://lucide.dev/icons/cable) icon.
+  /// [![`cable`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/cable.svg)](https://lucide.dev/icons/cable)
   static const cable = IconData(58595, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`cake-slice`](https://lucide.dev/icons/cake-slice) icon.
+  /// [![`cake-slice`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/cake-slice.svg)](https://lucide.dev/icons/cake-slice)
   static const cakeSlice = IconData(58553, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`cake`](https://lucide.dev/icons/cake) icon.
+  /// [![`cake`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/cake.svg)](https://lucide.dev/icons/cake)
   static const cake = IconData(58180, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`calculator`](https://lucide.dev/icons/calculator) icon.
+  /// [![`calculator`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/calculator.svg)](https://lucide.dev/icons/calculator)
   static const calculator = IconData(57788, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`calendar-1`](https://lucide.dev/icons/calendar-1) icon.
+  /// [![`calendar-1`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/calendar-1.svg)](https://lucide.dev/icons/calendar-1)
   static const calendar1 = IconData(58928, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`calendar-arrow-down`](https://lucide.dev/icons/calendar-arrow-down) icon.
+  /// [![`calendar-arrow-down`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/calendar-arrow-down.svg)](https://lucide.dev/icons/calendar-arrow-down)
   static const calendarArrowDown = IconData(58878, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`calendar-arrow-up`](https://lucide.dev/icons/calendar-arrow-up) icon.
+  /// [![`calendar-arrow-up`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/calendar-arrow-up.svg)](https://lucide.dev/icons/calendar-arrow-up)
   static const calendarArrowUp = IconData(58879, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`calendar-check-2`](https://lucide.dev/icons/calendar-check-2) icon.
+  /// [![`calendar-check-2`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/calendar-check-2.svg)](https://lucide.dev/icons/calendar-check-2)
   static const calendarCheck2 = IconData(58040, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`calendar-check`](https://lucide.dev/icons/calendar-check) icon.
+  /// [![`calendar-check`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/calendar-check.svg)](https://lucide.dev/icons/calendar-check)
   static const calendarCheck = IconData(58039, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`calendar-clock`](https://lucide.dev/icons/calendar-clock) icon.
+  /// [![`calendar-clock`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/calendar-clock.svg)](https://lucide.dev/icons/calendar-clock)
   static const calendarClock = IconData(58116, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`calendar-cog`](https://lucide.dev/icons/calendar-cog) icon.
+  /// [![`calendar-cog`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/calendar-cog.svg)](https://lucide.dev/icons/calendar-cog)
   static const calendarCog = IconData(58861, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`calendar-days`](https://lucide.dev/icons/calendar-days) icon.
+  /// [![`calendar-days`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/calendar-days.svg)](https://lucide.dev/icons/calendar-days)
   static const calendarDays = IconData(58041, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`calendar-fold`](https://lucide.dev/icons/calendar-fold) icon.
+  /// [![`calendar-fold`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/calendar-fold.svg)](https://lucide.dev/icons/calendar-fold)
   static const calendarFold = IconData(58804, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`calendar-heart`](https://lucide.dev/icons/calendar-heart) icon.
+  /// [![`calendar-heart`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/calendar-heart.svg)](https://lucide.dev/icons/calendar-heart)
   static const calendarHeart = IconData(58117, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`calendar-minus-2`](https://lucide.dev/icons/calendar-minus-2) icon.
+  /// [![`calendar-minus-2`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/calendar-minus-2.svg)](https://lucide.dev/icons/calendar-minus-2)
   static const calendarMinus2 = IconData(58805, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`calendar-minus`](https://lucide.dev/icons/calendar-minus) icon.
+  /// [![`calendar-minus`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/calendar-minus.svg)](https://lucide.dev/icons/calendar-minus)
   static const calendarMinus = IconData(58042, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`calendar-off`](https://lucide.dev/icons/calendar-off) icon.
+  /// [![`calendar-off`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/calendar-off.svg)](https://lucide.dev/icons/calendar-off)
   static const calendarOff = IconData(58043, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`calendar-plus-2`](https://lucide.dev/icons/calendar-plus-2) icon.
+  /// [![`calendar-plus-2`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/calendar-plus-2.svg)](https://lucide.dev/icons/calendar-plus-2)
   static const calendarPlus2 = IconData(58806, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`calendar-plus`](https://lucide.dev/icons/calendar-plus) icon.
+  /// [![`calendar-plus`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/calendar-plus.svg)](https://lucide.dev/icons/calendar-plus)
   static const calendarPlus = IconData(58044, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`calendar-range`](https://lucide.dev/icons/calendar-range) icon.
+  /// [![`calendar-range`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/calendar-range.svg)](https://lucide.dev/icons/calendar-range)
   static const calendarRange = IconData(58045, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`calendar-search`](https://lucide.dev/icons/calendar-search) icon.
+  /// [![`calendar-search`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/calendar-search.svg)](https://lucide.dev/icons/calendar-search)
   static const calendarSearch = IconData(58118, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`calendar-sync`](https://lucide.dev/icons/calendar-sync) icon.
+  /// [![`calendar-sync`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/calendar-sync.svg)](https://lucide.dev/icons/calendar-sync)
   static const calendarSync = IconData(58934, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`calendar-x-2`](https://lucide.dev/icons/calendar-x-2) icon.
+  /// [![`calendar-x-2`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/calendar-x-2.svg)](https://lucide.dev/icons/calendar-x-2)
   static const calendarX2 = IconData(58047, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`calendar-x`](https://lucide.dev/icons/calendar-x) icon.
+  /// [![`calendar-x`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/calendar-x.svg)](https://lucide.dev/icons/calendar-x)
   static const calendarX = IconData(58046, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`calendar`](https://lucide.dev/icons/calendar) icon.
+  /// [![`calendar`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/calendar.svg)](https://lucide.dev/icons/calendar)
   static const calendar = IconData(57443, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`calendars`](https://lucide.dev/icons/calendars) icon.
+  /// [![`calendars`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/calendars.svg)](https://lucide.dev/icons/calendars)
   static const calendars = IconData(59047, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`camera-off`](https://lucide.dev/icons/camera-off) icon.
+  /// [![`camera-off`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/camera-off.svg)](https://lucide.dev/icons/camera-off)
   static const cameraOff = IconData(57445, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`camera`](https://lucide.dev/icons/camera) icon.
+  /// [![`camera`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/camera.svg)](https://lucide.dev/icons/camera)
   static const camera = IconData(57444, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`candy-cane`](https://lucide.dev/icons/candy-cane) icon.
+  /// [![`candy-cane`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/candy-cane.svg)](https://lucide.dev/icons/candy-cane)
   static const candyCane = IconData(58554, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`candy-off`](https://lucide.dev/icons/candy-off) icon.
+  /// [![`candy-off`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/candy-off.svg)](https://lucide.dev/icons/candy-off)
   static const candyOff = IconData(58258, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`candy`](https://lucide.dev/icons/candy) icon.
+  /// [![`candy`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/candy.svg)](https://lucide.dev/icons/candy)
   static const candy = IconData(58257, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`cannabis-off`](https://lucide.dev/icons/cannabis-off) icon.
+  /// [![`cannabis-off`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/cannabis-off.svg)](https://lucide.dev/icons/cannabis-off)
   static const cannabisOff = IconData(59063, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`cannabis`](https://lucide.dev/icons/cannabis) icon.
+  /// [![`cannabis`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/cannabis.svg)](https://lucide.dev/icons/cannabis)
   static const cannabis = IconData(58836, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`captions-off`](https://lucide.dev/icons/captions-off) icon.
+  /// [![`captions-off`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/captions-off.svg)](https://lucide.dev/icons/captions-off)
   static const captionsOff = IconData(58817, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`captions`](https://lucide.dev/icons/captions) icon.
+  /// [![`captions`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/captions.svg)](https://lucide.dev/icons/captions)
   static const captions = IconData(58276, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`car-front`](https://lucide.dev/icons/car-front) icon.
+  /// [![`car-front`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/car-front.svg)](https://lucide.dev/icons/car-front)
   static const carFront = IconData(58621, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`car-taxi-front`](https://lucide.dev/icons/car-taxi-front) icon.
+  /// [![`car-taxi-front`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/car-taxi-front.svg)](https://lucide.dev/icons/car-taxi-front)
   static const carTaxiFront = IconData(58622, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`car`](https://lucide.dev/icons/car) icon.
+  /// [![`car`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/car.svg)](https://lucide.dev/icons/car)
   static const car = IconData(57813, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`caravan`](https://lucide.dev/icons/caravan) icon.
+  /// [![`caravan`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/caravan.svg)](https://lucide.dev/icons/caravan)
   static const caravan = IconData(58681, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`card-sim`](https://lucide.dev/icons/card-sim) icon.
+  /// [![`card-sim`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/card-sim.svg)](https://lucide.dev/icons/card-sim)
   static const cardSim = IconData(58993, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`carrot`](https://lucide.dev/icons/carrot) icon.
+  /// [![`carrot`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/carrot.svg)](https://lucide.dev/icons/carrot)
   static const carrot = IconData(57946, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`case-lower`](https://lucide.dev/icons/case-lower) icon.
+  /// [![`case-lower`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/case-lower.svg)](https://lucide.dev/icons/case-lower)
   static const caseLower = IconData(58328, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`case-sensitive`](https://lucide.dev/icons/case-sensitive) icon.
+  /// [![`case-sensitive`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/case-sensitive.svg)](https://lucide.dev/icons/case-sensitive)
   static const caseSensitive = IconData(58329, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`case-upper`](https://lucide.dev/icons/case-upper) icon.
+  /// [![`case-upper`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/case-upper.svg)](https://lucide.dev/icons/case-upper)
   static const caseUpper = IconData(58330, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`cassette-tape`](https://lucide.dev/icons/cassette-tape) icon.
+  /// [![`cassette-tape`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/cassette-tape.svg)](https://lucide.dev/icons/cassette-tape)
   static const cassetteTape = IconData(58570, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`cast`](https://lucide.dev/icons/cast) icon.
+  /// [![`cast`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/cast.svg)](https://lucide.dev/icons/cast)
   static const cast = IconData(57446, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`castle`](https://lucide.dev/icons/castle) icon.
+  /// [![`castle`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/castle.svg)](https://lucide.dev/icons/castle)
   static const castle = IconData(58336, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`cat`](https://lucide.dev/icons/cat) icon.
+  /// [![`cat`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/cat.svg)](https://lucide.dev/icons/cat)
   static const cat = IconData(58252, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`cctv`](https://lucide.dev/icons/cctv) icon.
+  /// [![`cctv`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/cctv.svg)](https://lucide.dev/icons/cctv)
   static const cctv = IconData(58749, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`chart-area`](https://lucide.dev/icons/chart-area) icon.
+  /// [![`chart-area`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/chart-area.svg)](https://lucide.dev/icons/chart-area)
   static const chartArea = IconData(58579, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`chart-bar-big`](https://lucide.dev/icons/chart-bar-big) icon.
+  /// [![`chart-bar-big`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/chart-bar-big.svg)](https://lucide.dev/icons/chart-bar-big)
   static const chartBarBig = IconData(58535, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`chart-bar-decreasing`](https://lucide.dev/icons/chart-bar-decreasing) icon.
+  /// [![`chart-bar-decreasing`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/chart-bar-decreasing.svg)](https://lucide.dev/icons/chart-bar-decreasing)
   static const chartBarDecreasing = IconData(58887, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`chart-bar-increasing`](https://lucide.dev/icons/chart-bar-increasing) icon.
+  /// [![`chart-bar-increasing`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/chart-bar-increasing.svg)](https://lucide.dev/icons/chart-bar-increasing)
   static const chartBarIncreasing = IconData(58888, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`chart-bar-stacked`](https://lucide.dev/icons/chart-bar-stacked) icon.
+  /// [![`chart-bar-stacked`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/chart-bar-stacked.svg)](https://lucide.dev/icons/chart-bar-stacked)
   static const chartBarStacked = IconData(58889, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`chart-bar`](https://lucide.dev/icons/chart-bar) icon.
+  /// [![`chart-bar`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/chart-bar.svg)](https://lucide.dev/icons/chart-bar)
   static const chartBar = IconData(58018, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`chart-candlestick`](https://lucide.dev/icons/chart-candlestick) icon.
+  /// [![`chart-candlestick`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/chart-candlestick.svg)](https://lucide.dev/icons/chart-candlestick)
   static const chartCandlestick = IconData(58536, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`chart-column-big`](https://lucide.dev/icons/chart-column-big) icon.
+  /// [![`chart-column-big`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/chart-column-big.svg)](https://lucide.dev/icons/chart-column-big)
   static const chartColumnBig = IconData(58537, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`chart-column-decreasing`](https://lucide.dev/icons/chart-column-decreasing) icon.
+  /// [![`chart-column-decreasing`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/chart-column-decreasing.svg)](https://lucide.dev/icons/chart-column-decreasing)
   static const chartColumnDecreasing = IconData(57447, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`chart-column-increasing`](https://lucide.dev/icons/chart-column-increasing) icon.
+  /// [![`chart-column-increasing`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/chart-column-increasing.svg)](https://lucide.dev/icons/chart-column-increasing)
   static const chartColumnIncreasing = IconData(58020, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`chart-column-stacked`](https://lucide.dev/icons/chart-column-stacked) icon.
+  /// [![`chart-column-stacked`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/chart-column-stacked.svg)](https://lucide.dev/icons/chart-column-stacked)
   static const chartColumnStacked = IconData(58890, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`chart-column`](https://lucide.dev/icons/chart-column) icon.
+  /// [![`chart-column`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/chart-column.svg)](https://lucide.dev/icons/chart-column)
   static const chartColumn = IconData(58019, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`chart-gantt`](https://lucide.dev/icons/chart-gantt) icon.
+  /// [![`chart-gantt`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/chart-gantt.svg)](https://lucide.dev/icons/chart-gantt)
   static const chartGantt = IconData(58916, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`chart-line`](https://lucide.dev/icons/chart-line) icon.
+  /// [![`chart-line`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/chart-line.svg)](https://lucide.dev/icons/chart-line)
   static const chartLine = IconData(58021, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`chart-network`](https://lucide.dev/icons/chart-network) icon.
+  /// [![`chart-network`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/chart-network.svg)](https://lucide.dev/icons/chart-network)
   static const chartNetwork = IconData(58891, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`chart-no-axes-column-decreasing`](https://lucide.dev/icons/chart-no-axes-column-decreasing) icon.
+  /// [![`chart-no-axes-column-decreasing`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/chart-no-axes-column-decreasing.svg)](https://lucide.dev/icons/chart-no-axes-column-decreasing)
   static const chartNoAxesColumnDecreasing = IconData(
     57449,
     fontFamily: 'ForuiLucideIcons',
     fontPackage: 'forui_assets',
   );
 
-  /// A [`chart-no-axes-column-increasing`](https://lucide.dev/icons/chart-no-axes-column-increasing) icon.
+  /// [![`chart-no-axes-column-increasing`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/chart-no-axes-column-increasing.svg)](https://lucide.dev/icons/chart-no-axes-column-increasing)
   static const chartNoAxesColumnIncreasing = IconData(
     57450,
     fontFamily: 'ForuiLucideIcons',
     fontPackage: 'forui_assets',
   );
 
-  /// A [`chart-no-axes-column`](https://lucide.dev/icons/chart-no-axes-column) icon.
+  /// [![`chart-no-axes-column`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/chart-no-axes-column.svg)](https://lucide.dev/icons/chart-no-axes-column)
   static const chartNoAxesColumn = IconData(57448, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`chart-no-axes-combined`](https://lucide.dev/icons/chart-no-axes-combined) icon.
+  /// [![`chart-no-axes-combined`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/chart-no-axes-combined.svg)](https://lucide.dev/icons/chart-no-axes-combined)
   static const chartNoAxesCombined = IconData(58892, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`chart-no-axes-gantt`](https://lucide.dev/icons/chart-no-axes-gantt) icon.
+  /// [![`chart-no-axes-gantt`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/chart-no-axes-gantt.svg)](https://lucide.dev/icons/chart-no-axes-gantt)
   static const chartNoAxesGantt = IconData(58564, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`chart-pie`](https://lucide.dev/icons/chart-pie) icon.
+  /// [![`chart-pie`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/chart-pie.svg)](https://lucide.dev/icons/chart-pie)
   static const chartPie = IconData(57451, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`chart-scatter`](https://lucide.dev/icons/chart-scatter) icon.
+  /// [![`chart-scatter`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/chart-scatter.svg)](https://lucide.dev/icons/chart-scatter)
   static const chartScatter = IconData(58506, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`chart-spline`](https://lucide.dev/icons/chart-spline) icon.
+  /// [![`chart-spline`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/chart-spline.svg)](https://lucide.dev/icons/chart-spline)
   static const chartSpline = IconData(58893, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`check-check`](https://lucide.dev/icons/check-check) icon.
+  /// [![`check-check`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/check-check.svg)](https://lucide.dev/icons/check-check)
   static const checkCheck = IconData(58254, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`check-line`](https://lucide.dev/icons/check-line) icon.
+  /// [![`check-line`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/check-line.svg)](https://lucide.dev/icons/check-line)
   static const checkLine = IconData(58987, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`check`](https://lucide.dev/icons/check) icon.
+  /// [![`check`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/check.svg)](https://lucide.dev/icons/check)
   static const check = IconData(57452, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`chef-hat`](https://lucide.dev/icons/chef-hat) icon.
+  /// [![`chef-hat`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/chef-hat.svg)](https://lucide.dev/icons/chef-hat)
   static const chefHat = IconData(58028, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`cherry`](https://lucide.dev/icons/cherry) icon.
+  /// [![`cherry`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/cherry.svg)](https://lucide.dev/icons/cherry)
   static const cherry = IconData(58192, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`chess-bishop`](https://lucide.dev/icons/chess-bishop) icon.
+  /// [![`chess-bishop`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/chess-bishop.svg)](https://lucide.dev/icons/chess-bishop)
   static const chessBishop = IconData(59040, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`chess-king`](https://lucide.dev/icons/chess-king) icon.
+  /// [![`chess-king`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/chess-king.svg)](https://lucide.dev/icons/chess-king)
   static const chessKing = IconData(59041, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`chess-knight`](https://lucide.dev/icons/chess-knight) icon.
+  /// [![`chess-knight`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/chess-knight.svg)](https://lucide.dev/icons/chess-knight)
   static const chessKnight = IconData(59042, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`chess-pawn`](https://lucide.dev/icons/chess-pawn) icon.
+  /// [![`chess-pawn`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/chess-pawn.svg)](https://lucide.dev/icons/chess-pawn)
   static const chessPawn = IconData(59043, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`chess-queen`](https://lucide.dev/icons/chess-queen) icon.
+  /// [![`chess-queen`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/chess-queen.svg)](https://lucide.dev/icons/chess-queen)
   static const chessQueen = IconData(59044, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`chess-rook`](https://lucide.dev/icons/chess-rook) icon.
+  /// [![`chess-rook`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/chess-rook.svg)](https://lucide.dev/icons/chess-rook)
   static const chessRook = IconData(59045, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`chevron-down`](https://lucide.dev/icons/chevron-down) icon.
+  /// [![`chevron-down`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/chevron-down.svg)](https://lucide.dev/icons/chevron-down)
   static const chevronDown = IconData(57453, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`chevron-first`](https://lucide.dev/icons/chevron-first) icon.
+  /// [![`chevron-first`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/chevron-first.svg)](https://lucide.dev/icons/chevron-first)
   static const chevronFirst = IconData(
     57923,
     fontFamily: 'ForuiLucideIcons',
@@ -1121,7 +1119,7 @@ class FIcons {
     matchTextDirection: true,
   );
 
-  /// A [`chevron-last`](https://lucide.dev/icons/chevron-last) icon.
+  /// [![`chevron-last`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/chevron-last.svg)](https://lucide.dev/icons/chevron-last)
   static const chevronLast = IconData(
     57924,
     fontFamily: 'ForuiLucideIcons',
@@ -1129,7 +1127,7 @@ class FIcons {
     matchTextDirection: true,
   );
 
-  /// A [`chevron-left`](https://lucide.dev/icons/chevron-left) icon.
+  /// [![`chevron-left`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/chevron-left.svg)](https://lucide.dev/icons/chevron-left)
   static const chevronLeft = IconData(
     57454,
     fontFamily: 'ForuiLucideIcons',
@@ -1137,7 +1135,7 @@ class FIcons {
     matchTextDirection: true,
   );
 
-  /// A [`chevron-right`](https://lucide.dev/icons/chevron-right) icon.
+  /// [![`chevron-right`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/chevron-right.svg)](https://lucide.dev/icons/chevron-right)
   static const chevronRight = IconData(
     57455,
     fontFamily: 'ForuiLucideIcons',
@@ -1145,22 +1143,22 @@ class FIcons {
     matchTextDirection: true,
   );
 
-  /// A [`chevron-up`](https://lucide.dev/icons/chevron-up) icon.
+  /// [![`chevron-up`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/chevron-up.svg)](https://lucide.dev/icons/chevron-up)
   static const chevronUp = IconData(57456, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`chevrons-down-up`](https://lucide.dev/icons/chevrons-down-up) icon.
+  /// [![`chevrons-down-up`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/chevrons-down-up.svg)](https://lucide.dev/icons/chevrons-down-up)
   static const chevronsDownUp = IconData(57896, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`chevrons-down`](https://lucide.dev/icons/chevrons-down) icon.
+  /// [![`chevrons-down`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/chevrons-down.svg)](https://lucide.dev/icons/chevrons-down)
   static const chevronsDown = IconData(57457, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`chevrons-left-right-ellipsis`](https://lucide.dev/icons/chevrons-left-right-ellipsis) icon.
+  /// [![`chevrons-left-right-ellipsis`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/chevrons-left-right-ellipsis.svg)](https://lucide.dev/icons/chevrons-left-right-ellipsis)
   static const chevronsLeftRightEllipsis = IconData(58911, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`chevrons-left-right`](https://lucide.dev/icons/chevrons-left-right) icon.
+  /// [![`chevrons-left-right`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/chevrons-left-right.svg)](https://lucide.dev/icons/chevrons-left-right)
   static const chevronsLeftRight = IconData(58003, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`chevrons-left`](https://lucide.dev/icons/chevrons-left) icon.
+  /// [![`chevrons-left`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/chevrons-left.svg)](https://lucide.dev/icons/chevrons-left)
   static const chevronsLeft = IconData(
     57458,
     fontFamily: 'ForuiLucideIcons',
@@ -1168,10 +1166,10 @@ class FIcons {
     matchTextDirection: true,
   );
 
-  /// A [`chevrons-right-left`](https://lucide.dev/icons/chevrons-right-left) icon.
+  /// [![`chevrons-right-left`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/chevrons-right-left.svg)](https://lucide.dev/icons/chevrons-right-left)
   static const chevronsRightLeft = IconData(58004, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`chevrons-right`](https://lucide.dev/icons/chevrons-right) icon.
+  /// [![`chevrons-right`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/chevrons-right.svg)](https://lucide.dev/icons/chevrons-right)
   static const chevronsRight = IconData(
     57459,
     fontFamily: 'ForuiLucideIcons',
@@ -1179,31 +1177,31 @@ class FIcons {
     matchTextDirection: true,
   );
 
-  /// A [`chevrons-up-down`](https://lucide.dev/icons/chevrons-up-down) icon.
+  /// [![`chevrons-up-down`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/chevrons-up-down.svg)](https://lucide.dev/icons/chevrons-up-down)
   static const chevronsUpDown = IconData(57873, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`chevrons-up`](https://lucide.dev/icons/chevrons-up) icon.
+  /// [![`chevrons-up`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/chevrons-up.svg)](https://lucide.dev/icons/chevrons-up)
   static const chevronsUp = IconData(57460, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`chromium`](https://lucide.dev/icons/chromium) icon.
+  /// [![`chromium`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/chromium.svg)](https://lucide.dev/icons/chromium)
   static const chromium = IconData(57461, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`church`](https://lucide.dev/icons/church) icon.
+  /// [![`church`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/church.svg)](https://lucide.dev/icons/church)
   static const church = IconData(58337, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`cigarette-off`](https://lucide.dev/icons/cigarette-off) icon.
+  /// [![`cigarette-off`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/cigarette-off.svg)](https://lucide.dev/icons/cigarette-off)
   static const cigaretteOff = IconData(58055, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`cigarette`](https://lucide.dev/icons/cigarette) icon.
+  /// [![`cigarette`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/cigarette.svg)](https://lucide.dev/icons/cigarette)
   static const cigarette = IconData(58054, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`circle-alert`](https://lucide.dev/icons/circle-alert) icon.
+  /// [![`circle-alert`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/circle-alert.svg)](https://lucide.dev/icons/circle-alert)
   static const circleAlert = IconData(57463, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`circle-arrow-down`](https://lucide.dev/icons/circle-arrow-down) icon.
+  /// [![`circle-arrow-down`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/circle-arrow-down.svg)](https://lucide.dev/icons/circle-arrow-down)
   static const circleArrowDown = IconData(57464, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`circle-arrow-left`](https://lucide.dev/icons/circle-arrow-left) icon.
+  /// [![`circle-arrow-left`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/circle-arrow-left.svg)](https://lucide.dev/icons/circle-arrow-left)
   static const circleArrowLeft = IconData(
     57465,
     fontFamily: 'ForuiLucideIcons',
@@ -1211,19 +1209,19 @@ class FIcons {
     matchTextDirection: true,
   );
 
-  /// A [`circle-arrow-out-down-left`](https://lucide.dev/icons/circle-arrow-out-down-left) icon.
+  /// [![`circle-arrow-out-down-left`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/circle-arrow-out-down-left.svg)](https://lucide.dev/icons/circle-arrow-out-down-left)
   static const circleArrowOutDownLeft = IconData(58359, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`circle-arrow-out-down-right`](https://lucide.dev/icons/circle-arrow-out-down-right) icon.
+  /// [![`circle-arrow-out-down-right`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/circle-arrow-out-down-right.svg)](https://lucide.dev/icons/circle-arrow-out-down-right)
   static const circleArrowOutDownRight = IconData(58360, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`circle-arrow-out-up-left`](https://lucide.dev/icons/circle-arrow-out-up-left) icon.
+  /// [![`circle-arrow-out-up-left`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/circle-arrow-out-up-left.svg)](https://lucide.dev/icons/circle-arrow-out-up-left)
   static const circleArrowOutUpLeft = IconData(58361, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`circle-arrow-out-up-right`](https://lucide.dev/icons/circle-arrow-out-up-right) icon.
+  /// [![`circle-arrow-out-up-right`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/circle-arrow-out-up-right.svg)](https://lucide.dev/icons/circle-arrow-out-up-right)
   static const circleArrowOutUpRight = IconData(58362, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`circle-arrow-right`](https://lucide.dev/icons/circle-arrow-right) icon.
+  /// [![`circle-arrow-right`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/circle-arrow-right.svg)](https://lucide.dev/icons/circle-arrow-right)
   static const circleArrowRight = IconData(
     57466,
     fontFamily: 'ForuiLucideIcons',
@@ -1231,19 +1229,19 @@ class FIcons {
     matchTextDirection: true,
   );
 
-  /// A [`circle-arrow-up`](https://lucide.dev/icons/circle-arrow-up) icon.
+  /// [![`circle-arrow-up`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/circle-arrow-up.svg)](https://lucide.dev/icons/circle-arrow-up)
   static const circleArrowUp = IconData(57467, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`circle-check-big`](https://lucide.dev/icons/circle-check-big) icon.
+  /// [![`circle-check-big`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/circle-check-big.svg)](https://lucide.dev/icons/circle-check-big)
   static const circleCheckBig = IconData(57468, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`circle-check`](https://lucide.dev/icons/circle-check) icon.
+  /// [![`circle-check`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/circle-check.svg)](https://lucide.dev/icons/circle-check)
   static const circleCheck = IconData(57894, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`circle-chevron-down`](https://lucide.dev/icons/circle-chevron-down) icon.
+  /// [![`circle-chevron-down`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/circle-chevron-down.svg)](https://lucide.dev/icons/circle-chevron-down)
   static const circleChevronDown = IconData(58589, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`circle-chevron-left`](https://lucide.dev/icons/circle-chevron-left) icon.
+  /// [![`circle-chevron-left`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/circle-chevron-left.svg)](https://lucide.dev/icons/circle-chevron-left)
   static const circleChevronLeft = IconData(
     58590,
     fontFamily: 'ForuiLucideIcons',
@@ -1251,7 +1249,7 @@ class FIcons {
     matchTextDirection: true,
   );
 
-  /// A [`circle-chevron-right`](https://lucide.dev/icons/circle-chevron-right) icon.
+  /// [![`circle-chevron-right`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/circle-chevron-right.svg)](https://lucide.dev/icons/circle-chevron-right)
   static const circleChevronRight = IconData(
     58591,
     fontFamily: 'ForuiLucideIcons',
@@ -1259,3016 +1257,3016 @@ class FIcons {
     matchTextDirection: true,
   );
 
-  /// A [`circle-chevron-up`](https://lucide.dev/icons/circle-chevron-up) icon.
+  /// [![`circle-chevron-up`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/circle-chevron-up.svg)](https://lucide.dev/icons/circle-chevron-up)
   static const circleChevronUp = IconData(58592, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`circle-dashed`](https://lucide.dev/icons/circle-dashed) icon.
+  /// [![`circle-dashed`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/circle-dashed.svg)](https://lucide.dev/icons/circle-dashed)
   static const circleDashed = IconData(58544, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`circle-divide`](https://lucide.dev/icons/circle-divide) icon.
+  /// [![`circle-divide`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/circle-divide.svg)](https://lucide.dev/icons/circle-divide)
   static const circleDivide = IconData(57469, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`circle-dollar-sign`](https://lucide.dev/icons/circle-dollar-sign) icon.
+  /// [![`circle-dollar-sign`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/circle-dollar-sign.svg)](https://lucide.dev/icons/circle-dollar-sign)
   static const circleDollarSign = IconData(58493, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`circle-dot-dashed`](https://lucide.dev/icons/circle-dot-dashed) icon.
+  /// [![`circle-dot-dashed`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/circle-dot-dashed.svg)](https://lucide.dev/icons/circle-dot-dashed)
   static const circleDotDashed = IconData(58545, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`circle-dot`](https://lucide.dev/icons/circle-dot) icon.
+  /// [![`circle-dot`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/circle-dot.svg)](https://lucide.dev/icons/circle-dot)
   static const circleDot = IconData(58181, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`circle-ellipsis`](https://lucide.dev/icons/circle-ellipsis) icon.
+  /// [![`circle-ellipsis`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/circle-ellipsis.svg)](https://lucide.dev/icons/circle-ellipsis)
   static const circleEllipsis = IconData(58182, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`circle-equal`](https://lucide.dev/icons/circle-equal) icon.
+  /// [![`circle-equal`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/circle-equal.svg)](https://lucide.dev/icons/circle-equal)
   static const circleEqual = IconData(58368, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`circle-fading-arrow-up`](https://lucide.dev/icons/circle-fading-arrow-up) icon.
+  /// [![`circle-fading-arrow-up`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/circle-fading-arrow-up.svg)](https://lucide.dev/icons/circle-fading-arrow-up)
   static const circleFadingArrowUp = IconData(58904, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`circle-fading-plus`](https://lucide.dev/icons/circle-fading-plus) icon.
+  /// [![`circle-fading-plus`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/circle-fading-plus.svg)](https://lucide.dev/icons/circle-fading-plus)
   static const circleFadingPlus = IconData(58812, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`circle-gauge`](https://lucide.dev/icons/circle-gauge) icon.
+  /// [![`circle-gauge`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/circle-gauge.svg)](https://lucide.dev/icons/circle-gauge)
   static const circleGauge = IconData(58593, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`circle-minus`](https://lucide.dev/icons/circle-minus) icon.
+  /// [![`circle-minus`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/circle-minus.svg)](https://lucide.dev/icons/circle-minus)
   static const circleMinus = IconData(57470, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`circle-off`](https://lucide.dev/icons/circle-off) icon.
+  /// [![`circle-off`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/circle-off.svg)](https://lucide.dev/icons/circle-off)
   static const circleOff = IconData(58369, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`circle-parking-off`](https://lucide.dev/icons/circle-parking-off) icon.
+  /// [![`circle-parking-off`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/circle-parking-off.svg)](https://lucide.dev/icons/circle-parking-off)
   static const circleParkingOff = IconData(58314, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`circle-parking`](https://lucide.dev/icons/circle-parking) icon.
+  /// [![`circle-parking`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/circle-parking.svg)](https://lucide.dev/icons/circle-parking)
   static const circleParking = IconData(58313, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`circle-pause`](https://lucide.dev/icons/circle-pause) icon.
+  /// [![`circle-pause`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/circle-pause.svg)](https://lucide.dev/icons/circle-pause)
   static const circlePause = IconData(57471, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`circle-percent`](https://lucide.dev/icons/circle-percent) icon.
+  /// [![`circle-percent`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/circle-percent.svg)](https://lucide.dev/icons/circle-percent)
   static const circlePercent = IconData(58650, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`circle-pile`](https://lucide.dev/icons/circle-pile) icon.
+  /// [![`circle-pile`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/circle-pile.svg)](https://lucide.dev/icons/circle-pile)
   static const circlePile = IconData(59056, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`circle-play`](https://lucide.dev/icons/circle-play) icon.
+  /// [![`circle-play`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/circle-play.svg)](https://lucide.dev/icons/circle-play)
   static const circlePlay = IconData(57472, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`circle-plus`](https://lucide.dev/icons/circle-plus) icon.
+  /// [![`circle-plus`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/circle-plus.svg)](https://lucide.dev/icons/circle-plus)
   static const circlePlus = IconData(57473, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`circle-pound-sterling`](https://lucide.dev/icons/circle-pound-sterling) icon.
+  /// [![`circle-pound-sterling`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/circle-pound-sterling.svg)](https://lucide.dev/icons/circle-pound-sterling)
   static const circlePoundSterling = IconData(58989, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`circle-power`](https://lucide.dev/icons/circle-power) icon.
+  /// [![`circle-power`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/circle-power.svg)](https://lucide.dev/icons/circle-power)
   static const circlePower = IconData(58704, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`circle-question-mark`](https://lucide.dev/icons/circle-question-mark) icon.
+  /// [![`circle-question-mark`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/circle-question-mark.svg)](https://lucide.dev/icons/circle-question-mark)
   static const circleQuestionMark = IconData(57474, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`circle-slash-2`](https://lucide.dev/icons/circle-slash-2) icon.
+  /// [![`circle-slash-2`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/circle-slash-2.svg)](https://lucide.dev/icons/circle-slash-2)
   static const circleSlash2 = IconData(57875, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`circle-slash`](https://lucide.dev/icons/circle-slash) icon.
+  /// [![`circle-slash`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/circle-slash.svg)](https://lucide.dev/icons/circle-slash)
   static const circleSlash = IconData(58370, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`circle-small`](https://lucide.dev/icons/circle-small) icon.
+  /// [![`circle-small`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/circle-small.svg)](https://lucide.dev/icons/circle-small)
   static const circleSmall = IconData(58944, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`circle-star`](https://lucide.dev/icons/circle-star) icon.
+  /// [![`circle-star`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/circle-star.svg)](https://lucide.dev/icons/circle-star)
   static const circleStar = IconData(59021, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`circle-stop`](https://lucide.dev/icons/circle-stop) icon.
+  /// [![`circle-stop`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/circle-stop.svg)](https://lucide.dev/icons/circle-stop)
   static const circleStop = IconData(57475, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`circle-user-round`](https://lucide.dev/icons/circle-user-round) icon.
+  /// [![`circle-user-round`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/circle-user-round.svg)](https://lucide.dev/icons/circle-user-round)
   static const circleUserRound = IconData(58466, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`circle-user`](https://lucide.dev/icons/circle-user) icon.
+  /// [![`circle-user`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/circle-user.svg)](https://lucide.dev/icons/circle-user)
   static const circleUser = IconData(58465, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`circle-x`](https://lucide.dev/icons/circle-x) icon.
+  /// [![`circle-x`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/circle-x.svg)](https://lucide.dev/icons/circle-x)
   static const circleX = IconData(57476, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`circle`](https://lucide.dev/icons/circle) icon.
+  /// [![`circle`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/circle.svg)](https://lucide.dev/icons/circle)
   static const circle = IconData(57462, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`circuit-board`](https://lucide.dev/icons/circuit-board) icon.
+  /// [![`circuit-board`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/circuit-board.svg)](https://lucide.dev/icons/circuit-board)
   static const circuitBoard = IconData(58371, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`citrus`](https://lucide.dev/icons/citrus) icon.
+  /// [![`citrus`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/citrus.svg)](https://lucide.dev/icons/citrus)
   static const citrus = IconData(58229, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`clapperboard`](https://lucide.dev/icons/clapperboard) icon.
+  /// [![`clapperboard`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/clapperboard.svg)](https://lucide.dev/icons/clapperboard)
   static const clapperboard = IconData(58011, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`clipboard-check`](https://lucide.dev/icons/clipboard-check) icon.
+  /// [![`clipboard-check`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/clipboard-check.svg)](https://lucide.dev/icons/clipboard-check)
   static const clipboardCheck = IconData(57881, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`clipboard-clock`](https://lucide.dev/icons/clipboard-clock) icon.
+  /// [![`clipboard-clock`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/clipboard-clock.svg)](https://lucide.dev/icons/clipboard-clock)
   static const clipboardClock = IconData(59016, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`clipboard-copy`](https://lucide.dev/icons/clipboard-copy) icon.
+  /// [![`clipboard-copy`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/clipboard-copy.svg)](https://lucide.dev/icons/clipboard-copy)
   static const clipboardCopy = IconData(57893, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`clipboard-list`](https://lucide.dev/icons/clipboard-list) icon.
+  /// [![`clipboard-list`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/clipboard-list.svg)](https://lucide.dev/icons/clipboard-list)
   static const clipboardList = IconData(57478, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`clipboard-minus`](https://lucide.dev/icons/clipboard-minus) icon.
+  /// [![`clipboard-minus`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/clipboard-minus.svg)](https://lucide.dev/icons/clipboard-minus)
   static const clipboardMinus = IconData(58814, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`clipboard-paste`](https://lucide.dev/icons/clipboard-paste) icon.
+  /// [![`clipboard-paste`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/clipboard-paste.svg)](https://lucide.dev/icons/clipboard-paste)
   static const clipboardPaste = IconData(58344, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`clipboard-pen-line`](https://lucide.dev/icons/clipboard-pen-line) icon.
+  /// [![`clipboard-pen-line`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/clipboard-pen-line.svg)](https://lucide.dev/icons/clipboard-pen-line)
   static const clipboardPenLine = IconData(58120, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`clipboard-pen`](https://lucide.dev/icons/clipboard-pen) icon.
+  /// [![`clipboard-pen`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/clipboard-pen.svg)](https://lucide.dev/icons/clipboard-pen)
   static const clipboardPen = IconData(58119, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`clipboard-plus`](https://lucide.dev/icons/clipboard-plus) icon.
+  /// [![`clipboard-plus`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/clipboard-plus.svg)](https://lucide.dev/icons/clipboard-plus)
   static const clipboardPlus = IconData(58815, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`clipboard-type`](https://lucide.dev/icons/clipboard-type) icon.
+  /// [![`clipboard-type`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/clipboard-type.svg)](https://lucide.dev/icons/clipboard-type)
   static const clipboardType = IconData(58121, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`clipboard-x`](https://lucide.dev/icons/clipboard-x) icon.
+  /// [![`clipboard-x`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/clipboard-x.svg)](https://lucide.dev/icons/clipboard-x)
   static const clipboardX = IconData(57890, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`clipboard`](https://lucide.dev/icons/clipboard) icon.
+  /// [![`clipboard`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/clipboard.svg)](https://lucide.dev/icons/clipboard)
   static const clipboard = IconData(57477, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`clock-1`](https://lucide.dev/icons/clock-1) icon.
+  /// [![`clock-1`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/clock-1.svg)](https://lucide.dev/icons/clock-1)
   static const clock1 = IconData(57931, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`clock-10`](https://lucide.dev/icons/clock-10) icon.
+  /// [![`clock-10`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/clock-10.svg)](https://lucide.dev/icons/clock-10)
   static const clock10 = IconData(57932, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`clock-11`](https://lucide.dev/icons/clock-11) icon.
+  /// [![`clock-11`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/clock-11.svg)](https://lucide.dev/icons/clock-11)
   static const clock11 = IconData(57933, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`clock-12`](https://lucide.dev/icons/clock-12) icon.
+  /// [![`clock-12`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/clock-12.svg)](https://lucide.dev/icons/clock-12)
   static const clock12 = IconData(57934, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`clock-2`](https://lucide.dev/icons/clock-2) icon.
+  /// [![`clock-2`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/clock-2.svg)](https://lucide.dev/icons/clock-2)
   static const clock2 = IconData(57935, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`clock-3`](https://lucide.dev/icons/clock-3) icon.
+  /// [![`clock-3`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/clock-3.svg)](https://lucide.dev/icons/clock-3)
   static const clock3 = IconData(57936, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`clock-4`](https://lucide.dev/icons/clock-4) icon.
+  /// [![`clock-4`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/clock-4.svg)](https://lucide.dev/icons/clock-4)
   static const clock4 = IconData(57937, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`clock-5`](https://lucide.dev/icons/clock-5) icon.
+  /// [![`clock-5`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/clock-5.svg)](https://lucide.dev/icons/clock-5)
   static const clock5 = IconData(57938, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`clock-6`](https://lucide.dev/icons/clock-6) icon.
+  /// [![`clock-6`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/clock-6.svg)](https://lucide.dev/icons/clock-6)
   static const clock6 = IconData(57939, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`clock-7`](https://lucide.dev/icons/clock-7) icon.
+  /// [![`clock-7`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/clock-7.svg)](https://lucide.dev/icons/clock-7)
   static const clock7 = IconData(57940, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`clock-8`](https://lucide.dev/icons/clock-8) icon.
+  /// [![`clock-8`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/clock-8.svg)](https://lucide.dev/icons/clock-8)
   static const clock8 = IconData(57941, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`clock-9`](https://lucide.dev/icons/clock-9) icon.
+  /// [![`clock-9`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/clock-9.svg)](https://lucide.dev/icons/clock-9)
   static const clock9 = IconData(57942, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`clock-alert`](https://lucide.dev/icons/clock-alert) icon.
+  /// [![`clock-alert`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/clock-alert.svg)](https://lucide.dev/icons/clock-alert)
   static const clockAlert = IconData(58922, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`clock-arrow-down`](https://lucide.dev/icons/clock-arrow-down) icon.
+  /// [![`clock-arrow-down`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/clock-arrow-down.svg)](https://lucide.dev/icons/clock-arrow-down)
   static const clockArrowDown = IconData(58880, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`clock-arrow-up`](https://lucide.dev/icons/clock-arrow-up) icon.
+  /// [![`clock-arrow-up`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/clock-arrow-up.svg)](https://lucide.dev/icons/clock-arrow-up)
   static const clockArrowUp = IconData(58881, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`clock-check`](https://lucide.dev/icons/clock-check) icon.
+  /// [![`clock-check`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/clock-check.svg)](https://lucide.dev/icons/clock-check)
   static const clockCheck = IconData(59038, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`clock-fading`](https://lucide.dev/icons/clock-fading) icon.
+  /// [![`clock-fading`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/clock-fading.svg)](https://lucide.dev/icons/clock-fading)
   static const clockFading = IconData(58954, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`clock-plus`](https://lucide.dev/icons/clock-plus) icon.
+  /// [![`clock-plus`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/clock-plus.svg)](https://lucide.dev/icons/clock-plus)
   static const clockPlus = IconData(58983, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`clock`](https://lucide.dev/icons/clock) icon.
+  /// [![`clock`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/clock.svg)](https://lucide.dev/icons/clock)
   static const clock = IconData(57479, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`closed-caption`](https://lucide.dev/icons/closed-caption) icon.
+  /// [![`closed-caption`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/closed-caption.svg)](https://lucide.dev/icons/closed-caption)
   static const closedCaption = IconData(59018, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`cloud-alert`](https://lucide.dev/icons/cloud-alert) icon.
+  /// [![`cloud-alert`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/cloud-alert.svg)](https://lucide.dev/icons/cloud-alert)
   static const cloudAlert = IconData(58931, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`cloud-backup`](https://lucide.dev/icons/cloud-backup) icon.
+  /// [![`cloud-backup`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/cloud-backup.svg)](https://lucide.dev/icons/cloud-backup)
   static const cloudBackup = IconData(59057, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`cloud-check`](https://lucide.dev/icons/cloud-check) icon.
+  /// [![`cloud-check`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/cloud-check.svg)](https://lucide.dev/icons/cloud-check)
   static const cloudCheck = IconData(58990, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`cloud-cog`](https://lucide.dev/icons/cloud-cog) icon.
+  /// [![`cloud-cog`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/cloud-cog.svg)](https://lucide.dev/icons/cloud-cog)
   static const cloudCog = IconData(58122, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`cloud-download`](https://lucide.dev/icons/cloud-download) icon.
+  /// [![`cloud-download`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/cloud-download.svg)](https://lucide.dev/icons/cloud-download)
   static const cloudDownload = IconData(57481, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`cloud-drizzle`](https://lucide.dev/icons/cloud-drizzle) icon.
+  /// [![`cloud-drizzle`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/cloud-drizzle.svg)](https://lucide.dev/icons/cloud-drizzle)
   static const cloudDrizzle = IconData(57482, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`cloud-fog`](https://lucide.dev/icons/cloud-fog) icon.
+  /// [![`cloud-fog`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/cloud-fog.svg)](https://lucide.dev/icons/cloud-fog)
   static const cloudFog = IconData(57876, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`cloud-hail`](https://lucide.dev/icons/cloud-hail) icon.
+  /// [![`cloud-hail`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/cloud-hail.svg)](https://lucide.dev/icons/cloud-hail)
   static const cloudHail = IconData(57483, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`cloud-lightning`](https://lucide.dev/icons/cloud-lightning) icon.
+  /// [![`cloud-lightning`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/cloud-lightning.svg)](https://lucide.dev/icons/cloud-lightning)
   static const cloudLightning = IconData(57484, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`cloud-moon-rain`](https://lucide.dev/icons/cloud-moon-rain) icon.
+  /// [![`cloud-moon-rain`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/cloud-moon-rain.svg)](https://lucide.dev/icons/cloud-moon-rain)
   static const cloudMoonRain = IconData(58106, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`cloud-moon`](https://lucide.dev/icons/cloud-moon) icon.
+  /// [![`cloud-moon`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/cloud-moon.svg)](https://lucide.dev/icons/cloud-moon)
   static const cloudMoon = IconData(57877, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`cloud-off`](https://lucide.dev/icons/cloud-off) icon.
+  /// [![`cloud-off`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/cloud-off.svg)](https://lucide.dev/icons/cloud-off)
   static const cloudOff = IconData(57485, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`cloud-rain-wind`](https://lucide.dev/icons/cloud-rain-wind) icon.
+  /// [![`cloud-rain-wind`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/cloud-rain-wind.svg)](https://lucide.dev/icons/cloud-rain-wind)
   static const cloudRainWind = IconData(57487, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`cloud-rain`](https://lucide.dev/icons/cloud-rain) icon.
+  /// [![`cloud-rain`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/cloud-rain.svg)](https://lucide.dev/icons/cloud-rain)
   static const cloudRain = IconData(57486, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`cloud-snow`](https://lucide.dev/icons/cloud-snow) icon.
+  /// [![`cloud-snow`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/cloud-snow.svg)](https://lucide.dev/icons/cloud-snow)
   static const cloudSnow = IconData(57488, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`cloud-sun-rain`](https://lucide.dev/icons/cloud-sun-rain) icon.
+  /// [![`cloud-sun-rain`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/cloud-sun-rain.svg)](https://lucide.dev/icons/cloud-sun-rain)
   static const cloudSunRain = IconData(58107, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`cloud-sun`](https://lucide.dev/icons/cloud-sun) icon.
+  /// [![`cloud-sun`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/cloud-sun.svg)](https://lucide.dev/icons/cloud-sun)
   static const cloudSun = IconData(57878, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`cloud-sync`](https://lucide.dev/icons/cloud-sync) icon.
+  /// [![`cloud-sync`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/cloud-sync.svg)](https://lucide.dev/icons/cloud-sync)
   static const cloudSync = IconData(59058, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`cloud-upload`](https://lucide.dev/icons/cloud-upload) icon.
+  /// [![`cloud-upload`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/cloud-upload.svg)](https://lucide.dev/icons/cloud-upload)
   static const cloudUpload = IconData(57489, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`cloud`](https://lucide.dev/icons/cloud) icon.
+  /// [![`cloud`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/cloud.svg)](https://lucide.dev/icons/cloud)
   static const cloud = IconData(57480, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`cloudy`](https://lucide.dev/icons/cloudy) icon.
+  /// [![`cloudy`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/cloudy.svg)](https://lucide.dev/icons/cloudy)
   static const cloudy = IconData(57879, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`clover`](https://lucide.dev/icons/clover) icon.
+  /// [![`clover`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/clover.svg)](https://lucide.dev/icons/clover)
   static const clover = IconData(57490, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`club`](https://lucide.dev/icons/club) icon.
+  /// [![`club`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/club.svg)](https://lucide.dev/icons/club)
   static const club = IconData(58518, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`code-xml`](https://lucide.dev/icons/code-xml) icon.
+  /// [![`code-xml`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/code-xml.svg)](https://lucide.dev/icons/code-xml)
   static const codeXml = IconData(57862, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`code`](https://lucide.dev/icons/code) icon.
+  /// [![`code`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/code.svg)](https://lucide.dev/icons/code)
   static const code = IconData(57491, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`codepen`](https://lucide.dev/icons/codepen) icon.
+  /// [![`codepen`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/codepen.svg)](https://lucide.dev/icons/codepen)
   static const codepen = IconData(57492, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`codesandbox`](https://lucide.dev/icons/codesandbox) icon.
+  /// [![`codesandbox`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/codesandbox.svg)](https://lucide.dev/icons/codesandbox)
   static const codesandbox = IconData(57493, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`coffee`](https://lucide.dev/icons/coffee) icon.
+  /// [![`coffee`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/coffee.svg)](https://lucide.dev/icons/coffee)
   static const coffee = IconData(57494, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`cog`](https://lucide.dev/icons/cog) icon.
+  /// [![`cog`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/cog.svg)](https://lucide.dev/icons/cog)
   static const cog = IconData(58123, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`coins`](https://lucide.dev/icons/coins) icon.
+  /// [![`coins`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/coins.svg)](https://lucide.dev/icons/coins)
   static const coins = IconData(57495, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`columns-2`](https://lucide.dev/icons/columns-2) icon.
+  /// [![`columns-2`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/columns-2.svg)](https://lucide.dev/icons/columns-2)
   static const columns2 = IconData(57496, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`columns-3-cog`](https://lucide.dev/icons/columns-3-cog) icon.
+  /// [![`columns-3-cog`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/columns-3-cog.svg)](https://lucide.dev/icons/columns-3-cog)
   static const columns3Cog = IconData(58977, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`columns-3`](https://lucide.dev/icons/columns-3) icon.
+  /// [![`columns-3`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/columns-3.svg)](https://lucide.dev/icons/columns-3)
   static const columns3 = IconData(57497, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`columns-4`](https://lucide.dev/icons/columns-4) icon.
+  /// [![`columns-4`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/columns-4.svg)](https://lucide.dev/icons/columns-4)
   static const columns4 = IconData(58761, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`combine`](https://lucide.dev/icons/combine) icon.
+  /// [![`combine`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/combine.svg)](https://lucide.dev/icons/combine)
   static const combine = IconData(58444, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`command`](https://lucide.dev/icons/command) icon.
+  /// [![`command`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/command.svg)](https://lucide.dev/icons/command)
   static const command = IconData(57498, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`compass`](https://lucide.dev/icons/compass) icon.
+  /// [![`compass`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/compass.svg)](https://lucide.dev/icons/compass)
   static const compass = IconData(57499, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`component`](https://lucide.dev/icons/component) icon.
+  /// [![`component`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/component.svg)](https://lucide.dev/icons/component)
   static const component = IconData(58029, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`computer`](https://lucide.dev/icons/computer) icon.
+  /// [![`computer`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/computer.svg)](https://lucide.dev/icons/computer)
   static const computer = IconData(58596, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`concierge-bell`](https://lucide.dev/icons/concierge-bell) icon.
+  /// [![`concierge-bell`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/concierge-bell.svg)](https://lucide.dev/icons/concierge-bell)
   static const conciergeBell = IconData(58232, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`cone`](https://lucide.dev/icons/cone) icon.
+  /// [![`cone`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/cone.svg)](https://lucide.dev/icons/cone)
   static const cone = IconData(58659, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`construction`](https://lucide.dev/icons/construction) icon.
+  /// [![`construction`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/construction.svg)](https://lucide.dev/icons/construction)
   static const construction = IconData(58292, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`contact-round`](https://lucide.dev/icons/contact-round) icon.
+  /// [![`contact-round`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/contact-round.svg)](https://lucide.dev/icons/contact-round)
   static const contactRound = IconData(58467, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`contact`](https://lucide.dev/icons/contact) icon.
+  /// [![`contact`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/contact.svg)](https://lucide.dev/icons/contact)
   static const contact = IconData(57500, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`container`](https://lucide.dev/icons/container) icon.
+  /// [![`container`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/container.svg)](https://lucide.dev/icons/container)
   static const container = IconData(58581, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`contrast`](https://lucide.dev/icons/contrast) icon.
+  /// [![`contrast`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/contrast.svg)](https://lucide.dev/icons/contrast)
   static const contrast = IconData(57501, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`cookie`](https://lucide.dev/icons/cookie) icon.
+  /// [![`cookie`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/cookie.svg)](https://lucide.dev/icons/cookie)
   static const cookie = IconData(57963, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`cooking-pot`](https://lucide.dev/icons/cooking-pot) icon.
+  /// [![`cooking-pot`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/cooking-pot.svg)](https://lucide.dev/icons/cooking-pot)
   static const cookingPot = IconData(58756, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`copy-check`](https://lucide.dev/icons/copy-check) icon.
+  /// [![`copy-check`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/copy-check.svg)](https://lucide.dev/icons/copy-check)
   static const copyCheck = IconData(58363, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`copy-minus`](https://lucide.dev/icons/copy-minus) icon.
+  /// [![`copy-minus`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/copy-minus.svg)](https://lucide.dev/icons/copy-minus)
   static const copyMinus = IconData(58364, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`copy-plus`](https://lucide.dev/icons/copy-plus) icon.
+  /// [![`copy-plus`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/copy-plus.svg)](https://lucide.dev/icons/copy-plus)
   static const copyPlus = IconData(58365, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`copy-slash`](https://lucide.dev/icons/copy-slash) icon.
+  /// [![`copy-slash`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/copy-slash.svg)](https://lucide.dev/icons/copy-slash)
   static const copySlash = IconData(58366, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`copy-x`](https://lucide.dev/icons/copy-x) icon.
+  /// [![`copy-x`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/copy-x.svg)](https://lucide.dev/icons/copy-x)
   static const copyX = IconData(58367, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`copy`](https://lucide.dev/icons/copy) icon.
+  /// [![`copy`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/copy.svg)](https://lucide.dev/icons/copy)
   static const copy = IconData(57502, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`copyleft`](https://lucide.dev/icons/copyleft) icon.
+  /// [![`copyleft`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/copyleft.svg)](https://lucide.dev/icons/copyleft)
   static const copyleft = IconData(57503, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`copyright`](https://lucide.dev/icons/copyright) icon.
+  /// [![`copyright`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/copyright.svg)](https://lucide.dev/icons/copyright)
   static const copyright = IconData(57504, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`corner-down-left`](https://lucide.dev/icons/corner-down-left) icon.
+  /// [![`corner-down-left`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/corner-down-left.svg)](https://lucide.dev/icons/corner-down-left)
   static const cornerDownLeft = IconData(57505, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`corner-down-right`](https://lucide.dev/icons/corner-down-right) icon.
+  /// [![`corner-down-right`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/corner-down-right.svg)](https://lucide.dev/icons/corner-down-right)
   static const cornerDownRight = IconData(57506, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`corner-left-down`](https://lucide.dev/icons/corner-left-down) icon.
+  /// [![`corner-left-down`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/corner-left-down.svg)](https://lucide.dev/icons/corner-left-down)
   static const cornerLeftDown = IconData(57507, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`corner-left-up`](https://lucide.dev/icons/corner-left-up) icon.
+  /// [![`corner-left-up`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/corner-left-up.svg)](https://lucide.dev/icons/corner-left-up)
   static const cornerLeftUp = IconData(57508, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`corner-right-down`](https://lucide.dev/icons/corner-right-down) icon.
+  /// [![`corner-right-down`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/corner-right-down.svg)](https://lucide.dev/icons/corner-right-down)
   static const cornerRightDown = IconData(57509, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`corner-right-up`](https://lucide.dev/icons/corner-right-up) icon.
+  /// [![`corner-right-up`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/corner-right-up.svg)](https://lucide.dev/icons/corner-right-up)
   static const cornerRightUp = IconData(57510, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`corner-up-left`](https://lucide.dev/icons/corner-up-left) icon.
+  /// [![`corner-up-left`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/corner-up-left.svg)](https://lucide.dev/icons/corner-up-left)
   static const cornerUpLeft = IconData(57511, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`corner-up-right`](https://lucide.dev/icons/corner-up-right) icon.
+  /// [![`corner-up-right`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/corner-up-right.svg)](https://lucide.dev/icons/corner-up-right)
   static const cornerUpRight = IconData(57512, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`cpu`](https://lucide.dev/icons/cpu) icon.
+  /// [![`cpu`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/cpu.svg)](https://lucide.dev/icons/cpu)
   static const cpu = IconData(57513, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`creative-commons`](https://lucide.dev/icons/creative-commons) icon.
+  /// [![`creative-commons`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/creative-commons.svg)](https://lucide.dev/icons/creative-commons)
   static const creativeCommons = IconData(58290, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`credit-card`](https://lucide.dev/icons/credit-card) icon.
+  /// [![`credit-card`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/credit-card.svg)](https://lucide.dev/icons/credit-card)
   static const creditCard = IconData(57514, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`croissant`](https://lucide.dev/icons/croissant) icon.
+  /// [![`croissant`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/croissant.svg)](https://lucide.dev/icons/croissant)
   static const croissant = IconData(58030, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`crop`](https://lucide.dev/icons/crop) icon.
+  /// [![`crop`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/crop.svg)](https://lucide.dev/icons/crop)
   static const crop = IconData(57515, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`cross`](https://lucide.dev/icons/cross) icon.
+  /// [![`cross`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/cross.svg)](https://lucide.dev/icons/cross)
   static const cross = IconData(57829, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`crosshair`](https://lucide.dev/icons/crosshair) icon.
+  /// [![`crosshair`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/crosshair.svg)](https://lucide.dev/icons/crosshair)
   static const crosshair = IconData(57516, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`crown`](https://lucide.dev/icons/crown) icon.
+  /// [![`crown`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/crown.svg)](https://lucide.dev/icons/crown)
   static const crown = IconData(57814, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`cuboid`](https://lucide.dev/icons/cuboid) icon.
+  /// [![`cuboid`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/cuboid.svg)](https://lucide.dev/icons/cuboid)
   static const cuboid = IconData(58660, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`cup-soda`](https://lucide.dev/icons/cup-soda) icon.
+  /// [![`cup-soda`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/cup-soda.svg)](https://lucide.dev/icons/cup-soda)
   static const cupSoda = IconData(58065, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`currency`](https://lucide.dev/icons/currency) icon.
+  /// [![`currency`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/currency.svg)](https://lucide.dev/icons/currency)
   static const currency = IconData(57904, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`cylinder`](https://lucide.dev/icons/cylinder) icon.
+  /// [![`cylinder`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/cylinder.svg)](https://lucide.dev/icons/cylinder)
   static const cylinder = IconData(58661, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`dam`](https://lucide.dev/icons/dam) icon.
+  /// [![`dam`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/dam.svg)](https://lucide.dev/icons/dam)
   static const dam = IconData(58886, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`database-backup`](https://lucide.dev/icons/database-backup) icon.
+  /// [![`database-backup`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/database-backup.svg)](https://lucide.dev/icons/database-backup)
   static const databaseBackup = IconData(58283, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`database-zap`](https://lucide.dev/icons/database-zap) icon.
+  /// [![`database-zap`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/database-zap.svg)](https://lucide.dev/icons/database-zap)
   static const databaseZap = IconData(58635, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`database`](https://lucide.dev/icons/database) icon.
+  /// [![`database`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/database.svg)](https://lucide.dev/icons/database)
   static const database = IconData(57517, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`decimals-arrow-left`](https://lucide.dev/icons/decimals-arrow-left) icon.
+  /// [![`decimals-arrow-left`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/decimals-arrow-left.svg)](https://lucide.dev/icons/decimals-arrow-left)
   static const decimalsArrowLeft = IconData(58972, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`decimals-arrow-right`](https://lucide.dev/icons/decimals-arrow-right) icon.
+  /// [![`decimals-arrow-right`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/decimals-arrow-right.svg)](https://lucide.dev/icons/decimals-arrow-right)
   static const decimalsArrowRight = IconData(58973, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`delete`](https://lucide.dev/icons/delete) icon.
+  /// [![`delete`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/delete.svg)](https://lucide.dev/icons/delete)
   static const delete = IconData(57518, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`dessert`](https://lucide.dev/icons/dessert) icon.
+  /// [![`dessert`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/dessert.svg)](https://lucide.dev/icons/dessert)
   static const dessert = IconData(58555, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`diameter`](https://lucide.dev/icons/diameter) icon.
+  /// [![`diameter`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/diameter.svg)](https://lucide.dev/icons/diameter)
   static const diameter = IconData(58662, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`diamond-minus`](https://lucide.dev/icons/diamond-minus) icon.
+  /// [![`diamond-minus`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/diamond-minus.svg)](https://lucide.dev/icons/diamond-minus)
   static const diamondMinus = IconData(58849, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`diamond-percent`](https://lucide.dev/icons/diamond-percent) icon.
+  /// [![`diamond-percent`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/diamond-percent.svg)](https://lucide.dev/icons/diamond-percent)
   static const diamondPercent = IconData(58651, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`diamond-plus`](https://lucide.dev/icons/diamond-plus) icon.
+  /// [![`diamond-plus`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/diamond-plus.svg)](https://lucide.dev/icons/diamond-plus)
   static const diamondPlus = IconData(58850, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`diamond`](https://lucide.dev/icons/diamond) icon.
+  /// [![`diamond`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/diamond.svg)](https://lucide.dev/icons/diamond)
   static const diamond = IconData(58066, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`dice-1`](https://lucide.dev/icons/dice-1) icon.
+  /// [![`dice-1`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/dice-1.svg)](https://lucide.dev/icons/dice-1)
   static const dice1 = IconData(57991, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`dice-2`](https://lucide.dev/icons/dice-2) icon.
+  /// [![`dice-2`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/dice-2.svg)](https://lucide.dev/icons/dice-2)
   static const dice2 = IconData(57992, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`dice-3`](https://lucide.dev/icons/dice-3) icon.
+  /// [![`dice-3`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/dice-3.svg)](https://lucide.dev/icons/dice-3)
   static const dice3 = IconData(57993, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`dice-4`](https://lucide.dev/icons/dice-4) icon.
+  /// [![`dice-4`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/dice-4.svg)](https://lucide.dev/icons/dice-4)
   static const dice4 = IconData(57994, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`dice-5`](https://lucide.dev/icons/dice-5) icon.
+  /// [![`dice-5`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/dice-5.svg)](https://lucide.dev/icons/dice-5)
   static const dice5 = IconData(57995, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`dice-6`](https://lucide.dev/icons/dice-6) icon.
+  /// [![`dice-6`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/dice-6.svg)](https://lucide.dev/icons/dice-6)
   static const dice6 = IconData(57996, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`dices`](https://lucide.dev/icons/dices) icon.
+  /// [![`dices`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/dices.svg)](https://lucide.dev/icons/dices)
   static const dices = IconData(58053, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`diff`](https://lucide.dev/icons/diff) icon.
+  /// [![`diff`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/diff.svg)](https://lucide.dev/icons/diff)
   static const diff = IconData(58124, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`disc-2`](https://lucide.dev/icons/disc-2) icon.
+  /// [![`disc-2`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/disc-2.svg)](https://lucide.dev/icons/disc-2)
   static const disc2 = IconData(58358, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`disc-3`](https://lucide.dev/icons/disc-3) icon.
+  /// [![`disc-3`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/disc-3.svg)](https://lucide.dev/icons/disc-3)
   static const disc3 = IconData(58516, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`disc-album`](https://lucide.dev/icons/disc-album) icon.
+  /// [![`disc-album`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/disc-album.svg)](https://lucide.dev/icons/disc-album)
   static const discAlbum = IconData(58716, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`disc`](https://lucide.dev/icons/disc) icon.
+  /// [![`disc`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/disc.svg)](https://lucide.dev/icons/disc)
   static const disc = IconData(57519, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`divide`](https://lucide.dev/icons/divide) icon.
+  /// [![`divide`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/divide.svg)](https://lucide.dev/icons/divide)
   static const divide = IconData(57520, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`dna-off`](https://lucide.dev/icons/dna-off) icon.
+  /// [![`dna-off`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/dna-off.svg)](https://lucide.dev/icons/dna-off)
   static const dnaOff = IconData(58260, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`dna`](https://lucide.dev/icons/dna) icon.
+  /// [![`dna`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/dna.svg)](https://lucide.dev/icons/dna)
   static const dna = IconData(58259, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`dock`](https://lucide.dev/icons/dock) icon.
+  /// [![`dock`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/dock.svg)](https://lucide.dev/icons/dock)
   static const dock = IconData(58835, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`dog`](https://lucide.dev/icons/dog) icon.
+  /// [![`dog`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/dog.svg)](https://lucide.dev/icons/dog)
   static const dog = IconData(58253, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`dollar-sign`](https://lucide.dev/icons/dollar-sign) icon.
+  /// [![`dollar-sign`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/dollar-sign.svg)](https://lucide.dev/icons/dollar-sign)
   static const dollarSign = IconData(57521, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`donut`](https://lucide.dev/icons/donut) icon.
+  /// [![`donut`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/donut.svg)](https://lucide.dev/icons/donut)
   static const donut = IconData(58556, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`door-closed-locked`](https://lucide.dev/icons/door-closed-locked) icon.
+  /// [![`door-closed-locked`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/door-closed-locked.svg)](https://lucide.dev/icons/door-closed-locked)
   static const doorClosedLocked = IconData(58980, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`door-closed`](https://lucide.dev/icons/door-closed) icon.
+  /// [![`door-closed`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/door-closed.svg)](https://lucide.dev/icons/door-closed)
   static const doorClosed = IconData(58325, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`door-open`](https://lucide.dev/icons/door-open) icon.
+  /// [![`door-open`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/door-open.svg)](https://lucide.dev/icons/door-open)
   static const doorOpen = IconData(58326, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`dot`](https://lucide.dev/icons/dot) icon.
+  /// [![`dot`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/dot.svg)](https://lucide.dev/icons/dot)
   static const dot = IconData(58447, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`download`](https://lucide.dev/icons/download) icon.
+  /// [![`download`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/download.svg)](https://lucide.dev/icons/download)
   static const download = IconData(57522, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`drafting-compass`](https://lucide.dev/icons/drafting-compass) icon.
+  /// [![`drafting-compass`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/drafting-compass.svg)](https://lucide.dev/icons/drafting-compass)
   static const draftingCompass = IconData(58663, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`drama`](https://lucide.dev/icons/drama) icon.
+  /// [![`drama`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/drama.svg)](https://lucide.dev/icons/drama)
   static const drama = IconData(58657, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`dribbble`](https://lucide.dev/icons/dribbble) icon.
+  /// [![`dribbble`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/dribbble.svg)](https://lucide.dev/icons/dribbble)
   static const dribbble = IconData(57523, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`drill`](https://lucide.dev/icons/drill) icon.
+  /// [![`drill`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/drill.svg)](https://lucide.dev/icons/drill)
   static const drill = IconData(58765, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`drone`](https://lucide.dev/icons/drone) icon.
+  /// [![`drone`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/drone.svg)](https://lucide.dev/icons/drone)
   static const drone = IconData(58998, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`droplet-off`](https://lucide.dev/icons/droplet-off) icon.
+  /// [![`droplet-off`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/droplet-off.svg)](https://lucide.dev/icons/droplet-off)
   static const dropletOff = IconData(58936, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`droplet`](https://lucide.dev/icons/droplet) icon.
+  /// [![`droplet`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/droplet.svg)](https://lucide.dev/icons/droplet)
   static const droplet = IconData(57524, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`droplets`](https://lucide.dev/icons/droplets) icon.
+  /// [![`droplets`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/droplets.svg)](https://lucide.dev/icons/droplets)
   static const droplets = IconData(57525, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`drum`](https://lucide.dev/icons/drum) icon.
+  /// [![`drum`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/drum.svg)](https://lucide.dev/icons/drum)
   static const drum = IconData(58717, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`drumstick`](https://lucide.dev/icons/drumstick) icon.
+  /// [![`drumstick`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/drumstick.svg)](https://lucide.dev/icons/drumstick)
   static const drumstick = IconData(57947, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`dumbbell`](https://lucide.dev/icons/dumbbell) icon.
+  /// [![`dumbbell`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/dumbbell.svg)](https://lucide.dev/icons/dumbbell)
   static const dumbbell = IconData(58273, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`ear-off`](https://lucide.dev/icons/ear-off) icon.
+  /// [![`ear-off`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/ear-off.svg)](https://lucide.dev/icons/ear-off)
   static const earOff = IconData(58243, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`ear`](https://lucide.dev/icons/ear) icon.
+  /// [![`ear`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/ear.svg)](https://lucide.dev/icons/ear)
   static const ear = IconData(58242, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`earth-lock`](https://lucide.dev/icons/earth-lock) icon.
+  /// [![`earth-lock`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/earth-lock.svg)](https://lucide.dev/icons/earth-lock)
   static const earthLock = IconData(58828, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`earth`](https://lucide.dev/icons/earth) icon.
+  /// [![`earth`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/earth.svg)](https://lucide.dev/icons/earth)
   static const earth = IconData(57843, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`eclipse`](https://lucide.dev/icons/eclipse) icon.
+  /// [![`eclipse`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/eclipse.svg)](https://lucide.dev/icons/eclipse)
   static const eclipse = IconData(58781, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`egg-fried`](https://lucide.dev/icons/egg-fried) icon.
+  /// [![`egg-fried`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/egg-fried.svg)](https://lucide.dev/icons/egg-fried)
   static const eggFried = IconData(58193, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`egg-off`](https://lucide.dev/icons/egg-off) icon.
+  /// [![`egg-off`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/egg-off.svg)](https://lucide.dev/icons/egg-off)
   static const eggOff = IconData(58261, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`egg`](https://lucide.dev/icons/egg) icon.
+  /// [![`egg`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/egg.svg)](https://lucide.dev/icons/egg)
   static const egg = IconData(57949, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`ellipsis-vertical`](https://lucide.dev/icons/ellipsis-vertical) icon.
+  /// [![`ellipsis-vertical`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/ellipsis-vertical.svg)](https://lucide.dev/icons/ellipsis-vertical)
   static const ellipsisVertical = IconData(57527, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`ellipsis`](https://lucide.dev/icons/ellipsis) icon.
+  /// [![`ellipsis`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/ellipsis.svg)](https://lucide.dev/icons/ellipsis)
   static const ellipsis = IconData(57526, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`equal-approximately`](https://lucide.dev/icons/equal-approximately) icon.
+  /// [![`equal-approximately`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/equal-approximately.svg)](https://lucide.dev/icons/equal-approximately)
   static const equalApproximately = IconData(58932, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`equal-not`](https://lucide.dev/icons/equal-not) icon.
+  /// [![`equal-not`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/equal-not.svg)](https://lucide.dev/icons/equal-not)
   static const equalNot = IconData(57790, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`equal`](https://lucide.dev/icons/equal) icon.
+  /// [![`equal`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/equal.svg)](https://lucide.dev/icons/equal)
   static const equal = IconData(57789, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`eraser`](https://lucide.dev/icons/eraser) icon.
+  /// [![`eraser`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/eraser.svg)](https://lucide.dev/icons/eraser)
   static const eraser = IconData(57999, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`ethernet-port`](https://lucide.dev/icons/ethernet-port) icon.
+  /// [![`ethernet-port`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/ethernet-port.svg)](https://lucide.dev/icons/ethernet-port)
   static const ethernetPort = IconData(58912, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`euro`](https://lucide.dev/icons/euro) icon.
+  /// [![`euro`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/euro.svg)](https://lucide.dev/icons/euro)
   static const euro = IconData(57528, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`ev-charger`](https://lucide.dev/icons/ev-charger) icon.
+  /// [![`ev-charger`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/ev-charger.svg)](https://lucide.dev/icons/ev-charger)
   static const evCharger = IconData(59031, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`expand`](https://lucide.dev/icons/expand) icon.
+  /// [![`expand`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/expand.svg)](https://lucide.dev/icons/expand)
   static const expand = IconData(57882, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`external-link`](https://lucide.dev/icons/external-link) icon.
+  /// [![`external-link`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/external-link.svg)](https://lucide.dev/icons/external-link)
   static const externalLink = IconData(57529, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`eye-closed`](https://lucide.dev/icons/eye-closed) icon.
+  /// [![`eye-closed`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/eye-closed.svg)](https://lucide.dev/icons/eye-closed)
   static const eyeClosed = IconData(58926, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`eye-off`](https://lucide.dev/icons/eye-off) icon.
+  /// [![`eye-off`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/eye-off.svg)](https://lucide.dev/icons/eye-off)
   static const eyeOff = IconData(57531, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`eye`](https://lucide.dev/icons/eye) icon.
+  /// [![`eye`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/eye.svg)](https://lucide.dev/icons/eye)
   static const eye = IconData(57530, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`facebook`](https://lucide.dev/icons/facebook) icon.
+  /// [![`facebook`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/facebook.svg)](https://lucide.dev/icons/facebook)
   static const facebook = IconData(57532, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`factory`](https://lucide.dev/icons/factory) icon.
+  /// [![`factory`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/factory.svg)](https://lucide.dev/icons/factory)
   static const factory = IconData(58015, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`fan`](https://lucide.dev/icons/fan) icon.
+  /// [![`fan`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/fan.svg)](https://lucide.dev/icons/fan)
   static const fan = IconData(58233, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`fast-forward`](https://lucide.dev/icons/fast-forward) icon.
+  /// [![`fast-forward`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/fast-forward.svg)](https://lucide.dev/icons/fast-forward)
   static const fastForward = IconData(57533, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`feather`](https://lucide.dev/icons/feather) icon.
+  /// [![`feather`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/feather.svg)](https://lucide.dev/icons/feather)
   static const feather = IconData(57534, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`fence`](https://lucide.dev/icons/fence) icon.
+  /// [![`fence`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/fence.svg)](https://lucide.dev/icons/fence)
   static const fence = IconData(58754, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`ferris-wheel`](https://lucide.dev/icons/ferris-wheel) icon.
+  /// [![`ferris-wheel`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/ferris-wheel.svg)](https://lucide.dev/icons/ferris-wheel)
   static const ferrisWheel = IconData(58495, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`figma`](https://lucide.dev/icons/figma) icon.
+  /// [![`figma`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/figma.svg)](https://lucide.dev/icons/figma)
   static const figma = IconData(57535, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`file-archive`](https://lucide.dev/icons/file-archive) icon.
+  /// [![`file-archive`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/file-archive.svg)](https://lucide.dev/icons/file-archive)
   static const fileArchive = IconData(58125, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`file-axis-3d`](https://lucide.dev/icons/file-axis-3d) icon.
+  /// [![`file-axis-3d`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/file-axis-3d.svg)](https://lucide.dev/icons/file-axis-3d)
   static const fileAxis3d = IconData(58126, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`file-badge`](https://lucide.dev/icons/file-badge) icon.
+  /// [![`file-badge`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/file-badge.svg)](https://lucide.dev/icons/file-badge)
   static const fileBadge = IconData(58127, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`file-box`](https://lucide.dev/icons/file-box) icon.
+  /// [![`file-box`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/file-box.svg)](https://lucide.dev/icons/file-box)
   static const fileBox = IconData(58128, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`file-braces-corner`](https://lucide.dev/icons/file-braces-corner) icon.
+  /// [![`file-braces-corner`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/file-braces-corner.svg)](https://lucide.dev/icons/file-braces-corner)
   static const fileBracesCorner = IconData(58220, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`file-braces`](https://lucide.dev/icons/file-braces) icon.
+  /// [![`file-braces`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/file-braces.svg)](https://lucide.dev/icons/file-braces)
   static const fileBraces = IconData(58219, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`file-chart-column-increasing`](https://lucide.dev/icons/file-chart-column-increasing) icon.
+  /// [![`file-chart-column-increasing`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/file-chart-column-increasing.svg)](https://lucide.dev/icons/file-chart-column-increasing)
   static const fileChartColumnIncreasing = IconData(58130, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`file-chart-column`](https://lucide.dev/icons/file-chart-column) icon.
+  /// [![`file-chart-column`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/file-chart-column.svg)](https://lucide.dev/icons/file-chart-column)
   static const fileChartColumn = IconData(58129, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`file-chart-line`](https://lucide.dev/icons/file-chart-line) icon.
+  /// [![`file-chart-line`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/file-chart-line.svg)](https://lucide.dev/icons/file-chart-line)
   static const fileChartLine = IconData(58131, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`file-chart-pie`](https://lucide.dev/icons/file-chart-pie) icon.
+  /// [![`file-chart-pie`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/file-chart-pie.svg)](https://lucide.dev/icons/file-chart-pie)
   static const fileChartPie = IconData(58132, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`file-check-corner`](https://lucide.dev/icons/file-check-corner) icon.
+  /// [![`file-check-corner`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/file-check-corner.svg)](https://lucide.dev/icons/file-check-corner)
   static const fileCheckCorner = IconData(57538, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`file-check`](https://lucide.dev/icons/file-check) icon.
+  /// [![`file-check`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/file-check.svg)](https://lucide.dev/icons/file-check)
   static const fileCheck = IconData(57537, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`file-clock`](https://lucide.dev/icons/file-clock) icon.
+  /// [![`file-clock`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/file-clock.svg)](https://lucide.dev/icons/file-clock)
   static const fileClock = IconData(58133, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`file-code-corner`](https://lucide.dev/icons/file-code-corner) icon.
+  /// [![`file-code-corner`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/file-code-corner.svg)](https://lucide.dev/icons/file-code-corner)
   static const fileCodeCorner = IconData(58462, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`file-code`](https://lucide.dev/icons/file-code) icon.
+  /// [![`file-code`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/file-code.svg)](https://lucide.dev/icons/file-code)
   static const fileCode = IconData(57539, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`file-cog`](https://lucide.dev/icons/file-cog) icon.
+  /// [![`file-cog`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/file-cog.svg)](https://lucide.dev/icons/file-cog)
   static const fileCog = IconData(58134, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`file-diff`](https://lucide.dev/icons/file-diff) icon.
+  /// [![`file-diff`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/file-diff.svg)](https://lucide.dev/icons/file-diff)
   static const fileDiff = IconData(58135, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`file-digit`](https://lucide.dev/icons/file-digit) icon.
+  /// [![`file-digit`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/file-digit.svg)](https://lucide.dev/icons/file-digit)
   static const fileDigit = IconData(57540, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`file-down`](https://lucide.dev/icons/file-down) icon.
+  /// [![`file-down`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/file-down.svg)](https://lucide.dev/icons/file-down)
   static const fileDown = IconData(58136, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`file-exclamation-point`](https://lucide.dev/icons/file-exclamation-point) icon.
+  /// [![`file-exclamation-point`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/file-exclamation-point.svg)](https://lucide.dev/icons/file-exclamation-point)
   static const fileExclamationPoint = IconData(58137, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`file-headphone`](https://lucide.dev/icons/file-headphone) icon.
+  /// [![`file-headphone`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/file-headphone.svg)](https://lucide.dev/icons/file-headphone)
   static const fileHeadphone = IconData(58138, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`file-heart`](https://lucide.dev/icons/file-heart) icon.
+  /// [![`file-heart`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/file-heart.svg)](https://lucide.dev/icons/file-heart)
   static const fileHeart = IconData(58139, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`file-image`](https://lucide.dev/icons/file-image) icon.
+  /// [![`file-image`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/file-image.svg)](https://lucide.dev/icons/file-image)
   static const fileImage = IconData(58140, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`file-input`](https://lucide.dev/icons/file-input) icon.
+  /// [![`file-input`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/file-input.svg)](https://lucide.dev/icons/file-input)
   static const fileInput = IconData(57541, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`file-key`](https://lucide.dev/icons/file-key) icon.
+  /// [![`file-key`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/file-key.svg)](https://lucide.dev/icons/file-key)
   static const fileKey = IconData(58141, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`file-lock`](https://lucide.dev/icons/file-lock) icon.
+  /// [![`file-lock`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/file-lock.svg)](https://lucide.dev/icons/file-lock)
   static const fileLock = IconData(58142, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`file-minus-corner`](https://lucide.dev/icons/file-minus-corner) icon.
+  /// [![`file-minus-corner`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/file-minus-corner.svg)](https://lucide.dev/icons/file-minus-corner)
   static const fileMinusCorner = IconData(57543, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`file-minus`](https://lucide.dev/icons/file-minus) icon.
+  /// [![`file-minus`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/file-minus.svg)](https://lucide.dev/icons/file-minus)
   static const fileMinus = IconData(57542, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`file-music`](https://lucide.dev/icons/file-music) icon.
+  /// [![`file-music`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/file-music.svg)](https://lucide.dev/icons/file-music)
   static const fileMusic = IconData(58718, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`file-output`](https://lucide.dev/icons/file-output) icon.
+  /// [![`file-output`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/file-output.svg)](https://lucide.dev/icons/file-output)
   static const fileOutput = IconData(57544, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`file-pen-line`](https://lucide.dev/icons/file-pen-line) icon.
+  /// [![`file-pen-line`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/file-pen-line.svg)](https://lucide.dev/icons/file-pen-line)
   static const filePenLine = IconData(58144, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`file-pen`](https://lucide.dev/icons/file-pen) icon.
+  /// [![`file-pen`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/file-pen.svg)](https://lucide.dev/icons/file-pen)
   static const filePen = IconData(58143, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`file-play`](https://lucide.dev/icons/file-play) icon.
+  /// [![`file-play`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/file-play.svg)](https://lucide.dev/icons/file-play)
   static const filePlay = IconData(58145, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`file-plus-corner`](https://lucide.dev/icons/file-plus-corner) icon.
+  /// [![`file-plus-corner`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/file-plus-corner.svg)](https://lucide.dev/icons/file-plus-corner)
   static const filePlusCorner = IconData(57546, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`file-plus`](https://lucide.dev/icons/file-plus) icon.
+  /// [![`file-plus`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/file-plus.svg)](https://lucide.dev/icons/file-plus)
   static const filePlus = IconData(57545, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`file-question-mark`](https://lucide.dev/icons/file-question-mark) icon.
+  /// [![`file-question-mark`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/file-question-mark.svg)](https://lucide.dev/icons/file-question-mark)
   static const fileQuestionMark = IconData(58146, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`file-scan`](https://lucide.dev/icons/file-scan) icon.
+  /// [![`file-scan`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/file-scan.svg)](https://lucide.dev/icons/file-scan)
   static const fileScan = IconData(58147, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`file-search-corner`](https://lucide.dev/icons/file-search-corner) icon.
+  /// [![`file-search-corner`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/file-search-corner.svg)](https://lucide.dev/icons/file-search-corner)
   static const fileSearchCorner = IconData(58148, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`file-search`](https://lucide.dev/icons/file-search) icon.
+  /// [![`file-search`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/file-search.svg)](https://lucide.dev/icons/file-search)
   static const fileSearch = IconData(57547, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`file-signal`](https://lucide.dev/icons/file-signal) icon.
+  /// [![`file-signal`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/file-signal.svg)](https://lucide.dev/icons/file-signal)
   static const fileSignal = IconData(58149, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`file-sliders`](https://lucide.dev/icons/file-sliders) icon.
+  /// [![`file-sliders`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/file-sliders.svg)](https://lucide.dev/icons/file-sliders)
   static const fileSliders = IconData(58784, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`file-spreadsheet`](https://lucide.dev/icons/file-spreadsheet) icon.
+  /// [![`file-spreadsheet`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/file-spreadsheet.svg)](https://lucide.dev/icons/file-spreadsheet)
   static const fileSpreadsheet = IconData(58150, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`file-stack`](https://lucide.dev/icons/file-stack) icon.
+  /// [![`file-stack`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/file-stack.svg)](https://lucide.dev/icons/file-stack)
   static const fileStack = IconData(58529, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`file-symlink`](https://lucide.dev/icons/file-symlink) icon.
+  /// [![`file-symlink`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/file-symlink.svg)](https://lucide.dev/icons/file-symlink)
   static const fileSymlink = IconData(58151, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`file-terminal`](https://lucide.dev/icons/file-terminal) icon.
+  /// [![`file-terminal`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/file-terminal.svg)](https://lucide.dev/icons/file-terminal)
   static const fileTerminal = IconData(58152, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`file-text`](https://lucide.dev/icons/file-text) icon.
+  /// [![`file-text`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/file-text.svg)](https://lucide.dev/icons/file-text)
   static const fileText = IconData(57548, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`file-type-corner`](https://lucide.dev/icons/file-type-corner) icon.
+  /// [![`file-type-corner`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/file-type-corner.svg)](https://lucide.dev/icons/file-type-corner)
   static const fileTypeCorner = IconData(58221, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`file-type`](https://lucide.dev/icons/file-type) icon.
+  /// [![`file-type`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/file-type.svg)](https://lucide.dev/icons/file-type)
   static const fileType = IconData(58153, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`file-up`](https://lucide.dev/icons/file-up) icon.
+  /// [![`file-up`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/file-up.svg)](https://lucide.dev/icons/file-up)
   static const fileUp = IconData(58154, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`file-user`](https://lucide.dev/icons/file-user) icon.
+  /// [![`file-user`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/file-user.svg)](https://lucide.dev/icons/file-user)
   static const fileUser = IconData(58925, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`file-video-camera`](https://lucide.dev/icons/file-video-camera) icon.
+  /// [![`file-video-camera`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/file-video-camera.svg)](https://lucide.dev/icons/file-video-camera)
   static const fileVideoCamera = IconData(58155, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`file-volume`](https://lucide.dev/icons/file-volume) icon.
+  /// [![`file-volume`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/file-volume.svg)](https://lucide.dev/icons/file-volume)
   static const fileVolume = IconData(58156, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`file-x-corner`](https://lucide.dev/icons/file-x-corner) icon.
+  /// [![`file-x-corner`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/file-x-corner.svg)](https://lucide.dev/icons/file-x-corner)
   static const fileXCorner = IconData(57550, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`file-x`](https://lucide.dev/icons/file-x) icon.
+  /// [![`file-x`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/file-x.svg)](https://lucide.dev/icons/file-x)
   static const fileX = IconData(57549, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`file`](https://lucide.dev/icons/file) icon.
+  /// [![`file`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/file.svg)](https://lucide.dev/icons/file)
   static const file = IconData(57536, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`files`](https://lucide.dev/icons/files) icon.
+  /// [![`files`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/files.svg)](https://lucide.dev/icons/files)
   static const files = IconData(57551, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`film`](https://lucide.dev/icons/film) icon.
+  /// [![`film`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/film.svg)](https://lucide.dev/icons/film)
   static const film = IconData(57552, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`fingerprint-pattern`](https://lucide.dev/icons/fingerprint-pattern) icon.
+  /// [![`fingerprint-pattern`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/fingerprint-pattern.svg)](https://lucide.dev/icons/fingerprint-pattern)
   static const fingerprintPattern = IconData(58059, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`fire-extinguisher`](https://lucide.dev/icons/fire-extinguisher) icon.
+  /// [![`fire-extinguisher`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/fire-extinguisher.svg)](https://lucide.dev/icons/fire-extinguisher)
   static const fireExtinguisher = IconData(58750, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`fish-off`](https://lucide.dev/icons/fish-off) icon.
+  /// [![`fish-off`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/fish-off.svg)](https://lucide.dev/icons/fish-off)
   static const fishOff = IconData(58288, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`fish-symbol`](https://lucide.dev/icons/fish-symbol) icon.
+  /// [![`fish-symbol`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/fish-symbol.svg)](https://lucide.dev/icons/fish-symbol)
   static const fishSymbol = IconData(58612, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`fish`](https://lucide.dev/icons/fish) icon.
+  /// [![`fish`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/fish.svg)](https://lucide.dev/icons/fish)
   static const fish = IconData(58278, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`fishing-hook`](https://lucide.dev/icons/fishing-hook) icon.
+  /// [![`fishing-hook`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/fishing-hook.svg)](https://lucide.dev/icons/fishing-hook)
   static const fishingHook = IconData(59062, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`flag-off`](https://lucide.dev/icons/flag-off) icon.
+  /// [![`flag-off`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/flag-off.svg)](https://lucide.dev/icons/flag-off)
   static const flagOff = IconData(58002, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`flag-triangle-left`](https://lucide.dev/icons/flag-triangle-left) icon.
+  /// [![`flag-triangle-left`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/flag-triangle-left.svg)](https://lucide.dev/icons/flag-triangle-left)
   static const flagTriangleLeft = IconData(57911, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`flag-triangle-right`](https://lucide.dev/icons/flag-triangle-right) icon.
+  /// [![`flag-triangle-right`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/flag-triangle-right.svg)](https://lucide.dev/icons/flag-triangle-right)
   static const flagTriangleRight = IconData(57912, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`flag`](https://lucide.dev/icons/flag) icon.
+  /// [![`flag`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/flag.svg)](https://lucide.dev/icons/flag)
   static const flag = IconData(57553, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`flame-kindling`](https://lucide.dev/icons/flame-kindling) icon.
+  /// [![`flame-kindling`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/flame-kindling.svg)](https://lucide.dev/icons/flame-kindling)
   static const flameKindling = IconData(58682, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`flame`](https://lucide.dev/icons/flame) icon.
+  /// [![`flame`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/flame.svg)](https://lucide.dev/icons/flame)
   static const flame = IconData(57554, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`flashlight-off`](https://lucide.dev/icons/flashlight-off) icon.
+  /// [![`flashlight-off`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/flashlight-off.svg)](https://lucide.dev/icons/flashlight-off)
   static const flashlightOff = IconData(57556, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`flashlight`](https://lucide.dev/icons/flashlight) icon.
+  /// [![`flashlight`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/flashlight.svg)](https://lucide.dev/icons/flashlight)
   static const flashlight = IconData(57555, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`flask-conical-off`](https://lucide.dev/icons/flask-conical-off) icon.
+  /// [![`flask-conical-off`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/flask-conical-off.svg)](https://lucide.dev/icons/flask-conical-off)
   static const flaskConicalOff = IconData(58262, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`flask-conical`](https://lucide.dev/icons/flask-conical) icon.
+  /// [![`flask-conical`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/flask-conical.svg)](https://lucide.dev/icons/flask-conical)
   static const flaskConical = IconData(57557, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`flask-round`](https://lucide.dev/icons/flask-round) icon.
+  /// [![`flask-round`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/flask-round.svg)](https://lucide.dev/icons/flask-round)
   static const flaskRound = IconData(57558, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`flip-horizontal-2`](https://lucide.dev/icons/flip-horizontal-2) icon.
+  /// [![`flip-horizontal-2`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/flip-horizontal-2.svg)](https://lucide.dev/icons/flip-horizontal-2)
   static const flipHorizontal2 = IconData(58206, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`flip-horizontal`](https://lucide.dev/icons/flip-horizontal) icon.
+  /// [![`flip-horizontal`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/flip-horizontal.svg)](https://lucide.dev/icons/flip-horizontal)
   static const flipHorizontal = IconData(58205, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`flip-vertical-2`](https://lucide.dev/icons/flip-vertical-2) icon.
+  /// [![`flip-vertical-2`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/flip-vertical-2.svg)](https://lucide.dev/icons/flip-vertical-2)
   static const flipVertical2 = IconData(58208, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`flip-vertical`](https://lucide.dev/icons/flip-vertical) icon.
+  /// [![`flip-vertical`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/flip-vertical.svg)](https://lucide.dev/icons/flip-vertical)
   static const flipVertical = IconData(58207, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`flower-2`](https://lucide.dev/icons/flower-2) icon.
+  /// [![`flower-2`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/flower-2.svg)](https://lucide.dev/icons/flower-2)
   static const flower2 = IconData(58068, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`flower`](https://lucide.dev/icons/flower) icon.
+  /// [![`flower`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/flower.svg)](https://lucide.dev/icons/flower)
   static const flower = IconData(58067, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`focus`](https://lucide.dev/icons/focus) icon.
+  /// [![`focus`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/focus.svg)](https://lucide.dev/icons/focus)
   static const focus = IconData(58014, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`fold-horizontal`](https://lucide.dev/icons/fold-horizontal) icon.
+  /// [![`fold-horizontal`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/fold-horizontal.svg)](https://lucide.dev/icons/fold-horizontal)
   static const foldHorizontal = IconData(58427, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`fold-vertical`](https://lucide.dev/icons/fold-vertical) icon.
+  /// [![`fold-vertical`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/fold-vertical.svg)](https://lucide.dev/icons/fold-vertical)
   static const foldVertical = IconData(58428, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`folder-archive`](https://lucide.dev/icons/folder-archive) icon.
+  /// [![`folder-archive`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/folder-archive.svg)](https://lucide.dev/icons/folder-archive)
   static const folderArchive = IconData(58157, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`folder-check`](https://lucide.dev/icons/folder-check) icon.
+  /// [![`folder-check`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/folder-check.svg)](https://lucide.dev/icons/folder-check)
   static const folderCheck = IconData(58158, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`folder-clock`](https://lucide.dev/icons/folder-clock) icon.
+  /// [![`folder-clock`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/folder-clock.svg)](https://lucide.dev/icons/folder-clock)
   static const folderClock = IconData(58159, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`folder-closed`](https://lucide.dev/icons/folder-closed) icon.
+  /// [![`folder-closed`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/folder-closed.svg)](https://lucide.dev/icons/folder-closed)
   static const folderClosed = IconData(58160, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`folder-code`](https://lucide.dev/icons/folder-code) icon.
+  /// [![`folder-code`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/folder-code.svg)](https://lucide.dev/icons/folder-code)
   static const folderCode = IconData(58875, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`folder-cog`](https://lucide.dev/icons/folder-cog) icon.
+  /// [![`folder-cog`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/folder-cog.svg)](https://lucide.dev/icons/folder-cog)
   static const folderCog = IconData(58161, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`folder-dot`](https://lucide.dev/icons/folder-dot) icon.
+  /// [![`folder-dot`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/folder-dot.svg)](https://lucide.dev/icons/folder-dot)
   static const folderDot = IconData(58565, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`folder-down`](https://lucide.dev/icons/folder-down) icon.
+  /// [![`folder-down`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/folder-down.svg)](https://lucide.dev/icons/folder-down)
   static const folderDown = IconData(58162, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`folder-git-2`](https://lucide.dev/icons/folder-git-2) icon.
+  /// [![`folder-git-2`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/folder-git-2.svg)](https://lucide.dev/icons/folder-git-2)
   static const folderGit2 = IconData(58378, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`folder-git`](https://lucide.dev/icons/folder-git) icon.
+  /// [![`folder-git`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/folder-git.svg)](https://lucide.dev/icons/folder-git)
   static const folderGit = IconData(58377, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`folder-heart`](https://lucide.dev/icons/folder-heart) icon.
+  /// [![`folder-heart`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/folder-heart.svg)](https://lucide.dev/icons/folder-heart)
   static const folderHeart = IconData(58163, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`folder-input`](https://lucide.dev/icons/folder-input) icon.
+  /// [![`folder-input`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/folder-input.svg)](https://lucide.dev/icons/folder-input)
   static const folderInput = IconData(58164, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`folder-kanban`](https://lucide.dev/icons/folder-kanban) icon.
+  /// [![`folder-kanban`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/folder-kanban.svg)](https://lucide.dev/icons/folder-kanban)
   static const folderKanban = IconData(58566, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`folder-key`](https://lucide.dev/icons/folder-key) icon.
+  /// [![`folder-key`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/folder-key.svg)](https://lucide.dev/icons/folder-key)
   static const folderKey = IconData(58165, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`folder-lock`](https://lucide.dev/icons/folder-lock) icon.
+  /// [![`folder-lock`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/folder-lock.svg)](https://lucide.dev/icons/folder-lock)
   static const folderLock = IconData(58166, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`folder-minus`](https://lucide.dev/icons/folder-minus) icon.
+  /// [![`folder-minus`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/folder-minus.svg)](https://lucide.dev/icons/folder-minus)
   static const folderMinus = IconData(57560, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`folder-open-dot`](https://lucide.dev/icons/folder-open-dot) icon.
+  /// [![`folder-open-dot`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/folder-open-dot.svg)](https://lucide.dev/icons/folder-open-dot)
   static const folderOpenDot = IconData(58567, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`folder-open`](https://lucide.dev/icons/folder-open) icon.
+  /// [![`folder-open`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/folder-open.svg)](https://lucide.dev/icons/folder-open)
   static const folderOpen = IconData(57927, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`folder-output`](https://lucide.dev/icons/folder-output) icon.
+  /// [![`folder-output`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/folder-output.svg)](https://lucide.dev/icons/folder-output)
   static const folderOutput = IconData(58167, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`folder-pen`](https://lucide.dev/icons/folder-pen) icon.
+  /// [![`folder-pen`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/folder-pen.svg)](https://lucide.dev/icons/folder-pen)
   static const folderPen = IconData(58168, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`folder-plus`](https://lucide.dev/icons/folder-plus) icon.
+  /// [![`folder-plus`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/folder-plus.svg)](https://lucide.dev/icons/folder-plus)
   static const folderPlus = IconData(57561, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`folder-root`](https://lucide.dev/icons/folder-root) icon.
+  /// [![`folder-root`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/folder-root.svg)](https://lucide.dev/icons/folder-root)
   static const folderRoot = IconData(58568, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`folder-search-2`](https://lucide.dev/icons/folder-search-2) icon.
+  /// [![`folder-search-2`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/folder-search-2.svg)](https://lucide.dev/icons/folder-search-2)
   static const folderSearch2 = IconData(58170, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`folder-search`](https://lucide.dev/icons/folder-search) icon.
+  /// [![`folder-search`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/folder-search.svg)](https://lucide.dev/icons/folder-search)
   static const folderSearch = IconData(58169, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`folder-symlink`](https://lucide.dev/icons/folder-symlink) icon.
+  /// [![`folder-symlink`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/folder-symlink.svg)](https://lucide.dev/icons/folder-symlink)
   static const folderSymlink = IconData(58171, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`folder-sync`](https://lucide.dev/icons/folder-sync) icon.
+  /// [![`folder-sync`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/folder-sync.svg)](https://lucide.dev/icons/folder-sync)
   static const folderSync = IconData(58569, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`folder-tree`](https://lucide.dev/icons/folder-tree) icon.
+  /// [![`folder-tree`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/folder-tree.svg)](https://lucide.dev/icons/folder-tree)
   static const folderTree = IconData(58172, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`folder-up`](https://lucide.dev/icons/folder-up) icon.
+  /// [![`folder-up`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/folder-up.svg)](https://lucide.dev/icons/folder-up)
   static const folderUp = IconData(58173, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`folder-x`](https://lucide.dev/icons/folder-x) icon.
+  /// [![`folder-x`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/folder-x.svg)](https://lucide.dev/icons/folder-x)
   static const folderX = IconData(58174, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`folder`](https://lucide.dev/icons/folder) icon.
+  /// [![`folder`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/folder.svg)](https://lucide.dev/icons/folder)
   static const folder = IconData(57559, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`folders`](https://lucide.dev/icons/folders) icon.
+  /// [![`folders`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/folders.svg)](https://lucide.dev/icons/folders)
   static const folders = IconData(58175, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`footprints`](https://lucide.dev/icons/footprints) icon.
+  /// [![`footprints`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/footprints.svg)](https://lucide.dev/icons/footprints)
   static const footprints = IconData(58297, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`forklift`](https://lucide.dev/icons/forklift) icon.
+  /// [![`forklift`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/forklift.svg)](https://lucide.dev/icons/forklift)
   static const forklift = IconData(58305, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`form`](https://lucide.dev/icons/form) icon.
+  /// [![`form`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/form.svg)](https://lucide.dev/icons/form)
   static const form = IconData(59048, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`forward`](https://lucide.dev/icons/forward) icon.
+  /// [![`forward`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/forward.svg)](https://lucide.dev/icons/forward)
   static const forward = IconData(57897, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`frame`](https://lucide.dev/icons/frame) icon.
+  /// [![`frame`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/frame.svg)](https://lucide.dev/icons/frame)
   static const frame = IconData(58001, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`framer`](https://lucide.dev/icons/framer) icon.
+  /// [![`framer`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/framer.svg)](https://lucide.dev/icons/framer)
   static const framer = IconData(57562, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`frown`](https://lucide.dev/icons/frown) icon.
+  /// [![`frown`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/frown.svg)](https://lucide.dev/icons/frown)
   static const frown = IconData(57563, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`fuel`](https://lucide.dev/icons/fuel) icon.
+  /// [![`fuel`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/fuel.svg)](https://lucide.dev/icons/fuel)
   static const fuel = IconData(58031, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`fullscreen`](https://lucide.dev/icons/fullscreen) icon.
+  /// [![`fullscreen`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/fullscreen.svg)](https://lucide.dev/icons/fullscreen)
   static const fullscreen = IconData(58676, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`funnel-plus`](https://lucide.dev/icons/funnel-plus) icon.
+  /// [![`funnel-plus`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/funnel-plus.svg)](https://lucide.dev/icons/funnel-plus)
   static const funnelPlus = IconData(57565, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`funnel-x`](https://lucide.dev/icons/funnel-x) icon.
+  /// [![`funnel-x`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/funnel-x.svg)](https://lucide.dev/icons/funnel-x)
   static const funnelX = IconData(58293, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`funnel`](https://lucide.dev/icons/funnel) icon.
+  /// [![`funnel`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/funnel.svg)](https://lucide.dev/icons/funnel)
   static const funnel = IconData(57564, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`gallery-horizontal-end`](https://lucide.dev/icons/gallery-horizontal-end) icon.
+  /// [![`gallery-horizontal-end`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/gallery-horizontal-end.svg)](https://lucide.dev/icons/gallery-horizontal-end)
   static const galleryHorizontalEnd = IconData(58575, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`gallery-horizontal`](https://lucide.dev/icons/gallery-horizontal) icon.
+  /// [![`gallery-horizontal`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/gallery-horizontal.svg)](https://lucide.dev/icons/gallery-horizontal)
   static const galleryHorizontal = IconData(58574, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`gallery-thumbnails`](https://lucide.dev/icons/gallery-thumbnails) icon.
+  /// [![`gallery-thumbnails`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/gallery-thumbnails.svg)](https://lucide.dev/icons/gallery-thumbnails)
   static const galleryThumbnails = IconData(58576, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`gallery-vertical-end`](https://lucide.dev/icons/gallery-vertical-end) icon.
+  /// [![`gallery-vertical-end`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/gallery-vertical-end.svg)](https://lucide.dev/icons/gallery-vertical-end)
   static const galleryVerticalEnd = IconData(58578, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`gallery-vertical`](https://lucide.dev/icons/gallery-vertical) icon.
+  /// [![`gallery-vertical`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/gallery-vertical.svg)](https://lucide.dev/icons/gallery-vertical)
   static const galleryVertical = IconData(58577, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`gamepad-2`](https://lucide.dev/icons/gamepad-2) icon.
+  /// [![`gamepad-2`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/gamepad-2.svg)](https://lucide.dev/icons/gamepad-2)
   static const gamepad2 = IconData(57567, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`gamepad-directional`](https://lucide.dev/icons/gamepad-directional) icon.
+  /// [![`gamepad-directional`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/gamepad-directional.svg)](https://lucide.dev/icons/gamepad-directional)
   static const gamepadDirectional = IconData(59035, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`gamepad`](https://lucide.dev/icons/gamepad) icon.
+  /// [![`gamepad`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/gamepad.svg)](https://lucide.dev/icons/gamepad)
   static const gamepad = IconData(57566, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`gauge`](https://lucide.dev/icons/gauge) icon.
+  /// [![`gauge`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/gauge.svg)](https://lucide.dev/icons/gauge)
   static const gauge = IconData(57791, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`gavel`](https://lucide.dev/icons/gavel) icon.
+  /// [![`gavel`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/gavel.svg)](https://lucide.dev/icons/gavel)
   static const gavel = IconData(57568, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`gem`](https://lucide.dev/icons/gem) icon.
+  /// [![`gem`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/gem.svg)](https://lucide.dev/icons/gem)
   static const gem = IconData(57922, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`georgian-lari`](https://lucide.dev/icons/georgian-lari) icon.
+  /// [![`georgian-lari`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/georgian-lari.svg)](https://lucide.dev/icons/georgian-lari)
   static const georgianLari = IconData(59000, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`ghost`](https://lucide.dev/icons/ghost) icon.
+  /// [![`ghost`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/ghost.svg)](https://lucide.dev/icons/ghost)
   static const ghost = IconData(57870, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`gift`](https://lucide.dev/icons/gift) icon.
+  /// [![`gift`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/gift.svg)](https://lucide.dev/icons/gift)
   static const gift = IconData(57569, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`git-branch-minus`](https://lucide.dev/icons/git-branch-minus) icon.
+  /// [![`git-branch-minus`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/git-branch-minus.svg)](https://lucide.dev/icons/git-branch-minus)
   static const gitBranchMinus = IconData(59036, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`git-branch-plus`](https://lucide.dev/icons/git-branch-plus) icon.
+  /// [![`git-branch-plus`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/git-branch-plus.svg)](https://lucide.dev/icons/git-branch-plus)
   static const gitBranchPlus = IconData(57844, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`git-branch`](https://lucide.dev/icons/git-branch) icon.
+  /// [![`git-branch`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/git-branch.svg)](https://lucide.dev/icons/git-branch)
   static const gitBranch = IconData(57570, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`git-commit-horizontal`](https://lucide.dev/icons/git-commit-horizontal) icon.
+  /// [![`git-commit-horizontal`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/git-commit-horizontal.svg)](https://lucide.dev/icons/git-commit-horizontal)
   static const gitCommitHorizontal = IconData(57571, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`git-commit-vertical`](https://lucide.dev/icons/git-commit-vertical) icon.
+  /// [![`git-commit-vertical`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/git-commit-vertical.svg)](https://lucide.dev/icons/git-commit-vertical)
   static const gitCommitVertical = IconData(58706, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`git-compare-arrows`](https://lucide.dev/icons/git-compare-arrows) icon.
+  /// [![`git-compare-arrows`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/git-compare-arrows.svg)](https://lucide.dev/icons/git-compare-arrows)
   static const gitCompareArrows = IconData(58707, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`git-compare`](https://lucide.dev/icons/git-compare) icon.
+  /// [![`git-compare`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/git-compare.svg)](https://lucide.dev/icons/git-compare)
   static const gitCompare = IconData(58201, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`git-fork`](https://lucide.dev/icons/git-fork) icon.
+  /// [![`git-fork`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/git-fork.svg)](https://lucide.dev/icons/git-fork)
   static const gitFork = IconData(57997, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`git-graph`](https://lucide.dev/icons/git-graph) icon.
+  /// [![`git-graph`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/git-graph.svg)](https://lucide.dev/icons/git-graph)
   static const gitGraph = IconData(58708, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`git-merge`](https://lucide.dev/icons/git-merge) icon.
+  /// [![`git-merge`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/git-merge.svg)](https://lucide.dev/icons/git-merge)
   static const gitMerge = IconData(57572, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`git-pull-request-arrow`](https://lucide.dev/icons/git-pull-request-arrow) icon.
+  /// [![`git-pull-request-arrow`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/git-pull-request-arrow.svg)](https://lucide.dev/icons/git-pull-request-arrow)
   static const gitPullRequestArrow = IconData(58709, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`git-pull-request-closed`](https://lucide.dev/icons/git-pull-request-closed) icon.
+  /// [![`git-pull-request-closed`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/git-pull-request-closed.svg)](https://lucide.dev/icons/git-pull-request-closed)
   static const gitPullRequestClosed = IconData(58202, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`git-pull-request-create-arrow`](https://lucide.dev/icons/git-pull-request-create-arrow) icon.
+  /// [![`git-pull-request-create-arrow`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/git-pull-request-create-arrow.svg)](https://lucide.dev/icons/git-pull-request-create-arrow)
   static const gitPullRequestCreateArrow = IconData(58711, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`git-pull-request-create`](https://lucide.dev/icons/git-pull-request-create) icon.
+  /// [![`git-pull-request-create`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/git-pull-request-create.svg)](https://lucide.dev/icons/git-pull-request-create)
   static const gitPullRequestCreate = IconData(58710, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`git-pull-request-draft`](https://lucide.dev/icons/git-pull-request-draft) icon.
+  /// [![`git-pull-request-draft`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/git-pull-request-draft.svg)](https://lucide.dev/icons/git-pull-request-draft)
   static const gitPullRequestDraft = IconData(58203, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`git-pull-request`](https://lucide.dev/icons/git-pull-request) icon.
+  /// [![`git-pull-request`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/git-pull-request.svg)](https://lucide.dev/icons/git-pull-request)
   static const gitPullRequest = IconData(57573, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`github`](https://lucide.dev/icons/github) icon.
+  /// [![`github`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/github.svg)](https://lucide.dev/icons/github)
   static const github = IconData(57574, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`gitlab`](https://lucide.dev/icons/gitlab) icon.
+  /// [![`gitlab`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/gitlab.svg)](https://lucide.dev/icons/gitlab)
   static const gitlab = IconData(57575, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`glass-water`](https://lucide.dev/icons/glass-water) icon.
+  /// [![`glass-water`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/glass-water.svg)](https://lucide.dev/icons/glass-water)
   static const glassWater = IconData(58069, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`glasses`](https://lucide.dev/icons/glasses) icon.
+  /// [![`glasses`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/glasses.svg)](https://lucide.dev/icons/glasses)
   static const glasses = IconData(57869, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`globe-lock`](https://lucide.dev/icons/globe-lock) icon.
+  /// [![`globe-lock`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/globe-lock.svg)](https://lucide.dev/icons/globe-lock)
   static const globeLock = IconData(58829, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`globe`](https://lucide.dev/icons/globe) icon.
+  /// [![`globe`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/globe.svg)](https://lucide.dev/icons/globe)
   static const globe = IconData(57576, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`goal`](https://lucide.dev/icons/goal) icon.
+  /// [![`goal`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/goal.svg)](https://lucide.dev/icons/goal)
   static const goal = IconData(58533, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`gpu`](https://lucide.dev/icons/gpu) icon.
+  /// [![`gpu`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/gpu.svg)](https://lucide.dev/icons/gpu)
   static const gpu = IconData(58986, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`graduation-cap`](https://lucide.dev/icons/graduation-cap) icon.
+  /// [![`graduation-cap`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/graduation-cap.svg)](https://lucide.dev/icons/graduation-cap)
   static const graduationCap = IconData(57908, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`grape`](https://lucide.dev/icons/grape) icon.
+  /// [![`grape`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/grape.svg)](https://lucide.dev/icons/grape)
   static const grape = IconData(58194, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`grid-2x2-check`](https://lucide.dev/icons/grid-2x2-check) icon.
+  /// [![`grid-2x2-check`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/grid-2x2-check.svg)](https://lucide.dev/icons/grid-2x2-check)
   static const grid2x2Check = IconData(58852, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`grid-2x2-plus`](https://lucide.dev/icons/grid-2x2-plus) icon.
+  /// [![`grid-2x2-plus`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/grid-2x2-plus.svg)](https://lucide.dev/icons/grid-2x2-plus)
   static const grid2x2Plus = IconData(58920, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`grid-2x2-x`](https://lucide.dev/icons/grid-2x2-x) icon.
+  /// [![`grid-2x2-x`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/grid-2x2-x.svg)](https://lucide.dev/icons/grid-2x2-x)
   static const grid2x2X = IconData(58853, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`grid-2x2`](https://lucide.dev/icons/grid-2x2) icon.
+  /// [![`grid-2x2`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/grid-2x2.svg)](https://lucide.dev/icons/grid-2x2)
   static const grid2x2 = IconData(58623, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`grid-3x2`](https://lucide.dev/icons/grid-3x2) icon.
+  /// [![`grid-3x2`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/grid-3x2.svg)](https://lucide.dev/icons/grid-3x2)
   static const grid3x2 = IconData(58991, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`grid-3x3`](https://lucide.dev/icons/grid-3x3) icon.
+  /// [![`grid-3x3`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/grid-3x3.svg)](https://lucide.dev/icons/grid-3x3)
   static const grid3x3 = IconData(57577, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`grip-horizontal`](https://lucide.dev/icons/grip-horizontal) icon.
+  /// [![`grip-horizontal`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/grip-horizontal.svg)](https://lucide.dev/icons/grip-horizontal)
   static const gripHorizontal = IconData(57578, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`grip-vertical`](https://lucide.dev/icons/grip-vertical) icon.
+  /// [![`grip-vertical`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/grip-vertical.svg)](https://lucide.dev/icons/grip-vertical)
   static const gripVertical = IconData(57579, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`grip`](https://lucide.dev/icons/grip) icon.
+  /// [![`grip`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/grip.svg)](https://lucide.dev/icons/grip)
   static const grip = IconData(58289, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`group`](https://lucide.dev/icons/group) icon.
+  /// [![`group`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/group.svg)](https://lucide.dev/icons/group)
   static const group = IconData(58468, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`guitar`](https://lucide.dev/icons/guitar) icon.
+  /// [![`guitar`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/guitar.svg)](https://lucide.dev/icons/guitar)
   static const guitar = IconData(58719, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`ham`](https://lucide.dev/icons/ham) icon.
+  /// [![`ham`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/ham.svg)](https://lucide.dev/icons/ham)
   static const ham = IconData(58839, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`hamburger`](https://lucide.dev/icons/hamburger) icon.
+  /// [![`hamburger`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/hamburger.svg)](https://lucide.dev/icons/hamburger)
   static const hamburger = IconData(58981, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`hammer`](https://lucide.dev/icons/hammer) icon.
+  /// [![`hammer`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/hammer.svg)](https://lucide.dev/icons/hammer)
   static const hammer = IconData(57580, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`hand-coins`](https://lucide.dev/icons/hand-coins) icon.
+  /// [![`hand-coins`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/hand-coins.svg)](https://lucide.dev/icons/hand-coins)
   static const handCoins = IconData(58808, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`hand-fist`](https://lucide.dev/icons/hand-fist) icon.
+  /// [![`hand-fist`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/hand-fist.svg)](https://lucide.dev/icons/hand-fist)
   static const handFist = IconData(59019, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`hand-grab`](https://lucide.dev/icons/hand-grab) icon.
+  /// [![`hand-grab`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/hand-grab.svg)](https://lucide.dev/icons/hand-grab)
   static const handGrab = IconData(57830, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`hand-heart`](https://lucide.dev/icons/hand-heart) icon.
+  /// [![`hand-heart`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/hand-heart.svg)](https://lucide.dev/icons/hand-heart)
   static const handHeart = IconData(58809, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`hand-helping`](https://lucide.dev/icons/hand-helping) icon.
+  /// [![`hand-helping`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/hand-helping.svg)](https://lucide.dev/icons/hand-helping)
   static const handHelping = IconData(58296, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`hand-metal`](https://lucide.dev/icons/hand-metal) icon.
+  /// [![`hand-metal`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/hand-metal.svg)](https://lucide.dev/icons/hand-metal)
   static const handMetal = IconData(57900, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`hand-platter`](https://lucide.dev/icons/hand-platter) icon.
+  /// [![`hand-platter`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/hand-platter.svg)](https://lucide.dev/icons/hand-platter)
   static const handPlatter = IconData(58810, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`hand`](https://lucide.dev/icons/hand) icon.
+  /// [![`hand`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/hand.svg)](https://lucide.dev/icons/hand)
   static const hand = IconData(57815, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`handbag`](https://lucide.dev/icons/handbag) icon.
+  /// [![`handbag`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/handbag.svg)](https://lucide.dev/icons/handbag)
   static const handbag = IconData(59017, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`handshake`](https://lucide.dev/icons/handshake) icon.
+  /// [![`handshake`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/handshake.svg)](https://lucide.dev/icons/handshake)
   static const handshake = IconData(58816, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`hard-drive-download`](https://lucide.dev/icons/hard-drive-download) icon.
+  /// [![`hard-drive-download`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/hard-drive-download.svg)](https://lucide.dev/icons/hard-drive-download)
   static const hardDriveDownload = IconData(58597, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`hard-drive-upload`](https://lucide.dev/icons/hard-drive-upload) icon.
+  /// [![`hard-drive-upload`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/hard-drive-upload.svg)](https://lucide.dev/icons/hard-drive-upload)
   static const hardDriveUpload = IconData(58598, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`hard-drive`](https://lucide.dev/icons/hard-drive) icon.
+  /// [![`hard-drive`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/hard-drive.svg)](https://lucide.dev/icons/hard-drive)
   static const hardDrive = IconData(57581, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`hard-hat`](https://lucide.dev/icons/hard-hat) icon.
+  /// [![`hard-hat`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/hard-hat.svg)](https://lucide.dev/icons/hard-hat)
   static const hardHat = IconData(57582, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`hash`](https://lucide.dev/icons/hash) icon.
+  /// [![`hash`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/hash.svg)](https://lucide.dev/icons/hash)
   static const hash = IconData(57583, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`hat-glasses`](https://lucide.dev/icons/hat-glasses) icon.
+  /// [![`hat-glasses`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/hat-glasses.svg)](https://lucide.dev/icons/hat-glasses)
   static const hatGlasses = IconData(59011, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`haze`](https://lucide.dev/icons/haze) icon.
+  /// [![`haze`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/haze.svg)](https://lucide.dev/icons/haze)
   static const haze = IconData(57584, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`hd`](https://lucide.dev/icons/hd) icon.
+  /// [![`hd`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/hd.svg)](https://lucide.dev/icons/hd)
   static const hd = IconData(59061, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`hdmi-port`](https://lucide.dev/icons/hdmi-port) icon.
+  /// [![`hdmi-port`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/hdmi-port.svg)](https://lucide.dev/icons/hdmi-port)
   static const hdmiPort = IconData(58599, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`heading-1`](https://lucide.dev/icons/heading-1) icon.
+  /// [![`heading-1`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/heading-1.svg)](https://lucide.dev/icons/heading-1)
   static const heading1 = IconData(58245, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`heading-2`](https://lucide.dev/icons/heading-2) icon.
+  /// [![`heading-2`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/heading-2.svg)](https://lucide.dev/icons/heading-2)
   static const heading2 = IconData(58246, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`heading-3`](https://lucide.dev/icons/heading-3) icon.
+  /// [![`heading-3`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/heading-3.svg)](https://lucide.dev/icons/heading-3)
   static const heading3 = IconData(58247, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`heading-4`](https://lucide.dev/icons/heading-4) icon.
+  /// [![`heading-4`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/heading-4.svg)](https://lucide.dev/icons/heading-4)
   static const heading4 = IconData(58248, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`heading-5`](https://lucide.dev/icons/heading-5) icon.
+  /// [![`heading-5`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/heading-5.svg)](https://lucide.dev/icons/heading-5)
   static const heading5 = IconData(58249, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`heading-6`](https://lucide.dev/icons/heading-6) icon.
+  /// [![`heading-6`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/heading-6.svg)](https://lucide.dev/icons/heading-6)
   static const heading6 = IconData(58250, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`heading`](https://lucide.dev/icons/heading) icon.
+  /// [![`heading`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/heading.svg)](https://lucide.dev/icons/heading)
   static const heading = IconData(58244, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`headphone-off`](https://lucide.dev/icons/headphone-off) icon.
+  /// [![`headphone-off`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/headphone-off.svg)](https://lucide.dev/icons/headphone-off)
   static const headphoneOff = IconData(58921, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`headphones`](https://lucide.dev/icons/headphones) icon.
+  /// [![`headphones`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/headphones.svg)](https://lucide.dev/icons/headphones)
   static const headphones = IconData(57585, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`headset`](https://lucide.dev/icons/headset) icon.
+  /// [![`headset`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/headset.svg)](https://lucide.dev/icons/headset)
   static const headset = IconData(58813, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`heart-crack`](https://lucide.dev/icons/heart-crack) icon.
+  /// [![`heart-crack`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/heart-crack.svg)](https://lucide.dev/icons/heart-crack)
   static const heartCrack = IconData(58070, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`heart-handshake`](https://lucide.dev/icons/heart-handshake) icon.
+  /// [![`heart-handshake`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/heart-handshake.svg)](https://lucide.dev/icons/heart-handshake)
   static const heartHandshake = IconData(58071, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`heart-minus`](https://lucide.dev/icons/heart-minus) icon.
+  /// [![`heart-minus`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/heart-minus.svg)](https://lucide.dev/icons/heart-minus)
   static const heartMinus = IconData(58961, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`heart-off`](https://lucide.dev/icons/heart-off) icon.
+  /// [![`heart-off`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/heart-off.svg)](https://lucide.dev/icons/heart-off)
   static const heartOff = IconData(58005, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`heart-plus`](https://lucide.dev/icons/heart-plus) icon.
+  /// [![`heart-plus`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/heart-plus.svg)](https://lucide.dev/icons/heart-plus)
   static const heartPlus = IconData(58962, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`heart-pulse`](https://lucide.dev/icons/heart-pulse) icon.
+  /// [![`heart-pulse`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/heart-pulse.svg)](https://lucide.dev/icons/heart-pulse)
   static const heartPulse = IconData(58222, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`heart`](https://lucide.dev/icons/heart) icon.
+  /// [![`heart`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/heart.svg)](https://lucide.dev/icons/heart)
   static const heart = IconData(57586, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`heater`](https://lucide.dev/icons/heater) icon.
+  /// [![`heater`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/heater.svg)](https://lucide.dev/icons/heater)
   static const heater = IconData(58766, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`helicopter`](https://lucide.dev/icons/helicopter) icon.
+  /// [![`helicopter`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/helicopter.svg)](https://lucide.dev/icons/helicopter)
   static const helicopter = IconData(59037, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`hexagon`](https://lucide.dev/icons/hexagon) icon.
+  /// [![`hexagon`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/hexagon.svg)](https://lucide.dev/icons/hexagon)
   static const hexagon = IconData(57587, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`highlighter`](https://lucide.dev/icons/highlighter) icon.
+  /// [![`highlighter`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/highlighter.svg)](https://lucide.dev/icons/highlighter)
   static const highlighter = IconData(57588, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`history`](https://lucide.dev/icons/history) icon.
+  /// [![`history`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/history.svg)](https://lucide.dev/icons/history)
   static const history = IconData(57845, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`hop-off`](https://lucide.dev/icons/hop-off) icon.
+  /// [![`hop-off`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/hop-off.svg)](https://lucide.dev/icons/hop-off)
   static const hopOff = IconData(58264, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`hop`](https://lucide.dev/icons/hop) icon.
+  /// [![`hop`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/hop.svg)](https://lucide.dev/icons/hop)
   static const hop = IconData(58263, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`hospital`](https://lucide.dev/icons/hospital) icon.
+  /// [![`hospital`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/hospital.svg)](https://lucide.dev/icons/hospital)
   static const hospital = IconData(58840, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`hotel`](https://lucide.dev/icons/hotel) icon.
+  /// [![`hotel`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/hotel.svg)](https://lucide.dev/icons/hotel)
   static const hotel = IconData(58338, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`hourglass`](https://lucide.dev/icons/hourglass) icon.
+  /// [![`hourglass`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/hourglass.svg)](https://lucide.dev/icons/hourglass)
   static const hourglass = IconData(58006, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`house-heart`](https://lucide.dev/icons/house-heart) icon.
+  /// [![`house-heart`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/house-heart.svg)](https://lucide.dev/icons/house-heart)
   static const houseHeart = IconData(59029, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`house-plug`](https://lucide.dev/icons/house-plug) icon.
+  /// [![`house-plug`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/house-plug.svg)](https://lucide.dev/icons/house-plug)
   static const housePlug = IconData(58864, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`house-plus`](https://lucide.dev/icons/house-plus) icon.
+  /// [![`house-plus`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/house-plus.svg)](https://lucide.dev/icons/house-plus)
   static const housePlus = IconData(58865, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`house-wifi`](https://lucide.dev/icons/house-wifi) icon.
+  /// [![`house-wifi`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/house-wifi.svg)](https://lucide.dev/icons/house-wifi)
   static const houseWifi = IconData(58940, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`house`](https://lucide.dev/icons/house) icon.
+  /// [![`house`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/house.svg)](https://lucide.dev/icons/house)
   static const house = IconData(57589, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`ice-cream-bowl`](https://lucide.dev/icons/ice-cream-bowl) icon.
+  /// [![`ice-cream-bowl`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/ice-cream-bowl.svg)](https://lucide.dev/icons/ice-cream-bowl)
   static const iceCreamBowl = IconData(58279, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`ice-cream-cone`](https://lucide.dev/icons/ice-cream-cone) icon.
+  /// [![`ice-cream-cone`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/ice-cream-cone.svg)](https://lucide.dev/icons/ice-cream-cone)
   static const iceCreamCone = IconData(58195, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`id-card-lanyard`](https://lucide.dev/icons/id-card-lanyard) icon.
+  /// [![`id-card-lanyard`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/id-card-lanyard.svg)](https://lucide.dev/icons/id-card-lanyard)
   static const idCardLanyard = IconData(58992, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`id-card`](https://lucide.dev/icons/id-card) icon.
+  /// [![`id-card`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/id-card.svg)](https://lucide.dev/icons/id-card)
   static const idCard = IconData(58903, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`image-down`](https://lucide.dev/icons/image-down) icon.
+  /// [![`image-down`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/image-down.svg)](https://lucide.dev/icons/image-down)
   static const imageDown = IconData(58684, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`image-minus`](https://lucide.dev/icons/image-minus) icon.
+  /// [![`image-minus`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/image-minus.svg)](https://lucide.dev/icons/image-minus)
   static const imageMinus = IconData(57846, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`image-off`](https://lucide.dev/icons/image-off) icon.
+  /// [![`image-off`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/image-off.svg)](https://lucide.dev/icons/image-off)
   static const imageOff = IconData(57792, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`image-play`](https://lucide.dev/icons/image-play) icon.
+  /// [![`image-play`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/image-play.svg)](https://lucide.dev/icons/image-play)
   static const imagePlay = IconData(58847, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`image-plus`](https://lucide.dev/icons/image-plus) icon.
+  /// [![`image-plus`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/image-plus.svg)](https://lucide.dev/icons/image-plus)
   static const imagePlus = IconData(57847, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`image-up`](https://lucide.dev/icons/image-up) icon.
+  /// [![`image-up`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/image-up.svg)](https://lucide.dev/icons/image-up)
   static const imageUp = IconData(58827, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`image-upscale`](https://lucide.dev/icons/image-upscale) icon.
+  /// [![`image-upscale`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/image-upscale.svg)](https://lucide.dev/icons/image-upscale)
   static const imageUpscale = IconData(58935, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`image`](https://lucide.dev/icons/image) icon.
+  /// [![`image`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/image.svg)](https://lucide.dev/icons/image)
   static const image = IconData(57590, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`images`](https://lucide.dev/icons/images) icon.
+  /// [![`images`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/images.svg)](https://lucide.dev/icons/images)
   static const images = IconData(58820, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`import`](https://lucide.dev/icons/import) icon.
+  /// [![`import`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/import.svg)](https://lucide.dev/icons/import)
   static const import = IconData(57903, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`inbox`](https://lucide.dev/icons/inbox) icon.
+  /// [![`inbox`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/inbox.svg)](https://lucide.dev/icons/inbox)
   static const inbox = IconData(57591, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`indian-rupee`](https://lucide.dev/icons/indian-rupee) icon.
+  /// [![`indian-rupee`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/indian-rupee.svg)](https://lucide.dev/icons/indian-rupee)
   static const indianRupee = IconData(57592, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`infinity`](https://lucide.dev/icons/infinity) icon.
+  /// [![`infinity`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/infinity.svg)](https://lucide.dev/icons/infinity)
   static const infinity = IconData(57831, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`info`](https://lucide.dev/icons/info) icon.
+  /// [![`info`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/info.svg)](https://lucide.dev/icons/info)
   static const info = IconData(57593, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`inspection-panel`](https://lucide.dev/icons/inspection-panel) icon.
+  /// [![`inspection-panel`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/inspection-panel.svg)](https://lucide.dev/icons/inspection-panel)
   static const inspectionPanel = IconData(58755, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`instagram`](https://lucide.dev/icons/instagram) icon.
+  /// [![`instagram`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/instagram.svg)](https://lucide.dev/icons/instagram)
   static const instagram = IconData(57594, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`italic`](https://lucide.dev/icons/italic) icon.
+  /// [![`italic`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/italic.svg)](https://lucide.dev/icons/italic)
   static const italic = IconData(57595, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`iteration-ccw`](https://lucide.dev/icons/iteration-ccw) icon.
+  /// [![`iteration-ccw`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/iteration-ccw.svg)](https://lucide.dev/icons/iteration-ccw)
   static const iterationCcw = IconData(58403, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`iteration-cw`](https://lucide.dev/icons/iteration-cw) icon.
+  /// [![`iteration-cw`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/iteration-cw.svg)](https://lucide.dev/icons/iteration-cw)
   static const iterationCw = IconData(58404, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`japanese-yen`](https://lucide.dev/icons/japanese-yen) icon.
+  /// [![`japanese-yen`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/japanese-yen.svg)](https://lucide.dev/icons/japanese-yen)
   static const japaneseYen = IconData(57596, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`joystick`](https://lucide.dev/icons/joystick) icon.
+  /// [![`joystick`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/joystick.svg)](https://lucide.dev/icons/joystick)
   static const joystick = IconData(58197, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`kanban`](https://lucide.dev/icons/kanban) icon.
+  /// [![`kanban`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/kanban.svg)](https://lucide.dev/icons/kanban)
   static const kanban = IconData(58588, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`kayak`](https://lucide.dev/icons/kayak) icon.
+  /// [![`kayak`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/kayak.svg)](https://lucide.dev/icons/kayak)
   static const kayak = IconData(59023, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`key-round`](https://lucide.dev/icons/key-round) icon.
+  /// [![`key-round`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/key-round.svg)](https://lucide.dev/icons/key-round)
   static const keyRound = IconData(58531, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`key-square`](https://lucide.dev/icons/key-square) icon.
+  /// [![`key-square`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/key-square.svg)](https://lucide.dev/icons/key-square)
   static const keySquare = IconData(58532, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`key`](https://lucide.dev/icons/key) icon.
+  /// [![`key`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/key.svg)](https://lucide.dev/icons/key)
   static const key = IconData(57597, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`keyboard-music`](https://lucide.dev/icons/keyboard-music) icon.
+  /// [![`keyboard-music`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/keyboard-music.svg)](https://lucide.dev/icons/keyboard-music)
   static const keyboardMusic = IconData(58720, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`keyboard-off`](https://lucide.dev/icons/keyboard-off) icon.
+  /// [![`keyboard-off`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/keyboard-off.svg)](https://lucide.dev/icons/keyboard-off)
   static const keyboardOff = IconData(58846, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`keyboard`](https://lucide.dev/icons/keyboard) icon.
+  /// [![`keyboard`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/keyboard.svg)](https://lucide.dev/icons/keyboard)
   static const keyboard = IconData(57988, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`lamp-ceiling`](https://lucide.dev/icons/lamp-ceiling) icon.
+  /// [![`lamp-ceiling`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/lamp-ceiling.svg)](https://lucide.dev/icons/lamp-ceiling)
   static const lampCeiling = IconData(58073, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`lamp-desk`](https://lucide.dev/icons/lamp-desk) icon.
+  /// [![`lamp-desk`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/lamp-desk.svg)](https://lucide.dev/icons/lamp-desk)
   static const lampDesk = IconData(58074, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`lamp-floor`](https://lucide.dev/icons/lamp-floor) icon.
+  /// [![`lamp-floor`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/lamp-floor.svg)](https://lucide.dev/icons/lamp-floor)
   static const lampFloor = IconData(58075, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`lamp-wall-down`](https://lucide.dev/icons/lamp-wall-down) icon.
+  /// [![`lamp-wall-down`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/lamp-wall-down.svg)](https://lucide.dev/icons/lamp-wall-down)
   static const lampWallDown = IconData(58076, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`lamp-wall-up`](https://lucide.dev/icons/lamp-wall-up) icon.
+  /// [![`lamp-wall-up`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/lamp-wall-up.svg)](https://lucide.dev/icons/lamp-wall-up)
   static const lampWallUp = IconData(58077, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`lamp`](https://lucide.dev/icons/lamp) icon.
+  /// [![`lamp`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/lamp.svg)](https://lucide.dev/icons/lamp)
   static const lamp = IconData(58072, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`land-plot`](https://lucide.dev/icons/land-plot) icon.
+  /// [![`land-plot`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/land-plot.svg)](https://lucide.dev/icons/land-plot)
   static const landPlot = IconData(58664, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`landmark`](https://lucide.dev/icons/landmark) icon.
+  /// [![`landmark`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/landmark.svg)](https://lucide.dev/icons/landmark)
   static const landmark = IconData(57914, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`languages`](https://lucide.dev/icons/languages) icon.
+  /// [![`languages`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/languages.svg)](https://lucide.dev/icons/languages)
   static const languages = IconData(57598, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`laptop-minimal-check`](https://lucide.dev/icons/laptop-minimal-check) icon.
+  /// [![`laptop-minimal-check`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/laptop-minimal-check.svg)](https://lucide.dev/icons/laptop-minimal-check)
   static const laptopMinimalCheck = IconData(58930, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`laptop-minimal`](https://lucide.dev/icons/laptop-minimal) icon.
+  /// [![`laptop-minimal`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/laptop-minimal.svg)](https://lucide.dev/icons/laptop-minimal)
   static const laptopMinimal = IconData(57816, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`laptop`](https://lucide.dev/icons/laptop) icon.
+  /// [![`laptop`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/laptop.svg)](https://lucide.dev/icons/laptop)
   static const laptop = IconData(57805, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`lasso-select`](https://lucide.dev/icons/lasso-select) icon.
+  /// [![`lasso-select`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/lasso-select.svg)](https://lucide.dev/icons/lasso-select)
   static const lassoSelect = IconData(57807, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`lasso`](https://lucide.dev/icons/lasso) icon.
+  /// [![`lasso`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/lasso.svg)](https://lucide.dev/icons/lasso)
   static const lasso = IconData(57806, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`laugh`](https://lucide.dev/icons/laugh) icon.
+  /// [![`laugh`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/laugh.svg)](https://lucide.dev/icons/laugh)
   static const laugh = IconData(58112, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`layers-2`](https://lucide.dev/icons/layers-2) icon.
+  /// [![`layers-2`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/layers-2.svg)](https://lucide.dev/icons/layers-2)
   static const layers2 = IconData(58666, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`layers-plus`](https://lucide.dev/icons/layers-plus) icon.
+  /// [![`layers-plus`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/layers-plus.svg)](https://lucide.dev/icons/layers-plus)
   static const layersPlus = IconData(59059, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`layers`](https://lucide.dev/icons/layers) icon.
+  /// [![`layers`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/layers.svg)](https://lucide.dev/icons/layers)
   static const layers = IconData(58665, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`layout-dashboard`](https://lucide.dev/icons/layout-dashboard) icon.
+  /// [![`layout-dashboard`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/layout-dashboard.svg)](https://lucide.dev/icons/layout-dashboard)
   static const layoutDashboard = IconData(57793, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`layout-grid`](https://lucide.dev/icons/layout-grid) icon.
+  /// [![`layout-grid`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/layout-grid.svg)](https://lucide.dev/icons/layout-grid)
   static const layoutGrid = IconData(57599, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`layout-list`](https://lucide.dev/icons/layout-list) icon.
+  /// [![`layout-list`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/layout-list.svg)](https://lucide.dev/icons/layout-list)
   static const layoutList = IconData(57817, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`layout-panel-left`](https://lucide.dev/icons/layout-panel-left) icon.
+  /// [![`layout-panel-left`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/layout-panel-left.svg)](https://lucide.dev/icons/layout-panel-left)
   static const layoutPanelLeft = IconData(58480, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`layout-panel-top`](https://lucide.dev/icons/layout-panel-top) icon.
+  /// [![`layout-panel-top`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/layout-panel-top.svg)](https://lucide.dev/icons/layout-panel-top)
   static const layoutPanelTop = IconData(58481, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`layout-template`](https://lucide.dev/icons/layout-template) icon.
+  /// [![`layout-template`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/layout-template.svg)](https://lucide.dev/icons/layout-template)
   static const layoutTemplate = IconData(57863, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`leaf`](https://lucide.dev/icons/leaf) icon.
+  /// [![`leaf`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/leaf.svg)](https://lucide.dev/icons/leaf)
   static const leaf = IconData(58078, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`leafy-green`](https://lucide.dev/icons/leafy-green) icon.
+  /// [![`leafy-green`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/leafy-green.svg)](https://lucide.dev/icons/leafy-green)
   static const leafyGreen = IconData(58479, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`lectern`](https://lucide.dev/icons/lectern) icon.
+  /// [![`lectern`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/lectern.svg)](https://lucide.dev/icons/lectern)
   static const lectern = IconData(58857, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`library-big`](https://lucide.dev/icons/library-big) icon.
+  /// [![`library-big`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/library-big.svg)](https://lucide.dev/icons/library-big)
   static const libraryBig = IconData(58702, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`library`](https://lucide.dev/icons/library) icon.
+  /// [![`library`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/library.svg)](https://lucide.dev/icons/library)
   static const library = IconData(57600, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`life-buoy`](https://lucide.dev/icons/life-buoy) icon.
+  /// [![`life-buoy`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/life-buoy.svg)](https://lucide.dev/icons/life-buoy)
   static const lifeBuoy = IconData(57601, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`ligature`](https://lucide.dev/icons/ligature) icon.
+  /// [![`ligature`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/ligature.svg)](https://lucide.dev/icons/ligature)
   static const ligature = IconData(58426, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`lightbulb-off`](https://lucide.dev/icons/lightbulb-off) icon.
+  /// [![`lightbulb-off`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/lightbulb-off.svg)](https://lucide.dev/icons/lightbulb-off)
   static const lightbulbOff = IconData(57864, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`lightbulb`](https://lucide.dev/icons/lightbulb) icon.
+  /// [![`lightbulb`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/lightbulb.svg)](https://lucide.dev/icons/lightbulb)
   static const lightbulb = IconData(57794, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`line-squiggle`](https://lucide.dev/icons/line-squiggle) icon.
+  /// [![`line-squiggle`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/line-squiggle.svg)](https://lucide.dev/icons/line-squiggle)
   static const lineSquiggle = IconData(59002, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`link-2-off`](https://lucide.dev/icons/link-2-off) icon.
+  /// [![`link-2-off`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/link-2-off.svg)](https://lucide.dev/icons/link-2-off)
   static const link2Off = IconData(57604, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`link-2`](https://lucide.dev/icons/link-2) icon.
+  /// [![`link-2`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/link-2.svg)](https://lucide.dev/icons/link-2)
   static const link2 = IconData(57603, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`link`](https://lucide.dev/icons/link) icon.
+  /// [![`link`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/link.svg)](https://lucide.dev/icons/link)
   static const link = IconData(57602, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`linkedin`](https://lucide.dev/icons/linkedin) icon.
+  /// [![`linkedin`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/linkedin.svg)](https://lucide.dev/icons/linkedin)
   static const linkedin = IconData(57605, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`list-check`](https://lucide.dev/icons/list-check) icon.
+  /// [![`list-check`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/list-check.svg)](https://lucide.dev/icons/list-check)
   static const listCheck = IconData(58874, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`list-checks`](https://lucide.dev/icons/list-checks) icon.
+  /// [![`list-checks`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/list-checks.svg)](https://lucide.dev/icons/list-checks)
   static const listChecks = IconData(57808, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`list-chevrons-down-up`](https://lucide.dev/icons/list-chevrons-down-up) icon.
+  /// [![`list-chevrons-down-up`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/list-chevrons-down-up.svg)](https://lucide.dev/icons/list-chevrons-down-up)
   static const listChevronsDownUp = IconData(59028, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`list-chevrons-up-down`](https://lucide.dev/icons/list-chevrons-up-down) icon.
+  /// [![`list-chevrons-up-down`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/list-chevrons-up-down.svg)](https://lucide.dev/icons/list-chevrons-up-down)
   static const listChevronsUpDown = IconData(59030, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`list-collapse`](https://lucide.dev/icons/list-collapse) icon.
+  /// [![`list-collapse`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/list-collapse.svg)](https://lucide.dev/icons/list-collapse)
   static const listCollapse = IconData(58779, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`list-end`](https://lucide.dev/icons/list-end) icon.
+  /// [![`list-end`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/list-end.svg)](https://lucide.dev/icons/list-end)
   static const listEnd = IconData(58079, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`list-filter-plus`](https://lucide.dev/icons/list-filter-plus) icon.
+  /// [![`list-filter-plus`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/list-filter-plus.svg)](https://lucide.dev/icons/list-filter-plus)
   static const listFilterPlus = IconData(58937, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`list-filter`](https://lucide.dev/icons/list-filter) icon.
+  /// [![`list-filter`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/list-filter.svg)](https://lucide.dev/icons/list-filter)
   static const listFilter = IconData(58464, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`list-indent-decrease`](https://lucide.dev/icons/list-indent-decrease) icon.
+  /// [![`list-indent-decrease`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/list-indent-decrease.svg)](https://lucide.dev/icons/list-indent-decrease)
   static const listIndentDecrease = IconData(57607, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`list-indent-increase`](https://lucide.dev/icons/list-indent-increase) icon.
+  /// [![`list-indent-increase`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/list-indent-increase.svg)](https://lucide.dev/icons/list-indent-increase)
   static const listIndentIncrease = IconData(57608, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`list-minus`](https://lucide.dev/icons/list-minus) icon.
+  /// [![`list-minus`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/list-minus.svg)](https://lucide.dev/icons/list-minus)
   static const listMinus = IconData(57918, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`list-music`](https://lucide.dev/icons/list-music) icon.
+  /// [![`list-music`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/list-music.svg)](https://lucide.dev/icons/list-music)
   static const listMusic = IconData(58080, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`list-ordered`](https://lucide.dev/icons/list-ordered) icon.
+  /// [![`list-ordered`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/list-ordered.svg)](https://lucide.dev/icons/list-ordered)
   static const listOrdered = IconData(57809, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`list-plus`](https://lucide.dev/icons/list-plus) icon.
+  /// [![`list-plus`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/list-plus.svg)](https://lucide.dev/icons/list-plus)
   static const listPlus = IconData(57919, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`list-restart`](https://lucide.dev/icons/list-restart) icon.
+  /// [![`list-restart`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/list-restart.svg)](https://lucide.dev/icons/list-restart)
   static const listRestart = IconData(58450, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`list-start`](https://lucide.dev/icons/list-start) icon.
+  /// [![`list-start`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/list-start.svg)](https://lucide.dev/icons/list-start)
   static const listStart = IconData(58081, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`list-todo`](https://lucide.dev/icons/list-todo) icon.
+  /// [![`list-todo`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/list-todo.svg)](https://lucide.dev/icons/list-todo)
   static const listTodo = IconData(58563, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`list-tree`](https://lucide.dev/icons/list-tree) icon.
+  /// [![`list-tree`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/list-tree.svg)](https://lucide.dev/icons/list-tree)
   static const listTree = IconData(58376, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`list-video`](https://lucide.dev/icons/list-video) icon.
+  /// [![`list-video`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/list-video.svg)](https://lucide.dev/icons/list-video)
   static const listVideo = IconData(58082, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`list-x`](https://lucide.dev/icons/list-x) icon.
+  /// [![`list-x`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/list-x.svg)](https://lucide.dev/icons/list-x)
   static const listX = IconData(57920, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`list`](https://lucide.dev/icons/list) icon.
+  /// [![`list`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/list.svg)](https://lucide.dev/icons/list)
   static const list = IconData(57606, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`loader-circle`](https://lucide.dev/icons/loader-circle) icon.
+  /// [![`loader-circle`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/loader-circle.svg)](https://lucide.dev/icons/loader-circle)
   static const loaderCircle = IconData(57610, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`loader-pinwheel`](https://lucide.dev/icons/loader-pinwheel) icon.
+  /// [![`loader-pinwheel`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/loader-pinwheel.svg)](https://lucide.dev/icons/loader-pinwheel)
   static const loaderPinwheel = IconData(58854, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`loader`](https://lucide.dev/icons/loader) icon.
+  /// [![`loader`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/loader.svg)](https://lucide.dev/icons/loader)
   static const loader = IconData(57609, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`locate-fixed`](https://lucide.dev/icons/locate-fixed) icon.
+  /// [![`locate-fixed`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/locate-fixed.svg)](https://lucide.dev/icons/locate-fixed)
   static const locateFixed = IconData(57819, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`locate-off`](https://lucide.dev/icons/locate-off) icon.
+  /// [![`locate-off`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/locate-off.svg)](https://lucide.dev/icons/locate-off)
   static const locateOff = IconData(57986, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`locate`](https://lucide.dev/icons/locate) icon.
+  /// [![`locate`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/locate.svg)](https://lucide.dev/icons/locate)
   static const locate = IconData(57818, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`lock-keyhole-open`](https://lucide.dev/icons/lock-keyhole-open) icon.
+  /// [![`lock-keyhole-open`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/lock-keyhole-open.svg)](https://lucide.dev/icons/lock-keyhole-open)
   static const lockKeyholeOpen = IconData(58674, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`lock-keyhole`](https://lucide.dev/icons/lock-keyhole) icon.
+  /// [![`lock-keyhole`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/lock-keyhole.svg)](https://lucide.dev/icons/lock-keyhole)
   static const lockKeyhole = IconData(58673, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`lock-open`](https://lucide.dev/icons/lock-open) icon.
+  /// [![`lock-open`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/lock-open.svg)](https://lucide.dev/icons/lock-open)
   static const lockOpen = IconData(57612, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`lock`](https://lucide.dev/icons/lock) icon.
+  /// [![`lock`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/lock.svg)](https://lucide.dev/icons/lock)
   static const lock = IconData(57611, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`log-in`](https://lucide.dev/icons/log-in) icon.
+  /// [![`log-in`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/log-in.svg)](https://lucide.dev/icons/log-in)
   static const logIn = IconData(57613, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`log-out`](https://lucide.dev/icons/log-out) icon.
+  /// [![`log-out`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/log-out.svg)](https://lucide.dev/icons/log-out)
   static const logOut = IconData(57614, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`logs`](https://lucide.dev/icons/logs) icon.
+  /// [![`logs`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/logs.svg)](https://lucide.dev/icons/logs)
   static const logs = IconData(58868, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`lollipop`](https://lucide.dev/icons/lollipop) icon.
+  /// [![`lollipop`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/lollipop.svg)](https://lucide.dev/icons/lollipop)
   static const lollipop = IconData(58557, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`luggage`](https://lucide.dev/icons/luggage) icon.
+  /// [![`luggage`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/luggage.svg)](https://lucide.dev/icons/luggage)
   static const luggage = IconData(58058, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`magnet`](https://lucide.dev/icons/magnet) icon.
+  /// [![`magnet`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/magnet.svg)](https://lucide.dev/icons/magnet)
   static const magnet = IconData(58037, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`mail-check`](https://lucide.dev/icons/mail-check) icon.
+  /// [![`mail-check`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/mail-check.svg)](https://lucide.dev/icons/mail-check)
   static const mailCheck = IconData(58209, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`mail-minus`](https://lucide.dev/icons/mail-minus) icon.
+  /// [![`mail-minus`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/mail-minus.svg)](https://lucide.dev/icons/mail-minus)
   static const mailMinus = IconData(58210, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`mail-open`](https://lucide.dev/icons/mail-open) icon.
+  /// [![`mail-open`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/mail-open.svg)](https://lucide.dev/icons/mail-open)
   static const mailOpen = IconData(58211, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`mail-plus`](https://lucide.dev/icons/mail-plus) icon.
+  /// [![`mail-plus`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/mail-plus.svg)](https://lucide.dev/icons/mail-plus)
   static const mailPlus = IconData(58212, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`mail-question-mark`](https://lucide.dev/icons/mail-question-mark) icon.
+  /// [![`mail-question-mark`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/mail-question-mark.svg)](https://lucide.dev/icons/mail-question-mark)
   static const mailQuestionMark = IconData(58213, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`mail-search`](https://lucide.dev/icons/mail-search) icon.
+  /// [![`mail-search`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/mail-search.svg)](https://lucide.dev/icons/mail-search)
   static const mailSearch = IconData(58214, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`mail-warning`](https://lucide.dev/icons/mail-warning) icon.
+  /// [![`mail-warning`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/mail-warning.svg)](https://lucide.dev/icons/mail-warning)
   static const mailWarning = IconData(58215, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`mail-x`](https://lucide.dev/icons/mail-x) icon.
+  /// [![`mail-x`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/mail-x.svg)](https://lucide.dev/icons/mail-x)
   static const mailX = IconData(58216, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`mail`](https://lucide.dev/icons/mail) icon.
+  /// [![`mail`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/mail.svg)](https://lucide.dev/icons/mail)
   static const mail = IconData(57615, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`mailbox`](https://lucide.dev/icons/mailbox) icon.
+  /// [![`mailbox`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/mailbox.svg)](https://lucide.dev/icons/mailbox)
   static const mailbox = IconData(58324, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`mails`](https://lucide.dev/icons/mails) icon.
+  /// [![`mails`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/mails.svg)](https://lucide.dev/icons/mails)
   static const mails = IconData(58217, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`map-minus`](https://lucide.dev/icons/map-minus) icon.
+  /// [![`map-minus`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/map-minus.svg)](https://lucide.dev/icons/map-minus)
   static const mapMinus = IconData(59014, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`map-pin-check-inside`](https://lucide.dev/icons/map-pin-check-inside) icon.
+  /// [![`map-pin-check-inside`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/map-pin-check-inside.svg)](https://lucide.dev/icons/map-pin-check-inside)
   static const mapPinCheckInside = IconData(58896, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`map-pin-check`](https://lucide.dev/icons/map-pin-check) icon.
+  /// [![`map-pin-check`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/map-pin-check.svg)](https://lucide.dev/icons/map-pin-check)
   static const mapPinCheck = IconData(58895, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`map-pin-house`](https://lucide.dev/icons/map-pin-house) icon.
+  /// [![`map-pin-house`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/map-pin-house.svg)](https://lucide.dev/icons/map-pin-house)
   static const mapPinHouse = IconData(58908, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`map-pin-minus-inside`](https://lucide.dev/icons/map-pin-minus-inside) icon.
+  /// [![`map-pin-minus-inside`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/map-pin-minus-inside.svg)](https://lucide.dev/icons/map-pin-minus-inside)
   static const mapPinMinusInside = IconData(58898, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`map-pin-minus`](https://lucide.dev/icons/map-pin-minus) icon.
+  /// [![`map-pin-minus`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/map-pin-minus.svg)](https://lucide.dev/icons/map-pin-minus)
   static const mapPinMinus = IconData(58897, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`map-pin-off`](https://lucide.dev/icons/map-pin-off) icon.
+  /// [![`map-pin-off`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/map-pin-off.svg)](https://lucide.dev/icons/map-pin-off)
   static const mapPinOff = IconData(58022, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`map-pin-pen`](https://lucide.dev/icons/map-pin-pen) icon.
+  /// [![`map-pin-pen`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/map-pin-pen.svg)](https://lucide.dev/icons/map-pin-pen)
   static const mapPinPen = IconData(58965, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`map-pin-plus-inside`](https://lucide.dev/icons/map-pin-plus-inside) icon.
+  /// [![`map-pin-plus-inside`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/map-pin-plus-inside.svg)](https://lucide.dev/icons/map-pin-plus-inside)
   static const mapPinPlusInside = IconData(58900, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`map-pin-plus`](https://lucide.dev/icons/map-pin-plus) icon.
+  /// [![`map-pin-plus`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/map-pin-plus.svg)](https://lucide.dev/icons/map-pin-plus)
   static const mapPinPlus = IconData(58899, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`map-pin-x-inside`](https://lucide.dev/icons/map-pin-x-inside) icon.
+  /// [![`map-pin-x-inside`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/map-pin-x-inside.svg)](https://lucide.dev/icons/map-pin-x-inside)
   static const mapPinXInside = IconData(58902, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`map-pin-x`](https://lucide.dev/icons/map-pin-x) icon.
+  /// [![`map-pin-x`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/map-pin-x.svg)](https://lucide.dev/icons/map-pin-x)
   static const mapPinX = IconData(58901, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`map-pin`](https://lucide.dev/icons/map-pin) icon.
+  /// [![`map-pin`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/map-pin.svg)](https://lucide.dev/icons/map-pin)
   static const mapPin = IconData(57617, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`map-pinned`](https://lucide.dev/icons/map-pinned) icon.
+  /// [![`map-pinned`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/map-pinned.svg)](https://lucide.dev/icons/map-pinned)
   static const mapPinned = IconData(58685, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`map-plus`](https://lucide.dev/icons/map-plus) icon.
+  /// [![`map-plus`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/map-plus.svg)](https://lucide.dev/icons/map-plus)
   static const mapPlus = IconData(58943, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`map`](https://lucide.dev/icons/map) icon.
+  /// [![`map`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/map.svg)](https://lucide.dev/icons/map)
   static const map = IconData(57616, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`mars-stroke`](https://lucide.dev/icons/mars-stroke) icon.
+  /// [![`mars-stroke`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/mars-stroke.svg)](https://lucide.dev/icons/mars-stroke)
   static const marsStroke = IconData(58946, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`mars`](https://lucide.dev/icons/mars) icon.
+  /// [![`mars`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/mars.svg)](https://lucide.dev/icons/mars)
   static const mars = IconData(58945, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`martini`](https://lucide.dev/icons/martini) icon.
+  /// [![`martini`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/martini.svg)](https://lucide.dev/icons/martini)
   static const martini = IconData(58083, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`maximize-2`](https://lucide.dev/icons/maximize-2) icon.
+  /// [![`maximize-2`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/maximize-2.svg)](https://lucide.dev/icons/maximize-2)
   static const maximize2 = IconData(57619, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`maximize`](https://lucide.dev/icons/maximize) icon.
+  /// [![`maximize`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/maximize.svg)](https://lucide.dev/icons/maximize)
   static const maximize = IconData(57618, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`medal`](https://lucide.dev/icons/medal) icon.
+  /// [![`medal`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/medal.svg)](https://lucide.dev/icons/medal)
   static const medal = IconData(58223, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`megaphone-off`](https://lucide.dev/icons/megaphone-off) icon.
+  /// [![`megaphone-off`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/megaphone-off.svg)](https://lucide.dev/icons/megaphone-off)
   static const megaphoneOff = IconData(58224, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`megaphone`](https://lucide.dev/icons/megaphone) icon.
+  /// [![`megaphone`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/megaphone.svg)](https://lucide.dev/icons/megaphone)
   static const megaphone = IconData(57909, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`meh`](https://lucide.dev/icons/meh) icon.
+  /// [![`meh`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/meh.svg)](https://lucide.dev/icons/meh)
   static const meh = IconData(57620, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`memory-stick`](https://lucide.dev/icons/memory-stick) icon.
+  /// [![`memory-stick`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/memory-stick.svg)](https://lucide.dev/icons/memory-stick)
   static const memoryStick = IconData(58437, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`menu`](https://lucide.dev/icons/menu) icon.
+  /// [![`menu`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/menu.svg)](https://lucide.dev/icons/menu)
   static const menu = IconData(57621, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`merge`](https://lucide.dev/icons/merge) icon.
+  /// [![`merge`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/merge.svg)](https://lucide.dev/icons/merge)
   static const merge = IconData(58431, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`message-circle-code`](https://lucide.dev/icons/message-circle-code) icon.
+  /// [![`message-circle-code`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/message-circle-code.svg)](https://lucide.dev/icons/message-circle-code)
   static const messageCircleCode = IconData(58722, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`message-circle-dashed`](https://lucide.dev/icons/message-circle-dashed) icon.
+  /// [![`message-circle-dashed`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/message-circle-dashed.svg)](https://lucide.dev/icons/message-circle-dashed)
   static const messageCircleDashed = IconData(58723, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`message-circle-heart`](https://lucide.dev/icons/message-circle-heart) icon.
+  /// [![`message-circle-heart`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/message-circle-heart.svg)](https://lucide.dev/icons/message-circle-heart)
   static const messageCircleHeart = IconData(58724, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`message-circle-more`](https://lucide.dev/icons/message-circle-more) icon.
+  /// [![`message-circle-more`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/message-circle-more.svg)](https://lucide.dev/icons/message-circle-more)
   static const messageCircleMore = IconData(58725, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`message-circle-off`](https://lucide.dev/icons/message-circle-off) icon.
+  /// [![`message-circle-off`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/message-circle-off.svg)](https://lucide.dev/icons/message-circle-off)
   static const messageCircleOff = IconData(58726, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`message-circle-plus`](https://lucide.dev/icons/message-circle-plus) icon.
+  /// [![`message-circle-plus`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/message-circle-plus.svg)](https://lucide.dev/icons/message-circle-plus)
   static const messageCirclePlus = IconData(58727, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`message-circle-question-mark`](https://lucide.dev/icons/message-circle-question-mark) icon.
+  /// [![`message-circle-question-mark`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/message-circle-question-mark.svg)](https://lucide.dev/icons/message-circle-question-mark)
   static const messageCircleQuestionMark = IconData(58728, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`message-circle-reply`](https://lucide.dev/icons/message-circle-reply) icon.
+  /// [![`message-circle-reply`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/message-circle-reply.svg)](https://lucide.dev/icons/message-circle-reply)
   static const messageCircleReply = IconData(58729, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`message-circle-warning`](https://lucide.dev/icons/message-circle-warning) icon.
+  /// [![`message-circle-warning`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/message-circle-warning.svg)](https://lucide.dev/icons/message-circle-warning)
   static const messageCircleWarning = IconData(58730, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`message-circle-x`](https://lucide.dev/icons/message-circle-x) icon.
+  /// [![`message-circle-x`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/message-circle-x.svg)](https://lucide.dev/icons/message-circle-x)
   static const messageCircleX = IconData(58731, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`message-circle`](https://lucide.dev/icons/message-circle) icon.
+  /// [![`message-circle`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/message-circle.svg)](https://lucide.dev/icons/message-circle)
   static const messageCircle = IconData(57622, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`message-square-code`](https://lucide.dev/icons/message-square-code) icon.
+  /// [![`message-square-code`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/message-square-code.svg)](https://lucide.dev/icons/message-square-code)
   static const messageSquareCode = IconData(58732, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`message-square-dashed`](https://lucide.dev/icons/message-square-dashed) icon.
+  /// [![`message-square-dashed`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/message-square-dashed.svg)](https://lucide.dev/icons/message-square-dashed)
   static const messageSquareDashed = IconData(58379, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`message-square-diff`](https://lucide.dev/icons/message-square-diff) icon.
+  /// [![`message-square-diff`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/message-square-diff.svg)](https://lucide.dev/icons/message-square-diff)
   static const messageSquareDiff = IconData(58733, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`message-square-dot`](https://lucide.dev/icons/message-square-dot) icon.
+  /// [![`message-square-dot`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/message-square-dot.svg)](https://lucide.dev/icons/message-square-dot)
   static const messageSquareDot = IconData(58734, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`message-square-heart`](https://lucide.dev/icons/message-square-heart) icon.
+  /// [![`message-square-heart`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/message-square-heart.svg)](https://lucide.dev/icons/message-square-heart)
   static const messageSquareHeart = IconData(58735, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`message-square-lock`](https://lucide.dev/icons/message-square-lock) icon.
+  /// [![`message-square-lock`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/message-square-lock.svg)](https://lucide.dev/icons/message-square-lock)
   static const messageSquareLock = IconData(58924, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`message-square-more`](https://lucide.dev/icons/message-square-more) icon.
+  /// [![`message-square-more`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/message-square-more.svg)](https://lucide.dev/icons/message-square-more)
   static const messageSquareMore = IconData(58736, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`message-square-off`](https://lucide.dev/icons/message-square-off) icon.
+  /// [![`message-square-off`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/message-square-off.svg)](https://lucide.dev/icons/message-square-off)
   static const messageSquareOff = IconData(58737, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`message-square-plus`](https://lucide.dev/icons/message-square-plus) icon.
+  /// [![`message-square-plus`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/message-square-plus.svg)](https://lucide.dev/icons/message-square-plus)
   static const messageSquarePlus = IconData(58380, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`message-square-quote`](https://lucide.dev/icons/message-square-quote) icon.
+  /// [![`message-square-quote`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/message-square-quote.svg)](https://lucide.dev/icons/message-square-quote)
   static const messageSquareQuote = IconData(58738, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`message-square-reply`](https://lucide.dev/icons/message-square-reply) icon.
+  /// [![`message-square-reply`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/message-square-reply.svg)](https://lucide.dev/icons/message-square-reply)
   static const messageSquareReply = IconData(58739, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`message-square-share`](https://lucide.dev/icons/message-square-share) icon.
+  /// [![`message-square-share`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/message-square-share.svg)](https://lucide.dev/icons/message-square-share)
   static const messageSquareShare = IconData(58740, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`message-square-text`](https://lucide.dev/icons/message-square-text) icon.
+  /// [![`message-square-text`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/message-square-text.svg)](https://lucide.dev/icons/message-square-text)
   static const messageSquareText = IconData(58741, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`message-square-warning`](https://lucide.dev/icons/message-square-warning) icon.
+  /// [![`message-square-warning`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/message-square-warning.svg)](https://lucide.dev/icons/message-square-warning)
   static const messageSquareWarning = IconData(58742, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`message-square-x`](https://lucide.dev/icons/message-square-x) icon.
+  /// [![`message-square-x`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/message-square-x.svg)](https://lucide.dev/icons/message-square-x)
   static const messageSquareX = IconData(58743, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`message-square`](https://lucide.dev/icons/message-square) icon.
+  /// [![`message-square`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/message-square.svg)](https://lucide.dev/icons/message-square)
   static const messageSquare = IconData(57623, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`messages-square`](https://lucide.dev/icons/messages-square) icon.
+  /// [![`messages-square`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/messages-square.svg)](https://lucide.dev/icons/messages-square)
   static const messagesSquare = IconData(58381, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`mic-off`](https://lucide.dev/icons/mic-off) icon.
+  /// [![`mic-off`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/mic-off.svg)](https://lucide.dev/icons/mic-off)
   static const micOff = IconData(57625, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`mic-vocal`](https://lucide.dev/icons/mic-vocal) icon.
+  /// [![`mic-vocal`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/mic-vocal.svg)](https://lucide.dev/icons/mic-vocal)
   static const micVocal = IconData(58185, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`mic`](https://lucide.dev/icons/mic) icon.
+  /// [![`mic`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/mic.svg)](https://lucide.dev/icons/mic)
   static const mic = IconData(57624, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`microchip`](https://lucide.dev/icons/microchip) icon.
+  /// [![`microchip`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/microchip.svg)](https://lucide.dev/icons/microchip)
   static const microchip = IconData(58906, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`microscope`](https://lucide.dev/icons/microscope) icon.
+  /// [![`microscope`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/microscope.svg)](https://lucide.dev/icons/microscope)
   static const microscope = IconData(58084, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`microwave`](https://lucide.dev/icons/microwave) icon.
+  /// [![`microwave`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/microwave.svg)](https://lucide.dev/icons/microwave)
   static const microwave = IconData(58234, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`milestone`](https://lucide.dev/icons/milestone) icon.
+  /// [![`milestone`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/milestone.svg)](https://lucide.dev/icons/milestone)
   static const milestone = IconData(58008, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`milk-off`](https://lucide.dev/icons/milk-off) icon.
+  /// [![`milk-off`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/milk-off.svg)](https://lucide.dev/icons/milk-off)
   static const milkOff = IconData(58266, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`milk`](https://lucide.dev/icons/milk) icon.
+  /// [![`milk`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/milk.svg)](https://lucide.dev/icons/milk)
   static const milk = IconData(58265, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`minimize-2`](https://lucide.dev/icons/minimize-2) icon.
+  /// [![`minimize-2`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/minimize-2.svg)](https://lucide.dev/icons/minimize-2)
   static const minimize2 = IconData(57627, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`minimize`](https://lucide.dev/icons/minimize) icon.
+  /// [![`minimize`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/minimize.svg)](https://lucide.dev/icons/minimize)
   static const minimize = IconData(57626, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`minus`](https://lucide.dev/icons/minus) icon.
+  /// [![`minus`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/minus.svg)](https://lucide.dev/icons/minus)
   static const minus = IconData(57628, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`monitor-check`](https://lucide.dev/icons/monitor-check) icon.
+  /// [![`monitor-check`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/monitor-check.svg)](https://lucide.dev/icons/monitor-check)
   static const monitorCheck = IconData(58498, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`monitor-cloud`](https://lucide.dev/icons/monitor-cloud) icon.
+  /// [![`monitor-cloud`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/monitor-cloud.svg)](https://lucide.dev/icons/monitor-cloud)
   static const monitorCloud = IconData(59033, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`monitor-cog`](https://lucide.dev/icons/monitor-cog) icon.
+  /// [![`monitor-cog`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/monitor-cog.svg)](https://lucide.dev/icons/monitor-cog)
   static const monitorCog = IconData(58883, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`monitor-dot`](https://lucide.dev/icons/monitor-dot) icon.
+  /// [![`monitor-dot`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/monitor-dot.svg)](https://lucide.dev/icons/monitor-dot)
   static const monitorDot = IconData(58499, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`monitor-down`](https://lucide.dev/icons/monitor-down) icon.
+  /// [![`monitor-down`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/monitor-down.svg)](https://lucide.dev/icons/monitor-down)
   static const monitorDown = IconData(58401, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`monitor-off`](https://lucide.dev/icons/monitor-off) icon.
+  /// [![`monitor-off`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/monitor-off.svg)](https://lucide.dev/icons/monitor-off)
   static const monitorOff = IconData(57820, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`monitor-pause`](https://lucide.dev/icons/monitor-pause) icon.
+  /// [![`monitor-pause`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/monitor-pause.svg)](https://lucide.dev/icons/monitor-pause)
   static const monitorPause = IconData(58500, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`monitor-play`](https://lucide.dev/icons/monitor-play) icon.
+  /// [![`monitor-play`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/monitor-play.svg)](https://lucide.dev/icons/monitor-play)
   static const monitorPlay = IconData(58501, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`monitor-smartphone`](https://lucide.dev/icons/monitor-smartphone) icon.
+  /// [![`monitor-smartphone`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/monitor-smartphone.svg)](https://lucide.dev/icons/monitor-smartphone)
   static const monitorSmartphone = IconData(58274, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`monitor-speaker`](https://lucide.dev/icons/monitor-speaker) icon.
+  /// [![`monitor-speaker`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/monitor-speaker.svg)](https://lucide.dev/icons/monitor-speaker)
   static const monitorSpeaker = IconData(57872, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`monitor-stop`](https://lucide.dev/icons/monitor-stop) icon.
+  /// [![`monitor-stop`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/monitor-stop.svg)](https://lucide.dev/icons/monitor-stop)
   static const monitorStop = IconData(58502, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`monitor-up`](https://lucide.dev/icons/monitor-up) icon.
+  /// [![`monitor-up`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/monitor-up.svg)](https://lucide.dev/icons/monitor-up)
   static const monitorUp = IconData(58402, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`monitor-x`](https://lucide.dev/icons/monitor-x) icon.
+  /// [![`monitor-x`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/monitor-x.svg)](https://lucide.dev/icons/monitor-x)
   static const monitorX = IconData(58503, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`monitor`](https://lucide.dev/icons/monitor) icon.
+  /// [![`monitor`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/monitor.svg)](https://lucide.dev/icons/monitor)
   static const monitor = IconData(57629, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`moon-star`](https://lucide.dev/icons/moon-star) icon.
+  /// [![`moon-star`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/moon-star.svg)](https://lucide.dev/icons/moon-star)
   static const moonStar = IconData(58384, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`moon`](https://lucide.dev/icons/moon) icon.
+  /// [![`moon`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/moon.svg)](https://lucide.dev/icons/moon)
   static const moon = IconData(57630, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`motorbike`](https://lucide.dev/icons/motorbike) icon.
+  /// [![`motorbike`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/motorbike.svg)](https://lucide.dev/icons/motorbike)
   static const motorbike = IconData(59032, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`mountain-snow`](https://lucide.dev/icons/mountain-snow) icon.
+  /// [![`mountain-snow`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/mountain-snow.svg)](https://lucide.dev/icons/mountain-snow)
   static const mountainSnow = IconData(57906, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`mountain`](https://lucide.dev/icons/mountain) icon.
+  /// [![`mountain`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/mountain.svg)](https://lucide.dev/icons/mountain)
   static const mountain = IconData(57905, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`mouse-off`](https://lucide.dev/icons/mouse-off) icon.
+  /// [![`mouse-off`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/mouse-off.svg)](https://lucide.dev/icons/mouse-off)
   static const mouseOff = IconData(58843, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`mouse-pointer-2-off`](https://lucide.dev/icons/mouse-pointer-2-off) icon.
+  /// [![`mouse-pointer-2-off`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/mouse-pointer-2-off.svg)](https://lucide.dev/icons/mouse-pointer-2-off)
   static const mousePointer2Off = IconData(59046, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`mouse-pointer-2`](https://lucide.dev/icons/mouse-pointer-2) icon.
+  /// [![`mouse-pointer-2`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/mouse-pointer-2.svg)](https://lucide.dev/icons/mouse-pointer-2)
   static const mousePointer2 = IconData(57795, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`mouse-pointer-ban`](https://lucide.dev/icons/mouse-pointer-ban) icon.
+  /// [![`mouse-pointer-ban`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/mouse-pointer-ban.svg)](https://lucide.dev/icons/mouse-pointer-ban)
   static const mousePointerBan = IconData(58855, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`mouse-pointer-click`](https://lucide.dev/icons/mouse-pointer-click) icon.
+  /// [![`mouse-pointer-click`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/mouse-pointer-click.svg)](https://lucide.dev/icons/mouse-pointer-click)
   static const mousePointerClick = IconData(57632, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`mouse-pointer`](https://lucide.dev/icons/mouse-pointer) icon.
+  /// [![`mouse-pointer`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/mouse-pointer.svg)](https://lucide.dev/icons/mouse-pointer)
   static const mousePointer = IconData(57631, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`mouse`](https://lucide.dev/icons/mouse) icon.
+  /// [![`mouse`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/mouse.svg)](https://lucide.dev/icons/mouse)
   static const mouse = IconData(57998, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`move-3d`](https://lucide.dev/icons/move-3d) icon.
+  /// [![`move-3d`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/move-3d.svg)](https://lucide.dev/icons/move-3d)
   static const move3d = IconData(58085, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`move-diagonal-2`](https://lucide.dev/icons/move-diagonal-2) icon.
+  /// [![`move-diagonal-2`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/move-diagonal-2.svg)](https://lucide.dev/icons/move-diagonal-2)
   static const moveDiagonal2 = IconData(57797, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`move-diagonal`](https://lucide.dev/icons/move-diagonal) icon.
+  /// [![`move-diagonal`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/move-diagonal.svg)](https://lucide.dev/icons/move-diagonal)
   static const moveDiagonal = IconData(57796, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`move-down-left`](https://lucide.dev/icons/move-down-left) icon.
+  /// [![`move-down-left`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/move-down-left.svg)](https://lucide.dev/icons/move-down-left)
   static const moveDownLeft = IconData(58509, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`move-down-right`](https://lucide.dev/icons/move-down-right) icon.
+  /// [![`move-down-right`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/move-down-right.svg)](https://lucide.dev/icons/move-down-right)
   static const moveDownRight = IconData(58510, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`move-down`](https://lucide.dev/icons/move-down) icon.
+  /// [![`move-down`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/move-down.svg)](https://lucide.dev/icons/move-down)
   static const moveDown = IconData(58508, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`move-horizontal`](https://lucide.dev/icons/move-horizontal) icon.
+  /// [![`move-horizontal`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/move-horizontal.svg)](https://lucide.dev/icons/move-horizontal)
   static const moveHorizontal = IconData(57798, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`move-left`](https://lucide.dev/icons/move-left) icon.
+  /// [![`move-left`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/move-left.svg)](https://lucide.dev/icons/move-left)
   static const moveLeft = IconData(58511, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`move-right`](https://lucide.dev/icons/move-right) icon.
+  /// [![`move-right`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/move-right.svg)](https://lucide.dev/icons/move-right)
   static const moveRight = IconData(58512, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`move-up-left`](https://lucide.dev/icons/move-up-left) icon.
+  /// [![`move-up-left`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/move-up-left.svg)](https://lucide.dev/icons/move-up-left)
   static const moveUpLeft = IconData(58514, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`move-up-right`](https://lucide.dev/icons/move-up-right) icon.
+  /// [![`move-up-right`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/move-up-right.svg)](https://lucide.dev/icons/move-up-right)
   static const moveUpRight = IconData(58515, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`move-up`](https://lucide.dev/icons/move-up) icon.
+  /// [![`move-up`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/move-up.svg)](https://lucide.dev/icons/move-up)
   static const moveUp = IconData(58513, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`move-vertical`](https://lucide.dev/icons/move-vertical) icon.
+  /// [![`move-vertical`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/move-vertical.svg)](https://lucide.dev/icons/move-vertical)
   static const moveVertical = IconData(57799, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`move`](https://lucide.dev/icons/move) icon.
+  /// [![`move`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/move.svg)](https://lucide.dev/icons/move)
   static const move = IconData(57633, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`music-2`](https://lucide.dev/icons/music-2) icon.
+  /// [![`music-2`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/music-2.svg)](https://lucide.dev/icons/music-2)
   static const music2 = IconData(58186, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`music-3`](https://lucide.dev/icons/music-3) icon.
+  /// [![`music-3`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/music-3.svg)](https://lucide.dev/icons/music-3)
   static const music3 = IconData(58187, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`music-4`](https://lucide.dev/icons/music-4) icon.
+  /// [![`music-4`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/music-4.svg)](https://lucide.dev/icons/music-4)
   static const music4 = IconData(58188, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`music`](https://lucide.dev/icons/music) icon.
+  /// [![`music`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/music.svg)](https://lucide.dev/icons/music)
   static const music = IconData(57634, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`navigation-2-off`](https://lucide.dev/icons/navigation-2-off) icon.
+  /// [![`navigation-2-off`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/navigation-2-off.svg)](https://lucide.dev/icons/navigation-2-off)
   static const navigation2Off = IconData(58023, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`navigation-2`](https://lucide.dev/icons/navigation-2) icon.
+  /// [![`navigation-2`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/navigation-2.svg)](https://lucide.dev/icons/navigation-2)
   static const navigation2 = IconData(57636, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`navigation-off`](https://lucide.dev/icons/navigation-off) icon.
+  /// [![`navigation-off`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/navigation-off.svg)](https://lucide.dev/icons/navigation-off)
   static const navigationOff = IconData(58024, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`navigation`](https://lucide.dev/icons/navigation) icon.
+  /// [![`navigation`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/navigation.svg)](https://lucide.dev/icons/navigation)
   static const navigation = IconData(57635, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`network`](https://lucide.dev/icons/network) icon.
+  /// [![`network`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/network.svg)](https://lucide.dev/icons/network)
   static const network = IconData(57637, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`newspaper`](https://lucide.dev/icons/newspaper) icon.
+  /// [![`newspaper`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/newspaper.svg)](https://lucide.dev/icons/newspaper)
   static const newspaper = IconData(58184, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`nfc`](https://lucide.dev/icons/nfc) icon.
+  /// [![`nfc`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/nfc.svg)](https://lucide.dev/icons/nfc)
   static const nfc = IconData(58307, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`non-binary`](https://lucide.dev/icons/non-binary) icon.
+  /// [![`non-binary`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/non-binary.svg)](https://lucide.dev/icons/non-binary)
   static const nonBinary = IconData(58947, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`notebook-pen`](https://lucide.dev/icons/notebook-pen) icon.
+  /// [![`notebook-pen`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/notebook-pen.svg)](https://lucide.dev/icons/notebook-pen)
   static const notebookPen = IconData(58774, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`notebook-tabs`](https://lucide.dev/icons/notebook-tabs) icon.
+  /// [![`notebook-tabs`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/notebook-tabs.svg)](https://lucide.dev/icons/notebook-tabs)
   static const notebookTabs = IconData(58775, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`notebook-text`](https://lucide.dev/icons/notebook-text) icon.
+  /// [![`notebook-text`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/notebook-text.svg)](https://lucide.dev/icons/notebook-text)
   static const notebookText = IconData(58776, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`notebook`](https://lucide.dev/icons/notebook) icon.
+  /// [![`notebook`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/notebook.svg)](https://lucide.dev/icons/notebook)
   static const notebook = IconData(58773, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`notepad-text-dashed`](https://lucide.dev/icons/notepad-text-dashed) icon.
+  /// [![`notepad-text-dashed`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/notepad-text-dashed.svg)](https://lucide.dev/icons/notepad-text-dashed)
   static const notepadTextDashed = IconData(58778, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`notepad-text`](https://lucide.dev/icons/notepad-text) icon.
+  /// [![`notepad-text`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/notepad-text.svg)](https://lucide.dev/icons/notepad-text)
   static const notepadText = IconData(58777, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`nut-off`](https://lucide.dev/icons/nut-off) icon.
+  /// [![`nut-off`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/nut-off.svg)](https://lucide.dev/icons/nut-off)
   static const nutOff = IconData(58268, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`nut`](https://lucide.dev/icons/nut) icon.
+  /// [![`nut`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/nut.svg)](https://lucide.dev/icons/nut)
   static const nut = IconData(58267, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`octagon-alert`](https://lucide.dev/icons/octagon-alert) icon.
+  /// [![`octagon-alert`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/octagon-alert.svg)](https://lucide.dev/icons/octagon-alert)
   static const octagonAlert = IconData(57639, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`octagon-minus`](https://lucide.dev/icons/octagon-minus) icon.
+  /// [![`octagon-minus`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/octagon-minus.svg)](https://lucide.dev/icons/octagon-minus)
   static const octagonMinus = IconData(58919, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`octagon-pause`](https://lucide.dev/icons/octagon-pause) icon.
+  /// [![`octagon-pause`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/octagon-pause.svg)](https://lucide.dev/icons/octagon-pause)
   static const octagonPause = IconData(57883, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`octagon-x`](https://lucide.dev/icons/octagon-x) icon.
+  /// [![`octagon-x`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/octagon-x.svg)](https://lucide.dev/icons/octagon-x)
   static const octagonX = IconData(57640, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`octagon`](https://lucide.dev/icons/octagon) icon.
+  /// [![`octagon`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/octagon.svg)](https://lucide.dev/icons/octagon)
   static const octagon = IconData(57638, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`omega`](https://lucide.dev/icons/omega) icon.
+  /// [![`omega`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/omega.svg)](https://lucide.dev/icons/omega)
   static const omega = IconData(58905, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`option`](https://lucide.dev/icons/option) icon.
+  /// [![`option`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/option.svg)](https://lucide.dev/icons/option)
   static const option = IconData(57848, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`orbit`](https://lucide.dev/icons/orbit) icon.
+  /// [![`orbit`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/orbit.svg)](https://lucide.dev/icons/orbit)
   static const orbit = IconData(58343, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`origami`](https://lucide.dev/icons/origami) icon.
+  /// [![`origami`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/origami.svg)](https://lucide.dev/icons/origami)
   static const origami = IconData(58851, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`package-2`](https://lucide.dev/icons/package-2) icon.
+  /// [![`package-2`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/package-2.svg)](https://lucide.dev/icons/package-2)
   static const package2 = IconData(58176, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`package-check`](https://lucide.dev/icons/package-check) icon.
+  /// [![`package-check`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/package-check.svg)](https://lucide.dev/icons/package-check)
   static const packageCheck = IconData(57958, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`package-minus`](https://lucide.dev/icons/package-minus) icon.
+  /// [![`package-minus`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/package-minus.svg)](https://lucide.dev/icons/package-minus)
   static const packageMinus = IconData(57959, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`package-open`](https://lucide.dev/icons/package-open) icon.
+  /// [![`package-open`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/package-open.svg)](https://lucide.dev/icons/package-open)
   static const packageOpen = IconData(58060, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`package-plus`](https://lucide.dev/icons/package-plus) icon.
+  /// [![`package-plus`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/package-plus.svg)](https://lucide.dev/icons/package-plus)
   static const packagePlus = IconData(57960, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`package-search`](https://lucide.dev/icons/package-search) icon.
+  /// [![`package-search`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/package-search.svg)](https://lucide.dev/icons/package-search)
   static const packageSearch = IconData(57961, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`package-x`](https://lucide.dev/icons/package-x) icon.
+  /// [![`package-x`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/package-x.svg)](https://lucide.dev/icons/package-x)
   static const packageX = IconData(57962, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`package`](https://lucide.dev/icons/package) icon.
+  /// [![`package`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/package.svg)](https://lucide.dev/icons/package)
   static const package = IconData(57641, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`paint-bucket`](https://lucide.dev/icons/paint-bucket) icon.
+  /// [![`paint-bucket`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/paint-bucket.svg)](https://lucide.dev/icons/paint-bucket)
   static const paintBucket = IconData(58086, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`paint-roller`](https://lucide.dev/icons/paint-roller) icon.
+  /// [![`paint-roller`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/paint-roller.svg)](https://lucide.dev/icons/paint-roller)
   static const paintRoller = IconData(58782, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`paintbrush-vertical`](https://lucide.dev/icons/paintbrush-vertical) icon.
+  /// [![`paintbrush-vertical`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/paintbrush-vertical.svg)](https://lucide.dev/icons/paintbrush-vertical)
   static const paintbrushVertical = IconData(58088, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`paintbrush`](https://lucide.dev/icons/paintbrush) icon.
+  /// [![`paintbrush`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/paintbrush.svg)](https://lucide.dev/icons/paintbrush)
   static const paintbrush = IconData(58087, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`palette`](https://lucide.dev/icons/palette) icon.
+  /// [![`palette`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/palette.svg)](https://lucide.dev/icons/palette)
   static const palette = IconData(57821, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`panda`](https://lucide.dev/icons/panda) icon.
+  /// [![`panda`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/panda.svg)](https://lucide.dev/icons/panda)
   static const panda = IconData(58984, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`panel-bottom-close`](https://lucide.dev/icons/panel-bottom-close) icon.
+  /// [![`panel-bottom-close`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/panel-bottom-close.svg)](https://lucide.dev/icons/panel-bottom-close)
   static const panelBottomClose = IconData(58413, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`panel-bottom-dashed`](https://lucide.dev/icons/panel-bottom-dashed) icon.
+  /// [![`panel-bottom-dashed`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/panel-bottom-dashed.svg)](https://lucide.dev/icons/panel-bottom-dashed)
   static const panelBottomDashed = IconData(58414, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`panel-bottom-open`](https://lucide.dev/icons/panel-bottom-open) icon.
+  /// [![`panel-bottom-open`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/panel-bottom-open.svg)](https://lucide.dev/icons/panel-bottom-open)
   static const panelBottomOpen = IconData(58415, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`panel-bottom`](https://lucide.dev/icons/panel-bottom) icon.
+  /// [![`panel-bottom`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/panel-bottom.svg)](https://lucide.dev/icons/panel-bottom)
   static const panelBottom = IconData(58412, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`panel-left-close`](https://lucide.dev/icons/panel-left-close) icon.
+  /// [![`panel-left-close`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/panel-left-close.svg)](https://lucide.dev/icons/panel-left-close)
   static const panelLeftClose = IconData(57884, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`panel-left-dashed`](https://lucide.dev/icons/panel-left-dashed) icon.
+  /// [![`panel-left-dashed`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/panel-left-dashed.svg)](https://lucide.dev/icons/panel-left-dashed)
   static const panelLeftDashed = IconData(58416, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`panel-left-open`](https://lucide.dev/icons/panel-left-open) icon.
+  /// [![`panel-left-open`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/panel-left-open.svg)](https://lucide.dev/icons/panel-left-open)
   static const panelLeftOpen = IconData(57885, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`panel-left-right-dashed`](https://lucide.dev/icons/panel-left-right-dashed) icon.
+  /// [![`panel-left-right-dashed`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/panel-left-right-dashed.svg)](https://lucide.dev/icons/panel-left-right-dashed)
   static const panelLeftRightDashed = IconData(59026, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`panel-left`](https://lucide.dev/icons/panel-left) icon.
+  /// [![`panel-left`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/panel-left.svg)](https://lucide.dev/icons/panel-left)
   static const panelLeft = IconData(57642, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`panel-right-close`](https://lucide.dev/icons/panel-right-close) icon.
+  /// [![`panel-right-close`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/panel-right-close.svg)](https://lucide.dev/icons/panel-right-close)
   static const panelRightClose = IconData(58418, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`panel-right-dashed`](https://lucide.dev/icons/panel-right-dashed) icon.
+  /// [![`panel-right-dashed`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/panel-right-dashed.svg)](https://lucide.dev/icons/panel-right-dashed)
   static const panelRightDashed = IconData(58419, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`panel-right-open`](https://lucide.dev/icons/panel-right-open) icon.
+  /// [![`panel-right-open`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/panel-right-open.svg)](https://lucide.dev/icons/panel-right-open)
   static const panelRightOpen = IconData(58420, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`panel-right`](https://lucide.dev/icons/panel-right) icon.
+  /// [![`panel-right`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/panel-right.svg)](https://lucide.dev/icons/panel-right)
   static const panelRight = IconData(58417, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`panel-top-bottom-dashed`](https://lucide.dev/icons/panel-top-bottom-dashed) icon.
+  /// [![`panel-top-bottom-dashed`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/panel-top-bottom-dashed.svg)](https://lucide.dev/icons/panel-top-bottom-dashed)
   static const panelTopBottomDashed = IconData(59027, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`panel-top-close`](https://lucide.dev/icons/panel-top-close) icon.
+  /// [![`panel-top-close`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/panel-top-close.svg)](https://lucide.dev/icons/panel-top-close)
   static const panelTopClose = IconData(58422, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`panel-top-dashed`](https://lucide.dev/icons/panel-top-dashed) icon.
+  /// [![`panel-top-dashed`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/panel-top-dashed.svg)](https://lucide.dev/icons/panel-top-dashed)
   static const panelTopDashed = IconData(58423, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`panel-top-open`](https://lucide.dev/icons/panel-top-open) icon.
+  /// [![`panel-top-open`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/panel-top-open.svg)](https://lucide.dev/icons/panel-top-open)
   static const panelTopOpen = IconData(58424, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`panel-top`](https://lucide.dev/icons/panel-top) icon.
+  /// [![`panel-top`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/panel-top.svg)](https://lucide.dev/icons/panel-top)
   static const panelTop = IconData(58421, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`panels-left-bottom`](https://lucide.dev/icons/panels-left-bottom) icon.
+  /// [![`panels-left-bottom`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/panels-left-bottom.svg)](https://lucide.dev/icons/panels-left-bottom)
   static const panelsLeftBottom = IconData(57643, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`panels-right-bottom`](https://lucide.dev/icons/panels-right-bottom) icon.
+  /// [![`panels-right-bottom`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/panels-right-bottom.svg)](https://lucide.dev/icons/panels-right-bottom)
   static const panelsRightBottom = IconData(58760, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`panels-top-left`](https://lucide.dev/icons/panels-top-left) icon.
+  /// [![`panels-top-left`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/panels-top-left.svg)](https://lucide.dev/icons/panels-top-left)
   static const panelsTopLeft = IconData(57644, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`paperclip`](https://lucide.dev/icons/paperclip) icon.
+  /// [![`paperclip`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/paperclip.svg)](https://lucide.dev/icons/paperclip)
   static const paperclip = IconData(57645, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`parentheses`](https://lucide.dev/icons/parentheses) icon.
+  /// [![`parentheses`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/parentheses.svg)](https://lucide.dev/icons/parentheses)
   static const parentheses = IconData(58436, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`parking-meter`](https://lucide.dev/icons/parking-meter) icon.
+  /// [![`parking-meter`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/parking-meter.svg)](https://lucide.dev/icons/parking-meter)
   static const parkingMeter = IconData(58624, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`party-popper`](https://lucide.dev/icons/party-popper) icon.
+  /// [![`party-popper`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/party-popper.svg)](https://lucide.dev/icons/party-popper)
   static const partyPopper = IconData(58179, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`pause`](https://lucide.dev/icons/pause) icon.
+  /// [![`pause`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/pause.svg)](https://lucide.dev/icons/pause)
   static const pause = IconData(57646, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`paw-print`](https://lucide.dev/icons/paw-print) icon.
+  /// [![`paw-print`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/paw-print.svg)](https://lucide.dev/icons/paw-print)
   static const pawPrint = IconData(58613, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`pc-case`](https://lucide.dev/icons/pc-case) icon.
+  /// [![`pc-case`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/pc-case.svg)](https://lucide.dev/icons/pc-case)
   static const pcCase = IconData(58438, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`pen-line`](https://lucide.dev/icons/pen-line) icon.
+  /// [![`pen-line`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/pen-line.svg)](https://lucide.dev/icons/pen-line)
   static const penLine = IconData(57648, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`pen-off`](https://lucide.dev/icons/pen-off) icon.
+  /// [![`pen-off`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/pen-off.svg)](https://lucide.dev/icons/pen-off)
   static const penOff = IconData(58862, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`pen-tool`](https://lucide.dev/icons/pen-tool) icon.
+  /// [![`pen-tool`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/pen-tool.svg)](https://lucide.dev/icons/pen-tool)
   static const penTool = IconData(57649, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`pen`](https://lucide.dev/icons/pen) icon.
+  /// [![`pen`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/pen.svg)](https://lucide.dev/icons/pen)
   static const pen = IconData(57647, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`pencil-line`](https://lucide.dev/icons/pencil-line) icon.
+  /// [![`pencil-line`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/pencil-line.svg)](https://lucide.dev/icons/pencil-line)
   static const pencilLine = IconData(58608, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`pencil-off`](https://lucide.dev/icons/pencil-off) icon.
+  /// [![`pencil-off`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/pencil-off.svg)](https://lucide.dev/icons/pencil-off)
   static const pencilOff = IconData(58863, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`pencil-ruler`](https://lucide.dev/icons/pencil-ruler) icon.
+  /// [![`pencil-ruler`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/pencil-ruler.svg)](https://lucide.dev/icons/pencil-ruler)
   static const pencilRuler = IconData(58609, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`pencil`](https://lucide.dev/icons/pencil) icon.
+  /// [![`pencil`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/pencil.svg)](https://lucide.dev/icons/pencil)
   static const pencil = IconData(57849, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`pentagon`](https://lucide.dev/icons/pentagon) icon.
+  /// [![`pentagon`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/pentagon.svg)](https://lucide.dev/icons/pentagon)
   static const pentagon = IconData(58667, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`percent`](https://lucide.dev/icons/percent) icon.
+  /// [![`percent`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/percent.svg)](https://lucide.dev/icons/percent)
   static const percent = IconData(57650, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`person-standing`](https://lucide.dev/icons/person-standing) icon.
+  /// [![`person-standing`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/person-standing.svg)](https://lucide.dev/icons/person-standing)
   static const personStanding = IconData(57886, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`philippine-peso`](https://lucide.dev/icons/philippine-peso) icon.
+  /// [![`philippine-peso`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/philippine-peso.svg)](https://lucide.dev/icons/philippine-peso)
   static const philippinePeso = IconData(58884, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`phone-call`](https://lucide.dev/icons/phone-call) icon.
+  /// [![`phone-call`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/phone-call.svg)](https://lucide.dev/icons/phone-call)
   static const phoneCall = IconData(57652, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`phone-forwarded`](https://lucide.dev/icons/phone-forwarded) icon.
+  /// [![`phone-forwarded`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/phone-forwarded.svg)](https://lucide.dev/icons/phone-forwarded)
   static const phoneForwarded = IconData(57653, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`phone-incoming`](https://lucide.dev/icons/phone-incoming) icon.
+  /// [![`phone-incoming`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/phone-incoming.svg)](https://lucide.dev/icons/phone-incoming)
   static const phoneIncoming = IconData(57654, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`phone-missed`](https://lucide.dev/icons/phone-missed) icon.
+  /// [![`phone-missed`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/phone-missed.svg)](https://lucide.dev/icons/phone-missed)
   static const phoneMissed = IconData(57655, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`phone-off`](https://lucide.dev/icons/phone-off) icon.
+  /// [![`phone-off`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/phone-off.svg)](https://lucide.dev/icons/phone-off)
   static const phoneOff = IconData(57656, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`phone-outgoing`](https://lucide.dev/icons/phone-outgoing) icon.
+  /// [![`phone-outgoing`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/phone-outgoing.svg)](https://lucide.dev/icons/phone-outgoing)
   static const phoneOutgoing = IconData(57657, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`phone`](https://lucide.dev/icons/phone) icon.
+  /// [![`phone`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/phone.svg)](https://lucide.dev/icons/phone)
   static const phone = IconData(57651, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`pi`](https://lucide.dev/icons/pi) icon.
+  /// [![`pi`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/pi.svg)](https://lucide.dev/icons/pi)
   static const pi = IconData(58482, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`piano`](https://lucide.dev/icons/piano) icon.
+  /// [![`piano`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/piano.svg)](https://lucide.dev/icons/piano)
   static const piano = IconData(58721, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`pickaxe`](https://lucide.dev/icons/pickaxe) icon.
+  /// [![`pickaxe`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/pickaxe.svg)](https://lucide.dev/icons/pickaxe)
   static const pickaxe = IconData(58822, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`picture-in-picture-2`](https://lucide.dev/icons/picture-in-picture-2) icon.
+  /// [![`picture-in-picture-2`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/picture-in-picture-2.svg)](https://lucide.dev/icons/picture-in-picture-2)
   static const pictureInPicture2 = IconData(58287, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`picture-in-picture`](https://lucide.dev/icons/picture-in-picture) icon.
+  /// [![`picture-in-picture`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/picture-in-picture.svg)](https://lucide.dev/icons/picture-in-picture)
   static const pictureInPicture = IconData(58286, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`piggy-bank`](https://lucide.dev/icons/piggy-bank) icon.
+  /// [![`piggy-bank`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/piggy-bank.svg)](https://lucide.dev/icons/piggy-bank)
   static const piggyBank = IconData(57658, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`pilcrow-left`](https://lucide.dev/icons/pilcrow-left) icon.
+  /// [![`pilcrow-left`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/pilcrow-left.svg)](https://lucide.dev/icons/pilcrow-left)
   static const pilcrowLeft = IconData(58844, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`pilcrow-right`](https://lucide.dev/icons/pilcrow-right) icon.
+  /// [![`pilcrow-right`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/pilcrow-right.svg)](https://lucide.dev/icons/pilcrow-right)
   static const pilcrowRight = IconData(58845, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`pilcrow`](https://lucide.dev/icons/pilcrow) icon.
+  /// [![`pilcrow`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/pilcrow.svg)](https://lucide.dev/icons/pilcrow)
   static const pilcrow = IconData(58275, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`pill-bottle`](https://lucide.dev/icons/pill-bottle) icon.
+  /// [![`pill-bottle`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/pill-bottle.svg)](https://lucide.dev/icons/pill-bottle)
   static const pillBottle = IconData(58858, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`pill`](https://lucide.dev/icons/pill) icon.
+  /// [![`pill`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/pill.svg)](https://lucide.dev/icons/pill)
   static const pill = IconData(58301, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`pin-off`](https://lucide.dev/icons/pin-off) icon.
+  /// [![`pin-off`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/pin-off.svg)](https://lucide.dev/icons/pin-off)
   static const pinOff = IconData(58038, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`pin`](https://lucide.dev/icons/pin) icon.
+  /// [![`pin`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/pin.svg)](https://lucide.dev/icons/pin)
   static const pin = IconData(57945, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`pipette`](https://lucide.dev/icons/pipette) icon.
+  /// [![`pipette`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/pipette.svg)](https://lucide.dev/icons/pipette)
   static const pipette = IconData(57659, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`pizza`](https://lucide.dev/icons/pizza) icon.
+  /// [![`pizza`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/pizza.svg)](https://lucide.dev/icons/pizza)
   static const pizza = IconData(58196, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`plane-landing`](https://lucide.dev/icons/plane-landing) icon.
+  /// [![`plane-landing`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/plane-landing.svg)](https://lucide.dev/icons/plane-landing)
   static const planeLanding = IconData(58317, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`plane-takeoff`](https://lucide.dev/icons/plane-takeoff) icon.
+  /// [![`plane-takeoff`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/plane-takeoff.svg)](https://lucide.dev/icons/plane-takeoff)
   static const planeTakeoff = IconData(58318, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`plane`](https://lucide.dev/icons/plane) icon.
+  /// [![`plane`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/plane.svg)](https://lucide.dev/icons/plane)
   static const plane = IconData(57822, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`play`](https://lucide.dev/icons/play) icon.
+  /// [![`play`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/play.svg)](https://lucide.dev/icons/play)
   static const play = IconData(57660, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`plug-2`](https://lucide.dev/icons/plug-2) icon.
+  /// [![`plug-2`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/plug-2.svg)](https://lucide.dev/icons/plug-2)
   static const plug2 = IconData(58240, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`plug-zap`](https://lucide.dev/icons/plug-zap) icon.
+  /// [![`plug-zap`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/plug-zap.svg)](https://lucide.dev/icons/plug-zap)
   static const plugZap = IconData(58460, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`plug`](https://lucide.dev/icons/plug) icon.
+  /// [![`plug`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/plug.svg)](https://lucide.dev/icons/plug)
   static const plug = IconData(58239, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`plus`](https://lucide.dev/icons/plus) icon.
+  /// [![`plus`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/plus.svg)](https://lucide.dev/icons/plus)
   static const plus = IconData(57661, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`pocket-knife`](https://lucide.dev/icons/pocket-knife) icon.
+  /// [![`pocket-knife`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/pocket-knife.svg)](https://lucide.dev/icons/pocket-knife)
   static const pocketKnife = IconData(58528, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`pocket`](https://lucide.dev/icons/pocket) icon.
+  /// [![`pocket`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/pocket.svg)](https://lucide.dev/icons/pocket)
   static const pocket = IconData(57662, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`podcast`](https://lucide.dev/icons/podcast) icon.
+  /// [![`podcast`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/podcast.svg)](https://lucide.dev/icons/podcast)
   static const podcast = IconData(57850, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`pointer-off`](https://lucide.dev/icons/pointer-off) icon.
+  /// [![`pointer-off`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/pointer-off.svg)](https://lucide.dev/icons/pointer-off)
   static const pointerOff = IconData(58751, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`pointer`](https://lucide.dev/icons/pointer) icon.
+  /// [![`pointer`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/pointer.svg)](https://lucide.dev/icons/pointer)
   static const pointer = IconData(57832, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`popcorn`](https://lucide.dev/icons/popcorn) icon.
+  /// [![`popcorn`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/popcorn.svg)](https://lucide.dev/icons/popcorn)
   static const popcorn = IconData(58558, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`popsicle`](https://lucide.dev/icons/popsicle) icon.
+  /// [![`popsicle`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/popsicle.svg)](https://lucide.dev/icons/popsicle)
   static const popsicle = IconData(58559, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`pound-sterling`](https://lucide.dev/icons/pound-sterling) icon.
+  /// [![`pound-sterling`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/pound-sterling.svg)](https://lucide.dev/icons/pound-sterling)
   static const poundSterling = IconData(57663, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`power-off`](https://lucide.dev/icons/power-off) icon.
+  /// [![`power-off`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/power-off.svg)](https://lucide.dev/icons/power-off)
   static const powerOff = IconData(57865, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`power`](https://lucide.dev/icons/power) icon.
+  /// [![`power`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/power.svg)](https://lucide.dev/icons/power)
   static const power = IconData(57664, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`presentation`](https://lucide.dev/icons/presentation) icon.
+  /// [![`presentation`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/presentation.svg)](https://lucide.dev/icons/presentation)
   static const presentation = IconData(58542, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`printer-check`](https://lucide.dev/icons/printer-check) icon.
+  /// [![`printer-check`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/printer-check.svg)](https://lucide.dev/icons/printer-check)
   static const printerCheck = IconData(58869, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`printer`](https://lucide.dev/icons/printer) icon.
+  /// [![`printer`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/printer.svg)](https://lucide.dev/icons/printer)
   static const printer = IconData(57665, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`projector`](https://lucide.dev/icons/projector) icon.
+  /// [![`projector`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/projector.svg)](https://lucide.dev/icons/projector)
   static const projector = IconData(58543, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`proportions`](https://lucide.dev/icons/proportions) icon.
+  /// [![`proportions`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/proportions.svg)](https://lucide.dev/icons/proportions)
   static const proportions = IconData(58831, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`puzzle`](https://lucide.dev/icons/puzzle) icon.
+  /// [![`puzzle`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/puzzle.svg)](https://lucide.dev/icons/puzzle)
   static const puzzle = IconData(58012, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`pyramid`](https://lucide.dev/icons/pyramid) icon.
+  /// [![`pyramid`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/pyramid.svg)](https://lucide.dev/icons/pyramid)
   static const pyramid = IconData(58668, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`qr-code`](https://lucide.dev/icons/qr-code) icon.
+  /// [![`qr-code`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/qr-code.svg)](https://lucide.dev/icons/qr-code)
   static const qrCode = IconData(57823, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`quote`](https://lucide.dev/icons/quote) icon.
+  /// [![`quote`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/quote.svg)](https://lucide.dev/icons/quote)
   static const quote = IconData(57913, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`rabbit`](https://lucide.dev/icons/rabbit) icon.
+  /// [![`rabbit`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/rabbit.svg)](https://lucide.dev/icons/rabbit)
   static const rabbit = IconData(58614, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`radar`](https://lucide.dev/icons/radar) icon.
+  /// [![`radar`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/radar.svg)](https://lucide.dev/icons/radar)
   static const radar = IconData(58519, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`radiation`](https://lucide.dev/icons/radiation) icon.
+  /// [![`radiation`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/radiation.svg)](https://lucide.dev/icons/radiation)
   static const radiation = IconData(58434, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`radical`](https://lucide.dev/icons/radical) icon.
+  /// [![`radical`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/radical.svg)](https://lucide.dev/icons/radical)
   static const radical = IconData(58818, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`radio-receiver`](https://lucide.dev/icons/radio-receiver) icon.
+  /// [![`radio-receiver`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/radio-receiver.svg)](https://lucide.dev/icons/radio-receiver)
   static const radioReceiver = IconData(57851, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`radio-tower`](https://lucide.dev/icons/radio-tower) icon.
+  /// [![`radio-tower`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/radio-tower.svg)](https://lucide.dev/icons/radio-tower)
   static const radioTower = IconData(58372, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`radio`](https://lucide.dev/icons/radio) icon.
+  /// [![`radio`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/radio.svg)](https://lucide.dev/icons/radio)
   static const radio = IconData(57666, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`radius`](https://lucide.dev/icons/radius) icon.
+  /// [![`radius`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/radius.svg)](https://lucide.dev/icons/radius)
   static const radius = IconData(58669, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`rail-symbol`](https://lucide.dev/icons/rail-symbol) icon.
+  /// [![`rail-symbol`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/rail-symbol.svg)](https://lucide.dev/icons/rail-symbol)
   static const railSymbol = IconData(58625, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`rainbow`](https://lucide.dev/icons/rainbow) icon.
+  /// [![`rainbow`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/rainbow.svg)](https://lucide.dev/icons/rainbow)
   static const rainbow = IconData(58562, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`rat`](https://lucide.dev/icons/rat) icon.
+  /// [![`rat`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/rat.svg)](https://lucide.dev/icons/rat)
   static const rat = IconData(58347, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`ratio`](https://lucide.dev/icons/ratio) icon.
+  /// [![`ratio`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/ratio.svg)](https://lucide.dev/icons/ratio)
   static const ratio = IconData(58600, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`receipt-cent`](https://lucide.dev/icons/receipt-cent) icon.
+  /// [![`receipt-cent`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/receipt-cent.svg)](https://lucide.dev/icons/receipt-cent)
   static const receiptCent = IconData(58789, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`receipt-euro`](https://lucide.dev/icons/receipt-euro) icon.
+  /// [![`receipt-euro`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/receipt-euro.svg)](https://lucide.dev/icons/receipt-euro)
   static const receiptEuro = IconData(58790, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`receipt-indian-rupee`](https://lucide.dev/icons/receipt-indian-rupee) icon.
+  /// [![`receipt-indian-rupee`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/receipt-indian-rupee.svg)](https://lucide.dev/icons/receipt-indian-rupee)
   static const receiptIndianRupee = IconData(58791, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`receipt-japanese-yen`](https://lucide.dev/icons/receipt-japanese-yen) icon.
+  /// [![`receipt-japanese-yen`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/receipt-japanese-yen.svg)](https://lucide.dev/icons/receipt-japanese-yen)
   static const receiptJapaneseYen = IconData(58792, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`receipt-pound-sterling`](https://lucide.dev/icons/receipt-pound-sterling) icon.
+  /// [![`receipt-pound-sterling`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/receipt-pound-sterling.svg)](https://lucide.dev/icons/receipt-pound-sterling)
   static const receiptPoundSterling = IconData(58793, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`receipt-russian-ruble`](https://lucide.dev/icons/receipt-russian-ruble) icon.
+  /// [![`receipt-russian-ruble`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/receipt-russian-ruble.svg)](https://lucide.dev/icons/receipt-russian-ruble)
   static const receiptRussianRuble = IconData(58794, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`receipt-swiss-franc`](https://lucide.dev/icons/receipt-swiss-franc) icon.
+  /// [![`receipt-swiss-franc`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/receipt-swiss-franc.svg)](https://lucide.dev/icons/receipt-swiss-franc)
   static const receiptSwissFranc = IconData(58795, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`receipt-text`](https://lucide.dev/icons/receipt-text) icon.
+  /// [![`receipt-text`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/receipt-text.svg)](https://lucide.dev/icons/receipt-text)
   static const receiptText = IconData(58796, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`receipt-turkish-lira`](https://lucide.dev/icons/receipt-turkish-lira) icon.
+  /// [![`receipt-turkish-lira`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/receipt-turkish-lira.svg)](https://lucide.dev/icons/receipt-turkish-lira)
   static const receiptTurkishLira = IconData(59007, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`receipt`](https://lucide.dev/icons/receipt) icon.
+  /// [![`receipt`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/receipt.svg)](https://lucide.dev/icons/receipt)
   static const receipt = IconData(58323, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`rectangle-circle`](https://lucide.dev/icons/rectangle-circle) icon.
+  /// [![`rectangle-circle`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/rectangle-circle.svg)](https://lucide.dev/icons/rectangle-circle)
   static const rectangleCircle = IconData(58995, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`rectangle-ellipsis`](https://lucide.dev/icons/rectangle-ellipsis) icon.
+  /// [![`rectangle-ellipsis`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/rectangle-ellipsis.svg)](https://lucide.dev/icons/rectangle-ellipsis)
   static const rectangleEllipsis = IconData(57887, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`rectangle-goggles`](https://lucide.dev/icons/rectangle-goggles) icon.
+  /// [![`rectangle-goggles`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/rectangle-goggles.svg)](https://lucide.dev/icons/rectangle-goggles)
   static const rectangleGoggles = IconData(58966, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`rectangle-horizontal`](https://lucide.dev/icons/rectangle-horizontal) icon.
+  /// [![`rectangle-horizontal`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/rectangle-horizontal.svg)](https://lucide.dev/icons/rectangle-horizontal)
   static const rectangleHorizontal = IconData(58230, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`rectangle-vertical`](https://lucide.dev/icons/rectangle-vertical) icon.
+  /// [![`rectangle-vertical`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/rectangle-vertical.svg)](https://lucide.dev/icons/rectangle-vertical)
   static const rectangleVertical = IconData(58231, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`recycle`](https://lucide.dev/icons/recycle) icon.
+  /// [![`recycle`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/recycle.svg)](https://lucide.dev/icons/recycle)
   static const recycle = IconData(58089, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`redo-2`](https://lucide.dev/icons/redo-2) icon.
+  /// [![`redo-2`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/redo-2.svg)](https://lucide.dev/icons/redo-2)
   static const redo2 = IconData(58016, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`redo-dot`](https://lucide.dev/icons/redo-dot) icon.
+  /// [![`redo-dot`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/redo-dot.svg)](https://lucide.dev/icons/redo-dot)
   static const redoDot = IconData(58448, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`redo`](https://lucide.dev/icons/redo) icon.
+  /// [![`redo`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/redo.svg)](https://lucide.dev/icons/redo)
   static const redo = IconData(57667, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`refresh-ccw-dot`](https://lucide.dev/icons/refresh-ccw-dot) icon.
+  /// [![`refresh-ccw-dot`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/refresh-ccw-dot.svg)](https://lucide.dev/icons/refresh-ccw-dot)
   static const refreshCcwDot = IconData(58546, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`refresh-ccw`](https://lucide.dev/icons/refresh-ccw) icon.
+  /// [![`refresh-ccw`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/refresh-ccw.svg)](https://lucide.dev/icons/refresh-ccw)
   static const refreshCcw = IconData(57668, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`refresh-cw-off`](https://lucide.dev/icons/refresh-cw-off) icon.
+  /// [![`refresh-cw-off`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/refresh-cw-off.svg)](https://lucide.dev/icons/refresh-cw-off)
   static const refreshCwOff = IconData(58520, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`refresh-cw`](https://lucide.dev/icons/refresh-cw) icon.
+  /// [![`refresh-cw`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/refresh-cw.svg)](https://lucide.dev/icons/refresh-cw)
   static const refreshCw = IconData(57669, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`refrigerator`](https://lucide.dev/icons/refrigerator) icon.
+  /// [![`refrigerator`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/refrigerator.svg)](https://lucide.dev/icons/refrigerator)
   static const refrigerator = IconData(58235, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`regex`](https://lucide.dev/icons/regex) icon.
+  /// [![`regex`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/regex.svg)](https://lucide.dev/icons/regex)
   static const regex = IconData(57852, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`remove-formatting`](https://lucide.dev/icons/remove-formatting) icon.
+  /// [![`remove-formatting`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/remove-formatting.svg)](https://lucide.dev/icons/remove-formatting)
   static const removeFormatting = IconData(58291, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`repeat-1`](https://lucide.dev/icons/repeat-1) icon.
+  /// [![`repeat-1`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/repeat-1.svg)](https://lucide.dev/icons/repeat-1)
   static const repeat1 = IconData(57853, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`repeat-2`](https://lucide.dev/icons/repeat-2) icon.
+  /// [![`repeat-2`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/repeat-2.svg)](https://lucide.dev/icons/repeat-2)
   static const repeat2 = IconData(58385, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`repeat`](https://lucide.dev/icons/repeat) icon.
+  /// [![`repeat`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/repeat.svg)](https://lucide.dev/icons/repeat)
   static const repeat = IconData(57670, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`replace-all`](https://lucide.dev/icons/replace-all) icon.
+  /// [![`replace-all`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/replace-all.svg)](https://lucide.dev/icons/replace-all)
   static const replaceAll = IconData(58332, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`replace`](https://lucide.dev/icons/replace) icon.
+  /// [![`replace`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/replace.svg)](https://lucide.dev/icons/replace)
   static const replace = IconData(58331, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`reply-all`](https://lucide.dev/icons/reply-all) icon.
+  /// [![`reply-all`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/reply-all.svg)](https://lucide.dev/icons/reply-all)
   static const replyAll = IconData(57899, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`reply`](https://lucide.dev/icons/reply) icon.
+  /// [![`reply`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/reply.svg)](https://lucide.dev/icons/reply)
   static const reply = IconData(57898, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`rewind`](https://lucide.dev/icons/rewind) icon.
+  /// [![`rewind`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/rewind.svg)](https://lucide.dev/icons/rewind)
   static const rewind = IconData(57671, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`ribbon`](https://lucide.dev/icons/ribbon) icon.
+  /// [![`ribbon`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/ribbon.svg)](https://lucide.dev/icons/ribbon)
   static const ribbon = IconData(58712, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`rocket`](https://lucide.dev/icons/rocket) icon.
+  /// [![`rocket`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/rocket.svg)](https://lucide.dev/icons/rocket)
   static const rocket = IconData(57990, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`rocking-chair`](https://lucide.dev/icons/rocking-chair) icon.
+  /// [![`rocking-chair`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/rocking-chair.svg)](https://lucide.dev/icons/rocking-chair)
   static const rockingChair = IconData(57907, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`roller-coaster`](https://lucide.dev/icons/roller-coaster) icon.
+  /// [![`roller-coaster`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/roller-coaster.svg)](https://lucide.dev/icons/roller-coaster)
   static const rollerCoaster = IconData(58496, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`rose`](https://lucide.dev/icons/rose) icon.
+  /// [![`rose`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/rose.svg)](https://lucide.dev/icons/rose)
   static const rose = IconData(59025, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`rotate-3d`](https://lucide.dev/icons/rotate-3d) icon.
+  /// [![`rotate-3d`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/rotate-3d.svg)](https://lucide.dev/icons/rotate-3d)
   static const rotate3d = IconData(58090, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`rotate-ccw-key`](https://lucide.dev/icons/rotate-ccw-key) icon.
+  /// [![`rotate-ccw-key`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/rotate-ccw-key.svg)](https://lucide.dev/icons/rotate-ccw-key)
   static const rotateCcwKey = IconData(58960, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`rotate-ccw-square`](https://lucide.dev/icons/rotate-ccw-square) icon.
+  /// [![`rotate-ccw-square`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/rotate-ccw-square.svg)](https://lucide.dev/icons/rotate-ccw-square)
   static const rotateCcwSquare = IconData(58832, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`rotate-ccw`](https://lucide.dev/icons/rotate-ccw) icon.
+  /// [![`rotate-ccw`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/rotate-ccw.svg)](https://lucide.dev/icons/rotate-ccw)
   static const rotateCcw = IconData(57672, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`rotate-cw-square`](https://lucide.dev/icons/rotate-cw-square) icon.
+  /// [![`rotate-cw-square`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/rotate-cw-square.svg)](https://lucide.dev/icons/rotate-cw-square)
   static const rotateCwSquare = IconData(58833, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`rotate-cw`](https://lucide.dev/icons/rotate-cw) icon.
+  /// [![`rotate-cw`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/rotate-cw.svg)](https://lucide.dev/icons/rotate-cw)
   static const rotateCw = IconData(57673, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`route-off`](https://lucide.dev/icons/route-off) icon.
+  /// [![`route-off`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/route-off.svg)](https://lucide.dev/icons/route-off)
   static const routeOff = IconData(58687, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`route`](https://lucide.dev/icons/route) icon.
+  /// [![`route`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/route.svg)](https://lucide.dev/icons/route)
   static const route = IconData(58686, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`router`](https://lucide.dev/icons/router) icon.
+  /// [![`router`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/router.svg)](https://lucide.dev/icons/router)
   static const router = IconData(58303, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`rows-2`](https://lucide.dev/icons/rows-2) icon.
+  /// [![`rows-2`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/rows-2.svg)](https://lucide.dev/icons/rows-2)
   static const rows2 = IconData(58425, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`rows-3`](https://lucide.dev/icons/rows-3) icon.
+  /// [![`rows-3`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/rows-3.svg)](https://lucide.dev/icons/rows-3)
   static const rows3 = IconData(58762, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`rows-4`](https://lucide.dev/icons/rows-4) icon.
+  /// [![`rows-4`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/rows-4.svg)](https://lucide.dev/icons/rows-4)
   static const rows4 = IconData(58763, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`rss`](https://lucide.dev/icons/rss) icon.
+  /// [![`rss`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/rss.svg)](https://lucide.dev/icons/rss)
   static const rss = IconData(57674, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`ruler-dimension-line`](https://lucide.dev/icons/ruler-dimension-line) icon.
+  /// [![`ruler-dimension-line`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/ruler-dimension-line.svg)](https://lucide.dev/icons/ruler-dimension-line)
   static const rulerDimensionLine = IconData(58978, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`ruler`](https://lucide.dev/icons/ruler) icon.
+  /// [![`ruler`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/ruler.svg)](https://lucide.dev/icons/ruler)
   static const ruler = IconData(57675, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`russian-ruble`](https://lucide.dev/icons/russian-ruble) icon.
+  /// [![`russian-ruble`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/russian-ruble.svg)](https://lucide.dev/icons/russian-ruble)
   static const russianRuble = IconData(57676, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`sailboat`](https://lucide.dev/icons/sailboat) icon.
+  /// [![`sailboat`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/sailboat.svg)](https://lucide.dev/icons/sailboat)
   static const sailboat = IconData(58238, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`salad`](https://lucide.dev/icons/salad) icon.
+  /// [![`salad`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/salad.svg)](https://lucide.dev/icons/salad)
   static const salad = IconData(58280, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`sandwich`](https://lucide.dev/icons/sandwich) icon.
+  /// [![`sandwich`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/sandwich.svg)](https://lucide.dev/icons/sandwich)
   static const sandwich = IconData(58281, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`satellite-dish`](https://lucide.dev/icons/satellite-dish) icon.
+  /// [![`satellite-dish`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/satellite-dish.svg)](https://lucide.dev/icons/satellite-dish)
   static const satelliteDish = IconData(58440, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`satellite`](https://lucide.dev/icons/satellite) icon.
+  /// [![`satellite`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/satellite.svg)](https://lucide.dev/icons/satellite)
   static const satellite = IconData(58439, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`saudi-riyal`](https://lucide.dev/icons/saudi-riyal) icon.
+  /// [![`saudi-riyal`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/saudi-riyal.svg)](https://lucide.dev/icons/saudi-riyal)
   static const saudiRiyal = IconData(58955, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`save-all`](https://lucide.dev/icons/save-all) icon.
+  /// [![`save-all`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/save-all.svg)](https://lucide.dev/icons/save-all)
   static const saveAll = IconData(58383, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`save-off`](https://lucide.dev/icons/save-off) icon.
+  /// [![`save-off`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/save-off.svg)](https://lucide.dev/icons/save-off)
   static const saveOff = IconData(58867, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`save`](https://lucide.dev/icons/save) icon.
+  /// [![`save`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/save.svg)](https://lucide.dev/icons/save)
   static const save = IconData(57677, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`scale-3d`](https://lucide.dev/icons/scale-3d) icon.
+  /// [![`scale-3d`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/scale-3d.svg)](https://lucide.dev/icons/scale-3d)
   static const scale3d = IconData(58091, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`scale`](https://lucide.dev/icons/scale) icon.
+  /// [![`scale`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/scale.svg)](https://lucide.dev/icons/scale)
   static const scale = IconData(57874, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`scaling`](https://lucide.dev/icons/scaling) icon.
+  /// [![`scaling`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/scaling.svg)](https://lucide.dev/icons/scaling)
   static const scaling = IconData(58092, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`scan-barcode`](https://lucide.dev/icons/scan-barcode) icon.
+  /// [![`scan-barcode`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/scan-barcode.svg)](https://lucide.dev/icons/scan-barcode)
   static const scanBarcode = IconData(58677, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`scan-eye`](https://lucide.dev/icons/scan-eye) icon.
+  /// [![`scan-eye`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/scan-eye.svg)](https://lucide.dev/icons/scan-eye)
   static const scanEye = IconData(58678, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`scan-face`](https://lucide.dev/icons/scan-face) icon.
+  /// [![`scan-face`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/scan-face.svg)](https://lucide.dev/icons/scan-face)
   static const scanFace = IconData(58225, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`scan-heart`](https://lucide.dev/icons/scan-heart) icon.
+  /// [![`scan-heart`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/scan-heart.svg)](https://lucide.dev/icons/scan-heart)
   static const scanHeart = IconData(58938, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`scan-line`](https://lucide.dev/icons/scan-line) icon.
+  /// [![`scan-line`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/scan-line.svg)](https://lucide.dev/icons/scan-line)
   static const scanLine = IconData(57944, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`scan-qr-code`](https://lucide.dev/icons/scan-qr-code) icon.
+  /// [![`scan-qr-code`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/scan-qr-code.svg)](https://lucide.dev/icons/scan-qr-code)
   static const scanQrCode = IconData(58870, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`scan-search`](https://lucide.dev/icons/scan-search) icon.
+  /// [![`scan-search`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/scan-search.svg)](https://lucide.dev/icons/scan-search)
   static const scanSearch = IconData(58679, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`scan-text`](https://lucide.dev/icons/scan-text) icon.
+  /// [![`scan-text`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/scan-text.svg)](https://lucide.dev/icons/scan-text)
   static const scanText = IconData(58680, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`scan`](https://lucide.dev/icons/scan) icon.
+  /// [![`scan`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/scan.svg)](https://lucide.dev/icons/scan)
   static const scan = IconData(57943, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`school`](https://lucide.dev/icons/school) icon.
+  /// [![`school`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/school.svg)](https://lucide.dev/icons/school)
   static const school = IconData(58339, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`scissors-line-dashed`](https://lucide.dev/icons/scissors-line-dashed) icon.
+  /// [![`scissors-line-dashed`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/scissors-line-dashed.svg)](https://lucide.dev/icons/scissors-line-dashed)
   static const scissorsLineDashed = IconData(58601, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`scissors`](https://lucide.dev/icons/scissors) icon.
+  /// [![`scissors`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/scissors.svg)](https://lucide.dev/icons/scissors)
   static const scissors = IconData(57678, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`scooter`](https://lucide.dev/icons/scooter) icon.
+  /// [![`scooter`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/scooter.svg)](https://lucide.dev/icons/scooter)
   static const scooter = IconData(59052, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`screen-share-off`](https://lucide.dev/icons/screen-share-off) icon.
+  /// [![`screen-share-off`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/screen-share-off.svg)](https://lucide.dev/icons/screen-share-off)
   static const screenShareOff = IconData(57680, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`screen-share`](https://lucide.dev/icons/screen-share) icon.
+  /// [![`screen-share`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/screen-share.svg)](https://lucide.dev/icons/screen-share)
   static const screenShare = IconData(57679, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`scroll-text`](https://lucide.dev/icons/scroll-text) icon.
+  /// [![`scroll-text`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/scroll-text.svg)](https://lucide.dev/icons/scroll-text)
   static const scrollText = IconData(58463, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`scroll`](https://lucide.dev/icons/scroll) icon.
+  /// [![`scroll`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/scroll.svg)](https://lucide.dev/icons/scroll)
   static const scroll = IconData(58093, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`search-alert`](https://lucide.dev/icons/search-alert) icon.
+  /// [![`search-alert`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/search-alert.svg)](https://lucide.dev/icons/search-alert)
   static const searchAlert = IconData(59060, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`search-check`](https://lucide.dev/icons/search-check) icon.
+  /// [![`search-check`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/search-check.svg)](https://lucide.dev/icons/search-check)
   static const searchCheck = IconData(58538, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`search-code`](https://lucide.dev/icons/search-code) icon.
+  /// [![`search-code`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/search-code.svg)](https://lucide.dev/icons/search-code)
   static const searchCode = IconData(58539, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`search-slash`](https://lucide.dev/icons/search-slash) icon.
+  /// [![`search-slash`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/search-slash.svg)](https://lucide.dev/icons/search-slash)
   static const searchSlash = IconData(58540, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`search-x`](https://lucide.dev/icons/search-x) icon.
+  /// [![`search-x`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/search-x.svg)](https://lucide.dev/icons/search-x)
   static const searchX = IconData(58541, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`search`](https://lucide.dev/icons/search) icon.
+  /// [![`search`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/search.svg)](https://lucide.dev/icons/search)
   static const search = IconData(57681, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`section`](https://lucide.dev/icons/section) icon.
+  /// [![`section`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/section.svg)](https://lucide.dev/icons/section)
   static const section = IconData(58856, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`send-horizontal`](https://lucide.dev/icons/send-horizontal) icon.
+  /// [![`send-horizontal`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/send-horizontal.svg)](https://lucide.dev/icons/send-horizontal)
   static const sendHorizontal = IconData(58610, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`send-to-back`](https://lucide.dev/icons/send-to-back) icon.
+  /// [![`send-to-back`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/send-to-back.svg)](https://lucide.dev/icons/send-to-back)
   static const sendToBack = IconData(58611, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`send`](https://lucide.dev/icons/send) icon.
+  /// [![`send`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/send.svg)](https://lucide.dev/icons/send)
   static const send = IconData(57682, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`separator-horizontal`](https://lucide.dev/icons/separator-horizontal) icon.
+  /// [![`separator-horizontal`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/separator-horizontal.svg)](https://lucide.dev/icons/separator-horizontal)
   static const separatorHorizontal = IconData(57800, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`separator-vertical`](https://lucide.dev/icons/separator-vertical) icon.
+  /// [![`separator-vertical`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/separator-vertical.svg)](https://lucide.dev/icons/separator-vertical)
   static const separatorVertical = IconData(57801, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`server-cog`](https://lucide.dev/icons/server-cog) icon.
+  /// [![`server-cog`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/server-cog.svg)](https://lucide.dev/icons/server-cog)
   static const serverCog = IconData(58177, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`server-crash`](https://lucide.dev/icons/server-crash) icon.
+  /// [![`server-crash`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/server-crash.svg)](https://lucide.dev/icons/server-crash)
   static const serverCrash = IconData(57833, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`server-off`](https://lucide.dev/icons/server-off) icon.
+  /// [![`server-off`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/server-off.svg)](https://lucide.dev/icons/server-off)
   static const serverOff = IconData(57834, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`server`](https://lucide.dev/icons/server) icon.
+  /// [![`server`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/server.svg)](https://lucide.dev/icons/server)
   static const server = IconData(57683, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`settings-2`](https://lucide.dev/icons/settings-2) icon.
+  /// [![`settings-2`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/settings-2.svg)](https://lucide.dev/icons/settings-2)
   static const settings2 = IconData(57925, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`settings`](https://lucide.dev/icons/settings) icon.
+  /// [![`settings`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/settings.svg)](https://lucide.dev/icons/settings)
   static const settings = IconData(57684, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`shapes`](https://lucide.dev/icons/shapes) icon.
+  /// [![`shapes`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/shapes.svg)](https://lucide.dev/icons/shapes)
   static const shapes = IconData(58547, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`share-2`](https://lucide.dev/icons/share-2) icon.
+  /// [![`share-2`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/share-2.svg)](https://lucide.dev/icons/share-2)
   static const share2 = IconData(57686, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`share`](https://lucide.dev/icons/share) icon.
+  /// [![`share`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/share.svg)](https://lucide.dev/icons/share)
   static const share = IconData(57685, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`sheet`](https://lucide.dev/icons/sheet) icon.
+  /// [![`sheet`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/sheet.svg)](https://lucide.dev/icons/sheet)
   static const sheet = IconData(57687, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`shell`](https://lucide.dev/icons/shell) icon.
+  /// [![`shell`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/shell.svg)](https://lucide.dev/icons/shell)
   static const shell = IconData(58615, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`shield-alert`](https://lucide.dev/icons/shield-alert) icon.
+  /// [![`shield-alert`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/shield-alert.svg)](https://lucide.dev/icons/shield-alert)
   static const shieldAlert = IconData(57854, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`shield-ban`](https://lucide.dev/icons/shield-ban) icon.
+  /// [![`shield-ban`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/shield-ban.svg)](https://lucide.dev/icons/shield-ban)
   static const shieldBan = IconData(57689, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`shield-check`](https://lucide.dev/icons/shield-check) icon.
+  /// [![`shield-check`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/shield-check.svg)](https://lucide.dev/icons/shield-check)
   static const shieldCheck = IconData(57855, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`shield-ellipsis`](https://lucide.dev/icons/shield-ellipsis) icon.
+  /// [![`shield-ellipsis`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/shield-ellipsis.svg)](https://lucide.dev/icons/shield-ellipsis)
   static const shieldEllipsis = IconData(58646, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`shield-half`](https://lucide.dev/icons/shield-half) icon.
+  /// [![`shield-half`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/shield-half.svg)](https://lucide.dev/icons/shield-half)
   static const shieldHalf = IconData(58647, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`shield-minus`](https://lucide.dev/icons/shield-minus) icon.
+  /// [![`shield-minus`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/shield-minus.svg)](https://lucide.dev/icons/shield-minus)
   static const shieldMinus = IconData(58648, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`shield-off`](https://lucide.dev/icons/shield-off) icon.
+  /// [![`shield-off`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/shield-off.svg)](https://lucide.dev/icons/shield-off)
   static const shieldOff = IconData(57690, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`shield-plus`](https://lucide.dev/icons/shield-plus) icon.
+  /// [![`shield-plus`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/shield-plus.svg)](https://lucide.dev/icons/shield-plus)
   static const shieldPlus = IconData(58649, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`shield-question-mark`](https://lucide.dev/icons/shield-question-mark) icon.
+  /// [![`shield-question-mark`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/shield-question-mark.svg)](https://lucide.dev/icons/shield-question-mark)
   static const shieldQuestionMark = IconData(58382, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`shield-user`](https://lucide.dev/icons/shield-user) icon.
+  /// [![`shield-user`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/shield-user.svg)](https://lucide.dev/icons/shield-user)
   static const shieldUser = IconData(58951, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`shield-x`](https://lucide.dev/icons/shield-x) icon.
+  /// [![`shield-x`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/shield-x.svg)](https://lucide.dev/icons/shield-x)
   static const shieldX = IconData(57856, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`shield`](https://lucide.dev/icons/shield) icon.
+  /// [![`shield`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/shield.svg)](https://lucide.dev/icons/shield)
   static const shield = IconData(57688, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`ship-wheel`](https://lucide.dev/icons/ship-wheel) icon.
+  /// [![`ship-wheel`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/ship-wheel.svg)](https://lucide.dev/icons/ship-wheel)
   static const shipWheel = IconData(58626, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`ship`](https://lucide.dev/icons/ship) icon.
+  /// [![`ship`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/ship.svg)](https://lucide.dev/icons/ship)
   static const ship = IconData(58298, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`shirt`](https://lucide.dev/icons/shirt) icon.
+  /// [![`shirt`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/shirt.svg)](https://lucide.dev/icons/shirt)
   static const shirt = IconData(57802, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`shopping-bag`](https://lucide.dev/icons/shopping-bag) icon.
+  /// [![`shopping-bag`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/shopping-bag.svg)](https://lucide.dev/icons/shopping-bag)
   static const shoppingBag = IconData(57691, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`shopping-basket`](https://lucide.dev/icons/shopping-basket) icon.
+  /// [![`shopping-basket`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/shopping-basket.svg)](https://lucide.dev/icons/shopping-basket)
   static const shoppingBasket = IconData(58602, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`shopping-cart`](https://lucide.dev/icons/shopping-cart) icon.
+  /// [![`shopping-cart`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/shopping-cart.svg)](https://lucide.dev/icons/shopping-cart)
   static const shoppingCart = IconData(57692, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`shovel`](https://lucide.dev/icons/shovel) icon.
+  /// [![`shovel`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/shovel.svg)](https://lucide.dev/icons/shovel)
   static const shovel = IconData(57693, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`shower-head`](https://lucide.dev/icons/shower-head) icon.
+  /// [![`shower-head`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/shower-head.svg)](https://lucide.dev/icons/shower-head)
   static const showerHead = IconData(58236, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`shredder`](https://lucide.dev/icons/shredder) icon.
+  /// [![`shredder`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/shredder.svg)](https://lucide.dev/icons/shredder)
   static const shredder = IconData(58971, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`shrimp`](https://lucide.dev/icons/shrimp) icon.
+  /// [![`shrimp`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/shrimp.svg)](https://lucide.dev/icons/shrimp)
   static const shrimp = IconData(58953, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`shrink`](https://lucide.dev/icons/shrink) icon.
+  /// [![`shrink`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/shrink.svg)](https://lucide.dev/icons/shrink)
   static const shrink = IconData(57888, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`shrub`](https://lucide.dev/icons/shrub) icon.
+  /// [![`shrub`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/shrub.svg)](https://lucide.dev/icons/shrub)
   static const shrub = IconData(58094, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`shuffle`](https://lucide.dev/icons/shuffle) icon.
+  /// [![`shuffle`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/shuffle.svg)](https://lucide.dev/icons/shuffle)
   static const shuffle = IconData(57694, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`sigma`](https://lucide.dev/icons/sigma) icon.
+  /// [![`sigma`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/sigma.svg)](https://lucide.dev/icons/sigma)
   static const sigma = IconData(57857, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`signal-high`](https://lucide.dev/icons/signal-high) icon.
+  /// [![`signal-high`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/signal-high.svg)](https://lucide.dev/icons/signal-high)
   static const signalHigh = IconData(57952, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`signal-low`](https://lucide.dev/icons/signal-low) icon.
+  /// [![`signal-low`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/signal-low.svg)](https://lucide.dev/icons/signal-low)
   static const signalLow = IconData(57953, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`signal-medium`](https://lucide.dev/icons/signal-medium) icon.
+  /// [![`signal-medium`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/signal-medium.svg)](https://lucide.dev/icons/signal-medium)
   static const signalMedium = IconData(57954, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`signal-zero`](https://lucide.dev/icons/signal-zero) icon.
+  /// [![`signal-zero`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/signal-zero.svg)](https://lucide.dev/icons/signal-zero)
   static const signalZero = IconData(57955, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`signal`](https://lucide.dev/icons/signal) icon.
+  /// [![`signal`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/signal.svg)](https://lucide.dev/icons/signal)
   static const signal = IconData(57951, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`signature`](https://lucide.dev/icons/signature) icon.
+  /// [![`signature`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/signature.svg)](https://lucide.dev/icons/signature)
   static const signature = IconData(58866, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`signpost-big`](https://lucide.dev/icons/signpost-big) icon.
+  /// [![`signpost-big`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/signpost-big.svg)](https://lucide.dev/icons/signpost-big)
   static const signpostBig = IconData(58689, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`signpost`](https://lucide.dev/icons/signpost) icon.
+  /// [![`signpost`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/signpost.svg)](https://lucide.dev/icons/signpost)
   static const signpost = IconData(58688, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`siren`](https://lucide.dev/icons/siren) icon.
+  /// [![`siren`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/siren.svg)](https://lucide.dev/icons/siren)
   static const siren = IconData(58095, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`skip-back`](https://lucide.dev/icons/skip-back) icon.
+  /// [![`skip-back`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/skip-back.svg)](https://lucide.dev/icons/skip-back)
   static const skipBack = IconData(57695, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`skip-forward`](https://lucide.dev/icons/skip-forward) icon.
+  /// [![`skip-forward`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/skip-forward.svg)](https://lucide.dev/icons/skip-forward)
   static const skipForward = IconData(57696, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`skull`](https://lucide.dev/icons/skull) icon.
+  /// [![`skull`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/skull.svg)](https://lucide.dev/icons/skull)
   static const skull = IconData(57889, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`slack`](https://lucide.dev/icons/slack) icon.
+  /// [![`slack`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/slack.svg)](https://lucide.dev/icons/slack)
   static const slack = IconData(57697, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`slash`](https://lucide.dev/icons/slash) icon.
+  /// [![`slash`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/slash.svg)](https://lucide.dev/icons/slash)
   static const slash = IconData(58653, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`slice`](https://lucide.dev/icons/slice) icon.
+  /// [![`slice`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/slice.svg)](https://lucide.dev/icons/slice)
   static const slice = IconData(58096, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`sliders-horizontal`](https://lucide.dev/icons/sliders-horizontal) icon.
+  /// [![`sliders-horizontal`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/sliders-horizontal.svg)](https://lucide.dev/icons/sliders-horizontal)
   static const slidersHorizontal = IconData(58010, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`sliders-vertical`](https://lucide.dev/icons/sliders-vertical) icon.
+  /// [![`sliders-vertical`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/sliders-vertical.svg)](https://lucide.dev/icons/sliders-vertical)
   static const slidersVertical = IconData(57698, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`smartphone-charging`](https://lucide.dev/icons/smartphone-charging) icon.
+  /// [![`smartphone-charging`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/smartphone-charging.svg)](https://lucide.dev/icons/smartphone-charging)
   static const smartphoneCharging = IconData(57902, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`smartphone-nfc`](https://lucide.dev/icons/smartphone-nfc) icon.
+  /// [![`smartphone-nfc`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/smartphone-nfc.svg)](https://lucide.dev/icons/smartphone-nfc)
   static const smartphoneNfc = IconData(58308, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`smartphone`](https://lucide.dev/icons/smartphone) icon.
+  /// [![`smartphone`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/smartphone.svg)](https://lucide.dev/icons/smartphone)
   static const smartphone = IconData(57699, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`smile-plus`](https://lucide.dev/icons/smile-plus) icon.
+  /// [![`smile-plus`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/smile-plus.svg)](https://lucide.dev/icons/smile-plus)
   static const smilePlus = IconData(58113, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`smile`](https://lucide.dev/icons/smile) icon.
+  /// [![`smile`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/smile.svg)](https://lucide.dev/icons/smile)
   static const smile = IconData(57700, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`snail`](https://lucide.dev/icons/snail) icon.
+  /// [![`snail`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/snail.svg)](https://lucide.dev/icons/snail)
   static const snail = IconData(58616, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`snowflake`](https://lucide.dev/icons/snowflake) icon.
+  /// [![`snowflake`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/snowflake.svg)](https://lucide.dev/icons/snowflake)
   static const snowflake = IconData(57701, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`soap-dispenser-droplet`](https://lucide.dev/icons/soap-dispenser-droplet) icon.
+  /// [![`soap-dispenser-droplet`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/soap-dispenser-droplet.svg)](https://lucide.dev/icons/soap-dispenser-droplet)
   static const soapDispenserDroplet = IconData(58985, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`sofa`](https://lucide.dev/icons/sofa) icon.
+  /// [![`sofa`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/sofa.svg)](https://lucide.dev/icons/sofa)
   static const sofa = IconData(58052, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`solar-panel`](https://lucide.dev/icons/solar-panel) icon.
+  /// [![`solar-panel`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/solar-panel.svg)](https://lucide.dev/icons/solar-panel)
   static const solarPanel = IconData(59039, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`soup`](https://lucide.dev/icons/soup) icon.
+  /// [![`soup`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/soup.svg)](https://lucide.dev/icons/soup)
   static const soup = IconData(58282, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`space`](https://lucide.dev/icons/space) icon.
+  /// [![`space`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/space.svg)](https://lucide.dev/icons/space)
   static const space = IconData(58333, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`spade`](https://lucide.dev/icons/spade) icon.
+  /// [![`spade`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/spade.svg)](https://lucide.dev/icons/spade)
   static const spade = IconData(58521, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`sparkle`](https://lucide.dev/icons/sparkle) icon.
+  /// [![`sparkle`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/sparkle.svg)](https://lucide.dev/icons/sparkle)
   static const sparkle = IconData(58494, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`sparkles`](https://lucide.dev/icons/sparkles) icon.
+  /// [![`sparkles`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/sparkles.svg)](https://lucide.dev/icons/sparkles)
   static const sparkles = IconData(58386, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`speaker`](https://lucide.dev/icons/speaker) icon.
+  /// [![`speaker`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/speaker.svg)](https://lucide.dev/icons/speaker)
   static const speaker = IconData(57702, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`speech`](https://lucide.dev/icons/speech) icon.
+  /// [![`speech`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/speech.svg)](https://lucide.dev/icons/speech)
   static const speech = IconData(58654, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`spell-check-2`](https://lucide.dev/icons/spell-check-2) icon.
+  /// [![`spell-check-2`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/spell-check-2.svg)](https://lucide.dev/icons/spell-check-2)
   static const spellCheck2 = IconData(58523, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`spell-check`](https://lucide.dev/icons/spell-check) icon.
+  /// [![`spell-check`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/spell-check.svg)](https://lucide.dev/icons/spell-check)
   static const spellCheck = IconData(58522, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`spline-pointer`](https://lucide.dev/icons/spline-pointer) icon.
+  /// [![`spline-pointer`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/spline-pointer.svg)](https://lucide.dev/icons/spline-pointer)
   static const splinePointer = IconData(58959, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`spline`](https://lucide.dev/icons/spline) icon.
+  /// [![`spline`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/spline.svg)](https://lucide.dev/icons/spline)
   static const spline = IconData(58251, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`split`](https://lucide.dev/icons/split) icon.
+  /// [![`split`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/split.svg)](https://lucide.dev/icons/split)
   static const split = IconData(58432, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`spool`](https://lucide.dev/icons/spool) icon.
+  /// [![`spool`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/spool.svg)](https://lucide.dev/icons/spool)
   static const spool = IconData(58999, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`spotlight`](https://lucide.dev/icons/spotlight) icon.
+  /// [![`spotlight`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/spotlight.svg)](https://lucide.dev/icons/spotlight)
   static const spotlight = IconData(59010, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`spray-can`](https://lucide.dev/icons/spray-can) icon.
+  /// [![`spray-can`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/spray-can.svg)](https://lucide.dev/icons/spray-can)
   static const sprayCan = IconData(58517, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`sprout`](https://lucide.dev/icons/sprout) icon.
+  /// [![`sprout`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/sprout.svg)](https://lucide.dev/icons/sprout)
   static const sprout = IconData(57835, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`square-activity`](https://lucide.dev/icons/square-activity) icon.
+  /// [![`square-activity`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/square-activity.svg)](https://lucide.dev/icons/square-activity)
   static const squareActivity = IconData(58548, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`square-arrow-down-left`](https://lucide.dev/icons/square-arrow-down-left) icon.
+  /// [![`square-arrow-down-left`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/square-arrow-down-left.svg)](https://lucide.dev/icons/square-arrow-down-left)
   static const squareArrowDownLeft = IconData(58549, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`square-arrow-down-right`](https://lucide.dev/icons/square-arrow-down-right) icon.
+  /// [![`square-arrow-down-right`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/square-arrow-down-right.svg)](https://lucide.dev/icons/square-arrow-down-right)
   static const squareArrowDownRight = IconData(58550, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`square-arrow-down`](https://lucide.dev/icons/square-arrow-down) icon.
+  /// [![`square-arrow-down`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/square-arrow-down.svg)](https://lucide.dev/icons/square-arrow-down)
   static const squareArrowDown = IconData(58407, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`square-arrow-left`](https://lucide.dev/icons/square-arrow-left) icon.
+  /// [![`square-arrow-left`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/square-arrow-left.svg)](https://lucide.dev/icons/square-arrow-left)
   static const squareArrowLeft = IconData(
     58408,
     fontFamily: 'ForuiLucideIcons',
@@ -4276,19 +4274,19 @@ class FIcons {
     matchTextDirection: true,
   );
 
-  /// A [`square-arrow-out-down-left`](https://lucide.dev/icons/square-arrow-out-down-left) icon.
+  /// [![`square-arrow-out-down-left`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/square-arrow-out-down-left.svg)](https://lucide.dev/icons/square-arrow-out-down-left)
   static const squareArrowOutDownLeft = IconData(58785, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`square-arrow-out-down-right`](https://lucide.dev/icons/square-arrow-out-down-right) icon.
+  /// [![`square-arrow-out-down-right`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/square-arrow-out-down-right.svg)](https://lucide.dev/icons/square-arrow-out-down-right)
   static const squareArrowOutDownRight = IconData(58786, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`square-arrow-out-up-left`](https://lucide.dev/icons/square-arrow-out-up-left) icon.
+  /// [![`square-arrow-out-up-left`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/square-arrow-out-up-left.svg)](https://lucide.dev/icons/square-arrow-out-up-left)
   static const squareArrowOutUpLeft = IconData(58787, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`square-arrow-out-up-right`](https://lucide.dev/icons/square-arrow-out-up-right) icon.
+  /// [![`square-arrow-out-up-right`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/square-arrow-out-up-right.svg)](https://lucide.dev/icons/square-arrow-out-up-right)
   static const squareArrowOutUpRight = IconData(58788, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`square-arrow-right`](https://lucide.dev/icons/square-arrow-right) icon.
+  /// [![`square-arrow-right`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/square-arrow-right.svg)](https://lucide.dev/icons/square-arrow-right)
   static const squareArrowRight = IconData(
     58409,
     fontFamily: 'ForuiLucideIcons',
@@ -4296,892 +4294,892 @@ class FIcons {
     matchTextDirection: true,
   );
 
-  /// A [`square-arrow-up-left`](https://lucide.dev/icons/square-arrow-up-left) icon.
+  /// [![`square-arrow-up-left`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/square-arrow-up-left.svg)](https://lucide.dev/icons/square-arrow-up-left)
   static const squareArrowUpLeft = IconData(58551, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`square-arrow-up-right`](https://lucide.dev/icons/square-arrow-up-right) icon.
+  /// [![`square-arrow-up-right`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/square-arrow-up-right.svg)](https://lucide.dev/icons/square-arrow-up-right)
   static const squareArrowUpRight = IconData(58552, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`square-arrow-up`](https://lucide.dev/icons/square-arrow-up) icon.
+  /// [![`square-arrow-up`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/square-arrow-up.svg)](https://lucide.dev/icons/square-arrow-up)
   static const squareArrowUp = IconData(58410, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`square-asterisk`](https://lucide.dev/icons/square-asterisk) icon.
+  /// [![`square-asterisk`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/square-asterisk.svg)](https://lucide.dev/icons/square-asterisk)
   static const squareAsterisk = IconData(57704, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`square-bottom-dashed-scissors`](https://lucide.dev/icons/square-bottom-dashed-scissors) icon.
+  /// [![`square-bottom-dashed-scissors`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/square-bottom-dashed-scissors.svg)](https://lucide.dev/icons/square-bottom-dashed-scissors)
   static const squareBottomDashedScissors = IconData(
     58603,
     fontFamily: 'ForuiLucideIcons',
     fontPackage: 'forui_assets',
   );
 
-  /// A [`square-chart-gantt`](https://lucide.dev/icons/square-chart-gantt) icon.
+  /// [![`square-chart-gantt`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/square-chart-gantt.svg)](https://lucide.dev/icons/square-chart-gantt)
   static const squareChartGantt = IconData(57705, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`square-check-big`](https://lucide.dev/icons/square-check-big) icon.
+  /// [![`square-check-big`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/square-check-big.svg)](https://lucide.dev/icons/square-check-big)
   static const squareCheckBig = IconData(57706, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`square-check`](https://lucide.dev/icons/square-check) icon.
+  /// [![`square-check`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/square-check.svg)](https://lucide.dev/icons/square-check)
   static const squareCheck = IconData(58713, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`square-chevron-down`](https://lucide.dev/icons/square-chevron-down) icon.
+  /// [![`square-chevron-down`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/square-chevron-down.svg)](https://lucide.dev/icons/square-chevron-down)
   static const squareChevronDown = IconData(58319, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`square-chevron-left`](https://lucide.dev/icons/square-chevron-left) icon.
+  /// [![`square-chevron-left`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/square-chevron-left.svg)](https://lucide.dev/icons/square-chevron-left)
   static const squareChevronLeft = IconData(58320, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`square-chevron-right`](https://lucide.dev/icons/square-chevron-right) icon.
+  /// [![`square-chevron-right`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/square-chevron-right.svg)](https://lucide.dev/icons/square-chevron-right)
   static const squareChevronRight = IconData(58321, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`square-chevron-up`](https://lucide.dev/icons/square-chevron-up) icon.
+  /// [![`square-chevron-up`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/square-chevron-up.svg)](https://lucide.dev/icons/square-chevron-up)
   static const squareChevronUp = IconData(58322, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`square-code`](https://lucide.dev/icons/square-code) icon.
+  /// [![`square-code`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/square-code.svg)](https://lucide.dev/icons/square-code)
   static const squareCode = IconData(57707, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`square-dashed-bottom-code`](https://lucide.dev/icons/square-dashed-bottom-code) icon.
+  /// [![`square-dashed-bottom-code`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/square-dashed-bottom-code.svg)](https://lucide.dev/icons/square-dashed-bottom-code)
   static const squareDashedBottomCode = IconData(58561, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`square-dashed-bottom`](https://lucide.dev/icons/square-dashed-bottom) icon.
+  /// [![`square-dashed-bottom`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/square-dashed-bottom.svg)](https://lucide.dev/icons/square-dashed-bottom)
   static const squareDashedBottom = IconData(58560, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`square-dashed-kanban`](https://lucide.dev/icons/square-dashed-kanban) icon.
+  /// [![`square-dashed-kanban`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/square-dashed-kanban.svg)](https://lucide.dev/icons/square-dashed-kanban)
   static const squareDashedKanban = IconData(57708, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`square-dashed-mouse-pointer`](https://lucide.dev/icons/square-dashed-mouse-pointer) icon.
+  /// [![`square-dashed-mouse-pointer`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/square-dashed-mouse-pointer.svg)](https://lucide.dev/icons/square-dashed-mouse-pointer)
   static const squareDashedMousePointer = IconData(58633, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`square-dashed-top-solid`](https://lucide.dev/icons/square-dashed-top-solid) icon.
+  /// [![`square-dashed-top-solid`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/square-dashed-top-solid.svg)](https://lucide.dev/icons/square-dashed-top-solid)
   static const squareDashedTopSolid = IconData(58988, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`square-dashed`](https://lucide.dev/icons/square-dashed) icon.
+  /// [![`square-dashed`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/square-dashed.svg)](https://lucide.dev/icons/square-dashed)
   static const squareDashed = IconData(57803, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`square-divide`](https://lucide.dev/icons/square-divide) icon.
+  /// [![`square-divide`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/square-divide.svg)](https://lucide.dev/icons/square-divide)
   static const squareDivide = IconData(57709, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`square-dot`](https://lucide.dev/icons/square-dot) icon.
+  /// [![`square-dot`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/square-dot.svg)](https://lucide.dev/icons/square-dot)
   static const squareDot = IconData(57710, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`square-equal`](https://lucide.dev/icons/square-equal) icon.
+  /// [![`square-equal`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/square-equal.svg)](https://lucide.dev/icons/square-equal)
   static const squareEqual = IconData(57711, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`square-function`](https://lucide.dev/icons/square-function) icon.
+  /// [![`square-function`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/square-function.svg)](https://lucide.dev/icons/square-function)
   static const squareFunction = IconData(57901, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`square-kanban`](https://lucide.dev/icons/square-kanban) icon.
+  /// [![`square-kanban`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/square-kanban.svg)](https://lucide.dev/icons/square-kanban)
   static const squareKanban = IconData(57712, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`square-library`](https://lucide.dev/icons/square-library) icon.
+  /// [![`square-library`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/square-library.svg)](https://lucide.dev/icons/square-library)
   static const squareLibrary = IconData(58703, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`square-m`](https://lucide.dev/icons/square-m) icon.
+  /// [![`square-m`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/square-m.svg)](https://lucide.dev/icons/square-m)
   static const squareM = IconData(58627, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`square-menu`](https://lucide.dev/icons/square-menu) icon.
+  /// [![`square-menu`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/square-menu.svg)](https://lucide.dev/icons/square-menu)
   static const squareMenu = IconData(58451, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`square-minus`](https://lucide.dev/icons/square-minus) icon.
+  /// [![`square-minus`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/square-minus.svg)](https://lucide.dev/icons/square-minus)
   static const squareMinus = IconData(57713, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`square-mouse-pointer`](https://lucide.dev/icons/square-mouse-pointer) icon.
+  /// [![`square-mouse-pointer`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/square-mouse-pointer.svg)](https://lucide.dev/icons/square-mouse-pointer)
   static const squareMousePointer = IconData(57858, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`square-parking-off`](https://lucide.dev/icons/square-parking-off) icon.
+  /// [![`square-parking-off`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/square-parking-off.svg)](https://lucide.dev/icons/square-parking-off)
   static const squareParkingOff = IconData(58316, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`square-parking`](https://lucide.dev/icons/square-parking) icon.
+  /// [![`square-parking`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/square-parking.svg)](https://lucide.dev/icons/square-parking)
   static const squareParking = IconData(58315, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`square-pause`](https://lucide.dev/icons/square-pause) icon.
+  /// [![`square-pause`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/square-pause.svg)](https://lucide.dev/icons/square-pause)
   static const squarePause = IconData(59012, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`square-pen`](https://lucide.dev/icons/square-pen) icon.
+  /// [![`square-pen`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/square-pen.svg)](https://lucide.dev/icons/square-pen)
   static const squarePen = IconData(57714, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`square-percent`](https://lucide.dev/icons/square-percent) icon.
+  /// [![`square-percent`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/square-percent.svg)](https://lucide.dev/icons/square-percent)
   static const squarePercent = IconData(58652, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`square-pi`](https://lucide.dev/icons/square-pi) icon.
+  /// [![`square-pi`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/square-pi.svg)](https://lucide.dev/icons/square-pi)
   static const squarePi = IconData(58504, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`square-pilcrow`](https://lucide.dev/icons/square-pilcrow) icon.
+  /// [![`square-pilcrow`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/square-pilcrow.svg)](https://lucide.dev/icons/square-pilcrow)
   static const squarePilcrow = IconData(58507, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`square-play`](https://lucide.dev/icons/square-play) icon.
+  /// [![`square-play`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/square-play.svg)](https://lucide.dev/icons/square-play)
   static const squarePlay = IconData(58497, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`square-plus`](https://lucide.dev/icons/square-plus) icon.
+  /// [![`square-plus`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/square-plus.svg)](https://lucide.dev/icons/square-plus)
   static const squarePlus = IconData(57715, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`square-power`](https://lucide.dev/icons/square-power) icon.
+  /// [![`square-power`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/square-power.svg)](https://lucide.dev/icons/square-power)
   static const squarePower = IconData(58705, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`square-radical`](https://lucide.dev/icons/square-radical) icon.
+  /// [![`square-radical`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/square-radical.svg)](https://lucide.dev/icons/square-radical)
   static const squareRadical = IconData(58819, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`square-round-corner`](https://lucide.dev/icons/square-round-corner) icon.
+  /// [![`square-round-corner`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/square-round-corner.svg)](https://lucide.dev/icons/square-round-corner)
   static const squareRoundCorner = IconData(58952, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`square-scissors`](https://lucide.dev/icons/square-scissors) icon.
+  /// [![`square-scissors`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/square-scissors.svg)](https://lucide.dev/icons/square-scissors)
   static const squareScissors = IconData(58604, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`square-sigma`](https://lucide.dev/icons/square-sigma) icon.
+  /// [![`square-sigma`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/square-sigma.svg)](https://lucide.dev/icons/square-sigma)
   static const squareSigma = IconData(58505, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`square-slash`](https://lucide.dev/icons/square-slash) icon.
+  /// [![`square-slash`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/square-slash.svg)](https://lucide.dev/icons/square-slash)
   static const squareSlash = IconData(57716, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`square-split-horizontal`](https://lucide.dev/icons/square-split-horizontal) icon.
+  /// [![`square-split-horizontal`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/square-split-horizontal.svg)](https://lucide.dev/icons/square-split-horizontal)
   static const squareSplitHorizontal = IconData(58294, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`square-split-vertical`](https://lucide.dev/icons/square-split-vertical) icon.
+  /// [![`square-split-vertical`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/square-split-vertical.svg)](https://lucide.dev/icons/square-split-vertical)
   static const squareSplitVertical = IconData(58295, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`square-square`](https://lucide.dev/icons/square-square) icon.
+  /// [![`square-square`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/square-square.svg)](https://lucide.dev/icons/square-square)
   static const squareSquare = IconData(58894, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`square-stack`](https://lucide.dev/icons/square-stack) icon.
+  /// [![`square-stack`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/square-stack.svg)](https://lucide.dev/icons/square-stack)
   static const squareStack = IconData(58530, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`square-star`](https://lucide.dev/icons/square-star) icon.
+  /// [![`square-star`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/square-star.svg)](https://lucide.dev/icons/square-star)
   static const squareStar = IconData(59022, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`square-stop`](https://lucide.dev/icons/square-stop) icon.
+  /// [![`square-stop`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/square-stop.svg)](https://lucide.dev/icons/square-stop)
   static const squareStop = IconData(59013, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`square-terminal`](https://lucide.dev/icons/square-terminal) icon.
+  /// [![`square-terminal`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/square-terminal.svg)](https://lucide.dev/icons/square-terminal)
   static const squareTerminal = IconData(57866, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`square-user-round`](https://lucide.dev/icons/square-user-round) icon.
+  /// [![`square-user-round`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/square-user-round.svg)](https://lucide.dev/icons/square-user-round)
   static const squareUserRound = IconData(58470, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`square-user`](https://lucide.dev/icons/square-user) icon.
+  /// [![`square-user`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/square-user.svg)](https://lucide.dev/icons/square-user)
   static const squareUser = IconData(58469, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`square-x`](https://lucide.dev/icons/square-x) icon.
+  /// [![`square-x`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/square-x.svg)](https://lucide.dev/icons/square-x)
   static const squareX = IconData(57717, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`square`](https://lucide.dev/icons/square) icon.
+  /// [![`square`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/square.svg)](https://lucide.dev/icons/square)
   static const square = IconData(57703, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`squares-exclude`](https://lucide.dev/icons/squares-exclude) icon.
+  /// [![`squares-exclude`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/squares-exclude.svg)](https://lucide.dev/icons/squares-exclude)
   static const squaresExclude = IconData(58967, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`squares-intersect`](https://lucide.dev/icons/squares-intersect) icon.
+  /// [![`squares-intersect`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/squares-intersect.svg)](https://lucide.dev/icons/squares-intersect)
   static const squaresIntersect = IconData(58968, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`squares-subtract`](https://lucide.dev/icons/squares-subtract) icon.
+  /// [![`squares-subtract`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/squares-subtract.svg)](https://lucide.dev/icons/squares-subtract)
   static const squaresSubtract = IconData(58969, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`squares-unite`](https://lucide.dev/icons/squares-unite) icon.
+  /// [![`squares-unite`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/squares-unite.svg)](https://lucide.dev/icons/squares-unite)
   static const squaresUnite = IconData(58970, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`squircle-dashed`](https://lucide.dev/icons/squircle-dashed) icon.
+  /// [![`squircle-dashed`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/squircle-dashed.svg)](https://lucide.dev/icons/squircle-dashed)
   static const squircleDashed = IconData(59001, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`squircle`](https://lucide.dev/icons/squircle) icon.
+  /// [![`squircle`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/squircle.svg)](https://lucide.dev/icons/squircle)
   static const squircle = IconData(58746, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`squirrel`](https://lucide.dev/icons/squirrel) icon.
+  /// [![`squirrel`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/squirrel.svg)](https://lucide.dev/icons/squirrel)
   static const squirrel = IconData(58527, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`stamp`](https://lucide.dev/icons/stamp) icon.
+  /// [![`stamp`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/stamp.svg)](https://lucide.dev/icons/stamp)
   static const stamp = IconData(58299, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`star-half`](https://lucide.dev/icons/star-half) icon.
+  /// [![`star-half`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/star-half.svg)](https://lucide.dev/icons/star-half)
   static const starHalf = IconData(57867, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`star-off`](https://lucide.dev/icons/star-off) icon.
+  /// [![`star-off`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/star-off.svg)](https://lucide.dev/icons/star-off)
   static const starOff = IconData(58032, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`star`](https://lucide.dev/icons/star) icon.
+  /// [![`star`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/star.svg)](https://lucide.dev/icons/star)
   static const star = IconData(57718, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`step-back`](https://lucide.dev/icons/step-back) icon.
+  /// [![`step-back`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/step-back.svg)](https://lucide.dev/icons/step-back)
   static const stepBack = IconData(58345, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`step-forward`](https://lucide.dev/icons/step-forward) icon.
+  /// [![`step-forward`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/step-forward.svg)](https://lucide.dev/icons/step-forward)
   static const stepForward = IconData(58346, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`stethoscope`](https://lucide.dev/icons/stethoscope) icon.
+  /// [![`stethoscope`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/stethoscope.svg)](https://lucide.dev/icons/stethoscope)
   static const stethoscope = IconData(58097, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`sticker`](https://lucide.dev/icons/sticker) icon.
+  /// [![`sticker`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/sticker.svg)](https://lucide.dev/icons/sticker)
   static const sticker = IconData(58114, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`sticky-note`](https://lucide.dev/icons/sticky-note) icon.
+  /// [![`sticky-note`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/sticky-note.svg)](https://lucide.dev/icons/sticky-note)
   static const stickyNote = IconData(58115, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`stone`](https://lucide.dev/icons/stone) icon.
+  /// [![`stone`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/stone.svg)](https://lucide.dev/icons/stone)
   static const stone = IconData(59064, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`store`](https://lucide.dev/icons/store) icon.
+  /// [![`store`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/store.svg)](https://lucide.dev/icons/store)
   static const store = IconData(58340, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`stretch-horizontal`](https://lucide.dev/icons/stretch-horizontal) icon.
+  /// [![`stretch-horizontal`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/stretch-horizontal.svg)](https://lucide.dev/icons/stretch-horizontal)
   static const stretchHorizontal = IconData(57980, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`stretch-vertical`](https://lucide.dev/icons/stretch-vertical) icon.
+  /// [![`stretch-vertical`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/stretch-vertical.svg)](https://lucide.dev/icons/stretch-vertical)
   static const stretchVertical = IconData(57981, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`strikethrough`](https://lucide.dev/icons/strikethrough) icon.
+  /// [![`strikethrough`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/strikethrough.svg)](https://lucide.dev/icons/strikethrough)
   static const strikethrough = IconData(57719, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`subscript`](https://lucide.dev/icons/subscript) icon.
+  /// [![`subscript`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/subscript.svg)](https://lucide.dev/icons/subscript)
   static const subscript = IconData(57948, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`sun-dim`](https://lucide.dev/icons/sun-dim) icon.
+  /// [![`sun-dim`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/sun-dim.svg)](https://lucide.dev/icons/sun-dim)
   static const sunDim = IconData(58009, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`sun-medium`](https://lucide.dev/icons/sun-medium) icon.
+  /// [![`sun-medium`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/sun-medium.svg)](https://lucide.dev/icons/sun-medium)
   static const sunMedium = IconData(58033, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`sun-moon`](https://lucide.dev/icons/sun-moon) icon.
+  /// [![`sun-moon`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/sun-moon.svg)](https://lucide.dev/icons/sun-moon)
   static const sunMoon = IconData(58034, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`sun-snow`](https://lucide.dev/icons/sun-snow) icon.
+  /// [![`sun-snow`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/sun-snow.svg)](https://lucide.dev/icons/sun-snow)
   static const sunSnow = IconData(58226, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`sun`](https://lucide.dev/icons/sun) icon.
+  /// [![`sun`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/sun.svg)](https://lucide.dev/icons/sun)
   static const sun = IconData(57720, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`sunrise`](https://lucide.dev/icons/sunrise) icon.
+  /// [![`sunrise`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/sunrise.svg)](https://lucide.dev/icons/sunrise)
   static const sunrise = IconData(57721, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`sunset`](https://lucide.dev/icons/sunset) icon.
+  /// [![`sunset`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/sunset.svg)](https://lucide.dev/icons/sunset)
   static const sunset = IconData(57722, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`superscript`](https://lucide.dev/icons/superscript) icon.
+  /// [![`superscript`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/superscript.svg)](https://lucide.dev/icons/superscript)
   static const superscript = IconData(57950, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`swatch-book`](https://lucide.dev/icons/swatch-book) icon.
+  /// [![`swatch-book`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/swatch-book.svg)](https://lucide.dev/icons/swatch-book)
   static const swatchBook = IconData(58783, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`swiss-franc`](https://lucide.dev/icons/swiss-franc) icon.
+  /// [![`swiss-franc`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/swiss-franc.svg)](https://lucide.dev/icons/swiss-franc)
   static const swissFranc = IconData(57723, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`switch-camera`](https://lucide.dev/icons/switch-camera) icon.
+  /// [![`switch-camera`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/switch-camera.svg)](https://lucide.dev/icons/switch-camera)
   static const switchCamera = IconData(57724, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`sword`](https://lucide.dev/icons/sword) icon.
+  /// [![`sword`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/sword.svg)](https://lucide.dev/icons/sword)
   static const sword = IconData(58035, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`swords`](https://lucide.dev/icons/swords) icon.
+  /// [![`swords`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/swords.svg)](https://lucide.dev/icons/swords)
   static const swords = IconData(58036, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`syringe`](https://lucide.dev/icons/syringe) icon.
+  /// [![`syringe`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/syringe.svg)](https://lucide.dev/icons/syringe)
   static const syringe = IconData(58098, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`table-2`](https://lucide.dev/icons/table-2) icon.
+  /// [![`table-2`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/table-2.svg)](https://lucide.dev/icons/table-2)
   static const table2 = IconData(58105, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`table-cells-merge`](https://lucide.dev/icons/table-cells-merge) icon.
+  /// [![`table-cells-merge`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/table-cells-merge.svg)](https://lucide.dev/icons/table-cells-merge)
   static const tableCellsMerge = IconData(58823, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`table-cells-split`](https://lucide.dev/icons/table-cells-split) icon.
+  /// [![`table-cells-split`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/table-cells-split.svg)](https://lucide.dev/icons/table-cells-split)
   static const tableCellsSplit = IconData(58824, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`table-columns-split`](https://lucide.dev/icons/table-columns-split) icon.
+  /// [![`table-columns-split`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/table-columns-split.svg)](https://lucide.dev/icons/table-columns-split)
   static const tableColumnsSplit = IconData(58825, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`table-of-contents`](https://lucide.dev/icons/table-of-contents) icon.
+  /// [![`table-of-contents`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/table-of-contents.svg)](https://lucide.dev/icons/table-of-contents)
   static const tableOfContents = IconData(58910, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`table-properties`](https://lucide.dev/icons/table-properties) icon.
+  /// [![`table-properties`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/table-properties.svg)](https://lucide.dev/icons/table-properties)
   static const tableProperties = IconData(58587, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`table-rows-split`](https://lucide.dev/icons/table-rows-split) icon.
+  /// [![`table-rows-split`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/table-rows-split.svg)](https://lucide.dev/icons/table-rows-split)
   static const tableRowsSplit = IconData(58826, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`table`](https://lucide.dev/icons/table) icon.
+  /// [![`table`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/table.svg)](https://lucide.dev/icons/table)
   static const table = IconData(57725, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`tablet-smartphone`](https://lucide.dev/icons/tablet-smartphone) icon.
+  /// [![`tablet-smartphone`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/tablet-smartphone.svg)](https://lucide.dev/icons/tablet-smartphone)
   static const tabletSmartphone = IconData(58634, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`tablet`](https://lucide.dev/icons/tablet) icon.
+  /// [![`tablet`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/tablet.svg)](https://lucide.dev/icons/tablet)
   static const tablet = IconData(57726, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`tablets`](https://lucide.dev/icons/tablets) icon.
+  /// [![`tablets`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/tablets.svg)](https://lucide.dev/icons/tablets)
   static const tablets = IconData(58302, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`tag`](https://lucide.dev/icons/tag) icon.
+  /// [![`tag`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/tag.svg)](https://lucide.dev/icons/tag)
   static const tag = IconData(57727, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`tags`](https://lucide.dev/icons/tags) icon.
+  /// [![`tags`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/tags.svg)](https://lucide.dev/icons/tags)
   static const tags = IconData(58204, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`tally-1`](https://lucide.dev/icons/tally-1) icon.
+  /// [![`tally-1`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/tally-1.svg)](https://lucide.dev/icons/tally-1)
   static const tally1 = IconData(58582, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`tally-2`](https://lucide.dev/icons/tally-2) icon.
+  /// [![`tally-2`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/tally-2.svg)](https://lucide.dev/icons/tally-2)
   static const tally2 = IconData(58583, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`tally-3`](https://lucide.dev/icons/tally-3) icon.
+  /// [![`tally-3`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/tally-3.svg)](https://lucide.dev/icons/tally-3)
   static const tally3 = IconData(58584, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`tally-4`](https://lucide.dev/icons/tally-4) icon.
+  /// [![`tally-4`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/tally-4.svg)](https://lucide.dev/icons/tally-4)
   static const tally4 = IconData(58585, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`tally-5`](https://lucide.dev/icons/tally-5) icon.
+  /// [![`tally-5`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/tally-5.svg)](https://lucide.dev/icons/tally-5)
   static const tally5 = IconData(58586, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`tangent`](https://lucide.dev/icons/tangent) icon.
+  /// [![`tangent`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/tangent.svg)](https://lucide.dev/icons/tangent)
   static const tangent = IconData(58670, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`target`](https://lucide.dev/icons/target) icon.
+  /// [![`target`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/target.svg)](https://lucide.dev/icons/target)
   static const target = IconData(57728, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`telescope`](https://lucide.dev/icons/telescope) icon.
+  /// [![`telescope`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/telescope.svg)](https://lucide.dev/icons/telescope)
   static const telescope = IconData(58821, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`tent-tree`](https://lucide.dev/icons/tent-tree) icon.
+  /// [![`tent-tree`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/tent-tree.svg)](https://lucide.dev/icons/tent-tree)
   static const tentTree = IconData(58683, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`tent`](https://lucide.dev/icons/tent) icon.
+  /// [![`tent`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/tent.svg)](https://lucide.dev/icons/tent)
   static const tent = IconData(57895, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`terminal`](https://lucide.dev/icons/terminal) icon.
+  /// [![`terminal`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/terminal.svg)](https://lucide.dev/icons/terminal)
   static const terminal = IconData(57729, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`test-tube-diagonal`](https://lucide.dev/icons/test-tube-diagonal) icon.
+  /// [![`test-tube-diagonal`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/test-tube-diagonal.svg)](https://lucide.dev/icons/test-tube-diagonal)
   static const testTubeDiagonal = IconData(58374, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`test-tube`](https://lucide.dev/icons/test-tube) icon.
+  /// [![`test-tube`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/test-tube.svg)](https://lucide.dev/icons/test-tube)
   static const testTube = IconData(58373, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`test-tubes`](https://lucide.dev/icons/test-tubes) icon.
+  /// [![`test-tubes`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/test-tubes.svg)](https://lucide.dev/icons/test-tubes)
   static const testTubes = IconData(58375, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`text-align-center`](https://lucide.dev/icons/text-align-center) icon.
+  /// [![`text-align-center`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/text-align-center.svg)](https://lucide.dev/icons/text-align-center)
   static const textAlignCenter = IconData(57730, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`text-align-end`](https://lucide.dev/icons/text-align-end) icon.
+  /// [![`text-align-end`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/text-align-end.svg)](https://lucide.dev/icons/text-align-end)
   static const textAlignEnd = IconData(57731, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`text-align-justify`](https://lucide.dev/icons/text-align-justify) icon.
+  /// [![`text-align-justify`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/text-align-justify.svg)](https://lucide.dev/icons/text-align-justify)
   static const textAlignJustify = IconData(57732, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`text-align-start`](https://lucide.dev/icons/text-align-start) icon.
+  /// [![`text-align-start`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/text-align-start.svg)](https://lucide.dev/icons/text-align-start)
   static const textAlignStart = IconData(57733, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`text-cursor-input`](https://lucide.dev/icons/text-cursor-input) icon.
+  /// [![`text-cursor-input`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/text-cursor-input.svg)](https://lucide.dev/icons/text-cursor-input)
   static const textCursorInput = IconData(57957, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`text-cursor`](https://lucide.dev/icons/text-cursor) icon.
+  /// [![`text-cursor`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/text-cursor.svg)](https://lucide.dev/icons/text-cursor)
   static const textCursor = IconData(57956, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`text-initial`](https://lucide.dev/icons/text-initial) icon.
+  /// [![`text-initial`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/text-initial.svg)](https://lucide.dev/icons/text-initial)
   static const textInitial = IconData(58885, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`text-quote`](https://lucide.dev/icons/text-quote) icon.
+  /// [![`text-quote`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/text-quote.svg)](https://lucide.dev/icons/text-quote)
   static const textQuote = IconData(58526, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`text-search`](https://lucide.dev/icons/text-search) icon.
+  /// [![`text-search`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/text-search.svg)](https://lucide.dev/icons/text-search)
   static const textSearch = IconData(58797, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`text-select`](https://lucide.dev/icons/text-select) icon.
+  /// [![`text-select`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/text-select.svg)](https://lucide.dev/icons/text-select)
   static const textSelect = IconData(58334, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`text-wrap`](https://lucide.dev/icons/text-wrap) icon.
+  /// [![`text-wrap`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/text-wrap.svg)](https://lucide.dev/icons/text-wrap)
   static const textWrap = IconData(57928, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`theater`](https://lucide.dev/icons/theater) icon.
+  /// [![`theater`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/theater.svg)](https://lucide.dev/icons/theater)
   static const theater = IconData(58658, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`thermometer-snowflake`](https://lucide.dev/icons/thermometer-snowflake) icon.
+  /// [![`thermometer-snowflake`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/thermometer-snowflake.svg)](https://lucide.dev/icons/thermometer-snowflake)
   static const thermometerSnowflake = IconData(57735, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`thermometer-sun`](https://lucide.dev/icons/thermometer-sun) icon.
+  /// [![`thermometer-sun`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/thermometer-sun.svg)](https://lucide.dev/icons/thermometer-sun)
   static const thermometerSun = IconData(57736, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`thermometer`](https://lucide.dev/icons/thermometer) icon.
+  /// [![`thermometer`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/thermometer.svg)](https://lucide.dev/icons/thermometer)
   static const thermometer = IconData(57734, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`thumbs-down`](https://lucide.dev/icons/thumbs-down) icon.
+  /// [![`thumbs-down`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/thumbs-down.svg)](https://lucide.dev/icons/thumbs-down)
   static const thumbsDown = IconData(57737, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`thumbs-up`](https://lucide.dev/icons/thumbs-up) icon.
+  /// [![`thumbs-up`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/thumbs-up.svg)](https://lucide.dev/icons/thumbs-up)
   static const thumbsUp = IconData(57738, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`ticket-check`](https://lucide.dev/icons/ticket-check) icon.
+  /// [![`ticket-check`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/ticket-check.svg)](https://lucide.dev/icons/ticket-check)
   static const ticketCheck = IconData(58798, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`ticket-minus`](https://lucide.dev/icons/ticket-minus) icon.
+  /// [![`ticket-minus`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/ticket-minus.svg)](https://lucide.dev/icons/ticket-minus)
   static const ticketMinus = IconData(58799, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`ticket-percent`](https://lucide.dev/icons/ticket-percent) icon.
+  /// [![`ticket-percent`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/ticket-percent.svg)](https://lucide.dev/icons/ticket-percent)
   static const ticketPercent = IconData(58800, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`ticket-plus`](https://lucide.dev/icons/ticket-plus) icon.
+  /// [![`ticket-plus`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/ticket-plus.svg)](https://lucide.dev/icons/ticket-plus)
   static const ticketPlus = IconData(58801, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`ticket-slash`](https://lucide.dev/icons/ticket-slash) icon.
+  /// [![`ticket-slash`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/ticket-slash.svg)](https://lucide.dev/icons/ticket-slash)
   static const ticketSlash = IconData(58802, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`ticket-x`](https://lucide.dev/icons/ticket-x) icon.
+  /// [![`ticket-x`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/ticket-x.svg)](https://lucide.dev/icons/ticket-x)
   static const ticketX = IconData(58803, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`ticket`](https://lucide.dev/icons/ticket) icon.
+  /// [![`ticket`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/ticket.svg)](https://lucide.dev/icons/ticket)
   static const ticket = IconData(57871, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`tickets-plane`](https://lucide.dev/icons/tickets-plane) icon.
+  /// [![`tickets-plane`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/tickets-plane.svg)](https://lucide.dev/icons/tickets-plane)
   static const ticketsPlane = IconData(58915, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`tickets`](https://lucide.dev/icons/tickets) icon.
+  /// [![`tickets`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/tickets.svg)](https://lucide.dev/icons/tickets)
   static const tickets = IconData(58914, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`timer-off`](https://lucide.dev/icons/timer-off) icon.
+  /// [![`timer-off`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/timer-off.svg)](https://lucide.dev/icons/timer-off)
   static const timerOff = IconData(57929, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`timer-reset`](https://lucide.dev/icons/timer-reset) icon.
+  /// [![`timer-reset`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/timer-reset.svg)](https://lucide.dev/icons/timer-reset)
   static const timerReset = IconData(57910, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`timer`](https://lucide.dev/icons/timer) icon.
+  /// [![`timer`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/timer.svg)](https://lucide.dev/icons/timer)
   static const timer = IconData(57824, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`toggle-left`](https://lucide.dev/icons/toggle-left) icon.
+  /// [![`toggle-left`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/toggle-left.svg)](https://lucide.dev/icons/toggle-left)
   static const toggleLeft = IconData(57739, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`toggle-right`](https://lucide.dev/icons/toggle-right) icon.
+  /// [![`toggle-right`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/toggle-right.svg)](https://lucide.dev/icons/toggle-right)
   static const toggleRight = IconData(57740, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`toilet`](https://lucide.dev/icons/toilet) icon.
+  /// [![`toilet`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/toilet.svg)](https://lucide.dev/icons/toilet)
   static const toilet = IconData(58933, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`tool-case`](https://lucide.dev/icons/tool-case) icon.
+  /// [![`tool-case`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/tool-case.svg)](https://lucide.dev/icons/tool-case)
   static const toolCase = IconData(59005, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`toolbox`](https://lucide.dev/icons/toolbox) icon.
+  /// [![`toolbox`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/toolbox.svg)](https://lucide.dev/icons/toolbox)
   static const toolbox = IconData(59065, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`tornado`](https://lucide.dev/icons/tornado) icon.
+  /// [![`tornado`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/tornado.svg)](https://lucide.dev/icons/tornado)
   static const tornado = IconData(57880, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`torus`](https://lucide.dev/icons/torus) icon.
+  /// [![`torus`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/torus.svg)](https://lucide.dev/icons/torus)
   static const torus = IconData(58671, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`touchpad-off`](https://lucide.dev/icons/touchpad-off) icon.
+  /// [![`touchpad-off`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/touchpad-off.svg)](https://lucide.dev/icons/touchpad-off)
   static const touchpadOff = IconData(58442, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`touchpad`](https://lucide.dev/icons/touchpad) icon.
+  /// [![`touchpad`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/touchpad.svg)](https://lucide.dev/icons/touchpad)
   static const touchpad = IconData(58441, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`tower-control`](https://lucide.dev/icons/tower-control) icon.
+  /// [![`tower-control`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/tower-control.svg)](https://lucide.dev/icons/tower-control)
   static const towerControl = IconData(58300, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`toy-brick`](https://lucide.dev/icons/toy-brick) icon.
+  /// [![`toy-brick`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/toy-brick.svg)](https://lucide.dev/icons/toy-brick)
   static const toyBrick = IconData(58183, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`tractor`](https://lucide.dev/icons/tractor) icon.
+  /// [![`tractor`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/tractor.svg)](https://lucide.dev/icons/tractor)
   static const tractor = IconData(58628, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`traffic-cone`](https://lucide.dev/icons/traffic-cone) icon.
+  /// [![`traffic-cone`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/traffic-cone.svg)](https://lucide.dev/icons/traffic-cone)
   static const trafficCone = IconData(58629, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`train-front-tunnel`](https://lucide.dev/icons/train-front-tunnel) icon.
+  /// [![`train-front-tunnel`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/train-front-tunnel.svg)](https://lucide.dev/icons/train-front-tunnel)
   static const trainFrontTunnel = IconData(58631, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`train-front`](https://lucide.dev/icons/train-front) icon.
+  /// [![`train-front`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/train-front.svg)](https://lucide.dev/icons/train-front)
   static const trainFront = IconData(58630, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`train-track`](https://lucide.dev/icons/train-track) icon.
+  /// [![`train-track`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/train-track.svg)](https://lucide.dev/icons/train-track)
   static const trainTrack = IconData(58632, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`tram-front`](https://lucide.dev/icons/tram-front) icon.
+  /// [![`tram-front`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/tram-front.svg)](https://lucide.dev/icons/tram-front)
   static const tramFront = IconData(58025, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`transgender`](https://lucide.dev/icons/transgender) icon.
+  /// [![`transgender`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/transgender.svg)](https://lucide.dev/icons/transgender)
   static const transgender = IconData(58948, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`trash-2`](https://lucide.dev/icons/trash-2) icon.
+  /// [![`trash-2`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/trash-2.svg)](https://lucide.dev/icons/trash-2)
   static const trash2 = IconData(57742, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`trash`](https://lucide.dev/icons/trash) icon.
+  /// [![`trash`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/trash.svg)](https://lucide.dev/icons/trash)
   static const trash = IconData(57741, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`tree-deciduous`](https://lucide.dev/icons/tree-deciduous) icon.
+  /// [![`tree-deciduous`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/tree-deciduous.svg)](https://lucide.dev/icons/tree-deciduous)
   static const treeDeciduous = IconData(58099, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`tree-palm`](https://lucide.dev/icons/tree-palm) icon.
+  /// [![`tree-palm`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/tree-palm.svg)](https://lucide.dev/icons/tree-palm)
   static const treePalm = IconData(57985, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`tree-pine`](https://lucide.dev/icons/tree-pine) icon.
+  /// [![`tree-pine`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/tree-pine.svg)](https://lucide.dev/icons/tree-pine)
   static const treePine = IconData(58100, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`trees`](https://lucide.dev/icons/trees) icon.
+  /// [![`trees`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/trees.svg)](https://lucide.dev/icons/trees)
   static const trees = IconData(58101, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`trello`](https://lucide.dev/icons/trello) icon.
+  /// [![`trello`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/trello.svg)](https://lucide.dev/icons/trello)
   static const trello = IconData(57743, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`trending-down`](https://lucide.dev/icons/trending-down) icon.
+  /// [![`trending-down`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/trending-down.svg)](https://lucide.dev/icons/trending-down)
   static const trendingDown = IconData(57744, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`trending-up-down`](https://lucide.dev/icons/trending-up-down) icon.
+  /// [![`trending-up-down`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/trending-up-down.svg)](https://lucide.dev/icons/trending-up-down)
   static const trendingUpDown = IconData(58917, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`trending-up`](https://lucide.dev/icons/trending-up) icon.
+  /// [![`trending-up`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/trending-up.svg)](https://lucide.dev/icons/trending-up)
   static const trendingUp = IconData(57745, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`triangle-alert`](https://lucide.dev/icons/triangle-alert) icon.
+  /// [![`triangle-alert`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/triangle-alert.svg)](https://lucide.dev/icons/triangle-alert)
   static const triangleAlert = IconData(57747, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`triangle-dashed`](https://lucide.dev/icons/triangle-dashed) icon.
+  /// [![`triangle-dashed`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/triangle-dashed.svg)](https://lucide.dev/icons/triangle-dashed)
   static const triangleDashed = IconData(58941, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`triangle-right`](https://lucide.dev/icons/triangle-right) icon.
+  /// [![`triangle-right`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/triangle-right.svg)](https://lucide.dev/icons/triangle-right)
   static const triangleRight = IconData(58605, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`triangle`](https://lucide.dev/icons/triangle) icon.
+  /// [![`triangle`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/triangle.svg)](https://lucide.dev/icons/triangle)
   static const triangle = IconData(57746, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`trophy`](https://lucide.dev/icons/trophy) icon.
+  /// [![`trophy`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/trophy.svg)](https://lucide.dev/icons/trophy)
   static const trophy = IconData(58227, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`truck-electric`](https://lucide.dev/icons/truck-electric) icon.
+  /// [![`truck-electric`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/truck-electric.svg)](https://lucide.dev/icons/truck-electric)
   static const truckElectric = IconData(58975, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`truck`](https://lucide.dev/icons/truck) icon.
+  /// [![`truck`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/truck.svg)](https://lucide.dev/icons/truck)
   static const truck = IconData(57748, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`turkish-lira`](https://lucide.dev/icons/turkish-lira) icon.
+  /// [![`turkish-lira`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/turkish-lira.svg)](https://lucide.dev/icons/turkish-lira)
   static const turkishLira = IconData(59008, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`turntable`](https://lucide.dev/icons/turntable) icon.
+  /// [![`turntable`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/turntable.svg)](https://lucide.dev/icons/turntable)
   static const turntable = IconData(59020, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`turtle`](https://lucide.dev/icons/turtle) icon.
+  /// [![`turtle`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/turtle.svg)](https://lucide.dev/icons/turtle)
   static const turtle = IconData(58617, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`tv-minimal-play`](https://lucide.dev/icons/tv-minimal-play) icon.
+  /// [![`tv-minimal-play`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/tv-minimal-play.svg)](https://lucide.dev/icons/tv-minimal-play)
   static const tvMinimalPlay = IconData(58860, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`tv-minimal`](https://lucide.dev/icons/tv-minimal) icon.
+  /// [![`tv-minimal`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/tv-minimal.svg)](https://lucide.dev/icons/tv-minimal)
   static const tvMinimal = IconData(57859, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`tv`](https://lucide.dev/icons/tv) icon.
+  /// [![`tv`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/tv.svg)](https://lucide.dev/icons/tv)
   static const tv = IconData(57749, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`twitch`](https://lucide.dev/icons/twitch) icon.
+  /// [![`twitch`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/twitch.svg)](https://lucide.dev/icons/twitch)
   static const twitch = IconData(57750, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`twitter`](https://lucide.dev/icons/twitter) icon.
+  /// [![`twitter`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/twitter.svg)](https://lucide.dev/icons/twitter)
   static const twitter = IconData(57751, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`type-outline`](https://lucide.dev/icons/type-outline) icon.
+  /// [![`type-outline`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/type-outline.svg)](https://lucide.dev/icons/type-outline)
   static const typeOutline = IconData(58882, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`type`](https://lucide.dev/icons/type) icon.
+  /// [![`type`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/type.svg)](https://lucide.dev/icons/type)
   static const type = IconData(57752, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`umbrella-off`](https://lucide.dev/icons/umbrella-off) icon.
+  /// [![`umbrella-off`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/umbrella-off.svg)](https://lucide.dev/icons/umbrella-off)
   static const umbrellaOff = IconData(58691, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`umbrella`](https://lucide.dev/icons/umbrella) icon.
+  /// [![`umbrella`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/umbrella.svg)](https://lucide.dev/icons/umbrella)
   static const umbrella = IconData(57753, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`underline`](https://lucide.dev/icons/underline) icon.
+  /// [![`underline`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/underline.svg)](https://lucide.dev/icons/underline)
   static const underline = IconData(57754, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`undo-2`](https://lucide.dev/icons/undo-2) icon.
+  /// [![`undo-2`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/undo-2.svg)](https://lucide.dev/icons/undo-2)
   static const undo2 = IconData(58017, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`undo-dot`](https://lucide.dev/icons/undo-dot) icon.
+  /// [![`undo-dot`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/undo-dot.svg)](https://lucide.dev/icons/undo-dot)
   static const undoDot = IconData(58449, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`undo`](https://lucide.dev/icons/undo) icon.
+  /// [![`undo`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/undo.svg)](https://lucide.dev/icons/undo)
   static const undo = IconData(57755, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`unfold-horizontal`](https://lucide.dev/icons/unfold-horizontal) icon.
+  /// [![`unfold-horizontal`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/unfold-horizontal.svg)](https://lucide.dev/icons/unfold-horizontal)
   static const unfoldHorizontal = IconData(58429, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`unfold-vertical`](https://lucide.dev/icons/unfold-vertical) icon.
+  /// [![`unfold-vertical`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/unfold-vertical.svg)](https://lucide.dev/icons/unfold-vertical)
   static const unfoldVertical = IconData(58430, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`ungroup`](https://lucide.dev/icons/ungroup) icon.
+  /// [![`ungroup`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/ungroup.svg)](https://lucide.dev/icons/ungroup)
   static const ungroup = IconData(58471, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`university`](https://lucide.dev/icons/university) icon.
+  /// [![`university`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/university.svg)](https://lucide.dev/icons/university)
   static const university = IconData(58341, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`unlink-2`](https://lucide.dev/icons/unlink-2) icon.
+  /// [![`unlink-2`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/unlink-2.svg)](https://lucide.dev/icons/unlink-2)
   static const unlink2 = IconData(57757, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`unlink`](https://lucide.dev/icons/unlink) icon.
+  /// [![`unlink`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/unlink.svg)](https://lucide.dev/icons/unlink)
   static const unlink = IconData(57756, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`unplug`](https://lucide.dev/icons/unplug) icon.
+  /// [![`unplug`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/unplug.svg)](https://lucide.dev/icons/unplug)
   static const unplug = IconData(58461, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`upload`](https://lucide.dev/icons/upload) icon.
+  /// [![`upload`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/upload.svg)](https://lucide.dev/icons/upload)
   static const upload = IconData(57758, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`usb`](https://lucide.dev/icons/usb) icon.
+  /// [![`usb`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/usb.svg)](https://lucide.dev/icons/usb)
   static const usb = IconData(58198, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`user-check`](https://lucide.dev/icons/user-check) icon.
+  /// [![`user-check`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/user-check.svg)](https://lucide.dev/icons/user-check)
   static const userCheck = IconData(57760, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`user-cog`](https://lucide.dev/icons/user-cog) icon.
+  /// [![`user-cog`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/user-cog.svg)](https://lucide.dev/icons/user-cog)
   static const userCog = IconData(58178, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`user-lock`](https://lucide.dev/icons/user-lock) icon.
+  /// [![`user-lock`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/user-lock.svg)](https://lucide.dev/icons/user-lock)
   static const userLock = IconData(58976, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`user-minus`](https://lucide.dev/icons/user-minus) icon.
+  /// [![`user-minus`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/user-minus.svg)](https://lucide.dev/icons/user-minus)
   static const userMinus = IconData(57761, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`user-pen`](https://lucide.dev/icons/user-pen) icon.
+  /// [![`user-pen`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/user-pen.svg)](https://lucide.dev/icons/user-pen)
   static const userPen = IconData(58876, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`user-plus`](https://lucide.dev/icons/user-plus) icon.
+  /// [![`user-plus`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/user-plus.svg)](https://lucide.dev/icons/user-plus)
   static const userPlus = IconData(57762, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`user-round-check`](https://lucide.dev/icons/user-round-check) icon.
+  /// [![`user-round-check`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/user-round-check.svg)](https://lucide.dev/icons/user-round-check)
   static const userRoundCheck = IconData(58473, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`user-round-cog`](https://lucide.dev/icons/user-round-cog) icon.
+  /// [![`user-round-cog`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/user-round-cog.svg)](https://lucide.dev/icons/user-round-cog)
   static const userRoundCog = IconData(58474, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`user-round-minus`](https://lucide.dev/icons/user-round-minus) icon.
+  /// [![`user-round-minus`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/user-round-minus.svg)](https://lucide.dev/icons/user-round-minus)
   static const userRoundMinus = IconData(58475, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`user-round-pen`](https://lucide.dev/icons/user-round-pen) icon.
+  /// [![`user-round-pen`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/user-round-pen.svg)](https://lucide.dev/icons/user-round-pen)
   static const userRoundPen = IconData(58877, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`user-round-plus`](https://lucide.dev/icons/user-round-plus) icon.
+  /// [![`user-round-plus`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/user-round-plus.svg)](https://lucide.dev/icons/user-round-plus)
   static const userRoundPlus = IconData(58476, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`user-round-search`](https://lucide.dev/icons/user-round-search) icon.
+  /// [![`user-round-search`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/user-round-search.svg)](https://lucide.dev/icons/user-round-search)
   static const userRoundSearch = IconData(58744, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`user-round-x`](https://lucide.dev/icons/user-round-x) icon.
+  /// [![`user-round-x`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/user-round-x.svg)](https://lucide.dev/icons/user-round-x)
   static const userRoundX = IconData(58477, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`user-round`](https://lucide.dev/icons/user-round) icon.
+  /// [![`user-round`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/user-round.svg)](https://lucide.dev/icons/user-round)
   static const userRound = IconData(58472, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`user-search`](https://lucide.dev/icons/user-search) icon.
+  /// [![`user-search`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/user-search.svg)](https://lucide.dev/icons/user-search)
   static const userSearch = IconData(58745, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`user-star`](https://lucide.dev/icons/user-star) icon.
+  /// [![`user-star`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/user-star.svg)](https://lucide.dev/icons/user-star)
   static const userStar = IconData(59015, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`user-x`](https://lucide.dev/icons/user-x) icon.
+  /// [![`user-x`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/user-x.svg)](https://lucide.dev/icons/user-x)
   static const userX = IconData(57763, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`user`](https://lucide.dev/icons/user) icon.
+  /// [![`user`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/user.svg)](https://lucide.dev/icons/user)
   static const user = IconData(57759, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`users-round`](https://lucide.dev/icons/users-round) icon.
+  /// [![`users-round`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/users-round.svg)](https://lucide.dev/icons/users-round)
   static const usersRound = IconData(58478, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`users`](https://lucide.dev/icons/users) icon.
+  /// [![`users`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/users.svg)](https://lucide.dev/icons/users)
   static const users = IconData(57764, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`utensils-crossed`](https://lucide.dev/icons/utensils-crossed) icon.
+  /// [![`utensils-crossed`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/utensils-crossed.svg)](https://lucide.dev/icons/utensils-crossed)
   static const utensilsCrossed = IconData(58103, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`utensils`](https://lucide.dev/icons/utensils) icon.
+  /// [![`utensils`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/utensils.svg)](https://lucide.dev/icons/utensils)
   static const utensils = IconData(58102, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`utility-pole`](https://lucide.dev/icons/utility-pole) icon.
+  /// [![`utility-pole`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/utility-pole.svg)](https://lucide.dev/icons/utility-pole)
   static const utilityPole = IconData(58306, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`van`](https://lucide.dev/icons/van) icon.
+  /// [![`van`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/van.svg)](https://lucide.dev/icons/van)
   static const van = IconData(59053, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`variable`](https://lucide.dev/icons/variable) icon.
+  /// [![`variable`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/variable.svg)](https://lucide.dev/icons/variable)
   static const variable = IconData(58483, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`vault`](https://lucide.dev/icons/vault) icon.
+  /// [![`vault`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/vault.svg)](https://lucide.dev/icons/vault)
   static const vault = IconData(58767, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`vector-square`](https://lucide.dev/icons/vector-square) icon.
+  /// [![`vector-square`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/vector-square.svg)](https://lucide.dev/icons/vector-square)
   static const vectorSquare = IconData(59004, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`vegan`](https://lucide.dev/icons/vegan) icon.
+  /// [![`vegan`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/vegan.svg)](https://lucide.dev/icons/vegan)
   static const vegan = IconData(58269, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`venetian-mask`](https://lucide.dev/icons/venetian-mask) icon.
+  /// [![`venetian-mask`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/venetian-mask.svg)](https://lucide.dev/icons/venetian-mask)
   static const venetianMask = IconData(58026, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`venus-and-mars`](https://lucide.dev/icons/venus-and-mars) icon.
+  /// [![`venus-and-mars`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/venus-and-mars.svg)](https://lucide.dev/icons/venus-and-mars)
   static const venusAndMars = IconData(58950, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`venus`](https://lucide.dev/icons/venus) icon.
+  /// [![`venus`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/venus.svg)](https://lucide.dev/icons/venus)
   static const venus = IconData(58949, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`vibrate-off`](https://lucide.dev/icons/vibrate-off) icon.
+  /// [![`vibrate-off`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/vibrate-off.svg)](https://lucide.dev/icons/vibrate-off)
   static const vibrateOff = IconData(58013, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`vibrate`](https://lucide.dev/icons/vibrate) icon.
+  /// [![`vibrate`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/vibrate.svg)](https://lucide.dev/icons/vibrate)
   static const vibrate = IconData(57891, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`video-off`](https://lucide.dev/icons/video-off) icon.
+  /// [![`video-off`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/video-off.svg)](https://lucide.dev/icons/video-off)
   static const videoOff = IconData(57766, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`video`](https://lucide.dev/icons/video) icon.
+  /// [![`video`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/video.svg)](https://lucide.dev/icons/video)
   static const video = IconData(57765, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`videotape`](https://lucide.dev/icons/videotape) icon.
+  /// [![`videotape`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/videotape.svg)](https://lucide.dev/icons/videotape)
   static const videotape = IconData(58571, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`view`](https://lucide.dev/icons/view) icon.
+  /// [![`view`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/view.svg)](https://lucide.dev/icons/view)
   static const view = IconData(57767, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`voicemail`](https://lucide.dev/icons/voicemail) icon.
+  /// [![`voicemail`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/voicemail.svg)](https://lucide.dev/icons/voicemail)
   static const voicemail = IconData(57768, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`volleyball`](https://lucide.dev/icons/volleyball) icon.
+  /// [![`volleyball`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/volleyball.svg)](https://lucide.dev/icons/volleyball)
   static const volleyball = IconData(58927, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`volume-1`](https://lucide.dev/icons/volume-1) icon.
+  /// [![`volume-1`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/volume-1.svg)](https://lucide.dev/icons/volume-1)
   static const volume1 = IconData(57770, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`volume-2`](https://lucide.dev/icons/volume-2) icon.
+  /// [![`volume-2`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/volume-2.svg)](https://lucide.dev/icons/volume-2)
   static const volume2 = IconData(57771, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`volume-off`](https://lucide.dev/icons/volume-off) icon.
+  /// [![`volume-off`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/volume-off.svg)](https://lucide.dev/icons/volume-off)
   static const volumeOff = IconData(58918, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`volume-x`](https://lucide.dev/icons/volume-x) icon.
+  /// [![`volume-x`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/volume-x.svg)](https://lucide.dev/icons/volume-x)
   static const volumeX = IconData(57772, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`volume`](https://lucide.dev/icons/volume) icon.
+  /// [![`volume`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/volume.svg)](https://lucide.dev/icons/volume)
   static const volume = IconData(57769, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`vote`](https://lucide.dev/icons/vote) icon.
+  /// [![`vote`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/vote.svg)](https://lucide.dev/icons/vote)
   static const vote = IconData(58285, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`wallet-cards`](https://lucide.dev/icons/wallet-cards) icon.
+  /// [![`wallet-cards`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/wallet-cards.svg)](https://lucide.dev/icons/wallet-cards)
   static const walletCards = IconData(58572, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`wallet-minimal`](https://lucide.dev/icons/wallet-minimal) icon.
+  /// [![`wallet-minimal`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/wallet-minimal.svg)](https://lucide.dev/icons/wallet-minimal)
   static const walletMinimal = IconData(58573, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`wallet`](https://lucide.dev/icons/wallet) icon.
+  /// [![`wallet`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/wallet.svg)](https://lucide.dev/icons/wallet)
   static const wallet = IconData(57860, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`wallpaper`](https://lucide.dev/icons/wallpaper) icon.
+  /// [![`wallpaper`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/wallpaper.svg)](https://lucide.dev/icons/wallpaper)
   static const wallpaper = IconData(58443, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`wand-sparkles`](https://lucide.dev/icons/wand-sparkles) icon.
+  /// [![`wand-sparkles`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/wand-sparkles.svg)](https://lucide.dev/icons/wand-sparkles)
   static const wandSparkles = IconData(58199, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`wand`](https://lucide.dev/icons/wand) icon.
+  /// [![`wand`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/wand.svg)](https://lucide.dev/icons/wand)
   static const wand = IconData(57926, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`warehouse`](https://lucide.dev/icons/warehouse) icon.
+  /// [![`warehouse`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/warehouse.svg)](https://lucide.dev/icons/warehouse)
   static const warehouse = IconData(58342, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`washing-machine`](https://lucide.dev/icons/washing-machine) icon.
+  /// [![`washing-machine`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/washing-machine.svg)](https://lucide.dev/icons/washing-machine)
   static const washingMachine = IconData(58768, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`watch`](https://lucide.dev/icons/watch) icon.
+  /// [![`watch`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/watch.svg)](https://lucide.dev/icons/watch)
   static const watch = IconData(57773, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`waves-arrow-down`](https://lucide.dev/icons/waves-arrow-down) icon.
+  /// [![`waves-arrow-down`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/waves-arrow-down.svg)](https://lucide.dev/icons/waves-arrow-down)
   static const wavesArrowDown = IconData(59049, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`waves-arrow-up`](https://lucide.dev/icons/waves-arrow-up) icon.
+  /// [![`waves-arrow-up`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/waves-arrow-up.svg)](https://lucide.dev/icons/waves-arrow-up)
   static const wavesArrowUp = IconData(59050, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`waves-ladder`](https://lucide.dev/icons/waves-ladder) icon.
+  /// [![`waves-ladder`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/waves-ladder.svg)](https://lucide.dev/icons/waves-ladder)
   static const wavesLadder = IconData(58939, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`waves`](https://lucide.dev/icons/waves) icon.
+  /// [![`waves`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/waves.svg)](https://lucide.dev/icons/waves)
   static const waves = IconData(57987, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`waypoints`](https://lucide.dev/icons/waypoints) icon.
+  /// [![`waypoints`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/waypoints.svg)](https://lucide.dev/icons/waypoints)
   static const waypoints = IconData(58690, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`webcam`](https://lucide.dev/icons/webcam) icon.
+  /// [![`webcam`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/webcam.svg)](https://lucide.dev/icons/webcam)
   static const webcam = IconData(57861, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`webhook-off`](https://lucide.dev/icons/webhook-off) icon.
+  /// [![`webhook-off`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/webhook-off.svg)](https://lucide.dev/icons/webhook-off)
   static const webhookOff = IconData(58807, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`webhook`](https://lucide.dev/icons/webhook) icon.
+  /// [![`webhook`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/webhook.svg)](https://lucide.dev/icons/webhook)
   static const webhook = IconData(58228, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`weight-tilde`](https://lucide.dev/icons/weight-tilde) icon.
+  /// [![`weight-tilde`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/weight-tilde.svg)](https://lucide.dev/icons/weight-tilde)
   static const weightTilde = IconData(59054, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`weight`](https://lucide.dev/icons/weight) icon.
+  /// [![`weight`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/weight.svg)](https://lucide.dev/icons/weight)
   static const weight = IconData(58672, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`wheat-off`](https://lucide.dev/icons/wheat-off) icon.
+  /// [![`wheat-off`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/wheat-off.svg)](https://lucide.dev/icons/wheat-off)
   static const wheatOff = IconData(58271, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`wheat`](https://lucide.dev/icons/wheat) icon.
+  /// [![`wheat`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/wheat.svg)](https://lucide.dev/icons/wheat)
   static const wheat = IconData(58270, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`whole-word`](https://lucide.dev/icons/whole-word) icon.
+  /// [![`whole-word`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/whole-word.svg)](https://lucide.dev/icons/whole-word)
   static const wholeWord = IconData(58335, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`wifi-cog`](https://lucide.dev/icons/wifi-cog) icon.
+  /// [![`wifi-cog`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/wifi-cog.svg)](https://lucide.dev/icons/wifi-cog)
   static const wifiCog = IconData(58996, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`wifi-high`](https://lucide.dev/icons/wifi-high) icon.
+  /// [![`wifi-high`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/wifi-high.svg)](https://lucide.dev/icons/wifi-high)
   static const wifiHigh = IconData(58871, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`wifi-low`](https://lucide.dev/icons/wifi-low) icon.
+  /// [![`wifi-low`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/wifi-low.svg)](https://lucide.dev/icons/wifi-low)
   static const wifiLow = IconData(58872, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`wifi-off`](https://lucide.dev/icons/wifi-off) icon.
+  /// [![`wifi-off`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/wifi-off.svg)](https://lucide.dev/icons/wifi-off)
   static const wifiOff = IconData(57775, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`wifi-pen`](https://lucide.dev/icons/wifi-pen) icon.
+  /// [![`wifi-pen`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/wifi-pen.svg)](https://lucide.dev/icons/wifi-pen)
   static const wifiPen = IconData(58979, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`wifi-sync`](https://lucide.dev/icons/wifi-sync) icon.
+  /// [![`wifi-sync`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/wifi-sync.svg)](https://lucide.dev/icons/wifi-sync)
   static const wifiSync = IconData(59009, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`wifi-zero`](https://lucide.dev/icons/wifi-zero) icon.
+  /// [![`wifi-zero`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/wifi-zero.svg)](https://lucide.dev/icons/wifi-zero)
   static const wifiZero = IconData(58873, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`wifi`](https://lucide.dev/icons/wifi) icon.
+  /// [![`wifi`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/wifi.svg)](https://lucide.dev/icons/wifi)
   static const wifi = IconData(57774, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`wind-arrow-down`](https://lucide.dev/icons/wind-arrow-down) icon.
+  /// [![`wind-arrow-down`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/wind-arrow-down.svg)](https://lucide.dev/icons/wind-arrow-down)
   static const windArrowDown = IconData(58929, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`wind`](https://lucide.dev/icons/wind) icon.
+  /// [![`wind`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/wind.svg)](https://lucide.dev/icons/wind)
   static const wind = IconData(57776, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`wine-off`](https://lucide.dev/icons/wine-off) icon.
+  /// [![`wine-off`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/wine-off.svg)](https://lucide.dev/icons/wine-off)
   static const wineOff = IconData(58272, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`wine`](https://lucide.dev/icons/wine) icon.
+  /// [![`wine`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/wine.svg)](https://lucide.dev/icons/wine)
   static const wine = IconData(58104, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`workflow`](https://lucide.dev/icons/workflow) icon.
+  /// [![`workflow`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/workflow.svg)](https://lucide.dev/icons/workflow)
   static const workflow = IconData(58405, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`worm`](https://lucide.dev/icons/worm) icon.
+  /// [![`worm`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/worm.svg)](https://lucide.dev/icons/worm)
   static const worm = IconData(58842, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`wrench`](https://lucide.dev/icons/wrench) icon.
+  /// [![`wrench`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/wrench.svg)](https://lucide.dev/icons/wrench)
   static const wrench = IconData(57777, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`x`](https://lucide.dev/icons/x) icon.
+  /// [![`x`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/x.svg)](https://lucide.dev/icons/x)
   static const x = IconData(57778, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`youtube`](https://lucide.dev/icons/youtube) icon.
+  /// [![`youtube`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/youtube.svg)](https://lucide.dev/icons/youtube)
   static const youtube = IconData(57779, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`zap-off`](https://lucide.dev/icons/zap-off) icon.
+  /// [![`zap-off`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/zap-off.svg)](https://lucide.dev/icons/zap-off)
   static const zapOff = IconData(57781, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`zap`](https://lucide.dev/icons/zap) icon.
+  /// [![`zap`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/zap.svg)](https://lucide.dev/icons/zap)
   static const zap = IconData(57780, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`zoom-in`](https://lucide.dev/icons/zoom-in) icon.
+  /// [![`zoom-in`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/zoom-in.svg)](https://lucide.dev/icons/zoom-in)
   static const zoomIn = IconData(57782, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
-  /// A [`zoom-out`](https://lucide.dev/icons/zoom-out) icon.
+  /// [![`zoom-out`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.562.0/icons/zoom-out.svg)](https://lucide.dev/icons/zoom-out)
   static const zoomOut = IconData(57783, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 }

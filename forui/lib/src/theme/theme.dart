@@ -5,7 +5,10 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 
-/// Applies a theme to descendant widgets.
+part 'theme.design.dart';
+
+/// Applies a theme to descendant widgets with animated transitions over a given duration whenever the provided
+/// [FThemeData] changes.
 ///
 /// A theme configures the colors and typographic choices of Forui widgets. The actual configuration is stored in
 /// a [FThemeData]. Descendant widgets obtain the current theme's [FThemeData] via either [FThemeBuildContext.theme],
@@ -32,9 +35,9 @@ import 'package:forui/forui.dart';
 /// ```
 ///
 /// See:
-/// * [FAnimatedTheme] which is an animated version of [FTheme].
+/// * [FBasicTheme], the non-animated theme widget wrapped by this widget.
 /// * [FThemeData] which describes the actual configuration of a theme.
-class FTheme extends StatelessWidget {
+class FTheme extends ImplicitlyAnimatedWidget {
   /// Returns the current [FThemeData], or `FThemes.zinc.light` if there is no ancestor [FTheme].
   ///
   /// It is recommended to use the terser [FThemeBuildContext.theme] getter instead.
@@ -83,7 +86,10 @@ class FTheme extends StatelessWidget {
     return theme?.data ?? FThemes.zinc.light;
   }
 
-  /// The color and typography values for descendant Forui widgets.
+  /// Motion-related properties for the animation.
+  final FThemeMotion motion;
+
+  /// The theme.
   final FThemeData data;
 
   /// The text direction. Defaults to the text direction inherited from its nearest ancestor.
@@ -92,49 +98,67 @@ class FTheme extends StatelessWidget {
   /// The widget below this widget in the tree.
   final Widget child;
 
-  /// Creates a [FTheme] that applies [data] to all descendant widgets in [child].
-  const FTheme({required this.data, required this.child, this.textDirection, super.key});
+  /// Creates an animated theme.
+  FTheme({
+    required this.data,
+    required this.child,
+    this.textDirection,
+    this.motion = const FThemeMotion(),
+    super.onEnd,
+    super.key,
+  }) : super(duration: motion.duration, curve: motion.curve);
 
   @override
-  Widget build(BuildContext context) => _InheritedTheme(
-    data: data,
-    child: Directionality(
-      textDirection: textDirection ?? Directionality.maybeOf(context) ?? .ltr,
-      child: DefaultTextStyle(
-        style: data.typography.base.copyWith(
-          fontFamily: data.typography.defaultFontFamily,
-          color: data.colors.foreground,
-        ),
-        child: child,
-      ),
-    ),
-  );
+  AnimatedWidgetBaseState<FTheme> createState() => _State();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('data', data, showName: false))
+      ..add(DiagnosticsProperty('motion', motion))
+      ..add(DiagnosticsProperty('data', data))
       ..add(EnumProperty('textDirection', textDirection));
   }
 }
 
-class _InheritedTheme extends InheritedTheme {
-  final FThemeData data;
-
-  const _InheritedTheme({required this.data, required super.child});
+class _State extends AnimatedWidgetBaseState<FTheme> {
+  _Tween? _tween;
 
   @override
-  Widget wrap(BuildContext context, Widget child) => _InheritedTheme(data: data, child: child);
-
-  @override
-  bool updateShouldNotify(covariant _InheritedTheme old) => data != old.data;
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('data', data));
+  void forEachTween(TweenVisitor<dynamic> visitor) {
+    _tween = visitor(_tween, widget.data, (value) => _Tween(begin: value as FThemeData))! as _Tween;
   }
+
+  @override
+  Widget build(BuildContext context) => FBasicTheme(
+    data: _tween!.evaluate(animation),
+    textDirection: widget.textDirection ?? Directionality.maybeOf(context) ?? .ltr,
+    child: widget.child,
+  );
+}
+
+class _Tween extends Tween<FThemeData> {
+  _Tween({super.begin});
+
+  @override
+  FThemeData lerp(double t) => FThemeData.lerp(begin!, end!, t);
+}
+
+/// The motion-related properties for [FTheme].
+class FThemeMotion with Diagnosticable, _$FThemeMotionFunctions {
+  /// The animation's duration. Defaults to 200 milliseconds.
+  @override
+  final Duration duration;
+
+  /// The animation's curve. Defaults to [Curves.linear].
+  ///
+  /// We recommend [Curves.linear], especially if only the theme's colors are changing.
+  /// See https://pow.rs/blog/animation-easings/ for more information.
+  @override
+  final Curve curve;
+
+  /// Creates a [FThemeMotion].
+  const FThemeMotion({this.duration = const Duration(milliseconds: 200), this.curve = Curves.linear});
 }
 
 /// Provides functions for accessing the current [FThemeData].
@@ -180,4 +204,64 @@ extension FThemeBuildContext on BuildContext {
   ///  }
   /// ```
   FThemeData get theme => FTheme.of(this);
+}
+
+/// Applies a theme to descendant widgets.
+///
+/// See:
+/// * [FTheme] which is an animated version of this widget.
+/// * [FThemeData] which describes the actual configuration of a theme.
+class FBasicTheme extends StatelessWidget {
+  /// The color and typography values for descendant Forui widgets.
+  final FThemeData data;
+
+  /// The text direction. Defaults to the text direction inherited from its nearest ancestor.
+  final TextDirection? textDirection;
+
+  /// The widget below this widget in the tree.
+  final Widget child;
+
+  /// Creates a [FTheme] that applies [data] to all descendant widgets in [child].
+  const FBasicTheme({required this.data, required this.child, this.textDirection, super.key});
+
+  @override
+  Widget build(BuildContext context) => _InheritedTheme(
+    data: data,
+    child: Directionality(
+      textDirection: textDirection ?? Directionality.maybeOf(context) ?? .ltr,
+      child: DefaultTextStyle(
+        style: data.typography.base.copyWith(
+          fontFamily: data.typography.defaultFontFamily,
+          color: data.colors.foreground,
+        ),
+        child: child,
+      ),
+    ),
+  );
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('data', data, showName: false))
+      ..add(EnumProperty('textDirection', textDirection));
+  }
+}
+
+class _InheritedTheme extends InheritedTheme {
+  final FThemeData data;
+
+  const _InheritedTheme({required this.data, required super.child});
+
+  @override
+  Widget wrap(BuildContext context, Widget child) => _InheritedTheme(data: data, child: child);
+
+  @override
+  bool updateShouldNotify(covariant _InheritedTheme old) => data != old.data;
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('data', data));
+  }
 }

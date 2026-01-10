@@ -2,10 +2,12 @@
 // {@snippet}
 
 import 'package:flutter/material.dart';
+
 import 'package:forui/forui.dart';
 
-// {@highlight}
 import 'theme/theme.dart';
+
+// {@highlight}
 // {@endhighlight}
 
 // {@endsnippet}
@@ -31,7 +33,7 @@ class Application extends StatelessWidget {
       localizationsDelegates: FLocalizations.localizationsDelegates,
       supportedLocales: FLocalizations.supportedLocales,
       // {@highlight}
-      builder: (_, child) => FAnimatedTheme(data: theme, child: child!),
+      builder: (_, child) => FTheme(data: theme, child: child!),
       theme: theme.toApproximateMaterialTheme(),
       // {@endhighlight}
       home: const FScaffold(

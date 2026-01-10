@@ -1,10 +1,13 @@
 // ignore_for_file: always_use_package_imports, unused_import
 // {@snippet}
+
 import 'package:flutter/material.dart';
+
 import 'package:forui/forui.dart';
 
-// {@highlight}
 import 'accordion_style.dart';
+
+// {@highlight}
 // {@endhighlight}
 
 // {@endsnippet}

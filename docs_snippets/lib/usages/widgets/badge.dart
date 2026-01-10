@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_function_declarations_over_variables
 
 import 'package:flutter/widgets.dart';
+
 import 'package:forui/forui.dart';
 
 final badge = FBadge(

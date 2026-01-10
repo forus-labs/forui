@@ -40,7 +40,7 @@ class Application extends StatelessWidget {
       // There is a known issue with implicitly animated widgets where their transition occurs AFTER the theme's.
       // See https://github.com/duobaseio/forui/issues/670.
       theme: theme.toApproximateMaterialTheme(),
-      builder: (_, child) => FAnimatedTheme(data: theme, child: child!),
+      builder: (_, child) => FTheme(data: theme, child: child!),
       // You can also replace FScaffold with Material Scaffold.
       home: const FScaffold(
         // TODO: replace with your widget.

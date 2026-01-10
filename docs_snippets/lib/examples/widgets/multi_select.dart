@@ -2,9 +2,9 @@ import 'package:flutter/widgets.dart';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:forui/forui.dart';
-import 'package:docs_snippets/main.dart';
 
 import 'package:docs_snippets/example.dart';
+import 'package:docs_snippets/main.dart';
 
 const fruits = [
   'Apple',
@@ -232,7 +232,7 @@ class AsyncLoadingMultiSelectPage extends Example {
     // {@highlight}
     contentLoadingBuilder: (context, style) => Padding(
       padding: const .all(8.0),
-      child: Text('Here be dragons...', style: style.textFieldStyle.contentTextStyle.resolve({})),
+      child: Text('Here be dragons...', style: style.fieldStyle.contentTextStyle.resolve({})),
     ),
     // {@endhighlight}
     contentBuilder: (context, _, fruits) => [for (final fruit in fruits) .item(title: Text(fruit), value: fruit)],
@@ -255,7 +255,7 @@ class AsyncErrorMultiSelectPage extends Example {
     contentBuilder: (context, _, fruits) => [for (final fruit in fruits) .item(title: Text(fruit), value: fruit)],
     // {@highlight}
     contentErrorBuilder: (context, error, trace) {
-      final style = context.theme.selectStyle.iconStyle;
+      final style = context.theme.selectStyle.fieldStyle.iconStyle.resolve({});
       return Padding(
         padding: const .all(8.0),
         child: Icon(FIcons.messageCircleX, size: style.size, color: style.color),
