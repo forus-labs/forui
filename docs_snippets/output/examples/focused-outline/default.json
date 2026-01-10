@@ -1,0 +1,300 @@
+{
+  "text": "@override\nWidget build(BuildContext context) => FFocusedOutline(\n  focused: true,\n  child: Container(\n    decoration: BoxDecoration(\n      color: context.theme.colors.primary,\n      borderRadius: .circular(8),\n    ),\n    padding: const .symmetric(vertical: 8.0, horizontal: 12),\n    child: Text(\n      'Focused',\n      style: context.theme.typography.base.copyWith(\n        color: context.theme.colors.primaryForeground,\n      ),\n    ),\n  ),\n);\n",
+  "highlights": [],
+  "links": [
+    {
+      "offset": 48,
+      "length": 15,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FFocusedOutline/FFocusedOutline.html"
+    },
+    {
+      "offset": 67,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FFocusedOutline/focused.html"
+    },
+    {
+      "offset": 84,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FFocusedOutline/FFocusedOutline.html"
+    },
+    {
+      "offset": 167,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors/primary.html"
+    },
+    {
+      "offset": 160,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/colors.html"
+    },
+    {
+      "offset": 154,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext/theme.html"
+    },
+    {
+      "offset": 351,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FTypography/base.html"
+    },
+    {
+      "offset": 340,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/typography.html"
+    },
+    {
+      "offset": 334,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext/theme.html"
+    },
+    {
+      "offset": 402,
+      "length": 17,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors/primaryForeground.html"
+    },
+    {
+      "offset": 395,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/colors.html"
+    },
+    {
+      "offset": 389,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext/theme.html"
+    }
+  ],
+  "tooltips": [
+    {
+      "offset": 48,
+      "length": 15,
+      "snippet": {
+        "text": "FFocusedOutline({\n  required bool focused,\n  required Widget? child,\n  FFocusedOutlineStyle Function(FFocusedOutlineStyle)? style,\n  Key? key,\n})\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FFocusedOutline/FFocusedOutline.html"
+          },
+          {
+            "offset": 34,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FFocusedOutline/FFocusedOutline.html"
+          },
+          {
+            "offset": 62,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FFocusedOutline/FFocusedOutline.html"
+          },
+          {
+            "offset": 124,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FFocusedOutline/FFocusedOutline.html"
+          },
+          {
+            "offset": 71,
+            "length": 20,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FFocusedOutlineStyle-class.html"
+          },
+          {
+            "offset": 101,
+            "length": 20,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FFocusedOutlineStyle-class.html"
+          },
+          {
+            "offset": 138,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FFocusedOutline/FFocusedOutline.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FFocusedOutline",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FFocusedOutline-class.html"
+        }
+      }
+    },
+    {
+      "offset": 67,
+      "length": 8,
+      "snippet": {
+        "text": "{required bool focused}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 84,
+      "length": 6,
+      "snippet": {
+        "text": "{required Widget? child}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 167,
+      "length": 7,
+      "snippet": {
+        "text": "Color primary",
+        "highlights": [],
+        "links": [],
+        "tooltips": [],
+        "container": {
+          "name": "FColors",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors-class.html"
+        }
+      }
+    },
+    {
+      "offset": 160,
+      "length": 6,
+      "snippet": {
+        "text": "FColors colors",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors-class.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FThemeData",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+        }
+      }
+    },
+    {
+      "offset": 154,
+      "length": 5,
+      "snippet": {
+        "text": "FThemeData get theme",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FThemeBuildContext",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext.html"
+        }
+      }
+    },
+    {
+      "offset": 351,
+      "length": 4,
+      "snippet": {
+        "text": "TextStyle base",
+        "highlights": [],
+        "links": [],
+        "tooltips": [],
+        "container": {
+          "name": "FTypography",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FTypography-class.html"
+        }
+      }
+    },
+    {
+      "offset": 340,
+      "length": 10,
+      "snippet": {
+        "text": "FTypography typography",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FTypography-class.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FThemeData",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+        }
+      }
+    },
+    {
+      "offset": 334,
+      "length": 5,
+      "snippet": {
+        "text": "FThemeData get theme",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FThemeBuildContext",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext.html"
+        }
+      }
+    },
+    {
+      "offset": 402,
+      "length": 17,
+      "snippet": {
+        "text": "Color primaryForeground",
+        "highlights": [],
+        "links": [],
+        "tooltips": [],
+        "container": {
+          "name": "FColors",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors-class.html"
+        }
+      }
+    },
+    {
+      "offset": 395,
+      "length": 6,
+      "snippet": {
+        "text": "FColors colors",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors-class.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FThemeData",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+        }
+      }
+    },
+    {
+      "offset": 389,
+      "length": 5,
+      "snippet": {
+        "text": "FThemeData get theme",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FThemeBuildContext",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext.html"
+        }
+      }
+    }
+  ]
+}

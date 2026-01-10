@@ -1,0 +1,356 @@
+{
+  "text": "FAccordion(\n  style: (style) => style.copyWith(\n    focusedOutlineStyle: (style) =>\n        style.copyWith(color: context.theme.colors.background),\n  ),\n  children: const [],\n);\n",
+  "highlights": [],
+  "links": [
+    {
+      "offset": 0,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordion/FAccordion.html"
+    },
+    {
+      "offset": 14,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordion/style.html"
+    },
+    {
+      "offset": 38,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/$FAccordionStyleTransformations/copyWith.html"
+    },
+    {
+      "offset": 52,
+      "length": 19,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/$FAccordionStyleTransformations/copyWith.html"
+    },
+    {
+      "offset": 98,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/$FFocusedOutlineStyleTransformations/copyWith.html"
+    },
+    {
+      "offset": 107,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/$FFocusedOutlineStyleTransformations/copyWith.html"
+    },
+    {
+      "offset": 135,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors/background.html"
+    },
+    {
+      "offset": 128,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/colors.html"
+    },
+    {
+      "offset": 122,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext/theme.html"
+    },
+    {
+      "offset": 155,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordion/children.html"
+    }
+  ],
+  "tooltips": [
+    {
+      "offset": 0,
+      "length": 10,
+      "snippet": {
+        "text": "FAccordion({\n  required List<Widget> children,\n  FAccordionControl control = const .managed(),\n  FAccordionStyle Function(FAccordionStyle)? style,\n  Key? key,\n})\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordion/FAccordion.html"
+          },
+          {
+            "offset": 37,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordion/FAccordion.html"
+          },
+          {
+            "offset": 67,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordion/FAccordion.html"
+          },
+          {
+            "offset": 49,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionControl-class.html"
+          },
+          {
+            "offset": 84,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionControl/FAccordionControl.managed.html"
+          },
+          {
+            "offset": 140,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordion/FAccordion.html"
+          },
+          {
+            "offset": 97,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionStyle-class.html"
+          },
+          {
+            "offset": 122,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionStyle-class.html"
+          },
+          {
+            "offset": 154,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordion/FAccordion.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FAccordion",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordion-class.html"
+        }
+      }
+    },
+    {
+      "offset": 14,
+      "length": 6,
+      "snippet": {
+        "text": "{FAccordionStyle Function(FAccordionStyle)? style}",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 1,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionStyle-class.html"
+          },
+          {
+            "offset": 26,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionStyle-class.html"
+          }
+        ],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 22,
+      "length": 5,
+      "snippet": {
+        "text": "FAccordionStyle style",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionStyle-class.html"
+          }
+        ],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 38,
+      "length": 8,
+      "snippet": {
+        "text": "FAccordionStyle copyWith({\n  FWidgetStateMap<TextStyle>? titleTextStyle,\n  TextStyle? childTextStyle,\n  EdgeInsetsGeometry? titlePadding,\n  EdgeInsetsGeometry? childPadding,\n  FWidgetStateMap<IconThemeData>? iconStyle,\n  FFocusedOutlineStyle Function(FFocusedOutlineStyle)? focusedOutlineStyle,\n  FDividerStyle Function(FDividerStyle)? dividerStyle,\n  FTappableStyle Function(FTappableStyle)? tappableStyle,\n  FAccordionMotion Function(FAccordionMotion)? motion,\n})",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionStyle-class.html"
+          },
+          {
+            "offset": 29,
+            "length": 27,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStateMap-class.html"
+          },
+          {
+            "offset": 176,
+            "length": 31,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStateMap-class.html"
+          },
+          {
+            "offset": 221,
+            "length": 20,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FFocusedOutlineStyle-class.html"
+          },
+          {
+            "offset": 251,
+            "length": 20,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FFocusedOutlineStyle-class.html"
+          },
+          {
+            "offset": 297,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.divider/FDividerStyle-class.html"
+          },
+          {
+            "offset": 320,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.divider/FDividerStyle-class.html"
+          },
+          {
+            "offset": 352,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappableStyle-class.html"
+          },
+          {
+            "offset": 376,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappableStyle-class.html"
+          },
+          {
+            "offset": 410,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionMotion-class.html"
+          },
+          {
+            "offset": 436,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionMotion-class.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "$FAccordionStyleTransformations",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/$FAccordionStyleTransformations.html"
+        }
+      }
+    },
+    {
+      "offset": 52,
+      "length": 20,
+      "snippet": {
+        "text": "{\n  FFocusedOutlineStyle Function(FFocusedOutlineStyle)? focusedOutlineStyle,\n}",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 4,
+            "length": 20,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FFocusedOutlineStyle-class.html"
+          },
+          {
+            "offset": 34,
+            "length": 20,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FFocusedOutlineStyle-class.html"
+          }
+        ],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 74,
+      "length": 5,
+      "snippet": {
+        "text": "FFocusedOutlineStyle style",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 20,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FFocusedOutlineStyle-class.html"
+          }
+        ],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 98,
+      "length": 8,
+      "snippet": {
+        "text": "FFocusedOutlineStyle copyWith({\n  Color? color,\n  BorderRadiusGeometry? borderRadius,\n  double? width,\n  double? spacing,\n})",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 20,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FFocusedOutlineStyle-class.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "$FFocusedOutlineStyleTransformations",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/$FFocusedOutlineStyleTransformations.html"
+        }
+      }
+    },
+    {
+      "offset": 107,
+      "length": 6,
+      "snippet": {
+        "text": "{Color? color}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 135,
+      "length": 10,
+      "snippet": {
+        "text": "Color background",
+        "highlights": [],
+        "links": [],
+        "tooltips": [],
+        "container": {
+          "name": "FColors",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors-class.html"
+        }
+      }
+    },
+    {
+      "offset": 128,
+      "length": 6,
+      "snippet": {
+        "text": "FColors colors",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors-class.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FThemeData",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+        }
+      }
+    },
+    {
+      "offset": 122,
+      "length": 5,
+      "snippet": {
+        "text": "FThemeData get theme",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FThemeBuildContext",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext.html"
+        }
+      }
+    },
+    {
+      "offset": 155,
+      "length": 9,
+      "snippet": {
+        "text": "{required List<Widget> children}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    }
+  ]
+}

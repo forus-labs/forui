@@ -1,0 +1,607 @@
+{
+  "text": "FTappable(\n  {{Core}}\n  {{Accessibility}}\n  {{Callbacks}}\n)",
+  "highlights": [],
+  "links": [
+    {
+      "offset": 0,
+      "length": 9,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappable/FTappable.html"
+    }
+  ],
+  "tooltips": [
+    {
+      "offset": 0,
+      "length": 9,
+      "snippet": {
+        "text": "FTappable({\n  FTappableStyle Function(FTappableStyle)? style,\n  FFocusedOutlineStyle Function(FFocusedOutlineStyle)? focusedOutlineStyle,\n  String? semanticsLabel,\n  bool excludeSemantics,\n  bool autofocus,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  void Function(bool)? onHoverChange,\n  void Function(FWidgetStatesDelta)? onStateChange,\n  bool selected,\n  HitTestBehavior behavior,\n  void Function()? onPress,\n  void Function()? onLongPress,\n  void Function()? onSecondaryPress,\n  void Function()? onSecondaryLongPress,\n  Map<ShortcutActivator, Intent>? shortcuts,\n  Map<Type, Action<Intent>>? actions,\n  Widget Function(BuildContext, Set<WidgetState>, Widget?) builder,\n  Widget? child,\n  Key? key,\n})\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappable/FTappable.html"
+          },
+          {
+            "offset": 55,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappable/FTappable.html"
+          },
+          {
+            "offset": 14,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappableStyle-class.html"
+          },
+          {
+            "offset": 38,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappableStyle-class.html"
+          },
+          {
+            "offset": 117,
+            "length": 19,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappable/FTappable.html"
+          },
+          {
+            "offset": 64,
+            "length": 20,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FFocusedOutlineStyle-class.html"
+          },
+          {
+            "offset": 94,
+            "length": 20,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FFocusedOutlineStyle-class.html"
+          },
+          {
+            "offset": 148,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappable/FTappable.html"
+          },
+          {
+            "offset": 171,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappable/FTappable.html"
+          },
+          {
+            "offset": 196,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappable/FTappable.html"
+          },
+          {
+            "offset": 220,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappable/FTappable.html"
+          },
+          {
+            "offset": 254,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappable/FTappable.html"
+          },
+          {
+            "offset": 292,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappable/FTappable.html"
+          },
+          {
+            "offset": 344,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappable/FTappable.html"
+          },
+          {
+            "offset": 323,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStatesDelta-class.html"
+          },
+          {
+            "offset": 366,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappable/FTappable.html"
+          },
+          {
+            "offset": 394,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappable/FTappable.html"
+          },
+          {
+            "offset": 423,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappable/FTappable.html"
+          },
+          {
+            "offset": 451,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappable/FTappable.html"
+          },
+          {
+            "offset": 483,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappable/FTappable.html"
+          },
+          {
+            "offset": 520,
+            "length": 20,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappable/FTappable.html"
+          },
+          {
+            "offset": 576,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappable/FTappable.html"
+          },
+          {
+            "offset": 616,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappable/FTappable.html"
+          },
+          {
+            "offset": 684,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappable/FTappable.html"
+          },
+          {
+            "offset": 703,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappable/FTappable.html"
+          },
+          {
+            "offset": 717,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappable/FTappable.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FTappable",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappable-class.html"
+        }
+      }
+    }
+  ],
+  "categories": {
+    "Core": [
+      {
+        "name": "Core",
+        "description": "",
+        "text": "style: (style) => style,\n  focusedOutlineStyle: (style) => style,\n  selected: false,\n  behavior: .translucent,\n  builder: (context, states, child) => child!,\n  child: const Text('Tap me'),",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappable/style.html"
+          },
+          {
+            "offset": 27,
+            "length": 19,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappable/focusedOutlineStyle.html"
+          },
+          {
+            "offset": 68,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappable/selected.html"
+          },
+          {
+            "offset": 87,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappable/behavior.html"
+          },
+          {
+            "offset": 113,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappable/builder.html"
+          },
+          {
+            "offset": 160,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappable/child.html"
+          }
+        ],
+        "tooltips": [
+          {
+            "offset": 0,
+            "length": 6,
+            "snippet": {
+              "text": "{FTappableStyle Function(FTappableStyle)? style}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 1,
+                  "length": 14,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappableStyle-class.html"
+                },
+                {
+                  "offset": 25,
+                  "length": 14,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappableStyle-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 8,
+            "length": 5,
+            "snippet": {
+              "text": "FTappableStyle style",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 14,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappableStyle-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 27,
+            "length": 20,
+            "snippet": {
+              "text": "{\n  FFocusedOutlineStyle Function(FFocusedOutlineStyle)? focusedOutlineStyle,\n}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 4,
+                  "length": 20,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FFocusedOutlineStyle-class.html"
+                },
+                {
+                  "offset": 34,
+                  "length": 20,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FFocusedOutlineStyle-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 49,
+            "length": 5,
+            "snippet": {
+              "text": "FFocusedOutlineStyle style",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 20,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FFocusedOutlineStyle-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 68,
+            "length": 9,
+            "snippet": {
+              "text": "{bool selected}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 87,
+            "length": 9,
+            "snippet": {
+              "text": "{HitTestBehavior behavior}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 113,
+            "length": 8,
+            "snippet": {
+              "text": "{Widget Function(BuildContext, Set<WidgetState>, Widget?) builder}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 123,
+            "length": 7,
+            "snippet": {
+              "text": "BuildContext context",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 132,
+            "length": 6,
+            "snippet": {
+              "text": "Set<WidgetState> states",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 140,
+            "length": 5,
+            "snippet": {
+              "text": "Widget? child",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 160,
+            "length": 6,
+            "snippet": {
+              "text": "{Widget? child}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          }
+        ]
+      }
+    ],
+    "Accessibility": [
+      {
+        "name": "Accessibility",
+        "description": "",
+        "text": "autofocus: false,\n  focusNode: null,\n  onFocusChange: (focused) {},\n  semanticsLabel: 'Tappable button',\n  excludeSemantics: false,\n  shortcuts: null,\n  actions: null,",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappable/autofocus.html"
+          },
+          {
+            "offset": 20,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappable/focusNode.html"
+          },
+          {
+            "offset": 39,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappable/onFocusChange.html"
+          },
+          {
+            "offset": 70,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappable/semanticsLabel.html"
+          },
+          {
+            "offset": 107,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappable/excludeSemantics.html"
+          },
+          {
+            "offset": 134,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappable/shortcuts.html"
+          },
+          {
+            "offset": 153,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappable/actions.html"
+          }
+        ],
+        "tooltips": [
+          {
+            "offset": 0,
+            "length": 10,
+            "snippet": {
+              "text": "{bool autofocus}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 20,
+            "length": 10,
+            "snippet": {
+              "text": "{FocusNode? focusNode}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 39,
+            "length": 14,
+            "snippet": {
+              "text": "{void Function(bool)? onFocusChange}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 55,
+            "length": 7,
+            "snippet": {
+              "text": "bool focused",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 70,
+            "length": 15,
+            "snippet": {
+              "text": "{String? semanticsLabel}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 107,
+            "length": 17,
+            "snippet": {
+              "text": "{bool excludeSemantics}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 134,
+            "length": 10,
+            "snippet": {
+              "text": "{Map<ShortcutActivator, Intent>? shortcuts}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 153,
+            "length": 8,
+            "snippet": {
+              "text": "{Map<Type, Action<Intent>>? actions}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          }
+        ]
+      }
+    ],
+    "Callbacks": [
+      {
+        "name": "Callbacks",
+        "description": "",
+        "text": "onPress: () {},\n  onLongPress: () {},\n  onSecondaryPress: () {},\n  onSecondaryLongPress: () {},\n  onHoverChange: (hovered) {},\n  onStateChange: (delta) {},",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappable/onPress.html"
+          },
+          {
+            "offset": 18,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappable/onLongPress.html"
+          },
+          {
+            "offset": 40,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappable/onSecondaryPress.html"
+          },
+          {
+            "offset": 67,
+            "length": 20,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappable/onSecondaryLongPress.html"
+          },
+          {
+            "offset": 98,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappable/onHoverChange.html"
+          },
+          {
+            "offset": 129,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappable/onStateChange.html"
+          }
+        ],
+        "tooltips": [
+          {
+            "offset": 0,
+            "length": 8,
+            "snippet": {
+              "text": "{void Function()? onPress}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 18,
+            "length": 12,
+            "snippet": {
+              "text": "{void Function()? onLongPress}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 40,
+            "length": 17,
+            "snippet": {
+              "text": "{void Function()? onSecondaryPress}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 67,
+            "length": 21,
+            "snippet": {
+              "text": "{void Function()? onSecondaryLongPress}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 98,
+            "length": 14,
+            "snippet": {
+              "text": "{void Function(bool)? onHoverChange}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 114,
+            "length": 7,
+            "snippet": {
+              "text": "bool hovered",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 129,
+            "length": 14,
+            "snippet": {
+              "text": "{void Function(FWidgetStatesDelta)? onStateChange}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 15,
+                  "length": 18,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStatesDelta-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 145,
+            "length": 5,
+            "snippet": {
+              "text": "FWidgetStatesDelta delta",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 18,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStatesDelta-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,847 @@
+{
+  "text": "const fruits = [\n  'Apple',\n  'Banana',\n  'Orange',\n  'Grape',\n  'Strawberry',\n  'Pineapple',\n];\n\nclass AsyncErrorAutocompleteExample extends StatelessWidget {\n  @override\n  Widget build(BuildContext _) => FAutocomplete.builder(\n    hint: 'Type to search fruits',\n    filter: (query) async {\n      await Future.delayed(const Duration(seconds: 3));\n      throw StateError('Error loading data');\n    },\n    contentBuilder: (context, query, values) => [\n      for (final fruit in values) .item(value: fruit),\n    ],\n    contentErrorBuilder: (context, error, trace) => Padding(\n      padding: const .all(14.0),\n      child: Icon(\n        FIcons.circleX,\n        size: 15,\n        color: context.theme.colors.primary,\n      ),\n    ),\n  );\n}\n",
+  "highlights": [
+    {
+      "start": 21,
+      "end": 28
+    }
+  ],
+  "links": [
+    {
+      "offset": 206,
+      "length": 21,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/FAutocomplete.builder.html"
+    },
+    {
+      "offset": 233,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/hint.html"
+    },
+    {
+      "offset": 268,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/filter.html"
+    },
+    {
+      "offset": 405,
+      "length": 14,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/contentBuilder.html"
+    },
+    {
+      "offset": 486,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocompleteItemMixin/item.html"
+    },
+    {
+      "offset": 491,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocompleteItemMixin/item.html"
+    },
+    {
+      "offset": 517,
+      "length": 19,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/contentErrorBuilder.html"
+    },
+    {
+      "offset": 634,
+      "length": 14,
+      "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/circleX.html"
+    },
+    {
+      "offset": 704,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors/primary.html"
+    },
+    {
+      "offset": 697,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/colors.html"
+    },
+    {
+      "offset": 691,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext/theme.html"
+    }
+  ],
+  "tooltips": [
+    {
+      "offset": 206,
+      "length": 21,
+      "snippet": {
+        "text": "FAutocomplete.builder({\n  required FutureOr<Iterable<String>> Function(String) filter,\n  required List<FAutocompleteItemMixin> Function(\n    BuildContext,\n    String,\n    Iterable<String>,\n  )\n  contentBuilder,\n  FAutocompleteControl control = const .managed(),\n  FPopoverControl popoverControl = const .managed(),\n  FAutocompleteStyle Function(FAutocompleteStyle)? style,\n  Widget? label,\n  String? hint,\n  Widget? description,\n  TextMagnifierConfiguration? magnifierConfiguration,\n  Object groupId = EditableText,\n  FocusNode? focusNode,\n  TextInputType? keyboardType,\n  TextInputAction? textInputAction,\n  TextCapitalization textCapitalization = .none,\n  TextAlign textAlign = .start,\n  TextAlignVertical? textAlignVertical,\n  TextDirection? textDirection,\n  void Function()? contentOnTapHide,\n  bool autofocus = false,\n  WidgetStatesController? statesController,\n  String obscuringCharacter = '•',\n  bool obscureText = false,\n  bool autocorrect = true,\n  SmartDashesType? smartDashesType,\n  SmartQuotesType? smartQuotesType,\n  bool enableSuggestions = true,\n  int? minLines,\n  int? maxLines = 1,\n  bool expands = false,\n  bool readOnly = false,\n  bool? showCursor,\n  int? maxLength,\n  MaxLengthEnforcement? maxLengthEnforcement,\n  bool onTapAlwaysCalled = false,\n  void Function()? onEditingComplete,\n  void Function(String)? onSubmit,\n  void Function(String, Map<String, dynamic>)? onAppPrivateCommand,\n  List<TextInputFormatter>? inputFormatters,\n  bool enabled = true,\n  bool? ignorePointers,\n  bool enableInteractiveSelection = true,\n  TextSelectionControls? selectionControls,\n  DragStartBehavior dragStartBehavior = .start,\n  MouseCursor? mouseCursor,\n  Widget? Function(BuildContext, int, int?, bool)? counterBuilder,\n  ScrollPhysics? scrollPhysics,\n  ScrollController? scrollController,\n  Iterable<String>? autofillHints,\n  String? restorationId,\n  bool stylusHandwritingEnabled = true,\n  bool enableIMEPersonalizedLearning = true,\n  ContentInsertionConfiguration? contentInsertionConfiguration,\n  Widget Function(BuildContext, EditableTextState)? contextMenuBuilder,\n  bool canRequestFocus = true,\n  UndoHistoryController? undoController,\n  SpellCheckConfiguration? spellCheckConfiguration,\n  Widget Function(BuildContext, FAutocompleteStyle, Set<WidgetState>)?\n  prefixBuilder,\n  Widget Function(BuildContext, FAutocompleteStyle, Set<WidgetState>)?\n  suffixBuilder,\n  bool Function(TextEditingValue) clearable = _clearable,\n  void Function(String?)? onSaved,\n  void Function()? onReset,\n  String? Function(String?)? validator,\n  AutovalidateMode autovalidateMode = .disabled,\n  String? forceErrorText,\n  Widget Function(BuildContext, String) errorBuilder =\n      FFormFieldProperties.defaultErrorBuilder,\n  AlignmentGeometry contentAnchor = AlignmentDirectional.topStart,\n  AlignmentGeometry fieldAnchor = AlignmentDirectional.bottomStart,\n  FPortalConstraints contentConstraints = const FAutoWidthPortalConstraints(\n    maxHeight: 300,\n  ),\n  FPortalSpacing contentSpacing = const .spacing(4),\n  FPortalOverflow contentOverflow = .flip,\n  Offset contentOffset = .zero,\n  FPopoverHideRegion contentHideRegion = .excludeChild,\n  Object? contentGroupId,\n  bool autoHide = true,\n  Widget Function(BuildContext, FAutocompleteStyle, Set<WidgetState>, Widget)\n      builder =\n      _builder,\n  bool rightArrowToComplete = false,\n  ScrollController? contentScrollController,\n  ScrollPhysics contentPhysics = const ClampingScrollPhysics(),\n  FItemDivider contentDivider = .none,\n  Widget Function(BuildContext, FAutocompleteContentStyle)\n      contentEmptyBuilder =\n      defaultContentEmptyBuilder,\n  Widget Function(BuildContext, FAutocompleteContentStyle)\n      contentLoadingBuilder =\n      defaultContentLoadingBuilder,\n  Widget Function(BuildContext, Object?, StackTrace)? contentErrorBuilder,\n  Key? key,\n})\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 21,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/FAutocomplete.builder.html"
+          },
+          {
+            "offset": 79,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/builder.html"
+          },
+          {
+            "offset": 195,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/builder.html"
+          },
+          {
+            "offset": 103,
+            "length": 22,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocompleteItemMixin-mixin.html"
+          },
+          {
+            "offset": 234,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/builder.html"
+          },
+          {
+            "offset": 213,
+            "length": 20,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocompleteControl-class.html"
+          },
+          {
+            "offset": 251,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocompleteControl/FAutocompleteControl.managed.html"
+          },
+          {
+            "offset": 280,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/builder.html"
+          },
+          {
+            "offset": 264,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverControl-class.html"
+          },
+          {
+            "offset": 304,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverControl/FPopoverControl.managed.html"
+          },
+          {
+            "offset": 366,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/builder.html"
+          },
+          {
+            "offset": 317,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocompleteStyle-class.html"
+          },
+          {
+            "offset": 345,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocompleteStyle-class.html"
+          },
+          {
+            "offset": 383,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/builder.html"
+          },
+          {
+            "offset": 400,
+            "length": 4,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/builder.html"
+          },
+          {
+            "offset": 416,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/builder.html"
+          },
+          {
+            "offset": 459,
+            "length": 22,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/builder.html"
+          },
+          {
+            "offset": 492,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/builder.html"
+          },
+          {
+            "offset": 529,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/builder.html"
+          },
+          {
+            "offset": 557,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/builder.html"
+          },
+          {
+            "offset": 590,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/builder.html"
+          },
+          {
+            "offset": 628,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/builder.html"
+          },
+          {
+            "offset": 668,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/builder.html"
+          },
+          {
+            "offset": 709,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/builder.html"
+          },
+          {
+            "offset": 745,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/builder.html"
+          },
+          {
+            "offset": 779,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/builder.html"
+          },
+          {
+            "offset": 804,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/builder.html"
+          },
+          {
+            "offset": 849,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/builder.html"
+          },
+          {
+            "offset": 876,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/builder.html"
+          },
+          {
+            "offset": 909,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/builder.html"
+          },
+          {
+            "offset": 937,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/builder.html"
+          },
+          {
+            "offset": 976,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/builder.html"
+          },
+          {
+            "offset": 1012,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/builder.html"
+          },
+          {
+            "offset": 1036,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/builder.html"
+          },
+          {
+            "offset": 1069,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/builder.html"
+          },
+          {
+            "offset": 1086,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/builder.html"
+          },
+          {
+            "offset": 1107,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/builder.html"
+          },
+          {
+            "offset": 1131,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/builder.html"
+          },
+          {
+            "offset": 1157,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/builder.html"
+          },
+          {
+            "offset": 1176,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/builder.html"
+          },
+          {
+            "offset": 1211,
+            "length": 20,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/builder.html"
+          },
+          {
+            "offset": 1240,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/builder.html"
+          },
+          {
+            "offset": 1286,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/builder.html"
+          },
+          {
+            "offset": 1330,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/builder.html"
+          },
+          {
+            "offset": 1387,
+            "length": 19,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/builder.html"
+          },
+          {
+            "offset": 1436,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/builder.html"
+          },
+          {
+            "offset": 1460,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/builder.html"
+          },
+          {
+            "offset": 1484,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/builder.html"
+          },
+          {
+            "offset": 1507,
+            "length": 26,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/builder.html"
+          },
+          {
+            "offset": 1567,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/builder.html"
+          },
+          {
+            "offset": 1606,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/builder.html"
+          },
+          {
+            "offset": 1649,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/builder.html"
+          },
+          {
+            "offset": 1713,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/builder.html"
+          },
+          {
+            "offset": 1746,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/builder.html"
+          },
+          {
+            "offset": 1781,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/builder.html"
+          },
+          {
+            "offset": 1819,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/builder.html"
+          },
+          {
+            "offset": 1844,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/builder.html"
+          },
+          {
+            "offset": 1866,
+            "length": 24,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/builder.html"
+          },
+          {
+            "offset": 1906,
+            "length": 29,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/builder.html"
+          },
+          {
+            "offset": 1977,
+            "length": 29,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/builder.html"
+          },
+          {
+            "offset": 2060,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/builder.html"
+          },
+          {
+            "offset": 2087,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/builder.html"
+          },
+          {
+            "offset": 2136,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/builder.html"
+          },
+          {
+            "offset": 2179,
+            "length": 23,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/builder.html"
+          },
+          {
+            "offset": 2277,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/builder.html"
+          },
+          {
+            "offset": 2236,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocompleteStyle-class.html"
+          },
+          {
+            "offset": 2365,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/builder.html"
+          },
+          {
+            "offset": 2324,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocompleteStyle-class.html"
+          },
+          {
+            "offset": 2414,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/builder.html"
+          },
+          {
+            "offset": 2464,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/builder.html"
+          },
+          {
+            "offset": 2492,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/builder.html"
+          },
+          {
+            "offset": 2530,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/builder.html"
+          },
+          {
+            "offset": 2560,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/builder.html"
+          },
+          {
+            "offset": 2600,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/builder.html"
+          },
+          {
+            "offset": 2656,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/builder.html"
+          },
+          {
+            "offset": 2677,
+            "length": 40,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FFormFieldProperties/defaultErrorBuilder.html"
+          },
+          {
+            "offset": 2739,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/builder.html"
+          },
+          {
+            "offset": 2806,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/builder.html"
+          },
+          {
+            "offset": 2875,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/builder.html"
+          },
+          {
+            "offset": 2856,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FPortalConstraints-class.html"
+          },
+          {
+            "offset": 2902,
+            "length": 27,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FAutoWidthPortalConstraints/FAutoWidthPortalConstraints.html"
+          },
+          {
+            "offset": 2935,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FAutoWidthPortalConstraints/maxHeight.html"
+          },
+          {
+            "offset": 2973,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/builder.html"
+          },
+          {
+            "offset": 2958,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FPortalSpacing-class.html"
+          },
+          {
+            "offset": 2997,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FPortalSpacing/FPortalSpacing.spacing.html"
+          },
+          {
+            "offset": 3027,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/builder.html"
+          },
+          {
+            "offset": 3011,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FPortalOverflow-class.html"
+          },
+          {
+            "offset": 3046,
+            "length": 4,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FPortalOverflow/flip-constant.html"
+          },
+          {
+            "offset": 3061,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/builder.html"
+          },
+          {
+            "offset": 3105,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/builder.html"
+          },
+          {
+            "offset": 3086,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverHideRegion.html"
+          },
+          {
+            "offset": 3126,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverHideRegion.html#excludeChild"
+          },
+          {
+            "offset": 3150,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/builder.html"
+          },
+          {
+            "offset": 3173,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/builder.html"
+          },
+          {
+            "offset": 3274,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/builder.html"
+          },
+          {
+            "offset": 3222,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocompleteStyle-class.html"
+          },
+          {
+            "offset": 3307,
+            "length": 20,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/builder.html"
+          },
+          {
+            "offset": 3357,
+            "length": 23,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/builder.html"
+          },
+          {
+            "offset": 3398,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/builder.html"
+          },
+          {
+            "offset": 3461,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/builder.html"
+          },
+          {
+            "offset": 3448,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemDivider.html"
+          },
+          {
+            "offset": 3479,
+            "length": 4,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemDivider.html#none"
+          },
+          {
+            "offset": 3550,
+            "length": 19,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/builder.html"
+          },
+          {
+            "offset": 3517,
+            "length": 25,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocompleteContentStyle-class.html"
+          },
+          {
+            "offset": 3671,
+            "length": 21,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/builder.html"
+          },
+          {
+            "offset": 3638,
+            "length": 25,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocompleteContentStyle-class.html"
+          },
+          {
+            "offset": 3785,
+            "length": 19,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/builder.html"
+          },
+          {
+            "offset": 3813,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete/builder.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FAutocomplete",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocomplete-class.html"
+        }
+      }
+    },
+    {
+      "offset": 233,
+      "length": 5,
+      "snippet": {
+        "text": "{String? hint}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 268,
+      "length": 7,
+      "snippet": {
+        "text": "{required FutureOr<Iterable<String>> Function(String) filter}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 277,
+      "length": 5,
+      "snippet": {
+        "text": "String query",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 405,
+      "length": 15,
+      "snippet": {
+        "text": "{\n  required List<FAutocompleteItemMixin> Function(\n    BuildContext,\n    String,\n    Iterable<String>,\n  )\n  contentBuilder,\n}",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 18,
+            "length": 22,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocompleteItemMixin-mixin.html"
+          }
+        ],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 422,
+      "length": 7,
+      "snippet": {
+        "text": "BuildContext context",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 431,
+      "length": 5,
+      "snippet": {
+        "text": "String query",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 438,
+      "length": 6,
+      "snippet": {
+        "text": "Iterable<String> values",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 486,
+      "length": 4,
+      "snippet": {
+        "text": "FAutocompleteItem item({\n  required String value,\n  FItemStyle Function(FItemStyle)? style,\n  bool? enabled,\n  Widget? prefix,\n  Widget? title,\n  Widget? subtitle,\n  Widget? suffix,\n  Key? key,\n})",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocompleteItem-class.html"
+          },
+          {
+            "offset": 52,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemStyle-class.html"
+          },
+          {
+            "offset": 72,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemStyle-class.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FAutocompleteItem",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocompleteItem-class.html"
+        }
+      }
+    },
+    {
+      "offset": 491,
+      "length": 6,
+      "snippet": {
+        "text": "{required String value}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 517,
+      "length": 20,
+      "snippet": {
+        "text": "{\n  Widget Function(BuildContext, Object?, StackTrace)? contentErrorBuilder,\n}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 539,
+      "length": 7,
+      "snippet": {
+        "text": "BuildContext context",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 548,
+      "length": 5,
+      "snippet": {
+        "text": "Object? error",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 555,
+      "length": 5,
+      "snippet": {
+        "text": "StackTrace trace",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 634,
+      "length": 14,
+      "snippet": {
+        "text": "IconData circleX",
+        "highlights": [],
+        "links": [],
+        "tooltips": [],
+        "container": {
+          "name": "FIcons",
+          "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons-class.html"
+        }
+      }
+    },
+    {
+      "offset": 704,
+      "length": 7,
+      "snippet": {
+        "text": "Color primary",
+        "highlights": [],
+        "links": [],
+        "tooltips": [],
+        "container": {
+          "name": "FColors",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors-class.html"
+        }
+      }
+    },
+    {
+      "offset": 697,
+      "length": 6,
+      "snippet": {
+        "text": "FColors colors",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors-class.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FThemeData",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+        }
+      }
+    },
+    {
+      "offset": 691,
+      "length": 5,
+      "snippet": {
+        "text": "FThemeData get theme",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FThemeBuildContext",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext.html"
+        }
+      }
+    }
+  ]
+}

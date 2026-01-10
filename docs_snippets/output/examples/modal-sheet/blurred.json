@@ -1,0 +1,2032 @@
+{
+  "text": "class BlurredModalSheetExample extends StatelessWidget {\n  @override\n  Widget build(BuildContext context) => FButton(\n    child: const Text('Open'),\n    onPress: () => showFSheet(\n      style: context.theme.modalSheetStyle.copyWith(\n        barrierFilter: (animation) => ImageFilter.compose(\n          outer: ImageFilter.blur(sigmaX: animation * 5, sigmaY: animation * 5),\n          inner: ColorFilter.mode(context.theme.colors.barrier, .srcOver),\n        ),\n      ),\n      context: context,\n      side: .ltr,\n      builder: (context) => const Form(side: .ltr),\n    ),\n  );\n}\n\nclass Form extends StatelessWidget {\n  final FLayout side;\n  const Form({required this.side, super.key});\n  @override\n  Widget build(BuildContext context) => Container(\n    height: .infinity,\n    width: .infinity,\n    decoration: BoxDecoration(\n      color: context.theme.colors.background,\n      border: side.vertical\n          ? .symmetric(\n              horizontal: BorderSide(color: context.theme.colors.border),\n            )\n          : .symmetric(\n              vertical: BorderSide(color: context.theme.colors.border),\n            ),\n    ),\n    child: Padding(\n      padding: const .symmetric(horizontal: 15, vertical: 8.0),\n      child: Center(\n        child: Column(\n          mainAxisSize: .min,\n          crossAxisAlignment: .start,\n          children: [\n            Text(\n              'Account',\n              style: context.theme.typography.xl2.copyWith(\n                fontWeight: .w600,\n                color: context.theme.colors.foreground,\n                height: 1.5,\n              ),\n            ),\n            Text(\n              'Make changes to your account here. Click save when you are done.',\n              style: context.theme.typography.sm.copyWith(\n                color: context.theme.colors.mutedForeground,\n              ),\n            ),\n            const SizedBox(height: 8),\n            SizedBox(\n              width: 450,\n              child: Column(\n                children: [\n                  const FTextField(label: Text('Name'), hint: 'John Renalo'),\n                  const SizedBox(height: 10),\n                  const FTextField(label: Text('Email'), hint: 'john@doe.com'),\n                  const SizedBox(height: 16),\n                  FButton(\n                    child: const Text('Save'),\n                    onPress: () => Navigator.of(context).pop(),\n                  ),\n                ],\n              ),\n            ),\n          ],\n        ),\n      ),\n    ),\n  );\n}\n",
+  "highlights": [
+    {
+      "start": 7,
+      "end": 10
+    }
+  ],
+  "links": [
+    {
+      "offset": 109,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+    },
+    {
+      "offset": 122,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/child.html"
+    },
+    {
+      "offset": 153,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/onPress.html"
+    },
+    {
+      "offset": 168,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/showFSheet.html"
+    },
+    {
+      "offset": 186,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/showFSheet.html"
+    },
+    {
+      "offset": 223,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/$FModalSheetStyleTransformations/copyWith.html"
+    },
+    {
+      "offset": 207,
+      "length": 15,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/modalSheetStyle.html"
+    },
+    {
+      "offset": 201,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext/theme.html"
+    },
+    {
+      "offset": 241,
+      "length": 13,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/$FModalSheetStyleTransformations/copyWith.html"
+    },
+    {
+      "offset": 428,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors/barrier.html"
+    },
+    {
+      "offset": 421,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/colors.html"
+    },
+    {
+      "offset": 415,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext/theme.html"
+    },
+    {
+      "offset": 474,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/showFSheet.html"
+    },
+    {
+      "offset": 498,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/showFSheet.html"
+    },
+    {
+      "offset": 505,
+      "length": 3,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FLayout.html#ltr"
+    },
+    {
+      "offset": 516,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/showFSheet.html"
+    },
+    {
+      "offset": 556,
+      "length": 3,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FLayout.html#ltr"
+    },
+    {
+      "offset": 622,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FLayout.html"
+    },
+    {
+      "offset": 856,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors/background.html"
+    },
+    {
+      "offset": 849,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/colors.html"
+    },
+    {
+      "offset": 843,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext/theme.html"
+    },
+    {
+      "offset": 887,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FLayout/vertical.html"
+    },
+    {
+      "offset": 985,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors/border.html"
+    },
+    {
+      "offset": 978,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/colors.html"
+    },
+    {
+      "offset": 972,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext/theme.html"
+    },
+    {
+      "offset": 1095,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors/border.html"
+    },
+    {
+      "offset": 1088,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/colors.html"
+    },
+    {
+      "offset": 1082,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext/theme.html"
+    },
+    {
+      "offset": 1433,
+      "length": 3,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FTypography/xl2.html"
+    },
+    {
+      "offset": 1422,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/typography.html"
+    },
+    {
+      "offset": 1416,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext/theme.html"
+    },
+    {
+      "offset": 1526,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors/foreground.html"
+    },
+    {
+      "offset": 1519,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/colors.html"
+    },
+    {
+      "offset": 1513,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext/theme.html"
+    },
+    {
+      "offset": 1745,
+      "length": 2,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FTypography/sm.html"
+    },
+    {
+      "offset": 1734,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/typography.html"
+    },
+    {
+      "offset": 1728,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext/theme.html"
+    },
+    {
+      "offset": 1802,
+      "length": 15,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors/mutedForeground.html"
+    },
+    {
+      "offset": 1795,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/colors.html"
+    },
+    {
+      "offset": 1789,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext/theme.html"
+    },
+    {
+      "offset": 2019,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+    },
+    {
+      "offset": 2030,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/label.html"
+    },
+    {
+      "offset": 2051,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/hint.html"
+    },
+    {
+      "offset": 2143,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+    },
+    {
+      "offset": 2154,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/label.html"
+    },
+    {
+      "offset": 2176,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/hint.html"
+    },
+    {
+      "offset": 2263,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+    },
+    {
+      "offset": 2292,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/child.html"
+    },
+    {
+      "offset": 2339,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/onPress.html"
+    }
+  ],
+  "tooltips": [
+    {
+      "offset": 109,
+      "length": 7,
+      "snippet": {
+        "text": "FButton({\n  required void Function()? onPress,\n  required Widget child,\n  FBaseButtonStyle Function(FButtonStyle) style = _primary,\n  void Function()? onLongPress,\n  void Function()? onSecondaryPress,\n  void Function()? onSecondaryLongPress,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  void Function(bool)? onHoverChange,\n  void Function(FWidgetStatesDelta)? onStateChange,\n  bool selected = false,\n  Map<ShortcutActivator, Intent>? shortcuts,\n  Map<Type, Action<Intent>>? actions,\n  MainAxisSize mainAxisSize = .max,\n  MainAxisAlignment mainAxisAlignment = .center,\n  CrossAxisAlignment crossAxisAlignment = .center,\n  TextBaseline? textBaseline,\n  Widget? prefix,\n  Widget? suffix,\n  Key? key,\n})\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 38,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 65,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 114,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 74,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FBaseButtonStyle-class.html"
+          },
+          {
+            "offset": 100,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButtonStyle-class.html"
+          },
+          {
+            "offset": 151,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 183,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 220,
+            "length": 20,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 249,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 281,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 315,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 353,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 405,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 384,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStatesDelta-class.html"
+          },
+          {
+            "offset": 427,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 479,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 519,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 543,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 584,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 634,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 680,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 704,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 722,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 737,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FButton",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton-class.html"
+        }
+      }
+    },
+    {
+      "offset": 122,
+      "length": 6,
+      "snippet": {
+        "text": "{required Widget child}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 153,
+      "length": 8,
+      "snippet": {
+        "text": "{required void Function()? onPress}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 168,
+      "length": 10,
+      "snippet": {
+        "text": "Future<T?> showFSheet<T>({\n  required BuildContext context,\n  required Widget Function(BuildContext) builder,\n  required FLayout side,\n  bool useRootNavigator = false,\n  FModalSheetStyle Function(FModalSheetStyle)? style,\n  double? mainAxisMaxRatio = 9 / 16,\n  bool useSafeArea = false,\n  bool resizeToAvoidBottomInset = true,\n  String? barrierLabel,\n  bool barrierDismissible = true,\n  BoxConstraints constraints = const BoxConstraints(),\n  bool draggable = true,\n  RouteSettings? routeSettings,\n  AnimationController? transitionAnimationController,\n  Offset? anchorPoint,\n  void Function()? onClosing,\n})",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 11,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/showFSheet.html"
+          },
+          {
+            "offset": 121,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FLayout.html"
+          },
+          {
+            "offset": 170,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/FModalSheetStyle-class.html"
+          },
+          {
+            "offset": 196,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/FModalSheetStyle-class.html"
+          }
+        ],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 186,
+      "length": 6,
+      "snippet": {
+        "text": "{FModalSheetStyle Function(FModalSheetStyle)? style}",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 1,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/FModalSheetStyle-class.html"
+          },
+          {
+            "offset": 27,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/FModalSheetStyle-class.html"
+          }
+        ],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 223,
+      "length": 8,
+      "snippet": {
+        "text": "FModalSheetStyle copyWith({\n  ImageFilter Function(double)? barrierFilter,\n  FModalSheetMotion Function(FModalSheetMotion)? motion,\n  double? flingVelocity,\n  double? closeProgressThreshold,\n})",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/FModalSheetStyle-class.html"
+          },
+          {
+            "offset": 77,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/FModalSheetMotion-class.html"
+          },
+          {
+            "offset": 104,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/FModalSheetMotion-class.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "$FModalSheetStyleTransformations",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/$FModalSheetStyleTransformations.html"
+        }
+      }
+    },
+    {
+      "offset": 207,
+      "length": 15,
+      "snippet": {
+        "text": "FModalSheetStyle modalSheetStyle",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/FModalSheetStyle-class.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FThemeData",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+        }
+      }
+    },
+    {
+      "offset": 201,
+      "length": 5,
+      "snippet": {
+        "text": "FThemeData get theme",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FThemeBuildContext",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext.html"
+        }
+      }
+    },
+    {
+      "offset": 241,
+      "length": 14,
+      "snippet": {
+        "text": "{ImageFilter Function(double)? barrierFilter}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 257,
+      "length": 9,
+      "snippet": {
+        "text": "double animation",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 428,
+      "length": 7,
+      "snippet": {
+        "text": "Color barrier",
+        "highlights": [],
+        "links": [],
+        "tooltips": [],
+        "container": {
+          "name": "FColors",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors-class.html"
+        }
+      }
+    },
+    {
+      "offset": 421,
+      "length": 6,
+      "snippet": {
+        "text": "FColors colors",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors-class.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FThemeData",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+        }
+      }
+    },
+    {
+      "offset": 415,
+      "length": 5,
+      "snippet": {
+        "text": "FThemeData get theme",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FThemeBuildContext",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext.html"
+        }
+      }
+    },
+    {
+      "offset": 474,
+      "length": 8,
+      "snippet": {
+        "text": "{required BuildContext context}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 498,
+      "length": 5,
+      "snippet": {
+        "text": "{required FLayout side}",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 10,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FLayout.html"
+          }
+        ],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 505,
+      "length": 3,
+      "snippet": {
+        "text": "FLayout ltr",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FLayout.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FLayout",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FLayout.html"
+        }
+      }
+    },
+    {
+      "offset": 516,
+      "length": 8,
+      "snippet": {
+        "text": "{required Widget Function(BuildContext) builder}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 526,
+      "length": 7,
+      "snippet": {
+        "text": "BuildContext context",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 556,
+      "length": 3,
+      "snippet": {
+        "text": "FLayout ltr",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FLayout.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FLayout",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FLayout.html"
+        }
+      }
+    },
+    {
+      "offset": 856,
+      "length": 10,
+      "snippet": {
+        "text": "Color background",
+        "highlights": [],
+        "links": [],
+        "tooltips": [],
+        "container": {
+          "name": "FColors",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors-class.html"
+        }
+      }
+    },
+    {
+      "offset": 849,
+      "length": 6,
+      "snippet": {
+        "text": "FColors colors",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors-class.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FThemeData",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+        }
+      }
+    },
+    {
+      "offset": 843,
+      "length": 5,
+      "snippet": {
+        "text": "FThemeData get theme",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FThemeBuildContext",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext.html"
+        }
+      }
+    },
+    {
+      "offset": 887,
+      "length": 8,
+      "snippet": {
+        "text": "bool vertical",
+        "highlights": [],
+        "links": [],
+        "tooltips": [],
+        "container": {
+          "name": "FLayout",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FLayout.html"
+        }
+      }
+    },
+    {
+      "offset": 985,
+      "length": 6,
+      "snippet": {
+        "text": "Color border",
+        "highlights": [],
+        "links": [],
+        "tooltips": [],
+        "container": {
+          "name": "FColors",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors-class.html"
+        }
+      }
+    },
+    {
+      "offset": 978,
+      "length": 6,
+      "snippet": {
+        "text": "FColors colors",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors-class.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FThemeData",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+        }
+      }
+    },
+    {
+      "offset": 972,
+      "length": 5,
+      "snippet": {
+        "text": "FThemeData get theme",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FThemeBuildContext",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext.html"
+        }
+      }
+    },
+    {
+      "offset": 1095,
+      "length": 6,
+      "snippet": {
+        "text": "Color border",
+        "highlights": [],
+        "links": [],
+        "tooltips": [],
+        "container": {
+          "name": "FColors",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors-class.html"
+        }
+      }
+    },
+    {
+      "offset": 1088,
+      "length": 6,
+      "snippet": {
+        "text": "FColors colors",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors-class.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FThemeData",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+        }
+      }
+    },
+    {
+      "offset": 1082,
+      "length": 5,
+      "snippet": {
+        "text": "FThemeData get theme",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FThemeBuildContext",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext.html"
+        }
+      }
+    },
+    {
+      "offset": 1433,
+      "length": 3,
+      "snippet": {
+        "text": "TextStyle xl2",
+        "highlights": [],
+        "links": [],
+        "tooltips": [],
+        "container": {
+          "name": "FTypography",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FTypography-class.html"
+        }
+      }
+    },
+    {
+      "offset": 1422,
+      "length": 10,
+      "snippet": {
+        "text": "FTypography typography",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FTypography-class.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FThemeData",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+        }
+      }
+    },
+    {
+      "offset": 1416,
+      "length": 5,
+      "snippet": {
+        "text": "FThemeData get theme",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FThemeBuildContext",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext.html"
+        }
+      }
+    },
+    {
+      "offset": 1526,
+      "length": 10,
+      "snippet": {
+        "text": "Color foreground",
+        "highlights": [],
+        "links": [],
+        "tooltips": [],
+        "container": {
+          "name": "FColors",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors-class.html"
+        }
+      }
+    },
+    {
+      "offset": 1519,
+      "length": 6,
+      "snippet": {
+        "text": "FColors colors",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors-class.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FThemeData",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+        }
+      }
+    },
+    {
+      "offset": 1513,
+      "length": 5,
+      "snippet": {
+        "text": "FThemeData get theme",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FThemeBuildContext",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext.html"
+        }
+      }
+    },
+    {
+      "offset": 1745,
+      "length": 2,
+      "snippet": {
+        "text": "TextStyle sm",
+        "highlights": [],
+        "links": [],
+        "tooltips": [],
+        "container": {
+          "name": "FTypography",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FTypography-class.html"
+        }
+      }
+    },
+    {
+      "offset": 1734,
+      "length": 10,
+      "snippet": {
+        "text": "FTypography typography",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FTypography-class.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FThemeData",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+        }
+      }
+    },
+    {
+      "offset": 1728,
+      "length": 5,
+      "snippet": {
+        "text": "FThemeData get theme",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FThemeBuildContext",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext.html"
+        }
+      }
+    },
+    {
+      "offset": 1802,
+      "length": 15,
+      "snippet": {
+        "text": "Color mutedForeground",
+        "highlights": [],
+        "links": [],
+        "tooltips": [],
+        "container": {
+          "name": "FColors",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors-class.html"
+        }
+      }
+    },
+    {
+      "offset": 1795,
+      "length": 6,
+      "snippet": {
+        "text": "FColors colors",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors-class.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FThemeData",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+        }
+      }
+    },
+    {
+      "offset": 1789,
+      "length": 5,
+      "snippet": {
+        "text": "FThemeData get theme",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FThemeBuildContext",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext.html"
+        }
+      }
+    },
+    {
+      "offset": 2019,
+      "length": 10,
+      "snippet": {
+        "text": "FTextField({\n  FTextFieldControl control = const .managed(),\n  FTextFieldStyle Function(FTextFieldStyle)? style,\n  Widget Function(BuildContext, FTextFieldStyle, Set<WidgetState>, Widget)\n      builder =\n      Input.defaultBuilder,\n  Widget? label,\n  String? hint,\n  Widget? description,\n  Widget? error,\n  TextMagnifierConfiguration? magnifierConfiguration,\n  Object groupId = EditableText,\n  FocusNode? focusNode,\n  TextInputType? keyboardType,\n  TextInputAction? textInputAction,\n  TextCapitalization textCapitalization = .none,\n  TextAlign textAlign = .start,\n  TextAlignVertical? textAlignVertical,\n  TextDirection? textDirection,\n  bool autofocus = false,\n  WidgetStatesController? statesController,\n  String obscuringCharacter = '•',\n  bool obscureText = false,\n  bool autocorrect = true,\n  SmartDashesType? smartDashesType,\n  SmartQuotesType? smartQuotesType,\n  bool enableSuggestions = true,\n  int? minLines,\n  int? maxLines = 1,\n  bool expands = false,\n  bool readOnly = false,\n  bool? showCursor,\n  int? maxLength,\n  MaxLengthEnforcement? maxLengthEnforcement,\n  void Function()? onTap,\n  void Function(PointerDownEvent)? onTapOutside,\n  bool onTapAlwaysCalled = false,\n  void Function()? onEditingComplete,\n  void Function(String)? onSubmit,\n  void Function(String, Map<String, dynamic>)? onAppPrivateCommand,\n  List<TextInputFormatter>? inputFormatters,\n  bool enabled = true,\n  bool? ignorePointers,\n  bool enableInteractiveSelection = true,\n  bool? selectAllOnFocus,\n  TextSelectionControls? selectionControls,\n  DragStartBehavior dragStartBehavior = .start,\n  MouseCursor? mouseCursor,\n  Widget? Function(BuildContext, int, int?, bool)? counterBuilder,\n  ScrollPhysics? scrollPhysics,\n  ScrollController? scrollController,\n  Iterable<String>? autofillHints,\n  String? restorationId,\n  bool stylusHandwritingEnabled = true,\n  bool enableIMEPersonalizedLearning = true,\n  ContentInsertionConfiguration? contentInsertionConfiguration,\n  Widget Function(BuildContext, EditableTextState)? contextMenuBuilder =\n      Input.defaultContextMenuBuilder,\n  bool canRequestFocus = true,\n  UndoHistoryController? undoController,\n  SpellCheckConfiguration? spellCheckConfiguration,\n  Widget Function(BuildContext, FTextFieldStyle, Set<WidgetState>)?\n  prefixBuilder,\n  Widget Function(BuildContext, FTextFieldStyle, Set<WidgetState>)?\n  suffixBuilder,\n  bool Function(TextEditingValue) clearable = Input.defaultClearable,\n  Widget Function(BuildContext, FTextFieldStyle, void Function())\n      clearIconBuilder =\n      Input.defaultClearIconBuilder,\n  Key? key,\n})\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 33,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 15,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFieldControl-class.html"
+          },
+          {
+            "offset": 50,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFieldControl/FTextFieldControl.managed.html"
+          },
+          {
+            "offset": 106,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 63,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFieldStyle-class.html"
+          },
+          {
+            "offset": 88,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFieldStyle-class.html"
+          },
+          {
+            "offset": 194,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 145,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFieldStyle-class.html"
+          },
+          {
+            "offset": 242,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 259,
+            "length": 4,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 275,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 298,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 335,
+            "length": 22,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 368,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 405,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 433,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 466,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 504,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 544,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 585,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 621,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 643,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 688,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 715,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 748,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 776,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 815,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 851,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 875,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 908,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 925,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 946,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 970,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 996,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 1015,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 1050,
+            "length": 20,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 1091,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 1133,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 1154,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 1200,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 1244,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 1301,
+            "length": 19,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 1350,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 1374,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 1398,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 1421,
+            "length": 26,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 1464,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 1507,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 1546,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 1589,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 1653,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 1686,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 1721,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 1759,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 1784,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 1806,
+            "length": 24,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 1846,
+            "length": 29,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 1917,
+            "length": 29,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 2000,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 2067,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 2116,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 2159,
+            "length": 23,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 2254,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 2216,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFieldStyle-class.html"
+          },
+          {
+            "offset": 2339,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 2301,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFieldStyle-class.html"
+          },
+          {
+            "offset": 2388,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 2496,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 2456,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFieldStyle-class.html"
+          },
+          {
+            "offset": 2559,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FTextField",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField-class.html"
+        }
+      }
+    },
+    {
+      "offset": 2030,
+      "length": 6,
+      "snippet": {
+        "text": "{Widget? label}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 2051,
+      "length": 5,
+      "snippet": {
+        "text": "{String? hint}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 2143,
+      "length": 10,
+      "snippet": {
+        "text": "FTextField({\n  FTextFieldControl control = const .managed(),\n  FTextFieldStyle Function(FTextFieldStyle)? style,\n  Widget Function(BuildContext, FTextFieldStyle, Set<WidgetState>, Widget)\n      builder =\n      Input.defaultBuilder,\n  Widget? label,\n  String? hint,\n  Widget? description,\n  Widget? error,\n  TextMagnifierConfiguration? magnifierConfiguration,\n  Object groupId = EditableText,\n  FocusNode? focusNode,\n  TextInputType? keyboardType,\n  TextInputAction? textInputAction,\n  TextCapitalization textCapitalization = .none,\n  TextAlign textAlign = .start,\n  TextAlignVertical? textAlignVertical,\n  TextDirection? textDirection,\n  bool autofocus = false,\n  WidgetStatesController? statesController,\n  String obscuringCharacter = '•',\n  bool obscureText = false,\n  bool autocorrect = true,\n  SmartDashesType? smartDashesType,\n  SmartQuotesType? smartQuotesType,\n  bool enableSuggestions = true,\n  int? minLines,\n  int? maxLines = 1,\n  bool expands = false,\n  bool readOnly = false,\n  bool? showCursor,\n  int? maxLength,\n  MaxLengthEnforcement? maxLengthEnforcement,\n  void Function()? onTap,\n  void Function(PointerDownEvent)? onTapOutside,\n  bool onTapAlwaysCalled = false,\n  void Function()? onEditingComplete,\n  void Function(String)? onSubmit,\n  void Function(String, Map<String, dynamic>)? onAppPrivateCommand,\n  List<TextInputFormatter>? inputFormatters,\n  bool enabled = true,\n  bool? ignorePointers,\n  bool enableInteractiveSelection = true,\n  bool? selectAllOnFocus,\n  TextSelectionControls? selectionControls,\n  DragStartBehavior dragStartBehavior = .start,\n  MouseCursor? mouseCursor,\n  Widget? Function(BuildContext, int, int?, bool)? counterBuilder,\n  ScrollPhysics? scrollPhysics,\n  ScrollController? scrollController,\n  Iterable<String>? autofillHints,\n  String? restorationId,\n  bool stylusHandwritingEnabled = true,\n  bool enableIMEPersonalizedLearning = true,\n  ContentInsertionConfiguration? contentInsertionConfiguration,\n  Widget Function(BuildContext, EditableTextState)? contextMenuBuilder =\n      Input.defaultContextMenuBuilder,\n  bool canRequestFocus = true,\n  UndoHistoryController? undoController,\n  SpellCheckConfiguration? spellCheckConfiguration,\n  Widget Function(BuildContext, FTextFieldStyle, Set<WidgetState>)?\n  prefixBuilder,\n  Widget Function(BuildContext, FTextFieldStyle, Set<WidgetState>)?\n  suffixBuilder,\n  bool Function(TextEditingValue) clearable = Input.defaultClearable,\n  Widget Function(BuildContext, FTextFieldStyle, void Function())\n      clearIconBuilder =\n      Input.defaultClearIconBuilder,\n  Key? key,\n})\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 33,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 15,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFieldControl-class.html"
+          },
+          {
+            "offset": 50,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFieldControl/FTextFieldControl.managed.html"
+          },
+          {
+            "offset": 106,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 63,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFieldStyle-class.html"
+          },
+          {
+            "offset": 88,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFieldStyle-class.html"
+          },
+          {
+            "offset": 194,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 145,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFieldStyle-class.html"
+          },
+          {
+            "offset": 242,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 259,
+            "length": 4,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 275,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 298,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 335,
+            "length": 22,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 368,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 405,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 433,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 466,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 504,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 544,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 585,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 621,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 643,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 688,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 715,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 748,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 776,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 815,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 851,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 875,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 908,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 925,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 946,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 970,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 996,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 1015,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 1050,
+            "length": 20,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 1091,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 1133,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 1154,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 1200,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 1244,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 1301,
+            "length": 19,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 1350,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 1374,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 1398,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 1421,
+            "length": 26,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 1464,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 1507,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 1546,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 1589,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 1653,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 1686,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 1721,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 1759,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 1784,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 1806,
+            "length": 24,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 1846,
+            "length": 29,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 1917,
+            "length": 29,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 2000,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 2067,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 2116,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 2159,
+            "length": 23,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 2254,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 2216,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFieldStyle-class.html"
+          },
+          {
+            "offset": 2339,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 2301,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFieldStyle-class.html"
+          },
+          {
+            "offset": 2388,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 2496,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          },
+          {
+            "offset": 2456,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFieldStyle-class.html"
+          },
+          {
+            "offset": 2559,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField/FTextField.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FTextField",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextField-class.html"
+        }
+      }
+    },
+    {
+      "offset": 2154,
+      "length": 6,
+      "snippet": {
+        "text": "{Widget? label}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 2176,
+      "length": 5,
+      "snippet": {
+        "text": "{String? hint}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 2263,
+      "length": 7,
+      "snippet": {
+        "text": "FButton({\n  required void Function()? onPress,\n  required Widget child,\n  FBaseButtonStyle Function(FButtonStyle) style = _primary,\n  void Function()? onLongPress,\n  void Function()? onSecondaryPress,\n  void Function()? onSecondaryLongPress,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  void Function(bool)? onHoverChange,\n  void Function(FWidgetStatesDelta)? onStateChange,\n  bool selected = false,\n  Map<ShortcutActivator, Intent>? shortcuts,\n  Map<Type, Action<Intent>>? actions,\n  MainAxisSize mainAxisSize = .max,\n  MainAxisAlignment mainAxisAlignment = .center,\n  CrossAxisAlignment crossAxisAlignment = .center,\n  TextBaseline? textBaseline,\n  Widget? prefix,\n  Widget? suffix,\n  Key? key,\n})\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 38,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 65,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 114,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 74,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FBaseButtonStyle-class.html"
+          },
+          {
+            "offset": 100,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButtonStyle-class.html"
+          },
+          {
+            "offset": 151,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 183,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 220,
+            "length": 20,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 249,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 281,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 315,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 353,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 405,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 384,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStatesDelta-class.html"
+          },
+          {
+            "offset": 427,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 479,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 519,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 543,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 584,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 634,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 680,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 704,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 722,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 737,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FButton",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton-class.html"
+        }
+      }
+    },
+    {
+      "offset": 2292,
+      "length": 6,
+      "snippet": {
+        "text": "{required Widget child}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 2339,
+      "length": 8,
+      "snippet": {
+        "text": "{required void Function()? onPress}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    }
+  ]
+}

@@ -1,0 +1,1862 @@
+{
+  "text": "FPopover(\n  {{Core}}\n  {{Control}}\n  {{Layout}}\n  {{Tap Region}}\n  {{Accessibility}}\n)",
+  "highlights": [],
+  "links": [
+    {
+      "offset": 0,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopover/FPopover.html"
+    }
+  ],
+  "tooltips": [
+    {
+      "offset": 0,
+      "length": 8,
+      "snippet": {
+        "text": "FPopover({\n  required Widget Function(BuildContext, FPopoverController) popoverBuilder,\n  FPopoverControl control = const .managed(),\n  FPopoverStyle Function(FPopoverStyle)? style,\n  FPortalConstraints constraints = const FPortalConstraints(),\n  FPortalSpacing spacing = const .spacing(4),\n  FPortalOverflow overflow = .flip,\n  Offset offset = .zero,\n  Object? groupId,\n  FPopoverHideRegion hideRegion = .excludeChild,\n  void Function()? onTapHide,\n  bool? autofocus,\n  FocusScopeNode? focusNode,\n  void Function(bool)? onFocusChange,\n  TraversalEdgeBehavior? traversalEdgeBehavior,\n  String? barrierSemanticsLabel,\n  bool barrierSemanticsDismissible = true,\n  String? semanticsLabel,\n  Map<ShortcutActivator, void Function()>? shortcuts,\n  Widget Function(BuildContext, FPopoverController, Widget?) builder =\n      _builder,\n  Widget? child,\n  AlignmentGeometry? popoverAnchor,\n  AlignmentGeometry? childAnchor,\n  Key? key,\n})\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopover/FPopover.html"
+          },
+          {
+            "offset": 72,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopover/FPopover.html"
+          },
+          {
+            "offset": 52,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverController-class.html"
+          },
+          {
+            "offset": 106,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopover/FPopover.html"
+          },
+          {
+            "offset": 90,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverControl-class.html"
+          },
+          {
+            "offset": 123,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverControl/FPopoverControl.managed.html"
+          },
+          {
+            "offset": 175,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopover/FPopover.html"
+          },
+          {
+            "offset": 136,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverStyle-class.html"
+          },
+          {
+            "offset": 159,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverStyle-class.html"
+          },
+          {
+            "offset": 203,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopover/FPopover.html"
+          },
+          {
+            "offset": 184,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FPortalConstraints-class.html"
+          },
+          {
+            "offset": 223,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FPortalConstraints/FPortalConstraints.html"
+          },
+          {
+            "offset": 262,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopover/FPopover.html"
+          },
+          {
+            "offset": 247,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FPortalSpacing-class.html"
+          },
+          {
+            "offset": 279,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FPortalSpacing/FPortalSpacing.spacing.html"
+          },
+          {
+            "offset": 309,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopover/FPopover.html"
+          },
+          {
+            "offset": 293,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FPortalOverflow-class.html"
+          },
+          {
+            "offset": 321,
+            "length": 4,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FPortalOverflow/flip-constant.html"
+          },
+          {
+            "offset": 336,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopover/FPopover.html"
+          },
+          {
+            "offset": 362,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopover/FPopover.html"
+          },
+          {
+            "offset": 392,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopover/FPopover.html"
+          },
+          {
+            "offset": 373,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverHideRegion.html"
+          },
+          {
+            "offset": 406,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverHideRegion.html#excludeChild"
+          },
+          {
+            "offset": 439,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopover/FPopover.html"
+          },
+          {
+            "offset": 458,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopover/FPopover.html"
+          },
+          {
+            "offset": 487,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopover/FPopover.html"
+          },
+          {
+            "offset": 521,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopover/FPopover.html"
+          },
+          {
+            "offset": 561,
+            "length": 21,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopover/FPopover.html"
+          },
+          {
+            "offset": 594,
+            "length": 21,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopover/FPopover.html"
+          },
+          {
+            "offset": 624,
+            "length": 27,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopover/FPopover.html"
+          },
+          {
+            "offset": 670,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopover/FPopover.html"
+          },
+          {
+            "offset": 729,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopover/FPopover.html"
+          },
+          {
+            "offset": 801,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopover/FPopover.html"
+          },
+          {
+            "offset": 772,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverController-class.html"
+          },
+          {
+            "offset": 837,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopover/FPopover.html"
+          },
+          {
+            "offset": 865,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopover/FPopover.html"
+          },
+          {
+            "offset": 901,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopover/FPopover.html"
+          },
+          {
+            "offset": 921,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopover/FPopover.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FPopover",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopover-class.html"
+        }
+      }
+    }
+  ],
+  "categories": {
+    "Core": [
+      {
+        "name": "Core",
+        "description": "",
+        "text": "style: (style) => style,\n  popoverBuilder: (context, controller) =>\n      const Padding(padding: .all(8), child: Text('Popover content')),\n  builder: (context, controller, child) => child!,\n  child: FButton(onPress: () {}, child: const Text('Show Popover')),",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopover/style.html"
+          },
+          {
+            "offset": 27,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopover/popoverBuilder.html"
+          },
+          {
+            "offset": 141,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopover/builder.html"
+          },
+          {
+            "offset": 192,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopover/child.html"
+          },
+          {
+            "offset": 199,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 207,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/onPress.html"
+          },
+          {
+            "offset": 223,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/child.html"
+          }
+        ],
+        "tooltips": [
+          {
+            "offset": 0,
+            "length": 6,
+            "snippet": {
+              "text": "{FPopoverStyle Function(FPopoverStyle)? style}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 1,
+                  "length": 13,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverStyle-class.html"
+                },
+                {
+                  "offset": 24,
+                  "length": 13,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverStyle-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 8,
+            "length": 5,
+            "snippet": {
+              "text": "FPopoverStyle style",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 13,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverStyle-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 27,
+            "length": 15,
+            "snippet": {
+              "text": "{\n  required Widget Function(BuildContext, FPopoverController) popoverBuilder,\n}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 43,
+                  "length": 18,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverController-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 44,
+            "length": 7,
+            "snippet": {
+              "text": "BuildContext context",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 53,
+            "length": 10,
+            "snippet": {
+              "text": "FPopoverController controller",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 18,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverController-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 141,
+            "length": 8,
+            "snippet": {
+              "text": "{\n  Widget Function(BuildContext, FPopoverController, Widget?) builder = _builder,\n}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 34,
+                  "length": 18,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverController-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 151,
+            "length": 7,
+            "snippet": {
+              "text": "BuildContext context",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 160,
+            "length": 10,
+            "snippet": {
+              "text": "FPopoverController controller",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 18,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverController-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 172,
+            "length": 5,
+            "snippet": {
+              "text": "Widget? child",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 192,
+            "length": 6,
+            "snippet": {
+              "text": "{Widget? child}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 199,
+            "length": 7,
+            "snippet": {
+              "text": "FButton({\n  required void Function()? onPress,\n  required Widget child,\n  FBaseButtonStyle Function(FButtonStyle) style = _primary,\n  void Function()? onLongPress,\n  void Function()? onSecondaryPress,\n  void Function()? onSecondaryLongPress,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  void Function(bool)? onHoverChange,\n  void Function(FWidgetStatesDelta)? onStateChange,\n  bool selected = false,\n  Map<ShortcutActivator, Intent>? shortcuts,\n  Map<Type, Action<Intent>>? actions,\n  MainAxisSize mainAxisSize = .max,\n  MainAxisAlignment mainAxisAlignment = .center,\n  CrossAxisAlignment crossAxisAlignment = .center,\n  TextBaseline? textBaseline,\n  Widget? prefix,\n  Widget? suffix,\n  Key? key,\n})\n",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 7,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+                },
+                {
+                  "offset": 38,
+                  "length": 7,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+                },
+                {
+                  "offset": 65,
+                  "length": 5,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+                },
+                {
+                  "offset": 114,
+                  "length": 5,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+                },
+                {
+                  "offset": 74,
+                  "length": 16,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FBaseButtonStyle-class.html"
+                },
+                {
+                  "offset": 100,
+                  "length": 12,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButtonStyle-class.html"
+                },
+                {
+                  "offset": 151,
+                  "length": 11,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+                },
+                {
+                  "offset": 183,
+                  "length": 16,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+                },
+                {
+                  "offset": 220,
+                  "length": 20,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+                },
+                {
+                  "offset": 249,
+                  "length": 9,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+                },
+                {
+                  "offset": 281,
+                  "length": 9,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+                },
+                {
+                  "offset": 315,
+                  "length": 13,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+                },
+                {
+                  "offset": 353,
+                  "length": 13,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+                },
+                {
+                  "offset": 405,
+                  "length": 13,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+                },
+                {
+                  "offset": 384,
+                  "length": 18,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStatesDelta-class.html"
+                },
+                {
+                  "offset": 427,
+                  "length": 8,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+                },
+                {
+                  "offset": 479,
+                  "length": 9,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+                },
+                {
+                  "offset": 519,
+                  "length": 7,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+                },
+                {
+                  "offset": 543,
+                  "length": 12,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+                },
+                {
+                  "offset": 584,
+                  "length": 17,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+                },
+                {
+                  "offset": 634,
+                  "length": 18,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+                },
+                {
+                  "offset": 680,
+                  "length": 12,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+                },
+                {
+                  "offset": 704,
+                  "length": 6,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+                },
+                {
+                  "offset": 722,
+                  "length": 6,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+                },
+                {
+                  "offset": 737,
+                  "length": 3,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+                }
+              ],
+              "tooltips": [],
+              "container": {
+                "name": "FButton",
+                "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton-class.html"
+              }
+            }
+          },
+          {
+            "offset": 207,
+            "length": 8,
+            "snippet": {
+              "text": "{required void Function()? onPress}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 223,
+            "length": 6,
+            "snippet": {
+              "text": "{required Widget child}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          }
+        ]
+      }
+    ],
+    "Control": [
+      {
+        "name": "`.lifted()`",
+        "description": "Externally controls the popover's visibility.",
+        "text": "control: .lifted(\n    shown: false,\n    onChange: (shown) {},\n    motion: const FPopoverMotion(),\n  ),",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 10,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverControl/FPopoverControl.lifted.html"
+          },
+          {
+            "offset": 22,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverControl/FPopoverControl.lifted.html"
+          },
+          {
+            "offset": 40,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverControl/FPopoverControl.lifted.html"
+          },
+          {
+            "offset": 66,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverControl/FPopoverControl.lifted.html"
+          },
+          {
+            "offset": 80,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverMotion/FPopoverMotion.html"
+          },
+          {
+            "offset": 0,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopover/control.html"
+          }
+        ],
+        "tooltips": [
+          {
+            "offset": 10,
+            "length": 6,
+            "snippet": {
+              "text": "FPopoverControl.lifted({\n  required bool shown,\n  required void Function(bool) onChange,\n  FPopoverMotion motion,\n})\n",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 22,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverControl/FPopoverControl.lifted.html"
+                },
+                {
+                  "offset": 41,
+                  "length": 5,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverControl/FPopoverControl.lifted.html"
+                },
+                {
+                  "offset": 79,
+                  "length": 8,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverControl/FPopoverControl.lifted.html"
+                },
+                {
+                  "offset": 106,
+                  "length": 6,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverControl/FPopoverControl.lifted.html"
+                },
+                {
+                  "offset": 91,
+                  "length": 14,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverMotion-class.html"
+                }
+              ],
+              "tooltips": [],
+              "container": {
+                "name": "FPopoverControl",
+                "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverControl-class.html"
+              }
+            }
+          },
+          {
+            "offset": 22,
+            "length": 6,
+            "snippet": {
+              "text": "{required bool shown}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 40,
+            "length": 9,
+            "snippet": {
+              "text": "{required void Function(bool) onChange}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 51,
+            "length": 5,
+            "snippet": {
+              "text": "bool shown",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 66,
+            "length": 7,
+            "snippet": {
+              "text": "{FPopoverMotion motion}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 1,
+                  "length": 14,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverMotion-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 80,
+            "length": 14,
+            "snippet": {
+              "text": "FPopoverMotion({\n  Duration entranceDuration = const Duration(milliseconds: 100),\n  Duration exitDuration = const Duration(milliseconds: 100),\n  Curve expandCurve = Curves.easeOutCubic,\n  Curve collapseCurve = Curves.easeInCubic,\n  Curve fadeInCurve = Curves.linear,\n  Curve fadeOutCurve = Curves.linear,\n  Animatable<double> scaleTween = const FImmutableTween(begin: 0.93, end: 1),\n  Animatable<double> fadeTween = const FImmutableTween(begin: 0, end: 1),\n})\n",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 14,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverMotion/FPopoverMotion.html"
+                },
+                {
+                  "offset": 28,
+                  "length": 16,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverMotion/FPopoverMotion.html"
+                },
+                {
+                  "offset": 93,
+                  "length": 12,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverMotion/FPopoverMotion.html"
+                },
+                {
+                  "offset": 151,
+                  "length": 11,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverMotion/FPopoverMotion.html"
+                },
+                {
+                  "offset": 194,
+                  "length": 13,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverMotion/FPopoverMotion.html"
+                },
+                {
+                  "offset": 238,
+                  "length": 11,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverMotion/FPopoverMotion.html"
+                },
+                {
+                  "offset": 275,
+                  "length": 12,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverMotion/FPopoverMotion.html"
+                },
+                {
+                  "offset": 326,
+                  "length": 10,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverMotion/FPopoverMotion.html"
+                },
+                {
+                  "offset": 345,
+                  "length": 15,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FImmutableTween/FImmutableTween.html"
+                },
+                {
+                  "offset": 361,
+                  "length": 5,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FImmutableTween/begin.html"
+                },
+                {
+                  "offset": 374,
+                  "length": 3,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FImmutableTween/end.html"
+                },
+                {
+                  "offset": 404,
+                  "length": 9,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverMotion/FPopoverMotion.html"
+                },
+                {
+                  "offset": 422,
+                  "length": 15,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FImmutableTween/FImmutableTween.html"
+                },
+                {
+                  "offset": 438,
+                  "length": 5,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FImmutableTween/begin.html"
+                },
+                {
+                  "offset": 448,
+                  "length": 3,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FImmutableTween/end.html"
+                }
+              ],
+              "tooltips": [],
+              "container": {
+                "name": "FPopoverMotion",
+                "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverMotion-class.html"
+              }
+            }
+          },
+          {
+            "offset": 0,
+            "length": 8,
+            "snippet": {
+              "text": "{FPopoverControl control = const .managed()}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 1,
+                  "length": 15,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverControl-class.html"
+                },
+                {
+                  "offset": 34,
+                  "length": 7,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverControl/FPopoverControl.managed.html"
+                }
+              ],
+              "tooltips": []
+            }
+          }
+        ]
+      },
+      {
+        "name": "`.managed()` with internal controller",
+        "description": "Manages the popover state internally.",
+        "text": "control: .managed(\n    initial: false,\n    onChange: (shown) {},\n    motion: const FPopoverMotion(),\n  ),",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 10,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverControl/FPopoverControl.managed.html"
+          },
+          {
+            "offset": 23,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverControl/FPopoverControl.managed.html"
+          },
+          {
+            "offset": 43,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverControl/FPopoverControl.managed.html"
+          },
+          {
+            "offset": 69,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverControl/FPopoverControl.managed.html"
+          },
+          {
+            "offset": 83,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverMotion/FPopoverMotion.html"
+          },
+          {
+            "offset": 0,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopover/control.html"
+          }
+        ],
+        "tooltips": [
+          {
+            "offset": 10,
+            "length": 7,
+            "snippet": {
+              "text": "FPopoverControl.managed({\n  FPopoverController? controller,\n  bool? initial,\n  FPopoverMotion? motion,\n  void Function(bool)? onChange,\n})\n",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 23,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverControl/FPopoverControl.managed.html"
+                },
+                {
+                  "offset": 48,
+                  "length": 10,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverControl/FPopoverControl.managed.html"
+                },
+                {
+                  "offset": 28,
+                  "length": 19,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverController-class.html"
+                },
+                {
+                  "offset": 68,
+                  "length": 7,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverControl/FPopoverControl.managed.html"
+                },
+                {
+                  "offset": 95,
+                  "length": 6,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverControl/FPopoverControl.managed.html"
+                },
+                {
+                  "offset": 79,
+                  "length": 15,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverMotion-class.html"
+                },
+                {
+                  "offset": 126,
+                  "length": 8,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverControl/FPopoverControl.managed.html"
+                }
+              ],
+              "tooltips": [],
+              "container": {
+                "name": "FPopoverControl",
+                "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverControl-class.html"
+              }
+            }
+          },
+          {
+            "offset": 23,
+            "length": 8,
+            "snippet": {
+              "text": "{bool? initial}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 43,
+            "length": 9,
+            "snippet": {
+              "text": "{void Function(bool)? onChange}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 54,
+            "length": 5,
+            "snippet": {
+              "text": "bool shown",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 69,
+            "length": 7,
+            "snippet": {
+              "text": "{FPopoverMotion? motion}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 1,
+                  "length": 15,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverMotion-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 83,
+            "length": 14,
+            "snippet": {
+              "text": "FPopoverMotion({\n  Duration entranceDuration = const Duration(milliseconds: 100),\n  Duration exitDuration = const Duration(milliseconds: 100),\n  Curve expandCurve = Curves.easeOutCubic,\n  Curve collapseCurve = Curves.easeInCubic,\n  Curve fadeInCurve = Curves.linear,\n  Curve fadeOutCurve = Curves.linear,\n  Animatable<double> scaleTween = const FImmutableTween(begin: 0.93, end: 1),\n  Animatable<double> fadeTween = const FImmutableTween(begin: 0, end: 1),\n})\n",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 14,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverMotion/FPopoverMotion.html"
+                },
+                {
+                  "offset": 28,
+                  "length": 16,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverMotion/FPopoverMotion.html"
+                },
+                {
+                  "offset": 93,
+                  "length": 12,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverMotion/FPopoverMotion.html"
+                },
+                {
+                  "offset": 151,
+                  "length": 11,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverMotion/FPopoverMotion.html"
+                },
+                {
+                  "offset": 194,
+                  "length": 13,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverMotion/FPopoverMotion.html"
+                },
+                {
+                  "offset": 238,
+                  "length": 11,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverMotion/FPopoverMotion.html"
+                },
+                {
+                  "offset": 275,
+                  "length": 12,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverMotion/FPopoverMotion.html"
+                },
+                {
+                  "offset": 326,
+                  "length": 10,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverMotion/FPopoverMotion.html"
+                },
+                {
+                  "offset": 345,
+                  "length": 15,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FImmutableTween/FImmutableTween.html"
+                },
+                {
+                  "offset": 361,
+                  "length": 5,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FImmutableTween/begin.html"
+                },
+                {
+                  "offset": 374,
+                  "length": 3,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FImmutableTween/end.html"
+                },
+                {
+                  "offset": 404,
+                  "length": 9,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverMotion/FPopoverMotion.html"
+                },
+                {
+                  "offset": 422,
+                  "length": 15,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FImmutableTween/FImmutableTween.html"
+                },
+                {
+                  "offset": 438,
+                  "length": 5,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FImmutableTween/begin.html"
+                },
+                {
+                  "offset": 448,
+                  "length": 3,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FImmutableTween/end.html"
+                }
+              ],
+              "tooltips": [],
+              "container": {
+                "name": "FPopoverMotion",
+                "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverMotion-class.html"
+              }
+            }
+          },
+          {
+            "offset": 0,
+            "length": 8,
+            "snippet": {
+              "text": "{FPopoverControl control = const .managed()}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 1,
+                  "length": 15,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverControl-class.html"
+                },
+                {
+                  "offset": 34,
+                  "length": 7,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverControl/FPopoverControl.managed.html"
+                }
+              ],
+              "tooltips": []
+            }
+          }
+        ]
+      },
+      {
+        "name": "`.managed()` with external controller",
+        "description": "Uses an external controller to control the popover's state.",
+        "text": "control: .managed(\n    // For demonstration purposes only. Don't create a controller inline, store it in a State instead.\n    controller: FPopoverController(\n      vsync: vsync,\n      shown: false,\n      motion: const FPopoverMotion(),\n    ),\n    onChange: (shown) {},\n  ),",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 10,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverControl/FPopoverControl.managed.html"
+          },
+          {
+            "offset": 126,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverControl/FPopoverControl.managed.html"
+          },
+          {
+            "offset": 138,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverController/FPopoverController.html"
+          },
+          {
+            "offset": 164,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverController/FPopoverController.html"
+          },
+          {
+            "offset": 184,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverController/FPopoverController.html"
+          },
+          {
+            "offset": 204,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverController/FPopoverController.html"
+          },
+          {
+            "offset": 218,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverMotion/FPopoverMotion.html"
+          },
+          {
+            "offset": 247,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverControl/FPopoverControl.managed.html"
+          },
+          {
+            "offset": 0,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopover/control.html"
+          }
+        ],
+        "tooltips": [
+          {
+            "offset": 10,
+            "length": 7,
+            "snippet": {
+              "text": "FPopoverControl.managed({\n  FPopoverController? controller,\n  bool? initial,\n  FPopoverMotion? motion,\n  void Function(bool)? onChange,\n})\n",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 23,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverControl/FPopoverControl.managed.html"
+                },
+                {
+                  "offset": 48,
+                  "length": 10,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverControl/FPopoverControl.managed.html"
+                },
+                {
+                  "offset": 28,
+                  "length": 19,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverController-class.html"
+                },
+                {
+                  "offset": 68,
+                  "length": 7,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverControl/FPopoverControl.managed.html"
+                },
+                {
+                  "offset": 95,
+                  "length": 6,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverControl/FPopoverControl.managed.html"
+                },
+                {
+                  "offset": 79,
+                  "length": 15,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverMotion-class.html"
+                },
+                {
+                  "offset": 126,
+                  "length": 8,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverControl/FPopoverControl.managed.html"
+                }
+              ],
+              "tooltips": [],
+              "container": {
+                "name": "FPopoverControl",
+                "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverControl-class.html"
+              }
+            }
+          },
+          {
+            "offset": 126,
+            "length": 11,
+            "snippet": {
+              "text": "{FPopoverController? controller}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 1,
+                  "length": 19,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverController-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 138,
+            "length": 18,
+            "snippet": {
+              "text": "FPopoverController({\n  required TickerProvider vsync,\n  bool shown = false,\n  FPopoverMotion motion = const .new(),\n})\n",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 18,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverController/FPopoverController.html"
+                },
+                {
+                  "offset": 47,
+                  "length": 5,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverController/FPopoverController.html"
+                },
+                {
+                  "offset": 61,
+                  "length": 5,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverController/FPopoverController.html"
+                },
+                {
+                  "offset": 93,
+                  "length": 6,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverController/FPopoverController.html"
+                },
+                {
+                  "offset": 78,
+                  "length": 14,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverMotion-class.html"
+                },
+                {
+                  "offset": 109,
+                  "length": 3,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverMotion/FPopoverMotion.html"
+                }
+              ],
+              "tooltips": [],
+              "container": {
+                "name": "FPopoverController",
+                "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverController-class.html"
+              }
+            }
+          },
+          {
+            "offset": 164,
+            "length": 6,
+            "snippet": {
+              "text": "{required TickerProvider vsync}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 184,
+            "length": 6,
+            "snippet": {
+              "text": "{bool shown = false}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 204,
+            "length": 7,
+            "snippet": {
+              "text": "{FPopoverMotion motion = const .new()}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 1,
+                  "length": 14,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverMotion-class.html"
+                },
+                {
+                  "offset": 32,
+                  "length": 3,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverMotion/FPopoverMotion.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 218,
+            "length": 14,
+            "snippet": {
+              "text": "FPopoverMotion({\n  Duration entranceDuration = const Duration(milliseconds: 100),\n  Duration exitDuration = const Duration(milliseconds: 100),\n  Curve expandCurve = Curves.easeOutCubic,\n  Curve collapseCurve = Curves.easeInCubic,\n  Curve fadeInCurve = Curves.linear,\n  Curve fadeOutCurve = Curves.linear,\n  Animatable<double> scaleTween = const FImmutableTween(begin: 0.93, end: 1),\n  Animatable<double> fadeTween = const FImmutableTween(begin: 0, end: 1),\n})\n",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 14,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverMotion/FPopoverMotion.html"
+                },
+                {
+                  "offset": 28,
+                  "length": 16,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverMotion/FPopoverMotion.html"
+                },
+                {
+                  "offset": 93,
+                  "length": 12,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverMotion/FPopoverMotion.html"
+                },
+                {
+                  "offset": 151,
+                  "length": 11,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverMotion/FPopoverMotion.html"
+                },
+                {
+                  "offset": 194,
+                  "length": 13,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverMotion/FPopoverMotion.html"
+                },
+                {
+                  "offset": 238,
+                  "length": 11,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverMotion/FPopoverMotion.html"
+                },
+                {
+                  "offset": 275,
+                  "length": 12,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverMotion/FPopoverMotion.html"
+                },
+                {
+                  "offset": 326,
+                  "length": 10,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverMotion/FPopoverMotion.html"
+                },
+                {
+                  "offset": 345,
+                  "length": 15,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FImmutableTween/FImmutableTween.html"
+                },
+                {
+                  "offset": 361,
+                  "length": 5,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FImmutableTween/begin.html"
+                },
+                {
+                  "offset": 374,
+                  "length": 3,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FImmutableTween/end.html"
+                },
+                {
+                  "offset": 404,
+                  "length": 9,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverMotion/FPopoverMotion.html"
+                },
+                {
+                  "offset": 422,
+                  "length": 15,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FImmutableTween/FImmutableTween.html"
+                },
+                {
+                  "offset": 438,
+                  "length": 5,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FImmutableTween/begin.html"
+                },
+                {
+                  "offset": 448,
+                  "length": 3,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FImmutableTween/end.html"
+                }
+              ],
+              "tooltips": [],
+              "container": {
+                "name": "FPopoverMotion",
+                "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverMotion-class.html"
+              }
+            }
+          },
+          {
+            "offset": 247,
+            "length": 9,
+            "snippet": {
+              "text": "{void Function(bool)? onChange}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 258,
+            "length": 5,
+            "snippet": {
+              "text": "bool shown",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 0,
+            "length": 8,
+            "snippet": {
+              "text": "{FPopoverControl control = const .managed()}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 1,
+                  "length": 15,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverControl-class.html"
+                },
+                {
+                  "offset": 34,
+                  "length": 7,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverControl/FPopoverControl.managed.html"
+                }
+              ],
+              "tooltips": []
+            }
+          }
+        ]
+      }
+    ],
+    "Layout": [
+      {
+        "name": "Layout",
+        "description": "",
+        "text": "constraints: const FPortalConstraints(),\n  popoverAnchor: .topCenter,\n  childAnchor: .bottomCenter,\n  spacing: const .spacing(4),\n  overflow: .flip,\n  offset: .zero,",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopover/constraints.html"
+          },
+          {
+            "offset": 19,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FPortalConstraints/FPortalConstraints.html"
+          },
+          {
+            "offset": 43,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopover/popoverAnchor.html"
+          },
+          {
+            "offset": 72,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopover/childAnchor.html"
+          },
+          {
+            "offset": 102,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopover/spacing.html"
+          },
+          {
+            "offset": 118,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FPortalSpacing/FPortalSpacing.spacing.html"
+          },
+          {
+            "offset": 132,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopover/overflow.html"
+          },
+          {
+            "offset": 143,
+            "length": 4,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FPortalOverflow/flip-constant.html"
+          },
+          {
+            "offset": 151,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopover/offset.html"
+          }
+        ],
+        "tooltips": [
+          {
+            "offset": 0,
+            "length": 12,
+            "snippet": {
+              "text": "{FPortalConstraints constraints = const FPortalConstraints()}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 1,
+                  "length": 18,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FPortalConstraints-class.html"
+                },
+                {
+                  "offset": 40,
+                  "length": 18,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FPortalConstraints/FPortalConstraints.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 19,
+            "length": 18,
+            "snippet": {
+              "text": "FPortalConstraints({\n  double minWidth,\n  double maxWidth,\n  double minHeight,\n  double maxHeight,\n})\n",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 18,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FPortalConstraints/FPortalConstraints.html"
+                },
+                {
+                  "offset": 30,
+                  "length": 8,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FPortalConstraints/FPortalConstraints.html"
+                },
+                {
+                  "offset": 49,
+                  "length": 8,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FPortalConstraints/FPortalConstraints.html"
+                },
+                {
+                  "offset": 68,
+                  "length": 9,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FPortalConstraints/FPortalConstraints.html"
+                },
+                {
+                  "offset": 88,
+                  "length": 9,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FPortalConstraints/FPortalConstraints.html"
+                }
+              ],
+              "tooltips": [],
+              "container": {
+                "name": "FPortalConstraints",
+                "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FPortalConstraints-class.html"
+              }
+            }
+          },
+          {
+            "offset": 43,
+            "length": 14,
+            "snippet": {
+              "text": "{AlignmentGeometry? popoverAnchor}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 72,
+            "length": 12,
+            "snippet": {
+              "text": "{AlignmentGeometry? childAnchor}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 102,
+            "length": 8,
+            "snippet": {
+              "text": "{FPortalSpacing spacing = const .spacing(4)}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 1,
+                  "length": 14,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FPortalSpacing-class.html"
+                },
+                {
+                  "offset": 33,
+                  "length": 7,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FPortalSpacing/FPortalSpacing.spacing.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 118,
+            "length": 7,
+            "snippet": {
+              "text": "FPortalSpacing.spacing(double spacing, {bool diagonal})\n",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 22,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FPortalSpacing/FPortalSpacing.spacing.html"
+                },
+                {
+                  "offset": 45,
+                  "length": 8,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FPortalSpacing/FPortalSpacing.spacing.html"
+                }
+              ],
+              "tooltips": [],
+              "container": {
+                "name": "FPortalSpacing",
+                "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FPortalSpacing-class.html"
+              }
+            }
+          },
+          {
+            "offset": 132,
+            "length": 9,
+            "snippet": {
+              "text": "{FPortalOverflow overflow = .flip}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 1,
+                  "length": 15,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FPortalOverflow-class.html"
+                },
+                {
+                  "offset": 29,
+                  "length": 4,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FPortalOverflow/flip-constant.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 143,
+            "length": 4,
+            "snippet": {
+              "text": "FPortalOverflow flip",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 15,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FPortalOverflow-class.html"
+                }
+              ],
+              "tooltips": [],
+              "container": {
+                "name": "FPortalOverflow",
+                "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FPortalOverflow-class.html"
+              }
+            }
+          },
+          {
+            "offset": 151,
+            "length": 7,
+            "snippet": {
+              "text": "{Offset offset = .zero}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          }
+        ]
+      }
+    ],
+    "Tap Region": [
+      {
+        "name": "Tap Region",
+        "description": "",
+        "text": "groupId: null,\n  hideRegion: .excludeChild,\n  onTapHide: () {},",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopover/groupId.html"
+          },
+          {
+            "offset": 17,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopover/hideRegion.html"
+          },
+          {
+            "offset": 30,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverHideRegion.html#excludeChild"
+          },
+          {
+            "offset": 46,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopover/onTapHide.html"
+          }
+        ],
+        "tooltips": [
+          {
+            "offset": 0,
+            "length": 8,
+            "snippet": {
+              "text": "{Object? groupId}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 17,
+            "length": 11,
+            "snippet": {
+              "text": "{FPopoverHideRegion hideRegion = .excludeChild}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 1,
+                  "length": 18,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverHideRegion.html"
+                },
+                {
+                  "offset": 34,
+                  "length": 12,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverHideRegion.html#excludeChild"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 30,
+            "length": 12,
+            "snippet": {
+              "text": "FPopoverHideRegion excludeChild",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 18,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverHideRegion.html"
+                }
+              ],
+              "tooltips": [],
+              "container": {
+                "name": "FPopoverHideRegion",
+                "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverHideRegion.html"
+              }
+            }
+          },
+          {
+            "offset": 46,
+            "length": 10,
+            "snippet": {
+              "text": "{void Function()? onTapHide}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          }
+        ]
+      }
+    ],
+    "Accessibility": [
+      {
+        "name": "Accessibility",
+        "description": "",
+        "text": "autofocus: null,\n  focusNode: null,\n  onFocusChange: (focused) {},\n  semanticsLabel: 'Popover',\n  traversalEdgeBehavior: null,\n  barrierSemanticsLabel: null,\n  barrierSemanticsDismissible: true,\n  shortcuts: null,",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopover/autofocus.html"
+          },
+          {
+            "offset": 19,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopover/focusNode.html"
+          },
+          {
+            "offset": 38,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopover/onFocusChange.html"
+          },
+          {
+            "offset": 69,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopover/semanticsLabel.html"
+          },
+          {
+            "offset": 98,
+            "length": 21,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopover/traversalEdgeBehavior.html"
+          },
+          {
+            "offset": 129,
+            "length": 21,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopover/barrierSemanticsLabel.html"
+          },
+          {
+            "offset": 160,
+            "length": 27,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopover/barrierSemanticsDismissible.html"
+          },
+          {
+            "offset": 197,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopover/shortcuts.html"
+          }
+        ],
+        "tooltips": [
+          {
+            "offset": 0,
+            "length": 10,
+            "snippet": {
+              "text": "{bool? autofocus}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 19,
+            "length": 10,
+            "snippet": {
+              "text": "{FocusScopeNode? focusNode}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 38,
+            "length": 14,
+            "snippet": {
+              "text": "{void Function(bool)? onFocusChange}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 54,
+            "length": 7,
+            "snippet": {
+              "text": "bool focused",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 69,
+            "length": 15,
+            "snippet": {
+              "text": "{String? semanticsLabel}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 98,
+            "length": 22,
+            "snippet": {
+              "text": "{TraversalEdgeBehavior? traversalEdgeBehavior}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 129,
+            "length": 22,
+            "snippet": {
+              "text": "{String? barrierSemanticsLabel}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 160,
+            "length": 28,
+            "snippet": {
+              "text": "{bool barrierSemanticsDismissible = true}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 197,
+            "length": 10,
+            "snippet": {
+              "text": "{Map<ShortcutActivator, void Function()>? shortcuts}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

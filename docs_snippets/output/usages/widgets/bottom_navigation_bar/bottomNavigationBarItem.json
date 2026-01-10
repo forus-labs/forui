@@ -1,0 +1,339 @@
+{
+  "text": "FBottomNavigationBarItem(\n  {{Core}}\n  {{Accessibility}}\n  {{Callbacks}}\n)",
+  "highlights": [],
+  "links": [
+    {
+      "offset": 0,
+      "length": 24,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.bottom_navigation_bar/FBottomNavigationBarItem/FBottomNavigationBarItem.html"
+    }
+  ],
+  "tooltips": [
+    {
+      "offset": 0,
+      "length": 24,
+      "snippet": {
+        "text": "FBottomNavigationBarItem({\n  required Widget icon,\n  Widget? label,\n  FBottomNavigationBarItemStyle Function(FBottomNavigationBarItemStyle)?\n  style,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  void Function(bool)? onHoverChange,\n  void Function(FWidgetStatesDelta)? onStateChange,\n  Key? key,\n})\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 24,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.bottom_navigation_bar/FBottomNavigationBarItem/FBottomNavigationBarItem.html"
+          },
+          {
+            "offset": 45,
+            "length": 4,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.bottom_navigation_bar/FBottomNavigationBarItem/FBottomNavigationBarItem.html"
+          },
+          {
+            "offset": 61,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.bottom_navigation_bar/FBottomNavigationBarItem/FBottomNavigationBarItem.html"
+          },
+          {
+            "offset": 143,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.bottom_navigation_bar/FBottomNavigationBarItem/FBottomNavigationBarItem.html"
+          },
+          {
+            "offset": 70,
+            "length": 29,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.bottom_navigation_bar/FBottomNavigationBarItemStyle-class.html"
+          },
+          {
+            "offset": 109,
+            "length": 29,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.bottom_navigation_bar/FBottomNavigationBarItemStyle-class.html"
+          },
+          {
+            "offset": 157,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.bottom_navigation_bar/FBottomNavigationBarItem/FBottomNavigationBarItem.html"
+          },
+          {
+            "offset": 189,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.bottom_navigation_bar/FBottomNavigationBarItem/FBottomNavigationBarItem.html"
+          },
+          {
+            "offset": 223,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.bottom_navigation_bar/FBottomNavigationBarItem/FBottomNavigationBarItem.html"
+          },
+          {
+            "offset": 261,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.bottom_navigation_bar/FBottomNavigationBarItem/FBottomNavigationBarItem.html"
+          },
+          {
+            "offset": 313,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.bottom_navigation_bar/FBottomNavigationBarItem/FBottomNavigationBarItem.html"
+          },
+          {
+            "offset": 292,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStatesDelta-class.html"
+          },
+          {
+            "offset": 335,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.bottom_navigation_bar/FBottomNavigationBarItem/FBottomNavigationBarItem.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FBottomNavigationBarItem",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.bottom_navigation_bar/FBottomNavigationBarItem-class.html"
+        }
+      }
+    }
+  ],
+  "categories": {
+    "Core": [
+      {
+        "name": "Core",
+        "description": "",
+        "text": "style: (style) => style,\n  icon: const Icon(FIcons.house),\n  label: const Text('Home'),",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.bottom_navigation_bar/FBottomNavigationBarItem/style.html"
+          },
+          {
+            "offset": 27,
+            "length": 4,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.bottom_navigation_bar/FBottomNavigationBarItem/icon.html"
+          },
+          {
+            "offset": 44,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/house.html"
+          },
+          {
+            "offset": 61,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.bottom_navigation_bar/FBottomNavigationBarItem/label.html"
+          }
+        ],
+        "tooltips": [
+          {
+            "offset": 0,
+            "length": 6,
+            "snippet": {
+              "text": "{\n  FBottomNavigationBarItemStyle Function(FBottomNavigationBarItemStyle)? style,\n}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 4,
+                  "length": 29,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.bottom_navigation_bar/FBottomNavigationBarItemStyle-class.html"
+                },
+                {
+                  "offset": 43,
+                  "length": 29,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.bottom_navigation_bar/FBottomNavigationBarItemStyle-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 8,
+            "length": 5,
+            "snippet": {
+              "text": "FBottomNavigationBarItemStyle style",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 29,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.bottom_navigation_bar/FBottomNavigationBarItemStyle-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 27,
+            "length": 5,
+            "snippet": {
+              "text": "{required Widget icon}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 44,
+            "length": 12,
+            "snippet": {
+              "text": "IconData house",
+              "highlights": [],
+              "links": [],
+              "tooltips": [],
+              "container": {
+                "name": "FIcons",
+                "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons-class.html"
+              }
+            }
+          },
+          {
+            "offset": 61,
+            "length": 6,
+            "snippet": {
+              "text": "{Widget? label}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          }
+        ]
+      }
+    ],
+    "Accessibility": [
+      {
+        "name": "Accessibility",
+        "description": "",
+        "text": "autofocus: false,\n  focusNode: null,\n  onFocusChange: (focused) {},",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.bottom_navigation_bar/FBottomNavigationBarItem/autofocus.html"
+          },
+          {
+            "offset": 20,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.bottom_navigation_bar/FBottomNavigationBarItem/focusNode.html"
+          },
+          {
+            "offset": 39,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.bottom_navigation_bar/FBottomNavigationBarItem/onFocusChange.html"
+          }
+        ],
+        "tooltips": [
+          {
+            "offset": 0,
+            "length": 10,
+            "snippet": {
+              "text": "{bool autofocus = false}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 20,
+            "length": 10,
+            "snippet": {
+              "text": "{FocusNode? focusNode}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 39,
+            "length": 14,
+            "snippet": {
+              "text": "{void Function(bool)? onFocusChange}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 55,
+            "length": 7,
+            "snippet": {
+              "text": "bool focused",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          }
+        ]
+      }
+    ],
+    "Callbacks": [
+      {
+        "name": "Callbacks",
+        "description": "",
+        "text": "onHoverChange: (hovered) {},\n  onStateChange: (delta) {},",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.bottom_navigation_bar/FBottomNavigationBarItem/onHoverChange.html"
+          },
+          {
+            "offset": 31,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.bottom_navigation_bar/FBottomNavigationBarItem/onStateChange.html"
+          }
+        ],
+        "tooltips": [
+          {
+            "offset": 0,
+            "length": 14,
+            "snippet": {
+              "text": "{void Function(bool)? onHoverChange}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 16,
+            "length": 7,
+            "snippet": {
+              "text": "bool hovered",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 31,
+            "length": 14,
+            "snippet": {
+              "text": "{void Function(FWidgetStatesDelta)? onStateChange}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 15,
+                  "length": 18,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStatesDelta-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 47,
+            "length": 5,
+            "snippet": {
+              "text": "FWidgetStatesDelta delta",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 18,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStatesDelta-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

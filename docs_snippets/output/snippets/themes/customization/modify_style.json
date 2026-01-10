@@ -1,0 +1,260 @@
+{
+  "text": "FAccordionStyle accordionStyle({\n  required FColors colors,\n  required FTypography typography,\n  required FStyle style,\n}) => FAccordionStyle(\n  titleTextStyle: FWidgetStateMap({\n    // This text style is applied when the accordion is hovered OR pressed OR focused (new).\n    WidgetState.hovered | WidgetState.pressed | WidgetState.focused: typography\n        .base\n        .copyWith(\n          fontWeight: .w500,\n          color: colors.foreground,\n          decoration: .underline,\n        ),\n\n    // This text style is applied when the accordion is NOT hovered OR pressed.\n    WidgetState.any: typography.base.copyWith(\n      fontWeight: .w500,\n      color: colors.foreground,\n    ),\n  }),\n);\n",
+  "highlights": [
+    {
+      "start": 8,
+      "end": 10
+    }
+  ],
+  "links": [
+    {
+      "offset": 0,
+      "length": 15,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionStyle-class.html"
+    },
+    {
+      "offset": 44,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors-class.html"
+    },
+    {
+      "offset": 71,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FTypography-class.html"
+    },
+    {
+      "offset": 106,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FStyle-class.html"
+    },
+    {
+      "offset": 126,
+      "length": 15,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionStyle/FAccordionStyle.html"
+    },
+    {
+      "offset": 145,
+      "length": 14,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionStyle/titleTextStyle.html"
+    },
+    {
+      "offset": 161,
+      "length": 15,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStateMap/FWidgetStateMap.html"
+    },
+    {
+      "offset": 361,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FTypography/base.html"
+    },
+    {
+      "offset": 438,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors/foreground.html"
+    },
+    {
+      "offset": 608,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FTypography/base.html"
+    },
+    {
+      "offset": 668,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors/foreground.html"
+    }
+  ],
+  "tooltips": [
+    {
+      "offset": 126,
+      "length": 15,
+      "snippet": {
+        "text": "FAccordionStyle({\n  required FWidgetStateMap<TextStyle> titleTextStyle,\n  required TextStyle childTextStyle,\n  required FWidgetStateMap<IconThemeData> iconStyle,\n  required FFocusedOutlineStyle focusedOutlineStyle,\n  required FDividerStyle dividerStyle,\n  required FTappableStyle tappableStyle,\n  EdgeInsetsGeometry titlePadding = const .symmetric(vertical: 15),\n  EdgeInsetsGeometry childPadding = const .only(bottom: 15),\n  FAccordionMotion motion = const FAccordionMotion(),\n})\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionStyle/FAccordionStyle.html"
+          },
+          {
+            "offset": 56,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionStyle/FAccordionStyle.html"
+          },
+          {
+            "offset": 29,
+            "length": 26,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStateMap-class.html"
+          },
+          {
+            "offset": 93,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionStyle/FAccordionStyle.html"
+          },
+          {
+            "offset": 151,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionStyle/FAccordionStyle.html"
+          },
+          {
+            "offset": 120,
+            "length": 30,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStateMap-class.html"
+          },
+          {
+            "offset": 194,
+            "length": 19,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionStyle/FAccordionStyle.html"
+          },
+          {
+            "offset": 173,
+            "length": 20,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FFocusedOutlineStyle-class.html"
+          },
+          {
+            "offset": 240,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionStyle/FAccordionStyle.html"
+          },
+          {
+            "offset": 226,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.divider/FDividerStyle-class.html"
+          },
+          {
+            "offset": 280,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionStyle/FAccordionStyle.html"
+          },
+          {
+            "offset": 265,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappableStyle-class.html"
+          },
+          {
+            "offset": 316,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionStyle/FAccordionStyle.html"
+          },
+          {
+            "offset": 384,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionStyle/FAccordionStyle.html"
+          },
+          {
+            "offset": 443,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionStyle/FAccordionStyle.html"
+          },
+          {
+            "offset": 426,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionMotion-class.html"
+          },
+          {
+            "offset": 458,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionMotion/FAccordionMotion.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FAccordionStyle",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionStyle-class.html"
+        }
+      }
+    },
+    {
+      "offset": 145,
+      "length": 15,
+      "snippet": {
+        "text": "{required FWidgetStateMap<TextStyle> titleTextStyle}",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 10,
+            "length": 26,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStateMap-class.html"
+          }
+        ],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 161,
+      "length": 15,
+      "snippet": {
+        "text": "FWidgetStateMap(Map<WidgetStatesConstraint, TextStyle> _constraints)\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStateMap/FWidgetStateMap.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FWidgetStateMap",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStateMap-class.html"
+        }
+      }
+    },
+    {
+      "offset": 361,
+      "length": 4,
+      "snippet": {
+        "text": "TextStyle base",
+        "highlights": [],
+        "links": [],
+        "tooltips": [],
+        "container": {
+          "name": "FTypography",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FTypography-class.html"
+        }
+      }
+    },
+    {
+      "offset": 438,
+      "length": 10,
+      "snippet": {
+        "text": "Color foreground",
+        "highlights": [],
+        "links": [],
+        "tooltips": [],
+        "container": {
+          "name": "FColors",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors-class.html"
+        }
+      }
+    },
+    {
+      "offset": 608,
+      "length": 4,
+      "snippet": {
+        "text": "TextStyle base",
+        "highlights": [],
+        "links": [],
+        "tooltips": [],
+        "container": {
+          "name": "FTypography",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FTypography-class.html"
+        }
+      }
+    },
+    {
+      "offset": 668,
+      "length": 10,
+      "snippet": {
+        "text": "Color foreground",
+        "highlights": [],
+        "links": [],
+        "tooltips": [],
+        "container": {
+          "name": "FColors",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors-class.html"
+        }
+      }
+    }
+  ]
+}

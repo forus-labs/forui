@@ -1,0 +1,123 @@
+{
+  "text": "@override\nWidget build(BuildContext _) => FCard(\n  image: Container(\n    decoration: BoxDecoration(\n      image: DecorationImage(\n        image: AssetImage(path('avatar.png')),\n        fit: .cover,\n      ),\n    ),\n    height: 200,\n  ),\n  title: const Text('Gratitude'),\n  subtitle: const Text(\n    'The quality of being thankful; readiness to show appreciation for and to return kindness.',\n  ),\n);\n",
+  "highlights": [],
+  "links": [
+    {
+      "offset": 42,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.card/FCard/FCard.html"
+    },
+    {
+      "offset": 51,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.card/FCard/FCard.html"
+    },
+    {
+      "offset": 238,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.card/FCard/FCard.html"
+    },
+    {
+      "offset": 272,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.card/FCard/FCard.html"
+    }
+  ],
+  "tooltips": [
+    {
+      "offset": 42,
+      "length": 5,
+      "snippet": {
+        "text": "FCard({\n  Widget? image,\n  Widget? title,\n  Widget? subtitle,\n  Widget? child,\n  MainAxisSize mainAxisSize = .min,\n  FCardStyle Function(FCardStyle)? style,\n  Key? key,\n})\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.card/FCard/FCard.html"
+          },
+          {
+            "offset": 18,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.card/FCard/FCard.html"
+          },
+          {
+            "offset": 35,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.card/FCard/FCard.html"
+          },
+          {
+            "offset": 52,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.card/FCard/FCard.html"
+          },
+          {
+            "offset": 72,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.card/FCard/FCard.html"
+          },
+          {
+            "offset": 94,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.card/FCard/FCard.html"
+          },
+          {
+            "offset": 150,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.card/FCard/FCard.html"
+          },
+          {
+            "offset": 117,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.card/FCardStyle-class.html"
+          },
+          {
+            "offset": 137,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.card/FCardStyle-class.html"
+          },
+          {
+            "offset": 164,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.card/FCard/FCard.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FCard",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.card/FCard-class.html"
+        }
+      }
+    },
+    {
+      "offset": 51,
+      "length": 6,
+      "snippet": {
+        "text": "{Widget? image}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 238,
+      "length": 6,
+      "snippet": {
+        "text": "{Widget? title}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 272,
+      "length": 9,
+      "snippet": {
+        "text": "{Widget? subtitle}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    }
+  ]
+}

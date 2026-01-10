@@ -1,0 +1,129 @@
+{
+  "text": "FProgress(\n  {{Core}}\n)",
+  "highlights": [],
+  "links": [
+    {
+      "offset": 0,
+      "length": 9,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.progress/FProgress/FProgress.html"
+    }
+  ],
+  "tooltips": [
+    {
+      "offset": 0,
+      "length": 9,
+      "snippet": {
+        "text": "FProgress({\n  FProgressStyle Function(FProgressStyle)? style,\n  String? semanticsLabel,\n  Key? key,\n})\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.progress/FProgress/FProgress.html"
+          },
+          {
+            "offset": 55,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.progress/FProgress/FProgress.html"
+          },
+          {
+            "offset": 14,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.progress/FProgressStyle-class.html"
+          },
+          {
+            "offset": 38,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.progress/FProgressStyle-class.html"
+          },
+          {
+            "offset": 72,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.progress/FProgress/FProgress.html"
+          },
+          {
+            "offset": 95,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.progress/FProgress/FProgress.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FProgress",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.progress/FProgress-class.html"
+        }
+      }
+    }
+  ],
+  "categories": {
+    "Core": [
+      {
+        "name": "Core",
+        "description": "",
+        "text": "style: (style) => style,\n  semanticsLabel: 'Loading',",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.progress/FProgress/style.html"
+          },
+          {
+            "offset": 27,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.progress/FProgress/semanticsLabel.html"
+          }
+        ],
+        "tooltips": [
+          {
+            "offset": 0,
+            "length": 6,
+            "snippet": {
+              "text": "{FProgressStyle Function(FProgressStyle)? style}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 1,
+                  "length": 14,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.progress/FProgressStyle-class.html"
+                },
+                {
+                  "offset": 25,
+                  "length": 14,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.progress/FProgressStyle-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 8,
+            "length": 5,
+            "snippet": {
+              "text": "FProgressStyle style",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 14,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.progress/FProgressStyle-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 27,
+            "length": 15,
+            "snippet": {
+              "text": "{String? semanticsLabel}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,151 @@
+{
+  "text": "@override\nWidget build(BuildContext context) {\n  final typography = context.theme.typography;\n\n  return Text(\n    'Hello World!',\n    style: typography.xs.copyWith(\n      color: context.theme.colors.primaryForeground,\n      fontWeight: .bold,\n    ),\n  );\n}\n",
+  "highlights": [
+    {
+      "start": 7,
+      "end": 10
+    }
+  ],
+  "links": [
+    {
+      "offset": 82,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/typography.html"
+    },
+    {
+      "offset": 76,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext/theme.html"
+    },
+    {
+      "offset": 152,
+      "length": 2,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FTypography/xs.html"
+    },
+    {
+      "offset": 199,
+      "length": 17,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors/primaryForeground.html"
+    },
+    {
+      "offset": 192,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/colors.html"
+    },
+    {
+      "offset": 186,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext/theme.html"
+    }
+  ],
+  "tooltips": [
+    {
+      "offset": 82,
+      "length": 10,
+      "snippet": {
+        "text": "FTypography typography",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FTypography-class.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FThemeData",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+        }
+      }
+    },
+    {
+      "offset": 76,
+      "length": 5,
+      "snippet": {
+        "text": "FThemeData get theme",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FThemeBuildContext",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext.html"
+        }
+      }
+    },
+    {
+      "offset": 152,
+      "length": 2,
+      "snippet": {
+        "text": "TextStyle xs",
+        "highlights": [],
+        "links": [],
+        "tooltips": [],
+        "container": {
+          "name": "FTypography",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FTypography-class.html"
+        }
+      }
+    },
+    {
+      "offset": 199,
+      "length": 17,
+      "snippet": {
+        "text": "Color primaryForeground",
+        "highlights": [],
+        "links": [],
+        "tooltips": [],
+        "container": {
+          "name": "FColors",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors-class.html"
+        }
+      }
+    },
+    {
+      "offset": 192,
+      "length": 6,
+      "snippet": {
+        "text": "FColors colors",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors-class.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FThemeData",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+        }
+      }
+    },
+    {
+      "offset": 186,
+      "length": 5,
+      "snippet": {
+        "text": "FThemeData get theme",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FThemeBuildContext",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext.html"
+        }
+      }
+    }
+  ]
+}

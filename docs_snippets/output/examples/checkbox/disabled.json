@@ -1,0 +1,208 @@
+{
+  "text": "class DisabledCheckboxExample extends StatefulWidget {\n  @override\n  State<DisabledCheckboxExample> createState() =>\n      _DisabledCheckboxExampleState();\n}\n\nclass _DisabledCheckboxExampleState extends State<DisabledCheckboxExample> {\n  bool _state = true;\n\n  @override\n  Widget build(BuildContext _) => FCheckbox(\n    label: const Text('Accept terms and conditions'),\n    description: const Text('You agree to our terms and conditions.'),\n    semanticsLabel: 'Accept terms and conditions',\n    value: _state,\n    onChange: (value) => setState(() => _state = value),\n    enabled: false,\n  );\n}\n",
+  "highlights": [
+    {
+      "start": 17,
+      "end": 17
+    }
+  ],
+  "links": [
+    {
+      "offset": 305,
+      "length": 9,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckbox/FCheckbox.html"
+    },
+    {
+      "offset": 320,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckbox/label.html"
+    },
+    {
+      "offset": 374,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckbox/description.html"
+    },
+    {
+      "offset": 445,
+      "length": 14,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckbox/semanticsLabel.html"
+    },
+    {
+      "offset": 496,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckbox/value.html"
+    },
+    {
+      "offset": 515,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckbox/onChange.html"
+    },
+    {
+      "offset": 572,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckbox/enabled.html"
+    }
+  ],
+  "tooltips": [
+    {
+      "offset": 305,
+      "length": 9,
+      "snippet": {
+        "text": "FCheckbox({\n  FCheckboxStyle Function(FCheckboxStyle)? style,\n  Widget? label,\n  Widget? description,\n  Widget? error,\n  String? semanticsLabel,\n  bool value = false,\n  void Function(bool)? onChange,\n  bool enabled = true,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  Key? key,\n})\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckbox/FCheckbox.html"
+          },
+          {
+            "offset": 55,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckbox/FCheckbox.html"
+          },
+          {
+            "offset": 14,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckboxStyle-class.html"
+          },
+          {
+            "offset": 38,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckboxStyle-class.html"
+          },
+          {
+            "offset": 72,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckbox/FCheckbox.html"
+          },
+          {
+            "offset": 89,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckbox/FCheckbox.html"
+          },
+          {
+            "offset": 112,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckbox/FCheckbox.html"
+          },
+          {
+            "offset": 129,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckbox/FCheckbox.html"
+          },
+          {
+            "offset": 152,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckbox/FCheckbox.html"
+          },
+          {
+            "offset": 190,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckbox/FCheckbox.html"
+          },
+          {
+            "offset": 207,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckbox/FCheckbox.html"
+          },
+          {
+            "offset": 230,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckbox/FCheckbox.html"
+          },
+          {
+            "offset": 262,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckbox/FCheckbox.html"
+          },
+          {
+            "offset": 296,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckbox/FCheckbox.html"
+          },
+          {
+            "offset": 318,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckbox/FCheckbox.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FCheckbox",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckbox-class.html"
+        }
+      }
+    },
+    {
+      "offset": 320,
+      "length": 6,
+      "snippet": {
+        "text": "{Widget? label}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 374,
+      "length": 12,
+      "snippet": {
+        "text": "{Widget? description}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 445,
+      "length": 15,
+      "snippet": {
+        "text": "{String? semanticsLabel}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 496,
+      "length": 6,
+      "snippet": {
+        "text": "{bool value = false}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 515,
+      "length": 9,
+      "snippet": {
+        "text": "{void Function(bool)? onChange}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 526,
+      "length": 5,
+      "snippet": {
+        "text": "bool value",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 572,
+      "length": 8,
+      "snippet": {
+        "text": "{bool enabled = true}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    }
+  ]
+}

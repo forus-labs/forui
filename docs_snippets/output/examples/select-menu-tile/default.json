@@ -1,0 +1,528 @@
+{
+  "text": "enum Notification {\n  all,\n  direct,\n  nothing,\n  limitedTime,\n  timeSensitive,\n  selectedApps,\n}\n\nclass SelectMenuTileExample extends StatelessWidget {\n  @override\n  Widget build(BuildContext _) => FSelectMenuTile<Notification>.fromMap(\n    const {'All': .all, 'Direct Messages': .direct, 'None': .nothing},\n    selectControl: const .managed(initial: {.all}),\n    validator: (value) => value == null ? 'Select an item' : null,\n    prefix: const Icon(FIcons.bell),\n    title: const Text('Notifications'),\n    detailsBuilder: (_, values, _) => Text(switch (values.firstOrNull) {\n      .all => 'All',\n      .direct => 'Direct Messages',\n      _ => 'None',\n    }),\n  );\n}\n",
+  "highlights": [],
+  "links": [
+    {
+      "offset": 199,
+      "length": 37,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_menu_tile/FSelectMenuTile/FSelectMenuTile.fromMap.html"
+    },
+    {
+      "offset": 313,
+      "length": 13,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_menu_tile/FSelectMenuTile/selectControl.html"
+    },
+    {
+      "offset": 335,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl/FMultiValueControl.managed.html"
+    },
+    {
+      "offset": 343,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl/FMultiValueControl.managed.html"
+    },
+    {
+      "offset": 365,
+      "length": 9,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_menu_tile/FSelectMenuTile/validator.html"
+    },
+    {
+      "offset": 432,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_menu_tile/FSelectMenuTile/prefix.html"
+    },
+    {
+      "offset": 451,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons/bell.html"
+    },
+    {
+      "offset": 469,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_menu_tile/FSelectMenuTile/title.html"
+    },
+    {
+      "offset": 509,
+      "length": 14,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_menu_tile/FSelectMenuTile/detailsBuilder.html"
+    }
+  ],
+  "tooltips": [
+    {
+      "offset": 199,
+      "length": 37,
+      "snippet": {
+        "text": "FSelectMenuTile.fromMap(\n  Map<String, Notification> menu, {\n  required Text title,\n  FMultiValueControl<Notification>? selectControl,\n  FPopoverControl popoverControl = const .managed(),\n  ScrollController? scrollController,\n  FSelectMenuTileStyle Function(FSelectMenuTileStyle)? style,\n  double? cacheExtent,\n  double maxHeight = .infinity,\n  DragStartBehavior dragStartBehavior = .start,\n  ScrollPhysics physics = const ClampingScrollPhysics(),\n  FItemDivider divider = .full,\n  AlignmentGeometry menuAnchor = .topRight,\n  AlignmentGeometry tileAnchor = .bottomRight,\n  FPortalSpacing menuSpacing = const .spacing(4),\n  FPortalOverflow menuOverflow = .flip,\n  Offset menuOffset = .zero,\n  FPopoverHideRegion menuHideRegion = .excludeChild,\n  void Function()? menuOnTapHide,\n  Object? menuGroupId,\n  bool autoHide = true,\n  Widget? label,\n  Widget? description,\n  bool autofocus = false,\n  FocusScopeNode? menuFocusNode,\n  void Function(bool)? menuOnFocusChange,\n  TraversalEdgeBehavior? menuTraversalEdgeBehavior,\n  String? menuBarrierSemanticsLabel,\n  bool menuBarrierSemanticsDismissible = true,\n  String? semanticsLabel,\n  Widget? prefix,\n  Widget? subtitle,\n  Widget Function(BuildContext, Set<Notification>, Widget?) detailsBuilder =\n      defaultSelectMenuTileBuilder,\n  Widget? details,\n  Widget? suffix,\n  Map<ShortcutActivator, Intent>? shortcuts,\n  Map<Type, Action<Intent>>? actions,\n  Widget Function(BuildContext, String) errorBuilder =\n      FFormFieldProperties.defaultErrorBuilder,\n  void Function(Set<Notification>?)? onSaved,\n  void Function()? onReset,\n  String? Function(Set<Notification>?)? validator,\n  String? forceErrorText,\n  bool enabled = true,\n  AutovalidateMode autovalidateMode = .disabled,\n  Key? key,\n})\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 23,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_menu_tile/FSelectMenuTile/FSelectMenuTile.fromMap.html"
+          },
+          {
+            "offset": 77,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_menu_tile/FSelectMenuTile/FSelectMenuTile.fromMap.html"
+          },
+          {
+            "offset": 120,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_menu_tile/FSelectMenuTile/FSelectMenuTile.fromMap.html"
+          },
+          {
+            "offset": 86,
+            "length": 33,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl-class.html"
+          },
+          {
+            "offset": 153,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_menu_tile/FSelectMenuTile/FSelectMenuTile.fromMap.html"
+          },
+          {
+            "offset": 137,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverControl-class.html"
+          },
+          {
+            "offset": 177,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverControl/FPopoverControl.managed.html"
+          },
+          {
+            "offset": 208,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_menu_tile/FSelectMenuTile/FSelectMenuTile.fromMap.html"
+          },
+          {
+            "offset": 281,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_menu_tile/FSelectMenuTile/FSelectMenuTile.fromMap.html"
+          },
+          {
+            "offset": 228,
+            "length": 20,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_menu_tile/FSelectMenuTileStyle-class.html"
+          },
+          {
+            "offset": 258,
+            "length": 20,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_menu_tile/FSelectMenuTileStyle-class.html"
+          },
+          {
+            "offset": 298,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_menu_tile/FSelectMenuTile/FSelectMenuTile.fromMap.html"
+          },
+          {
+            "offset": 320,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_menu_tile/FSelectMenuTile/FSelectMenuTile.fromMap.html"
+          },
+          {
+            "offset": 363,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_menu_tile/FSelectMenuTile/FSelectMenuTile.fromMap.html"
+          },
+          {
+            "offset": 407,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_menu_tile/FSelectMenuTile/FSelectMenuTile.fromMap.html"
+          },
+          {
+            "offset": 463,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_menu_tile/FSelectMenuTile/FSelectMenuTile.fromMap.html"
+          },
+          {
+            "offset": 450,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemDivider.html"
+          },
+          {
+            "offset": 474,
+            "length": 4,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemDivider.html#full"
+          },
+          {
+            "offset": 500,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_menu_tile/FSelectMenuTile/FSelectMenuTile.fromMap.html"
+          },
+          {
+            "offset": 544,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_menu_tile/FSelectMenuTile/FSelectMenuTile.fromMap.html"
+          },
+          {
+            "offset": 588,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_menu_tile/FSelectMenuTile/FSelectMenuTile.fromMap.html"
+          },
+          {
+            "offset": 573,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FPortalSpacing-class.html"
+          },
+          {
+            "offset": 609,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FPortalSpacing/FPortalSpacing.spacing.html"
+          },
+          {
+            "offset": 639,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_menu_tile/FSelectMenuTile/FSelectMenuTile.fromMap.html"
+          },
+          {
+            "offset": 623,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FPortalOverflow-class.html"
+          },
+          {
+            "offset": 655,
+            "length": 4,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FPortalOverflow/flip-constant.html"
+          },
+          {
+            "offset": 670,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_menu_tile/FSelectMenuTile/FSelectMenuTile.fromMap.html"
+          },
+          {
+            "offset": 711,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_menu_tile/FSelectMenuTile/FSelectMenuTile.fromMap.html"
+          },
+          {
+            "offset": 692,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverHideRegion.html"
+          },
+          {
+            "offset": 729,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverHideRegion.html#excludeChild"
+          },
+          {
+            "offset": 762,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_menu_tile/FSelectMenuTile/FSelectMenuTile.fromMap.html"
+          },
+          {
+            "offset": 787,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_menu_tile/FSelectMenuTile/FSelectMenuTile.fromMap.html"
+          },
+          {
+            "offset": 807,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_menu_tile/FSelectMenuTile/FSelectMenuTile.fromMap.html"
+          },
+          {
+            "offset": 834,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_menu_tile/FSelectMenuTile/FSelectMenuTile.fromMap.html"
+          },
+          {
+            "offset": 851,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_menu_tile/FSelectMenuTile/FSelectMenuTile.fromMap.html"
+          },
+          {
+            "offset": 871,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_menu_tile/FSelectMenuTile/FSelectMenuTile.fromMap.html"
+          },
+          {
+            "offset": 908,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_menu_tile/FSelectMenuTile/FSelectMenuTile.fromMap.html"
+          },
+          {
+            "offset": 946,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_menu_tile/FSelectMenuTile/FSelectMenuTile.fromMap.html"
+          },
+          {
+            "offset": 990,
+            "length": 25,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_menu_tile/FSelectMenuTile/FSelectMenuTile.fromMap.html"
+          },
+          {
+            "offset": 1027,
+            "length": 25,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_menu_tile/FSelectMenuTile/FSelectMenuTile.fromMap.html"
+          },
+          {
+            "offset": 1061,
+            "length": 31,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_menu_tile/FSelectMenuTile/FSelectMenuTile.fromMap.html"
+          },
+          {
+            "offset": 1111,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_menu_tile/FSelectMenuTile/FSelectMenuTile.fromMap.html"
+          },
+          {
+            "offset": 1137,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_menu_tile/FSelectMenuTile/FSelectMenuTile.fromMap.html"
+          },
+          {
+            "offset": 1155,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_menu_tile/FSelectMenuTile/FSelectMenuTile.fromMap.html"
+          },
+          {
+            "offset": 1225,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_menu_tile/FSelectMenuTile/FSelectMenuTile.fromMap.html"
+          },
+          {
+            "offset": 1288,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_menu_tile/FSelectMenuTile/FSelectMenuTile.fromMap.html"
+          },
+          {
+            "offset": 1307,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_menu_tile/FSelectMenuTile/FSelectMenuTile.fromMap.html"
+          },
+          {
+            "offset": 1349,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_menu_tile/FSelectMenuTile/FSelectMenuTile.fromMap.html"
+          },
+          {
+            "offset": 1389,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_menu_tile/FSelectMenuTile/FSelectMenuTile.fromMap.html"
+          },
+          {
+            "offset": 1438,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_menu_tile/FSelectMenuTile/FSelectMenuTile.fromMap.html"
+          },
+          {
+            "offset": 1459,
+            "length": 40,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FFormFieldProperties/defaultErrorBuilder.html"
+          },
+          {
+            "offset": 1538,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_menu_tile/FSelectMenuTile/FSelectMenuTile.fromMap.html"
+          },
+          {
+            "offset": 1566,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_menu_tile/FSelectMenuTile/FSelectMenuTile.fromMap.html"
+          },
+          {
+            "offset": 1615,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_menu_tile/FSelectMenuTile/FSelectMenuTile.fromMap.html"
+          },
+          {
+            "offset": 1636,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_menu_tile/FSelectMenuTile/FSelectMenuTile.fromMap.html"
+          },
+          {
+            "offset": 1659,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_menu_tile/FSelectMenuTile/FSelectMenuTile.fromMap.html"
+          },
+          {
+            "offset": 1694,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_menu_tile/FSelectMenuTile/FSelectMenuTile.fromMap.html"
+          },
+          {
+            "offset": 1731,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_menu_tile/FSelectMenuTile/FSelectMenuTile.fromMap.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FSelectMenuTile",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_menu_tile/FSelectMenuTile-class.html"
+        }
+      }
+    },
+    {
+      "offset": 313,
+      "length": 14,
+      "snippet": {
+        "text": "{FMultiValueControl<Notification>? selectControl}",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 1,
+            "length": 33,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl-class.html"
+          }
+        ],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 335,
+      "length": 7,
+      "snippet": {
+        "text": "FMultiValueControl.managed({\n  FMultiValueNotifier<Notification>? controller,\n  Set<Notification>? initial,\n  int min,\n  int? max,\n  void Function(Set<Notification>)? onChange,\n})\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 26,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl/FMultiValueControl.managed.html"
+          },
+          {
+            "offset": 66,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl/FMultiValueControl.managed.html"
+          },
+          {
+            "offset": 31,
+            "length": 34,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueNotifier-class.html"
+          },
+          {
+            "offset": 99,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl/FMultiValueControl.managed.html"
+          },
+          {
+            "offset": 114,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl/FMultiValueControl.managed.html"
+          },
+          {
+            "offset": 126,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl/FMultiValueControl.managed.html"
+          },
+          {
+            "offset": 167,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl/FMultiValueControl.managed.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FMultiValueControl",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl-class.html"
+        }
+      }
+    },
+    {
+      "offset": 343,
+      "length": 8,
+      "snippet": {
+        "text": "{Set<Notification>? initial}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 365,
+      "length": 10,
+      "snippet": {
+        "text": "{String? Function(Set<Notification>?)? validator}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 377,
+      "length": 5,
+      "snippet": {
+        "text": "Set<Notification>? value",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 432,
+      "length": 7,
+      "snippet": {
+        "text": "{Widget? prefix}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 451,
+      "length": 11,
+      "snippet": {
+        "text": "IconData bell",
+        "highlights": [],
+        "links": [],
+        "tooltips": [],
+        "container": {
+          "name": "FIcons",
+          "url": "https://pub.dev/documentation/forui_assets/0.17.1/forui_assets/FIcons-class.html"
+        }
+      }
+    },
+    {
+      "offset": 469,
+      "length": 6,
+      "snippet": {
+        "text": "{required Text title}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 509,
+      "length": 15,
+      "snippet": {
+        "text": "{\n  Widget Function(BuildContext, Set<Notification>, Widget?) detailsBuilder =\n      defaultSelectMenuTileBuilder,\n}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 526,
+      "length": 1,
+      "snippet": {
+        "text": "BuildContext _",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 529,
+      "length": 6,
+      "snippet": {
+        "text": "Set<Notification> values",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 537,
+      "length": 1,
+      "snippet": {
+        "text": "Widget? _",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    }
+  ]
+}

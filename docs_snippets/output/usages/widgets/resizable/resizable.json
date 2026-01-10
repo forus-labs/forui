@@ -1,0 +1,1529 @@
+{
+  "text": "FResizable(\n  {{Core}}\n  {{Control}}\n  {{Layout}}\n  {{Accessibility}}\n)",
+  "highlights": [],
+  "links": [
+    {
+      "offset": 0,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizable/FResizable.html"
+    }
+  ],
+  "tooltips": [
+    {
+      "offset": 0,
+      "length": 10,
+      "snippet": {
+        "text": "FResizable({\n  required Axis axis,\n  required List<FResizableRegion> children,\n  FResizableControl control = const .managedCascade(),\n  FResizableStyle Function(FResizableStyle)? style,\n  FResizableDivider divider = .dividerWithThumb,\n  double? crossAxisExtent,\n  double resizePercentage = 0.005,\n  String Function(FResizableRegionData, FResizableRegionData)\n      semanticFormatterCallback =\n      _label,\n  double? hitRegionExtent,\n  Key? key,\n})\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizable/FResizable.html"
+          },
+          {
+            "offset": 29,
+            "length": 4,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizable/FResizable.html"
+          },
+          {
+            "offset": 69,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizable/FResizable.html"
+          },
+          {
+            "offset": 51,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegion-class.html"
+          },
+          {
+            "offset": 99,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizable/FResizable.html"
+          },
+          {
+            "offset": 81,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableControl-class.html"
+          },
+          {
+            "offset": 116,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableControl/FResizableControl.managedCascade.html"
+          },
+          {
+            "offset": 179,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizable/FResizable.html"
+          },
+          {
+            "offset": 136,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableStyle-class.html"
+          },
+          {
+            "offset": 161,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableStyle-class.html"
+          },
+          {
+            "offset": 206,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizable/FResizable.html"
+          },
+          {
+            "offset": 188,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableDivider.html"
+          },
+          {
+            "offset": 217,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableDivider.html#dividerWithThumb"
+          },
+          {
+            "offset": 245,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizable/FResizable.html"
+          },
+          {
+            "offset": 271,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizable/FResizable.html"
+          },
+          {
+            "offset": 365,
+            "length": 25,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizable/FResizable.html"
+          },
+          {
+            "offset": 315,
+            "length": 20,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegionData-class.html"
+          },
+          {
+            "offset": 337,
+            "length": 20,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegionData-class.html"
+          },
+          {
+            "offset": 417,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizable/FResizable.html"
+          },
+          {
+            "offset": 441,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizable/FResizable.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FResizable",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizable-class.html"
+        }
+      }
+    }
+  ],
+  "categories": {
+    "Core": [
+      {
+        "name": "Core",
+        "description": "",
+        "text": "style: (style) => style,\n  axis: .vertical,\n  divider: .dividerWithThumb,\n  children: [\n    FResizableRegion(\n      initialExtent: 200,\n      builder: (context, data, child) => child!,\n    ),\n    FResizableRegion(\n      initialExtent: 200,\n      minExtent: 100,\n      builder: (context, data, child) => child!,\n    ),\n  ],",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizable/style.html"
+          },
+          {
+            "offset": 27,
+            "length": 4,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizable/axis.html"
+          },
+          {
+            "offset": 46,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizable/divider.html"
+          },
+          {
+            "offset": 56,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableDivider.html#dividerWithThumb"
+          },
+          {
+            "offset": 76,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizable/children.html"
+          },
+          {
+            "offset": 92,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegion/FResizableRegion.html"
+          },
+          {
+            "offset": 116,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegion/initialExtent.html"
+          },
+          {
+            "offset": 142,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegion/builder.html"
+          },
+          {
+            "offset": 196,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegion/FResizableRegion.html"
+          },
+          {
+            "offset": 220,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegion/initialExtent.html"
+          },
+          {
+            "offset": 246,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegion/minExtent.html"
+          },
+          {
+            "offset": 268,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegion/builder.html"
+          }
+        ],
+        "tooltips": [
+          {
+            "offset": 0,
+            "length": 6,
+            "snippet": {
+              "text": "{FResizableStyle Function(FResizableStyle)? style}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 1,
+                  "length": 15,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableStyle-class.html"
+                },
+                {
+                  "offset": 26,
+                  "length": 15,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableStyle-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 8,
+            "length": 5,
+            "snippet": {
+              "text": "FResizableStyle style",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 15,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableStyle-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 27,
+            "length": 5,
+            "snippet": {
+              "text": "{required Axis axis}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 46,
+            "length": 8,
+            "snippet": {
+              "text": "{FResizableDivider divider = .dividerWithThumb}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 1,
+                  "length": 17,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableDivider.html"
+                },
+                {
+                  "offset": 30,
+                  "length": 16,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableDivider.html#dividerWithThumb"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 56,
+            "length": 16,
+            "snippet": {
+              "text": "FResizableDivider dividerWithThumb",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 17,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableDivider.html"
+                }
+              ],
+              "tooltips": [],
+              "container": {
+                "name": "FResizableDivider",
+                "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableDivider.html"
+              }
+            }
+          },
+          {
+            "offset": 76,
+            "length": 9,
+            "snippet": {
+              "text": "{required List<FResizableRegion> children}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 15,
+                  "length": 16,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegion-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 92,
+            "length": 16,
+            "snippet": {
+              "text": "FResizableRegion({\n  required double initialExtent,\n  required Widget Function(BuildContext, FResizableRegionData, Widget?)\n  builder,\n  double? minExtent,\n  Widget? child,\n  Key? key,\n})\n",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 16,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegion/FResizableRegion.html"
+                },
+                {
+                  "offset": 37,
+                  "length": 13,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegion/FResizableRegion.html"
+                },
+                {
+                  "offset": 126,
+                  "length": 7,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegion/FResizableRegion.html"
+                },
+                {
+                  "offset": 93,
+                  "length": 20,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegionData-class.html"
+                },
+                {
+                  "offset": 145,
+                  "length": 9,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegion/FResizableRegion.html"
+                },
+                {
+                  "offset": 166,
+                  "length": 5,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegion/FResizableRegion.html"
+                },
+                {
+                  "offset": 180,
+                  "length": 3,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegion/FResizableRegion.html"
+                }
+              ],
+              "tooltips": [],
+              "container": {
+                "name": "FResizableRegion",
+                "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegion-class.html"
+              }
+            }
+          },
+          {
+            "offset": 116,
+            "length": 14,
+            "snippet": {
+              "text": "{required double initialExtent}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 142,
+            "length": 8,
+            "snippet": {
+              "text": "{\n  required Widget Function(BuildContext, FResizableRegionData, Widget?) builder,\n}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 43,
+                  "length": 20,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegionData-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 152,
+            "length": 7,
+            "snippet": {
+              "text": "BuildContext context",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 161,
+            "length": 4,
+            "snippet": {
+              "text": "FResizableRegionData data",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 20,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegionData-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 167,
+            "length": 5,
+            "snippet": {
+              "text": "Widget? child",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 196,
+            "length": 16,
+            "snippet": {
+              "text": "FResizableRegion({\n  required double initialExtent,\n  required Widget Function(BuildContext, FResizableRegionData, Widget?)\n  builder,\n  double? minExtent,\n  Widget? child,\n  Key? key,\n})\n",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 16,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegion/FResizableRegion.html"
+                },
+                {
+                  "offset": 37,
+                  "length": 13,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegion/FResizableRegion.html"
+                },
+                {
+                  "offset": 126,
+                  "length": 7,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegion/FResizableRegion.html"
+                },
+                {
+                  "offset": 93,
+                  "length": 20,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegionData-class.html"
+                },
+                {
+                  "offset": 145,
+                  "length": 9,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegion/FResizableRegion.html"
+                },
+                {
+                  "offset": 166,
+                  "length": 5,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegion/FResizableRegion.html"
+                },
+                {
+                  "offset": 180,
+                  "length": 3,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegion/FResizableRegion.html"
+                }
+              ],
+              "tooltips": [],
+              "container": {
+                "name": "FResizableRegion",
+                "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegion-class.html"
+              }
+            }
+          },
+          {
+            "offset": 220,
+            "length": 14,
+            "snippet": {
+              "text": "{required double initialExtent}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 246,
+            "length": 10,
+            "snippet": {
+              "text": "{double? minExtent}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 268,
+            "length": 8,
+            "snippet": {
+              "text": "{\n  required Widget Function(BuildContext, FResizableRegionData, Widget?) builder,\n}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 43,
+                  "length": 20,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegionData-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 278,
+            "length": 7,
+            "snippet": {
+              "text": "BuildContext context",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 287,
+            "length": 4,
+            "snippet": {
+              "text": "FResizableRegionData data",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 20,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegionData-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 293,
+            "length": 5,
+            "snippet": {
+              "text": "Widget? child",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          }
+        ]
+      }
+    ],
+    "Control": [
+      {
+        "name": "`.managed()` with internal controller",
+        "description": "Non-cascading resize with internal controller.",
+        "text": "control: .managed(\n    onResizeUpdate: (resized) {},\n    onResizeEnd: (resized) {},\n  ),",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 10,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableControl/FResizableControl.managed.html"
+          },
+          {
+            "offset": 23,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableControl/FResizableControl.managed.html"
+          },
+          {
+            "offset": 57,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableControl/FResizableControl.managed.html"
+          },
+          {
+            "offset": 0,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizable/control.html"
+          }
+        ],
+        "tooltips": [
+          {
+            "offset": 10,
+            "length": 7,
+            "snippet": {
+              "text": "FResizableControl.managed({\n  FResizableController? controller,\n  void Function(List<FResizableRegionData>)? onResizeUpdate,\n  void Function(List<FResizableRegionData>)? onResizeEnd,\n})\n",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 25,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableControl/FResizableControl.managed.html"
+                },
+                {
+                  "offset": 52,
+                  "length": 10,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableControl/FResizableControl.managed.html"
+                },
+                {
+                  "offset": 30,
+                  "length": 21,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableController-class.html"
+                },
+                {
+                  "offset": 109,
+                  "length": 14,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableControl/FResizableControl.managed.html"
+                },
+                {
+                  "offset": 85,
+                  "length": 20,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegionData-class.html"
+                },
+                {
+                  "offset": 170,
+                  "length": 11,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableControl/FResizableControl.managed.html"
+                },
+                {
+                  "offset": 146,
+                  "length": 20,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegionData-class.html"
+                }
+              ],
+              "tooltips": [],
+              "container": {
+                "name": "FResizableControl",
+                "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableControl-class.html"
+              }
+            }
+          },
+          {
+            "offset": 23,
+            "length": 15,
+            "snippet": {
+              "text": "{void Function(List<FResizableRegionData>)? onResizeUpdate}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 20,
+                  "length": 20,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegionData-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 40,
+            "length": 7,
+            "snippet": {
+              "text": "List<FResizableRegionData> resized",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 5,
+                  "length": 20,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegionData-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 57,
+            "length": 12,
+            "snippet": {
+              "text": "{void Function(List<FResizableRegionData>)? onResizeEnd}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 20,
+                  "length": 20,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegionData-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 71,
+            "length": 7,
+            "snippet": {
+              "text": "List<FResizableRegionData> resized",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 5,
+                  "length": 20,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegionData-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 0,
+            "length": 8,
+            "snippet": {
+              "text": "{FResizableControl control = const .managedCascade()}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 1,
+                  "length": 17,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableControl-class.html"
+                },
+                {
+                  "offset": 36,
+                  "length": 14,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableControl/FResizableControl.managedCascade.html"
+                }
+              ],
+              "tooltips": []
+            }
+          }
+        ]
+      },
+      {
+        "name": "`.managed()` with external controller",
+        "description": "Non-cascading resize with external controller.",
+        "text": "control: .managed(\n    // For demonstration purposes only. Don't create a controller inline, store it in a State instead.\n    controller: FResizableController(\n      onResizeUpdate: (resized) {},\n      onResizeEnd: (resized) {},\n    ),\n  ),",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 10,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableControl/FResizableControl.managed.html"
+          },
+          {
+            "offset": 126,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableControl/FResizableControl.managed.html"
+          },
+          {
+            "offset": 138,
+            "length": 20,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableController/FResizableController.html"
+          },
+          {
+            "offset": 166,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableController/FResizableController.html"
+          },
+          {
+            "offset": 202,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableController/FResizableController.html"
+          },
+          {
+            "offset": 0,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizable/control.html"
+          }
+        ],
+        "tooltips": [
+          {
+            "offset": 10,
+            "length": 7,
+            "snippet": {
+              "text": "FResizableControl.managed({\n  FResizableController? controller,\n  void Function(List<FResizableRegionData>)? onResizeUpdate,\n  void Function(List<FResizableRegionData>)? onResizeEnd,\n})\n",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 25,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableControl/FResizableControl.managed.html"
+                },
+                {
+                  "offset": 52,
+                  "length": 10,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableControl/FResizableControl.managed.html"
+                },
+                {
+                  "offset": 30,
+                  "length": 21,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableController-class.html"
+                },
+                {
+                  "offset": 109,
+                  "length": 14,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableControl/FResizableControl.managed.html"
+                },
+                {
+                  "offset": 85,
+                  "length": 20,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegionData-class.html"
+                },
+                {
+                  "offset": 170,
+                  "length": 11,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableControl/FResizableControl.managed.html"
+                },
+                {
+                  "offset": 146,
+                  "length": 20,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegionData-class.html"
+                }
+              ],
+              "tooltips": [],
+              "container": {
+                "name": "FResizableControl",
+                "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableControl-class.html"
+              }
+            }
+          },
+          {
+            "offset": 126,
+            "length": 11,
+            "snippet": {
+              "text": "{FResizableController? controller}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 1,
+                  "length": 21,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableController-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 138,
+            "length": 20,
+            "snippet": {
+              "text": "FResizableController({\n  void Function(List<FResizableRegionData>)? onResizeUpdate,\n  void Function(List<FResizableRegionData>)? onResizeEnd,\n})\n",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 20,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableController/FResizableController.html"
+                },
+                {
+                  "offset": 68,
+                  "length": 14,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableController/FResizableController.html"
+                },
+                {
+                  "offset": 44,
+                  "length": 20,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegionData-class.html"
+                },
+                {
+                  "offset": 129,
+                  "length": 11,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableController/FResizableController.html"
+                },
+                {
+                  "offset": 105,
+                  "length": 20,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegionData-class.html"
+                }
+              ],
+              "tooltips": [],
+              "container": {
+                "name": "FResizableController",
+                "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableController-class.html"
+              }
+            }
+          },
+          {
+            "offset": 166,
+            "length": 15,
+            "snippet": {
+              "text": "{void Function(List<FResizableRegionData>)? onResizeUpdate}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 20,
+                  "length": 20,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegionData-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 183,
+            "length": 7,
+            "snippet": {
+              "text": "List<FResizableRegionData> resized",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 5,
+                  "length": 20,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegionData-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 202,
+            "length": 12,
+            "snippet": {
+              "text": "{void Function(List<FResizableRegionData>)? onResizeEnd}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 20,
+                  "length": 20,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegionData-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 216,
+            "length": 7,
+            "snippet": {
+              "text": "List<FResizableRegionData> resized",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 5,
+                  "length": 20,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegionData-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 0,
+            "length": 8,
+            "snippet": {
+              "text": "{FResizableControl control = const .managedCascade()}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 1,
+                  "length": 17,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableControl-class.html"
+                },
+                {
+                  "offset": 36,
+                  "length": 14,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableControl/FResizableControl.managedCascade.html"
+                }
+              ],
+              "tooltips": []
+            }
+          }
+        ]
+      },
+      {
+        "name": "`.managedCascade()` with internal controller",
+        "description": "Cascading resize with internal controller.",
+        "text": "control: .managedCascade(\n    onResizeUpdate: (resized) {},\n    onResizeEnd: (all) {},\n  ),",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 10,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableControl/FResizableControl.managedCascade.html"
+          },
+          {
+            "offset": 30,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableControl/FResizableControl.managedCascade.html"
+          },
+          {
+            "offset": 64,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableControl/FResizableControl.managedCascade.html"
+          },
+          {
+            "offset": 0,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizable/control.html"
+          }
+        ],
+        "tooltips": [
+          {
+            "offset": 10,
+            "length": 14,
+            "snippet": {
+              "text": "FResizableControl.managedCascade({\n  FResizableController? controller,\n  void Function(List<FResizableRegionData>)? onResizeUpdate,\n  void Function(UnmodifiableListView<FResizableRegionData>)? onResizeEnd,\n})\n",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 32,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableControl/FResizableControl.managedCascade.html"
+                },
+                {
+                  "offset": 59,
+                  "length": 10,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableControl/FResizableControl.managedCascade.html"
+                },
+                {
+                  "offset": 37,
+                  "length": 21,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableController-class.html"
+                },
+                {
+                  "offset": 116,
+                  "length": 14,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableControl/FResizableControl.managedCascade.html"
+                },
+                {
+                  "offset": 92,
+                  "length": 20,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegionData-class.html"
+                },
+                {
+                  "offset": 193,
+                  "length": 11,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableControl/FResizableControl.managedCascade.html"
+                },
+                {
+                  "offset": 169,
+                  "length": 20,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegionData-class.html"
+                }
+              ],
+              "tooltips": [],
+              "container": {
+                "name": "FResizableControl",
+                "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableControl-class.html"
+              }
+            }
+          },
+          {
+            "offset": 30,
+            "length": 15,
+            "snippet": {
+              "text": "{void Function(List<FResizableRegionData>)? onResizeUpdate}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 20,
+                  "length": 20,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegionData-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 47,
+            "length": 7,
+            "snippet": {
+              "text": "List<FResizableRegionData> resized",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 5,
+                  "length": 20,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegionData-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 64,
+            "length": 12,
+            "snippet": {
+              "text": "{\n  void Function(UnmodifiableListView<FResizableRegionData>)? onResizeEnd,\n}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 39,
+                  "length": 20,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegionData-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 78,
+            "length": 3,
+            "snippet": {
+              "text": "UnmodifiableListView<FResizableRegionData> all",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 21,
+                  "length": 20,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegionData-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 0,
+            "length": 8,
+            "snippet": {
+              "text": "{FResizableControl control = const .managedCascade()}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 1,
+                  "length": 17,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableControl-class.html"
+                },
+                {
+                  "offset": 36,
+                  "length": 14,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableControl/FResizableControl.managedCascade.html"
+                }
+              ],
+              "tooltips": []
+            }
+          }
+        ]
+      },
+      {
+        "name": "`.managedCascade()` with external controller",
+        "description": "Cascading resize with external controller.",
+        "text": "control: .managedCascade(\n    // For demonstration purposes only. Don't create a controller inline, store it in a State instead.\n    controller: FResizableController.cascade(\n      onResizeUpdate: (resized) {},\n      onResizeEnd: (all) {},\n    ),\n  ),",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 10,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableControl/FResizableControl.managedCascade.html"
+          },
+          {
+            "offset": 133,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableControl/FResizableControl.managedCascade.html"
+          },
+          {
+            "offset": 145,
+            "length": 28,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableController/FResizableController.cascade.html"
+          },
+          {
+            "offset": 181,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableController/FResizableController.cascade.html"
+          },
+          {
+            "offset": 217,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableController/FResizableController.cascade.html"
+          },
+          {
+            "offset": 0,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizable/control.html"
+          }
+        ],
+        "tooltips": [
+          {
+            "offset": 10,
+            "length": 14,
+            "snippet": {
+              "text": "FResizableControl.managedCascade({\n  FResizableController? controller,\n  void Function(List<FResizableRegionData>)? onResizeUpdate,\n  void Function(UnmodifiableListView<FResizableRegionData>)? onResizeEnd,\n})\n",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 32,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableControl/FResizableControl.managedCascade.html"
+                },
+                {
+                  "offset": 59,
+                  "length": 10,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableControl/FResizableControl.managedCascade.html"
+                },
+                {
+                  "offset": 37,
+                  "length": 21,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableController-class.html"
+                },
+                {
+                  "offset": 116,
+                  "length": 14,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableControl/FResizableControl.managedCascade.html"
+                },
+                {
+                  "offset": 92,
+                  "length": 20,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegionData-class.html"
+                },
+                {
+                  "offset": 193,
+                  "length": 11,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableControl/FResizableControl.managedCascade.html"
+                },
+                {
+                  "offset": 169,
+                  "length": 20,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegionData-class.html"
+                }
+              ],
+              "tooltips": [],
+              "container": {
+                "name": "FResizableControl",
+                "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableControl-class.html"
+              }
+            }
+          },
+          {
+            "offset": 133,
+            "length": 11,
+            "snippet": {
+              "text": "{FResizableController? controller}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 1,
+                  "length": 21,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableController-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 145,
+            "length": 28,
+            "snippet": {
+              "text": "FResizableController.cascade({\n  void Function(List<FResizableRegionData>)? onResizeUpdate,\n  void Function(UnmodifiableListView<FResizableRegionData>)? onResizeEnd,\n})\n",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 28,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableController/FResizableController.cascade.html"
+                },
+                {
+                  "offset": 76,
+                  "length": 14,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableController/FResizableController.cascade.html"
+                },
+                {
+                  "offset": 52,
+                  "length": 20,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegionData-class.html"
+                },
+                {
+                  "offset": 153,
+                  "length": 11,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableController/FResizableController.cascade.html"
+                },
+                {
+                  "offset": 129,
+                  "length": 20,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegionData-class.html"
+                }
+              ],
+              "tooltips": [],
+              "container": {
+                "name": "FResizableController",
+                "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableController-class.html"
+              }
+            }
+          },
+          {
+            "offset": 181,
+            "length": 15,
+            "snippet": {
+              "text": "{void Function(List<FResizableRegionData>)? onResizeUpdate}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 20,
+                  "length": 20,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegionData-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 198,
+            "length": 7,
+            "snippet": {
+              "text": "List<FResizableRegionData> resized",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 5,
+                  "length": 20,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegionData-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 217,
+            "length": 12,
+            "snippet": {
+              "text": "{\n  void Function(UnmodifiableListView<FResizableRegionData>)? onResizeEnd,\n}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 39,
+                  "length": 20,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegionData-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 231,
+            "length": 3,
+            "snippet": {
+              "text": "UnmodifiableListView<FResizableRegionData> all",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 21,
+                  "length": 20,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegionData-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 0,
+            "length": 8,
+            "snippet": {
+              "text": "{FResizableControl control = const .managedCascade()}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 1,
+                  "length": 17,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableControl-class.html"
+                },
+                {
+                  "offset": 36,
+                  "length": 14,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableControl/FResizableControl.managedCascade.html"
+                }
+              ],
+              "tooltips": []
+            }
+          }
+        ]
+      }
+    ],
+    "Layout": [
+      {
+        "name": "Layout",
+        "description": "",
+        "text": "crossAxisExtent: null,\n  hitRegionExtent: 10,\n  resizePercentage: 0.005,",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizable/crossAxisExtent.html"
+          },
+          {
+            "offset": 25,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizable/hitRegionExtent.html"
+          },
+          {
+            "offset": 48,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizable/resizePercentage.html"
+          }
+        ],
+        "tooltips": [
+          {
+            "offset": 0,
+            "length": 16,
+            "snippet": {
+              "text": "{double? crossAxisExtent}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 25,
+            "length": 16,
+            "snippet": {
+              "text": "{double? hitRegionExtent}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 48,
+            "length": 17,
+            "snippet": {
+              "text": "{double resizePercentage = 0.005}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          }
+        ]
+      }
+    ],
+    "Accessibility": [
+      {
+        "name": "Accessibility",
+        "description": "",
+        "text": "semanticFormatterCallback: (first, second) =>\n      '${first.extent.current}, ${second.extent.current}',",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 25,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizable/semanticFormatterCallback.html"
+          },
+          {
+            "offset": 68,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegionData/extent.html"
+          },
+          {
+            "offset": 61,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegionData/extent.html"
+          },
+          {
+            "offset": 94,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegionData/extent.html"
+          },
+          {
+            "offset": 87,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegionData/extent.html"
+          }
+        ],
+        "tooltips": [
+          {
+            "offset": 0,
+            "length": 26,
+            "snippet": {
+              "text": "{\n  String Function(FResizableRegionData, FResizableRegionData)\n      semanticFormatterCallback =\n      _label,\n}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 20,
+                  "length": 20,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegionData-class.html"
+                },
+                {
+                  "offset": 42,
+                  "length": 20,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegionData-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 28,
+            "length": 5,
+            "snippet": {
+              "text": "FResizableRegionData first",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 20,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegionData-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 35,
+            "length": 6,
+            "snippet": {
+              "text": "FResizableRegionData second",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 20,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegionData-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 68,
+            "length": 7,
+            "snippet": {
+              "text": "double current",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 61,
+            "length": 6,
+            "snippet": {
+              "text": "({double current, double max, double min, double total}) extent",
+              "highlights": [],
+              "links": [],
+              "tooltips": [],
+              "container": {
+                "name": "FResizableRegionData",
+                "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegionData-class.html"
+              }
+            }
+          },
+          {
+            "offset": 94,
+            "length": 7,
+            "snippet": {
+              "text": "double current",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 87,
+            "length": 6,
+            "snippet": {
+              "text": "({double current, double max, double min, double total}) extent",
+              "highlights": [],
+              "links": [],
+              "tooltips": [],
+              "container": {
+                "name": "FResizableRegionData",
+                "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableRegionData-class.html"
+              }
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

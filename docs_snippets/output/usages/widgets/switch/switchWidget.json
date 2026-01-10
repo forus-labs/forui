@@ -1,0 +1,361 @@
+{
+  "text": "FSwitch(\n  {{Core}}\n  {{Accessibility}}\n)",
+  "highlights": [],
+  "links": [
+    {
+      "offset": 0,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.switch_/FSwitch/FSwitch.html"
+    }
+  ],
+  "tooltips": [
+    {
+      "offset": 0,
+      "length": 7,
+      "snippet": {
+        "text": "FSwitch({\n  FSwitchStyle Function(FSwitchStyle)? style,\n  Widget? label,\n  Widget? description,\n  Widget? error,\n  String? semanticsLabel,\n  bool value = false,\n  void Function(bool)? onChange,\n  bool enabled = true,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  DragStartBehavior dragStartBehavior = .start,\n  Key? key,\n})\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.switch_/FSwitch/FSwitch.html"
+          },
+          {
+            "offset": 49,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.switch_/FSwitch/FSwitch.html"
+          },
+          {
+            "offset": 12,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.switch_/FSwitchStyle-class.html"
+          },
+          {
+            "offset": 34,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.switch_/FSwitchStyle-class.html"
+          },
+          {
+            "offset": 66,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.switch_/FSwitch/FSwitch.html"
+          },
+          {
+            "offset": 83,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.switch_/FSwitch/FSwitch.html"
+          },
+          {
+            "offset": 106,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.switch_/FSwitch/FSwitch.html"
+          },
+          {
+            "offset": 123,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.switch_/FSwitch/FSwitch.html"
+          },
+          {
+            "offset": 146,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.switch_/FSwitch/FSwitch.html"
+          },
+          {
+            "offset": 184,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.switch_/FSwitch/FSwitch.html"
+          },
+          {
+            "offset": 201,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.switch_/FSwitch/FSwitch.html"
+          },
+          {
+            "offset": 224,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.switch_/FSwitch/FSwitch.html"
+          },
+          {
+            "offset": 256,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.switch_/FSwitch/FSwitch.html"
+          },
+          {
+            "offset": 290,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.switch_/FSwitch/FSwitch.html"
+          },
+          {
+            "offset": 325,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.switch_/FSwitch/FSwitch.html"
+          },
+          {
+            "offset": 360,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.switch_/FSwitch/FSwitch.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FSwitch",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.switch_/FSwitch-class.html"
+        }
+      }
+    }
+  ],
+  "categories": {
+    "Core": [
+      {
+        "name": "Core",
+        "description": "",
+        "text": "style: (style) => style,\n  enabled: true,\n  value: false,\n  onChange: (value) {},\n  dragStartBehavior: .start,\n  label: const Text('Enable notifications'),\n  description: const Text('Receive push notifications'),\n  error: null,",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.switch_/FSwitch/style.html"
+          },
+          {
+            "offset": 27,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.switch_/FSwitch/enabled.html"
+          },
+          {
+            "offset": 44,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.switch_/FSwitch/value.html"
+          },
+          {
+            "offset": 60,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.switch_/FSwitch/onChange.html"
+          },
+          {
+            "offset": 84,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.switch_/FSwitch/dragStartBehavior.html"
+          },
+          {
+            "offset": 113,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.switch_/FSwitch/label.html"
+          },
+          {
+            "offset": 158,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.switch_/FSwitch/description.html"
+          },
+          {
+            "offset": 215,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.switch_/FSwitch/error.html"
+          }
+        ],
+        "tooltips": [
+          {
+            "offset": 0,
+            "length": 6,
+            "snippet": {
+              "text": "{FSwitchStyle Function(FSwitchStyle)? style}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 1,
+                  "length": 12,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.switch_/FSwitchStyle-class.html"
+                },
+                {
+                  "offset": 23,
+                  "length": 12,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.switch_/FSwitchStyle-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 8,
+            "length": 5,
+            "snippet": {
+              "text": "FSwitchStyle style",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 12,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.switch_/FSwitchStyle-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 27,
+            "length": 8,
+            "snippet": {
+              "text": "{bool enabled = true}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 44,
+            "length": 6,
+            "snippet": {
+              "text": "{bool value = false}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 60,
+            "length": 9,
+            "snippet": {
+              "text": "{void Function(bool)? onChange}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 71,
+            "length": 5,
+            "snippet": {
+              "text": "bool value",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 84,
+            "length": 18,
+            "snippet": {
+              "text": "{DragStartBehavior dragStartBehavior = .start}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 113,
+            "length": 6,
+            "snippet": {
+              "text": "{Widget? label}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 158,
+            "length": 12,
+            "snippet": {
+              "text": "{Widget? description}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 215,
+            "length": 6,
+            "snippet": {
+              "text": "{Widget? error}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          }
+        ]
+      }
+    ],
+    "Accessibility": [
+      {
+        "name": "Accessibility",
+        "description": "",
+        "text": "autofocus: false,\n  focusNode: null,\n  onFocusChange: (focused) {},\n  semanticsLabel: 'Enable notifications switch',",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.switch_/FSwitch/autofocus.html"
+          },
+          {
+            "offset": 20,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.switch_/FSwitch/focusNode.html"
+          },
+          {
+            "offset": 39,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.switch_/FSwitch/onFocusChange.html"
+          },
+          {
+            "offset": 70,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.switch_/FSwitch/semanticsLabel.html"
+          }
+        ],
+        "tooltips": [
+          {
+            "offset": 0,
+            "length": 10,
+            "snippet": {
+              "text": "{bool autofocus = false}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 20,
+            "length": 10,
+            "snippet": {
+              "text": "{FocusNode? focusNode}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 39,
+            "length": 14,
+            "snippet": {
+              "text": "{void Function(bool)? onFocusChange}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 55,
+            "length": 7,
+            "snippet": {
+              "text": "bool focused",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 70,
+            "length": 15,
+            "snippet": {
+              "text": "{String? semanticsLabel}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,198 @@
+{
+  "text": "class DisabledSwitchExample extends StatefulWidget {\n  @override\n  State<DisabledSwitchExample> createState() => _DisabledSwitchExampleState();\n}\n\nclass _DisabledSwitchExampleState extends State<DisabledSwitchExample> {\n  bool _state = false;\n\n  @override\n  Widget build(BuildContext _) => FSwitch(\n    label: const Text('Airplane Mode'),\n    semanticsLabel: 'Airplane Mode',\n    value: _state,\n    onChange: (value) => setState(() => _state = value),\n    enabled: false,\n  );\n}\n",
+  "highlights": [
+    {
+      "start": 15,
+      "end": 15
+    }
+  ],
+  "links": [
+    {
+      "offset": 290,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.switch_/FSwitch/FSwitch.html"
+    },
+    {
+      "offset": 303,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.switch_/FSwitch/label.html"
+    },
+    {
+      "offset": 343,
+      "length": 14,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.switch_/FSwitch/semanticsLabel.html"
+    },
+    {
+      "offset": 380,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.switch_/FSwitch/value.html"
+    },
+    {
+      "offset": 399,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.switch_/FSwitch/onChange.html"
+    },
+    {
+      "offset": 456,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.switch_/FSwitch/enabled.html"
+    }
+  ],
+  "tooltips": [
+    {
+      "offset": 290,
+      "length": 7,
+      "snippet": {
+        "text": "FSwitch({\n  FSwitchStyle Function(FSwitchStyle)? style,\n  Widget? label,\n  Widget? description,\n  Widget? error,\n  String? semanticsLabel,\n  bool value = false,\n  void Function(bool)? onChange,\n  bool enabled = true,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  DragStartBehavior dragStartBehavior = .start,\n  Key? key,\n})\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.switch_/FSwitch/FSwitch.html"
+          },
+          {
+            "offset": 49,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.switch_/FSwitch/FSwitch.html"
+          },
+          {
+            "offset": 12,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.switch_/FSwitchStyle-class.html"
+          },
+          {
+            "offset": 34,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.switch_/FSwitchStyle-class.html"
+          },
+          {
+            "offset": 66,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.switch_/FSwitch/FSwitch.html"
+          },
+          {
+            "offset": 83,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.switch_/FSwitch/FSwitch.html"
+          },
+          {
+            "offset": 106,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.switch_/FSwitch/FSwitch.html"
+          },
+          {
+            "offset": 123,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.switch_/FSwitch/FSwitch.html"
+          },
+          {
+            "offset": 146,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.switch_/FSwitch/FSwitch.html"
+          },
+          {
+            "offset": 184,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.switch_/FSwitch/FSwitch.html"
+          },
+          {
+            "offset": 201,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.switch_/FSwitch/FSwitch.html"
+          },
+          {
+            "offset": 224,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.switch_/FSwitch/FSwitch.html"
+          },
+          {
+            "offset": 256,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.switch_/FSwitch/FSwitch.html"
+          },
+          {
+            "offset": 290,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.switch_/FSwitch/FSwitch.html"
+          },
+          {
+            "offset": 325,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.switch_/FSwitch/FSwitch.html"
+          },
+          {
+            "offset": 360,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.switch_/FSwitch/FSwitch.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FSwitch",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.switch_/FSwitch-class.html"
+        }
+      }
+    },
+    {
+      "offset": 303,
+      "length": 6,
+      "snippet": {
+        "text": "{Widget? label}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 343,
+      "length": 15,
+      "snippet": {
+        "text": "{String? semanticsLabel}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 380,
+      "length": 6,
+      "snippet": {
+        "text": "{bool value = false}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 399,
+      "length": 9,
+      "snippet": {
+        "text": "{void Function(bool)? onChange}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 410,
+      "length": 5,
+      "snippet": {
+        "text": "bool value",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 456,
+      "length": 8,
+      "snippet": {
+        "text": "{bool enabled = true}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    }
+  ]
+}

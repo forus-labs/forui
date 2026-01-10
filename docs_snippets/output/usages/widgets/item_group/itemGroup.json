@@ -1,0 +1,510 @@
+{
+  "text": "FItemGroup(\n  {{Core}}\n  {{Scroll}}\n  {{Accessibility}}\n)",
+  "highlights": [],
+  "links": [
+    {
+      "offset": 0,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroup/FItemGroup.html"
+    }
+  ],
+  "tooltips": [
+    {
+      "offset": 0,
+      "length": 10,
+      "snippet": {
+        "text": "FItemGroup({\n  required List<FItemMixin> children,\n  FItemGroupStyle Function(FItemGroupStyle)? style,\n  ScrollController? scrollController,\n  double? cacheExtent,\n  double maxHeight = .infinity,\n  DragStartBehavior dragStartBehavior = .start,\n  ScrollPhysics physics = const ClampingScrollPhysics(),\n  bool? enabled,\n  FItemDivider divider = .none,\n  String? semanticsLabel,\n  Key? key,\n})\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroup/FItemGroup.html"
+          },
+          {
+            "offset": 41,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroup/FItemGroup.html"
+          },
+          {
+            "offset": 29,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemMixin-mixin.html"
+          },
+          {
+            "offset": 96,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroup/FItemGroup.html"
+          },
+          {
+            "offset": 53,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroupStyle-class.html"
+          },
+          {
+            "offset": 78,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroupStyle-class.html"
+          },
+          {
+            "offset": 123,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroup/FItemGroup.html"
+          },
+          {
+            "offset": 151,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroup/FItemGroup.html"
+          },
+          {
+            "offset": 173,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroup/FItemGroup.html"
+          },
+          {
+            "offset": 216,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroup/FItemGroup.html"
+          },
+          {
+            "offset": 260,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroup/FItemGroup.html"
+          },
+          {
+            "offset": 309,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroup/FItemGroup.html"
+          },
+          {
+            "offset": 333,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroup/FItemGroup.html"
+          },
+          {
+            "offset": 320,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemDivider.html"
+          },
+          {
+            "offset": 344,
+            "length": 4,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemDivider.html#none"
+          },
+          {
+            "offset": 360,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroup/FItemGroup.html"
+          },
+          {
+            "offset": 383,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroup/FItemGroup.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FItemGroup",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroup-class.html"
+        }
+      }
+    }
+  ],
+  "categories": {
+    "Core": [
+      {
+        "name": "Core",
+        "description": "",
+        "text": "style: (style) => style,\n  enabled: true,\n  divider: .none,\n  children: [\n    .item(title: const Text('Item 1'), onPress: () {}),\n    .item(title: const Text('Item 2'), onPress: () {}),\n  ],",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroup/style.html"
+          },
+          {
+            "offset": 27,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroup/enabled.html"
+          },
+          {
+            "offset": 44,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroup/divider.html"
+          },
+          {
+            "offset": 54,
+            "length": 4,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemDivider.html#none"
+          },
+          {
+            "offset": 62,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroup/FItemGroup.html"
+          },
+          {
+            "offset": 79,
+            "length": 4,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemMixin/item.html"
+          },
+          {
+            "offset": 84,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemMixin/item.html"
+          },
+          {
+            "offset": 113,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemMixin/item.html"
+          },
+          {
+            "offset": 135,
+            "length": 4,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemMixin/item.html"
+          },
+          {
+            "offset": 140,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemMixin/item.html"
+          },
+          {
+            "offset": 169,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemMixin/item.html"
+          }
+        ],
+        "tooltips": [
+          {
+            "offset": 0,
+            "length": 6,
+            "snippet": {
+              "text": "{FItemGroupStyle Function(FItemGroupStyle)? style}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 1,
+                  "length": 15,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroupStyle-class.html"
+                },
+                {
+                  "offset": 26,
+                  "length": 15,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroupStyle-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 8,
+            "length": 5,
+            "snippet": {
+              "text": "FItemGroupStyle style",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 15,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroupStyle-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 27,
+            "length": 8,
+            "snippet": {
+              "text": "{bool? enabled}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 44,
+            "length": 8,
+            "snippet": {
+              "text": "{FItemDivider divider = .none}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 1,
+                  "length": 12,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemDivider.html"
+                },
+                {
+                  "offset": 25,
+                  "length": 4,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemDivider.html#none"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 54,
+            "length": 4,
+            "snippet": {
+              "text": "FItemDivider none",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 12,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemDivider.html"
+                }
+              ],
+              "tooltips": [],
+              "container": {
+                "name": "FItemDivider",
+                "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemDivider.html"
+              }
+            }
+          },
+          {
+            "offset": 62,
+            "length": 9,
+            "snippet": {
+              "text": "{required List<FItemMixin> children}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 15,
+                  "length": 10,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemMixin-mixin.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 79,
+            "length": 4,
+            "snippet": {
+              "text": "FItem item({\n  required Widget title,\n  FItemStyle Function(FItemStyle)? style,\n  bool? enabled,\n  bool selected = false,\n  String? semanticsLabel,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  void Function(bool)? onHoverChange,\n  void Function(FWidgetStatesDelta)? onStateChange,\n  void Function()? onPress,\n  void Function()? onLongPress,\n  void Function()? onSecondaryPress,\n  void Function()? onSecondaryLongPress,\n  Map<ShortcutActivator, Intent>? shortcuts,\n  Map<Type, Action<Intent>>? actions,\n  Widget? prefix,\n  Widget? subtitle,\n  Widget? details,\n  Widget? suffix,\n  Key? key,\n})",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 5,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem-class.html"
+                },
+                {
+                  "offset": 40,
+                  "length": 10,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemStyle-class.html"
+                },
+                {
+                  "offset": 60,
+                  "length": 10,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemStyle-class.html"
+                },
+                {
+                  "offset": 290,
+                  "length": 18,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStatesDelta-class.html"
+                }
+              ],
+              "tooltips": [],
+              "container": {
+                "name": "FItem",
+                "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem-class.html"
+              }
+            }
+          },
+          {
+            "offset": 84,
+            "length": 6,
+            "snippet": {
+              "text": "{required Widget title}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 113,
+            "length": 8,
+            "snippet": {
+              "text": "{void Function()? onPress}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 135,
+            "length": 4,
+            "snippet": {
+              "text": "FItem item({\n  required Widget title,\n  FItemStyle Function(FItemStyle)? style,\n  bool? enabled,\n  bool selected = false,\n  String? semanticsLabel,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  void Function(bool)? onHoverChange,\n  void Function(FWidgetStatesDelta)? onStateChange,\n  void Function()? onPress,\n  void Function()? onLongPress,\n  void Function()? onSecondaryPress,\n  void Function()? onSecondaryLongPress,\n  Map<ShortcutActivator, Intent>? shortcuts,\n  Map<Type, Action<Intent>>? actions,\n  Widget? prefix,\n  Widget? subtitle,\n  Widget? details,\n  Widget? suffix,\n  Key? key,\n})",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 5,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem-class.html"
+                },
+                {
+                  "offset": 40,
+                  "length": 10,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemStyle-class.html"
+                },
+                {
+                  "offset": 60,
+                  "length": 10,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemStyle-class.html"
+                },
+                {
+                  "offset": 290,
+                  "length": 18,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStatesDelta-class.html"
+                }
+              ],
+              "tooltips": [],
+              "container": {
+                "name": "FItem",
+                "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItem-class.html"
+              }
+            }
+          },
+          {
+            "offset": 140,
+            "length": 6,
+            "snippet": {
+              "text": "{required Widget title}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 169,
+            "length": 8,
+            "snippet": {
+              "text": "{void Function()? onPress}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          }
+        ]
+      }
+    ],
+    "Scroll": [
+      {
+        "name": "Scroll",
+        "description": "",
+        "text": "scrollController: null,\n  cacheExtent: null,\n  maxHeight: .infinity,\n  dragStartBehavior: .start,\n  physics: const ClampingScrollPhysics(),",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroup/scrollController.html"
+          },
+          {
+            "offset": 26,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroup/cacheExtent.html"
+          },
+          {
+            "offset": 47,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroup/maxHeight.html"
+          },
+          {
+            "offset": 71,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroup/dragStartBehavior.html"
+          },
+          {
+            "offset": 100,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroup/physics.html"
+          }
+        ],
+        "tooltips": [
+          {
+            "offset": 0,
+            "length": 17,
+            "snippet": {
+              "text": "{ScrollController? scrollController}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 26,
+            "length": 12,
+            "snippet": {
+              "text": "{double? cacheExtent}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 47,
+            "length": 10,
+            "snippet": {
+              "text": "{double maxHeight = .infinity}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 71,
+            "length": 18,
+            "snippet": {
+              "text": "{DragStartBehavior dragStartBehavior = .start}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 100,
+            "length": 8,
+            "snippet": {
+              "text": "{ScrollPhysics physics = const ClampingScrollPhysics()}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          }
+        ]
+      }
+    ],
+    "Accessibility": [
+      {
+        "name": "Accessibility",
+        "description": "",
+        "text": "semanticsLabel: 'Item group',",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroup/semanticsLabel.html"
+          }
+        ],
+        "tooltips": [
+          {
+            "offset": 0,
+            "length": 15,
+            "snippet": {
+              "text": "{String? semanticsLabel}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

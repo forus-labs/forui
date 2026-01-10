@@ -1,0 +1,685 @@
+{
+  "text": "@override\nWidget build(BuildContext context) => FButton(\n  child: const Text('Click me'),\n  onPress: () => showFSheet(\n    context: context,\n    side: .btt,\n    mainAxisMaxRatio: null,\n    builder: (context) => DraggableScrollableSheet(\n      expand: false,\n      builder: (context, controller) => ScrollConfiguration(\n        // This is required to enable dragging on desktop.\n        // See https://github.com/flutter/flutter/issues/101903 for more information.\n        behavior: ScrollConfiguration.of(\n          context,\n        ).copyWith(dragDevices: {.touch, .mouse, .trackpad}),\n        child: FTileGroup.builder(\n          count: 25,\n          scrollController: controller,\n          tileBuilder: (context, index) => FTile(title: Text('Tile $index')),\n        ),\n      ),\n    ),\n  ),\n);\n",
+  "highlights": [],
+  "links": [
+    {
+      "offset": 48,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+    },
+    {
+      "offset": 59,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/child.html"
+    },
+    {
+      "offset": 92,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/onPress.html"
+    },
+    {
+      "offset": 107,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/showFSheet.html"
+    },
+    {
+      "offset": 123,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/showFSheet.html"
+    },
+    {
+      "offset": 145,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/showFSheet.html"
+    },
+    {
+      "offset": 152,
+      "length": 3,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FLayout.html#btt"
+    },
+    {
+      "offset": 161,
+      "length": 16,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/showFSheet.html"
+    },
+    {
+      "offset": 189,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/showFSheet.html"
+    },
+    {
+      "offset": 602,
+      "length": 18,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileGroup/FTileGroup.builder.html"
+    },
+    {
+      "offset": 632,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileGroup/FTileGroup.builder.html"
+    },
+    {
+      "offset": 653,
+      "length": 16,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileGroup/scrollController.html"
+    },
+    {
+      "offset": 693,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileGroup/FTileGroup.builder.html"
+    },
+    {
+      "offset": 726,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTile/FTile.html"
+    },
+    {
+      "offset": 732,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTile/FTile.html"
+    }
+  ],
+  "tooltips": [
+    {
+      "offset": 48,
+      "length": 7,
+      "snippet": {
+        "text": "FButton({\n  required void Function()? onPress,\n  required Widget child,\n  FBaseButtonStyle Function(FButtonStyle) style = _primary,\n  void Function()? onLongPress,\n  void Function()? onSecondaryPress,\n  void Function()? onSecondaryLongPress,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  void Function(bool)? onHoverChange,\n  void Function(FWidgetStatesDelta)? onStateChange,\n  bool selected = false,\n  Map<ShortcutActivator, Intent>? shortcuts,\n  Map<Type, Action<Intent>>? actions,\n  MainAxisSize mainAxisSize = .max,\n  MainAxisAlignment mainAxisAlignment = .center,\n  CrossAxisAlignment crossAxisAlignment = .center,\n  TextBaseline? textBaseline,\n  Widget? prefix,\n  Widget? suffix,\n  Key? key,\n})\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 38,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 65,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 114,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 74,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FBaseButtonStyle-class.html"
+          },
+          {
+            "offset": 100,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButtonStyle-class.html"
+          },
+          {
+            "offset": 151,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 183,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 220,
+            "length": 20,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 249,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 281,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 315,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 353,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 405,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 384,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStatesDelta-class.html"
+          },
+          {
+            "offset": 427,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 479,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 519,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 543,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 584,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 634,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 680,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 704,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 722,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 737,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FButton",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton-class.html"
+        }
+      }
+    },
+    {
+      "offset": 59,
+      "length": 6,
+      "snippet": {
+        "text": "{required Widget child}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 92,
+      "length": 8,
+      "snippet": {
+        "text": "{required void Function()? onPress}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 107,
+      "length": 10,
+      "snippet": {
+        "text": "Future<T?> showFSheet<T>({\n  required BuildContext context,\n  required Widget Function(BuildContext) builder,\n  required FLayout side,\n  bool useRootNavigator = false,\n  FModalSheetStyle Function(FModalSheetStyle)? style,\n  double? mainAxisMaxRatio = 9 / 16,\n  bool useSafeArea = false,\n  bool resizeToAvoidBottomInset = true,\n  String? barrierLabel,\n  bool barrierDismissible = true,\n  BoxConstraints constraints = const BoxConstraints(),\n  bool draggable = true,\n  RouteSettings? routeSettings,\n  AnimationController? transitionAnimationController,\n  Offset? anchorPoint,\n  void Function()? onClosing,\n})",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 11,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/showFSheet.html"
+          },
+          {
+            "offset": 121,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FLayout.html"
+          },
+          {
+            "offset": 170,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/FModalSheetStyle-class.html"
+          },
+          {
+            "offset": 196,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/FModalSheetStyle-class.html"
+          }
+        ],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 123,
+      "length": 8,
+      "snippet": {
+        "text": "{required BuildContext context}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 145,
+      "length": 5,
+      "snippet": {
+        "text": "{required FLayout side}",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 10,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FLayout.html"
+          }
+        ],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 152,
+      "length": 3,
+      "snippet": {
+        "text": "FLayout btt",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FLayout.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FLayout",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FLayout.html"
+        }
+      }
+    },
+    {
+      "offset": 161,
+      "length": 17,
+      "snippet": {
+        "text": "{double? mainAxisMaxRatio = 9 / 16}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 189,
+      "length": 8,
+      "snippet": {
+        "text": "{required Widget Function(BuildContext) builder}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 199,
+      "length": 7,
+      "snippet": {
+        "text": "BuildContext context",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 274,
+      "length": 7,
+      "snippet": {
+        "text": "BuildContext context",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 283,
+      "length": 10,
+      "snippet": {
+        "text": "ScrollController controller",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 602,
+      "length": 18,
+      "snippet": {
+        "text": "FTileGroup.builder({\n  required Widget? Function(BuildContext, int) tileBuilder,\n  int? count,\n  FTileGroupStyle Function(FTileGroupStyle)? style,\n  ScrollController? scrollController,\n  double? cacheExtent,\n  double maxHeight = .infinity,\n  DragStartBehavior dragStartBehavior = .start,\n  ScrollPhysics physics = const ClampingScrollPhysics(),\n  bool? enabled,\n  FItemDivider divider = .indented,\n  String? semanticsLabel,\n  Widget? label,\n  Widget? description,\n  Widget? error,\n  Key? key,\n})\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileGroup/FTileGroup.builder.html"
+          },
+          {
+            "offset": 68,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileGroup/FTileGroup.builder.html"
+          },
+          {
+            "offset": 88,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileGroup/FTileGroup.builder.html"
+          },
+          {
+            "offset": 140,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileGroup/FTileGroup.builder.html"
+          },
+          {
+            "offset": 97,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileGroupStyle-class.html"
+          },
+          {
+            "offset": 122,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileGroupStyle-class.html"
+          },
+          {
+            "offset": 167,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileGroup/FTileGroup.builder.html"
+          },
+          {
+            "offset": 195,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileGroup/FTileGroup.builder.html"
+          },
+          {
+            "offset": 217,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileGroup/FTileGroup.builder.html"
+          },
+          {
+            "offset": 260,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileGroup/FTileGroup.builder.html"
+          },
+          {
+            "offset": 304,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileGroup/FTileGroup.builder.html"
+          },
+          {
+            "offset": 353,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileGroup/FTileGroup.builder.html"
+          },
+          {
+            "offset": 377,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileGroup/FTileGroup.builder.html"
+          },
+          {
+            "offset": 364,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemDivider.html"
+          },
+          {
+            "offset": 388,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemDivider.html#indented"
+          },
+          {
+            "offset": 408,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileGroup/FTileGroup.builder.html"
+          },
+          {
+            "offset": 434,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileGroup/FTileGroup.builder.html"
+          },
+          {
+            "offset": 451,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileGroup/FTileGroup.builder.html"
+          },
+          {
+            "offset": 474,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileGroup/FTileGroup.builder.html"
+          },
+          {
+            "offset": 488,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileGroup/FTileGroup.builder.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FTileGroup",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileGroup-class.html"
+        }
+      }
+    },
+    {
+      "offset": 632,
+      "length": 6,
+      "snippet": {
+        "text": "{int? count}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 653,
+      "length": 17,
+      "snippet": {
+        "text": "{ScrollController? scrollController}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 693,
+      "length": 12,
+      "snippet": {
+        "text": "{required Widget? Function(BuildContext, int) tileBuilder}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 707,
+      "length": 7,
+      "snippet": {
+        "text": "BuildContext context",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 716,
+      "length": 5,
+      "snippet": {
+        "text": "int index",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 726,
+      "length": 5,
+      "snippet": {
+        "text": "FTile({\n  required Widget title,\n  FItemStyle Function(FItemStyle)? style,\n  bool? enabled,\n  bool selected = false,\n  String? semanticsLabel,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  void Function(bool)? onHoverChange,\n  void Function(FWidgetStatesDelta)? onStateChange,\n  void Function()? onPress,\n  void Function()? onLongPress,\n  void Function()? onSecondaryPress,\n  void Function()? onSecondaryLongPress,\n  Map<ShortcutActivator, Intent>? shortcuts,\n  Map<Type, Action<Intent>>? actions,\n  Widget? prefix,\n  Widget? subtitle,\n  Widget? details,\n  Widget? suffix,\n  Key? key,\n})\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTile/FTile.html"
+          },
+          {
+            "offset": 26,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTile/FTile.html"
+          },
+          {
+            "offset": 68,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTile/FTile.html"
+          },
+          {
+            "offset": 35,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemStyle-class.html"
+          },
+          {
+            "offset": 55,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemStyle-class.html"
+          },
+          {
+            "offset": 83,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTile/FTile.html"
+          },
+          {
+            "offset": 99,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTile/FTile.html"
+          },
+          {
+            "offset": 127,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTile/FTile.html"
+          },
+          {
+            "offset": 150,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTile/FTile.html"
+          },
+          {
+            "offset": 182,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTile/FTile.html"
+          },
+          {
+            "offset": 216,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTile/FTile.html"
+          },
+          {
+            "offset": 254,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTile/FTile.html"
+          },
+          {
+            "offset": 306,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTile/FTile.html"
+          },
+          {
+            "offset": 285,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStatesDelta-class.html"
+          },
+          {
+            "offset": 340,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTile/FTile.html"
+          },
+          {
+            "offset": 368,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTile/FTile.html"
+          },
+          {
+            "offset": 400,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTile/FTile.html"
+          },
+          {
+            "offset": 437,
+            "length": 20,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTile/FTile.html"
+          },
+          {
+            "offset": 493,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTile/FTile.html"
+          },
+          {
+            "offset": 533,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTile/FTile.html"
+          },
+          {
+            "offset": 552,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTile/FTile.html"
+          },
+          {
+            "offset": 570,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTile/FTile.html"
+          },
+          {
+            "offset": 590,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTile/FTile.html"
+          },
+          {
+            "offset": 609,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTile/FTile.html"
+          },
+          {
+            "offset": 624,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTile/FTile.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FTile",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTile-class.html"
+        }
+      }
+    },
+    {
+      "offset": 732,
+      "length": 6,
+      "snippet": {
+        "text": "{required Widget title}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    }
+  ]
+}

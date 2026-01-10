@@ -1,0 +1,149 @@
+{
+  "text": "FFocusedOutline(\n  {{Core}}\n)",
+  "highlights": [],
+  "links": [
+    {
+      "offset": 0,
+      "length": 15,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FFocusedOutline/FFocusedOutline.html"
+    }
+  ],
+  "tooltips": [
+    {
+      "offset": 0,
+      "length": 15,
+      "snippet": {
+        "text": "FFocusedOutline({\n  required bool focused,\n  required Widget? child,\n  FFocusedOutlineStyle Function(FFocusedOutlineStyle)? style,\n  Key? key,\n})\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FFocusedOutline/FFocusedOutline.html"
+          },
+          {
+            "offset": 34,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FFocusedOutline/FFocusedOutline.html"
+          },
+          {
+            "offset": 62,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FFocusedOutline/FFocusedOutline.html"
+          },
+          {
+            "offset": 124,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FFocusedOutline/FFocusedOutline.html"
+          },
+          {
+            "offset": 71,
+            "length": 20,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FFocusedOutlineStyle-class.html"
+          },
+          {
+            "offset": 101,
+            "length": 20,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FFocusedOutlineStyle-class.html"
+          },
+          {
+            "offset": 138,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FFocusedOutline/FFocusedOutline.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FFocusedOutline",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FFocusedOutline-class.html"
+        }
+      }
+    }
+  ],
+  "categories": {
+    "Core": [
+      {
+        "name": "Core",
+        "description": "",
+        "text": "style: (style) => style,\n  focused: true,\n  child: const Placeholder(),",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FFocusedOutline/style.html"
+          },
+          {
+            "offset": 27,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FFocusedOutline/focused.html"
+          },
+          {
+            "offset": 44,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FFocusedOutline/FFocusedOutline.html"
+          }
+        ],
+        "tooltips": [
+          {
+            "offset": 0,
+            "length": 6,
+            "snippet": {
+              "text": "{FFocusedOutlineStyle Function(FFocusedOutlineStyle)? style}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 1,
+                  "length": 20,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FFocusedOutlineStyle-class.html"
+                },
+                {
+                  "offset": 31,
+                  "length": 20,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FFocusedOutlineStyle-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 8,
+            "length": 5,
+            "snippet": {
+              "text": "FFocusedOutlineStyle style",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 20,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FFocusedOutlineStyle-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 27,
+            "length": 8,
+            "snippet": {
+              "text": "{required bool focused}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 44,
+            "length": 6,
+            "snippet": {
+              "text": "{required Widget? child}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,323 @@
+{
+  "text": "@override\nWidget build(BuildContext _) => const FDateField.calendar(\n  label: Text('Appointment Date'),\n  description: Text('Select a date for your appointment'),\n);\n",
+  "highlights": [],
+  "links": [
+    {
+      "offset": 48,
+      "length": 19,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateField/FDateField.calendar.html"
+    },
+    {
+      "offset": 71,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateField/label.html"
+    },
+    {
+      "offset": 106,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateField/description.html"
+    }
+  ],
+  "tooltips": [
+    {
+      "offset": 48,
+      "length": 19,
+      "snippet": {
+        "text": "FDateField.calendar({\n  FDateFieldControl control,\n  FPopoverControl popoverControl,\n  FDateFieldStyle Function(FDateFieldStyle)? style,\n  DateFormat? format,\n  TextAlign textAlign,\n  TextAlignVertical? textAlignVertical,\n  TextDirection? textDirection,\n  bool expands,\n  MouseCursor mouseCursor,\n  bool canRequestFocus,\n  bool clearable,\n  String? hint,\n  bool autofocus,\n  FocusNode? focusNode,\n  Widget Function(\n    BuildContext,\n    ({\n      bool current,\n      DateTime date,\n      bool selectable,\n      bool selected,\n      FCalendarDayPickerStyle style,\n      bool today,\n    }),\n    Widget?,\n  )\n  dayBuilder,\n  DateTime? start,\n  DateTime? end,\n  DateTime? today,\n  FCalendarPickerType initialType,\n  bool autoHide,\n  Alignment anchor,\n  Alignment fieldAnchor,\n  Object? groupId,\n  FPortalSpacing spacing,\n  FPortalOverflow overflow,\n  Offset offset,\n  FPopoverHideRegion hideRegion,\n  void Function()? onTapHide,\n  Widget Function(BuildContext, FDateFieldStyle, Set<WidgetState>, Widget)\n  builder,\n  Widget Function(BuildContext, FDateFieldStyle, Set<WidgetState>)?\n  prefixBuilder,\n  Widget Function(BuildContext, FDateFieldStyle, Set<WidgetState>)?\n  suffixBuilder,\n  Widget? label,\n  Widget? description,\n  bool enabled,\n  void Function(DateTime?)? onSaved,\n  void Function()? onReset,\n  AutovalidateMode autovalidateMode,\n  String? forceErrorText,\n  Widget Function(BuildContext, String) errorBuilder,\n  Key? key,\n})\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 19,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateField/FDateField.calendar.html"
+          },
+          {
+            "offset": 42,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateField/FDateField.calendar.html"
+          },
+          {
+            "offset": 24,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateFieldControl-class.html"
+          },
+          {
+            "offset": 69,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateField/FDateField.calendar.html"
+          },
+          {
+            "offset": 53,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverControl-class.html"
+          },
+          {
+            "offset": 130,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateField/FDateField.calendar.html"
+          },
+          {
+            "offset": 87,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateFieldStyle-class.html"
+          },
+          {
+            "offset": 112,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateFieldStyle-class.html"
+          },
+          {
+            "offset": 151,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateField/FDateField.calendar.html"
+          },
+          {
+            "offset": 171,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateField/FDateField.calendar.html"
+          },
+          {
+            "offset": 203,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateField/FDateField.calendar.html"
+          },
+          {
+            "offset": 239,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateField/FDateField.calendar.html"
+          },
+          {
+            "offset": 261,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateField/FDateField.calendar.html"
+          },
+          {
+            "offset": 284,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateField/FDateField.calendar.html"
+          },
+          {
+            "offset": 304,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateField/FDateField.calendar.html"
+          },
+          {
+            "offset": 328,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateField/FDateField.calendar.html"
+          },
+          {
+            "offset": 349,
+            "length": 4,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateField/FDateField.calendar.html"
+          },
+          {
+            "offset": 362,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateField/FDateField.calendar.html"
+          },
+          {
+            "offset": 386,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateField/FDateField.calendar.html"
+          },
+          {
+            "offset": 608,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateField/FDateField.calendar.html"
+          },
+          {
+            "offset": 532,
+            "length": 23,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarDayPickerStyle-class.html"
+          },
+          {
+            "offset": 632,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateField/FDateField.calendar.html"
+          },
+          {
+            "offset": 651,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateField/FDateField.calendar.html"
+          },
+          {
+            "offset": 668,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateField/FDateField.calendar.html"
+          },
+          {
+            "offset": 697,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateField/FDateField.calendar.html"
+          },
+          {
+            "offset": 677,
+            "length": 19,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarPickerType.html"
+          },
+          {
+            "offset": 717,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateField/FDateField.calendar.html"
+          },
+          {
+            "offset": 739,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateField/FDateField.calendar.html"
+          },
+          {
+            "offset": 759,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateField/FDateField.calendar.html"
+          },
+          {
+            "offset": 782,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateField/FDateField.calendar.html"
+          },
+          {
+            "offset": 808,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateField/FDateField.calendar.html"
+          },
+          {
+            "offset": 793,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FPortalSpacing-class.html"
+          },
+          {
+            "offset": 835,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateField/FDateField.calendar.html"
+          },
+          {
+            "offset": 819,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FPortalOverflow-class.html"
+          },
+          {
+            "offset": 854,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateField/FDateField.calendar.html"
+          },
+          {
+            "offset": 883,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateField/FDateField.calendar.html"
+          },
+          {
+            "offset": 864,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverHideRegion.html"
+          },
+          {
+            "offset": 914,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateField/FDateField.calendar.html"
+          },
+          {
+            "offset": 1002,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateField/FDateField.calendar.html"
+          },
+          {
+            "offset": 957,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateFieldStyle-class.html"
+          },
+          {
+            "offset": 1081,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateField/FDateField.calendar.html"
+          },
+          {
+            "offset": 1043,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateFieldStyle-class.html"
+          },
+          {
+            "offset": 1166,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateField/FDateField.calendar.html"
+          },
+          {
+            "offset": 1128,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateFieldStyle-class.html"
+          },
+          {
+            "offset": 1191,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateField/FDateField.calendar.html"
+          },
+          {
+            "offset": 1208,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateField/FDateField.calendar.html"
+          },
+          {
+            "offset": 1228,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateField/FDateField.calendar.html"
+          },
+          {
+            "offset": 1265,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateField/FDateField.calendar.html"
+          },
+          {
+            "offset": 1293,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateField/FDateField.calendar.html"
+          },
+          {
+            "offset": 1321,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateField/FDateField.calendar.html"
+          },
+          {
+            "offset": 1349,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateField/FDateField.calendar.html"
+          },
+          {
+            "offset": 1405,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateField/FDateField.calendar.html"
+          },
+          {
+            "offset": 1426,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateField/FDateField.calendar.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FDateField",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateField-class.html"
+        }
+      }
+    },
+    {
+      "offset": 71,
+      "length": 6,
+      "snippet": {
+        "text": "{Widget? label}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 106,
+      "length": 12,
+      "snippet": {
+        "text": "{Widget? description}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    }
+  ]
+}

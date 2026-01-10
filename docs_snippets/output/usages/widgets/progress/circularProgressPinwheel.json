@@ -1,0 +1,129 @@
+{
+  "text": "FCircularProgress.pinwheel(\n  {{Core}}\n)",
+  "highlights": [],
+  "links": [
+    {
+      "offset": 0,
+      "length": 26,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.progress/FCircularProgress/FCircularProgress.pinwheel.html"
+    }
+  ],
+  "tooltips": [
+    {
+      "offset": 0,
+      "length": 26,
+      "snippet": {
+        "text": "FCircularProgress.pinwheel({\n  FCircularProgressStyle Function(FCircularProgressStyle)? style,\n  String? semanticsLabel,\n  Key? key,\n})\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 26,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.progress/FCircularProgress/FCircularProgress.pinwheel.html"
+          },
+          {
+            "offset": 88,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.progress/FCircularProgress/FCircularProgress.pinwheel.html"
+          },
+          {
+            "offset": 31,
+            "length": 22,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.progress/FCircularProgressStyle-class.html"
+          },
+          {
+            "offset": 63,
+            "length": 22,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.progress/FCircularProgressStyle-class.html"
+          },
+          {
+            "offset": 105,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.progress/FCircularProgress/FCircularProgress.pinwheel.html"
+          },
+          {
+            "offset": 128,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.progress/FCircularProgress/FCircularProgress.pinwheel.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FCircularProgress",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.progress/FCircularProgress-class.html"
+        }
+      }
+    }
+  ],
+  "categories": {
+    "Core": [
+      {
+        "name": "Core",
+        "description": "",
+        "text": "style: (style) => style,\n  semanticsLabel: 'Loading',",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.progress/FCircularProgress/style.html"
+          },
+          {
+            "offset": 27,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.progress/FCircularProgress/semanticsLabel.html"
+          }
+        ],
+        "tooltips": [
+          {
+            "offset": 0,
+            "length": 6,
+            "snippet": {
+              "text": "{FCircularProgressStyle Function(FCircularProgressStyle)? style}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 1,
+                  "length": 22,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.progress/FCircularProgressStyle-class.html"
+                },
+                {
+                  "offset": 33,
+                  "length": 22,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.progress/FCircularProgressStyle-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 8,
+            "length": 5,
+            "snippet": {
+              "text": "FCircularProgressStyle style",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 22,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.progress/FCircularProgressStyle-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 27,
+            "length": 15,
+            "snippet": {
+              "text": "{String? semanticsLabel}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

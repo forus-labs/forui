@@ -1,0 +1,173 @@
+{
+  "text": "class RadioExample extends StatefulWidget {\n  @override\n  State<RadioExample> createState() => _RadioExampleState();\n}\n\nclass _RadioExampleState extends State<RadioExample> {\n  bool _value = true;\n\n  @override\n  Widget build(BuildContext _) => FRadio(\n    label: const Text('Default'),\n    description: const Text('The description of the default option.'),\n    value: _value,\n    onChange: (value) => setState(() => _value = value),\n  );\n}\n",
+  "highlights": [],
+  "links": [
+    {
+      "offset": 244,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.radio/FRadio/FRadio.html"
+    },
+    {
+      "offset": 256,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.radio/FRadio/label.html"
+    },
+    {
+      "offset": 290,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.radio/FRadio/description.html"
+    },
+    {
+      "offset": 361,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.radio/FRadio/value.html"
+    },
+    {
+      "offset": 380,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.radio/FRadio/onChange.html"
+    }
+  ],
+  "tooltips": [
+    {
+      "offset": 244,
+      "length": 6,
+      "snippet": {
+        "text": "FRadio({\n  FRadioStyle Function(FRadioStyle)? style,\n  Widget? label,\n  Widget? description,\n  Widget? error,\n  String? semanticsLabel,\n  bool value = false,\n  void Function(bool)? onChange,\n  bool enabled = true,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  Key? key,\n})\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.radio/FRadio/FRadio.html"
+          },
+          {
+            "offset": 46,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.radio/FRadio/FRadio.html"
+          },
+          {
+            "offset": 11,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.radio/FRadioStyle-class.html"
+          },
+          {
+            "offset": 32,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.radio/FRadioStyle-class.html"
+          },
+          {
+            "offset": 63,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.radio/FRadio/FRadio.html"
+          },
+          {
+            "offset": 80,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.radio/FRadio/FRadio.html"
+          },
+          {
+            "offset": 103,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.radio/FRadio/FRadio.html"
+          },
+          {
+            "offset": 120,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.radio/FRadio/FRadio.html"
+          },
+          {
+            "offset": 143,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.radio/FRadio/FRadio.html"
+          },
+          {
+            "offset": 181,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.radio/FRadio/FRadio.html"
+          },
+          {
+            "offset": 198,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.radio/FRadio/FRadio.html"
+          },
+          {
+            "offset": 221,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.radio/FRadio/FRadio.html"
+          },
+          {
+            "offset": 253,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.radio/FRadio/FRadio.html"
+          },
+          {
+            "offset": 287,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.radio/FRadio/FRadio.html"
+          },
+          {
+            "offset": 309,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.radio/FRadio/FRadio.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FRadio",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.radio/FRadio-class.html"
+        }
+      }
+    },
+    {
+      "offset": 256,
+      "length": 6,
+      "snippet": {
+        "text": "{Widget? label}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 290,
+      "length": 12,
+      "snippet": {
+        "text": "{Widget? description}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 361,
+      "length": 6,
+      "snippet": {
+        "text": "{bool value = false}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 380,
+      "length": 9,
+      "snippet": {
+        "text": "{void Function(bool)? onChange}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 391,
+      "length": 5,
+      "snippet": {
+        "text": "bool value",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    }
+  ]
+}

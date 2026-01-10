@@ -1,0 +1,308 @@
+{
+  "text": "@override\nWidget build(BuildContext _) => const FTimeField.picker(\n  label: Text('Appointment Time'),\n  description: Text('Select a time for your appointment.'),\n);\n",
+  "highlights": [],
+  "links": [
+    {
+      "offset": 48,
+      "length": 17,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.picker.html"
+    },
+    {
+      "offset": 69,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/label.html"
+    },
+    {
+      "offset": 104,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/description.html"
+    }
+  ],
+  "tooltips": [
+    {
+      "offset": 48,
+      "length": 17,
+      "snippet": {
+        "text": "FTimeField.picker({\n  FTimeFieldControl control,\n  FPopoverControl popoverControl,\n  FTimeFieldStyle Function(FTimeFieldStyle)? style,\n  bool hour24,\n  DateFormat? format,\n  TextAlign textAlign,\n  TextAlignVertical? textAlignVertical,\n  TextDirection? textDirection,\n  bool expands,\n  MouseCursor mouseCursor,\n  bool canRequestFocus,\n  String? hint,\n  bool autofocus,\n  FocusNode? focusNode,\n  Alignment anchor,\n  Alignment fieldAnchor,\n  FPortalConstraints constraints,\n  FPortalSpacing spacing,\n  FPortalOverflow overflow,\n  Offset offset,\n  FPopoverHideRegion hideRegion,\n  Object? groupId,\n  void Function()? onTapHide,\n  int hourInterval,\n  int minuteInterval,\n  Widget Function(BuildContext, FTimeFieldStyle, Set<WidgetState>, Widget)\n  builder,\n  Widget Function(BuildContext, FTimeFieldStyle, Set<WidgetState>)?\n  prefixBuilder,\n  Widget Function(BuildContext, FTimeFieldStyle, Set<WidgetState>)?\n  suffixBuilder,\n  Widget? label,\n  Widget? description,\n  bool enabled,\n  void Function(FTime?)? onSaved,\n  void Function()? onReset,\n  AutovalidateMode autovalidateMode,\n  String? forceErrorText,\n  Widget Function(BuildContext, String) errorBuilder,\n  Key? key,\n})\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.picker.html"
+          },
+          {
+            "offset": 40,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.picker.html"
+          },
+          {
+            "offset": 22,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeFieldControl-class.html"
+          },
+          {
+            "offset": 67,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.picker.html"
+          },
+          {
+            "offset": 51,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverControl-class.html"
+          },
+          {
+            "offset": 128,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.picker.html"
+          },
+          {
+            "offset": 85,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeFieldStyle-class.html"
+          },
+          {
+            "offset": 110,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeFieldStyle-class.html"
+          },
+          {
+            "offset": 142,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.picker.html"
+          },
+          {
+            "offset": 164,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.picker.html"
+          },
+          {
+            "offset": 184,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.picker.html"
+          },
+          {
+            "offset": 216,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.picker.html"
+          },
+          {
+            "offset": 252,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.picker.html"
+          },
+          {
+            "offset": 274,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.picker.html"
+          },
+          {
+            "offset": 297,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.picker.html"
+          },
+          {
+            "offset": 317,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.picker.html"
+          },
+          {
+            "offset": 344,
+            "length": 4,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.picker.html"
+          },
+          {
+            "offset": 357,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.picker.html"
+          },
+          {
+            "offset": 381,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.picker.html"
+          },
+          {
+            "offset": 404,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.picker.html"
+          },
+          {
+            "offset": 424,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.picker.html"
+          },
+          {
+            "offset": 458,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.picker.html"
+          },
+          {
+            "offset": 439,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FPortalConstraints-class.html"
+          },
+          {
+            "offset": 488,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.picker.html"
+          },
+          {
+            "offset": 473,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FPortalSpacing-class.html"
+          },
+          {
+            "offset": 515,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.picker.html"
+          },
+          {
+            "offset": 499,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FPortalOverflow-class.html"
+          },
+          {
+            "offset": 534,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.picker.html"
+          },
+          {
+            "offset": 563,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.picker.html"
+          },
+          {
+            "offset": 544,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverHideRegion.html"
+          },
+          {
+            "offset": 585,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.picker.html"
+          },
+          {
+            "offset": 613,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.picker.html"
+          },
+          {
+            "offset": 630,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.picker.html"
+          },
+          {
+            "offset": 650,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.picker.html"
+          },
+          {
+            "offset": 743,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.picker.html"
+          },
+          {
+            "offset": 698,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeFieldStyle-class.html"
+          },
+          {
+            "offset": 822,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.picker.html"
+          },
+          {
+            "offset": 784,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeFieldStyle-class.html"
+          },
+          {
+            "offset": 907,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.picker.html"
+          },
+          {
+            "offset": 869,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeFieldStyle-class.html"
+          },
+          {
+            "offset": 932,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.picker.html"
+          },
+          {
+            "offset": 949,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.picker.html"
+          },
+          {
+            "offset": 969,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.picker.html"
+          },
+          {
+            "offset": 1003,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.picker.html"
+          },
+          {
+            "offset": 994,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTime-class.html"
+          },
+          {
+            "offset": 1031,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.picker.html"
+          },
+          {
+            "offset": 1059,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.picker.html"
+          },
+          {
+            "offset": 1087,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.picker.html"
+          },
+          {
+            "offset": 1143,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.picker.html"
+          },
+          {
+            "offset": 1164,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField/FTimeField.picker.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FTimeField",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeField-class.html"
+        }
+      }
+    },
+    {
+      "offset": 69,
+      "length": 6,
+      "snippet": {
+        "text": "{Widget? label}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 104,
+      "length": 12,
+      "snippet": {
+        "text": "{Widget? description}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    }
+  ]
+}

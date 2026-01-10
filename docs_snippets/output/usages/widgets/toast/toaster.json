@@ -1,0 +1,129 @@
+{
+  "text": "FToaster(\n  {{Core}}\n)",
+  "highlights": [],
+  "links": [
+    {
+      "offset": 0,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/FToaster/FToaster.html"
+    }
+  ],
+  "tooltips": [
+    {
+      "offset": 0,
+      "length": 8,
+      "snippet": {
+        "text": "FToaster({\n  required Widget child,\n  FToasterStyle Function(FToasterStyle)? style,\n  Key? key,\n})\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/FToaster/FToaster.html"
+          },
+          {
+            "offset": 29,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/FToaster/FToaster.html"
+          },
+          {
+            "offset": 77,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/FToaster/FToaster.html"
+          },
+          {
+            "offset": 38,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/FToasterStyle-class.html"
+          },
+          {
+            "offset": 61,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/FToasterStyle-class.html"
+          },
+          {
+            "offset": 91,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/FToaster/FToaster.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FToaster",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/FToaster-class.html"
+        }
+      }
+    }
+  ],
+  "categories": {
+    "Core": [
+      {
+        "name": "Core",
+        "description": "",
+        "text": "style: (style) => style,\n  child: const Placeholder(),",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/FToaster/style.html"
+          },
+          {
+            "offset": 27,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/FToaster/child.html"
+          }
+        ],
+        "tooltips": [
+          {
+            "offset": 0,
+            "length": 6,
+            "snippet": {
+              "text": "{FToasterStyle Function(FToasterStyle)? style}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 1,
+                  "length": 13,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/FToasterStyle-class.html"
+                },
+                {
+                  "offset": 24,
+                  "length": 13,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/FToasterStyle-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 8,
+            "length": 5,
+            "snippet": {
+              "text": "FToasterStyle style",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 13,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/FToasterStyle-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 27,
+            "length": 6,
+            "snippet": {
+              "text": "{required Widget child}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,669 @@
+{
+  "text": "class FormSelectExample extends StatefulWidget {\n  @override\n  State<FormSelectExample> createState() => _FormSelectExampleState();\n}\n\nclass _FormSelectExampleState extends State<FormSelectExample>\n    with SingleTickerProviderStateMixin {\n  final _key = GlobalKey<FormState>();\n\n  @override\n  Widget build(BuildContext context) => Form(\n    key: _key,\n    child: Column(\n      crossAxisAlignment: .start,\n      spacing: 25,\n      children: [\n        FSelect<String>.rich(\n          label: const Text('Department'),\n          description: const Text('Choose your dream department'),\n          hint: 'Select a department',\n          format: (s) => s,\n          validator: (department) =>\n              department == null ? 'Please select a department' : null,\n          children: [\n            for (final department in const [\n              'Engineering',\n              'Marketing',\n              'Sales',\n              'Human Resources',\n              'Finance',\n            ])\n              .item(title: Text(department), value: department),\n          ],\n        ),\n        FButton(\n          child: const Text('Submit'),\n          onPress: () {\n            if (_key.currentState!.validate()) {\n              // Form is valid, do something with department.\n            }\n          },\n        ),\n      ],\n    ),\n  );\n}\n",
+  "highlights": [],
+  "links": [
+    {
+      "offset": 451,
+      "length": 20,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.rich.html"
+    },
+    {
+      "offset": 483,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/label.html"
+    },
+    {
+      "offset": 526,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/description.html"
+    },
+    {
+      "offset": 593,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/hint.html"
+    },
+    {
+      "offset": 632,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/format.html"
+    },
+    {
+      "offset": 660,
+      "length": 9,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/validator.html"
+    },
+    {
+      "offset": 769,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.rich.html"
+    },
+    {
+      "offset": 993,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectItemMixin/item.html"
+    },
+    {
+      "offset": 998,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectItemMixin/item.html"
+    },
+    {
+      "offset": 1023,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectItemMixin/item.html"
+    },
+    {
+      "offset": 1075,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+    },
+    {
+      "offset": 1094,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/child.html"
+    },
+    {
+      "offset": 1133,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/onPress.html"
+    }
+  ],
+  "tooltips": [
+    {
+      "offset": 451,
+      "length": 20,
+      "snippet": {
+        "text": "FSelect.rich({\n  required String Function(String) format,\n  required List<FSelectItemMixin> children,\n  FSelectControl<String>? control,\n  FPopoverControl popoverControl,\n  FSelectStyle Function(FSelectStyle)? style,\n  bool autofocus,\n  FocusNode? focusNode,\n  Widget Function(BuildContext, FSelectStyle, Set<WidgetState>, Widget)\n  builder,\n  Widget Function(BuildContext, FSelectStyle, Set<WidgetState>)?\n  prefixBuilder,\n  Widget Function(BuildContext, FSelectStyle, Set<WidgetState>)?\n  suffixBuilder,\n  Widget? label,\n  Widget? description,\n  bool enabled,\n  void Function(String?)? onSaved,\n  void Function()? onReset,\n  AutovalidateMode autovalidateMode,\n  String? forceErrorText,\n  String? Function(String?) validator,\n  Widget Function(BuildContext, String) errorBuilder,\n  String? hint,\n  TextAlign textAlign,\n  TextAlignVertical? textAlignVertical,\n  TextDirection? textDirection,\n  bool expands,\n  MouseCursor mouseCursor,\n  bool canRequestFocus,\n  bool clearable,\n  AlignmentGeometry contentAnchor,\n  AlignmentGeometry fieldAnchor,\n  FPortalConstraints contentConstraints,\n  FPortalSpacing contentSpacing,\n  FPortalOverflow contentOverflow,\n  Offset contentOffset,\n  FPopoverHideRegion contentHideRegion,\n  Object? contentGroupId,\n  bool autoHide,\n  Widget Function(BuildContext, FSelectStyle) contentEmptyBuilder,\n  ScrollController? contentScrollController,\n  bool contentScrollHandles,\n  ScrollPhysics contentPhysics,\n  FItemDivider contentDivider,\n  Key? key,\n})\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.rich.html"
+          },
+          {
+            "offset": 50,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.rich.html"
+          },
+          {
+            "offset": 92,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.rich.html"
+          },
+          {
+            "offset": 74,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectItemMixin-mixin.html"
+          },
+          {
+            "offset": 128,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.rich.html"
+          },
+          {
+            "offset": 104,
+            "length": 23,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectControl-class.html"
+          },
+          {
+            "offset": 155,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.rich.html"
+          },
+          {
+            "offset": 139,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverControl-class.html"
+          },
+          {
+            "offset": 210,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.rich.html"
+          },
+          {
+            "offset": 173,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectStyle-class.html"
+          },
+          {
+            "offset": 195,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectStyle-class.html"
+          },
+          {
+            "offset": 224,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.rich.html"
+          },
+          {
+            "offset": 248,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.rich.html"
+          },
+          {
+            "offset": 333,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.rich.html"
+          },
+          {
+            "offset": 291,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectStyle-class.html"
+          },
+          {
+            "offset": 409,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.rich.html"
+          },
+          {
+            "offset": 374,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectStyle-class.html"
+          },
+          {
+            "offset": 491,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.rich.html"
+          },
+          {
+            "offset": 456,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectStyle-class.html"
+          },
+          {
+            "offset": 516,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.rich.html"
+          },
+          {
+            "offset": 533,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.rich.html"
+          },
+          {
+            "offset": 553,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.rich.html"
+          },
+          {
+            "offset": 588,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.rich.html"
+          },
+          {
+            "offset": 616,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.rich.html"
+          },
+          {
+            "offset": 644,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.rich.html"
+          },
+          {
+            "offset": 672,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.rich.html"
+          },
+          {
+            "offset": 716,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.rich.html"
+          },
+          {
+            "offset": 767,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.rich.html"
+          },
+          {
+            "offset": 791,
+            "length": 4,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.rich.html"
+          },
+          {
+            "offset": 809,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.rich.html"
+          },
+          {
+            "offset": 841,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.rich.html"
+          },
+          {
+            "offset": 877,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.rich.html"
+          },
+          {
+            "offset": 899,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.rich.html"
+          },
+          {
+            "offset": 922,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.rich.html"
+          },
+          {
+            "offset": 942,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.rich.html"
+          },
+          {
+            "offset": 966,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.rich.html"
+          },
+          {
+            "offset": 997,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.rich.html"
+          },
+          {
+            "offset": 1032,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.rich.html"
+          },
+          {
+            "offset": 1066,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.rich.html"
+          },
+          {
+            "offset": 1047,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FPortalConstraints-class.html"
+          },
+          {
+            "offset": 1103,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.rich.html"
+          },
+          {
+            "offset": 1088,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FPortalSpacing-class.html"
+          },
+          {
+            "offset": 1137,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.rich.html"
+          },
+          {
+            "offset": 1121,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FPortalOverflow-class.html"
+          },
+          {
+            "offset": 1163,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.rich.html"
+          },
+          {
+            "offset": 1199,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.rich.html"
+          },
+          {
+            "offset": 1180,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverHideRegion.html"
+          },
+          {
+            "offset": 1228,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.rich.html"
+          },
+          {
+            "offset": 1251,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.rich.html"
+          },
+          {
+            "offset": 1307,
+            "length": 19,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.rich.html"
+          },
+          {
+            "offset": 1293,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectStyle-class.html"
+          },
+          {
+            "offset": 1348,
+            "length": 23,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.rich.html"
+          },
+          {
+            "offset": 1380,
+            "length": 20,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.rich.html"
+          },
+          {
+            "offset": 1418,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.rich.html"
+          },
+          {
+            "offset": 1449,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.rich.html"
+          },
+          {
+            "offset": 1436,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemDivider.html"
+          },
+          {
+            "offset": 1472,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.rich.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FSelect",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect-class.html"
+        }
+      }
+    },
+    {
+      "offset": 483,
+      "length": 6,
+      "snippet": {
+        "text": "{Widget? label}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 526,
+      "length": 12,
+      "snippet": {
+        "text": "{Widget? description}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 593,
+      "length": 5,
+      "snippet": {
+        "text": "{String? hint}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 632,
+      "length": 7,
+      "snippet": {
+        "text": "{required String Function(String) format}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 641,
+      "length": 1,
+      "snippet": {
+        "text": "String s",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 660,
+      "length": 10,
+      "snippet": {
+        "text": "{String? Function(String?) validator}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 672,
+      "length": 10,
+      "snippet": {
+        "text": "String? department",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 769,
+      "length": 9,
+      "snippet": {
+        "text": "{required List<FSelectItemMixin> children}",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 15,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectItemMixin-mixin.html"
+          }
+        ],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 993,
+      "length": 4,
+      "snippet": {
+        "text": "FSelectItem<T> item<T>({\n  required Widget title,\n  required T value,\n  FItemStyle Function(FItemStyle)? style,\n  bool? enabled,\n  Widget? prefix,\n  Widget? subtitle,\n  Widget? Function(BuildContext, bool) suffixBuilder = _defaultSuffixBuilder,\n  Key? key,\n})",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectItem-class.html"
+          },
+          {
+            "offset": 72,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemStyle-class.html"
+          },
+          {
+            "offset": 92,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemStyle-class.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FSelectItem",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectItem-class.html"
+        }
+      }
+    },
+    {
+      "offset": 998,
+      "length": 6,
+      "snippet": {
+        "text": "{required Widget title}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 1023,
+      "length": 6,
+      "snippet": {
+        "text": "{required String value}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 1075,
+      "length": 7,
+      "snippet": {
+        "text": "FButton({\n  required void Function()? onPress,\n  required Widget child,\n  FBaseButtonStyle Function(FButtonStyle) style = _primary,\n  void Function()? onLongPress,\n  void Function()? onSecondaryPress,\n  void Function()? onSecondaryLongPress,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  void Function(bool)? onHoverChange,\n  void Function(FWidgetStatesDelta)? onStateChange,\n  bool selected = false,\n  Map<ShortcutActivator, Intent>? shortcuts,\n  Map<Type, Action<Intent>>? actions,\n  MainAxisSize mainAxisSize = .max,\n  MainAxisAlignment mainAxisAlignment = .center,\n  CrossAxisAlignment crossAxisAlignment = .center,\n  TextBaseline? textBaseline,\n  Widget? prefix,\n  Widget? suffix,\n  Key? key,\n})\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 38,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 65,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 114,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 74,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FBaseButtonStyle-class.html"
+          },
+          {
+            "offset": 100,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButtonStyle-class.html"
+          },
+          {
+            "offset": 151,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 183,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 220,
+            "length": 20,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 249,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 281,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 315,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 353,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 405,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 384,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStatesDelta-class.html"
+          },
+          {
+            "offset": 427,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 479,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 519,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 543,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 584,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 634,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 680,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 704,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 722,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 737,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FButton",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton-class.html"
+        }
+      }
+    },
+    {
+      "offset": 1094,
+      "length": 6,
+      "snippet": {
+        "text": "{required Widget child}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 1133,
+      "length": 8,
+      "snippet": {
+        "text": "{required void Function()? onPress}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    }
+  ]
+}

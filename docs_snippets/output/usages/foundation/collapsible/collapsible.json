@@ -1,0 +1,92 @@
+{
+  "text": "FCollapsible(\n  {{Core}}\n)",
+  "highlights": [],
+  "links": [
+    {
+      "offset": 0,
+      "length": 12,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FCollapsible/FCollapsible.html"
+    }
+  ],
+  "tooltips": [
+    {
+      "offset": 0,
+      "length": 12,
+      "snippet": {
+        "text": "FCollapsible({required double value, required Widget child, Key? key})\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FCollapsible/FCollapsible.html"
+          },
+          {
+            "offset": 30,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FCollapsible/FCollapsible.html"
+          },
+          {
+            "offset": 53,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FCollapsible/FCollapsible.html"
+          },
+          {
+            "offset": 65,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FCollapsible/FCollapsible.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FCollapsible",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FCollapsible-class.html"
+        }
+      }
+    }
+  ],
+  "categories": {
+    "Core": [
+      {
+        "name": "Core",
+        "description": "",
+        "text": "value: 0.5,\n  child: Placeholder(),",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FCollapsible/value.html"
+          },
+          {
+            "offset": 14,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FCollapsible/child.html"
+          }
+        ],
+        "tooltips": [
+          {
+            "offset": 0,
+            "length": 6,
+            "snippet": {
+              "text": "{required double value}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 14,
+            "length": 6,
+            "snippet": {
+              "text": "{required Widget child}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

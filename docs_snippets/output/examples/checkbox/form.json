@@ -1,0 +1,933 @@
+{
+  "text": "class FormCheckboxExample extends StatefulWidget {\n  @override\n  State<FormCheckboxExample> createState() => _FormCheckboxExampleState();\n}\n\nclass _FormCheckboxExampleState extends State<FormCheckboxExample> {\n  final _key = GlobalKey<FormState>();\n\n  @override\n  Widget build(BuildContext _) => Form(\n    key: _key,\n    child: Column(\n      mainAxisAlignment: .center,\n      crossAxisAlignment: .start,\n      children: [\n        FTextFormField.email(\n          hint: 'janedoe@foruslabs.com',\n          validator: (value) => (value?.contains('@') ?? false)\n              ? null\n              : 'Please enter a valid email.',\n        ),\n        const SizedBox(height: 12),\n        FTextFormField.password(\n          validator: (value) => 8 <= (value?.length ?? 0)\n              ? null\n              : 'Password must be at least 8 characters long.',\n        ),\n        const SizedBox(height: 15),\n        FormField(\n          initialValue: false,\n          onSaved: (value) {\n            // Save values somewhere.\n          },\n          validator: (value) => (value ?? false)\n              ? null\n              : 'Please accept the terms and conditions.',\n          builder: (state) => FCheckbox(\n            label: const Text('Accept terms and conditions'),\n            description: const Text('You agree to our terms and conditions.'),\n            error: state.errorText == null ? null : Text(state.errorText!),\n            value: state.value ?? false,\n            onChange: (value) => state.didChange(value),\n          ),\n        ),\n        const SizedBox(height: 20),\n        FButton(\n          child: const Text('Register'),\n          onPress: () {\n            if (!_key.currentState!.validate()) {\n              // Handle errors here.\n              return;\n            }\n\n            _key.currentState!.save();\n            // Do something.\n          },\n        ),\n      ],\n    ),\n  );\n}\n",
+  "highlights": [],
+  "links": [
+    {
+      "offset": 430,
+      "length": 20,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFormField/FTextFormField.email.html"
+    },
+    {
+      "offset": 462,
+      "length": 4,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFormField/hint.html"
+    },
+    {
+      "offset": 503,
+      "length": 9,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFormField/validator.html"
+    },
+    {
+      "offset": 680,
+      "length": 23,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFormField/password.html"
+    },
+    {
+      "offset": 715,
+      "length": 9,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFormField/password.html"
+    },
+    {
+      "offset": 1184,
+      "length": 9,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckbox/FCheckbox.html"
+    },
+    {
+      "offset": 1207,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckbox/label.html"
+    },
+    {
+      "offset": 1269,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckbox/description.html"
+    },
+    {
+      "offset": 1348,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckbox/error.html"
+    },
+    {
+      "offset": 1424,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckbox/value.html"
+    },
+    {
+      "offset": 1465,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckbox/onChange.html"
+    },
+    {
+      "offset": 1578,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+    },
+    {
+      "offset": 1597,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/child.html"
+    },
+    {
+      "offset": 1638,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/onPress.html"
+    }
+  ],
+  "tooltips": [
+    {
+      "offset": 430,
+      "length": 20,
+      "snippet": {
+        "text": "FTextFormField.email({\n  FTextFieldControl control = const .managed(),\n  FTextFieldStyle Function(FTextFieldStyle)? style,\n  Widget Function(BuildContext, FTextFieldStyle, Set<WidgetState>, Widget)\n      builder =\n      Input.defaultBuilder,\n  Widget? label = const LocalizedText.email(),\n  String? hint,\n  Widget? description,\n  TextMagnifierConfiguration? magnifierConfiguration,\n  Object groupId = EditableText,\n  FocusNode? focusNode,\n  TextInputType? keyboardType = .emailAddress,\n  TextInputAction? textInputAction = .next,\n  TextCapitalization textCapitalization = .none,\n  TextAlign textAlign = .start,\n  TextAlignVertical? textAlignVertical,\n  TextDirection? textDirection,\n  bool autofocus = false,\n  WidgetStatesController? statesController,\n  String obscuringCharacter = '•',\n  bool obscureText = false,\n  bool autocorrect = false,\n  SmartDashesType? smartDashesType,\n  SmartQuotesType? smartQuotesType,\n  bool enableSuggestions = true,\n  int? minLines,\n  int? maxLines = 1,\n  bool expands = false,\n  bool readOnly = false,\n  bool? showCursor,\n  int? maxLength,\n  MaxLengthEnforcement? maxLengthEnforcement,\n  void Function()? onTap,\n  void Function(PointerDownEvent)? onTapOutside,\n  bool onTapAlwaysCalled = false,\n  void Function()? onEditingComplete,\n  void Function(String)? onSubmit,\n  void Function(String, Map<String, dynamic>)? onAppPrivateCommand,\n  List<TextInputFormatter>? inputFormatters,\n  bool enabled = true,\n  bool? ignorePointers,\n  bool enableInteractiveSelection = true,\n  bool? selectAllOnFocus,\n  TextSelectionControls? selectionControls,\n  DragStartBehavior dragStartBehavior = .start,\n  MouseCursor? mouseCursor,\n  Widget? Function(BuildContext, int, int?, bool)? counterBuilder,\n  ScrollPhysics? scrollPhysics,\n  ScrollController? scrollController,\n  Iterable<String>? autofillHints = const [AutofillHints.email],\n  String? restorationId,\n  bool stylusHandwritingEnabled = true,\n  bool enableIMEPersonalizedLearning = true,\n  ContentInsertionConfiguration? contentInsertionConfiguration,\n  Widget Function(BuildContext, EditableTextState)? contextMenuBuilder =\n      Input.defaultContextMenuBuilder,\n  bool canRequestFocus = true,\n  UndoHistoryController? undoController,\n  SpellCheckConfiguration? spellCheckConfiguration,\n  Widget Function(BuildContext, FTextFieldStyle, Set<WidgetState>)?\n  prefixBuilder,\n  Widget Function(BuildContext, FTextFieldStyle, Set<WidgetState>)?\n  suffixBuilder,\n  bool Function(TextEditingValue) clearable = Input.defaultClearable,\n  Widget Function(BuildContext, FTextFieldStyle, void Function())\n      clearIconBuilder =\n      Input.defaultClearIconBuilder,\n  void Function(String?)? onSaved,\n  void Function()? onReset,\n  String? Function(String?)? validator,\n  AutovalidateMode autovalidateMode = .disabled,\n  String? forceErrorText,\n  Widget Function(BuildContext, String) errorBuilder = _errorBuilder,\n  Key? key,\n})\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 20,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFormField/FTextFormField.email.html"
+          },
+          {
+            "offset": 43,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFormField/FTextFormField.email.html"
+          },
+          {
+            "offset": 25,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFieldControl-class.html"
+          },
+          {
+            "offset": 60,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFieldControl/FTextFieldControl.managed.html"
+          },
+          {
+            "offset": 116,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFormField/FTextFormField.email.html"
+          },
+          {
+            "offset": 73,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFieldStyle-class.html"
+          },
+          {
+            "offset": 98,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFieldStyle-class.html"
+          },
+          {
+            "offset": 204,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFormField/FTextFormField.email.html"
+          },
+          {
+            "offset": 155,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFieldStyle-class.html"
+          },
+          {
+            "offset": 252,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFormField/FTextFormField.email.html"
+          },
+          {
+            "offset": 299,
+            "length": 4,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFormField/FTextFormField.email.html"
+          },
+          {
+            "offset": 315,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFormField/FTextFormField.email.html"
+          },
+          {
+            "offset": 358,
+            "length": 22,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFormField/FTextFormField.email.html"
+          },
+          {
+            "offset": 391,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFormField/FTextFormField.email.html"
+          },
+          {
+            "offset": 428,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFormField/FTextFormField.email.html"
+          },
+          {
+            "offset": 456,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFormField/FTextFormField.email.html"
+          },
+          {
+            "offset": 505,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFormField/FTextFormField.email.html"
+          },
+          {
+            "offset": 551,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFormField/FTextFormField.email.html"
+          },
+          {
+            "offset": 591,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFormField/FTextFormField.email.html"
+          },
+          {
+            "offset": 632,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFormField/FTextFormField.email.html"
+          },
+          {
+            "offset": 668,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFormField/FTextFormField.email.html"
+          },
+          {
+            "offset": 690,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFormField/FTextFormField.email.html"
+          },
+          {
+            "offset": 735,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFormField/FTextFormField.email.html"
+          },
+          {
+            "offset": 762,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFormField/FTextFormField.email.html"
+          },
+          {
+            "offset": 795,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFormField/FTextFormField.email.html"
+          },
+          {
+            "offset": 823,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFormField/FTextFormField.email.html"
+          },
+          {
+            "offset": 863,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFormField/FTextFormField.email.html"
+          },
+          {
+            "offset": 899,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFormField/FTextFormField.email.html"
+          },
+          {
+            "offset": 923,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFormField/FTextFormField.email.html"
+          },
+          {
+            "offset": 956,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFormField/FTextFormField.email.html"
+          },
+          {
+            "offset": 973,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFormField/FTextFormField.email.html"
+          },
+          {
+            "offset": 994,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFormField/FTextFormField.email.html"
+          },
+          {
+            "offset": 1018,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFormField/FTextFormField.email.html"
+          },
+          {
+            "offset": 1044,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFormField/FTextFormField.email.html"
+          },
+          {
+            "offset": 1063,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFormField/FTextFormField.email.html"
+          },
+          {
+            "offset": 1098,
+            "length": 20,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFormField/FTextFormField.email.html"
+          },
+          {
+            "offset": 1139,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFormField/FTextFormField.email.html"
+          },
+          {
+            "offset": 1181,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFormField/FTextFormField.email.html"
+          },
+          {
+            "offset": 1202,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFormField/FTextFormField.email.html"
+          },
+          {
+            "offset": 1248,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFormField/FTextFormField.email.html"
+          },
+          {
+            "offset": 1292,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFormField/FTextFormField.email.html"
+          },
+          {
+            "offset": 1349,
+            "length": 19,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFormField/FTextFormField.email.html"
+          },
+          {
+            "offset": 1398,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFormField/FTextFormField.email.html"
+          },
+          {
+            "offset": 1422,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFormField/FTextFormField.email.html"
+          },
+          {
+            "offset": 1446,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFormField/FTextFormField.email.html"
+          },
+          {
+            "offset": 1469,
+            "length": 26,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFormField/FTextFormField.email.html"
+          },
+          {
+            "offset": 1512,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFormField/FTextFormField.email.html"
+          },
+          {
+            "offset": 1555,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFormField/FTextFormField.email.html"
+          },
+          {
+            "offset": 1594,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFormField/FTextFormField.email.html"
+          },
+          {
+            "offset": 1637,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFormField/FTextFormField.email.html"
+          },
+          {
+            "offset": 1701,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFormField/FTextFormField.email.html"
+          },
+          {
+            "offset": 1734,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFormField/FTextFormField.email.html"
+          },
+          {
+            "offset": 1769,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFormField/FTextFormField.email.html"
+          },
+          {
+            "offset": 1807,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFormField/FTextFormField.email.html"
+          },
+          {
+            "offset": 1862,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFormField/FTextFormField.email.html"
+          },
+          {
+            "offset": 1884,
+            "length": 24,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFormField/FTextFormField.email.html"
+          },
+          {
+            "offset": 1924,
+            "length": 29,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFormField/FTextFormField.email.html"
+          },
+          {
+            "offset": 1995,
+            "length": 29,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFormField/FTextFormField.email.html"
+          },
+          {
+            "offset": 2078,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFormField/FTextFormField.email.html"
+          },
+          {
+            "offset": 2145,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFormField/FTextFormField.email.html"
+          },
+          {
+            "offset": 2194,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFormField/FTextFormField.email.html"
+          },
+          {
+            "offset": 2237,
+            "length": 23,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFormField/FTextFormField.email.html"
+          },
+          {
+            "offset": 2332,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFormField/FTextFormField.email.html"
+          },
+          {
+            "offset": 2294,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFieldStyle-class.html"
+          },
+          {
+            "offset": 2417,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFormField/FTextFormField.email.html"
+          },
+          {
+            "offset": 2379,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFieldStyle-class.html"
+          },
+          {
+            "offset": 2466,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFormField/FTextFormField.email.html"
+          },
+          {
+            "offset": 2574,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFormField/FTextFormField.email.html"
+          },
+          {
+            "offset": 2534,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFieldStyle-class.html"
+          },
+          {
+            "offset": 2656,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFormField/FTextFormField.email.html"
+          },
+          {
+            "offset": 2684,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFormField/FTextFormField.email.html"
+          },
+          {
+            "offset": 2722,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFormField/FTextFormField.email.html"
+          },
+          {
+            "offset": 2752,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFormField/FTextFormField.email.html"
+          },
+          {
+            "offset": 2792,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFormField/FTextFormField.email.html"
+          },
+          {
+            "offset": 2848,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFormField/FTextFormField.email.html"
+          },
+          {
+            "offset": 2885,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFormField/FTextFormField.email.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FTextFormField",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFormField-class.html"
+        }
+      }
+    },
+    {
+      "offset": 462,
+      "length": 5,
+      "snippet": {
+        "text": "{String? hint}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 503,
+      "length": 10,
+      "snippet": {
+        "text": "{String? Function(String?)? validator}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 515,
+      "length": 5,
+      "snippet": {
+        "text": "String? value",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 695,
+      "length": 8,
+      "snippet": {
+        "text": "Widget password({\n  FTextFieldControl control = const .managed(),\n  FObscureTextControl obscureTextControl = const .managed(),\n  FTextFieldStyle Function(FTextFieldStyle)? style,\n  Widget Function(BuildContext, FTextFieldStyle, Set<WidgetState>, Widget)\n      builder =\n      Input.defaultBuilder,\n  Widget? label = const LocalizedText.password(),\n  String? hint,\n  Widget? description,\n  Widget? error,\n  TextMagnifierConfiguration? magnifierConfiguration,\n  Object groupId = EditableText,\n  FocusNode? focusNode,\n  TextInputType? keyboardType,\n  TextInputAction textInputAction = .next,\n  TextCapitalization textCapitalization = .none,\n  TextAlign textAlign = .start,\n  TextAlignVertical? textAlignVertical,\n  TextDirection? textDirection,\n  bool autofocus = false,\n  WidgetStatesController? statesController,\n  String obscuringCharacter = '•',\n  bool autocorrect = false,\n  SmartDashesType? smartDashesType,\n  SmartQuotesType? smartQuotesType,\n  bool enableSuggestions = false,\n  int? minLines,\n  int maxLines = 1,\n  bool expands = false,\n  bool readOnly = false,\n  bool? showCursor,\n  int? maxLength,\n  MaxLengthEnforcement? maxLengthEnforcement,\n  void Function()? onTap,\n  void Function(PointerDownEvent)? onTapOutside,\n  bool onTapAlwaysCalled = false,\n  void Function()? onEditingComplete,\n  void Function(String)? onSubmit,\n  void Function(String, Map<String, dynamic>)? onAppPrivateCommand,\n  List<TextInputFormatter>? inputFormatters,\n  bool enabled = true,\n  bool? ignorePointers,\n  bool enableInteractiveSelection = true,\n  bool? selectAllOnFocus,\n  TextSelectionControls? selectionControls,\n  DragStartBehavior dragStartBehavior = .start,\n  MouseCursor? mouseCursor,\n  Widget? Function(BuildContext, int, int?, bool)? counterBuilder,\n  ScrollPhysics? scrollPhysics,\n  ScrollController? scrollController,\n  Iterable<String> autofillHints = const [AutofillHints.password],\n  String? restorationId,\n  bool stylusHandwritingEnabled = true,\n  bool enableIMEPersonalizedLearning = true,\n  ContentInsertionConfiguration? contentInsertionConfiguration,\n  Widget Function(BuildContext, EditableTextState) contextMenuBuilder =\n      Input.defaultContextMenuBuilder,\n  bool canRequestFocus = true,\n  UndoHistoryController? undoController,\n  SpellCheckConfiguration? spellCheckConfiguration,\n  Widget Function(\n    BuildContext,\n    FTextFieldStyle,\n    ValueNotifier<bool>,\n    Set<WidgetState>,\n  )?\n  prefixBuilder,\n  Widget Function(\n        BuildContext,\n        FTextFieldStyle,\n        ValueNotifier<bool>,\n        Set<WidgetState>,\n      )?\n      suffixBuilder =\n      PasswordField.defaultToggleBuilder,\n  bool Function(TextEditingValue) clearable = Input.defaultClearable,\n  Widget Function(BuildContext, FTextFieldStyle, void Function())\n      clearIconBuilder =\n      Input.defaultClearIconBuilder,\n  void Function(String?)? onSaved,\n  void Function()? onReset,\n  String? Function(String?)? validator,\n  AutovalidateMode autovalidateMode = .disabled,\n  String? forceErrorText,\n  Widget Function(BuildContext, String) errorBuilder = _errorBuilder,\n  Key? key,\n})",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 7,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFormField/password.html"
+          },
+          {
+            "offset": 20,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFieldControl-class.html"
+          },
+          {
+            "offset": 55,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFieldControl/FTextFieldControl.managed.html"
+          },
+          {
+            "offset": 68,
+            "length": 19,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FObscureTextControl-class.html"
+          },
+          {
+            "offset": 116,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FObscureTextControl/FObscureTextControl.managed.html"
+          },
+          {
+            "offset": 129,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFieldStyle-class.html"
+          },
+          {
+            "offset": 154,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFieldStyle-class.html"
+          },
+          {
+            "offset": 211,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFieldStyle-class.html"
+          },
+          {
+            "offset": 2335,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFieldStyle-class.html"
+          },
+          {
+            "offset": 2470,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFieldStyle-class.html"
+          },
+          {
+            "offset": 2717,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFieldStyle-class.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FTextFormField",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFormField-class.html"
+        }
+      }
+    },
+    {
+      "offset": 715,
+      "length": 10,
+      "snippet": {
+        "text": "{String? Function(String?)? validator}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 727,
+      "length": 5,
+      "snippet": {
+        "text": "String? value",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 965,
+      "length": 5,
+      "snippet": {
+        "text": "bool? value",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 1047,
+      "length": 5,
+      "snippet": {
+        "text": "bool? value",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 1174,
+      "length": 5,
+      "snippet": {
+        "text": "FormFieldState<bool> state",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 1184,
+      "length": 9,
+      "snippet": {
+        "text": "FCheckbox({\n  FCheckboxStyle Function(FCheckboxStyle)? style,\n  Widget? label,\n  Widget? description,\n  Widget? error,\n  String? semanticsLabel,\n  bool value = false,\n  void Function(bool)? onChange,\n  bool enabled = true,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  Key? key,\n})\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckbox/FCheckbox.html"
+          },
+          {
+            "offset": 55,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckbox/FCheckbox.html"
+          },
+          {
+            "offset": 14,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckboxStyle-class.html"
+          },
+          {
+            "offset": 38,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckboxStyle-class.html"
+          },
+          {
+            "offset": 72,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckbox/FCheckbox.html"
+          },
+          {
+            "offset": 89,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckbox/FCheckbox.html"
+          },
+          {
+            "offset": 112,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckbox/FCheckbox.html"
+          },
+          {
+            "offset": 129,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckbox/FCheckbox.html"
+          },
+          {
+            "offset": 152,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckbox/FCheckbox.html"
+          },
+          {
+            "offset": 190,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckbox/FCheckbox.html"
+          },
+          {
+            "offset": 207,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckbox/FCheckbox.html"
+          },
+          {
+            "offset": 230,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckbox/FCheckbox.html"
+          },
+          {
+            "offset": 262,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckbox/FCheckbox.html"
+          },
+          {
+            "offset": 296,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckbox/FCheckbox.html"
+          },
+          {
+            "offset": 318,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckbox/FCheckbox.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FCheckbox",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckbox-class.html"
+        }
+      }
+    },
+    {
+      "offset": 1207,
+      "length": 6,
+      "snippet": {
+        "text": "{Widget? label}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 1269,
+      "length": 12,
+      "snippet": {
+        "text": "{Widget? description}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 1348,
+      "length": 6,
+      "snippet": {
+        "text": "{Widget? error}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 1424,
+      "length": 6,
+      "snippet": {
+        "text": "{bool value = false}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 1465,
+      "length": 9,
+      "snippet": {
+        "text": "{void Function(bool)? onChange}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 1476,
+      "length": 5,
+      "snippet": {
+        "text": "bool value",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 1578,
+      "length": 7,
+      "snippet": {
+        "text": "FButton({\n  required void Function()? onPress,\n  required Widget child,\n  FBaseButtonStyle Function(FButtonStyle) style = _primary,\n  void Function()? onLongPress,\n  void Function()? onSecondaryPress,\n  void Function()? onSecondaryLongPress,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n  void Function(bool)? onHoverChange,\n  void Function(FWidgetStatesDelta)? onStateChange,\n  bool selected = false,\n  Map<ShortcutActivator, Intent>? shortcuts,\n  Map<Type, Action<Intent>>? actions,\n  MainAxisSize mainAxisSize = .max,\n  MainAxisAlignment mainAxisAlignment = .center,\n  CrossAxisAlignment crossAxisAlignment = .center,\n  TextBaseline? textBaseline,\n  Widget? prefix,\n  Widget? suffix,\n  Key? key,\n})\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 38,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 65,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 114,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 74,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FBaseButtonStyle-class.html"
+          },
+          {
+            "offset": 100,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButtonStyle-class.html"
+          },
+          {
+            "offset": 151,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 183,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 220,
+            "length": 20,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 249,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 281,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 315,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 353,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 405,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 384,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FWidgetStatesDelta-class.html"
+          },
+          {
+            "offset": 427,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 479,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 519,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 543,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 584,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 634,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 680,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 704,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 722,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          },
+          {
+            "offset": 737,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton/FButton.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FButton",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButton-class.html"
+        }
+      }
+    },
+    {
+      "offset": 1597,
+      "length": 6,
+      "snippet": {
+        "text": "{required Widget child}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 1638,
+      "length": 8,
+      "snippet": {
+        "text": "{required void Function()? onPress}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    }
+  ]
+}

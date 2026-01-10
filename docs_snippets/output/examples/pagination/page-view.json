@@ -1,0 +1,422 @@
+{
+  "text": "class PaginationWithViewExample extends StatefulWidget {\n  @override\n  State<PaginationWithViewExample> createState() =>\n      _PaginationWithViewExampleState();\n}\n\nclass _PaginationWithViewExampleState extends State<PaginationWithViewExample> {\n  final _controller = PageController();\n  final _paginationController = FPaginationController(pages: 10);\n\n  @override\n  void didChangeDependencies() {\n    super.didChangeDependencies();\n    _paginationController.value =\n        PageStorage.maybeOf(context)?.readState(context) ?? 0;\n  }\n\n  void _handlePageChange(int page) {\n    final old = _controller.page?.round();\n    if (old case final old when old != page) {\n      if (page == old! + 1 || page == old - 1) {\n        setState(() {\n          _controller.animateToPage(\n            page,\n            duration: const Duration(milliseconds: 300),\n            curve: Curves.easeInOut,\n          );\n        });\n      } else {\n        setState(() {\n          _controller.jumpToPage(page);\n        });\n      }\n    }\n  }\n\n  @override\n  void dispose() {\n    _paginationController.dispose();\n    _controller.dispose();\n    super.dispose();\n  }\n\n  @override\n  Widget build(BuildContext context) {\n    final colors = context.theme.colors;\n    return Column(\n      mainAxisSize: .min,\n      mainAxisAlignment: .center,\n      spacing: 10,\n      children: [\n        SizedBox(\n          height: 300,\n          width: 300,\n          child: NotificationListener<ScrollEndNotification>(\n            onNotification: (notification) {\n              if (_controller.hasClients) {\n                _paginationController.value = _controller.page!.round();\n                return true;\n              }\n\n              return false;\n            },\n            child: PageView.builder(\n              itemCount: 10,\n              controller: _controller,\n              itemBuilder: (context, index) => ColoredBox(\n                color: index.isEven\n                    ? colors.hover(colors.primary)\n                    : colors.mutedForeground,\n                child: Center(\n                  child: DefaultTextStyle(\n                    style: TextStyle(\n                      fontSize: 45,\n                      color: colors.primaryForeground,\n                    ),\n                    child: Text('Page ${index + 1}'),\n                  ),\n                ),\n              ),\n            ),\n          ),\n        ),\n        FPagination(\n          control: .managed(\n            controller: _paginationController,\n            onChange: _handlePageChange,\n          ),\n        ),\n      ],\n    );\n  }\n}\n",
+  "highlights": [],
+  "links": [
+    {
+      "offset": 318,
+      "length": 21,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPaginationController/FPaginationController.html"
+    },
+    {
+      "offset": 340,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPaginationController/pages.html"
+    },
+    {
+      "offset": 1220,
+      "length": 6,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/colors.html"
+    },
+    {
+      "offset": 1214,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext/theme.html"
+    },
+    {
+      "offset": 1949,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors/hover.html"
+    },
+    {
+      "offset": 1962,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors/primary.html"
+    },
+    {
+      "offset": 2000,
+      "length": 15,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors/mutedForeground.html"
+    },
+    {
+      "offset": 2201,
+      "length": 17,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors/primaryForeground.html"
+    },
+    {
+      "offset": 2401,
+      "length": 11,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPagination/FPagination.html"
+    },
+    {
+      "offset": 2424,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPagination/control.html"
+    },
+    {
+      "offset": 2434,
+      "length": 7,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPaginationControl/FPaginationControl.managed.html"
+    },
+    {
+      "offset": 2455,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPaginationControl/FPaginationControl.managed.html"
+    },
+    {
+      "offset": 2502,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPaginationControl/FPaginationControl.managed.html"
+    }
+  ],
+  "tooltips": [
+    {
+      "offset": 318,
+      "length": 21,
+      "snippet": {
+        "text": "FPaginationController({\n  required int pages,\n  int page = 0,\n  int siblings = 1,\n  bool showEdges = true,\n})\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 21,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPaginationController/FPaginationController.html"
+          },
+          {
+            "offset": 39,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPaginationController/FPaginationController.html"
+          },
+          {
+            "offset": 52,
+            "length": 4,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPaginationController/FPaginationController.html"
+          },
+          {
+            "offset": 68,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPaginationController/FPaginationController.html"
+          },
+          {
+            "offset": 89,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPaginationController/FPaginationController.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FPaginationController",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPaginationController-class.html"
+        }
+      }
+    },
+    {
+      "offset": 340,
+      "length": 6,
+      "snippet": {
+        "text": "{required int pages}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 1220,
+      "length": 6,
+      "snippet": {
+        "text": "FColors colors",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors-class.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FThemeData",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+        }
+      }
+    },
+    {
+      "offset": 1214,
+      "length": 5,
+      "snippet": {
+        "text": "FThemeData get theme",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FThemeBuildContext",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeBuildContext.html"
+        }
+      }
+    },
+    {
+      "offset": 1498,
+      "length": 12,
+      "snippet": {
+        "text": "ScrollEndNotification notification",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 1853,
+      "length": 7,
+      "snippet": {
+        "text": "BuildContext context",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 1862,
+      "length": 5,
+      "snippet": {
+        "text": "int index",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 1949,
+      "length": 5,
+      "snippet": {
+        "text": "Color hover(Color color)",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 6,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors/hover.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FColors",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors-class.html"
+        }
+      }
+    },
+    {
+      "offset": 1962,
+      "length": 7,
+      "snippet": {
+        "text": "Color primary",
+        "highlights": [],
+        "links": [],
+        "tooltips": [],
+        "container": {
+          "name": "FColors",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors-class.html"
+        }
+      }
+    },
+    {
+      "offset": 2000,
+      "length": 15,
+      "snippet": {
+        "text": "Color mutedForeground",
+        "highlights": [],
+        "links": [],
+        "tooltips": [],
+        "container": {
+          "name": "FColors",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors-class.html"
+        }
+      }
+    },
+    {
+      "offset": 2201,
+      "length": 17,
+      "snippet": {
+        "text": "Color primaryForeground",
+        "highlights": [],
+        "links": [],
+        "tooltips": [],
+        "container": {
+          "name": "FColors",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors-class.html"
+        }
+      }
+    },
+    {
+      "offset": 2401,
+      "length": 11,
+      "snippet": {
+        "text": "FPagination({\n  FPaginationControl control = const .managed(),\n  FPaginationStyle Function(FPaginationStyle)? style,\n  Widget? previous,\n  Widget? next,\n  Key? key,\n})\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPagination/FPagination.html"
+          },
+          {
+            "offset": 35,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPagination/FPagination.html"
+          },
+          {
+            "offset": 16,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPaginationControl-class.html"
+          },
+          {
+            "offset": 52,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPaginationControl/FPaginationControl.managed.html"
+          },
+          {
+            "offset": 110,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPagination/FPagination.html"
+          },
+          {
+            "offset": 65,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPaginationStyle-class.html"
+          },
+          {
+            "offset": 91,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPaginationStyle-class.html"
+          },
+          {
+            "offset": 127,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPagination/FPagination.html"
+          },
+          {
+            "offset": 147,
+            "length": 4,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPagination/FPagination.html"
+          },
+          {
+            "offset": 160,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPagination/FPagination.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FPagination",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPagination-class.html"
+        }
+      }
+    },
+    {
+      "offset": 2424,
+      "length": 8,
+      "snippet": {
+        "text": "{FPaginationControl control = const .managed()}",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 1,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPaginationControl-class.html"
+          },
+          {
+            "offset": 37,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPaginationControl/FPaginationControl.managed.html"
+          }
+        ],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 2434,
+      "length": 7,
+      "snippet": {
+        "text": "FPaginationControl.managed({\n  FPaginationController? controller,\n  int? initial,\n  int? pages,\n  int? siblings,\n  bool showEdges,\n  void Function(int)? onChange,\n})\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 26,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPaginationControl/FPaginationControl.managed.html"
+          },
+          {
+            "offset": 54,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPaginationControl/FPaginationControl.managed.html"
+          },
+          {
+            "offset": 31,
+            "length": 22,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPaginationController-class.html"
+          },
+          {
+            "offset": 73,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPaginationControl/FPaginationControl.managed.html"
+          },
+          {
+            "offset": 89,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPaginationControl/FPaginationControl.managed.html"
+          },
+          {
+            "offset": 103,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPaginationControl/FPaginationControl.managed.html"
+          },
+          {
+            "offset": 120,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPaginationControl/FPaginationControl.managed.html"
+          },
+          {
+            "offset": 153,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPaginationControl/FPaginationControl.managed.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FPaginationControl",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPaginationControl-class.html"
+        }
+      }
+    },
+    {
+      "offset": 2455,
+      "length": 11,
+      "snippet": {
+        "text": "{FPaginationController? controller}",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 1,
+            "length": 22,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPaginationController-class.html"
+          }
+        ],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 2502,
+      "length": 9,
+      "snippet": {
+        "text": "{void Function(int)? onChange}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    }
+  ]
+}

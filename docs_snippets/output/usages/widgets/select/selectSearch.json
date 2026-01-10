@@ -1,0 +1,3070 @@
+{
+  "text": "FSelect<String>.search(\n  {{Core}}\n  {{Control}}\n  {{Popover Control}}\n  {{Form}}\n  {{Field}}\n  {{Content}}\n  {{Accessibility}}\n)",
+  "highlights": [],
+  "links": [
+    {
+      "offset": 0,
+      "length": 22,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.search.html"
+    }
+  ],
+  "tooltips": [
+    {
+      "offset": 0,
+      "length": 22,
+      "snippet": {
+        "text": "FSelect.search({\n  required Map<String, String> items,\n  FutureOr<Iterable<String>> Function(String)? filter,\n  FSelectSearchFieldProperties searchFieldProperties =\n      const FSelectSearchFieldProperties(),\n  Widget Function(BuildContext, FSelectSearchStyle) contentLoadingBuilder =\n      FSelect.defaultContentLoadingBuilder,\n  Widget Function(BuildContext, Object?, StackTrace)? contentErrorBuilder,\n  FSelectControl<String>? control,\n  FPopoverControl popoverControl = const .managed(),\n  FSelectStyle Function(FSelectStyle)? style,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  Widget Function(BuildContext, FSelectStyle, Set<WidgetState>, Widget)\n      builder =\n      _fieldBuilder,\n  Widget Function(BuildContext, FSelectStyle, Set<WidgetState>)?\n  prefixBuilder,\n  Widget Function(BuildContext, FSelectStyle, Set<WidgetState>)?\n      suffixBuilder =\n      defaultIconBuilder,\n  Widget? label,\n  Widget? description,\n  bool enabled = true,\n  void Function(String?)? onSaved,\n  void Function()? onReset,\n  AutovalidateMode autovalidateMode = .onUnfocus,\n  String? forceErrorText,\n  String? Function(String?) validator = _defaultValidator,\n  Widget Function(BuildContext, String) errorBuilder =\n      FFormFieldProperties.defaultErrorBuilder,\n  String? hint,\n  TextAlign textAlign = .start,\n  TextAlignVertical? textAlignVertical,\n  TextDirection? textDirection,\n  bool expands = false,\n  MouseCursor mouseCursor = .defer,\n  bool canRequestFocus = true,\n  bool clearable = false,\n  AlignmentGeometry contentAnchor = AlignmentDirectional.topStart,\n  AlignmentGeometry fieldAnchor = AlignmentDirectional.bottomStart,\n  FPortalConstraints contentConstraints = const FAutoWidthPortalConstraints(\n    maxHeight: 300,\n  ),\n  FPortalSpacing contentSpacing = const .spacing(4),\n  FPortalOverflow contentOverflow = .flip,\n  Offset contentOffset = .zero,\n  FPopoverHideRegion contentHideRegion = .excludeChild,\n  Object? contentGroupId,\n  bool autoHide = true,\n  Widget Function(BuildContext, FSelectStyle) contentEmptyBuilder =\n      defaultContentEmptyBuilder,\n  ScrollController? contentScrollController,\n  bool contentScrollHandles = false,\n  ScrollPhysics contentPhysics = const ClampingScrollPhysics(),\n  FItemDivider contentDivider = .none,\n  Key? key,\n})\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.search.html"
+          },
+          {
+            "offset": 48,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.search.html"
+          },
+          {
+            "offset": 102,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.search.html"
+          },
+          {
+            "offset": 141,
+            "length": 21,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.search.html"
+          },
+          {
+            "offset": 112,
+            "length": 28,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectSearchFieldProperties-class.html"
+          },
+          {
+            "offset": 177,
+            "length": 28,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectSearchFieldProperties/FSelectSearchFieldProperties.html"
+          },
+          {
+            "offset": 261,
+            "length": 21,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.search.html"
+          },
+          {
+            "offset": 241,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectSearchStyle-class.html"
+          },
+          {
+            "offset": 383,
+            "length": 19,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.search.html"
+          },
+          {
+            "offset": 430,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.search.html"
+          },
+          {
+            "offset": 406,
+            "length": 23,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectControl-class.html"
+          },
+          {
+            "offset": 457,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.search.html"
+          },
+          {
+            "offset": 441,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverControl-class.html"
+          },
+          {
+            "offset": 481,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverControl/FPopoverControl.managed.html"
+          },
+          {
+            "offset": 531,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.search.html"
+          },
+          {
+            "offset": 494,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectStyle-class.html"
+          },
+          {
+            "offset": 516,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectStyle-class.html"
+          },
+          {
+            "offset": 545,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.search.html"
+          },
+          {
+            "offset": 577,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.search.html"
+          },
+          {
+            "offset": 666,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.search.html"
+          },
+          {
+            "offset": 620,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectStyle-class.html"
+          },
+          {
+            "offset": 764,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.search.html"
+          },
+          {
+            "offset": 729,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectStyle-class.html"
+          },
+          {
+            "offset": 850,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.search.html"
+          },
+          {
+            "offset": 811,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectStyle-class.html"
+          },
+          {
+            "offset": 902,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.search.html"
+          },
+          {
+            "offset": 919,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.search.html"
+          },
+          {
+            "offset": 939,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.search.html"
+          },
+          {
+            "offset": 981,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.search.html"
+          },
+          {
+            "offset": 1009,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.search.html"
+          },
+          {
+            "offset": 1037,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.search.html"
+          },
+          {
+            "offset": 1078,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.search.html"
+          },
+          {
+            "offset": 1122,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.search.html"
+          },
+          {
+            "offset": 1193,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.search.html"
+          },
+          {
+            "offset": 1214,
+            "length": 40,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FFormFieldProperties/defaultErrorBuilder.html"
+          },
+          {
+            "offset": 1266,
+            "length": 4,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.search.html"
+          },
+          {
+            "offset": 1284,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.search.html"
+          },
+          {
+            "offset": 1325,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.search.html"
+          },
+          {
+            "offset": 1361,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.search.html"
+          },
+          {
+            "offset": 1383,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.search.html"
+          },
+          {
+            "offset": 1414,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.search.html"
+          },
+          {
+            "offset": 1443,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.search.html"
+          },
+          {
+            "offset": 1474,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.search.html"
+          },
+          {
+            "offset": 1513,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.search.html"
+          },
+          {
+            "offset": 1580,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.search.html"
+          },
+          {
+            "offset": 1649,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.search.html"
+          },
+          {
+            "offset": 1630,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FPortalConstraints-class.html"
+          },
+          {
+            "offset": 1676,
+            "length": 27,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FAutoWidthPortalConstraints/FAutoWidthPortalConstraints.html"
+          },
+          {
+            "offset": 1709,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FAutoWidthPortalConstraints/maxHeight.html"
+          },
+          {
+            "offset": 1747,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.search.html"
+          },
+          {
+            "offset": 1732,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FPortalSpacing-class.html"
+          },
+          {
+            "offset": 1771,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FPortalSpacing/FPortalSpacing.spacing.html"
+          },
+          {
+            "offset": 1801,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.search.html"
+          },
+          {
+            "offset": 1785,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FPortalOverflow-class.html"
+          },
+          {
+            "offset": 1820,
+            "length": 4,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FPortalOverflow/flip-constant.html"
+          },
+          {
+            "offset": 1835,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.search.html"
+          },
+          {
+            "offset": 1879,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.search.html"
+          },
+          {
+            "offset": 1860,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverHideRegion.html"
+          },
+          {
+            "offset": 1900,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverHideRegion.html#excludeChild"
+          },
+          {
+            "offset": 1924,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.search.html"
+          },
+          {
+            "offset": 1947,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.search.html"
+          },
+          {
+            "offset": 2010,
+            "length": 19,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.search.html"
+          },
+          {
+            "offset": 1996,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectStyle-class.html"
+          },
+          {
+            "offset": 2086,
+            "length": 23,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.search.html"
+          },
+          {
+            "offset": 2118,
+            "length": 20,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.search.html"
+          },
+          {
+            "offset": 2164,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.search.html"
+          },
+          {
+            "offset": 2227,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.search.html"
+          },
+          {
+            "offset": 2214,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemDivider.html"
+          },
+          {
+            "offset": 2245,
+            "length": 4,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemDivider.html#none"
+          },
+          {
+            "offset": 2258,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.search.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FSelect",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect-class.html"
+        }
+      }
+    }
+  ],
+  "categories": {
+    "Core": [
+      {
+        "name": "Core",
+        "description": "",
+        "text": "style: (style) => style,\n  enabled: true,\n  filter: (query) =>\n      ['apple', 'banana', 'cherry'].where((e) => e.startsWith(query)),\n  items: const {'Apple': 'apple', 'Banana': 'banana', 'Cherry': 'cherry'},",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/style.html"
+          },
+          {
+            "offset": 27,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/enabled.html"
+          },
+          {
+            "offset": 44,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.search.html"
+          },
+          {
+            "offset": 136,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.search.html"
+          }
+        ],
+        "tooltips": [
+          {
+            "offset": 0,
+            "length": 6,
+            "snippet": {
+              "text": "{FSelectStyle Function(FSelectStyle)? style}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 1,
+                  "length": 12,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectStyle-class.html"
+                },
+                {
+                  "offset": 23,
+                  "length": 12,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectStyle-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 8,
+            "length": 5,
+            "snippet": {
+              "text": "FSelectStyle style",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 12,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectStyle-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 27,
+            "length": 8,
+            "snippet": {
+              "text": "{bool enabled = true}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 44,
+            "length": 7,
+            "snippet": {
+              "text": "{FutureOr<Iterable<String>> Function(String)? filter}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 53,
+            "length": 5,
+            "snippet": {
+              "text": "String query",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 136,
+            "length": 6,
+            "snippet": {
+              "text": "{required Map<String, String> items}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          }
+        ]
+      }
+    ],
+    "Control": [
+      {
+        "name": "`.lifted()`",
+        "description": "Externally controls the select's value.",
+        "text": "control: .lifted(\n    value: null,\n    onChange: (value) {},\n  ),",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 10,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectControl/FSelectControl.lifted.html"
+          },
+          {
+            "offset": 22,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectControl/FSelectControl.lifted.html"
+          },
+          {
+            "offset": 39,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectControl/FSelectControl.lifted.html"
+          },
+          {
+            "offset": 0,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/control.html"
+          }
+        ],
+        "tooltips": [
+          {
+            "offset": 10,
+            "length": 6,
+            "snippet": {
+              "text": "FSelectControl.lifted({\n  required String? value,\n  required void Function(String?) onChange,\n})\n",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 21,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectControl/FSelectControl.lifted.html"
+                },
+                {
+                  "offset": 43,
+                  "length": 5,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectControl/FSelectControl.lifted.html"
+                },
+                {
+                  "offset": 84,
+                  "length": 8,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectControl/FSelectControl.lifted.html"
+                }
+              ],
+              "tooltips": [],
+              "container": {
+                "name": "FSelectControl",
+                "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectControl-class.html"
+              }
+            }
+          },
+          {
+            "offset": 22,
+            "length": 6,
+            "snippet": {
+              "text": "{required String? value}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 39,
+            "length": 9,
+            "snippet": {
+              "text": "{required void Function(String?) onChange}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 50,
+            "length": 5,
+            "snippet": {
+              "text": "String? value",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 0,
+            "length": 8,
+            "snippet": {
+              "text": "{FSelectControl<String>? control}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 1,
+                  "length": 23,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectControl-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          }
+        ]
+      },
+      {
+        "name": "`.managed()` with internal controller",
+        "description": "Manages the select state internally.",
+        "text": "control: .managed(\n    initial: null,\n    toggleable: false,\n    onChange: (value) {},\n  ),",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 10,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectControl/FSelectControl.managed.html"
+          },
+          {
+            "offset": 23,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectControl/FSelectControl.managed.html"
+          },
+          {
+            "offset": 42,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectControl/FSelectControl.managed.html"
+          },
+          {
+            "offset": 65,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectControl/FSelectControl.managed.html"
+          },
+          {
+            "offset": 0,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/control.html"
+          }
+        ],
+        "tooltips": [
+          {
+            "offset": 10,
+            "length": 7,
+            "snippet": {
+              "text": "FSelectControl.managed({\n  FSelectController<String>? controller,\n  String? initial,\n  bool toggleable,\n  void Function(String?)? onChange,\n})\n",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 22,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectControl/FSelectControl.managed.html"
+                },
+                {
+                  "offset": 54,
+                  "length": 10,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectControl/FSelectControl.managed.html"
+                },
+                {
+                  "offset": 27,
+                  "length": 26,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectController-class.html"
+                },
+                {
+                  "offset": 76,
+                  "length": 7,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectControl/FSelectControl.managed.html"
+                },
+                {
+                  "offset": 92,
+                  "length": 10,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectControl/FSelectControl.managed.html"
+                },
+                {
+                  "offset": 130,
+                  "length": 8,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectControl/FSelectControl.managed.html"
+                }
+              ],
+              "tooltips": [],
+              "container": {
+                "name": "FSelectControl",
+                "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectControl-class.html"
+              }
+            }
+          },
+          {
+            "offset": 23,
+            "length": 8,
+            "snippet": {
+              "text": "{String? initial}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 42,
+            "length": 11,
+            "snippet": {
+              "text": "{bool toggleable}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 65,
+            "length": 9,
+            "snippet": {
+              "text": "{void Function(String?)? onChange}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 76,
+            "length": 5,
+            "snippet": {
+              "text": "String? value",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 0,
+            "length": 8,
+            "snippet": {
+              "text": "{FSelectControl<String>? control}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 1,
+                  "length": 23,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectControl-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          }
+        ]
+      },
+      {
+        "name": "`.managed()` with external controller",
+        "description": "Uses an external controller to control the select's state.",
+        "text": "control: .managed(\n    // For demonstration purposes only. Don't create a controller inline, store it in a State instead.\n    controller: FSelectController<String>(value: null, toggleable: false),\n    onChange: (value) {},\n  ),",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 10,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectControl/FSelectControl.managed.html"
+          },
+          {
+            "offset": 126,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectControl/FSelectControl.managed.html"
+          },
+          {
+            "offset": 138,
+            "length": 25,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectController/FSelectController.html"
+          },
+          {
+            "offset": 164,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectController/value.html"
+          },
+          {
+            "offset": 177,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectController/toggleable.html"
+          },
+          {
+            "offset": 201,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectControl/FSelectControl.managed.html"
+          },
+          {
+            "offset": 0,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/control.html"
+          }
+        ],
+        "tooltips": [
+          {
+            "offset": 10,
+            "length": 7,
+            "snippet": {
+              "text": "FSelectControl.managed({\n  FSelectController<String>? controller,\n  String? initial,\n  bool toggleable,\n  void Function(String?)? onChange,\n})\n",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 22,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectControl/FSelectControl.managed.html"
+                },
+                {
+                  "offset": 54,
+                  "length": 10,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectControl/FSelectControl.managed.html"
+                },
+                {
+                  "offset": 27,
+                  "length": 26,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectController-class.html"
+                },
+                {
+                  "offset": 76,
+                  "length": 7,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectControl/FSelectControl.managed.html"
+                },
+                {
+                  "offset": 92,
+                  "length": 10,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectControl/FSelectControl.managed.html"
+                },
+                {
+                  "offset": 130,
+                  "length": 8,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectControl/FSelectControl.managed.html"
+                }
+              ],
+              "tooltips": [],
+              "container": {
+                "name": "FSelectControl",
+                "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectControl-class.html"
+              }
+            }
+          },
+          {
+            "offset": 126,
+            "length": 11,
+            "snippet": {
+              "text": "{FSelectController<String>? controller}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 1,
+                  "length": 26,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectController-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 138,
+            "length": 25,
+            "snippet": {
+              "text": "FSelectController({String? value, bool toggleable = false})\n",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 17,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectController/FSelectController.html"
+                },
+                {
+                  "offset": 27,
+                  "length": 5,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectController/FSelectController.html"
+                },
+                {
+                  "offset": 39,
+                  "length": 10,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectController/FSelectController.html"
+                }
+              ],
+              "tooltips": [],
+              "container": {
+                "name": "FSelectController",
+                "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectController-class.html"
+              }
+            }
+          },
+          {
+            "offset": 164,
+            "length": 6,
+            "snippet": {
+              "text": "{String? value}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 177,
+            "length": 11,
+            "snippet": {
+              "text": "{bool toggleable = false}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 201,
+            "length": 9,
+            "snippet": {
+              "text": "{void Function(String?)? onChange}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 212,
+            "length": 5,
+            "snippet": {
+              "text": "String? value",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 0,
+            "length": 8,
+            "snippet": {
+              "text": "{FSelectControl<String>? control}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 1,
+                  "length": 23,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectControl-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          }
+        ]
+      }
+    ],
+    "Popover Control": [
+      {
+        "name": "`.lifted()`",
+        "description": "Externally controls the popover's visibility.",
+        "text": "popoverControl: .lifted(\n    shown: false,\n    onChange: (shown) {},\n    motion: const FPopoverMotion(),\n  ),",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 17,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverControl/FPopoverControl.lifted.html"
+          },
+          {
+            "offset": 29,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverControl/FPopoverControl.lifted.html"
+          },
+          {
+            "offset": 47,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverControl/FPopoverControl.lifted.html"
+          },
+          {
+            "offset": 73,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverControl/FPopoverControl.lifted.html"
+          },
+          {
+            "offset": 87,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverMotion/FPopoverMotion.html"
+          },
+          {
+            "offset": 0,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/popoverControl.html"
+          }
+        ],
+        "tooltips": [
+          {
+            "offset": 17,
+            "length": 6,
+            "snippet": {
+              "text": "FPopoverControl.lifted({\n  required bool shown,\n  required void Function(bool) onChange,\n  FPopoverMotion motion,\n})\n",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 22,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverControl/FPopoverControl.lifted.html"
+                },
+                {
+                  "offset": 41,
+                  "length": 5,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverControl/FPopoverControl.lifted.html"
+                },
+                {
+                  "offset": 79,
+                  "length": 8,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverControl/FPopoverControl.lifted.html"
+                },
+                {
+                  "offset": 106,
+                  "length": 6,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverControl/FPopoverControl.lifted.html"
+                },
+                {
+                  "offset": 91,
+                  "length": 14,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverMotion-class.html"
+                }
+              ],
+              "tooltips": [],
+              "container": {
+                "name": "FPopoverControl",
+                "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverControl-class.html"
+              }
+            }
+          },
+          {
+            "offset": 29,
+            "length": 6,
+            "snippet": {
+              "text": "{required bool shown}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 47,
+            "length": 9,
+            "snippet": {
+              "text": "{required void Function(bool) onChange}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 58,
+            "length": 5,
+            "snippet": {
+              "text": "bool shown",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 73,
+            "length": 7,
+            "snippet": {
+              "text": "{FPopoverMotion motion}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 1,
+                  "length": 14,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverMotion-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 87,
+            "length": 14,
+            "snippet": {
+              "text": "FPopoverMotion({\n  Duration entranceDuration = const Duration(milliseconds: 100),\n  Duration exitDuration = const Duration(milliseconds: 100),\n  Curve expandCurve = Curves.easeOutCubic,\n  Curve collapseCurve = Curves.easeInCubic,\n  Curve fadeInCurve = Curves.linear,\n  Curve fadeOutCurve = Curves.linear,\n  Animatable<double> scaleTween = const FImmutableTween(begin: 0.93, end: 1),\n  Animatable<double> fadeTween = const FImmutableTween(begin: 0, end: 1),\n})\n",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 14,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverMotion/FPopoverMotion.html"
+                },
+                {
+                  "offset": 28,
+                  "length": 16,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverMotion/FPopoverMotion.html"
+                },
+                {
+                  "offset": 93,
+                  "length": 12,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverMotion/FPopoverMotion.html"
+                },
+                {
+                  "offset": 151,
+                  "length": 11,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverMotion/FPopoverMotion.html"
+                },
+                {
+                  "offset": 194,
+                  "length": 13,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverMotion/FPopoverMotion.html"
+                },
+                {
+                  "offset": 238,
+                  "length": 11,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverMotion/FPopoverMotion.html"
+                },
+                {
+                  "offset": 275,
+                  "length": 12,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverMotion/FPopoverMotion.html"
+                },
+                {
+                  "offset": 326,
+                  "length": 10,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverMotion/FPopoverMotion.html"
+                },
+                {
+                  "offset": 345,
+                  "length": 15,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FImmutableTween/FImmutableTween.html"
+                },
+                {
+                  "offset": 361,
+                  "length": 5,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FImmutableTween/begin.html"
+                },
+                {
+                  "offset": 374,
+                  "length": 3,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FImmutableTween/end.html"
+                },
+                {
+                  "offset": 404,
+                  "length": 9,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverMotion/FPopoverMotion.html"
+                },
+                {
+                  "offset": 422,
+                  "length": 15,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FImmutableTween/FImmutableTween.html"
+                },
+                {
+                  "offset": 438,
+                  "length": 5,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FImmutableTween/begin.html"
+                },
+                {
+                  "offset": 448,
+                  "length": 3,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FImmutableTween/end.html"
+                }
+              ],
+              "tooltips": [],
+              "container": {
+                "name": "FPopoverMotion",
+                "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverMotion-class.html"
+              }
+            }
+          },
+          {
+            "offset": 0,
+            "length": 15,
+            "snippet": {
+              "text": "{FPopoverControl popoverControl = const .managed()}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 1,
+                  "length": 15,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverControl-class.html"
+                },
+                {
+                  "offset": 41,
+                  "length": 7,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverControl/FPopoverControl.managed.html"
+                }
+              ],
+              "tooltips": []
+            }
+          }
+        ]
+      },
+      {
+        "name": "`.managed()` with internal controller",
+        "description": "Manages the popover's visibility internally.",
+        "text": "popoverControl: .managed(\n    initial: false,\n    onChange: (shown) {},\n    motion: const FPopoverMotion(),\n  ),",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 17,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverControl/FPopoverControl.managed.html"
+          },
+          {
+            "offset": 30,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverControl/FPopoverControl.managed.html"
+          },
+          {
+            "offset": 50,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverControl/FPopoverControl.managed.html"
+          },
+          {
+            "offset": 76,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverControl/FPopoverControl.managed.html"
+          },
+          {
+            "offset": 90,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverMotion/FPopoverMotion.html"
+          },
+          {
+            "offset": 0,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/popoverControl.html"
+          }
+        ],
+        "tooltips": [
+          {
+            "offset": 17,
+            "length": 7,
+            "snippet": {
+              "text": "FPopoverControl.managed({\n  FPopoverController? controller,\n  bool? initial,\n  FPopoverMotion? motion,\n  void Function(bool)? onChange,\n})\n",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 23,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverControl/FPopoverControl.managed.html"
+                },
+                {
+                  "offset": 48,
+                  "length": 10,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverControl/FPopoverControl.managed.html"
+                },
+                {
+                  "offset": 28,
+                  "length": 19,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverController-class.html"
+                },
+                {
+                  "offset": 68,
+                  "length": 7,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverControl/FPopoverControl.managed.html"
+                },
+                {
+                  "offset": 95,
+                  "length": 6,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverControl/FPopoverControl.managed.html"
+                },
+                {
+                  "offset": 79,
+                  "length": 15,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverMotion-class.html"
+                },
+                {
+                  "offset": 126,
+                  "length": 8,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverControl/FPopoverControl.managed.html"
+                }
+              ],
+              "tooltips": [],
+              "container": {
+                "name": "FPopoverControl",
+                "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverControl-class.html"
+              }
+            }
+          },
+          {
+            "offset": 30,
+            "length": 8,
+            "snippet": {
+              "text": "{bool? initial}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 50,
+            "length": 9,
+            "snippet": {
+              "text": "{void Function(bool)? onChange}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 61,
+            "length": 5,
+            "snippet": {
+              "text": "bool shown",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 76,
+            "length": 7,
+            "snippet": {
+              "text": "{FPopoverMotion? motion}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 1,
+                  "length": 15,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverMotion-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 90,
+            "length": 14,
+            "snippet": {
+              "text": "FPopoverMotion({\n  Duration entranceDuration = const Duration(milliseconds: 100),\n  Duration exitDuration = const Duration(milliseconds: 100),\n  Curve expandCurve = Curves.easeOutCubic,\n  Curve collapseCurve = Curves.easeInCubic,\n  Curve fadeInCurve = Curves.linear,\n  Curve fadeOutCurve = Curves.linear,\n  Animatable<double> scaleTween = const FImmutableTween(begin: 0.93, end: 1),\n  Animatable<double> fadeTween = const FImmutableTween(begin: 0, end: 1),\n})\n",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 14,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverMotion/FPopoverMotion.html"
+                },
+                {
+                  "offset": 28,
+                  "length": 16,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverMotion/FPopoverMotion.html"
+                },
+                {
+                  "offset": 93,
+                  "length": 12,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverMotion/FPopoverMotion.html"
+                },
+                {
+                  "offset": 151,
+                  "length": 11,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverMotion/FPopoverMotion.html"
+                },
+                {
+                  "offset": 194,
+                  "length": 13,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverMotion/FPopoverMotion.html"
+                },
+                {
+                  "offset": 238,
+                  "length": 11,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverMotion/FPopoverMotion.html"
+                },
+                {
+                  "offset": 275,
+                  "length": 12,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverMotion/FPopoverMotion.html"
+                },
+                {
+                  "offset": 326,
+                  "length": 10,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverMotion/FPopoverMotion.html"
+                },
+                {
+                  "offset": 345,
+                  "length": 15,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FImmutableTween/FImmutableTween.html"
+                },
+                {
+                  "offset": 361,
+                  "length": 5,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FImmutableTween/begin.html"
+                },
+                {
+                  "offset": 374,
+                  "length": 3,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FImmutableTween/end.html"
+                },
+                {
+                  "offset": 404,
+                  "length": 9,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverMotion/FPopoverMotion.html"
+                },
+                {
+                  "offset": 422,
+                  "length": 15,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FImmutableTween/FImmutableTween.html"
+                },
+                {
+                  "offset": 438,
+                  "length": 5,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FImmutableTween/begin.html"
+                },
+                {
+                  "offset": 448,
+                  "length": 3,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FImmutableTween/end.html"
+                }
+              ],
+              "tooltips": [],
+              "container": {
+                "name": "FPopoverMotion",
+                "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverMotion-class.html"
+              }
+            }
+          },
+          {
+            "offset": 0,
+            "length": 15,
+            "snippet": {
+              "text": "{FPopoverControl popoverControl = const .managed()}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 1,
+                  "length": 15,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverControl-class.html"
+                },
+                {
+                  "offset": 41,
+                  "length": 7,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverControl/FPopoverControl.managed.html"
+                }
+              ],
+              "tooltips": []
+            }
+          }
+        ]
+      },
+      {
+        "name": "`.managed()` with external controller",
+        "description": "Uses an external controller to control the popover's visibility.",
+        "text": "popoverControl: .managed(\n    // For demonstration purposes only. Don't create a controller inline, store it in a State instead.\n    controller: FPopoverController(\n      vsync: vsync,\n      shown: false,\n      motion: const FPopoverMotion(),\n    ),\n    onChange: (shown) {},\n  ),",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 17,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverControl/FPopoverControl.managed.html"
+          },
+          {
+            "offset": 133,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverControl/FPopoverControl.managed.html"
+          },
+          {
+            "offset": 145,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverController/FPopoverController.html"
+          },
+          {
+            "offset": 171,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverController/FPopoverController.html"
+          },
+          {
+            "offset": 191,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverController/FPopoverController.html"
+          },
+          {
+            "offset": 211,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverController/FPopoverController.html"
+          },
+          {
+            "offset": 225,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverMotion/FPopoverMotion.html"
+          },
+          {
+            "offset": 254,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverControl/FPopoverControl.managed.html"
+          },
+          {
+            "offset": 0,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/popoverControl.html"
+          }
+        ],
+        "tooltips": [
+          {
+            "offset": 17,
+            "length": 7,
+            "snippet": {
+              "text": "FPopoverControl.managed({\n  FPopoverController? controller,\n  bool? initial,\n  FPopoverMotion? motion,\n  void Function(bool)? onChange,\n})\n",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 23,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverControl/FPopoverControl.managed.html"
+                },
+                {
+                  "offset": 48,
+                  "length": 10,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverControl/FPopoverControl.managed.html"
+                },
+                {
+                  "offset": 28,
+                  "length": 19,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverController-class.html"
+                },
+                {
+                  "offset": 68,
+                  "length": 7,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverControl/FPopoverControl.managed.html"
+                },
+                {
+                  "offset": 95,
+                  "length": 6,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverControl/FPopoverControl.managed.html"
+                },
+                {
+                  "offset": 79,
+                  "length": 15,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverMotion-class.html"
+                },
+                {
+                  "offset": 126,
+                  "length": 8,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverControl/FPopoverControl.managed.html"
+                }
+              ],
+              "tooltips": [],
+              "container": {
+                "name": "FPopoverControl",
+                "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverControl-class.html"
+              }
+            }
+          },
+          {
+            "offset": 133,
+            "length": 11,
+            "snippet": {
+              "text": "{FPopoverController? controller}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 1,
+                  "length": 19,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverController-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 145,
+            "length": 18,
+            "snippet": {
+              "text": "FPopoverController({\n  required TickerProvider vsync,\n  bool shown = false,\n  FPopoverMotion motion = const .new(),\n})\n",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 18,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverController/FPopoverController.html"
+                },
+                {
+                  "offset": 47,
+                  "length": 5,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverController/FPopoverController.html"
+                },
+                {
+                  "offset": 61,
+                  "length": 5,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverController/FPopoverController.html"
+                },
+                {
+                  "offset": 93,
+                  "length": 6,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverController/FPopoverController.html"
+                },
+                {
+                  "offset": 78,
+                  "length": 14,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverMotion-class.html"
+                },
+                {
+                  "offset": 109,
+                  "length": 3,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverMotion/FPopoverMotion.html"
+                }
+              ],
+              "tooltips": [],
+              "container": {
+                "name": "FPopoverController",
+                "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverController-class.html"
+              }
+            }
+          },
+          {
+            "offset": 171,
+            "length": 6,
+            "snippet": {
+              "text": "{required TickerProvider vsync}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 191,
+            "length": 6,
+            "snippet": {
+              "text": "{bool shown = false}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 211,
+            "length": 7,
+            "snippet": {
+              "text": "{FPopoverMotion motion = const .new()}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 1,
+                  "length": 14,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverMotion-class.html"
+                },
+                {
+                  "offset": 32,
+                  "length": 3,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverMotion/FPopoverMotion.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 225,
+            "length": 14,
+            "snippet": {
+              "text": "FPopoverMotion({\n  Duration entranceDuration = const Duration(milliseconds: 100),\n  Duration exitDuration = const Duration(milliseconds: 100),\n  Curve expandCurve = Curves.easeOutCubic,\n  Curve collapseCurve = Curves.easeInCubic,\n  Curve fadeInCurve = Curves.linear,\n  Curve fadeOutCurve = Curves.linear,\n  Animatable<double> scaleTween = const FImmutableTween(begin: 0.93, end: 1),\n  Animatable<double> fadeTween = const FImmutableTween(begin: 0, end: 1),\n})\n",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 14,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverMotion/FPopoverMotion.html"
+                },
+                {
+                  "offset": 28,
+                  "length": 16,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverMotion/FPopoverMotion.html"
+                },
+                {
+                  "offset": 93,
+                  "length": 12,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverMotion/FPopoverMotion.html"
+                },
+                {
+                  "offset": 151,
+                  "length": 11,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverMotion/FPopoverMotion.html"
+                },
+                {
+                  "offset": 194,
+                  "length": 13,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverMotion/FPopoverMotion.html"
+                },
+                {
+                  "offset": 238,
+                  "length": 11,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverMotion/FPopoverMotion.html"
+                },
+                {
+                  "offset": 275,
+                  "length": 12,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverMotion/FPopoverMotion.html"
+                },
+                {
+                  "offset": 326,
+                  "length": 10,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverMotion/FPopoverMotion.html"
+                },
+                {
+                  "offset": 345,
+                  "length": 15,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FImmutableTween/FImmutableTween.html"
+                },
+                {
+                  "offset": 361,
+                  "length": 5,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FImmutableTween/begin.html"
+                },
+                {
+                  "offset": 374,
+                  "length": 3,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FImmutableTween/end.html"
+                },
+                {
+                  "offset": 404,
+                  "length": 9,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverMotion/FPopoverMotion.html"
+                },
+                {
+                  "offset": 422,
+                  "length": 15,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FImmutableTween/FImmutableTween.html"
+                },
+                {
+                  "offset": 438,
+                  "length": 5,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FImmutableTween/begin.html"
+                },
+                {
+                  "offset": 448,
+                  "length": 3,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FImmutableTween/end.html"
+                }
+              ],
+              "tooltips": [],
+              "container": {
+                "name": "FPopoverMotion",
+                "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverMotion-class.html"
+              }
+            }
+          },
+          {
+            "offset": 254,
+            "length": 9,
+            "snippet": {
+              "text": "{void Function(bool)? onChange}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 265,
+            "length": 5,
+            "snippet": {
+              "text": "bool shown",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 0,
+            "length": 15,
+            "snippet": {
+              "text": "{FPopoverControl popoverControl = const .managed()}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 1,
+                  "length": 15,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverControl-class.html"
+                },
+                {
+                  "offset": 41,
+                  "length": 7,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverControl/FPopoverControl.managed.html"
+                }
+              ],
+              "tooltips": []
+            }
+          }
+        ]
+      }
+    ],
+    "Form": [
+      {
+        "name": "Form",
+        "description": "",
+        "text": "label: const Text('Label'),\n  description: const Text('Description'),\n  onSaved: (value) {},\n  onReset: () {},\n  autovalidateMode: .onUnfocus,\n  forceErrorText: null,\n  validator: (value) => null,\n  errorBuilder: FFormFieldProperties.defaultErrorBuilder,",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/label.html"
+          },
+          {
+            "offset": 30,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/description.html"
+          },
+          {
+            "offset": 72,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/onSaved.html"
+          },
+          {
+            "offset": 95,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/onReset.html"
+          },
+          {
+            "offset": 113,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/autovalidateMode.html"
+          },
+          {
+            "offset": 145,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/forceErrorText.html"
+          },
+          {
+            "offset": 169,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/validator.html"
+          },
+          {
+            "offset": 199,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/errorBuilder.html"
+          },
+          {
+            "offset": 213,
+            "length": 40,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FFormFieldProperties/defaultErrorBuilder.html"
+          }
+        ],
+        "tooltips": [
+          {
+            "offset": 0,
+            "length": 6,
+            "snippet": {
+              "text": "{Widget? label}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 30,
+            "length": 12,
+            "snippet": {
+              "text": "{Widget? description}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 72,
+            "length": 8,
+            "snippet": {
+              "text": "{void Function(String?)? onSaved}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 82,
+            "length": 5,
+            "snippet": {
+              "text": "String? value",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 95,
+            "length": 8,
+            "snippet": {
+              "text": "{void Function()? onReset}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 113,
+            "length": 17,
+            "snippet": {
+              "text": "{AutovalidateMode autovalidateMode = .onUnfocus}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 145,
+            "length": 15,
+            "snippet": {
+              "text": "{String? forceErrorText}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 169,
+            "length": 10,
+            "snippet": {
+              "text": "{String? Function(String?) validator = _defaultValidator}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 181,
+            "length": 5,
+            "snippet": {
+              "text": "String? value",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 199,
+            "length": 13,
+            "snippet": {
+              "text": "{\n  Widget Function(BuildContext, String) errorBuilder =\n      FFormFieldProperties.defaultErrorBuilder,\n}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 63,
+                  "length": 40,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FFormFieldProperties/defaultErrorBuilder.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 213,
+            "length": 40,
+            "snippet": {
+              "text": "Widget defaultErrorBuilder(BuildContext _, String error)",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 7,
+                  "length": 19,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FFormFieldProperties/defaultErrorBuilder.html"
+                }
+              ],
+              "tooltips": [],
+              "container": {
+                "name": "FFormFieldProperties",
+                "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FFormFieldProperties-mixin.html"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "Field": [
+      {
+        "name": "Field",
+        "description": "",
+        "text": "hint: 'Search fruits',\n  textAlign: .start,\n  textAlignVertical: null,\n  textDirection: null,\n  expands: false,\n  mouseCursor: .defer,\n  canRequestFocus: true,\n  clearable: false,\n  builder: (context, style, states, child) => child,\n  prefixBuilder: null,\n  suffixBuilder: FSelect.defaultIconBuilder,",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 4,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/hint.html"
+          },
+          {
+            "offset": 25,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/textAlign.html"
+          },
+          {
+            "offset": 46,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/textAlignVertical.html"
+          },
+          {
+            "offset": 73,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/textDirection.html"
+          },
+          {
+            "offset": 96,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/expands.html"
+          },
+          {
+            "offset": 114,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/mouseCursor.html"
+          },
+          {
+            "offset": 137,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/canRequestFocus.html"
+          },
+          {
+            "offset": 162,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/clearable.html"
+          },
+          {
+            "offset": 182,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/builder.html"
+          },
+          {
+            "offset": 235,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/prefixBuilder.html"
+          },
+          {
+            "offset": 258,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/suffixBuilder.html"
+          },
+          {
+            "offset": 273,
+            "length": 26,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/defaultIconBuilder.html"
+          }
+        ],
+        "tooltips": [
+          {
+            "offset": 0,
+            "length": 5,
+            "snippet": {
+              "text": "{String? hint}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 25,
+            "length": 10,
+            "snippet": {
+              "text": "{TextAlign textAlign = .start}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 46,
+            "length": 18,
+            "snippet": {
+              "text": "{TextAlignVertical? textAlignVertical}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 73,
+            "length": 14,
+            "snippet": {
+              "text": "{TextDirection? textDirection}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 96,
+            "length": 8,
+            "snippet": {
+              "text": "{bool expands = false}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 114,
+            "length": 12,
+            "snippet": {
+              "text": "{MouseCursor mouseCursor = .defer}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 137,
+            "length": 16,
+            "snippet": {
+              "text": "{bool canRequestFocus = true}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 162,
+            "length": 10,
+            "snippet": {
+              "text": "{bool clearable = false}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 182,
+            "length": 8,
+            "snippet": {
+              "text": "{\n  Widget Function(BuildContext, FSelectStyle, Set<WidgetState>, Widget)\n      builder =\n      _fieldBuilder,\n}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 34,
+                  "length": 12,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectStyle-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 192,
+            "length": 7,
+            "snippet": {
+              "text": "BuildContext context",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 201,
+            "length": 5,
+            "snippet": {
+              "text": "FSelectStyle style",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 12,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectStyle-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 208,
+            "length": 6,
+            "snippet": {
+              "text": "Set<WidgetState> states",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 216,
+            "length": 5,
+            "snippet": {
+              "text": "Widget child",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 235,
+            "length": 14,
+            "snippet": {
+              "text": "{\n  Widget Function(BuildContext, FSelectStyle, Set<WidgetState>)? prefixBuilder,\n}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 34,
+                  "length": 12,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectStyle-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 258,
+            "length": 14,
+            "snippet": {
+              "text": "{\n  Widget Function(BuildContext, FSelectStyle, Set<WidgetState>)? suffixBuilder =\n      defaultIconBuilder,\n}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 34,
+                  "length": 12,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectStyle-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 273,
+            "length": 26,
+            "snippet": {
+              "text": "Widget defaultIconBuilder(\n  BuildContext _,\n  FSelectStyle style,\n  Set<WidgetState> states,\n)",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 7,
+                  "length": 18,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/defaultIconBuilder.html"
+                },
+                {
+                  "offset": 47,
+                  "length": 12,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectStyle-class.html"
+                }
+              ],
+              "tooltips": [],
+              "container": {
+                "name": "FSelect",
+                "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect-class.html"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "Content": [
+      {
+        "name": "Content",
+        "description": "",
+        "text": "searchFieldProperties: const FSelectSearchFieldProperties(),\n  contentAnchor: AlignmentDirectional.topStart,\n  fieldAnchor: AlignmentDirectional.bottomStart,\n  contentConstraints: const FAutoWidthPortalConstraints(maxHeight: 300),\n  contentSpacing: const .spacing(4),\n  contentOverflow: .flip,\n  contentOffset: .zero,\n  contentHideRegion: .excludeChild,\n  contentGroupId: null,\n  autoHide: true,\n  contentEmptyBuilder: FSelect.defaultContentEmptyBuilder,\n  contentLoadingBuilder: FSelect.defaultContentLoadingBuilder,\n  contentErrorBuilder: null,\n  contentScrollController: null,\n  contentPhysics: const ClampingScrollPhysics(),\n  contentDivider: .none,",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 21,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.search.html"
+          },
+          {
+            "offset": 29,
+            "length": 28,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectSearchFieldProperties/FSelectSearchFieldProperties.html"
+          },
+          {
+            "offset": 63,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/contentAnchor.html"
+          },
+          {
+            "offset": 111,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/fieldAnchor.html"
+          },
+          {
+            "offset": 160,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/contentConstraints.html"
+          },
+          {
+            "offset": 186,
+            "length": 27,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FAutoWidthPortalConstraints/FAutoWidthPortalConstraints.html"
+          },
+          {
+            "offset": 214,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FAutoWidthPortalConstraints/maxHeight.html"
+          },
+          {
+            "offset": 233,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/contentSpacing.html"
+          },
+          {
+            "offset": 256,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FPortalSpacing/FPortalSpacing.spacing.html"
+          },
+          {
+            "offset": 270,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/contentOverflow.html"
+          },
+          {
+            "offset": 288,
+            "length": 4,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FPortalOverflow/flip-constant.html"
+          },
+          {
+            "offset": 296,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/contentOffset.html"
+          },
+          {
+            "offset": 320,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/contentHideRegion.html"
+          },
+          {
+            "offset": 340,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverHideRegion.html#excludeChild"
+          },
+          {
+            "offset": 356,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/contentGroupId.html"
+          },
+          {
+            "offset": 380,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/autoHide.html"
+          },
+          {
+            "offset": 398,
+            "length": 19,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/contentEmptyBuilder.html"
+          },
+          {
+            "offset": 419,
+            "length": 34,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/defaultContentEmptyBuilder.html"
+          },
+          {
+            "offset": 457,
+            "length": 21,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.search.html"
+          },
+          {
+            "offset": 480,
+            "length": 36,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/defaultContentLoadingBuilder.html"
+          },
+          {
+            "offset": 520,
+            "length": 19,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/FSelect.search.html"
+          },
+          {
+            "offset": 549,
+            "length": 23,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/contentScrollController.html"
+          },
+          {
+            "offset": 582,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/contentPhysics.html"
+          },
+          {
+            "offset": 631,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/contentDivider.html"
+          },
+          {
+            "offset": 648,
+            "length": 4,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemDivider.html#none"
+          }
+        ],
+        "tooltips": [
+          {
+            "offset": 0,
+            "length": 22,
+            "snippet": {
+              "text": "{\n  FSelectSearchFieldProperties searchFieldProperties =\n      const FSelectSearchFieldProperties(),\n}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 4,
+                  "length": 28,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectSearchFieldProperties-class.html"
+                },
+                {
+                  "offset": 69,
+                  "length": 28,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectSearchFieldProperties/FSelectSearchFieldProperties.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 29,
+            "length": 28,
+            "snippet": {
+              "text": "FSelectSearchFieldProperties({\n  FTextFieldControl control = const .managed(),\n  String? hint,\n  TextMagnifierConfiguration? magnifierConfiguration,\n  TextInputType? keyboardType,\n  TextInputAction? textInputAction,\n  TextCapitalization textCapitalization = .none,\n  TextAlign textAlign = .start,\n  TextAlignVertical? textAlignVertical,\n  TextDirection? textDirection,\n  bool autofocus = false,\n  bool autocorrect = true,\n  SmartDashesType? smartDashesType,\n  SmartQuotesType? smartQuotesType,\n  bool enableSuggestions = true,\n  int? minLines,\n  int? maxLines = 1,\n  bool readOnly = false,\n  bool? showCursor,\n  int? maxLength,\n  MaxLengthEnforcement? maxLengthEnforcement,\n  void Function(TextEditingValue)? onChange,\n  void Function()? onTap,\n  bool onTapAlwaysCalled = false,\n  void Function()? onEditingComplete,\n  void Function(String)? onSubmit,\n  List<TextInputFormatter>? inputFormatters,\n  bool enabled = true,\n  bool? ignorePointers,\n  bool enableInteractiveSelection = true,\n  TextSelectionControls? selectionControls,\n  DragStartBehavior dragStartBehavior = .start,\n  MouseCursor? mouseCursor,\n  ScrollPhysics? scrollPhysics,\n  ScrollController? scrollController,\n  Iterable<String>? autofillHints,\n  String? restorationId,\n  bool stylusHandwritingEnabled = true,\n  bool enableIMEPersonalizedLearning = true,\n  ContentInsertionConfiguration? contentInsertionConfiguration,\n  Widget Function(BuildContext, EditableTextState)? contextMenuBuilder,\n  UndoHistoryController? undoController,\n  SpellCheckConfiguration? spellCheckConfiguration,\n  Widget Function(BuildContext, FSelectSearchStyle, Set<WidgetState>)?\n      prefixBuilder =\n      defaultIconBuilder,\n  Widget Function(BuildContext, FSelectSearchStyle, Set<WidgetState>)?\n  suffixBuilder,\n  bool Function(TextEditingValue) clearable = _clearable,\n})\n",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 28,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectSearchFieldProperties/FSelectSearchFieldProperties.html"
+                },
+                {
+                  "offset": 51,
+                  "length": 7,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectSearchFieldProperties/FSelectSearchFieldProperties.html"
+                },
+                {
+                  "offset": 33,
+                  "length": 17,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFieldControl-class.html"
+                },
+                {
+                  "offset": 68,
+                  "length": 7,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFieldControl/FTextFieldControl.managed.html"
+                },
+                {
+                  "offset": 89,
+                  "length": 4,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectSearchFieldProperties/FSelectSearchFieldProperties.html"
+                },
+                {
+                  "offset": 125,
+                  "length": 22,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectSearchFieldProperties/FSelectSearchFieldProperties.html"
+                },
+                {
+                  "offset": 166,
+                  "length": 12,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectSearchFieldProperties/FSelectSearchFieldProperties.html"
+                },
+                {
+                  "offset": 199,
+                  "length": 15,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectSearchFieldProperties/FSelectSearchFieldProperties.html"
+                },
+                {
+                  "offset": 237,
+                  "length": 18,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectSearchFieldProperties/FSelectSearchFieldProperties.html"
+                },
+                {
+                  "offset": 277,
+                  "length": 9,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectSearchFieldProperties/FSelectSearchFieldProperties.html"
+                },
+                {
+                  "offset": 318,
+                  "length": 17,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectSearchFieldProperties/FSelectSearchFieldProperties.html"
+                },
+                {
+                  "offset": 354,
+                  "length": 13,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectSearchFieldProperties/FSelectSearchFieldProperties.html"
+                },
+                {
+                  "offset": 376,
+                  "length": 9,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectSearchFieldProperties/FSelectSearchFieldProperties.html"
+                },
+                {
+                  "offset": 402,
+                  "length": 11,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectSearchFieldProperties/FSelectSearchFieldProperties.html"
+                },
+                {
+                  "offset": 441,
+                  "length": 15,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectSearchFieldProperties/FSelectSearchFieldProperties.html"
+                },
+                {
+                  "offset": 477,
+                  "length": 15,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectSearchFieldProperties/FSelectSearchFieldProperties.html"
+                },
+                {
+                  "offset": 501,
+                  "length": 17,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectSearchFieldProperties/FSelectSearchFieldProperties.html"
+                },
+                {
+                  "offset": 534,
+                  "length": 8,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectSearchFieldProperties/FSelectSearchFieldProperties.html"
+                },
+                {
+                  "offset": 551,
+                  "length": 8,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectSearchFieldProperties/FSelectSearchFieldProperties.html"
+                },
+                {
+                  "offset": 572,
+                  "length": 8,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectSearchFieldProperties/FSelectSearchFieldProperties.html"
+                },
+                {
+                  "offset": 598,
+                  "length": 10,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectSearchFieldProperties/FSelectSearchFieldProperties.html"
+                },
+                {
+                  "offset": 617,
+                  "length": 9,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectSearchFieldProperties/FSelectSearchFieldProperties.html"
+                },
+                {
+                  "offset": 652,
+                  "length": 20,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectSearchFieldProperties/FSelectSearchFieldProperties.html"
+                },
+                {
+                  "offset": 709,
+                  "length": 8,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectSearchFieldProperties/FSelectSearchFieldProperties.html"
+                },
+                {
+                  "offset": 738,
+                  "length": 5,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectSearchFieldProperties/FSelectSearchFieldProperties.html"
+                },
+                {
+                  "offset": 752,
+                  "length": 17,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectSearchFieldProperties/FSelectSearchFieldProperties.html"
+                },
+                {
+                  "offset": 798,
+                  "length": 17,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectSearchFieldProperties/FSelectSearchFieldProperties.html"
+                },
+                {
+                  "offset": 842,
+                  "length": 8,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectSearchFieldProperties/FSelectSearchFieldProperties.html"
+                },
+                {
+                  "offset": 880,
+                  "length": 15,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectSearchFieldProperties/FSelectSearchFieldProperties.html"
+                },
+                {
+                  "offset": 904,
+                  "length": 7,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectSearchFieldProperties/FSelectSearchFieldProperties.html"
+                },
+                {
+                  "offset": 928,
+                  "length": 14,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectSearchFieldProperties/FSelectSearchFieldProperties.html"
+                },
+                {
+                  "offset": 951,
+                  "length": 26,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectSearchFieldProperties/FSelectSearchFieldProperties.html"
+                },
+                {
+                  "offset": 1011,
+                  "length": 17,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectSearchFieldProperties/FSelectSearchFieldProperties.html"
+                },
+                {
+                  "offset": 1050,
+                  "length": 17,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectSearchFieldProperties/FSelectSearchFieldProperties.html"
+                },
+                {
+                  "offset": 1093,
+                  "length": 11,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectSearchFieldProperties/FSelectSearchFieldProperties.html"
+                },
+                {
+                  "offset": 1123,
+                  "length": 13,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectSearchFieldProperties/FSelectSearchFieldProperties.html"
+                },
+                {
+                  "offset": 1158,
+                  "length": 16,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectSearchFieldProperties/FSelectSearchFieldProperties.html"
+                },
+                {
+                  "offset": 1196,
+                  "length": 13,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectSearchFieldProperties/FSelectSearchFieldProperties.html"
+                },
+                {
+                  "offset": 1221,
+                  "length": 13,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectSearchFieldProperties/FSelectSearchFieldProperties.html"
+                },
+                {
+                  "offset": 1243,
+                  "length": 24,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectSearchFieldProperties/FSelectSearchFieldProperties.html"
+                },
+                {
+                  "offset": 1283,
+                  "length": 29,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectSearchFieldProperties/FSelectSearchFieldProperties.html"
+                },
+                {
+                  "offset": 1354,
+                  "length": 29,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectSearchFieldProperties/FSelectSearchFieldProperties.html"
+                },
+                {
+                  "offset": 1437,
+                  "length": 18,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectSearchFieldProperties/FSelectSearchFieldProperties.html"
+                },
+                {
+                  "offset": 1482,
+                  "length": 14,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectSearchFieldProperties/FSelectSearchFieldProperties.html"
+                },
+                {
+                  "offset": 1525,
+                  "length": 23,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectSearchFieldProperties/FSelectSearchFieldProperties.html"
+                },
+                {
+                  "offset": 1627,
+                  "length": 13,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectSearchFieldProperties/FSelectSearchFieldProperties.html"
+                },
+                {
+                  "offset": 1582,
+                  "length": 18,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectSearchStyle-class.html"
+                },
+                {
+                  "offset": 1742,
+                  "length": 13,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectSearchFieldProperties/FSelectSearchFieldProperties.html"
+                },
+                {
+                  "offset": 1701,
+                  "length": 18,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectSearchStyle-class.html"
+                },
+                {
+                  "offset": 1791,
+                  "length": 9,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectSearchFieldProperties/FSelectSearchFieldProperties.html"
+                }
+              ],
+              "tooltips": [],
+              "container": {
+                "name": "FSelectSearchFieldProperties",
+                "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectSearchFieldProperties-class.html"
+              }
+            }
+          },
+          {
+            "offset": 63,
+            "length": 14,
+            "snippet": {
+              "text": "{AlignmentGeometry contentAnchor = AlignmentDirectional.topStart}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 111,
+            "length": 12,
+            "snippet": {
+              "text": "{AlignmentGeometry fieldAnchor = AlignmentDirectional.bottomStart}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 160,
+            "length": 19,
+            "snippet": {
+              "text": "{\n  FPortalConstraints contentConstraints = const FAutoWidthPortalConstraints(\n    maxHeight: 300,\n  ),\n}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 4,
+                  "length": 18,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FPortalConstraints-class.html"
+                },
+                {
+                  "offset": 50,
+                  "length": 27,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FAutoWidthPortalConstraints/FAutoWidthPortalConstraints.html"
+                },
+                {
+                  "offset": 83,
+                  "length": 9,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FAutoWidthPortalConstraints/maxHeight.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 186,
+            "length": 27,
+            "snippet": {
+              "text": "FAutoWidthPortalConstraints({\n  double minHeight = 0.0,\n  double maxHeight = .infinity,\n})\n",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 27,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FAutoWidthPortalConstraints/FAutoWidthPortalConstraints.html"
+                },
+                {
+                  "offset": 39,
+                  "length": 9,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FAutoWidthPortalConstraints/FAutoWidthPortalConstraints.html"
+                },
+                {
+                  "offset": 65,
+                  "length": 9,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FAutoWidthPortalConstraints/FAutoWidthPortalConstraints.html"
+                }
+              ],
+              "tooltips": [],
+              "container": {
+                "name": "FAutoWidthPortalConstraints",
+                "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FAutoWidthPortalConstraints-class.html"
+              }
+            }
+          },
+          {
+            "offset": 214,
+            "length": 10,
+            "snippet": {
+              "text": "{double maxHeight = .infinity}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 233,
+            "length": 15,
+            "snippet": {
+              "text": "{FPortalSpacing contentSpacing = const .spacing(4)}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 1,
+                  "length": 14,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FPortalSpacing-class.html"
+                },
+                {
+                  "offset": 40,
+                  "length": 7,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FPortalSpacing/FPortalSpacing.spacing.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 256,
+            "length": 7,
+            "snippet": {
+              "text": "FPortalSpacing.spacing(double spacing, {bool diagonal})\n",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 22,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FPortalSpacing/FPortalSpacing.spacing.html"
+                },
+                {
+                  "offset": 45,
+                  "length": 8,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FPortalSpacing/FPortalSpacing.spacing.html"
+                }
+              ],
+              "tooltips": [],
+              "container": {
+                "name": "FPortalSpacing",
+                "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FPortalSpacing-class.html"
+              }
+            }
+          },
+          {
+            "offset": 270,
+            "length": 16,
+            "snippet": {
+              "text": "{FPortalOverflow contentOverflow = .flip}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 1,
+                  "length": 15,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FPortalOverflow-class.html"
+                },
+                {
+                  "offset": 36,
+                  "length": 4,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FPortalOverflow/flip-constant.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 288,
+            "length": 4,
+            "snippet": {
+              "text": "FPortalOverflow flip",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 15,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FPortalOverflow-class.html"
+                }
+              ],
+              "tooltips": [],
+              "container": {
+                "name": "FPortalOverflow",
+                "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FPortalOverflow-class.html"
+              }
+            }
+          },
+          {
+            "offset": 296,
+            "length": 14,
+            "snippet": {
+              "text": "{Offset contentOffset = .zero}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 320,
+            "length": 18,
+            "snippet": {
+              "text": "{FPopoverHideRegion contentHideRegion = .excludeChild}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 1,
+                  "length": 18,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverHideRegion.html"
+                },
+                {
+                  "offset": 41,
+                  "length": 12,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverHideRegion.html#excludeChild"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 340,
+            "length": 12,
+            "snippet": {
+              "text": "FPopoverHideRegion excludeChild",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 18,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverHideRegion.html"
+                }
+              ],
+              "tooltips": [],
+              "container": {
+                "name": "FPopoverHideRegion",
+                "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverHideRegion.html"
+              }
+            }
+          },
+          {
+            "offset": 356,
+            "length": 15,
+            "snippet": {
+              "text": "{Object? contentGroupId}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 380,
+            "length": 9,
+            "snippet": {
+              "text": "{bool autoHide = true}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 398,
+            "length": 20,
+            "snippet": {
+              "text": "{\n  Widget Function(BuildContext, FSelectStyle) contentEmptyBuilder =\n      defaultContentEmptyBuilder,\n}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 34,
+                  "length": 12,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectStyle-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 419,
+            "length": 34,
+            "snippet": {
+              "text": "Widget defaultContentEmptyBuilder(BuildContext context, FSelectStyle style)",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 7,
+                  "length": 26,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/defaultContentEmptyBuilder.html"
+                },
+                {
+                  "offset": 56,
+                  "length": 12,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectStyle-class.html"
+                }
+              ],
+              "tooltips": [],
+              "container": {
+                "name": "FSelect",
+                "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect-class.html"
+              }
+            }
+          },
+          {
+            "offset": 457,
+            "length": 22,
+            "snippet": {
+              "text": "{\n  Widget Function(BuildContext, FSelectSearchStyle) contentLoadingBuilder =\n      FSelect.defaultContentLoadingBuilder,\n}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 34,
+                  "length": 18,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectSearchStyle-class.html"
+                },
+                {
+                  "offset": 84,
+                  "length": 36,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/defaultContentLoadingBuilder.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 480,
+            "length": 36,
+            "snippet": {
+              "text": "Widget defaultContentLoadingBuilder(BuildContext _, FSelectSearchStyle style)",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 7,
+                  "length": 28,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/defaultContentLoadingBuilder.html"
+                },
+                {
+                  "offset": 52,
+                  "length": 18,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectSearchStyle-class.html"
+                }
+              ],
+              "tooltips": [],
+              "container": {
+                "name": "FSelect",
+                "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect-class.html"
+              }
+            }
+          },
+          {
+            "offset": 520,
+            "length": 20,
+            "snippet": {
+              "text": "{\n  Widget Function(BuildContext, Object?, StackTrace)? contentErrorBuilder,\n}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 549,
+            "length": 24,
+            "snippet": {
+              "text": "{ScrollController? contentScrollController}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 582,
+            "length": 15,
+            "snippet": {
+              "text": "{ScrollPhysics contentPhysics = const ClampingScrollPhysics()}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 631,
+            "length": 15,
+            "snippet": {
+              "text": "{FItemDivider contentDivider = .none}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 1,
+                  "length": 12,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemDivider.html"
+                },
+                {
+                  "offset": 32,
+                  "length": 4,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemDivider.html#none"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 648,
+            "length": 4,
+            "snippet": {
+              "text": "FItemDivider none",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 12,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemDivider.html"
+                }
+              ],
+              "tooltips": [],
+              "container": {
+                "name": "FItemDivider",
+                "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemDivider.html"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "Accessibility": [
+      {
+        "name": "Accessibility",
+        "description": "",
+        "text": "autofocus: false,\n  focusNode: null,",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/autofocus.html"
+          },
+          {
+            "offset": 20,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelect/focusNode.html"
+          }
+        ],
+        "tooltips": [
+          {
+            "offset": 0,
+            "length": 10,
+            "snippet": {
+              "text": "{bool autofocus = false}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 20,
+            "length": 10,
+            "snippet": {
+              "text": "{FocusNode? focusNode}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

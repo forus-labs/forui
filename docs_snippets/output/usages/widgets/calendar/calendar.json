@@ -1,0 +1,1637 @@
+{
+  "text": "FCalendar(\n  {{Core}}\n  {{Control}}\n  {{Appearance}}\n  {{Callbacks}}\n)",
+  "highlights": [],
+  "links": [
+    {
+      "offset": 0,
+      "length": 9,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendar/FCalendar.html"
+    }
+  ],
+  "tooltips": [
+    {
+      "offset": 0,
+      "length": 9,
+      "snippet": {
+        "text": "FCalendar({\n  required FCalendarControl<Object?> control,\n  FCalendarStyle Function(FCalendarStyle)? style,\n  Widget Function(\n        BuildContext,\n        ({\n          bool current,\n          DateTime date,\n          bool selectable,\n          bool selected,\n          FCalendarDayPickerStyle style,\n          bool today,\n        }),\n        Widget?,\n      )\n      dayBuilder =\n      defaultDayBuilder,\n  void Function(DateTime)? onMonthChange,\n  void Function(DateTime)? onPress,\n  void Function(DateTime)? onLongPress,\n  FCalendarPickerType initialType = .day,\n  DateTime? start,\n  DateTime? end,\n  DateTime? today,\n  DateTime? initialMonth,\n  Key? key,\n})\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendar/FCalendar.html"
+          },
+          {
+            "offset": 49,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendar/FCalendar.html"
+          },
+          {
+            "offset": 23,
+            "length": 25,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarControl-class.html"
+          },
+          {
+            "offset": 101,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendar/FCalendar.html"
+          },
+          {
+            "offset": 60,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarStyle-class.html"
+          },
+          {
+            "offset": 84,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarStyle-class.html"
+          },
+          {
+            "offset": 367,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendar/FCalendar.html"
+          },
+          {
+            "offset": 271,
+            "length": 23,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarDayPickerStyle-class.html"
+          },
+          {
+            "offset": 432,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendar/FCalendar.html"
+          },
+          {
+            "offset": 474,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendar/FCalendar.html"
+          },
+          {
+            "offset": 510,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendar/FCalendar.html"
+          },
+          {
+            "offset": 545,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendar/FCalendar.html"
+          },
+          {
+            "offset": 525,
+            "length": 19,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarPickerType.html"
+          },
+          {
+            "offset": 560,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarPickerType.html#day"
+          },
+          {
+            "offset": 577,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendar/FCalendar.html"
+          },
+          {
+            "offset": 596,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendar/FCalendar.html"
+          },
+          {
+            "offset": 613,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendar/FCalendar.html"
+          },
+          {
+            "offset": 632,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendar/FCalendar.html"
+          },
+          {
+            "offset": 653,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendar/FCalendar.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FCalendar",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendar-class.html"
+        }
+      }
+    }
+  ],
+  "categories": {
+    "Core": [
+      {
+        "name": "Core",
+        "description": "",
+        "text": "style: (style) => style,\n  start: .utc(1900),\n  end: .utc(2100),\n  today: .now(),\n  initialMonth: .now(),\n  initialType: .day,",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendar/style.html"
+          },
+          {
+            "offset": 27,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendar/start.html"
+          },
+          {
+            "offset": 48,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendar/end.html"
+          },
+          {
+            "offset": 67,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendar/today.html"
+          },
+          {
+            "offset": 84,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendar/FCalendar.html"
+          },
+          {
+            "offset": 108,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendar/FCalendar.html"
+          },
+          {
+            "offset": 122,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarPickerType.html#day"
+          }
+        ],
+        "tooltips": [
+          {
+            "offset": 0,
+            "length": 6,
+            "snippet": {
+              "text": "{FCalendarStyle Function(FCalendarStyle)? style}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 1,
+                  "length": 14,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarStyle-class.html"
+                },
+                {
+                  "offset": 25,
+                  "length": 14,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarStyle-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 8,
+            "length": 5,
+            "snippet": {
+              "text": "FCalendarStyle style",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 14,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarStyle-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 27,
+            "length": 6,
+            "snippet": {
+              "text": "{DateTime? start}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 48,
+            "length": 4,
+            "snippet": {
+              "text": "{DateTime? end}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 67,
+            "length": 6,
+            "snippet": {
+              "text": "{DateTime? today}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 84,
+            "length": 13,
+            "snippet": {
+              "text": "{DateTime? initialMonth}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 108,
+            "length": 12,
+            "snippet": {
+              "text": "{FCalendarPickerType initialType = .day}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 1,
+                  "length": 19,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarPickerType.html"
+                },
+                {
+                  "offset": 36,
+                  "length": 3,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarPickerType.html#day"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 122,
+            "length": 3,
+            "snippet": {
+              "text": "FCalendarPickerType day",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 19,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarPickerType.html"
+                }
+              ],
+              "tooltips": [],
+              "container": {
+                "name": "FCalendarPickerType",
+                "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarPickerType.html"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "Control": [
+      {
+        "name": "`.lifted()`",
+        "description": "Lifted state control for external state management.",
+        "text": "control: .lifted(\n    selectable: (date) => true,\n    selected: (date) => false,\n    select: (date) {},\n  ),",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 10,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarControl/lifted.html"
+          },
+          {
+            "offset": 22,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarControl/lifted.html"
+          },
+          {
+            "offset": 54,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarControl/lifted.html"
+          },
+          {
+            "offset": 85,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarControl/lifted.html"
+          },
+          {
+            "offset": 0,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendar/control.html"
+          }
+        ],
+        "tooltips": [
+          {
+            "offset": 10,
+            "length": 6,
+            "snippet": {
+              "text": "FCalendarControl<Object?> lifted({\n  required bool Function(DateTime) selected,\n  required void Function(DateTime) select,\n  bool Function(DateTime) selectable = _defaultSelectable,\n})",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 26,
+                  "length": 6,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarControl/lifted.html"
+                },
+                {
+                  "offset": 0,
+                  "length": 25,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarControl-class.html"
+                }
+              ],
+              "tooltips": [],
+              "container": {
+                "name": "FCalendarControl",
+                "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarControl-class.html"
+              }
+            }
+          },
+          {
+            "offset": 22,
+            "length": 11,
+            "snippet": {
+              "text": "{bool Function(DateTime) selectable = _defaultSelectable}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 35,
+            "length": 4,
+            "snippet": {
+              "text": "DateTime date",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 54,
+            "length": 9,
+            "snippet": {
+              "text": "{required bool Function(DateTime) selected}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 65,
+            "length": 4,
+            "snippet": {
+              "text": "DateTime date",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 85,
+            "length": 7,
+            "snippet": {
+              "text": "{required void Function(DateTime) select}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 94,
+            "length": 4,
+            "snippet": {
+              "text": "DateTime date",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 0,
+            "length": 8,
+            "snippet": {
+              "text": "{required FCalendarControl<Object?> control}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 10,
+                  "length": 25,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarControl-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          }
+        ]
+      },
+      {
+        "name": "`.managedDate()` with internal controller",
+        "description": "Single date selection with internal management.",
+        "text": "control: .managedDate(\n    initial: null,\n    selectable: (date) => true,\n    toggleable: true,\n    truncateAndStripTimezone: true,\n    onChange: (date) {},\n  ),",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 10,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarControl/managedDate.html"
+          },
+          {
+            "offset": 27,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarControl/managedDate.html"
+          },
+          {
+            "offset": 46,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarControl/managedDate.html"
+          },
+          {
+            "offset": 78,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarControl/managedDate.html"
+          },
+          {
+            "offset": 100,
+            "length": 24,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarControl/managedDate.html"
+          },
+          {
+            "offset": 136,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarControl/managedDate.html"
+          },
+          {
+            "offset": 0,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendar/control.html"
+          }
+        ],
+        "tooltips": [
+          {
+            "offset": 10,
+            "length": 11,
+            "snippet": {
+              "text": "FCalendarControl<DateTime?> managedDate({\n  FCalendarController<DateTime?>? controller,\n  DateTime? initial,\n  bool Function(DateTime)? selectable,\n  bool toggleable = true,\n  bool truncateAndStripTimezone = true,\n  void Function(DateTime?)? onChange,\n})",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 28,
+                  "length": 11,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarControl/managedDate.html"
+                },
+                {
+                  "offset": 0,
+                  "length": 27,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarControl-class.html"
+                },
+                {
+                  "offset": 44,
+                  "length": 31,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarController-class.html"
+                }
+              ],
+              "tooltips": [],
+              "container": {
+                "name": "FCalendarControl",
+                "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarControl-class.html"
+              }
+            }
+          },
+          {
+            "offset": 27,
+            "length": 8,
+            "snippet": {
+              "text": "{DateTime? initial}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 46,
+            "length": 11,
+            "snippet": {
+              "text": "{bool Function(DateTime)? selectable}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 59,
+            "length": 4,
+            "snippet": {
+              "text": "DateTime date",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 78,
+            "length": 11,
+            "snippet": {
+              "text": "{bool toggleable = true}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 100,
+            "length": 25,
+            "snippet": {
+              "text": "{bool truncateAndStripTimezone = true}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 136,
+            "length": 9,
+            "snippet": {
+              "text": "{void Function(DateTime?)? onChange}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 147,
+            "length": 4,
+            "snippet": {
+              "text": "DateTime? date",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 0,
+            "length": 8,
+            "snippet": {
+              "text": "{required FCalendarControl<Object?> control}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 10,
+                  "length": 25,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarControl-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          }
+        ]
+      },
+      {
+        "name": "`.managedDate()` with external controller",
+        "description": "Single date selection with external controller.",
+        "text": "control: .managedDate(\n    // For demonstration purposes only. Don't create a controller inline, store it in a State instead.\n    controller: .date(\n      initial: null,\n      selectable: (date) => true,\n      toggleable: true,\n      truncateAndStripTimezone: true,\n    ),\n    onChange: (date) {},\n  ),",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 10,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarControl/managedDate.html"
+          },
+          {
+            "offset": 130,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarControl/managedDate.html"
+          },
+          {
+            "offset": 143,
+            "length": 4,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarController/date.html"
+          },
+          {
+            "offset": 155,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarController/date.html"
+          },
+          {
+            "offset": 176,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarController/date.html"
+          },
+          {
+            "offset": 210,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarController/date.html"
+          },
+          {
+            "offset": 234,
+            "length": 24,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarController/date.html"
+          },
+          {
+            "offset": 277,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarControl/managedDate.html"
+          },
+          {
+            "offset": 0,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendar/control.html"
+          }
+        ],
+        "tooltips": [
+          {
+            "offset": 10,
+            "length": 11,
+            "snippet": {
+              "text": "FCalendarControl<DateTime?> managedDate({\n  FCalendarController<DateTime?>? controller,\n  DateTime? initial,\n  bool Function(DateTime)? selectable,\n  bool toggleable = true,\n  bool truncateAndStripTimezone = true,\n  void Function(DateTime?)? onChange,\n})",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 28,
+                  "length": 11,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarControl/managedDate.html"
+                },
+                {
+                  "offset": 0,
+                  "length": 27,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarControl-class.html"
+                },
+                {
+                  "offset": 44,
+                  "length": 31,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarController-class.html"
+                }
+              ],
+              "tooltips": [],
+              "container": {
+                "name": "FCalendarControl",
+                "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarControl-class.html"
+              }
+            }
+          },
+          {
+            "offset": 130,
+            "length": 11,
+            "snippet": {
+              "text": "{FCalendarController<DateTime?>? controller}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 1,
+                  "length": 31,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarController-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 143,
+            "length": 4,
+            "snippet": {
+              "text": "FCalendarController<DateTime?> date({\n  DateTime? initial,\n  bool Function(DateTime)? selectable,\n  bool toggleable = true,\n  bool truncateAndStripTimezone = true,\n})",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 31,
+                  "length": 4,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarController/date.html"
+                },
+                {
+                  "offset": 0,
+                  "length": 30,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarController-class.html"
+                }
+              ],
+              "tooltips": [],
+              "container": {
+                "name": "FCalendarController",
+                "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarController-class.html"
+              }
+            }
+          },
+          {
+            "offset": 155,
+            "length": 8,
+            "snippet": {
+              "text": "{DateTime? initial}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 176,
+            "length": 11,
+            "snippet": {
+              "text": "{bool Function(DateTime)? selectable}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 189,
+            "length": 4,
+            "snippet": {
+              "text": "DateTime date",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 210,
+            "length": 11,
+            "snippet": {
+              "text": "{bool toggleable = true}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 234,
+            "length": 25,
+            "snippet": {
+              "text": "{bool truncateAndStripTimezone = true}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 277,
+            "length": 9,
+            "snippet": {
+              "text": "{void Function(DateTime?)? onChange}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 288,
+            "length": 4,
+            "snippet": {
+              "text": "DateTime? date",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 0,
+            "length": 8,
+            "snippet": {
+              "text": "{required FCalendarControl<Object?> control}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 10,
+                  "length": 25,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarControl-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          }
+        ]
+      },
+      {
+        "name": "`.managedDates()` with internal controller",
+        "description": "Multiple dates selection with internal management.",
+        "text": "control: .managedDates(\n    initial: {},\n    selectable: (date) => true,\n    truncateAndStripTimezone: true,\n    onChange: (dates) {},\n  ),",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 10,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarControl/managedDates.html"
+          },
+          {
+            "offset": 28,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarControl/managedDates.html"
+          },
+          {
+            "offset": 45,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarControl/managedDates.html"
+          },
+          {
+            "offset": 77,
+            "length": 24,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarControl/managedDates.html"
+          },
+          {
+            "offset": 113,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarControl/managedDates.html"
+          },
+          {
+            "offset": 0,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendar/control.html"
+          }
+        ],
+        "tooltips": [
+          {
+            "offset": 10,
+            "length": 12,
+            "snippet": {
+              "text": "FCalendarControl<Set<DateTime>> managedDates({\n  FCalendarController<Set<DateTime>>? controller,\n  Set<DateTime>? initial,\n  bool Function(DateTime)? selectable,\n  bool truncateAndStripTimezone = true,\n  void Function(Set<DateTime>)? onChange,\n})",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 32,
+                  "length": 12,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarControl/managedDates.html"
+                },
+                {
+                  "offset": 0,
+                  "length": 31,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarControl-class.html"
+                },
+                {
+                  "offset": 49,
+                  "length": 35,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarController-class.html"
+                }
+              ],
+              "tooltips": [],
+              "container": {
+                "name": "FCalendarControl",
+                "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarControl-class.html"
+              }
+            }
+          },
+          {
+            "offset": 28,
+            "length": 8,
+            "snippet": {
+              "text": "{Set<DateTime>? initial}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 45,
+            "length": 11,
+            "snippet": {
+              "text": "{bool Function(DateTime)? selectable}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 58,
+            "length": 4,
+            "snippet": {
+              "text": "DateTime date",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 77,
+            "length": 25,
+            "snippet": {
+              "text": "{bool truncateAndStripTimezone = true}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 113,
+            "length": 9,
+            "snippet": {
+              "text": "{void Function(Set<DateTime>)? onChange}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 124,
+            "length": 5,
+            "snippet": {
+              "text": "Set<DateTime> dates",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 0,
+            "length": 8,
+            "snippet": {
+              "text": "{required FCalendarControl<Object?> control}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 10,
+                  "length": 25,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarControl-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          }
+        ]
+      },
+      {
+        "name": "`.managedDates()` with external controller",
+        "description": "Multiple dates selection with external controller.",
+        "text": "control: .managedDates(\n    // For demonstration purposes only. Don't create a controller inline, store it in a State instead.\n    controller: .dates(\n      initial: {},\n      selectable: (date) => true,\n      truncateAndStripTimezone: true,\n    ),\n    onChange: (dates) {},\n  ),",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 10,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarControl/managedDates.html"
+          },
+          {
+            "offset": 131,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarControl/managedDates.html"
+          },
+          {
+            "offset": 144,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarController/dates.html"
+          },
+          {
+            "offset": 157,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarController/dates.html"
+          },
+          {
+            "offset": 176,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarController/dates.html"
+          },
+          {
+            "offset": 210,
+            "length": 24,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarController/dates.html"
+          },
+          {
+            "offset": 253,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarControl/managedDates.html"
+          },
+          {
+            "offset": 0,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendar/control.html"
+          }
+        ],
+        "tooltips": [
+          {
+            "offset": 10,
+            "length": 12,
+            "snippet": {
+              "text": "FCalendarControl<Set<DateTime>> managedDates({\n  FCalendarController<Set<DateTime>>? controller,\n  Set<DateTime>? initial,\n  bool Function(DateTime)? selectable,\n  bool truncateAndStripTimezone = true,\n  void Function(Set<DateTime>)? onChange,\n})",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 32,
+                  "length": 12,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarControl/managedDates.html"
+                },
+                {
+                  "offset": 0,
+                  "length": 31,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarControl-class.html"
+                },
+                {
+                  "offset": 49,
+                  "length": 35,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarController-class.html"
+                }
+              ],
+              "tooltips": [],
+              "container": {
+                "name": "FCalendarControl",
+                "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarControl-class.html"
+              }
+            }
+          },
+          {
+            "offset": 131,
+            "length": 11,
+            "snippet": {
+              "text": "{FCalendarController<Set<DateTime>>? controller}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 1,
+                  "length": 35,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarController-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 144,
+            "length": 5,
+            "snippet": {
+              "text": "FCalendarController<Set<DateTime>> dates({\n  Set<DateTime> initial = const {},\n  bool Function(DateTime)? selectable,\n  bool truncateAndStripTimezone = true,\n})",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 35,
+                  "length": 5,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarController/dates.html"
+                },
+                {
+                  "offset": 0,
+                  "length": 34,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarController-class.html"
+                }
+              ],
+              "tooltips": [],
+              "container": {
+                "name": "FCalendarController",
+                "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarController-class.html"
+              }
+            }
+          },
+          {
+            "offset": 157,
+            "length": 8,
+            "snippet": {
+              "text": "{Set<DateTime> initial = const {}}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 176,
+            "length": 11,
+            "snippet": {
+              "text": "{bool Function(DateTime)? selectable}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 189,
+            "length": 4,
+            "snippet": {
+              "text": "DateTime date",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 210,
+            "length": 25,
+            "snippet": {
+              "text": "{bool truncateAndStripTimezone = true}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 253,
+            "length": 9,
+            "snippet": {
+              "text": "{void Function(Set<DateTime>)? onChange}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 264,
+            "length": 5,
+            "snippet": {
+              "text": "Set<DateTime> dates",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 0,
+            "length": 8,
+            "snippet": {
+              "text": "{required FCalendarControl<Object?> control}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 10,
+                  "length": 25,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarControl-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          }
+        ]
+      },
+      {
+        "name": "`.managedRange()` with internal controller",
+        "description": "Range selection with internal management.",
+        "text": "control: .managedRange(\n        initial: null,\n        selectable: (date) => true,\n        truncateAndStripTimezone: true,\n        onChange: (range) {},\n      ),",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 10,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarControl/managedRange.html"
+          },
+          {
+            "offset": 32,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarControl/managedRange.html"
+          },
+          {
+            "offset": 55,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarControl/managedRange.html"
+          },
+          {
+            "offset": 91,
+            "length": 24,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarControl/managedRange.html"
+          },
+          {
+            "offset": 131,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarControl/managedRange.html"
+          },
+          {
+            "offset": 0,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendar/control.html"
+          }
+        ],
+        "tooltips": [
+          {
+            "offset": 10,
+            "length": 12,
+            "snippet": {
+              "text": "FCalendarControl<(DateTime, DateTime)?> managedRange({\n  FCalendarController<(DateTime, DateTime)?>? controller,\n  (DateTime, DateTime)? initial,\n  bool Function(DateTime)? selectable,\n  bool truncateAndStripTimezone = true,\n  void Function((DateTime, DateTime)?)? onChange,\n})",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 40,
+                  "length": 12,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarControl/managedRange.html"
+                },
+                {
+                  "offset": 0,
+                  "length": 39,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarControl-class.html"
+                },
+                {
+                  "offset": 57,
+                  "length": 43,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarController-class.html"
+                }
+              ],
+              "tooltips": [],
+              "container": {
+                "name": "FCalendarControl",
+                "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarControl-class.html"
+              }
+            }
+          },
+          {
+            "offset": 32,
+            "length": 8,
+            "snippet": {
+              "text": "{(DateTime, DateTime)? initial}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 55,
+            "length": 11,
+            "snippet": {
+              "text": "{bool Function(DateTime)? selectable}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 68,
+            "length": 4,
+            "snippet": {
+              "text": "DateTime date",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 91,
+            "length": 25,
+            "snippet": {
+              "text": "{bool truncateAndStripTimezone = true}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 131,
+            "length": 9,
+            "snippet": {
+              "text": "{void Function((DateTime, DateTime)?)? onChange}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 142,
+            "length": 5,
+            "snippet": {
+              "text": "(DateTime, DateTime)? range",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 0,
+            "length": 8,
+            "snippet": {
+              "text": "{required FCalendarControl<Object?> control}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 10,
+                  "length": 25,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarControl-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          }
+        ]
+      },
+      {
+        "name": "`.managedRange()` with external controller",
+        "description": "Range selection with external controller.",
+        "text": "control: .managedRange(\n    // For demonstration purposes only. Don't create a controller inline, store it in a State instead.\n    controller: .range(\n      initial: (.utc(2000), .utc(2001)),\n      selectable: (date) => true,\n      truncateAndStripTimezone: true,\n    ),\n    onChange: (range) {},\n  ),",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 10,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarControl/managedRange.html"
+          },
+          {
+            "offset": 131,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarControl/managedRange.html"
+          },
+          {
+            "offset": 144,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarController/range.html"
+          },
+          {
+            "offset": 157,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarController/range.html"
+          },
+          {
+            "offset": 198,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarController/range.html"
+          },
+          {
+            "offset": 232,
+            "length": 24,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarController/range.html"
+          },
+          {
+            "offset": 275,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarControl/managedRange.html"
+          },
+          {
+            "offset": 0,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendar/control.html"
+          }
+        ],
+        "tooltips": [
+          {
+            "offset": 10,
+            "length": 12,
+            "snippet": {
+              "text": "FCalendarControl<(DateTime, DateTime)?> managedRange({\n  FCalendarController<(DateTime, DateTime)?>? controller,\n  (DateTime, DateTime)? initial,\n  bool Function(DateTime)? selectable,\n  bool truncateAndStripTimezone = true,\n  void Function((DateTime, DateTime)?)? onChange,\n})",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 40,
+                  "length": 12,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarControl/managedRange.html"
+                },
+                {
+                  "offset": 0,
+                  "length": 39,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarControl-class.html"
+                },
+                {
+                  "offset": 57,
+                  "length": 43,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarController-class.html"
+                }
+              ],
+              "tooltips": [],
+              "container": {
+                "name": "FCalendarControl",
+                "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarControl-class.html"
+              }
+            }
+          },
+          {
+            "offset": 131,
+            "length": 11,
+            "snippet": {
+              "text": "{FCalendarController<(DateTime, DateTime)?>? controller}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 1,
+                  "length": 43,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarController-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 144,
+            "length": 5,
+            "snippet": {
+              "text": "FCalendarController<(DateTime, DateTime)?> range({\n  (DateTime, DateTime)? initial,\n  bool Function(DateTime)? selectable,\n  bool truncateAndStripTimezone = true,\n})",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 43,
+                  "length": 5,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarController/range.html"
+                },
+                {
+                  "offset": 0,
+                  "length": 42,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarController-class.html"
+                }
+              ],
+              "tooltips": [],
+              "container": {
+                "name": "FCalendarController",
+                "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarController-class.html"
+              }
+            }
+          },
+          {
+            "offset": 157,
+            "length": 8,
+            "snippet": {
+              "text": "{(DateTime, DateTime)? initial}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 198,
+            "length": 11,
+            "snippet": {
+              "text": "{bool Function(DateTime)? selectable}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 211,
+            "length": 4,
+            "snippet": {
+              "text": "DateTime date",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 232,
+            "length": 25,
+            "snippet": {
+              "text": "{bool truncateAndStripTimezone = true}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 275,
+            "length": 9,
+            "snippet": {
+              "text": "{void Function((DateTime, DateTime)?)? onChange}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 286,
+            "length": 5,
+            "snippet": {
+              "text": "(DateTime, DateTime)? range",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 0,
+            "length": 8,
+            "snippet": {
+              "text": "{required FCalendarControl<Object?> control}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 10,
+                  "length": 25,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarControl-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          }
+        ]
+      }
+    ],
+    "Appearance": [
+      {
+        "name": "Appearance",
+        "description": "",
+        "text": "dayBuilder: FCalendar.defaultDayBuilder,",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendar/dayBuilder.html"
+          },
+          {
+            "offset": 12,
+            "length": 27,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendar/defaultDayBuilder.html"
+          }
+        ],
+        "tooltips": [
+          {
+            "offset": 0,
+            "length": 11,
+            "snippet": {
+              "text": "{\n  Widget Function(\n        BuildContext,\n        ({\n          bool current,\n          DateTime date,\n          bool selectable,\n          bool selected,\n          FCalendarDayPickerStyle style,\n          bool today,\n        }),\n        Widget?,\n      )\n      dayBuilder =\n      defaultDayBuilder,\n}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 165,
+                  "length": 23,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarDayPickerStyle-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 12,
+            "length": 27,
+            "snippet": {
+              "text": "Widget defaultDayBuilder(\n  BuildContext _,\n  ({\n    bool current,\n    DateTime date,\n    bool selectable,\n    bool selected,\n    FCalendarDayPickerStyle style,\n    bool today,\n  })\n  data,\n  Widget? child,\n)",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 7,
+                  "length": 17,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendar/defaultDayBuilder.html"
+                },
+                {
+                  "offset": 130,
+                  "length": 23,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarDayPickerStyle-class.html"
+                }
+              ],
+              "tooltips": [],
+              "container": {
+                "name": "FCalendar",
+                "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendar-class.html"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "Callbacks": [
+      {
+        "name": "Callbacks",
+        "description": "",
+        "text": "onMonthChange: (month) {},\n  onPress: (date) {},\n  onLongPress: (date) {},",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendar/onMonthChange.html"
+          },
+          {
+            "offset": 29,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendar/onPress.html"
+          },
+          {
+            "offset": 51,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendar/onLongPress.html"
+          }
+        ],
+        "tooltips": [
+          {
+            "offset": 0,
+            "length": 14,
+            "snippet": {
+              "text": "{void Function(DateTime)? onMonthChange}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 16,
+            "length": 5,
+            "snippet": {
+              "text": "DateTime month",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 29,
+            "length": 8,
+            "snippet": {
+              "text": "{void Function(DateTime)? onPress}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 39,
+            "length": 4,
+            "snippet": {
+              "text": "DateTime date",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 51,
+            "length": 12,
+            "snippet": {
+              "text": "{void Function(DateTime)? onLongPress}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 65,
+            "length": 4,
+            "snippet": {
+              "text": "DateTime date",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

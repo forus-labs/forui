@@ -1,0 +1,609 @@
+{
+  "text": "final theme = FThemes.zinc.light.copyWith(\n  extensions: [const BrandColor(color: Color(0xFF6366F1))],\n);\n",
+  "highlights": [],
+  "links": [
+    {
+      "offset": 33,
+      "length": 8,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/copyWith.html"
+    },
+    {
+      "offset": 27,
+      "length": 5,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemes/zinc.html"
+    },
+    {
+      "offset": 14,
+      "length": 12,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemes/zinc.html"
+    },
+    {
+      "offset": 45,
+      "length": 10,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/copyWith.html"
+    }
+  ],
+  "tooltips": [
+    {
+      "offset": 33,
+      "length": 8,
+      "snippet": {
+        "text": "FThemeData copyWith({\n  String? debugLabel,\n  FBreakpoints? breakpoints,\n  FColors? colors,\n  FTypography? typography,\n  FStyle Function(FStyle)? style,\n  FAccordionStyle Function(FAccordionStyle)? accordionStyle,\n  FAutocompleteStyle Function(FAutocompleteStyle)? autocompleteStyle,\n  FAlertStyles Function(FAlertStyles)? alertStyles,\n  FAvatarStyle Function(FAvatarStyle)? avatarStyle,\n  FBadgeStyles Function(FBadgeStyles)? badgeStyles,\n  FBottomNavigationBarStyle Function(FBottomNavigationBarStyle)?\n  bottomNavigationBarStyle,\n  FBreadcrumbStyle Function(FBreadcrumbStyle)? breadcrumbStyle,\n  FButtonStyles Function(FButtonStyles)? buttonStyles,\n  FCalendarStyle Function(FCalendarStyle)? calendarStyle,\n  FCardStyle Function(FCardStyle)? cardStyle,\n  FCheckboxStyle Function(FCheckboxStyle)? checkboxStyle,\n  FCircularProgressStyle Function(FCircularProgressStyle)?\n  circularProgressStyle,\n  FDateFieldStyle Function(FDateFieldStyle)? dateFieldStyle,\n  FDeterminateProgressStyle Function(FDeterminateProgressStyle)?\n  determinateProgressStyle,\n  FDialogRouteStyle Function(FDialogRouteStyle)? dialogRouteStyle,\n  FDialogStyle Function(FDialogStyle)? dialogStyle,\n  FDividerStyles Function(FDividerStyles)? dividerStyles,\n  FHeaderStyles Function(FHeaderStyles)? headerStyles,\n  FItemStyle Function(FItemStyle)? itemStyle,\n  FItemGroupStyle Function(FItemGroupStyle)? itemGroupStyle,\n  FLabelStyles Function(FLabelStyles)? labelStyles,\n  FLineCalendarStyle Function(FLineCalendarStyle)? lineCalendarStyle,\n  FMultiSelectStyle Function(FMultiSelectStyle)? multiSelectStyle,\n  FModalSheetStyle Function(FModalSheetStyle)? modalSheetStyle,\n  FPaginationStyle Function(FPaginationStyle)? paginationStyle,\n  FPersistentSheetStyle Function(FPersistentSheetStyle)? persistentSheetStyle,\n  FPickerStyle Function(FPickerStyle)? pickerStyle,\n  FPopoverStyle Function(FPopoverStyle)? popoverStyle,\n  FPopoverMenuStyle Function(FPopoverMenuStyle)? popoverMenuStyle,\n  FProgressStyle Function(FProgressStyle)? progressStyle,\n  FRadioStyle Function(FRadioStyle)? radioStyle,\n  FResizableStyle Function(FResizableStyle)? resizableStyle,\n  FScaffoldStyle Function(FScaffoldStyle)? scaffoldStyle,\n  FSelectStyle Function(FSelectStyle)? selectStyle,\n  FSelectGroupStyle Function(FSelectGroupStyle)? selectGroupStyle,\n  FSelectMenuTileStyle Function(FSelectMenuTileStyle)? selectMenuTileStyle,\n  FSidebarStyle Function(FSidebarStyle)? sidebarStyle,\n  FSliderStyles Function(FSliderStyles)? sliderStyles,\n  FToasterStyle Function(FToasterStyle)? toasterStyle,\n  FSwitchStyle Function(FSwitchStyle)? switchStyle,\n  FTabsStyle Function(FTabsStyle)? tabsStyle,\n  FTappableStyle Function(FTappableStyle)? tappableStyle,\n  FTextFieldStyle Function(FTextFieldStyle)? textFieldStyle,\n  FTileStyle Function(FTileStyle)? tileStyle,\n  FTileGroupStyle Function(FTileGroupStyle)? tileGroupStyle,\n  FTimeFieldStyle Function(FTimeFieldStyle)? timeFieldStyle,\n  FTimePickerStyle Function(FTimePickerStyle)? timePickerStyle,\n  FTooltipStyle Function(FTooltipStyle)? tooltipStyle,\n  Iterable<ThemeExtension<dynamic>>? extensions,\n})",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 11,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData/copyWith.html"
+          },
+          {
+            "offset": 0,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+          },
+          {
+            "offset": 46,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FBreakpoints-class.html"
+          },
+          {
+            "offset": 75,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FColors-class.html"
+          },
+          {
+            "offset": 94,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FTypography-class.html"
+          },
+          {
+            "offset": 121,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FStyle-class.html"
+          },
+          {
+            "offset": 137,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FStyle-class.html"
+          },
+          {
+            "offset": 155,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionStyle-class.html"
+          },
+          {
+            "offset": 180,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.accordion/FAccordionStyle-class.html"
+          },
+          {
+            "offset": 216,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocompleteStyle-class.html"
+          },
+          {
+            "offset": 244,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.autocomplete/FAutocompleteStyle-class.html"
+          },
+          {
+            "offset": 286,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.alert/FAlertStyles-class.html"
+          },
+          {
+            "offset": 308,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.alert/FAlertStyles-class.html"
+          },
+          {
+            "offset": 338,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.avatar/FAvatarStyle-class.html"
+          },
+          {
+            "offset": 360,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.avatar/FAvatarStyle-class.html"
+          },
+          {
+            "offset": 390,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.badge/FBadgeStyles-class.html"
+          },
+          {
+            "offset": 412,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.badge/FBadgeStyles-class.html"
+          },
+          {
+            "offset": 442,
+            "length": 25,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.bottom_navigation_bar/FBottomNavigationBarStyle-class.html"
+          },
+          {
+            "offset": 477,
+            "length": 25,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.bottom_navigation_bar/FBottomNavigationBarStyle-class.html"
+          },
+          {
+            "offset": 535,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbStyle-class.html"
+          },
+          {
+            "offset": 561,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.breadcrumb/FBreadcrumbStyle-class.html"
+          },
+          {
+            "offset": 599,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButtonStyles-class.html"
+          },
+          {
+            "offset": 622,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.button/FButtonStyles-class.html"
+          },
+          {
+            "offset": 654,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarStyle-class.html"
+          },
+          {
+            "offset": 678,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.calendar/FCalendarStyle-class.html"
+          },
+          {
+            "offset": 712,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.card/FCardStyle-class.html"
+          },
+          {
+            "offset": 732,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.card/FCardStyle-class.html"
+          },
+          {
+            "offset": 758,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckboxStyle-class.html"
+          },
+          {
+            "offset": 782,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckboxStyle-class.html"
+          },
+          {
+            "offset": 816,
+            "length": 22,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.progress/FCircularProgressStyle-class.html"
+          },
+          {
+            "offset": 848,
+            "length": 22,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.progress/FCircularProgressStyle-class.html"
+          },
+          {
+            "offset": 900,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateFieldStyle-class.html"
+          },
+          {
+            "offset": 925,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.date_field/FDateFieldStyle-class.html"
+          },
+          {
+            "offset": 961,
+            "length": 25,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.progress/FDeterminateProgressStyle-class.html"
+          },
+          {
+            "offset": 996,
+            "length": 25,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.progress/FDeterminateProgressStyle-class.html"
+          },
+          {
+            "offset": 1054,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.dialog/FDialogRouteStyle-class.html"
+          },
+          {
+            "offset": 1081,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.dialog/FDialogRouteStyle-class.html"
+          },
+          {
+            "offset": 1121,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.dialog/FDialogStyle-class.html"
+          },
+          {
+            "offset": 1143,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.dialog/FDialogStyle-class.html"
+          },
+          {
+            "offset": 1173,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.divider/FDividerStyles-class.html"
+          },
+          {
+            "offset": 1197,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.divider/FDividerStyles-class.html"
+          },
+          {
+            "offset": 1231,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.header/FHeaderStyles-class.html"
+          },
+          {
+            "offset": 1254,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.header/FHeaderStyles-class.html"
+          },
+          {
+            "offset": 1286,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemStyle-class.html"
+          },
+          {
+            "offset": 1306,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemStyle-class.html"
+          },
+          {
+            "offset": 1332,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroupStyle-class.html"
+          },
+          {
+            "offset": 1357,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.item/FItemGroupStyle-class.html"
+          },
+          {
+            "offset": 1393,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.label/FLabelStyles-class.html"
+          },
+          {
+            "offset": 1415,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.label/FLabelStyles-class.html"
+          },
+          {
+            "offset": 1445,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.line_calendar/FLineCalendarStyle-class.html"
+          },
+          {
+            "offset": 1473,
+            "length": 18,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.line_calendar/FLineCalendarStyle-class.html"
+          },
+          {
+            "offset": 1515,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FMultiSelectStyle-class.html"
+          },
+          {
+            "offset": 1542,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FMultiSelectStyle-class.html"
+          },
+          {
+            "offset": 1582,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/FModalSheetStyle-class.html"
+          },
+          {
+            "offset": 1608,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/FModalSheetStyle-class.html"
+          },
+          {
+            "offset": 1646,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPaginationStyle-class.html"
+          },
+          {
+            "offset": 1672,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.pagination/FPaginationStyle-class.html"
+          },
+          {
+            "offset": 1710,
+            "length": 21,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/FPersistentSheetStyle-class.html"
+          },
+          {
+            "offset": 1741,
+            "length": 21,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sheet/FPersistentSheetStyle-class.html"
+          },
+          {
+            "offset": 1789,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.picker/FPickerStyle-class.html"
+          },
+          {
+            "offset": 1811,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.picker/FPickerStyle-class.html"
+          },
+          {
+            "offset": 1841,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverStyle-class.html"
+          },
+          {
+            "offset": 1864,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover/FPopoverStyle-class.html"
+          },
+          {
+            "offset": 1896,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover_menu/FPopoverMenuStyle-class.html"
+          },
+          {
+            "offset": 1923,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.popover_menu/FPopoverMenuStyle-class.html"
+          },
+          {
+            "offset": 1963,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.progress/FProgressStyle-class.html"
+          },
+          {
+            "offset": 1987,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.progress/FProgressStyle-class.html"
+          },
+          {
+            "offset": 2021,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.radio/FRadioStyle-class.html"
+          },
+          {
+            "offset": 2042,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.radio/FRadioStyle-class.html"
+          },
+          {
+            "offset": 2070,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableStyle-class.html"
+          },
+          {
+            "offset": 2095,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.resizable/FResizableStyle-class.html"
+          },
+          {
+            "offset": 2131,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.scaffold/FScaffoldStyle-class.html"
+          },
+          {
+            "offset": 2155,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.scaffold/FScaffoldStyle-class.html"
+          },
+          {
+            "offset": 2189,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectStyle-class.html"
+          },
+          {
+            "offset": 2211,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select/FSelectStyle-class.html"
+          },
+          {
+            "offset": 2241,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroupStyle-class.html"
+          },
+          {
+            "offset": 2268,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroupStyle-class.html"
+          },
+          {
+            "offset": 2308,
+            "length": 20,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_menu_tile/FSelectMenuTileStyle-class.html"
+          },
+          {
+            "offset": 2338,
+            "length": 20,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_menu_tile/FSelectMenuTileStyle-class.html"
+          },
+          {
+            "offset": 2384,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sidebar/FSidebarStyle-class.html"
+          },
+          {
+            "offset": 2407,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.sidebar/FSidebarStyle-class.html"
+          },
+          {
+            "offset": 2439,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderStyles-class.html"
+          },
+          {
+            "offset": 2462,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.slider/FSliderStyles-class.html"
+          },
+          {
+            "offset": 2494,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/FToasterStyle-class.html"
+          },
+          {
+            "offset": 2517,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.toast/FToasterStyle-class.html"
+          },
+          {
+            "offset": 2549,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.switch_/FSwitchStyle-class.html"
+          },
+          {
+            "offset": 2571,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.switch_/FSwitchStyle-class.html"
+          },
+          {
+            "offset": 2601,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tabs/FTabsStyle-class.html"
+          },
+          {
+            "offset": 2621,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tabs/FTabsStyle-class.html"
+          },
+          {
+            "offset": 2647,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappableStyle-class.html"
+          },
+          {
+            "offset": 2671,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FTappableStyle-class.html"
+          },
+          {
+            "offset": 2705,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFieldStyle-class.html"
+          },
+          {
+            "offset": 2730,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.text_field/FTextFieldStyle-class.html"
+          },
+          {
+            "offset": 2766,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileStyle-class.html"
+          },
+          {
+            "offset": 2786,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileStyle-class.html"
+          },
+          {
+            "offset": 2812,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileGroupStyle-class.html"
+          },
+          {
+            "offset": 2837,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tile/FTileGroupStyle-class.html"
+          },
+          {
+            "offset": 2873,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeFieldStyle-class.html"
+          },
+          {
+            "offset": 2898,
+            "length": 15,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_field/FTimeFieldStyle-class.html"
+          },
+          {
+            "offset": 2934,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_picker/FTimePickerStyle-class.html"
+          },
+          {
+            "offset": 2960,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.time_picker/FTimePickerStyle-class.html"
+          },
+          {
+            "offset": 2998,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tooltip/FTooltipStyle-class.html"
+          },
+          {
+            "offset": 3021,
+            "length": 13,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.tooltip/FTooltipStyle-class.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FThemeData",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+        }
+      }
+    },
+    {
+      "offset": 27,
+      "length": 5,
+      "snippet": {
+        "text": "FThemeData light",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+          }
+        ],
+        "tooltips": []
+      }
+    },
+    {
+      "offset": 14,
+      "length": 12,
+      "snippet": {
+        "text": "({FThemeData dark, FThemeData light}) zinc",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 2,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+          },
+          {
+            "offset": 19,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemeData-class.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FThemes",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.theme/FThemes.html"
+        }
+      }
+    },
+    {
+      "offset": 45,
+      "length": 11,
+      "snippet": {
+        "text": "{Iterable<ThemeExtension<dynamic>>? extensions}",
+        "highlights": [],
+        "links": [],
+        "tooltips": []
+      }
+    }
+  ]
+}
