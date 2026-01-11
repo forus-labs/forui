@@ -152,18 +152,13 @@ class FSliderStyle extends FLabelStyle with _$FSliderStyleFunctions {
     AlignmentGeometry tooltipThumbAnchor = .topCenter,
   }) : this(
          activeColor: FWidgetStateMap({
-           WidgetState.error: colors.error,
            WidgetState.disabled: colors.disable(colors.primary, colors.secondary),
            WidgetState.any: colors.primary,
          }),
          inactiveColor: .all(colors.secondary),
          thumbStyle: FSliderThumbStyle(
-           color: FWidgetStateMap({
-             WidgetState.error: colors.errorForeground,
-             WidgetState.any: colors.primaryForeground,
-           }),
+           color: .all(colors.primaryForeground),
            borderColor: FWidgetStateMap({
-             WidgetState.error: colors.error,
              WidgetState.disabled: colors.disable(colors.primary),
              WidgetState.any: colors.primary,
            }),
@@ -171,10 +166,7 @@ class FSliderStyle extends FLabelStyle with _$FSliderStyleFunctions {
          ),
          markStyle: FSliderMarkStyle(
            tickColor: .all(colors.mutedForeground),
-           labelTextStyle: FWidgetStateMap({
-             WidgetState.error: typography.xs.copyWith(color: colors.error),
-             WidgetState.any: typography.xs.copyWith(color: colors.mutedForeground),
-           }),
+           labelTextStyle: .all(typography.xs.copyWith(color: colors.mutedForeground)),
            labelAnchor: labelAnchor,
            labelOffset: labelOffset,
          ),

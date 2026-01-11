@@ -34,6 +34,10 @@
 * Fix `FMultiSelect` still allowing tags to be removed when disabled.
 
 
+### `FSlider`
+* Change `FSlider`'s default error style to not affect the entire slider.
+
+
 ### `FTextField`
 * **Breaking** Add `FTextFieldStyle.iconStyle`.
 
