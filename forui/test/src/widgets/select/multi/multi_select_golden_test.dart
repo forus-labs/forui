@@ -449,7 +449,7 @@ void main() {
         child: FMultiSelect<String>(
           control: const .managed(initial: {'Apple', 'Banana', 'Cherry'}),
           items: letters,
-          tagBuilder: (context, _, _, _, child) => child,
+          tagBuilder: (context, _, _, _, _, child) => child,
           key: key,
         ),
       ),

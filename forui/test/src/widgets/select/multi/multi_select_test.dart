@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/localizations/localizations_en.dart';
 import '../../../test_scaffold.dart';
 
 const letters = {
@@ -215,17 +216,54 @@ void main() {
     expect(controller.value, {'A'});
   });
 
-  testWidgets('disabled', (tester) async {
-    await tester.pumpWidget(
-      TestScaffold.app(
-        child: FMultiSelect(items: letters, enabled: false, clearable: true, key: key),
-      ),
-    );
+  group('disabled', () {
+    testWidgets('field', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FMultiSelect(enabled: false, items: letters, clearable: true, key: key),
+        ),
+      );
 
-    await tester.tap(find.byKey(key));
-    await tester.pumpAndSettle(const Duration(seconds: 1));
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle(const Duration(seconds: 1));
 
-    expect(find.text('A'), findsNothing);
+      expect(find.text('A'), findsNothing);
+    });
+
+    testWidgets('clear icon', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          locale: const Locale('en', 'SG'),
+          child: FMultiSelect(
+            control: const .managed(initial: {'A'}),
+            enabled: false,
+            items: letters,
+            clearable: true,
+            key: key,
+          ),
+        ),
+      );
+
+      expect(find.bySemanticsLabel(FLocalizationsEnSg().textFieldClearButtonSemanticsLabel), findsNothing);
+    });
+
+    testWidgets('tag', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FMultiSelect(
+            control: const .managed(initial: {'A'}),
+            enabled: false,
+            items: letters,
+            key: key,
+          ),
+        ),
+      );
+
+      await tester.tap(find.text('A'));
+      await tester.pumpAndSettle(const Duration(seconds: 1));
+
+      expect(find.text('A'), findsOne);
+    });
   });
 
   testWidgets('tag clears itself', (tester) async {

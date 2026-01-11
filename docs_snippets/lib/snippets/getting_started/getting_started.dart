@@ -56,7 +56,7 @@ class _ExampleState extends State<Example> {
   @override
   Widget build(BuildContext context) => Center(
     child: Column(
-      mainAxisSize: MainAxisSize.min,
+      mainAxisSize: .min,
       spacing: 10,
       children: [
         Text('Count: $_count'),

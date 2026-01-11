@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_positional_boolean_parameters
+
 import 'dart:async';
 import 'dart:ui';
 
@@ -26,6 +28,7 @@ part 'select.design.dart';
 typedef FMultiSelectTagBuilder<T> =
     Widget Function(
       BuildContext context,
+      bool enabled,
       FMultiValueNotifier<T> controller,
       FMultiSelectStyle style,
       T value,
@@ -48,17 +51,22 @@ abstract class FMultiSelect<T> extends StatefulWidget {
   /// The default suffix builder that shows a upward and downward facing chevron icon.
   static Widget defaultIconBuilder(BuildContext _, FMultiSelectStyle style, Set<WidgetState> states) => Padding(
     padding: const .directional(start: 4),
-    child: IconTheme(data: style.fieldStyle.iconStyle, child: const Icon(FIcons.chevronDown)),
+    child: IconTheme(data: style.fieldStyle.iconStyle.resolve(states), child: const Icon(FIcons.chevronDown)),
   );
 
   /// The default tag builder that builds a [FMultiSelectTag] with the given value.
   static Widget defaultTagBuilder<T>(
     BuildContext context,
+    bool enabled,
     FMultiValueNotifier<T> controller,
     FMultiSelectStyle style,
     T value,
     Widget label,
-  ) => FMultiSelectTag(style: style.tagStyle, label: label, onPress: () => controller.update(value, add: false));
+  ) => FMultiSelectTag(
+    style: style.tagStyle,
+    label: label,
+    onPress: enabled ? () => controller.update(value, add: false) : null,
+  );
 
   /// The default loading builder that shows a spinner when an asynchronous search is pending.
   static Widget defaultContentLoadingBuilder(BuildContext _, FSelectSearchStyle style) => Padding(
@@ -227,14 +235,7 @@ abstract class FMultiSelect<T> extends StatefulWidget {
     Widget? hint,
     bool keepHint = true,
     int Function(T a, T b)? sort,
-    Widget Function(
-      BuildContext context,
-      FMultiValueNotifier<T> controller,
-      FMultiSelectStyle style,
-      T value,
-      Widget label,
-    )?
-    tagBuilder,
+    FMultiSelectTagBuilder<T>? tagBuilder,
     TextAlign textAlign = .start,
     TextDirection? textDirection,
     bool clearable = false,
@@ -548,14 +549,7 @@ abstract class FMultiSelect<T> extends StatefulWidget {
     this.contentScrollHandles = false,
     this.contentPhysics = const ClampingScrollPhysics(),
     this.contentDivider = .none,
-    Widget Function(
-      BuildContext context,
-      FMultiValueNotifier<T> controller,
-      FMultiSelectStyle style,
-      T value,
-      Widget label,
-    )?
-    tagBuilder,
+    FMultiSelectTagBuilder<T>? tagBuilder,
     super.key,
   }) : tagBuilder = tagBuilder ?? defaultTagBuilder;
 
@@ -728,7 +722,14 @@ abstract class _FMultiSelectState<S extends FMultiSelect<T>, T> extends State<S>
                                   runSpacing: style.fieldStyle.runSpacing,
                                   children: [
                                     for (final value in values)
-                                      widget.tagBuilder(context, _controller, style, value, widget.format(value)),
+                                      widget.tagBuilder(
+                                        context,
+                                        widget.enabled,
+                                        _controller,
+                                        style,
+                                        value,
+                                        widget.format(value),
+                                      ),
                                     if (widget.keepHint || _controller.value.isEmpty)
                                       Padding(
                                         padding: style.fieldStyle.hintPadding,
@@ -741,7 +742,7 @@ abstract class _FMultiSelectState<S extends FMultiSelect<T>, T> extends State<S>
                                 ),
                               ),
                             ),
-                            if (widget.clearable && _controller.value.isNotEmpty)
+                            if (widget.enabled && widget.clearable && _controller.value.isNotEmpty)
                               Padding(
                                 padding: style.fieldStyle.clearButtonPadding,
                                 child: FButton.icon(
@@ -862,8 +863,15 @@ class FMultiSelectFieldStyle extends FLabelStyle with Diagnosticable, _$FMultiSe
   final EdgeInsetsGeometry hintPadding;
 
   /// The multi-select field's icon style.
+  ///
+  /// The supported states are:
+  /// * [WidgetState.disabled]
+  /// * [WidgetState.error]
+  /// * [WidgetState.focused]
+  /// * [WidgetState.hovered]
+  /// * [WidgetState.pressed]
   @override
-  final IconThemeData iconStyle;
+  final FWidgetStateMap<IconThemeData> iconStyle;
 
   /// The clear button's style when [FMultiSelect.clearable] is true.
   @override
@@ -930,7 +938,10 @@ class FMultiSelectFieldStyle extends FLabelStyle with Diagnosticable, _$FMultiSe
         WidgetState.disabled: typography.sm.copyWith(color: colors.disable(colors.border)),
         WidgetState.any: typography.sm.copyWith(color: colors.mutedForeground),
       }),
-      iconStyle: IconThemeData(color: colors.mutedForeground, size: 18),
+      iconStyle: FWidgetStateMap({
+        WidgetState.disabled: IconThemeData(color: colors.disable(colors.mutedForeground), size: 17),
+        WidgetState.any: IconThemeData(color: colors.mutedForeground, size: 17),
+      }),
       clearButtonStyle: ghost.copyWith(
         iconContentStyle: ghost.iconContentStyle.copyWith(
           iconStyle: FWidgetStateMap({

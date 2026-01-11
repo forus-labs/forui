@@ -89,7 +89,7 @@ class FMultiSelectTag extends StatelessWidget {
         child: Padding(
           padding: style.padding,
           child: Row(
-            mainAxisSize: MainAxisSize.min,
+            mainAxisSize: .min,
             spacing: style.spacing,
             children: [
               DefaultTextStyle(style: style.labelTextStyle.resolve(states), child: label),

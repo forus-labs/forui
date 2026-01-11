@@ -56,6 +56,13 @@ class FTextFieldStyle extends FLabelStyle with _$FTextFieldStyleFunctions {
   final EdgeInsets scrollPadding;
 
   /// The prefix & suffix icon styles.
+  ///
+  /// The supported states are:
+  /// * [WidgetState.disabled]
+  /// * [WidgetState.error]
+  /// * [WidgetState.focused]
+  /// * [WidgetState.hovered]
+  /// * [WidgetState.pressed]
   @override
   final FWidgetStateMap<IconThemeData> iconStyle;
 
@@ -146,17 +153,18 @@ class FTextFieldStyle extends FLabelStyle with _$FTextFieldStyleFunctions {
       WidgetState.disabled: IconThemeData(color: colors.disable(colors.mutedForeground), size: 17),
       WidgetState.any: IconThemeData(color: colors.mutedForeground, size: 17),
     });
-    final buttonStyle = ghost.copyWith(
+    final bounceableButtonStyle = ghost.copyWith(
       iconContentStyle: ghost.iconContentStyle.copyWith(iconStyle: iconStyle),
-      tappableStyle: (style) =>
-          style.copyWith(motion: (motion) => motion.copyWith(bounceTween: FTappableMotion.noBounceTween)),
     );
 
     return .new(
       keyboardAppearance: colors.brightness,
       iconStyle: iconStyle,
-      clearButtonStyle: buttonStyle,
-      obscureButtonStyle: buttonStyle,
+      clearButtonStyle: bounceableButtonStyle,
+      obscureButtonStyle: bounceableButtonStyle.copyWith(
+        tappableStyle: (style) =>
+            style.copyWith(motion: (motion) => motion.copyWith(bounceTween: FTappableMotion.noBounceTween)),
+      ),
       contentTextStyle: FWidgetStateMap({
         WidgetState.disabled: textStyle.copyWith(color: colors.disable(colors.primary)),
         WidgetState.any: textStyle.copyWith(color: colors.primary),
