@@ -32,7 +32,7 @@ export default function HomePage() {
 
         <ImageZoom
           src="/banners/banner-311225.png"
-          className="w-full border rounded-lg p-4 bg-white"
+          className="w-full border rounded-lg p-4 bg-white max-w-5xl"
           alt="Forui Demo"
           width={2400}
           height={1200}

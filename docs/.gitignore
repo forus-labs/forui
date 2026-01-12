@@ -1,6 +1,10 @@
 # deps
 /node_modules
 
+# open next
+.open-next
+.wrangler
+
 # generated content
 .source
 
